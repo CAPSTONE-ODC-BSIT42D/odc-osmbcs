@@ -1019,32 +1019,7 @@
                 </Grid>
                 <Grid x:Name="manageMiscGrid" Visibility="Hidden">
                     <Label x:Name="label7_Copy6" Content="Manage - Settings" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
-                    <Grid Margin="10,70,10,10">
-                        <TabControl x:Name="tabControl" Margin="10,0,0,5" Width="1226">
-                            <TabItem Header="Company">
-                                <Grid Background="#FFE5E5E5">
-                                    <Grid Margin="0,307,741,423">
-                                        <Label x:Name="label19" Content="Employee Positions" HorizontalAlignment="Left" Height="32" Margin="10,10,0,0" VerticalAlignment="Top" Width="153" FontWeight="Bold" FontStyle="Italic" FontSize="14"/>
-                                        <Border BorderBrush="Black" BorderThickness="1" Margin="10,42,10,10">
-                                            <Grid Margin="0,0,-1,0">
-                                                <Label x:Name="label26" Content="Position Name:" HorizontalAlignment="Left" Margin="12,6,0,0" VerticalAlignment="Top"/>
-                                                <TextBox x:Name="empPosNewTb" HorizontalAlignment="Left" Height="23" Margin="117,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236"/>
-                                                <Button x:Name="addEmpPosBtn" Content="+ add" HorizontalAlignment="Left" Margin="358,10,0,0" VerticalAlignment="Top" Width="90" Click="addEmpPosBtn_Click"/>
-                                                <Button x:Name="saveEmpPosBtn" Content="save" HorizontalAlignment="Left" Margin="358,10,0,0" VerticalAlignment="Top" Width="90" Click="saveEmpPosBtn_Click" Visibility="Hidden"/>
-                                                <ListBox x:Name="employeePositionLb" HorizontalAlignment="Left" Height="127" Margin="16,46,0,0" VerticalAlignment="Top" Width="337" />
-                                                <Button x:Name="deleteEmpPosBtn" Content="- delete" HorizontalAlignment="Left" Margin="358,64,0,0" VerticalAlignment="Top" Width="90" Click="deleteEmpPosBtn_Click"/>
-                                                <Button x:Name="editEmpPosBtn" Content="edit" HorizontalAlignment="Left" Margin="358,89,0,0" VerticalAlignment="Top" Width="90" Click="editEmpPosBtn_Click"/>
-                                            </Grid>
-                                        </Border>
-
-                                    </Grid>
-                                </Grid>
-                            </TabItem>
-                            <TabItem Header="Services">
-                                <Grid Background="#FFE5E5E5"/>
-                            </TabItem>
-                        </TabControl>
-                    </Grid>
+                    <Grid Margin="10,70,10,10"/>
                 </Grid>
                 <Grid x:Name="companyDetailsGrid" d:IsHidden="True">
                     <Label x:Name="companyDetailsHeader" Content="" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
