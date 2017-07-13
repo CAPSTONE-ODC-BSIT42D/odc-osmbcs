@@ -113,7 +113,7 @@ public class RegexUtilities
             // Use IdnMapping class to convert Unicode domain names.
             try
             {
-                strIn = Regex.Replace(strIn, @"(@)(.+)$", this.DomainMapper,
+                 strIn = Regex.Replace(strIn, @"(@)(.+)$", this.DomainMapper,
                                       RegexOptions.None, TimeSpan.FromMilliseconds(200));
             }
             catch (RegexMatchTimeoutException)

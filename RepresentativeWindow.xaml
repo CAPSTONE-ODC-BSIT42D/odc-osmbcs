@@ -35,9 +35,6 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Window.DataContext>
-        <local:MainViewModel x:Name="MainVM"/>
-    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -45,21 +42,21 @@
         <GroupBox x:Name="groupBox" Header="Representative's Details" HorizontalAlignment="Left" Margin="10,22,0,54" Width="602" FontWeight="Bold">
             <Grid Margin="0,0,-2,4">
                 <Label x:Name="label1_Copy" Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="127" Margin="10,10,0,0" FontWeight="Bold"/>
-                <TextBox x:Name="firstNameTb" TextWrapping="Wrap" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" MaxLines="1" MaxLength="20" Margin="0,65,417,0" Height="23" VerticalAlignment="Top" HorizontalAlignment="Right" Width="141" TextChanged="firstNameTb_TextChanged" HorizontalContentAlignment="Center" FontWeight="Normal">
+                <TextBox x:Name="firstNameTb" TextWrapping="Wrap" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" MaxLines="1" MaxLength="20" Margin="0,65,417,0" Height="23" VerticalAlignment="Top" HorizontalAlignment="Right" Width="141" TextChanged="firstNameTb_TextChanged" FontWeight="Normal" VerticalContentAlignment="Center">
                     <Binding Path="FirstName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <local:TextBoxValidation TextBoxType="String"/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox>
-                <TextBox x:Name="middleInitialTb" TextWrapping="Wrap" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" MaxLines="1" MaxLength="3" Margin="202,66,303,0" Height="23" VerticalAlignment="Top" TextChanged="middleInitialTb_TextChanged" HorizontalContentAlignment="Center" FontWeight="Normal">
+                <TextBox x:Name="middleInitialTb" TextWrapping="Wrap" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" MaxLines="1" MaxLength="3" Margin="202,66,303,0" Height="23" VerticalAlignment="Top" TextChanged="middleInitialTb_TextChanged" FontWeight="Normal" VerticalContentAlignment="Center">
                     <Binding Path="MiddleName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <local:TextBoxValidation TextBoxType="String"/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox>
-                <TextBox x:Name="lastNameTb" TextWrapping="Wrap" MaxLines="1" MaxLength="20" Margin="317,67,73,0" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Height="23" VerticalAlignment="Top" TextChanged="lastNameTb_TextChanged" HorizontalContentAlignment="Center" FontWeight="Normal">
+                <TextBox x:Name="lastNameTb" TextWrapping="Wrap" MaxLines="1" MaxLength="20" Margin="317,67,73,0" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Height="23" VerticalAlignment="Top" TextChanged="lastNameTb_TextChanged" FontWeight="Normal" VerticalContentAlignment="Center">
                     <Binding Path="LastName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <local:TextBoxValidation TextBoxType="String"/>
@@ -99,7 +96,7 @@
                 <Button x:Name="addNewCustContactBtn" Content="+add" HorizontalAlignment="Left" Margin="414,129,0,0" VerticalAlignment="Top" Width="66" FontWeight="Normal" Height="23" Click="addNewCustContactBtn_Click"/>
                 <Button x:Name="saveCustContactBtn" Content="save" HorizontalAlignment="Left" Margin="414,129,0,0" VerticalAlignment="Top" Width="66" FontWeight="Normal" Height="23" Click="saveCustContactBtn_Click" IsEnabled="False" Visibility="Hidden"/>
                 <Button x:Name="cancelCustContactBtn" Content="cancel" HorizontalAlignment="Left" Margin="485,129,0,0" VerticalAlignment="Top" Width="66" FontWeight="Normal" Height="23" Click="cancelCustContactBtn_Click" IsEnabled="True" Visibility="Hidden"/>
-                <DataGrid x:Name="repContactsDg" HorizontalAlignment="Left" Height="148" Margin="35,172,0,0" VerticalAlignment="Top" Width="547" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedRepContact}" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" SelectionChanged="repContactsDg_SelectionChanged" ItemsSource="{Binding CustContacts}">
+                <DataGrid x:Name="repContactsDg" HorizontalAlignment="Left" Height="148" Margin="35,172,0,0" VerticalAlignment="Top" Width="547" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedRepContact}" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" SelectionChanged="repContactsDg_SelectionChanged" ItemsSource="{Binding RepContacts}">
                     <DataGrid.Columns >
                         <DataGridTextColumn Binding="{Binding ContactTypeID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"/>
                         <DataGridTextColumn Binding="{Binding ContactType}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Contact Type"/>

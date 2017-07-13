@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace prototype2
 {
-    public class Representative:ViewModelEntity
+    public class Representative : ViewModelEntity
     {
         public Representative()
         {
@@ -16,70 +16,61 @@ namespace prototype2
         protected string middlename;
         protected string lastname;
 
-        public string FirstName
+        public string RepFirstName
         {
             get { return firstname; }
             set { SetProperty(ref firstname, value); }
         }
-        public string MiddleName
+        public string RepMiddleName
         {
             get { return middlename; }
             set { SetProperty(ref middlename, value); }
         }
-        public string LastName
+        public string RepLastName
         {
             get { return lastname; }
             set { SetProperty(ref lastname, value); }
         }
     }
-    
-    //public class RepContacts : ViewModelEntity
-    //{
-    //    public RepContacts()
-    //    {
 
-    //    }
-    //    protected string typeidr;
-    //    protected string typenamer;
-    //    protected string detailsr;
+    public class Customer : ViewModelEntity
+    {
+        public Customer()
+        {
 
-    //    public string RepContactTypeID
-    //    {
-    //        get { return typeidr; }
-    //        set
-    //        {
-    //            if (typeidr != value)
-    //            {
-    //                typeidr = value;
-    //                NotifyPropertyChanged("RepContactTypeID");
-    //            }
-    //        }
-    //    }
-    //    public string RepContactType
-    //    {
-    //        get { return typenamer; }
-    //        set
-    //        {
-    //            if (typenamer != value)
-    //            {
-    //                typenamer = value;
-    //                NotifyPropertyChanged("RepContactType");
-    //            }
-    //        }
-    //    }
-    //    public string RepContactDetails
-    //    {
-    //        get { return detailsr; }
-    //        set
-    //        {
-    //            if (detailsr != value)
-    //            {
-    //                detailsr = value;
-    //                NotifyPropertyChanged("RepContactDetails");
-    //            }
-    //        }
-    //    }
-    //}
+        }
+        protected string customerName;
+        protected string customerDesc;
+        protected string customerAddress;
+        protected string customerCity;
+        protected string customerProvinceID;
+
+        public string CustomerName
+        {
+            get { return customerName; }
+            set { SetProperty(ref customerName, value); }
+        }
+        public string CustomerDesc
+        {
+            get { return customerDesc; }
+            set { SetProperty(ref customerDesc, value); }
+        }
+        public string CustomerAddress
+        {
+            get { return customerAddress; }
+            set { SetProperty(ref customerAddress, value); }
+        }
+        public string CustomerCity
+        {
+            get { return customerCity; }
+            set { SetProperty(ref customerCity, value); }
+        }
+        public string CustomerProvinceID
+        {
+            get { return customerProvinceID; }
+            set { SetProperty(ref customerProvinceID, value); }
+        }
+    }
 
     public class Contact : ViewModelEntity
     {

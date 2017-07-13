@@ -87,11 +87,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
     </Window.Resources>
-    <Window.DataContext>
-        <local:MainViewModel x:Name="MainVM"/>
-    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -450,11 +447,12 @@
             </Grid>
         </Grid>
         <Grid x:Name="containerGrid" Grid.Row="1" Background="#FF1695A3">
-            <Grid x:Name="manageSubMenugrid" HorizontalAlignment="Right" Width="175" Background="#FF395066" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Height="140" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden" d:IsHidden="True">
+            <Grid x:Name="manageSubMenugrid" HorizontalAlignment="Right" Width="175" Background="#FF395066" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Height="173" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden">
                 <Button x:Name="employeeManageMenuBtn" Content="Employees" Margin="0,1,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="175" Click="employeeManageMenuBtn_Click" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="customerManageMenuBtn" Content="Customers" Margin="0,36,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Foreground="White" Width="175" Click="customerManageMenuBtn_Click" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="supplierManageMenuBtn" Content="Suppliers" Margin="0,71,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="175" Click="supplierManageMenuBtn_Click" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="contractorManageMenuBtn" Content="Contractor" Margin="0,106,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="contractorManageMenuBtn_Click" Width="175" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
+                <Button x:Name="settingsManageMenuBtn" Content="Settings" Margin="0,141,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="contractorManageMenuBtn_Click" Width="175" HorizontalContentAlignment="Right" Padding="1,1,10,1" Visibility="Hidden"/>
             </Grid>
             <Grid x:Name="saleSubMenuGrid" Width="175" Margin="0,0,369,0" Background="#FF395066" HorizontalAlignment="Right" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden" d:IsHidden="True">
                 <Button x:Name="quotesSalesMenuBtn" Content="Quotations" Margin="0,75,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="quotesSalesMenuBtn_Click" Width="175" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1"/>
@@ -826,7 +824,7 @@
             </Grid>
             <Grid x:Name="reportsGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True"/>
             <Grid x:Name="manageGrid" Margin="10,0" Background="#FFECF0F1" >
-                <Grid x:Name="manageCustomerGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged">
+                <Grid x:Name="manageCustomerGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged" d:IsHidden="True">
                     <Label x:Name="label7_Copy" Content="Manage - Customer" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid x:Name="manageCustomerHomeGrid" Margin="10,70,10,10" d:IsHidden="True">
                         <Grid Margin="10,1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -860,145 +858,7 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
-                    <Grid x:Name="customerDetailsGrid" Margin="10,70,10,10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1175*"/>
-                            <ColumnDefinition Width="62*"/>
-                        </Grid.ColumnDefinitions>
-                        <GroupBox x:Name="groupBox" Header="Customer Details" Margin="10,10,10,47" FontSize="14" FontWeight="Bold" Background="#FFECF0F1" BorderBrush="#FF2C3E50" Grid.ColumnSpan="2">
-                            <ScrollViewer Margin="0,0,-2,1">
-                                <Grid VerticalAlignment="Top" Height="863">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Label x:Name="label23" Content="All required fields are marked with (*)" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" FontWeight="Normal"/>
-                                    <Grid Margin="10,28,10,0" VerticalAlignment="Top" Height="50">
-                                        <Label x:Name="label24" Content="* Company Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" FontWeight="Bold" Margin="0,2,0,0" FontStyle="Italic"/>
-                                        <TextBox x:Name="custCompanyNameTb" Height="26" Margin="140,5,10,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="custCompanyNameTb_TextChanged" VerticalContentAlignment="Center" FontWeight="Normal">
-                                            <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                                <Binding.ValidationRules>
-                                                    <local:TextBoxValidation TextBoxType="String"/>
-                                                </Binding.ValidationRules>
-                                            </Binding>
-                                        </TextBox>
-                                    </Grid>
-                                    <Grid Margin="10,87,10,0" VerticalAlignment="Top" Height="120">
-                                        <TextBox x:Name="custAddInfoTb" Height="120" TextWrapping="Wrap" VerticalAlignment="Top" Margin="140,0,10,0" FontWeight="Normal"/>
-                                        <Label x:Name="label_Copy" Content="Description:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="107" FontWeight="Bold" FontStyle="Italic"/>
-                                    </Grid>
-                                    <Grid Margin="10,205,10,0" VerticalAlignment="Top" Height="170">
-                                        <Label x:Name="label25" Content="Location/Address:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic"/>
-                                        <Label x:Name="locationBrngyTbLbl" Content="* Address" VerticalAlignment="Top" Visibility="Visible" FontWeight="Normal" Margin="19,26,10,0"/>
-                                        <TextBox x:Name="custAddressTb" TextWrapping="Wrap" Height="25" MaxLines="1" VerticalContentAlignment="Center" VerticalAlignment="Top" Margin="34,52,10,0" TextChanged="locationAddressTb_TextChanged" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" FontWeight="Normal">
-                                            <Binding Path="Address" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                                <Binding.ValidationRules>
-                                                    <local:TextBoxValidation TextBoxType="String"/>
-                                                </Binding.ValidationRules>
-                                            </Binding>
-                                        </TextBox>
-                                        <Label x:Name="locationCityTbLbl" Content="* City" VerticalAlignment="Top" Visibility="Visible" Margin="19,99,972,0" FontWeight="Normal"/>
-                                        <TextBox x:Name="custCityTb" TextWrapping="Wrap" Height="25" MaxLines="1" VerticalAlignment="Top" Margin="34,135,0,0" TextChanged="locationAddressTb_TextChanged" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" HorizontalAlignment="Left" Width="200" VerticalContentAlignment="Center" FontWeight="Normal">
-                                            <Binding Path="City" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                                <Binding.ValidationRules>
-                                                    <local:TextBoxValidation TextBoxType="String"/>
-                                                </Binding.ValidationRules>
-                                            </Binding>
-                                        </TextBox>
-                                        <Label x:Name="label1_Copy4" Content="* Province:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Normal" Margin="246,103,0,0"/>
-                                        <ComboBox x:Name="custProvinceCb" Margin="261,134,729,0" VerticalAlignment="Top" Height="25" IsEditable="True" DisplayMemberPath = "locProvince" SelectedValuePath = "locProvinceID" Width="179" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontWeight="Normal">
-                                            <ComboBox.SelectedItem>
-                                                <Binding Path="locProvinceId" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                                    <Binding.ValidationRules>
-                                                        <local:TextBoxValidation TextBoxType="ComboBox"/>
-                                                    </Binding.ValidationRules>
-                                                </Binding>
-                                            </ComboBox.SelectedItem>
-                                        </ComboBox>
-                                    </Grid>
-                                    <Label Content="* Customer Contacts:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Margin="12,390,0,0" Height="30"/>
-                                    <ComboBox x:Name="contactTypeCb" Margin="47,422,0,0" VerticalAlignment="Top" Height="25" IsEditable="True" Width="130" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" SelectionChanged="contactTypeCb_SelectionChanged" VerticalContentAlignment="Center" FontWeight="Normal" FontSize="12" SelectedValuePath="Content" >
-                                        <ComboBoxItem>[Contact Type]</ComboBoxItem>
-                                        <ComboBoxItem>Email Address</ComboBoxItem>
-                                        <ComboBoxItem>Phone Number</ComboBoxItem>
-                                        <ComboBoxItem>Mobile Number</ComboBoxItem>
-                                    </ComboBox>
-                                    <TextBox x:Name="contactDetailsEmailTb" HorizontalAlignment="Left" Height="25" Margin="192,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" FontWeight="Normal" TextChanged="contactDetailsEmailTb_TextChanged" VerticalContentAlignment="Center">
-                                        <Binding Path="EmailAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <local:TextBoxValidation TextBoxType="Email"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox>
-                                    <TextBox x:Name="contactDetailsPhoneTb" HorizontalAlignment="Left" Height="25" Margin="192,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" FontWeight="Normal" TextChanged="contactDetailsPhoneTb_TextChanged" VerticalContentAlignment="Center">
-                                        <Binding Path="PhoneNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <local:TextBoxValidation TextBoxType="Phone"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox>
-                                    <TextBox x:Name="contactDetailsMobileTb" HorizontalAlignment="Left" Height="25" Margin="192,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" FontWeight="Normal" TextChanged="contactDetailsMobileTb_TextChanged" VerticalContentAlignment="Center">
-                                        <Binding Path="MobileNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <local:TextBoxValidation TextBoxType="Mobile"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox>
-                                    <Button x:Name="addNewCustContactBtn" Content="+add" HorizontalAlignment="Left" Margin="492,422,0,0" VerticalAlignment="Top" Width="110" FontWeight="Normal" Height="25" Click="addNewCustContactBtn_Click"/>
-                                    <Button x:Name="saveCustContactBtn" Content="save" HorizontalAlignment="Left" Margin="492,422,0,0" VerticalAlignment="Top" Width="110" FontWeight="Normal" Height="25" Click="saveCustContactBtn_Click" Visibility="Hidden" IsEnabled="False"/>
-                                    <Button x:Name="cancelCustContactBtn" Content="cancel" HorizontalAlignment="Left" Margin="607,422,0,0" VerticalAlignment="Top" Width="110" FontWeight="Normal" Height="25" Click="cancelCustContactBtn_Click" IsEnabled="True" Visibility="Hidden"/>
-                                    <DataGrid x:Name="custContactDg" HorizontalAlignment="Left" Height="148" Margin="47,483,0,0" VerticalAlignment="Top" Width="547" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" SelectionChanged="custContactDg_SelectionChanged" ItemsSource="{Binding CustContacts}" SelectedItem="{Binding SelectedCustContact}" >
-                                        <DataGrid.Columns >
-                                            <DataGridTextColumn Binding="{Binding ContactTypeID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"/>
-                                            <DataGridTextColumn Binding="{Binding ContactType}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Contact Type"/>
-                                            <DataGridTextColumn Binding="{Binding ContactDetails}" ClipboardContentBinding="{x:Null}" Header="Contact Details" Width="200" CanUserResize="False"/>
-                                            <DataGridTemplateColumn x:Name="columnEditBtnCustCont" Width="100" Visibility="Hidden"  CanUserResize="False">
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <Button x:Name="btnEditCustCont" Content="Edit" Click="btnEditCustCont_Click"/>
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                            <DataGridTemplateColumn x:Name="columnDelBtnCustCont" Width="100" Visibility="Hidden"  CanUserResize="False">
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <Button x:Name="btnDeleteCustCont" Click="btnDeleteCustCont_Click" Content="Delete" />
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                        </DataGrid.Columns>
-                                    </DataGrid>
 
-                                    <Label x:Name="label1_Copy6" Content="Representative:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Width="129" FontStyle="Italic" Margin="14,636,0,0"/>
-                                    <Button x:Name="newRepresentativeBtn" Content="+add" HorizontalAlignment="Left" Margin="491,639,0,0" VerticalAlignment="Top" Width="111" FontWeight="Normal" Click="newRepresentativeBtn_Click"/>
-                                    <DataGrid x:Name="customerRepresentativeDg" HorizontalAlignment="Left" Height="169" Margin="47,677,0,0" VerticalAlignment="Top" Width="555" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="customerRepresentativeDg_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" ItemsSource="{Binding Representatives}" SelectedItem="{Binding SelectedRepresentative}">
-                                        
-                                        <DataGrid.Columns >
-                                            <DataGridTextColumn Binding="{Binding FirstName}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="First Name"/>
-                                            <DataGridTextColumn Binding="{Binding LastName}" ClipboardContentBinding="{x:Null}" Header="Last Name" Width="200" CanUserResize="False"/>
-                                            <DataGridTemplateColumn x:Name="columnEditBtnCustContRep" Width="100" Visibility="Hidden"  CanUserResize="False">
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <Button x:Name="editBtnCustContRep" Content="Edit" Click="editBtnCustContRep_Click"/>
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                            <DataGridTemplateColumn x:Name="columnDelBtnCustContRep" Width="100" Visibility="Hidden"  CanUserResize="False">
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <Button x:Name="delBtnCustContRep" Content="Delete" Click="delBtnCustContRep_Click" />
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                        </DataGrid.Columns>
-                                    </DataGrid>
-                                </Grid>
-                            </ScrollViewer>
-                        </GroupBox>
-                        <Grid Margin="0,0,10,10" Height="20" VerticalAlignment="Bottom" Grid.ColumnSpan="2" HorizontalAlignment="Right">
-                            <Button x:Name="saveCustBtn" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="saveCustBtn_Click" IsEnabled="False"/>
-                            <Button x:Name="cancelCustBtn" Content="Cancel" HorizontalAlignment="Left" Margin="84,0,0,0" VerticalAlignment="Top" Width="75" Click="cancelCustBtn_Click"/>
-                        </Grid>
-                    </Grid>
                 </Grid>
                 <Grid x:Name="manageEmployeeGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged" d:IsHidden="True">
                     <Grid Height="57" Margin="10,0" VerticalAlignment="Top" Background="#FF1695A3">
@@ -1118,143 +978,6 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
-                    <Grid x:Name="supplierDetailsGrid" Margin="10,70,10,10" IsEnabled="False" Visibility="Hidden" d:IsLocked="True">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1175*"/>
-                            <ColumnDefinition Width="62*"/>
-                        </Grid.ColumnDefinitions>
-                        <GroupBox x:Name="groupBox6" Header="Supplier Details" Margin="10,10,10,47" FontSize="14" FontWeight="Bold" Background="#FFECF0F1" BorderBrush="#FF2C3E50" Grid.ColumnSpan="2">
-                            <ScrollViewer Margin="0,0,-2,1">
-                                <Grid VerticalAlignment="Top" Height="863">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Label x:Name="label19" Content="All required fields are marked with (*)" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" FontWeight="Normal"/>
-                                    <Grid Margin="10,28,10,0" VerticalAlignment="Top" Height="50">
-                                        <Label x:Name="label26" Content="* Supplier Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" FontWeight="Bold" Margin="0,2,0,0" FontStyle="Italic"/>
-                                        <TextBox x:Name="custCompanyNameTb1" Height="26" Margin="140,5,10,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="custCompanyNameTb_TextChanged" VerticalContentAlignment="Center" FontWeight="Normal">
-                                            <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                                <Binding.ValidationRules>
-                                                    <local:TextBoxValidation TextBoxType="String"/>
-                                                </Binding.ValidationRules>
-                                            </Binding>
-                                        </TextBox>
-                                    </Grid>
-                                    <Grid Margin="10,87,10,0" VerticalAlignment="Top" Height="120">
-                                        <TextBox x:Name="custAddInfoTb1" Height="120" TextWrapping="Wrap" VerticalAlignment="Top" Margin="140,0,10,0" FontWeight="Normal"/>
-                                        <Label x:Name="label_Copy1" Content="Description:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="107" FontWeight="Bold" FontStyle="Italic"/>
-                                    </Grid>
-                                    <Grid Margin="10,205,10,0" VerticalAlignment="Top" Height="170">
-                                        <Label x:Name="label27" Content="Location/Address:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic"/>
-                                        <Label x:Name="locationBrngyTbLbl1" Content="* Address" VerticalAlignment="Top" Visibility="Visible" FontWeight="Normal" Margin="19,26,10,0"/>
-                                        <TextBox x:Name="custAddressTb1" TextWrapping="Wrap" Height="25" MaxLines="1" VerticalContentAlignment="Center" VerticalAlignment="Top" Margin="34,52,10,0" TextChanged="locationAddressTb_TextChanged" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" FontWeight="Normal">
-                                            <Binding Path="Address" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                                <Binding.ValidationRules>
-                                                    <local:TextBoxValidation TextBoxType="String"/>
-                                                </Binding.ValidationRules>
-                                            </Binding>
-                                        </TextBox>
-                                        <Label x:Name="locationCityTbLbl1" Content="* City" VerticalAlignment="Top" Visibility="Visible" Margin="19,99,972,0" FontWeight="Normal"/>
-                                        <TextBox x:Name="custCityTb1" TextWrapping="Wrap" Height="25" MaxLines="1" VerticalAlignment="Top" Margin="34,135,0,0" TextChanged="locationAddressTb_TextChanged" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" HorizontalAlignment="Left" Width="200" VerticalContentAlignment="Center" FontWeight="Normal">
-                                            <Binding Path="City" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                                <Binding.ValidationRules>
-                                                    <local:TextBoxValidation TextBoxType="String"/>
-                                                </Binding.ValidationRules>
-                                            </Binding>
-                                        </TextBox>
-                                        <Label x:Name="label1_Copy7" Content="* Province:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Normal" Margin="246,103,0,0"/>
-                                        <ComboBox x:Name="custProvinceCb1" Margin="261,134,729,0" VerticalAlignment="Top" Height="25" IsEditable="True" DisplayMemberPath = "locProvince" SelectedValuePath = "locProvinceID" Width="179" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontWeight="Normal">
-                                            <ComboBox.SelectedItem>
-                                                <Binding Path="locProvinceId" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                                    <Binding.ValidationRules>
-                                                        <local:TextBoxValidation TextBoxType="ComboBox"/>
-                                                    </Binding.ValidationRules>
-                                                </Binding>
-                                            </ComboBox.SelectedItem>
-                                        </ComboBox>
-                                    </Grid>
-                                    <Label Content="* Supplier Contacts:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Margin="12,390,0,0" Height="30"/>
-                                    <ComboBox x:Name="contactTypeCb1" Margin="47,422,0,0" VerticalAlignment="Top" Height="25" IsEditable="True" Width="130" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" SelectionChanged="contactTypeCb_SelectionChanged" VerticalContentAlignment="Center" FontWeight="Normal" FontSize="12" SelectedValuePath="Content" >
-                                        <ComboBoxItem Content="[Contact Type]"/>
-                                        <ComboBoxItem Content="Email Address"/>
-                                        <ComboBoxItem Content="Phone Number"/>
-                                        <ComboBoxItem Content="Mobile Number"/>
-                                    </ComboBox>
-                                    <TextBox x:Name="contactDetailsEmailTb1" HorizontalAlignment="Left" Height="25" Margin="192,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" FontWeight="Normal" TextChanged="contactDetailsEmailTb_TextChanged" VerticalContentAlignment="Center">
-                                        <Binding Path="EmailAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <local:TextBoxValidation TextBoxType="Email"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox>
-                                    <TextBox x:Name="contactDetailsPhoneTb1" HorizontalAlignment="Left" Height="25" Margin="192,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" FontWeight="Normal" TextChanged="contactDetailsPhoneTb_TextChanged" VerticalContentAlignment="Center">
-                                        <Binding Path="PhoneNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <local:TextBoxValidation TextBoxType="Phone"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox>
-                                    <TextBox x:Name="contactDetailsMobileTb1" HorizontalAlignment="Left" Height="25" Margin="192,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" FontWeight="Normal" TextChanged="contactDetailsMobileTb_TextChanged" VerticalContentAlignment="Center">
-                                        <Binding Path="MobileNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <local:TextBoxValidation TextBoxType="Mobile"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox>
-                                    <Button x:Name="addNewCustContactBtn1" Content="+add" HorizontalAlignment="Left" Margin="492,422,0,0" VerticalAlignment="Top" Width="110" FontWeight="Normal" Height="25" Click="addNewCustContactBtn_Click"/>
-                                    <Button x:Name="saveCustContactBtn1" Content="save" HorizontalAlignment="Left" Margin="492,422,0,0" VerticalAlignment="Top" Width="110" FontWeight="Normal" Height="25" Click="saveCustContactBtn_Click" Visibility="Hidden" IsEnabled="False"/>
-                                    <Button x:Name="cancelCustContactBtn1" Content="cancel" HorizontalAlignment="Left" Margin="607,422,0,0" VerticalAlignment="Top" Width="110" FontWeight="Normal" Height="25" Click="cancelCustContactBtn_Click" IsEnabled="True" Visibility="Hidden"/>
-                                    <DataGrid x:Name="custContactDetailsDg1" HorizontalAlignment="Left" Height="148" Margin="48,474,0,0" VerticalAlignment="Top" Width="555" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedCustContact, Mode=TwoWay}" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30">
-                                        <DataGrid.Columns >
-                                            <DataGridTextColumn Binding="{Binding contactTypeID}" ClipboardContentBinding="{x:Null}" Width="10" CanUserResize="False" Visibility="Visible"/>
-                                            <DataGridTextColumn Binding="{Binding contactType}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Contact Type"/>
-                                            <DataGridTextColumn Binding="{Binding contactDetails}" ClipboardContentBinding="{x:Null}" Header="Contact Details" Width="200" CanUserResize="False"/>
-                                            <DataGridTemplateColumn x:Name="columnEditBtnCustCont1" Width="100" Visibility="Hidden"  CanUserResize="False">
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <Button x:Name="btnEditCustCont" Content="Edit" Click="btnEditCustCont_Click"/>
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                            <DataGridTemplateColumn x:Name="columnDelBtnCustCont1" Width="100" Visibility="Hidden"  CanUserResize="False">
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <Button x:Name="btnDeleteCustCont" Click="btnDeleteCustCont_Click" Content="Delete" />
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                        </DataGrid.Columns>
-                                    </DataGrid>
-                                    <Label x:Name="label1_Copy8" Content="Representative:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Width="129" FontStyle="Italic" Margin="14,636,0,0"/>
-                                    <Button x:Name="newRepresentativeBtn1" Content="+add" HorizontalAlignment="Left" Margin="491,639,0,0" VerticalAlignment="Top" Width="111" FontWeight="Normal" Click="newRepresentativeBtn_Click"/>
-                                    <DataGrid x:Name="customerRepresentativeDg1" HorizontalAlignment="Left" Height="169" Margin="47,677,0,0" VerticalAlignment="Top" Width="555" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedCustContact, Mode=TwoWay}" SelectionChanged="customerRepresentativeDg_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30">
-                                        <DataGrid.Columns >
-                                            <DataGridTextColumn Binding="{Binding firstName}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="First Name"/>
-                                            <DataGridTextColumn Binding="{Binding lastName}" ClipboardContentBinding="{x:Null}" Header="Last Name" Width="200" CanUserResize="False"/>
-                                            <DataGridTemplateColumn x:Name="columnEditBtnCustContRep1" Width="100" Visibility="Hidden"  CanUserResize="False">
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <Button x:Name="editBtnCustContRep" Content="Edit" Click="editBtnCustContRep_Click"/>
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                            <DataGridTemplateColumn x:Name="columnDelBtnCustContRep1" Width="100" Visibility="Hidden"  CanUserResize="False">
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <Button x:Name="delBtnCustContRep" Content="Delete" Click="delBtnCustContRep_Click" />
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                        </DataGrid.Columns>
-                                    </DataGrid>
-                                </Grid>
-                            </ScrollViewer>
-                        </GroupBox>
-                        <Grid Margin="0,0,10,10" Height="20" VerticalAlignment="Bottom" Grid.ColumnSpan="2" HorizontalAlignment="Right">
-                            <Button x:Name="saveSuppBtn" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="saveSuppBtn_Click" IsEnabled="False"/>
-                            <Button x:Name="cancelSuppBtn" Content="Cancel" HorizontalAlignment="Left" Margin="84,0,0,0" VerticalAlignment="Top" Width="75" Click="cancelSuppBtn_Click"/>
-                        </Grid>
-                    </Grid>
                 </Grid>
                 <Grid x:Name="manageContractorGrid" IsVisibleChanged="manageContractorGrid_IsVisibleChanged" d:IsHidden="True">
                     <Grid Margin="10,70,10,10">
@@ -1294,9 +1017,176 @@
                         <Label x:Name="label7_Copy9" Content="Manage - Contractor" Margin="0,0,307,0" FontSize="20" FontWeight="Bold" Background="{x:Null}" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageApplicationGrid" d:IsHidden="True">
-                    <Label x:Name="label7_Copy6" Content="Manage - Application Settings" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
+                <Grid x:Name="manageMiscGrid" Visibility="Hidden">
+                    <Label x:Name="label7_Copy6" Content="Manage - Settings" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
+                    <Grid Margin="10,70,10,10">
+                        <TabControl x:Name="tabControl" Margin="10,0,0,5" Width="1226">
+                            <TabItem Header="Company">
+                                <Grid Background="#FFE5E5E5">
+                                    <Grid Margin="0,307,741,423">
+                                        <Label x:Name="label19" Content="Employee Positions" HorizontalAlignment="Left" Height="32" Margin="10,10,0,0" VerticalAlignment="Top" Width="153" FontWeight="Bold" FontStyle="Italic" FontSize="14"/>
+                                        <Border BorderBrush="Black" BorderThickness="1" Margin="10,42,10,10">
+                                            <Grid Margin="0,0,-1,0">
+                                                <Label x:Name="label26" Content="Position Name:" HorizontalAlignment="Left" Margin="12,6,0,0" VerticalAlignment="Top"/>
+                                                <TextBox x:Name="empPosNewTb" HorizontalAlignment="Left" Height="23" Margin="117,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236"/>
+                                                <Button x:Name="addEmpPosBtn" Content="+ add" HorizontalAlignment="Left" Margin="358,10,0,0" VerticalAlignment="Top" Width="90" Click="addEmpPosBtn_Click"/>
+                                                <Button x:Name="saveEmpPosBtn" Content="save" HorizontalAlignment="Left" Margin="358,10,0,0" VerticalAlignment="Top" Width="90" Click="saveEmpPosBtn_Click" Visibility="Hidden"/>
+                                                <ListBox x:Name="employeePositionLb" HorizontalAlignment="Left" Height="127" Margin="16,46,0,0" VerticalAlignment="Top" Width="337" />
+                                                <Button x:Name="deleteEmpPosBtn" Content="- delete" HorizontalAlignment="Left" Margin="358,64,0,0" VerticalAlignment="Top" Width="90" Click="deleteEmpPosBtn_Click"/>
+                                                <Button x:Name="editEmpPosBtn" Content="edit" HorizontalAlignment="Left" Margin="358,89,0,0" VerticalAlignment="Top" Width="90" Click="editEmpPosBtn_Click"/>
+                                            </Grid>
+                                        </Border>
+
+                                    </Grid>
+                                </Grid>
+                            </TabItem>
+                            <TabItem Header="Services">
+                                <Grid Background="#FFE5E5E5"/>
+                            </TabItem>
+                        </TabControl>
+                    </Grid>
+                </Grid>
+                <Grid x:Name="companyDetailsGrid" d:IsHidden="True">
+                    <Label x:Name="companyDetailsHeader" Content="" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid Margin="10,70,10,10"/>
+                    <Grid x:Name="customerDetailsGrid" Margin="10,70,10,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1175*"/>
+                            <ColumnDefinition Width="62*"/>
+                        </Grid.ColumnDefinitions>
+                        <GroupBox x:Name="groupBox" Header="Details" Margin="10,10,10,47" FontSize="14" FontWeight="Bold" Background="#FFECF0F1" BorderBrush="#FF2C3E50" Grid.ColumnSpan="2">
+                            <ScrollViewer Margin="0,0,-2,1">
+                                <Grid VerticalAlignment="Top" Height="863">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label x:Name="label23" Content="All required fields are marked with (*)" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" FontWeight="Normal"/>
+                                    <Grid Margin="10,28,10,0" VerticalAlignment="Top" Height="50">
+                                        <Label x:Name="label24" Content="* Company Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" FontWeight="Bold" Margin="0,2,0,0" FontStyle="Italic"/>
+                                        <TextBox x:Name="custCompanyNameTb" Height="26" Margin="140,5,10,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="custCompanyNameTb_TextChanged" VerticalContentAlignment="Center" FontWeight="Normal">
+                                            <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <local:TextBoxValidation TextBoxType="String"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox>
+                                    </Grid>
+                                    <Grid Margin="10,87,10,0" VerticalAlignment="Top" Height="120">
+                                        <TextBox x:Name="custAddInfoTb" Height="120" TextWrapping="Wrap" VerticalAlignment="Top" Margin="140,0,10,0" FontWeight="Normal"/>
+                                        <Label x:Name="label_Copy" Content="Description:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="107" FontWeight="Bold" FontStyle="Italic"/>
+                                    </Grid>
+                                    <Grid Margin="10,205,10,0" VerticalAlignment="Top" Height="170">
+                                        <Label x:Name="label25" Content="Location/Address:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic"/>
+                                        <Label x:Name="locationBrngyTbLbl" Content="* Address" VerticalAlignment="Top" Visibility="Visible" FontWeight="Normal" Margin="19,26,10,0"/>
+                                        <TextBox x:Name="custAddressTb" TextWrapping="Wrap" Height="25" MaxLines="1" VerticalContentAlignment="Center" VerticalAlignment="Top" Margin="34,52,10,0" TextChanged="locationAddressTb_TextChanged" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" FontWeight="Normal">
+                                            <Binding Path="Address" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <local:TextBoxValidation TextBoxType="String"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox>
+                                        <Label x:Name="locationCityTbLbl" Content="* City" VerticalAlignment="Top" Visibility="Visible" Margin="19,99,972,0" FontWeight="Normal"/>
+                                        <TextBox x:Name="custCityTb" TextWrapping="Wrap" Height="25" MaxLines="1" VerticalAlignment="Top" Margin="34,135,0,0" TextChanged="locationAddressTb_TextChanged" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" HorizontalAlignment="Left" Width="200" VerticalContentAlignment="Center" FontWeight="Normal">
+                                            <Binding Path="City" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <local:TextBoxValidation TextBoxType="String"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox>
+                                        <Label x:Name="label1_Copy4" Content="* Province:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Normal" Margin="246,103,0,0"/>
+                                        <ComboBox x:Name="custProvinceCb" Margin="261,134,729,0" VerticalAlignment="Top" Height="25" IsEditable="True" DisplayMemberPath = "locProvince" SelectedValuePath = "locProvinceID" Width="179" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontWeight="Normal">
+                                            <ComboBox.SelectedItem>
+                                                <Binding Path="locProvinceId" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                                    <Binding.ValidationRules>
+                                                        <local:TextBoxValidation TextBoxType="ComboBox"/>
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </ComboBox.SelectedItem>
+                                        </ComboBox>
+                                    </Grid>
+                                    <Label Content="* Contacts:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Margin="12,390,0,0" Height="30"/>
+                                    <ComboBox x:Name="contactTypeCb" Margin="47,422,0,0" VerticalAlignment="Top" Height="25" IsEditable="True" Width="130" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" SelectionChanged="contactTypeCb_SelectionChanged" VerticalContentAlignment="Center" FontWeight="Normal" FontSize="12" SelectedValuePath="Content" >
+                                        <ComboBoxItem>[Contact Type]</ComboBoxItem>
+                                        <ComboBoxItem>Email Address</ComboBoxItem>
+                                        <ComboBoxItem>Phone Number</ComboBoxItem>
+                                        <ComboBoxItem>Mobile Number</ComboBoxItem>
+                                    </ComboBox>
+                                    <TextBox x:Name="contactDetailsEmailTb" HorizontalAlignment="Left" Height="25" Margin="192,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" FontWeight="Normal" TextChanged="contactDetailsEmailTb_TextChanged" VerticalContentAlignment="Center">
+                                        <Binding Path="EmailAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:TextBoxValidation TextBoxType="Email"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox>
+                                    <TextBox x:Name="contactDetailsPhoneTb" HorizontalAlignment="Left" Height="25" Margin="192,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" FontWeight="Normal" TextChanged="contactDetailsPhoneTb_TextChanged" VerticalContentAlignment="Center">
+                                        <Binding Path="PhoneNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:TextBoxValidation TextBoxType="Phone"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox>
+                                    <TextBox x:Name="contactDetailsMobileTb" HorizontalAlignment="Left" Height="25" Margin="192,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" FontWeight="Normal" TextChanged="contactDetailsMobileTb_TextChanged" VerticalContentAlignment="Center">
+                                        <Binding Path="MobileNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:TextBoxValidation TextBoxType="Mobile"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox>
+                                    <Button x:Name="addNewCustContactBtn" Content="+add" HorizontalAlignment="Left" Margin="492,422,0,0" VerticalAlignment="Top" Width="110" FontWeight="Normal" Height="25" Click="addNewCustContactBtn_Click"/>
+                                    <Button x:Name="saveCustContactBtn" Content="save" HorizontalAlignment="Left" Margin="492,422,0,0" VerticalAlignment="Top" Width="110" FontWeight="Normal" Height="25" Click="saveCustContactBtn_Click" Visibility="Hidden" IsEnabled="False"/>
+                                    <Button x:Name="cancelCustContactBtn" Content="cancel" HorizontalAlignment="Left" Margin="607,422,0,0" VerticalAlignment="Top" Width="110" FontWeight="Normal" Height="25" Click="cancelCustContactBtn_Click" IsEnabled="True" Visibility="Hidden"/>
+                                    <DataGrid x:Name="custContactDg" HorizontalAlignment="Left" Height="148" Margin="47,483,0,0" VerticalAlignment="Top" Width="547" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" SelectionChanged="custContactDg_SelectionChanged" ItemsSource="{Binding CustContacts}" SelectedItem="{Binding SelectedCustContact}" >
+                                        <DataGrid.Columns >
+                                            <DataGridTextColumn Binding="{Binding ContactTypeID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"/>
+                                            <DataGridTextColumn Binding="{Binding ContactType}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Contact Type"/>
+                                            <DataGridTextColumn Binding="{Binding ContactDetails}" ClipboardContentBinding="{x:Null}" Header="Contact Details" Width="200" CanUserResize="False"/>
+                                            <DataGridTemplateColumn x:Name="columnEditBtnCustCont" Width="100" Visibility="Hidden"  CanUserResize="False">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Button x:Name="btnEditCustCont" Content="Edit" Click="btnEditCustCont_Click"/>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTemplateColumn x:Name="columnDelBtnCustCont" Width="100" Visibility="Hidden"  CanUserResize="False">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Button x:Name="btnDeleteCustCont" Click="btnDeleteCustCont_Click" Content="Delete" />
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+
+                                    <Label x:Name="label1_Copy6" Content="Representative:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Width="129" FontStyle="Italic" Margin="14,636,0,0"/>
+                                    <Button x:Name="newRepresentativeBtn" Content="+add" HorizontalAlignment="Left" Margin="491,639,0,0" VerticalAlignment="Top" Width="111" FontWeight="Normal" Click="newRepresentativeBtn_Click"/>
+                                    <DataGrid x:Name="customerRepresentativeDg" HorizontalAlignment="Left" Height="169" Margin="47,677,0,0" VerticalAlignment="Top" Width="555" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="customerRepresentativeDg_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" ItemsSource="{Binding CustRepresentatives}" SelectedItem="{Binding SelectedRepresentative}">
+                                        <DataGrid.Columns >
+                                            <DataGridTextColumn Binding="{Binding RepFirstName}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="First Name"/>
+                                            <DataGridTextColumn Binding="{Binding RepLastName}" ClipboardContentBinding="{x:Null}" Header="Last Name" Width="200" CanUserResize="False"/>
+                                            <DataGridTemplateColumn x:Name="columnEditBtnCustContRep" Width="100" Visibility="Hidden"  CanUserResize="False">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Button x:Name="editBtnCustContRep" Content="Edit" Click="editBtnCustContRep_Click"/>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTemplateColumn x:Name="columnDelBtnCustContRep" Width="100" Visibility="Hidden"  CanUserResize="False">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Button x:Name="delBtnCustContRep" Content="Delete" Click="delBtnCustContRep_Click" />
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </Grid>
+                            </ScrollViewer>
+                        </GroupBox>
+                        <Grid Margin="0,0,10,10" Height="20" VerticalAlignment="Bottom" Grid.ColumnSpan="2" HorizontalAlignment="Right">
+                            <Button x:Name="saveCustBtn" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="saveCustBtn_Click" IsEnabled="False"/>
+                            <Button x:Name="cancelCustBtn" Content="Cancel" HorizontalAlignment="Left" Margin="84,0,0,0" VerticalAlignment="Top" Width="75" Click="cancelCustBtn_Click"/>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>

@@ -13,15 +13,32 @@ namespace prototype2
         {
 
         }
-        protected ObservableCollection<Representative> representatives =
-            new ObservableCollection<Representative>();
+
+        public new String Name { get; set; }
+        public String Address { get; set; }
+        public String City { get; set; }
+        public String Number { get; set; }
+        public String Email { get; set; }
+        public object locProvinceId { get; set; }
+        public object CityName { get; set; }
+        public String EmailAddress { get; set; }
+        public String PhoneNumber { get; set; }
+        public String MobileNumber { get; set; }
+
+        public String FirstName { get; set; }
+        public String MiddleName { get; set; }
+        public String LastName { get; set; }
+        public int Edit { get; set; }
+
+        //-----REPRESENTATIVE
+        protected ObservableCollection<Representative> custrepresentative = new ObservableCollection<Representative>();
 
         protected Representative selectedRepresentative = null;
 
-        public ObservableCollection<Representative> Representatives
+        public ObservableCollection<Representative> CustRepresentatives
         {
-            get { return representatives; }
-            set { representatives = value; }
+            get { return custrepresentative; }
+            set { custrepresentative = value; }
         }
 
         public Representative SelectedRepresentative
@@ -29,6 +46,26 @@ namespace prototype2
             get { return selectedRepresentative; }
             set { SetProperty(ref selectedRepresentative, value); }
         }
+        //-----END OF REPRESENTATIVE
+
+        //-----CUSTOMER
+        protected ObservableCollection<Customer> customers =
+            new ObservableCollection<Customer>();
+
+        protected Representative selectedCustomer = null;
+
+        public ObservableCollection<Customer> Customers
+        {
+            get { return customers; }
+            set { customers = value; }
+        }
+
+        public Representative SelectedCustomer
+        {
+            get { return selectedCustomer; }
+            set { SetProperty(ref selectedCustomer, value); }
+        }
+        //-----END OF CUSTOMER
 
         protected ObservableCollection<Contact> custcontact = new ObservableCollection<Contact>();
 

@@ -21,22 +21,11 @@ namespace prototype2
     /// </summary>
     public partial class RepresentativeWindow : Window
     {
-        public String FirstName { get; set; }
-        public String MiddleName { get; set; }
-        public String LastName { get; set; }
-        public String EmailAddress { get; set; }
-        public String PhoneNumber { get; set; }
-        public String MobileNumber { get; set; }
-        public int Edit { get; set; }
+        
         public RepresentativeWindow()
         {
             InitializeComponent();
-            firstNameTb.DataContext = this;
-            middleInitialTb.DataContext = this;
-            lastNameTb.DataContext = this;
-            contactDetailsEmailTb.DataContext = this;
-            contactDetailsMobileTb.DataContext = this;
-            contactDetailsPhoneTb.DataContext = this;
+            this.DataContext = MainMenu.MainVM;
         }
         public string custName { get; set; }
         public string custId { get; set; }
@@ -44,33 +33,14 @@ namespace prototype2
         private void setControlsValue()
         {
             contactTypeCb.SelectedIndex = 0;
-            if (repDetails.Count!=0&&contactDetails.Count!=0)
+            if (repDetails != null && idOfContacts !=0)
             {
-                foreach(string[] details in repDetails)
-                {
-                    FirstName = details[0];
-                    MiddleName = details[1];
-                    LastName = details[2];
-                }
-                foreach (string[] details in contactDetails)
-                {
-                    string contactType = "";
-                    if (details[0].Equals("1"))
-                    {
-                        contactType = "Email Address";
-                    }
-                    else if (details[0].Equals("2"))
-                    {
-                        contactType = "Phone Number";
-                    }
-                    else if (details[0].Equals("1"))
-                    {
-                        contactType = "Mobile Number";
-                    }
-                    //var data = new Contacts { contactType = contactType, contactTypeID = details[0], contactDetails = details[1] };
-                    //repContactsDg.Items.Add(data);
-                }
+                firstNameTb.Text = repDetails[0];
+                middleInitialTb.Text = repDetails[1];
+                lastNameTb.Text = repDetails[2];
+                MainMenu.MainVM.RepContacts = MainMenu.MainVM.ContactOfRep[idOfContacts];
             }
+           
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -78,15 +48,16 @@ namespace prototype2
             setControlsValue();
         }
         private static String dbname = "odc_db";
-        public List<string[]> repDetails = new List<string[]>();
+        public String[] repDetails;
         public List<string[]> contactDetails = new List<string[]>();
+        public int idOfContacts;
         private string contactDetail = "";
         private void addNewCustContactBtn_Click(object sender, RoutedEventArgs e)
         {
             
             if (contactTypeCb.SelectedIndex != 0)
             {
-                MainVM.CustContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
+                MainMenu.MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
                 validateTextBoxes();
                 contactDetailsEmailTb.Text = "";
                 contactDetailsMobileTb.Text = "";
@@ -198,7 +169,7 @@ namespace prototype2
 
         private void validateTextBoxes()
         {
-            if (contactDetails.Count>0)
+            if (MainMenu.MainVM.RepContacts.Count>0)
             {
                 saveBtn.IsEnabled = true;
                 saveCustContactBtn.IsEnabled = true;
@@ -212,8 +183,9 @@ namespace prototype2
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainVM.Representatives.Add(new Representative() { FirstName = firstNameTb.Text , MiddleName = middleInitialTb.Text, LastName = lastNameTb.Text});
-            MainVM.ContactOfRep.Add(MainVM.RepContacts);
+            repDetails =  new String[] { firstNameTb.Text, middleInitialTb.Text, lastNameTb.Text };
+            MainMenu.MainVM.ContactOfRep.Add(MainMenu.MainVM.RepContacts);
+            MainMenu.MainVM.RepContacts.Clear();
             this.Close();
         }
 
@@ -227,20 +199,20 @@ namespace prototype2
         {
             if (repContactsDg.SelectedItem != null)
             {
-                contactTypeCb.SelectedIndex = int.Parse(MainVM.SelectedRepContact.ContactTypeID);
+                contactTypeCb.SelectedIndex = int.Parse(MainMenu.MainVM.SelectedRepContact.ContactTypeID);
 
-                if (MainVM.SelectedRepContact.ContactTypeID.Equals("1"))
+                if (MainMenu.MainVM.SelectedRepContact.ContactTypeID.Equals("1"))
                 {
-                    contactDetailsEmailTb.Text = MainVM.SelectedRepContact.ContactDetails;
+                    contactDetailsEmailTb.Text = MainMenu.MainVM.SelectedRepContact.ContactDetails;
 
                 }
-                else if (MainVM.SelectedRepContact.ContactTypeID.Equals("2"))
+                else if (MainMenu.MainVM.SelectedRepContact.ContactTypeID.Equals("2"))
                 {
-                    contactDetailsPhoneTb.Text = MainVM.SelectedRepContact.ContactDetails;
+                    contactDetailsPhoneTb.Text = MainMenu.MainVM.SelectedRepContact.ContactDetails;
                 }
-                else if (MainVM.SelectedRepContact.ContactTypeID.Equals("3"))
+                else if (MainMenu.MainVM.SelectedRepContact.ContactTypeID.Equals("3"))
                 {
-                    contactDetailsMobileTb.Text = MainVM.SelectedRepContact.ContactDetails;
+                    contactDetailsMobileTb.Text = MainMenu.MainVM.SelectedRepContact.ContactDetails;
                 }
                 saveCustContactBtn.Visibility = Visibility.Visible;
                 cancelCustContactBtn.Visibility = Visibility.Visible;
@@ -249,12 +221,10 @@ namespace prototype2
 
         private void delRepContBtn_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Do you want to delete this representative?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+            MessageBoxResult result = MessageBox.Show("Do you want to delete this contact information?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
-                int selectIndex = repContactsDg.SelectedIndex;
-                contactDetails.RemoveAt(selectIndex);
-                repContactsDg.Items.RemoveAt(selectIndex);
+                MainMenu.MainVM.RepContacts.Remove(MainMenu.MainVM.SelectedRepContact);
             }
             else if (result == MessageBoxResult.No)
             {
@@ -271,9 +241,9 @@ namespace prototype2
                 if (contactTypeCb.SelectedIndex != 0)
                 {
                     saveCustContactBtn.Visibility = Visibility.Hidden;
-                    MainVM.SelectedRepContact.ContactDetails = contactDetail;
-                    MainVM.SelectedRepContact.ContactType = contactTypeCb.SelectedValue.ToString();
-                    MainVM.SelectedRepContact.ContactTypeID = contactTypeCb.SelectedIndex.ToString();
+                    MainMenu.MainVM.SelectedRepContact.ContactDetails = contactDetail;
+                    MainMenu.MainVM.SelectedRepContact.ContactType = contactTypeCb.SelectedValue.ToString();
+                    MainMenu.MainVM.SelectedRepContact.ContactTypeID = contactTypeCb.SelectedIndex.ToString();
                     contactDetailsEmailTb.Text = "";
                     contactDetailsMobileTb.Text = "";
                     contactDetailsPhoneTb.Text = "";

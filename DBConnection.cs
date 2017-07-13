@@ -43,7 +43,7 @@ namespace prototype2
                     result = false;
                 string connstring = string.Format("Server=localhost; database={0}; UID=root; password=password", databaseName);
                 connection = new MySqlConnection(connstring);
-                connection.Open();
+                //connection.Open();
                 result = true;
             }
 
@@ -113,11 +113,11 @@ namespace prototype2
         {
             if (query.Length > 0)
             {
-                con.Open();
                 sqlCommand = new MySqlCommand();
                 sqlCommand.Connection = con;
                 sqlCommand.CommandText = query;
                 sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
+                con.Open();
                 return sqlCommand;
             }
             else
