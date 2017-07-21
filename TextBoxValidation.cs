@@ -11,90 +11,92 @@ namespace prototype2
         public override ValidationResult Validate (object value, System.Globalization.CultureInfo cultureInfo)
         {
             var str = TextBoxType as string;
-            if (value == null)
-                return new ValidationResult(false, "Value cannot be empty.");
-            else
+
+            if (str.Equals("String"))
             {
-                if (str.Equals("String"))
+                if (value.ToString().Length == 0)
+                    return new ValidationResult(false, "*Cannot be empty.");
+                return ValidationResult.ValidResult;
+            }
+            else if (str.Equals("Number"))
+            {
+                try
                 {
-                    if (value.ToString().Length == 0)
-                        return new ValidationResult(false, "*Cannot be empty.");
-                    return ValidationResult.ValidResult;
+                    Decimal number = Decimal.Parse(value.ToString());
+                    if (value.ToString().Length < 7)
+                    {
+                        return new ValidationResult(false, "*Must be greater than 7.");
+                    }
+                    else if (value.ToString().Length > 11)
+                    {
+                        return new ValidationResult(false, "*Must be less than/equal 11.");
+                    }
                 }
-                else if (str.Equals("Number"))
+                catch (Exception e)
                 {
-                    try
-                    {
-                        Decimal number = Decimal.Parse(value.ToString());
-                        if (value.ToString().Length < 7)
-                        {
-                            return new ValidationResult(false, "*Must be greater than 7.");
-                        }
-                        else if (value.ToString().Length > 11)
-                        {
-                            return new ValidationResult(false, "*Must be less than/equal 11.");
-                        }
-                    }
-                    catch(Exception e)
-                    {
-                        return new ValidationResult(false, "*Only numbers.");
-                    }
-                    return ValidationResult.ValidResult;
-
+                    return new ValidationResult(false, "*Only numbers.");
                 }
-                else if (str.Equals("Mobile"))
-                {
-                    try
-                    {
-                        Decimal number = Decimal.Parse(value.ToString());
-                        if (value.ToString().Length > 11)
-                        {
-                            return new ValidationResult(false, "*Must be less than/equal 11 Digits");
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        return new ValidationResult(false, "* Only numbers.");
-                    }
-                    return ValidationResult.ValidResult;
-
-                }
-                else if (str.Equals("Phone"))
-                {
-                    try
-                    {
-                        Decimal number = Decimal.Parse(value.ToString());
-                        if (value.ToString().Length > 7)
-                        {
-                            return new ValidationResult(false, "* Must be equal to 7 Digits");
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        return new ValidationResult(false, "*Only numbers.");
-                    }
-                    return ValidationResult.ValidResult;
-
-                }
-                else if (str.Equals("Email"))
-                {
-                    if (!regex.IsValidEmail(value.ToString()))
-                    {
-                        return new ValidationResult(false, "*The email is not a valid email.");
-                    }
-                    return ValidationResult.ValidResult;
-
-                }
-                else if (str.Equals("ComboBox"))
-                {
-                    if (value is ComboBoxItem)
-
-                        return new ValidationResult(false, "Selection is invalid.");
-                    return new ValidationResult(true, null);
-
-                }
+                return ValidationResult.ValidResult;
 
             }
+            else if (str.Equals("Mobile"))
+            {
+                try
+                {
+                    Decimal number = Decimal.Parse(value.ToString());
+                    if (value.ToString().Length > 11)
+                    {
+                        return new ValidationResult(false, "*Must be less than/equal 11 Digits");
+                    }
+                }
+                catch (Exception e)
+                {
+                    return new ValidationResult(false, "* Only numbers.");
+                }
+                return ValidationResult.ValidResult;
+
+            }
+            else if (str.Equals("Phone"))
+            {
+                try
+                {
+                    Decimal number = Decimal.Parse(value.ToString());
+                    if (value.ToString().Length > 7)
+                    {
+                        return new ValidationResult(false, "* Must be equal to 7 Digits");
+                    }
+                }
+                catch (Exception e)
+                {
+                    return new ValidationResult(false, "*Only numbers.");
+                }
+                return ValidationResult.ValidResult;
+
+            }
+            else if (str.Equals("Email"))
+            {
+                if (!regex.IsValidEmail(value.ToString()))
+                {
+                    return new ValidationResult(false, "*The email is not a valid email.");
+                }
+                return ValidationResult.ValidResult;
+
+            }
+            else if (str.Equals("ComboBox"))
+            {
+                if (value is null)
+                    return new ValidationResult(false, "Selection is invalid.");
+                else
+                    return new ValidationResult(true, null);
+
+            }
+            //if (value == null)
+            //    return new ValidationResult(false, "Value cannot be empty.");
+            //else
+            //{
+                
+
+            //}
 
             return ValidationResult.ValidResult;
         }

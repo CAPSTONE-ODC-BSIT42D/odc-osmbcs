@@ -41,9 +41,8 @@ namespace prototype2
             {
                 if (String.IsNullOrEmpty(databaseName))
                     result = false;
-                string connstring = string.Format("Server=localhost; database={0}; UID=root; password=password", databaseName);
+                string connstring = string.Format("Server=localhost; database={0}; UID=root; password=password", Properties.Settings.Default.dbname);
                 connection = new MySqlConnection(connstring);
-                //connection.Open();
                 result = true;
             }
 

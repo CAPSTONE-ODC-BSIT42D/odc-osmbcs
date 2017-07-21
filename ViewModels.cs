@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -20,11 +21,12 @@ namespace prototype2
         public String Number { get; set; }
         public String Email { get; set; }
         public object locProvinceId { get; set; }
+        public object cbItem { get; set; }
         public object CityName { get; set; }
         public String EmailAddress { get; set; }
         public String PhoneNumber { get; set; }
         public String MobileNumber { get; set; }
-
+        public String ContactValue { get; set; }
         public String FirstName { get; set; }
         public String MiddleName { get; set; }
         public String LastName { get; set; }
@@ -83,16 +85,7 @@ namespace prototype2
             set { SetProperty(ref selectedContact, value); }
         }
 
-        protected List<ObservableCollection<Contact>> contactOfRep = new List<ObservableCollection<Contact>>();
-
-        public List<ObservableCollection<Contact>> ContactOfRep
-        {
-            get { return contactOfRep; }
-            set { contactOfRep = value; }
-        }
-
-        protected ObservableCollection<Contact> repcontact =
-            new ObservableCollection<Contact>();
+        protected ObservableCollection<Contact> repcontact = new ObservableCollection<Contact>();
 
         protected Contact selectedRepContact = null;
 

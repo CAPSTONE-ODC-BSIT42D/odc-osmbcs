@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -30,16 +31,15 @@ namespace prototype2
         public string custName { get; set; }
         public string custId { get; set; }
         public string repType { get; set; }
+        private static String dbname = "odc_db";
+        public String[] repDetails;
+        public List<string[]> contactDetails = new List<string[]>();
+        public int idOfContacts;
+        public bool isEdit = false;
+        private string contactDetail = "";
         private void setControlsValue()
         {
             contactTypeCb.SelectedIndex = 0;
-            if (repDetails != null && idOfContacts !=0)
-            {
-                firstNameTb.Text = repDetails[0];
-                middleInitialTb.Text = repDetails[1];
-                lastNameTb.Text = repDetails[2];
-                MainMenu.MainVM.RepContacts = MainMenu.MainVM.ContactOfRep[idOfContacts];
-            }
            
         }
 
@@ -47,24 +47,15 @@ namespace prototype2
         {
             setControlsValue();
         }
-        private static String dbname = "odc_db";
-        public String[] repDetails;
-        public List<string[]> contactDetails = new List<string[]>();
-        public int idOfContacts;
-        private string contactDetail = "";
+        
         private void addNewCustContactBtn_Click(object sender, RoutedEventArgs e)
         {
             
             if (contactTypeCb.SelectedIndex != 0)
             {
-                MainMenu.MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
-                validateTextBoxes();
-                contactDetailsEmailTb.Text = "";
-                contactDetailsMobileTb.Text = "";
-                contactDetailsPhoneTb.Text = "";
-                Validation.ClearInvalid((contactDetailsPhoneTb).GetBindingExpression(TextBox.TextProperty));
-                Validation.ClearInvalid((contactDetailsEmailTb).GetBindingExpression(TextBox.TextProperty));
-                Validation.ClearInvalid((contactDetailsMobileTb).GetBindingExpression(TextBox.TextProperty));
+                MainMenu.MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = MainMenu.MainVM.ContactValue });
+                contactTypeCb.SelectedIndex = 0;
+                clearContactsBoxes();
                 validateTextBoxes();
             }
             else
@@ -80,6 +71,7 @@ namespace prototype2
                 contactDetailsEmailTb.IsEnabled = false;
                 contactDetailsMobileTb.IsEnabled = false;
                 contactDetailsPhoneTb.IsEnabled = false;
+                clearContactsBoxes();
             }
             else if (contactTypeCb.SelectedIndex == 1)
             {
@@ -89,6 +81,7 @@ namespace prototype2
                 contactDetailsEmailTb.IsEnabled = true;
                 contactDetailsMobileTb.IsEnabled = false;
                 contactDetailsPhoneTb.IsEnabled = false;
+                clearContactsBoxes();
             }
             else if (contactTypeCb.SelectedIndex == 2)
             {
@@ -98,6 +91,7 @@ namespace prototype2
                 contactDetailsEmailTb.IsEnabled = false;
                 contactDetailsMobileTb.IsEnabled = false;
                 contactDetailsPhoneTb.IsEnabled = true;
+                clearContactsBoxes();
             }
             else if (contactTypeCb.SelectedIndex == 3)
             {
@@ -107,10 +101,17 @@ namespace prototype2
                 contactDetailsEmailTb.IsEnabled = false;
                 contactDetailsMobileTb.IsEnabled = true;
                 contactDetailsPhoneTb.IsEnabled = false;
+                clearContactsBoxes();
             }
         }
 
-        
+        private void clearContactsBoxes()
+        {
+            MainMenu.MainVM.ContactValue = "";
+            Validation.ClearInvalid((contactDetailsPhoneTb).GetBindingExpression(TextBox.TextProperty));
+            Validation.ClearInvalid((contactDetailsEmailTb).GetBindingExpression(TextBox.TextProperty));
+            Validation.ClearInvalid((contactDetailsMobileTb).GetBindingExpression(TextBox.TextProperty));
+        }
 
         private void firstNameTb_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -169,24 +170,29 @@ namespace prototype2
 
         private void validateTextBoxes()
         {
-            if (MainMenu.MainVM.RepContacts.Count>0)
+            if (MainMenu.MainVM.RepContacts!=null)
             {
-                saveBtn.IsEnabled = true;
-                saveCustContactBtn.IsEnabled = true;
+                if (MainMenu.MainVM.RepContacts.Count > 0)
+                {
+                    saveBtn.IsEnabled = true;
+                    saveCustContactBtn.IsEnabled = true;
+                }
+                else
+                {
+                    saveBtn.IsEnabled = false;
+                    saveCustContactBtn.IsEnabled = false;
+                }
             }
-            else
-            {
-                saveBtn.IsEnabled = false;
-                saveCustContactBtn.IsEnabled = false;
-            }
+            
         }
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
-            repDetails =  new String[] { firstNameTb.Text, middleInitialTb.Text, lastNameTb.Text };
-            MainMenu.MainVM.ContactOfRep.Add(MainMenu.MainVM.RepContacts);
-            MainMenu.MainVM.RepContacts.Clear();
-            this.Close();
+            MainMenu.MainVM.SelectedRepresentative.ContactsOfRep = MainMenu.MainVM.RepContacts;
+            MainMenu.MainVM.SelectedRepresentative.RepFirstName = firstNameTb.Text;
+            MainMenu.MainVM.SelectedRepresentative.RepMiddleName = middleInitialTb.Text;
+            MainMenu.MainVM.SelectedRepresentative.RepLastName = lastNameTb.Text;
+            
         }
 
 
@@ -244,14 +250,10 @@ namespace prototype2
                     MainMenu.MainVM.SelectedRepContact.ContactDetails = contactDetail;
                     MainMenu.MainVM.SelectedRepContact.ContactType = contactTypeCb.SelectedValue.ToString();
                     MainMenu.MainVM.SelectedRepContact.ContactTypeID = contactTypeCb.SelectedIndex.ToString();
-                    contactDetailsEmailTb.Text = "";
-                    contactDetailsMobileTb.Text = "";
-                    contactDetailsPhoneTb.Text = "";
+                    clearContactsBoxes();
                     cancelCustContactBtn.Visibility = Visibility.Hidden;
                     saveCustContactBtn.Visibility = Visibility.Hidden;
-                    Validation.ClearInvalid((contactDetailsPhoneTb).GetBindingExpression(TextBox.TextProperty));
-                    Validation.ClearInvalid((contactDetailsEmailTb).GetBindingExpression(TextBox.TextProperty));
-                    Validation.ClearInvalid((contactDetailsMobileTb).GetBindingExpression(TextBox.TextProperty));
+                    
                 }
                 else
                 {
@@ -288,14 +290,9 @@ namespace prototype2
 
         private void cancelCustContactBtn_Click(object sender, RoutedEventArgs e)
         {
-            contactDetailsEmailTb.Text = "";
-            contactDetailsMobileTb.Text = "";
-            contactDetailsPhoneTb.Text = "";
+            clearContactsBoxes();
             cancelCustContactBtn.Visibility = Visibility.Hidden;
             saveCustContactBtn.Visibility = Visibility.Hidden;
-            Validation.ClearInvalid((contactDetailsPhoneTb).GetBindingExpression(TextBox.TextProperty));
-            Validation.ClearInvalid((contactDetailsEmailTb).GetBindingExpression(TextBox.TextProperty));
-            Validation.ClearInvalid((contactDetailsMobileTb).GetBindingExpression(TextBox.TextProperty));
         }
     }
 }

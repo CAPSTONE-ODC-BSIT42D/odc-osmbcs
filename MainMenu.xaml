@@ -65,10 +65,17 @@
             <Setter Property="Validation.ErrorTemplate">
                 <Setter.Value>
                     <ControlTemplate>
-                        <DockPanel LastChildFill="False">
-                            <AdornedElementPlaceholder x:Name="Box" DockPanel.Dock="Top"/>
-                            <TextBlock Foreground="Red" DockPanel.Dock="Bottom"
-                                        Text="{Binding AdornedElement.(Validation.Errors)[0].ErrorContent, ElementName=Box}"/>
+                        <DockPanel LastChildFill="true">
+                            <Border Background="OrangeRed" DockPanel.Dock="right" Margin="5,0,0,0" 
+                                Width="20" Height="20" CornerRadius="5"
+                                ToolTip="{Binding ElementName=customAdorner, 
+                                          Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" 
+                                   FontWeight="Bold" Foreground="white" />
+                            </Border>
+                            <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
+                                <Border BorderBrush="red" BorderThickness="1" />
+                            </AdornedElementPlaceholder>
                         </DockPanel>
                     </ControlTemplate>
                 </Setter.Value>
@@ -78,10 +85,17 @@
             <Setter Property="Validation.ErrorTemplate">
                 <Setter.Value>
                     <ControlTemplate>
-                        <DockPanel LastChildFill="False">
-                            <AdornedElementPlaceholder x:Name="Box" DockPanel.Dock="Top"/>
-                            <TextBlock Foreground="Red" DockPanel.Dock="Bottom"
-                                        Text="{Binding AdornedElement.(Validation.Errors)[0].ErrorContent, ElementName=Box}"/>
+                        <DockPanel LastChildFill="true">
+                            <Border Background="OrangeRed" DockPanel.Dock="right" Margin="5,0,0,0" 
+                                Width="20" Height="20" CornerRadius="5"
+                                ToolTip="{Binding ElementName=customAdorner, 
+                                          Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" 
+                                   FontWeight="Bold" Foreground="white" />
+                            </Border>
+                            <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
+                                <Border BorderBrush="red" BorderThickness="1" />
+                            </AdornedElementPlaceholder>
                         </DockPanel>
                     </ControlTemplate>
                 </Setter.Value>
@@ -835,12 +849,10 @@
                         <Button x:Name="manageCustomerAddBtn" Content="+ add new" HorizontalAlignment="Right" Height="26" Margin="0,0,10,0" VerticalAlignment="Top" Width="90" Click="manageCustomerAddBtn_Click"/>
                         <DataGrid x:Name="manageCustomeDataGrid" Margin="10,41,10,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" SelectionChanged="manageCustomeDataGrid_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30">
                             <DataGrid.Columns >
-                                <DataGridTextColumn Binding="{Binding custID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"/>
-                                <DataGridTextColumn Binding="{Binding custCompanyName}" ClipboardContentBinding="{x:Null}" Header="Company Name" Width="200" CanUserResize="False"/>
-                                <DataGridTextColumn Binding="{Binding custAddInfo}" ClipboardContentBinding="{x:Null}" Header="Description" Width="200" />
+                                <DataGridTextColumn Binding="{Binding companyID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"/>
+                                <DataGridTextColumn Binding="{Binding companyName}" ClipboardContentBinding="{x:Null}" Header="Company Name" Width="200" CanUserResize="False"/>
+                                <DataGridTextColumn Binding="{Binding companyAddInfo}" ClipboardContentBinding="{x:Null}" Header="Description" Width="200" />
                                 <DataGridTextColumn Binding="{Binding custLocation}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350" CanUserResize="False"/>
-                                <DataGridTextColumn Binding="{Binding officePhoneNo}" ClipboardContentBinding="{x:Null}" Header="Office No." Width="100" CanUserResize="False" />
-                                <DataGridTextColumn Binding="{Binding emailAddress}" ClipboardContentBinding="{x:Null}" Header="Email Address" Width="200" CanUserResize="False" />
                                 <DataGridTemplateColumn x:Name="columnEditCustBtn" Width="100" Visibility="Hidden" CanUserResize="False">
                                     <DataGridTemplateColumn.CellTemplate  >
                                         <DataTemplate>
@@ -1069,9 +1081,9 @@
                                             </Binding>
                                         </TextBox>
                                         <Label x:Name="label1_Copy4" Content="* Province:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Normal" Margin="246,103,0,0"/>
-                                        <ComboBox x:Name="custProvinceCb" Margin="261,134,729,0" VerticalAlignment="Top" Height="25" IsEditable="True" DisplayMemberPath = "locProvince" SelectedValuePath = "locProvinceID" Width="179" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontWeight="Normal">
+                                        <ComboBox x:Name="custProvinceCb" Margin="261,134,729,0" VerticalAlignment="Top" Height="25" DisplayMemberPath = "locProvince" SelectedValuePath = "locProvinceID" Width="179" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontWeight="Normal">
                                             <ComboBox.SelectedItem>
-                                                <Binding Path="locProvinceId" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding Path="cbItem" Mode="TwoWay" UpdateSourceTrigger="LostFocus">
                                                     <Binding.ValidationRules>
                                                         <local:TextBoxValidation TextBoxType="ComboBox"/>
                                                     </Binding.ValidationRules>
@@ -1087,21 +1099,21 @@
                                         <ComboBoxItem>Mobile Number</ComboBoxItem>
                                     </ComboBox>
                                     <TextBox x:Name="contactDetailsEmailTb" HorizontalAlignment="Left" Height="25" Margin="192,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" FontWeight="Normal" TextChanged="contactDetailsEmailTb_TextChanged" VerticalContentAlignment="Center">
-                                        <Binding Path="EmailAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding Path="ContactValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
                                                 <local:TextBoxValidation TextBoxType="Email"/>
                                             </Binding.ValidationRules>
                                         </Binding>
                                     </TextBox>
                                     <TextBox x:Name="contactDetailsPhoneTb" HorizontalAlignment="Left" Height="25" Margin="192,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" FontWeight="Normal" TextChanged="contactDetailsPhoneTb_TextChanged" VerticalContentAlignment="Center">
-                                        <Binding Path="PhoneNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding Path="ContactValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
                                                 <local:TextBoxValidation TextBoxType="Phone"/>
                                             </Binding.ValidationRules>
                                         </Binding>
                                     </TextBox>
                                     <TextBox x:Name="contactDetailsMobileTb" HorizontalAlignment="Left" Height="25" Margin="192,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" FontWeight="Normal" TextChanged="contactDetailsMobileTb_TextChanged" VerticalContentAlignment="Center">
-                                        <Binding Path="MobileNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding Path="ContactValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
                                                 <local:TextBoxValidation TextBoxType="Mobile"/>
                                             </Binding.ValidationRules>

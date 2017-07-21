@@ -17,5 +17,8 @@
     <Setting Name="inventoryCategory" Type="System.String" Scope="User">
       <Value Profile="(Default)">ROUTER,MODEM,SWITCH,RJ45</Value>
     </Setting>
+    <Setting Name="dbname" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">odc_db</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

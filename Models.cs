@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace prototype2
         protected string firstname;
         protected string middlename;
         protected string lastname;
+        protected ObservableCollection<Contact> contactsOfRep = new ObservableCollection<Contact>();
 
         public string RepFirstName
         {
@@ -31,6 +33,13 @@ namespace prototype2
             get { return lastname; }
             set { SetProperty(ref lastname, value); }
         }
+
+        public ObservableCollection<Contact> ContactsOfRep
+        {
+            get { return contactsOfRep; }
+            set { contactsOfRep = value; }
+        }
+
     }
 
     public class Customer : ViewModelEntity

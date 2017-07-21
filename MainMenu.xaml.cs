@@ -28,7 +28,6 @@ namespace prototype2
             InitializeComponent();
             this.DataContext = MainVM;
         }
-        private static String dbname = "odc_db";
         public static MainViewModel MainVM = new MainViewModel();
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -252,7 +251,6 @@ namespace prototype2
         private void setTransControlValues()
         {
             var dbCon = DBConnection.Instance();
-            dbCon.DatabaseName = dbname;
             if (dbCon.IsConnect())
             {
                 string query = "SELECT * FROM cust_supp_t;";
@@ -269,7 +267,6 @@ namespace prototype2
         private void custCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var dbCon = DBConnection.Instance();
-            dbCon.DatabaseName = dbname;
             if (dbCon.IsConnect())
             {
                 string query = query = "SELECT CONCAT(custRepLName,' ,',custRepFname) AS custRepFullName, custRepID FROM CUSTOMER_REP_T WHERE custID = '" + custCb.SelectedValue + "';";
@@ -481,7 +478,6 @@ namespace prototype2
         private void setManageCustomerGridControls()
         {
             var dbCon = DBConnection.Instance();
-            dbCon.DatabaseName = dbname;
             if (dbCon.IsConnect())
             {
                 string query = "SELECT cs.companyID, cs.companyName, cs.companyAddInfo, CONCAT(cs.companyAddress,', ',cs.companyCity,', ',p.locProvince) AS custLocation " +
@@ -509,7 +505,6 @@ namespace prototype2
         private void setEditCustomerControls(string id)
         {
             var dbCon = DBConnection.Instance();
-            dbCon.DatabaseName = dbname;
             if (dbCon.IsConnect())
             {
                 string query = "SELECT cs.companyID, cs.companyName, cs.companyAddInfo,cs.companyAddress ,cs.companyCity, cs.companyProvinceID" +
@@ -560,7 +555,6 @@ namespace prototype2
             {
                 String id = (manageCustomeDataGrid.Columns[0].GetCellContent(manageCustomeDataGrid.SelectedItem) as TextBlock).Text;
                 var dbCon = DBConnection.Instance();
-                dbCon.DatabaseName = dbname;
                 MessageBoxResult result = MessageBox.Show("Do you want to delete this customer?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
@@ -645,7 +639,6 @@ namespace prototype2
         private void setManageEmployeeGridControls()
         {
             var dbCon = DBConnection.Instance();
-            dbCon.DatabaseName = dbname;
             if (dbCon.IsConnect())
             {
                 string query = "";
@@ -681,7 +674,6 @@ namespace prototype2
             {
                 String id = (manageEmployeeDataGrid.Columns[0].GetCellContent(manageEmployeeDataGrid.SelectedItem) as TextBlock).Text;
                 var dbCon = DBConnection.Instance();
-                dbCon.DatabaseName = dbname;
                 MessageBoxResult result = MessageBox.Show("Do you want to delete this customer?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
@@ -755,7 +747,6 @@ namespace prototype2
         private void setManageSupplierGridControls()
         {
             var dbCon = DBConnection.Instance();
-            dbCon.DatabaseName = dbname;
             if (dbCon.IsConnect())
             {
                 string query = "SELECT cs.companyID, cs.companyName, cs.companyAddInfo, CONCAT(cs.companyAddress,', ',cs.companyCity,', ',p.locProvince) AS custLocation " +
@@ -798,7 +789,6 @@ namespace prototype2
             {
                 String id = (manageSupplierDataGrid.Columns[0].GetCellContent(manageSupplierDataGrid.SelectedItem) as TextBlock).Text;
                 var dbCon = DBConnection.Instance();
-                dbCon.DatabaseName = dbname;
                 MessageBoxResult result = MessageBox.Show("Do you want to delete this supplier?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
@@ -951,14 +941,13 @@ namespace prototype2
             {
                 String id = (manageContractorDataGrid.Columns[0].GetCellContent(manageContractorDataGrid.SelectedItem) as TextBlock).Text;
                 var dbCon = DBConnection.Instance();
-                dbCon.DatabaseName = dbname;
                 MessageBoxResult result = MessageBox.Show("Do you want to delete this Contractor?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
-                    if (dbCon.IsConnect())
+                    using (MySqlConnection conn = dbCon.Connection)
                     {
                         string query = "UPDATE `contractor_t` SET `isDeleted`= 1 WHERE contID = '" + id + "';";
-                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        if (dbCon.insertQuery(query, conn))
                         {
                             MessageBox.Show("Successfully deleted.");
                             setManageContractorGridControls();
@@ -983,11 +972,10 @@ namespace prototype2
         private void setManageContractorGridControls()
         {
             var dbCon = DBConnection.Instance();
-            dbCon.DatabaseName = dbname;
-            if (dbCon.IsConnect())
+            using (MySqlConnection conn = dbCon.Connection)
             {
                 string query = query = "";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, conn);
                 DataSet fromDb = new DataSet();
                 //dataAdapter.Fill(fromDb, "t");
                 //manageContractorDataGrid.ItemsSource = fromDb.Tables["t"].DefaultView;
@@ -1034,94 +1022,84 @@ namespace prototype2
         private void saveCustBtn_Click(object sender, RoutedEventArgs e)
         {
             var dbCon = DBConnection.Instance();
-            dbCon.DatabaseName = dbname;
             MessageBoxResult result = MessageBox.Show("Do you want to save this new customer?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
                 
                 try
                 {
-                    if (dbCon.IsConnect())
+                    using (MySqlConnection conn = dbCon.Connection)
                     {
-                        string custid = "";
-                        //INSERT NEW CUSTOMER TO DB;
+                        conn.Open();
                         string proc = "INSERT_COMPANY";
-                        int lastinsertid = 0;
-                        MySqlCommand cmd = dbCon.storedProc(proc, dbCon.Connection);
-                        cmd.Parameters.AddWithValue("?companyName", custCompanyNameTb.Text);
-                        cmd.Parameters["?companyName"].Direction = ParameterDirection.Input;
-                        cmd.Parameters.AddWithValue("?addInfo", custAddInfoTb.Text);
-                        cmd.Parameters["?addInfo"].Direction = ParameterDirection.Input;
-                        cmd.Parameters.AddWithValue("?address", custAddressTb.Text);
-                        cmd.Parameters["?address"].Direction = ParameterDirection.Input;
-                        cmd.Parameters.AddWithValue("?city", custCityTb.Text);
-                        cmd.Parameters["?city"].Direction = ParameterDirection.Input;
-                        cmd.Parameters.AddWithValue("?province", custProvinceCb.SelectedValue);
-                        cmd.Parameters["?province"].Direction = ParameterDirection.Input;
-                        cmd.Parameters.AddWithValue("?compType", compType);
-                        cmd.Parameters["?compType"].Direction = ParameterDirection.Input;
-                        cmd.Parameters.Add(new MySqlParameter("?insertedid", MySqlDbType.Int32, 11));
-                        cmd.Parameters["?insertedid"].Direction = ParameterDirection.Output;
+                        string lastinsertedid = "";
+                        MySqlCommand cmd = new MySqlCommand(proc, conn);
+                        //INSERT NEW CUSTOMER TO DB;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@companyName", custCompanyNameTb.Text);
+                        cmd.Parameters["@companyName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@addInfo", custAddInfoTb.Text);
+                        cmd.Parameters["@addInfo"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@address", custAddressTb.Text);
+                        cmd.Parameters["@address"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@city", custCityTb.Text);
+                        cmd.Parameters["@city"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@province", custProvinceCb.SelectedValue);
+                        cmd.Parameters["@province"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@compType", compType);
+                        cmd.Parameters["@compType"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
+                        cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
                         cmd.ExecuteNonQuery();
-                        lastinsertid = Convert.ToInt32(cmd.Parameters["?insertedid"].Value);
-                        dbCon.Close();
-                        
-                        //if (!(cmd.Parameters["?insertedid"].Value is DBNull))
-                            
-                        //else
-                        //    MessageBox.Show("Failed");
-                        //INSERT CUST CONTACTS INTO DB;
+                        lastinsertedid = cmd.Parameters["@insertedid"].Value.ToString();
                         foreach (Contact cont in MainVM.CustContacts)
                         {
                             proc = "INSERT_COMPANY_CONT";
-
-                            cmd = dbCon.storedProc(proc, dbCon.Connection);
-                            cmd.Parameters.AddWithValue("?contactType", cont.ContactTypeID);
-                            cmd.Parameters["?contactType"].Direction = ParameterDirection.Input;
-                            cmd.Parameters.AddWithValue("?contactDetail", cont.ContactDetails);
-                            cmd.Parameters["?contactDetail"].Direction = ParameterDirection.Input;
-                            cmd.Parameters.AddWithValue("?compID", lastinsertid);
-                            cmd.Parameters["?compID"].Direction = ParameterDirection.Input;
+                            cmd = new MySqlCommand(proc, conn);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@contactType", cont.ContactTypeID);
+                            cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@contactDetail", cont.ContactDetails);
+                            cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@compID", lastinsertedid);
+                            cmd.Parameters["@compID"].Direction = ParameterDirection.Input;
                             cmd.ExecuteNonQuery();
-                            dbCon.Close();
                         }
                         //INSERT REPRESENTATIVE TO DB;
                         foreach (Representative rep in MainVM.CustRepresentatives)
                         {
                             proc = "INSERT_REP";
-                            cmd = dbCon.storedProc(proc, dbCon.Connection);
-                            cmd.Parameters.AddWithValue("?repLName", rep.RepLastName);
-                            cmd.Parameters["?repLName"].Direction = ParameterDirection.Input;
-                            cmd.Parameters.AddWithValue("?repFName", rep.RepFirstName);
-                            cmd.Parameters["?repFName"].Direction = ParameterDirection.Input;
-                            cmd.Parameters.AddWithValue("?repMName", rep.RepMiddleName);
-                            cmd.Parameters["?repMName"].Direction = ParameterDirection.Input;
-                            cmd.Parameters.AddWithValue("?custID", lastinsertid);
-                            cmd.Parameters["?custID"].Direction = ParameterDirection.Input;
-                            cmd.Parameters.Add(new MySqlParameter("?insertedid", MySqlDbType.Int32));
-                            cmd.Parameters["?insertedid"].Direction = ParameterDirection.Output;
+                            cmd = new MySqlCommand(proc, conn);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@repLName", rep.RepLastName);
+                            cmd.Parameters["@repLName"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@repFName", rep.RepFirstName);
+                            cmd.Parameters["@repFName"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@repMName", rep.RepMiddleName);
+                            cmd.Parameters["@repMName"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@custID", lastinsertedid);
+                            cmd.Parameters["@custID"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
+                            cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
                             cmd.ExecuteNonQuery();
-                            dbCon.Close();
-                            int lastinsertid1 = 0;
-                            if (!(cmd.Parameters["?insertedid"].Value is DBNull))
-                                lastinsertid1 = Convert.ToInt32(cmd.Parameters["?insertedid"].Value);
+                            lastinsertedid = cmd.Parameters["@insertedid"].Value.ToString();
                             //INSERT CONTACTS OF REPRESENTATIVE TO DB;
                             foreach (Contact repcont in MainVM.RepContacts)
                             {
                                 proc = "INSERT_REP_CONT";
-                                cmd = dbCon.storedProc(proc, dbCon.Connection);
-                                cmd.Parameters.AddWithValue("?contactType", repcont.ContactTypeID);
-                                cmd.Parameters["?contactType"].Direction = ParameterDirection.Input;
-                                cmd.Parameters.AddWithValue("?contactDetail", repcont.ContactDetails);
-                                cmd.Parameters["?contactDetail"].Direction = ParameterDirection.Input;
-                                cmd.Parameters.AddWithValue("?RepID", lastinsertid1);
-                                cmd.Parameters["?RepID"].Direction = ParameterDirection.Input;
+                                cmd = new MySqlCommand(proc, conn);
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                cmd.Parameters.AddWithValue("@contactType", repcont.ContactTypeID);
+                                cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
+                                cmd.Parameters.AddWithValue("@contactDetail", repcont.ContactDetails);
+                                cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
+                                cmd.Parameters.AddWithValue("@RepID", lastinsertedid);
+                                cmd.Parameters["@RepID"].Direction = ParameterDirection.Input;
                                 cmd.ExecuteNonQuery();
-                                dbCon.Close();
                             }
+
                         }
                         clearCompanyDetailsGrid();
-
                     }
                 }
                 catch (Exception)
@@ -1284,7 +1262,14 @@ namespace prototype2
         private string contactDetail = "";
         private void contactTypeCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (contactTypeCb.SelectedIndex == 1)
+            if (contactTypeCb.SelectedIndex==0)
+            {
+                contactDetailsMobileTb.IsEnabled = false;
+                contactDetailsPhoneTb.IsEnabled = false;
+                contactDetailsEmailTb.IsEnabled = false;
+                clearContactsBoxes();
+            }
+            else if (contactTypeCb.SelectedIndex == 1)
             {
                 contactDetailsEmailTb.Visibility = Visibility.Visible;
                 contactDetailsMobileTb.Visibility = Visibility.Collapsed;
@@ -1292,6 +1277,7 @@ namespace prototype2
                 contactDetailsMobileTb.IsEnabled = false;
                 contactDetailsPhoneTb.IsEnabled = false;
                 contactDetailsEmailTb.IsEnabled = true;
+                clearContactsBoxes();
             }
             else if (contactTypeCb.SelectedIndex == 2)
             {
@@ -1301,6 +1287,8 @@ namespace prototype2
                 contactDetailsMobileTb.IsEnabled = false;
                 contactDetailsPhoneTb.IsEnabled = true;
                 contactDetailsEmailTb.IsEnabled = false;
+                clearContactsBoxes();
+
             }
             else if (contactTypeCb.SelectedIndex == 3)
             {
@@ -1310,6 +1298,7 @@ namespace prototype2
                 contactDetailsMobileTb.IsEnabled = true;
                 contactDetailsPhoneTb.IsEnabled = false;
                 contactDetailsEmailTb.IsEnabled = false;
+                clearContactsBoxes();
             }
         }
 
@@ -1319,17 +1308,13 @@ namespace prototype2
             {
                 if (contactTypeCb.SelectedIndex != 0)
                 {
-                    contactTypeCb.SelectedIndex = 0;
+                    
                     MainVM.CustContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
-                    contactDetailsEmailTb.Text = "";
-                    contactDetailsMobileTb.Text = "";
-                    contactDetailsPhoneTb.Text = "";
+                    clearContactsBoxes();
+                    contactTypeCb.SelectedIndex = 0;
                     validateCustomerDetailsTextBoxes();
-                    Validation.ClearInvalid((contactDetailsPhoneTb).GetBindingExpression(TextBox.TextProperty));
-                    Validation.ClearInvalid((contactDetailsEmailTb).GetBindingExpression(TextBox.TextProperty));
-                    Validation.ClearInvalid((contactDetailsMobileTb).GetBindingExpression(TextBox.TextProperty));
-                    MessageBox.Show(""+custContactDg.Items.Count);
-                   
+
+
                 }
                 else
                 {
@@ -1350,16 +1335,16 @@ namespace prototype2
 
                 if (id.Equals("1"))
                 {
-                    contactDetailsEmailTb.Text = MainVM.SelectedCustContact.ContactDetails;
+                    MainMenu.MainVM.ContactValue = MainVM.SelectedCustContact.ContactDetails;
 
                 }
                 else if (id.Equals("2"))
                 {
-                    contactDetailsMobileTb.Text = MainVM.SelectedCustContact.ContactDetails;
+                    MainMenu.MainVM.ContactValue = MainVM.SelectedCustContact.ContactDetails;
                 }
                 else if (id.Equals("3"))
                 {
-                    contactDetailsPhoneTb.Text = MainVM.SelectedCustContact.ContactDetails;
+                    MainMenu.MainVM.ContactValue = MainVM.SelectedCustContact.ContactDetails;
                 }
                 saveCustContactBtn.Visibility = Visibility.Visible;
                 cancelCustContactBtn.Visibility = Visibility.Visible;
@@ -1376,14 +1361,9 @@ namespace prototype2
                     contactTypeCb.SelectedIndex = 0;
                     MainVM.SelectedCustContact.ContactDetails = contactDetail;
                     validateCustomerDetailsTextBoxes();
-                    contactDetailsEmailTb.Text = "";
-                    contactDetailsMobileTb.Text = "";
-                    contactDetailsPhoneTb.Text = "";
+                    clearContactsBoxes();
                     cancelCustContactBtn.Visibility = Visibility.Hidden;
                     saveCustContactBtn.Visibility = Visibility.Hidden;
-                    Validation.ClearInvalid((contactDetailsPhoneTb).GetBindingExpression(TextBox.TextProperty));
-                    Validation.ClearInvalid((contactDetailsEmailTb).GetBindingExpression(TextBox.TextProperty));
-                    Validation.ClearInvalid((contactDetailsMobileTb).GetBindingExpression(TextBox.TextProperty));
                 }
                 else
                 {
@@ -1397,15 +1377,9 @@ namespace prototype2
         private void cancelCustContactBtn_Click(object sender, RoutedEventArgs e)
         {
             contactTypeCb.SelectedIndex = 0;
-            contactDetailsEmailTb.Text = "";
-            contactDetailsMobileTb.Text = "";
-            contactDetailsPhoneTb.Text = "";
             cancelCustContactBtn.Visibility = Visibility.Hidden;
             saveCustContactBtn.Visibility = Visibility.Hidden;
-            Validation.ClearInvalid((contactDetailsPhoneTb).GetBindingExpression(TextBox.TextProperty));
-            Validation.ClearInvalid((contactDetailsEmailTb).GetBindingExpression(TextBox.TextProperty));
-            Validation.ClearInvalid((contactDetailsMobileTb).GetBindingExpression(TextBox.TextProperty));
-
+            clearContactsBoxes();
         }
 
         int newCust = 0;
@@ -1443,9 +1417,9 @@ namespace prototype2
         private void newRepresentativeBtn_Click(object sender, RoutedEventArgs e)
         {
             RepresentativeWindow repWindow = new RepresentativeWindow();
+            MainVM.CustRepresentatives.Add(new Representative());
+            customerRepresentativeDg.SelectedIndex = customerRepresentativeDg.Items.Count - 1;
             repWindow.ShowDialog();
-            repDetails = repWindow.repDetails;
-            MainVM.CustRepresentatives.Add(new Representative() { RepFirstName = repDetails[0], RepMiddleName = repDetails[1], RepLastName = repDetails[2] });
             validateCustomerDetailsTextBoxes();
             
         }
@@ -1466,9 +1440,9 @@ namespace prototype2
         private void editBtnCustContRep_Click(object sender, RoutedEventArgs e)
         {
             RepresentativeWindow repWindow = new RepresentativeWindow();
-            repWindow.ShowDialog();
-            repWindow.repDetails = new String[] { MainVM.SelectedRepresentative.RepFirstName, MainVM.SelectedRepresentative.RepMiddleName, MainVM.SelectedRepresentative.RepLastName};
+            repWindow.isEdit = true;
             repWindow.idOfContacts = customerRepresentativeDg.SelectedIndex;
+            repWindow.ShowDialog();
             validateCustomerDetailsTextBoxes();
         }
 
@@ -1478,7 +1452,7 @@ namespace prototype2
             if (result == MessageBoxResult.Yes)
             {
                 int selectIndex = custContactDg.SelectedIndex;
-                MainVM.CustContacts.RemoveAt(selectIndex);
+                MainVM.CustRepresentatives.RemoveAt(selectIndex);
             }
             else if (result == MessageBoxResult.No)
             {
@@ -1496,6 +1470,14 @@ namespace prototype2
 
         private void newSupplierGrid()
         {
+        }
+
+        private void clearContactsBoxes()
+        {
+            MainMenu.MainVM.ContactValue = "";
+            Validation.ClearInvalid((contactDetailsPhoneTb).GetBindingExpression(TextBox.TextProperty));
+            Validation.ClearInvalid((contactDetailsEmailTb).GetBindingExpression(TextBox.TextProperty));
+            Validation.ClearInvalid((contactDetailsMobileTb).GetBindingExpression(TextBox.TextProperty));
         }
 
         private void transReqAddNewItem_Click(object sender, RoutedEventArgs e)
