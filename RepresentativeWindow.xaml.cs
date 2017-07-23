@@ -37,17 +37,25 @@ namespace prototype2
         public int idOfContacts;
         public bool isEdit = false;
         private string contactDetail = "";
-        private void setControlsValue()
-        {
-            contactTypeCb.SelectedIndex = 0;
-           
-        }
+        
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             setControlsValue();
         }
-        
+
+        private void setControlsValue()
+        {
+            contactTypeCb.SelectedIndex = 0;
+            if (isEdit)
+            {
+                foreach(Contact cop in MainMenu.MainVM.SelectedRepresentative.ContactsOfRep)
+                {
+                    MainMenu.MainVM.RepContacts.Add(cop);
+                }
+            }
+        }
+
         private void addNewCustContactBtn_Click(object sender, RoutedEventArgs e)
         {
             
@@ -188,7 +196,10 @@ namespace prototype2
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainMenu.MainVM.SelectedRepresentative.ContactsOfRep = MainMenu.MainVM.RepContacts;
+            foreach (Contact cop in MainMenu.MainVM.RepContacts)
+            {
+                MainMenu.MainVM.SelectedRepresentative.ContactsOfRep.Add(cop);
+            }
             MainMenu.MainVM.SelectedRepresentative.RepFirstName = firstNameTb.Text;
             MainMenu.MainVM.SelectedRepresentative.RepMiddleName = middleInitialTb.Text;
             MainMenu.MainVM.SelectedRepresentative.RepLastName = lastNameTb.Text;
@@ -198,6 +209,7 @@ namespace prototype2
 
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
         {
+            MainMenu.MainVM.CustRepresentatives.Remove(MainMenu.MainVM.SelectedRepresentative);
             this.Close();
         }
 

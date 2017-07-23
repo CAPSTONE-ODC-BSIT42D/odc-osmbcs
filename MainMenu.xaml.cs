@@ -1084,7 +1084,7 @@ namespace prototype2
                             cmd.ExecuteNonQuery();
                             lastinsertedid = cmd.Parameters["@insertedid"].Value.ToString();
                             //INSERT CONTACTS OF REPRESENTATIVE TO DB;
-                            foreach (Contact repcont in MainVM.RepContacts)
+                            foreach (Contact repcont in rep.ContactsOfRep)
                             {
                                 proc = "INSERT_REP_CONT";
                                 cmd = new MySqlCommand(proc, conn);
@@ -1441,7 +1441,6 @@ namespace prototype2
         {
             RepresentativeWindow repWindow = new RepresentativeWindow();
             repWindow.isEdit = true;
-            repWindow.idOfContacts = customerRepresentativeDg.SelectedIndex;
             repWindow.ShowDialog();
             validateCustomerDetailsTextBoxes();
         }
