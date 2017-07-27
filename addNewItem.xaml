@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="addNewItem" Height="707.335" Width="726.01" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <GroupBox x:Name="groupBox" Header="New Item" HorizontalAlignment="Left" Margin="10,10,0,48" Width="700">
+        <GroupBox x:Name="groupBox" Header="New Item" HorizontalAlignment="Left" Margin="10,10,0,48" Width="700" FontSize="14">
             <ScrollViewer HorizontalAlignment="Left" Width="690" Margin="0,0,-2,0">
                 <Grid>
                     <Label x:Name="label" Content="Item Type:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic"/>
@@ -60,7 +60,7 @@
                 </Grid>
             </ScrollViewer>
         </GroupBox>
-        <Button x:Name="saveBtn" Content="Save" Margin="549,0,96,10" VerticalAlignment="Bottom"/>
-        <Button x:Name="cancelBtn" Content="Cancel" Margin="635,0,10,10" VerticalAlignment="Bottom" Click="cancelBtn_Click"/>
+        <Button x:Name="saveBtn" Content="Save" Margin="530,0,112,10" VerticalAlignment="Bottom" Background="#FF395DFF" BorderBrush="#FF0D32DA" Foreground="#FFFDF9F9" Width="78" Height="28" FontSize="14" FontFamily="Segoe UI Semibold"/>
+        <Button x:Name="cancelBtn" Content="Cancel" Margin="626,0,16,10" VerticalAlignment="Bottom" Click="cancelBtn_Click" Width="78" Height="28" FontSize="14" Background="#FFFFCC1F" BorderBrush="#FFD3A404" FontFamily="Segoe UI Semibold"/>
     </Grid>
 </Window>

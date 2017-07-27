@@ -39,7 +39,7 @@
     <Grid>
         <ScrollViewer Margin="0">
             <Grid>
-                <GroupBox x:Name="groupBox" Header="Contractor Details" Margin="10,12,10,44" FontWeight="Bold" MinHeight="460">
+                <GroupBox x:Name="groupBox" Header="Contractor Details" Margin="10,12,10,51" FontWeight="Bold" MinHeight="460" FontSize="14">
                     <Grid Margin="-1,0,-2,-1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"/>
@@ -63,7 +63,7 @@
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox>
-                        <Label Content="* Last Name" HorizontalAlignment="Left" Margin="277,49,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
+                        <Label Content="* Last Name" HorizontalAlignment="Left" Margin="292,49,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
                         <TextBox x:Name="lastNameTb" HorizontalAlignment="Left" Height="23" Margin="293,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" FontWeight="Normal" Grid.Column="1" RenderTransformOrigin="0.5,0.5" TextChanged="lastNameTb_TextChanged">
                             <Binding Path="LastName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
@@ -72,7 +72,7 @@
                             </Binding>
                         </TextBox>
                         <Image x:Name="empImage" Grid.Column="1" HorizontalAlignment="Left" Height="80" Margin="477,28,0,0" VerticalAlignment="Top" Width="80" Source="Resources/picture.png"/>
-                        <Button x:Name="openFileBtn" Content="+ Open Image" Grid.Column="1" HorizontalAlignment="Left" Margin="471,107,0,0" VerticalAlignment="Top" Width="94" FontWeight="Normal" Click="openFileBtn_Click"/>
+                        <Button x:Name="openFileBtn" Content="Open Image" Grid.Column="1" HorizontalAlignment="Left" Margin="477,106,0,0" VerticalAlignment="Top" Width="78" FontWeight="Normal" Click="openFileBtn_Click" Height="26" FontSize="12" FontFamily="Segoe UI Semibold" Background="#FF01B901" BorderBrush="#FF019B01" Foreground="#FFFFF5F5"/>
                         <Label Content="Address" HorizontalAlignment="Left" Margin="2,116,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1"/>
                         <Label Content="* Address" VerticalAlignment="Top" Visibility="Visible" Margin="21,141,443,0" FontWeight="Normal" Grid.Column="1"/>
                         <TextBox x:Name="addressTb" HorizontalAlignment="Left" Height="23" Margin="38,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="520" FontWeight="Normal" Grid.Column="1" TextChanged="addressTb_TextChanged">
@@ -92,7 +92,7 @@
                                 </Binding>
                             </ComboBox.SelectedItem>
                         </ComboBox>
-                        <Label Content="* City" VerticalAlignment="Top" Visibility="Visible" Margin="212,201,316,0" FontWeight="Normal" Grid.Column="1"/>
+                        <Label Content="* City" VerticalAlignment="Top" Visibility="Visible" Margin="226,201,302,0" FontWeight="Normal" Grid.Column="1"/>
                         <ComboBox x:Name="cityCb" Margin="229,232,0,0" VerticalAlignment="Top" Height="23" IsEditable="True" DisplayMemberPath = "cityName" SelectedValuePath = "cityID" Width="162" HorizontalAlignment="Left" SelectionChanged="cityCb_SelectionChanged" Grid.Column="1" FontWeight="Normal">
                             <ComboBox.SelectedItem>
                                 <Binding Path="cityID" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
@@ -136,8 +136,8 @@
                 </GroupBox>
 
                 <Grid Margin="425,0,0,10" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="172">
-                    <Button x:Name="saveBtn" Content="Save" HorizontalAlignment="Left" Width="75" Click="saveBtn_Click" IsEnabled="False" Height="20" VerticalAlignment="Top"/>
-                    <Button x:Name="cancelBtn" Content="Cancel" HorizontalAlignment="Left" Margin="97,0,0,0" VerticalAlignment="Top" Width="75" Click="cancelBtn_Click"/>
+                    <Button x:Name="saveBtn" Content="Save" HorizontalAlignment="Left" Width="78" Click="saveBtn_Click" Height="28" VerticalAlignment="Top" FontFamily="Segoe UI Semibold" FontSize="14" Margin="11,-15,0,0" BorderBrush="#FF0F32CF" Background="#FF3356F7" Foreground="#FFFDFCFC" IsEnabled="False"/>
+                    <Button x:Name="cancelBtn" Content="Cancel" HorizontalAlignment="Left" Margin="108,-15,-14,0" VerticalAlignment="Top" Width="78" Click="cancelBtn_Click" FontFamily="Segoe UI Semibold" FontSize="14" Height="28" Background="#FFFFCB1C" BorderBrush="#FFE8BF05"/>
                 </Grid>
             </Grid>
         </ScrollViewer>

@@ -70,7 +70,7 @@
         </GroupBox>
         <GroupBox x:Name="groupBox_Copy" Header="Price Per Location" Height="121" Margin="10,338,10,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" FontSize="16">
             <Grid x:Name="serviceTypeGrid1" Margin="10,10,12,9">
-                <ComboBox x:Name="custProvinceCb" Margin="25,36,0,0" VerticalAlignment="Top" Height="25" IsEditable="True" DisplayMemberPath = "locProvince" SelectedValuePath = "locProvinceID" Width="179" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontWeight="Normal" SelectionChanged="custProvinceCb_SelectionChanged">
+                <ComboBox x:Name="custProvinceCb" Margin="25,36,0,0" VerticalAlignment="Top" Height="25" IsEditable="True" DisplayMemberPath = "locProvince" SelectedValuePath = "locProvinceID" Width="179" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontWeight="Normal" SelectionChanged="custProvinceCb_SelectionChanged" FontSize="14">
                     <ComboBox.SelectedItem>
                         <Binding Path="locProvinceId" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
@@ -79,10 +79,10 @@
                         </Binding>
                     </ComboBox.SelectedItem>
                 </ComboBox>
-                <Label x:Name="label1" Content="Select Province:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="12" FontWeight="Normal" FontStyle="Normal"/>
-                <xctk:DecimalUpDown x:Name="locationPrice" HorizontalAlignment="Left" Margin="220,36,0,0" VerticalAlignment="Top" Width="193"/>
-                <Label x:Name="label1_Copy" Content="Price" HorizontalAlignment="Left" Margin="220,10,0,0" VerticalAlignment="Top" FontSize="12" FontWeight="Normal" FontStyle="Normal"/>
-                <Button x:Name="setPriceBtn" Content="Set" HorizontalAlignment="Left" Margin="418,36,0,0" VerticalAlignment="Top" Width="75" FontWeight="Normal" FontStyle="Normal" FontSize="12" Height="25" IsEnabled="False" Click="setPriceBtn_Click"/>
+                <Label x:Name="label1" Content="Select Province:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Normal" FontStyle="Normal"/>
+                <xctk:DecimalUpDown x:Name="locationPrice" HorizontalAlignment="Left" Margin="220,36,0,0" VerticalAlignment="Top" Width="193" FontSize="14"/>
+                <Label x:Name="label1_Copy" Content="Price" HorizontalAlignment="Left" Margin="220,10,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Normal" FontStyle="Normal"/>
+                <Button x:Name="setPriceBtn" Content="Set" HorizontalAlignment="Left" Margin="422,34,0,0" VerticalAlignment="Top" Width="75" FontWeight="Normal" FontStyle="Normal" FontSize="14" Height="25" Click="setPriceBtn_Click" Background="#FF0591B0" BorderBrush="#FF017791" Foreground="#FFFBF5F5" FontFamily="Segoe UI Semibold"/>
             </Grid>
         </GroupBox>
 

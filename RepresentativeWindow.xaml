@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:prototype2"
         mc:Ignorable="d"
-        Title="Representative - Manage Customer" Height="481.455" Width="631.08" ResizeMode="NoResize" Loaded="Window_Loaded" MinWidth="580" MinHeight="300" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="WidthAndHeight">
+        Title="Representative - Manage Customer" Height="481.455" Width="631.08" ResizeMode="NoResize" Loaded="Window_Loaded" MinWidth="580" MinHeight="300" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" SizeToContent="WidthAndHeight" Closing="Window_Closing">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <Style TargetType="{x:Type TextBox}">
@@ -39,7 +39,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <GroupBox x:Name="groupBox" Header="Representative's Details" HorizontalAlignment="Left" Margin="10,22,0,54" Width="602" FontWeight="Bold">
+        <GroupBox x:Name="groupBox" Header="Representative's Details" HorizontalAlignment="Left" Margin="10,22,0,43" Width="602" FontWeight="Bold" FontSize="14">
             <Grid Margin="0,0,-2,4">
                 <Label x:Name="label1_Copy" Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="127" Margin="10,10,0,0" FontWeight="Bold"/>
                 <TextBox x:Name="firstNameTb" TextWrapping="Wrap" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" MaxLines="1" MaxLength="20" Margin="0,65,417,0" Height="23" VerticalAlignment="Top" HorizontalAlignment="Right" Width="141" TextChanged="firstNameTb_TextChanged" FontWeight="Normal" VerticalContentAlignment="Center">
@@ -64,39 +64,39 @@
                     </Binding>
                 </TextBox>
                 <Label x:Name="label1_Copy9" Content="* First Name" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Normal" Margin="34,39,0,0"/>
-                <Label x:Name="label1_Copy10" Content="* Middle Initial" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Normal" Margin="202,39,0,0"/>
-                <Label x:Name="label1_Copy11" Content="* Last Name" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Normal" Margin="317,39,0,0" RenderTransformOrigin="0.341,0.483"/>
-                <ComboBox x:Name="contactTypeCb" Margin="34,130,0,0" VerticalAlignment="Top" Height="25" IsEditable="True" Width="130" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" SelectionChanged="contactTypeCb_SelectionChanged" VerticalContentAlignment="Center" FontWeight="Normal" FontSize="12" SelectedValuePath="Content">
+                <Label x:Name="label1_Copy10" Content="* Middle Initial" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Normal" Margin="193,39,0,0"/>
+                <Label x:Name="label1_Copy11" Content="* Last Name" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Normal" Margin="315,38,0,0" RenderTransformOrigin="0.341,0.483"/>
+                <ComboBox x:Name="contactTypeCb" Margin="36,139,0,0" VerticalAlignment="Top" Height="25" IsEditable="True" Width="130" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" SelectionChanged="contactTypeCb_SelectionChanged" VerticalContentAlignment="Center" FontWeight="Normal" FontSize="12" SelectedValuePath="Content">
                     <ComboBoxItem>[Contact Type]</ComboBoxItem>
                     <ComboBoxItem>Email Address</ComboBoxItem>
                     <ComboBoxItem>Phone Number</ComboBoxItem>
                     <ComboBoxItem>Mobile Number</ComboBoxItem>
                 </ComboBox>
-                <TextBox x:Name="contactDetailsEmailTb" HorizontalAlignment="Left" Height="25" Margin="177,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" TextChanged="contactDetailsEmailTb_TextChanged" VerticalContentAlignment="Center" IsEnabled="False">
+                <TextBox x:Name="contactDetailsEmailTb" HorizontalAlignment="Left" Height="25" Margin="177,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" TextChanged="contactDetailsEmailTb_TextChanged" VerticalContentAlignment="Center" IsEnabled="False">
                     <Binding Path="ContactValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <local:TextBoxValidation TextBoxType="Email"/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox>
-                <TextBox x:Name="contactDetailsPhoneTb" HorizontalAlignment="Left" Height="25" Margin="177,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" TextChanged="contactDetailsPhoneTb_TextChanged" VerticalContentAlignment="Center" IsEnabled="False">
+                <TextBox x:Name="contactDetailsPhoneTb" HorizontalAlignment="Left" Height="25" Margin="177,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" TextChanged="contactDetailsPhoneTb_TextChanged" VerticalContentAlignment="Center" IsEnabled="False">
                     <Binding Path="ContactValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <local:TextBoxValidation TextBoxType="Phone"/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox>
-                <TextBox x:Name="contactDetailsMobileTb" HorizontalAlignment="Left" Height="25" Margin="177,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" TextChanged="contactDetailsMobileTb_TextChanged" VerticalContentAlignment="Center" IsEnabled="False">
+                <TextBox x:Name="contactDetailsMobileTb" HorizontalAlignment="Left" Height="25" Margin="177,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" TextChanged="contactDetailsMobileTb_TextChanged" VerticalContentAlignment="Center" IsEnabled="False">
                     <Binding Path="ContactValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <local:TextBoxValidation TextBoxType="Mobile"/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox>
-                <Button x:Name="addNewCustContactBtn" Content="+add" HorizontalAlignment="Left" Margin="414,129,0,0" VerticalAlignment="Top" Width="66" FontWeight="Normal" Height="23" Click="addNewCustContactBtn_Click"/>
+                <Button x:Name="addNewCustContactBtn" Content="Add" HorizontalAlignment="Left" Margin="413,140,0,0" VerticalAlignment="Top" Width="75" FontWeight="Normal" Height="25" Click="addNewCustContactBtn_Click" Background="#FF03BD03" BorderBrush="#FF019C01" Foreground="#FFF7F4F4" FontFamily="Segoe UI Semibold" FontSize="14"/>
                 <Button x:Name="saveCustContactBtn" Content="save" HorizontalAlignment="Left" Margin="414,129,0,0" VerticalAlignment="Top" Width="66" FontWeight="Normal" Height="23" Click="saveCustContactBtn_Click" IsEnabled="False" Visibility="Hidden"/>
                 <Button x:Name="cancelCustContactBtn" Content="cancel" HorizontalAlignment="Left" Margin="485,129,0,0" VerticalAlignment="Top" Width="66" FontWeight="Normal" Height="23" Click="cancelCustContactBtn_Click" IsEnabled="True" Visibility="Hidden"/>
-                <DataGrid x:Name="repContactsDg" HorizontalAlignment="Left" Height="148" Margin="35,172,0,0" VerticalAlignment="Top" Width="547" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedRepContact}" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" SelectionChanged="repContactsDg_SelectionChanged" ItemsSource="{Binding RepContacts}">
+                <DataGrid x:Name="repContactsDg" HorizontalAlignment="Left" Height="148" Margin="35,189,0,0" VerticalAlignment="Top" Width="547" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedRepContact}" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" SelectionChanged="repContactsDg_SelectionChanged" ItemsSource="{Binding RepContacts}">
                     <DataGrid.Columns >
                         <DataGridTextColumn Binding="{Binding ContactTypeID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"/>
                         <DataGridTextColumn Binding="{Binding ContactType}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Contact Type"/>
@@ -117,10 +117,10 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Label x:Name="label1_Copy1" Content="Contact Details" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="127" Margin="10,93,0,0" FontWeight="Bold"/>
+                <Label x:Name="label1_Copy1" Content="Contact Details" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="127" Margin="12,102,0,0" FontWeight="Bold"/>
             </Grid>
         </GroupBox>
-        <Button x:Name="cancelBtn" Content="Cancel" Margin="534,413,13,19" Click="cancelBtn_Click"/>
-        <Button x:Name="saveBtn" Content="Save" Margin="443,413,104,19" Click="saveBtn_Click"/>
+        <Button x:Name="cancelBtn" Content="Cancel" Margin="528,414,22,11" Click="cancelBtn_Click" Width="75" Height="27" FontFamily="Segoe UI Semibold" FontSize="14" Background="#FFFDCA1C" BorderBrush="#FFE4B104"/>
+        <Button x:Name="saveBtn" Content="Save" Margin="437,414,113,11" Click="saveBtn_Click" Width="75" Height="27" Background="#FF3357F9" BorderBrush="#FF0B2ED1" Foreground="#FFF9F9F9" FontFamily="Segoe UI Semibold" FontSize="14" IsEnabled="False"/>
     </Grid>
 </Window>

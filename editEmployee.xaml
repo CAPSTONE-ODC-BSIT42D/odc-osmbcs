@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:prototype2"
         mc:Ignorable="d"
-        Title="Employee - Edit Employee Details" Height="257.6" MinWidth="640" MinHeight="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Width="650">
+        Title="Employee - Edit Employee Details" Height="923.651" MinWidth="640" MinHeight="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Width="650">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <Style TargetType="{x:Type TextBox}">
@@ -38,7 +38,7 @@
     <Grid>
         <ScrollViewer Margin="0">
             <Grid>
-                <GroupBox x:Name="groupBox" Header="Employee Details" Margin="10,12,10,44" FontWeight="Bold">
+                <GroupBox x:Name="groupBox" Header="Employee Details" Margin="10,12,10,50" FontWeight="Bold" FontSize="14">
                     <Grid Margin="-1,0,-2,-1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"/>
@@ -54,7 +54,7 @@
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox>
-                        <Label Content="Middle Initial" HorizontalAlignment="Left" Margin="168,49,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
+                        <Label Content="Middle Initial" HorizontalAlignment="Left" Margin="174,49,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
                         <TextBox x:Name="middleInitialTb" HorizontalAlignment="Left" Height="23" Margin="181,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" FontWeight="Normal" MaxLength="3" Grid.Column="1" TextChanged="middleInitialTb_TextChanged">
                             <Binding Path="MiddleName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
@@ -62,7 +62,7 @@
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox>
-                        <Label Content="Last Name" HorizontalAlignment="Left" Margin="274,49,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
+                        <Label Content="Last Name" HorizontalAlignment="Left" Margin="290,49,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
                         <TextBox x:Name="lastNameTb" HorizontalAlignment="Left" Height="23" Margin="293,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" FontWeight="Normal" Grid.Column="1" RenderTransformOrigin="0.5,0.5" TextChanged="lastNameTb_TextChanged">
                             <Binding Path="LastName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
@@ -71,7 +71,7 @@
                             </Binding>
                         </TextBox>
                         <Image x:Name="empImage" Grid.Column="1" HorizontalAlignment="Left" Height="80" Margin="477,28,0,0" VerticalAlignment="Top" Width="80" Source="Resources/picture.png"/>
-                        <Button x:Name="openFileBtn" Content="+ Open Image" Grid.Column="1" HorizontalAlignment="Left" Margin="471,107,0,0" VerticalAlignment="Top" Width="94" FontWeight="Normal" Click="openFileBtn_Click"/>
+                        <Button x:Name="openFileBtn" Content="Open Image" Grid.Column="1" HorizontalAlignment="Left" Margin="476,105,0,0" VerticalAlignment="Top" Width="80" FontWeight="Normal" Click="openFileBtn_Click" FontFamily="Segoe UI Semibold" FontSize="12" Height="26" Background="#FF05C705" BorderBrush="#FF02A602" Foreground="White"/>
                         <Label Content="Address" HorizontalAlignment="Left" Margin="2,116,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1"/>
                         <Label Content="Address" VerticalAlignment="Top" Visibility="Visible" Margin="21,141,443,0" FontWeight="Normal" Grid.Column="1"/>
                         <TextBox x:Name="addressTb" HorizontalAlignment="Left" Height="23" Margin="38,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="520" FontWeight="Normal" Grid.Column="1" TextChanged="addressTb_TextChanged">
@@ -111,7 +111,7 @@
                             </Binding>
                         </TextBox>
                         <Label Content="Email Address" HorizontalAlignment="Left" Margin="229,291,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
-                        <TextBox x:Name="emailAddressTb" HorizontalAlignment="Left" Height="23" Margin="261,322,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="157" FontWeight="Normal" Grid.Column="1" TextChanged="emailAddressTb_TextChanged">
+                        <TextBox x:Name="emailAddressTb" HorizontalAlignment="Left" Height="23" Margin="261,322,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" FontWeight="Normal" Grid.Column="1" TextChanged="emailAddressTb_TextChanged">
                             <Binding Path="Email" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <local:TextBoxValidation TextBoxType="Email"/>
@@ -129,16 +129,16 @@
                             </ComboBox.SelectedItem>
                         </ComboBox>
                         <Label x:Name="label_Copy5" Content="Account Credentials" HorizontalAlignment="Left" Margin="4,430,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1"/>
-                        <Label x:Name="label_Copy6" Content="Your username is same as your email address. &#xA;Password will be automatically generated and will be sent to your email." HorizontalAlignment="Left" Margin="38,461,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1" Height="42" Width="399"/>
-                        <Label x:Name="label_Copy" Content="Signature" HorizontalAlignment="Left" Margin="4,508,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1"/>
-                        <InkCanvas x:Name="MyInkCanvas" Margin="38,542,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="214" Width="507" Grid.Column="1" Background="Transparent"/>
-                        <Button x:Name="btnClear" Content="Clear Signature" HorizontalAlignment="Left" Margin="440,761,0,0" VerticalAlignment="Top" Width="105" Grid.Column="1" Click="btnClear_Click" FontWeight="Normal"/>
+                        <Label x:Name="label_Copy6" Content="Your username is same as your email address. &#xA;Password will be automatically generated and will be sent to your email." HorizontalAlignment="Left" Margin="38,461,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1" Height="47" Width="473"/>
+                        <Label x:Name="label_Copy" Content="Signature" HorizontalAlignment="Left" Margin="4,508,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1" Width="80"/>
+                        <InkCanvas x:Name="MyInkCanvas" Margin="38,550,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="214" Width="507" Grid.Column="1" Background="Transparent"/>
+                        <Button x:Name="btnClear" Content="Clear Signature" HorizontalAlignment="Left" Margin="480,775,0,0" VerticalAlignment="Top" Width="98" Grid.Column="1" Click="btnClear_Click" FontWeight="Normal" FontFamily="Segoe UI Semibold" FontSize="13" Height="27" Background="#FFF01616" BorderBrush="#FFCB0202" Foreground="#FFFFF9F9"/>
                     </Grid>
                 </GroupBox>
 
                 <Grid Margin="425,0,0,10" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="172">
-                    <Button x:Name="saveBtn" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="saveBtn_Click" IsEnabled="False"/>
-                    <Button x:Name="cancelBtn" Content="Cancel" HorizontalAlignment="Left" Margin="97,0,0,0" VerticalAlignment="Top" Width="75" Click="cancelBtn_Click"/>
+                    <Button x:Name="saveBtn" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="78" Click="saveBtn_Click" IsEnabled="False" Margin="-3,-9,0,0" FontFamily="Segoe UI Semibold" FontSize="14" Height="28" Background="#FF3357FB" BorderBrush="#FF052CE0" Foreground="#FFFFFEFE"/>
+                    <Button x:Name="cancelBtn" Content="Cancel" HorizontalAlignment="Left" Margin="106,-11,-12,0" VerticalAlignment="Top" Width="78" Click="cancelBtn_Click" FontFamily="Segoe UI Semibold" FontSize="14" Height="28" Background="#FFFDCA1C" BorderBrush="#FFE4B101"/>
                 </Grid>
             </Grid>
         </ScrollViewer>

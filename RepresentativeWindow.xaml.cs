@@ -49,7 +49,8 @@ namespace prototype2
             contactTypeCb.SelectedIndex = 0;
             if (isEdit)
             {
-                foreach(Contact cop in MainMenu.MainVM.SelectedRepresentative.ContactsOfRep)
+                MainMenu.MainVM.RepContacts.Clear();
+                foreach (Contact cop in MainMenu.MainVM.SelectedRepresentative.ContactsOfRep)
                 {
                     MainMenu.MainVM.RepContacts.Add(cop);
                 }
@@ -115,7 +116,9 @@ namespace prototype2
 
         private void clearContactsBoxes()
         {
-            MainMenu.MainVM.ContactValue = "";
+            contactDetailsPhoneTb.Text = "";
+            contactDetailsEmailTb.Text = "";
+            contactDetailsMobileTb.Text = "";
             Validation.ClearInvalid((contactDetailsPhoneTb).GetBindingExpression(TextBox.TextProperty));
             Validation.ClearInvalid((contactDetailsEmailTb).GetBindingExpression(TextBox.TextProperty));
             Validation.ClearInvalid((contactDetailsMobileTb).GetBindingExpression(TextBox.TextProperty));
@@ -146,63 +149,51 @@ namespace prototype2
         private void contactDetailsEmailTb_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (System.Windows.Controls.Validation.GetHasError(contactDetailsEmailTb) == true)
-                saveBtn.IsEnabled = false;
+                saveCustContactBtn.IsEnabled = false;
             else
             {
                 contactDetail = contactDetailsEmailTb.Text;
-                validateTextBoxes();
             }
         }
 
         private void contactDetailsPhoneTb_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (System.Windows.Controls.Validation.GetHasError(contactDetailsPhoneTb) == true)
-                saveBtn.IsEnabled = false;
+                saveCustContactBtn.IsEnabled = false;
             else
             {
                 contactDetail = contactDetailsPhoneTb.Text;
-                validateTextBoxes();
             }
         }
 
         private void contactDetailsMobileTb_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (System.Windows.Controls.Validation.GetHasError(contactDetailsMobileTb) == true)
-                saveBtn.IsEnabled = false;
+                saveCustContactBtn.IsEnabled = false;
             else
             {
                 contactDetail = contactDetailsMobileTb.Text;
-                validateTextBoxes();
             }
         }
 
         private void validateTextBoxes()
         {
-            if (MainMenu.MainVM.RepContacts!=null)
+            if (MainMenu.MainVM.RepContacts!=null && !firstNameTb.Text.Equals("") && !middleInitialTb.Text.Equals("") && !lastNameTb.Text.Equals(""))
             {
-                if (MainMenu.MainVM.RepContacts.Count > 0)
-                {
-                    saveBtn.IsEnabled = true;
-                    saveCustContactBtn.IsEnabled = true;
-                }
-                else
-                {
-                    saveBtn.IsEnabled = false;
-                    saveCustContactBtn.IsEnabled = false;
-                }
+                saveBtn.IsEnabled = true;
+
             }
-            
+            else
+            {
+                saveBtn.IsEnabled = false;
+                
+            }
+
         }
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Contact cop in MainMenu.MainVM.RepContacts)
-            {
-                MainMenu.MainVM.SelectedRepresentative.ContactsOfRep.Add(cop);
-            }
-            MainMenu.MainVM.SelectedRepresentative.RepFirstName = firstNameTb.Text;
-            MainMenu.MainVM.SelectedRepresentative.RepMiddleName = middleInitialTb.Text;
-            MainMenu.MainVM.SelectedRepresentative.RepLastName = lastNameTb.Text;
+            this.Close();
             
         }
 
@@ -306,5 +297,37 @@ namespace prototype2
             cancelCustContactBtn.Visibility = Visibility.Hidden;
             saveCustContactBtn.Visibility = Visibility.Hidden;
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Do you want to save the data?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                if (!isEdit)
+                { 
+
+                    foreach (Contact cop in MainMenu.MainVM.RepContacts)
+                    {
+                        MainMenu.MainVM.SelectedRepresentative.ContactsOfRep.Add(cop);
+                    }
+                    MainMenu.MainVM.SelectedRepresentative.RepFirstName = firstNameTb.Text;
+                    MainMenu.MainVM.SelectedRepresentative.RepMiddleName = middleInitialTb.Text;
+                    MainMenu.MainVM.SelectedRepresentative.RepLastName = lastNameTb.Text;
+                
+                }
+            }
+            else if (result == MessageBoxResult.No)
+            {
+                if (!isEdit)
+                {
+                    MainMenu.MainVM.CustRepresentatives.Remove(MainMenu.MainVM.SelectedRepresentative);
+                }
+                
+            }
+            else if (result == MessageBoxResult.Cancel)
+                e.Cancel = true;
+        }
+            
+        }
     }
-}
+

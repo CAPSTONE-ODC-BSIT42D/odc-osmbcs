@@ -1093,8 +1093,8 @@ namespace prototype2
                                 cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
                                 cmd.Parameters.AddWithValue("@contactDetail", repcont.ContactDetails);
                                 cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
-                                cmd.Parameters.AddWithValue("@RepID", lastinsertedid);
-                                cmd.Parameters["@RepID"].Direction = ParameterDirection.Input;
+                                cmd.Parameters.AddWithValue("@repID", lastinsertedid);
+                                cmd.Parameters["@repId"].Direction = ParameterDirection.Input;
                                 cmd.ExecuteNonQuery();
                             }
 
@@ -1311,8 +1311,9 @@ namespace prototype2
                     
                     MainVM.CustContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
                     clearContactsBoxes();
-                    contactTypeCb.SelectedIndex = 0;
+                    
                     validateCustomerDetailsTextBoxes();
+                    contactTypeCb.SelectedIndex = 0;
 
 
                 }
@@ -1473,7 +1474,9 @@ namespace prototype2
 
         private void clearContactsBoxes()
         {
-            MainMenu.MainVM.ContactValue = "";
+            contactDetailsPhoneTb.Text = "";
+            contactDetailsEmailTb.Text = "";
+            contactDetailsMobileTb.Text = "";
             Validation.ClearInvalid((contactDetailsPhoneTb).GetBindingExpression(TextBox.TextProperty));
             Validation.ClearInvalid((contactDetailsEmailTb).GetBindingExpression(TextBox.TextProperty));
             Validation.ClearInvalid((contactDetailsMobileTb).GetBindingExpression(TextBox.TextProperty));

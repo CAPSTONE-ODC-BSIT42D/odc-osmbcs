@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:prototype2"
         mc:Ignorable="d"
-        Title="Contact Details" Height="330.577" Width="582.912" ResizeMode="NoResize">
+        Title="Contact Details" Height="337.44" Width="582.912" ResizeMode="NoResize">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <Style TargetType="{x:Type TextBox}">
@@ -36,8 +36,8 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Label x:Name="label1_Copy5" Content="Contact Details:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="127" Margin="10,10,0,0" FontWeight="Bold"/>
-        <DataGrid x:Name="contactDetailsDg" Margin="10,88,10,0" AutoGenerateColumns="False" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedCustContact, Mode=TwoWay}" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" Height="178" VerticalAlignment="Top">
+        <Label x:Name="label1_Copy5" Content="Contact Details:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="127" Margin="10,10,0,0" FontWeight="Bold" FontSize="14"/>
+        <DataGrid x:Name="contactDetailsDg" Margin="10,88,10,0" AutoGenerateColumns="False" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedCustContact, Mode=TwoWay}" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" Height="178" VerticalAlignment="Top" FontSize="14">
             <DataGrid.Columns >
                 <DataGridTextColumn Binding="{Binding contactID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Hidden"/>
                 <DataGridTextColumn Binding="{Binding ContactType}" ClipboardContentBinding="{x:Null}" Width="150" CanUserResize="False" Visibility="Visible" Header="Contact Type"/>
@@ -58,7 +58,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <ComboBox x:Name="contactTypeCb" Margin="41,46,406,0" VerticalAlignment="Top" Height="23" IsEditable="True" DisplayMemberPath = "locProvince" SelectedValuePath = "locProvinceID" Width="130" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" SelectedIndex="0" SelectionChanged="contactTypeCb_SelectionChanged">
+        <ComboBox x:Name="contactTypeCb" Margin="19,46,428,0" VerticalAlignment="Top" Height="23" IsEditable="True" DisplayMemberPath = "locProvince" SelectedValuePath = "locProvinceID" Width="130" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" SelectedIndex="0" SelectionChanged="contactTypeCb_SelectionChanged" FontSize="14">
             <ComboBoxItem>[Contact Type]</ComboBoxItem>
             <ComboBoxItem>Email Address</ComboBoxItem>
             <ComboBoxItem>Phone Number</ComboBoxItem>
@@ -78,7 +78,7 @@
                 </Binding.ValidationRules>
             </Binding>
         </TextBox>
-        <TextBox x:Name="contactDetailsMobileTb" HorizontalAlignment="Left" Height="23" Margin="182,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" TextChanged="contactDetailsMobileTb_TextChanged">
+        <TextBox x:Name="contactDetailsMobileTb" HorizontalAlignment="Left" Height="23" Margin="182,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" TextChanged="contactDetailsMobileTb_TextChanged" FontSize="14">
             <Binding Path="MobileNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                 <Binding.ValidationRules>
                     <local:TextBoxValidation TextBoxType="MobileNumber"/>
@@ -86,8 +86,8 @@
             </Binding>
         </TextBox>
         <Button x:Name="addNewContactBtn" Content="+add" HorizontalAlignment="Left" Margin="420,45,0,0" VerticalAlignment="Top" Width="67" FontWeight="Normal" Height="23" Click="addNewContactBtn_Click"/>
-        <Button x:Name="saveContactBtn" Content="+add" HorizontalAlignment="Left" Margin="420,45,0,0" VerticalAlignment="Top" Width="67" FontWeight="Normal" Height="23"/>
-        <Button x:Name="saveBtn" Content="Save" HorizontalAlignment="Left" Margin="398,271,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="cancelBtn" Content="Cancel" HorizontalAlignment="Left" Margin="492,271,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="saveContactBtn" Content="Add" HorizontalAlignment="Left" Margin="416,43,0,0" VerticalAlignment="Top" Width="75" FontWeight="Normal" Height="26" FontFamily="Segoe UI Semibold" FontSize="14" Background="#FF02B402" BorderBrush="#FF019501" Foreground="#FFF9F3F3"/>
+        <Button x:Name="saveBtn" Content="Save" HorizontalAlignment="Left" Margin="389,271,0,0" VerticalAlignment="Top" Width="78" FontFamily="Segoe UI Semibold" FontSize="14" Height="28" Background="#FF3356F7" BorderBrush="#FF0227CD" Foreground="#FFF1EDED"/>
+        <Button x:Name="cancelBtn" Content="Cancel" HorizontalAlignment="Left" Margin="486,271,0,0" VerticalAlignment="Top" Width="78" FontFamily="Segoe UI Semibold" FontSize="14" Height="28" Background="#FFFFCB1C" BorderBrush="#FFDCAA03"/>
     </Grid>
 </Window>
