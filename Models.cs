@@ -90,7 +90,7 @@ namespace prototype2
         protected string typeid;
         protected string typename;
         protected string details;
-
+        protected string tableID;
         public string ContactTypeID
         {
             get { return typeid; }
@@ -105,6 +105,11 @@ namespace prototype2
         {
             get { return details; }
             set { SetProperty(ref details, value); }
+        }
+        public string TableID
+        {
+            get { return tableID; }
+            set { SetProperty(ref tableID, value); }
         }
     }
 
