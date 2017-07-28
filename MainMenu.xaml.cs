@@ -143,6 +143,7 @@ namespace prototype2
         /*-----------------END OF MENU BAR BUTTONS-------------------*/
 
         /*-----------------SUB MENU BAR BUTTONS-------------------*/
+
         private void quotesSalesMenuBtn_Click(object sender, RoutedEventArgs e)
         {
             saleSubMenuGrid.Visibility = Visibility.Collapsed;
@@ -294,7 +295,7 @@ namespace prototype2
             }
             else
             {
-                System.Windows.MessageBox.Show("Select a customer first.");
+                System.Windows.MessageBox.Show("Please select a customer first.");
             }
 
         }
@@ -412,7 +413,7 @@ namespace prototype2
 
         private void orderFormBack_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Do you want to cancel this transaction?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+            MessageBoxResult result = MessageBox.Show("Do you wish to cancel this transaction?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
                 for (int x = 1; x < transactionOrdersGrid.Children.Count; x++)
@@ -555,7 +556,7 @@ namespace prototype2
             {
                 String id = (manageCustomeDataGrid.Columns[0].GetCellContent(manageCustomeDataGrid.SelectedItem) as TextBlock).Text;
                 var dbCon = DBConnection.Instance();
-                MessageBoxResult result = MessageBox.Show("Do you want to delete this customer?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                MessageBoxResult result = MessageBox.Show("Do you wish to delete this customer record?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
                     if (dbCon.IsConnect())
@@ -563,7 +564,7 @@ namespace prototype2
                         string query = "UPDATE `customer_t` SET `isDeleted`= 1 WHERE custID = '"+id+"';";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
-                            MessageBox.Show("Successfully deleted.");
+                            MessageBox.Show("Record successfully deleted!");
                             setManageCustomerGridControls();
                         }
                     }
@@ -618,6 +619,8 @@ namespace prototype2
         /*
         /*
         /*-----------------MANAGE EMPLOYEE-------------------------*/
+
+
         private void manageEmployeeDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Visual visual = e.OriginalSource as Visual;
@@ -674,7 +677,7 @@ namespace prototype2
             {
                 String id = (manageEmployeeDataGrid.Columns[0].GetCellContent(manageEmployeeDataGrid.SelectedItem) as TextBlock).Text;
                 var dbCon = DBConnection.Instance();
-                MessageBoxResult result = MessageBox.Show("Do you want to delete this customer?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                MessageBoxResult result = MessageBox.Show("Do you wish to delete this customer?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
                     if (dbCon.IsConnect())
@@ -682,7 +685,7 @@ namespace prototype2
                         string query = "UPDATE `employee_t` SET `isDeleted`= 1 WHERE empID = '" + id + "';";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
-                            MessageBox.Show("Successfully deleted.");
+                            MessageBox.Show("Record successfully deleted!");
                             setManageEmployeeGridControls();
                         }
                     }
@@ -789,7 +792,7 @@ namespace prototype2
             {
                 String id = (manageSupplierDataGrid.Columns[0].GetCellContent(manageSupplierDataGrid.SelectedItem) as TextBlock).Text;
                 var dbCon = DBConnection.Instance();
-                MessageBoxResult result = MessageBox.Show("Do you want to delete this supplier?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                MessageBoxResult result = MessageBox.Show("Do you wish to delete this supplier record?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
                     if (dbCon.IsConnect())
@@ -797,7 +800,7 @@ namespace prototype2
                         string query = "UPDATE `supplier_t` SET `isDeleted`= 1 WHERE suppID = '" + id + "';";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
-                            MessageBox.Show("Successfully deleted.");
+                            MessageBox.Show("Record successfully deleted!");
                             setManageSupplierGridControls();
                         }
                     }
@@ -942,7 +945,7 @@ namespace prototype2
             {
                 String id = (manageContractorDataGrid.Columns[0].GetCellContent(manageContractorDataGrid.SelectedItem) as TextBlock).Text;
                 var dbCon = DBConnection.Instance();
-                MessageBoxResult result = MessageBox.Show("Do you want to delete this Contractor?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                MessageBoxResult result = MessageBox.Show("Do you wish to delete this Contractor record?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
                     using (MySqlConnection conn = dbCon.Connection)
@@ -950,7 +953,7 @@ namespace prototype2
                         string query = "UPDATE `contractor_t` SET `isDeleted`= 1 WHERE contID = '" + id + "';";
                         if (dbCon.insertQuery(query, conn))
                         {
-                            MessageBox.Show("Successfully deleted.");
+                            MessageBox.Show("Record successfully deleted!");
                             setManageContractorGridControls();
                         }
                     }
@@ -1023,7 +1026,7 @@ namespace prototype2
         private void saveCustBtn_Click(object sender, RoutedEventArgs e)
         {
             
-            MessageBoxResult result = MessageBox.Show("Do you want to save this information?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+            MessageBoxResult result = MessageBox.Show("Do you wish to save this record?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
                 dataToDatabase();
@@ -1350,7 +1353,7 @@ namespace prototype2
                 }
                 else
                 {
-                    MessageBox.Show("Select The Type");
+                    MessageBox.Show("Please choose from the selection before adding.");
                 }
             }
             else
@@ -1399,7 +1402,7 @@ namespace prototype2
                 }
                 else
                 {
-                    MessageBox.Show("Select The Type");
+                    MessageBox.Show("Please choose from the selection before saving.");
                 }
             }
             else
@@ -1418,7 +1421,7 @@ namespace prototype2
         int newSupp = 0;
         private void btnDeleteCustCont_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Do you want to delete this contact information?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+            MessageBoxResult result = MessageBox.Show("Do you wish to delete this contact record?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
                 MainVM.CustContacts.Remove(MainVM.SelectedCustContact);
@@ -1480,7 +1483,7 @@ namespace prototype2
 
         private void delBtnCustContRep_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Do you want to delete this representative?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+            MessageBoxResult result = MessageBox.Show("Do you wish to delete this Representative record?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
                 int selectIndex = custContactDg.SelectedIndex;
@@ -1573,7 +1576,7 @@ namespace prototype2
         public string lineNo
         {
             get { return _lineNo; }
-            set { SetField(ref _lineNo, value, "Line No"); }
+            set { SetField(ref _lineNo, value, "Line No."); }
         }
         private string _itemCode;
         public string itemCode
