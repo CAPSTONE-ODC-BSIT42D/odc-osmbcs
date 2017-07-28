@@ -27,6 +27,7 @@ namespace prototype2
         {
             InitializeComponent();
             this.DataContext = MainMenu.MainVM;
+            
         }
         public string custName { get; set; }
         public string custId { get; set; }
@@ -37,7 +38,7 @@ namespace prototype2
         public int idOfContacts;
         public bool isEdit = false;
         private string contactDetail = "";
-        
+        public bool dataChanged;
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -54,6 +55,11 @@ namespace prototype2
                 {
                     MainMenu.MainVM.RepContacts.Add(cop);
                 }
+                firstNameTb.Text = MainMenu.MainVM.SelectedRepresentative.RepFirstName;
+                lastNameTb.Text = MainMenu.MainVM.SelectedRepresentative.RepLastName;
+                middleInitialTb.Text = MainMenu.MainVM.SelectedRepresentative.RepMiddleName;
+                dataChanged = false;
+                saveBtn.IsEnabled = false;
             }
         }
 
@@ -178,6 +184,7 @@ namespace prototype2
 
         private void validateTextBoxes()
         {
+            dataChanged = true;
             if (MainMenu.MainVM.RepContacts!=null && !firstNameTb.Text.Equals("") && !middleInitialTb.Text.Equals("") && !lastNameTb.Text.Equals(""))
             {
                 saveBtn.IsEnabled = true;
@@ -186,7 +193,6 @@ namespace prototype2
             else
             {
                 saveBtn.IsEnabled = false;
-                
             }
 
         }
@@ -197,10 +203,10 @@ namespace prototype2
             
         }
 
-
+        public bool cancelBtnClicked = false;
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainMenu.MainVM.CustRepresentatives.Remove(MainMenu.MainVM.SelectedRepresentative);
+            cancelBtnClicked = true;
             this.Close();
         }
 
@@ -300,34 +306,32 @@ namespace prototype2
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Do you want to save the data?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
-            if (result == MessageBoxResult.Yes)
+            if (!cancelBtnClicked)
             {
-                if (!isEdit)
-                { 
-
-                    foreach (Contact cop in MainMenu.MainVM.RepContacts)
-                    {
-                        MainMenu.MainVM.SelectedRepresentative.ContactsOfRep.Add(cop);
-                    }
-                    MainMenu.MainVM.SelectedRepresentative.RepFirstName = firstNameTb.Text;
-                    MainMenu.MainVM.SelectedRepresentative.RepMiddleName = middleInitialTb.Text;
-                    MainMenu.MainVM.SelectedRepresentative.RepLastName = lastNameTb.Text;
-                
-                }
-            }
-            else if (result == MessageBoxResult.No)
-            {
-                if (!isEdit)
+                if (dataChanged)
                 {
-                    MainMenu.MainVM.CustRepresentatives.Remove(MainMenu.MainVM.SelectedRepresentative);
+                    MessageBoxResult result = MessageBox.Show("Do you want to save the data?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        foreach (Contact cop in MainMenu.MainVM.RepContacts)
+                        {
+                            MainMenu.MainVM.SelectedRepresentative.ContactsOfRep.Add(cop);
+                        }
+                        MainMenu.MainVM.SelectedRepresentative.RepFirstName = firstNameTb.Text;
+                        MainMenu.MainVM.SelectedRepresentative.RepMiddleName = middleInitialTb.Text;
+                        MainMenu.MainVM.SelectedRepresentative.RepLastName = lastNameTb.Text;
+                    }
+                    else if (result == MessageBoxResult.No)
+                    {
+
+
+                    }
+                    else if (result == MessageBoxResult.Cancel)
+                        e.Cancel = true;
                 }
                 
             }
-            else if (result == MessageBoxResult.Cancel)
-                e.Cancel = true;
         }
-            
-        }
+      }
     }
 

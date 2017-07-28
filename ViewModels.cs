@@ -15,7 +15,8 @@ namespace prototype2
 
         }
 
-        public new String Name { get; set; }
+        public String Name { get; set; }
+        public String AdditionalInfo { get; set; }
         public String Address { get; set; }
         public String City { get; set; }
         public String Number { get; set; }
@@ -54,7 +55,7 @@ namespace prototype2
         protected ObservableCollection<Customer> customers =
             new ObservableCollection<Customer>();
 
-        protected Representative selectedCustomer = null;
+        protected Customer selectedCustomer = null;
 
         public ObservableCollection<Customer> Customers
         {
@@ -62,7 +63,7 @@ namespace prototype2
             set { customers = value; }
         }
 
-        public Representative SelectedCustomer
+        public Customer SelectedCustomer
         {
             get { return selectedCustomer; }
             set { SetProperty(ref selectedCustomer, value); }

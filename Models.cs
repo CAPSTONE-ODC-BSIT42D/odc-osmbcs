@@ -16,6 +16,7 @@ namespace prototype2
         protected string firstname;
         protected string middlename;
         protected string lastname;
+        protected string representativeID;
         protected ObservableCollection<Contact> contactsOfRep = new ObservableCollection<Contact>();
 
         public string RepFirstName
@@ -34,6 +35,12 @@ namespace prototype2
             set { SetProperty(ref lastname, value); }
         }
 
+        public string RepresentativeID
+        {
+            get { return representativeID; }
+            set { SetProperty(ref representativeID, value); }
+        }
+
         public ObservableCollection<Contact> ContactsOfRep
         {
             get { return contactsOfRep; }
@@ -48,36 +55,48 @@ namespace prototype2
         {
 
         }
-        protected string customerName;
-        protected string customerDesc;
-        protected string customerAddress;
-        protected string customerCity;
-        protected string customerProvinceID;
+        protected string companyID;
+        protected string companyName;
+        protected string companyDesc;
+        protected string companyAddress;
+        protected string companyCity;
+        protected string companyProvinceID;
+        protected string companyProvinceName;
 
-        public string CustomerName
+        public string CompanyID
         {
-            get { return customerName; }
-            set { SetProperty(ref customerName, value); }
+            get { return companyID; }
+            set { SetProperty(ref companyID, value); }
         }
-        public string CustomerDesc
+        public string CompanyName
         {
-            get { return customerDesc; }
-            set { SetProperty(ref customerDesc, value); }
+            get { return companyName; }
+            set { SetProperty(ref companyName, value); }
         }
-        public string CustomerAddress
+        public string CompanyDesc
         {
-            get { return customerAddress; }
-            set { SetProperty(ref customerAddress, value); }
+            get { return companyDesc; }
+            set { SetProperty(ref companyDesc, value); }
         }
-        public string CustomerCity
+        public string CompanyAddress
         {
-            get { return customerCity; }
-            set { SetProperty(ref customerCity, value); }
+            get { return companyAddress; }
+            set { SetProperty(ref companyAddress, value); }
         }
-        public string CustomerProvinceID
+        public string CompanyCity
         {
-            get { return customerProvinceID; }
-            set { SetProperty(ref customerProvinceID, value); }
+            get { return companyCity; }
+            set { SetProperty(ref companyCity, value); }
+        }
+        public string CompanyProvinceID
+        {
+            get { return companyProvinceID; }
+            set { SetProperty(ref companyProvinceID, value); }
+        }
+        public string CompanyProvinceName
+        {
+            get { return companyProvinceName; }
+            set { SetProperty(ref companyProvinceName, value); }
         }
     }
 

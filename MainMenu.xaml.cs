@@ -22,13 +22,13 @@ namespace prototype2
     /// </summary>
     public partial class MainMenu : Window
     {
-
+        public static MainViewModel MainVM = new MainViewModel();
         public MainMenu()
         {
             InitializeComponent();
             this.DataContext = MainVM;
         }
-        public static MainViewModel MainVM = new MainViewModel();
+        
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             for (int x = 0; x < containerGrid.Children.Count; x++)
@@ -49,12 +49,6 @@ namespace prototype2
             if (!visual.IsDescendantOf(saleSubMenuGrid) && !visual.IsDescendantOf(manageSubMenugrid))
                 saleSubMenuGrid.Visibility = Visibility.Collapsed;
             manageSubMenugrid.Visibility = Visibility.Collapsed;
-            if (!visual.IsDescendantOf(manageCustomeDataGrid))
-            {
-                manageCustomeDataGrid.SelectedIndex = -1;
-                manageCustomeDataGrid.Columns[manageCustomeDataGrid.Columns.IndexOf(columnEditCustBtn)].Visibility = Visibility.Hidden;
-                manageCustomeDataGrid.Columns[manageCustomeDataGrid.Columns.IndexOf(columnDeleteCustBtn)].Visibility = Visibility.Hidden;
-            }
             if (!visual.IsDescendantOf(manageEmployeeDataGrid))
             {
                 if (manageEmployeeDataGrid.SelectedItems.Count > 0)
@@ -481,14 +475,20 @@ namespace prototype2
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
-                string query = "SELECT cs.companyID, cs.companyName, cs.companyAddInfo, CONCAT(cs.companyAddress,', ',cs.companyCity,', ',p.locProvince) AS custLocation " +
+                string query = "SELECT cs.companyID, cs.companyName, cs.companyAddInfo, cs.companyAddress,cs.companyCity,p.locProvince,cs.companyProvinceID " +
                     "FROM cust_supp_t cs  " +
                     "JOIN provinces_t p ON cs.companyProvinceID = p.locProvinceId " +
                     "WHERE isDeleted = 0 AND companyType = 0;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
-                manageCustomeDataGrid.ItemsSource = fromDb.Tables["t"].DefaultView;
+                fromDbTable = fromDb.Tables["t"];
+                MainVM.Customers.Clear();
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.Customers.Add(new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString() , CompanyProvinceName = dr["locProvince"].ToString() ,CompanyProvinceID = dr["companyProvinceID"].ToString() });
+                }
                 dbCon.Close();
             }
             if (dbCon.IsConnect())
@@ -505,49 +505,49 @@ namespace prototype2
 
         private void setEditCustomerControls(string id)
         {
-            var dbCon = DBConnection.Instance();
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT cs.companyID, cs.companyName, cs.companyAddInfo,cs.companyAddress ,cs.companyCity, cs.companyProvinceID" +
-                    "FROM cust_supp_t cs  " +
-                    "WHERE cs.companyID = '" + id + "' " +
-                    "AND companyType = 0;";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    int locProvId = Int32.Parse(dr["companyProvinceID"].ToString());
-                    custProvinceCb.SelectedIndex = locProvId - 1;
-                    Name = dr["companyName"].ToString();
-                    custAddInfoTb.Text = dr["companyAddInfo"].ToString();
-                    MainVM.City = dr["companyCity"].ToString();
-                    MainVM.Address = dr["companyAddress"].ToString();
-                }
-                dbCon.Close();
-            }
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * FROM provinces_t";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                dataAdapter.Fill(fromDb, "t");
-                custProvinceCb.ItemsSource = fromDb.Tables["t"].DefaultView;
-                dbCon.Close();
-            }
+            //var dbCon = DBConnection.Instance();
+            //if (dbCon.IsConnect())
+            //{
+            //    string query = "SELECT cs.companyID, cs.companyName, cs.companyAddInfo,cs.companyAddress ,cs.companyCity, cs.companyProvinceID" +
+            //        "FROM cust_supp_t cs  " +
+            //        "WHERE cs.companyID = '" + id + "' " +
+            //        "AND companyType = 0;";
+            //    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+            //    DataSet fromDb = new DataSet();
+            //    DataTable fromDbTable = new DataTable();
+            //    dataAdapter.Fill(fromDb, "t");
+            //    fromDbTable = fromDb.Tables["t"];
+            //    foreach (DataRow dr in fromDbTable.Rows)
+            //    {
+            //        int locProvId = Int32.Parse(dr["companyProvinceID"].ToString());
+            //        custProvinceCb.SelectedIndex = locProvId - 1;
+            //        Name = dr["companyName"].ToString();
+            //        custAddInfoTb.Text = dr["companyAddInfo"].ToString();
+            //        MainVM.City = dr["companyCity"].ToString();
+            //        MainVM.Address = dr["companyAddress"].ToString();
+            //    }
+            //    dbCon.Close();
+            //}
+            //if (dbCon.IsConnect())
+            //{
+            //    string query = "SELECT * FROM provinces_t";
+            //    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+            //    DataSet fromDb = new DataSet();
+            //    dataAdapter.Fill(fromDb, "t");
+            //    custProvinceCb.ItemsSource = fromDb.Tables["t"].DefaultView;
+            //    dbCon.Close();
+            //}
         }
 
 
         private void btnEditCust_Click(object sender, RoutedEventArgs e)
         {
-            
+            loadCustSuppDetails();
             manageCustomerHomeGrid.Visibility = Visibility.Hidden;
-            customerDetailsGrid.Visibility = Visibility.Visible;
-            customerDetailsGrid.IsEnabled = true;
-            string id = (manageCustomeDataGrid.Columns[0].GetCellContent(manageCustomeDataGrid.SelectedItem) as TextBlock).Text;
-            setEditCustomerControls(id);
+            manageCustomerGrid.Visibility = Visibility.Hidden;
+            companyDetailsGrid.Visibility = Visibility.Visible;
+            companyDetailsHeader.Content = "Manage Customer - Edit Customer";
+            
         }
 
         private void btnDeleteCust_Click(object sender, RoutedEventArgs e)
@@ -1023,6 +1023,7 @@ namespace prototype2
         /*----------------------------------------*/
         private int compType = 0;
         private bool isEdit = false;
+        private string compID = "";
         private void saveCustBtn_Click(object sender, RoutedEventArgs e)
         {
             
@@ -1045,7 +1046,7 @@ namespace prototype2
         {
             var dbCon = DBConnection.Instance();
             string[] proc = { "", "", "", "" };
-            string[] idOfEdit = { "", "" };
+            
             if (!isEdit)
             {
                 proc[0] = "INSERT_COMPANY";
@@ -1072,20 +1073,19 @@ namespace prototype2
                 cmd.Parameters["@province"].Direction = ParameterDirection.Input;
                 cmd.Parameters.AddWithValue("@compType", compType);
                 cmd.Parameters["@compType"].Direction = ParameterDirection.Input;
-                cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
-                cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
-                cmd.ExecuteNonQuery();
-                lastinsertedid = cmd.Parameters["@insertedid"].Value.ToString();
-                //if (!isEdit)
-                //{
-                    
-                //}
-                //else
-                //{
-                //    cmd.Parameters.AddWithValue("@compID", idOfEdit[0]);
-                //    cmd.Parameters["@compID"].Direction = ParameterDirection.Input;
-                //    cmd.ExecuteNonQuery();
-                //}
+                if (!isEdit)
+                {
+                    cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
+                    cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
+                    cmd.ExecuteNonQuery();
+                    lastinsertedid = cmd.Parameters["@insertedid"].Value.ToString();
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@compID", compID);
+                    cmd.Parameters["@compID"].Direction = ParameterDirection.Input;
+                    cmd.ExecuteNonQuery();
+                }
                 foreach (Contact cont in MainVM.CustContacts)
                 {
                     cmd = new MySqlCommand(proc[1], conn);
@@ -1501,30 +1501,75 @@ namespace prototype2
         private void loadCustSuppDetails()
         {
             var dbCon = DBConnection.Instance();
-            string[] proc = { "", "", "", "" };
-            string[] idOfEdit = { "", "" };
-            if (!isEdit)
+            using (MySqlConnection conn = dbCon.Connection)
             {
-                proc[0] = "INSERT_COMPANY";
-                proc[1] = "INSERT_COMPANY_CONT";
-                proc[2] = "INSERT_REP";
-                proc[3] = "INSERT_REP_CONT";
+                conn.Open();
+                MessageBox.Show("" + MainVM.SelectedCustomer);
+                string id = MainVM.SelectedCustomer.CompanyID;
+                custCompanyNameTb.Text = MainVM.SelectedCustomer.CompanyName;
+                custAddInfoTb.Text = MainVM.SelectedCustomer.CompanyDesc;
+                custAddressTb.Text = MainVM.SelectedCustomer.CompanyAddress;
+                custCityTb.Text = MainVM.SelectedCustomer.CompanyCity;
+                custProvinceCb.SelectedValue = MainVM.SelectedCustomer.CompanyProvinceID;
+                string query = "SELECT representativeID," +
+                    "repTitle," +
+                    "repLName," +
+                    "repFName," +
+                    "repMInitial " +
+                    "FROM representative_t " +
+                    "WHERE companyID = '"+id+"'; ";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, conn);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.CustRepresentatives.Add(new Representative() { RepFirstName = dr["repFName"].ToString(), RepLastName = dr["RepLName"].ToString(), RepMiddleName = dr["RepMInitial"].ToString(), RepresentativeID = dr["representativeID"].ToString() });
+                    query = "SELECT rc.tableID," +
+                    "rc.repID," +
+                    "rc.contactTypeID," +
+                    "rc.contactValue," +
+                    "cont.contactType" +
+                    " FROM rep_t_contact_t rc" +
+                    " JOIN contacts_t cont" +
+                    " ON cont.contactTypeID = rc.contactTypeID" +
+                    " WHERE rc.repID = '" + dr["representativeID"].ToString() + "';";
+                    dataAdapter = dbCon.selectQuery(query, conn);
+                    fromDb = new DataSet();
+                    fromDbTable = new DataTable();
+                    dataAdapter.Fill(fromDb, "t");
+                    fromDbTable = fromDb.Tables["t"];
+                    MainVM.SelectedRepresentative = MainVM.CustRepresentatives.Last();
+                    foreach (DataRow dr1 in fromDbTable.Rows)
+                    {
+                        MainVM.SelectedRepresentative.ContactsOfRep.Add(new Contact() { TableID = dr1["tableID"].ToString(), ContactDetails = dr1["contactValue"].ToString(), ContactType = dr1["contactType"].ToString(), ContactTypeID = dr1["contactTypeID"].ToString() });
+                    }
+                }
+
+                query = "SELECT `cust_supp_t_contact_t`.`tableID`," +
+                    "`cust_supp_t_contact_t`.`compID`," +
+                    "`cust_supp_t_contact_t`.`contactTypeID`," +
+                    "`cust_supp_t_contact_t`.`contactValue`," +
+                    "`contacts_t`.`contactType`" +
+                    " FROM `odc_db`.`cust_supp_t_contact_t`" +
+                    " JOIN `odc_db`.`contacts_t`" +
+                    " ON `contacts_t`.`contactTypeID` = `cust_supp_t_contact_t`.`contactTypeID`" +
+                    " WHERE `cust_supp_t_contact_t`.`compID` = '"+id+"';";
+                dataAdapter = dbCon.selectQuery(query, conn);
+                fromDb = new DataSet();
+                fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.CustContacts.Add(new Contact() { TableID = dr["tableID"].ToString(), ContactDetails = dr["contactValue"].ToString(), ContactType = dr["contactType"].ToString(), ContactTypeID = dr["contactTypeID"].ToString() });
+                }
+
             }
             try
             {
-                using (MySqlConnection conn = dbCon.Connection)
-                {
-                    string query = "";
-                    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                    DataSet fromDb = new DataSet();
-                    DataTable fromDbTable = new DataTable();
-                    dataAdapter.Fill(fromDb, "t");
-                    fromDbTable = fromDb.Tables["t"];
-                    foreach (DataRow dr in fromDbTable.Rows)
-                    {
-                    }
-                    clearCompanyDetailsGrid();
-                }
+                
             }
             catch (Exception)
             {
