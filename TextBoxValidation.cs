@@ -15,7 +15,7 @@ namespace prototype2
             if (str.Equals("String"))
             {
                 if (value.ToString().Length == 0)
-                    return new ValidationResult(false, "*Cannot be empty.");
+                    return new ValidationResult(false, "*This field must be filled.");
                 return ValidationResult.ValidResult;
             }
             else if (str.Equals("Number"))
@@ -25,16 +25,16 @@ namespace prototype2
                     Decimal number = Decimal.Parse(value.ToString());
                     if (value.ToString().Length < 7)
                     {
-                        return new ValidationResult(false, "*Must be greater than 7.");
+                        return new ValidationResult(false, "*Please follow the correct format for Phone number. (Ex. 123-4567)");
                     }
                     else if (value.ToString().Length > 11)
                     {
-                        return new ValidationResult(false, "*Must be less than/equal 11.");
+                        return new ValidationResult(false, "*Please follow the correct format for Mobile number. (Ex. 0912-345-6789)");
                     }
                 }
                 catch (Exception e)
                 {
-                    return new ValidationResult(false, "*Only numbers.");
+                    return new ValidationResult(false, "*Characters are not accepted.");
                 }
                 return ValidationResult.ValidResult;
 
@@ -46,12 +46,12 @@ namespace prototype2
                     Decimal number = Decimal.Parse(value.ToString());
                     if (value.ToString().Length > 11)
                     {
-                        return new ValidationResult(false, "*Must be less than/equal 11 Digits");
+                        return new ValidationResult(false, "*Please follow the correct format for Mobile number. (Ex. 0912-345-6789)");
                     }
                 }
                 catch (Exception e)
                 {
-                    return new ValidationResult(false, "* Only numbers.");
+                    return new ValidationResult(false, "*Characters are not accepted.");
                 }
                 return ValidationResult.ValidResult;
 
@@ -63,12 +63,12 @@ namespace prototype2
                     Decimal number = Decimal.Parse(value.ToString());
                     if (value.ToString().Length > 7)
                     {
-                        return new ValidationResult(false, "* Must be equal to 7 Digits");
+                        return new ValidationResult(false, "*Please follow the correct format for Phone Bumber. (Ex. 123-4567)");
                     }
                 }
                 catch (Exception e)
                 {
-                    return new ValidationResult(false, "*Only numbers.");
+                    return new ValidationResult(false, "*Characters are not accepted.");
                 }
                 return ValidationResult.ValidResult;
 
@@ -77,7 +77,7 @@ namespace prototype2
             {
                 if (!regex.IsValidEmail(value.ToString()))
                 {
-                    return new ValidationResult(false, "*The email is not a valid email.");
+                    return new ValidationResult(false, "*The E-mail is not a valid email.");
                 }
                 return ValidationResult.ValidResult;
 
