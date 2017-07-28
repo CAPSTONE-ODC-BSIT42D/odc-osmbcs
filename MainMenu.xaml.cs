@@ -1452,6 +1452,7 @@ namespace prototype2
             repWindow.ShowDialog();
             validateCustomerDetailsTextBoxes();
             
+            
         }
         private void customerRepresentativeDg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -1508,10 +1509,7 @@ namespace prototype2
             {
                 using (MySqlConnection conn = dbCon.Connection)
                 {
-                    string query = "SELECT c.custID, c.custCompanyName, c.custAddInfo,c.locationId, cc.officePhoneNo, cc.emailAddress,ld.locationAddress,ld.locationCityID,lp.locProvinceID FROM customer_t c " +
-                    "JOIN customer_contacts_t cc ON c.custID = cc.custID " +
-                    "JOIN location_details_t ld ON c.locationID = ld.locationID " +
-                    "JOIN provinces_t lp ON ld.locationProvinceID = lp.locProvinceID WHERE c.custID = '" +"';";
+                    string query = "";
                     MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                     DataSet fromDb = new DataSet();
                     DataTable fromDbTable = new DataTable();
