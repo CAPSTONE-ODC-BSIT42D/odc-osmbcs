@@ -34,7 +34,7 @@ namespace prototype2
                 }
                 catch (Exception e)
                 {
-                    return new ValidationResult(false, "*Characters are not accepted.");
+                    return new ValidationResult(false, "*Characters and symbols are not accepted.");
                 }
                 return ValidationResult.ValidResult;
 
@@ -51,7 +51,7 @@ namespace prototype2
                 }
                 catch (Exception e)
                 {
-                    return new ValidationResult(false, "*Characters are not accepted.");
+                    return new ValidationResult(false, "*Characters and symbols are not accepted.");
                 }
                 return ValidationResult.ValidResult;
 
@@ -68,7 +68,7 @@ namespace prototype2
                 }
                 catch (Exception e)
                 {
-                    return new ValidationResult(false, "*Characters are not accepted.");
+                    return new ValidationResult(false, "*Characters and symbols are not accepted.");
                 }
                 return ValidationResult.ValidResult;
 
@@ -77,7 +77,7 @@ namespace prototype2
             {
                 if (!regex.IsValidEmail(value.ToString()))
                 {
-                    return new ValidationResult(false, "*The E-mail is not a valid email.");
+                    return new ValidationResult(false, "*Please use valid format for E-mail.");
                 }
                 return ValidationResult.ValidResult;
 
@@ -85,7 +85,7 @@ namespace prototype2
             else if (str.Equals("ComboBox"))
             {
                 if (value is null)
-                    return new ValidationResult(false, "Selection is invalid.");
+                    return new ValidationResult(false, "Please choose a Contact Type.");
                 else
                     return new ValidationResult(true, null);
 

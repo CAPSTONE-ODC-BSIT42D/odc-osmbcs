@@ -22,12 +22,12 @@ namespace prototype2
     /// </summary>
     public partial class RepresentativeWindow : Window
     {
-        
+
         public RepresentativeWindow()
         {
             InitializeComponent();
             this.DataContext = MainMenu.MainVM;
-            
+
         }
         public string custName { get; set; }
         public string custId { get; set; }
@@ -65,7 +65,7 @@ namespace prototype2
 
         private void addNewCustContactBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+
             if (contactTypeCb.SelectedIndex != 0)
             {
                 MainMenu.MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = MainMenu.MainVM.ContactValue });
@@ -185,14 +185,14 @@ namespace prototype2
         private void validateTextBoxes()
         {
             dataChanged = true;
-            if (MainMenu.MainVM.RepContacts!=null && !firstNameTb.Text.Equals("") && !middleInitialTb.Text.Equals("") && !lastNameTb.Text.Equals(""))
+            if (MainMenu.MainVM.RepContacts.Count == 0 && !firstNameTb.Text.Equals("") && !middleInitialTb.Text.Equals("") && !lastNameTb.Text.Equals(""))
             {
-                saveBtn.IsEnabled = true;
+                saveBtn.IsEnabled = false;
 
             }
             else
             {
-                saveBtn.IsEnabled = false;
+                saveBtn.IsEnabled = true;
             }
 
         }
@@ -200,7 +200,7 @@ namespace prototype2
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            
+
         }
 
         public bool cancelBtnClicked = false;
@@ -262,7 +262,7 @@ namespace prototype2
                     clearContactsBoxes();
                     cancelCustContactBtn.Visibility = Visibility.Hidden;
                     saveCustContactBtn.Visibility = Visibility.Hidden;
-                    
+
                 }
                 else
                 {
@@ -329,9 +329,9 @@ namespace prototype2
                     else if (result == MessageBoxResult.Cancel)
                         e.Cancel = true;
                 }
-                
+
             }
         }
-      }
     }
+}
 

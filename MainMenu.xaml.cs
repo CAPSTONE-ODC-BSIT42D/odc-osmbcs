@@ -28,7 +28,7 @@ namespace prototype2
             InitializeComponent();
             this.DataContext = MainVM;
         }
-        
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             for (int x = 0; x < containerGrid.Children.Count; x++)
@@ -161,7 +161,7 @@ namespace prototype2
             {
                 transactionQuotationsGrid.Children[x].Visibility = Visibility.Collapsed;
             }
-            for (int x = 0; x<transactionGrid.Children.Count; x++)
+            for (int x = 0; x < transactionGrid.Children.Count; x++)
             {
                 transactionGrid.Children[x].Visibility = Visibility.Collapsed;
             }
@@ -303,7 +303,7 @@ namespace prototype2
             }
 
         }
-        
+
         private void paymentCustomRb_Checked(object sender, RoutedEventArgs e)
         {
             downPercentTb.IsEnabled = true;
@@ -497,7 +497,7 @@ namespace prototype2
                 MainVM.Customers.Clear();
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    MainVM.Customers.Add(new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString() , CompanyProvinceName = dr["locProvince"].ToString() ,CompanyProvinceID = dr["companyProvinceID"].ToString() });
+                    MainVM.Customers.Add(new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString() });
                 }
                 dbCon.Close();
             }
@@ -506,7 +506,6 @@ namespace prototype2
         private void btnEditCust_Click(object sender, RoutedEventArgs e)
         {
             loadCustSuppDetails();
-            manageCustomerHomeGrid.Visibility = Visibility.Hidden;
             manageCustomerGrid.Visibility = Visibility.Hidden;
             companyDetailsGrid.Visibility = Visibility.Visible;
             companyDetailsHeader.Content = "Manage Customer - Edit Customer";
@@ -524,7 +523,7 @@ namespace prototype2
                 {
                     if (dbCon.IsConnect())
                     {
-                        string query = "UPDATE `cust_supp_t` SET `isDeleted`= 1 WHERE companyID = '"+id+"';";
+                        string query = "UPDATE `cust_supp_t` SET `isDeleted`= 1 WHERE companyID = '" + id + "';";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             MessageBox.Show("Record successfully deleted!");
@@ -540,7 +539,7 @@ namespace prototype2
             }
         }
 
-        
+
 
         private void manageCustomerAddBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -552,7 +551,7 @@ namespace prototype2
 
         private void manageCustomeDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
             Visual visual = e.OriginalSource as Visual;
             if (visual.IsDescendantOf(manageCustomeDataGrid))
             {
@@ -563,14 +562,14 @@ namespace prototype2
                 }
             }
         }
-        
+
         private void manageCustomerGrid_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             setManageCustomerGridControls();
         }
 
-        
-        
+
+
 
         /*-----------------END OF MANAGE CUSTOMER-------------------*/
         /*
@@ -719,7 +718,7 @@ namespace prototype2
                 manageSupplierDataGrid.ItemsSource = fromDb.Tables["t"].DefaultView;
                 dbCon.Close();
             }
-            
+
         }
 
         private void btnEditSupp_Click(object sender, RoutedEventArgs e)
@@ -731,7 +730,7 @@ namespace prototype2
                 editSupplier.ShowDialog();
                 setManageSupplierGridControls();
             }
-            
+
         }
 
         private void btnDeleteSupp_Click(object sender, RoutedEventArgs e)
@@ -763,7 +762,7 @@ namespace prototype2
 
         private void manageSupplierAddbtn_Click(object sender, RoutedEventArgs e)
         {
-            manageSupplierHome.Visibility = Visibility.Hidden;
+            manageSupplierGrid.Visibility = Visibility.Hidden;
             companyDetailsGrid.Visibility = Visibility.Visible;
             companyDetailsHeader.Content = "Manage Supplier - New Supplier";
             compType = 1;
@@ -781,7 +780,7 @@ namespace prototype2
                 }
             }
         }
-        
+
         /*-----------------END OF MANAGE SUPPLIER-------------------*/
         /*
         /*
@@ -968,7 +967,7 @@ namespace prototype2
         private string compID = "";
         private void saveCustBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+
             MessageBoxResult result = MessageBox.Show("Do you wish to save this record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
             if (result == MessageBoxResult.OK)
             {
@@ -981,12 +980,12 @@ namespace prototype2
             }
 
         }
-        
+
         private void cancelCustBtn_Click(object sender, RoutedEventArgs e)
         {
             clearCompanyDetailsGrid();
         }
-        
+
 
         private void custCompanyNameTb_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -1059,7 +1058,7 @@ namespace prototype2
         private string contactDetail = "";
         private void contactTypeCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (contactTypeCb.SelectedIndex==0)
+            if (contactTypeCb.SelectedIndex == 0)
             {
                 contactDetailsMobileTb.IsEnabled = false;
                 contactDetailsPhoneTb.IsEnabled = false;
@@ -1105,10 +1104,10 @@ namespace prototype2
             {
                 if (contactTypeCb.SelectedIndex != 0)
                 {
-                    
+
                     MainVM.CustContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
                     clearContactsBoxes();
-                    
+
                     validateCustomerDetailsTextBoxes();
                     contactTypeCb.SelectedIndex = 0;
 
@@ -1135,7 +1134,7 @@ namespace prototype2
                 }
                 else if (MainVM.SelectedCustContact.ContactTypeID.Equals("2"))
                 {
-                   contactDetailsPhoneTb.Text = MainVM.SelectedCustContact.ContactDetails;
+                    contactDetailsPhoneTb.Text = MainVM.SelectedCustContact.ContactDetails;
                 }
                 else if (MainVM.SelectedCustContact.ContactTypeID.Equals("3"))
                 {
@@ -1144,7 +1143,7 @@ namespace prototype2
                 saveCustContactBtn.Visibility = Visibility.Visible;
                 cancelCustContactBtn.Visibility = Visibility.Visible;
             }
-          
+
         }
 
         private void saveCustContactBtn_Click(object sender, RoutedEventArgs e)
@@ -1213,8 +1212,8 @@ namespace prototype2
             customerRepresentativeDg.SelectedIndex = customerRepresentativeDg.Items.Count - 1;
             repWindow.ShowDialog();
             validateCustomerDetailsTextBoxes();
-            
-            
+
+
         }
         private void customerRepresentativeDg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -1228,7 +1227,7 @@ namespace prototype2
                 }
             }
         }
-        
+
 
         private void editBtnCustContRep_Click(object sender, RoutedEventArgs e)
         {
@@ -1259,21 +1258,14 @@ namespace prototype2
             if (!isEdit)
             {
                 proc[0] = "INSERT_COMPANY";
-                proc[1] = "INSERT_COMPANY_CONT";
-                proc[2] = "INSERT_REP";
-                proc[3] = "INSERT_REP_CONT";
             }
             else
             {
                 proc[0] = "UPDATE_COMPANY";
-                proc[1] = "UPDATE_COMPANY_CONT";
-                proc[2] = "UPDATE_REP";
-                proc[3] = "UPDATE_REP_CONT";
             }
             using (MySqlConnection conn = dbCon.Connection)
             {
                 conn.Open();
-                string lastinsertedid = "";
                 MySqlCommand cmd = new MySqlCommand(proc[0], conn);
                 //INSERT NEW CUSTOMER TO DB;
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -1294,7 +1286,7 @@ namespace prototype2
                     cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
                     cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
                     cmd.ExecuteNonQuery();
-                    lastinsertedid = cmd.Parameters["@insertedid"].Value.ToString();
+                    compID = cmd.Parameters["@insertedid"].Value.ToString();
                 }
                 else
                 {
@@ -1304,48 +1296,64 @@ namespace prototype2
                 }
                 foreach (Contact cont in MainVM.CustContacts)
                 {
-                    cmd = new MySqlCommand(proc[1], conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@contactType", cont.ContactTypeID);
-                    cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
-                    cmd.Parameters.AddWithValue("@contactDetail", cont.ContactDetails);
-                    cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
-                    if (!isEdit)
+                    if (cont.TableID == null)
                     {
-                        cmd.Parameters.AddWithValue("@compID", lastinsertedid);
+                        cmd = new MySqlCommand("INSERT_COMPANY_CONT", conn);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@contactType", cont.ContactTypeID);
+                        cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@contactDetail", cont.ContactDetails);
+                        cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@compID", compID);
                         cmd.Parameters["@compID"].Direction = ParameterDirection.Input;
                         cmd.ExecuteNonQuery();
                     }
                     else
                     {
+                        cmd = new MySqlCommand("UPDATE_COMPANY_CONT", conn);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@contactType", cont.ContactTypeID);
+                        cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@contactDetail", cont.ContactDetails);
+                        cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
                         cmd.Parameters.AddWithValue("@tableID", cont.TableID);
                         cmd.Parameters["@tableID"].Direction = ParameterDirection.Input;
                         cmd.ExecuteNonQuery();
                     }
 
+
                 }
                 //INSERT REPRESENTATIVE TO DB;
+                string repID = "";
                 foreach (Representative rep in MainVM.CustRepresentatives)
                 {
-                    cmd = new MySqlCommand(proc[2], conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@repLName", rep.RepLastName);
-                    cmd.Parameters["@repLName"].Direction = ParameterDirection.Input;
-                    cmd.Parameters.AddWithValue("@repFName", rep.RepFirstName);
-                    cmd.Parameters["@repFName"].Direction = ParameterDirection.Input;
-                    cmd.Parameters.AddWithValue("@repMName", rep.RepMiddleName);
-                    cmd.Parameters["@repMName"].Direction = ParameterDirection.Input;
-                    if (!isEdit)
+                    if (rep.RepresentativeID == null)
                     {
-                        cmd.Parameters.AddWithValue("@custID", lastinsertedid);
+                        cmd = new MySqlCommand("INSERT_REP", conn);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@repLName", rep.RepLastName);
+                        cmd.Parameters["@repLName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@repFName", rep.RepFirstName);
+                        cmd.Parameters["@repFName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@repMName", rep.RepMiddleName);
+                        cmd.Parameters["@repMName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@custID", compID);
                         cmd.Parameters["@custID"].Direction = ParameterDirection.Input;
                         cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
                         cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
                         cmd.ExecuteNonQuery();
-                        lastinsertedid = cmd.Parameters["@insertedid"].Value.ToString();
+                        repID = cmd.Parameters["@insertedid"].Value.ToString();
                     }
                     else
                     {
+                        cmd = new MySqlCommand("UPDATE_REP", conn);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@repLName", rep.RepLastName);
+                        cmd.Parameters["@repLName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@repFName", rep.RepFirstName);
+                        cmd.Parameters["@repFName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@repMName", rep.RepMiddleName);
+                        cmd.Parameters["@repMName"].Direction = ParameterDirection.Input;
                         cmd.Parameters.AddWithValue("@repID", rep.RepresentativeID);
                         cmd.Parameters["@repID"].Direction = ParameterDirection.Input;
                         cmd.ExecuteNonQuery();
@@ -1353,24 +1361,40 @@ namespace prototype2
                     //INSERT CONTACTS OF REPRESENTATIVE TO DB;
                     foreach (Contact repcont in rep.ContactsOfRep)
                     {
-                        cmd = new MySqlCommand(proc[3], conn);
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@contactType", repcont.ContactTypeID);
-                        cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
-                        cmd.Parameters.AddWithValue("@contactDetail", repcont.ContactDetails);
-                        cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
-
-                        if (!isEdit)
+                        if (repcont.TableID == null)
                         {
-                            cmd.Parameters.AddWithValue("@repID", lastinsertedid);
+                            cmd = new MySqlCommand("INSERT_REP_CONT", conn);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@contactType", repcont.ContactTypeID);
+                            cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@contactDetail", repcont.ContactDetails);
+                            cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@repID", repID);
                             cmd.Parameters["@repId"].Direction = ParameterDirection.Input;
                             cmd.ExecuteNonQuery();
                         }
                         else
                         {
+
+                            cmd = new MySqlCommand("UPDATE_REP_CONT", conn);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@contactType", repcont.ContactTypeID);
+                            cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@contactDetail", repcont.ContactDetails);
+                            cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
                             cmd.Parameters.AddWithValue("@tableID", repcont.TableID);
                             cmd.Parameters["@tableID"].Direction = ParameterDirection.Input;
                             cmd.ExecuteNonQuery();
+                        }
+
+
+                        if (!isEdit)
+                        {
+
+                        }
+                        else
+                        {
+
                         }
                     }
 
@@ -1391,7 +1415,7 @@ namespace prototype2
         }
         private void clearCompanyDetailsGrid()
         {
-            
+
             MainVM.CustContacts.Clear();
             MainVM.RepContacts.Clear();
             MainVM.CustRepresentatives.Clear();
@@ -1440,7 +1464,7 @@ namespace prototype2
 
         private void loadCustSuppDetails()
         {
-            
+
             try
             {
                 var dbCon = DBConnection.Instance();
@@ -1452,7 +1476,7 @@ namespace prototype2
                     custAddInfoTb.Text = MainVM.SelectedCustomer.CompanyDesc;
                     custAddressTb.Text = MainVM.SelectedCustomer.CompanyAddress;
                     custCityTb.Text = MainVM.SelectedCustomer.CompanyCity;
-                    custProvinceCb.SelectedIndex = int.Parse(MainVM.SelectedCustomer.CompanyProvinceID);
+                    custProvinceCb.SelectedIndex = int.Parse(MainVM.SelectedCustomer.CompanyProvinceID) - 1;
                     string query = "SELECT representativeID," +
                         "repTitle," +
                         "repLName," +
@@ -1540,7 +1564,7 @@ namespace prototype2
             //}
         }
 
-        
+
     }
     internal class Item : INotifyPropertyChanged
     {
@@ -1601,6 +1625,6 @@ namespace prototype2
         }
     }
 
-    
+
 
 }
