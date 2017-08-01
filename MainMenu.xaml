@@ -855,7 +855,6 @@
                                 <DataGridTextColumn Binding="{Binding CompanyAddress}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350" CanUserResize="False"/>
                                 <DataGridTextColumn Binding="{Binding CompanyCity}" ClipboardContentBinding="{x:Null}" Header="City" Width="200" CanUserResize="False"/>
                                 <DataGridTextColumn Binding="{Binding CompanyProvinceName}" ClipboardContentBinding="{x:Null}" Header="Province" Width="200" CanUserResize="False"/>
-                                <DataGridTextColumn Binding="{Binding CompanyProvinceID}" ClipboardContentBinding="{x:Null}" Header="Province" Width="200" CanUserResize="False"/>
                                 <DataGridTemplateColumn x:Name="columnEditCustBtn" Width="100" Visibility="Hidden" CanUserResize="False">
                                     <DataGridTemplateColumn.CellTemplate  >
                                         <DataTemplate>
@@ -965,10 +964,12 @@
                         <Button x:Name="manageSupplierAddbtn" Content="+ add new" HorizontalAlignment="Right" Height="26" Margin="0,0,10,0" VerticalAlignment="Top" Width="90" Click="manageSupplierAddbtn_Click"/>
                         <DataGrid x:Name="manageSupplierDataGrid" Margin="10,41,10,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" SelectionChanged="manageSupplierDataGrid_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30">
                             <DataGrid.Columns >
-                                <DataGridTextColumn Binding="{Binding companyID}" ClipboardContentBinding="{x:Null}" Width="30" CanUserResize="False" Visibility="Visible"/>
-                                <DataGridTextColumn Binding="{Binding companyName}" ClipboardContentBinding="{x:Null}" Header="Company Name" Width="200" CanUserResize="False"/>
-                                <DataGridTextColumn Binding="{Binding companyAddInfo}" ClipboardContentBinding="{x:Null}" Header="Description" Width="200" />
-                                <DataGridTextColumn Binding="{Binding custLocation}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350" CanUserResize="False"/>
+                                <DataGridTextColumn Binding="{Binding CompanyID}" ClipboardContentBinding="{x:Null}" Width="30" CanUserResize="False" Visibility="Visible"/>
+                                <DataGridTextColumn Binding="{Binding CompanyName}" ClipboardContentBinding="{x:Null}" Header="Company Name" Width="200" CanUserResize="False"/>
+                                <DataGridTextColumn Binding="{Binding CompanyDesc}" ClipboardContentBinding="{x:Null}" Header="Description" Width="200" />
+                                <DataGridTextColumn Binding="{Binding CompanyAddress}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350" CanUserResize="False"/>
+                                <DataGridTextColumn Binding="{Binding CompanyCity}" ClipboardContentBinding="{x:Null}" Header="City" Width="200" CanUserResize="False"/>
+                                <DataGridTextColumn Binding="{Binding CompanyProvinceName}" ClipboardContentBinding="{x:Null}" Header="Province" Width="200" CanUserResize="False"/>
                                 <DataGridTemplateColumn x:Name="columnViewSuppBtn" Width="100" Visibility="Hidden">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
