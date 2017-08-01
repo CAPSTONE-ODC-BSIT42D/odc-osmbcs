@@ -855,6 +855,7 @@
                                 <DataGridTextColumn Binding="{Binding CompanyAddress}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350" CanUserResize="False"/>
                                 <DataGridTextColumn Binding="{Binding CompanyCity}" ClipboardContentBinding="{x:Null}" Header="City" Width="200" CanUserResize="False"/>
                                 <DataGridTextColumn Binding="{Binding CompanyProvinceName}" ClipboardContentBinding="{x:Null}" Header="Province" Width="200" CanUserResize="False"/>
+                                <DataGridTextColumn Binding="{Binding CompanyProvinceID}" ClipboardContentBinding="{x:Null}" Header="Province" Width="200" CanUserResize="False"/>
                                 <DataGridTemplateColumn x:Name="columnEditCustBtn" Width="100" Visibility="Hidden" CanUserResize="False">
                                     <DataGridTemplateColumn.CellTemplate  >
                                         <DataTemplate>

@@ -40,7 +40,17 @@ namespace prototype2
             contactDetailsMobileTb.IsEnabled = false;
             contactDetailsPhoneTb.IsEnabled = false;
             contactDetailsEmailTb.IsEnabled = false;
-            
+            var dbCon = DBConnection.Instance();
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM provinces_t";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                dataAdapter.Fill(fromDb, "t");
+                custProvinceCb.ItemsSource = fromDb.Tables["t"].DefaultView;
+                dbCon.Close();
+
+            }
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -491,54 +501,7 @@ namespace prototype2
                 }
                 dbCon.Close();
             }
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * FROM provinces_t";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                dataAdapter.Fill(fromDb, "t");
-                custProvinceCb.ItemsSource = fromDb.Tables["t"].DefaultView;
-                dbCon.Close();
-
-            }
         }
-
-        private void setEditCustomerControls(string id)
-        {
-            //var dbCon = DBConnection.Instance();
-            //if (dbCon.IsConnect())
-            //{
-            //    string query = "SELECT cs.companyID, cs.companyName, cs.companyAddInfo,cs.companyAddress ,cs.companyCity, cs.companyProvinceID" +
-            //        "FROM cust_supp_t cs  " +
-            //        "WHERE cs.companyID = '" + id + "' " +
-            //        "AND companyType = 0;";
-            //    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-            //    DataSet fromDb = new DataSet();
-            //    DataTable fromDbTable = new DataTable();
-            //    dataAdapter.Fill(fromDb, "t");
-            //    fromDbTable = fromDb.Tables["t"];
-            //    foreach (DataRow dr in fromDbTable.Rows)
-            //    {
-            //        int locProvId = Int32.Parse(dr["companyProvinceID"].ToString());
-            //        custProvinceCb.SelectedIndex = locProvId - 1;
-            //        Name = dr["companyName"].ToString();
-            //        custAddInfoTb.Text = dr["companyAddInfo"].ToString();
-            //        MainVM.City = dr["companyCity"].ToString();
-            //        MainVM.Address = dr["companyAddress"].ToString();
-            //    }
-            //    dbCon.Close();
-            //}
-            //if (dbCon.IsConnect())
-            //{
-            //    string query = "SELECT * FROM provinces_t";
-            //    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-            //    DataSet fromDb = new DataSet();
-            //    dataAdapter.Fill(fromDb, "t");
-            //    custProvinceCb.ItemsSource = fromDb.Tables["t"].DefaultView;
-            //    dbCon.Close();
-            //}
-        }
-
 
         private void btnEditCust_Click(object sender, RoutedEventArgs e)
         {
@@ -547,21 +510,21 @@ namespace prototype2
             manageCustomerGrid.Visibility = Visibility.Hidden;
             companyDetailsGrid.Visibility = Visibility.Visible;
             companyDetailsHeader.Content = "Manage Customer - Edit Customer";
-            
+            isEdit = true;
         }
 
         private void btnDeleteCust_Click(object sender, RoutedEventArgs e)
         {
             if (manageCustomeDataGrid.SelectedItems.Count > 0)
             {
-                String id = (manageCustomeDataGrid.Columns[0].GetCellContent(manageCustomeDataGrid.SelectedItem) as TextBlock).Text;
+                String id = MainVM.SelectedCustomer.CompanyID;
                 var dbCon = DBConnection.Instance();
-                MessageBoxResult result = MessageBox.Show("Do you wish to delete this customer record?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
-                if (result == MessageBoxResult.Yes)
+                MessageBoxResult result = MessageBox.Show("Do you wish to delete this record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.OK)
                 {
                     if (dbCon.IsConnect())
                     {
-                        string query = "UPDATE `customer_t` SET `isDeleted`= 1 WHERE custID = '"+id+"';";
+                        string query = "UPDATE `cust_supp_t` SET `isDeleted`= 1 WHERE companyID = '"+id+"';";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             MessageBox.Show("Record successfully deleted!");
@@ -569,9 +532,6 @@ namespace prototype2
                         }
                     }
 
-                }
-                else if (result == MessageBoxResult.No)
-                {
                 }
                 else if (result == MessageBoxResult.Cancel)
                 {
@@ -677,8 +637,8 @@ namespace prototype2
             {
                 String id = (manageEmployeeDataGrid.Columns[0].GetCellContent(manageEmployeeDataGrid.SelectedItem) as TextBlock).Text;
                 var dbCon = DBConnection.Instance();
-                MessageBoxResult result = MessageBox.Show("Do you wish to delete this customer?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
-                if (result == MessageBoxResult.Yes)
+                MessageBoxResult result = MessageBox.Show("Do you wish to delete this record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.OK)
                 {
                     if (dbCon.IsConnect())
                     {
@@ -690,9 +650,6 @@ namespace prototype2
                         }
                     }
 
-                }
-                else if (result == MessageBoxResult.No)
-                {
                 }
                 else if (result == MessageBoxResult.Cancel)
                 {
@@ -762,16 +719,7 @@ namespace prototype2
                 manageSupplierDataGrid.ItemsSource = fromDb.Tables["t"].DefaultView;
                 dbCon.Close();
             }
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * FROM provinces_t";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                dataAdapter.Fill(fromDb, "t");
-                custProvinceCb.ItemsSource = fromDb.Tables["t"].DefaultView;
-                dbCon.Close();
-
-            }
+            
         }
 
         private void btnEditSupp_Click(object sender, RoutedEventArgs e)
@@ -792,8 +740,8 @@ namespace prototype2
             {
                 String id = (manageSupplierDataGrid.Columns[0].GetCellContent(manageSupplierDataGrid.SelectedItem) as TextBlock).Text;
                 var dbCon = DBConnection.Instance();
-                MessageBoxResult result = MessageBox.Show("Do you wish to delete this supplier record?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
-                if (result == MessageBoxResult.Yes)
+                MessageBoxResult result = MessageBox.Show("Do you wish to delete this supplier record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.OK)
                 {
                     if (dbCon.IsConnect())
                     {
@@ -805,9 +753,6 @@ namespace prototype2
                         }
                     }
 
-                }
-                else if (result == MessageBoxResult.No)
-                {
                 }
                 else if (result == MessageBoxResult.Cancel)
                 {
@@ -945,8 +890,8 @@ namespace prototype2
             {
                 String id = (manageContractorDataGrid.Columns[0].GetCellContent(manageContractorDataGrid.SelectedItem) as TextBlock).Text;
                 var dbCon = DBConnection.Instance();
-                MessageBoxResult result = MessageBox.Show("Do you wish to delete this Contractor record?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
-                if (result == MessageBoxResult.Yes)
+                MessageBoxResult result = MessageBox.Show("Do you wish to delete this Contractor record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.OK)
                 {
                     using (MySqlConnection conn = dbCon.Connection)
                     {
@@ -958,9 +903,6 @@ namespace prototype2
                         }
                     }
 
-                }
-                else if (result == MessageBoxResult.No)
-                {
                 }
                 else if (result == MessageBoxResult.Cancel)
                 {
@@ -1027,203 +969,24 @@ namespace prototype2
         private void saveCustBtn_Click(object sender, RoutedEventArgs e)
         {
             
-            MessageBoxResult result = MessageBox.Show("Do you wish to save this record?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
-            if (result == MessageBoxResult.Yes)
+            MessageBoxResult result = MessageBox.Show("Do you wish to save this record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.OK)
             {
                 dataToDatabase();
 
             }
-            else if (result == MessageBoxResult.No)
-            {
-                clearCompanyDetailsGrid();
-            }
             else if (result == MessageBoxResult.Cancel)
             {
-            }
-
-        }
-        private void dataToDatabase()
-        {
-            var dbCon = DBConnection.Instance();
-            string[] proc = { "", "", "", "" };
-            
-            if (!isEdit)
-            {
-                proc[0] = "INSERT_COMPANY";
-                proc[1] = "INSERT_COMPANY_CONT";
-                proc[2] = "INSERT_REP";
-                proc[3] = "INSERT_REP_CONT";
-            }
-            using (MySqlConnection conn = dbCon.Connection)
-            {
-                conn.Open();
-                string lastinsertedid = "";
-                MySqlCommand cmd = new MySqlCommand("INSERT_COMPANY", conn);
-                //INSERT NEW CUSTOMER TO DB;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@companyName", custCompanyNameTb.Text);
-                cmd.Parameters["@companyName"].Direction = ParameterDirection.Input;
-                cmd.Parameters.AddWithValue("@addInfo", custAddInfoTb.Text);
-                cmd.Parameters["@addInfo"].Direction = ParameterDirection.Input;
-                cmd.Parameters.AddWithValue("@address", custAddressTb.Text);
-                cmd.Parameters["@address"].Direction = ParameterDirection.Input;
-                cmd.Parameters.AddWithValue("@city", custCityTb.Text);
-                cmd.Parameters["@city"].Direction = ParameterDirection.Input;
-                cmd.Parameters.AddWithValue("@province", custProvinceCb.SelectedValue);
-                cmd.Parameters["@province"].Direction = ParameterDirection.Input;
-                cmd.Parameters.AddWithValue("@compType", compType);
-                cmd.Parameters["@compType"].Direction = ParameterDirection.Input;
-                if (!isEdit)
-                {
-                    cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
-                    cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
-                    cmd.ExecuteNonQuery();
-                    lastinsertedid = cmd.Parameters["@insertedid"].Value.ToString();
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@compID", compID);
-                    cmd.Parameters["@compID"].Direction = ParameterDirection.Input;
-                    cmd.ExecuteNonQuery();
-                }
-                foreach (Contact cont in MainVM.CustContacts)
-                {
-                    cmd = new MySqlCommand(proc[1], conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@contactType", cont.ContactTypeID);
-                    cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
-                    cmd.Parameters.AddWithValue("@contactDetail", cont.ContactDetails);
-                    cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
-                    if (!isEdit)
-                    {
-                        cmd.Parameters.AddWithValue("@compID", lastinsertedid);
-                        cmd.Parameters["@compID"].Direction = ParameterDirection.Input;
-                        cmd.ExecuteNonQuery();
-                    }
-                    else
-                    {
-                        cmd.Parameters.AddWithValue("@tableID", cont.TableID);
-                        cmd.Parameters["@tableID"].Direction = ParameterDirection.Input;
-                        cmd.ExecuteNonQuery();
-                    }
-
-                }
-                //INSERT REPRESENTATIVE TO DB;
-                foreach (Representative rep in MainVM.CustRepresentatives)
-                {
-                    cmd = new MySqlCommand(proc[2], conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@repLName", rep.RepLastName);
-                    cmd.Parameters["@repLName"].Direction = ParameterDirection.Input;
-                    cmd.Parameters.AddWithValue("@repFName", rep.RepFirstName);
-                    cmd.Parameters["@repFName"].Direction = ParameterDirection.Input;
-                    cmd.Parameters.AddWithValue("@repMName", rep.RepMiddleName);
-                    cmd.Parameters["@repMName"].Direction = ParameterDirection.Input;
-                    cmd.Parameters.AddWithValue("@custID", lastinsertedid);
-                    cmd.Parameters["@custID"].Direction = ParameterDirection.Input;
-                    cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
-                    cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
-                    cmd.ExecuteNonQuery();
-                    lastinsertedid = cmd.Parameters["@insertedid"].Value.ToString();
-                    //INSERT CONTACTS OF REPRESENTATIVE TO DB;
-                    foreach (Contact repcont in rep.ContactsOfRep)
-                    {
-                        cmd = new MySqlCommand(proc[3], conn);
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@contactType", repcont.ContactTypeID);
-                        cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
-                        cmd.Parameters.AddWithValue("@contactDetail", repcont.ContactDetails);
-                        cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
-                        cmd.Parameters.AddWithValue("@repID", lastinsertedid);
-                        cmd.Parameters["@repId"].Direction = ParameterDirection.Input;
-                        cmd.ExecuteNonQuery();
-                    }
-
-                }
                 clearCompanyDetailsGrid();
             }
-            try
-            {
-                
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-            }
+
         }
+        
         private void cancelCustBtn_Click(object sender, RoutedEventArgs e)
         {
             clearCompanyDetailsGrid();
         }
-
-        private void clearCompanyDetailsGrid()
-        {
-            if (compType == 0)
-            {
-                manageCustomerGrid.Visibility = Visibility.Visible;
-                companyDetailsGrid.Visibility = Visibility.Hidden;
-                MainVM.CustContacts.Clear();
-                MainVM.RepContacts.Clear();
-                MainVM.CustRepresentatives.Clear();
-                MainVM.Name = "";
-                MainVM.Address = "";
-                MainVM.City = "";
-                MainVM.Number = "";
-                MainVM.Email = "";
-                MainVM.CityName = "";
-                MainVM.EmailAddress = "";
-                MainVM.PhoneNumber = "";
-                MainVM.MobileNumber = "";
-                compType = 0;
-                Validation.ClearInvalid((custCompanyNameTb).GetBindingExpression(TextBox.TextProperty));
-                Validation.ClearInvalid((custAddressTb).GetBindingExpression(TextBox.TextProperty));
-                Validation.ClearInvalid((custCityTb).GetBindingExpression(TextBox.TextProperty));
-                Validation.ClearInvalid((contactDetailsPhoneTb).GetBindingExpression(TextBox.TextProperty));
-                Validation.ClearInvalid((contactDetailsEmailTb).GetBindingExpression(TextBox.TextProperty));
-                Validation.ClearInvalid((contactDetailsMobileTb).GetBindingExpression(TextBox.TextProperty));
-                setManageCustomerGridControls();
-            }
-            else if (compType == 1)
-            {
-                manageSupplierGrid.Visibility = Visibility.Visible;
-                companyDetailsGrid.Visibility = Visibility.Hidden;
-                MainVM.CustContacts.Clear();
-                MainVM.RepContacts.Clear();
-                MainVM.CustRepresentatives.Clear();
-                MainVM.Name = "";
-                MainVM.Address = "";
-                MainVM.City = "";
-                MainVM.Number = "";
-                MainVM.Email = "";
-                MainVM.CityName = "";
-                MainVM.EmailAddress = "";
-                MainVM.PhoneNumber = "";
-                MainVM.MobileNumber = "";
-                compType = 0;
-                Validation.ClearInvalid((custCompanyNameTb).GetBindingExpression(TextBox.TextProperty));
-                Validation.ClearInvalid((custAddressTb).GetBindingExpression(TextBox.TextProperty));
-                Validation.ClearInvalid((custCityTb).GetBindingExpression(TextBox.TextProperty));
-                Validation.ClearInvalid((contactDetailsPhoneTb).GetBindingExpression(TextBox.TextProperty));
-                Validation.ClearInvalid((contactDetailsEmailTb).GetBindingExpression(TextBox.TextProperty));
-                Validation.ClearInvalid((contactDetailsMobileTb).GetBindingExpression(TextBox.TextProperty));
-                setManageSupplierGridControls();
-            }
-        }
-
-        private void validateCustomerDetailsTextBoxes()
-        {
-            if (custCompanyNameTb.Text.Equals("") || custAddressTb.Text.Equals("") || custCityTb.Text.Equals("") || custProvinceCb.SelectedIndex == -1 || MainVM.CustContacts.Count == 0 || MainVM.CustRepresentatives.Count == 0)
-            {
-                saveCustBtn.IsEnabled = false;
-            }
-            else
-            {
-                saveCustBtn.IsEnabled = true;
-            }
-        }
+        
 
         private void custCompanyNameTb_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -1365,21 +1128,18 @@ namespace prototype2
         {
             if (custContactDg.SelectedItem != null)
             {
-                String id = (custContactDg.Columns[0].GetCellContent(custContactDg.SelectedItem) as TextBlock).Text;
-                contactTypeCb.SelectedIndex = int.Parse(id);
-
-                if (id.Equals("1"))
+                contactTypeCb.SelectedIndex = int.Parse(MainVM.SelectedCustContact.ContactTypeID);
+                if (MainVM.SelectedCustContact.ContactTypeID.Equals("1"))
                 {
-                    MainMenu.MainVM.ContactValue = MainVM.SelectedCustContact.ContactDetails;
-
+                    contactDetailsEmailTb.Text = MainVM.SelectedCustContact.ContactDetails;
                 }
-                else if (id.Equals("2"))
+                else if (MainVM.SelectedCustContact.ContactTypeID.Equals("2"))
                 {
-                    MainMenu.MainVM.ContactValue = MainVM.SelectedCustContact.ContactDetails;
+                   contactDetailsPhoneTb.Text = MainVM.SelectedCustContact.ContactDetails;
                 }
-                else if (id.Equals("3"))
+                else if (MainVM.SelectedCustContact.ContactTypeID.Equals("3"))
                 {
-                    MainMenu.MainVM.ContactValue = MainVM.SelectedCustContact.ContactDetails;
+                    contactDetailsMobileTb.Text = MainVM.SelectedCustContact.ContactDetails;
                 }
                 saveCustContactBtn.Visibility = Visibility.Visible;
                 cancelCustContactBtn.Visibility = Visibility.Visible;
@@ -1421,13 +1181,10 @@ namespace prototype2
         int newSupp = 0;
         private void btnDeleteCustCont_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Do you wish to delete this contact record?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
-            if (result == MessageBoxResult.Yes)
+            MessageBoxResult result = MessageBox.Show("Do you wish to delete this contact record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.OK)
             {
                 MainVM.CustContacts.Remove(MainVM.SelectedCustContact);
-            }
-            else if (result == MessageBoxResult.No)
-            {
             }
             else if (result == MessageBoxResult.Cancel)
             {
@@ -1483,93 +1240,276 @@ namespace prototype2
 
         private void delBtnCustContRep_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Do you wish to delete this Representative record?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
-            if (result == MessageBoxResult.Yes)
+            MessageBoxResult result = MessageBox.Show("Do you wish to delete this Representative record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.OK)
             {
                 int selectIndex = custContactDg.SelectedIndex;
                 MainVM.CustRepresentatives.RemoveAt(selectIndex);
-            }
-            else if (result == MessageBoxResult.No)
-            {
             }
             else if (result == MessageBoxResult.Cancel)
             {
             }
 
         }
-
-        private void loadCustSuppDetails()
+        private void dataToDatabase()
         {
             var dbCon = DBConnection.Instance();
+            string[] proc = { "", "", "", "" };
+
+            if (!isEdit)
+            {
+                proc[0] = "INSERT_COMPANY";
+                proc[1] = "INSERT_COMPANY_CONT";
+                proc[2] = "INSERT_REP";
+                proc[3] = "INSERT_REP_CONT";
+            }
+            else
+            {
+                proc[0] = "UPDATE_COMPANY";
+                proc[1] = "UPDATE_COMPANY_CONT";
+                proc[2] = "UPDATE_REP";
+                proc[3] = "UPDATE_REP_CONT";
+            }
             using (MySqlConnection conn = dbCon.Connection)
             {
                 conn.Open();
-                MessageBox.Show("" + MainVM.SelectedCustomer);
-                string id = MainVM.SelectedCustomer.CompanyID;
-                custCompanyNameTb.Text = MainVM.SelectedCustomer.CompanyName;
-                custAddInfoTb.Text = MainVM.SelectedCustomer.CompanyDesc;
-                custAddressTb.Text = MainVM.SelectedCustomer.CompanyAddress;
-                custCityTb.Text = MainVM.SelectedCustomer.CompanyCity;
-                custProvinceCb.SelectedValue = MainVM.SelectedCustomer.CompanyProvinceID;
-                string query = "SELECT representativeID," +
-                    "repTitle," +
-                    "repLName," +
-                    "repFName," +
-                    "repMInitial " +
-                    "FROM representative_t " +
-                    "WHERE companyID = '"+id+"'; ";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, conn);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-                foreach (DataRow dr in fromDbTable.Rows)
+                string lastinsertedid = "";
+                MySqlCommand cmd = new MySqlCommand(proc[0], conn);
+                //INSERT NEW CUSTOMER TO DB;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@companyName", custCompanyNameTb.Text);
+                cmd.Parameters["@companyName"].Direction = ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("@addInfo", custAddInfoTb.Text);
+                cmd.Parameters["@addInfo"].Direction = ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("@address", custAddressTb.Text);
+                cmd.Parameters["@address"].Direction = ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("@city", custCityTb.Text);
+                cmd.Parameters["@city"].Direction = ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("@province", custProvinceCb.SelectedValue);
+                cmd.Parameters["@province"].Direction = ParameterDirection.Input;
+                cmd.Parameters.AddWithValue("@compType", compType);
+                cmd.Parameters["@compType"].Direction = ParameterDirection.Input;
+                if (!isEdit)
                 {
-                    MainVM.CustRepresentatives.Add(new Representative() { RepFirstName = dr["repFName"].ToString(), RepLastName = dr["RepLName"].ToString(), RepMiddleName = dr["RepMInitial"].ToString(), RepresentativeID = dr["representativeID"].ToString() });
-                    query = "SELECT rc.tableID," +
-                    "rc.repID," +
-                    "rc.contactTypeID," +
-                    "rc.contactValue," +
-                    "cont.contactType" +
-                    " FROM rep_t_contact_t rc" +
-                    " JOIN contacts_t cont" +
-                    " ON cont.contactTypeID = rc.contactTypeID" +
-                    " WHERE rc.repID = '" + dr["representativeID"].ToString() + "';";
+                    cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
+                    cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
+                    cmd.ExecuteNonQuery();
+                    lastinsertedid = cmd.Parameters["@insertedid"].Value.ToString();
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@compID", compID);
+                    cmd.Parameters["@compID"].Direction = ParameterDirection.Input;
+                    cmd.ExecuteNonQuery();
+                }
+                foreach (Contact cont in MainVM.CustContacts)
+                {
+                    cmd = new MySqlCommand(proc[1], conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@contactType", cont.ContactTypeID);
+                    cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
+                    cmd.Parameters.AddWithValue("@contactDetail", cont.ContactDetails);
+                    cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
+                    if (!isEdit)
+                    {
+                        cmd.Parameters.AddWithValue("@compID", lastinsertedid);
+                        cmd.Parameters["@compID"].Direction = ParameterDirection.Input;
+                        cmd.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@tableID", cont.TableID);
+                        cmd.Parameters["@tableID"].Direction = ParameterDirection.Input;
+                        cmd.ExecuteNonQuery();
+                    }
+
+                }
+                //INSERT REPRESENTATIVE TO DB;
+                foreach (Representative rep in MainVM.CustRepresentatives)
+                {
+                    cmd = new MySqlCommand(proc[2], conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@repLName", rep.RepLastName);
+                    cmd.Parameters["@repLName"].Direction = ParameterDirection.Input;
+                    cmd.Parameters.AddWithValue("@repFName", rep.RepFirstName);
+                    cmd.Parameters["@repFName"].Direction = ParameterDirection.Input;
+                    cmd.Parameters.AddWithValue("@repMName", rep.RepMiddleName);
+                    cmd.Parameters["@repMName"].Direction = ParameterDirection.Input;
+                    if (!isEdit)
+                    {
+                        cmd.Parameters.AddWithValue("@custID", lastinsertedid);
+                        cmd.Parameters["@custID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
+                        cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
+                        cmd.ExecuteNonQuery();
+                        lastinsertedid = cmd.Parameters["@insertedid"].Value.ToString();
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@repID", rep.RepresentativeID);
+                        cmd.Parameters["@repID"].Direction = ParameterDirection.Input;
+                        cmd.ExecuteNonQuery();
+                    }
+                    //INSERT CONTACTS OF REPRESENTATIVE TO DB;
+                    foreach (Contact repcont in rep.ContactsOfRep)
+                    {
+                        cmd = new MySqlCommand(proc[3], conn);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@contactType", repcont.ContactTypeID);
+                        cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@contactDetail", repcont.ContactDetails);
+                        cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
+
+                        if (!isEdit)
+                        {
+                            cmd.Parameters.AddWithValue("@repID", lastinsertedid);
+                            cmd.Parameters["@repId"].Direction = ParameterDirection.Input;
+                            cmd.ExecuteNonQuery();
+                        }
+                        else
+                        {
+                            cmd.Parameters.AddWithValue("@tableID", repcont.TableID);
+                            cmd.Parameters["@tableID"].Direction = ParameterDirection.Input;
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+
+                }
+                clearCompanyDetailsGrid();
+            }
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+            }
+        }
+        private void clearCompanyDetailsGrid()
+        {
+            
+            MainVM.CustContacts.Clear();
+            MainVM.RepContacts.Clear();
+            MainVM.CustRepresentatives.Clear();
+            MainVM.Name = "";
+            MainVM.Address = "";
+            MainVM.City = "";
+            MainVM.Number = "";
+            MainVM.Email = "";
+            MainVM.CityName = "";
+            MainVM.EmailAddress = "";
+            MainVM.PhoneNumber = "";
+            MainVM.MobileNumber = "";
+            compType = 0;
+            Validation.ClearInvalid((custCompanyNameTb).GetBindingExpression(TextBox.TextProperty));
+            Validation.ClearInvalid((custAddressTb).GetBindingExpression(TextBox.TextProperty));
+            Validation.ClearInvalid((custCityTb).GetBindingExpression(TextBox.TextProperty));
+            Validation.ClearInvalid((contactDetailsPhoneTb).GetBindingExpression(TextBox.TextProperty));
+            Validation.ClearInvalid((contactDetailsEmailTb).GetBindingExpression(TextBox.TextProperty));
+            Validation.ClearInvalid((contactDetailsMobileTb).GetBindingExpression(TextBox.TextProperty));
+            isEdit = false;
+            if (compType == 0)
+            {
+                manageCustomerGrid.Visibility = Visibility.Visible;
+                companyDetailsGrid.Visibility = Visibility.Hidden;
+                setManageCustomerGridControls();
+            }
+            else if (compType == 1)
+            {
+                manageSupplierGrid.Visibility = Visibility.Visible;
+                companyDetailsGrid.Visibility = Visibility.Hidden;
+                setManageSupplierGridControls();
+            }
+        }
+
+        private void validateCustomerDetailsTextBoxes()
+        {
+            if (custCompanyNameTb.Text.Equals("") || custAddressTb.Text.Equals("") || custCityTb.Text.Equals("") || custProvinceCb.SelectedIndex == -1 || MainVM.CustContacts.Count == 0 || MainVM.CustRepresentatives.Count == 0)
+            {
+                saveCustBtn.IsEnabled = false;
+            }
+            else
+            {
+                saveCustBtn.IsEnabled = true;
+            }
+        }
+
+        private void loadCustSuppDetails()
+        {
+            
+            try
+            {
+                var dbCon = DBConnection.Instance();
+                using (MySqlConnection conn = dbCon.Connection)
+                {
+                    conn.Open();
+                    compID = MainVM.SelectedCustomer.CompanyID;
+                    custCompanyNameTb.Text = MainVM.SelectedCustomer.CompanyName;
+                    custAddInfoTb.Text = MainVM.SelectedCustomer.CompanyDesc;
+                    custAddressTb.Text = MainVM.SelectedCustomer.CompanyAddress;
+                    custCityTb.Text = MainVM.SelectedCustomer.CompanyCity;
+                    custProvinceCb.SelectedIndex = int.Parse(MainVM.SelectedCustomer.CompanyProvinceID);
+                    string query = "SELECT representativeID," +
+                        "repTitle," +
+                        "repLName," +
+                        "repFName," +
+                        "repMInitial " +
+                        "FROM representative_t " +
+                        "WHERE companyID = '" + compID + "'; ";
+                    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, conn);
+                    DataSet fromDb = new DataSet();
+                    DataTable fromDbTable = new DataTable();
+                    dataAdapter.Fill(fromDb, "t");
+                    fromDbTable = fromDb.Tables["t"];
+                    foreach (DataRow dr in fromDbTable.Rows)
+                    {
+                        MainVM.CustRepresentatives.Add(new Representative() { RepFirstName = dr["repFName"].ToString(), RepLastName = dr["RepLName"].ToString(), RepMiddleName = dr["RepMInitial"].ToString(), RepresentativeID = dr["representativeID"].ToString() });
+                        query = "SELECT rc.tableID," +
+                        "rc.repID," +
+                        "rc.contactTypeID," +
+                        "rc.contactValue," +
+                        "cont.contactType" +
+                        " FROM rep_t_contact_t rc" +
+                        " JOIN contacts_t cont" +
+                        " ON cont.contactTypeID = rc.contactTypeID" +
+                        " WHERE rc.repID = '" + dr["representativeID"].ToString() + "';";
+                        dataAdapter = dbCon.selectQuery(query, conn);
+                        fromDb = new DataSet();
+                        fromDbTable = new DataTable();
+                        dataAdapter.Fill(fromDb, "t");
+                        fromDbTable = fromDb.Tables["t"];
+                        MainVM.SelectedRepresentative = MainVM.CustRepresentatives.Last();
+                        foreach (DataRow dr1 in fromDbTable.Rows)
+                        {
+                            MainVM.SelectedRepresentative.ContactsOfRep.Add(new Contact() { TableID = dr1["tableID"].ToString(), ContactDetails = dr1["contactValue"].ToString(), ContactType = dr1["contactType"].ToString(), ContactTypeID = dr1["contactTypeID"].ToString() });
+                        }
+                    }
+
+                    query = "SELECT cs.tableID," +
+                        "cs.compID," +
+                        "cs.contactTypeID," +
+                        "cs.contactValue," +
+                        "cont.contactType" +
+                        " FROM cust_supp_t_contact_t cs" +
+                        " JOIN contacts_t cont" +
+                        " ON cont.contactTypeID = cs.contactTypeID" +
+                        " WHERE cs.compID = '" + compID + "';";
                     dataAdapter = dbCon.selectQuery(query, conn);
                     fromDb = new DataSet();
                     fromDbTable = new DataTable();
                     dataAdapter.Fill(fromDb, "t");
                     fromDbTable = fromDb.Tables["t"];
-                    MainVM.SelectedRepresentative = MainVM.CustRepresentatives.Last();
-                    foreach (DataRow dr1 in fromDbTable.Rows)
+                    foreach (DataRow dr in fromDbTable.Rows)
                     {
-                        MainVM.SelectedRepresentative.ContactsOfRep.Add(new Contact() { TableID = dr1["tableID"].ToString(), ContactDetails = dr1["contactValue"].ToString(), ContactType = dr1["contactType"].ToString(), ContactTypeID = dr1["contactTypeID"].ToString() });
+                        MainVM.CustContacts.Add(new Contact() { TableID = dr["tableID"].ToString(), ContactDetails = dr["contactValue"].ToString(), ContactType = dr["contactType"].ToString(), ContactTypeID = dr["contactTypeID"].ToString() });
                     }
-                }
 
-                query = "SELECT `cust_supp_t_contact_t`.`tableID`," +
-                    "`cust_supp_t_contact_t`.`compID`," +
-                    "`cust_supp_t_contact_t`.`contactTypeID`," +
-                    "`cust_supp_t_contact_t`.`contactValue`," +
-                    "`contacts_t`.`contactType`" +
-                    " FROM `odc_db`.`cust_supp_t_contact_t`" +
-                    " JOIN `odc_db`.`contacts_t`" +
-                    " ON `contacts_t`.`contactTypeID` = `cust_supp_t_contact_t`.`contactTypeID`" +
-                    " WHERE `cust_supp_t_contact_t`.`compID` = '"+id+"';";
-                dataAdapter = dbCon.selectQuery(query, conn);
-                fromDb = new DataSet();
-                fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    MainVM.CustContacts.Add(new Contact() { TableID = dr["tableID"].ToString(), ContactDetails = dr["contactValue"].ToString(), ContactType = dr["contactType"].ToString(), ContactTypeID = dr["contactTypeID"].ToString() });
                 }
-
-            }
-            try
-            {
-                
+                validateCustomerDetailsTextBoxes();
             }
             catch (Exception)
             {
