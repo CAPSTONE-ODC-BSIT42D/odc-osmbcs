@@ -185,7 +185,7 @@ namespace prototype2
         private void validateTextBoxes()
         {
             dataChanged = true;
-            if (MainMenu.MainVM.RepContacts.Count == 0 && !firstNameTb.Text.Equals("") && !middleInitialTb.Text.Equals("") && !lastNameTb.Text.Equals(""))
+            if (MainMenu.MainVM.RepContacts.Count == 0 || firstNameTb.Text.Equals("") || middleInitialTb.Text.Equals("") || lastNameTb.Text.Equals(""))
             {
                 saveBtn.IsEnabled = false;
 
