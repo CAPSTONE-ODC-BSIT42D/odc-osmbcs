@@ -724,14 +724,11 @@ namespace prototype2
 
         private void btnEditSupp_Click(object sender, RoutedEventArgs e)
         {
-            if (manageSupplierDataGrid.SelectedItems.Count > 0)
-            {
-                String id = (manageSupplierDataGrid.Columns[0].GetCellContent(manageSupplierDataGrid.SelectedItem) as TextBlock).Text;
-                editSupplier editSupplier = new editSupplier(id);
-                editSupplier.ShowDialog();
-                setManageSupplierGridControls();
-            }
-            
+            loadCustSuppDetails();
+            manageCustomerGrid.Visibility = Visibility.Hidden;
+            companyDetailsGrid.Visibility = Visibility.Visible;
+            companyDetailsHeader.Content = "Manage Supplier - Edit Supplier";
+            isEdit = true;
         }
 
         private void btnDeleteSupp_Click(object sender, RoutedEventArgs e)
