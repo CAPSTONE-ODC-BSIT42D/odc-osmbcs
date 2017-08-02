@@ -75,7 +75,7 @@ namespace prototype2
             }
             else
             {
-                MessageBox.Show("Select The Type");
+                MessageBox.Show("Please select a Contact Type.");
             }
         }
 
@@ -266,7 +266,7 @@ namespace prototype2
                 }
                 else
                 {
-                    MessageBox.Show("Select The Type");
+                    MessageBox.Show("Please select a Contact Type.");
                 }
             }
             else
