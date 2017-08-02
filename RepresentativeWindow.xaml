@@ -63,10 +63,10 @@
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox>
-                <Label x:Name="label1_Copy9" Content=" First Name" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Normal" Margin="34,39,0,0"/>
-                <Label x:Name="label1_Copy10" Content=" Middle Initial" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Normal" Margin="193,39,0,0"/>
-                <Label x:Name="label1_Copy11" Content=" Last Name" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Normal" Margin="315,38,0,0" RenderTransformOrigin="0.341,0.483"/>
-                <ComboBox x:Name="contactTypeCb" Margin="36,139,0,0" VerticalAlignment="Top" Height="25" IsEditable="True" Width="130" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" SelectionChanged="contactTypeCb_SelectionChanged" VerticalContentAlignment="Center" FontWeight="Normal" FontSize="12" SelectedValuePath="Content">
+                <Label x:Name="label1_Copy9" Content="* First Name" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Normal" Margin="34,39,0,0"/>
+                <Label x:Name="label1_Copy10" Content="* Middle Initial" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Normal" Margin="193,39,0,0"/>
+                <Label x:Name="label1_Copy11" Content="* Last Name" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Normal" Margin="315,38,0,0" RenderTransformOrigin="0.341,0.483"/>
+                <ComboBox x:Name="contactTypeCb" Margin="36,139,0,0" VerticalAlignment="Top" Height="25" Width="130" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" SelectionChanged="contactTypeCb_SelectionChanged" VerticalContentAlignment="Center" FontWeight="Normal" FontSize="12" SelectedValuePath="Content">
                     <ComboBoxItem>[Contact Type]</ComboBoxItem>
                     <ComboBoxItem>Email Address</ComboBoxItem>
                     <ComboBoxItem>Phone Number</ComboBoxItem>

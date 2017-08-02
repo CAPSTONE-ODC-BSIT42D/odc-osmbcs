@@ -105,7 +105,7 @@ namespace prototype2
                     string query = "INSERT INTO service_t (serviceName,serviceDesc,servicePrice) VALUES ('" + serviceName.Text + "','" + serviceDesc.Text + "', '" + servicePrice.Value + "')";
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
-                        MessageBox.Show("Added");
+                        MessageBox.Show("Service type added!");
                         serviceTypeList.Visibility = Visibility.Visible;
                         serviceTypeAdd.Visibility = Visibility.Collapsed;
                         setWindowControls();
@@ -177,7 +177,29 @@ namespace prototype2
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = dbname;
+            if (serviceTypeDg.SelectedItems.Count > 0)
+            {
+                id = (serviceTypeDg.Columns[0].GetCellContent(serviceTypeDg.SelectedItem) as TextBlock).Text;
+                serviceTypeList.Visibility = Visibility.Collapsed;
+                serviceTypeAdd.Visibility = Visibility.Visible;
+                MessageBoxResult result = MessageBox.Show("Do you wish to delete this record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.OK)
+                {
+                    if (dbCon.IsConnect())
+                    {
+                        string query = "UPDATE `service_t` SET `isDeleted`= 1 WHERE serviceID = '" + id + "';";
+                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        {
+                            MessageBox.Show("Record successfully deleted!");
+                        }
+                    }
+                    dbCon.Close();
+                    serviceTypeList.Visibility = Visibility.Collapsed;
+                    serviceTypeAdd.Visibility = Visibility.Visible;
+                }
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -225,7 +247,7 @@ namespace prototype2
                         string query = "INSERT INTO location_details_t (locationProvinceID,locationPrice) VALUES ('" + custProvinceCb.SelectedValue + "', '" + locationPrice.Value + "')";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
-                            MessageBox.Show("Saved.");
+                            MessageBox.Show("Price saved.");
                             custProvinceCb.SelectedValue = -1;
                             locationPrice.Value = 0;
                             setWindowControls();
@@ -236,7 +258,7 @@ namespace prototype2
                         string query = "UPDATE `location_details_t` SET locationPrice = '" + locationPrice.Value + "' WHERE locationId = '" + locationid + "'";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
-                            MessageBox.Show("Updated.");
+                            MessageBox.Show("Price updated.");
                             id = "";
                             custProvinceCb.SelectedValue = -1;
                             locationPrice.Value = 0;
@@ -259,7 +281,7 @@ namespace prototype2
             }
             else
             {
-                MessageBox.Show("Enter the price.");
+                MessageBox.Show("Please enter the price.");
             }
             
         }
