@@ -48,6 +48,7 @@ namespace prototype2
                 DataSet fromDb = new DataSet();
                 dataAdapter.Fill(fromDb, "t");
                 custProvinceCb.ItemsSource = fromDb.Tables["t"].DefaultView;
+                empProvinceCb.ItemsSource = fromDb.Tables["t"].DefaultView;
                 dbCon.Close();
 
             }
@@ -971,7 +972,7 @@ namespace prototype2
             MessageBoxResult result = MessageBox.Show("Do you wish to save this record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
             if (result == MessageBoxResult.OK)
             {
-                dataToDatabase();
+                custDataToDb();
 
             }
             else if (result == MessageBoxResult.Cancel)
@@ -1250,7 +1251,7 @@ namespace prototype2
             }
 
         }
-        private void dataToDatabase()
+        private void custDataToDb()
         {
             var dbCon = DBConnection.Instance();
             string[] proc = { "", "", "", "" };
@@ -1263,146 +1264,146 @@ namespace prototype2
             {
                 proc[0] = "UPDATE_COMPANY";
             }
-            using (MySqlConnection conn = dbCon.Connection)
+            try
             {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand(proc[0], conn);
-                //INSERT NEW CUSTOMER TO DB;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@companyName", custCompanyNameTb.Text);
-                cmd.Parameters["@companyName"].Direction = ParameterDirection.Input;
-                cmd.Parameters.AddWithValue("@addInfo", custAddInfoTb.Text);
-                cmd.Parameters["@addInfo"].Direction = ParameterDirection.Input;
-                cmd.Parameters.AddWithValue("@address", custAddressTb.Text);
-                cmd.Parameters["@address"].Direction = ParameterDirection.Input;
-                cmd.Parameters.AddWithValue("@city", custCityTb.Text);
-                cmd.Parameters["@city"].Direction = ParameterDirection.Input;
-                cmd.Parameters.AddWithValue("@province", custProvinceCb.SelectedValue);
-                cmd.Parameters["@province"].Direction = ParameterDirection.Input;
-                cmd.Parameters.AddWithValue("@compType", compType);
-                cmd.Parameters["@compType"].Direction = ParameterDirection.Input;
-                if (!isEdit)
+                using (MySqlConnection conn = dbCon.Connection)
                 {
-                    cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
-                    cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
-                    cmd.ExecuteNonQuery();
-                    compID = cmd.Parameters["@insertedid"].Value.ToString();
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@compID", compID);
-                    cmd.Parameters["@compID"].Direction = ParameterDirection.Input;
-                    cmd.ExecuteNonQuery();
-                }
-                foreach (Contact cont in MainVM.CustContacts)
-                {
-                    if (cont.TableID == null)
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(proc[0], conn);
+                    //INSERT NEW CUSTOMER TO DB;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@companyName", custCompanyNameTb.Text);
+                    cmd.Parameters["@companyName"].Direction = ParameterDirection.Input;
+                    cmd.Parameters.AddWithValue("@addInfo", custAddInfoTb.Text);
+                    cmd.Parameters["@addInfo"].Direction = ParameterDirection.Input;
+                    cmd.Parameters.AddWithValue("@address", custAddressTb.Text);
+                    cmd.Parameters["@address"].Direction = ParameterDirection.Input;
+                    cmd.Parameters.AddWithValue("@city", custCityTb.Text);
+                    cmd.Parameters["@city"].Direction = ParameterDirection.Input;
+                    cmd.Parameters.AddWithValue("@province", custProvinceCb.SelectedValue);
+                    cmd.Parameters["@province"].Direction = ParameterDirection.Input;
+                    cmd.Parameters.AddWithValue("@compType", compType);
+                    cmd.Parameters["@compType"].Direction = ParameterDirection.Input;
+                    if (!isEdit)
                     {
-                        cmd = new MySqlCommand("INSERT_COMPANY_CONT", conn);
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@contactType", cont.ContactTypeID);
-                        cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
-                        cmd.Parameters.AddWithValue("@contactDetail", cont.ContactDetails);
-                        cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
+                        cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
+                        cmd.ExecuteNonQuery();
+                        compID = cmd.Parameters["@insertedid"].Value.ToString();
+                    }
+                    else
+                    {
                         cmd.Parameters.AddWithValue("@compID", compID);
                         cmd.Parameters["@compID"].Direction = ParameterDirection.Input;
                         cmd.ExecuteNonQuery();
                     }
-                    else
+                    foreach (Contact cont in MainVM.CustContacts)
                     {
-                        cmd = new MySqlCommand("UPDATE_COMPANY_CONT", conn);
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@contactType", cont.ContactTypeID);
-                        cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
-                        cmd.Parameters.AddWithValue("@contactDetail", cont.ContactDetails);
-                        cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
-                        cmd.Parameters.AddWithValue("@tableID", cont.TableID);
-                        cmd.Parameters["@tableID"].Direction = ParameterDirection.Input;
-                        cmd.ExecuteNonQuery();
-                    }
-                    
-
-                }
-                //INSERT REPRESENTATIVE TO DB;
-                string repID = "";
-                foreach (Representative rep in MainVM.CustRepresentatives)
-                {
-                    if(rep.RepresentativeID == null)
-                    {
-                        cmd = new MySqlCommand("INSERT_REP", conn);
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@repLName", rep.RepLastName);
-                        cmd.Parameters["@repLName"].Direction = ParameterDirection.Input;
-                        cmd.Parameters.AddWithValue("@repFName", rep.RepFirstName);
-                        cmd.Parameters["@repFName"].Direction = ParameterDirection.Input;
-                        cmd.Parameters.AddWithValue("@repMName", rep.RepMiddleName);
-                        cmd.Parameters["@repMName"].Direction = ParameterDirection.Input;
-                        cmd.Parameters.AddWithValue("@custID", compID);
-                        cmd.Parameters["@custID"].Direction = ParameterDirection.Input;
-                        cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
-                        cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
-                        cmd.ExecuteNonQuery();
-                        repID = cmd.Parameters["@insertedid"].Value.ToString();
-                    }
-                    else
-                    {
-                        cmd = new MySqlCommand("UPDATE_REP", conn);
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@repLName", rep.RepLastName);
-                        cmd.Parameters["@repLName"].Direction = ParameterDirection.Input;
-                        cmd.Parameters.AddWithValue("@repFName", rep.RepFirstName);
-                        cmd.Parameters["@repFName"].Direction = ParameterDirection.Input;
-                        cmd.Parameters.AddWithValue("@repMName", rep.RepMiddleName);
-                        cmd.Parameters["@repMName"].Direction = ParameterDirection.Input;
-                        cmd.Parameters.AddWithValue("@repID", rep.RepresentativeID);
-                        cmd.Parameters["@repID"].Direction = ParameterDirection.Input;
-                        cmd.ExecuteNonQuery();
-                    }
-                    //INSERT CONTACTS OF REPRESENTATIVE TO DB;
-                    foreach (Contact repcont in rep.ContactsOfRep)
-                    {
-                        if (repcont.TableID == null)
+                        if (cont.TableID == null)
                         {
-                            cmd = new MySqlCommand("INSERT_REP_CONT", conn);
+                            cmd = new MySqlCommand("INSERT_COMPANY_CONT", conn);
                             cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@contactType", repcont.ContactTypeID);
+                            cmd.Parameters.AddWithValue("@contactType", cont.ContactTypeID);
                             cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
-                            cmd.Parameters.AddWithValue("@contactDetail", repcont.ContactDetails);
+                            cmd.Parameters.AddWithValue("@contactDetail", cont.ContactDetails);
                             cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
-                            cmd.Parameters.AddWithValue("@repID", repID);
-                            cmd.Parameters["@repId"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@compID", compID);
+                            cmd.Parameters["@compID"].Direction = ParameterDirection.Input;
                             cmd.ExecuteNonQuery();
-                        }
-                        else { 
-
-                            cmd = new MySqlCommand("UPDATE_REP_CONT", conn);
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@contactType", repcont.ContactTypeID);
-                            cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
-                            cmd.Parameters.AddWithValue("@contactDetail", repcont.ContactDetails);
-                            cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
-                            cmd.Parameters.AddWithValue("@tableID", repcont.TableID);
-                            cmd.Parameters["@tableID"].Direction = ParameterDirection.Input;
-                            cmd.ExecuteNonQuery();
-                        }
-                        
-
-                        if (!isEdit)
-                        {
-                            
                         }
                         else
                         {
-                            
+                            cmd = new MySqlCommand("UPDATE_COMPANY_CONT", conn);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@contactType", cont.ContactTypeID);
+                            cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@contactDetail", cont.ContactDetails);
+                            cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@tableID", cont.TableID);
+                            cmd.Parameters["@tableID"].Direction = ParameterDirection.Input;
+                            cmd.ExecuteNonQuery();
                         }
+
+
                     }
+                    //INSERT REPRESENTATIVE TO DB;
+                    string repID = "";
+                    foreach (Representative rep in MainVM.CustRepresentatives)
+                    {
+                        if (rep.RepresentativeID == null)
+                        {
+                            cmd = new MySqlCommand("INSERT_REP", conn);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@repLName", rep.RepLastName);
+                            cmd.Parameters["@repLName"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@repFName", rep.RepFirstName);
+                            cmd.Parameters["@repFName"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@repMName", rep.RepMiddleName);
+                            cmd.Parameters["@repMName"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@custID", compID);
+                            cmd.Parameters["@custID"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
+                            cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
+                            cmd.ExecuteNonQuery();
+                            repID = cmd.Parameters["@insertedid"].Value.ToString();
+                        }
+                        else
+                        {
+                            cmd = new MySqlCommand("UPDATE_REP", conn);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@repLName", rep.RepLastName);
+                            cmd.Parameters["@repLName"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@repFName", rep.RepFirstName);
+                            cmd.Parameters["@repFName"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@repMName", rep.RepMiddleName);
+                            cmd.Parameters["@repMName"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@repID", rep.RepresentativeID);
+                            cmd.Parameters["@repID"].Direction = ParameterDirection.Input;
+                            cmd.ExecuteNonQuery();
+                        }
+                        //INSERT CONTACTS OF REPRESENTATIVE TO DB;
+                        foreach (Contact repcont in rep.ContactsOfRep)
+                        {
+                            if (repcont.TableID == null)
+                            {
+                                cmd = new MySqlCommand("INSERT_REP_CONT", conn);
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                cmd.Parameters.AddWithValue("@contactType", repcont.ContactTypeID);
+                                cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
+                                cmd.Parameters.AddWithValue("@contactDetail", repcont.ContactDetails);
+                                cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
+                                cmd.Parameters.AddWithValue("@repID", repID);
+                                cmd.Parameters["@repId"].Direction = ParameterDirection.Input;
+                                cmd.ExecuteNonQuery();
+                            }
+                            else
+                            {
 
+                                cmd = new MySqlCommand("UPDATE_REP_CONT", conn);
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                cmd.Parameters.AddWithValue("@contactType", repcont.ContactTypeID);
+                                cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
+                                cmd.Parameters.AddWithValue("@contactDetail", repcont.ContactDetails);
+                                cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
+                                cmd.Parameters.AddWithValue("@tableID", repcont.TableID);
+                                cmd.Parameters["@tableID"].Direction = ParameterDirection.Input;
+                                cmd.ExecuteNonQuery();
+                            }
+
+
+                            if (!isEdit)
+                            {
+
+                            }
+                            else
+                            {
+
+                            }
+                        }
+
+                    }
+                    clearCompanyDetailsGrid();
                 }
-                clearCompanyDetailsGrid();
-            }
-            try
-            {
-
             }
             catch (Exception)
             {
@@ -1449,10 +1450,9 @@ namespace prototype2
                 setManageSupplierGridControls();
             }
         }
-
         private void validateCustomerDetailsTextBoxes()
         {
-            if (custCompanyNameTb.Text.Equals("") || custAddressTb.Text.Equals("") || custCityTb.Text.Equals("") || custProvinceCb.SelectedIndex == -1 || MainVM.CustContacts.Count == 0 || MainVM.CustRepresentatives.Count == 0)
+            if (String.IsNullOrWhiteSpace(custCompanyNameTb.Text) || String.IsNullOrWhiteSpace(custAddressTb.Text) || String.IsNullOrWhiteSpace(custCityTb.Text) || custProvinceCb.SelectedIndex == -1 || MainVM.CustContacts.Count == 0 || MainVM.CustRepresentatives.Count == 0)
             {
                 saveCustBtn.IsEnabled = false;
             }
@@ -1461,6 +1461,8 @@ namespace prototype2
                 saveCustBtn.IsEnabled = true;
             }
         }
+
+
 
         private void loadCustSuppDetails()
         {
@@ -1549,9 +1551,15 @@ namespace prototype2
             contactDetailsPhoneTb.Text = "";
             contactDetailsEmailTb.Text = "";
             contactDetailsMobileTb.Text = "";
+            contactDetailsPhoneTb1.Text = "";
+            contactDetailsEmailTb1.Text = "";
+            contactDetailsMobileTb1.Text = "";
             Validation.ClearInvalid((contactDetailsPhoneTb).GetBindingExpression(TextBox.TextProperty));
             Validation.ClearInvalid((contactDetailsEmailTb).GetBindingExpression(TextBox.TextProperty));
             Validation.ClearInvalid((contactDetailsMobileTb).GetBindingExpression(TextBox.TextProperty));
+            Validation.ClearInvalid((contactDetailsPhoneTb1).GetBindingExpression(TextBox.TextProperty));
+            Validation.ClearInvalid((contactDetailsEmailTb1).GetBindingExpression(TextBox.TextProperty));
+            Validation.ClearInvalid((contactDetailsMobileTb1).GetBindingExpression(TextBox.TextProperty));
         }
 
         private void transReqAddNewItem_Click(object sender, RoutedEventArgs e)
@@ -1564,7 +1572,336 @@ namespace prototype2
             //}
         }
 
-        
+        private void validateEmployeeTextBoxes()
+        {
+            if (String.IsNullOrWhiteSpace(empFirstNameTb.Text) || String.IsNullOrWhiteSpace(empLastNameTb.Text) || String.IsNullOrWhiteSpace(empMiddleInitialTb.Text) || String.IsNullOrWhiteSpace(empCityTb.Text) || empPostionCb.SelectedIndex == -1 || empProvinceCb.SelectedIndex == -1)
+            {
+                saveEmpBtn.IsEnabled = false;
+            }
+            else
+            {
+                saveEmpBtn.IsEnabled = true;
+            }
+        }
+
+        private void empFirstNameTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Windows.Controls.Validation.GetHasError(empFirstNameTb) == true)
+                saveEmpBtn.IsEnabled = false;
+            else validateEmployeeTextBoxes();
+        }
+
+        private void empMiddleInitialTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Windows.Controls.Validation.GetHasError(empMiddleInitialTb) == true)
+                saveEmpBtn.IsEnabled = false;
+            else validateEmployeeTextBoxes();
+        }
+
+        private void empLastNameTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Windows.Controls.Validation.GetHasError(empLastNameTb) == true)
+                saveEmpBtn.IsEnabled = false;
+            else validateEmployeeTextBoxes();
+        }
+
+        private void empAddressTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Windows.Controls.Validation.GetHasError(empAddressTb) == true)
+                saveEmpBtn.IsEnabled = false;
+            else validateEmployeeTextBoxes();
+        }
+
+        private void empCityTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Windows.Controls.Validation.GetHasError(empCityTb) == true)
+                saveEmpBtn.IsEnabled = false;
+            else validateEmployeeTextBoxes();
+        }
+
+        private void empProvinceCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (System.Windows.Controls.Validation.GetHasError(empProvinceCb) == true)
+                saveEmpBtn.IsEnabled = false;
+            else validateEmployeeTextBoxes();
+        }
+
+        private void contactTypeCb1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (contactTypeCb1.SelectedIndex == 0)
+            {
+                contactDetailsMobileTb1.IsEnabled = false;
+                contactDetailsPhoneTb1.IsEnabled = false;
+                contactDetailsEmailTb1.IsEnabled = false;
+                clearContactsBoxes();
+            }
+            else if (contactTypeCb1.SelectedIndex == 1)
+            {
+                contactDetailsEmailTb1.Visibility = Visibility.Visible;
+                contactDetailsMobileTb1.Visibility = Visibility.Collapsed;
+                contactDetailsPhoneTb1.Visibility = Visibility.Collapsed;
+                contactDetailsMobileTb1.IsEnabled = false;
+                contactDetailsPhoneTb1.IsEnabled = false;
+                contactDetailsEmailTb1.IsEnabled = true;
+                clearContactsBoxes();
+            }
+            else if (contactTypeCb1.SelectedIndex == 2)
+            {
+                contactDetailsEmailTb1.Visibility = Visibility.Collapsed;
+                contactDetailsMobileTb1.Visibility = Visibility.Collapsed;
+                contactDetailsPhoneTb1.Visibility = Visibility.Visible;
+                contactDetailsMobileTb1.IsEnabled = false;
+                contactDetailsPhoneTb1.IsEnabled = true;
+                contactDetailsEmailTb1.IsEnabled = false;
+                clearContactsBoxes();
+
+            }
+            else if (contactTypeCb1.SelectedIndex == 3)
+            {
+                contactDetailsEmailTb1.Visibility = Visibility.Collapsed;
+                contactDetailsMobileTb1.Visibility = Visibility.Visible;
+                contactDetailsPhoneTb1.Visibility = Visibility.Collapsed;
+                contactDetailsMobileTb1.IsEnabled = true;
+                contactDetailsPhoneTb1.IsEnabled = false;
+                contactDetailsEmailTb1.IsEnabled = false;
+                clearContactsBoxes();
+            }
+        }
+
+        private void contactDetailsEmailTb1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Windows.Controls.Validation.GetHasError(contactDetailsEmailTb1) == true)
+            {
+                saveEmpBtn.IsEnabled = false;
+                saveEmpContactBtn.IsEnabled = false;
+            }
+            else
+            {
+                contactDetail = contactDetailsEmailTb1.Text;
+                saveEmpContactBtn.IsEnabled = true;
+                validateEmployeeTextBoxes();
+            }
+
+        }
+
+        private void contactDetailsPhoneTb1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Windows.Controls.Validation.GetHasError(contactDetailsPhoneTb1) == true)
+            {
+                saveEmpBtn.IsEnabled = false;
+                saveEmpContactBtn.IsEnabled = false;
+            }
+            else
+            {
+                contactDetail = contactDetailsPhoneTb1.Text;
+                saveEmpContactBtn.IsEnabled = true;
+                validateEmployeeTextBoxes();
+            }
+        }
+
+        private void contactDetailsMobileTb1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Windows.Controls.Validation.GetHasError(contactDetailsMobileTb1) == true)
+            {
+                saveEmpBtn.IsEnabled = false;
+                saveEmpContactBtn.IsEnabled = false;
+            }
+            else
+            {
+                contactDetail = contactDetailsMobileTb1.Text;
+                saveEmpContactBtn.IsEnabled = true;
+                validateEmployeeTextBoxes();
+            }
+        }
+        private string empId;
+        private void empDataToDb()
+        {
+            var dbCon = DBConnection.Instance();
+            string[] proc = { "", "", "", "" };
+
+            if (!isEdit)
+            {
+                proc[0] = "INSERT_EMPLOYEE";
+            }
+            else
+            {
+                proc[0] = "UPDATE_EMPLOYEE";
+            }
+            try
+            {
+                using (MySqlConnection conn = dbCon.Connection)
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(proc[0], conn);
+                    //INSERT NEW EMPLOYEE TO DB;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@fName", custCompanyNameTb.Text);
+                    cmd.Parameters["@fName"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@middleInitial", custAddInfoTb.Text);
+                    cmd.Parameters["@middleInitial"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@lName", custAddInfoTb.Text);
+                    cmd.Parameters["@lName"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@address", custAddressTb.Text);
+                    cmd.Parameters["@address"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@city", custCityTb.Text);
+                    cmd.Parameters["@city"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@provinceID", custProvinceCb.SelectedValue);
+                    cmd.Parameters["@provinceID"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@username", compType);
+                    cmd.Parameters["@username"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@password", compType);
+                    cmd.Parameters["@password"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@positionID", compType);
+                    cmd.Parameters["@positionID"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@jobID", compType);
+                    cmd.Parameters["@jobID"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@dateFrom", compType);
+                    cmd.Parameters["@dateFrom"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@dateTo", compType);
+                    cmd.Parameters["@dateTo"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@empType", compType);
+                    cmd.Parameters["@empType"].Direction = ParameterDirection.Input;
+                    if (!isEdit)
+                    {
+                        cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
+                        cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
+                        cmd.ExecuteNonQuery();
+                        empId = cmd.Parameters["@insertedid"].Value.ToString();
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@empID", compID);
+                        cmd.Parameters["@empID"].Direction = ParameterDirection.Input;
+                        cmd.ExecuteNonQuery();
+                    }
+                    foreach (Contact cont in MainVM.CustContacts)
+                    {
+                        if (cont.TableID == null)
+                        {
+                            cmd = new MySqlCommand("INSERT_COMPANY_CONT", conn);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@contactType", cont.ContactTypeID);
+                            cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@contactDetail", cont.ContactDetails);
+                            cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@compID", compID);
+                            cmd.Parameters["@compID"].Direction = ParameterDirection.Input;
+                            cmd.ExecuteNonQuery();
+                        }
+                        else
+                        {
+                            cmd = new MySqlCommand("UPDATE_COMPANY_CONT", conn);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@contactType", cont.ContactTypeID);
+                            cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@contactDetail", cont.ContactDetails);
+                            cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@tableID", cont.TableID);
+                            cmd.Parameters["@tableID"].Direction = ParameterDirection.Input;
+                            cmd.ExecuteNonQuery();
+                        }
+
+
+                    }
+                    //INSERT REPRESENTATIVE TO DB;
+                    string repID = "";
+                    foreach (Representative rep in MainVM.CustRepresentatives)
+                    {
+                        if (rep.RepresentativeID == null)
+                        {
+                            cmd = new MySqlCommand("INSERT_REP", conn);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@repLName", rep.RepLastName);
+                            cmd.Parameters["@repLName"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@repFName", rep.RepFirstName);
+                            cmd.Parameters["@repFName"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@repMName", rep.RepMiddleName);
+                            cmd.Parameters["@repMName"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@custID", compID);
+                            cmd.Parameters["@custID"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
+                            cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
+                            cmd.ExecuteNonQuery();
+                            repID = cmd.Parameters["@insertedid"].Value.ToString();
+                        }
+                        else
+                        {
+                            cmd = new MySqlCommand("UPDATE_REP", conn);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@repLName", rep.RepLastName);
+                            cmd.Parameters["@repLName"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@repFName", rep.RepFirstName);
+                            cmd.Parameters["@repFName"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@repMName", rep.RepMiddleName);
+                            cmd.Parameters["@repMName"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@repID", rep.RepresentativeID);
+                            cmd.Parameters["@repID"].Direction = ParameterDirection.Input;
+                            cmd.ExecuteNonQuery();
+                        }
+                        //INSERT CONTACTS OF REPRESENTATIVE TO DB;
+                        foreach (Contact repcont in rep.ContactsOfRep)
+                        {
+                            if (repcont.TableID == null)
+                            {
+                                cmd = new MySqlCommand("INSERT_REP_CONT", conn);
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                cmd.Parameters.AddWithValue("@contactType", repcont.ContactTypeID);
+                                cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
+                                cmd.Parameters.AddWithValue("@contactDetail", repcont.ContactDetails);
+                                cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
+                                cmd.Parameters.AddWithValue("@repID", repID);
+                                cmd.Parameters["@repId"].Direction = ParameterDirection.Input;
+                                cmd.ExecuteNonQuery();
+                            }
+                            else
+                            {
+
+                                cmd = new MySqlCommand("UPDATE_REP_CONT", conn);
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                cmd.Parameters.AddWithValue("@contactType", repcont.ContactTypeID);
+                                cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
+                                cmd.Parameters.AddWithValue("@contactDetail", repcont.ContactDetails);
+                                cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
+                                cmd.Parameters.AddWithValue("@tableID", repcont.TableID);
+                                cmd.Parameters["@tableID"].Direction = ParameterDirection.Input;
+                                cmd.ExecuteNonQuery();
+                            }
+
+
+                            if (!isEdit)
+                            {
+
+                            }
+                            else
+                            {
+
+                            }
+                        }
+
+                    }
+                    clearCompanyDetailsGrid();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+            }
+        }
     }
     internal class Item : INotifyPropertyChanged
     {

@@ -70,9 +70,45 @@ namespace prototype2
         }
         //-----END OF CUSTOMER
 
-        protected ObservableCollection<Contact> custcontact = new ObservableCollection<Contact>();
+        //-----Employee
+        protected ObservableCollection<Employee> employees =
+            new ObservableCollection<Employee>();
+
+        protected Employee selectedEmployee = null;
+
+        public ObservableCollection<Employee> Employees
+        {
+            get { return employees; }
+            set { employees = value; }
+        }
+
+        public Employee SelectedEmployee
+        {
+            get { return selectedEmployee; }
+            set { SetProperty(ref selectedEmployee, value); }
+        }
+        //-----End of Employee
+
+        //-----Selected CustContact
+        protected ObservableCollection<Contact> empcontacts = new ObservableCollection<Contact>();
 
         protected Contact selectedContact = null;
+
+        public ObservableCollection<Contact> EmpContacts
+        {
+            get { return empcontacts; }
+            set { empcontacts = value; }
+        }
+
+        public Contact SelectedEmpContacts
+        {
+            get { return selectedContact; }
+            set { SetProperty(ref selectedContact, value); }
+        }
+        //----- END of Selected CustContact
+
+        //-----Selected CustContact
+        protected ObservableCollection<Contact> custcontact = new ObservableCollection<Contact>();
 
         public ObservableCollection<Contact> CustContacts
         {
@@ -85,10 +121,10 @@ namespace prototype2
             get { return selectedContact; }
             set { SetProperty(ref selectedContact, value); }
         }
+        //----- END of Selected CustContact
 
+        //----- RepContacts
         protected ObservableCollection<Contact> repcontact = new ObservableCollection<Contact>();
-
-        protected Contact selectedRepContact = null;
 
         public ObservableCollection<Contact> RepContacts
         {
@@ -98,8 +134,9 @@ namespace prototype2
 
         public Contact SelectedRepContact
         {
-            get { return selectedRepContact; }
-            set { SetProperty(ref selectedRepContact, value); }
+            get { return selectedContact; }
+            set { SetProperty(ref selectedContact, value); }
         }
+        //----- END of REpContacts
     }
 }
