@@ -1427,7 +1427,6 @@ namespace prototype2
             MainVM.EmailAddress = "";
             MainVM.PhoneNumber = "";
             MainVM.MobileNumber = "";
-            compType = 0;
             Validation.ClearInvalid((custCompanyNameTb).GetBindingExpression(TextBox.TextProperty));
             Validation.ClearInvalid((custAddressTb).GetBindingExpression(TextBox.TextProperty));
             Validation.ClearInvalid((custCityTb).GetBindingExpression(TextBox.TextProperty));
@@ -1437,12 +1436,14 @@ namespace prototype2
             isEdit = false;
             if (compType == 0)
             {
+                compType = 0;
                 manageCustomerGrid.Visibility = Visibility.Visible;
                 companyDetailsGrid.Visibility = Visibility.Hidden;
                 setManageCustomerGridControls();
             }
             else if (compType == 1)
             {
+                compType = 0;
                 manageSupplierGrid.Visibility = Visibility.Visible;
                 companyDetailsGrid.Visibility = Visibility.Hidden;
                 setManageSupplierGridControls();
