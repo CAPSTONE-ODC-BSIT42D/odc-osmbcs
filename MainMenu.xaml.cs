@@ -745,7 +745,7 @@ namespace prototype2
                 {
                     if (dbCon.IsConnect())
                     {
-                        string query = "UPDATE `supplier_t` SET `isDeleted`= 1 WHERE suppID = '" + id + "';";
+                        string query = "UPDATE `cust_supp_t` SET `isDeleted`= 1 WHERE companyID = '" + id + "';";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             MessageBox.Show("Record successfully deleted!");
