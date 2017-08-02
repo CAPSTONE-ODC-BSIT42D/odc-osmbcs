@@ -29,10 +29,32 @@ namespace prototype2
 
         private void loginBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainMenu mainMenu = new MainMenu();
-            this.Hide();
-            mainMenu.ShowDialog();
-            this.Show();
+            String uname = "";
+            String pword = "";
+            uname = usernameTb.Text;
+            pword = passwordBox.Password.ToString();
+            if (String.IsNullOrWhiteSpace(usernameTb.Text) && String.IsNullOrWhiteSpace(passwordBox.Password.ToString()))
+            {
+                MessageBox.Show("Username and Password must be filled.");
+            }
+            else
+            {
+                if (uname.Equals("admin") && pword.Equals("adminadmin"))
+                {
+                    MainMenu mainMenu = new MainMenu();
+                    this.Hide();
+                    mainMenu.ShowDialog();
+                    this.Show();
+                }
+                else
+                {
+                    usernameTb.Text = "";
+                    passwordBox.Password = "";
+                    MessageBox.Show("Username and Password do not match.");
+
+                }
+
+            }
         }
     }
 }
