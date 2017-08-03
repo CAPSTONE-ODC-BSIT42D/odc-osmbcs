@@ -118,7 +118,7 @@ public class RegexUtilities
             invalid = false;
             try
             {
-                return Regex.IsMatch(strIn,@"\((?<AreaCode>\d{3})\)\s*(?<Number>\d{3}(?:-|\s*)\d{4})",
+                return Regex.IsMatch(strIn,@"\((?<AreaCode>\d{1,3})\)\s*(?<Number>\d{4}(?:-|\s*)\d{3})",
                       RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
             }
             catch (RegexMatchTimeoutException)
@@ -126,7 +126,7 @@ public class RegexUtilities
                 return false;
             }
         }
-
+   
         public bool IsValidMobileNumber(string strIn)
         {
             invalid = false;
