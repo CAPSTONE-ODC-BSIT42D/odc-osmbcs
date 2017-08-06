@@ -624,7 +624,27 @@ namespace prototype2
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 dataAdapter.Fill(fromDb, "t");
-                empPostionCb.ItemsSource = fromDb.Tables["t"].DefaultView;
+                empJobCb.ItemsSource = fromDb.Tables["t"].DefaultView;
+                dbCon.Close();
+            }
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT a.empID, a.empFName,a.empLname, a.empMI, a.empAddinfo, a.empAddress, a.empCity, a.empProvinceID, b.locprovince, a.positionID ,c.positionName, a.jobID " +
+                    "FROM emp_cont_t a  " +
+                    "JOIN provinces_t b ON a.empProvinceID = b.locProvinceId " +
+                    "JOIN position_t c ON a.positionID = c.positionid " +
+                    //"JOIN job_title_t d ON a.jobID = d.jobID " +
+                    "WHERE isDeleted = 0 AND empType = 0;";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                MainVM.Customers.Clear();
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.Employees.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), PositionID = dr["positionID"].ToString() , PositionName = dr["positionName"].ToString(), JobID = dr["jobID"].ToString(), JobName = dr["jobName"].ToString() });
+                }
                 dbCon.Close();
             }
         }
@@ -635,6 +655,7 @@ namespace prototype2
             employeeDetailsGrid.Visibility = Visibility.Visible;
             employeeDetailsHeader.Content = "Manage Employee - New Employee";
             empType = 0;
+            contractorOnlyGrid.Visibility = Visibility.Collapsed;
             empJobCb.IsEnabled = false;
             empDateStarted.IsEnabled = false;
             empDateEnded.IsEnabled = false;
@@ -779,6 +800,10 @@ namespace prototype2
             employeeDetailsGrid.Visibility = Visibility.Visible;
             employeeDetailsHeader.Content = "Manage Contractor - New Contractor";
             empType = 1;
+            contractorOnlyGrid.Visibility = Visibility.Visible;
+            empJobCb.IsEnabled = true;
+            empDateStarted.IsEnabled = true;
+            empDateEnded.IsEnabled = true;
             setManageContractorGridControls();
         }
 
@@ -1775,7 +1800,7 @@ namespace prototype2
                 if (contactTypeCb1.SelectedIndex != 0)
                 {
 
-                    MainVM.EmpContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
+                    MainVM.EmpContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
                     clearContactsBoxes();
                     validateCustomerDetailsTextBoxes();
                     contactTypeCb1.SelectedIndex = 0;
@@ -1858,6 +1883,7 @@ namespace prototype2
             {
                 proc[0] = "UPDATE_EMPLOYEE";
             }
+            
             try
             {
                 using (MySqlConnection conn = dbCon.Connection)
@@ -1866,36 +1892,39 @@ namespace prototype2
                     MySqlCommand cmd = new MySqlCommand(proc[0], conn);
                     //INSERT NEW EMPLOYEE TO DB;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@fName", custCompanyNameTb.Text);
+                    cmd.Parameters.AddWithValue("@fName", empFirstNameTb.Text);
                     cmd.Parameters["@fName"].Direction = ParameterDirection.Input;
 
-                    cmd.Parameters.AddWithValue("@middleInitial", custAddInfoTb.Text);
-                    cmd.Parameters["@middleInitial"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@lName", custAddInfoTb.Text);
+                    cmd.Parameters.AddWithValue("@lName", empLastNameTb.Text);
                     cmd.Parameters["@lName"].Direction = ParameterDirection.Input;
 
-                    cmd.Parameters.AddWithValue("@address", custAddressTb.Text);
+                    cmd.Parameters.AddWithValue("@middleInitial", empMiddleInitialTb.Text);
+                    cmd.Parameters["@middleInitial"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@address", empAddressTb.Text);
                     cmd.Parameters["@address"].Direction = ParameterDirection.Input;
 
-                    cmd.Parameters.AddWithValue("@city", custCityTb.Text);
+                    cmd.Parameters.AddWithValue("@city", empCityTb.Text);
                     cmd.Parameters["@city"].Direction = ParameterDirection.Input;
 
-                    cmd.Parameters.AddWithValue("@provinceID", custProvinceCb.SelectedValue);
+                    cmd.Parameters.AddWithValue("@provinceID", empProvinceCb.SelectedValue);
                     cmd.Parameters["@provinceID"].Direction = ParameterDirection.Input;
 
                     cmd.Parameters.AddWithValue("@username", empUserNameTb.Text);
                     cmd.Parameters["@username"].Direction = ParameterDirection.Input;
 
-                    cmd.Parameters.AddWithValue("@password", empPasswordTb.Text);
-                    cmd.Parameters["@password"].Direction = ParameterDirection.Input;
+                    cmd.Parameters.AddWithValue("@upassword", empPasswordTb.Text);
+                    cmd.Parameters["@upassword"].Direction = ParameterDirection.Input;
 
                     cmd.Parameters.AddWithValue("@positionID", empPostionCb.SelectedValue);
                     cmd.Parameters["@positionID"].Direction = ParameterDirection.Input;
 
+                    cmd.Parameters.AddWithValue("@empType", empType);
+                    cmd.Parameters["@empType"].Direction = ParameterDirection.Input;
+
                     if (empType == 1)
                     {
-                        cmd.Parameters.AddWithValue("@jobID",empJobCb);
+                        cmd.Parameters.AddWithValue("@jobID", empJobCb);
                         cmd.Parameters["@jobID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@dateFrom", empDateStarted);
@@ -1904,9 +1933,17 @@ namespace prototype2
                         cmd.Parameters.AddWithValue("@dateTo", empDateEnded);
                         cmd.Parameters["@dateTo"].Direction = ParameterDirection.Input;
                     }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@jobID", DBNull.Value);
+                        cmd.Parameters["@jobID"].Direction = ParameterDirection.Input;
 
-                    cmd.Parameters.AddWithValue("@empType", empType);
-                    cmd.Parameters["@empType"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@dateFrom", DBNull.Value);
+                        cmd.Parameters["@dateFrom"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@dateTo", DBNull.Value);
+                        cmd.Parameters["@dateTo"].Direction = ParameterDirection.Input;
+                    }
                     if (!isEdit)
                     {
                         cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
@@ -1961,7 +1998,7 @@ namespace prototype2
                     }
                     else
                     {
-                        cmd = new MySqlCommand("INSERT_EMPLOYEE_PIC_T", conn);
+                        cmd = new MySqlCommand("UPDATE_EMPLOYEE_PIC_T", conn);
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@picBLOB", picdata);
                         cmd.Parameters["@picBLOB"].Direction = ParameterDirection.Input;
@@ -1986,9 +2023,14 @@ namespace prototype2
         private void clearEmployeeDetailsGrid()
         {
             isEdit = false;
+            MainVM.EmpContacts.Clear();
+            empFirstNameTb.Clear();
+
             if (empType == 0)
             {
                 empType = 0;
+                
+
                 manageEmployeeGrid.Visibility = Visibility.Visible;
                 employeeDetailsGrid.Visibility = Visibility.Hidden;
                 setManageEmployeeGridControls();

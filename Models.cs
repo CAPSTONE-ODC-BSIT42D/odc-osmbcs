@@ -179,6 +179,12 @@ namespace prototype2
             set { SetProperty(ref empProvinceID, value); }
         }
 
+        public string EmpProvinceName
+        {
+            get { return empProvinceName; }
+            set { SetProperty(ref empProvinceName, value); }
+        }
+
         public string PositionID
         {
             get { return positionID; }
