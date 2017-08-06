@@ -7,7 +7,7 @@
         xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms" xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit" x:Class="prototype2.MainMenu"
         mc:Ignorable="d"
-        Title="MainMenu" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" Loaded="Window_Loaded" WindowState="Maximized" MinWidth="768" MinHeight="535" d:DesignWidth="1284" d:DesignHeight="1185">
+        Title="MainMenu" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" Loaded="Window_Loaded" WindowState="Maximized" MinWidth="768" MinHeight="535" d:DesignWidth="1284" d:DesignHeight="1273">
     <Window.Resources>
         <Style TargetType="{x:Type Button}" x:Key="mainButton">
             <Setter Property="Background" Value="#2C3E50"/>
@@ -1184,156 +1184,172 @@
                     </Grid>
                 </Grid>
                 <Grid x:Name="employeeDetailsGrid">
-                    <Label x:Name="companyDetailsHeader1" Content="" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
+                    <Label x:Name="employeeDetailsHeader" Content="" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid Margin="10,70,10,10"/>
-                    <Grid x:Name="customerDetailsGrid1" Margin="10,70,10,10">
+                    <Grid x:Name="employeeDetails" Margin="10,70,10,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Grid Margin="0,0,10,10" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                            <Button x:Name="saveEmpBtn" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
-                            <Button x:Name="cancelEmpBtn" Content="Cancel" HorizontalAlignment="Left" Margin="84,0,0,0" VerticalAlignment="Top" Width="75"/>
-                        </Grid>
                         <GroupBox x:Name="groupBox_Copy" Header="Details" Margin="10,12,10,35" FontWeight="Bold" FontSize="14">
-                            <Grid Margin="-1,0,-2,-1">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="3*"/>
-                                    <ColumnDefinition Width="193*"/>
-                                </Grid.ColumnDefinitions>
-                                <Label x:Name="label19" Content="All required fields are marked with (*)" HorizontalAlignment="Left" Margin="3,4,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1" Width="240" FontStyle="Italic"/>
-                                <Label Content="Full Name" HorizontalAlignment="Left" Margin="2,25,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1"/>
-                                <Label Content="* First Name" HorizontalAlignment="Left" Margin="19,49,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
-                                <TextBox x:Name="empFirstNameTb" HorizontalAlignment="Left" Height="23" Margin="38,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="228" FontWeight="Normal" Grid.Column="1" TextChanged="empFirstNameTb_TextChanged">
-                                    <Binding Path="FirstName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                            <local:TextBoxValidation TextBoxType="String"/>
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox>
-                                <Label Content="* Middle Initial" HorizontalAlignment="Left" Margin="287,49,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
-                                <TextBox x:Name="empMiddleInitialTb" HorizontalAlignment="Left" Height="23" Margin="302,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" FontWeight="Normal" MaxLength="3" Grid.Column="1" TextChanged="empMiddleInitialTb_TextChanged">
-                                    <Binding Path="MiddleName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                            <local:TextBoxValidation TextBoxType="String"/>
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox>
-                                <Label Content="* Last Name" HorizontalAlignment="Left" Margin="431,49,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
-                                <TextBox x:Name="empLastNameTb" HorizontalAlignment="Left" Height="23" Margin="447,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="299" FontWeight="Normal" Grid.Column="1" RenderTransformOrigin="0.5,0.5" TextChanged="empLastNameTb_TextChanged">
-                                    <Binding Path="LastName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                            <local:TextBoxValidation TextBoxType="String"/>
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox>
-                                <Image x:Name="empImage" Grid.Column="1" HorizontalAlignment="Left" Height="151" Margin="1035,13,0,0" VerticalAlignment="Top" Width="144" Source="Resources/picture.png" Stretch="Fill"/>
-                                <Button x:Name="openFileBtn" Content="Open Image" Grid.Column="1" HorizontalAlignment="Left" Margin="1099,183,0,0" VerticalAlignment="Top" Width="80" FontWeight="Normal" Click="openFileBtn_Click" FontSize="12" Height="26" FontFamily="Segoe UI Semibold" Background="#FF08B908" BorderBrush="#FF039303" Foreground="#FFFBFBFB"/>
-                                <Label Content="Address" HorizontalAlignment="Left" Margin="2,116,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1"/>
-                                <Label Content="* Address" VerticalAlignment="Top" Visibility="Visible" Margin="21,141,443,0" FontWeight="Normal" Grid.Column="1"/>
-                                <TextBox x:Name="empAddressTb" HorizontalAlignment="Left" Height="23" Margin="38,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="708" FontWeight="Normal" Grid.Column="1" TextChanged="empAddressTb_TextChanged">
-                                    <Binding Path="Address" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                            <local:TextBoxValidation TextBoxType="String"/>
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox>
-                                <Label Content="* City" VerticalAlignment="Top" Visibility="Visible" Margin="19,201,0,0" FontWeight="Normal" Grid.Column="1" HorizontalAlignment="Left" Width="90"/>
-                                <TextBox x:Name="empCityTb" HorizontalAlignment="Left" Height="23" Margin="38,232,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162" FontWeight="Normal" Grid.Column="1" TextChanged="empCityTb_TextChanged">
-                                    <Binding Path="Address" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                            <local:TextBoxValidation TextBoxType="String"/>
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox>
-                                <Label Content="* Province" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="229,201,0,0" FontWeight="Normal" Grid.Column="1"/>
-                                <ComboBox x:Name="empProvinceCb" Margin="246,232,0,0" VerticalAlignment="Top" Height="23" DisplayMemberPath = "locProvince" SelectedValuePath = "locProvinceID" Width="157" HorizontalAlignment="Left" FontWeight="Normal" Grid.Column="1" SelectionChanged="empProvinceCb_SelectionChanged">
-                                    <ComboBox.SelectedItem>
-                                        <Binding Path="locProvinceId" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <ScrollViewer Margin="0,0,0,2">
+                                <Grid Margin="-1,0,-2,-1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*"/>
+
+                                        <ColumnDefinition Width="193*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label x:Name="label19" Content="All required fields are marked with (*)" HorizontalAlignment="Left" Margin="3,4,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1" Width="240" FontStyle="Italic"/>
+                                    <Label Content="Full Name" HorizontalAlignment="Left" Margin="2,25,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1"/>
+                                    <Label Content="* First Name" HorizontalAlignment="Left" Margin="19,49,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
+                                    <TextBox x:Name="empFirstNameTb" HorizontalAlignment="Left" Height="23" Margin="38,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="228" FontWeight="Normal" Grid.Column="1" TextChanged="empFirstNameTb_TextChanged">
+                                        <Binding Path="FirstName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
-                                                <local:TextBoxValidation TextBoxType="ComboBox"/>
+                                                <local:TextBoxValidation TextBoxType="String"/>
                                             </Binding.ValidationRules>
                                         </Binding>
-                                    </ComboBox.SelectedItem>
-                                </ComboBox>
-                                <Label x:Name="label1_Copy7" Content="Contact Details" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="127" Margin="10,281,0,0" FontWeight="Bold" Grid.Column="1"/>
-                                <ComboBox x:Name="contactTypeCb1" Margin="38,331,0,0" VerticalAlignment="Top" Height="25" IsEditable="True" Width="130" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" FontWeight="Normal" FontSize="12" SelectedValuePath="Content" Grid.Column="1" SelectionChanged="contactTypeCb1_SelectionChanged">
-                                    <ComboBoxItem Content="[Contact Type]"/>
-                                    <ComboBoxItem Content="Email Address"/>
-                                    <ComboBoxItem Content="Phone Number"/>
-                                    <ComboBoxItem Content="Mobile Number"/>
-                                </ComboBox>
-                                <TextBox x:Name="contactDetailsEmailTb1" HorizontalAlignment="Left" Height="25" Margin="179,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center" IsEnabled="False" Grid.Column="1" TextChanged="contactDetailsEmailTb1_TextChanged">
-                                    <Binding Path="ContactValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                            <local:TextBoxValidation TextBoxType="Email"/>
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox>
-                                <TextBox x:Name="contactDetailsPhoneTb1" HorizontalAlignment="Left" Height="25" Margin="179,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center" IsEnabled="False" Grid.Column="1" TextChanged="contactDetailsPhoneTb1_TextChanged">
-                                    <Binding Path="ContactValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                            <local:TextBoxValidation TextBoxType="Phone"/>
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox>
-                                <TextBox x:Name="contactDetailsMobileTb1" HorizontalAlignment="Left" Height="25" Margin="179,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center" IsEnabled="False" Grid.Column="1" TextChanged="contactDetailsMobileTb1_TextChanged">
-                                    <Binding Path="ContactValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                            <local:TextBoxValidation TextBoxType="Mobile"/>
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox>
-                                <Button x:Name="addNewEmpContactBtn" Content="Add" HorizontalAlignment="Left" Margin="415,332,0,0" VerticalAlignment="Top" Width="75" FontWeight="Normal" Height="25" Click="addNewCustContactBtn_Click" Background="#FF03BD03" BorderBrush="#FF019C01" Foreground="#FFF7F4F4" FontFamily="Segoe UI Semibold" FontSize="14" Grid.Column="1"/>
-                                <Button x:Name="saveEmpContactBtn" Content="save" HorizontalAlignment="Left" Margin="416,321,0,0" VerticalAlignment="Top" Width="66" FontWeight="Normal" Height="23" Click="saveCustContactBtn_Click" IsEnabled="False" Visibility="Hidden" Grid.Column="1"/>
-                                <Button x:Name="cancelEmpContactBtn" Content="cancel" HorizontalAlignment="Left" Margin="487,321,0,0" VerticalAlignment="Top" Width="66" FontWeight="Normal" Height="23" Click="cancelCustContactBtn_Click" IsEnabled="True" Visibility="Hidden" Grid.Column="1"/>
-                                <DataGrid x:Name="empContactsDg" HorizontalAlignment="Left" Height="148" Margin="37,381,0,0" VerticalAlignment="Top" Width="547" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedRepContact}" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" SelectionChanged="repContactsDg_SelectionChanged" ItemsSource="{Binding RepContacts}" Grid.Column="1">
-                                    <DataGrid.Columns >
-                                        <DataGridTextColumn Binding="{Binding ContactTypeID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"/>
-                                        <DataGridTextColumn Binding="{Binding ContactType}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Contact Type"/>
-                                        <DataGridTextColumn Binding="{Binding ContactDetails}" ClipboardContentBinding="{x:Null}" Header="Contact Details" Width="200" CanUserResize="False"/>
-                                        <DataGridTemplateColumn x:Name="colEditRepContact" Width="100" Visibility="Hidden"  CanUserResize="False">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <Button x:Name="editRepContBtn" Click="editRepContBtn_Click" Content="Edit"/>
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                        <DataGridTemplateColumn x:Name="colDelRepContact" Width="100" Visibility="Hidden"  CanUserResize="False">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <Button x:Name="delRepContBtn" Click="delRepContBtn_Click" Content="Delete" />
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                                <Label Content="Position" HorizontalAlignment="Left" Margin="10,554,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1"/>
-                                <ComboBox x:Name="empPostionCb" HorizontalAlignment="Left" Margin="44,585,0,0" VerticalAlignment="Top" Width="162" Height="26" Grid.Column="1" SelectedValuePath="positionId" DisplayMemberPath="positionName" FontWeight="Normal">
-                                    <ComboBox.SelectedItem>
-                                        <Binding Path="positionSelected" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                    </TextBox>
+                                    <Label Content="* Middle Initial" HorizontalAlignment="Left" Margin="287,49,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
+                                    <TextBox x:Name="empMiddleInitialTb" HorizontalAlignment="Left" Height="23" Margin="302,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" FontWeight="Normal" MaxLength="3" Grid.Column="1" TextChanged="empMiddleInitialTb_TextChanged">
+                                        <Binding Path="MiddleName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
-                                                <local:TextBoxValidation TextBoxType="ComboBox"/>
+                                                <local:TextBoxValidation TextBoxType="String"/>
                                             </Binding.ValidationRules>
                                         </Binding>
-                                    </ComboBox.SelectedItem>
-                                </ComboBox>
-                                <Label x:Name="label_Copy5" Content="Account Credentials" HorizontalAlignment="Left" Margin="10,625,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1"/>
-                                <Label x:Name="label_Copy6" Content="Your username is same as your email address. &#xA;Password will be automatically generated and will be sent to your email." HorizontalAlignment="Left" Margin="44,656,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1" Height="47" Width="478"/>
-                                <Label Content="* Job Title" HorizontalAlignment="Left" Margin="10,718,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1"/>
-                                <TextBox x:Name="empJobTitleTb" HorizontalAlignment="Left" Height="23" Margin="44,744,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162" FontWeight="Normal" Grid.Column="1">
-                                    <Binding Path="JobTitle" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                            <local:TextBoxValidation TextBoxType="String"/>
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox>
-                                <Label Content="Duration of Employment" HorizontalAlignment="Left" Margin="6,781,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1"/>
-                                <Label Content="* Start Date" HorizontalAlignment="Left" Margin="27,812,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
-                                <xctk:DateTimePicker x:Name="empDateStarted" Grid.Column="1" HorizontalAlignment="Left" Margin="44,843,0,0" VerticalAlignment="Top" Width="157" Format="Custom" FormatString="yyyy-MM-dd" ValueChanged="dateStarted_ValueChanged" TimePickerVisibility="Hidden" DisplayDefaultValueOnEmptyText="True" AllowTextInput="False"/>
-                                <Label Content="* End date" HorizontalAlignment="Left" Margin="27,871,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
-                                <xctk:DateTimePicker x:Name="empDateEnded" HorizontalAlignment="Left" Margin="44,904,0,0" VerticalAlignment="Top" Width="157" Format="Custom" FormatString="yyyy-MM-dd" Grid.Column="1" ValueChanged="dateEnded_ValueChanged" TimePickerVisibility="Hidden" DisplayDefaultValueOnEmptyText="True" AllowTextInput="False"/>
-                            </Grid>
+                                    </TextBox>
+                                    <Label Content="* Last Name" HorizontalAlignment="Left" Margin="431,49,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
+                                    <TextBox x:Name="empLastNameTb" HorizontalAlignment="Left" Height="23" Margin="447,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="299" FontWeight="Normal" Grid.Column="1" RenderTransformOrigin="0.5,0.5" TextChanged="empLastNameTb_TextChanged">
+                                        <Binding Path="LastName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:TextBoxValidation TextBoxType="String"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox>
+                                    <Image x:Name="empImage" Grid.Column="1" HorizontalAlignment="Left" Height="151" Margin="1035,13,-7,0" VerticalAlignment="Top" Width="144" Source="Resources/picture.png" Stretch="Fill"/>
+                                    <Button x:Name="openFileBtn" Content="Open Image" Grid.Column="1" HorizontalAlignment="Left" Margin="1099,183,-7,0" VerticalAlignment="Top" Width="80" FontWeight="Normal" Click="openFileBtn_Click" FontSize="12" Height="26" FontFamily="Segoe UI Semibold" Background="#FF08B908" BorderBrush="#FF039303" Foreground="#FFFBFBFB"/>
+                                    <Label Content="Address" HorizontalAlignment="Left" Margin="2,116,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1"/>
+                                    <Label Content="* Address" VerticalAlignment="Top" Visibility="Visible" Margin="21,141,426,0" FontWeight="Normal" Grid.Column="1"/>
+                                    <TextBox x:Name="empAddressTb" HorizontalAlignment="Left" Height="23" Margin="38,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="708" FontWeight="Normal" Grid.Column="1" TextChanged="empAddressTb_TextChanged">
+                                        <Binding Path="Address" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:TextBoxValidation TextBoxType="String"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox>
+                                    <Label Content="* City" VerticalAlignment="Top" Visibility="Visible" Margin="19,201,0,0" FontWeight="Normal" Grid.Column="1" HorizontalAlignment="Left" Width="90"/>
+                                    <TextBox x:Name="empCityTb" HorizontalAlignment="Left" Height="23" Margin="38,232,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162" FontWeight="Normal" Grid.Column="1" TextChanged="empCityTb_TextChanged">
+                                        <Binding Path="Address" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:TextBoxValidation TextBoxType="String"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox>
+                                    <Label Content="* Province" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="229,201,0,0" FontWeight="Normal" Grid.Column="1"/>
+                                    <ComboBox x:Name="empProvinceCb" Margin="246,232,0,0" VerticalAlignment="Top" Height="23" DisplayMemberPath = "locProvince" SelectedValuePath = "locProvinceID" Width="157" HorizontalAlignment="Left" FontWeight="Normal" Grid.Column="1" SelectionChanged="empProvinceCb_SelectionChanged">
+                                        <ComboBox.SelectedItem>
+                                            <Binding Path="locProvinceId" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <local:TextBoxValidation TextBoxType="ComboBox"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </ComboBox.SelectedItem>
+                                    </ComboBox>
+                                    <Label x:Name="label1_Copy7" Content="Contact Details" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="127" Margin="10,281,0,0" FontWeight="Bold" Grid.Column="1"/>
+                                    <ComboBox x:Name="contactTypeCb1" Margin="38,331,0,0" VerticalAlignment="Top" Height="25" IsEditable="True" Width="130" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" FontWeight="Normal" FontSize="12" SelectedValuePath="Content" Grid.Column="1" SelectionChanged="contactTypeCb1_SelectionChanged">
+                                        <ComboBoxItem Content="[Contact Type]"/>
+                                        <ComboBoxItem Content="Email Address"/>
+                                        <ComboBoxItem Content="Phone Number"/>
+                                        <ComboBoxItem Content="Mobile Number"/>
+                                    </ComboBox>
+                                    <TextBox x:Name="contactDetailsEmailTb1" HorizontalAlignment="Left" Height="25" Margin="179,331,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center" IsEnabled="False" Grid.Column="1" TextChanged="contactDetailsEmailTb1_TextChanged">
+                                        <Binding Path="ContactValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:TextBoxValidation TextBoxType="Email"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox>
+                                    <TextBox x:Name="contactDetailsPhoneTb1" HorizontalAlignment="Left" Height="25" Margin="179,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center" IsEnabled="False" Grid.Column="1" TextChanged="contactDetailsPhoneTb1_TextChanged">
+                                        <Binding Path="ContactValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:TextBoxValidation TextBoxType="Phone"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox>
+                                    <TextBox x:Name="contactDetailsMobileTb1" HorizontalAlignment="Left" Height="25" Margin="179,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center" IsEnabled="False" Grid.Column="1" TextChanged="contactDetailsMobileTb1_TextChanged">
+                                        <Binding Path="ContactValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:TextBoxValidation TextBoxType="Mobile"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox>
+                                    <Button x:Name="addNewEmpContactBtn" Content="Add" HorizontalAlignment="Left" Margin="415,332,0,0" VerticalAlignment="Top" Width="75" FontWeight="Normal" Height="25" Click="addNewEmpContactBtn_Click" Background="#FF03BD03" BorderBrush="#FF019C01" Foreground="#FFF7F4F4" FontFamily="Segoe UI Semibold" FontSize="14" Grid.Column="1"/>
+                                    <Button x:Name="saveEmpContactBtn" Content="save" HorizontalAlignment="Left" Margin="416,321,0,0" VerticalAlignment="Top" Width="66" FontWeight="Normal" Height="23" Click="saveCustContactBtn_Click" IsEnabled="False" Visibility="Hidden" Grid.Column="1"/>
+                                    <Button x:Name="cancelEmpContactBtn" Content="cancel" HorizontalAlignment="Left" Margin="487,321,0,0" VerticalAlignment="Top" Width="66" FontWeight="Normal" Height="23" Click="cancelCustContactBtn_Click" IsEnabled="True" Visibility="Hidden" Grid.Column="1"/>
+                                    <DataGrid x:Name="empContactsDg" HorizontalAlignment="Left" Height="148" Margin="37,381,0,0" VerticalAlignment="Top" Width="547" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedEmpContact}" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30"  ItemsSource="{Binding EmpContacts}" Grid.Column="1" SelectionChanged="empContactsDg_SelectionChanged">
+                                        <DataGrid.Columns >
+                                            <DataGridTextColumn Binding="{Binding ContactTypeID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"/>
+                                            <DataGridTextColumn Binding="{Binding ContactType}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Contact Type"/>
+                                            <DataGridTextColumn Binding="{Binding ContactDetails}" ClipboardContentBinding="{x:Null}" Header="Contact Details" Width="200" CanUserResize="False"/>
+                                            <DataGridTemplateColumn x:Name="colEditEmpContact" Width="100" Visibility="Hidden"  CanUserResize="False">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Button x:Name="editEmpContBtn" Click="editEmpContBtn_Click" Content="Edit"/>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTemplateColumn x:Name="colDelEmpContact" Width="100" Visibility="Hidden"  CanUserResize="False">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Button x:Name="delEmpContBtn" Click="delEmpContBtn_Click" Content="Delete" />
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                    <Label Content="Position" HorizontalAlignment="Left" Margin="10,554,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1"/>
+                                    <ComboBox x:Name="empPostionCb" HorizontalAlignment="Left" Margin="37,583,0,0" VerticalAlignment="Top" Width="162" Height="26" Grid.Column="1" SelectedValuePath="positionid" DisplayMemberPath="positionName" FontWeight="Normal" SelectionChanged="empPostionCb_SelectionChanged">
+                                        <ComboBox.SelectedItem>
+                                            <Binding Path="positionSelected" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <local:TextBoxValidation TextBoxType="ComboBox"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </ComboBox.SelectedItem>
+                                    </ComboBox>
+                                    <Label x:Name="label_Copy5" Content="Account Credentials" HorizontalAlignment="Left" Margin="10,625,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1"/>
+                                    <Label x:Name="label_Copy1" Content="* Username" HorizontalAlignment="Left" Margin="38,659,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1" Width="99"/>
+                                    <TextBox x:Name="empUserNameTb" HorizontalAlignment="Left" Height="25" Margin="38,688,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center" IsEnabled="False" Grid.Column="1" TextChanged="empUserNameTb_TextChanged">
+                                        <!--<Binding Path="ContactValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:TextBoxValidation TextBoxType="Email"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>-->
+                                    </TextBox>
+                                    <TextBox x:Name="empPasswordTb" HorizontalAlignment="Left" Height="25" Margin="38,760,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center" IsEnabled="False" Grid.Column="1" TextChanged="empPasswordTb_TextChanged">
+                                    </TextBox>
+                                    <Label Content="* Job Title" HorizontalAlignment="Left" Margin="10,790,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1"/>
+                                    <ComboBox x:Name="empJobCb" HorizontalAlignment="Left" Margin="37,819,0,0" VerticalAlignment="Top" Width="162" Height="26" Grid.Column="1" SelectedValuePath="positionId" DisplayMemberPath="positionName" FontWeight="Normal" SelectionChanged="empPostionCb_SelectionChanged">
+                                        <ComboBox.SelectedItem>
+                                            <Binding Path="positionSelected" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <local:TextBoxValidation TextBoxType="ComboBox"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </ComboBox.SelectedItem>
+                                    </ComboBox>
+                                    <Label Content="Duration of Employment" HorizontalAlignment="Left" Margin="6,853,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1"/>
+                                    <Label Content="* Start Date" HorizontalAlignment="Left" Margin="27,884,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
+                                    <xctk:DateTimePicker x:Name="empDateStarted" Grid.Column="1" HorizontalAlignment="Left" Margin="44,913,0,0" VerticalAlignment="Top" Width="157" Format="Custom" FormatString="yyyy-MM-dd" ValueChanged="dateStarted_ValueChanged" TimePickerVisibility="Hidden" DisplayDefaultValueOnEmptyText="True" AllowTextInput="False"/>
+                                    <Label Content="* End date" HorizontalAlignment="Left" Margin="27,939,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
+                                    <xctk:DateTimePicker x:Name="empDateEnded" HorizontalAlignment="Left" Margin="44,969,0,0" Width="157" Format="Custom" FormatString="yyyy-MM-dd" Grid.Column="1" ValueChanged="dateEnded_ValueChanged" TimePickerVisibility="Hidden" DisplayDefaultValueOnEmptyText="True" AllowTextInput="False" Height="23" VerticalAlignment="Top"/>
+                                    <Label x:Name="label_Copy2" Content="* Password" HorizontalAlignment="Left" Margin="38,731,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1" Width="99"/>
+                                </Grid>
+                            </ScrollViewer>
+
                         </GroupBox>
+                        <Grid Margin="0,0,10,10" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                            <Button x:Name="saveEmpBtn" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="saveEmpBtn_Click"/>
+                            <Button x:Name="cancelEmpBtn" Content="Cancel" HorizontalAlignment="Left" Margin="84,0,0,0" VerticalAlignment="Top" Width="75" Click="cancelEmpBtn_Click"/>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>
