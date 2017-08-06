@@ -794,7 +794,7 @@ namespace prototype2
             }
             if (dbCon.IsConnect())
             {
-                string query = "SELECT a.empID, a.empFName,a.empLname, a.empMI, a.empAddinfo, a.empAddress, a.empCity, a.empProvinceID, b.locprovince, a.positionID ,c.positionName, a.jobID, d.jobName" +
+                string query = "SELECT a.empID, a.empFName,a.empLname, a.empMI, a.empAddinfo, a.empAddress, a.empCity, a.empProvinceID, b.locprovince, a.positionID ,c.positionName, a.jobID, d.jobName " +
                     "FROM emp_cont_t a  " +
                     "JOIN provinces_t b ON a.empProvinceID = b.locProvinceId " +
                     "JOIN position_t c ON a.positionID = c.positionid " +
