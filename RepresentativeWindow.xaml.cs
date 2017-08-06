@@ -159,6 +159,7 @@ namespace prototype2
             else
             {
                 contactDetail = contactDetailsEmailTb.Text;
+                saveCustContactBtn.IsEnabled = true; 
             }
         }
 
@@ -169,6 +170,7 @@ namespace prototype2
             else
             {
                 contactDetail = contactDetailsPhoneTb.Text;
+                saveCustContactBtn.IsEnabled = true;
             }
         }
 
@@ -179,6 +181,7 @@ namespace prototype2
             else
             {
                 contactDetail = contactDetailsMobileTb.Text;
+                saveCustContactBtn.IsEnabled = true;
             }
         }
 
@@ -214,23 +217,26 @@ namespace prototype2
         {
             if (repContactsDg.SelectedItem != null)
             {
-                contactTypeCb.SelectedIndex = int.Parse(MainMenu.MainVM.SelectedRepContact.ContactTypeID);
+                MessageBox.Show(""+MainMenu.MainVM.SelectedRepContact.ContactDetails);
 
                 if (MainMenu.MainVM.SelectedRepContact.ContactTypeID.Equals("1"))
                 {
+                    contactTypeCb.SelectedIndex = int.Parse(MainMenu.MainVM.SelectedRepContact.ContactTypeID);
                     contactDetailsEmailTb.Text = MainMenu.MainVM.SelectedRepContact.ContactDetails;
-
                 }
                 else if (MainMenu.MainVM.SelectedRepContact.ContactTypeID.Equals("2"))
                 {
+                    contactTypeCb.SelectedIndex = int.Parse(MainMenu.MainVM.SelectedRepContact.ContactTypeID);
                     contactDetailsPhoneTb.Text = MainMenu.MainVM.SelectedRepContact.ContactDetails;
                 }
                 else if (MainMenu.MainVM.SelectedRepContact.ContactTypeID.Equals("3"))
                 {
+                    contactTypeCb.SelectedIndex = int.Parse(MainMenu.MainVM.SelectedRepContact.ContactTypeID);
                     contactDetailsMobileTb.Text = MainMenu.MainVM.SelectedRepContact.ContactDetails;
                 }
                 saveCustContactBtn.Visibility = Visibility.Visible;
                 cancelCustContactBtn.Visibility = Visibility.Visible;
+                addNewCustContactBtn.Visibility = Visibility.Collapsed;
             }
         }
 

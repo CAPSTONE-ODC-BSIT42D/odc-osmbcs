@@ -100,7 +100,7 @@ namespace prototype2
             set { empcontacts = value; }
         }
 
-        public Contact SelectedEmpContacts
+        public Contact SelectedEmpContact
         {
             get { return selectedContact; }
             set { SetProperty(ref selectedContact, value); }

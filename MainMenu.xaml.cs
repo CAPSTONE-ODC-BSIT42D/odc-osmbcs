@@ -1,8 +1,10 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Microsoft.Win32;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,9 +39,13 @@ namespace prototype2
             }
             dashboardGrid.Visibility = Visibility.Visible;
             contactTypeCb.SelectedIndex = 0;
+            contactTypeCb1.SelectedIndex = 0;
             contactDetailsMobileTb.IsEnabled = false;
             contactDetailsPhoneTb.IsEnabled = false;
             contactDetailsEmailTb.IsEnabled = false;
+            contactDetailsMobileTb1.IsEnabled = false;
+            contactDetailsPhoneTb1.IsEnabled = false;
+            contactDetailsEmailTb1.IsEnabled = false;
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
@@ -601,22 +607,37 @@ namespace prototype2
 
         private void setManageEmployeeGridControls()
         {
+
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
-                string query = "";
+                string query = "SELECT * FROM position_t";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
-                //dataAdapter.Fill(fromDb, "t");
-                //manageEmployeeDataGrid.ItemsSource = fromDb.Tables["t"].DefaultView;
+                dataAdapter.Fill(fromDb, "t");
+                empPostionCb.ItemsSource = fromDb.Tables["t"].DefaultView;
+                dbCon.Close();
+            }
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT jobID, jobName FROM job_title_t";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                dataAdapter.Fill(fromDb, "t");
+                empPostionCb.ItemsSource = fromDb.Tables["t"].DefaultView;
                 dbCon.Close();
             }
         }
 
         private void manageEmployeeAddBtn_Click(object sender, RoutedEventArgs e)
         {
-            addEmployee addEmployee = new addEmployee();
-            addEmployee.ShowDialog();
+            manageEmployeeGrid.Visibility = Visibility.Hidden;
+            employeeDetailsGrid.Visibility = Visibility.Visible;
+            employeeDetailsHeader.Content = "Manage Employee - New Employee";
+            empType = 0;
+            empJobCb.IsEnabled = false;
+            empDateStarted.IsEnabled = false;
+            empDateEnded.IsEnabled = false;
             setManageEmployeeGridControls();
         }
 
@@ -642,7 +663,7 @@ namespace prototype2
                 {
                     if (dbCon.IsConnect())
                     {
-                        string query = "UPDATE `employee_t` SET `isDeleted`= 1 WHERE empID = '" + id + "';";
+                        string query = "UPDATE `emp_cont_t` SET `isDeleted`= 1 WHERE empID = '" + id + "';";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             MessageBox.Show("Record successfully deleted!");
@@ -678,6 +699,107 @@ namespace prototype2
         /*
         /*
         /*
+        /*-----------------MANAGE CONTRACTOR-------------------------*/
+        
+        private void contractorManageMenuBtn_Click(object sender, RoutedEventArgs e)
+        {
+            saleSubMenuGrid.Visibility = Visibility.Collapsed;
+            manageSubMenugrid.Visibility = Visibility.Collapsed;
+            for (int x = 0; x < containerGrid.Children.Count; x++)
+            {
+                containerGrid.Children[x].Visibility = Visibility.Collapsed;
+            }
+            manageGrid.Visibility = Visibility.Visible;
+            for (int x = 0; x < manageGrid.Children.Count; x++)
+            {
+                manageGrid.Children[x].Visibility = Visibility.Collapsed;
+            }
+            manageContractorGrid.Visibility = Visibility.Visible;
+        }
+
+        private void btnEditCont_Click(object sender, RoutedEventArgs e)
+        {
+            if (manageContractorDataGrid.SelectedItems.Count > 0)
+            {
+                String id = (manageContractorDataGrid.Columns[0].GetCellContent(manageContractorDataGrid.SelectedItem) as TextBlock).Text;
+                editContractor editContractor = new editContractor(id);
+                editContractor.ShowDialog();
+                setManageContractorGridControls();
+            }
+        }
+
+        private void btnDeleteCont_Click(object sender, RoutedEventArgs e)
+        {
+            if (manageContractorDataGrid.SelectedItems.Count > 0)
+            {
+                String id = (manageContractorDataGrid.Columns[0].GetCellContent(manageContractorDataGrid.SelectedItem) as TextBlock).Text;
+                var dbCon = DBConnection.Instance();
+                MessageBoxResult result = MessageBox.Show("Do you wish to delete this Contractor record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.OK)
+                {
+                    using (MySqlConnection conn = dbCon.Connection)
+                    {
+                        string query = "UPDATE `contractor_t` SET `isDeleted`= 1 WHERE contID = '" + id + "';";
+                        if (dbCon.insertQuery(query, conn))
+                        {
+                            MessageBox.Show("Record successfully deleted!");
+                            setManageContractorGridControls();
+                        }
+                    }
+
+                }
+                else if (result == MessageBoxResult.Cancel)
+                {
+                }
+            }
+        }
+
+        private void manageContractorGrid_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            setManageContractorGridControls();
+        }
+
+        private void setManageContractorGridControls()
+        {
+            var dbCon = DBConnection.Instance();
+            using (MySqlConnection conn = dbCon.Connection)
+            {
+                string query = query = "";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, conn);
+                DataSet fromDb = new DataSet();
+                //dataAdapter.Fill(fromDb, "t");
+                //manageContractorDataGrid.ItemsSource = fromDb.Tables["t"].DefaultView;
+                dbCon.Close();
+            }
+        }
+
+        private void manageContractorAddBtn_Click(object sender, RoutedEventArgs e)
+        {
+            manageContractorGrid.Visibility = Visibility.Hidden;
+            employeeDetailsGrid.Visibility = Visibility.Visible;
+            employeeDetailsHeader.Content = "Manage Contractor - New Contractor";
+            empType = 1;
+            setManageContractorGridControls();
+        }
+
+        private void manageContractorDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Visual visual = e.OriginalSource as Visual;
+            if (visual.IsDescendantOf(manageContractorDataGrid))
+            {
+                if (manageContractorDataGrid.SelectedItems.Count > 0)
+                {
+                    manageContractorDataGrid.Columns[manageContractorDataGrid.Columns.IndexOf(columnEditBtnCont)].Visibility = Visibility.Visible;
+                    manageContractorDataGrid.Columns[manageContractorDataGrid.Columns.IndexOf(columnDelBtnCont)].Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+        /*-----------------END OF MANAGE CONTRACTOR-------------------*/
+        /*
+        /*
+        /*
+        /**/
         /*
         /*
         /*-----------------MANAGE SUPPLIER-------------------------*/
@@ -709,14 +831,20 @@ namespace prototype2
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
-                string query = "SELECT cs.companyID, cs.companyName, cs.companyAddInfo, CONCAT(cs.companyAddress,', ',cs.companyCity,', ',p.locProvince) AS custLocation " +
+                string query = "SELECT cs.companyID, cs.companyName, cs.companyAddInfo, cs.companyAddress,cs.companyCity,p.locProvince,cs.companyProvinceID " +
                     "FROM cust_supp_t cs  " +
                     "JOIN provinces_t p ON cs.companyProvinceID = p.locProvinceId " +
                     "WHERE isDeleted = 0 AND companyType = 1;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
-                manageSupplierDataGrid.ItemsSource = fromDb.Tables["t"].DefaultView;
+                fromDbTable = fromDb.Tables["t"];
+                MainVM.Customers.Clear();
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.Customers.Add(new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString() });
+                }
                 dbCon.Close();
             }
             
@@ -725,7 +853,7 @@ namespace prototype2
         private void btnEditSupp_Click(object sender, RoutedEventArgs e)
         {
             loadCustSuppDetails();
-            manageCustomerGrid.Visibility = Visibility.Hidden;
+            manageSupplierGrid.Visibility = Visibility.Hidden;
             companyDetailsGrid.Visibility = Visibility.Visible;
             companyDetailsHeader.Content = "Manage Supplier - Edit Supplier";
             isEdit = true;
@@ -849,115 +977,13 @@ namespace prototype2
         /*
         /*
         /*
-        /*
-        /*-----------------MANAGE CONTRACTOR-------------------------*/
-
-
-
-        private void contractorManageMenuBtn_Click(object sender, RoutedEventArgs e)
-        {
-            saleSubMenuGrid.Visibility = Visibility.Collapsed;
-            manageSubMenugrid.Visibility = Visibility.Collapsed;
-            for (int x = 0; x < containerGrid.Children.Count; x++)
-            {
-                containerGrid.Children[x].Visibility = Visibility.Collapsed;
-            }
-            manageGrid.Visibility = Visibility.Visible;
-            for (int x = 0; x < manageGrid.Children.Count; x++)
-            {
-                manageGrid.Children[x].Visibility = Visibility.Collapsed;
-            }
-            manageContractorGrid.Visibility = Visibility.Visible;
-        }
-
-        private void btnEditCont_Click(object sender, RoutedEventArgs e)
-        {
-            if (manageContractorDataGrid.SelectedItems.Count > 0)
-            {
-                String id = (manageContractorDataGrid.Columns[0].GetCellContent(manageContractorDataGrid.SelectedItem) as TextBlock).Text;
-                editContractor editContractor = new editContractor(id);
-                editContractor.ShowDialog();
-                setManageContractorGridControls();
-            }
-        }
-
-        private void btnDeleteCont_Click(object sender, RoutedEventArgs e)
-        {
-            if (manageContractorDataGrid.SelectedItems.Count > 0)
-            {
-                String id = (manageContractorDataGrid.Columns[0].GetCellContent(manageContractorDataGrid.SelectedItem) as TextBlock).Text;
-                var dbCon = DBConnection.Instance();
-                MessageBoxResult result = MessageBox.Show("Do you wish to delete this Contractor record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
-                if (result == MessageBoxResult.OK)
-                {
-                    using (MySqlConnection conn = dbCon.Connection)
-                    {
-                        string query = "UPDATE `contractor_t` SET `isDeleted`= 1 WHERE contID = '" + id + "';";
-                        if (dbCon.insertQuery(query, conn))
-                        {
-                            MessageBox.Show("Record successfully deleted!");
-                            setManageContractorGridControls();
-                        }
-                    }
-
-                }
-                else if (result == MessageBoxResult.Cancel)
-                {
-                }
-            }
-        }
-
-        private void manageContractorGrid_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            setManageContractorGridControls();
-        }
-
-        private void setManageContractorGridControls()
-        {
-            var dbCon = DBConnection.Instance();
-            using (MySqlConnection conn = dbCon.Connection)
-            {
-                string query = query = "";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, conn);
-                DataSet fromDb = new DataSet();
-                //dataAdapter.Fill(fromDb, "t");
-                //manageContractorDataGrid.ItemsSource = fromDb.Tables["t"].DefaultView;
-                dbCon.Close();
-            }
-        }
-
-        private void manageContractorAddBtn_Click(object sender, RoutedEventArgs e)
-        {
-            addContractor addContractor = new addContractor();
-            addContractor.ShowDialog();
-            setManageContractorGridControls();
-        }
-
-        private void manageContractorDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Visual visual = e.OriginalSource as Visual;
-            if (visual.IsDescendantOf(manageContractorDataGrid))
-            {
-                if (manageContractorDataGrid.SelectedItems.Count > 0)
-                {
-                    manageContractorDataGrid.Columns[manageContractorDataGrid.Columns.IndexOf(columnEditBtnCont)].Visibility = Visibility.Visible;
-                    manageContractorDataGrid.Columns[manageContractorDataGrid.Columns.IndexOf(columnDelBtnCont)].Visibility = Visibility.Visible;
-                }
-            }
-        }
+        /**/
+        
 
         private void servicesDg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
-
-
-        /*-----------------END OF MANAGE CONTRACTOR-------------------*/
-        /*
-        /*
-        /*
-        /*
-        /*
 
         /*----------------------------------------*/
         private int compType = 0;
@@ -1710,7 +1736,115 @@ namespace prototype2
                 validateEmployeeTextBoxes();
             }
         }
+
+        byte[] picdata;
+        byte[] sigdata;
+        private void openFileBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                try
+                {
+                    FileStream fs = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read);
+                    BinaryReader br = new BinaryReader(fs);
+                    empImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                    picdata = br.ReadBytes((int)fs.Length);
+                    br.Close();
+                    fs.Close();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+            }
+        }
+
+        private void empContactsDg_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void addNewEmpContactBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (!(System.Windows.Controls.Validation.GetHasError(contactDetailsPhoneTb1) == true) && !(System.Windows.Controls.Validation.GetHasError(contactDetailsEmailTb1) == true) && !(System.Windows.Controls.Validation.GetHasError(contactDetailsMobileTb1) == true))
+            {
+                if (contactTypeCb1.SelectedIndex != 0)
+                {
+
+                    MainVM.EmpContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
+                    clearContactsBoxes();
+                    validateCustomerDetailsTextBoxes();
+                    contactTypeCb1.SelectedIndex = 0;
+                }
+                else
+                {
+                    MessageBox.Show("Please choose from the selection before adding.");
+                }
+            }
+            else
+                MessageBox.Show("Please resolve the error first.");
+        }
+
+        private void editEmpContBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void delEmpContBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void dateStarted_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+
+        }
+
+        private void dateEnded_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+
+        }
+
+        private void empPostionCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            validateEmployeeTextBoxes();
+        }
+
+        private void empUserNameTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void empPasswordTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void saveEmpBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Do you wish to save this record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.OK)
+            {
+                empDataToDb();
+            }
+            else if (result == MessageBoxResult.Cancel)
+            {
+            }
+        }
+
+        private void cancelEmpBtn_Click(object sender, RoutedEventArgs e)
+        {
+            clearEmployeeDetailsGrid();
+        }
+
+        
+
         private string empId;
+        private int empType = 0;
         private void empDataToDb()
         {
             var dbCon = DBConnection.Instance();
@@ -1750,25 +1884,28 @@ namespace prototype2
                     cmd.Parameters.AddWithValue("@provinceID", custProvinceCb.SelectedValue);
                     cmd.Parameters["@provinceID"].Direction = ParameterDirection.Input;
 
-                    cmd.Parameters.AddWithValue("@username", compType);
+                    cmd.Parameters.AddWithValue("@username", empUserNameTb.Text);
                     cmd.Parameters["@username"].Direction = ParameterDirection.Input;
 
-                    cmd.Parameters.AddWithValue("@password", compType);
+                    cmd.Parameters.AddWithValue("@password", empPasswordTb.Text);
                     cmd.Parameters["@password"].Direction = ParameterDirection.Input;
 
-                    cmd.Parameters.AddWithValue("@positionID", compType);
+                    cmd.Parameters.AddWithValue("@positionID", empPostionCb.SelectedValue);
                     cmd.Parameters["@positionID"].Direction = ParameterDirection.Input;
 
-                    cmd.Parameters.AddWithValue("@jobID", compType);
-                    cmd.Parameters["@jobID"].Direction = ParameterDirection.Input;
+                    if (empType == 1)
+                    {
+                        cmd.Parameters.AddWithValue("@jobID",empJobCb);
+                        cmd.Parameters["@jobID"].Direction = ParameterDirection.Input;
 
-                    cmd.Parameters.AddWithValue("@dateFrom", compType);
-                    cmd.Parameters["@dateFrom"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@dateFrom", empDateStarted);
+                        cmd.Parameters["@dateFrom"].Direction = ParameterDirection.Input;
 
-                    cmd.Parameters.AddWithValue("@dateTo", compType);
-                    cmd.Parameters["@dateTo"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@dateTo", empDateEnded);
+                        cmd.Parameters["@dateTo"].Direction = ParameterDirection.Input;
+                    }
 
-                    cmd.Parameters.AddWithValue("@empType", compType);
+                    cmd.Parameters.AddWithValue("@empType", empType);
                     cmd.Parameters["@empType"].Direction = ParameterDirection.Input;
                     if (!isEdit)
                     {
@@ -1783,23 +1920,23 @@ namespace prototype2
                         cmd.Parameters["@empID"].Direction = ParameterDirection.Input;
                         cmd.ExecuteNonQuery();
                     }
-                    foreach (Contact cont in MainVM.CustContacts)
+                    foreach (Contact cont in MainVM.EmpContacts)
                     {
                         if (cont.TableID == null)
                         {
-                            cmd = new MySqlCommand("INSERT_COMPANY_CONT", conn);
+                            cmd = new MySqlCommand("INSERT_EMPLOYEE_CONT", conn);
                             cmd.CommandType = CommandType.StoredProcedure;
                             cmd.Parameters.AddWithValue("@contactType", cont.ContactTypeID);
                             cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
                             cmd.Parameters.AddWithValue("@contactDetail", cont.ContactDetails);
                             cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
-                            cmd.Parameters.AddWithValue("@compID", compID);
-                            cmd.Parameters["@compID"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@empID", empId);
+                            cmd.Parameters["@empID"].Direction = ParameterDirection.Input;
                             cmd.ExecuteNonQuery();
                         }
                         else
                         {
-                            cmd = new MySqlCommand("UPDATE_COMPANY_CONT", conn);
+                            cmd = new MySqlCommand("UPDATE_EMPLOYEE_CONT", conn);
                             cmd.CommandType = CommandType.StoredProcedure;
                             cmd.Parameters.AddWithValue("@contactType", cont.ContactTypeID);
                             cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
@@ -1809,86 +1946,32 @@ namespace prototype2
                             cmd.Parameters["@tableID"].Direction = ParameterDirection.Input;
                             cmd.ExecuteNonQuery();
                         }
-
-
                     }
-                    //INSERT REPRESENTATIVE TO DB;
-                    string repID = "";
-                    foreach (Representative rep in MainVM.CustRepresentatives)
+                    if (!isEdit)
                     {
-                        if (rep.RepresentativeID == null)
-                        {
-                            cmd = new MySqlCommand("INSERT_REP", conn);
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@repLName", rep.RepLastName);
-                            cmd.Parameters["@repLName"].Direction = ParameterDirection.Input;
-                            cmd.Parameters.AddWithValue("@repFName", rep.RepFirstName);
-                            cmd.Parameters["@repFName"].Direction = ParameterDirection.Input;
-                            cmd.Parameters.AddWithValue("@repMName", rep.RepMiddleName);
-                            cmd.Parameters["@repMName"].Direction = ParameterDirection.Input;
-                            cmd.Parameters.AddWithValue("@custID", compID);
-                            cmd.Parameters["@custID"].Direction = ParameterDirection.Input;
-                            cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
-                            cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
-                            cmd.ExecuteNonQuery();
-                            repID = cmd.Parameters["@insertedid"].Value.ToString();
-                        }
-                        else
-                        {
-                            cmd = new MySqlCommand("UPDATE_REP", conn);
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@repLName", rep.RepLastName);
-                            cmd.Parameters["@repLName"].Direction = ParameterDirection.Input;
-                            cmd.Parameters.AddWithValue("@repFName", rep.RepFirstName);
-                            cmd.Parameters["@repFName"].Direction = ParameterDirection.Input;
-                            cmd.Parameters.AddWithValue("@repMName", rep.RepMiddleName);
-                            cmd.Parameters["@repMName"].Direction = ParameterDirection.Input;
-                            cmd.Parameters.AddWithValue("@repID", rep.RepresentativeID);
-                            cmd.Parameters["@repID"].Direction = ParameterDirection.Input;
-                            cmd.ExecuteNonQuery();
-                        }
-                        //INSERT CONTACTS OF REPRESENTATIVE TO DB;
-                        foreach (Contact repcont in rep.ContactsOfRep)
-                        {
-                            if (repcont.TableID == null)
-                            {
-                                cmd = new MySqlCommand("INSERT_REP_CONT", conn);
-                                cmd.CommandType = CommandType.StoredProcedure;
-                                cmd.Parameters.AddWithValue("@contactType", repcont.ContactTypeID);
-                                cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
-                                cmd.Parameters.AddWithValue("@contactDetail", repcont.ContactDetails);
-                                cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
-                                cmd.Parameters.AddWithValue("@repID", repID);
-                                cmd.Parameters["@repId"].Direction = ParameterDirection.Input;
-                                cmd.ExecuteNonQuery();
-                            }
-                            else
-                            {
-
-                                cmd = new MySqlCommand("UPDATE_REP_CONT", conn);
-                                cmd.CommandType = CommandType.StoredProcedure;
-                                cmd.Parameters.AddWithValue("@contactType", repcont.ContactTypeID);
-                                cmd.Parameters["@contactType"].Direction = ParameterDirection.Input;
-                                cmd.Parameters.AddWithValue("@contactDetail", repcont.ContactDetails);
-                                cmd.Parameters["@contactDetail"].Direction = ParameterDirection.Input;
-                                cmd.Parameters.AddWithValue("@tableID", repcont.TableID);
-                                cmd.Parameters["@tableID"].Direction = ParameterDirection.Input;
-                                cmd.ExecuteNonQuery();
-                            }
-
-
-                            if (!isEdit)
-                            {
-
-                            }
-                            else
-                            {
-
-                            }
-                        }
-
+                        cmd = new MySqlCommand("INSERT_EMPLOYEE_PIC_T", conn);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@picBLOB", picdata);
+                        cmd.Parameters["@picBLOB"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@sigBLOB", null);
+                        cmd.Parameters["@sigBLOB"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@empID", empId);
+                        cmd.Parameters["@empID"].Direction = ParameterDirection.Input;
+                        cmd.ExecuteNonQuery();
                     }
-                    clearCompanyDetailsGrid();
+                    else
+                    {
+                        cmd = new MySqlCommand("INSERT_EMPLOYEE_PIC_T", conn);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@picBLOB", picdata);
+                        cmd.Parameters["@picBLOB"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@sigBLOB", null);
+                        cmd.Parameters["@sigBLOB"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@empID", empId);
+                        cmd.Parameters["@empID"].Direction = ParameterDirection.Input;
+                        cmd.ExecuteNonQuery();
+                    }
+                    clearEmployeeDetailsGrid();
                 }
             }
             catch (Exception)
@@ -1899,6 +1982,27 @@ namespace prototype2
             {
             }
         }
+
+        private void clearEmployeeDetailsGrid()
+        {
+            isEdit = false;
+            if (empType == 0)
+            {
+                empType = 0;
+                manageEmployeeGrid.Visibility = Visibility.Visible;
+                employeeDetailsGrid.Visibility = Visibility.Hidden;
+                setManageEmployeeGridControls();
+            }
+            else if (empType == 1)
+            {
+                empType= 0;
+                manageContractorGrid.Visibility = Visibility.Visible;
+                employeeDetailsGrid.Visibility = Visibility.Hidden;
+                setManageContractorGridControls();
+            }
+        }
+
+        
     }
     internal class Item : INotifyPropertyChanged
     {
