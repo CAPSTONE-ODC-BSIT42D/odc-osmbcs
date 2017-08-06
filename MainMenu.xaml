@@ -1002,15 +1002,14 @@
                             <Button x:Name="button4" Content="search" HorizontalAlignment="Left" Margin="396,3,0,0" VerticalAlignment="Top" Width="75" Height="23"/>
                         </Grid>
                         <Button x:Name="manageContractorAddBtn" Content="+ add new" HorizontalAlignment="Right" Height="26" Margin="0,0,10,0" VerticalAlignment="Top" Width="90" Click="manageContractorAddBtn_Click"/>
-                        <DataGrid x:Name="manageContractorDataGrid" Margin="10,41,10,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" SelectionChanged="manageContractorDataGrid_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" IsVisibleChanged="manageEmployeeDataGrid_IsVisibleChanged" RowHeight="30">
+                        <DataGrid x:Name="manageContractorDataGrid" Margin="10,41,10,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="manageContractorDataGrid_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" IsVisibleChanged="manageEmployeeDataGrid_IsVisibleChanged" RowHeight="30" ItemsSource="{Binding Employees}" SelectedItem ="{Binding SelectedEmployee}">
                             <DataGrid.Columns >
-                                <DataGridTextColumn Binding="{Binding contID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"/>
-                                <DataGridTextColumn Binding="{Binding empPic}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"/>
-                                <DataGridTextColumn Binding="{Binding contName}" ClipboardContentBinding="{x:Null}" Header="Contractor Name" Width="200" CanUserResize="False"/>
-                                <DataGridTextColumn Binding="{Binding contAddress}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350" />
-                                <DataGridTextColumn Binding="{Binding contContact}" ClipboardContentBinding="{x:Null}" Header="Mobile Number" Width="150" CanUserResize="False"/>
-                                <DataGridTextColumn Binding="{Binding contEmail}" ClipboardContentBinding="{x:Null}" Header="Email Address" Width="200" CanUserResize="False" />
-                                <DataGridTextColumn Binding="{Binding jobTitle}" ClipboardContentBinding="{x:Null}" Header="Job Title" Width="200" CanUserResize="False" />
+                                <DataGridTextColumn Binding="{Binding EmpID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"/>
+                                <DataGridTextColumn Binding="{Binding EmpFName}" ClipboardContentBinding="{x:Null}" Header="First Name" Width="75" CanUserResize="False" Visibility="Visible"/>
+                                <DataGridTextColumn Binding="{Binding EmpLName}" ClipboardContentBinding="{x:Null}" Header="Last Name" Width="200" CanUserResize="False"/>
+                                <DataGridTextColumn Binding="{Binding EmpAddress}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350" />
+                                <DataGridTextColumn Binding="{Binding EmpCity}" ClipboardContentBinding="{x:Null}" Header="City" Width="200" CanUserResize="False"/>
+                                <DataGridTextColumn Binding="{Binding PositionName}" ClipboardContentBinding="{x:Null}" Header="Position" Width="100" CanUserResize="False" />
                                 <DataGridTemplateColumn x:Name="columnEditBtnCont" Width="100" Visibility="Hidden"  CanUserResize="False">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>

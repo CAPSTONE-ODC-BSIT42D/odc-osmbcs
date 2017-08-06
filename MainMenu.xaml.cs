@@ -640,10 +640,10 @@ namespace prototype2
                 DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
                 fromDbTable = fromDb.Tables["t"];
-                MainVM.Customers.Clear();
+                MainVM.Employees.Clear();
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    MainVM.Employees.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), PositionID = dr["positionID"].ToString() , PositionName = dr["positionName"].ToString(), JobID = dr["jobID"].ToString(), JobName = dr["jobName"].ToString() });
+                    MainVM.Employees.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), PositionID = dr["positionID"].ToString() , PositionName = dr["positionName"].ToString() });
                 }
                 dbCon.Close();
             }
@@ -790,6 +790,26 @@ namespace prototype2
                 DataSet fromDb = new DataSet();
                 //dataAdapter.Fill(fromDb, "t");
                 //manageContractorDataGrid.ItemsSource = fromDb.Tables["t"].DefaultView;
+                dbCon.Close();
+            }
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT a.empID, a.empFName,a.empLname, a.empMI, a.empAddinfo, a.empAddress, a.empCity, a.empProvinceID, b.locprovince, a.positionID ,c.positionName, a.jobID, d.jobName" +
+                    "FROM emp_cont_t a  " +
+                    "JOIN provinces_t b ON a.empProvinceID = b.locProvinceId " +
+                    "JOIN position_t c ON a.positionID = c.positionid " +
+                    "JOIN job_title_t d ON a.jobID = d.jobID " +
+                    "WHERE isDeleted = 0 AND empType = 1;";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                MainVM.Employees.Clear();
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.Employees.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), PositionID = dr["positionID"].ToString(), PositionName = dr["positionName"].ToString(), JobID = dr["jobID"].ToString(), JobName = dr["jobName"].ToString() });
+                }
                 dbCon.Close();
             }
         }
