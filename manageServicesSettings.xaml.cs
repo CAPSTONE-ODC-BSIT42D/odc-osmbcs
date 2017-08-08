@@ -108,6 +108,11 @@ namespace prototype2
                         MessageBox.Show("Service type added!");
                         serviceTypeList.Visibility = Visibility.Visible;
                         serviceTypeAdd.Visibility = Visibility.Collapsed;
+
+                        //clearing textboxes
+                        serviceName.Clear();
+                        serviceDesc.Clear();
+                        servicePrice.Value = 0;
                         setWindowControls();
                     }
                 }
@@ -162,9 +167,18 @@ namespace prototype2
                         serviceName.Text = dr["serviceName"].ToString();
                         serviceDesc.Text = dr["serviceDesc"].ToString();
                         servicePrice.Text = dr["servicePrice"].ToString();
+
+
+                        serviceName.Clear();
+                        serviceDesc.Clear();
+                        servicePrice.Value = 0;
                     }
                     catch (Exception)
                     {
+
+                        serviceName.Clear();
+                        serviceDesc.Clear();
+                        servicePrice.Value = 0;
                         throw;
                     }
                 }
@@ -250,6 +264,10 @@ namespace prototype2
                             MessageBox.Show("Price saved.");
                             custProvinceCb.SelectedValue = -1;
                             locationPrice.Value = 0;
+
+                            serviceName.Clear();
+                            serviceDesc.Clear();
+                            servicePrice.Value = 0;
                             setWindowControls();
                         }
                     }

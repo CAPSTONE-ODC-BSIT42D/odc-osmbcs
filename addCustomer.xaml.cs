@@ -93,6 +93,12 @@ namespace prototype2
                             if (dbCon.insertQuery(query, dbCon.Connection))
                             {
                                 MessageBox.Show("Saved");
+                                //clearing textboxes
+                                custCompanyNameTb.Clear();
+                                locationAddressTb.Clear();
+                                cityCb.SelectedValue = -1;
+                                officeNumber.Clear();
+                                emailAddress.Clear();
                                 this.Close();
                             }
                         }

@@ -28,7 +28,7 @@ namespace prototype2
         private static String dbname = "odc_db";
 
         //EMPLOYEE PART
-        string posID = "";
+        string positionID = "";
         private void addEmpPosBtn_Click(object sender, RoutedEventArgs e)
         {
             var dbCon = DBConnection.Instance();
@@ -58,15 +58,19 @@ namespace prototype2
         {
             var dbCon = DBConnection.Instance();
             dbCon.DatabaseName = dbname;
-            if (employeePositionLb.Items.Contains(empPosNewTb.Text))
+            if (String.IsNullOrWhiteSpace(empPosNewTb.Text))
             {
-                MessageBox.Show("Already in the list.");
+                MessageBox.Show("Employee Position must be filled");
             }
             else
             {
+                if (employeePositionLb.Items.Contains(empPosNewTb.Text))
+                {
+                    MessageBox.Show("Already in the list.");
+                }
                 if (dbCon.IsConnect())
                 {
-                    string query = "UPDATE `odc_db`.`position_t` set `positionName` = '" + empPosNewTb.Text + "' where positionID = '" + posID + "'";
+                    string query = "UPDATE `odc_db`.`position_t` set `positionName` = '" + empPosNewTb.Text + "' where positionID = '" + positionID + "'";
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
                         MessageBox.Show("Saved");
@@ -80,19 +84,32 @@ namespace prototype2
         }
         private void deleteEmpPosBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (employeePositionLb.SelectedItems.Count != 0)
+            if (employeePositionLb.SelectedItems.Count > 0)
             {
                 var dbCon = DBConnection.Instance();
                 dbCon.DatabaseName = dbname;
                 if (dbCon.IsConnect())
                 {
-                    string query = "DELETE FROM `odc_db`.`position_t` WHERE `positionID`='" + employeePositionLb.SelectedValue + "';";
-                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    try
                     {
-                        dbCon.Close();
-                        MessageBox.Show("Delete the position");
-                        setListBoxControls();
+                        foreach (object list in employeePositionLb.Items)
+                        {
+                            if (employeePositionLb.SelectedItems.Count != 0)
+                            {
+                                positionID = (String)employeePositionLb.SelectedValue.ToString();
+                                empPosNewTb.Text = (employeePositionLb.SelectedItem as DataRowView)["positionName"].ToString();
+                                string query = "DELETE FROM `odc_db`.`position_t` WHERE `positionID`='" + employeePositionLb.SelectedValue + "';";
+
+                                if (dbCon.insertQuery(query, dbCon.Connection))
+                                {
+                                    dbCon.Close();
+                                    MessageBox.Show("Position deleted.");
+                                    setListBoxControls();
+                                }
+                            }
+                        }
                     }
+                    catch (Exception) { throw; }
                 }
             }
             else
@@ -104,16 +121,36 @@ namespace prototype2
 
         private void editEmpPosBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (employeePositionLb.SelectedItems.Count != 0)
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = dbname;
+
+            if (employeePositionLb.SelectedItems.Count > 0)
             {
-                posID = employeePositionLb.SelectedValue.ToString();
+                positionID = employeePositionLb.SelectedValue.ToString();
                 empPosNewTb.Text = (employeePositionLb.SelectedItem as DataRowView)["positionName"].ToString();
                 saveEmpPosBtn.Visibility = Visibility.Visible;
+
+                string query = "SELECT * FROM position_t WHERE positionid = '" + positionID + "';";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+
+                DataSet fromDb = new DataSet();
+                dataAdapter.Fill(fromDb, "t");
+                DataTable fromDbTable = new DataTable();
+                fromDbTable = fromDb.Tables["t"];
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    try {
+                        empPosNewTb.Text = dr["empPosNewTb"].ToString();
+
+                    }//try                        
+                    catch (Exception) { throw;   }
+                }
             }
             else
             {
-                MessageBox.Show("Select a position first.");
+                MessageBox.Show("Please select a position first.");
             }
+            dbCon.Close();
         }
 
        

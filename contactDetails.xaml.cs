@@ -83,7 +83,7 @@ namespace prototype2
                 contactDetailsMobileTb.Text = "";
                 contactDetailsPhoneTb.Text = "";
                 contactDetail = "";
-                MessageBox.Show("Added!");
+                MessageBox.Show("Contact successfull added!");
             }
         }
         

@@ -58,7 +58,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <ComboBox x:Name="contactTypeCb" Margin="19,46,428,0" VerticalAlignment="Top" Height="23" DisplayMemberPath = "locProvince" SelectedValuePath = "locProvinceID" Width="130" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" SelectedIndex="1" SelectionChanged="contactTypeCb_SelectionChanged" FontSize="14">
+        <ComboBox x:Name="contactTypeCb" Margin="19,46,428,0" VerticalAlignment="Top" Height="23" DisplayMemberPath = "locProvince" SelectedValuePath = "locProvinceID" Width="130" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" SelectedIndex="1" SelectionChanged="contactTypeCb_SelectionChanged" FontSize="14" IsDropDownOpen="True">
             <ComboBoxItem>[Contact Type]</ComboBoxItem>
             <ComboBoxItem>Email Address</ComboBoxItem>
             <ComboBoxItem>Phone Number</ComboBoxItem>
