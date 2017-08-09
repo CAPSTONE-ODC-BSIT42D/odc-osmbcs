@@ -348,6 +348,16 @@ namespace prototype2
 
         }
 
+        private void transReqAddNewItem_Click(object sender, RoutedEventArgs e)
+        {
+            addNewItem newItem = new addNewItem();
+            newItem.ShowDialog();
+            //foreach (Representative rep in MainVM.Representatives)
+            //{
+
+            //}
+        }
+
         private void transQuotationSaveBtn_Click(object sender, RoutedEventArgs e)
         {
             for (int x = 1; x < transactionQuotationsGrid.Children.Count; x++)
@@ -614,6 +624,7 @@ namespace prototype2
                     "FROM emp_cont_t a  " +
                     "JOIN provinces_t b ON a.empProvinceID = b.locProvinceId " +
                     "JOIN position_t c ON a.positionID = c.positionid " +
+                    "JOIN " +
                     //"JOIN job_title_t d ON a.jobID = d.jobID " +
                     "WHERE isDeleted = 0 AND empType = 0;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
@@ -1577,15 +1588,7 @@ namespace prototype2
             Validation.ClearInvalid((contactDetailsMobileTb1).GetBindingExpression(TextBox.TextProperty));
         }
 
-        private void transReqAddNewItem_Click(object sender, RoutedEventArgs e)
-        {
-            addNewItem newItem = new addNewItem();
-            newItem.ShowDialog();
-            //foreach (Representative rep in MainVM.Representatives)
-            //{
-
-            //}
-        }
+        
 
         private void validateEmployeeTextBoxes()
         {
@@ -1798,6 +1801,7 @@ namespace prototype2
                 {
                     contactDetailsMobileTb1.Text = MainVM.SelectedEmpContact.ContactDetails;
                 }
+                addNewEmpContactBtn.Visibility = Visibility.Hidden;
                 cancelEmpContactBtn.Visibility = Visibility.Visible;
                 saveEmpContactBtn.Visibility = Visibility.Visible;
             }
@@ -1827,6 +1831,7 @@ namespace prototype2
                     clearContactsBoxes();
                     cancelCustContactBtn.Visibility = Visibility.Hidden;
                     saveCustContactBtn.Visibility = Visibility.Hidden;
+                    addNewEmpContactBtn.Visibility = Visibility.Visible;
                 }
                 else
                 {
@@ -1842,6 +1847,7 @@ namespace prototype2
             contactTypeCb1.SelectedIndex = 0;
             cancelEmpContactBtn.Visibility = Visibility.Hidden;
             saveEmpContactBtn.Visibility = Visibility.Hidden;
+            addNewEmpContactBtn.Visibility = Visibility.Visible;
             clearContactsBoxes();
         }
 
@@ -1857,17 +1863,21 @@ namespace prototype2
 
         private void empPostionCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            validateEmployeeTextBoxes();
+            if (empPostionCb.SelectedIndex>0)
+            {
+                validateEmployeeTextBoxes();
+            }
+            
         }
 
         private void empUserNameTb_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            validateEmployeeTextBoxes();
         }
 
         private void empPasswordTb_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            validateEmployeeTextBoxes();
         }
 
 
@@ -2067,8 +2077,67 @@ namespace prototype2
                 setManageContractorGridControls();
             }
         }
+        private void loadEmpContDetails()
+        {
 
-        
+            try
+            {
+                var dbCon = DBConnection.Instance();
+                using (MySqlConnection conn = dbCon.Connection)
+                {
+                    conn.Open();
+                    empFirstNameTb.Text = MainVM.SelectedEmployee.EmpFname;
+                    empMiddleInitialTb.Text = MainVM.SelectedEmployee.EmpMiddleInitial;
+                    empLastNameTb.Text = MainVM.SelectedEmployee.EmpLName;
+                    empAddressTb.Text = MainVM.SelectedEmployee.EmpAddress;
+                    empCityTb.Text = MainVM.SelectedEmployee.EmpCity;
+                    empProvinceCb.SelectedIndex = int.Parse(MainVM.SelectedEmployee.EmpProvinceID);
+                    empPostionCb.SelectedIndex = int.Parse(MainVM.SelectedEmployee.PositionID);
+                    accountCredentialsGrid.Visibility = Visibility.Visible;
+                    if (MainVM.SelectedEmployee.EmpPic==null)
+                    {
+                        using (System.IO.MemoryStream ms = new System.IO.MemoryStream(MainVM.SelectedEmployee.EmpPic))
+                        {
+                            var imageSource = new BitmapImage();
+                            imageSource.BeginInit();
+                            imageSource.StreamSource = ms;
+                            imageSource.CacheOption = BitmapCacheOption.OnLoad;
+                            imageSource.EndInit();
+                            // Assign the Source property of your image
+                            empImage.Source = imageSource;
+                        }
+                    }
+                    string query = "SELECT cs.tableID," +
+                        "cs.empId," +
+                        "cs.contactTypeID," +
+                        "cs.contactValue," +
+                        "cont.contactType" +
+                        " FROM employee_t_contact_t cs" +
+                        " JOIN contacts_t cont" +
+                        " ON cont.contactTypeID = cs.contactTypeID" +
+                        " WHERE cs.compID = '" + MainVM.SelectedEmployee.EmpID + "';";
+                    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, conn);
+                    DataSet fromDb = new DataSet();
+                    DataTable fromDbTable = new DataTable();
+                    dataAdapter.Fill(fromDb, "t");
+                    fromDbTable = fromDb.Tables["t"];
+                    foreach (DataRow dr in fromDbTable.Rows)
+                    {
+                        MainVM.EmpContacts.Add(new Contact() { TableID = dr["tableID"].ToString(), ContactDetails = dr["contactValue"].ToString(), ContactType = dr["contactType"].ToString(), ContactTypeID = dr["contactTypeID"].ToString() });
+                    }
+
+                }
+                validateEmployeeTextBoxes();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+            }
+        }
+
     }
     internal class Item : INotifyPropertyChanged
     {

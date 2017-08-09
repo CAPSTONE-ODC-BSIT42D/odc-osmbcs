@@ -124,7 +124,8 @@ namespace prototype2
         protected string jobName;
         protected string empDateFrom;
         protected string empDateTo;
-
+        protected byte[] empPic;
+        protected byte[] empSig;
 
         public string EmpID
         {
@@ -224,13 +225,25 @@ namespace prototype2
         public string EmpDateFrom
         {
             get { return empDateFrom; }
-            set { SetProperty(ref empTitle, value); }
+            set { SetProperty(ref empDateFrom, value); }
         }
 
         public string EmpDateTo
         {
             get { return empDateTo; }
-            set { SetProperty(ref empTitle, value); }
+            set { SetProperty(ref empDateFrom, value); }
+        }
+
+        public byte[] EmpPic
+        {
+            get { return empPic; }
+            set { SetProperty(ref empPic, value); }
+        }
+
+        public byte[] EmpSig
+        {
+            get { return empSig; }
+            set { SetProperty(ref empSig, value); }
         }
     }
 
