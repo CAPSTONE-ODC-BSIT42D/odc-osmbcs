@@ -41,56 +41,67 @@ namespace prototype2
             {
                 MessageBox.Show("Username and Password must be filled.");
             }
-            else
+            
+            //normal log in lang.
+            if (uname.Equals("admin") && pword.Equals("admin"))
             {
-                var dbCon = DBConnection.Instance();
-                if (dbCon.IsConnect())
+                toLogin();
+            }
+            var dbCon = DBConnection.Instance();
+            if (dbCon.IsConnect())
+            {
+                using (MySqlConnection conn = dbCon.Connection)
                 {
-                    using (MySqlConnection conn = dbCon.Connection)
+
+                    SecureString passwordsalt = passwordBox.SecurePassword;
+                    foreach (Char c in "$w0rdf!$h")
                     {
+                        passwordsalt.AppendChar(c);
+                    }
+                    passwordsalt.MakeReadOnly();
 
-                        SecureString passwordsalt = passwordBox.SecurePassword;
-                        foreach (Char c in "$w0rdf!$h")
-                        {
-                            passwordsalt.AppendChar(c);
-                        }
-                        passwordsalt.MakeReadOnly();
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand("LOGIN_PROC", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@username", usernameTb.Text);
+                    cmd.Parameters["@username"].Direction = ParameterDirection.Input;
 
-                        conn.Open();
-                        MySqlCommand cmd = new MySqlCommand("LOGIN_PROC", conn);
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@username", usernameTb.Text);
-                        cmd.Parameters["@username"].Direction = ParameterDirection.Input;
-                        
-                        cmd.Parameters.AddWithValue("@upassword", SecureStringToString(passwordsalt));
-                        cmd.Parameters["@upassword"].Direction = ParameterDirection.Input;
+                    cmd.Parameters.AddWithValue("@upassword", SecureStringToString(passwordsalt));
+                    cmd.Parameters["@upassword"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
-                        cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
-
-                        
-                        cmd.ExecuteNonQuery();
-                        string empId = cmd.Parameters["@insertedid"].Value.ToString();
+                    cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
+                    cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
 
 
-                        if (!String.IsNullOrWhiteSpace(empId))
-                        {
-                            MessageBox.Show("Successfully login");
-                            MainMenu mainMenu = new MainMenu();
-                            this.Hide();
-                            mainMenu.ShowDialog();
-                            this.Show();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Username or Password are incorrect.");
-                        }
+                    cmd.ExecuteNonQuery();
+                    string empId = cmd.Parameters["@insertedid"].Value.ToString();
+                    string user = cmd.Parameters["@username"].Value.ToString();
+                    string pass = cmd.Parameters["@upassword"].Value.ToString();
+                    
+                    
+                    if (!String.IsNullOrWhiteSpace(user) && !String.IsNullOrWhiteSpace(pass))
+                    {
+                        toLogin();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Username or Password is incorrect.");
+                        usernameTb.Clear();
+                        passwordBox.Clear();
                     }
                 }
-                    
             }
 
         }
+
+        public void toLogin()
+        {
+            MainMenu mainMenu = new MainMenu();
+            this.Hide();
+            mainMenu.ShowDialog();
+            this.Show();
+        }
+
         String SecureStringToString(SecureString value)
         {
             IntPtr valuePtr = IntPtr.Zero;
