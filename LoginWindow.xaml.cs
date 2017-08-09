@@ -44,36 +44,50 @@ namespace prototype2
             else
             {
                 var dbCon = DBConnection.Instance();
-                using (MySqlConnection conn = dbCon.Connection)
+                if (dbCon.IsConnect())
                 {
-                    conn.Open();
-                    MySqlCommand cmd = new MySqlCommand("LOGIN", conn);
-                    cmd.Parameters.AddWithValue("@username", usernameTb.Text);
-                    cmd.Parameters["@username"].Direction = ParameterDirection.Input;
-
-                    SecureString passwordsalt = passwordBox.SecurePassword;
-                    foreach (Char c in "$w0rdf!$h")
+                    using (MySqlConnection conn = dbCon.Connection)
                     {
-                        passwordsalt.AppendChar(c);
-                    }
-                    passwordsalt.MakeReadOnly();
 
-                    cmd.Parameters.AddWithValue("@upassword", SecureStringToString(passwordsalt));
-                    cmd.Parameters["@upassword"].Direction = ParameterDirection.Input;
+                        SecureString passwordsalt = passwordBox.SecurePassword;
+                        foreach (Char c in "$w0rdf!$h")
+                        {
+                            passwordsalt.AppendChar(c);
+                        }
+                        passwordsalt.MakeReadOnly();
 
-                    cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
-                    cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
+                        conn.Open();
+                        MySqlCommand cmd = new MySqlCommand("LOGIN_PROC", conn);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@username", usernameTb.Text);
+                        cmd.Parameters["@username"].Direction = ParameterDirection.Input;
+                        
+                        cmd.Parameters.AddWithValue("@upassword", SecureStringToString(passwordsalt));
+                        cmd.Parameters["@upassword"].Direction = ParameterDirection.Input;
 
-                    cmd.Parameters.Add("@isEqual", MySqlDbType.Bit);
-                    cmd.Parameters["@isEqual"].Direction = ParameterDirection.ReturnValue;
-                    cmd.ExecuteNonQuery();
-                    string empId = cmd.Parameters["@insertedid"].Value.ToString();
-                    string returnvalue = (string)cmd.Parameters["@isEqual"].Value;
-                    if (returnvalue.Equals('1'))
-                    {
-                        MessageBox.Show("Successfully login");
+                        cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
+                        cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
+
+                        
+                        cmd.ExecuteNonQuery();
+                        string empId = cmd.Parameters["@insertedid"].Value.ToString();
+
+
+                        if (!String.IsNullOrWhiteSpace(empId))
+                        {
+                            MessageBox.Show("Successfully login");
+                            MainMenu mainMenu = new MainMenu();
+                            this.Hide();
+                            mainMenu.ShowDialog();
+                            this.Show();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Username or Password are incorrect.");
+                        }
                     }
                 }
+                    
             }
 
         }
