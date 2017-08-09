@@ -688,7 +688,7 @@ namespace prototype2
                         string query = "UPDATE `emp_cont_t` SET `isDeleted`= 1 WHERE empID = '" + id + "';";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
-                            MessageBox.Show("Record successfully deleted!");
+                            MessageBox.Show("Employee record successfully deleted!");
                             setManageEmployeeGridControls();
                         }
                     }
@@ -1878,6 +1878,7 @@ namespace prototype2
             if (result == MessageBoxResult.OK)
             {
                 empDataToDb();
+
             }
             else if (result == MessageBoxResult.Cancel)
             {

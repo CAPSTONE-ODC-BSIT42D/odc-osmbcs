@@ -109,7 +109,15 @@ namespace prototype2
                             query = "UPDATE `supplier_contacts_t` SET `sOfficeNo`='" + officeNumber.Text + "',`sEmailAddress`='" + emailAddress.Text + "' WHERE `suppID`='" + id + "';";
                             if (dbCon.insertQuery(query, dbCon.Connection))
                             {
-                                MessageBox.Show("Updated");
+                                MessageBox.Show("Supplier record successfully updated");
+
+                                //clearing textboxes
+                                custCompanyNameTb.Clear();
+                                locationAddressTb.Clear();
+                                officeNumber.Clear();
+                                emailAddress.Clear();
+                                cityCb.SelectedValue = -1;
+                                custProvinceCust.SelectedValue = -1;
                                 this.Close();
                             }
                         }

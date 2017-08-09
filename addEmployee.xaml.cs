@@ -158,6 +158,15 @@ namespace prototype2
                                 cmd.Parameters["@signature"].Value = SignatureToBitmapBytes();
                                 cmd.ExecuteNonQuery();
                                 conn.Close();
+
+                                //clearing textboxes
+                                firstNameTb.Clear();
+                                middleInitialTb.Clear();
+                                lastNameTb.Clear();
+                                provinceCb.SelectedValue = -1;
+                                emailAddressTb.Clear();
+                                mobileNumberTb.Clear();
+                                postionCb.SelectedValue = -1;
                                 MessageBox.Show("Saved");
                                 this.Close();
                             }

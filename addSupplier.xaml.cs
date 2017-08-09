@@ -37,6 +37,7 @@ namespace prototype2
             emailAddress.DataContext = this;
             officeNumber.DataContext = this;
             custProvinceCust.DataContext = this;
+
         }
         private static String dbname = "odc_db";
         private void setControlsValues()
@@ -92,6 +93,14 @@ namespace prototype2
                             if (dbCon.insertQuery(query, dbCon.Connection))
                             {
                                 MessageBox.Show("Saved");
+                                //clearing textboxes
+                                locationAddressTb.Clear();
+                                cityCb.SelectedItem = -1;
+                                custProvinceCust.SelectedItem = -1;
+                                custCompanyNameTb.Clear();
+                                custAddInfoTb.Clear();
+                                officeNumber.Clear();
+                                emailAddress.Clear();
                                 this.Close();
                             }
                         }
