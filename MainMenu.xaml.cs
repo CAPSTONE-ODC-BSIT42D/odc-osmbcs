@@ -6,6 +6,8 @@ using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -620,11 +622,11 @@ namespace prototype2
             }
             if (dbCon.IsConnect())
             {
-                string query = "SELECT a.empID, a.empFName,a.empLname, a.empMI, a.empAddinfo, a.empAddress, a.empCity, a.empProvinceID, b.locprovince, a.positionID ,c.positionName, a.jobID " +
+                string query = "SELECT a.empID, a.empFName,a.empLname, a.empMI, a.empAddinfo, a.empAddress, a.empCity, a.empProvinceID, b.locprovince, a.positionID ,c.positionName, a.jobID, d.empPic, d.empSignature " +
                     "FROM emp_cont_t a  " +
                     "JOIN provinces_t b ON a.empProvinceID = b.locProvinceId " +
                     "JOIN position_t c ON a.positionID = c.positionid " +
-                    "JOIN " +
+                    "JOIN emp_pic_t d ON a.empID = d.empID " +
                     //"JOIN job_title_t d ON a.jobID = d.jobID " +
                     "WHERE isDeleted = 0 AND empType = 0;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
@@ -635,7 +637,15 @@ namespace prototype2
                 MainVM.Employees.Clear();
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    MainVM.Employees.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), PositionID = dr["positionID"].ToString() , PositionName = dr["positionName"].ToString() });
+                    if (dr["empPic"].Equals(DBNull.Value))
+                    {
+                        MainVM.Employees.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), PositionID = dr["positionID"].ToString(), PositionName = dr["positionName"].ToString() });
+                    }
+                    else
+                    {
+                        MainVM.Employees.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), PositionID = dr["positionID"].ToString(), PositionName = dr["positionName"].ToString(), EmpPic = (byte[])dr["empPic"] });
+                    }
+                    
                 }
                 dbCon.Close();
             }
@@ -1946,8 +1956,15 @@ namespace prototype2
 
                     cmd.Parameters.AddWithValue("@username", empUserNameTb.Text);
                     cmd.Parameters["@username"].Direction = ParameterDirection.Input;
+                    
+                    SecureString passwordsalt = empPasswordTb.SecurePassword;
+                    foreach(Char c in "$w0rdf!$h")
+                    {
+                        passwordsalt.AppendChar(c);
+                    }
+                    passwordsalt.MakeReadOnly();
 
-                    cmd.Parameters.AddWithValue("@upassword", empPasswordTb.Password);
+                    cmd.Parameters.AddWithValue("@upassword", SecureStringToString(passwordsalt));
                     cmd.Parameters["@upassword"].Direction = ParameterDirection.Input;
 
                     cmd.Parameters.AddWithValue("@positionID", empPostionCb.SelectedValue);
@@ -2135,6 +2152,20 @@ namespace prototype2
             }
             finally
             {
+            }
+        }
+
+        String SecureStringToString(SecureString value)
+        {
+            IntPtr valuePtr = IntPtr.Zero;
+            try
+            {
+                valuePtr = Marshal.SecureStringToGlobalAllocUnicode(value);
+                return Marshal.PtrToStringUni(valuePtr);
+            }
+            finally
+            {
+                Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
             }
         }
 
