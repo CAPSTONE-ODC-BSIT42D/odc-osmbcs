@@ -598,11 +598,12 @@ namespace prototype2
                     manageEmployeeDataGrid.Columns[manageEmployeeDataGrid.Columns.IndexOf(columnDelBtnEmp)].Visibility = Visibility.Visible;
                 }
             }
+
         }
 
         private void manageEmployeeDataGrid_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            setManageEmployeeGridControls();
+            
         }
 
         private void setManageEmployeeGridControls()
@@ -714,6 +715,7 @@ namespace prototype2
                 manageGrid.Children[x].Visibility = Visibility.Collapsed;
             }
             manageEmployeeGrid.Visibility = Visibility.Visible;
+            setManageEmployeeGridControls();
         }
 
         /*-----------------END OF MANAGE EMPLOYEE-------------------*/
@@ -736,6 +738,7 @@ namespace prototype2
                 manageGrid.Children[x].Visibility = Visibility.Collapsed;
             }
             manageContractorGrid.Visibility = Visibility.Visible;
+            setManageEmployeeGridControls();
         }
 
         private void btnEditCont_Click(object sender, RoutedEventArgs e)
@@ -777,7 +780,7 @@ namespace prototype2
 
         private void manageContractorGrid_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            setManageContractorGridControls();
+            //setManageContractorGridControls();
         }
 
         private void setManageContractorGridControls()
@@ -799,7 +802,7 @@ namespace prototype2
                     "JOIN provinces_t b ON a.empProvinceID = b.locProvinceId " +
                     "JOIN position_t c ON a.positionID = c.positionid " +
                     "JOIN job_title_t d ON a.jobID = d.jobID " +
-                    "WHERE isDeleted = 0 AND empType = 1;";
+                    "WHERE a.isDeleted = 0 AND a.empType = 1;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
@@ -1642,7 +1645,7 @@ namespace prototype2
 
         private void validateEmployeeTextBoxes()
         {
-            if (String.IsNullOrWhiteSpace(empFirstNameTb.Text) || String.IsNullOrWhiteSpace(empLastNameTb.Text) || String.IsNullOrWhiteSpace(empMiddleInitialTb.Text) || String.IsNullOrWhiteSpace(empCityTb.Text) || empPostionCb.SelectedIndex == -1 || empProvinceCb.SelectedIndex == -1)
+            if (String.IsNullOrWhiteSpace(empFirstNameTb.Text) || String.IsNullOrWhiteSpace(empLastNameTb.Text) || String.IsNullOrWhiteSpace(empMiddleInitialTb.Text) || String.IsNullOrWhiteSpace(empCityTb.Text) || String.IsNullOrWhiteSpace(empUserNameTb.Text) || String.IsNullOrWhiteSpace(empPasswordTb.Password) || empPostionCb.SelectedIndex == -1 || empProvinceCb.SelectedIndex == -1)
             {
                 saveEmpBtn.IsEnabled = false;
             }
@@ -1933,7 +1936,7 @@ namespace prototype2
                     cmd.Parameters.AddWithValue("@username", empUserNameTb.Text);
                     cmd.Parameters["@username"].Direction = ParameterDirection.Input;
 
-                    cmd.Parameters.AddWithValue("@upassword", empPasswordTb.Text);
+                    cmd.Parameters.AddWithValue("@upassword", empPasswordTb.Password);
                     cmd.Parameters["@upassword"].Direction = ParameterDirection.Input;
 
                     cmd.Parameters.AddWithValue("@positionID", empPostionCb.SelectedValue);
