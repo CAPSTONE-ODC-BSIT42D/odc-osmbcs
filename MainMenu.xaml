@@ -528,14 +528,14 @@
                                 <DataGridTextColumn Binding="{Binding custCompanyName}" ClipboardContentBinding="{x:Null}" Header="Customer Name" Width="350" />
                                 <DataGridTextColumn Binding="{Binding quoteSubject}" ClipboardContentBinding="{x:Null}" Header="Subject" Width="200" CanUserResize="False"/>
                                 <DataGridTextColumn Binding="{Binding status}" ClipboardContentBinding="{x:Null}" Header="Status" Width="200" CanUserResize="False"/>
-                                <DataGridTemplateColumn x:Name="columnEditBtn1" Width="100" Visibility="Hidden"  CanUserResize="False">
+                                <DataGridTemplateColumn x:Name="columnEditBtn1" Width="100" CanUserResize="False">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button x:Name="btnEdit1" Content="Edit" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn x:Name="columnDelBtn1" Width="100" Visibility="Hidden"  CanUserResize="False">
+                                <DataGridTemplateColumn x:Name="columnDelBtn1" Width="100" CanUserResize="False">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button x:Name="btnDelete" Content="Delete" />
@@ -773,14 +773,14 @@
                             <DataGridTextColumn Binding="{Binding dateEnded}" ClipboardContentBinding="{x:Null}" Header="Date Ended" Width="200" CanUserResize="False"/>
                             <DataGridTextColumn Binding="{Binding location}" ClipboardContentBinding="{x:Null}" Header="Location" Width="200" CanUserResize="False" />
                             <DataGridTextColumn Binding="{Binding salesNote}" ClipboardContentBinding="{x:Null}" Header="Note" Width="100" CanUserResize="False" />
-                            <DataGridTemplateColumn x:Name="columnEditBtn4" Width="100" Visibility="Hidden"  CanUserResize="False">
+                            <DataGridTemplateColumn x:Name="columnEditBtn4" Width="100" CanUserResize="False">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button x:Name="btnEdit1" Content="Edit" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn x:Name="columnDelBtn4" Width="100" Visibility="Hidden"  CanUserResize="False">
+                            <DataGridTemplateColumn x:Name="columnDelBtn4" Width="100" CanUserResize="False">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button x:Name="btnDelete" Content="Delete" />
@@ -855,14 +855,14 @@
                                 <DataGridTextColumn Binding="{Binding CompanyAddress}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350" CanUserResize="False"/>
                                 <DataGridTextColumn Binding="{Binding CompanyCity}" ClipboardContentBinding="{x:Null}" Header="City" Width="200" CanUserResize="False"/>
                                 <DataGridTextColumn Binding="{Binding CompanyProvinceName}" ClipboardContentBinding="{x:Null}" Header="Province" Width="200" CanUserResize="False"/>
-                                <DataGridTemplateColumn x:Name="columnEditCustBtn" Width="100" Visibility="Hidden" CanUserResize="False">
+                                <DataGridTemplateColumn x:Name="columnEditCustBtn" Width="100" CanUserResize="False">
                                     <DataGridTemplateColumn.CellTemplate  >
                                         <DataTemplate>
                                             <Button x:Name="btnEditCust" Click="btnEditCust_Click" Content="Edit" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn x:Name="columnDeleteCustBtn" Width="100" Visibility="Hidden" CanUserResize="False">
+                                <DataGridTemplateColumn x:Name="columnDeleteCustBtn" Width="100" CanUserResize="False">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button x:Name="btnDeleteCust" Click="btnDeleteCust_Click" Content="Delete" />
@@ -934,14 +934,14 @@
                                 <DataGridTextColumn Binding="{Binding EmpAddress}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350" />
                                 <DataGridTextColumn Binding="{Binding EmpCity}" ClipboardContentBinding="{x:Null}" Header="City" Width="200" CanUserResize="False"/>
                                 <DataGridTextColumn Binding="{Binding PositionName}" ClipboardContentBinding="{x:Null}" Header="Position" Width="100" CanUserResize="False" />
-                                <DataGridTemplateColumn x:Name="columnEditBtnEmp" Width="100" Visibility="Hidden"  CanUserResize="False">
+                                <DataGridTemplateColumn x:Name="columnEditBtnEmp" Width="100" CanUserResize="False">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button x:Name="btnEditEmp" Click="btnEditEmp_Click" Content="Edit" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn x:Name="columnDelBtnEmp" Width="100" Visibility="Hidden"  CanUserResize="False">
+                                <DataGridTemplateColumn x:Name="columnDelBtnEmp" Width="100"  CanUserResize="False">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button x:Name="btnDeleteEmp" Click="btnDeleteEmp_Click" Content="Delete" />
@@ -969,21 +969,14 @@
                                 <DataGridTextColumn Binding="{Binding CompanyAddress}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350" CanUserResize="False"/>
                                 <DataGridTextColumn Binding="{Binding CompanyCity}" ClipboardContentBinding="{x:Null}" Header="City" Width="200" CanUserResize="False"/>
                                 <DataGridTextColumn Binding="{Binding CompanyProvinceName}" ClipboardContentBinding="{x:Null}" Header="Province" Width="200" CanUserResize="False"/>
-                                <DataGridTemplateColumn x:Name="columnViewSuppBtn" Width="100" Visibility="Hidden">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button x:Name="btnViewSupp" Content="Edit" />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTemplateColumn x:Name="columnEditSuppBtn" Width="100" Visibility="Hidden">
+                                <DataGridTemplateColumn x:Name="columnEditSuppBtn" Width="100" >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button x:Name="btnEditSupp" Click="btnEditSupp_Click" Content="Edit" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn x:Name="columnDeleteSuppBtn" Width="100" Visibility="Hidden">
+                                <DataGridTemplateColumn x:Name="columnDeleteSuppBtn" Width="100" >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button x:Name="btnDeleteSuppBtn" Click="btnDeleteSupp_Click" Content="Delete" />
@@ -1010,14 +1003,14 @@
                                 <DataGridTextColumn Binding="{Binding EmpAddress}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350" />
                                 <DataGridTextColumn Binding="{Binding EmpCity}" ClipboardContentBinding="{x:Null}" Header="City" Width="200" CanUserResize="False"/>
                                 <DataGridTextColumn Binding="{Binding PositionName}" ClipboardContentBinding="{x:Null}" Header="Position" Width="100" CanUserResize="False" />
-                                <DataGridTemplateColumn x:Name="columnEditBtnCont" Width="100" Visibility="Hidden"  CanUserResize="False">
+                                <DataGridTemplateColumn x:Name="columnEditBtnCont" Width="100"  CanUserResize="False">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button x:Name="btnEditEmp" Click="btnEditCont_Click" Content="Edit"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn x:Name="columnDelBtnCont" Width="100" Visibility="Hidden"  CanUserResize="False">
+                                <DataGridTemplateColumn x:Name="columnDelBtnCont" Width="100"  CanUserResize="False">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button x:Name="btnDeleteEmp" Click="btnDeleteCont_Click" Content="Delete" />
@@ -1133,14 +1126,14 @@
                                             <DataGridTextColumn Binding="{Binding ContactTypeID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"/>
                                             <DataGridTextColumn Binding="{Binding ContactType}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Contact Type"/>
                                             <DataGridTextColumn Binding="{Binding ContactDetails}" ClipboardContentBinding="{x:Null}" Header="Contact Details" Width="200" CanUserResize="False"/>
-                                            <DataGridTemplateColumn x:Name="columnEditBtnCustCont" Width="100" Visibility="Hidden"  CanUserResize="False">
+                                            <DataGridTemplateColumn x:Name="columnEditBtnCustCont" Width="100"  CanUserResize="False">
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <Button x:Name="btnEditCustCont" Content="Edit" Click="btnEditCustCont_Click"/>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
                                             </DataGridTemplateColumn>
-                                            <DataGridTemplateColumn x:Name="columnDelBtnCustCont" Width="100" Visibility="Hidden"  CanUserResize="False">
+                                            <DataGridTemplateColumn x:Name="columnDelBtnCustCont" Width="100"  CanUserResize="False">
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <Button x:Name="btnDeleteCustCont" Click="btnDeleteCustCont_Click" Content="Delete" />
@@ -1156,14 +1149,14 @@
                                         <DataGrid.Columns >
                                             <DataGridTextColumn Binding="{Binding RepFirstName}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="First Name"/>
                                             <DataGridTextColumn Binding="{Binding RepLastName}" ClipboardContentBinding="{x:Null}" Header="Last Name" Width="200" CanUserResize="False"/>
-                                            <DataGridTemplateColumn x:Name="columnEditBtnCustContRep" Width="100" Visibility="Hidden"  CanUserResize="False">
+                                            <DataGridTemplateColumn x:Name="columnEditBtnCustContRep" Width="100" CanUserResize="False">
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <Button x:Name="editBtnCustContRep" Content="Edit" Click="editBtnCustContRep_Click"/>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
                                             </DataGridTemplateColumn>
-                                            <DataGridTemplateColumn x:Name="columnDelBtnCustContRep" Width="100" Visibility="Hidden"  CanUserResize="False">
+                                            <DataGridTemplateColumn x:Name="columnDelBtnCustContRep" Width="100" CanUserResize="False">
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <Button x:Name="delBtnCustContRep" Content="Delete" Click="delBtnCustContRep_Click" />
@@ -1280,21 +1273,21 @@
                                         </Binding>
                                     </TextBox>
                                     <Button x:Name="addNewEmpContactBtn" Content="Add" HorizontalAlignment="Left" Margin="415,332,0,0" VerticalAlignment="Top" Width="75" FontWeight="Normal" Height="25" Click="addNewEmpContactBtn_Click" Background="#FF03BD03" BorderBrush="#FF019C01" Foreground="#FFF7F4F4" FontFamily="Segoe UI Semibold" FontSize="14" Grid.Column="1"/>
-                                    <Button x:Name="saveEmpContactBtn" Content="save" HorizontalAlignment="Left" Margin="416,321,0,0" VerticalAlignment="Top" Width="66" FontWeight="Normal" Height="23" Click="saveCustContactBtn_Click" IsEnabled="False" Visibility="Hidden" Grid.Column="1"/>
-                                    <Button x:Name="cancelEmpContactBtn" Content="cancel" HorizontalAlignment="Left" Margin="487,321,0,0" VerticalAlignment="Top" Width="66" FontWeight="Normal" Height="23" Click="cancelCustContactBtn_Click" IsEnabled="True" Visibility="Hidden" Grid.Column="1"/>
+                                    <Button x:Name="saveEmpContactBtn" Content="save" HorizontalAlignment="Left" Margin="416,321,0,0" VerticalAlignment="Top" Width="66" FontWeight="Normal" Height="23" Click="saveEmpContactBtn_Click" IsEnabled="False" Visibility="Hidden" Grid.Column="1"/>
+                                    <Button x:Name="cancelEmpContactBtn" Content="cancel" HorizontalAlignment="Left" Margin="487,321,0,0" VerticalAlignment="Top" Width="66" FontWeight="Normal" Height="23" Click="cancelEmpContactBtn_Click" IsEnabled="True" Visibility="Hidden" Grid.Column="1"/>
                                     <DataGrid x:Name="empContactsDg" HorizontalAlignment="Left" Height="148" Margin="37,381,0,0" VerticalAlignment="Top" Width="547" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedEmpContact}" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30"  ItemsSource="{Binding EmpContacts}" Grid.Column="1" SelectionChanged="empContactsDg_SelectionChanged">
                                         <DataGrid.Columns >
                                             <DataGridTextColumn Binding="{Binding ContactTypeID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"/>
                                             <DataGridTextColumn Binding="{Binding ContactType}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Contact Type"/>
                                             <DataGridTextColumn Binding="{Binding ContactDetails}" ClipboardContentBinding="{x:Null}" Header="Contact Details" Width="200" CanUserResize="False"/>
-                                            <DataGridTemplateColumn x:Name="colEditEmpContact" Width="100" Visibility="Hidden"  CanUserResize="False">
+                                            <DataGridTemplateColumn x:Name="colEditEmpContact" Width="100"  CanUserResize="False">
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <Button x:Name="editEmpContBtn" Click="editEmpContBtn_Click" Content="Edit"/>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
                                             </DataGridTemplateColumn>
-                                            <DataGridTemplateColumn x:Name="colDelEmpContact" Width="100" Visibility="Hidden"  CanUserResize="False">
+                                            <DataGridTemplateColumn x:Name="colDelEmpContact" Width="100" CanUserResize="False">
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <Button x:Name="delEmpContBtn" Click="delEmpContBtn_Click" Content="Delete" />

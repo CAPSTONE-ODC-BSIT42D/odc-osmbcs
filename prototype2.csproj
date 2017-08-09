@@ -239,19 +239,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="addSupplier.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="contactDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="editContractor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="editSupplier.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -262,14 +254,6 @@
     <Page Include="addEmployee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="editCustomer.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="addCustomer.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="form.xaml">
       <SubType>Designer</SubType>
@@ -285,17 +269,11 @@
     <Compile Include="addNewItem.xaml.cs">
       <DependentUpon>addNewItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="addSupplier.xaml.cs">
-      <DependentUpon>addSupplier.xaml</DependentUpon>
-    </Compile>
     <Compile Include="contactDetails.xaml.cs">
       <DependentUpon>contactDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="editContractor.xaml.cs">
       <DependentUpon>editContractor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="editSupplier.xaml.cs">
-      <DependentUpon>editSupplier.xaml</DependentUpon>
     </Compile>
     <Compile Include="editEmployee.xaml.cs">
       <DependentUpon>editEmployee.xaml</DependentUpon>
@@ -320,12 +298,6 @@
       <DependentUpon>RepresentativeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="TextBoxValidation.cs" />
-    <Compile Include="editCustomer.xaml.cs">
-      <DependentUpon>editCustomer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="addCustomer.xaml.cs">
-      <DependentUpon>addCustomer.xaml</DependentUpon>
-    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>

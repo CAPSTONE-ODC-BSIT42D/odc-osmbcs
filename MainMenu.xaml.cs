@@ -66,30 +66,30 @@ namespace prototype2
             if (!visual.IsDescendantOf(saleSubMenuGrid) && !visual.IsDescendantOf(manageSubMenugrid))
                 saleSubMenuGrid.Visibility = Visibility.Collapsed;
             manageSubMenugrid.Visibility = Visibility.Collapsed;
-            if (!visual.IsDescendantOf(manageEmployeeDataGrid))
-            {
-                if (manageEmployeeDataGrid.SelectedItems.Count > 0)
-                {
-                    manageEmployeeDataGrid.Columns[manageEmployeeDataGrid.Columns.IndexOf(columnEditBtnEmp)].Visibility = Visibility.Hidden;
-                    manageEmployeeDataGrid.Columns[manageEmployeeDataGrid.Columns.IndexOf(columnDelBtnEmp)].Visibility = Visibility.Hidden;
-                }
-            }
-            if (!visual.IsDescendantOf(manageSupplierDataGrid))
-            {
-                if (manageSupplierDataGrid.SelectedItems.Count > 0)
-                {
-                    manageSupplierDataGrid.Columns[manageSupplierDataGrid.Columns.IndexOf(columnEditSuppBtn)].Visibility = Visibility.Hidden;
-                    manageSupplierDataGrid.Columns[manageSupplierDataGrid.Columns.IndexOf(columnDeleteSuppBtn)].Visibility = Visibility.Hidden;
-                }
-            }
-            if (!visual.IsDescendantOf(manageCustomeDataGrid))
-            {
-                if (manageCustomeDataGrid.SelectedItems.Count > 0)
-                {
-                    manageCustomeDataGrid.Columns[manageContractorDataGrid.Columns.IndexOf(columnEditBtnCont)].Visibility = Visibility.Hidden;
-                    manageCustomeDataGrid.Columns[manageContractorDataGrid.Columns.IndexOf(columnDelBtnCont)].Visibility = Visibility.Hidden;
-                }
-            }
+            //if (!visual.IsDescendantOf(manageEmployeeDataGrid))
+            //{
+            //    if (manageEmployeeDataGrid.SelectedItems.Count > 0)
+            //    {
+            //        manageEmployeeDataGrid.Columns[manageEmployeeDataGrid.Columns.IndexOf(columnEditBtnEmp)].Visibility = Visibility.Hidden;
+            //        manageEmployeeDataGrid.Columns[manageEmployeeDataGrid.Columns.IndexOf(columnDelBtnEmp)].Visibility = Visibility.Hidden;
+            //    }
+            //}
+            //if (!visual.IsDescendantOf(manageSupplierDataGrid))
+            //{
+            //    if (manageSupplierDataGrid.SelectedItems.Count > 0)
+            //    {
+            //        manageSupplierDataGrid.Columns[manageSupplierDataGrid.Columns.IndexOf(columnEditSuppBtn)].Visibility = Visibility.Hidden;
+            //        manageSupplierDataGrid.Columns[manageSupplierDataGrid.Columns.IndexOf(columnDeleteSuppBtn)].Visibility = Visibility.Hidden;
+            //    }
+            //}
+            //if (!visual.IsDescendantOf(manageCustomeDataGrid))
+            //{
+            //    if (manageCustomeDataGrid.SelectedItems.Count > 0)
+            //    {
+            //        manageCustomeDataGrid.Columns[manageContractorDataGrid.Columns.IndexOf(columnEditBtnCont)].Visibility = Visibility.Hidden;
+            //        manageCustomeDataGrid.Columns[manageContractorDataGrid.Columns.IndexOf(columnDelBtnCont)].Visibility = Visibility.Hidden;
+            //    }
+            //}
         }
 
         /*-----------------MENU BAR BUTTONS-------------------*/
@@ -293,8 +293,6 @@ namespace prototype2
 
         private void addCustBtn_Click(object sender, RoutedEventArgs e)
         {
-            addCustomer addCust = new addCustomer();
-            addCust.ShowDialog();
             setTransControlValues();
         }
         private void addCustRepBtn_Click(object sender, RoutedEventArgs e)
@@ -559,15 +557,6 @@ namespace prototype2
         private void manageCustomeDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
-            Visual visual = e.OriginalSource as Visual;
-            if (visual.IsDescendantOf(manageCustomeDataGrid))
-            {
-                if (manageCustomeDataGrid.SelectedItems.Count > 0)
-                {
-                    manageCustomeDataGrid.Columns[manageCustomeDataGrid.Columns.IndexOf(columnEditCustBtn)].Visibility = Visibility.Visible;
-                    manageCustomeDataGrid.Columns[manageCustomeDataGrid.Columns.IndexOf(columnDeleteCustBtn)].Visibility = Visibility.Visible;
-                }
-            }
         }
         
         private void manageCustomerGrid_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -589,15 +578,6 @@ namespace prototype2
 
         private void manageEmployeeDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Visual visual = e.OriginalSource as Visual;
-            if (visual.IsDescendantOf(manageEmployeeDataGrid))
-            {
-                if (manageEmployeeDataGrid.SelectedItems.Count > 0)
-                {
-                    manageEmployeeDataGrid.Columns[manageEmployeeDataGrid.Columns.IndexOf(columnEditBtnEmp)].Visibility = Visibility.Visible;
-                    manageEmployeeDataGrid.Columns[manageEmployeeDataGrid.Columns.IndexOf(columnDelBtnEmp)].Visibility = Visibility.Visible;
-                }
-            }
 
         }
 
@@ -832,15 +812,6 @@ namespace prototype2
 
         private void manageContractorDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Visual visual = e.OriginalSource as Visual;
-            if (visual.IsDescendantOf(manageContractorDataGrid))
-            {
-                if (manageContractorDataGrid.SelectedItems.Count > 0)
-                {
-                    manageContractorDataGrid.Columns[manageContractorDataGrid.Columns.IndexOf(columnEditBtnCont)].Visibility = Visibility.Visible;
-                    manageContractorDataGrid.Columns[manageContractorDataGrid.Columns.IndexOf(columnDelBtnCont)].Visibility = Visibility.Visible;
-                }
-            }
         }
 
         /*-----------------END OF MANAGE CONTRACTOR-------------------*/
@@ -944,15 +915,6 @@ namespace prototype2
 
         private void manageSupplierDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Visual visual = e.OriginalSource as Visual;
-            if (visual.IsDescendantOf(manageSupplierDataGrid))
-            {
-                if (manageSupplierDataGrid.SelectedItems.Count > 0)
-                {
-                    manageSupplierDataGrid.Columns[manageSupplierDataGrid.Columns.IndexOf(columnEditSuppBtn)].Visibility = Visibility.Visible;
-                    manageSupplierDataGrid.Columns[manageSupplierDataGrid.Columns.IndexOf(columnDeleteSuppBtn)].Visibility = Visibility.Visible;
-                }
-            }
         }
         
         /*-----------------END OF MANAGE SUPPLIER-------------------*/
@@ -1264,15 +1226,6 @@ namespace prototype2
 
         private void custContactDg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Visual visual = e.OriginalSource as Visual;
-            if (visual.IsDescendantOf(custContactDg))
-            {
-                if (custContactDg.SelectedItems.Count > 0)
-                {
-                    custContactDg.Columns[custContactDg.Columns.IndexOf(columnEditBtnCustCont)].Visibility = Visibility.Visible;
-                    custContactDg.Columns[custContactDg.Columns.IndexOf(columnDelBtnCustCont)].Visibility = Visibility.Visible;
-                }
-            }
         }
 
 
@@ -1289,15 +1242,6 @@ namespace prototype2
         }
         private void customerRepresentativeDg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Visual visual = e.OriginalSource as Visual;
-            if (visual.IsDescendantOf(customerRepresentativeDg))
-            {
-                if (customerRepresentativeDg.SelectedItems.Count > 0)
-                {
-                    customerRepresentativeDg.Columns[customerRepresentativeDg.Columns.IndexOf(columnEditBtnCustContRep)].Visibility = Visibility.Visible;
-                    customerRepresentativeDg.Columns[customerRepresentativeDg.Columns.IndexOf(columnDelBtnCustContRep)].Visibility = Visibility.Visible;
-                }
-            }
         }
         
 
@@ -1839,12 +1783,66 @@ namespace prototype2
 
         private void editEmpContBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            if (empContactsDg.SelectedItem != null)
+            {
+                empContactsDg.SelectedIndex = int.Parse(MainVM.SelectedEmpContact.ContactTypeID);
+                if (MainVM.SelectedEmpContact.ContactTypeID.Equals("1"))
+                {
+                    contactDetailsEmailTb1.Text = MainVM.SelectedEmpContact.ContactDetails;
+                }
+                else if (MainVM.SelectedEmpContact.ContactTypeID.Equals("2"))
+                {
+                    contactDetailsPhoneTb1.Text = MainVM.SelectedEmpContact.ContactDetails;
+                }
+                else if (MainVM.SelectedEmpContact.ContactTypeID.Equals("3"))
+                {
+                    contactDetailsMobileTb1.Text = MainVM.SelectedEmpContact.ContactDetails;
+                }
+                cancelEmpContactBtn.Visibility = Visibility.Visible;
+                saveEmpContactBtn.Visibility = Visibility.Visible;
+            }
         }
 
         private void delEmpContBtn_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBox.Show("Do you wish to delete this contact?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.OK)
+            {
+                MainVM.EmpContacts.RemoveAt(empContactsDg.SelectedIndex);
+            }
+            else if (result == MessageBoxResult.Cancel)
+            {
+            }
+        }
 
+        private void saveEmpContactBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (!(System.Windows.Controls.Validation.GetHasError(contactDetailsPhoneTb) == true) && !(System.Windows.Controls.Validation.GetHasError(contactDetailsEmailTb) == true) && !(System.Windows.Controls.Validation.GetHasError(contactDetailsMobileTb) == true))
+            {
+                if (contactTypeCb.SelectedIndex != 0)
+                {
+                    contactTypeCb.SelectedIndex = 0;
+                    MainVM.SelectedCustContact.ContactDetails = contactDetail;
+                    validateCustomerDetailsTextBoxes();
+                    clearContactsBoxes();
+                    cancelCustContactBtn.Visibility = Visibility.Hidden;
+                    saveCustContactBtn.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    MessageBox.Show("Please choose from the selection before saving.");
+                }
+            }
+            else
+                MessageBox.Show("Please resolve the error first.");
+        }
+
+        private void cancelEmpContactBtn_Click(object sender, RoutedEventArgs e)
+        {
+            contactTypeCb1.SelectedIndex = 0;
+            cancelEmpContactBtn.Visibility = Visibility.Hidden;
+            saveEmpContactBtn.Visibility = Visibility.Hidden;
+            clearContactsBoxes();
         }
 
         private void dateStarted_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -1871,6 +1869,8 @@ namespace prototype2
         {
 
         }
+
+
 
         private void saveEmpBtn_Click(object sender, RoutedEventArgs e)
         {
