@@ -1183,7 +1183,7 @@
                         </Grid.ColumnDefinitions>
                         <GroupBox x:Name="groupBox_Copy" Header="Details" Margin="10,12,10,35" FontWeight="Bold" FontSize="14">
                             <ScrollViewer Margin="0,0,0,2" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
-                                <Grid Height="1016">
+                                <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="3*"/>
 
@@ -1296,7 +1296,7 @@
                                             </DataGridTemplateColumn>
                                         </DataGrid.Columns>
                                     </DataGrid>
-                                    <StackPanel Grid.Column="1" Margin="10,554,0,-14" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Width="244" Height="476">
+                                    <StackPanel Grid.Column="1" Margin="10,554,0,-20" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Width="244" Height="482">
                                         <Grid x:Name="employeeOnlyGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="240">
                                             <Label Content="Position" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic"/>
                                             <ComboBox x:Name="empPostionCb" HorizontalAlignment="Left" Margin="27,29,0,0" VerticalAlignment="Top" Width="162" Height="26" SelectedValuePath="positionid" DisplayMemberPath="positionName" FontWeight="Normal" SelectionChanged="empPostionCb_SelectionChanged">

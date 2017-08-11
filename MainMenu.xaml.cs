@@ -657,6 +657,7 @@ namespace prototype2
             employeeDetailsGrid.Visibility = Visibility.Visible;
             employeeDetailsHeader.Content = "Manage Employee - New Employee";
             empType = 0;
+            employeeOnlyGrid.Visibility = Visibility.Visible;
             contractorOnlyGrid.Visibility = Visibility.Collapsed;
             empJobCb.IsEnabled = false;
             empDateStarted.IsEnabled = false;
