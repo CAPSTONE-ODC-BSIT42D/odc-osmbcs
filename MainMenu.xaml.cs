@@ -672,6 +672,7 @@ namespace prototype2
             employeeDetailsHeader.Content = "Manage Employee - Edit Employee";
             empType = 0;
             isEdit = true;
+            employeeOnlyGrid.Visibility = Visibility.Visible;
             contractorOnlyGrid.Visibility = Visibility.Collapsed;
             empJobCb.IsEnabled = false;
             empDateStarted.IsEnabled = false;
@@ -1878,8 +1879,8 @@ namespace prototype2
                     MainVM.SelectedEmpContact.ContactDetails = contactDetail;
                     validateEmployeeTextBoxes();
                     clearContactsBoxes();
-                    cancelEmpBtn.Visibility = Visibility.Hidden;
-                    saveEmpBtn.Visibility = Visibility.Hidden;
+                    cancelEmpContactBtn.Visibility = Visibility.Hidden;
+                    saveEmpContactBtn.Visibility = Visibility.Hidden;
                     addNewEmpContactBtn.Visibility = Visibility.Visible;
                 }
                 else
@@ -2128,7 +2129,7 @@ namespace prototype2
             empPostionCb.SelectedIndex = 0;
             empUserNameTb.Clear();
             empPasswordTb.Clear();
-            empImage.Source = null;
+            empImage.Source = ;
             if (empType == 0)
             {
                 empType = 0;
