@@ -1613,7 +1613,7 @@ namespace prototype2
             {
                 if (!isEdit)
                 {
-                    if (String.IsNullOrWhiteSpace(empFirstNameTb.Text) || String.IsNullOrWhiteSpace(empLastNameTb.Text) || String.IsNullOrWhiteSpace(empMiddleInitialTb.Text) || String.IsNullOrWhiteSpace(empCityTb.Text) || String.IsNullOrWhiteSpace(empUserNameTb.Text) || String.IsNullOrWhiteSpace(empPasswordTb.Password) || empPostionCb.SelectedIndex == -1 || empProvinceCb.SelectedIndex == -1)
+                    if (String.IsNullOrWhiteSpace(empFirstNameTb.Text) || String.IsNullOrWhiteSpace(empLastNameTb.Text) || String.IsNullOrWhiteSpace(empCityTb.Text) || String.IsNullOrWhiteSpace(empUserNameTb.Text) || String.IsNullOrWhiteSpace(empPasswordTb.Password) || empPostionCb.SelectedIndex == -1 || empProvinceCb.SelectedIndex == -1)
                     {
                         saveEmpBtn.IsEnabled = false;
                     }
@@ -1624,7 +1624,7 @@ namespace prototype2
                 }
                 else
                 {
-                    if (String.IsNullOrWhiteSpace(empFirstNameTb.Text) || String.IsNullOrWhiteSpace(empLastNameTb.Text) || String.IsNullOrWhiteSpace(empMiddleInitialTb.Text) || String.IsNullOrWhiteSpace(empCityTb.Text) || empPostionCb.SelectedIndex == -1 || empProvinceCb.SelectedIndex == -1)
+                    if (String.IsNullOrWhiteSpace(empFirstNameTb.Text) || String.IsNullOrWhiteSpace(empLastNameTb.Text) || String.IsNullOrWhiteSpace(empCityTb.Text) || empPostionCb.SelectedIndex == -1 || empProvinceCb.SelectedIndex == -1)
                     {
                         saveEmpBtn.IsEnabled = false;
                     }
