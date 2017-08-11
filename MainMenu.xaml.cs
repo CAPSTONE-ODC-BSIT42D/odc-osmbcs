@@ -830,6 +830,7 @@ namespace prototype2
             employeeDetailsGrid.Visibility = Visibility.Visible;
             employeeDetailsHeader.Content = "Manage Contractor - New Contractor";
             empType = 1;
+            employeeOnlyGrid.Visibility = Visibility.Collapsed;
             contractorOnlyGrid.Visibility = Visibility.Visible;
             empJobCb.IsEnabled = true;
             empDateStarted.IsEnabled = true;
@@ -1610,14 +1611,29 @@ namespace prototype2
         {
             if (empType == 0)
             {
-                if (String.IsNullOrWhiteSpace(empFirstNameTb.Text) || String.IsNullOrWhiteSpace(empLastNameTb.Text) || String.IsNullOrWhiteSpace(empMiddleInitialTb.Text) || String.IsNullOrWhiteSpace(empCityTb.Text) || String.IsNullOrWhiteSpace(empUserNameTb.Text) || String.IsNullOrWhiteSpace(empPasswordTb.Password) || empPostionCb.SelectedIndex == -1 || empProvinceCb.SelectedIndex == -1)
+                if (!isEdit)
                 {
-                    saveEmpBtn.IsEnabled = false;
+                    if (String.IsNullOrWhiteSpace(empFirstNameTb.Text) || String.IsNullOrWhiteSpace(empLastNameTb.Text) || String.IsNullOrWhiteSpace(empMiddleInitialTb.Text) || String.IsNullOrWhiteSpace(empCityTb.Text) || String.IsNullOrWhiteSpace(empUserNameTb.Text) || String.IsNullOrWhiteSpace(empPasswordTb.Password) || empPostionCb.SelectedIndex == -1 || empProvinceCb.SelectedIndex == -1)
+                    {
+                        saveEmpBtn.IsEnabled = false;
+                    }
+                    else
+                    {
+                        saveEmpBtn.IsEnabled = true;
+                    }
                 }
                 else
                 {
-                    saveEmpBtn.IsEnabled = true;
+                    if (String.IsNullOrWhiteSpace(empFirstNameTb.Text) || String.IsNullOrWhiteSpace(empLastNameTb.Text) || String.IsNullOrWhiteSpace(empMiddleInitialTb.Text) || String.IsNullOrWhiteSpace(empCityTb.Text) || empPostionCb.SelectedIndex == -1 || empProvinceCb.SelectedIndex == -1)
+                    {
+                        saveEmpBtn.IsEnabled = false;
+                    }
+                    else
+                    {
+                        saveEmpBtn.IsEnabled = true;
+                    }
                 }
+                
             }
             else
             {
@@ -1883,14 +1899,19 @@ namespace prototype2
             clearContactsBoxes();
         }
 
+        private void empJobCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            validateEmployeeTextBoxes();
+        }
+
         private void dateStarted_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-
+            validateEmployeeTextBoxes();
         }
 
         private void dateEnded_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-
+            validateEmployeeTextBoxes();
         }
 
         private void empPostionCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -2106,6 +2127,7 @@ namespace prototype2
             empPostionCb.SelectedIndex = 0;
             empUserNameTb.Clear();
             empPasswordTb.Clear();
+            empImage.Source = null;
             if (empType == 0)
             {
                 empType = 0;
@@ -2137,7 +2159,7 @@ namespace prototype2
                     empCityTb.Text = MainVM.SelectedEmployee.EmpCity;
                     empProvinceCb.SelectedIndex = int.Parse(MainVM.SelectedEmployee.EmpProvinceID);
                     empPostionCb.SelectedIndex = int.Parse(MainVM.SelectedEmployee.PositionID);
-                    accountCredentialsGrid.Visibility = Visibility.Hidden;
+                    employeeOnlyGrid.Visibility = Visibility.Hidden;
                     if (MainVM.SelectedEmployee.EmpPic!=null)
                     {
                         using (System.IO.MemoryStream ms = new System.IO.MemoryStream(MainVM.SelectedEmployee.EmpPic))
@@ -2196,6 +2218,7 @@ namespace prototype2
             }
         }
 
+        
     }
     internal class Item : INotifyPropertyChanged
     {
