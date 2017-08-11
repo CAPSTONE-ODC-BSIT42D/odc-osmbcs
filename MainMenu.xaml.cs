@@ -666,13 +666,16 @@ namespace prototype2
 
         private void btnEditEmp_Click(object sender, RoutedEventArgs e)
         {
-            if (manageEmployeeDataGrid.SelectedItems.Count > 0)
-            {
-                String id = (manageEmployeeDataGrid.Columns[0].GetCellContent(manageEmployeeDataGrid.SelectedItem) as TextBlock).Text;
-                editEmployee editEmployee = new editEmployee(id);
-                editEmployee.ShowDialog();
-                setManageEmployeeGridControls();
-            }
+            manageEmployeeGrid.Visibility = Visibility.Hidden;
+            employeeDetailsGrid.Visibility = Visibility.Visible;
+            employeeDetailsHeader.Content = "Manage Employee - Edit Employee";
+            empType = 0;
+            isEdit = true;
+            contractorOnlyGrid.Visibility = Visibility.Collapsed;
+            empJobCb.IsEnabled = false;
+            empDateStarted.IsEnabled = false;
+            empDateEnded.IsEnabled = false;
+            setManageEmployeeGridControls();
         }
 
         private void btnDeleteEmp_Click(object sender, RoutedEventArgs e)
@@ -744,13 +747,16 @@ namespace prototype2
 
         private void btnEditCont_Click(object sender, RoutedEventArgs e)
         {
-            if (manageContractorDataGrid.SelectedItems.Count > 0)
-            {
-                String id = (manageContractorDataGrid.Columns[0].GetCellContent(manageContractorDataGrid.SelectedItem) as TextBlock).Text;
-                editContractor editContractor = new editContractor(id);
-                editContractor.ShowDialog();
-                setManageContractorGridControls();
-            }
+            manageContractorGrid.Visibility = Visibility.Hidden;
+            employeeDetailsGrid.Visibility = Visibility.Visible;
+            employeeDetailsHeader.Content = "Manage Contractor - Edit Contractor";
+            empType = 1;
+            isEdit = true;
+            contractorOnlyGrid.Visibility = Visibility.Visible;
+            empJobCb.IsEnabled = true;
+            empDateStarted.IsEnabled = true;
+            empDateEnded.IsEnabled = true;
+            setManageContractorGridControls();
         }
 
         private void btnDeleteCont_Click(object sender, RoutedEventArgs e)
@@ -1602,14 +1608,29 @@ namespace prototype2
 
         private void validateEmployeeTextBoxes()
         {
-            if (String.IsNullOrWhiteSpace(empFirstNameTb.Text) || String.IsNullOrWhiteSpace(empLastNameTb.Text) || String.IsNullOrWhiteSpace(empMiddleInitialTb.Text) || String.IsNullOrWhiteSpace(empCityTb.Text) || String.IsNullOrWhiteSpace(empUserNameTb.Text) || String.IsNullOrWhiteSpace(empPasswordTb.Password) || empPostionCb.SelectedIndex == -1 || empProvinceCb.SelectedIndex == -1)
+            if (empType == 0)
             {
-                saveEmpBtn.IsEnabled = false;
+                if (String.IsNullOrWhiteSpace(empFirstNameTb.Text) || String.IsNullOrWhiteSpace(empLastNameTb.Text) || String.IsNullOrWhiteSpace(empMiddleInitialTb.Text) || String.IsNullOrWhiteSpace(empCityTb.Text) || String.IsNullOrWhiteSpace(empUserNameTb.Text) || String.IsNullOrWhiteSpace(empPasswordTb.Password) || empPostionCb.SelectedIndex == -1 || empProvinceCb.SelectedIndex == -1)
+                {
+                    saveEmpBtn.IsEnabled = false;
+                }
+                else
+                {
+                    saveEmpBtn.IsEnabled = true;
+                }
             }
             else
             {
-                saveEmpBtn.IsEnabled = true;
+                if (String.IsNullOrWhiteSpace(empFirstNameTb.Text) || String.IsNullOrWhiteSpace(empLastNameTb.Text) || String.IsNullOrWhiteSpace(empMiddleInitialTb.Text) || String.IsNullOrWhiteSpace(empCityTb.Text) || empJobCb.SelectedIndex == -1 || empProvinceCb.SelectedIndex == -1 || String.IsNullOrWhiteSpace(empDateStarted.Text) || String.IsNullOrWhiteSpace(empDateEnded.Text))
+                {
+                    saveEmpBtn.IsEnabled = false;
+                }
+                else
+                {
+                    saveEmpBtn.IsEnabled = true;
+                }
             }
+            
         }
 
         private void empFirstNameTb_TextChanged(object sender, TextChangedEventArgs e)
@@ -1798,10 +1819,11 @@ namespace prototype2
         {
             if (empContactsDg.SelectedItem != null)
             {
-                empContactsDg.SelectedIndex = int.Parse(MainVM.SelectedEmpContact.ContactTypeID);
+                contactTypeCb1.SelectedIndex = int.Parse(MainVM.SelectedEmpContact.ContactTypeID);
                 if (MainVM.SelectedEmpContact.ContactTypeID.Equals("1"))
                 {
                     contactDetailsEmailTb1.Text = MainVM.SelectedEmpContact.ContactDetails;
+                    
                 }
                 else if (MainVM.SelectedEmpContact.ContactTypeID.Equals("2"))
                 {
@@ -1833,14 +1855,14 @@ namespace prototype2
         {
             if (!(System.Windows.Controls.Validation.GetHasError(contactDetailsPhoneTb) == true) && !(System.Windows.Controls.Validation.GetHasError(contactDetailsEmailTb) == true) && !(System.Windows.Controls.Validation.GetHasError(contactDetailsMobileTb) == true))
             {
-                if (contactTypeCb.SelectedIndex != 0)
+                if (contactTypeCb1.SelectedIndex != 0)
                 {
-                    contactTypeCb.SelectedIndex = 0;
-                    MainVM.SelectedCustContact.ContactDetails = contactDetail;
-                    validateCustomerDetailsTextBoxes();
+                    contactTypeCb1.SelectedIndex = 0;
+                    MainVM.SelectedEmpContact.ContactDetails = contactDetail;
+                    validateEmployeeTextBoxes();
                     clearContactsBoxes();
-                    cancelCustContactBtn.Visibility = Visibility.Hidden;
-                    saveCustContactBtn.Visibility = Visibility.Hidden;
+                    cancelEmpBtn.Visibility = Visibility.Hidden;
+                    saveEmpBtn.Visibility = Visibility.Hidden;
                     addNewEmpContactBtn.Visibility = Visibility.Visible;
                 }
                 else
@@ -2076,12 +2098,17 @@ namespace prototype2
             isEdit = false;
             MainVM.EmpContacts.Clear();
             empFirstNameTb.Clear();
-
+            empLastNameTb.Clear();
+            empMiddleInitialTb.Clear();
+            empAddressTb.Clear();
+            empCityTb.Clear();
+            empProvinceCb.SelectedIndex = 0;
+            empPostionCb.SelectedIndex = 0;
+            empUserNameTb.Clear();
+            empPasswordTb.Clear();
             if (empType == 0)
             {
                 empType = 0;
-                
-
                 manageEmployeeGrid.Visibility = Visibility.Visible;
                 employeeDetailsGrid.Visibility = Visibility.Hidden;
                 setManageEmployeeGridControls();
@@ -2110,8 +2137,8 @@ namespace prototype2
                     empCityTb.Text = MainVM.SelectedEmployee.EmpCity;
                     empProvinceCb.SelectedIndex = int.Parse(MainVM.SelectedEmployee.EmpProvinceID);
                     empPostionCb.SelectedIndex = int.Parse(MainVM.SelectedEmployee.PositionID);
-                    accountCredentialsGrid.Visibility = Visibility.Visible;
-                    if (MainVM.SelectedEmployee.EmpPic==null)
+                    accountCredentialsGrid.Visibility = Visibility.Hidden;
+                    if (MainVM.SelectedEmployee.EmpPic!=null)
                     {
                         using (System.IO.MemoryStream ms = new System.IO.MemoryStream(MainVM.SelectedEmployee.EmpPic))
                         {
