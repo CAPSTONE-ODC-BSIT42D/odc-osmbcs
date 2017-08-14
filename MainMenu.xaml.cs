@@ -622,7 +622,7 @@ namespace prototype2
             }
             if (dbCon.IsConnect())
             {
-                string query = "SELECT a.empID, a.empFName,a.empLname, a.empMI, a.empAddinfo, a.empAddress, a.empCity, a.empProvinceID, b.locprovince, a.positionID ,c.positionName, a.jobID, d.empPic, d.empSignature " +
+                string query = "SELECT a.empID, a.empFName,a.empLname, a.empMI, a.empAddinfo, a.empAddress, a.empCity, a.empProvinceID, a.empUserName, b.locprovince, a.positionID ,c.positionName, a.jobID, d.empPic, d.empSignature " +
                     "FROM emp_cont_t a  " +
                     "JOIN provinces_t b ON a.empProvinceID = b.locProvinceId " +
                     "JOIN position_t c ON a.positionID = c.positionid " +
@@ -639,11 +639,11 @@ namespace prototype2
                 {
                     if (dr["empPic"].Equals(DBNull.Value))
                     {
-                        MainVM.Employees.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), PositionID = dr["positionID"].ToString(), PositionName = dr["positionName"].ToString() });
+                        MainVM.Employees.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), PositionID = dr["positionID"].ToString(), PositionName = dr["positionName"].ToString(), EmpUserName = dr["empUserName"].ToString() });
                     }
                     else
                     {
-                        MainVM.Employees.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), PositionID = dr["positionID"].ToString(), PositionName = dr["positionName"].ToString(), EmpPic = (byte[])dr["empPic"] });
+                        MainVM.Employees.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), PositionID = dr["positionID"].ToString(), PositionName = dr["positionName"].ToString(), EmpPic = (byte[])dr["empPic"], EmpUserName = dr["empUserName"].ToString() });
                     }
                     
                 }
@@ -2059,7 +2059,34 @@ namespace prototype2
 
         private void empUserNameTb_TextChanged(object sender, TextChangedEventArgs e)
         {
-            validateEmployeeTextBoxes();
+            bool usernameExist = false;
+            TextBox txtBox = sender as TextBox;
+            BindingExpression bindingExpression = BindingOperations.GetBindingExpression(txtBox, TextBox.TextProperty);
+
+            BindingExpressionBase bindingExpressionBase = BindingOperations.GetBindingExpressionBase(txtBox, TextBox.TextProperty);
+            foreach (Employee emp in MainVM.Employees)
+            {
+                if (emp.EmpUserName.Equals(empUserNameTb.Text))
+                {
+                    usernameExist = true;
+                }
+            }
+            if (usernameExist)
+            {
+                
+
+                ValidationError validationError = new ValidationError(new ExceptionValidationRule(), bindingExpression);
+                validationError.ErrorContent = "The username is already exist.";
+                Validation.MarkInvalid(bindingExpressionBase, validationError);
+            }
+            else
+            {
+                Validation.ClearInvalid(bindingExpressionBase);
+                validateEmployeeTextBoxes();
+
+            }
+
+
         }
 
         private void empPasswordTb_TextChanged(object sender, TextChangedEventArgs e)

@@ -40,11 +40,11 @@ namespace prototype2
             }
             else
             {
-                if (usernameTb.Equals("admin") && passwordBox.Password.ToString().Equals("admin"))
+                if (usernameTb.Text.Equals("admin") && passwordBox.Password.Equals("admin"))
                 {
                     toLogin();
                 }
-                if (dbCon.IsConnect())
+                else if (dbCon.IsConnect())
                 {
                     using (MySqlConnection conn = dbCon.Connection)
                     {

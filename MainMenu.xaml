@@ -1313,11 +1313,10 @@
                                             <Label x:Name="label_Copy1" Content="* Username" HorizontalAlignment="Left" Margin="28,113,0,0" VerticalAlignment="Top" FontWeight="Normal" Width="99"/>
                                             <Label x:Name="label_Copy2" Content="* Password" HorizontalAlignment="Left" Margin="28,175,0,0" VerticalAlignment="Top" FontWeight="Normal" Width="99"/>
                                             <TextBox x:Name="empUserNameTb" HorizontalAlignment="Left" Height="25" Margin="28,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center" TextChanged="empUserNameTb_TextChanged">
-                                                <!--<Binding Path="ContactValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <local:TextBoxValidation TextBoxType="Email"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>-->
+                                                <TextBox.Text>
+                                                    <Binding Path="UserName" ValidatesOnDataErrors="True" ValidatesOnExceptions="True">
+                                                    </Binding>
+                                                </TextBox.Text>
                                             </TextBox>
                                             <PasswordBox x:Name="empPasswordTb" HorizontalAlignment="Left" Margin="28,209,0,0" VerticalAlignment="Top" Width="216"/>
                                         </Grid>
