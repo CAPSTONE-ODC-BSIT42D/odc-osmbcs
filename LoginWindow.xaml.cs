@@ -41,8 +41,8 @@ namespace prototype2
             {
                 MessageBox.Show("Username and Password must be filled.");
             }
-            
-            //normal log in lang.
+
+
             if (uname.Equals("admin") && pword.Equals("admin"))
             {
                 toLogin();
@@ -77,8 +77,8 @@ namespace prototype2
                     string empId = cmd.Parameters["@insertedid"].Value.ToString();
                     string user = cmd.Parameters["@username"].Value.ToString();
                     string pass = cmd.Parameters["@upassword"].Value.ToString();
-                    
-                    
+
+
                     if (!String.IsNullOrWhiteSpace(user) && !String.IsNullOrWhiteSpace(pass))
                     {
                         toLogin();

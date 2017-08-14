@@ -1168,23 +1168,51 @@ namespace prototype2
             {
                 if (contactTypeCb.SelectedIndex != 0)
                 {
-                    
-                    MainVM.CustContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
-                    clearContactsBoxes();
-                    
-                    validateCustomerDetailsTextBoxes();
-                    contactTypeCb.SelectedIndex = 0;
+                    if (contactTypeCb.SelectedIndex == 1)
+                    {
+                        if (!String.IsNullOrWhiteSpace(contactDetailsEmailTb.Text))
+                        {
 
+                            MainVM.CustContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            clearContactsBoxes();
+                        }
+                        else
+                        {
+                        }
+                    }
+                    if (contactTypeCb.SelectedIndex == 2)
+                    {
+                        if (!String.IsNullOrWhiteSpace(contactDetailsPhoneTb.Text))
+                        {
 
+                            MainVM.CustContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            clearContactsBoxes();
+                        }
+                        else
+                        {
+                        }
+                    }
+                    if (contactTypeCb.SelectedIndex == 3)
+                    {
+                        if (!String.IsNullOrWhiteSpace(contactDetailsMobileTb.Text))
+                        {
+                            MainVM.CustContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            clearContactsBoxes();
+                        }
+                        else
+                        {
+                        }
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Please choose from the selection before adding.");
+                    MessageBox.Show("Please choose a contact type.");
                 }
             }
             else
+            {
                 MessageBox.Show("Please resolve the error first.");
-
+            }
         }
 
         private void btnEditCustCont_Click(object sender, RoutedEventArgs e)
@@ -1216,20 +1244,51 @@ namespace prototype2
             {
                 if (contactTypeCb.SelectedIndex != 0)
                 {
-                    contactTypeCb.SelectedIndex = 0;
-                    MainVM.SelectedCustContact.ContactDetails = contactDetail;
-                    validateCustomerDetailsTextBoxes();
-                    clearContactsBoxes();
-                    cancelCustContactBtn.Visibility = Visibility.Hidden;
-                    saveCustContactBtn.Visibility = Visibility.Hidden;
+                    if (contactTypeCb.SelectedIndex == 1)
+                    {
+                        if (!String.IsNullOrWhiteSpace(contactDetailsEmailTb.Text))
+                        {
+
+                            MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            clearContactsBoxes();
+                        }
+                        else
+                        {
+                        }
+                    }
+                    if (contactTypeCb.SelectedIndex == 2)
+                    {
+                        if (!String.IsNullOrWhiteSpace(contactDetailsPhoneTb.Text))
+                        {
+
+                            MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            clearContactsBoxes();
+                        }
+                        else
+                        {
+                        }
+                    }
+                    if (contactTypeCb.SelectedIndex == 3)
+                    {
+                        if (!String.IsNullOrWhiteSpace(contactDetailsMobileTb.Text))
+                        {
+                            MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            clearContactsBoxes();
+                        }
+                        else
+                        {
+                        }
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Please choose from the selection before saving.");
+                    MessageBox.Show("Please choose a contact type.");
                 }
             }
             else
+            {
                 MessageBox.Show("Please resolve the error first.");
+            }
         }
 
         private void cancelCustContactBtn_Click(object sender, RoutedEventArgs e)
@@ -1818,19 +1877,51 @@ namespace prototype2
             {
                 if (contactTypeCb1.SelectedIndex != 0)
                 {
+                    if (contactTypeCb1.SelectedIndex == 1)
+                    {
+                        if (!String.IsNullOrWhiteSpace(contactDetailsEmailTb1.Text))
+                        {
 
-                    MainVM.EmpContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
-                    clearContactsBoxes();
-                    validateCustomerDetailsTextBoxes();
-                    contactTypeCb1.SelectedIndex = 0;
+                            MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            clearContactsBoxes();
+                        }
+                        else
+                        {
+                        }
+                    }
+                    if (contactTypeCb1.SelectedIndex == 2)
+                    {
+                        if (!String.IsNullOrWhiteSpace(contactDetailsPhoneTb1.Text))
+                        {
+
+                            MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            clearContactsBoxes();
+                        }
+                        else
+                        {
+                        }
+                    }
+                    if (contactTypeCb1.SelectedIndex == 3)
+                    {
+                        if (!String.IsNullOrWhiteSpace(contactDetailsMobileTb1.Text))
+                        {
+                            MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            clearContactsBoxes();
+                        }
+                        else
+                        {
+                        }
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Please choose from the selection before adding.");
+                    MessageBox.Show("Please choose a contact type.");
                 }
             }
             else
+            {
                 MessageBox.Show("Please resolve the error first.");
+            }
         }
 
         private void editEmpContBtn_Click(object sender, RoutedEventArgs e)
@@ -1866,7 +1957,6 @@ namespace prototype2
             }
             else if (result == MessageBoxResult.Cancel)
             {
-                ;
             }
         }
 
@@ -1876,21 +1966,62 @@ namespace prototype2
             {
                 if (contactTypeCb1.SelectedIndex != 0)
                 {
-                    contactTypeCb1.SelectedIndex = 0;
-                    MainVM.SelectedEmpContact.ContactDetails = contactDetail;
-                    validateEmployeeTextBoxes();
-                    clearContactsBoxes();
-                    cancelEmpContactBtn.Visibility = Visibility.Hidden;
-                    saveEmpContactBtn.Visibility = Visibility.Hidden;
-                    addNewEmpContactBtn.Visibility = Visibility.Visible;
+                    if (contactTypeCb1.SelectedIndex == 1)
+                    {
+                        if (!String.IsNullOrWhiteSpace(contactDetailsEmailTb1.Text))
+                        {
+
+                            MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            clearContactsBoxes();
+                        }
+                        else
+                        {
+                        }
+                    }
+                    if (contactTypeCb1.SelectedIndex == 2)
+                    {
+                        if (!String.IsNullOrWhiteSpace(contactDetailsPhoneTb1.Text))
+                        {
+
+                            MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            clearContactsBoxes();
+                        }
+                        else
+                        {
+                        }
+                    }
+                    if (contactTypeCb1.SelectedIndex == 3)
+                    {
+                        if (!String.IsNullOrWhiteSpace(contactDetailsMobileTb1.Text))
+                        {
+                            MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            clearContactsBoxes();
+                        }
+                        else
+                        {
+                        }
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Please choose from the selection before saving.");
+                    MessageBox.Show("Please choose a contact type.");
                 }
             }
             else
+            {
                 MessageBox.Show("Please resolve the error first.");
+            }
+        }
+
+        public void clearContactTextbox()
+        {
+            contactTypeCb1.SelectedIndex = 0;
+            MainVM.SelectedEmpContact.ContactDetails = contactDetail;
+            validateEmployeeTextBoxes();
+            clearContactsBoxes();
+            cancelEmpContactBtn.Visibility = Visibility.Hidden;
+            saveEmpContactBtn.Visibility = Visibility.Hidden;
+            addNewEmpContactBtn.Visibility = Visibility.Visible;
         }
 
         private void cancelEmpContactBtn_Click(object sender, RoutedEventArgs e)
@@ -2130,6 +2261,7 @@ namespace prototype2
             empPostionCb.SelectedIndex = 0;
             empUserNameTb.Clear();
             empPasswordTb.Clear();
+            empImage.Source = null;
             if (empType == 0)
             {
                 empType = 0;
