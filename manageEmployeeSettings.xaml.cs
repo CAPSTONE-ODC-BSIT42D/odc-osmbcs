@@ -31,55 +31,70 @@ namespace prototype2
         string positionID = "";
         private void addEmpPosBtn_Click(object sender, RoutedEventArgs e)
         {
-            var dbCon = DBConnection.Instance();
-            dbCon.DatabaseName = dbname;
-            if (employeePositionLb.Items.Contains(empPosNewTb.Text))
+            if (!String.IsNullOrWhiteSpace(empPosNewTb.Text))
             {
-                MessageBox.Show("Already in the list.");
-            }
-            else
-            {
-                if (dbCon.IsConnect())
+                MessageBox.Show("Employee Position field must be filled");
+
+                var dbCon = DBConnection.Instance();
+                dbCon.DatabaseName = dbname;
+                if (employeePositionLb.Items.Contains(empPosNewTb.Text))
                 {
-                    string query = "INSERT INTO `odc_db`.`position_t` (`positionName`) VALUES('" + empPosNewTb.Text + "')";
-                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    MessageBox.Show("Emploee position already exists.");
+                }
+                else
+                {
+
+                    if (dbCon.IsConnect())
                     {
-                        MessageBox.Show("Added");
-                        empPosNewTb.Clear();
-                        setListBoxControls();
-                        dbCon.Close();
+                        string query = "INSERT INTO `odc_db`.`position_t` (`positionName`) VALUES('" + empPosNewTb.Text + "')";
+                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        {
+                            MessageBox.Show("Employee Position record successfully saved");
+                            empPosNewTb.Clear();
+                            setListBoxControls();
+                            dbCon.Close();
+                        }
                     }
                 }
             }
-            
+            else
+            {
+                MessageBox.Show("Employee Position field must be filled");
+            }
         }
 
         private void saveEmpPosBtn_Click(object sender, RoutedEventArgs e)
         {
-            var dbCon = DBConnection.Instance();
-            dbCon.DatabaseName = dbname;
-            if (String.IsNullOrWhiteSpace(empPosNewTb.Text))
+            if (!String.IsNullOrWhiteSpace(empPosNewTb.Text))
             {
                 MessageBox.Show("Employee Position must be filled");
-            }
-            else
-            {
+                var dbCon = DBConnection.Instance();
+                dbCon.DatabaseName = dbname;
+
                 if (employeePositionLb.Items.Contains(empPosNewTb.Text))
                 {
-                    MessageBox.Show("Already in the list.");
+                    MessageBox.Show("Employee Position already exists");
                 }
-                if (dbCon.IsConnect())
+                else
                 {
-                    string query = "UPDATE `odc_db`.`position_t` set `positionName` = '" + empPosNewTb.Text + "' where positionID = '" + positionID + "'";
-                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    if (dbCon.IsConnect())
                     {
-                        MessageBox.Show("Saved");
-                        empPosNewTb.Clear();
-                        setListBoxControls();
-                        dbCon.Close();
+                        string query = "UPDATE `odc_db`.`position_t` set `positionName` = '" + empPosNewTb.Text + "' where positionID = '" + positionID + "'";
+                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        {
+                            MessageBox.Show("Employee Position record successfully saved");
+                            empPosNewTb.Clear();
+                            setListBoxControls();
+                            dbCon.Close();
+                        }
                     }
                 }
             }
+            else
+            {
+                MessageBox.Show("Employee Position field must be filled");
+            }
+
             
         }
         private void deleteEmpPosBtn_Click(object sender, RoutedEventArgs e)
@@ -103,7 +118,7 @@ namespace prototype2
                                 if (dbCon.insertQuery(query, dbCon.Connection))
                                 {
                                     dbCon.Close();
-                                    MessageBox.Show("Position deleted.");
+                                    MessageBox.Show("Employee position deleted.");
                                     setListBoxControls();
                                 }
                             }
@@ -114,7 +129,7 @@ namespace prototype2
             }
             else
             {
-                MessageBox.Show("Select a position first.");
+                MessageBox.Show("Please select an Employee Position Record");
             }
             
         }

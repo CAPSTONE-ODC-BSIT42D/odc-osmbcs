@@ -217,6 +217,7 @@ namespace prototype2
                                 MessageBox.Show("Employee record successfully updated.");
 
                                 //clearing textboxes
+                                /*
                                 firstNameTb.Clear();
                                 middleInitialTb.Clear();
                                 lastNameTb.Clear();
@@ -225,6 +226,7 @@ namespace prototype2
                                 emailAddressTb.Clear();
                                 mobileNumberTb.Clear();
                                 postionCb.SelectedValue = -1;
+                                */
                                 this.Close();
                             }
                             catch (Exception ex)
