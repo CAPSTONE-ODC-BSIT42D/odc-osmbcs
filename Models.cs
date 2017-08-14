@@ -279,4 +279,27 @@ namespace prototype2
         }
     }
 
+    public class EmpPosition : ViewModelEntity
+    {
+        public EmpPosition()
+        {
+
+        }
+
+        protected string positionid;
+        protected string positionName;
+
+        public string PositionID
+        {
+            get { return positionid; }
+            set { SetProperty(ref positionid, value); }
+        }
+
+        public string PositionName
+        {
+            get { return positionName; }
+            set { SetProperty(ref positionName, value); }
+        }
+    }
+
 }

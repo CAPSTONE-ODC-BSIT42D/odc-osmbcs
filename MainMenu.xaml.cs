@@ -1866,6 +1866,7 @@ namespace prototype2
             }
             else if (result == MessageBoxResult.Cancel)
             {
+                ;
             }
         }
 
@@ -2129,7 +2130,6 @@ namespace prototype2
             empPostionCb.SelectedIndex = 0;
             empUserNameTb.Clear();
             empPasswordTb.Clear();
-            empImage.Source = ;
             if (empType == 0)
             {
                 empType = 0;

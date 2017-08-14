@@ -14,7 +14,7 @@
                 <TextBox x:Name="empPosNewTb" HorizontalAlignment="Left" Height="23" Margin="117,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" FontSize="13"/>
                 <Button x:Name="addEmpPosBtn" Content="Add" HorizontalAlignment="Left" Margin="358,10,0,0" VerticalAlignment="Top" Width="75" Click="addEmpPosBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF03BD03" BorderBrush="#FF019C01" Foreground="#FFFDF7F7"/>
                 <Button x:Name="saveEmpPosBtn" Content="save" HorizontalAlignment="Left" Margin="358,10,0,0" VerticalAlignment="Top" Width="90" Click="saveEmpPosBtn_Click" Visibility="Hidden"/>
-                <ListBox x:Name="employeePositionLb" HorizontalAlignment="Left" Height="127" Margin="16,52,0,0" VerticalAlignment="Top" Width="337" FontSize="13" />
+                <ListBox x:Name="employeePositionLb" HorizontalAlignment="Left" Height="127" Margin="16,52,0,0" VerticalAlignment="Top" Width="337" FontSize="13" ItemsSource="{Binding EmpPosition}" SelectedItem="{Binding SelectedEmpPosition}" DisplayMemberPath="{Binding PositionName}" />
                 <Button x:Name="deleteEmpPosBtn" Content="Delete" HorizontalAlignment="Left" Margin="358,87,0,0" VerticalAlignment="Top" Width="75" Click="deleteEmpPosBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FFEC1717" BorderBrush="#FFDC0606" Foreground="#FFF9F3F3"/>
                 <Button x:Name="editEmpPosBtn" Content="Edit" HorizontalAlignment="Left" Margin="358,54,0,0" VerticalAlignment="Top" Width="75" Click="editEmpPosBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF7527B6" BorderBrush="#FF6D08C1" Foreground="#FFF9F9F9"/>
             </Grid>

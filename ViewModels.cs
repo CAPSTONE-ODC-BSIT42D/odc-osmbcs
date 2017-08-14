@@ -138,5 +138,23 @@ namespace prototype2
             set { SetProperty(ref selectedContact, value); }
         }
         //----- END of REpContacts
+
+        //----- Employee Position
+        protected ObservableCollection<EmpPosition> empPosition = new ObservableCollection<EmpPosition>();
+
+        protected EmpPosition selectedEmpPosition = null;
+
+        public ObservableCollection<EmpPosition> EmpPosition
+        {
+            get { return empPosition; }
+            set { empPosition = value; }
+        }
+
+        public EmpPosition SelectedEmpPosition
+        {
+            get { return selectedEmpPosition; }
+            set { SetProperty(ref selectedEmpPosition, value); }
+        }
+        //----- End of Employee Position
     }
 }

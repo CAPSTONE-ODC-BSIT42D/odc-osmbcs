@@ -24,6 +24,7 @@ namespace prototype2
         public manageEmployeeSettings()
         {
             InitializeComponent();
+            this.DataContext = MainMenu.MainVM;
         }
         private static String dbname = "odc_db";
 
@@ -70,7 +71,7 @@ namespace prototype2
                 }
                 if (dbCon.IsConnect())
                 {
-                    string query = "UPDATE `odc_db`.`position_t` set `positionName` = '" + empPosNewTb.Text + "' where positionID = '" + positionID + "'";
+                    string query = "UPDATE `odc_db`.`position_t` set `positionName` = '" + empPosNewTb.Text + "' where positionID = '" + MainMenu.MainVM.SelectedEmpPosition.PositionID + "'";
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
                         MessageBox.Show("Saved");
@@ -92,21 +93,13 @@ namespace prototype2
                 {
                     try
                     {
-                        foreach (object list in employeePositionLb.Items)
-                        {
-                            if (employeePositionLb.SelectedItems.Count != 0)
-                            {
-                                positionID = (String)employeePositionLb.SelectedValue.ToString();
-                                empPosNewTb.Text = (employeePositionLb.SelectedItem as DataRowView)["positionName"].ToString();
-                                string query = "DELETE FROM `odc_db`.`position_t` WHERE `positionID`='" + employeePositionLb.SelectedValue + "';";
+                        string query = "DELETE FROM `odc_db`.`position_t` WHERE `positionID`='" + MainMenu.MainVM.SelectedEmpPosition.PositionID + "';";
 
-                                if (dbCon.insertQuery(query, dbCon.Connection))
-                                {
-                                    dbCon.Close();
-                                    MessageBox.Show("Position deleted.");
-                                    setListBoxControls();
-                                }
-                            }
+                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        {
+                            dbCon.Close();
+                            MessageBox.Show("Position deleted.");
+                            setListBoxControls();
                         }
                     }
                     catch (Exception) { throw; }
@@ -126,25 +119,8 @@ namespace prototype2
 
             if (employeePositionLb.SelectedItems.Count > 0)
             {
-                positionID = employeePositionLb.SelectedValue.ToString();
-                empPosNewTb.Text = (employeePositionLb.SelectedItem as DataRowView)["positionName"].ToString();
-                saveEmpPosBtn.Visibility = Visibility.Visible;
 
-                string query = "SELECT * FROM position_t WHERE positionid = '" + positionID + "';";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-
-                DataSet fromDb = new DataSet();
-                dataAdapter.Fill(fromDb, "t");
-                DataTable fromDbTable = new DataTable();
-                fromDbTable = fromDb.Tables["t"];
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    try {
-                        empPosNewTb.Text = dr["empPosNewTb"].ToString();
-
-                    }//try                        
-                    catch (Exception) { throw;   }
-                }
+                empPosNewTb.Text = MainMenu.MainVM.SelectedEmpPosition.PositionName;
             }
             else
             {
@@ -168,10 +144,14 @@ namespace prototype2
                 string query = "SELECT * FROM POSITION_T;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
-                dataAdapter.Fill(fromDb, "t1");
-                employeePositionLb.ItemsSource = fromDb.Tables["t1"].DefaultView;
-                employeePositionLb.DisplayMemberPath = "positionName";
-                employeePositionLb.SelectedValuePath = "positionId";
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                MainMenu.MainVM.EmpPosition.Clear();
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainMenu.MainVM.EmpPosition.Add(new EmpPosition(){ PositionID = dr["positionid"].ToString(), PositionName = dr["positionName"].ToString() });
+                }
                 dbCon.Close();
             }
         }
