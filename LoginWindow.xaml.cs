@@ -33,64 +33,60 @@ namespace prototype2
 
         private void loginBtn_Click(object sender, RoutedEventArgs e)
         {
-            String uname = "";
-            String pword = "";
-            uname = usernameTb.Text;
-            pword = passwordBox.Password.ToString();
+            var dbCon = DBConnection.Instance();
             if (String.IsNullOrWhiteSpace(usernameTb.Text) && String.IsNullOrWhiteSpace(passwordBox.Password.ToString()))
             {
                 MessageBox.Show("Username and Password must be filled.");
             }
-
-
-            if (uname.Equals("admin") && pword.Equals("admin"))
+            else
             {
-                toLogin();
-            }
-            var dbCon = DBConnection.Instance();
-            if (dbCon.IsConnect())
-            {
-                using (MySqlConnection conn = dbCon.Connection)
+                if (usernameTb.Equals("admin") && passwordBox.Password.ToString().Equals("admin"))
                 {
-
-                    SecureString passwordsalt = passwordBox.SecurePassword;
-                    foreach (Char c in "$w0rdf!$h")
+                    toLogin();
+                }
+                if (dbCon.IsConnect())
+                {
+                    using (MySqlConnection conn = dbCon.Connection)
                     {
-                        passwordsalt.AppendChar(c);
-                    }
-                    passwordsalt.MakeReadOnly();
+                        SecureString passwordsalt = passwordBox.SecurePassword;
+                        foreach (Char c in "$w0rdf!$h")
+                        {
+                            passwordsalt.AppendChar(c);
+                        }
+                        passwordsalt.MakeReadOnly();
 
-                    conn.Open();
-                    MySqlCommand cmd = new MySqlCommand("LOGIN_PROC", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@username", usernameTb.Text);
-                    cmd.Parameters["@username"].Direction = ParameterDirection.Input;
+                        conn.Open();
+                        MySqlCommand cmd = new MySqlCommand("LOGIN_PROC", conn);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@username", usernameTb.Text);
+                        cmd.Parameters["@username"].Direction = ParameterDirection.Input;
 
-                    cmd.Parameters.AddWithValue("@upassword", SecureStringToString(passwordsalt));
-                    cmd.Parameters["@upassword"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@upassword", SecureStringToString(passwordsalt));
+                        cmd.Parameters["@upassword"].Direction = ParameterDirection.Input;
 
-                    cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
-                    cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
-
-
-                    cmd.ExecuteNonQuery();
-                    string empId = cmd.Parameters["@insertedid"].Value.ToString();
-                    string user = cmd.Parameters["@username"].Value.ToString();
-                    string pass = cmd.Parameters["@upassword"].Value.ToString();
+                        cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
+                        cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
 
 
-                    if (!String.IsNullOrWhiteSpace(user) && !String.IsNullOrWhiteSpace(pass))
-                    {
-                        toLogin();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Username or Password is incorrect.");
-                        usernameTb.Clear();
-                        passwordBox.Clear();
+                        cmd.ExecuteNonQuery();
+                        string empId = cmd.Parameters["@insertedid"].Value.ToString();
+
+
+                        if (!String.IsNullOrWhiteSpace(empId))
+                        {
+                            toLogin();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Username or Password is incorrect.");
+                            usernameTb.Clear();
+                            passwordBox.Clear();
+                        }
                     }
                 }
             }
+            
+            
 
         }
 
