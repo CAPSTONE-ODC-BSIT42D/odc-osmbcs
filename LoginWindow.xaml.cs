@@ -34,16 +34,21 @@ namespace prototype2
         private void loginBtn_Click(object sender, RoutedEventArgs e)
         {
             var dbCon = DBConnection.Instance();
+
+            //Checks if the fields are null
             if (String.IsNullOrWhiteSpace(usernameTb.Text) && String.IsNullOrWhiteSpace(passwordBox.Password.ToString()))
             {
                 MessageBox.Show("Username and Password must be filled.");
             }
+            //If the fields are not empty
             else
             {
+                //Checks if the fields are equal to admin, admin
                 if (usernameTb.Text.Equals("admin") && passwordBox.Password.Equals("admin"))
                 {
                     toLogin();
                 }
+                //If not then, checks the database for registered employee
                 else if (dbCon.IsConnect())
                 {
                     using (MySqlConnection conn = dbCon.Connection)
@@ -69,13 +74,15 @@ namespace prototype2
 
 
                         cmd.ExecuteNonQuery();
+                        //Gets the output key from the stored procedure/database;
                         string empId = cmd.Parameters["@insertedid"].Value.ToString();
 
-
+                        //Checks if the empID variable is null, if not > toLogin(); function
                         if (!String.IsNullOrWhiteSpace(empId))
                         {
                             toLogin();
                         }
+                        //If its null, this.
                         else
                         {
                             MessageBox.Show("Username or Password is incorrect.");
