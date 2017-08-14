@@ -77,7 +77,7 @@ namespace prototype2
                         //Gets the output key from the stored procedure/database;
                         string empId = cmd.Parameters["@insertedid"].Value.ToString();
 
-                        //Checks if the empID variable is null, if not > toLogin(); function
+                        //Checks if the empID variable is null, if not do the toLogin(); function
                         if (!String.IsNullOrWhiteSpace(empId))
                         {
                             toLogin();
