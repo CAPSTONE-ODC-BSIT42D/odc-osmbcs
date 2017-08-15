@@ -148,7 +148,7 @@ namespace prototype2
                                 cmd.Parameters["@signature"].Value = "";
                                 cmd.ExecuteNonQuery();
                                 conn.Close();
-                                MessageBox.Show("Saved");
+                                MessageBox.Show("Contractor record successfully saved");
                                 this.Close();
                             }
                             catch (Exception ex)

@@ -667,6 +667,7 @@ namespace prototype2
 
         private void btnEditEmp_Click(object sender, RoutedEventArgs e)
         {
+            setManageEmployeeGridControls();
             manageEmployeeGrid.Visibility = Visibility.Hidden;
             employeeDetailsGrid.Visibility = Visibility.Visible;
             employeeDetailsHeader.Content = "Manage Employee - Edit Employee";
@@ -677,7 +678,6 @@ namespace prototype2
             empJobCb.IsEnabled = false;
             empDateStarted.IsEnabled = false;
             empDateEnded.IsEnabled = false;
-            setManageEmployeeGridControls();
         }
 
         private void btnDeleteEmp_Click(object sender, RoutedEventArgs e)
@@ -709,6 +709,7 @@ namespace prototype2
 
         private void employeeManageMenuBtn_Click(object sender, RoutedEventArgs e)
         {
+            setManageEmployeeGridControls();
             saleSubMenuGrid.Visibility = Visibility.Collapsed;
             manageSubMenugrid.Visibility = Visibility.Collapsed;
             for (int x = 0; x < containerGrid.Children.Count; x++)
@@ -721,7 +722,7 @@ namespace prototype2
                 manageGrid.Children[x].Visibility = Visibility.Collapsed;
             }
             manageEmployeeGrid.Visibility = Visibility.Visible;
-            setManageEmployeeGridControls();
+
         }
 
         /*-----------------END OF MANAGE EMPLOYEE-------------------*/
@@ -749,6 +750,7 @@ namespace prototype2
 
         private void btnEditCont_Click(object sender, RoutedEventArgs e)
         {
+            setManageContractorGridControls();
             manageContractorGrid.Visibility = Visibility.Hidden;
             employeeDetailsGrid.Visibility = Visibility.Visible;
             employeeDetailsHeader.Content = "Manage Contractor - Edit Contractor";
@@ -758,7 +760,7 @@ namespace prototype2
             empJobCb.IsEnabled = true;
             empDateStarted.IsEnabled = true;
             empDateEnded.IsEnabled = true;
-            setManageContractorGridControls();
+
         }
 
         private void btnDeleteCont_Click(object sender, RoutedEventArgs e)
@@ -784,6 +786,7 @@ namespace prototype2
                 else if (result == MessageBoxResult.Cancel)
                 {
                 }
+                setManageContractorGridControls();
             }
         }
 
@@ -828,6 +831,7 @@ namespace prototype2
 
         private void manageContractorAddBtn_Click(object sender, RoutedEventArgs e)
         {
+            setManageContractorGridControls();
             manageContractorGrid.Visibility = Visibility.Hidden;
             employeeDetailsGrid.Visibility = Visibility.Visible;
             employeeDetailsHeader.Content = "Manage Contractor - New Contractor";
@@ -837,7 +841,7 @@ namespace prototype2
             empJobCb.IsEnabled = true;
             empDateStarted.IsEnabled = true;
             empDateEnded.IsEnabled = true;
-            setManageContractorGridControls();
+
         }
 
         private void manageContractorDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -923,24 +927,34 @@ namespace prototype2
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             MessageBox.Show("Record successfully deleted!");
-                            setManageSupplierGridControls();
                         }
+                        setManageSupplierGridControls();
                     }
 
                 }
                 else if (result == MessageBoxResult.Cancel)
                 {
+                    setManageSupplierGridControls();
                 }
-                setManageSupplierGridControls();
             }
         }
 
         private void manageSupplierAddbtn_Click(object sender, RoutedEventArgs e)
         {
+            clearSupplierFields();
             manageSupplierGrid.Visibility = Visibility.Hidden;
             companyDetailsGrid.Visibility = Visibility.Visible;
             companyDetailsHeader.Content = "Manage Supplier - New Supplier";
             compType = 1;
+        }
+
+        private void clearSupplierFields()
+        {
+            custCompanyNameTb.Clear();
+            custCityTb.Clear();
+            descriptionTb1.Clear();
+            custAddressTb.Clear();
+            custProvinceCb.SelectedValue = -1;
         }
 
         private void manageSupplierDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

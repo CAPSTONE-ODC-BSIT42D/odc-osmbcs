@@ -36,7 +36,7 @@ namespace prototype2
             dbCon.DatabaseName = dbname;
             if (employeePositionLb.Items.Contains(empPosNewTb.Text))
             {
-                MessageBox.Show("Already in the list.");
+                MessageBox.Show("Employee position already exists");
             }
             else
             {
@@ -45,7 +45,7 @@ namespace prototype2
                     string query = "INSERT INTO `odc_db`.`position_t` (`positionName`) VALUES('" + empPosNewTb.Text + "')";
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
-                        MessageBox.Show("Added");
+                        MessageBox.Show("Employee Poisition successfully added");
                         empPosNewTb.Clear();
                         setListBoxControls();
                         dbCon.Close();
@@ -74,7 +74,7 @@ namespace prototype2
                     string query = "UPDATE `odc_db`.`position_t` set `positionName` = '" + empPosNewTb.Text + "' where positionID = '" + MainMenu.MainVM.SelectedEmpPosition.PositionID + "'";
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
-                        MessageBox.Show("Saved");
+                        MessageBox.Show("Employee Poisition saved");
                         empPosNewTb.Clear();
                         setListBoxControls();
                         dbCon.Close();
@@ -98,7 +98,7 @@ namespace prototype2
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             dbCon.Close();
-                            MessageBox.Show("Position deleted.");
+                            MessageBox.Show("Employee position successfully deleted.");
                             setListBoxControls();
                         }
                     }
@@ -107,7 +107,7 @@ namespace prototype2
             }
             else
             {
-                MessageBox.Show("Select a position first.");
+                MessageBox.Show("Select an employee position first.");
             }
             
         }
@@ -124,7 +124,7 @@ namespace prototype2
             }
             else
             {
-                MessageBox.Show("Please select a position first.");
+                MessageBox.Show("Please select an employee position first.");
             }
             dbCon.Close();
         }

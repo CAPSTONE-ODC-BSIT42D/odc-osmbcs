@@ -167,7 +167,7 @@ namespace prototype2
                                 emailAddressTb.Clear();
                                 mobileNumberTb.Clear();
                                 postionCb.SelectedValue = -1;
-                                MessageBox.Show("Saved");
+                                MessageBox.Show("Employee successfully saved");
                                 this.Close();
                             }
                             catch (Exception ex)
