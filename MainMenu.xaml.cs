@@ -927,24 +927,34 @@ namespace prototype2
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             MessageBox.Show("Record successfully deleted!");
-                            setManageSupplierGridControls();
                         }
+                        setManageSupplierGridControls();
                     }
 
                 }
                 else if (result == MessageBoxResult.Cancel)
                 {
+                    setManageSupplierGridControls();
                 }
-                setManageSupplierGridControls();
             }
         }
 
         private void manageSupplierAddbtn_Click(object sender, RoutedEventArgs e)
         {
+            clearSupplierFields();
             manageSupplierGrid.Visibility = Visibility.Hidden;
             companyDetailsGrid.Visibility = Visibility.Visible;
             companyDetailsHeader.Content = "Manage Supplier - New Supplier";
             compType = 1;
+        }
+
+        private void clearSupplierFields()
+        {
+            custCompanyNameTb.Clear();
+            custCityTb.Clear();
+            descriptionTb1.Clear();
+            custAddressTb.Clear();
+            custProvinceCb.SelectedValue = -1;
         }
 
         private void manageSupplierDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
