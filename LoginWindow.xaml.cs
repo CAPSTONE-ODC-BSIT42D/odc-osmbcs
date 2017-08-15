@@ -54,14 +54,14 @@ namespace prototype2
                     using (MySqlConnection conn = dbCon.Connection)
                     {
                         SecureString passwordsalt = passwordBox.SecurePassword;
-                        foreach (Char c in "$w0rdf!$h")
+                        foreach (Char c in "$w0rdf!$h")//hashing password
                         {
                             passwordsalt.AppendChar(c);
                         }
                         passwordsalt.MakeReadOnly();
 
                         conn.Open();
-                        MySqlCommand cmd = new MySqlCommand("LOGIN_PROC", conn);
+                        MySqlCommand cmd = new MySqlCommand("LOGIN_PROC", conn);//stored proc ng login
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@username", usernameTb.Text);
                         cmd.Parameters["@username"].Direction = ParameterDirection.Input;
@@ -91,10 +91,7 @@ namespace prototype2
                         }
                     }
                 }
-            }
-            
-            
-
+            }    
         }
 
         public void toLogin()

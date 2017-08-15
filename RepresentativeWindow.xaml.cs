@@ -65,25 +65,6 @@ namespace prototype2
 
         private void addNewCustContactBtn_Click(object sender, RoutedEventArgs e)
         {
-            /*
-            if (contactTypeCb.SelectedIndex != 0)
-            {
-                if (!String.IsNullOrWhiteSpace(contactDetailsMobileTb.Text) || !String.IsNullOrWhiteSpace(contactDetailsPhoneTb.Text) || !String.IsNullOrWhiteSpace(contactDetailsEmailTb.Text))
-                {
-                    MainMenu.MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = MainMenu.MainVM.ContactValue });
-                    contactTypeCb.SelectedIndex = 0;
-                    clearContactsBoxes();
-                    validateTextBoxes();
-                }
-                else
-                {
-                    MessageBox.Show("Contact field must be filled");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please select a Contact Type.");
-            }*/
             if (!(System.Windows.Controls.Validation.GetHasError(contactDetailsPhoneTb) == true) && !(System.Windows.Controls.Validation.GetHasError(contactDetailsEmailTb) == true) && !(System.Windows.Controls.Validation.GetHasError(contactDetailsMobileTb) == true))
             {
                 if (contactTypeCb.SelectedIndex != 0)

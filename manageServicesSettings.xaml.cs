@@ -105,7 +105,7 @@ namespace prototype2
                     string query = "INSERT INTO service_t (serviceName,serviceDesc,servicePrice) VALUES ('" + serviceName.Text + "','" + serviceDesc.Text + "', '" + servicePrice.Value + "')";
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
-                        MessageBox.Show("Service type added!");
+                        MessageBox.Show("Service type successfully added!");
                         serviceTypeList.Visibility = Visibility.Visible;
                         serviceTypeAdd.Visibility = Visibility.Collapsed;
 
@@ -121,7 +121,7 @@ namespace prototype2
                     string query = "UPDATE `service_T` SET serviceName = '" + serviceName.Text + "',serviceDesc = '" + serviceDesc.Text + "', servicePrice = '" + servicePrice.Value + "' WHERE serviceID = '" + id + "'";
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
-                        MessageBox.Show("Updated");
+                        MessageBox.Show("Sevice type sucessfully updated");
                         id = "";
                         serviceTypeList.Visibility = Visibility.Visible;
                         serviceTypeAdd.Visibility = Visibility.Collapsed;
