@@ -523,6 +523,7 @@ namespace prototype2
         private void btnEditCust_Click(object sender, RoutedEventArgs e)
         {
             loadCustSuppDetails();
+            compType = 0;
             manageCustomerGrid.Visibility = Visibility.Hidden;
             companyDetailsGrid.Visibility = Visibility.Visible;
             companyDetailsHeader.Content = "Manage Customer - Edit Customer";
@@ -906,6 +907,7 @@ namespace prototype2
         private void btnEditSupp_Click(object sender, RoutedEventArgs e)
         {
             loadCustSuppDetails();
+            compType = 1;
             manageSupplierGrid.Visibility = Visibility.Hidden;
             companyDetailsGrid.Visibility = Visibility.Visible;
             companyDetailsHeader.Content = "Manage Supplier - Edit Supplier";
