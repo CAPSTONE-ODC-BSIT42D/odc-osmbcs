@@ -913,7 +913,6 @@ namespace prototype2
             companyDetailsHeader.Content = "Manage Supplier - Edit Supplier";
             isEdit = true;
         }
-
         private void btnDeleteSupp_Click(object sender, RoutedEventArgs e)
         {
             if (manageSupplierDataGrid.SelectedItems.Count > 0)
@@ -936,6 +935,7 @@ namespace prototype2
                 }
                 else if (result == MessageBoxResult.Cancel)
                 {
+                    clearSupplierFields();
                     setManageSupplierGridControls();
                 }
             }
@@ -1064,6 +1064,7 @@ namespace prototype2
         private void cancelCustBtn_Click(object sender, RoutedEventArgs e)
         {
             clearCompanyDetailsGrid();
+            clearSupplierFields();
         }
         
 
@@ -2122,6 +2123,7 @@ namespace prototype2
             }
             else if (result == MessageBoxResult.Cancel)
             {
+                clearEmployeeDetailsGrid();
             }
         }
 
