@@ -25,7 +25,7 @@
     <Grid>
         <GroupBox x:Name="groupBox" Header="Service Types" Height="308" Margin="10,10,10,154" FontWeight="Bold" FontStyle="Italic" FontSize="16">
             <Grid x:Name="serviceTypeGrid" Margin="10,10,12,0" VerticalAlignment="Top">
-                <Grid x:Name="serviceTypeList" HorizontalAlignment="Left" Height="265" VerticalAlignment="Top" Width="685" Margin="0,0,-104,0" d:IsHidden="True">
+                <Grid x:Name="serviceTypeList" HorizontalAlignment="Left" Height="265" VerticalAlignment="Top" Width="685" Margin="0,0,-104,0">
                     <Button x:Name="addServiceTypeBtn" Content="+ add" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="75" FontWeight="Normal" FontStyle="Normal" FontSize="12" Click="addServiceTypeBtn_Click"/>
                     <DataGrid x:Name="serviceTypeDg" Height="207" Margin="10,48,10,0" ItemsSource="{Binding items}" CanUserAddRows="False" MinColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" Grid.ColumnSpan="2" CanUserReorderColumns="False" CanUserResizeColumns="False" SelectionChanged="serviceTypeDg_SelectionChanged" >
                         <DataGrid.Columns >
