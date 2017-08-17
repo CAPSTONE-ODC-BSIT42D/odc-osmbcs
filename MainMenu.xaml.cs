@@ -2262,12 +2262,12 @@ namespace prototype2
 
         private void clearContactsBoxes()
         {
-            contactDetailsPhoneTb.Text = "";
-            contactDetailsEmailTb.Text = "";
-            contactDetailsMobileTb.Text = "";
-            contactDetailsPhoneTb1.Text = "";
-            contactDetailsEmailTb1.Text = "";
-            contactDetailsMobileTb1.Text = "";
+            contactDetailsPhoneTb.Clear();
+            contactDetailsEmailTb.Clear();
+            contactDetailsMobileTb.Clear();
+            contactDetailsPhoneTb1.Clear();
+            contactDetailsEmailTb1.Clear();
+            contactDetailsMobileTb1.Clear();
             Validation.ClearInvalid((contactDetailsPhoneTb).GetBindingExpression(TextBox.TextProperty));
             Validation.ClearInvalid((contactDetailsEmailTb).GetBindingExpression(TextBox.TextProperty));
             Validation.ClearInvalid((contactDetailsMobileTb).GetBindingExpression(TextBox.TextProperty));
