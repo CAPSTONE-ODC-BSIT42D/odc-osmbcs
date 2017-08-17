@@ -7,7 +7,7 @@
         xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms" xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit" x:Class="prototype2.MainMenu"
         mc:Ignorable="d"
-        Title="MainMenu" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" Loaded="Window_Loaded" WindowState="Maximized" MinWidth="768" MinHeight="535" d:DesignWidth="1284" d:DesignHeight="929.8">
+        Title="MainMenu" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" Loaded="Window_Loaded" WindowState="Maximized" MinWidth="768" MinHeight="535" d:DesignWidth="1284" d:DesignHeight="1063.3">
     <Window.Resources>
         <Style TargetType="{x:Type Button}" x:Key="mainButton">
             <Setter Property="Background" Value="#2C3E50"/>
@@ -62,6 +62,26 @@
         </Style>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="true">
+                            <Border Background="OrangeRed" DockPanel.Dock="right" Margin="5,0,0,0" 
+                                Width="20" Height="20" CornerRadius="5"
+                                ToolTip="{Binding ElementName=customAdorner, 
+                                          Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" 
+                                   FontWeight="Bold" Foreground="white" />
+                            </Border>
+                            <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
+                                <Border BorderBrush="red" BorderThickness="1" />
+                            </AdornedElementPlaceholder>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type xctk:DecimalUpDown}">
             <Setter Property="Validation.ErrorTemplate">
                 <Setter.Value>
                     <ControlTemplate>
@@ -747,7 +767,7 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid x:Name="servicesGrid" Margin="10,0" Background="#FFECF0F1">
+            <Grid x:Name="servicesGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True">
                 <Grid x:Name="servicesHome" Margin="10,70,10,10">
                     <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476">
                         <Label x:Name="label17" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -865,7 +885,7 @@
                     </Grid>
 
                 </Grid>
-                <Grid x:Name="manageEmployeeGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged">
+                <Grid x:Name="manageEmployeeGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged" d:IsHidden="True">
                     <Grid Height="57" Margin="10,0" VerticalAlignment="Top" Background="#FF1695A3">
                         <Label x:Name="label7_Copy4" Content="Manage - Employee" Margin="0,0,307,0" FontSize="20" FontWeight="Bold" Background="{x:Null}" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                         <Button x:Name="settingsEmployeeGridBtn" Margin="1170,0,0,0" Style="{StaticResource settingsButton}" HorizontalAlignment="Right" Width="59" Foreground="White"  Click="settingsEmployeeGridBtn_Click" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Background="{x:Null}" Visibility="Collapsed">
@@ -943,7 +963,7 @@
                         </DataGrid>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageSupplierGrid" IsVisibleChanged="manageSupplierGrid_IsVisibleChanged">
+                <Grid x:Name="manageSupplierGrid" IsVisibleChanged="manageSupplierGrid_IsVisibleChanged" d:IsHidden="True">
                     <Label x:Name="label7_Copy5" Content="Manage - Supplier" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid x:Name="manageSupplierHome" Margin="10,70,10,10">
                         <Grid Margin="10,1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -978,7 +998,7 @@
                         </DataGrid>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageContractorGrid" IsVisibleChanged="manageContractorGrid_IsVisibleChanged">
+                <Grid x:Name="manageContractorGrid" IsVisibleChanged="manageContractorGrid_IsVisibleChanged" d:IsHidden="True">
                     <Grid Margin="10,70,10,10">
                         <Grid Margin="10,1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Label x:Name="label22" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -1018,7 +1038,7 @@
                 <Grid x:Name="manageSettingsGrid">
                     <Label x:Name="label7_Copy6" Content="Manage - Settings" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid Margin="10,70,10,10">
-                        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="693" Margin="24,26,0,0" VerticalAlignment="Top" Width="1183">
+                        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Margin="24,26,0,10" Width="1183">
                             <TabItem Header="Employee &amp; Contractor" RenderTransformOrigin="0.284,0.568">
                                 <Grid Background="#FFE5E5E5">
                                     <Grid Margin="34,49,707,443">
@@ -1044,15 +1064,153 @@
                                 </Grid>
                             </TabItem>
                             <TabItem Header="Services">
-                                <Grid Background="#FFE5E5E5"/>
+                                <Grid Background="#FFE5E5E5">
+                                    <GroupBox x:Name="groupBox_Copy1" Header="Service Types" Height="308" Margin="10,10,456,500" FontWeight="Bold" FontStyle="Italic" FontSize="16">
+                                        <Grid x:Name="serviceTypeGrid" Margin="10,10,12,0" VerticalAlignment="Top">
+                                            <Grid x:Name="serviceTypeList" HorizontalAlignment="Left" Height="265" VerticalAlignment="Top" Width="685" Margin="0,0,-104,0">
+                                                <Button x:Name="addServiceTypeBtn" Content="+ add" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="75" FontWeight="Normal" FontStyle="Normal" FontSize="12" Click="addServiceTypeBtn_Click"/>
+                                                <DataGrid x:Name="serviceTypeDg" Height="207" Margin="10,48,10,0" ItemsSource="{Binding items}" CanUserAddRows="False" MinColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" Grid.ColumnSpan="2" CanUserReorderColumns="False" CanUserResizeColumns="False" >
+                                                    <DataGrid.Columns >
+                                                        <DataGridTextColumn Binding="{Binding serviceID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False"/>
+                                                        <DataGridTextColumn Binding="{Binding serviceName}" ClipboardContentBinding="{x:Null}" Header="Service Name" Width="150" CanUserResize="False"/>
+                                                        <DataGridTextColumn Binding="{Binding serviceDesc}" ClipboardContentBinding="{x:Null}" Header="Description" Width="200" CanUserResize="False" />
+                                                        <DataGridTextColumn Binding="{Binding servicePrice}" ClipboardContentBinding="{x:Null}" Header="Price" Width="175" />
+                                                        <DataGridTemplateColumn Width="100" >
+                                                            <DataGridTemplateColumn.CellTemplate>
+                                                                <DataTemplate>
+                                                                    <Button x:Name="btnEditService" Click="btnEditService_Click" Content="Edit" />
+                                                                </DataTemplate>
+                                                            </DataGridTemplateColumn.CellTemplate>
+                                                        </DataGridTemplateColumn>
+                                                        <DataGridTemplateColumn Width="100" >
+                                                            <DataGridTemplateColumn.CellTemplate>
+                                                                <DataTemplate>
+                                                                    <Button x:Name="btnDeleteService" Click="btnDeleteService_Click" Content="Delete" />
+                                                                </DataTemplate>
+                                                            </DataGridTemplateColumn.CellTemplate>
+                                                        </DataGridTemplateColumn>
+                                                    </DataGrid.Columns>
+                                                </DataGrid>
+                                            </Grid>
+                                            <Grid x:Name="serviceTypeAdd" Visibility="Hidden">
+                                                <Label x:Name="label29" Content="Service Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="12"/>
+                                                <TextBox x:Name="serviceName" HorizontalAlignment="Left" Height="23" Margin="120,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="252" FontWeight="Normal" FontStyle="Normal" FontSize="12" TextChanged="serviceName_TextChanged">
+                                                    <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                                        <Binding.ValidationRules>
+                                                            <local:TextBoxValidation TextBoxType="String"/>
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox>
+                                                <Label x:Name="label_Copy3" Content="Service Description:" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="12"/>
+                                                <TextBox x:Name="serviceDesc" HorizontalAlignment="Left" Height="82" Margin="120,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="547" FontWeight="Normal" FontStyle="Normal" FontSize="12"/>
+                                                <Label x:Name="label_Copy4" Content="Service Price:" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="12"/>
+                                                <xctk:DecimalUpDown x:Name="servicePrice" HorizontalAlignment="Left" Margin="120,161,0,0" VerticalAlignment="Top" Width="252" FontWeight="Normal" FontStyle="Normal" FontSize="12" FormatString="F2" CultureInfo="en-PH" ValueChanged="servicePrice_ValueChanged"/>
+                                                <Button x:Name="saveServiceTypeBtn" Content="save" HorizontalAlignment="Left" Margin="502,230,0,0" VerticalAlignment="Top" Width="75" FontSize="12" FontWeight="Normal" FontStyle="Normal" Height="25" IsEnabled="False" Click="saveServiceTypeBtn_Click"/>
+                                                <Button x:Name="cancelServiceTypeBtn" Content="cancel" HorizontalAlignment="Left" Margin="592,230,0,0" VerticalAlignment="Top" Width="75" FontSize="12" FontWeight="Normal" FontStyle="Normal" Height="25" Click="cancelServiceTypeBtn_Click"/>
+                                            </Grid>
+                                        </Grid>
+                                    </GroupBox>
+                                    <GroupBox x:Name="groupBox_Copy2" Header="Price Per Location" Height="121" Margin="10,338,456,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" FontSize="16">
+                                        <Grid x:Name="serviceTypeGrid1" Margin="10,10,12,9">
+                                            <ComboBox x:Name="custProvinceCb1" Margin="25,36,0,0" VerticalAlignment="Top" Height="25" IsEditable="True" DisplayMemberPath = "locProvince" SelectedValuePath = "locProvinceID" Width="179" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontWeight="Normal" SelectionChanged="custProvinceCb1_SelectionChanged" FontSize="14">
+                                                <ComboBox.SelectedItem>
+                                                    <Binding Path="locProvinceId" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                                        <Binding.ValidationRules>
+                                                            <local:TextBoxValidation TextBoxType="ComboBox"/>
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </ComboBox.SelectedItem>
+                                            </ComboBox>
+                                            <Label x:Name="label30" Content="Select Province:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Normal" FontStyle="Normal"/>
+                                            <xctk:DecimalUpDown x:Name="locationPrice" HorizontalAlignment="Left" Margin="220,36,0,0" VerticalAlignment="Top" Width="193" FontSize="14"/>
+                                            <Label x:Name="label1_Copy8" Content="Price" HorizontalAlignment="Left" Margin="220,10,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Normal" FontStyle="Normal"/>
+                                            <Button x:Name="setPriceBtn" Content="Set" HorizontalAlignment="Left" Margin="422,34,0,0" VerticalAlignment="Top" Width="75" FontWeight="Normal" FontStyle="Normal" FontSize="14" Height="25" Click="setPriceBtn_Click" Background="#FF0591B0" BorderBrush="#FF017791" Foreground="#FFFBF5F5" FontFamily="Segoe UI Semibold"/>
+                                        </Grid>
+                                    </GroupBox>
+                                </Grid>
                             </TabItem>
                             <TabItem Header="Products" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="54">
-                                <Grid Background="#FFE5E5E5"/>
+                                <Grid Background="#FFE5E5E5">
+                                    <Label x:Name="label17_Copy" Content="Products Category" HorizontalAlignment="Left" Height="32" Margin="10,10,0,0" VerticalAlignment="Top" Width="207" FontWeight="Bold" FontStyle="Italic" FontSize="14"/>
+                                    <Border BorderBrush="Black" BorderThickness="1" Margin="33,47,666,0" Padding="10" CornerRadius="10" Height="208" VerticalAlignment="Top" HorizontalAlignment="Left">
+                                        <Grid Margin="0,0,0,-1">
+                                            <ListBox x:Name="invProductsCategoryLb" HorizontalAlignment="Left" Height="127" Margin="16,53,0,0" VerticalAlignment="Top" Width="366" FontSize="13" />
+                                            <Button x:Name="deleteCategoryBtn" Content="Delete" HorizontalAlignment="Left" Margin="387,56,0,0" VerticalAlignment="Top" Width="75" Click="deleteCategoryBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Height="24" Background="#FFEC1717" BorderBrush="#FFBB0000" Foreground="#FFF9F5F5"/>
+                                            <Button x:Name="addCategoryBtn" Content="Add" HorizontalAlignment="Left" Margin="387,9,0,0" VerticalAlignment="Top" Width="75" Click="addCategoryBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Height="24" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>
+                                            <TextBox x:Name="invCategoryTb" HorizontalAlignment="Left" Height="23" Margin="120,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" FontSize="13"/>
+                                            <Label x:Name="label28" Content="Category Name:" HorizontalAlignment="Left" Margin="12,6,0,0" VerticalAlignment="Top" FontSize="13"/>
+                                        </Grid>
+                                    </Border>
+                                    <Label x:Name="label17_Copy1" Content="Product List" HorizontalAlignment="Left" Height="32" Margin="10,283,0,0" VerticalAlignment="Top" Width="208" FontWeight="Bold" FontStyle="Italic" FontSize="14"/>
+                                    <Border Margin="33,315,42,10" BorderBrush="Black" Padding="10" BorderThickness="1" CornerRadius="10">
+                                        <Grid>
+                                            <ScrollViewer Margin="0,0,0,-2">
+                                                <Grid>
+                                                    <Label x:Name="label31" Content="Product Name:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                                    <Label x:Name="label31_Copy" Content="Product Description:" HorizontalAlignment="Left" Margin="0,31,0,0" VerticalAlignment="Top"/>
+                                                    <Label x:Name="label31_Copy1" Content="Cost Price:" HorizontalAlignment="Left" Margin="0,91,0,0" VerticalAlignment="Top"/>
+                                                    <Label x:Name="label31_Copy2" Content="Sales Price:" HorizontalAlignment="Left" Margin="0,122,0,0" VerticalAlignment="Top"/>
+                                                    <Label x:Name="label31_Copy3" Content="Product Category:" HorizontalAlignment="Left" Margin="0,153,0,0" VerticalAlignment="Top"/>
+                                                    <TextBox x:Name="productNameTb" HorizontalAlignment="Left" Height="24" Margin="121,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
+                                                        <TextBox.Text>
+                                                            <Binding Path="Text" ValidatesOnDataErrors="True" ValidatesOnExceptions="True">
+                                                            </Binding>
+                                                        </TextBox.Text>
+                                                    </TextBox>
+                                                    <TextBox x:Name="productDescTb" HorizontalAlignment="Left" Height="58" Margin="121,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
+                                                    <xctk:DecimalUpDown x:Name="costPriceTb" HorizontalAlignment="Left" Margin="121,98,0,0" VerticalAlignment="Top" Width="120">
+                                                        <xctk:DecimalUpDown.Value>
+                                                            <Binding Path="Text" ValidatesOnDataErrors="True" ValidatesOnExceptions="True">
+                                                            </Binding>
+                                                        </xctk:DecimalUpDown.Value>
+                                                    </xctk:DecimalUpDown>
+                                                    <xctk:DecimalUpDown x:Name="salesPriceTb" HorizontalAlignment="Left" Margin="121,125,0,0" VerticalAlignment="Top" Width="120">
+                                                        <xctk:DecimalUpDown.Value>
+                                                            <Binding Path="Text" ValidatesOnDataErrors="True" ValidatesOnExceptions="True">
+                                                            </Binding>
+                                                        </xctk:DecimalUpDown.Value>
+                                                    </xctk:DecimalUpDown>
+
+                                                    <ComboBox x:Name="productCategoryCb" HorizontalAlignment="Left" Margin="121,153,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="categoryName" SelectedValuePath="categoryID">
+                                                        <ComboBox.SelectedItem>
+                                                            <Binding Path="cbItem" ValidatesOnDataErrors="True" ValidatesOnExceptions="True">
+                                                            </Binding>
+                                                        </ComboBox.SelectedItem>
+                                                    </ComboBox>
+                                                    <Button x:Name="addNewProductBtn" Content="+ add" HorizontalAlignment="Left" Margin="377,153,0,0" VerticalAlignment="Top" Width="74" Click="addNewProductBtn_Click"/>
+                                                    <DataGrid x:Name="productListTb" HorizontalAlignment="Left" Height="250" Margin="0,196,0,0" VerticalAlignment="Top" Width="1053" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}">
+                                                        <DataGrid.Columns >
+                                                            <DataGridTextColumn Binding="{Binding ItemName}" ClipboardContentBinding="{x:Null}" Width="150" CanUserResize="False" Visibility="Visible" Header="Product Name" />
+                                                            <DataGridTextColumn Binding="{Binding ItemDesc}" ClipboardContentBinding="{x:Null}" Header="Product Description" Width="200" CanUserResize="False" />
+                                                            <DataGridTextColumn Binding="{Binding CostPrice}" ClipboardContentBinding="{x:Null}" Header="Cost Price" Width="150" CanUserResize="False" />
+                                                            <DataGridTextColumn Binding="{Binding SalesPrice}" ClipboardContentBinding="{x:Null}" Header="Sales Price" Width="150" CanUserResize="False" />
+                                                            <DataGridTemplateColumn Width="100"  CanUserResize="False" >
+                                                                <DataGridTemplateColumn.CellTemplate>
+                                                                    <DataTemplate>
+                                                                        <Button x:Name="editProductListBtn" Content="Edit" Click="editProductListBtn_Click"/>
+                                                                    </DataTemplate>
+                                                                </DataGridTemplateColumn.CellTemplate>
+                                                            </DataGridTemplateColumn>
+                                                            <DataGridTemplateColumn Width="100"  CanUserResize="False" >
+                                                                <DataGridTemplateColumn.CellTemplate>
+                                                                    <DataTemplate>
+                                                                        <Button x:Name="deleteProductListBtn" Click="deleteProductListBtn_Click" Content="Delete" />
+                                                                    </DataTemplate>
+                                                                </DataGridTemplateColumn.CellTemplate>
+                                                            </DataGridTemplateColumn>
+                                                        </DataGrid.Columns>
+                                                    </DataGrid>
+                                                    <Button x:Name="saveProductListBtn" Content="Save" HorizontalAlignment="Left" Margin="977,451,0,0" VerticalAlignment="Top" Width="76"/>
+                                                </Grid>
+                                            </ScrollViewer>
+                                        </Grid>
+                                    </Border>
+                                </Grid>
                             </TabItem>
                         </TabControl>
                     </Grid>
                 </Grid>
-                <Grid x:Name="companyDetailsGrid">
+                <Grid x:Name="companyDetailsGrid" d:IsHidden="True">
                     <Label x:Name="companyDetailsHeader" Content="" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid Margin="10,70,10,10"/>
                     <Grid x:Name="customerDetailsGrid" Margin="10,70,10,10">

@@ -57,6 +57,7 @@ namespace prototype2
                 DataSet fromDb = new DataSet();
                 dataAdapter.Fill(fromDb, "t");
                 custProvinceCb.ItemsSource = fromDb.Tables["t"].DefaultView;
+                custProvinceCb1.ItemsSource = fromDb.Tables["t"].DefaultView;
                 empProvinceCb.ItemsSource = fromDb.Tables["t"].DefaultView;
                 dbCon.Close();
 
@@ -1174,6 +1175,382 @@ namespace prototype2
             }
             dbCon.Close();
         }
+        
+
+        //product category
+        private void deleteCategoryBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = dbname;
+            MessageBox.Show("" + invProductsCategoryLb.SelectedValue);
+            if (dbCon.IsConnect())
+            {
+                string query = "DELETE FROM `odc_db`.`item_category_t` WHERE `categoryID`='" + invProductsCategoryLb.SelectedValue + "';";
+                if (dbCon.deleteQuery(query, dbCon.Connection))
+                {
+                    dbCon.Close();
+                    setListBoxControls();
+                    MessageBox.Show("Deleted the category");
+                }
+
+
+            }
+
+        }
+
+        private void addCategoryBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = dbname;
+            if (dbCon.IsConnect())
+            {
+                string query = "INSERT INTO `odc_db`.`item_category_t` (`categoryName`) VALUES('" + invCategoryTb.Text + "')";
+                if (dbCon.insertQuery(query, dbCon.Connection))
+                {
+                    MessageBox.Show("Added");
+                    setListBoxControls();
+                    dbCon.Close();
+                }
+
+
+            }
+        }
+
+        //product list
+        private void editProductListBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void deleteProductListBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void addNewProductBtn_Click(object sender, RoutedEventArgs e)
+        {
+            
+            BindingExpression productNameTbBindingExpression = BindingOperations.GetBindingExpression(productNameTb, TextBox.TextProperty);
+            BindingExpressionBase productNameTbBindingExpressionBase = BindingOperations.GetBindingExpressionBase(productNameTb, TextBox.TextProperty);
+
+            if (String.IsNullOrWhiteSpace(productNameTb.Text))
+            {
+                ValidationError validationError = new ValidationError(new ExceptionValidationRule(),productNameTbBindingExpression);
+                validationError.ErrorContent = "*Please fill out this field";
+                Validation.MarkInvalid(productNameTbBindingExpressionBase,validationError);
+            }
+            else if(Validation.GetHasError(productNameTb))
+            {
+                
+                Validation.ClearInvalid(productNameTbBindingExpressionBase);
+            }
+
+            BindingExpression costPriceTbBindingExpression = BindingOperations.GetBindingExpression(costPriceTb, Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
+            BindingExpressionBase costPriceTbBindingExpressionBase = BindingOperations.GetBindingExpressionBase(costPriceTb, Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
+
+            if (String.IsNullOrWhiteSpace(costPriceTb.Text))
+            {
+                ValidationError validationError = new ValidationError(new ExceptionValidationRule(), costPriceTbBindingExpression);
+                validationError.ErrorContent = "*Please fill out this field";
+                Validation.MarkInvalid(costPriceTbBindingExpressionBase, validationError);
+            }
+            else if (Validation.GetHasError(costPriceTb))
+            {
+                Validation.ClearInvalid(costPriceTbBindingExpressionBase);
+            }
+
+            BindingExpression salesPriceTbBindingExpression = BindingOperations.GetBindingExpression(salesPriceTb, Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
+            BindingExpressionBase salesPriceTbBindingExpressionBase = BindingOperations.GetBindingExpressionBase(salesPriceTb, Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
+
+            if (String.IsNullOrWhiteSpace(salesPriceTb.Text))
+            {
+                ValidationError validationError = new ValidationError(new ExceptionValidationRule(), salesPriceTbBindingExpression);
+                validationError.ErrorContent = "*Please fill out this field";
+                Validation.MarkInvalid(salesPriceTbBindingExpressionBase, validationError);
+            }
+            else if (Validation.GetHasError(salesPriceTb))
+            {
+                Validation.ClearInvalid(salesPriceTbBindingExpressionBase);
+            }
+
+            BindingExpression productCategoryCbBindingExpression = BindingOperations.GetBindingExpression(productCategoryCb, ComboBox.SelectedItemProperty);
+            BindingExpressionBase productCategoryCbBindingExpressionBase = BindingOperations.GetBindingExpressionBase(productCategoryCb, ComboBox.SelectedItemProperty);
+
+            if (productCategoryCb.SelectedItem==null)
+            {
+                ValidationError validationError = new ValidationError(new ExceptionValidationRule(), productCategoryCbBindingExpression);
+                validationError.ErrorContent = "*Please select a corresponding category for this product";
+                Validation.MarkInvalid(productCategoryCbBindingExpressionBase, validationError);
+            }
+            else if (Validation.GetHasError(productCategoryCb))
+            {
+                Validation.ClearInvalid(productCategoryCbBindingExpressionBase);
+            }
+            if (Validation.GetHasError(productNameTb) == false|| Validation.GetHasError(costPriceTb) == false || Validation.GetHasError(salesPriceTb) == false || Validation.GetHasError(productCategoryCb) == false)
+            {
+                MainVM.ProductList.Add(new Item() { ItemName = productNameTb.Text, ItemDesc = productDescTb.Text, CostPrice = (decimal)costPriceTb.Value, SalesPrice = (decimal)salesPriceTb.Value });
+            }
+        }
+
+        //service types
+        private void addServiceTypeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            serviceTypeList.Visibility = Visibility.Collapsed;
+            serviceTypeAdd.Visibility = Visibility.Visible;
+        }
+
+        private void cancelServiceTypeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            serviceTypeList.Visibility = Visibility.Visible;
+            serviceTypeAdd.Visibility = Visibility.Collapsed;
+            setListBoxControls();
+        }
+
+        private void serviceName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Windows.Controls.Validation.GetHasError(serviceName) == true)
+                saveServiceTypeBtn.IsEnabled = false;
+            else validateTextBoxes();
+        }
+
+        private void servicePrice_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            validateTextBoxes();
+        }
+
+        private void validateTextBoxes()
+        {
+            if (serviceName.Text.Equals("") || servicePrice.Value == 0)
+            {
+                saveServiceTypeBtn.IsEnabled = false;
+            }
+            else
+            {
+                saveServiceTypeBtn.IsEnabled = true;
+            }
+        }
+        private string id = "";
+        private void saveServiceTypeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = dbname;
+            MessageBoxResult result = MessageBox.Show("Do you want to save this service type?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                if (id.Equals(""))
+                {
+                    string query = "INSERT INTO service_t (serviceName,serviceDesc,servicePrice) VALUES ('" + serviceName.Text + "','" + serviceDesc.Text + "', '" + servicePrice.Value + "')";
+                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    {
+                        MessageBox.Show("Service type successfully added!");
+                        serviceTypeList.Visibility = Visibility.Visible;
+                        serviceTypeAdd.Visibility = Visibility.Collapsed;
+
+                        //clearing textboxes
+                        serviceName.Clear();
+                        serviceDesc.Clear();
+                        servicePrice.Value = 0;
+                        setListBoxControls();
+                    }
+                }
+                else
+                {
+                    string query = "UPDATE `service_T` SET serviceName = '" + serviceName.Text + "',serviceDesc = '" + serviceDesc.Text + "', servicePrice = '" + servicePrice.Value + "' WHERE serviceID = '" + id + "'";
+                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    {
+                        MessageBox.Show("Sevice type sucessfully updated");
+                        id = "";
+                        serviceTypeList.Visibility = Visibility.Visible;
+                        serviceTypeAdd.Visibility = Visibility.Collapsed;
+                        setListBoxControls();
+                    }
+                }
+
+            }
+            else if (result == MessageBoxResult.No)
+            {
+                for (int x = 1; x < serviceTypeGrid.Children.Count; x++)
+                {
+                    serviceTypeGrid.Children[x].Visibility = Visibility.Collapsed;
+                }
+                serviceTypeList.Visibility = Visibility.Visible;
+                setListBoxControls();
+            }
+            else if (result == MessageBoxResult.Cancel)
+            {
+            }
+
+        }
+
+        private void btnEditService_Click(object sender, RoutedEventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = dbname;
+            if (serviceTypeDg.SelectedItems.Count > 0)
+            {
+                id = (serviceTypeDg.Columns[0].GetCellContent(serviceTypeDg.SelectedItem) as TextBlock).Text;
+                serviceTypeList.Visibility = Visibility.Collapsed;
+                serviceTypeAdd.Visibility = Visibility.Visible;
+                string query = "SELECT * FROM service_t where serviceID = '" + id + "';";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                dataAdapter.Fill(fromDb, "t");
+                DataTable fromDbTable = new DataTable();
+                fromDbTable = fromDb.Tables["t"];
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    try
+                    {
+                        serviceName.Text = dr["serviceName"].ToString();
+                        serviceDesc.Text = dr["serviceDesc"].ToString();
+                        servicePrice.Text = dr["servicePrice"].ToString();
+
+
+                        serviceName.Clear();
+                        serviceDesc.Clear();
+                        servicePrice.Value = 0;
+                    }
+                    catch (Exception)
+                    {
+
+                        serviceName.Clear();
+                        serviceDesc.Clear();
+                        servicePrice.Value = 0;
+                        throw;
+                    }
+                }
+                dbCon.Close();
+                serviceTypeList.Visibility = Visibility.Collapsed;
+                serviceTypeAdd.Visibility = Visibility.Visible;
+            }
+
+        }
+
+        private void btnDeleteService_Click(object sender, RoutedEventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = dbname;
+            if (serviceTypeDg.SelectedItems.Count > 0)
+            {
+                id = (serviceTypeDg.Columns[0].GetCellContent(serviceTypeDg.SelectedItem) as TextBlock).Text;
+                serviceTypeList.Visibility = Visibility.Collapsed;
+                serviceTypeAdd.Visibility = Visibility.Visible;
+                MessageBoxResult result = MessageBox.Show("Do you wish to delete this record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.OK)
+                {
+                    if (dbCon.IsConnect())
+                    {
+                        string query = "UPDATE `service_t` SET `isDeleted`= 1 WHERE serviceID = '" + id + "';";
+                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        {
+                            MessageBox.Show("Record successfully deleted!");
+                        }
+                    }
+                    dbCon.Close();
+                    serviceTypeList.Visibility = Visibility.Collapsed;
+                    serviceTypeAdd.Visibility = Visibility.Visible;
+                }
+            }
+            
+        }
+
+        bool initPrice = true;
+        string locationid = "";
+        private void custProvinceCb1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (custProvinceCb1.SelectedIndex == -1)
+            {
+                setPriceBtn.IsEnabled = false;
+            }
+            else
+            {
+                setPriceBtn.IsEnabled = true;
+                var dbCon = DBConnection.Instance();
+                dbCon.DatabaseName = dbname;
+                if (dbCon.IsConnect())
+                {
+                    string query = "SELECT locationID,locationPrice FROM location_details_t " +
+                        "WHERE locationProvinceId = '" + custProvinceCb.SelectedValue + "';";
+                    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                    DataSet fromDb = new DataSet();
+                    DataTable fromDbTable = new DataTable();
+                    dataAdapter.Fill(fromDb, "t");
+                    fromDbTable = fromDb.Tables["t"];
+                    if (fromDbTable.Rows.Count != 0)
+                    {
+                        initPrice = false;
+                        foreach (DataRow dr in fromDbTable.Rows)
+                        {
+                            locationPrice.Value = Decimal.Parse(dr["locationPrice"].ToString());
+                            locationid = dr["locationId"].ToString();
+                        }
+                    }
+                    else
+                    {
+                        locationPrice.Value = 0;
+                        initPrice = true;
+                    }
+                }
+            }
+
+        }
+
+        private void setPriceBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (locationPrice.Value != null)
+            {
+                var dbCon = DBConnection.Instance();
+                dbCon.DatabaseName = dbname;
+                MessageBoxResult result = MessageBox.Show("Do you want to save this price?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
+                {
+                    if (initPrice)
+                    {
+                        string query = "INSERT INTO location_details_t (locationProvinceID,locationPrice) VALUES ('" + custProvinceCb.SelectedValue + "', '" + locationPrice.Value + "')";
+                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        {
+                            MessageBox.Show("Price saved.");
+                            custProvinceCb.SelectedValue = -1;
+                            locationPrice.Value = 0;
+
+                            serviceName.Clear();
+                            serviceDesc.Clear();
+                            servicePrice.Value = 0;
+                            setListBoxControls();
+                        }
+                    }
+                    else
+                    {
+                        string query = "UPDATE `location_details_t` SET locationPrice = '" + locationPrice.Value + "' WHERE locationId = '" + locationid + "'";
+                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        {
+                            MessageBox.Show("Price updated.");
+                            id = "";
+                            custProvinceCb.SelectedValue = -1;
+                            locationPrice.Value = 0;
+                            initPrice = true;
+                            setListBoxControls();
+                        }
+                    }
+
+
+
+                }
+                else if (result == MessageBoxResult.No)
+                {
+                    custProvinceCb.SelectedValue = -1;
+                    locationPrice.Value = 0;
+                }
+                else if (result == MessageBoxResult.Cancel)
+                {
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please enter the price.");
+            }
+
+        }
 
         private void setListBoxControls()
         {
@@ -1209,7 +1586,40 @@ namespace prototype2
                 }
                 dbCon.Close();
             }
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM ITEM_TYPE_T;";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                dataAdapter.Fill(fromDb, "t");
+                invProductsCategoryLb.ItemsSource = fromDb.Tables["t"].DefaultView;
+                invProductsCategoryLb.DisplayMemberPath = "typeName";
+                invProductsCategoryLb.SelectedValuePath = "typeID";
+                productCategoryCb.ItemsSource = fromDb.Tables["t"].DefaultView;
+
+            }
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM service_t;";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                dataAdapter.Fill(fromDb, "t");
+                serviceTypeDg.ItemsSource = fromDb.Tables["t"].DefaultView;
+                dbCon.Close();
+            }
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM provinces_t";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                dataAdapter.Fill(fromDb, "t");
+                custProvinceCb.ItemsSource = fromDb.Tables["t"].DefaultView;
+                dbCon.Close();
+
+            }
         }
+
+       
 
         /*-----------------END OF MANAGE UTILITIES-------------------*/
         /*
@@ -2599,65 +3009,4 @@ namespace prototype2
 
         
     }
-    internal class Item : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-        protected bool SetField<T>(ref T field, T value, string propertyName)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            field = value;
-            OnPropertyChanged(propertyName);
-            return true;
-        }
-        private string _lineNo;
-        public string lineNo
-        {
-            get { return _lineNo; }
-            set { SetField(ref _lineNo, value, "Line No."); }
-        }
-        private string _itemCode;
-        public string itemCode
-        {
-            get { return _itemCode; }
-            set { SetField(ref _itemCode, value, "Item Code"); }
-        }
-        private string _desc;
-        public string desc
-        {
-            get { return _desc; }
-            set { SetField(ref _desc, value, "Description"); }
-        }
-        private string _unit;
-        public string unit
-        {
-            get { return _unit; }
-            set { SetField(ref _unit, value, "Unit"); }
-        }
-        private int _qty;
-        public int qty
-        {
-            get { return _qty; }
-            set { SetField(ref _qty, value, "Quantity"); }
-        }
-        private decimal _unitprice;
-        public decimal unitPrice
-        {
-            get { return _unitprice; }
-            set { SetField(ref _unitprice, value, "Unit Price"); }
-        }
-        private decimal _totalAmount;
-        public decimal totalAmount
-        {
-            get { return _totalAmount; }
-            set { SetField(ref _totalAmount, value, "Total Amount"); }
-        }
-    }
-
-    
-
 }

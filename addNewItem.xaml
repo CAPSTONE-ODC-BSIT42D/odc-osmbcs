@@ -46,16 +46,7 @@
                             <Label Content="Total Amount:" VerticalAlignment="Top" Height="26" Margin="0,384,0,0" HorizontalAlignment="Left" Width="90" FontSize="12" FontFamily="Segoe UI" FontStyle="Italic" FontWeight="Bold" RenderTransformOrigin="0.5,0.5"/>
                             <TextBox x:Name="totalPrice2" HorizontalAlignment="Left" Height="23" Margin="27,415,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" FontSize="12" FontFamily="Segoe UI" FontStyle="Normal" FontWeight="Normal" IsEnabled="False"/>
                         </Grid>
-                        <Grid x:Name="product" Margin="0,0,0,54" Visibility="Hidden">
-                            <Label Content="Item Code:" VerticalAlignment="Top" Height="26" Margin="0,1,0,0" HorizontalAlignment="Left" Width="80" FontSize="12" FontFamily="Segoe UI" FontStyle="Italic" FontWeight="Bold" RenderTransformOrigin="0.5,0.5"/>
-                            <TextBox x:Name="itemCode" Height="23" Margin="27,35,493,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" FontSize="12" FontFamily="Segoe UI" FontStyle="Normal" FontWeight="Normal"/>
-                            <Label Content="Description:" VerticalAlignment="Top" Height="26" Margin="0,67,0,0" HorizontalAlignment="Left" Width="80" FontSize="12" FontFamily="Segoe UI" FontStyle="Italic" FontWeight="Bold" RenderTransformOrigin="0.5,0.5"/>
-                            <TextBox x:Name="serviceDescTb1_Copy" Height="79" Margin="27,101,10,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" FontSize="12" FontFamily="Segoe UI" FontStyle="Normal" FontWeight="Normal"/>
-                            <Label Content="Unit Price:" VerticalAlignment="Top" Height="26" Margin="0,199,0,0" HorizontalAlignment="Left" Width="90" FontSize="12" FontFamily="Segoe UI" FontStyle="Italic" FontWeight="Bold" RenderTransformOrigin="0.5,0.5"/>
-                            <xctk:DecimalUpDown x:Name="unitPrice1" HorizontalAlignment="Left" Margin="27,240,0,0" VerticalAlignment="Top" Width="186"/>
-                            <Label Content="Total Amount:" VerticalAlignment="Top" Height="26" Margin="0,277,0,0" HorizontalAlignment="Left" Width="90" FontSize="12" FontFamily="Segoe UI" FontStyle="Italic" FontWeight="Bold" RenderTransformOrigin="0.5,0.5"/>
-                            <TextBox x:Name="totalPrice1" HorizontalAlignment="Left" Height="23" Margin="27,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" FontSize="12" FontFamily="Segoe UI" FontStyle="Normal" FontWeight="Normal" IsEnabled="False"/>
-                        </Grid>
+                        <Grid x:Name="product" Margin="0,0,0,54"/>
                     </Grid>
                 </Grid>
             </ScrollViewer>

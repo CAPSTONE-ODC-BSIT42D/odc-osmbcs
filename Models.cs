@@ -340,4 +340,106 @@ namespace prototype2
         }
     }
 
+    public class Item : ViewModelEntity
+    {
+        public Item()
+        {
+
+        }
+
+        protected string itemNo;
+        protected string itemName;
+        protected string itemDesc;
+        protected decimal costPrice;
+        protected decimal salesPrice;
+        protected string typeID;
+        protected string supplierID;
+
+        public string ItemNo
+        {
+            get { return itemNo; }
+            set { SetProperty(ref itemNo, value); }
+        }
+        public string ItemName
+        {
+            get { return itemName; }
+            set { SetProperty(ref itemName, value); }
+        }
+        public string ItemDesc
+        {
+            get { return itemDesc; }
+            set { SetProperty(ref itemDesc, value); }
+        }
+        public decimal CostPrice
+        {
+            get { return costPrice; }
+            set { SetProperty(ref costPrice, value); }
+        }
+        public decimal SalesPrice
+        {
+            get { return salesPrice; }
+            set { SetProperty(ref salesPrice, value); }
+        }
+        public string TypeID
+        {
+            get { return typeID; }
+            set { SetProperty(ref typeID, value); }
+        }
+        public string SupplierID
+        {
+            get { return supplierID; }
+            set { SetProperty(ref supplierID, value); }
+        }
+    }
+
+    public class RequestedItem : ViewModelEntity
+    {
+        public RequestedItem()
+        {
+
+        }
+        private string _lineNo;
+        public string lineNo
+        {
+            get { return _lineNo; }
+            set { SetProperty(ref _lineNo, value); }
+        }
+        private string _itemCode;
+        public string itemCode
+        {
+            get { return _itemCode; }
+            set { SetProperty(ref _itemCode, value); }
+        }
+        private string _desc;
+        public string desc
+        {
+            get { return _desc; }
+            set { SetProperty(ref _desc, value); }
+        }
+        private string _unit;
+        public string unit
+        {
+            get { return _unit; }
+            set { SetProperty(ref _unit, value); }
+        }
+        private int _qty;
+        public int qty
+        {
+            get { return _qty; }
+            set { SetProperty(ref _qty, value); }
+        }
+        private decimal _unitprice;
+        public decimal unitPrice
+        {
+            get { return _unitprice; }
+            set { SetProperty(ref _unitprice, value); }
+        }
+        private decimal _totalAmount;
+        public decimal totalAmount
+        {
+            get { return _totalAmount; }
+            set { SetProperty(ref _totalAmount, value); }
+        }
+    }
+
 }

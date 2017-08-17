@@ -175,5 +175,23 @@ namespace prototype2
             set { SetProperty(ref selectedJobTitle, value); }
         }
         //----- End of Contractor Job Title
+
+        //----- Product Lsit
+        protected ObservableCollection<Item> productList = new ObservableCollection<Item>();
+
+        protected Item selectedProduct = null;
+
+        public ObservableCollection<Item> ProductList
+        {
+            get { return productList; }
+            set { productList = value; }
+        }
+
+        public Item SelectedProduct
+        {
+            get { return selectedProduct; }
+            set { SetProperty(ref selectedProduct, value); }
+        }
+        //----- End of Product list
     }
 }
