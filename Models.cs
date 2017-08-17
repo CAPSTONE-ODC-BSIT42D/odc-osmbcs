@@ -17,6 +17,7 @@ namespace prototype2
         protected string middlename;
         protected string lastname;
         protected string representativeID;
+        protected bool isDefault;
         protected ObservableCollection<Contact> contactsOfRep = new ObservableCollection<Contact>();
 
         public string RepFirstName
@@ -39,6 +40,11 @@ namespace prototype2
         {
             get { return representativeID; }
             set { SetProperty(ref representativeID, value); }
+        }
+        public bool IsDefault
+        {
+            get { return isDefault; }
+            set { SetProperty(ref isDefault, value); }
         }
 
         public ObservableCollection<Contact> ContactsOfRep
@@ -126,6 +132,7 @@ namespace prototype2
         protected string empDateTo;
         protected byte[] empPic;
         protected byte[] empSig;
+        
 
         public string EmpID
         {
@@ -257,6 +264,7 @@ namespace prototype2
         protected string typename;
         protected string details;
         protected string tableID;
+        protected bool isDefault;
         public string ContactTypeID
         {
             get { return typeid; }
@@ -277,6 +285,13 @@ namespace prototype2
             get { return tableID; }
             set { SetProperty(ref tableID, value); }
         }
+        
+        public bool IsDefault
+        {
+            get { return isDefault; }
+            set { SetProperty(ref isDefault, value); }
+        }
+
     }
 
     public class EmpPosition : ViewModelEntity
@@ -299,6 +314,29 @@ namespace prototype2
         {
             get { return positionName; }
             set { SetProperty(ref positionName, value); }
+        }
+    }
+
+    public class ContJobName : ViewModelEntity
+    {
+        public ContJobName()
+        {
+
+        }
+
+        protected string jobid;
+        protected string jobName;
+
+        public string JobID
+        {
+            get { return jobid; }
+            set { SetProperty(ref jobid, value); }
+        }
+
+        public string JobName
+        {
+            get { return jobName; }
+            set { SetProperty(ref jobName, value); }
         }
     }
 

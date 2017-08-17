@@ -157,5 +157,23 @@ namespace prototype2
             set { SetProperty(ref selectedEmpPosition, value); }
         }
         //----- End of Employee Position
+
+        //----- Contractor Job Title
+        protected ObservableCollection<ContJobName> contJobTitle = new ObservableCollection<ContJobName>();
+
+        protected ContJobName selectedJobTitle = null;
+
+        public ObservableCollection<ContJobName> ContJobTitle
+        {
+            get { return contJobTitle; }
+            set { contJobTitle = value; }
+        }
+
+        public ContJobName SelectedJobTitle
+        {
+            get { return selectedJobTitle; }
+            set { SetProperty(ref selectedJobTitle, value); }
+        }
+        //----- End of Contractor Job Title
     }
 }

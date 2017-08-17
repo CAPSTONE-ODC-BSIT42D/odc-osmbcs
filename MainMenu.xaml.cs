@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.IO;
@@ -60,6 +61,7 @@ namespace prototype2
                 dbCon.Close();
 
             }
+            setManageCustomerGridControls();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -176,7 +178,6 @@ namespace prototype2
             }
             transactionQuotationsGrid.Visibility = Visibility.Visible;
             quotationsGridHome.Visibility = Visibility.Visible;
-            setTransControlValues();
 
         }
 
@@ -232,83 +233,46 @@ namespace prototype2
 
 
         /*-----------------TRANSTACTION-------------------*/
+        private void findBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var linqResults = MainVM.Customers.Where(x => x.CompanyName.ToLower().Contains(transSearchBoxSelectCustGridTb.Text.ToLower()));
+            var observable = new ObservableCollection<Customer>(linqResults);
+            selectCustomerDg.ItemsSource = observable;
+        }
+
         private void transQuoteAddBtn_Click(object sender, RoutedEventArgs e)
         {
             for (int x = 1; x < transactionQuotationsGrid.Children.Count; x++)
             {
                 transactionQuotationsGrid.Children[x].Visibility = Visibility.Collapsed;
             }
-            addRequestionGrid.Visibility = Visibility.Visible;
-            setAddTransControlValues();
+            selectCustomerGrid.Visibility = Visibility.Visible;
         }
+
+        private void selectCustBtn_Click(object sender, RoutedEventArgs e)
+        {
+            for (int x = 1; x < transactionQuotationsGrid.Children.Count; x++)
+            {
+                transactionQuotationsGrid.Children[x].Visibility = Visibility.Collapsed;
+            }
+            addRequestionGrid.Visibility = Visibility.Visible;
+        }
+
         private void transRequestBack_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Do you want to cancel this transaction?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
-            if (result == MessageBoxResult.Yes)
+            MessageBoxResult result = MessageBox.Show("Do you want to cancel this transaction?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.OK)
             {
                 for (int x = 1; x < transactionQuotationsGrid.Children.Count; x++)
                 {
                     transactionQuotationsGrid.Children[x].Visibility = Visibility.Collapsed;
                 }
-                quotationsGridHome.Visibility = Visibility.Visible;
+                selectCustomerGrid.Visibility = Visibility.Visible;
             }
-            else if (result == MessageBoxResult.No)
+            else if (result == MessageBoxResult.Cancel)
             {
 
             }
-        }
-
-        private void setAddTransControlValues()
-        {
-        }
-
-        private void setTransControlValues()
-        {
-            var dbCon = DBConnection.Instance();
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * FROM cust_supp_t;";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                dataAdapter.Fill(fromDb, "t");
-                custCb.ItemsSource = fromDb.Tables["t"].DefaultView;
-                dbCon.Close();
-
-            }
-
-        }
-
-        private void custCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var dbCon = DBConnection.Instance();
-            if (dbCon.IsConnect())
-            {
-                string query = query = "SELECT CONCAT(custRepLName,' ,',custRepFname) AS custRepFullName, custRepID FROM CUSTOMER_REP_T WHERE custID = '" + custCb.SelectedValue + "';";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                dataAdapter.Fill(fromDb, "t");
-                custRepCb.ItemsSource = fromDb.Tables["t"].DefaultView;
-                dbCon.Close();
-
-            }
-        }
-
-        private void addCustBtn_Click(object sender, RoutedEventArgs e)
-        {
-            setTransControlValues();
-        }
-        private void addCustRepBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (!(custCb.SelectedIndex < 0))
-            {
-                RepresentativeWindow addRep = new RepresentativeWindow();
-                addRep.ShowDialog();
-            }
-            else
-            {
-                System.Windows.MessageBox.Show("Please select a customer first.");
-            }
-
         }
         
         private void paymentCustomRb_Checked(object sender, RoutedEventArgs e)
@@ -477,7 +441,7 @@ namespace prototype2
         }
 
         /*-----------------END OF TRANSTACTION-------------------*/
-
+        
 
         /*-----------------MANAGE CUSTOMER-------------------*/
 
@@ -576,8 +540,6 @@ namespace prototype2
         {
             setManageCustomerGridControls();
         }
-
-        
         
 
         /*-----------------END OF MANAGE CUSTOMER-------------------*/
@@ -962,7 +924,7 @@ namespace prototype2
         private void manageSupplierDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
         }
-        
+
         /*-----------------END OF MANAGE SUPPLIER-------------------*/
         /*
         /*
@@ -971,7 +933,7 @@ namespace prototype2
         /*
         /*-----------------MANAGE UTILITIES-------------------------*/
 
-        private void utilitiesManageMenuBtn_Click(object sender, RoutedEventArgs e)
+        private void settingsManageMenuBtn_Click(object sender, RoutedEventArgs e)
         {
             saleSubMenuGrid.Visibility = Visibility.Collapsed;
             manageSubMenugrid.Visibility = Visibility.Collapsed;
@@ -984,10 +946,14 @@ namespace prototype2
             {
                 manageGrid.Children[x].Visibility = Visibility.Collapsed;
             }
-            manageMiscGrid.Visibility = Visibility.Visible;
+            manageSettingsGrid.Visibility = Visibility.Visible;
+            setManageSettingsGridControl();
         }
 
-
+        private void setManageSettingsGridControl()
+        {
+            setListBoxControls();
+        }
 
         private void settingsEmployeeGridBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -1007,26 +973,243 @@ namespace prototype2
             manageProductSettings.ShowDialog();
         }
 
+        private static String dbname = "odc_db";
 
-
-
-
-        private void appSettingsManageMenuBtn_Click(object sender, RoutedEventArgs e)
+        //EMPLOYEE PART
+        private void addEmpPosBtn_Click(object sender, RoutedEventArgs e)
         {
-            saleSubMenuGrid.Visibility = Visibility.Collapsed;
-            manageSubMenugrid.Visibility = Visibility.Collapsed;
-            for (int x = 0; x < containerGrid.Children.Count; x++)
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = dbname;
+            if (employeePositionLb.Items.Contains(empPosNewTb.Text))
             {
-                containerGrid.Children[x].Visibility = Visibility.Collapsed;
+                MessageBox.Show("Employee position already exists");
             }
-            manageGrid.Visibility = Visibility.Visible;
-            for (int x = 0; x < manageGrid.Children.Count; x++)
+            else
             {
-                manageGrid.Children[x].Visibility = Visibility.Collapsed;
+                if (dbCon.IsConnect())
+                {
+                    string query = "INSERT INTO `odc_db`.`position_t` (`positionName`) VALUES('" + empPosNewTb.Text + "')";
+                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    {
+                        MessageBox.Show("Employee Poisition successfully added");
+                        empPosNewTb.Clear();
+                        setListBoxControls();
+                        dbCon.Close();
+                    }
+                }
             }
-            manageMiscGrid.Visibility = Visibility.Visible;
+
         }
 
+        private void saveEmpPosBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = dbname;
+            if (String.IsNullOrWhiteSpace(empPosNewTb.Text))
+            {
+                MessageBox.Show("Employee Position must be filled");
+            }
+            else
+            {
+                if (employeePositionLb.Items.Contains(empPosNewTb.Text))
+                {
+                    MessageBox.Show("Already in the list.");
+                }
+                if (dbCon.IsConnect())
+                {
+                    string query = "UPDATE `odc_db`.`position_t` set `positionName` = '" + empPosNewTb.Text + "' where positionID = '" + MainMenu.MainVM.SelectedEmpPosition.PositionID + "'";
+                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    {
+                        MessageBox.Show("Employee Poisition saved");
+                        empPosNewTb.Clear();
+                        setListBoxControls();
+                        dbCon.Close();
+                    }
+                }
+            }
+
+        }
+        private void deleteEmpPosBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (employeePositionLb.SelectedItems.Count > 0)
+            {
+                var dbCon = DBConnection.Instance();
+                dbCon.DatabaseName = dbname;
+                if (dbCon.IsConnect())
+                {
+                    try
+                    {
+                        string query = "DELETE FROM `odc_db`.`position_t` WHERE `positionID`='" + MainMenu.MainVM.SelectedEmpPosition.PositionID + "';";
+
+                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        {
+                            dbCon.Close();
+                            MessageBox.Show("Employee position successfully deleted.");
+                            setListBoxControls();
+                        }
+                    }
+                    catch (Exception) { throw; }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Select an employee position first.");
+            }
+
+        }
+
+        private void editEmpPosBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = dbname;
+
+            if (employeePositionLb.SelectedItems.Count > 0)
+            {
+
+                empPosNewTb.Text = MainMenu.MainVM.SelectedEmpPosition.PositionName;
+            }
+            else
+            {
+                MessageBox.Show("Please select an employee position first.");
+            }
+            dbCon.Close();
+        }
+
+        //CONTRACTOR PART
+        private void addContJobBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = dbname;
+            if (contJobLb.Items.Contains(contNewJobTb.Text))
+            {
+                MessageBox.Show("Contractor  already exists");
+            }
+            else
+            {
+                if (dbCon.IsConnect())
+                {
+                    string query = "INSERT INTO `odc_db`.`job_title_t` (`jobName`) VALUES('" + contNewJobTb.Text + "')";
+                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    {
+                        MessageBox.Show("Contractor Job Title successfully added");
+                        contNewJobTb.Clear();
+                        setListBoxControls();
+                        dbCon.Close();
+                    }
+                }
+            }
+
+        }
+
+        private void saveContJobBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = dbname;
+            if (String.IsNullOrWhiteSpace(contNewJobTb.Text))
+            {
+                MessageBox.Show("Contractor  must be filled");
+            }
+            else
+            {
+                if (contJobLb.Items.Contains(contNewJobTb.Text))
+                {
+                    MessageBox.Show("Already in the list.");
+                }
+                if (dbCon.IsConnect())
+                {
+                    string query = "UPDATE `odc_db`.`job_title_t` set `jobName` = '" + contNewJobTb.Text + "' where positionID = '" + MainMenu.MainVM.SelectedJobTitle.JobID + "'";
+                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    {
+                        MessageBox.Show("Employee Poisition saved");
+                        contNewJobTb.Clear();
+                        setListBoxControls();
+                        dbCon.Close();
+                    }
+                }
+            }
+
+        }
+        private void deleteContJobBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (contJobLb.SelectedItems.Count > 0)
+            {
+                var dbCon = DBConnection.Instance();
+                dbCon.DatabaseName = dbname;
+                if (dbCon.IsConnect())
+                {
+                    try
+                    {
+                        string query = "DELETE FROM `odc_db`.`job_title_t` WHERE `positionID`='" + MainMenu.MainVM.SelectedJobTitle.JobID + "';";
+
+                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        {
+                            dbCon.Close();
+                            MessageBox.Show("Employee position successfully deleted.");
+                            setListBoxControls();
+                        }
+                    }
+                    catch (Exception) { throw; }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Select an employee position first.");
+            }
+
+        }
+
+        private void editContJobBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = dbname;
+
+            if (contJobLb.SelectedItems.Count > 0)
+            {
+
+                contNewJobTb.Text = MainMenu.MainVM.SelectedJobTitle.JobName;
+            }
+            else
+            {
+                MessageBox.Show("Please select an employee position first.");
+            }
+            dbCon.Close();
+        }
+
+        private void setListBoxControls()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = dbname;
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM POSITION_T;";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                MainMenu.MainVM.EmpPosition.Clear();
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainMenu.MainVM.EmpPosition.Add(new EmpPosition() { PositionID = dr["positionid"].ToString(), PositionName = dr["positionName"].ToString() });
+                }
+                dbCon.Close();
+            }
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM JOB_TITLE_T;";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                MainMenu.MainVM.EmpPosition.Clear();
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainMenu.MainVM.ContJobTitle.Add(new ContJobName() { JobID = dr["jobID"].ToString(), JobName = dr["jobName"].ToString() });
+                }
+                dbCon.Close();
+            }
+        }
 
         /*-----------------END OF MANAGE UTILITIES-------------------*/
         /*
@@ -1034,7 +1217,7 @@ namespace prototype2
         /*
         /*
         /**/
-        
+
 
         private void servicesDg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -1898,7 +2081,7 @@ namespace prototype2
                         if (!String.IsNullOrWhiteSpace(contactDetailsEmailTb1.Text))
                         {
 
-                            MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            MainVM.EmpContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
                             clearContactsBoxes();
                         }
                         else
@@ -1910,7 +2093,7 @@ namespace prototype2
                         if (!String.IsNullOrWhiteSpace(contactDetailsPhoneTb1.Text))
                         {
 
-                            MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            MainVM.EmpContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
                             clearContactsBoxes();
                         }
                         else
@@ -1921,7 +2104,7 @@ namespace prototype2
                     {
                         if (!String.IsNullOrWhiteSpace(contactDetailsMobileTb1.Text))
                         {
-                            MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            MainVM.EmpContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
                             clearContactsBoxes();
                         }
                         else
@@ -2392,6 +2575,23 @@ namespace prototype2
             finally
             {
                 Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
+            }
+        }
+
+        
+
+        private void manageSupplierSearchBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var linqResults = MainVM.Customers.Where(x => x.CompanyName.ToLower().Contains(manageSupplierSearchTb.Text.ToLower()));
+            var observable = new ObservableCollection<Customer>(linqResults);
+            manageSupplierDataGrid.ItemsSource = observable;
+        }
+
+        private void manageSupplierSearchTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(manageSupplierSearchTb.Text.Count() == 0)
+            {
+                manageSupplierDataGrid.ItemsSource = MainVM.Customers;
             }
         }
 
