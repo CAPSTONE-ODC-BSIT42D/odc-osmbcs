@@ -988,12 +988,16 @@ namespace prototype2
         {
             var dbCon = DBConnection.Instance();
             dbCon.DatabaseName = dbname;
-            if (employeePositionLb.Items.Contains(empPosNewTb.Text))
+            if (String.IsNullOrWhiteSpace(empPosNewTb.Text))
             {
-                MessageBox.Show("Employee position already exists");
+                MessageBox.Show("Employee Position field must be filled");
             }
             else
             {
+                if (employeePositionLb.Items.Contains(empPosNewTb.Text))
+                {
+                    MessageBox.Show("Employee position already exists");
+                }
                 if (dbCon.IsConnect())
                 {
                     string query = "INSERT INTO `odc_db`.`position_t` (`positionName`) VALUES('" + empPosNewTb.Text + "')";
@@ -1021,7 +1025,7 @@ namespace prototype2
             {
                 if (employeePositionLb.Items.Contains(empPosNewTb.Text))
                 {
-                    MessageBox.Show("Already in the list.");
+                    MessageBox.Show("Employee Position already exists");
                 }
                 if (dbCon.IsConnect())
                 {
@@ -1088,12 +1092,16 @@ namespace prototype2
         {
             var dbCon = DBConnection.Instance();
             dbCon.DatabaseName = dbname;
-            if (contJobLb.Items.Contains(contNewJobTb.Text))
+            if (String.IsNullOrWhiteSpace(contNewJobTb.Text))
             {
-                MessageBox.Show("Contractor  already exists");
+                MessageBox.Show("Contractor Job Title field must be field");
             }
             else
             {
+                if (contJobLb.Items.Contains(contNewJobTb.Text))
+                {
+                    MessageBox.Show("Contractor Job Title already exists");
+                }
                 if (dbCon.IsConnect())
                 {
                     string query = "INSERT INTO `odc_db`.`job_title_t` (`jobName`) VALUES('" + contNewJobTb.Text + "')";
@@ -1115,20 +1123,20 @@ namespace prototype2
             dbCon.DatabaseName = dbname;
             if (String.IsNullOrWhiteSpace(contNewJobTb.Text))
             {
-                MessageBox.Show("Contractor  must be filled");
+                MessageBox.Show("Contractor Job Title field must be filled");
             }
             else
             {
                 if (contJobLb.Items.Contains(contNewJobTb.Text))
                 {
-                    MessageBox.Show("Already in the list.");
+                    MessageBox.Show("Job Title already exists");
                 }
                 if (dbCon.IsConnect())
                 {
                     string query = "UPDATE `odc_db`.`job_title_t` set `jobName` = '" + contNewJobTb.Text + "' where positionID = '" + MainMenu.MainVM.SelectedJobTitle.JobID + "'";
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
-                        MessageBox.Show("Employee Poisition saved");
+                        MessageBox.Show("Job Title successfully saved");
                         contNewJobTb.Clear();
                         setListBoxControls();
                         dbCon.Close();
@@ -1152,7 +1160,7 @@ namespace prototype2
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             dbCon.Close();
-                            MessageBox.Show("Employee position successfully deleted.");
+                            MessageBox.Show("Job Position successfully deleted.");
                             setListBoxControls();
                         }
                     }
@@ -1161,7 +1169,7 @@ namespace prototype2
             }
             else
             {
-                MessageBox.Show("Select an employee position first.");
+                MessageBox.Show("Select a Job Position first.");
             }
 
         }
@@ -1178,7 +1186,7 @@ namespace prototype2
             }
             else
             {
-                MessageBox.Show("Please select an employee position first.");
+                MessageBox.Show("Please select a record first.");
             }
             dbCon.Close();
         }
@@ -1197,7 +1205,7 @@ namespace prototype2
                 {
                     dbCon.Close();
                     setListBoxControls();
-                    MessageBox.Show("Deleted the category");
+                    MessageBox.Show("Product Category successfully deleted");
                 }
 
 
@@ -1214,7 +1222,7 @@ namespace prototype2
                 string query = "INSERT INTO `odc_db`.`item_type_t` (`typeName`) VALUES('" + invCategoryTb.Text + "')";
                 if (dbCon.insertQuery(query, dbCon.Connection))
                 {
-                    MessageBox.Show("Added");
+                    MessageBox.Show("Product Category successfully added");
                     setListBoxControls();
                     dbCon.Close();
                 }
@@ -1428,7 +1436,7 @@ namespace prototype2
                     string query = "UPDATE `service_T` SET serviceName = '" + serviceName.Text + "',serviceDesc = '" + serviceDesc.Text + "', servicePrice = '" + servicePrice.Value + "' WHERE serviceID = '" + id + "'";
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
-                        MessageBox.Show("Sevice type sucessfully updated");
+                        //MessageBox.Show("Sevice type sucessfully updated");
                         id = "";
                         serviceTypeList.Visibility = Visibility.Visible;
                         serviceTypeAdd.Visibility = Visibility.Collapsed;
@@ -1594,7 +1602,7 @@ namespace prototype2
                         string query = "UPDATE `location_details_t` SET locationPrice = '" + locationPrice.Value + "' WHERE locationId = '" + locationid + "'";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
-                            MessageBox.Show("Price updated.");
+                            //MessageBox.Show("Price updated.");
                             id = "";
                             custProvinceCb.SelectedValue = -1;
                             locationPrice.Value = 0;
