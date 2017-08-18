@@ -69,7 +69,24 @@ namespace prototype2
             get { return selectedCustomer; }
             set { SetProperty(ref selectedCustomer, value); }
         }
-        //-----END OF CUSTOMER
+
+        //-----CUSTOMER
+        protected ObservableCollection<Customer> suppliers =
+            new ObservableCollection<Customer>();
+
+        protected Customer selectedSupplier = null;
+
+        public ObservableCollection<Customer> Suppliers
+        {
+            get { return suppliers; }
+            set { suppliers = value; }
+        }
+
+        public Customer SelectedSupplier
+        {
+            get { return selectedSupplier; }
+            set { SetProperty(ref selectedSupplier, value); }
+        }
 
         //-----Employee
         protected ObservableCollection<Employee> employees =
@@ -193,5 +210,23 @@ namespace prototype2
             set { SetProperty(ref selectedProduct, value); }
         }
         //----- End of Product list
+
+        //----- Provinces
+
+        protected ObservableCollection<Province> provinces = new ObservableCollection<Province>();
+
+        protected Province selectedProvince = null;
+
+        public ObservableCollection<Province> Provinces
+        {
+            get { return provinces; }
+            set { provinces = value; }
+        }
+
+        public Province SelectedProvince
+        {
+            get { return selectedProvince; }
+            set { SetProperty(ref selectedProvince, value); }
+        }
     }
 }

@@ -972,7 +972,7 @@
                             <Button x:Name="manageSupplierSearchBtn" Content="search" HorizontalAlignment="Left" Margin="396,3,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="manageSupplierSearchBtn_Click"/>
                         </Grid>
                         <Button x:Name="manageSupplierAddbtn" Content="+ add new" HorizontalAlignment="Right" Height="26" Margin="0,0,10,0" VerticalAlignment="Top" Width="90" Click="manageSupplierAddbtn_Click"/>
-                        <DataGrid x:Name="manageSupplierDataGrid" Margin="10,41,10,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="manageSupplierDataGrid_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}">
+                        <DataGrid x:Name="manageSupplierDataGrid" Margin="10,41,10,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="manageSupplierDataGrid_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" ItemsSource="{Binding Suppliers}" SelectedItem="{Binding SelectedSupplier}">
                             <DataGrid.Columns >
                                 <DataGridTextColumn Binding="{Binding CompanyID}" ClipboardContentBinding="{x:Null}" Width="30" CanUserResize="False" Visibility="Visible" />
                                 <DataGridTextColumn Binding="{Binding CompanyName}" ClipboardContentBinding="{x:Null}" Header="Company Name" Width="200" CanUserResize="False" />
@@ -1038,7 +1038,7 @@
                 <Grid x:Name="manageSettingsGrid">
                     <Label x:Name="label7_Copy6" Content="Manage - Settings" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid Margin="10,70,10,10">
-                        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Margin="24,26,0,10" Width="1183">
+                        <TabControl x:Name="tabControl" Margin="24,26,29,10">
                             <TabItem Header="Employee &amp; Contractor" RenderTransformOrigin="0.284,0.568">
                                 <Grid Background="#FFE5E5E5">
                                     <Grid Margin="34,49,707,443">
@@ -1112,7 +1112,7 @@
                                     </GroupBox>
                                     <GroupBox x:Name="groupBox_Copy2" Header="Price Per Location" Height="121" Margin="10,338,456,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" FontSize="16">
                                         <Grid x:Name="serviceTypeGrid1" Margin="10,10,12,9">
-                                            <ComboBox x:Name="custProvinceCb1" Margin="25,36,0,0" VerticalAlignment="Top" Height="25" IsEditable="True" DisplayMemberPath = "locProvince" SelectedValuePath = "locProvinceID" Width="179" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontWeight="Normal" SelectionChanged="custProvinceCb1_SelectionChanged" FontSize="14">
+                                            <ComboBox x:Name="custProvinceCb1" Margin="25,36,0,0" VerticalAlignment="Top" Height="25" IsEditable="True" DisplayMemberPath = "ProvinceName" SelectedValuePath = "ProvinceID" ItemsSource ="{Binding Provinces}" Width="179" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontWeight="Normal" SelectionChanged="custProvinceCb1_SelectionChanged" FontSize="14">
                                                 <ComboBox.SelectedItem>
                                                     <Binding Path="locProvinceId" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                                         <Binding.ValidationRules>
@@ -1131,80 +1131,63 @@
                             </TabItem>
                             <TabItem Header="Products" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="54">
                                 <Grid Background="#FFE5E5E5">
-                                    <Label x:Name="label17_Copy" Content="Products Category" HorizontalAlignment="Left" Height="32" Margin="10,10,0,0" VerticalAlignment="Top" Width="207" FontWeight="Bold" FontStyle="Italic" FontSize="14"/>
-                                    <Border BorderBrush="Black" BorderThickness="1" Margin="33,47,666,0" Padding="10" CornerRadius="10" Height="208" VerticalAlignment="Top" HorizontalAlignment="Left">
-                                        <Grid Margin="0,0,0,-1">
-                                            <ListBox x:Name="invProductsCategoryLb" HorizontalAlignment="Left" Height="127" Margin="16,53,0,0" VerticalAlignment="Top" Width="366" FontSize="13" />
-                                            <Button x:Name="deleteCategoryBtn" Content="Delete" HorizontalAlignment="Left" Margin="387,56,0,0" VerticalAlignment="Top" Width="75" Click="deleteCategoryBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Height="24" Background="#FFEC1717" BorderBrush="#FFBB0000" Foreground="#FFF9F5F5"/>
-                                            <Button x:Name="addCategoryBtn" Content="Add" HorizontalAlignment="Left" Margin="387,9,0,0" VerticalAlignment="Top" Width="75" Click="addCategoryBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Height="24" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>
-                                            <TextBox x:Name="invCategoryTb" HorizontalAlignment="Left" Height="23" Margin="120,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" FontSize="13"/>
-                                            <Label x:Name="label28" Content="Category Name:" HorizontalAlignment="Left" Margin="12,6,0,0" VerticalAlignment="Top" FontSize="13"/>
-                                        </Grid>
-                                    </Border>
-                                    <Label x:Name="label17_Copy1" Content="Product List" HorizontalAlignment="Left" Height="32" Margin="10,283,0,0" VerticalAlignment="Top" Width="208" FontWeight="Bold" FontStyle="Italic" FontSize="14"/>
-                                    <Border Margin="33,315,42,10" BorderBrush="Black" Padding="10" BorderThickness="1" CornerRadius="10">
+                                    <ScrollViewer Margin="0,0,0,10">
                                         <Grid>
-                                            <ScrollViewer Margin="0,0,0,-2">
-                                                <Grid>
-                                                    <Label x:Name="label31" Content="Product Name:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                                                    <Label x:Name="label31_Copy" Content="Product Description:" HorizontalAlignment="Left" Margin="0,31,0,0" VerticalAlignment="Top"/>
-                                                    <Label x:Name="label31_Copy1" Content="Cost Price:" HorizontalAlignment="Left" Margin="0,91,0,0" VerticalAlignment="Top"/>
-                                                    <Label x:Name="label31_Copy2" Content="Sales Price:" HorizontalAlignment="Left" Margin="0,122,0,0" VerticalAlignment="Top"/>
-                                                    <Label x:Name="label31_Copy3" Content="Product Category:" HorizontalAlignment="Left" Margin="0,153,0,0" VerticalAlignment="Top"/>
-                                                    <TextBox x:Name="productNameTb" HorizontalAlignment="Left" Height="24" Margin="121,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
-                                                        <TextBox.Text>
-                                                            <Binding Path="Text" ValidatesOnDataErrors="True" ValidatesOnExceptions="True">
-                                                            </Binding>
-                                                        </TextBox.Text>
-                                                    </TextBox>
-                                                    <TextBox x:Name="productDescTb" HorizontalAlignment="Left" Height="58" Margin="121,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
-                                                    <xctk:DecimalUpDown x:Name="costPriceTb" HorizontalAlignment="Left" Margin="121,98,0,0" VerticalAlignment="Top" Width="120">
-                                                        <xctk:DecimalUpDown.Value>
-                                                            <Binding Path="Text" ValidatesOnDataErrors="True" ValidatesOnExceptions="True">
-                                                            </Binding>
-                                                        </xctk:DecimalUpDown.Value>
-                                                    </xctk:DecimalUpDown>
-                                                    <xctk:DecimalUpDown x:Name="salesPriceTb" HorizontalAlignment="Left" Margin="121,125,0,0" VerticalAlignment="Top" Width="120">
-                                                        <xctk:DecimalUpDown.Value>
-                                                            <Binding Path="Text" ValidatesOnDataErrors="True" ValidatesOnExceptions="True">
-                                                            </Binding>
-                                                        </xctk:DecimalUpDown.Value>
-                                                    </xctk:DecimalUpDown>
-
-                                                    <ComboBox x:Name="productCategoryCb" HorizontalAlignment="Left" Margin="121,153,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="categoryName" SelectedValuePath="categoryID">
-                                                        <ComboBox.SelectedItem>
-                                                            <Binding Path="cbItem" ValidatesOnDataErrors="True" ValidatesOnExceptions="True">
-                                                            </Binding>
-                                                        </ComboBox.SelectedItem>
-                                                    </ComboBox>
-                                                    <Button x:Name="addNewProductBtn" Content="+ add" HorizontalAlignment="Left" Margin="377,153,0,0" VerticalAlignment="Top" Width="74" Click="addNewProductBtn_Click"/>
-                                                    <DataGrid x:Name="productListTb" HorizontalAlignment="Left" Height="250" Margin="0,196,0,0" VerticalAlignment="Top" Width="1053" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}">
-                                                        <DataGrid.Columns >
-                                                            <DataGridTextColumn Binding="{Binding ItemName}" ClipboardContentBinding="{x:Null}" Width="150" CanUserResize="False" Visibility="Visible" Header="Product Name" />
-                                                            <DataGridTextColumn Binding="{Binding ItemDesc}" ClipboardContentBinding="{x:Null}" Header="Product Description" Width="200" CanUserResize="False" />
-                                                            <DataGridTextColumn Binding="{Binding CostPrice}" ClipboardContentBinding="{x:Null}" Header="Cost Price" Width="150" CanUserResize="False" />
-                                                            <DataGridTextColumn Binding="{Binding SalesPrice}" ClipboardContentBinding="{x:Null}" Header="Sales Price" Width="150" CanUserResize="False" />
-                                                            <DataGridTemplateColumn Width="100"  CanUserResize="False" >
-                                                                <DataGridTemplateColumn.CellTemplate>
-                                                                    <DataTemplate>
-                                                                        <Button x:Name="editProductListBtn" Content="Edit" Click="editProductListBtn_Click"/>
-                                                                    </DataTemplate>
-                                                                </DataGridTemplateColumn.CellTemplate>
-                                                            </DataGridTemplateColumn>
-                                                            <DataGridTemplateColumn Width="100"  CanUserResize="False" >
-                                                                <DataGridTemplateColumn.CellTemplate>
-                                                                    <DataTemplate>
-                                                                        <Button x:Name="deleteProductListBtn" Click="deleteProductListBtn_Click" Content="Delete" />
-                                                                    </DataTemplate>
-                                                                </DataGridTemplateColumn.CellTemplate>
-                                                            </DataGridTemplateColumn>
-                                                        </DataGrid.Columns>
-                                                    </DataGrid>
-                                                    <Button x:Name="saveProductListBtn" Content="Save" HorizontalAlignment="Left" Margin="977,451,0,0" VerticalAlignment="Top" Width="76"/>
+                                            <Label x:Name="label17_Copy" Content="Products Category" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="207" FontWeight="Bold" FontStyle="Italic" FontSize="14"/>
+                                            <Border BorderBrush="Black" BorderThickness="1" Margin="23,37,0,0" Padding="10" CornerRadius="10" Height="208" VerticalAlignment="Top" HorizontalAlignment="Left">
+                                                <Grid Margin="0,0,0,-1">
+                                                    <ListBox x:Name="invProductsCategoryLb" HorizontalAlignment="Left" Height="127" Margin="16,53,0,0" VerticalAlignment="Top" Width="366" FontSize="13" />
+                                                    <Button x:Name="deleteCategoryBtn" Content="Delete" HorizontalAlignment="Left" Margin="387,56,0,0" VerticalAlignment="Top" Width="75" Click="deleteCategoryBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Height="24" Background="#FFEC1717" BorderBrush="#FFBB0000" Foreground="#FFF9F5F5"/>
+                                                    <Button x:Name="addCategoryBtn" Content="Add" HorizontalAlignment="Left" Margin="387,9,0,0" VerticalAlignment="Top" Width="75" Click="addCategoryBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Height="24" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>
+                                                    <TextBox x:Name="invCategoryTb" HorizontalAlignment="Left" Height="23" Margin="120,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" FontSize="13"/>
+                                                    <Label x:Name="label28" Content="Category Name:" HorizontalAlignment="Left" Margin="12,6,0,0" VerticalAlignment="Top" FontSize="13"/>
                                                 </Grid>
-                                            </ScrollViewer>
+                                            </Border>
+                                            <Label x:Name="label17_Copy1" Content="Product List" HorizontalAlignment="Left" Height="32" Margin="0,273,0,0" VerticalAlignment="Top" Width="208" FontWeight="Bold" FontStyle="Italic" FontSize="14"/>
+                                            <Border Margin="23,305,10,18" BorderBrush="Black" Padding="10" BorderThickness="1" CornerRadius="10">
+                                                <Grid>
+                                                    <Grid Margin="0,0,17,0">
+                                                        <Label x:Name="label31" Content="Product Name:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                                        <Label x:Name="label31_Copy" Content="Product Description:" HorizontalAlignment="Left" Margin="0,31,0,0" VerticalAlignment="Top"/>
+                                                        <Label x:Name="label31_Copy1" Content="Cost Price:" HorizontalAlignment="Left" Margin="0,91,0,0" VerticalAlignment="Top"/>
+                                                        <Label x:Name="label31_Copy2" Content="Sales Price:" HorizontalAlignment="Left" Margin="0,122,0,0" VerticalAlignment="Top"/>
+                                                        <Label x:Name="label31_Copy3" Content="Product Category:" HorizontalAlignment="Left" Margin="0,153,0,0" VerticalAlignment="Top"/>
+                                                        <Label x:Name="label31_Copy4" Content="Supplier:" HorizontalAlignment="Left" Margin="0,184,0,0" VerticalAlignment="Top"/>
+                                                        <TextBox x:Name="productNameTb" HorizontalAlignment="Left" Height="24" Margin="121,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Text, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"/>
+                                                        <TextBox x:Name="productDescTb" HorizontalAlignment="Left" Height="58" Margin="121,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
+                                                        <xctk:DecimalUpDown x:Name="costPriceTb" HorizontalAlignment="Left" Margin="121,98,0,0" VerticalAlignment="Top" Width="120" Value="{Binding Text, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" DisplayDefaultValueOnEmptyText="True" DefaultValue="0"/>
+                                                        <xctk:DecimalUpDown x:Name="salesPriceTb" HorizontalAlignment="Left" Margin="121,125,0,0" VerticalAlignment="Top" Width="120" Value="{Binding Text, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" DisplayDefaultValueOnEmptyText="True" DefaultValue="0"/>
+
+                                                        <ComboBox x:Name="productCategoryCb" HorizontalAlignment="Left" Margin="121,153,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="typeName" SelectedValuePath="typeID" SelectedItem="{Binding cbItem, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"/>
+                                                        <ComboBox x:Name="productSupplierCb" HorizontalAlignment="Left" Margin="121,186,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="CompanyName" SelectedValuePath="CompanyID" SelectedItem="{Binding SelectedSupplier, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" ItemsSource="{Binding Suppliers}"/>
+                                                        <Button x:Name="addSaveProductBtn" Content="+ add" HorizontalAlignment="Left" Margin="377,186,0,0" VerticalAlignment="Top" Width="74" Click="addNewProductBtn_Click"/>
+                                                        <DataGrid x:Name="productListTb" Margin="488,10,10,27" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}" AutoGenerateColumns="False" IsReadOnly="True">
+                                                            <DataGrid.Columns >
+                                                                <DataGridTextColumn Binding="{Binding ItemName}" ClipboardContentBinding="{x:Null}" Width="150" CanUserResize="False" Visibility="Visible" Header="Product Name" />
+                                                                <DataGridTextColumn Binding="{Binding ItemDesc}" ClipboardContentBinding="{x:Null}" Header="Product Description" Width="200" CanUserResize="False" />
+                                                                <DataGridTextColumn Binding="{Binding CostPrice}" ClipboardContentBinding="{x:Null}" Header="Cost Price" Width="150" CanUserResize="False" />
+                                                                <DataGridTextColumn Binding="{Binding SalesPrice}" ClipboardContentBinding="{x:Null}" Header="Sales Price" Width="150" CanUserResize="False" />
+                                                                <DataGridTemplateColumn Width="100"  CanUserResize="False" >
+                                                                    <DataGridTemplateColumn.CellTemplate>
+                                                                        <DataTemplate>
+                                                                            <Button x:Name="editProductListBtn" Content="Edit" Click="editProductListBtn_Click"/>
+                                                                        </DataTemplate>
+                                                                    </DataGridTemplateColumn.CellTemplate>
+                                                                </DataGridTemplateColumn>
+                                                                <DataGridTemplateColumn Width="100"  CanUserResize="False" >
+                                                                    <DataGridTemplateColumn.CellTemplate>
+                                                                        <DataTemplate>
+                                                                            <Button x:Name="deleteProductListBtn" Click="deleteProductListBtn_Click" Content="Delete" />
+                                                                        </DataTemplate>
+                                                                    </DataGridTemplateColumn.CellTemplate>
+                                                                </DataGridTemplateColumn>
+                                                            </DataGrid.Columns>
+                                                        </DataGrid>
+                                                    </Grid>
+                                                </Grid>
+                                            </Border>
                                         </Grid>
-                                    </Border>
+                                    </ScrollViewer>
                                 </Grid>
                             </TabItem>
                         </TabControl>
@@ -1262,7 +1245,7 @@
                                             </Binding>
                                         </TextBox>
                                         <Label x:Name="label1_Copy4" Content="* Province:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Normal" Margin="246,103,0,0"/>
-                                        <ComboBox x:Name="custProvinceCb" Margin="261,134,729,0" VerticalAlignment="Top" Height="25" DisplayMemberPath = "locProvince" SelectedValuePath = "locProvinceID" Width="179" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontWeight="Normal">
+                                        <ComboBox x:Name="custProvinceCb" Margin="261,134,729,0" VerticalAlignment="Top" Height="25" DisplayMemberPath = "ProvinceName" SelectedValuePath = "ProvinceID" ItemsSource ="{Binding Provinces}" Width="179" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontWeight="Normal" >
                                             <ComboBox.SelectedItem>
                                                 <Binding Path="cbItem" Mode="TwoWay" UpdateSourceTrigger="LostFocus">
                                                     <Binding.ValidationRules>
@@ -1417,7 +1400,7 @@
                                         </Binding>
                                     </TextBox>
                                     <Label Content="* Province" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="229,201,0,0" FontWeight="Normal" Grid.Column="1"/>
-                                    <ComboBox x:Name="empProvinceCb" Margin="246,232,0,0" VerticalAlignment="Top" Height="23" DisplayMemberPath = "locProvince" SelectedValuePath = "locProvinceID" Width="157" HorizontalAlignment="Left" FontWeight="Normal" Grid.Column="1" SelectionChanged="empProvinceCb_SelectionChanged">
+                                    <ComboBox x:Name="empProvinceCb" Margin="246,232,0,0" VerticalAlignment="Top" Height="23" DisplayMemberPath = "ProvinceName" SelectedValuePath = "ProvinceID" ItemsSource ="{Binding Provinces}" Width="157" HorizontalAlignment="Left" FontWeight="Normal" Grid.Column="1" SelectionChanged="empProvinceCb_SelectionChanged">
                                         <ComboBox.SelectedItem>
                                             <Binding Path="locProvinceId" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>

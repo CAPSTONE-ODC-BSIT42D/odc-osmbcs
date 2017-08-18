@@ -55,14 +55,21 @@ namespace prototype2
                 string query = "SELECT * FROM provinces_t";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
-                custProvinceCb.ItemsSource = fromDb.Tables["t"].DefaultView;
-                custProvinceCb1.ItemsSource = fromDb.Tables["t"].DefaultView;
-                empProvinceCb.ItemsSource = fromDb.Tables["t"].DefaultView;
+                fromDbTable = fromDb.Tables["t"];
+                MainVM.Provinces.Clear();
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.Provinces.Add(new Province() {  ProvinceID= (int)dr["locProvinceID"], ProvinceName = dr["locProvince"].ToString() });
+                }
                 dbCon.Close();
-
             }
             setManageCustomerGridControls();
+            setManageSupplierGridControls();
+            setManageEmployeeGridControls();
+            setManageContractorGridControls();
+            setManageSettingsGridControl();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -479,7 +486,7 @@ namespace prototype2
                 MainVM.Customers.Clear();
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    MainVM.Customers.Add(new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString() , CompanyProvinceName = dr["locProvince"].ToString() ,CompanyProvinceID = dr["companyProvinceID"].ToString() });
+                    MainVM.Customers.Add(new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString() });
                 }
                 dbCon.Close();
             }
@@ -857,10 +864,10 @@ namespace prototype2
                 DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
                 fromDbTable = fromDb.Tables["t"];
-                MainVM.Customers.Clear();
+                MainVM.Suppliers.Clear();
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    MainVM.Customers.Add(new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString() });
+                    MainVM.Suppliers.Add(new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString() });
                 }
                 dbCon.Close();
             }
@@ -1185,7 +1192,7 @@ namespace prototype2
             MessageBox.Show("" + invProductsCategoryLb.SelectedValue);
             if (dbCon.IsConnect())
             {
-                string query = "DELETE FROM `odc_db`.`item_category_t` WHERE `categoryID`='" + invProductsCategoryLb.SelectedValue + "';";
+                string query = "DELETE FROM `odc_db`.`item_type_t` WHERE `typeID`='" + invProductsCategoryLb.SelectedValue + "';";
                 if (dbCon.deleteQuery(query, dbCon.Connection))
                 {
                     dbCon.Close();
@@ -1204,7 +1211,7 @@ namespace prototype2
             dbCon.DatabaseName = dbname;
             if (dbCon.IsConnect())
             {
-                string query = "INSERT INTO `odc_db`.`item_category_t` (`categoryName`) VALUES('" + invCategoryTb.Text + "')";
+                string query = "INSERT INTO `odc_db`.`item_type_t` (`typeName`) VALUES('" + invCategoryTb.Text + "')";
                 if (dbCon.insertQuery(query, dbCon.Connection))
                 {
                     MessageBox.Show("Added");
@@ -1286,10 +1293,73 @@ namespace prototype2
             {
                 Validation.ClearInvalid(productCategoryCbBindingExpressionBase);
             }
-            if (Validation.GetHasError(productNameTb) == false|| Validation.GetHasError(costPriceTb) == false || Validation.GetHasError(salesPriceTb) == false || Validation.GetHasError(productCategoryCb) == false)
+
+            BindingExpression productSupplierCbBindingExpression = BindingOperations.GetBindingExpression(productSupplierCb, ComboBox.SelectedItemProperty);
+            BindingExpressionBase productSupplierCbBindingExpressionBase = BindingOperations.GetBindingExpressionBase(productSupplierCb, ComboBox.SelectedItemProperty);
+
+            if (productSupplierCb.SelectedItem == null)
             {
-                MainVM.ProductList.Add(new Item() { ItemName = productNameTb.Text, ItemDesc = productDescTb.Text, CostPrice = (decimal)costPriceTb.Value, SalesPrice = (decimal)salesPriceTb.Value });
+                ValidationError validationError = new ValidationError(new ExceptionValidationRule(), productSupplierCbBindingExpression);
+                validationError.ErrorContent = "*Please select a corresponding supplier for this product";
+                Validation.MarkInvalid(productSupplierCbBindingExpressionBase, validationError);
             }
+            else if (Validation.GetHasError(productSupplierCb))
+            {
+                Validation.ClearInvalid(productSupplierCbBindingExpressionBase);
+            }
+
+            var dbCon = DBConnection.Instance();
+            if (Validation.GetHasError(productNameTb) == false|| Validation.GetHasError(costPriceTb) == false || Validation.GetHasError(salesPriceTb) == false || Validation.GetHasError(productCategoryCb) == false || Validation.GetHasError(productSupplierCb) == false)
+            {
+                
+                using (MySqlConnection conn = dbCon.Connection)
+                {
+                    conn.Open();
+                    MySqlCommand cmd = null;
+                    if (!isEdit)
+                    {
+                        cmd = new MySqlCommand("INSERT_ITEM", conn);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                    }
+                    else
+                    {
+                        cmd = new MySqlCommand("UPDATE_ITEM", conn);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@itemNo", MainVM.SelectedProduct.ItemNo);
+                        cmd.Parameters["@itemNo"].Direction = ParameterDirection.Input;
+                    }
+                    
+                    //INSERT NEW Product TO DB;
+                   
+                    cmd.Parameters.AddWithValue("@itemName", productNameTb.Text);
+                    cmd.Parameters["@itemName"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@itemDesc", productDescTb.Text);
+                    cmd.Parameters["@itemDesc"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@costPrice", costPriceTb.Value);
+                    cmd.Parameters["@costPrice"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@salesPrice", salesPriceTb.Value);
+                    cmd.Parameters["@salesPrice"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@typeID", productCategoryCb.SelectedValue);
+                    cmd.Parameters["@typeID"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@supplierID", productSupplierCb.SelectedValue);
+                    cmd.Parameters["@supplierID"].Direction = ParameterDirection.Input;
+
+                    cmd.ExecuteNonQuery();
+
+                    setListBoxControls();
+                }
+
+            }
+        }
+
+        private void saveProductListBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         //service types
@@ -1609,13 +1679,19 @@ namespace prototype2
             }
             if (dbCon.IsConnect())
             {
-                string query = "SELECT * FROM provinces_t";
+                string query = "SELECT * FROM ITEM_T;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
-                custProvinceCb.ItemsSource = fromDb.Tables["t"].DefaultView;
+                fromDbTable = fromDb.Tables["t"];
+                MainMenu.MainVM.ProductList.Clear();
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.SelectedSupplier = MainVM.Suppliers.Where(x => x.CompanyID.Equals(dr["supplierID"].ToString())).FirstOrDefault();
+                    MainMenu.MainVM.ProductList.Add(new Item() { ItemNo = dr["itemNo"].ToString(), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], SalesPrice = (decimal)dr["salesPrice"], TypeID = dr["typeID"].ToString(), SupplierID = dr["supplierID"].ToString(), SupplierName = MainVM.SelectedSupplier.CompanyName});
+                }
                 dbCon.Close();
-
             }
         }
 
@@ -2180,19 +2256,32 @@ namespace prototype2
 
         private void loadCustSuppDetails()
         {
+            var dbCon = DBConnection.Instance();
             
             try
             {
-                var dbCon = DBConnection.Instance();
                 using (MySqlConnection conn = dbCon.Connection)
                 {
                     conn.Open();
-                    compID = MainVM.SelectedCustomer.CompanyID;
-                    custCompanyNameTb.Text = MainVM.SelectedCustomer.CompanyName;
-                    custAddInfoTb.Text = MainVM.SelectedCustomer.CompanyDesc;
-                    custAddressTb.Text = MainVM.SelectedCustomer.CompanyAddress;
-                    custCityTb.Text = MainVM.SelectedCustomer.CompanyCity;
-                    custProvinceCb.SelectedIndex = int.Parse(MainVM.SelectedCustomer.CompanyProvinceID)-1;
+                    if (compType == 0)
+                    {
+                        compID = MainVM.SelectedSupplier.CompanyID;
+                        custCompanyNameTb.Text = MainVM.SelectedSupplier.CompanyName;
+                        custAddInfoTb.Text = MainVM.SelectedSupplier.CompanyDesc;
+                        custAddressTb.Text = MainVM.SelectedSupplier.CompanyAddress;
+                        custCityTb.Text = MainVM.SelectedSupplier.CompanyCity;
+                        custProvinceCb.SelectedIndex = int.Parse(MainVM.SelectedSupplier.CompanyProvinceID) - 1;
+                    }
+                    else
+                    {
+                        compID = MainVM.SelectedCustomer.CompanyID;
+                        custCompanyNameTb.Text = MainVM.SelectedCustomer.CompanyName;
+                        custAddInfoTb.Text = MainVM.SelectedCustomer.CompanyDesc;
+                        custAddressTb.Text = MainVM.SelectedCustomer.CompanyAddress;
+                        custCityTb.Text = MainVM.SelectedCustomer.CompanyCity;
+                        custProvinceCb.SelectedIndex = int.Parse(MainVM.SelectedCustomer.CompanyProvinceID) - 1;
+                    }
+
                     string query = "SELECT representativeID," +
                         "repTitle," +
                         "repLName," +
@@ -2995,6 +3084,7 @@ namespace prototype2
         private void manageSupplierSearchBtn_Click(object sender, RoutedEventArgs e)
         {
             var linqResults = MainVM.Customers.Where(x => x.CompanyName.ToLower().Contains(manageSupplierSearchTb.Text.ToLower()));
+            
             var observable = new ObservableCollection<Customer>(linqResults);
             manageSupplierDataGrid.ItemsSource = observable;
         }

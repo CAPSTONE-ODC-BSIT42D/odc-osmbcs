@@ -340,6 +340,26 @@ namespace prototype2
         }
     }
 
+    public class Province : ViewModelEntity
+    {
+        public Province()
+        {
+
+        }
+        protected int provinceID;
+        protected string provinceName;
+        public int ProvinceID
+        {
+            get { return provinceID; }
+            set { SetProperty(ref provinceID, value); }
+        }
+        public string ProvinceName
+        {
+            get { return provinceName; }
+            set { SetProperty(ref provinceName, value); }
+        }
+    }
+
     public class Item : ViewModelEntity
     {
         public Item()
@@ -354,7 +374,8 @@ namespace prototype2
         protected decimal salesPrice;
         protected string typeID;
         protected string supplierID;
-
+        protected string typeName;
+        protected string supplierName;
         public string ItemNo
         {
             get { return itemNo; }
@@ -385,10 +406,20 @@ namespace prototype2
             get { return typeID; }
             set { SetProperty(ref typeID, value); }
         }
+        public string TypeName
+        {
+            get { return typeName; }
+            set { SetProperty(ref typeName, value); }
+        }
         public string SupplierID
         {
             get { return supplierID; }
             set { SetProperty(ref supplierID, value); }
+        }
+        public string SupplierName
+        {
+            get { return supplierName; }
+            set { SetProperty(ref supplierName, value); }
         }
     }
 
