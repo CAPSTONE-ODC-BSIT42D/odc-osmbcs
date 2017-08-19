@@ -1077,7 +1077,6 @@ namespace prototype2
 
             if (employeePositionLb.SelectedItems.Count > 0)
             {
-
                 empPosNewTb.Text = MainMenu.MainVM.SelectedEmpPosition.PositionName;
             }
             else
@@ -1197,38 +1196,66 @@ namespace prototype2
         {
             var dbCon = DBConnection.Instance();
             dbCon.DatabaseName = dbname;
-            MessageBox.Show("" + invProductsCategoryLb.SelectedValue);
-            if (dbCon.IsConnect())
+            if (invProductsCategoryLb.SelectedItems.Count > 0)
             {
-                string query = "DELETE FROM `odc_db`.`item_type_t` WHERE `typeID`='" + invProductsCategoryLb.SelectedValue + "';";
-                if (dbCon.deleteQuery(query, dbCon.Connection))
+                if (dbCon.IsConnect())
                 {
-                    dbCon.Close();
-                    setListBoxControls();
-                    MessageBox.Show("Product Category successfully deleted");
+                    string query = "DELETE FROM `odc_db`.`item_type_t` WHERE `typeID`='" + invProductsCategoryLb.SelectedValue + "';";
+                    if (dbCon.deleteQuery(query, dbCon.Connection))
+                    {
+                        dbCon.Close();
+                        setListBoxControls();
+                        MessageBox.Show("Product Category successfully deleted");
+                    }
                 }
-
-
             }
-
+            else
+            {
+                MessageBox.Show("Please choose a Product Category first.");
+            }
         }
 
         private void addCategoryBtn_Click(object sender, RoutedEventArgs e)
         {
             var dbCon = DBConnection.Instance();
             dbCon.DatabaseName = dbname;
-            if (dbCon.IsConnect())
+            if (!String.IsNullOrWhiteSpace(invCategoryTb.Text))
             {
-                string query = "INSERT INTO `odc_db`.`item_type_t` (`typeName`) VALUES('" + invCategoryTb.Text + "')";
-                if (dbCon.insertQuery(query, dbCon.Connection))
+                if (invProductsCategoryLb.Items.Contains(invCategoryTb.Text))
                 {
-                    MessageBox.Show("Product Category successfully added");
-                    setListBoxControls();
-                    dbCon.Close();
+                    MessageBox.Show("Product Category already exists");
                 }
-
-
+                if (dbCon.IsConnect())
+                {
+                    string query = "INSERT INTO `odc_db`.`item_type_t` (`typeName`) VALUES('" + invCategoryTb.Text + "')";
+                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    {
+                        MessageBox.Show("Product Category successfully added");
+                        setListBoxControls();
+                        invCategoryTb.Clear();
+                        dbCon.Close();
+                    }
+                }
             }
+            else
+            {
+                MessageBox.Show("Product Category field must be filled");
+            }
+        }
+
+        private void editCategoryBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = dbname;
+            if (invProductsCategoryLb.SelectedItems.Count > 0)
+            {
+                //empPosNewTb.Text = MainMenu.MainVM.SelectedEmpPosition.PositionName;
+            }
+            else
+            {
+                MessageBox.Show("Please select a product category first.");
+            }
+            dbCon.Close();
         }
 
         //product list
@@ -1360,9 +1387,21 @@ namespace prototype2
                     cmd.ExecuteNonQuery();
 
                     setListBoxControls();
+
+                    clearPrdListFields();
                 }
 
             }
+        }
+
+        private void clearPrdListFields()
+        {
+            productNameTb.Clear();
+            productDescTb.Clear();
+            productCategoryCb.SelectedValue = -1;
+            productSupplierCb.SelectedValue = -1;
+            salesPriceTb.Value = 0;
+            costPriceTb.Value = 0;
         }
 
         private void saveProductListBtn_Click(object sender, RoutedEventArgs e)
@@ -3105,6 +3144,6 @@ namespace prototype2
             }
         }
 
-        
+
     }
 }
