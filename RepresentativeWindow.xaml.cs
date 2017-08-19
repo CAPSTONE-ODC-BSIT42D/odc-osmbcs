@@ -225,7 +225,7 @@ namespace prototype2
         private void validateTextBoxes()
         {
             dataChanged = true;
-            if (MainMenu.MainVM.RepContacts.Count == 0 || String.IsNullOrWhiteSpace(firstNameTb.Text) || String.IsNullOrWhiteSpace(middleInitialTb.Text) || String.IsNullOrWhiteSpace(lastNameTb.Text))
+            if (MainMenu.MainVM.RepContacts.Count == 0 || String.IsNullOrWhiteSpace(firstNameTb.Text) || String.IsNullOrWhiteSpace(lastNameTb.Text))
             {
                 saveBtn.IsEnabled = false;
 

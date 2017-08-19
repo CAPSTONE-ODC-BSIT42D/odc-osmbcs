@@ -1041,6 +1041,7 @@ namespace prototype2
             }
 
         }
+
         private void deleteEmpPosBtn_Click(object sender, RoutedEventArgs e)
         {
             if (employeePositionLb.SelectedItems.Count > 0)
@@ -1399,7 +1400,7 @@ namespace prototype2
             productNameTb.Clear();
             productDescTb.Clear();
             productCategoryCb.SelectedValue = -1;
-            productSupplierCb.SelectedValue = -1;
+            productSupplierCb.SelectedValue = 0;
             salesPriceTb.Value = 0;
             costPriceTb.Value = 0;
         }
