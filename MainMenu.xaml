@@ -493,7 +493,7 @@
                 <Button x:Name="ordersSalesMenuBtn" Content="Orders" Margin="0,40,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="ordersSalesMenuBtn_Click" Width="175" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1"/>
                 <Button x:Name="invoiceSalesMenuBtn" Content="Invoices" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="invoiceSalesMenuBtn_Click" Width="175" Margin="0,5,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1"/>
             </Grid>
-            <Grid x:Name="dashboardGrid" Margin="10,0" Background="#FFECF0F1">
+            <Grid x:Name="dashboardGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -530,10 +530,10 @@
                     <ListBox x:Name="listBox1" Margin="13,54,11,10"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="transactionGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True">
+            <Grid x:Name="transactionGrid" Margin="10,0" Background="#FFECF0F1">
                 <Grid x:Name="transactionQuotationsGrid">
                     <Label x:Name="transQuotationHeader" Content="Transaction - Quotations" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" Margin="10,0"/>
-                    <Grid x:Name="quotationsGridHome" Margin="10,70,10,10">
+                    <Grid x:Name="quotationsGridHome" Margin="10,70,10,10" d:IsHidden="True">
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476">
                             <Label x:Name="label8" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
                             <TextBox x:Name="searchBox" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="317"/>
@@ -581,12 +581,16 @@
                         <Button x:Name="findBtn" Content="Find" Grid.Column="1" HorizontalAlignment="Left" Margin="306,50,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="findBtn_Click"/>
                         <DataGrid x:Name="selectCustomerDg" Margin="0,101,10,35" Grid.Column="1" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" CanUserResizeRows="False" CanUserAddRows="False" IsReadOnly="True">
                             <DataGrid.Columns >
-                                <DataGridTextColumn Binding="{Binding CompanyID}" ClipboardContentBinding="{x:Null}" Width="30" CanUserResize="False" Visibility="Hidden"/>
+                                
                                 <DataGridTextColumn Binding="{Binding CompanyName}" ClipboardContentBinding="{x:Null}" Header="Company Name" Width="200" CanUserResize="False"/>
+                                <DataGridTextColumn Binding="{Binding CompanyDesc}" ClipboardContentBinding="{x:Null}" Header="Description" Width="200"  />
+                                <DataGridTextColumn Binding="{Binding CompanyAddress}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350" CanUserResize="False" />
+                                <DataGridTextColumn Binding="{Binding CompanyCity}" ClipboardContentBinding="{x:Null}" Header="City" Width="200" CanUserResize="False" />
+                                <DataGridTextColumn Binding="{Binding CompanyProvinceName}" ClipboardContentBinding="{x:Null}" Header="Province" Width="200" CanUserResize="False" />
                                 <DataGridTemplateColumn x:Name="columnSelectBtn" Width="100" >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button x:Name="selectCustBtn" Click="selectCustBtn_Click" Content="Edit" />
+                                            <Button x:Name="selectCustBtn" Click="selectCustBtn_Click" Content="Select This Customer" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -620,14 +624,13 @@
                                     </DataGrid.Columns>
                                 </DataGrid>
                                 <Label x:Name="label12" Content="Customer's Name:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" FontStyle="Italic"/>
-                                <Label x:Name="label12_Copy" Content="Customer's Representative (Default):" Grid.Column="1" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" FontStyle="Italic"/>
-                                <Label x:Name="selectedCustNameLbl" Content="Customer's Name:" Grid.Column="1" HorizontalAlignment="Left" Margin="142,12,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Normal" FontStyle="Italic"/>
-                                <Label x:Name="selectedCustRepNameLbl" Content="Customer's Representative (Default):" Grid.Column="1" HorizontalAlignment="Left" Margin="259,46,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Normal" FontStyle="Italic"/>
+                                <Label x:Name="label12_Copy" Content="Customer's Representative:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" FontStyle="Italic"/>
+                                <Label x:Name="selectedCustNameLbl" Content="{Binding SelectedCustomer.CompanyName}" Grid.Column="1" HorizontalAlignment="Left" Margin="142,15,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Normal" FontStyle="Italic"/>
                             </Grid>
                         </GroupBox>
                         <Button x:Name="transRequestNext" Content="Next &gt;" HorizontalAlignment="Right" Margin="0,0,14,8" VerticalAlignment="Bottom" Width="74" Height="24" Click="transRequestNext_Click"/>
                     </Grid>
-                    <Grid x:Name="makeSalesQuoteGrid" Margin="10,70,10,10">
+                    <Grid x:Name="makeSalesQuoteGrid" Margin="10,70,10,10" d:IsHidden="True">
                         <Button x:Name="transQuotationFormBack" Content="&lt; Back" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="74" Height="24" Click="transQuotationFormBack_Click"/>
                         <GroupBox x:Name="groupBox2" Header="Quotation Form" Margin="10,29,10,42" FontFamily="Segoe UI Symbol" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderBrush="Black" VerticalContentAlignment="Stretch">
                             <ScrollViewer Margin="10,10,15,13">
@@ -664,7 +667,7 @@
                         </GroupBox>
                         <Button x:Name="transQuotationSaveBtn" Content="Next &gt;" HorizontalAlignment="Right" Margin="0,0,14,8" VerticalAlignment="Bottom" Width="74" Height="24" Click="transQuotationSaveBtn_Click"/>
                     </Grid>
-                    <Grid x:Name="viewQuotationGrid" Margin="10,70,10,10">
+                    <Grid x:Name="viewQuotationGrid" Margin="10,70,10,10" d:IsHidden="True">
                         <Button x:Name="transViewBackBtn" Content="&lt; Back" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="74" Height="24" Click="transViewBackBtn_Click"/>
                         <GroupBox x:Name="groupBox3" Header="View Sale Quotation" Margin="10,29,10,42" FontFamily="Segoe UI Symbol" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderBrush="Black" VerticalContentAlignment="Stretch">
                             <ScrollViewer Margin="1,1,-2,1">
@@ -676,7 +679,7 @@
                         <Button x:Name="transViewSaveSend" Content="Save and Send" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="98" Height="24" Click="transViewSaveSend_Click"/>
                     </Grid>
                 </Grid>
-                <Grid x:Name="transactionInvoiceGrid">
+                <Grid x:Name="transactionInvoiceGrid" d:IsHidden="True">
                     <Label x:Name="label7_Copy1" Content="Transaction - Invoice" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" Margin="10,0"/>
                     <Grid Margin="10,70,10,10">
                         <Grid Margin="10,7,461,383" HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -688,7 +691,7 @@
                         <DataGrid x:Name="quotationsDataGrid2" Margin="0,41,0,0" AutoGenerateColumns="False"/>
                     </Grid>
                 </Grid>
-                <Grid x:Name="transactionReceiptGrid">
+                <Grid x:Name="transactionReceiptGrid" d:IsHidden="True">
                     <Label x:Name="label7_Copy2" Content="Transaction - Receipts" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" Margin="10,0"/>
                     <Grid Margin="10,70,10,10">
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="478">
@@ -700,7 +703,7 @@
                         <DataGrid x:Name="quotationsDataGrid3" Margin="0,41,0,0" AutoGenerateColumns="False"/>
                     </Grid>
                 </Grid>
-                <Grid x:Name="transactionOrdersGrid">
+                <Grid x:Name="transactionOrdersGrid" d:IsHidden="True">
                     <Label x:Name="label7_Copy3" Content="Transaction - Purchase Orders" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" Margin="10,0"/>
                     <Grid x:Name="transOrdersGridHome" Margin="10,70,10,10">
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="474">
@@ -848,7 +851,7 @@
                 </Grid>
             </Grid>
             <Grid x:Name="reportsGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True"/>
-            <Grid x:Name="manageGrid" Margin="10,0" Background="#FFECF0F1" >
+            <Grid x:Name="manageGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True" >
                 <Grid x:Name="manageCustomerGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged" d:IsHidden="True">
                     <Label x:Name="label7_Copy" Content="Manage - Customer" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid x:Name="manageCustomerHomeGrid" Margin="10,70,10,10">
@@ -1041,7 +1044,7 @@
                         <TabControl x:Name="tabControl" Margin="24,26,29,10">
                             <TabItem Header="Employee &amp; Contractor" RenderTransformOrigin="0.284,0.568">
                                 <Grid Background="#FFE5E5E5">
-                                    <Grid Margin="34,49,707,443">
+                                    <Grid Margin="34,49,707,0" Height="188" VerticalAlignment="Top">
                                         <Label Content="Position Name:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13"/>
                                         <TextBox x:Name="empPosNewTb" HorizontalAlignment="Left" Height="23" Margin="105,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" FontSize="13"/>
                                         <Button x:Name="addEmpPosBtn" Content="Add" HorizontalAlignment="Left" Margin="346,4,0,0" VerticalAlignment="Top" Width="75" Click="addEmpPosBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF03BD03" BorderBrush="#FF019C01" Foreground="#FFFDF7F7"/>
@@ -1050,7 +1053,7 @@
                                         <Button x:Name="deleteEmpPosBtn" Content="Delete" HorizontalAlignment="Left" Margin="346,81,0,0" VerticalAlignment="Top" Width="75" Click="deleteEmpPosBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FFEC1717" BorderBrush="#FFDC0606" Foreground="#FFF9F3F3"/>
                                         <Button x:Name="editEmpPosBtn" Content="Edit" HorizontalAlignment="Left" Margin="346,48,0,0" VerticalAlignment="Top" Width="75" Click="editEmpPosBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF7527B6" BorderBrush="#FF6D08C1" Foreground="#FFF9F9F9"/>
                                     </Grid>
-                                    <Grid Margin="34,286,707,206">
+                                    <Grid Margin="34,286,707,0" Height="188" VerticalAlignment="Top">
                                         <Label Content="Job Name:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13"/>
                                         <TextBox x:Name="contNewJobTb" HorizontalAlignment="Left" Height="23" Margin="105,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" FontSize="13"/>
                                         <Button x:Name="addContJobBtn" Content="Add" HorizontalAlignment="Left" Margin="346,4,0,0" VerticalAlignment="Top" Width="75" Click="addContJobBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF03BD03" BorderBrush="#FF019C01" Foreground="#FFFDF7F7"/>
@@ -1065,7 +1068,24 @@
                             </TabItem>
                             <TabItem Header="Services">
                                 <Grid Background="#FFE5E5E5">
-                                    <GroupBox x:Name="groupBox_Copy1" Header="Service Types" Height="308" Margin="10,10,456,500" FontWeight="Bold" FontStyle="Italic" FontSize="16">
+                                    <GroupBox x:Name="groupBox_Copy2" Header="Price Per Location" Height="121" Margin="10,338,456,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" FontSize="16">
+                                        <Grid x:Name="serviceTypeGrid1" Margin="10,10,12,9">
+                                            <ComboBox x:Name="custProvinceCb1" Margin="25,36,0,0" VerticalAlignment="Top" Height="25" IsEditable="True" DisplayMemberPath = "ProvinceName" SelectedValuePath = "ProvinceID" ItemsSource ="{Binding Provinces}" Width="179" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontWeight="Normal" SelectionChanged="custProvinceCb1_SelectionChanged" FontSize="14">
+                                                <ComboBox.SelectedItem>
+                                                    <Binding Path="locProvinceId" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                                        <Binding.ValidationRules>
+                                                            <local:TextBoxValidation TextBoxType="ComboBox"/>
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </ComboBox.SelectedItem>
+                                            </ComboBox>
+                                            <Label x:Name="label30" Content="Select Province:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Normal" FontStyle="Normal"/>
+                                            <xctk:DecimalUpDown x:Name="locationPrice" HorizontalAlignment="Left" Margin="220,36,0,0" VerticalAlignment="Top" Width="193" FontSize="14"/>
+                                            <Label x:Name="label1_Copy8" Content="Price" HorizontalAlignment="Left" Margin="220,10,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Normal" FontStyle="Normal"/>
+                                            <Button x:Name="setPriceBtn" Content="Set" HorizontalAlignment="Left" Margin="422,34,0,0" VerticalAlignment="Top" Width="75" FontWeight="Normal" FontStyle="Normal" FontSize="14" Height="25" Click="setPriceBtn_Click" Background="#FF0591B0" BorderBrush="#FF017791" Foreground="#FFFBF5F5" FontFamily="Segoe UI Semibold"/>
+                                        </Grid>
+                                    </GroupBox>
+                                    <GroupBox x:Name="groupBox_Copy1" Header="Service Types" Height="308" Margin="10,10,456,0" FontWeight="Bold" FontStyle="Italic" FontSize="16" VerticalAlignment="Top">
                                         <Grid x:Name="serviceTypeGrid" Margin="10,10,12,0" VerticalAlignment="Top">
                                             <Grid x:Name="serviceTypeList" HorizontalAlignment="Left" Height="265" VerticalAlignment="Top" Width="685" Margin="0,0,-104,0">
                                                 <Button x:Name="addServiceTypeBtn" Content="+ add" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="75" FontWeight="Normal" FontStyle="Normal" FontSize="12" Click="addServiceTypeBtn_Click"/>
@@ -1108,23 +1128,6 @@
                                                 <Button x:Name="saveServiceTypeBtn" Content="save" HorizontalAlignment="Left" Margin="502,230,0,0" VerticalAlignment="Top" Width="75" FontSize="12" FontWeight="Normal" FontStyle="Normal" Height="25" IsEnabled="False" Click="saveServiceTypeBtn_Click"/>
                                                 <Button x:Name="cancelServiceTypeBtn" Content="cancel" HorizontalAlignment="Left" Margin="592,230,0,0" VerticalAlignment="Top" Width="75" FontSize="12" FontWeight="Normal" FontStyle="Normal" Height="25" Click="cancelServiceTypeBtn_Click"/>
                                             </Grid>
-                                        </Grid>
-                                    </GroupBox>
-                                    <GroupBox x:Name="groupBox_Copy2" Header="Price Per Location" Height="121" Margin="10,338,456,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" FontSize="16">
-                                        <Grid x:Name="serviceTypeGrid1" Margin="10,10,12,9">
-                                            <ComboBox x:Name="custProvinceCb1" Margin="25,36,0,0" VerticalAlignment="Top" Height="25" IsEditable="True" DisplayMemberPath = "ProvinceName" SelectedValuePath = "ProvinceID" ItemsSource ="{Binding Provinces}" Width="179" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontWeight="Normal" SelectionChanged="custProvinceCb1_SelectionChanged" FontSize="14">
-                                                <ComboBox.SelectedItem>
-                                                    <Binding Path="locProvinceId" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                                        <Binding.ValidationRules>
-                                                            <local:TextBoxValidation TextBoxType="ComboBox"/>
-                                                        </Binding.ValidationRules>
-                                                    </Binding>
-                                                </ComboBox.SelectedItem>
-                                            </ComboBox>
-                                            <Label x:Name="label30" Content="Select Province:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Normal" FontStyle="Normal"/>
-                                            <xctk:DecimalUpDown x:Name="locationPrice" HorizontalAlignment="Left" Margin="220,36,0,0" VerticalAlignment="Top" Width="193" FontSize="14"/>
-                                            <Label x:Name="label1_Copy8" Content="Price" HorizontalAlignment="Left" Margin="220,10,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Normal" FontStyle="Normal"/>
-                                            <Button x:Name="setPriceBtn" Content="Set" HorizontalAlignment="Left" Margin="422,34,0,0" VerticalAlignment="Top" Width="75" FontWeight="Normal" FontStyle="Normal" FontSize="14" Height="25" Click="setPriceBtn_Click" Background="#FF0591B0" BorderBrush="#FF017791" Foreground="#FFFBF5F5" FontFamily="Segoe UI Semibold"/>
                                         </Grid>
                                     </GroupBox>
                                 </Grid>
