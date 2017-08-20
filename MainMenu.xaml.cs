@@ -2081,8 +2081,12 @@ namespace prototype2
             MessageBoxResult result = MessageBox.Show("Do you wish to delete this Representative record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
             if (result == MessageBoxResult.OK)
             {
-                int selectIndex = custContactDg.SelectedIndex;
-                MainVM.CustRepresentatives.RemoveAt(selectIndex);
+                try
+                {
+                    int selectIndex = custContactDg.SelectedIndex;
+                    MainVM.CustRepresentatives.RemoveAt(selectIndex);
+                }
+                catch (Exception) { throw; }
             }
             else if (result == MessageBoxResult.Cancel)
             {
