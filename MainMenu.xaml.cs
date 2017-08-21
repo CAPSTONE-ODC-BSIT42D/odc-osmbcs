@@ -2623,7 +2623,7 @@ namespace prototype2
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    //MessageBox.Show(ex.Message);
                 }
 
             }
@@ -2870,12 +2870,14 @@ namespace prototype2
             else if (result == MessageBoxResult.Cancel)
             {
                 clearEmployeeDetailsGrid();
+                clearEmployeeTextBoxes();
             }
         }
 
         private void cancelEmpBtn_Click(object sender, RoutedEventArgs e)
         {
             clearEmployeeDetailsGrid();
+            clearEmployeeTextBoxes();
         }
 
         
