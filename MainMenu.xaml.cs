@@ -926,6 +926,7 @@ namespace prototype2
             custCityTb.Clear();
             descriptionTb1.Clear();
             custAddressTb.Clear();
+            custAddInfoTb.Clear();
             custProvinceCb.SelectedValue = -1;
         }
 
@@ -2230,8 +2231,6 @@ namespace prototype2
                                 cmd.Parameters["@tableID"].Direction = ParameterDirection.Input;
                                 cmd.ExecuteNonQuery();
                             }
-
-
                             if (!isEdit)
                             {
 
@@ -2268,6 +2267,7 @@ namespace prototype2
             MainVM.EmailAddress = "";
             MainVM.PhoneNumber = "";
             MainVM.MobileNumber = "";
+            MainVM.AdditionalInfo = "";
             Validation.ClearInvalid((custCompanyNameTb).GetBindingExpression(TextBox.TextProperty));
             Validation.ClearInvalid((custAddressTb).GetBindingExpression(TextBox.TextProperty));
             Validation.ClearInvalid((custCityTb).GetBindingExpression(TextBox.TextProperty));

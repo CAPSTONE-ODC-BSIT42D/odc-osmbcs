@@ -160,9 +160,9 @@ namespace prototype2
 
         private void clearContactsBoxes()
         {
-            contactDetailsPhoneTb.Text = "";
-            contactDetailsEmailTb.Text = "";
-            contactDetailsMobileTb.Text = "";
+            contactDetailsPhoneTb.Clear();
+            contactDetailsEmailTb.Clear();
+            contactDetailsMobileTb.Clear();
             Validation.ClearInvalid((contactDetailsPhoneTb).GetBindingExpression(TextBox.TextProperty));
             Validation.ClearInvalid((contactDetailsEmailTb).GetBindingExpression(TextBox.TextProperty));
             Validation.ClearInvalid((contactDetailsMobileTb).GetBindingExpression(TextBox.TextProperty));
