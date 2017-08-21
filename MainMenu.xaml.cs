@@ -1087,6 +1087,7 @@ namespace prototype2
             dbCon.Close();
         }
 
+
         //CONTRACTOR PART
         private void addContJobBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -2415,7 +2416,20 @@ namespace prototype2
             Validation.ClearInvalid((contactDetailsMobileTb1).GetBindingExpression(TextBox.TextProperty));
         }
 
-        
+
+        public void clearEmployeeTextBoxes()
+        {
+            empAddressTb.Clear();
+            empCityTb.Clear();
+            empFirstNameTb.Clear();
+            empLastNameTb.Clear();
+            empMiddleInitialTb.Clear();
+            empUserNameTb.Clear();
+            empPasswordTb.Clear();
+            empProvinceCb.SelectedValue = -1;
+            empPostionCb.SelectedValue = -1;
+        }
+
 
         private void validateEmployeeTextBoxes()
         {
