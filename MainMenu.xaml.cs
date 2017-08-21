@@ -1010,7 +1010,6 @@ namespace prototype2
                     }
                 }
             }
-
         }
 
         private void saveEmpPosBtn_Click(object sender, RoutedEventArgs e)
@@ -2256,8 +2255,7 @@ namespace prototype2
             }
         }
         private void clearCompanyDetailsGrid()
-        {
-            
+        {         
             MainVM.CustContacts.Clear();
             MainVM.RepContacts.Clear();
             MainVM.CustRepresentatives.Clear();

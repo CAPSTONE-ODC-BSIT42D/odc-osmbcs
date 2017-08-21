@@ -170,12 +170,8 @@ namespace prototype2
 
         private void firstNameTb_TextChanged(object sender, TextChangedEventArgs e)
         {
-            /*if (System.Windows.Controls.Validation.GetHasError(firstNameTb) == true)
-                saveBtn.IsEnabled = false;
-            else validateTextBoxes();*/
-
             string firstName = (sender as TextBox).Text;
-            if (!Regex.IsMatch(firstName, @"[a-zA-Z -']"))
+            if (!Regex.IsMatch(firstName, @"[a-zA-Z -]"))
             {
                 MessageBox.Show("Numbers and special symbols are not accepted");
                 saveBtn.IsEnabled = false;
@@ -189,11 +185,8 @@ namespace prototype2
 
         private void middleInitialTb_TextChanged(object sender, TextChangedEventArgs e)
         {
-            /*if (System.Windows.Controls.Validation.GetHasError(middleInitialTb) == true)
-                saveBtn.IsEnabled = false;
-            else validateTextBoxes();*/
             string middleName = (sender as TextBox).Text;
-            if (!Regex.IsMatch(middleName, @"[a-zA-Z -']"))
+            if (!Regex.IsMatch(middleName, @"[a-zA-Z -]"))
             {
                 MessageBox.Show("Numbers and special symbols are not accepted");
                 saveBtn.IsEnabled = false;
@@ -206,11 +199,8 @@ namespace prototype2
 
         private void lastNameTb_TextChanged(object sender, TextChangedEventArgs e)
         {
-            /*if (System.Windows.Controls.Validation.GetHasError(lastNameTb) == true)
-                saveBtn.IsEnabled = false;
-            else validateTextBoxes();*/
             string lastName = (sender as TextBox).Text;
-            if (!Regex.IsMatch(lastName, @"[a-zA-Z -']"))
+            if (!Regex.IsMatch(lastName, @"[a-zA-Z -]"))
             {
                 MessageBox.Show("Numbers and special symbols are not accepted");
                 saveBtn.IsEnabled = false;
@@ -279,6 +269,7 @@ namespace prototype2
         {
             cancelBtnClicked = true;
             this.Close();
+            
         }
 
         private void editRepContBtn_Click(object sender, RoutedEventArgs e)
