@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -169,24 +170,55 @@ namespace prototype2
 
         private void firstNameTb_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (System.Windows.Controls.Validation.GetHasError(firstNameTb) == true)
+            /*if (System.Windows.Controls.Validation.GetHasError(firstNameTb) == true)
                 saveBtn.IsEnabled = false;
-            else validateTextBoxes();
+            else validateTextBoxes();*/
+
+            string firstName = (sender as TextBox).Text;
+            if (!Regex.IsMatch(firstName, @"[a-zA-Z -']"))
+            {
+                MessageBox.Show("Numbers and special symbols are not accepted");
+                saveBtn.IsEnabled = false;
+            }
+            else
+            {
+                validateTextBoxes();
+            }
         }
 
 
         private void middleInitialTb_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (System.Windows.Controls.Validation.GetHasError(middleInitialTb) == true)
+            /*if (System.Windows.Controls.Validation.GetHasError(middleInitialTb) == true)
                 saveBtn.IsEnabled = false;
-            else validateTextBoxes();
+            else validateTextBoxes();*/
+            string middleName = (sender as TextBox).Text;
+            if (!Regex.IsMatch(middleName, @"[a-zA-Z -']"))
+            {
+                MessageBox.Show("Numbers and special symbols are not accepted");
+                saveBtn.IsEnabled = false;
+            }
+            else
+            {
+                validateTextBoxes();
+            }
         }
 
         private void lastNameTb_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (System.Windows.Controls.Validation.GetHasError(lastNameTb) == true)
+            /*if (System.Windows.Controls.Validation.GetHasError(lastNameTb) == true)
                 saveBtn.IsEnabled = false;
-            else validateTextBoxes();
+            else validateTextBoxes();*/
+            string lastName = (sender as TextBox).Text;
+            if (!Regex.IsMatch(lastName, @"[a-zA-Z -']"))
+            {
+                MessageBox.Show("Numbers and special symbols are not accepted");
+                saveBtn.IsEnabled = false;
+            }
+            else
+            {
+                validateTextBoxes();
+            }
         }
 
         private void contactDetailsEmailTb_TextChanged(object sender, TextChangedEventArgs e)
@@ -225,7 +257,7 @@ namespace prototype2
         private void validateTextBoxes()
         {
             dataChanged = true;
-            if (MainMenu.MainVM.RepContacts.Count == 0 || String.IsNullOrWhiteSpace(firstNameTb.Text) || String.IsNullOrWhiteSpace(middleInitialTb.Text) || String.IsNullOrWhiteSpace(lastNameTb.Text))
+            if (MainMenu.MainVM.RepContacts.Count == 0 || String.IsNullOrWhiteSpace(firstNameTb.Text) || String.IsNullOrWhiteSpace(lastNameTb.Text))
             {
                 saveBtn.IsEnabled = false;
 

@@ -1041,6 +1041,7 @@ namespace prototype2
             }
 
         }
+
         private void deleteEmpPosBtn_Click(object sender, RoutedEventArgs e)
         {
             if (employeePositionLb.SelectedItems.Count > 0)
@@ -1399,7 +1400,7 @@ namespace prototype2
             productNameTb.Clear();
             productDescTb.Clear();
             productCategoryCb.SelectedValue = -1;
-            productSupplierCb.SelectedValue = -1;
+            productSupplierCb.SelectedValue = 0;
             salesPriceTb.Value = 0;
             costPriceTb.Value = 0;
         }
@@ -2080,8 +2081,12 @@ namespace prototype2
             MessageBoxResult result = MessageBox.Show("Do you wish to delete this Representative record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
             if (result == MessageBoxResult.OK)
             {
-                int selectIndex = custContactDg.SelectedIndex;
-                MainVM.CustRepresentatives.RemoveAt(selectIndex);
+                try
+                {
+                    int selectIndex = custContactDg.SelectedIndex;
+                    MainVM.CustRepresentatives.RemoveAt(selectIndex);
+                }
+                catch (Exception) { throw; }
             }
             else if (result == MessageBoxResult.Cancel)
             {
