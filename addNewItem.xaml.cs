@@ -67,7 +67,7 @@ namespace prototype2
             {
                 if (prd.IsChecked)
                 {
-                    MainMenu.MainVM.RequestedItems.Add(new RequestedItem() { lineNo = (MainMenu.MainVM.RequestedItems.Count + 1).ToString(), itemCode = prd.ItemNo, desc = prd.ItemDesc, qty = prd.Quantity});
+                    MainMenu.MainVM.RequestedItems.Add(new RequestedItem() { lineNo = (MainMenu.MainVM.RequestedItems.Count + 1).ToString(), itemCode = prd.ItemNo, desc = prd.ItemDesc, qty = prd.Quantity, unitPrice = prd.CostPrice, totalAmount = prd.Quantity*prd.CostPrice});
                 }
             }
         }
