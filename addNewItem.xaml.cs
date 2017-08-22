@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,13 +64,35 @@ namespace prototype2
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
-            foreach(Item prd in MainMenu.MainVM.ProductList)
+            if ((bool)productRbtn.IsChecked)
             {
-                if (prd.IsChecked)
+                foreach (Item prd in MainMenu.MainVM.ProductList)
                 {
-                    MainMenu.MainVM.RequestedItems.Add(new RequestedItem() { lineNo = (MainMenu.MainVM.RequestedItems.Count + 1).ToString(), itemCode = prd.ItemNo, desc = prd.ItemDesc, qty = prd.Quantity, unitPrice = prd.CostPrice, totalAmount = prd.Quantity*prd.CostPrice});
+                    if (prd.IsChecked)
+                    {
+                        MainMenu.MainVM.RequestedItems.Add(new RequestedItem() { lineNo = (MainMenu.MainVM.RequestedItems.Count + 1).ToString(), itemCode = prd.ItemNo, desc = prd.ItemDesc, itemType = "Product", qty = prd.Quantity, unitPrice = prd.CostPrice, totalAmount = prd.Quantity * prd.CostPrice });
+                    }
                 }
             }
+            else if ((bool)serviceRbtn.IsChecked)
+            {
+                foreach (Item prd in MainMenu.MainVM.ProductList)
+                {
+                    if (prd.IsChecked)
+                    {
+                        MainMenu.MainVM.RequestedItems.Add(new RequestedItem() { lineNo = (MainMenu.MainVM.RequestedItems.Count + 1).ToString(), itemCode = prd.ItemNo, desc = prd.ItemDesc, itemType = "Service", qty = prd.Quantity, unitPrice = prd.CostPrice, totalAmount = prd.Quantity * prd.CostPrice });
+                    }
+                }
+            }
+            
+        }
+
+        private void searchBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var linqResults = MainMenu.MainVM.ProductList.Where(x => x.ItemName.ToLower().Contains(searchTb.Text.ToLower()));
+
+            var observable = new ObservableCollection<Item>(linqResults);
+            addGridProductListDg.ItemsSource = observable;
         }
     }
 }

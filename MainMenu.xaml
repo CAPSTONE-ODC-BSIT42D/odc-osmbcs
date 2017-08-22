@@ -7,7 +7,7 @@
         xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms" xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit" x:Class="prototype2.MainMenu"
         mc:Ignorable="d"
-        Title="MainMenu" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" Loaded="Window_Loaded" WindowState="Maximized" MinWidth="768" MinHeight="535" d:DesignWidth="1284" d:DesignHeight="1063.3">
+        Title="MainMenu" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" Loaded="Window_Loaded" WindowState="Maximized" MinWidth="763" MinHeight="535" d:DesignWidth="1284" d:DesignHeight="1136.3">
     <Window.Resources>
         <Style TargetType="{x:Type Button}" x:Key="mainButton">
             <Setter Property="Background" Value="#2C3E50"/>
@@ -604,38 +604,33 @@
                             <ColumnDefinition Width="23*"/>
                         </Grid.ColumnDefinitions>
                         <Button x:Name="transRequestBack" Content="&lt; Back" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="74" Height="24" Click="transRequestBack_Click"/>
-                        <GroupBox x:Name="groupBox1" Header="Requisition Form" Margin="10,29,10,42" FontFamily="Segoe UI Symbol" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderBrush="Black" VerticalContentAlignment="Stretch" Grid.ColumnSpan="2">
-                            <Grid Margin="0,0,-2,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="6*"/>
-                                    <ColumnDefinition Width="455*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Label Content="Requested Items" VerticalAlignment="Top" Height="26" Margin="0,105,0,0" HorizontalAlignment="Left" Width="241" FontSize="14" FontFamily="Segoe UI" FontStyle="Italic" FontWeight="Bold" Grid.Column="1"/>
-                                <Button x:Name="transReqAddNewItem" Content="+add new item" Grid.Column="1" Margin="1061,108,10,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Normal" FontFamily="Segoe UI" FontSize="14" Click="transReqAddNewItem_Click"/>
-                                <DataGrid x:Name="itemDg" Margin="10,136,10,95" ItemsSource="{Binding RequestedItems}" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" Grid.ColumnSpan="2" CanUserReorderColumns="False" CanUserResizeColumns="False">
-                                    <DataGrid.Columns >
-                                        <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Width="25" CanUserResize="False" />
-                                        <DataGridTextColumn Binding="{Binding lineNo}" ClipboardContentBinding="{x:Null}" Header="Line #" Width="50" CanUserResize="False" />
-                                        <DataGridTextColumn Binding="{Binding itemCode}" ClipboardContentBinding="{x:Null}" Header="Item Code" Width="100" CanUserResize="False" />
-                                        <DataGridTextColumn Binding="{Binding desc}" ClipboardContentBinding="{x:Null}" Header="Description" Width="400"  />
-                                        <DataGridTextColumn Binding="{Binding itemType}" ClipboardContentBinding="{x:Null}" Header="Unit" Width="50" CanUserResize="False" />
-                                        <DataGridTextColumn Binding="{Binding qty}" ClipboardContentBinding="{x:Null}" Header="Qty" Width="50" CanUserResize="False"  />
-                                        <DataGridTextColumn Binding="{Binding unitPrice}" ClipboardContentBinding="{x:Null}" Header="Unit Price" Width="100"  />
-                                        <DataGridTextColumn Binding="{Binding totalAmount}" ClipboardContentBinding="{x:Null}" Header="Total Amount" Width="100"  />
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                                <Label x:Name="label12" Content="Customer's Name:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" FontStyle="Italic"/>
-                                <Label x:Name="label12_Copy" Content="Customer's Representative:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" FontStyle="Italic"/>
-                                <Label x:Name="selectedCustNameLbl" Content="{Binding SelectedCustomer.CompanyName}" Grid.Column="1" HorizontalAlignment="Left" Margin="142,15,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Normal" FontStyle="Italic"/>
-                                <Label x:Name="label32" Content="Markup Price (Percent):" Grid.Column="1" HorizontalAlignment="Left" Margin="0,693,0,0" VerticalAlignment="Top"/>
-                                <xctk:IntegerUpDown Grid.Column="1" HorizontalAlignment="Left" Margin="187,695,0,0" VerticalAlignment="Top" Width="86"/>
-                                <Label x:Name="label32_Copy" Content="Markup Price (Percent):" Grid.Column="1" HorizontalAlignment="Left" Margin="0,693,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="label32_Copy1" Content="Additional Fees:" Grid.Column="1" HorizontalAlignment="Left" Margin="0,729,0,0" VerticalAlignment="Top"/>
-                                <Button x:Name="additionalFeesBtn" Content="View Additional Fees" Grid.Column="1" HorizontalAlignment="Left" Margin="142,732,0,0" VerticalAlignment="Top" Width="170" FontStyle="Normal" FontWeight="Normal" FontSize="14" Height="28"/>
-                            </Grid>
+                        <GroupBox x:Name="groupBox1" Header="Requisition Form" Margin="10,29,10,42" FontFamily="Segoe UI Symbol" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderBrush="Black" VerticalContentAlignment="Stretch" Grid.ColumnSpan="2" Padding="5" BorderThickness="2,2,2.6,2">
+                            <ScrollViewer Margin="0,0,-2,4">
+                                <Grid>
+                                    <Label x:Name="label12_Copy1" Content="Customer Details" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI"/>
+                                    <Label x:Name="label12" Content="Customer's Name:" HorizontalAlignment="Left" Margin="41,41,0,0" VerticalAlignment="Top" FontSize="12" FontWeight="Bold" FontStyle="Italic"/>
+                                    <Label x:Name="label12_Copy" Content="Customer's Representative:" HorizontalAlignment="Left" Margin="41,72,0,0" VerticalAlignment="Top" FontSize="12" FontWeight="Bold" FontStyle="Italic"/>
+                                    <Label x:Name="selectedCustNameLbl" Content="{Binding SelectedCustomer.CompanyName}" HorizontalAlignment="Left" Margin="156,41,0,0" VerticalAlignment="Top" FontSize="12" FontWeight="Normal" FontStyle="Italic" Height="26" VerticalContentAlignment="Center"/>
+                                    <Label x:Name="label32_Copy" Content="Markup Price (Percent):" HorizontalAlignment="Left" Margin="10,430,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Segoe UI"/>
+                                    <Label x:Name="label32_Copy1" Content="Additional Fees:" HorizontalAlignment="Left" Margin="10,466,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Segoe UI"/>
+                                    <Label Content="Requested Items" VerticalAlignment="Top" Height="37" Margin="10,103,0,0" HorizontalAlignment="Left" Width="241" FontSize="16" FontFamily="Segoe UI" FontStyle="Italic" FontWeight="Bold"/>
+                                    <Button x:Name="transReqAddNewItem" Content="+add new item" Margin="0,108,10,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Normal" FontFamily="Segoe UI" FontSize="14" Click="transReqAddNewItem_Click" HorizontalAlignment="Right" Width="119"/>
+                                    <DataGrid x:Name="itemDg" Margin="10,136,0,0" ItemsSource="{Binding RequestedItems}" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="False" IsReadOnly="True" HorizontalAlignment="Left" Width="1159" VerticalAlignment="Top" Height="275">
+                                        <DataGrid.Columns >
+                                            <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Width="25" CanUserResize="False" />
+                                            <DataGridTextColumn Binding="{Binding lineNo}" ClipboardContentBinding="{x:Null}" Header="Line #" Width="50" CanUserResize="False" />
+                                            <DataGridTextColumn Binding="{Binding itemName}" ClipboardContentBinding="{x:Null}" Header="Item Name" Width="100" CanUserResize="False" />
+                                            <DataGridTextColumn Binding="{Binding desc}" ClipboardContentBinding="{x:Null}" Header="Description" Width="300"  />
+                                            <DataGridTextColumn Binding="{Binding itemType}" ClipboardContentBinding="{x:Null}" Header="Item Type" Width="100" CanUserResize="False" />
+                                            <DataGridTextColumn Binding="{Binding qty}" ClipboardContentBinding="{x:Null}" Header="Qty" Width="100" CanUserResize="False"  />
+                                            <DataGridTextColumn Binding="{Binding unitPrice}" ClipboardContentBinding="{x:Null}" Header="Unit Price" Width="100"  />
+                                            <DataGridTextColumn Binding="{Binding totalAmount}" ClipboardContentBinding="{x:Null}" Header="Total Amount" Width="100"  />
+                                            <DataGridTextColumn Binding="{Binding totalAmount}" ClipboardContentBinding="{x:Null}" Header="Total + Markup Price" Width="200"  />
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                    <xctk:IntegerUpDown x:Name="markupPriceTb" HorizontalAlignment="Left" Margin="201,433,0,0" VerticalAlignment="Top" Width="86" ValueChanged="markupPriceTb_ValueChanged" VerticalContentAlignment="Center" Height="22" DefaultValue="0" Minimum="0" DisplayDefaultValueOnEmptyText="True" ParsingNumberStyle="Integer" Text="0" IsReadOnly="True" FontWeight="Normal" FontStyle="Normal" HorizontalContentAlignment="Center"/>
+                                </Grid>
+                            </ScrollViewer>
                         </GroupBox>
                         <Button x:Name="transRequestNext" Content="Next &gt;" HorizontalAlignment="Right" Margin="0,0,14,8" VerticalAlignment="Bottom" Width="74" Height="24" Click="transRequestNext_Click" Grid.ColumnSpan="2"/>
                     </Grid>

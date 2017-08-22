@@ -39,7 +39,7 @@
                             <TextBox x:Name="totalPrice2" HorizontalAlignment="Left" Height="23" Margin="27,415,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" FontSize="12" FontFamily="Segoe UI" FontStyle="Normal" FontWeight="Normal" IsEnabled="False"/>
                         </Grid>
                         <Grid x:Name="product" Margin="0,0,0,54">
-                            <DataGrid x:Name="productListTb" Margin="10,10,10,28" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}" AutoGenerateColumns="False" IsReadOnly="True">
+                            <DataGrid x:Name="addGridProductListDg" Margin="10,41,10,28" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}" AutoGenerateColumns="False" IsReadOnly="True">
                                 <DataGrid.Columns >
                                     <DataGridTemplateColumn Header="" Width="60">
                                         <DataGridTemplateColumn.CellTemplate>
@@ -50,16 +50,19 @@
                                     </DataGridTemplateColumn>
                                     <DataGridTextColumn Binding="{Binding ItemName}" ClipboardContentBinding="{x:Null}" Width="150" CanUserResize="False" Visibility="Visible" Header="Product Name" />
                                     <DataGridTextColumn Binding="{Binding ItemDesc}" ClipboardContentBinding="{x:Null}" Header="Product Description" Width="200" CanUserResize="False" />
-                                    <DataGridTemplateColumn Header="Selected Items" Width="60">
+                                    <DataGridTemplateColumn Header="Quantity" Width="60">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <xctk:DecimalUpDown Value="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"/>
+                                                <xctk:IntegerUpDown Value="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" DisplayDefaultValueOnEmptyText="True" Minimum="1" MouseWheelActiveOnFocus="True" DefaultValue="1" ParsingNumberStyle="Integer"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
                                     <DataGridTextColumn Binding="{Binding CostPrice}" ClipboardContentBinding="{x:Null}" Header="Cost Price" Width="150" CanUserResize="False" />
                                 </DataGrid.Columns>
                             </DataGrid>
+                            <Label x:Name="label8" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="14,7,0,0"/>
+                            <TextBox x:Name="searchTb" HorizontalAlignment="Left" Height="25" Margin="70,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317"/>
+                            <Button x:Name="searchBtn" Content="search" HorizontalAlignment="Left" Margin="410,10,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="searchBtn_Click"/>
                         </Grid>
                     </Grid>
                 </Grid>

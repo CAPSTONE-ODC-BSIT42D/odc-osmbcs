@@ -70,6 +70,7 @@ namespace prototype2
             setManageEmployeeGridControls();
             setManageContractorGridControls();
             setManageSettingsGridControl();
+            setListBoxControls();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -1769,7 +1770,7 @@ namespace prototype2
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
                     MainVM.SelectedSupplier = MainVM.Suppliers.Where(x => x.CompanyID.Equals(dr["supplierID"].ToString())).FirstOrDefault();
-                    MainMenu.MainVM.ProductList.Add(new Item() { ItemNo = dr["itemNo"].ToString(), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), SupplierID = dr["supplierID"].ToString(), SupplierName = MainVM.SelectedSupplier.CompanyName});
+                    MainMenu.MainVM.ProductList.Add(new Item() { ItemNo = dr["itemNo"].ToString(), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), Quantity = 1, SupplierID = dr["supplierID"].ToString(), SupplierName = MainVM.SelectedSupplier.CompanyName});
                 }
                 dbCon.Close();
             }
@@ -3191,6 +3192,15 @@ namespace prototype2
             }
         }
 
-
+        private void markupPriceTb_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            foreach(RequestedItem item in MainVM.RequestedItems)
+            {
+                if (item.itemType.Equals("Product"))
+                {
+                    item.totalAmountMarkUp = (item.unitPrice * item.qty) + (((item.unitPrice*item.qty)/100) * (decimal)markupPriceTb.Value);
+                }
+            }
+        }
     }
 }

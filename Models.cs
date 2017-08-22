@@ -472,11 +472,19 @@ namespace prototype2
             get { return _unitprice; }
             set { SetProperty(ref _unitprice, value); }
         }
+
         private decimal _totalAmount;
         public decimal totalAmount
         {
             get { return _totalAmount; }
             set { SetProperty(ref _totalAmount, value); }
+        }
+
+        private decimal _totalAmountMarkUp;
+        public decimal totalAmountMarkUp
+        {
+            get { return _totalAmountMarkUp; }
+            set { SetProperty(ref _totalAmountMarkUp, value); }
         }
     }
 
