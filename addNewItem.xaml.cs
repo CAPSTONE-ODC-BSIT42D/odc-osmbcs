@@ -23,6 +23,7 @@ namespace prototype2
         {
             InitializeComponent();
             productRbtn.IsChecked = true;
+            this.DataContext = MainMenu.MainVM;
         }
 
         private void productRbtn_Checked(object sender, RoutedEventArgs e)
@@ -58,6 +59,17 @@ namespace prototype2
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void saveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach(Item prd in MainMenu.MainVM.ProductList)
+            {
+                if (prd.IsChecked)
+                {
+                    MainMenu.MainVM.RequestedItems.Add(new RequestedItem() { lineNo = (MainMenu.MainVM.RequestedItems.Count + 1).ToString(), itemCode = prd.ItemNo, desc = prd.ItemDesc, qty = prd.Quantity});
+                }
+            }
         }
     }
 }

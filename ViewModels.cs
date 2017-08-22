@@ -209,7 +209,22 @@ namespace prototype2
             get { return selectedProduct; }
             set { SetProperty(ref selectedProduct, value); }
         }
-        //----- End of Product list
+        //----- Requested Item
+        protected ObservableCollection<RequestedItem> requestedItems = new ObservableCollection<RequestedItem>();
+
+        protected RequestedItem selectedRequestedItem = null;
+
+        public ObservableCollection<RequestedItem> RequestedItems
+        {
+            get { return requestedItems; }
+            set { requestedItems = value; }
+        }
+
+        public RequestedItem SelectedRequestedItem
+        {
+            get { return selectedRequestedItem; }
+            set { SetProperty(ref selectedRequestedItem, value); }
+        }
 
         //----- Provinces
 

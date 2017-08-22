@@ -76,6 +76,7 @@ namespace prototype2
                         {
 
                            MainMenu.MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            validateTextBoxes();
                             clearContactsBoxes();
                         }
                         else

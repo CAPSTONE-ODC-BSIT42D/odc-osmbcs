@@ -15,7 +15,7 @@
                     <RadioButton x:Name="productRbtn" Content="Product" HorizontalAlignment="Left" Margin="37,39,0,0" VerticalAlignment="Top" GroupName="itemType" Checked="productRbtn_Checked" Unchecked="productRbtn_Unchecked"/>
                     <RadioButton x:Name="serviceRbtn" Content="Service" HorizontalAlignment="Left" Margin="37,59,0,0" VerticalAlignment="Top" GroupName="itemType" Checked="serviceRbtn_Checked" Unchecked="serviceRbtn_Unchecked"/>
                     <Grid x:Name="forms" Margin="10,79,10,10">
-                        <Grid x:Name="service" Margin="0,0,13,90">
+                        <Grid x:Name="service" Margin="0,0,13,90" d:IsHidden="True">
                             <Label Content="Service Type:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic"/>
                             <ComboBox x:Name="serviceTypeCb" HorizontalAlignment="Left" Margin="27,31,0,0" VerticalAlignment="Top" Width="120"/>
                             <Label Content="Description:" VerticalAlignment="Top" Height="26" Margin="0,59,0,0" HorizontalAlignment="Left" Width="80" FontSize="12" FontFamily="Segoe UI" FontStyle="Italic" FontWeight="Bold" RenderTransformOrigin="0.5,0.5"/>
@@ -38,12 +38,34 @@
                             <Label Content="Total Amount:" VerticalAlignment="Top" Height="26" Margin="0,384,0,0" HorizontalAlignment="Left" Width="90" FontSize="12" FontFamily="Segoe UI" FontStyle="Italic" FontWeight="Bold" RenderTransformOrigin="0.5,0.5"/>
                             <TextBox x:Name="totalPrice2" HorizontalAlignment="Left" Height="23" Margin="27,415,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" FontSize="12" FontFamily="Segoe UI" FontStyle="Normal" FontWeight="Normal" IsEnabled="False"/>
                         </Grid>
-                        <Grid x:Name="product" Margin="0,0,0,54"/>
+                        <Grid x:Name="product" Margin="0,0,0,54">
+                            <DataGrid x:Name="productListTb" Margin="10,10,10,28" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}" AutoGenerateColumns="False" IsReadOnly="True">
+                                <DataGrid.Columns >
+                                    <DataGridTemplateColumn Header="" Width="60">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Binding="{Binding ItemName}" ClipboardContentBinding="{x:Null}" Width="150" CanUserResize="False" Visibility="Visible" Header="Product Name" />
+                                    <DataGridTextColumn Binding="{Binding ItemDesc}" ClipboardContentBinding="{x:Null}" Header="Product Description" Width="200" CanUserResize="False" />
+                                    <DataGridTemplateColumn Header="Selected Items" Width="60">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <xctk:DecimalUpDown Value="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Binding="{Binding CostPrice}" ClipboardContentBinding="{x:Null}" Header="Cost Price" Width="150" CanUserResize="False" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
                     </Grid>
                 </Grid>
             </ScrollViewer>
         </GroupBox>
-        <Button x:Name="saveBtn" Content="Save" Margin="530,0,112,10" VerticalAlignment="Bottom" Background="#FF395DFF" BorderBrush="#FF0D32DA" Foreground="#FFFDF9F9" Width="78" Height="28" FontSize="14" FontFamily="Segoe UI Semibold"/>
+        <Button x:Name="saveBtn" Content="Save" Margin="519,0,123,10" VerticalAlignment="Bottom" Background="#FF395DFF" BorderBrush="#FF0D32DA" Foreground="#FFFDF9F9" Width="78" Height="28" FontSize="14" FontFamily="Segoe UI Semibold" Click="saveBtn_Click"/>
         <Button x:Name="cancelBtn" Content="Cancel" Margin="613,0,29,10" VerticalAlignment="Bottom" Click="cancelBtn_Click" Width="78" Height="28" FontSize="14" Background="#FFFFCC1F" BorderBrush="#FFD3A404" FontFamily="Segoe UI Semibold"/>
     </Grid>
 </Window>

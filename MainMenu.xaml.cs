@@ -161,6 +161,7 @@ namespace prototype2
         {
             saleSubMenuGrid.Visibility = Visibility.Collapsed;
             manageSubMenugrid.Visibility = Visibility.Visible;
+            
         }
 
         /*-----------------END OF MENU BAR BUTTONS-------------------*/
@@ -1262,29 +1263,58 @@ namespace prototype2
         //product list
         private void editProductListBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            productNameTb.Text = MainVM.SelectedProduct.ItemName;
+            productDescTb.Text = MainVM.SelectedProduct.ItemDesc;
+            costPriceTb.Value = MainVM.SelectedProduct.CostPrice;
+            productCategoryCb.SelectedValue = MainVM.SelectedProduct.TypeID;
+            productSupplierCb.SelectedValue = MainVM.SelectedProduct.SupplierID;
+            isEdit = true;
+            addSaveProductBtn.Content = "Save";
         }
 
         private void deleteProductListBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = dbname;
+            if (invProductsCategoryLb.SelectedItems.Count > 0)
+            {
+                if (dbCon.IsConnect())
+                {
+                    string query = "DELETE FROM `odc_db`.`item_t` WHERE `itemNo`='" + MainVM.SelectedProduct.ItemNo + "';";
+                    if (dbCon.deleteQuery(query, dbCon.Connection))
+                    {
+                        dbCon.Close();
+                        setListBoxControls();
+                        MessageBox.Show("Product Item successfully deleted");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please choose a Product Category first.");
+            }
         }
 
         private void addNewProductBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+
+            addSavePrdToDb();
+        }
+
+        private void addSavePrdToDb()
+        {
             BindingExpression productNameTbBindingExpression = BindingOperations.GetBindingExpression(productNameTb, TextBox.TextProperty);
             BindingExpressionBase productNameTbBindingExpressionBase = BindingOperations.GetBindingExpressionBase(productNameTb, TextBox.TextProperty);
 
             if (String.IsNullOrWhiteSpace(productNameTb.Text))
             {
-                ValidationError validationError = new ValidationError(new ExceptionValidationRule(),productNameTbBindingExpression);
+                ValidationError validationError = new ValidationError(new ExceptionValidationRule(), productNameTbBindingExpression);
                 validationError.ErrorContent = "*Please fill out this field";
-                Validation.MarkInvalid(productNameTbBindingExpressionBase,validationError);
+                Validation.MarkInvalid(productNameTbBindingExpressionBase, validationError);
             }
-            else if(Validation.GetHasError(productNameTb))
+            else if (Validation.GetHasError(productNameTb))
             {
-                
+
                 Validation.ClearInvalid(productNameTbBindingExpressionBase);
             }
 
@@ -1302,24 +1332,24 @@ namespace prototype2
                 Validation.ClearInvalid(costPriceTbBindingExpressionBase);
             }
 
-            BindingExpression salesPriceTbBindingExpression = BindingOperations.GetBindingExpression(salesPriceTb, Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
-            BindingExpressionBase salesPriceTbBindingExpressionBase = BindingOperations.GetBindingExpressionBase(salesPriceTb, Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
+            //BindingExpression salesPriceTbBindingExpression = BindingOperations.GetBindingExpression(salesPriceTb, Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
+            //BindingExpressionBase salesPriceTbBindingExpressionBase = BindingOperations.GetBindingExpressionBase(salesPriceTb, Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
 
-            if (String.IsNullOrWhiteSpace(salesPriceTb.Text))
-            {
-                ValidationError validationError = new ValidationError(new ExceptionValidationRule(), salesPriceTbBindingExpression);
-                validationError.ErrorContent = "*Please fill out this field";
-                Validation.MarkInvalid(salesPriceTbBindingExpressionBase, validationError);
-            }
-            else if (Validation.GetHasError(salesPriceTb))
-            {
-                Validation.ClearInvalid(salesPriceTbBindingExpressionBase);
-            }
+            //if (String.IsNullOrWhiteSpace(salesPriceTb.Text))
+            //{
+            //    ValidationError validationError = new ValidationError(new ExceptionValidationRule(), salesPriceTbBindingExpression);
+            //    validationError.ErrorContent = "*Please fill out this field";
+            //    Validation.MarkInvalid(salesPriceTbBindingExpressionBase, validationError);
+            //}
+            //else if (Validation.GetHasError(salesPriceTb))
+            //{
+            //    Validation.ClearInvalid(salesPriceTbBindingExpressionBase);
+            //}
 
             BindingExpression productCategoryCbBindingExpression = BindingOperations.GetBindingExpression(productCategoryCb, ComboBox.SelectedItemProperty);
             BindingExpressionBase productCategoryCbBindingExpressionBase = BindingOperations.GetBindingExpressionBase(productCategoryCb, ComboBox.SelectedItemProperty);
 
-            if (productCategoryCb.SelectedItem==null)
+            if (productCategoryCb.SelectedItem == null)
             {
                 ValidationError validationError = new ValidationError(new ExceptionValidationRule(), productCategoryCbBindingExpression);
                 validationError.ErrorContent = "*Please select a corresponding category for this product";
@@ -1345,9 +1375,9 @@ namespace prototype2
             }
 
             var dbCon = DBConnection.Instance();
-            if (Validation.GetHasError(productNameTb) == false|| Validation.GetHasError(costPriceTb) == false || Validation.GetHasError(salesPriceTb) == false || Validation.GetHasError(productCategoryCb) == false || Validation.GetHasError(productSupplierCb) == false)
+            if (Validation.GetHasError(productNameTb) == false || Validation.GetHasError(costPriceTb) == false || Validation.GetHasError(productCategoryCb) == false || Validation.GetHasError(productSupplierCb) == false)
             {
-                
+
                 using (MySqlConnection conn = dbCon.Connection)
                 {
                     conn.Open();
@@ -1363,10 +1393,12 @@ namespace prototype2
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@itemNo", MainVM.SelectedProduct.ItemNo);
                         cmd.Parameters["@itemNo"].Direction = ParameterDirection.Input;
+                        isEdit = false;
+                        addSaveProductBtn.Content = "+ add";
                     }
-                    
+
                     //INSERT NEW Product TO DB;
-                   
+
                     cmd.Parameters.AddWithValue("@itemName", productNameTb.Text);
                     cmd.Parameters["@itemName"].Direction = ParameterDirection.Input;
 
@@ -1376,8 +1408,8 @@ namespace prototype2
                     cmd.Parameters.AddWithValue("@costPrice", costPriceTb.Value);
                     cmd.Parameters["@costPrice"].Direction = ParameterDirection.Input;
 
-                    cmd.Parameters.AddWithValue("@salesPrice", salesPriceTb.Value);
-                    cmd.Parameters["@salesPrice"].Direction = ParameterDirection.Input;
+                    //cmd.Parameters.AddWithValue("@salesPrice", salesPriceTb.Value);
+                    //cmd.Parameters["@salesPrice"].Direction = ParameterDirection.Input;
 
                     cmd.Parameters.AddWithValue("@typeID", productCategoryCb.SelectedValue);
                     cmd.Parameters["@typeID"].Direction = ParameterDirection.Input;
@@ -1388,7 +1420,7 @@ namespace prototype2
                     cmd.ExecuteNonQuery();
 
                     setListBoxControls();
-
+                    
                     clearPrdListFields();
                 }
 
@@ -1401,7 +1433,6 @@ namespace prototype2
             productDescTb.Clear();
             productCategoryCb.SelectedValue = -1;
             productSupplierCb.SelectedValue = 0;
-            salesPriceTb.Value = 0;
             costPriceTb.Value = 0;
         }
 
@@ -1737,14 +1768,11 @@ namespace prototype2
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
                     MainVM.SelectedSupplier = MainVM.Suppliers.Where(x => x.CompanyID.Equals(dr["supplierID"].ToString())).FirstOrDefault();
-                    MainMenu.MainVM.ProductList.Add(new Item() { ItemNo = dr["itemNo"].ToString(), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], SalesPrice = (decimal)dr["salesPrice"], TypeID = dr["typeID"].ToString(), SupplierID = dr["supplierID"].ToString(), SupplierName = MainVM.SelectedSupplier.CompanyName});
+                    MainMenu.MainVM.ProductList.Add(new Item() { ItemNo = dr["itemNo"].ToString(), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), SupplierID = dr["supplierID"].ToString(), SupplierName = MainVM.SelectedSupplier.CompanyName});
                 }
                 dbCon.Close();
             }
         }
-
-       
-
         /*-----------------END OF MANAGE UTILITIES-------------------*/
         /*
         /*

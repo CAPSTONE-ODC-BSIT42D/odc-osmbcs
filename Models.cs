@@ -366,16 +366,23 @@ namespace prototype2
         {
 
         }
-
+        protected bool isChecked;
         protected string itemNo;
         protected string itemName;
         protected string itemDesc;
         protected decimal costPrice;
-        protected decimal salesPrice;
+        protected int quantity;
         protected string typeID;
         protected string supplierID;
         protected string typeName;
         protected string supplierName;
+
+        public bool IsChecked
+        {
+            get { return isChecked; }
+            set { SetProperty(ref isChecked, value); }
+        }
+
         public string ItemNo
         {
             get { return itemNo; }
@@ -396,10 +403,10 @@ namespace prototype2
             get { return costPrice; }
             set { SetProperty(ref costPrice, value); }
         }
-        public decimal SalesPrice
+        public int Quantity
         {
-            get { return salesPrice; }
-            set { SetProperty(ref salesPrice, value); }
+            get { return quantity; }
+            set { SetProperty(ref quantity, value); }
         }
         public string TypeID
         {
@@ -447,11 +454,11 @@ namespace prototype2
             get { return _desc; }
             set { SetProperty(ref _desc, value); }
         }
-        private string _unit;
-        public string unit
+        private string _itemType;
+        public string itemType
         {
-            get { return _unit; }
-            set { SetProperty(ref _unit, value); }
+            get { return _itemType; }
+            set { SetProperty(ref _itemType, value); }
         }
         private int _qty;
         public int qty
