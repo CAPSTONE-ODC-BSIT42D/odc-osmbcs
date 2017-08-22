@@ -32,7 +32,7 @@
             <Grid HorizontalAlignment="Left" Height="138" Margin="76,152,0,0" VerticalAlignment="Top" Width="318" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">
                 <Grid Margin="18,17,27,114">
                     <Label x:Name="label" Content="Username:" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="68" FontWeight="Bold" Margin="0,0,0,-18" Foreground="Black"/>
-                    <TextBox x:Name="usernameTb" HorizontalAlignment="Left" Height="25" Margin="73,1,0,-19" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" AutomationProperties.IsRequiredForForm="True" MaxLines="1" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="usernameTb" HorizontalAlignment="Left" Height="25" Margin="73,0,0,-18" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" AutomationProperties.IsRequiredForForm="True" MaxLines="1" VerticalContentAlignment="Center"/>
                 </Grid>
                 <Grid Margin="18,58,27,73">
                     <Label x:Name="label_Copy" Content="Password:" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="68" FontWeight="Bold" Margin="0,0,0,-18" Foreground="Black"/>

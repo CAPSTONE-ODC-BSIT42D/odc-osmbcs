@@ -85,9 +85,9 @@ namespace prototype2
                         //If its null, this.
                         else
                         {
-                            MessageBox.Show("Username or Password is incorrect.");
                             usernameTb.Clear();
                             passwordBox.Clear();
+                            MessageBox.Show("Username or Password is incorrect.");
                         }
                     }
                 }

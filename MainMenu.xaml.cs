@@ -113,8 +113,6 @@ namespace prototype2
             if (result == MessageBoxResult.Yes)
             {
                 this.Close();
-                empUserNameTb.Clear();
-                empPasswordTb.Clear();
             }
             else if (result == MessageBoxResult.No)
             {
