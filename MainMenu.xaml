@@ -599,8 +599,12 @@
 
                     </Grid>
                     <Grid x:Name="addRequestionGrid" Margin="10,70,10,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1214*"/>
+                            <ColumnDefinition Width="23*"/>
+                        </Grid.ColumnDefinitions>
                         <Button x:Name="transRequestBack" Content="&lt; Back" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="74" Height="24" Click="transRequestBack_Click"/>
-                        <GroupBox x:Name="groupBox1" Header="Requisition Form" Margin="10,29,10,42" FontFamily="Segoe UI Symbol" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderBrush="Black" VerticalContentAlignment="Stretch">
+                        <GroupBox x:Name="groupBox1" Header="Requisition Form" Margin="10,29,10,42" FontFamily="Segoe UI Symbol" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderBrush="Black" VerticalContentAlignment="Stretch" Grid.ColumnSpan="2">
                             <Grid Margin="0,0,-2,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="6*"/>
@@ -628,7 +632,7 @@
                                 <Label x:Name="selectedCustNameLbl" Content="{Binding SelectedCustomer.CompanyName}" Grid.Column="1" HorizontalAlignment="Left" Margin="142,15,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Normal" FontStyle="Italic"/>
                             </Grid>
                         </GroupBox>
-                        <Button x:Name="transRequestNext" Content="Next &gt;" HorizontalAlignment="Right" Margin="0,0,14,8" VerticalAlignment="Bottom" Width="74" Height="24" Click="transRequestNext_Click"/>
+                        <Button x:Name="transRequestNext" Content="Next &gt;" HorizontalAlignment="Right" Margin="0,0,14,8" VerticalAlignment="Bottom" Width="74" Height="24" Click="transRequestNext_Click" Grid.ColumnSpan="2"/>
                     </Grid>
                     <Grid x:Name="makeSalesQuoteGrid" Margin="10,70,10,10" d:IsHidden="True">
                         <Button x:Name="transQuotationFormBack" Content="&lt; Back" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="74" Height="24" Click="transQuotationFormBack_Click"/>

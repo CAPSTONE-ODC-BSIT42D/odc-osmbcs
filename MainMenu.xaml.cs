@@ -927,6 +927,7 @@ namespace prototype2
             custCityTb.Clear();
             descriptionTb1.Clear();
             custAddressTb.Clear();
+            custAddInfoTb.Clear();
             custProvinceCb.SelectedValue = -1;
         }
 
@@ -1011,7 +1012,6 @@ namespace prototype2
                     }
                 }
             }
-
         }
 
         private void saveEmpPosBtn_Click(object sender, RoutedEventArgs e)
@@ -1087,6 +1087,7 @@ namespace prototype2
             }
             dbCon.Close();
         }
+
 
         //CONTRACTOR PART
         private void addContJobBtn_Click(object sender, RoutedEventArgs e)
@@ -2259,8 +2260,6 @@ namespace prototype2
                                 cmd.Parameters["@tableID"].Direction = ParameterDirection.Input;
                                 cmd.ExecuteNonQuery();
                             }
-
-
                             if (!isEdit)
                             {
 
@@ -2284,8 +2283,7 @@ namespace prototype2
             }
         }
         private void clearCompanyDetailsGrid()
-        {
-            
+        {         
             MainVM.CustContacts.Clear();
             MainVM.RepContacts.Clear();
             MainVM.CustRepresentatives.Clear();
@@ -2298,6 +2296,7 @@ namespace prototype2
             MainVM.EmailAddress = "";
             MainVM.PhoneNumber = "";
             MainVM.MobileNumber = "";
+            MainVM.AdditionalInfo = "";
             Validation.ClearInvalid((custCompanyNameTb).GetBindingExpression(TextBox.TextProperty));
             Validation.ClearInvalid((custAddressTb).GetBindingExpression(TextBox.TextProperty));
             Validation.ClearInvalid((custCityTb).GetBindingExpression(TextBox.TextProperty));
@@ -2445,7 +2444,20 @@ namespace prototype2
             Validation.ClearInvalid((contactDetailsMobileTb1).GetBindingExpression(TextBox.TextProperty));
         }
 
-        
+
+        public void clearEmployeeTextBoxes()
+        {
+            empAddressTb.Clear();
+            empCityTb.Clear();
+            empFirstNameTb.Clear();
+            empLastNameTb.Clear();
+            empMiddleInitialTb.Clear();
+            empUserNameTb.Clear();
+            empPasswordTb.Clear();
+            empProvinceCb.SelectedValue = -1;
+            empPostionCb.SelectedValue = -1;
+        }
+
 
         private void validateEmployeeTextBoxes()
         {
@@ -2639,7 +2651,7 @@ namespace prototype2
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    //MessageBox.Show(ex.Message);
                 }
 
             }
@@ -2886,12 +2898,14 @@ namespace prototype2
             else if (result == MessageBoxResult.Cancel)
             {
                 clearEmployeeDetailsGrid();
+                clearEmployeeTextBoxes();
             }
         }
 
         private void cancelEmpBtn_Click(object sender, RoutedEventArgs e)
         {
             clearEmployeeDetailsGrid();
+            clearEmployeeTextBoxes();
         }
 
         
