@@ -251,7 +251,6 @@ namespace prototype2
             if (MainMenu.MainVM.RepContacts.Count == 0 || String.IsNullOrWhiteSpace(firstNameTb.Text) || String.IsNullOrWhiteSpace(lastNameTb.Text))
             {
                 saveBtn.IsEnabled = false;
-
             }
             else
             {
@@ -270,7 +269,7 @@ namespace prototype2
         {
             cancelBtnClicked = true;
             this.Close();
-            
+            MainMenu.MainVM.CustRepresentatives.Remove(MainMenu.MainVM.SelectedRepresentative);          
         }
 
         private void editRepContBtn_Click(object sender, RoutedEventArgs e)
@@ -327,8 +326,7 @@ namespace prototype2
                     MainMenu.MainVM.SelectedRepContact.ContactTypeID = contactTypeCb.SelectedIndex.ToString();
                     clearContactsBoxes();
                     cancelCustContactBtn.Visibility = Visibility.Hidden;
-                    saveCustContactBtn.Visibility = Visibility.Hidden;
-                    
+                    saveCustContactBtn.Visibility = Visibility.Hidden;                   
                 }
                 else
                 {
