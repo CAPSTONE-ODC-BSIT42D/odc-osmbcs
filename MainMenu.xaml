@@ -634,6 +634,7 @@
                                 <xctk:IntegerUpDown Grid.Column="1" HorizontalAlignment="Left" Margin="187,695,0,0" VerticalAlignment="Top" Width="86"/>
                                 <Label x:Name="label32_Copy" Content="Markup Price (Percent):" Grid.Column="1" HorizontalAlignment="Left" Margin="0,693,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="label32_Copy1" Content="Additional Fees:" Grid.Column="1" HorizontalAlignment="Left" Margin="0,729,0,0" VerticalAlignment="Top"/>
+                                <Button x:Name="additionalFeesBtn" Content="View Additional Fees" Grid.Column="1" HorizontalAlignment="Left" Margin="142,732,0,0" VerticalAlignment="Top" Width="170" FontStyle="Normal" FontWeight="Normal" FontSize="14" Height="28"/>
                             </Grid>
                         </GroupBox>
                         <Button x:Name="transRequestNext" Content="Next &gt;" HorizontalAlignment="Right" Margin="0,0,14,8" VerticalAlignment="Bottom" Width="74" Height="24" Click="transRequestNext_Click" Grid.ColumnSpan="2"/>
