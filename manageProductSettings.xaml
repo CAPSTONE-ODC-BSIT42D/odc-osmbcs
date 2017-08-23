@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:prototype2"
         mc:Ignorable="d"
-        Title="manageProductSettings" Height="291.758" Width="500" ResizeMode="CanMinimize" Loaded="Window_Loaded">
+        Title="manageProductSettings" Height="291.758" Width="515.143" ResizeMode="CanMinimize" Loaded="Window_Loaded">
     <Grid>
         <Label x:Name="label17_Copy" Content="Inventory Products Category" HorizontalAlignment="Left" Height="32" Margin="10,10,0,0" VerticalAlignment="Top" Width="207" FontWeight="Bold" FontStyle="Italic" FontSize="14"/>
         <Border BorderBrush="Black" BorderThickness="1" Height="190" Margin="10,48,10,0" VerticalAlignment="Top">
             <Grid Margin="0,0,0,-18">
                 <ListBox x:Name="invProductsCategoryLb" HorizontalAlignment="Left" Height="127" Margin="16,53,0,0" VerticalAlignment="Top" Width="366" FontSize="13" />
-                <Button x:Name="deleteCategoryBtn" Content="Delete" HorizontalAlignment="Left" Margin="387,56,0,0" VerticalAlignment="Top" Width="75" Click="deleteCategoryBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Height="24" Background="#FFEC1717" BorderBrush="#FFBB0000" Foreground="#FFF9F5F5"/>
-                <Button x:Name="addCategoryBtn" Content="Add" HorizontalAlignment="Left" Margin="387,9,0,0" VerticalAlignment="Top" Width="75" Click="addCategoryBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Height="24" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>
+                <Button x:Name="deleteCategoryBtn" Content="Delete" HorizontalAlignment="Left" Margin="403,56,0,0" VerticalAlignment="Top" Width="75" Click="deleteCategoryBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Height="24" Background="#FFEC1717" BorderBrush="#FFBB0000" Foreground="#FFF9F5F5"/>
+                <Button x:Name="addCategoryBtn" Content="Add" HorizontalAlignment="Left" Margin="403,9,0,0" VerticalAlignment="Top" Width="75" Click="addCategoryBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Height="24" Background="#FF194E84" BorderBrush="#FF0B3D70" Foreground="#FFFFF9F9"/>
                 <TextBox x:Name="invCategoryTb" HorizontalAlignment="Left" Height="23" Margin="120,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" FontSize="13"/>
                 <Label x:Name="label19" Content="Category Name:" HorizontalAlignment="Left" Margin="12,6,0,0" VerticalAlignment="Top" FontSize="13"/>
             </Grid>

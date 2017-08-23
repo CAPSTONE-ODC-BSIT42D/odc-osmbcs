@@ -64,7 +64,7 @@
                     </Binding>
                 </TextBox>
                 <Label x:Name="label1_Copy9" Content="* First Name" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Normal" Margin="34,39,0,0"/>
-                <Label x:Name="label1_Copy10" Content="Middle Initial" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Normal" Margin="193,39,0,0"/>
+                <Label x:Name="label1_Copy10" Content="Middle Initial" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Normal" Margin="198,39,0,0"/>
                 <Label x:Name="label1_Copy11" Content="* Last Name" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Normal" Margin="315,38,0,0" RenderTransformOrigin="0.341,0.483"/>
                 <Label x:Name="label1_Copy1" Content="Contact Details" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="127" Margin="12,102,0,0" FontWeight="Bold"/>
                 <ComboBox x:Name="contactTypeCb" Margin="36,139,0,0" VerticalAlignment="Top" Height="25" Width="130" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" SelectionChanged="contactTypeCb_SelectionChanged" VerticalContentAlignment="Center" FontWeight="Normal" FontSize="12" SelectedValuePath="Content">
@@ -94,7 +94,7 @@
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox>
-                <Button x:Name="addNewCustContactBtn" Content="Add" HorizontalAlignment="Left" Margin="413,140,0,0" VerticalAlignment="Top" Width="75" FontWeight="Normal" Height="25" Click="addNewCustContactBtn_Click" Background="#FF03BD03" BorderBrush="#FF019C01" Foreground="#FFF7F4F4" FontFamily="Segoe UI Semibold" FontSize="14"/>
+                <Button x:Name="addNewCustContactBtn" Content="Add" HorizontalAlignment="Left" Margin="422,140,0,0" VerticalAlignment="Top" Width="86" FontWeight="Normal" Height="26" Click="addNewCustContactBtn_Click" Background="#FF194E84" BorderBrush="#FF0B3D70" Foreground="#FFF7F4F4" FontFamily="Segoe UI Semibold" FontSize="14"/>
                 <Button x:Name="saveCustContactBtn" Content="save" HorizontalAlignment="Left" Margin="414,129,0,0" VerticalAlignment="Top" Width="66" FontWeight="Normal" Height="23" Click="saveCustContactBtn_Click" IsEnabled="False" Visibility="Hidden"/>
                 <Button x:Name="cancelCustContactBtn" Content="cancel" HorizontalAlignment="Left" Margin="485,129,0,0" VerticalAlignment="Top" Width="66" FontWeight="Normal" Height="23" Click="cancelCustContactBtn_Click" IsEnabled="True" Visibility="Hidden"/>
                 <DataGrid x:Name="repContactsDg" HorizontalAlignment="Left" Height="148" Margin="35,189,0,0" VerticalAlignment="Top" Width="547" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedRepContact}" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" SelectionChanged="repContactsDg_SelectionChanged" ItemsSource="{Binding RepContacts}">
@@ -120,7 +120,7 @@
                 </DataGrid>
             </Grid>
         </GroupBox>
-        <Button x:Name="cancelBtn" Content="Cancel" Margin="528,414,22,11" Click="cancelBtn_Click" Width="75" Height="27" FontFamily="Segoe UI Semibold" FontSize="14" Background="#FFFDCA1C" BorderBrush="#FFE4B104"/>
-        <Button x:Name="saveBtn" Content="Save" Margin="437,414,113,11" Click="saveBtn_Click" Width="75" Height="27" Background="#FF3357F9" BorderBrush="#FF0B2ED1" Foreground="#FFF9F9F9" FontFamily="Segoe UI Semibold" FontSize="14" IsEnabled="False"/>
+        <Button x:Name="cancelBtn" Content="Cancel" Margin="520,414,20,12" Click="cancelBtn_Click" Width="85" Height="26" FontFamily="Segoe UI Semibold" FontSize="14" Background="#FFC50919" BorderBrush="#FFA50311" Foreground="#FFFFFCFC"/>
+        <Button x:Name="saveBtn" Content="Save" Margin="413,414,127,12" Click="saveBtn_Click" Width="85" Height="26" Background="#FF194E84" BorderBrush="#FF0B3D70" Foreground="#FFF9F9F9" FontFamily="Segoe UI Semibold" FontSize="14" IsEnabled="False"/>
     </Grid>
 </Window>
