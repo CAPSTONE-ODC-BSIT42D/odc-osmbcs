@@ -531,7 +531,7 @@
                 </Grid>
             </Grid>
             <Grid x:Name="transactionGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True">
-                <Grid x:Name="transactionQuotationsGrid">
+                <Grid x:Name="transactionQuotationsGrid" d:IsHidden="True">
                     <Label x:Name="transQuotationHeader" Content="Transaction - Quotations" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" Margin="10,0" d:IsHidden="True"/>
                     <Grid x:Name="quotationsGridHome" Margin="10,70,10,10" d:IsHidden="True">
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" d:IsHidden="True">
@@ -955,14 +955,14 @@
                                 <DataGridTemplateColumn x:Name="columnEditBtnEmp" Width="100" CanUserResize="False" >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button x:Name="btnEditEmp" Click="btnEditEmp_Click" Content="Edit" />
+                                            <Button x:Name="btnEditEmp" Click="btnEditEmp_Click" Content="Edit" Foreground="Snow" Background="#FF194E84" BorderBrush="#FF0B3D70" Width="70" Height="24" FontFamily="Segoe UI Semibold" FontSize="13" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                                 <DataGridTemplateColumn x:Name="columnDelBtnEmp" Width="100"  CanUserResize="False" >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button x:Name="btnDeleteEmp" Click="btnDeleteEmp_Click" Content="Delete" />
+                                            <Button x:Name="btnDeleteEmp" Click="btnDeleteEmp_Click" Content="Delete" Foreground="White" Background="#FFC50919" BorderBrush="#FFA50311" Width="70" Height="24" FontFamily="Segoe UI Semibold" FontSize="13" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -971,15 +971,15 @@
                     </Grid>
                 </Grid>
                 <Grid x:Name="manageSupplierGrid" IsVisibleChanged="manageSupplierGrid_IsVisibleChanged" d:IsHidden="True">
-                    <Label x:Name="label7_Copy5" Content="Manage - Supplier" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
-                    <Grid x:Name="manageSupplierHome" Margin="10,70,10,10">
-                        <Grid Margin="10,1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
-                            <Label x:Name="label15" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-                            <TextBox x:Name="manageSupplierSearchTb" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317" TextChanged="manageSupplierSearchTb_TextChanged"/>
-                            <Button x:Name="manageSupplierSearchBtn" Content="Search" HorizontalAlignment="Left" Margin="404,3,-8,0" VerticalAlignment="Top" Width="85" Height="26" Click="manageSupplierSearchBtn_Click" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="14"/>
+                    <Label x:Name="label7_Copy5" Content="Manage - Supplier" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" d:IsHidden="True"/>
+                    <Grid x:Name="manageSupplierHome" Margin="10,70,10,10" d:IsHidden="True">
+                        <Grid Margin="10,1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" d:IsHidden="True">
+                            <Label x:Name="label15" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" d:IsHidden="True"/>
+                            <TextBox x:Name="manageSupplierSearchTb" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317" TextChanged="manageSupplierSearchTb_TextChanged" d:IsHidden="True"/>
+                            <Button x:Name="manageSupplierSearchBtn" Content="Search" HorizontalAlignment="Left" Margin="404,3,-8,0" VerticalAlignment="Top" Width="85" Height="26" Click="manageSupplierSearchBtn_Click" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="14" d:IsHidden="True"/>
                         </Grid>
-                        <Button x:Name="manageSupplierAddbtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,4,10,0" VerticalAlignment="Top" Width="85" Click="manageSupplierAddbtn_Click" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="14"/>
-                        <DataGrid x:Name="manageSupplierDataGrid" Margin="10,41,10,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="manageSupplierDataGrid_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" ItemsSource="{Binding Suppliers}" SelectedItem="{Binding SelectedSupplier}">
+                        <Button x:Name="manageSupplierAddbtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,4,10,0" VerticalAlignment="Top" Width="85" Click="manageSupplierAddbtn_Click" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="14" d:IsHidden="True"/>
+                        <DataGrid x:Name="manageSupplierDataGrid" Margin="10,41,10,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="manageSupplierDataGrid_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" ItemsSource="{Binding Suppliers}" SelectedItem="{Binding SelectedSupplier}" d:IsHidden="True">
                             <DataGrid.Columns >
                                 <DataGridTextColumn Binding="{Binding CompanyID}" ClipboardContentBinding="{x:Null}" Width="30" CanUserResize="False" Visibility="Visible" />
                                 <DataGridTextColumn Binding="{Binding CompanyName}" ClipboardContentBinding="{x:Null}" Header="Company Name" Width="200" CanUserResize="False" />
@@ -1013,7 +1013,7 @@
                             <Button x:Name="button4" Content="Search" HorizontalAlignment="Left" Margin="402,3,-6,0" VerticalAlignment="Top" Width="85" Height="26" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70" FontFamily="Segoe UI Semibold" FontSize="13"/>
                         </Grid>
                         <Button x:Name="manageContractorAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,8,10,0" VerticalAlignment="Top" Width="85" Click="manageContractorAddBtn_Click" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70" FontFamily="Segoe UI Semibold" FontSize="13"/>
-                        <DataGrid x:Name="manageContractorDataGrid" Margin="10,41,10,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="manageContractorDataGrid_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" IsVisibleChanged="manageEmployeeDataGrid_IsVisibleChanged" RowHeight="30" ItemsSource="{Binding Employees}" SelectedItem ="{Binding SelectedEmployee}">
+                        <DataGrid x:Name="manageContractorDataGrid" Margin="20,41,0,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="manageContractorDataGrid_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" IsVisibleChanged="manageEmployeeDataGrid_IsVisibleChanged" RowHeight="30" ItemsSource="{Binding Employees}" SelectedItem ="{Binding SelectedEmployee}">
                             <DataGrid.Columns >
                                 <DataGridTextColumn Binding="{Binding EmpID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible" />
                                 <DataGridTextColumn Binding="{Binding EmpFName}" ClipboardContentBinding="{x:Null}" Header="First Name" Width="75" CanUserResize="False" Visibility="Visible" />
@@ -1024,14 +1024,14 @@
                                 <DataGridTemplateColumn x:Name="columnEditBtnCont" Width="100"  CanUserResize="False" >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button x:Name="btnEditEmp" Click="btnEditCont_Click" Content="Edit"/>
+                                            <Button x:Name="btnEditEmp" Click="btnEditCont_Click" Content="Edit" Background="#FF194E84" Foreground="White" BorderBrush="#FF0B3D70"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                                 <DataGridTemplateColumn x:Name="columnDelBtnCont" Width="100"  CanUserResize="False" >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button x:Name="btnDeleteEmp" Click="btnDeleteCont_Click" Content="Delete" />
+                                            <Button x:Name="btnDeleteEmp" Click="btnDeleteCont_Click" Content="Delete" Foreground="White" BorderBrush="#FFA50311" Background="#FFC50919" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -1042,7 +1042,7 @@
                         <Label x:Name="label7_Copy9" Content="Manage - Contractor" Margin="0,0,307,0" FontSize="20" FontWeight="Bold" Background="{x:Null}" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageSettingsGrid">
+                <Grid x:Name="manageSettingsGrid" d:IsHidden="True">
                     <Label x:Name="label7_Copy6" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid Margin="10,70,10,10">
                         <TabControl x:Name="tabControl" Margin="24,26,29,10">
@@ -1201,7 +1201,7 @@
                         </TabControl>
                     </Grid>
                 </Grid>
-                <Grid x:Name="companyDetailsGrid">
+                <Grid x:Name="companyDetailsGrid" d:IsHidden="True">
                     <Label x:Name="companyDetailsHeader" Content="" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid Margin="10,70,10,10"/>
                     <Grid x:Name="customerDetailsGrid" Margin="10,70,10,10">
@@ -1302,37 +1302,37 @@
                                             <DataGridTemplateColumn x:Name="columnEditBtnCustCont" Width="100"  CanUserResize="False" >
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
-                                                        <Button x:Name="btnEditCustCont" Content="Edit" Click="btnEditCustCont_Click"/>
+                                                        <Button x:Name="btnEditCustCont" Content="Edit" Click="btnEditCustCont_Click" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70" Width="70" Height="24"/>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
                                             </DataGridTemplateColumn>
                                             <DataGridTemplateColumn x:Name="columnDelBtnCustCont" Width="100"  CanUserResize="False" >
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
-                                                        <Button x:Name="btnDeleteCustCont" Click="btnDeleteCustCont_Click" Content="Delete" />
+                                                        <Button x:Name="btnDeleteCustCont" Click="btnDeleteCustCont_Click" Content="Delete" Background="#FF194E84" Foreground="White" BorderBrush="#FF0B3D70" Width="70" Height="24" />
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
                                             </DataGridTemplateColumn>
                                         </DataGrid.Columns>
                                     </DataGrid>
 
-                                    <Label x:Name="label1_Copy6" Content="Representative:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Width="129" FontStyle="Italic" Margin="14,636,0,0"/>
-                                    <Button x:Name="newRepresentativeBtn" Content="Add" HorizontalAlignment="Left" Margin="512,646,0,0" VerticalAlignment="Top" Width="85" FontWeight="Normal" Click="newRepresentativeBtn_Click" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Height="26" FontFamily="Segoe UI Semibold"/>
-                                    <DataGrid x:Name="customerRepresentativeDg" HorizontalAlignment="Left" Height="169" Margin="47,677,0,0" VerticalAlignment="Top" Width="555" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="customerRepresentativeDg_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" ItemsSource="{Binding CustRepresentatives}" SelectedItem="{Binding SelectedRepresentative}">
+                                    <Label x:Name="label1_Copy6" Content="Representative:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Width="129" FontStyle="Italic" Margin="14,642,0,0"/>
+                                    <Button x:Name="newRepresentativeBtn" Content="Add" HorizontalAlignment="Left" Margin="512,652,0,0" VerticalAlignment="Top" Width="85" FontWeight="Normal" Click="newRepresentativeBtn_Click" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Height="26" FontFamily="Segoe UI Semibold"/>
+                                    <DataGrid x:Name="customerRepresentativeDg" HorizontalAlignment="Left" Height="169" Margin="47,683,0,0" VerticalAlignment="Top" Width="555" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="customerRepresentativeDg_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" ItemsSource="{Binding CustRepresentatives}" SelectedItem="{Binding SelectedRepresentative}">
                                         <DataGrid.Columns >
                                             <DataGridTextColumn Binding="{Binding RepFirstName}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="First Name" />
                                             <DataGridTextColumn Binding="{Binding RepLastName}" ClipboardContentBinding="{x:Null}" Header="Last Name" Width="200" CanUserResize="False" />
                                             <DataGridTemplateColumn x:Name="columnEditBtnCustContRep" Width="100" CanUserResize="False" >
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
-                                                        <Button x:Name="editBtnCustContRep" Content="Edit" Click="editBtnCustContRep_Click"/>
+                                                        <Button x:Name="editBtnCustContRep" Content="Edit" Click="editBtnCustContRep_Click" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70" Width="70" Height="24"/>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
                                             </DataGridTemplateColumn>
                                             <DataGridTemplateColumn x:Name="columnDelBtnCustContRep" Width="100" CanUserResize="False" >
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
-                                                        <Button x:Name="delBtnCustContRep" Content="Delete" Click="delBtnCustContRep_Click" />
+                                                        <Button x:Name="delBtnCustContRep" Content="Delete" Click="delBtnCustContRep_Click" Foreground="White" Background="#FFC50919" BorderBrush="#FFA50311" Width="70" Height="24" />
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
                                             </DataGridTemplateColumn>
@@ -1341,21 +1341,21 @@
                                 </Grid>
                             </ScrollViewer>
                         </GroupBox>
-                        <Grid Margin="0,0,10,10" Height="20" VerticalAlignment="Bottom" Grid.ColumnSpan="2" HorizontalAlignment="Right">
+                        <Grid Margin="0,0,10,10" Height="20" VerticalAlignment="Bottom" Grid.ColumnSpan="2" HorizontalAlignment="Right" d:IsHidden="True">
                             <Button x:Name="saveCustBtn" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" Click="saveCustBtn_Click" IsEnabled="False" FontFamily="Segoe UI Semibold" Margin="-37,-9,0,0" Height="26" FontSize="14" Background="#FF194E84" Foreground="#FFF7F5F5" BorderBrush="#FF0B3D70"/>
                             <Button x:Name="cancelCustBtn" Content="Cancel" HorizontalAlignment="Left" Margin="82,-9,0,0" VerticalAlignment="Top" Width="85" Click="cancelCustBtn_Click" FontFamily="Segoe UI Semibold" Height="26" FontSize="14" Background="#FFC50919" BorderBrush="#FFA50311" Foreground="White"/>
                         </Grid>
                     </Grid>
                 </Grid>
                 <Grid x:Name="employeeDetailsGrid">
-                    <Label x:Name="employeeDetailsHeader" Content="" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" d:IsHidden="True"/>
-                    <Grid Margin="10,70,10,10" d:IsHidden="True"/>
+                    <Label x:Name="employeeDetailsHeader" Content="" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
+                    <Grid Margin="10,70,10,10"/>
                     <Grid x:Name="employeeDetails" Margin="10,70,10,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <GroupBox x:Name="groupBox_Copy" Header="Details" Margin="10,12,10,51" FontWeight="Bold" FontSize="14">
-                            <ScrollViewer Margin="0,0,0,2" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                            <ScrollViewer Margin="0,0,0,2" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" d:IsHidden="True">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="3*"/>
