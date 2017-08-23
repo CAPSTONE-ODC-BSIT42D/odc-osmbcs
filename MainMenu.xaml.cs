@@ -1714,7 +1714,7 @@ namespace prototype2
                 DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
                 fromDbTable = fromDb.Tables["t"];
-                //MainMenu.MainVM.EmpPosition.Clear();
+                MainMenu.MainVM.EmpPosition.Clear();
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
                     MainMenu.MainVM.EmpPosition.Add(new EmpPosition() { PositionID = dr["positionid"].ToString(), PositionName = dr["positionName"].ToString() });
@@ -1729,7 +1729,7 @@ namespace prototype2
                 DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
                 fromDbTable = fromDb.Tables["t"];
-                //MainMenu.MainVM.EmpPosition.Clear();
+                MainMenu.MainVM.ContJobTitle.Clear();
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
                     MainMenu.MainVM.ContJobTitle.Add(new ContJobName() { JobID = dr["jobID"].ToString(), JobName = dr["jobName"].ToString() });

@@ -530,7 +530,7 @@
                     <ListBox x:Name="listBox1" Margin="13,54,11,10"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="transactionGrid" Margin="10,0" Background="#FFECF0F1">
+            <Grid x:Name="transactionGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True">
                 <Grid x:Name="transactionQuotationsGrid">
                     <Label x:Name="transQuotationHeader" Content="Transaction - Quotations" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" Margin="10,0"/>
                     <Grid x:Name="quotationsGridHome" Margin="10,70,10,10" d:IsHidden="True">
@@ -855,7 +855,7 @@
                 </Grid>
             </Grid>
             <Grid x:Name="reportsGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True"/>
-            <Grid x:Name="manageGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True" >
+            <Grid x:Name="manageGrid" Margin="10,0" Background="#FFECF0F1" >
                 <Grid x:Name="manageCustomerGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged" d:IsHidden="True">
                     <Label x:Name="label7_Copy" Content="Manage - Customer" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid x:Name="manageCustomerHomeGrid" Margin="10,70,10,10">
@@ -1053,7 +1053,7 @@
                                         <TextBox x:Name="empPosNewTb" HorizontalAlignment="Left" Height="23" Margin="105,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" FontSize="13"/>
                                         <Button x:Name="addEmpPosBtn" Content="Add" HorizontalAlignment="Left" Margin="346,4,0,0" VerticalAlignment="Top" Width="75" Click="addEmpPosBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF03BD03" BorderBrush="#FF019C01" Foreground="#FFFDF7F7"/>
                                         <Button x:Name="saveEmpPosBtn" Content="save" HorizontalAlignment="Left" Margin="346,4,0,0" VerticalAlignment="Top" Width="90" Click="saveEmpPosBtn_Click" Visibility="Hidden"/>
-                                        <ListBox x:Name="employeePositionLb" HorizontalAlignment="Left" Height="127" Margin="4,46,0,0" VerticalAlignment="Top" Width="337" FontSize="13" ItemsSource="{Binding EmpPosition}" SelectedItem="{Binding SelectedEmpPosition}" DisplayMemberPath="{Binding PositionName}" />
+                                        <ListBox x:Name="employeePositionLb" HorizontalAlignment="Left" Height="127" Margin="4,46,0,0" VerticalAlignment="Top" Width="337" FontSize="13" ItemsSource="{Binding EmpPosition}" SelectedItem="{Binding SelectedEmpPosition}" DisplayMemberPath="PositionName" />
                                         <Button x:Name="deleteEmpPosBtn" Content="Delete" HorizontalAlignment="Left" Margin="346,81,0,0" VerticalAlignment="Top" Width="75" Click="deleteEmpPosBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FFEC1717" BorderBrush="#FFDC0606" Foreground="#FFF9F3F3"/>
                                         <Button x:Name="editEmpPosBtn" Content="Edit" HorizontalAlignment="Left" Margin="346,48,0,0" VerticalAlignment="Top" Width="75" Click="editEmpPosBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF7527B6" BorderBrush="#FF6D08C1" Foreground="#FFF9F9F9"/>
                                     </Grid>
@@ -1062,7 +1062,7 @@
                                         <TextBox x:Name="contNewJobTb" HorizontalAlignment="Left" Height="23" Margin="105,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" FontSize="13"/>
                                         <Button x:Name="addContJobBtn" Content="Add" HorizontalAlignment="Left" Margin="346,4,0,0" VerticalAlignment="Top" Width="75" Click="addContJobBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF03BD03" BorderBrush="#FF019C01" Foreground="#FFFDF7F7"/>
                                         <Button x:Name="saveContJobBtn" Content="save" HorizontalAlignment="Left" Margin="346,4,0,0" VerticalAlignment="Top" Width="90" Click="saveEmpPosBtn_Click" Visibility="Hidden"/>
-                                        <ListBox x:Name="contJobLb" HorizontalAlignment="Left" Height="127" Margin="4,46,0,0" VerticalAlignment="Top" Width="337" FontSize="13" ItemsSource="{Binding EmpPosition}" SelectedItem="{Binding SelectedEmpPosition}" DisplayMemberPath="{Binding PositionName}" />
+                                        <ListBox x:Name="contJobLb" HorizontalAlignment="Left" Height="127" Margin="4,46,0,0" VerticalAlignment="Top" Width="337" FontSize="13" ItemsSource="{Binding ContJobTitle}" SelectedItem="{Binding SelectedJobTitle}" DisplayMemberPath="JobName" />
                                         <Button x:Name="deleteContJobBtn" Content="Delete" HorizontalAlignment="Left" Margin="346,81,0,0" VerticalAlignment="Top" Width="75" Click="deleteContJobBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FFEC1717" BorderBrush="#FFDC0606" Foreground="#FFF9F3F3"/>
                                         <Button x:Name="editContJobBtn" Content="Edit" HorizontalAlignment="Left" Margin="346,48,0,0" VerticalAlignment="Top" Width="75" Click="editContJobBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF7527B6" BorderBrush="#FF6D08C1" Foreground="#FFF9F9F9"/>
                                     </Grid>
