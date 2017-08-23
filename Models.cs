@@ -430,6 +430,99 @@ namespace prototype2
         }
     }
 
+    public class Service : ViewModelEntity
+    {
+        public Service()
+        {
+
+        }
+
+        protected string serviceID;
+        protected string serviceName;
+        protected string serviceDesc;
+        protected decimal servicePrice;
+
+        public string ServiceID
+        {
+            get { return serviceID; }
+            set { SetProperty(ref serviceID, value); }
+        }
+
+        public string ServiceName
+        {
+            get { return serviceName; }
+            set { SetProperty(ref serviceName, value); }
+        }
+
+        public string ServiceDesc
+        {
+            get { return serviceDesc; }
+            set { SetProperty(ref serviceDesc, value); }
+        }
+
+        public decimal ServicePrice
+        {
+            get { return servicePrice; }
+            set { SetProperty(ref servicePrice, value); }
+        }
+    }
+
+    public class AddedService : ViewModelEntity
+    {
+        public AddedService()
+        {
+
+        }
+
+        protected string serviceID;
+        protected string serviceName;
+        protected decimal servicePrice;
+        protected string address;
+        protected string city;
+        protected string provinceName;
+        protected string provinceID;
+        public string ServiceID
+        {
+            get { return serviceID; }
+            set { SetProperty(ref serviceID, value); }
+        }
+
+        public string ServiceName
+        {
+            get { return serviceName; }
+            set { SetProperty(ref serviceName, value); }
+        }
+
+        public decimal ServicePrice
+        {
+            get { return servicePrice; }
+            set { SetProperty(ref servicePrice, value); }
+        }
+    }
+
+    public class AdditionalFee : ViewModelEntity
+    {
+        public AdditionalFee()
+        {
+
+        }
+
+        protected string feeName;
+        protected decimal feePrice;
+
+        public string FeeName
+        {
+            get { return feeName; }
+            set { SetProperty(ref feeName, value); }
+        }
+
+        public decimal FeePrice
+        {
+            get { return feePrice; }
+            set { SetProperty(ref feePrice, value); }
+        }
+    }
+
     public class RequestedItem : ViewModelEntity
     {
         public RequestedItem()
@@ -443,7 +536,7 @@ namespace prototype2
             set { SetProperty(ref _lineNo, value); }
         }
         private string _itemCode;
-        public string itemCode
+        public string itemName
         {
             get { return _itemCode; }
             set { SetProperty(ref _itemCode, value); }
@@ -454,12 +547,20 @@ namespace prototype2
             get { return _desc; }
             set { SetProperty(ref _desc, value); }
         }
-        private string _itemType;
-        public string itemType
+        private string _itemTypeName;
+        public string itemTypeName
+        {
+            get { return _itemTypeName; }
+            set { SetProperty(ref _itemTypeName, value); }
+        }
+
+        private int _itemType;
+        public int itemType
         {
             get { return _itemType; }
             set { SetProperty(ref _itemType, value); }
         }
+
         private int _qty;
         public int qty
         {

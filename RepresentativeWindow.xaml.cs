@@ -393,6 +393,10 @@ namespace prototype2
                     else if (result == MessageBoxResult.Cancel)
                         e.Cancel = true;
                 }
+                else
+                {
+
+                }
                 
             }
         }

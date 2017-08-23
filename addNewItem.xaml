@@ -6,64 +6,66 @@
         xmlns:local="clr-namespace:prototype2"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="prototype2.addNewItem"
         mc:Ignorable="d"
-        Title="addNewItem" Height="642.835" Width="726.01" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="addNewItem" Height="642.835" Width="856.51" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <GroupBox x:Name="groupBox" Header="New Item" HorizontalAlignment="Left" Margin="10,10,0,48" Width="700" FontSize="14">
-            <ScrollViewer HorizontalAlignment="Left" Width="690" Margin="0,0,-2,0">
+        <GroupBox x:Name="groupBox" Header="New Item" Margin="10,10,10,48" FontSize="14">
+            <ScrollViewer Margin="0,0,-2,0">
                 <Grid>
                     <Label x:Name="label" Content="Item Type:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic"/>
                     <RadioButton x:Name="productRbtn" Content="Product" HorizontalAlignment="Left" Margin="37,39,0,0" VerticalAlignment="Top" GroupName="itemType" Checked="productRbtn_Checked" Unchecked="productRbtn_Unchecked"/>
                     <RadioButton x:Name="serviceRbtn" Content="Service" HorizontalAlignment="Left" Margin="37,59,0,0" VerticalAlignment="Top" GroupName="itemType" Checked="serviceRbtn_Checked" Unchecked="serviceRbtn_Unchecked"/>
                     <Grid x:Name="forms" Margin="10,79,10,10">
-                        <Grid x:Name="service" Margin="0,0,13,90" d:IsHidden="True">
-                            <Label Content="Service Type:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic"/>
-                            <ComboBox x:Name="serviceTypeCb" HorizontalAlignment="Left" Margin="27,31,0,0" VerticalAlignment="Top" Width="120"/>
-                            <Label Content="Description:" VerticalAlignment="Top" Height="26" Margin="0,59,0,0" HorizontalAlignment="Left" Width="80" FontSize="12" FontFamily="Segoe UI" FontStyle="Italic" FontWeight="Bold" RenderTransformOrigin="0.5,0.5"/>
-                            <TextBox x:Name="serviceDescTb" Height="79" Margin="27,93,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" FontSize="12" FontFamily="Segoe UI" FontStyle="Normal" FontWeight="Normal"/>
-                            <Label Content="Location" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,186,0,0" FontWeight="Bold" FontStyle="Italic" Width="65"/>
-                            <Label Content="City" VerticalAlignment="Top" Visibility="Visible" Margin="27,230,552,0" FontWeight="Normal"/>
-                            <TextBox x:Name="cityTb" TextWrapping="Wrap" Margin="55,261,465,153"/>
-                            <Label Content="Province" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="213,230,0,0" FontWeight="Normal"/>
-                            <ComboBox x:Name="provinceCb" Margin="232,261,0,0" VerticalAlignment="Top" Height="23" IsEditable="True" ItemsSource ="{Binding Provinces}" DisplayMemberPath = "ProvinceName" SelectedValuePath = "ProvinceID" Width="157" HorizontalAlignment="Left" FontWeight="Normal">
-                                <ComboBox.SelectedItem>
-                                    <Binding Path="locProvinceId" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                            <local:TextBoxValidation TextBoxType="ComboBox"/>
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </ComboBox.SelectedItem>
-                            </ComboBox>
-                            <Label Content="Unit Price:" VerticalAlignment="Top" Height="26" Margin="0,306,0,0" HorizontalAlignment="Left" Width="90" FontSize="12" FontFamily="Segoe UI" FontStyle="Italic" FontWeight="Bold" RenderTransformOrigin="0.5,0.5"/>
-                            <xctk:DecimalUpDown x:Name="unitPrice" HorizontalAlignment="Left" Margin="27,347,0,0" VerticalAlignment="Top" Width="186"/>
-                            <Label Content="Total Amount:" VerticalAlignment="Top" Height="26" Margin="0,384,0,0" HorizontalAlignment="Left" Width="90" FontSize="12" FontFamily="Segoe UI" FontStyle="Italic" FontWeight="Bold" RenderTransformOrigin="0.5,0.5"/>
-                            <TextBox x:Name="totalPrice2" HorizontalAlignment="Left" Height="23" Margin="27,415,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" FontSize="12" FontFamily="Segoe UI" FontStyle="Normal" FontWeight="Normal" IsEnabled="False"/>
-                        </Grid>
-                        <Grid x:Name="product" Margin="0,0,0,54">
-                            <DataGrid x:Name="addGridProductListDg" Margin="10,41,10,28" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}" AutoGenerateColumns="False" IsReadOnly="True">
-                                <DataGrid.Columns >
-                                    <DataGridTemplateColumn Header="" Width="60">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTextColumn Binding="{Binding ItemName}" ClipboardContentBinding="{x:Null}" Width="150" CanUserResize="False" Visibility="Visible" Header="Product Name" />
-                                    <DataGridTextColumn Binding="{Binding ItemDesc}" ClipboardContentBinding="{x:Null}" Header="Product Description" Width="200" CanUserResize="False" />
-                                    <DataGridTemplateColumn Header="Quantity" Width="60">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <xctk:IntegerUpDown Value="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" DisplayDefaultValueOnEmptyText="True" Minimum="1" MouseWheelActiveOnFocus="True" DefaultValue="1" ParsingNumberStyle="Integer"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTextColumn Binding="{Binding CostPrice}" ClipboardContentBinding="{x:Null}" Header="Cost Price" Width="150" CanUserResize="False" />
-                                </DataGrid.Columns>
-                            </DataGrid>
-                            <Label x:Name="label8" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="14,7,0,0"/>
-                            <TextBox x:Name="searchTb" HorizontalAlignment="Left" Height="25" Margin="70,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317"/>
-                            <Button x:Name="searchBtn" Content="search" HorizontalAlignment="Left" Margin="410,10,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="searchBtn_Click"/>
-                        </Grid>
+                        <Border x:Name="service" Margin="0,0,0,90" BorderThickness="1" BorderBrush="Black" Panel.ZIndex="-1">
+                            <Grid>
+                                <Label Content="Service Type:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic"/>
+                                <ComboBox x:Name="serviceTypeCb" HorizontalAlignment="Left" Margin="27,31,0,0" VerticalAlignment="Top" Width="186" ItemsSource="{Binding ServicesList}" DisplayMemberPath="ServiceName"/>
+                                <Label Content="Description:" VerticalAlignment="Top" Height="26" Margin="0,59,0,0" HorizontalAlignment="Left" Width="80" FontSize="12" FontFamily="Segoe UI" FontStyle="Italic" FontWeight="Bold" RenderTransformOrigin="0.5,0.5"/>
+                                <TextBox x:Name="serviceDescTb" Height="79" Margin="27,93,21,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" FontSize="12" FontFamily="Segoe UI" FontStyle="Normal" FontWeight="Normal"/>
+                                <Label Content="Location" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,186,0,0" FontWeight="Bold" FontStyle="Italic" Width="65"/>
+                                <TextBox x:Name="addressTb" TextWrapping="Wrap" Margin="56,244,0,170" HorizontalAlignment="Left" Width="705"/>
+                                <Label Content="Address" VerticalAlignment="Top" Visibility="Visible" Margin="28,215,551,0" FontWeight="Normal"/>
+                                <Label Content="City" VerticalAlignment="Top" Visibility="Visible" Margin="28,285,551,0" FontWeight="Normal"/>
+                                <TextBox x:Name="cityTb" TextWrapping="Wrap" Margin="56,316,0,98" HorizontalAlignment="Left" Width="158"/>
+                                <Label Content="Province" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="214,285,0,0" FontWeight="Normal"/>
+                                <ComboBox x:Name="provinceCb" Margin="233,316,0,0" VerticalAlignment="Top" Height="21" IsEditable="True" ItemsSource ="{Binding Provinces}" DisplayMemberPath = "ProvinceName" SelectedValuePath = "ProvinceID" Width="157" HorizontalAlignment="Left" FontWeight="Normal">
+                                    <ComboBox.SelectedItem>
+                                        <Binding Path="locProvinceId" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:TextBoxValidation TextBoxType="ComboBox"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </ComboBox.SelectedItem>
+                                </ComboBox>
+                            </Grid>
+                        </Border>
+                        <Border x:Name="product" Margin="0,0,0,90" BorderBrush="Black" BorderThickness="1" Panel.ZIndex="-1" d:IsHidden="True" >
+                            <Grid d:IsHidden="True">
+                                <DataGrid x:Name="addGridProductListDg" Margin="10,41,10,28" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}" AutoGenerateColumns="False" IsReadOnly="True">
+                                    <DataGrid.Columns >
+                                        <DataGridTemplateColumn Header="" Width="60">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Binding="{Binding ItemName}" ClipboardContentBinding="{x:Null}" Width="150" CanUserResize="False" Visibility="Visible" Header="Product Name" />
+                                        <DataGridTextColumn Binding="{Binding ItemDesc}" ClipboardContentBinding="{x:Null}" Header="Product Description" Width="200" CanUserResize="False" />
+                                        <DataGridTemplateColumn Header="Quantity" Width="60">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <xctk:IntegerUpDown Value="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" DisplayDefaultValueOnEmptyText="True" Minimum="1" MouseWheelActiveOnFocus="True" DefaultValue="1" ParsingNumberStyle="Integer"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Binding="{Binding CostPrice}" ClipboardContentBinding="{x:Null}" Header="Cost Price" Width="150" CanUserResize="False" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Label x:Name="label8" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="14,7,0,0"/>
+                                <TextBox x:Name="searchTb" HorizontalAlignment="Left" Height="25" Margin="70,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317"/>
+                                <Button x:Name="searchBtn" Content="search" HorizontalAlignment="Left" Margin="410,10,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="searchBtn_Click"/>
+                            </Grid>
+                        </Border>
                     </Grid>
                 </Grid>
             </ScrollViewer>

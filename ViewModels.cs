@@ -209,6 +209,22 @@ namespace prototype2
             get { return selectedProduct; }
             set { SetProperty(ref selectedProduct, value); }
         }
+        //-----services
+        protected ObservableCollection<Service> servicesList = new ObservableCollection<Service>();
+
+        protected Service selectedservice = null;
+
+        public ObservableCollection<Service> ServicesList
+        {
+            get { return servicesList; }
+            set { servicesList = value; }
+        }
+
+        public Service SelectedService
+        {
+            get { return selectedservice; }
+            set { SetProperty(ref selectedservice, value); }
+        }
         //----- Requested Item
         protected ObservableCollection<RequestedItem> requestedItems = new ObservableCollection<RequestedItem>();
 
@@ -225,7 +241,22 @@ namespace prototype2
             get { return selectedRequestedItem; }
             set { SetProperty(ref selectedRequestedItem, value); }
         }
+        //-----Additional Fees
+        protected ObservableCollection<AdditionalFee> additionalFees = new ObservableCollection<AdditionalFee>();
 
+        protected AdditionalFee selectedAdditionalFee = null;
+
+        public ObservableCollection<AdditionalFee> AdditionalFees
+        {
+            get { return additionalFees; }
+            set { additionalFees = value; }
+        }
+
+        public AdditionalFee SelectedAdditionalFee
+        {
+            get { return selectedAdditionalFee; }
+            set { SetProperty(ref selectedAdditionalFee, value); }
+        }
         //----- Provinces
 
         protected ObservableCollection<Province> provinces = new ObservableCollection<Province>();
