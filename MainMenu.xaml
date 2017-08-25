@@ -134,9 +134,9 @@
 
         <Grid Background="#FF2C3E50" Height="70" VerticalAlignment="Top">
             <Grid Margin="10,0,959,0">
-                <Image x:Name="image" HorizontalAlignment="Left" Width="50" Source="Resources/user-16.png"/>
-                <Label x:Name="label" Content="Lewis Ken Kinaadman" HorizontalAlignment="Left" Margin="69,18,0,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
-                <Button x:Name="logoutBtn" HorizontalAlignment="Left" Margin="236,18,0,0" VerticalAlignment="Top" Width="29" Background="{x:Null}" BorderBrush="White" Height="30" ToolTip="Logout" Click="logoutBtn_Click">
+                <Image x:Name="image" HorizontalAlignment="Left" Width="50" Source="Resources/user-16.png" Margin="991,0,-734,0"/>
+                <Label x:Name="label" Content="Lewis Ken Kinaadman" HorizontalAlignment="Left" Margin="1058,18,-913,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
+                <Button x:Name="logoutBtn" HorizontalAlignment="Left" Margin="1220,19,-942,0" VerticalAlignment="Top" Width="29" Background="{x:Null}" BorderBrush="White" Height="30" ToolTip="Logout" Click="logoutBtn_Click">
                     <Canvas x:Name="Capa_1" Canvas.Left="0" Canvas.Top="0" Width="20" Height="18.9">
                         <Canvas.RenderTransform>
                             <TranslateTransform X="0" Y="0"/>
@@ -174,7 +174,7 @@
                 </Button>
             </Grid>
             <Grid HorizontalAlignment="Right" Width="877">
-                <Button x:Name="dashBoardBtn" Click="dashBoardBtn_Click" Style="{StaticResource mainButton}" MinWidth="125" Margin="210,0,0,0" HorizontalAlignment="Left" Width="126" Foreground="White">
+                <Button x:Name="dashBoardBtn" Click="dashBoardBtn_Click" Style="{StaticResource mainButton}" MinWidth="125" Margin="-388,1,0,-1" HorizontalAlignment="Left" Width="126" Foreground="White">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
                         <Canvas x:Name="Capa_2" Canvas.Left="0" Canvas.Top="0" Width="30" Height="30">
                             <Canvas.RenderTransform>
@@ -206,7 +206,7 @@
                         <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="70" Height="17"><Run Text="Dashboard"/><LineBreak/><Run/></TextBlock>
                     </StackPanel>
                 </Button>
-                <Button x:Name="salesBtn" Margin="341,0,0,0" Click="salesBtn_Click" Style="{StaticResource mainButton}" MinWidth="125" HorizontalAlignment="Left" Width="130" Foreground="White" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="5" ScrollViewer.CanContentScroll="True">
+                <Button x:Name="salesBtn" Margin="-262,0,0,0" Click="salesBtn_Click" Style="{StaticResource mainButton}" MinWidth="125" HorizontalAlignment="Left" Width="130" Foreground="White" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="5" ScrollViewer.CanContentScroll="True">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                         <Canvas x:Name="Capa_3" Width="29.875" Height="29.875" Canvas.Left="0" Canvas.Top="0">
                             <Canvas.RenderTransform>
@@ -332,7 +332,7 @@
                         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="70" Height="18" Text="Transaction"/>
                     </StackPanel>
                 </Button>
-                <Button x:Name="serviceBtn" Margin="476,0,0,0" Style="{StaticResource mainButton}" MinWidth="125" HorizontalAlignment="Left" Width="130" Foreground="White" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="5" ScrollViewer.CanContentScroll="True" Click="serviceBtn_Click">
+                <Button x:Name="serviceBtn" Margin="-127,0,0,0" Style="{StaticResource mainButton}" MinWidth="125" HorizontalAlignment="Left" Width="130" Foreground="White" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="5" ScrollViewer.CanContentScroll="True" Click="serviceBtn_Click">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                         <Canvas x:Name="Capa_1gh" Width="30" Height="30" Canvas.Left="0" Canvas.Top="0">
                             <Canvas.RenderTransform>
@@ -366,7 +366,7 @@
                         <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="47" Height="18" Text="Services"/>
                     </StackPanel>
                 </Button>
-                <Button x:Name="reportsBtn" Margin="611,0,0,0" Click="reportsBtn_Click" Style="{StaticResource mainButton}" MinWidth="125" HorizontalAlignment="Left" Width="125" Foreground="White">
+                <Button x:Name="reportsBtn" Margin="126,-1,0,1" Click="reportsBtn_Click" Style="{StaticResource mainButton}" MinWidth="125" HorizontalAlignment="Left" Width="125" Foreground="White">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
                         <Canvas x:Name="Capa_1d1" Width="27.646" Height="27.647" Canvas.Left="0" Canvas.Top="0">
                             <Canvas.RenderTransform>
@@ -403,7 +403,7 @@
                         <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Reports" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="50"/>
                     </StackPanel>
                 </Button>
-                <Button x:Name="manageBtn" Margin="741,0,0,0" Click="manageBtn_Click" Style="{StaticResource mainButton}" MinWidth="125" HorizontalAlignment="Left" Width="126" Foreground="White">
+                <Button x:Name="manageBtn" Margin="0,1,0,-1" Click="manageBtn_Click" Style="{StaticResource mainButton}" MinWidth="125" HorizontalAlignment="Left" Width="126" Foreground="White">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                         <Canvas x:Name="Capa_1g" Width="30" Height="30">
                             <Canvas.RenderTransform>
@@ -502,37 +502,50 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Grid Margin="10,62,10,10" Background="#99ABABAB" RenderTransformOrigin="0.5,0.5" d:LayoutOverrides="LeftMargin, RightMargin">
+                <Grid Margin="90,98,68,10" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
+                    <Grid.Background>
+                        <SolidColorBrush Color="#FFA4A4A4"/>
+                    </Grid.Background>
                     <Border BorderBrush="Black" BorderThickness="1" Height="1" Margin="10,48,5,0" VerticalAlignment="Top"/>
-                    <Label x:Name="label1" Content="Today's Appointment" Height="33" Margin="19,10,242,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
-                    <Label x:Name="label2" Content="No appointment/s to show." Height="37" Margin="19,59,22,0" VerticalAlignment="Top"/>
-                    <Label x:Name="label1_Copy" Content="February 18, 2016" Height="26" Margin="302,10,5,0" VerticalAlignment="Top" FlowDirection="RightToLeft" FontWeight="Bold"/>
-                    <Label x:Name="label1_Copy1" Content="Upcoming appointment" Height="26" Margin="272,122,12,0" VerticalAlignment="Top" FlowDirection="RightToLeft" FontWeight="Bold"/>
-                    <ListBox x:Name="listBox" Margin="13,153,11,10"/>
-                </Grid>
-                <Grid Margin="10,62,10,167" Background="#99ABABAB" RenderTransformOrigin="0.5,0.5" Grid.Column="1" d:LayoutOverrides="LeftMargin, RightMargin">
-                    <Border BorderBrush="Black" BorderThickness="1" Height="1" Margin="10,48,10,0" VerticalAlignment="Top"/>
-                    <Label x:Name="label3" Content="Pending Balance" HorizontalAlignment="Left" Height="33" Margin="10,6,0,0" VerticalAlignment="Top" Width="175" FontSize="16" FontWeight="Bold"/>
-                    <Label x:Name="label4" Margin="19,59,10,10" HorizontalContentAlignment="Right" FontWeight="Bold" FontSize="16" VerticalContentAlignment="Stretch" Content="$ 90,000"/>
-                    <Label x:Name="label1_Copy2" Content="As of February 18, 2016" Height="26" Margin="357,10,3,0" VerticalAlignment="Top" FlowDirection="RightToLeft" FontWeight="Bold" HorizontalAlignment="Right"/>
-                </Grid>
-                <Grid Margin="10,0,10,10" Background="#99ABABAB" RenderTransformOrigin="0.5,0.5" Grid.Column="1" d:LayoutOverrides="LeftMargin, RightMargin" Height="144" VerticalAlignment="Bottom">
-                    <Border BorderBrush="Black" BorderThickness="1" Height="1" Margin="12,48,10,0" VerticalAlignment="Top"/>
-                    <Label x:Name="label5" Content="Profits made" HorizontalAlignment="Left" Height="33" Margin="19,10,0,0" VerticalAlignment="Top" Width="175" FontSize="16" FontWeight="Bold"/>
-                    <Label x:Name="label6" Content="$ 50,000" Margin="19,59,10,10" HorizontalContentAlignment="Right" FontWeight="Bold" VerticalContentAlignment="Stretch" TextOptions.TextFormattingMode="Ideal" TextOptions.TextHintingMode="Auto" FontSize="16" UseLayoutRounding="False"/>
-                    <Label x:Name="label1_Copy3" Content="As of February 18, 2016" HorizontalAlignment="Right" Height="26" Margin="357,10,0,0" VerticalAlignment="Top" Width="146" FlowDirection="RightToLeft" FontWeight="Bold"/>
+                    <Label x:Name="label1" Content="Today's Appointment" Height="33" Margin="19,10,242,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Foreground="Black"/>
+                    <Label x:Name="label2" Content="No appointment/s to show." Height="37" Margin="19,59,22,0" VerticalAlignment="Top" Foreground="Black" FontSize="14"/>
+                    <Label x:Name="label1_Copy" Content="February 18, 2016" Height="26" Margin="302,10,5,0" VerticalAlignment="Top" FlowDirection="RightToLeft" FontWeight="Bold" Foreground="Black" FontSize="13"/>
+                    <Label x:Name="label1_Copy1" Content="Upcoming appointment" Height="52" Margin="272,95,12,0" VerticalAlignment="Top" FlowDirection="RightToLeft" FontWeight="Bold" Foreground="Black" FontSize="14"/>
+                    <ListBox x:Name="listBox" Margin="13,131,11,10"/>
                 </Grid>
                 <Label x:Name="label7" Content="Dashboard" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Grid.ColumnSpan="2" Height="57" VerticalAlignment="Top" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
-                <Grid Margin="10" Background="#99ABABAB" RenderTransformOrigin="0.5,0.5" Grid.Column="1" d:LayoutOverrides="LeftMargin, RightMargin" Grid.Row="1">
-                    <Border BorderBrush="Black" BorderThickness="1" Height="1" Margin="10,48,5,0" VerticalAlignment="Top"/>
-                    <Label x:Name="label18" Content="Pending Sales Quote" Height="33" Margin="19,10,242,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
-                    <Label x:Name="label1_Copy5" Content="February 18, 2016" Height="26" Margin="302,10,5,0" VerticalAlignment="Top" FlowDirection="RightToLeft" FontWeight="Bold"/>
-                    <ListBox x:Name="listBox1" Margin="13,54,11,10"/>
-                </Grid>
+                <Button x:Name="btReceivables" HorizontalAlignment="Left" Margin="48,94,0,0" VerticalAlignment="Top" Width="229" Height="190" Foreground="White" Background="#FF1A3A5D" BorderBrush="#FF0F2D4B">
+                    <Grid Height="158" Width="216">
+                        <Label x:Name="LblReceivables" Content="25, 000" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="63" Width="210" FontSize="36" FontWeight="Bold" Foreground="White"/>
+                        <Label Content="RECEIVABLES" HorizontalAlignment="Left" Margin="8,122,0,-17" VerticalAlignment="Top" Width="183" Height="53" FontSize="25" FontWeight="Bold" Foreground="#FFFBFBFB"/>
+                        <Label Content="WEEKLY" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" Width="102" Foreground="White"/>
+                    </Grid>
+                </Button>
+                <Button x:Name="btPayables" HorizontalAlignment="Left" Margin="362,94,0,0" VerticalAlignment="Top" Width="229" Height="190" Background="#FF08AE4D" BorderBrush="#FF027431">
+                    <Grid Height="175" Width="215">
+                        <Label Content="10, 000" HorizontalAlignment="Left" Margin="-4,8,0,0" VerticalAlignment="Top" Height="63" Width="210" FontSize="36" FontWeight="Bold" Foreground="White"/>
+                        <Label Content="WEEKLY" HorizontalAlignment="Left" Margin="4,98,0,0" VerticalAlignment="Top" Width="93" Height="34" FontSize="18" FontWeight="Bold" Foreground="White"/>
+                        <Label Content="PAYABLES" HorizontalAlignment="Left" Margin="2,123,0,-17" VerticalAlignment="Top" Width="183" Height="53" FontWeight="Bold" FontSize="25" Foreground="White"/>
+                    </Grid>
+                </Button>
+                <Button x:Name="btPendingSQ" HorizontalAlignment="Left" Margin="48,357,0,0" VerticalAlignment="Top" Width="229" Height="190" Background="#FF2A80B9" BorderBrush="#FF0C65A0" Grid.RowSpan="2">
+                    <Grid Height="162" Width="205">
+                        <Label Content="25" HorizontalAlignment="Left" Margin="0,12,-5,0" VerticalAlignment="Top" Foreground="White" Width="210" Height="63" FontWeight="Bold" FontSize="36"/>
+                        <Label Content="PENDING" HorizontalAlignment="Left" Margin="2,85,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" Width="113"/>
+                        <Label Content="SALES QUOTE" HorizontalAlignment="Left" Margin="2,116,0,0" VerticalAlignment="Top" Foreground="White" FontSize="25" Width="185" FontWeight="Bold"/>
+                    </Grid>
+                </Button>
+                <Button HorizontalAlignment="Left" Margin="362,357,0,0" VerticalAlignment="Top" Width="229" Height="190" Background="#FFBF3A2B" BorderBrush="#FFA21717" Grid.RowSpan="2">
+                    <Grid Height="151" Width="210">
+                        <Label Content="52" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Height="63" FontWeight="Bold" FontSize="36" Foreground="#FFFBFBFB" Margin="0,4,0,0"/>
+                        <Label Content="SERVICES" HorizontalAlignment="Left" Margin="-2,111,0,-6" VerticalAlignment="Top" FontWeight="Bold" FontSize="25" Width="138" Height="46" Foreground="#FFFBFBFB"/>
+                        <Label Content="PENDING" HorizontalAlignment="Left" Margin="0,81,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Foreground="#FFFBF6F6"/>
+                    </Grid>
+                </Button>
             </Grid>
-            <Grid x:Name="transactionGrid" Margin="10,0" Background="#FFECF0F1">
-                <Grid x:Name="transactionQuotationsGrid">
-                    <Label x:Name="transQuotationHeader" Content="Transaction - Quotations" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" Margin="10,0"/>
+            <Grid x:Name="transactionGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True">
+                <Grid x:Name="transactionQuotationsGrid" d:IsHidden="True">
+                    <Label x:Name="transQuotationHeader" Content="Transaction - Quotations" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" Margin="10,0" d:IsHidden="True"/>
                     <Grid x:Name="quotationsGridHome" Margin="10,70,10,10" d:IsHidden="True">
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" d:IsHidden="True">
                             <Label x:Name="label8" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
