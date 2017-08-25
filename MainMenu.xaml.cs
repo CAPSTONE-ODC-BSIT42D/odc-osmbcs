@@ -1418,58 +1418,67 @@ namespace prototype2
             {
                 Validation.ClearInvalid(productSupplierCbBindingExpressionBase);
             }
-
-            var dbCon = DBConnection.Instance();
-            if (Validation.GetHasError(productNameTb) == false || Validation.GetHasError(costPriceTb) == false || Validation.GetHasError(productCategoryCb) == false || Validation.GetHasError(productSupplierCb) == false)
+            string strProdName = productNameTb.Text;
+            if (!Regex.IsMatch(strProdName, @"[a-zA-Z -]"))
             {
-
-                using (MySqlConnection conn = dbCon.Connection)
-                {
-                    conn.Open();
-                    MySqlCommand cmd = null;
-                    if (!isEdit)
-                    {
-                        cmd = new MySqlCommand("INSERT_ITEM", conn);
-                        cmd.CommandType = CommandType.StoredProcedure;
-                    }
-                    else
-                    {
-                        cmd = new MySqlCommand("UPDATE_ITEM", conn);
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@itemNo", MainVM.SelectedProduct.ItemNo);
-                        cmd.Parameters["@itemNo"].Direction = ParameterDirection.Input;
-                        isEdit = false;
-                        addSaveProductBtn.Content = "+ add";
-                    }
-
-                    //INSERT NEW Product TO DB;
-
-                    cmd.Parameters.AddWithValue("@itemName", productNameTb.Text);
-                    cmd.Parameters["@itemName"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@itemDesc", productDescTb.Text);
-                    cmd.Parameters["@itemDesc"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@costPrice", costPriceTb.Value);
-                    cmd.Parameters["@costPrice"].Direction = ParameterDirection.Input;
-
-                    //cmd.Parameters.AddWithValue("@salesPrice", salesPriceTb.Value);
-                    //cmd.Parameters["@salesPrice"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@typeID", productCategoryCb.SelectedValue);
-                    cmd.Parameters["@typeID"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@supplierID", productSupplierCb.SelectedValue);
-                    cmd.Parameters["@supplierID"].Direction = ParameterDirection.Input;
-
-                    cmd.ExecuteNonQuery();
-
-                    setListBoxControls();
-                    
-                    clearPrdListFields();
-                }
-
+                MessageBox.Show("Special characters are not accepted");
             }
+            else
+            {
+                var dbCon = DBConnection.Instance();
+                if (Validation.GetHasError(productNameTb) == false || Validation.GetHasError(costPriceTb) == false || Validation.GetHasError(productCategoryCb) == false || Validation.GetHasError(productSupplierCb) == false)
+                {
+
+                    using (MySqlConnection conn = dbCon.Connection)
+                    {
+
+                        conn.Open();
+                        MySqlCommand cmd = null;
+                        if (!isEdit)
+                        {
+                            cmd = new MySqlCommand("INSERT_ITEM", conn);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                        }
+                        else
+                        {
+                            cmd = new MySqlCommand("UPDATE_ITEM", conn);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@itemNo", MainVM.SelectedProduct.ItemNo);
+                            cmd.Parameters["@itemNo"].Direction = ParameterDirection.Input;
+                            isEdit = false;
+                            addSaveProductBtn.Content = "+ add";
+                        }
+
+                        //INSERT NEW Product TO DB;
+
+                        cmd.Parameters.AddWithValue("@itemName", productNameTb.Text);
+                        cmd.Parameters["@itemName"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@itemDesc", productDescTb.Text);
+                        cmd.Parameters["@itemDesc"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@costPrice", costPriceTb.Value);
+                        cmd.Parameters["@costPrice"].Direction = ParameterDirection.Input;
+
+                        //cmd.Parameters.AddWithValue("@salesPrice", salesPriceTb.Value);
+                        //cmd.Parameters["@salesPrice"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@typeID", productCategoryCb.SelectedValue);
+                        cmd.Parameters["@typeID"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@supplierID", productSupplierCb.SelectedValue);
+                        cmd.Parameters["@supplierID"].Direction = ParameterDirection.Input;
+
+                        cmd.ExecuteNonQuery();
+
+                        setListBoxControls();
+
+                        clearPrdListFields();
+                    }
+
+                }
+            }
+            
         }
 
         private void clearPrdListFields()
