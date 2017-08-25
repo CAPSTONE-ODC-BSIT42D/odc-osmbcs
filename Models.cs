@@ -348,6 +348,7 @@ namespace prototype2
         }
         protected int provinceID;
         protected string provinceName;
+        protected decimal provincePrice;
         public int ProvinceID
         {
             get { return provinceID; }
@@ -357,6 +358,11 @@ namespace prototype2
         {
             get { return provinceName; }
             set { SetProperty(ref provinceName, value); }
+        }
+        public decimal ProvincePrice
+        {
+            get { return provincePrice; }
+            set { SetProperty(ref provincePrice, value); }
         }
     }
 

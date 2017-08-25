@@ -7,7 +7,7 @@
         xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms" xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit" x:Class="prototype2.MainMenu"
         mc:Ignorable="d"
-        Title="MainMenu" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" Loaded="Window_Loaded" WindowState="Maximized" MinWidth="763" MinHeight="535" d:DesignWidth="1284" d:DesignHeight="1192.8">
+        Title="MainMenu" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" Loaded="Window_Loaded" WindowState="Maximized" MinWidth="763" MinHeight="535" d:DesignWidth="1254" d:DesignHeight="1192.8">
     <Window.Resources>
         <Style TargetType="{x:Type Button}" x:Key="mainButton">
             <Setter Property="Background" Value="#2C3E50"/>
@@ -152,11 +152,11 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid Background="#FF2C3E50" Height="70" VerticalAlignment="Top" HorizontalAlignment="Right" Width="1276">
-            <Grid Margin="10,0,959,0">
-                <Image x:Name="image" HorizontalAlignment="Left" Width="50" Source="Resources/user-16.png" Margin="991,0,-734,0"/>
-                <Label x:Name="label" Content="Lewis Ken Kinaadman" HorizontalAlignment="Left" Margin="1058,18,-913,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
-                <Button x:Name="logoutBtn" HorizontalAlignment="Left" Margin="1220,19,-942,0" VerticalAlignment="Top" Width="29" Background="{x:Null}" BorderBrush="White" Height="30" ToolTip="Logout" Click="logoutBtn_Click">
+        <Grid Background="#FF2C3E50" Height="70" VerticalAlignment="Top">
+            <Grid Margin="0,0,10,0" HorizontalAlignment="Right" Width="307">
+                <Image x:Name="image" HorizontalAlignment="Left" Width="50" Source="Resources/user-16.png"/>
+                <Label x:Name="label" Content="Lewis Ken Kinaadman" HorizontalAlignment="Left" Margin="67,18,0,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
+                <Button x:Name="logoutBtn" HorizontalAlignment="Left" Margin="229,19,0,0" VerticalAlignment="Top" Width="29" Background="{x:Null}" BorderBrush="White" Height="30" ToolTip="Logout" Click="logoutBtn_Click">
                     <Canvas x:Name="Capa_1" Canvas.Left="0" Canvas.Top="0" Width="20" Height="18.9">
                         <Canvas.RenderTransform>
                             <TranslateTransform X="0" Y="0"/>
@@ -193,8 +193,8 @@
                     </Canvas>
                 </Button>
             </Grid>
-            <Grid HorizontalAlignment="Right" Width="877">
-                <Button x:Name="dashBoardBtn" Click="dashBoardBtn_Click" Style="{StaticResource mainButton}" MinWidth="125" Margin="-388,1,0,-1" HorizontalAlignment="Left" Width="126" Foreground="White">
+            <Grid Margin="10,0,0,0" HorizontalAlignment="Left" Width="870">
+                <Button x:Name="dashBoardBtn" Click="dashBoardBtn_Click" Style="{StaticResource mainButton}" MinWidth="125" Margin="10,0,0,0" HorizontalAlignment="Left" Width="126" Foreground="White">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
                         <Canvas x:Name="Capa_2" Canvas.Left="0" Canvas.Top="0" Width="30" Height="30">
                             <Canvas.RenderTransform>
@@ -226,7 +226,7 @@
                         <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="70" Height="17"><Run Text="Dashboard"/><LineBreak/><Run/></TextBlock>
                     </StackPanel>
                 </Button>
-                <Button x:Name="salesBtn" Margin="-262,0,0,0" Click="salesBtn_Click" Style="{StaticResource mainButton}" MinWidth="125" HorizontalAlignment="Left" Width="130" Foreground="White" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="5" ScrollViewer.CanContentScroll="True">
+                <Button x:Name="salesBtn" Margin="136,-1,0,1" Click="salesBtn_Click" Style="{StaticResource mainButton}" MinWidth="125" HorizontalAlignment="Left" Width="130" Foreground="White" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="5" ScrollViewer.CanContentScroll="True">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                         <Canvas x:Name="Capa_3" Width="29.875" Height="29.875" Canvas.Left="0" Canvas.Top="0">
                             <Canvas.RenderTransform>
@@ -352,7 +352,7 @@
                         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="70" Height="18" Text="Transaction"/>
                     </StackPanel>
                 </Button>
-                <Button x:Name="serviceBtn" Margin="-127,0,0,0" Style="{StaticResource mainButton}" MinWidth="125" HorizontalAlignment="Left" Width="130" Foreground="White" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="5" ScrollViewer.CanContentScroll="True" Click="serviceBtn_Click">
+                <Button x:Name="serviceBtn" Margin="270,-1,0,1" Style="{StaticResource mainButton}" MinWidth="125" HorizontalAlignment="Left" Width="130" Foreground="White" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="5" ScrollViewer.CanContentScroll="True" Click="serviceBtn_Click">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                         <Canvas x:Name="Capa_1gh" Width="30" Height="30" Canvas.Left="0" Canvas.Top="0">
                             <Canvas.RenderTransform>
@@ -386,7 +386,7 @@
                         <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="47" Height="18" Text="Services"/>
                     </StackPanel>
                 </Button>
-                <Button x:Name="reportsBtn" Margin="126,-1,0,1" Click="reportsBtn_Click" Style="{StaticResource mainButton}" MinWidth="125" HorizontalAlignment="Left" Width="125" Foreground="White">
+                <Button x:Name="reportsBtn" Margin="524,-2,0,2" Click="reportsBtn_Click" Style="{StaticResource mainButton}" MinWidth="125" HorizontalAlignment="Left" Width="124" Foreground="White">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
                         <Canvas x:Name="Capa_1d1" Width="27.646" Height="27.647" Canvas.Left="0" Canvas.Top="0">
                             <Canvas.RenderTransform>
@@ -423,7 +423,7 @@
                         <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Reports" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="50"/>
                     </StackPanel>
                 </Button>
-                <Button x:Name="manageBtn" Margin="0,1,0,-1" Click="manageBtn_Click" Style="{StaticResource mainButton}" MinWidth="125" HorizontalAlignment="Left" Width="126" Foreground="White">
+                <Button x:Name="manageBtn" Margin="398,0,0,0" Click="manageBtn_Click" Style="{StaticResource mainButton}" MinWidth="125" HorizontalAlignment="Left" Width="126" Foreground="White">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                         <Canvas x:Name="Capa_1g" Width="30" Height="30">
                             <Canvas.RenderTransform>
@@ -501,14 +501,14 @@
             </Grid>
         </Grid>
         <Grid x:Name="containerGrid" Grid.Row="1" Background="#FF1695A3">
-            <Grid x:Name="manageSubMenugrid" HorizontalAlignment="Right" Width="175" Background="#FF395066" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Height="173" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden">
+            <Grid x:Name="manageSubMenugrid" HorizontalAlignment="Right" Width="174" Background="#FF395066" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Height="173" Panel.ZIndex="999999" VerticalAlignment="Top" Margin="0,0,728,0" Visibility="Hidden">
                 <Button x:Name="employeeManageMenuBtn" Content="Employees" Margin="0,1,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="175" Click="employeeManageMenuBtn_Click" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="customerManageMenuBtn" Content="Customers" Margin="0,36,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Foreground="White" Width="175" Click="customerManageMenuBtn_Click" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="supplierManageMenuBtn" Content="Suppliers" Margin="0,71,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="175" Click="supplierManageMenuBtn_Click" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="contractorManageMenuBtn" Content="Contractor" Margin="0,106,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="contractorManageMenuBtn_Click" Width="175" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="settingsManageMenuBtn" Content="Settings" Margin="0,141,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="settingsManageMenuBtn_Click" Width="175" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
             </Grid>
-            <Grid x:Name="saleSubMenuGrid" Width="175" Margin="0,0,369,0" Background="#FF395066" HorizontalAlignment="Right" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden">
+            <Grid x:Name="saleSubMenuGrid" Width="175" Margin="0,0,957,0" Background="#FF395066" HorizontalAlignment="Right" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden">
                 <Button x:Name="quotesSalesMenuBtn" Content="Quotations" Margin="0,75,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="quotesSalesMenuBtn_Click" Width="175" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1"/>
                 <Button x:Name="ordersSalesMenuBtn" Content="Orders" Margin="0,40,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="ordersSalesMenuBtn_Click" Width="175" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1"/>
                 <Button x:Name="invoiceSalesMenuBtn" Content="Invoices" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="invoiceSalesMenuBtn_Click" Width="175" Margin="0,5,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1"/>
@@ -522,7 +522,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Grid Margin="90,98,68,10" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
+                <Grid Margin="10,83,10,10" RenderTransformOrigin="0.5,0.5">
                     <Grid.Background>
                         <SolidColorBrush Color="#FFA4A4A4"/>
                     </Grid.Background>
@@ -534,28 +534,28 @@
                     <ListBox x:Name="listBox" Margin="13,131,11,10"/>
                 </Grid>
                 <Label x:Name="label7" Content="Dashboard" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Grid.ColumnSpan="2" Height="57" VerticalAlignment="Top" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
-                <Button x:Name="btReceivables" HorizontalAlignment="Left" Margin="58,83,0,0" VerticalAlignment="Top" Width="229" Height="190" Foreground="White" Background="#FF1A3A5D" BorderBrush="#FF0F2D4B" Grid.Column="1">
+                <Button x:Name="btReceivables" Margin="27,83,0,273" Foreground="White" Background="#FF1A3A5D" BorderBrush="#FF0F2D4B" Grid.Column="1" HorizontalAlignment="Left" Width="221">
                     <Grid Height="158" Width="216">
                         <Label x:Name="LblReceivables" Content="25, 000" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="63" Width="210" FontSize="36" FontWeight="Bold" Foreground="White"/>
                         <Label Content="RECEIVABLES" HorizontalAlignment="Left" Margin="8,122,0,-17" VerticalAlignment="Top" Width="183" Height="53" FontSize="25" FontWeight="Bold" Foreground="#FFFBFBFB"/>
                         <Label Content="WEEKLY" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" Width="102" Foreground="White"/>
                     </Grid>
                 </Button>
-                <Button x:Name="btPayables" HorizontalAlignment="Left" Margin="370,83,0,0" VerticalAlignment="Top" Width="229" Height="190" Background="#FF08AE4D" BorderBrush="#FF027431" Grid.Column="1">
+                <Button x:Name="btPayables" Margin="339,83,0,0" VerticalAlignment="Top" Height="190" Background="#FF08AE4D" BorderBrush="#FF027431" Grid.Column="1" HorizontalAlignment="Left" Width="223">
                     <Grid Height="175" Width="215">
                         <Label Content="10, 000" HorizontalAlignment="Left" Margin="-4,8,0,0" VerticalAlignment="Top" Height="63" Width="210" FontSize="36" FontWeight="Bold" Foreground="White"/>
                         <Label Content="WEEKLY" HorizontalAlignment="Left" Margin="4,98,0,0" VerticalAlignment="Top" Width="93" Height="34" FontSize="18" FontWeight="Bold" Foreground="White"/>
                         <Label Content="PAYABLES" HorizontalAlignment="Left" Margin="4,123,0,-1" VerticalAlignment="Top" Width="183" Height="53" FontWeight="Bold" FontSize="25" Foreground="White"/>
                     </Grid>
                 </Button>
-                <Button x:Name="btPendingSQ" HorizontalAlignment="Left" Margin="58,334,0,22" Width="229" Background="#FF2A80B9" BorderBrush="#FF0C65A0" Grid.Column="1">
+                <Button x:Name="btPendingSQ" Margin="27,334,0,22" Background="#FF2A80B9" BorderBrush="#FF0C65A0" Grid.Column="1" HorizontalAlignment="Left" Width="221">
                     <Grid Height="162" Width="205">
                         <Label Content="25" HorizontalAlignment="Left" Margin="0,12,-5,0" VerticalAlignment="Top" Foreground="White" Width="210" Height="63" FontWeight="Bold" FontSize="36"/>
                         <Label Content="PENDING" HorizontalAlignment="Left" Margin="2,85,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" Width="113"/>
                         <Label Content="SALES QUOTE" HorizontalAlignment="Left" Margin="2,116,0,0" VerticalAlignment="Top" Foreground="White" FontSize="25" Width="185" FontWeight="Bold"/>
                     </Grid>
                 </Button>
-                <Button Margin="370,336,0,20" Background="#FFBF3A2B" BorderBrush="#FFA21717" Grid.Column="1" HorizontalAlignment="Left" Width="231">
+                <Button Margin="339,336,0,20" Background="#FFBF3A2B" BorderBrush="#FFA21717" HorizontalAlignment="Left" Width="232" Grid.Column="1">
                     <Grid Height="151" Width="210">
                         <Label Content="52" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Height="63" FontWeight="Bold" FontSize="36" Foreground="#FFFBFBFB" Margin="0,4,0,0"/>
                         <Label Content="SERVICES" HorizontalAlignment="Left" Margin="-2,111,0,-6" VerticalAlignment="Top" FontWeight="Bold" FontSize="25" Width="138" Height="46" Foreground="#FFFBFBFB"/>

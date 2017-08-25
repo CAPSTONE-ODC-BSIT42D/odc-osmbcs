@@ -73,9 +73,14 @@ namespace prototype2
                         MainMenu.MainVM.RequestedItems.Add(new RequestedItem() { lineNo = (MainMenu.MainVM.RequestedItems.Count + 1).ToString(), itemName = prd.ItemName, desc = prd.ItemDesc, itemTypeName = "Product", itemType=0, qty = prd.Quantity, unitPrice = prd.CostPrice, totalAmount = prd.Quantity * prd.CostPrice,totalAmountMarkUp = prd.Quantity * prd.CostPrice });
                     }
                 }
+                this.Close();
             }
             else if ((bool)serviceRbtn.IsChecked)
             {
+                MainMenu.MainVM.SelectedService = MainMenu.MainVM.ServicesList.Where(x => x.ServiceID == serviceTypeCb.SelectedValue.ToString()).First();
+                MainMenu.MainVM.SelectedProvince = MainMenu.MainVM.Provinces.Where(x => x.ProvinceID == int.Parse(provinceCb.SelectedValue.ToString())).First();
+                MainMenu.MainVM.RequestedItems.Add(new RequestedItem() { lineNo = (MainMenu.MainVM.RequestedItems.Count + 1).ToString(), itemName = MainMenu.MainVM.SelectedService.ServiceName, desc = serviceDescTb.Text, itemTypeName = "Service", itemType = 1, qty = 1, unitPrice = MainMenu.MainVM.SelectedService.ServicePrice + MainMenu.MainVM.SelectedProvince.ProvincePrice, totalAmount = MainMenu.MainVM.SelectedService.ServicePrice + MainMenu.MainVM.SelectedProvince.ProvincePrice, totalAmountMarkUp = MainMenu.MainVM.SelectedService.ServicePrice + MainMenu.MainVM.SelectedProvince.ProvincePrice });
+                this.Close();
             }
             
         }
@@ -86,6 +91,15 @@ namespace prototype2
 
             var observable = new ObservableCollection<Item>(linqResults);
             addGridProductListDg.ItemsSource = observable;
+        }
+
+        private void provinceCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MainMenu.MainVM.SelectedProvince = MainMenu.MainVM.Provinces.Where(x => x.ProvinceID == int.Parse(provinceCb.SelectedValue.ToString())).First();
+            if (MainMenu.MainVM.SelectedProvince.ProvincePrice==0)
+            {
+                MessageBox.Show("This location has no price set. Please set it in Settings.");
+            }
         }
     }
 }

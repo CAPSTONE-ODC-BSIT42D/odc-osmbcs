@@ -52,7 +52,7 @@ namespace prototype2
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
-                string query = "SELECT * FROM provinces_t";
+                string query = "SELECT locProvinceID, locProvince FROM provinces_t";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
@@ -61,7 +61,25 @@ namespace prototype2
                 MainVM.Provinces.Clear();
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    MainVM.Provinces.Add(new Province() {  ProvinceID= (int)dr["locProvinceID"], ProvinceName = dr["locProvince"].ToString() });
+                    MainVM.Provinces.Add(new Province() {  ProvinceID= (int)dr["locProvinceID"], ProvinceName = dr["locProvince"].ToString(), ProvincePrice = (decimal)dr["locationPrice"] });
+                }
+                dbCon.Close();
+            }
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT locationProvinceID, locationaPrice FROM location_details_t";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    foreach (Province prov in MainVM.Provinces)
+                    {
+                        if(prov.ProvinceID == (int)dr["locationProvinceID"])
+                        prov.ProvincePrice = (decimal)dr["locationPrice"];
+                    }
                 }
                 dbCon.Close();
             }
@@ -343,10 +361,7 @@ namespace prototype2
         {
             addNewItem newItem = new addNewItem();
             newItem.ShowDialog();
-            //foreach (Representative rep in MainVM.Representatives)
-            //{
-
-            //}
+            computePrice();
         }
 
         private void transQuotationSaveBtn_Click(object sender, RoutedEventArgs e)
@@ -1761,6 +1776,24 @@ namespace prototype2
                 }
                 dbCon.Close();
             }
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT locationProvinceID, locationaPrice FROM location_details_t";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    foreach (Province prov in MainVM.Provinces)
+                    {
+                        if (prov.ProvinceID == (int)dr["locationProvinceID"])
+                            prov.ProvincePrice = (decimal)dr["locationPrice"];
+                    }
+                }
+                dbCon.Close();
+            }
         }
         /*-----------------END OF MANAGE UTILITIES-------------------*/
         /*
@@ -1779,6 +1812,54 @@ namespace prototype2
         private int compType = 0;
         private bool isEdit = false;
         private string compID = "";
+        private bool ForceValidate()
+        {
+            Validation.ClearInvalid((custCompanyNameTb).GetBindingExpression(TextBox.TextProperty));
+            Validation.ClearInvalid((custAddressTb).GetBindingExpression(TextBox.TextProperty));
+            Validation.ClearInvalid((custCityTb).GetBindingExpression(TextBox.TextProperty));
+
+            BindingExpression companyContactDgBindingExp = BindingOperations.GetBindingExpression(custContactDg, DataGrid.ItemsSourceProperty);
+            BindingExpressionBase companyContactDgBindingExpBase = BindingOperations.GetBindingExpressionBase(custContactDg, DataGrid.ItemsSourceProperty);
+
+            if (!custContactDg.HasItems)
+            {
+                ValidationError validationError = new ValidationError(new ExceptionValidationRule(), companyContactDgBindingExp);
+                validationError.ErrorContent = "*Empt contact list";
+                Validation.MarkInvalid(companyContactDgBindingExpBase, validationError);
+            }
+            else if (Validation.GetHasError(custContactDg))
+            {
+
+                Validation.ClearInvalid(companyContactDgBindingExpBase);
+            }
+
+            BindingExpression customerRepresentativeDgBindingExp = BindingOperations.GetBindingExpression(customerRepresentativeDg, DataGrid.ItemsSourceProperty);
+            BindingExpressionBase customerRepresentativeDgBindingExpBase = BindingOperations.GetBindingExpressionBase(customerRepresentativeDg, DataGrid.ItemsSourceProperty);
+
+            if (!custContactDg.HasItems)
+            {
+                ValidationError validationError = new ValidationError(new ExceptionValidationRule(), customerRepresentativeDgBindingExp);
+                validationError.ErrorContent = "*Empty representative list";
+                Validation.MarkInvalid(customerRepresentativeDgBindingExpBase, validationError);
+            }
+            else if (Validation.GetHasError(custContactDg))
+            {
+
+                Validation.ClearInvalid(customerRepresentativeDgBindingExpBase);
+            }
+            custCompanyNameTb.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            custAddressTb.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            custCityTb.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            custProvinceCb.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
+            if (Validation.GetHasError(custCompanyNameTb) || Validation.GetHasError(custAddressTb) || Validation.GetHasError(custCityTb) || Validation.GetHasError(custContactDg) || Validation.GetHasError(customerRepresentativeDg))
+            {
+                return false;
+            }
+            else
+                return true;
+
+        }
+
         private void saveCustBtn_Click(object sender, RoutedEventArgs e)
         {
             
@@ -3160,18 +3241,26 @@ namespace prototype2
 
         private void markupPriceTb_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            foreach(RequestedItem item in MainVM.RequestedItems)
-            {
-                if (item.itemType==0)
-                {
-                    item.totalAmountMarkUp = (item.unitPrice * item.qty) + (((item.unitPrice*item.qty)/100) * (decimal)markupPriceTb.Value);
-                }
-            }
+            computePrice();
         }
 
         private void additionalFeesDg_SourceUpdated(object sender, DataTransferEventArgs e)
         {
+            computePrice();
+
+
+        }
+
+        private void computePrice()
+        {
             decimal totalFee = 0;
+            foreach (RequestedItem item in MainVM.RequestedItems)
+            {
+                if (item.itemType == 0)
+                {
+                    item.totalAmountMarkUp = (item.unitPrice * item.qty) + (((item.unitPrice * item.qty) / 100) * (decimal)markupPriceTb.Value);
+                }
+            }
             foreach (AdditionalFee aF in MainVM.AdditionalFees)
             {
                 if (!(aF.FeePrice == 0))
@@ -3186,55 +3275,6 @@ namespace prototype2
                     item.totalAmountMarkUp = ((item.unitPrice + totalFee) / 100) * (decimal)markupPriceTb.Value;
                 }
             }
-            
-        }
-
-        private bool ForceValidate()
-        {
-            Validation.ClearInvalid((custCompanyNameTb).GetBindingExpression(TextBox.TextProperty));
-            Validation.ClearInvalid((custAddressTb).GetBindingExpression(TextBox.TextProperty));
-            Validation.ClearInvalid((custCityTb).GetBindingExpression(TextBox.TextProperty));
-
-            BindingExpression companyContactDgBindingExp = BindingOperations.GetBindingExpression(custContactDg, DataGrid.ItemsSourceProperty);
-            BindingExpressionBase companyContactDgBindingExpBase = BindingOperations.GetBindingExpressionBase(custContactDg, DataGrid.ItemsSourceProperty);
-
-            if (!custContactDg.HasItems)
-            {
-                ValidationError validationError = new ValidationError(new ExceptionValidationRule(), companyContactDgBindingExp);
-                validationError.ErrorContent = "*Empt contact list";
-                Validation.MarkInvalid(companyContactDgBindingExpBase, validationError);
-            }
-            else if (Validation.GetHasError(custContactDg))
-            {
-
-                Validation.ClearInvalid(companyContactDgBindingExpBase);
-            }
-
-            BindingExpression customerRepresentativeDgBindingExp = BindingOperations.GetBindingExpression(customerRepresentativeDg, DataGrid.ItemsSourceProperty);
-            BindingExpressionBase customerRepresentativeDgBindingExpBase = BindingOperations.GetBindingExpressionBase(customerRepresentativeDg, DataGrid.ItemsSourceProperty);
-
-            if (!custContactDg.HasItems)
-            {
-                ValidationError validationError = new ValidationError(new ExceptionValidationRule(), customerRepresentativeDgBindingExp);
-                validationError.ErrorContent = "*Empty representative list";
-                Validation.MarkInvalid(customerRepresentativeDgBindingExpBase, validationError);
-            }
-            else if (Validation.GetHasError(custContactDg))
-            {
-
-                Validation.ClearInvalid(customerRepresentativeDgBindingExpBase);
-            }
-            custCompanyNameTb.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            custAddressTb.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            custCityTb.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            custProvinceCb.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
-            if (Validation.GetHasError(custCompanyNameTb)|| Validation.GetHasError(custAddressTb)  || Validation.GetHasError(custCityTb)|| Validation.GetHasError(custContactDg) || Validation.GetHasError(customerRepresentativeDg))
-            {
-                return false;
-            }
-            else
-                return true;
-            
         }
     }
 }

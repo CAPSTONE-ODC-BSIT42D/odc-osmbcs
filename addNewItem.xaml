@@ -27,7 +27,7 @@
                                 <Label Content="City" VerticalAlignment="Top" Visibility="Visible" Margin="28,285,551,0" FontWeight="Normal"/>
                                 <TextBox x:Name="cityTb" TextWrapping="Wrap" Margin="56,316,0,98" HorizontalAlignment="Left" Width="158"/>
                                 <Label Content="Province" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="214,285,0,0" FontWeight="Normal"/>
-                                <ComboBox x:Name="provinceCb" Margin="233,316,0,0" VerticalAlignment="Top" Height="21" IsEditable="True" ItemsSource ="{Binding Provinces}" DisplayMemberPath = "ProvinceName" SelectedValuePath = "ProvinceID" Width="157" HorizontalAlignment="Left" FontWeight="Normal">
+                                <ComboBox x:Name="provinceCb" Margin="233,316,0,0" VerticalAlignment="Top" Height="21" IsEditable="True" ItemsSource ="{Binding Provinces}" DisplayMemberPath = "ProvinceName" SelectedValuePath = "ProvinceID" Width="157" HorizontalAlignment="Left" FontWeight="Normal" SelectionChanged="provinceCb_SelectionChanged">
                                     <ComboBox.SelectedItem>
                                         <Binding Path="locProvinceId" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
