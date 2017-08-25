@@ -152,7 +152,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid Background="#FF2C3E50" Height="70" VerticalAlignment="Top">
+        <Grid Background="#FF2C3E50" Height="70" VerticalAlignment="Top" HorizontalAlignment="Right" Width="1276">
             <Grid Margin="10,0,959,0">
                 <Image x:Name="image" HorizontalAlignment="Left" Width="50" Source="Resources/user-16.png" Margin="991,0,-734,0"/>
                 <Label x:Name="label" Content="Lewis Ken Kinaadman" HorizontalAlignment="Left" Margin="1058,18,-913,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
@@ -501,19 +501,19 @@
             </Grid>
         </Grid>
         <Grid x:Name="containerGrid" Grid.Row="1" Background="#FF1695A3">
-            <Grid x:Name="manageSubMenugrid" HorizontalAlignment="Right" Width="175" Background="#FF395066" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Height="173" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden" d:IsHidden="True">
+            <Grid x:Name="manageSubMenugrid" HorizontalAlignment="Right" Width="175" Background="#FF395066" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Height="173" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden">
                 <Button x:Name="employeeManageMenuBtn" Content="Employees" Margin="0,1,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="175" Click="employeeManageMenuBtn_Click" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="customerManageMenuBtn" Content="Customers" Margin="0,36,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Foreground="White" Width="175" Click="customerManageMenuBtn_Click" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="supplierManageMenuBtn" Content="Suppliers" Margin="0,71,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="175" Click="supplierManageMenuBtn_Click" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="contractorManageMenuBtn" Content="Contractor" Margin="0,106,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="contractorManageMenuBtn_Click" Width="175" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="settingsManageMenuBtn" Content="Settings" Margin="0,141,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="settingsManageMenuBtn_Click" Width="175" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
             </Grid>
-            <Grid x:Name="saleSubMenuGrid" Width="175" Margin="0,0,369,0" Background="#FF395066" HorizontalAlignment="Right" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden" d:IsHidden="True">
+            <Grid x:Name="saleSubMenuGrid" Width="175" Margin="0,0,369,0" Background="#FF395066" HorizontalAlignment="Right" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden">
                 <Button x:Name="quotesSalesMenuBtn" Content="Quotations" Margin="0,75,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="quotesSalesMenuBtn_Click" Width="175" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1"/>
                 <Button x:Name="ordersSalesMenuBtn" Content="Orders" Margin="0,40,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="ordersSalesMenuBtn_Click" Width="175" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1"/>
                 <Button x:Name="invoiceSalesMenuBtn" Content="Invoices" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="invoiceSalesMenuBtn_Click" Width="175" Margin="0,5,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1"/>
             </Grid>
-            <Grid x:Name="dashboardGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True">
+            <Grid x:Name="dashboardGrid" Margin="10,0" Background="#FFECF0F1">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -534,28 +534,28 @@
                     <ListBox x:Name="listBox" Margin="13,131,11,10"/>
                 </Grid>
                 <Label x:Name="label7" Content="Dashboard" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Grid.ColumnSpan="2" Height="57" VerticalAlignment="Top" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
-                <Button x:Name="btReceivables" HorizontalAlignment="Left" Margin="48,94,0,0" VerticalAlignment="Top" Width="229" Height="190" Foreground="White" Background="#FF1A3A5D" BorderBrush="#FF0F2D4B">
+                <Button x:Name="btReceivables" HorizontalAlignment="Left" Margin="58,83,0,0" VerticalAlignment="Top" Width="229" Height="190" Foreground="White" Background="#FF1A3A5D" BorderBrush="#FF0F2D4B" Grid.Column="1">
                     <Grid Height="158" Width="216">
                         <Label x:Name="LblReceivables" Content="25, 000" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="63" Width="210" FontSize="36" FontWeight="Bold" Foreground="White"/>
                         <Label Content="RECEIVABLES" HorizontalAlignment="Left" Margin="8,122,0,-17" VerticalAlignment="Top" Width="183" Height="53" FontSize="25" FontWeight="Bold" Foreground="#FFFBFBFB"/>
                         <Label Content="WEEKLY" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" Width="102" Foreground="White"/>
                     </Grid>
                 </Button>
-                <Button x:Name="btPayables" HorizontalAlignment="Left" Margin="362,94,0,0" VerticalAlignment="Top" Width="229" Height="190" Background="#FF08AE4D" BorderBrush="#FF027431">
+                <Button x:Name="btPayables" HorizontalAlignment="Left" Margin="370,83,0,0" VerticalAlignment="Top" Width="229" Height="190" Background="#FF08AE4D" BorderBrush="#FF027431" Grid.Column="1">
                     <Grid Height="175" Width="215">
                         <Label Content="10, 000" HorizontalAlignment="Left" Margin="-4,8,0,0" VerticalAlignment="Top" Height="63" Width="210" FontSize="36" FontWeight="Bold" Foreground="White"/>
                         <Label Content="WEEKLY" HorizontalAlignment="Left" Margin="4,98,0,0" VerticalAlignment="Top" Width="93" Height="34" FontSize="18" FontWeight="Bold" Foreground="White"/>
-                        <Label Content="PAYABLES" HorizontalAlignment="Left" Margin="2,123,0,-17" VerticalAlignment="Top" Width="183" Height="53" FontWeight="Bold" FontSize="25" Foreground="White"/>
+                        <Label Content="PAYABLES" HorizontalAlignment="Left" Margin="4,123,0,-1" VerticalAlignment="Top" Width="183" Height="53" FontWeight="Bold" FontSize="25" Foreground="White"/>
                     </Grid>
                 </Button>
-                <Button x:Name="btPendingSQ" HorizontalAlignment="Left" Margin="48,357,0,0" VerticalAlignment="Top" Width="229" Height="190" Background="#FF2A80B9" BorderBrush="#FF0C65A0" Grid.RowSpan="2">
+                <Button x:Name="btPendingSQ" HorizontalAlignment="Left" Margin="58,334,0,22" Width="229" Background="#FF2A80B9" BorderBrush="#FF0C65A0" Grid.Column="1">
                     <Grid Height="162" Width="205">
                         <Label Content="25" HorizontalAlignment="Left" Margin="0,12,-5,0" VerticalAlignment="Top" Foreground="White" Width="210" Height="63" FontWeight="Bold" FontSize="36"/>
                         <Label Content="PENDING" HorizontalAlignment="Left" Margin="2,85,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" Width="113"/>
                         <Label Content="SALES QUOTE" HorizontalAlignment="Left" Margin="2,116,0,0" VerticalAlignment="Top" Foreground="White" FontSize="25" Width="185" FontWeight="Bold"/>
                     </Grid>
                 </Button>
-                <Button HorizontalAlignment="Left" Margin="362,357,0,0" VerticalAlignment="Top" Width="229" Height="190" Background="#FFBF3A2B" BorderBrush="#FFA21717" Grid.RowSpan="2">
+                <Button Margin="370,336,0,20" Background="#FFBF3A2B" BorderBrush="#FFA21717" Grid.Column="1" HorizontalAlignment="Left" Width="231">
                     <Grid Height="151" Width="210">
                         <Label Content="52" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Height="63" FontWeight="Bold" FontSize="36" Foreground="#FFFBFBFB" Margin="0,4,0,0"/>
                         <Label Content="SERVICES" HorizontalAlignment="Left" Margin="-2,111,0,-6" VerticalAlignment="Top" FontWeight="Bold" FontSize="25" Width="138" Height="46" Foreground="#FFFBFBFB"/>

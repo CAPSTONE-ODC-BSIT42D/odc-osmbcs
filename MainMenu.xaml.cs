@@ -1164,7 +1164,7 @@ namespace prototype2
                 {
                     try
                     {
-                        string query = "DELETE FROM `odc_db`.`job_title_t` WHERE `positionID`='" + MainMenu.MainVM.SelectedJobTitle.JobID + "';";
+                        string query = "DELETE FROM `odc_db`.`job_title_t` WHERE `JobID`='" + MainMenu.MainVM.SelectedJobTitle.JobID + "';";
 
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
