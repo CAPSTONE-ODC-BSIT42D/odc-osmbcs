@@ -82,7 +82,7 @@
                 <Label x:Name="label1" Content="Select Province:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Normal" FontStyle="Normal"/>
                 <xctk:DecimalUpDown x:Name="locationPrice" HorizontalAlignment="Left" Margin="220,36,0,0" VerticalAlignment="Top" Width="193" FontSize="14"/>
                 <Label x:Name="label1_Copy" Content="Price" HorizontalAlignment="Left" Margin="220,10,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Normal" FontStyle="Normal"/>
-                <Button x:Name="setPriceBtn" Content="Set" HorizontalAlignment="Left" Margin="422,34,0,0" VerticalAlignment="Top" Width="85" FontWeight="Normal" FontStyle="Normal" FontSize="13" Height="24" Click="setPriceBtn_Click" Background="#FF194E84" BorderBrush="#FF0B3D70" Foreground="#FFFBF5F5" FontFamily="Segoe UI Semibold"/>
+                <Button x:Name="setPriceBtn" Content="Set" HorizontalAlignment="Left" Margin="443,36,0,0" VerticalAlignment="Top" Width="85" FontWeight="Normal" FontStyle="Normal" FontSize="13" Height="24" Click="setPriceBtn_Click" Background="#FF194E84" BorderBrush="#FF0B3D70" Foreground="#FFFBF5F5" FontFamily="Segoe UI Semibold"/>
             </Grid>
         </GroupBox>
 
