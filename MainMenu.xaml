@@ -501,19 +501,19 @@
             </Grid>
         </Grid>
         <Grid x:Name="containerGrid" Grid.Row="1" Background="#FF1695A3">
-            <Grid x:Name="manageSubMenugrid" HorizontalAlignment="Right" Width="175" Background="#FF395066" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Height="173" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden">
+            <Grid x:Name="manageSubMenugrid" HorizontalAlignment="Right" Width="175" Background="#FF395066" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Height="173" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden" d:IsHidden="True">
                 <Button x:Name="employeeManageMenuBtn" Content="Employees" Margin="0,1,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="175" Click="employeeManageMenuBtn_Click" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="customerManageMenuBtn" Content="Customers" Margin="0,36,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Foreground="White" Width="175" Click="customerManageMenuBtn_Click" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="supplierManageMenuBtn" Content="Suppliers" Margin="0,71,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="175" Click="supplierManageMenuBtn_Click" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="contractorManageMenuBtn" Content="Contractor" Margin="0,106,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="contractorManageMenuBtn_Click" Width="175" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="settingsManageMenuBtn" Content="Settings" Margin="0,141,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="settingsManageMenuBtn_Click" Width="175" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
             </Grid>
-            <Grid x:Name="saleSubMenuGrid" Width="175" Margin="0,0,369,0" Background="#FF395066" HorizontalAlignment="Right" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden">
+            <Grid x:Name="saleSubMenuGrid" Width="175" Margin="0,0,369,0" Background="#FF395066" HorizontalAlignment="Right" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden" d:IsHidden="True">
                 <Button x:Name="quotesSalesMenuBtn" Content="Quotations" Margin="0,75,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="quotesSalesMenuBtn_Click" Width="175" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1"/>
                 <Button x:Name="ordersSalesMenuBtn" Content="Orders" Margin="0,40,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="ordersSalesMenuBtn_Click" Width="175" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1"/>
                 <Button x:Name="invoiceSalesMenuBtn" Content="Invoices" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="invoiceSalesMenuBtn_Click" Width="175" Margin="0,5,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1"/>
             </Grid>
-            <Grid x:Name="dashboardGrid" Margin="10,0" Background="#FFECF0F1">
+            <Grid x:Name="dashboardGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -902,7 +902,7 @@
                 </Grid>
             </Grid>
             <Grid x:Name="reportsGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True"/>
-            <Grid x:Name="manageGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True" >
+            <Grid x:Name="manageGrid" Margin="10,0" Background="#FFECF0F1" >
                 <Grid x:Name="manageCustomerGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged" d:IsHidden="True">
                     <Label x:Name="label7_Copy" Content="Manage - Customer" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid x:Name="manageCustomerHomeGrid" Margin="10,70,10,10">
@@ -1089,7 +1089,7 @@
                         <Label x:Name="label7_Copy9" Content="Manage - Contractor" Margin="0,0,307,0" FontSize="20" FontWeight="Bold" Background="{x:Null}" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageSettingsGrid" d:IsHidden="True">
+                <Grid x:Name="manageSettingsGrid">
                     <Label x:Name="label7_Copy6" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid Margin="10,70,10,10">
                         <TabControl x:Name="tabControl" Margin="24,26,29,10">
@@ -1097,7 +1097,7 @@
                                 <Grid Background="#FFE5E5E5">
                                     <Grid Margin="34,49,707,0" Height="188" VerticalAlignment="Top">
                                         <Label Content="Position Name:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13"/>
-                                        <TextBox x:Name="empPosNewTb" HorizontalAlignment="Left" Height="23" Margin="105,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" FontSize="13"/>
+                                        <TextBox x:Name="empPosNewTb" HorizontalAlignment="Left" Height="23" Margin="105,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" FontSize="13" />
                                         <Button x:Name="addEmpPosBtn" Content="Add" HorizontalAlignment="Left" Margin="370,4,-19,0" VerticalAlignment="Top" Width="85" Click="addEmpPosBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF194E84" BorderBrush="#FF0B3D70" Foreground="#FFFDF7F7"/>
                                         <Button x:Name="saveEmpPosBtn" Content="save" HorizontalAlignment="Left" Margin="346,4,0,0" VerticalAlignment="Top" Width="90" Click="saveEmpPosBtn_Click" Visibility="Hidden"/>
                                         <ListBox x:Name="employeePositionLb" HorizontalAlignment="Left" Height="127" Margin="4,46,0,0" VerticalAlignment="Top" Width="337" FontSize="13" ItemsSource="{Binding EmpPosition}" SelectedItem="{Binding SelectedEmpPosition}" DisplayMemberPath="PositionName" />
@@ -1402,7 +1402,7 @@
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid x:Name="employeeDetailsGrid">
+                <Grid x:Name="employeeDetailsGrid" d:IsHidden="True">
                     <Label x:Name="employeeDetailsHeader" Content="" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid Margin="10,70,10,10"/>
                     <Grid x:Name="employeeDetails" Margin="10,70,10,10">

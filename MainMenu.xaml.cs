@@ -9,7 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -258,7 +258,7 @@ namespace prototype2
             selectCustomerGrid.Visibility = Visibility.Visible;
             if (MainVM.Customers.Count == 0)
             {
-                MessageBox.Show("No Custmers Currently Added.\nAdd new customer in the next screen");
+                MessageBox.Show("No Customers Currently Added.\nAdd new customer in the next screen");
                 saleSubMenuGrid.Visibility = Visibility.Collapsed;
                 manageSubMenugrid.Visibility = Visibility.Collapsed;
                 for (int x = 0; x < containerGrid.Children.Count; x++)
@@ -995,27 +995,38 @@ namespace prototype2
         //EMPLOYEE PART
         private void addEmpPosBtn_Click(object sender, RoutedEventArgs e)
         {
-            var dbCon = DBConnection.Instance();
-            dbCon.DatabaseName = dbname;
+            string strPosition = empPosNewTb.Text;
             if (String.IsNullOrWhiteSpace(empPosNewTb.Text))
             {
                 MessageBox.Show("Employee Position field must be filled");
             }
             else
             {
+                var dbCon = DBConnection.Instance();
+                dbCon.DatabaseName = dbname;
                 if (employeePositionLb.Items.Contains(empPosNewTb.Text))
                 {
                     MessageBox.Show("Employee position already exists");
                 }
                 if (dbCon.IsConnect())
                 {
-                    string query = "INSERT INTO `odc_db`.`position_t` (`positionName`) VALUES('" + empPosNewTb.Text + "')";
-                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    if (!Regex.IsMatch(strPosition, @"[a-zA-Z -]"))
                     {
-                        MessageBox.Show("Employee Poisition successfully added");
+                        MessageBox.Show("Special characters are not accepted");
                         empPosNewTb.Clear();
-                        setListBoxControls();
-                        dbCon.Close();
+                    }
+                    else
+                    {
+                        string query = "INSERT INTO `odc_db`.`position_t` (`positionName`) VALUES('" + empPosNewTb.Text + "')";
+                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        {
+                            {
+                                MessageBox.Show("Employee Poisition successfully added");
+                                empPosNewTb.Clear();
+                                setListBoxControls();
+                                dbCon.Close();
+                            }
+                        }
                     }
                 }
             }
@@ -1099,6 +1110,7 @@ namespace prototype2
         //CONTRACTOR PART
         private void addContJobBtn_Click(object sender, RoutedEventArgs e)
         {
+            string strJobTitle = contNewJobTb.Text;
             var dbCon = DBConnection.Instance();
             dbCon.DatabaseName = dbname;
             if (String.IsNullOrWhiteSpace(contNewJobTb.Text))
@@ -1111,15 +1123,26 @@ namespace prototype2
                 {
                     MessageBox.Show("Contractor Job Title already exists");
                 }
-                if (dbCon.IsConnect())
+                else
                 {
-                    string query = "INSERT INTO `odc_db`.`job_title_t` (`jobName`) VALUES('" + contNewJobTb.Text + "')";
-                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    if (!Regex.IsMatch(strJobTitle, @"[a-zA-Z -]"))
                     {
-                        MessageBox.Show("Contractor Job Title successfully added");
+                        MessageBox.Show("Special Characters are not accepted");
                         contNewJobTb.Clear();
-                        setListBoxControls();
-                        dbCon.Close();
+                    }
+                    else
+                    {
+                        if (dbCon.IsConnect())
+                        {
+                            string query = "INSERT INTO `odc_db`.`job_title_t` (`jobName`) VALUES('" + contNewJobTb.Text + "')";
+                            if (dbCon.insertQuery(query, dbCon.Connection))
+                            {
+                                MessageBox.Show("Contractor Job Title successfully added");
+                                contNewJobTb.Clear();
+                                setListBoxControls();
+                                dbCon.Close();
+                            }
+                        }
                     }
                 }
             }
@@ -1227,23 +1250,37 @@ namespace prototype2
 
         private void addCategoryBtn_Click(object sender, RoutedEventArgs e)
         {
+            string strCategory = invCategoryTb.Text;
             var dbCon = DBConnection.Instance();
             dbCon.DatabaseName = dbname;
+
             if (!String.IsNullOrWhiteSpace(invCategoryTb.Text))
             {
                 if (invProductsCategoryLb.Items.Contains(invCategoryTb.Text))
                 {
                     MessageBox.Show("Product Category already exists");
                 }
-                if (dbCon.IsConnect())
+                else
                 {
-                    string query = "INSERT INTO `odc_db`.`item_type_t` (`typeName`) VALUES('" + invCategoryTb.Text + "')";
-                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    if (!Regex.IsMatch(strCategory, @"[a-zA-Z -]"))
                     {
-                        MessageBox.Show("Product Category successfully added");
-                        setListBoxControls();
+                        MessageBox.Show("Special characters are not accepted");
                         invCategoryTb.Clear();
-                        dbCon.Close();
+                    }
+                    else
+                    {
+                        if (dbCon.IsConnect())
+                        {
+                            string query = "INSERT INTO `odc_db`.`item_type_t` (`typeName`) VALUES('" + invCategoryTb.Text + "')";
+                            if (dbCon.insertQuery(query, dbCon.Connection))
+                            {
+
+                                MessageBox.Show("Product Category successfully added");
+                                setListBoxControls();
+                                invCategoryTb.Clear();
+                                dbCon.Close();
+                            }
+                        }
                     }
                 }
             }
@@ -1465,9 +1502,18 @@ namespace prototype2
 
         private void serviceName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (System.Windows.Controls.Validation.GetHasError(serviceName) == true)
-                saveServiceTypeBtn.IsEnabled = false;
-            else validateTextBoxes();
+            string strService = (sender as TextBox).Text;
+            if (!Regex.IsMatch(strService, @"[a-zA-Z -]"))
+            {
+                MessageBox.Show("Special characters are not accepted");
+            }
+                //if (System.Windows.Controls.Validation.GetHasError(serviceName) == true)
+                  //  saveServiceTypeBtn.IsEnabled = false;
+            else
+            {
+                validateTextBoxes();
+            }
+
         }
 
         private void servicePrice_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
