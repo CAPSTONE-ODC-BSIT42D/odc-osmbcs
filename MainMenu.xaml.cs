@@ -256,6 +256,22 @@ namespace prototype2
                 transactionQuotationsGrid.Children[x].Visibility = Visibility.Collapsed;
             }
             selectCustomerGrid.Visibility = Visibility.Visible;
+            if (MainVM.Customers.Count == 0)
+            {
+                MessageBox.Show("No Custmers Currently Added.\nAdd new customer in the next screen");
+                saleSubMenuGrid.Visibility = Visibility.Collapsed;
+                manageSubMenugrid.Visibility = Visibility.Collapsed;
+                for (int x = 0; x < containerGrid.Children.Count; x++)
+                {
+                    containerGrid.Children[x].Visibility = Visibility.Collapsed;
+                }
+                manageGrid.Visibility = Visibility.Visible;
+                for (int x = 0; x < manageGrid.Children.Count; x++)
+                {
+                    manageGrid.Children[x].Visibility = Visibility.Collapsed;
+                }
+                manageCustomerGrid.Visibility = Visibility.Visible;
+            }
         }
 
         private void selectCustBtn_Click(object sender, RoutedEventArgs e)
@@ -567,7 +583,7 @@ namespace prototype2
 
         private void manageEmployeeDataGrid_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            
+            setManageEmployeeGridControls();
         }
 
         private void setManageEmployeeGridControls()
@@ -764,21 +780,12 @@ namespace prototype2
 
         private void manageContractorGrid_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            //setManageContractorGridControls();
+            setManageContractorGridControls();
         }
 
         private void setManageContractorGridControls()
         {
             var dbCon = DBConnection.Instance();
-            using (MySqlConnection conn = dbCon.Connection)
-            {
-                string query = query = "";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, conn);
-                DataSet fromDb = new DataSet();
-                //dataAdapter.Fill(fromDb, "t");
-                //manageContractorDataGrid.ItemsSource = fromDb.Tables["t"].DefaultView;
-                dbCon.Close();
-            }
             if (dbCon.IsConnect())
             {
                 string query = "SELECT a.empID, a.empFName,a.empLname, a.empMI, a.empAddinfo, a.empAddress, a.empCity, a.empProvinceID, b.locprovince, a.positionID ,c.positionName, a.jobID, d.jobName " +
@@ -1538,37 +1545,12 @@ namespace prototype2
             dbCon.DatabaseName = dbname;
             if (serviceTypeDg.SelectedItems.Count > 0)
             {
-                id = (serviceTypeDg.Columns[0].GetCellContent(serviceTypeDg.SelectedItem) as TextBlock).Text;
+                
                 serviceTypeList.Visibility = Visibility.Collapsed;
                 serviceTypeAdd.Visibility = Visibility.Visible;
-                string query = "SELECT * FROM service_t where serviceID = '" + id + "';";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                dataAdapter.Fill(fromDb, "t");
-                DataTable fromDbTable = new DataTable();
-                fromDbTable = fromDb.Tables["t"];
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    try
-                    {
-                        serviceName.Text = dr["serviceName"].ToString();
-                        serviceDesc.Text = dr["serviceDesc"].ToString();
-                        servicePrice.Text = dr["servicePrice"].ToString();
-
-
-                        serviceName.Clear();
-                        serviceDesc.Clear();
-                        servicePrice.Value = 0;
-                    }
-                    catch (Exception)
-                    {
-
-                        serviceName.Clear();
-                        serviceDesc.Clear();
-                        servicePrice.Value = 0;
-                        throw;
-                    }
-                }
+                serviceName.Text = MainVM.SelectedService.ServiceName;
+                serviceDesc.Text = MainVM.SelectedService.ServiceDesc;
+                servicePrice.Value = MainVM.SelectedService.ServicePrice;
                 dbCon.Close();
                 serviceTypeList.Visibility = Visibility.Collapsed;
                 serviceTypeAdd.Visibility = Visibility.Visible;
@@ -1753,8 +1735,14 @@ namespace prototype2
                 string query = "SELECT * FROM service_t;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
-                serviceTypeDg.ItemsSource = fromDb.Tables["t"].DefaultView;
+                fromDbTable = fromDb.Tables["t"];
+                MainMenu.MainVM.ServicesList.Clear();
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainMenu.MainVM.ServicesList.Add(new Service() { ServiceID = dr["serviceID"].ToString(), ServiceName = dr["serviceName"].ToString(), ServiceDesc = dr["serviceDesc"].ToString(), ServicePrice = (decimal)dr["ServicePrice"] });
+                }
                 dbCon.Close();
             }
             if (dbCon.IsConnect())
@@ -2012,7 +2000,7 @@ namespace prototype2
                         if (!String.IsNullOrWhiteSpace(contactDetailsEmailTb.Text))
                         {
 
-                            MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            MainVM.CustContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
                             clearContactsBoxes();
                         }
                         else
@@ -2024,7 +2012,7 @@ namespace prototype2
                         if (!String.IsNullOrWhiteSpace(contactDetailsPhoneTb.Text))
                         {
 
-                            MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            MainVM.CustContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
                             clearContactsBoxes();
                         }
                         else
@@ -2035,7 +2023,7 @@ namespace prototype2
                     {
                         if (!String.IsNullOrWhiteSpace(contactDetailsMobileTb.Text))
                         {
-                            MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            MainVM.CustContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
                             clearContactsBoxes();
                         }
                         else
@@ -2089,8 +2077,6 @@ namespace prototype2
             customerRepresentativeDg.SelectedIndex = customerRepresentativeDg.Items.Count - 1;
             repWindow.ShowDialog();
             validateCustomerDetailsTextBoxes();
-            
-            
         }
         private void customerRepresentativeDg_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -3196,11 +3182,31 @@ namespace prototype2
         {
             foreach(RequestedItem item in MainVM.RequestedItems)
             {
-                if (item.itemType.Equals("Product"))
+                if (item.itemType==0)
                 {
                     item.totalAmountMarkUp = (item.unitPrice * item.qty) + (((item.unitPrice*item.qty)/100) * (decimal)markupPriceTb.Value);
                 }
             }
+        }
+
+        private void additionalFeesDg_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+            decimal totalFee = 0;
+            foreach (AdditionalFee aF in MainVM.AdditionalFees)
+            {
+                if (!(aF.FeePrice == 0))
+                {
+                    totalFee += aF.FeePrice;
+                }
+            }
+            foreach (RequestedItem item in MainVM.RequestedItems)
+            {
+                if (item.itemType == 1)
+                {
+                    item.totalAmountMarkUp = ((item.unitPrice + totalFee) / 100) * (decimal)markupPriceTb.Value;
+                }
+            }
+            
         }
     }
 }

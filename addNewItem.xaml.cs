@@ -70,19 +70,12 @@ namespace prototype2
                 {
                     if (prd.IsChecked)
                     {
-                        MainMenu.MainVM.RequestedItems.Add(new RequestedItem() { lineNo = (MainMenu.MainVM.RequestedItems.Count + 1).ToString(), itemCode = prd.ItemNo, desc = prd.ItemDesc, itemType = "Product", qty = prd.Quantity, unitPrice = prd.CostPrice, totalAmount = prd.Quantity * prd.CostPrice });
+                        MainMenu.MainVM.RequestedItems.Add(new RequestedItem() { lineNo = (MainMenu.MainVM.RequestedItems.Count + 1).ToString(), itemName = prd.ItemName, desc = prd.ItemDesc, itemTypeName = "Product", itemType=0, qty = prd.Quantity, unitPrice = prd.CostPrice, totalAmount = prd.Quantity * prd.CostPrice,totalAmountMarkUp = prd.Quantity * prd.CostPrice });
                     }
                 }
             }
             else if ((bool)serviceRbtn.IsChecked)
             {
-                foreach (Item prd in MainMenu.MainVM.ProductList)
-                {
-                    if (prd.IsChecked)
-                    {
-                        MainMenu.MainVM.RequestedItems.Add(new RequestedItem() { lineNo = (MainMenu.MainVM.RequestedItems.Count + 1).ToString(), itemCode = prd.ItemNo, desc = prd.ItemDesc, itemType = "Service", qty = prd.Quantity, unitPrice = prd.CostPrice, totalAmount = prd.Quantity * prd.CostPrice });
-                    }
-                }
             }
             
         }
