@@ -502,7 +502,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Grid Margin="90,98,68,48" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
+                <Grid Margin="90,98,68,10" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
                     <Grid.Background>
                         <SolidColorBrush Color="#FFA4A4A4"/>
                     </Grid.Background>
