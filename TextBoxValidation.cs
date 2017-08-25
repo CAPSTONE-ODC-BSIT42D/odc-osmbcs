@@ -14,6 +14,10 @@ namespace prototype2
 
             if (str.Equals("String"))
             {
+                if (value == null)
+                {
+                    return new ValidationResult(false, "*This field must be filled.");
+                }
                 if (value.ToString().Length == 0)
                     return new ValidationResult(false, "*This field must be filled.");
                 return ValidationResult.ValidResult;

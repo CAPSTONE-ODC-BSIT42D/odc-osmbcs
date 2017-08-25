@@ -1785,7 +1785,15 @@ namespace prototype2
             MessageBoxResult result = MessageBox.Show("Do you wish to save this record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
             if (result == MessageBoxResult.OK)
             {
-                custDataToDb();
+                if (ForceValidate())
+                {
+                    custDataToDb();
+                }
+                else
+                {
+                    MessageBox.Show("Resolve the error first.");
+                }
+                
 
             }
             else if (result == MessageBoxResult.Cancel)
@@ -1801,34 +1809,10 @@ namespace prototype2
             clearSupplierFields();
         }
         
-
-        private void custCompanyNameTb_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (System.Windows.Controls.Validation.GetHasError(custCompanyNameTb) == true)
-                saveCustBtn.IsEnabled = false;
-            else validateCustomerDetailsTextBoxes();
-
-        }
-
-        private void locationAddressTb_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (System.Windows.Controls.Validation.GetHasError(custAddressTb) == true)
-                saveCustBtn.IsEnabled = false;
-            else validateCustomerDetailsTextBoxes();
-        }
-
-        private void locationCityTb_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (System.Windows.Controls.Validation.GetHasError(custCityTb) == true)
-                saveCustBtn.IsEnabled = false;
-            else validateCustomerDetailsTextBoxes();
-        }
-
         private void contactDetailsEmailTb_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (System.Windows.Controls.Validation.GetHasError(contactDetailsEmailTb) == true)
             {
-                saveCustBtn.IsEnabled = false;
                 saveCustContactBtn.IsEnabled = false;
             }
             else
@@ -1844,7 +1828,6 @@ namespace prototype2
         {
             if (System.Windows.Controls.Validation.GetHasError(contactDetailsPhoneTb) == true)
             {
-                saveCustBtn.IsEnabled = false;
                 saveCustContactBtn.IsEnabled = false;
             }
             else
@@ -1859,7 +1842,6 @@ namespace prototype2
         {
             if (System.Windows.Controls.Validation.GetHasError(contactDetailsMobileTb) == true)
             {
-                saveCustBtn.IsEnabled = false;
                 saveCustContactBtn.IsEnabled = false;
             }
             else
@@ -2112,7 +2094,7 @@ namespace prototype2
         {
             var dbCon = DBConnection.Instance();
             string[] proc = { "", "", "", "" };
-
+            
             if (!isEdit)
             {
                 proc[0] = "INSERT_COMPANY";
@@ -2305,20 +2287,6 @@ namespace prototype2
                 setManageSupplierGridControls();
             }
         }
-        private void validateCustomerDetailsTextBoxes()
-        {
-            if (String.IsNullOrWhiteSpace(custCompanyNameTb.Text) || String.IsNullOrWhiteSpace(custAddressTb.Text) || String.IsNullOrWhiteSpace(custCityTb.Text) || custProvinceCb.SelectedIndex == -1 || MainVM.CustContacts.Count == 0 || MainVM.CustRepresentatives.Count == 0)
-            {
-                saveCustBtn.IsEnabled = false;
-            }
-            else
-            {
-                saveCustBtn.IsEnabled = true;
-            }
-        }
-
-
-
         private void loadCustSuppDetails()
         {
             var dbCon = DBConnection.Instance();
@@ -2413,6 +2381,18 @@ namespace prototype2
             {
 
             }
+        }
+
+        private void validateCustomerDetailsTextBoxes()
+        {
+            //if (String.IsNullOrWhiteSpace(custCompanyNameTb.Text) || String.IsNullOrWhiteSpace(custAddressTb.Text) || String.IsNullOrWhiteSpace(custCityTb.Text) || custProvinceCb.SelectedIndex == -1 || MainVM.CustContacts.Count == 0 || MainVM.CustRepresentatives.Count == 0)
+            //{
+            //    saveCustBtn.IsEnabled = false;
+            //}
+            //else
+            //{
+            //    saveCustBtn.IsEnabled = true;
+            //}
         }
 
         private void clearContactsBoxes()
@@ -3206,6 +3186,54 @@ namespace prototype2
                     item.totalAmountMarkUp = ((item.unitPrice + totalFee) / 100) * (decimal)markupPriceTb.Value;
                 }
             }
+            
+        }
+
+        private bool ForceValidate()
+        {
+            Validation.ClearInvalid((custCompanyNameTb).GetBindingExpression(TextBox.TextProperty));
+            Validation.ClearInvalid((custAddressTb).GetBindingExpression(TextBox.TextProperty));
+            Validation.ClearInvalid((custCityTb).GetBindingExpression(TextBox.TextProperty));
+
+            BindingExpression companyContactDgBindingExp = BindingOperations.GetBindingExpression(custContactDg, DataGrid.ItemsSourceProperty);
+            BindingExpressionBase companyContactDgBindingExpBase = BindingOperations.GetBindingExpressionBase(custContactDg, DataGrid.ItemsSourceProperty);
+
+            if (!custContactDg.HasItems)
+            {
+                ValidationError validationError = new ValidationError(new ExceptionValidationRule(), companyContactDgBindingExp);
+                validationError.ErrorContent = "*Empt contact list";
+                Validation.MarkInvalid(companyContactDgBindingExpBase, validationError);
+            }
+            else if (Validation.GetHasError(custContactDg))
+            {
+
+                Validation.ClearInvalid(companyContactDgBindingExpBase);
+            }
+
+            BindingExpression customerRepresentativeDgBindingExp = BindingOperations.GetBindingExpression(customerRepresentativeDg, DataGrid.ItemsSourceProperty);
+            BindingExpressionBase customerRepresentativeDgBindingExpBase = BindingOperations.GetBindingExpressionBase(customerRepresentativeDg, DataGrid.ItemsSourceProperty);
+
+            if (!custContactDg.HasItems)
+            {
+                ValidationError validationError = new ValidationError(new ExceptionValidationRule(), customerRepresentativeDgBindingExp);
+                validationError.ErrorContent = "*Empty representative list";
+                Validation.MarkInvalid(customerRepresentativeDgBindingExpBase, validationError);
+            }
+            else if (Validation.GetHasError(custContactDg))
+            {
+
+                Validation.ClearInvalid(customerRepresentativeDgBindingExpBase);
+            }
+            custCompanyNameTb.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            custAddressTb.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            custCityTb.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            custProvinceCb.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
+            if (Validation.GetHasError(custCompanyNameTb)|| Validation.GetHasError(custAddressTb)  || Validation.GetHasError(custCityTb)|| Validation.GetHasError(custContactDg) || Validation.GetHasError(customerRepresentativeDg))
+            {
+                return false;
+            }
+            else
+                return true;
             
         }
     }
