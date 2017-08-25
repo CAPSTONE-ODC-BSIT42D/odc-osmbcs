@@ -631,10 +631,10 @@
                                     </DataGrid>
                                     <xctk:IntegerUpDown x:Name="markupPriceTb" HorizontalAlignment="Left" Margin="219,433,0,0" VerticalAlignment="Top" Width="86" ValueChanged="markupPriceTb_ValueChanged" VerticalContentAlignment="Center" Height="22" DefaultValue="0" Minimum="0" DisplayDefaultValueOnEmptyText="True" ParsingNumberStyle="Integer" Text="0" FontWeight="Normal" FontStyle="Normal" HorizontalContentAlignment="Center"/>
                                     <xctk:IntegerUpDown x:Name="percentPriceTb" HorizontalAlignment="Left" Margin="219,469,0,0" VerticalAlignment="Top" Width="86"  VerticalContentAlignment="Center" Height="22" DefaultValue="0" Minimum="0" DisplayDefaultValueOnEmptyText="True" ParsingNumberStyle="Integer" Text="0" FontWeight="Normal" FontStyle="Normal" HorizontalContentAlignment="Center"/>
-                                    <DataGrid x:Name="additionalFeesDg" Margin="40,538,579,76" ItemsSource="{Binding AdditionalFees}" SourceUpdated="additionalFeesDg_SourceUpdated">
+                                    <DataGrid x:Name="additionalFeesDg" Margin="40,538,579,76" ItemsSource="{Binding AdditionalFees}" SourceUpdated="additionalFeesDg_SourceUpdated" AutoGenerateColumns="False" CanUserReorderColumns="False" MinColumnWidth="50">
                                         <DataGrid.Columns>
-                                            <DataGridTextColumn Binding="{Binding FeeName}" ClipboardContentBinding="{x:Null}" Header="Line #" Width="50" CanUserResize="False" />
-                                            <DataGridTemplateColumn Header="Quantity" Width="60">
+                                            <DataGridTextColumn Binding="{Binding FeeName}" ClipboardContentBinding="{x:Null}" Header="Fee Name" Width="100" CanUserResize="False" />
+                                            <DataGridTemplateColumn Header="Fee Price" Width="60">
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <xctk:IntegerUpDown Value="{Binding FeePrice, UpdateSourceTrigger=PropertyChanged}" DisplayDefaultValueOnEmptyText="True" Minimum="1" MouseWheelActiveOnFocus="True" DefaultValue="1" ParsingNumberStyle="Integer"/>
