@@ -502,13 +502,16 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Grid Margin="10,62,10,10" Background="#99ABABAB" RenderTransformOrigin="0.5,0.5" d:LayoutOverrides="LeftMargin, RightMargin">
+                <Grid Margin="90,98,68,10" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
+                    <Grid.Background>
+                        <SolidColorBrush Color="#FFA4A4A4"/>
+                    </Grid.Background>
                     <Border BorderBrush="Black" BorderThickness="1" Height="1" Margin="10,48,5,0" VerticalAlignment="Top"/>
-                    <Label x:Name="label1" Content="Today's Appointment" Height="33" Margin="19,10,242,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
-                    <Label x:Name="label2" Content="No appointment/s to show." Height="37" Margin="19,59,22,0" VerticalAlignment="Top"/>
-                    <Label x:Name="label1_Copy" Content="February 18, 2016" Height="26" Margin="302,10,5,0" VerticalAlignment="Top" FlowDirection="RightToLeft" FontWeight="Bold"/>
-                    <Label x:Name="label1_Copy1" Content="Upcoming appointment" Height="26" Margin="272,122,12,0" VerticalAlignment="Top" FlowDirection="RightToLeft" FontWeight="Bold"/>
-                    <ListBox x:Name="listBox" Margin="13,153,11,10"/>
+                    <Label x:Name="label1" Content="Today's Appointment" Height="33" Margin="19,10,242,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Foreground="Black"/>
+                    <Label x:Name="label2" Content="No appointment/s to show." Height="37" Margin="19,59,22,0" VerticalAlignment="Top" Foreground="Black" FontSize="14"/>
+                    <Label x:Name="label1_Copy" Content="February 18, 2016" Height="26" Margin="302,10,5,0" VerticalAlignment="Top" FlowDirection="RightToLeft" FontWeight="Bold" Foreground="Black" FontSize="13"/>
+                    <Label x:Name="label1_Copy1" Content="Upcoming appointment" Height="52" Margin="272,95,12,0" VerticalAlignment="Top" FlowDirection="RightToLeft" FontWeight="Bold" Foreground="Black" FontSize="14"/>
+                    <ListBox x:Name="listBox" Margin="13,131,11,10"/>
                 </Grid>
                 <Label x:Name="label7" Content="Dashboard" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Grid.ColumnSpan="2" Height="57" VerticalAlignment="Top" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
                 <Button x:Name="btReceivables" HorizontalAlignment="Left" Margin="58,83,0,0" VerticalAlignment="Top" Width="229" Height="190" Foreground="White" Background="#FF1A3A5D" BorderBrush="#FF0F2D4B" Grid.Column="1">
@@ -641,10 +644,10 @@
                                     </DataGrid>
                                     <xctk:IntegerUpDown x:Name="markupPriceTb" HorizontalAlignment="Left" Margin="219,433,0,0" VerticalAlignment="Top" Width="86" ValueChanged="markupPriceTb_ValueChanged" VerticalContentAlignment="Center" Height="22" DefaultValue="0" Minimum="0" DisplayDefaultValueOnEmptyText="True" ParsingNumberStyle="Integer" Text="0" FontWeight="Normal" FontStyle="Normal" HorizontalContentAlignment="Center"/>
                                     <xctk:IntegerUpDown x:Name="percentPriceTb" HorizontalAlignment="Left" Margin="219,469,0,0" VerticalAlignment="Top" Width="86"  VerticalContentAlignment="Center" Height="22" DefaultValue="0" Minimum="0" DisplayDefaultValueOnEmptyText="True" ParsingNumberStyle="Integer" Text="0" FontWeight="Normal" FontStyle="Normal" HorizontalContentAlignment="Center"/>
-                                    <DataGrid x:Name="additionalFeesDg" Margin="40,538,579,76" ItemsSource="{Binding AdditionalFees}" SourceUpdated="additionalFeesDg_SourceUpdated">
+                                    <DataGrid x:Name="additionalFeesDg" Margin="40,538,579,76" ItemsSource="{Binding AdditionalFees}" SourceUpdated="additionalFeesDg_SourceUpdated" AutoGenerateColumns="False" CanUserReorderColumns="False" MinColumnWidth="50">
                                         <DataGrid.Columns>
-                                            <DataGridTextColumn Binding="{Binding FeeName}" ClipboardContentBinding="{x:Null}" Header="Line #" Width="50" CanUserResize="False" />
-                                            <DataGridTemplateColumn Header="Quantity" Width="60">
+                                            <DataGridTextColumn Binding="{Binding FeeName}" ClipboardContentBinding="{x:Null}" Header="Fee Name" Width="100" CanUserResize="False" />
+                                            <DataGridTemplateColumn Header="Fee Price" Width="60">
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <xctk:IntegerUpDown Value="{Binding FeePrice, UpdateSourceTrigger=PropertyChanged}" DisplayDefaultValueOnEmptyText="True" Minimum="1" MouseWheelActiveOnFocus="True" DefaultValue="1" ParsingNumberStyle="Integer"/>
