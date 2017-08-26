@@ -1125,7 +1125,7 @@
                                     <Grid Margin="34,49,707,0" Height="188" VerticalAlignment="Top">
                                         <Label Content="Position Name:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13"/>
                                         <TextBox x:Name="empPosNewTb" HorizontalAlignment="Left" Height="23" Margin="105,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" FontSize="13" />
-                                        <Button x:Name="addEmpPosBtn" Content="Add" HorizontalAlignment="Left" Margin="370,4,-19,0" VerticalAlignment="Top" Width="85" Click="addEmpPosBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF194E84" BorderBrush="#FF0B3D70" Foreground="#FFFDF7F7"/>
+                                        <Button x:Name="addEmpPosBtn" Content="Add" HorizontalAlignment="Left" Margin="370,4,-19,0" VerticalAlignment="Top" Width="85" Click="addEmpPosBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>
                                         <Button x:Name="saveEmpPosBtn" Content="save" HorizontalAlignment="Left" Margin="346,4,0,0" VerticalAlignment="Top" Width="90" Click="saveEmpPosBtn_Click" Visibility="Hidden"/>
                                         <ListBox x:Name="employeePositionLb" HorizontalAlignment="Left" Height="127" Margin="4,46,0,0" VerticalAlignment="Top" Width="337" FontSize="13" ItemsSource="{Binding EmpPosition}" SelectedItem="{Binding SelectedEmpPosition}" DisplayMemberPath="PositionName" />
                                         <Button x:Name="deleteEmpPosBtn" Content="Delete" HorizontalAlignment="Left" Margin="370,81,-19,0" VerticalAlignment="Top" Width="85" Click="deleteEmpPosBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FFC50919" BorderBrush="#FFA50311" Foreground="#FFF9F3F3"/>
@@ -1134,7 +1134,7 @@
                                     <Grid Margin="34,286,707,0" Height="188" VerticalAlignment="Top">
                                         <Label Content="Job Name:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13"/>
                                         <TextBox x:Name="contNewJobTb" HorizontalAlignment="Left" Height="23" Margin="105,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" FontSize="13"/>
-                                        <Button x:Name="addContJobBtn" Content="Add" HorizontalAlignment="Left" Margin="370,4,-19,0" VerticalAlignment="Top" Width="85" Click="addContJobBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF194E84" BorderBrush="#FF0B3D70" Foreground="#FFFDF7F7"/>
+                                        <Button x:Name="addContJobBtn" Content="Add" HorizontalAlignment="Left" Margin="370,4,-19,0" VerticalAlignment="Top" Width="85" Click="addContJobBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>
                                         <Button x:Name="saveContJobBtn" Content="save" HorizontalAlignment="Left" Margin="346,4,0,0" VerticalAlignment="Top" Width="90" Click="saveEmpPosBtn_Click" Visibility="Hidden"/>
                                         <ListBox x:Name="contJobLb" HorizontalAlignment="Left" Height="127" Margin="4,46,0,0" VerticalAlignment="Top" Width="337" FontSize="13" ItemsSource="{Binding ContJobTitle}" SelectedItem="{Binding SelectedJobTitle}" DisplayMemberPath="JobName" />
                                         <Button x:Name="deleteContJobBtn" Content="Delete" HorizontalAlignment="Left" Margin="370,81,-19,0" VerticalAlignment="Top" Width="85" Click="deleteContJobBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FFC50919" BorderBrush="#FFA50311" Foreground="#FFF9F3F3"/>
@@ -1160,13 +1160,13 @@
                                             <Label x:Name="label30" Content="Select Province:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Normal" FontStyle="Normal"/>
                                             <xctk:DecimalUpDown x:Name="locationPrice" HorizontalAlignment="Left" Margin="220,36,0,0" VerticalAlignment="Top" Width="193" FontSize="14"/>
                                             <Label x:Name="label1_Copy8" Content="Price" HorizontalAlignment="Left" Margin="220,10,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Normal" FontStyle="Normal"/>
-                                            <Button x:Name="setPriceBtn" Content="Set" HorizontalAlignment="Left" Margin="422,34,0,0" VerticalAlignment="Top" Width="75" FontWeight="Normal" FontStyle="Normal" FontSize="14" Height="25" Click="setPriceBtn_Click" Background="#FF0591B0" BorderBrush="#FF017791" Foreground="#FFFBF5F5" FontFamily="Segoe UI Semibold"/>
+                                            <Button x:Name="setPriceBtn" Content="Set" HorizontalAlignment="Left" Margin="422,34,0,0" VerticalAlignment="Top" Width="75" FontWeight="Normal" FontStyle="Normal" FontSize="14" Height="25" Click="setPriceBtn_Click" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold"/>
                                         </Grid>
                                     </GroupBox>
                                     <GroupBox x:Name="groupBox_Copy1" Header="Service Types" Height="308" Margin="10,10,456,0" FontWeight="Bold" FontStyle="Italic" FontSize="16" VerticalAlignment="Top">
                                         <Grid x:Name="serviceTypeGrid" Margin="10,10,12,0" VerticalAlignment="Top">
                                             <Grid x:Name="serviceTypeList" HorizontalAlignment="Left" Height="265" VerticalAlignment="Top" Width="685" Margin="0,0,-104,0">
-                                                <Button x:Name="addServiceTypeBtn" Content="+ add" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="75" FontWeight="Normal" FontStyle="Normal" FontSize="12" Click="addServiceTypeBtn_Click"/>
+                                                <Button x:Name="addServiceTypeBtn" Content="Add" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="75" Height="24" FontWeight="Normal" FontFamily="Segoe UI Semibold"  FontSize="13" Click="addServiceTypeBtn_Click" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>
                                                 <DataGrid x:Name="serviceTypeDg" Height="207" Margin="10,48,10,0" ItemsSource="{Binding ServicesList}" CanUserAddRows="False" MinColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" Grid.ColumnSpan="2" CanUserReorderColumns="False" CanUserResizeColumns="False" SelectedItem="{Binding SelectedService}">
                                                     <DataGrid.Columns >
                                                         <DataGridTextColumn Binding="{Binding ServiceID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False"/>
@@ -1214,19 +1214,23 @@
                                 <Grid Background="#FFE5E5E5">
                                     <ScrollViewer Margin="0,0,0,10">
                                         <Grid>
-                                            <Label x:Name="label17_Copy" Content="Products Category" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="207" FontWeight="Bold" FontStyle="Italic" FontSize="14"/>
-                                            <Border BorderBrush="Black" BorderThickness="1" Margin="23,37,0,0" Padding="10" CornerRadius="10" Height="208" VerticalAlignment="Top" HorizontalAlignment="Left">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="9*"/>
+                                                <ColumnDefinition Width="217*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label x:Name="label17_Copy" Content="Products Category" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="207" FontWeight="Bold" FontStyle="Italic" FontSize="14" Grid.ColumnSpan="2"/>
+                                            <Border BorderBrush="Black" BorderThickness="1" Margin="23,37,0,0" Padding="10" CornerRadius="10" Height="208" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2">
                                                 <Grid Margin="0,0,0,-1">
                                                     <ListBox x:Name="invProductsCategoryLb" HorizontalAlignment="Left" Height="127" Margin="16,53,0,0" VerticalAlignment="Top" Width="366" FontSize="13" />
                                                     <Button x:Name="deleteCategoryBtn" Content="Delete" HorizontalAlignment="Left" Margin="387,92,0,0" VerticalAlignment="Top" Width="75" Click="deleteCategoryBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Height="24" Background="#FFEC1717" BorderBrush="#FFBB0000" Foreground="#FFF9F5F5"/>
                                                     <Button x:Name="addCategoryBtn" Content="Add" HorizontalAlignment="Left" Margin="387,9,0,0" VerticalAlignment="Top" Width="75" Click="addCategoryBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Height="24" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>
                                                     <TextBox x:Name="invCategoryTb" HorizontalAlignment="Left" Height="23" Margin="120,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" FontSize="13"/>
                                                     <Label x:Name="label28" Content="Category Name:" HorizontalAlignment="Left" Margin="12,6,0,0" VerticalAlignment="Top" FontSize="13"/>
-                                                    <Button x:Name="editCategoryBtn" Content="Edit" HorizontalAlignment="Left" Margin="387,63,0,0" VerticalAlignment="Top" Width="75" Click="editCategoryBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF7527B6" BorderBrush="#FF6D08C1" Foreground="#FFF9F9F9"/>
+                                                    <Button x:Name="editCategoryBtn" Content="Edit" HorizontalAlignment="Left" Margin="387,63,0,0" VerticalAlignment="Top" Width="75" Click="editCategoryBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF194E84" BorderBrush="#FF6D08C1" Foreground="#FFF9F9F9"/>
                                                 </Grid>
                                             </Border>
-                                            <Label x:Name="label17_Copy1" Content="Product List" HorizontalAlignment="Left" Height="32" Margin="0,273,0,0" VerticalAlignment="Top" Width="208" FontWeight="Bold" FontStyle="Italic" FontSize="14"/>
-                                            <Border Margin="23,305,10,18" BorderBrush="Black" Padding="10" BorderThickness="1" CornerRadius="10">
+                                            <Label x:Name="label17_Copy1" Content="Product List" HorizontalAlignment="Left" Height="32" Margin="0,273,0,0" VerticalAlignment="Top" Width="208" FontWeight="Bold" FontStyle="Italic" FontSize="14" Grid.ColumnSpan="2"/>
+                                            <Border Margin="23,305,10,18" BorderBrush="Black" Padding="10" BorderThickness="1" CornerRadius="10" Grid.ColumnSpan="2">
                                                 <Grid>
                                                     <Grid Margin="0,0,17,0">
                                                         <Label x:Name="label31" Content="Product Name:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -1242,7 +1246,7 @@
 
                                                         <ComboBox x:Name="productCategoryCb" HorizontalAlignment="Left" Margin="121,128,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="typeName" SelectedValuePath="typeID" SelectedItem="{Binding cbItem, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"/>
                                                         <ComboBox x:Name="productSupplierCb" HorizontalAlignment="Left" Margin="121,161,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="CompanyName" SelectedValuePath="CompanyID" SelectedItem="{Binding SelectedSupplier, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" ItemsSource="{Binding Suppliers}"/>
-                                                        <Button x:Name="addSaveProductBtn" Content="+ add" HorizontalAlignment="Left" Margin="377,186,0,0" VerticalAlignment="Top" Width="74" Click="addNewProductBtn_Click"/>
+                                                        <Button x:Name="addSaveProductBtn" FontSize="13" Content="Add" HorizontalAlignment="Left" Margin="377,186,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="addNewProductBtn_Click" FontFamily="Segoe UI Semibold" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>
                                                         <DataGrid x:Name="productListTb" Margin="488,10,10,27" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}" AutoGenerateColumns="False" IsReadOnly="True">
                                                             <DataGrid.Columns >
                                                                 <DataGridTextColumn Binding="{Binding ItemName}" ClipboardContentBinding="{x:Null}" Width="150" CanUserResize="False" Visibility="Visible" Header="Product Name" />
