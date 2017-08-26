@@ -1708,11 +1708,11 @@ namespace prototype2
                 {
                     if (initPrice)
                     {
-                        string query = "INSERT INTO location_details_t (locationProvinceID,locationPrice) VALUES ('" + custProvinceCb.SelectedValue + "', '" + locationPrice.Value + "')";
+                        string query = "INSERT INTO location_details_t (locationProvinceID,locationPrice) VALUES ('" + custProvinceCb1.SelectedValue + "', '" + locationPrice.Value + "')";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             MessageBox.Show("Price saved.");
-                            custProvinceCb.SelectedValue = -1;
+                            custProvinceCb1.SelectedValue = -1;
                             locationPrice.Value = 0;
 
                             serviceName.Clear();
@@ -1728,7 +1728,7 @@ namespace prototype2
                         {
                             //MessageBox.Show("Price updated.");
                             id = "";
-                            custProvinceCb.SelectedValue = -1;
+                            custProvinceCb1.SelectedValue = -1;
                             locationPrice.Value = 0;
                             initPrice = true;
                             setListBoxControls();
@@ -3304,16 +3304,25 @@ namespace prototype2
             computePrice();
         }
 
+        private void discountPriceTb_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            computePrice();
+        }
+
+        private void qtyTb_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            computePrice();
+        }
+
+        private void IntegerUpDown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            computePrice();
+        }
+
         private void computePrice()
         {
             decimal totalFee = 0;
-            foreach (RequestedItem item in MainVM.RequestedItems)
-            {
-                if (item.itemType == 0)
-                {
-                    item.totalAmountMarkUp = (item.unitPrice * item.qty) + (((item.unitPrice * item.qty) / 100) * (decimal)markupPriceTb.Value);
-                }
-            }
+            decimal totalPrice = 0;
             foreach (AdditionalFee aF in MainVM.AdditionalFees)
             {
                 if (!(aF.FeePrice == 0))
@@ -3323,11 +3332,27 @@ namespace prototype2
             }
             foreach (RequestedItem item in MainVM.RequestedItems)
             {
-                if (item.itemType == 1)
+                item.totalAmount = item.unitPrice * item.qty;
+                if (item.itemType == 0)
                 {
-                    item.totalAmountMarkUp = ((item.unitPrice + totalFee) / 100) * (decimal)markupPriceTb.Value;
+                    item.totalAmountMarkUp = ((item.unitPrice * item.qty) + (((item.unitPrice * item.qty) / 100) * (decimal)markupPriceTb.Value)) - (((item.unitPrice * item.qty) / 100) * (decimal)discountPriceTb.Value);
                 }
+                else if (item.itemType == 1)
+                {
+                    item.totalAmountMarkUp = (item.unitPrice+totalFee+(((item.unitPrice + totalFee) / 100) * (decimal)markupPriceTb.Value)) - ((item.unitPrice + totalFee) / 100) * (decimal)discountPriceTb.Value;
+                }
+                totalPrice += item.totalAmountMarkUp;
             }
+            if (totalPriceLbl != null)
+            {
+                totalPriceLbl.Content = "" + totalPrice;
+            }
+        }
+
+        private void feeDeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(MainVM.SelectedAdditionalFee!=null)
+            MainVM.AdditionalFees.Remove(MainVM.SelectedAdditionalFee);
         }
     }
 }

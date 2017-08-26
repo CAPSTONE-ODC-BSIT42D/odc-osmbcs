@@ -593,6 +593,13 @@ namespace prototype2
             get { return _totalAmountMarkUp; }
             set { SetProperty(ref _totalAmountMarkUp, value); }
         }
+
+        private bool _qtyEditable;
+        public bool qtyEditable
+        {
+            get { return _qtyEditable; }
+            set { SetProperty(ref _qtyEditable, value); }
+        }
     }
 
 }
