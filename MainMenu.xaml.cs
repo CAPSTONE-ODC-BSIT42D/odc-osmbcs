@@ -61,13 +61,13 @@ namespace prototype2
                 MainVM.Provinces.Clear();
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    MainVM.Provinces.Add(new Province() {  ProvinceID= (int)dr["locProvinceID"], ProvinceName = dr["locProvince"].ToString(), ProvincePrice = (decimal)dr["locationPrice"] });
+                    MainVM.Provinces.Add(new Province() {  ProvinceID= (int)dr["locProvinceID"], ProvinceName = dr["locProvince"].ToString() });
                 }
                 dbCon.Close();
             }
             if (dbCon.IsConnect())
             {
-                string query = "SELECT locationProvinceID, locationaPrice FROM location_details_t";
+                string query = "SELECT locationProvinceID, locationPrice FROM location_details_t";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
@@ -3302,8 +3302,6 @@ namespace prototype2
         private void additionalFeesDg_SourceUpdated(object sender, DataTransferEventArgs e)
         {
             computePrice();
-
-
         }
 
         private void computePrice()
