@@ -8,17 +8,17 @@
         mc:Ignorable="d"
         Title="addNewItem" Height="642.835" Width="856.51" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <GroupBox x:Name="groupBox" Header="New Item" Margin="10,10,10,48" FontSize="14">
+        <GroupBox x:Name="groupBox" Header="New Item" Margin="10,10,10,48" FontSize="14" BorderBrush="Black">
             <ScrollViewer Margin="0,0,-2,0">
                 <Grid>
                     <Label x:Name="label" Content="Item Type:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic"/>
                     <RadioButton x:Name="productRbtn" Content="Product" HorizontalAlignment="Left" Margin="37,39,0,0" VerticalAlignment="Top" GroupName="itemType" Checked="productRbtn_Checked" Unchecked="productRbtn_Unchecked"/>
                     <RadioButton x:Name="serviceRbtn" Content="Service" HorizontalAlignment="Left" Margin="37,59,0,0" VerticalAlignment="Top" GroupName="itemType" Checked="serviceRbtn_Checked" Unchecked="serviceRbtn_Unchecked"/>
                     <Grid x:Name="forms" Margin="10,79,10,10">
-                        <Border x:Name="service" Margin="0,0,0,90" BorderThickness="1" BorderBrush="Black" Panel.ZIndex="-1">
+                        <Border x:Name="service" Margin="0,0,0,90" BorderThickness="1" BorderBrush="Black" Panel.ZIndex="-1" d:IsHidden="True">
                             <Grid>
                                 <Label Content="Service Type:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic"/>
-                                <ComboBox x:Name="serviceTypeCb" HorizontalAlignment="Left" Margin="27,31,0,0" VerticalAlignment="Top" Width="186" ItemsSource="{Binding ServicesList}" DisplayMemberPath="ServiceName"/>
+                                <ComboBox x:Name="serviceTypeCb" HorizontalAlignment="Left" Margin="27,31,0,0" VerticalAlignment="Top" Width="186" ItemsSource="{Binding ServicesList}" DisplayMemberPath="ServiceName" SelectedValuePath="ServiceID"/>
                                 <Label Content="Description:" VerticalAlignment="Top" Height="26" Margin="0,59,0,0" HorizontalAlignment="Left" Width="80" FontSize="12" FontFamily="Segoe UI" FontStyle="Italic" FontWeight="Bold" RenderTransformOrigin="0.5,0.5"/>
                                 <TextBox x:Name="serviceDescTb" Height="79" Margin="27,93,21,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" FontSize="12" FontFamily="Segoe UI" FontStyle="Normal" FontWeight="Normal"/>
                                 <Label Content="Location" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,186,0,0" FontWeight="Bold" FontStyle="Italic" Width="65"/>
@@ -38,11 +38,11 @@
                                 </ComboBox>
                             </Grid>
                         </Border>
-                        <Border x:Name="product" Margin="0,0,0,90" BorderBrush="Black" BorderThickness="1" Panel.ZIndex="-1" d:IsHidden="True" >
-                            <Grid d:IsHidden="True">
+                        <Border x:Name="product" Margin="0,0,0,90" BorderBrush="Black" BorderThickness="1" Panel.ZIndex="-1" >
+                            <Grid>
                                 <DataGrid x:Name="addGridProductListDg" Margin="10,41,10,28" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}" AutoGenerateColumns="False" IsReadOnly="True">
                                     <DataGrid.Columns >
-                                        <DataGridTemplateColumn Header="" Width="60">
+                                        <DataGridTemplateColumn Header="" Width="25">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"/>
