@@ -1833,7 +1833,7 @@ namespace prototype2
             }
             if (dbCon.IsConnect())
             {
-                string query = "SELECT locationProvinceID, locationaPrice FROM location_details_t";
+                string query = "SELECT locationProvinceID, locationPrice FROM location_details_t";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
