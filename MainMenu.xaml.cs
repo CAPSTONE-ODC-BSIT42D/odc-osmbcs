@@ -320,13 +320,13 @@ namespace prototype2
         
         private void paymentCustomRb_Checked(object sender, RoutedEventArgs e)
         {
-            downPercentTb.IsEnabled = true;
+            downpaymentPercentTb.IsEnabled = true;
             paymentDpLbl.IsEnabled = true;
         }
 
         private void paymentCustomRb_Unchecked(object sender, RoutedEventArgs e)
         {
-            downPercentTb.IsEnabled = false;
+            downpaymentPercentTb.IsEnabled = false;
             paymentDpLbl.IsEnabled = false;
         }
 
@@ -2216,8 +2216,13 @@ namespace prototype2
             {
                 try
                 {
-                    int selectIndex = custContactDg.SelectedIndex;
-                    MainVM.CustRepresentatives.RemoveAt(selectIndex);
+                    if (MainVM.CustRepresentatives.Count != 1)
+                    {
+                        MainVM.CustRepresentatives.Remove(MainVM.SelectedRepresentative);
+                    }
+                    else
+                        MessageBox.Show("Need atleast 1 representative.");
+                    
                 }
                 catch (Exception) { throw; }
             }
