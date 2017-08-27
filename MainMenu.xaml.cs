@@ -1927,7 +1927,7 @@ namespace prototype2
                 }
                 else
                 {
-                    MessageBox.Show("Resolve the error first.");
+                    MessageBox.Show("Please resolve the error/s first.");
                 }
                 
 
@@ -2080,7 +2080,7 @@ namespace prototype2
             }
             else
             {
-                MessageBox.Show("Please resolve the error first.");
+                MessageBox.Show("Please resolve the error/s first.");
             }
         }
 
@@ -2156,7 +2156,7 @@ namespace prototype2
             }
             else
             {
-                MessageBox.Show("Please resolve the error first.");
+                MessageBox.Show("Please resolve the error/s first.");
             }
         }
 
@@ -2819,7 +2819,7 @@ namespace prototype2
             }
             else
             {
-                MessageBox.Show("Please resolve the error first.");
+                MessageBox.Show("Please resolve the error/s first.");
             }
         }
 
@@ -2908,7 +2908,7 @@ namespace prototype2
             }
             else
             {
-                MessageBox.Show("Please resolve the error first.");
+                MessageBox.Show("Please resolve the error/s first.");
             }
         }
 

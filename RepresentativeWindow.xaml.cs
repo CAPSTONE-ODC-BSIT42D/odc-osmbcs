@@ -269,7 +269,11 @@ namespace prototype2
         {
             cancelBtnClicked = true;
             this.Close();
-            MainMenu.MainVM.CustRepresentatives.Remove(MainMenu.MainVM.SelectedRepresentative);          
+            MainMenu.MainVM.CustRepresentatives.Remove(MainMenu.MainVM.SelectedRepresentative);
+            firstNameTb.Clear();
+            middleInitialTb.Clear();
+            lastNameTb.Clear();
+            clearContactsBoxes();
         }
 
         private void editRepContBtn_Click(object sender, RoutedEventArgs e)

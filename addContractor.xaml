@@ -72,7 +72,7 @@
                             </Binding>
                         </TextBox>
                         <Image x:Name="empImage" Grid.Column="1" HorizontalAlignment="Left" Height="80" Margin="477,28,0,0" VerticalAlignment="Top" Width="80" Source="Resources/picture.png"/>
-                        <Button x:Name="openFileBtn" Content="Open Image" Grid.Column="1" HorizontalAlignment="Left" Margin="475,106,0,0" VerticalAlignment="Top" Width="87" FontWeight="Normal" Click="openFileBtn_Click" Height="28" FontSize="13" FontFamily="Segoe UI Semibold" Background="#FF194E84" BorderBrush="#FF0B3D70" Foreground="#FFFFF5F5"/>
+                        <Button x:Name="openFileBtn" Content="Open Image" Grid.Column="1" HorizontalAlignment="Left" Margin="475,106,0,0" VerticalAlignment="Top" Width="87" FontWeight="Normal" Click="openFileBtn_Click" Height="28" FontSize="13" FontFamily="Segoe UI Semibold" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>
                         <Label Content="Address" HorizontalAlignment="Left" Margin="2,116,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1"/>
                         <Label Content="* Address" VerticalAlignment="Top" Visibility="Visible" Margin="21,141,443,0" FontWeight="Normal" Grid.Column="1"/>
                         <TextBox x:Name="addressTb" HorizontalAlignment="Left" Height="23" Margin="38,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="520" FontWeight="Normal" Grid.Column="1" TextChanged="addressTb_TextChanged">
