@@ -22,6 +22,7 @@ namespace prototype2
         private Paragraph addressFrame;
         private Paragraph customerName;
         private Paragraph dateFrame;
+        private Paragraph paragraph1;
         private Paragraph letterHeaderFrame;
         private Table table;
         readonly XPathNavigator navigator;
@@ -40,6 +41,7 @@ namespace prototype2
             this.document.Info.Title = "Sales Quote "+sqNo;
             this.document.Info.Subject = "Sales Quote " + sqNo;
             this.document.Info.Author = author;
+            this.document.DefaultPageSetup.PageFormat = PageFormat.Letter;
             DefineStyles();
             CreatePage();
             //FillContent();
@@ -126,6 +128,15 @@ namespace prototype2
             addressFrame.Format.Font.Name = "Calibri";
             addressFrame.Format.Font.Size = 11;
             addressFrame.Format.SpaceAfter = "1.0cm";
+            paragraph1.AddText("Dear");
+            paragraph1.AddFormattedText("<placeholder>", TextFormat.Bold);
+            paragraph1.AddLineBreak();
+            paragraph1.AddText("As per your request last January 18, 2017, we are formally offering our price proposal for the above subject as follows:");
+            addressFrame.Format.Font.Name = "Calibri";
+            addressFrame.Format.Font.Size = 11;
+            addressFrame.Format.SpaceAfter = "1.0cm";
+
+
             // Create the item table
 
             this.table = section.AddTable();
@@ -140,23 +151,24 @@ namespace prototype2
             Column column = this.table.AddColumn("1cm");
             column.Format.Alignment = ParagraphAlignment.Center;
 
-            column = this.table.AddColumn("2.5cm");
+            column = this.table.AddColumn();
             column.Format.Alignment = ParagraphAlignment.Right;
 
-            column = this.table.AddColumn("3cm");
+            column = this.table.AddColumn();
             column.Format.Alignment = ParagraphAlignment.Right;
 
-            column = this.table.AddColumn("3.5cm");
+            column = this.table.AddColumn();
             column.Format.Alignment = ParagraphAlignment.Right;
 
-            column = this.table.AddColumn("2cm");
+            column = this.table.AddColumn();
             column.Format.Alignment = ParagraphAlignment.Center;
 
-            column = this.table.AddColumn("4cm");
+            column = this.table.AddColumn();
             column.Format.Alignment = ParagraphAlignment.Right;
 
-            column = this.table.AddColumn("4cm");
+            column = this.table.AddColumn();
             column.Format.Alignment = ParagraphAlignment.Right;
+            
             
             // Create the header of the table
             Row row = table.AddRow();
@@ -187,128 +199,117 @@ namespace prototype2
             row.Cells[6].AddParagraph("Total Amount");
             row.Cells[6].Format.Alignment = ParagraphAlignment.Left;
             row.Cells[6].VerticalAlignment = VerticalAlignment.Bottom;
-            //row = table.AddRow();
-            //row.HeadingFormat = true;
-            //row.Format.Alignment = ParagraphAlignment.Center;
-            //row.Format.Font.Bold = true;
-            //row.Shading.Color = TableBlue;
-            //row.Cells[1].AddParagraph("Quantity");
-            //row.Cells[1].Format.Alignment = ParagraphAlignment.Left;
-            //row.Cells[2].AddParagraph("Unit Price");
-            //row.Cells[2].Format.Alignment = ParagraphAlignment.Left;
-            //row.Cells[3].AddParagraph("Discount (%)");
-            //row.Cells[3].Format.Alignment = ParagraphAlignment.Left;
-            //row.Cells[4].AddParagraph("Taxable");
-            //row.Cells[4].Format.Alignment = ParagraphAlignment.Left;
+
 
             this.table.SetEdge(0, 0, 7, 1, Edge.Box, BorderStyle.Single, 0.25, Color.Empty);
         }
-        //void FillContent()
-        //{
-        //    // Fill address in address text frame
-        //    XPathNavigator item = SelectItem("/invoice/to");
-        //    Paragraph paragraph = this.addressFrame.AddParagraph();
-        //    paragraph.AddText(GetValue(item, "name/singleName"));
-        //    paragraph.AddLineBreak();
-        //    paragraph.AddText(GetValue(item, "address/line1"));
-        //    paragraph.AddLineBreak();
-        //    paragraph.AddText(GetValue(item, "address/postalCode") + " " + GetValue(item, "address/city"));
+        void FillContent()
+        {
 
-        //    // Iterate the invoice items
-        //    double totalExtendedPrice = 0;
-        //    XPathNodeIterator iter = this.navigator.Select("/invoice/items/*");
-        //    while (iter.MoveNext())
-        //    {
-        //        item = iter.Current;
-        //        double quantity = GetValueAsDouble(item, "quantity");
-        //        double price = GetValueAsDouble(item, "price");
-        //        double discount = GetValueAsDouble(item, "discount");
+            //// Fill address in address text frame
+            //XPathNavigator item = SelectItem("/invoice/to");
+            //Paragraph paragraph = this.addressFrame.AddParagraph();
+            //paragraph.AddText(GetValue(item, "name/singleName"));
+            //paragraph.AddLineBreak();
+            //paragraph.AddText(GetValue(item, "address/line1"));
+            //paragraph.AddLineBreak();
+            //paragraph.AddText(GetValue(item, "address/postalCode") + " " + GetValue(item, "address/city"));
 
-        //        // Each item fills two rows
-        //        Row row1 = this.table.AddRow();
-        //        Row row2 = this.table.AddRow();
-        //        row1.TopPadding = 1.5;
-        //        row1.Cells[0].Shading.Color = TableGray;
-        //        row1.Cells[0].VerticalAlignment = VerticalAlignment.Center;
-        //        row1.Cells[0].MergeDown = 1;
-        //        row1.Cells[1].Format.Alignment = ParagraphAlignment.Left;
-        //        row1.Cells[1].MergeRight = 3;
-        //        row1.Cells[5].Shading.Color = TableGray;
-        //        row1.Cells[5].MergeDown = 1;
+            //// Iterate the invoice items
+            //double totalExtendedPrice = 0;
+            //XPathNodeIterator iter = this.navigator.Select("/invoice/items/*");
+            //while (iter.MoveNext())
+            //{
+            //    item = iter.Current;
+            //    double quantity = GetValueAsDouble(item, "quantity");
+            //    double price = GetValueAsDouble(item, "price");
+            //    double discount = GetValueAsDouble(item, "discount");
 
-        //        row1.Cells[0].AddParagraph(GetValue(item, "itemNumber"));
-        //        paragraph = row1.Cells[1].AddParagraph();
-        //        paragraph.AddFormattedText(GetValue(item, "title"), TextFormat.Bold);
-        //        paragraph.AddFormattedText(" by ", TextFormat.Italic);
-        //        paragraph.AddText(GetValue(item, "author"));
-        //        row2.Cells[1].AddParagraph(GetValue(item, "quantity"));
-        //        row2.Cells[2].AddParagraph(price.ToString("0.00") + " €");
-        //        row2.Cells[3].AddParagraph(discount.ToString("0.0"));
-        //        row2.Cells[4].AddParagraph();
-        //        row2.Cells[5].AddParagraph(price.ToString("0.00"));
-        //        double extendedPrice = quantity * price;
-        //        extendedPrice = extendedPrice * (100 - discount) / 100;
-        //        row1.Cells[5].AddParagraph(extendedPrice.ToString("0.00") + " €");
-        //        row1.Cells[5].VerticalAlignment = VerticalAlignment.Bottom;
-        //        totalExtendedPrice += extendedPrice;
+            //    // Each item fills two rows
+            //    Row row1 = this.table.AddRow();
+            //    Row row2 = this.table.AddRow();
+            //    row1.TopPadding = 1.5;
+            //    row1.Cells[0].Shading.Color = TableGray;
+            //    row1.Cells[0].VerticalAlignment = VerticalAlignment.Center;
+            //    row1.Cells[0].MergeDown = 1;
+            //    row1.Cells[1].Format.Alignment = ParagraphAlignment.Left;
+            //    row1.Cells[1].MergeRight = 3;
+            //    row1.Cells[5].Shading.Color = TableGray;
+            //    row1.Cells[5].MergeDown = 1;
 
-        //        this.table.SetEdge(0, this.table.Rows.Count - 2, 6, 2, Edge.Box, BorderStyle.Single, 0.75);
-        //    }
+            //    row1.Cells[0].AddParagraph(GetValue(item, "itemNumber"));
+            //    paragraph = row1.Cells[1].AddParagraph();
+            //    paragraph.AddFormattedText(GetValue(item, "title"), TextFormat.Bold);
+            //    paragraph.AddFormattedText(" by ", TextFormat.Italic);
+            //    paragraph.AddText(GetValue(item, "author"));
+            //    row2.Cells[1].AddParagraph(GetValue(item, "quantity"));
+            //    row2.Cells[2].AddParagraph(price.ToString("0.00") + " €");
+            //    row2.Cells[3].AddParagraph(discount.ToString("0.0"));
+            //    row2.Cells[4].AddParagraph();
+            //    row2.Cells[5].AddParagraph(price.ToString("0.00"));
+            //    double extendedPrice = quantity * price;
+            //    extendedPrice = extendedPrice * (100 - discount) / 100;
+            //    row1.Cells[5].AddParagraph(extendedPrice.ToString("0.00") + " €");
+            //    row1.Cells[5].VerticalAlignment = VerticalAlignment.Bottom;
+            //    totalExtendedPrice += extendedPrice;
 
-        //    // Add an invisible row as a space line to the table
-        //    Row row = this.table.AddRow();
-        //    row.Borders.Visible = false;
+            //    this.table.SetEdge(0, this.table.Rows.Count - 2, 6, 2, Edge.Box, BorderStyle.Single, 0.75);
+            //}
 
-        //    // Add the total price row
-        //    row = this.table.AddRow();
-        //    row.Cells[0].Borders.Visible = false;
-        //    row.Cells[0].AddParagraph("Total Price");
-        //    row.Cells[0].Format.Font.Bold = true;
-        //    row.Cells[0].Format.Alignment = ParagraphAlignment.Right;
-        //    row.Cells[0].MergeRight = 4;
-        //    row.Cells[5].AddParagraph(totalExtendedPrice.ToString("0.00") + " €");
+            //// Add an invisible row as a space line to the table
+            //Row row = this.table.AddRow();
+            //row.Borders.Visible = false;
 
-        //    // Add the VAT row
-        //    row = this.table.AddRow();
-        //    row.Cells[0].Borders.Visible = false;
-        //    row.Cells[0].AddParagraph("VAT (19%)");
-        //    row.Cells[0].Format.Font.Bold = true;
-        //    row.Cells[0].Format.Alignment = ParagraphAlignment.Right;
-        //    row.Cells[0].MergeRight = 4;
-        //    row.Cells[5].AddParagraph((0.19 * totalExtendedPrice).ToString("0.00") + " €");
+            //// Add the total price row
+            //row = this.table.AddRow();
+            //row.Cells[0].Borders.Visible = false;
+            //row.Cells[0].AddParagraph("Total Price");
+            //row.Cells[0].Format.Font.Bold = true;
+            //row.Cells[0].Format.Alignment = ParagraphAlignment.Right;
+            //row.Cells[0].MergeRight = 4;
+            //row.Cells[5].AddParagraph(totalExtendedPrice.ToString("0.00") + " €");
 
-        //    // Add the additional fee row
-        //    row = this.table.AddRow();
-        //    row.Cells[0].Borders.Visible = false;
-        //    row.Cells[0].AddParagraph("Shipping and Handling");
-        //    row.Cells[5].AddParagraph(0.ToString("0.00") + " €");
-        //    row.Cells[0].Format.Font.Bold = true;
-        //    row.Cells[0].Format.Alignment = ParagraphAlignment.Right;
-        //    row.Cells[0].MergeRight = 4;
+            //// Add the VAT row
+            //row = this.table.AddRow();
+            //row.Cells[0].Borders.Visible = false;
+            //row.Cells[0].AddParagraph("VAT (19%)");
+            //row.Cells[0].Format.Font.Bold = true;
+            //row.Cells[0].Format.Alignment = ParagraphAlignment.Right;
+            //row.Cells[0].MergeRight = 4;
+            //row.Cells[5].AddParagraph((0.19 * totalExtendedPrice).ToString("0.00") + " €");
 
-        //    // Add the total due row
-        //    row = this.table.AddRow();
-        //    row.Cells[0].AddParagraph("Total Due");
-        //    row.Cells[0].Borders.Visible = false;
-        //    row.Cells[0].Format.Font.Bold = true;
-        //    row.Cells[0].Format.Alignment = ParagraphAlignment.Right;
-        //    row.Cells[0].MergeRight = 4;
-        //    totalExtendedPrice += 0.19 * totalExtendedPrice;
-        //    row.Cells[5].AddParagraph(totalExtendedPrice.ToString("0.00") + " €");
+            //// Add the additional fee row
+            //row = this.table.AddRow();
+            //row.Cells[0].Borders.Visible = false;
+            //row.Cells[0].AddParagraph("Shipping and Handling");
+            //row.Cells[5].AddParagraph(0.ToString("0.00") + " €");
+            //row.Cells[0].Format.Font.Bold = true;
+            //row.Cells[0].Format.Alignment = ParagraphAlignment.Right;
+            //row.Cells[0].MergeRight = 4;
 
-        //    // Set the borders of the specified cell range
-        //    this.table.SetEdge(5, this.table.Rows.Count - 4, 1, 4, Edge.Box, BorderStyle.Single, 0.75);
+            //// Add the total due row
+            //row = this.table.AddRow();
+            //row.Cells[0].AddParagraph("Total Due");
+            //row.Cells[0].Borders.Visible = false;
+            //row.Cells[0].Format.Font.Bold = true;
+            //row.Cells[0].Format.Alignment = ParagraphAlignment.Right;
+            //row.Cells[0].MergeRight = 4;
+            //totalExtendedPrice += 0.19 * totalExtendedPrice;
+            //row.Cells[5].AddParagraph(totalExtendedPrice.ToString("0.00") + " €");
 
-        //    // Add the notes paragraph
-        //    paragraph = this.document.LastSection.AddParagraph();
-        //    paragraph.Format.SpaceBefore = "1cm";
-        //    paragraph.Format.Borders.Width = 0.75;
-        //    paragraph.Format.Borders.Distance = 3;
-        //    paragraph.Format.Borders.Color = TableBorder;
-        //    paragraph.Format.Shading.Color = TableGray;
-        //    item = SelectItem("/invoice");
-        //    paragraph.AddText(GetValue(item, "notes"));
-        //}
+            //// Set the borders of the specified cell range
+            //this.table.SetEdge(5, this.table.Rows.Count - 4, 1, 4, Edge.Box, BorderStyle.Single, 0.75);
+
+            //// Add the notes paragraph
+            //paragraph = this.document.LastSection.AddParagraph();
+            //paragraph.Format.SpaceBefore = "1cm";
+            //paragraph.Format.Borders.Width = 0.75;
+            //paragraph.Format.Borders.Distance = 3;
+            //paragraph.Format.Borders.Color = TableBorder;
+            //paragraph.Format.Shading.Color = TableGray;
+            //item = SelectItem("/invoice");
+            //paragraph.AddText(GetValue(item, "notes"));
+        }
         /// <summary>
         /// Selects a subtree in the XML data.
         /// </summary>

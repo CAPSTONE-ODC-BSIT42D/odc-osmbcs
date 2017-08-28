@@ -7,7 +7,7 @@
         xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms" xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit" xmlns:Windows="clr-namespace:MigraDoc.Rendering.Windows;assembly=MigraDoc.Rendering-WPF" x:Class="prototype2.MainMenu"
         mc:Ignorable="d"
-        Title="MainMenu" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" Loaded="Window_Loaded" WindowState="Maximized" MinWidth="763" MinHeight="535" d:DesignWidth="1353.5" d:DesignHeight="914.8">
+        Title="MainMenu" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" Loaded="Window_Loaded" WindowState="Maximized" MinWidth="763" MinHeight="535" d:DesignWidth="1353.5" d:DesignHeight="883.3">
     <Window.Resources>
         <Style TargetType="{x:Type Button}" x:Key="mainButton">
             <Setter Property="Background" Value="#2C3E50"/>
@@ -624,7 +624,7 @@
                         </DataGrid>
 
                     </Grid>
-                    <Grid x:Name="addRequestionGrid" Margin="10,70,10,10" d:IsHidden="True">
+                    <Grid x:Name="addRequestionGrid" Margin="10,70,10,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1214*"/>
                             <ColumnDefinition Width="23*"/>
@@ -645,14 +645,20 @@
                                     <Label Content="Requested Items" VerticalAlignment="Top" Height="37" Margin="10,72,0,0" HorizontalAlignment="Left" Width="241" FontSize="16" FontFamily="Segoe UI" FontStyle="Italic" FontWeight="Bold"/>
                                     <Label x:Name="label32_Copy2" Content="Additional Fees:" HorizontalAlignment="Left" Margin="10,394,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Segoe UI"/>
                                     <Button x:Name="transReqAddNewItem" Content="Add New Item" Margin="0,72,10,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Normal" FontFamily="Segoe UI Semibold" FontSize="13" Click="transReqAddNewItem_Click" HorizontalAlignment="Right" Width="105" Foreground="White" Height="26" Background="#FF194E84" BorderBrush="#FF0B3D70" Grid.Column="1"/>
-                                    <DataGrid x:Name="itemDg" Margin="10,109,24,0" ItemsSource="{Binding RequestedItems}" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="False" IsReadOnly="True" VerticalAlignment="Top" Height="275" Grid.ColumnSpan="2" SelectedItem="{Binding SelectedAdditionalFee}" >
+                                    <DataGrid x:Name="itemDg" Margin="10,109,24,0" ItemsSource="{Binding RequestedItems}" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="False" IsReadOnly="True" VerticalAlignment="Top" Height="275" Grid.ColumnSpan="2" SelectedItem="{Binding SelectedRequestedItem}" >
                                         <DataGrid.Columns >
                                             <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Width="25" CanUserResize="False" />
                                             <DataGridTextColumn Binding="{Binding lineNo}" ClipboardContentBinding="{x:Null}" Header="Line #" Width="50" CanUserResize="False" />
                                             <DataGridTextColumn Binding="{Binding itemName}" ClipboardContentBinding="{x:Null}" Header="Item Name" Width="100" CanUserResize="False" />
                                             <DataGridTextColumn Binding="{Binding desc}" ClipboardContentBinding="{x:Null}" Header="Description" Width="300"  />
                                             <DataGridTextColumn Binding="{Binding itemType}" ClipboardContentBinding="{x:Null}" Header="Item Type" Width="100" CanUserResize="False" />
-                                            <DataGridTextColumn Binding="{Binding qty}" ClipboardContentBinding="{x:Null}" Header="Qty" Width="100" CanUserResize="False"  />
+                                            <DataGridTemplateColumn Header="" Width="60">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <xctk:IntegerUpDown x:Name="qtyTb" Value ="{Binding qty}" ValueChanged="qtyTb_ValueChanged" />
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
                                             <DataGridTextColumn Binding="{Binding unitPrice}" ClipboardContentBinding="{x:Null}" Header="Unit Price" Width="100"  />
                                             <DataGridTextColumn Binding="{Binding totalAmount}" ClipboardContentBinding="{x:Null}" Header="Total Amount" Width="100"  />
                                             <DataGridTextColumn Binding="{Binding totalAmountMarkUp}" ClipboardContentBinding="{x:Null}" Header="Total + Markup Price" Width="200"  />
@@ -660,10 +666,17 @@
                                     </DataGrid>
                                     <xctk:IntegerUpDown x:Name="markupPriceTb" Margin="201,403,0,0" VerticalAlignment="Top" ValueChanged="markupPriceTb_ValueChanged" VerticalContentAlignment="Center" Height="25" DefaultValue="0" Minimum="0" DisplayDefaultValueOnEmptyText="True" ParsingNumberStyle="Integer" Text="0" FontWeight="Normal" FontStyle="Normal" HorizontalContentAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" Width="105"/>
                                     <xctk:IntegerUpDown x:Name="discountPriceTb" HorizontalAlignment="Left" Margin="201,435,0,0" VerticalAlignment="Top" Width="105"  VerticalContentAlignment="Center" Height="22" DefaultValue="0" Minimum="0" DisplayDefaultValueOnEmptyText="True" ParsingNumberStyle="Integer" Text="0" FontWeight="Normal" FontStyle="Normal" HorizontalContentAlignment="Center" ValueChanged="discountPriceTb_ValueChanged" Grid.Column="1"/>
-                                    <DataGrid x:Name="additionalFeesDg" Margin="10,436,18,-125" ItemsSource="{Binding AdditionalFees}" AutoGenerateColumns="False" CanUserReorderColumns="False" MinColumnWidth="50" Height="300">
+                                    <DataGrid x:Name="additionalFeesDg" Margin="10,430,10,0" ItemsSource="{Binding AdditionalFees}" AutoGenerateColumns="False" CanUserReorderColumns="False" MinColumnWidth="50" Height="344" VerticalAlignment="Top" SelectedItem="{Binding SelectedAdditionalFee}">
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Binding="{Binding FeeName}" ClipboardContentBinding="{x:Null}" Header="Fee Name" Width="100" CanUserResize="False" />
-                                            <DataGridTemplateColumn Header="Fee Price" Width="60">
+                                            <DataGridTemplateColumn Header="" Width="60">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <xctk:DecimalUpDown Value ="{Binding FeePrice}" ValueChanged="IntegerUpDown_ValueChanged" />
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTemplateColumn Header="" Width="60">
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <Button x:Name="feeDeleteBtn" Content="Delete" Click="feeDeleteBtn_Click" />
