@@ -28,13 +28,13 @@ namespace prototype2
     /// </summary>
     public partial class MainMenu : Window
     {
-        public static MainViewModel MainVM = new MainViewModel();
+        
         public MainMenu()
         {
             InitializeComponent();
             this.DataContext = MainVM;
         }
-        
+        public static MainViewModel MainVM = new MainViewModel();
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             for (int x = 0; x < containerGrid.Children.Count; x++)
@@ -98,30 +98,6 @@ namespace prototype2
             if (!visual.IsDescendantOf(saleSubMenuGrid) && !visual.IsDescendantOf(manageSubMenugrid))
                 saleSubMenuGrid.Visibility = Visibility.Collapsed;
             manageSubMenugrid.Visibility = Visibility.Collapsed;
-            //if (!visual.IsDescendantOf(manageEmployeeDataGrid))
-            //{
-            //    if (manageEmployeeDataGrid.SelectedItems.Count > 0)
-            //    {
-            //        manageEmployeeDataGrid.Columns[manageEmployeeDataGrid.Columns.IndexOf(columnEditBtnEmp)].Visibility = Visibility.Hidden;
-            //        manageEmployeeDataGrid.Columns[manageEmployeeDataGrid.Columns.IndexOf(columnDelBtnEmp)].Visibility = Visibility.Hidden;
-            //    }
-            //}
-            //if (!visual.IsDescendantOf(manageSupplierDataGrid))
-            //{
-            //    if (manageSupplierDataGrid.SelectedItems.Count > 0)
-            //    {
-            //        manageSupplierDataGrid.Columns[manageSupplierDataGrid.Columns.IndexOf(columnEditSuppBtn)].Visibility = Visibility.Hidden;
-            //        manageSupplierDataGrid.Columns[manageSupplierDataGrid.Columns.IndexOf(columnDeleteSuppBtn)].Visibility = Visibility.Hidden;
-            //    }
-            //}
-            //if (!visual.IsDescendantOf(manageCustomeDataGrid))
-            //{
-            //    if (manageCustomeDataGrid.SelectedItems.Count > 0)
-            //    {
-            //        manageCustomeDataGrid.Columns[manageContractorDataGrid.Columns.IndexOf(columnEditBtnCont)].Visibility = Visibility.Hidden;
-            //        manageCustomeDataGrid.Columns[manageContractorDataGrid.Columns.IndexOf(columnDelBtnCont)].Visibility = Visibility.Hidden;
-            //    }
-            //}
         }
 
         /*-----------------MENU BAR BUTTONS-------------------*/
@@ -338,11 +314,7 @@ namespace prototype2
                 transactionQuotationsGrid.Children[x].Visibility = Visibility.Collapsed;
             }
             makeSalesQuoteGrid.Visibility = Visibility.Visible;
-            Document document;
-            DocumentFormat df = new DocumentFormat();
-            document = df.CreateDocument("sdadsa", "asdsadsa");
-            string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
-            pagePreview.Ddl = ddl;
+            
         }
 
         private void transQuotationFormBack_Click(object sender, RoutedEventArgs e)
@@ -380,8 +352,7 @@ namespace prototype2
             DocumentFormat df = new DocumentFormat();
             document = df.CreateDocument("sdadsa", "asdsadsa");
             string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
-            //.Ddl = ddl;
-            pagePreview.Document = document;
+            pagePreview.Ddl = ddl;
             viewQuotationGrid.Visibility = Visibility.Visible;
             
         }

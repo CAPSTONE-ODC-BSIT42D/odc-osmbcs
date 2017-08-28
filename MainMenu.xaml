@@ -7,7 +7,7 @@
         xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms" xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit" xmlns:Windows="clr-namespace:MigraDoc.Rendering.Windows;assembly=MigraDoc.Rendering-WPF" x:Class="prototype2.MainMenu"
         mc:Ignorable="d"
-        Title="MainMenu" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" Loaded="Window_Loaded" WindowState="Maximized" MinWidth="763" MinHeight="535" d:DesignWidth="1320" d:DesignHeight="904.8">
+        Title="MainMenu" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" Loaded="Window_Loaded" WindowState="Maximized" MinWidth="763" MinHeight="535" d:DesignWidth="1353.5" d:DesignHeight="914.8">
     <Window.Resources>
         <Style TargetType="{x:Type Button}" x:Key="mainButton">
             <Setter Property="Background" Value="#2C3E50"/>
@@ -497,14 +497,14 @@
             </Grid>
         </Grid>
         <Grid x:Name="containerGrid" Grid.Row="1" Background="#FF1695A3">
-            <Grid x:Name="manageSubMenugrid" HorizontalAlignment="Right" Width="175" Background="#FF395066" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Height="173" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden" >
+            <Grid x:Name="manageSubMenugrid" Background="#FF395066" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Height="172" Panel.ZIndex="999999" VerticalAlignment="Top" Margin="406,0,0,0" HorizontalAlignment="Left" Width="174" d:IsHidden="True" >
                 <Button x:Name="employeeManageMenuBtn" Content="Employees" Margin="0,1,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="175" Click="employeeManageMenuBtn_Click" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="customerManageMenuBtn" Content="Customers" Margin="0,36,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Foreground="White" Width="175" Click="customerManageMenuBtn_Click" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="supplierManageMenuBtn" Content="Suppliers" Margin="0,71,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="175" Click="supplierManageMenuBtn_Click" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="contractorManageMenuBtn" Content="Contractor" Margin="0,106,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="contractorManageMenuBtn_Click" Width="175" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="settingsManageMenuBtn" Content="Settings" Margin="0,141,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="settingsManageMenuBtn_Click" Width="175" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
             </Grid>
-            <Grid x:Name="saleSubMenuGrid" Width="175" Margin="0,0,369,0" Background="#FF395066" HorizontalAlignment="Right" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden" >
+            <Grid x:Name="saleSubMenuGrid" Margin="140,0,0,0" Background="#FF395066" Panel.ZIndex="999999" VerticalAlignment="Top" HorizontalAlignment="Left" Width="176" d:IsHidden="True" >
                 <Button x:Name="quotesSalesMenuBtn" Content="Quotations" Margin="0,75,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="quotesSalesMenuBtn_Click" Width="175" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1"/>
                 <Button x:Name="ordersSalesMenuBtn" Content="Orders" Margin="0,40,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="ordersSalesMenuBtn_Click" Width="175" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1"/>
                 <Button x:Name="invoiceSalesMenuBtn" Content="Invoices" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="invoiceSalesMenuBtn_Click" Width="175" Margin="0,5,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1"/>
@@ -679,7 +679,7 @@
                         </GroupBox>
                         <Button x:Name="transRequestNext" Content="Next" HorizontalAlignment="Right" Margin="0,0,10,7" VerticalAlignment="Bottom" Width="85" Height="26" Click="transRequestNext_Click" Grid.ColumnSpan="2" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84"/>
                     </Grid>
-                    <Grid x:Name="makeSalesQuoteGrid" Margin="10,70,10,10">
+                    <Grid x:Name="makeSalesQuoteGrid" Margin="10,70,10,10" d:IsHidden="True">
                         <Button x:Name="transQuotationFormBack" Content="&lt; Back" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="74" Height="24" Click="transQuotationFormBack_Click"/>
                         <GroupBox x:Name="groupBox2" Header="Quotation Form" Margin="10,29,10,42" FontFamily="Segoe UI Symbol" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderBrush="Black" VerticalContentAlignment="Stretch">
                             <ScrollViewer Margin="10,10,15,13">
