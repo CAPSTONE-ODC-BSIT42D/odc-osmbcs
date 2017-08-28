@@ -556,7 +556,7 @@
                     </Grid>
                 </Button>
             </Grid>
-            <Grid x:Name="transactionGrid" Margin="10,0" Background="#FFECF0F1" >
+            <Grid x:Name="transactionGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True" >
                 <Grid x:Name="transactionQuotationsGrid" >
                     <Label x:Name="transQuotationHeader" Content="Transaction - Quotations" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" Margin="10,0" d:IsHidden="True" />
                     <Grid x:Name="quotationsGridHome" Margin="10,70,10,10" d:IsHidden="True" >
@@ -909,8 +909,8 @@
                 </Grid>
             </Grid>
             <Grid x:Name="reportsGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True" />
-            <Grid x:Name="manageGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True" >
-                <Grid x:Name="manageCustomerGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged" >
+            <Grid x:Name="manageGrid" Margin="10,0" Background="#FFECF0F1" >
+                <Grid x:Name="manageCustomerGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged" d:IsHidden="True" >
                     <Label x:Name="label7_Copy" Content="Manage - Customer" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid x:Name="manageCustomerHomeGrid" Margin="10,70,10,10">
                         <Grid Margin="10,1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -1096,7 +1096,7 @@
                         <Label x:Name="label7_Copy9" Content="Manage - Contractor" Margin="0,0,307,0" FontSize="20" FontWeight="Bold" Background="{x:Null}" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageSettingsGrid" d:IsHidden="True">
+                <Grid x:Name="manageSettingsGrid">
                     <Label x:Name="label7_Copy6" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid Margin="10,70,10,10">
                         <TabControl x:Name="tabControl" Margin="24,26,29,10">
@@ -1106,7 +1106,7 @@
                                         <Label Content="Position Name:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13"/>
                                         <TextBox x:Name="empPosNewTb" HorizontalAlignment="Left" Height="23" Margin="105,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" FontSize="13" />
                                         <Button x:Name="addEmpPosBtn" Content="Add" HorizontalAlignment="Left" Margin="370,4,-19,0" VerticalAlignment="Top" Width="85" Click="addEmpPosBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>
-                                        <Button x:Name="saveEmpPosBtn" Content="save" HorizontalAlignment="Left" Margin="346,4,0,0" VerticalAlignment="Top" Width="90" Click="saveEmpPosBtn_Click" Visibility="Hidden"/>
+                                        <Button x:Name="saveEmpPosBtn" Content="Save" HorizontalAlignment="Left" Margin="369,131,0,0" VerticalAlignment="Top" Width="90" Click="saveEmpPosBtn_Click" Visibility="Hidden"/>
                                         <ListBox x:Name="employeePositionLb" HorizontalAlignment="Left" Height="127" Margin="4,46,0,0" VerticalAlignment="Top" Width="337" FontSize="13" ItemsSource="{Binding EmpPosition}" SelectedItem="{Binding SelectedEmpPosition}" DisplayMemberPath="PositionName" />
                                         <Button x:Name="deleteEmpPosBtn" Content="Delete" HorizontalAlignment="Left" Margin="370,81,-19,0" VerticalAlignment="Top" Width="85" Click="deleteEmpPosBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FFC50919" BorderBrush="#FFA50311" Foreground="#FFF9F3F3"/>
                                         <Button x:Name="editEmpPosBtn" Content="Edit" HorizontalAlignment="Left" Margin="370,48,-19,0" VerticalAlignment="Top" Width="85" Click="editEmpPosBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF194E84" BorderBrush="#FF0B3D70" Foreground="#FFF9F9F9"/>
@@ -1114,15 +1114,15 @@
                                     <Grid Margin="34,286,707,0" Height="188" VerticalAlignment="Top">
                                         <Label Content="Job Name:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13"/>
                                         <TextBox x:Name="contNewJobTb" HorizontalAlignment="Left" Height="23" Margin="105,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" FontSize="13"/>
-                                        <Button x:Name="addContJobBtn" Content="Add" HorizontalAlignment="Left" Margin="370,4,-19,0" VerticalAlignment="Top" Width="85" Click="addContJobBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>
-                                        <Button x:Name="saveContJobBtn" Content="save" HorizontalAlignment="Left" Margin="346,4,0,0" VerticalAlignment="Top" Width="90" Click="saveEmpPosBtn_Click" Visibility="Hidden"/>
+                                        <Button x:Name="addContJobBtn" Content="Add" HorizontalAlignment="Left" Margin="370,8,0,0" VerticalAlignment="Top" Width="85" Click="addContJobBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>
+                                        <Button x:Name="saveContJobBtn" Content="Save" HorizontalAlignment="Left" Margin="368,142,0,0" VerticalAlignment="Top" Width="90" Click="saveContJobBtn_Click" Visibility="Hidden"/>
                                         <ListBox x:Name="contJobLb" HorizontalAlignment="Left" Height="127" Margin="4,46,0,0" VerticalAlignment="Top" Width="337" FontSize="13" ItemsSource="{Binding ContJobTitle}" SelectedItem="{Binding SelectedJobTitle}" DisplayMemberPath="JobName" />
                                         <Button x:Name="deleteContJobBtn" Content="Delete" HorizontalAlignment="Left" Margin="370,81,-19,0" VerticalAlignment="Top" Width="85" Click="deleteContJobBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FFC50919" BorderBrush="#FFA50311" Foreground="#FFF9F3F3"/>
                                         <Button x:Name="editContJobBtn" Content="Edit" HorizontalAlignment="Left" Margin="370,48,-19,0" VerticalAlignment="Top" Width="85" Click="editContJobBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF194E84" BorderBrush="#FF0B3D70" Foreground="#FFF9F9F9"/>
                                     </Grid>
                                     <Label x:Name="label20" Content="Employee" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top"/>
                                     <Label x:Name="label20_Copy1" Content="Contractor" HorizontalAlignment="Left" Margin="10,255,0,0" VerticalAlignment="Top"/>
-                                </Grid>
+                                   </Grid>
                             </TabItem>
                             <TabItem Header="Services">
                                 <Grid Background="#FFE5E5E5">
