@@ -910,7 +910,7 @@
             </Grid>
             <Grid x:Name="reportsGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True" />
             <Grid x:Name="manageGrid" Margin="10,0" Background="#FFECF0F1" >
-                <Grid x:Name="manageCustomerGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged" d:IsHidden="True" >
+                <Grid x:Name="manageCustomerGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged" >
                     <Label x:Name="label7_Copy" Content="Manage - Customer" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid x:Name="manageCustomerHomeGrid" Margin="10,70,10,10">
                         <Grid Margin="10,1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -1096,7 +1096,7 @@
                         <Label x:Name="label7_Copy9" Content="Manage - Contractor" Margin="0,0,307,0" FontSize="20" FontWeight="Bold" Background="{x:Null}" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageSettingsGrid">
+                <Grid x:Name="manageSettingsGrid" d:IsHidden="True">
                     <Label x:Name="label7_Copy6" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid Margin="10,70,10,10">
                         <TabControl x:Name="tabControl" Margin="24,26,29,10">
@@ -1207,6 +1207,7 @@
                                                     <TextBox x:Name="invCategoryTb" HorizontalAlignment="Left" Height="23" Margin="120,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" FontSize="13"/>
                                                     <Label x:Name="label28" Content="Category Name:" HorizontalAlignment="Left" Margin="12,6,0,0" VerticalAlignment="Top" FontSize="13"/>
                                                     <Button x:Name="editCategoryBtn" Content="Edit" HorizontalAlignment="Left" Margin="387,63,0,0" VerticalAlignment="Top" Width="75" Click="editCategoryBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF194E84" BorderBrush="#FF6D08C1" Foreground="#FFF9F9F9"/>
+                                                    <Button x:Name="saveProdCatBtn" Content="Save" HorizontalAlignment="Left" Margin="385,138,0,0" VerticalAlignment="Top" Width="75" Click="saveProdCatBtn_Click" Visibility="Hidden"/>
                                                 </Grid>
                                             </Border>
                                             <Label x:Name="label17_Copy1" Content="Product List" HorizontalAlignment="Left" Height="32" Margin="0,273,0,0" VerticalAlignment="Top" Width="208" FontWeight="Bold" FontStyle="Italic" FontSize="14" Grid.ColumnSpan="2"/>
@@ -1259,7 +1260,7 @@
                         </TabControl>
                     </Grid>
                 </Grid>
-                <Grid x:Name="companyDetailsGrid" d:IsHidden="True">
+                <Grid x:Name="companyDetailsGrid">
                     <Label x:Name="companyDetailsHeader" Content="" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid Margin="10,70,10,10"/>
                     <Grid x:Name="customerDetailsGrid" Margin="10,70,10,10">
@@ -1268,14 +1269,14 @@
                             <ColumnDefinition Width="62*"/>
                         </Grid.ColumnDefinitions>
                         <GroupBox x:Name="groupBox" Header="Details" Margin="10,10,10,47" FontSize="14" FontWeight="Bold" Background="#FFECF0F1" BorderBrush="#FF2C3E50" Grid.ColumnSpan="2">
-                            <ScrollViewer Margin="0,0,-2,1">
+                            <ScrollViewer Margin="0,0,-2,12">
                                 <Grid VerticalAlignment="Top" Height="863">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <Label x:Name="label23" Content="All required fields are marked with (*)" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" FontWeight="Normal"/>
                                     <Grid Margin="10,28,10,0" VerticalAlignment="Top" Height="50">
-                                        <Label x:Name="label24" Content="* Company Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" FontWeight="Bold" Margin="0,2,0,0" FontStyle="Italic"/>
+                                        <Label x:Name="label24" Content="* Company Name" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" FontWeight="Bold" Margin="0,2,0,0"/>
                                         <TextBox x:Name="custCompanyNameTb" Height="26" Margin="140,5,10,0" TextWrapping="Wrap" VerticalAlignment="Top" VerticalContentAlignment="Center" FontWeight="Normal">
                                             <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                                 <Binding.ValidationRules>
@@ -1286,10 +1287,10 @@
                                     </Grid>
                                     <Grid Margin="10,87,10,0" VerticalAlignment="Top" Height="120">
                                         <TextBox x:Name="custAddInfoTb" Height="120" TextWrapping="Wrap" VerticalAlignment="Top" Margin="140,0,10,0" FontWeight="Normal" Text="{Binding AdditionaInfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                        <Label x:Name="label_Copy" Content="Description:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="107" FontWeight="Bold" FontStyle="Italic"/>
+                                        <Label x:Name="label_Copy" Content="Description" HorizontalAlignment="Left" VerticalAlignment="Top" Width="107" FontWeight="Bold"/>
                                     </Grid>
                                     <Grid Margin="10,205,10,0" VerticalAlignment="Top" Height="170">
-                                        <Label x:Name="label25" Content="Location/Address:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic"/>
+                                        <Label x:Name="label25" Content="Location/Address" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
                                         <Label x:Name="locationBrngyTbLbl" Content="* Address" VerticalAlignment="Top" Visibility="Visible" FontWeight="Normal" Margin="19,26,10,0"/>
                                         <TextBox x:Name="custAddressTb" TextWrapping="Wrap" Height="25" MaxLines="1" VerticalContentAlignment="Center" VerticalAlignment="Top" Margin="34,52,10,0" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" FontWeight="Normal">
                                             <Binding Path="Address" Mode="TwoWay" UpdateSourceTrigger="Explicit">
@@ -1317,7 +1318,7 @@
                                             </ComboBox.SelectedItem>
                                         </ComboBox>
                                     </Grid>
-                                    <Label Content="* Contacts:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Margin="12,390,0,0" Height="30"/>
+                                    <Label Content="* Contacts" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="12,390,0,0" Height="30"/>
                                     <ComboBox x:Name="contactTypeCb" Margin="47,422,0,0" VerticalAlignment="Top" Height="25" Width="130" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" SelectionChanged="contactTypeCb_SelectionChanged" VerticalContentAlignment="Center" FontWeight="Normal" FontSize="12" SelectedValuePath="Content" >
                                         <ComboBoxItem Content="[Contact Type]"/>
                                         <ComboBoxItem Content="Email Address"/>
@@ -1370,7 +1371,7 @@
                                         </DataGrid.Columns>
                                     </DataGrid>
 
-                                    <Label x:Name="label1_Copy6" Content="Representative:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Width="129" FontStyle="Italic" Margin="14,642,0,0"/>
+                                    <Label x:Name="label1_Copy6" Content="Representative" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Width="129" Margin="14,642,0,0"/>
                                     <Button x:Name="newRepresentativeBtn" Content="Add" HorizontalAlignment="Left" Margin="512,652,0,0" VerticalAlignment="Top" Width="85" FontWeight="Normal" Click="newRepresentativeBtn_Click" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" Height="26" FontFamily="Segoe UI Semibold"/>
                                     <DataGrid x:Name="customerRepresentativeDg" HorizontalAlignment="Left" Height="169" Margin="47,683,0,0" VerticalAlignment="Top" Width="555" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="customerRepresentativeDg_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30"  SelectedItem="{Binding SelectedRepresentative}" ItemsSource="{Binding CustRepresentatives, Mode=TwoWay, UpdateSourceTrigger=Explicit}">
                                         <DataGrid.Columns >
@@ -1416,7 +1417,7 @@
                                         <ColumnDefinition Width="193*"/>
                                     </Grid.ColumnDefinitions>
                                     <Label x:Name="label19" Content="All required fields are marked with (*)" HorizontalAlignment="Left" Margin="3,4,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1" Width="240" FontStyle="Italic"/>
-                                    <Label Content="Full Name" HorizontalAlignment="Left" Margin="2,25,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1"/>
+                                    <Label Content="Full Name" HorizontalAlignment="Left" Margin="2,25,0,0" VerticalAlignment="Top" FontWeight="Bold"  Grid.Column="1"/>
                                     <Label Content="* First Name" HorizontalAlignment="Left" Margin="19,49,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
                                     <TextBox x:Name="empFirstNameTb" HorizontalAlignment="Left" Height="23" Margin="28,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="228" FontWeight="Normal" Grid.Column="1" TextChanged="empFirstNameTb_TextChanged">
                                         <Binding Path="FirstName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
@@ -1425,7 +1426,7 @@
                                             </Binding.ValidationRules>
                                         </Binding>
                                     </TextBox>
-                                    <Label Content="* Middle Initial" HorizontalAlignment="Left" Margin="287,49,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
+                                    <Label Content=" Middle Initial" HorizontalAlignment="Left" Margin="287,49,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
                                     <TextBox x:Name="empMiddleInitialTb" HorizontalAlignment="Left" Height="23" Margin="302,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" FontWeight="Normal" MaxLength="3" Grid.Column="1" TextChanged="empMiddleInitialTb_TextChanged">
                                         <Binding Path="MiddleName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
@@ -1443,7 +1444,7 @@
                                     </TextBox>
                                     <Image x:Name="empImage" Grid.Column="1" HorizontalAlignment="Left" Height="151" Margin="1031,13,-6,0" VerticalAlignment="Top" Width="144" Source="Resources/picture.png" Stretch="Fill"/>
                                     <Button x:Name="openFileBtn" Content="Open Image" Grid.Column="1" HorizontalAlignment="Left" Margin="1038,158,-4,0" VerticalAlignment="Top" Width="135" FontWeight="Normal" Click="openFileBtn_Click" FontSize="13" Height="28" FontFamily="Segoe UI Semibold" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>
-                                    <Label Content="Address" HorizontalAlignment="Left" Margin="2,116,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1"/>
+                                    <Label Content="Address" HorizontalAlignment="Left" Margin="2,116,0,0" VerticalAlignment="Top" FontWeight="Bold"  Grid.Column="1"/>
                                     <Label Content="* Address" VerticalAlignment="Top" Visibility="Visible" Margin="21,141,426,0" FontWeight="Normal" Grid.Column="1"/>
                                     <TextBox x:Name="empAddressTb" HorizontalAlignment="Left" Height="23" Margin="38,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="708" FontWeight="Normal" Grid.Column="1" TextChanged="empAddressTb_TextChanged">
                                         <Binding Path="Address" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
@@ -1524,7 +1525,7 @@
                                     </DataGrid>
                                     <StackPanel Grid.Column="1" Margin="10,554,0,-20" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Width="244" Height="482">
                                         <Grid x:Name="employeeOnlyGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="240">
-                                            <Label Content="Position" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic"/>
+                                            <Label Content="Position" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
                                             <ComboBox x:Name="empPostionCb" HorizontalAlignment="Left" Margin="27,29,0,0" VerticalAlignment="Top" Width="162" Height="26" SelectedValuePath="positionid" DisplayMemberPath="positionName" FontWeight="Normal" SelectionChanged="empPostionCb_SelectionChanged">
                                                 <ComboBox.SelectedItem>
                                                     <Binding Path="positionSelected" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
