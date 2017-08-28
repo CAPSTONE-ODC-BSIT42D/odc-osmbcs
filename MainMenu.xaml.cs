@@ -2168,7 +2168,7 @@ namespace prototype2
                         if (!String.IsNullOrWhiteSpace(contactDetailsEmailTb.Text))
                         {
 
-                            MainVM.CustContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            MainVM.SelectedCustContact.ContactDetails = contactDetailsEmailTb.Text;
                             clearContactsBoxes();
                         }
                         else
@@ -2180,7 +2180,7 @@ namespace prototype2
                         if (!String.IsNullOrWhiteSpace(contactDetailsPhoneTb.Text))
                         {
 
-                            MainVM.CustContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            MainVM.SelectedCustContact.ContactDetails = contactDetailsPhoneTb.Text;
                             clearContactsBoxes();
                         }
                         else
@@ -2191,7 +2191,7 @@ namespace prototype2
                     {
                         if (!String.IsNullOrWhiteSpace(contactDetailsMobileTb.Text))
                         {
-                            MainVM.CustContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            MainVM.SelectedCustContact.ContactDetails = contactDetailsMobileTb.Text;
                             clearContactsBoxes();
                         }
                         else
@@ -2837,7 +2837,7 @@ namespace prototype2
                         if (!String.IsNullOrWhiteSpace(contactDetailsEmailTb1.Text))
                         {
 
-                            MainVM.EmpContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            MainVM.SelectedEmpContact.ContactDetails = contactDetailsEmailTb1.Text;
                             clearContactsBoxes();
                         }
                         else
@@ -2849,7 +2849,7 @@ namespace prototype2
                         if (!String.IsNullOrWhiteSpace(contactDetailsPhoneTb1.Text))
                         {
 
-                            MainVM.EmpContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            MainVM.SelectedEmpContact.ContactDetails = contactDetailsPhoneTb1.Text;
                             clearContactsBoxes();
                         }
                         else
@@ -2860,7 +2860,7 @@ namespace prototype2
                     {
                         if (!String.IsNullOrWhiteSpace(contactDetailsMobileTb1.Text))
                         {
-                            MainVM.EmpContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            MainVM.SelectedEmpContact.ContactDetails = contactDetailsMobileTb1.Text;
                             clearContactsBoxes();
                         }
                         else
