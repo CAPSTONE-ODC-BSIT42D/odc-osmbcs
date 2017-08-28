@@ -1020,7 +1020,7 @@ namespace prototype2
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             {
-                                MessageBox.Show("Employee Poisition successfully added");
+                                MessageBox.Show("Employee Position successfully added");
                                 empPosNewTb.Clear();
                                 setListBoxControls();
                                 dbCon.Close();
@@ -1031,34 +1031,6 @@ namespace prototype2
             }
         }
 
-        private void saveEmpPosBtn_Click(object sender, RoutedEventArgs e)
-        {
-            var dbCon = DBConnection.Instance();
-            dbCon.DatabaseName = dbname;
-            if (String.IsNullOrWhiteSpace(empPosNewTb.Text))
-            {
-                MessageBox.Show("Employee Position must be filled");
-            }
-            else
-            {
-                if (employeePositionLb.Items.Contains(empPosNewTb.Text))
-                {
-                    MessageBox.Show("Employee Position already exists");
-                }
-                if (dbCon.IsConnect())
-                {
-                    string query = "UPDATE `odc_db`.`position_t` set `positionName` = '" + empPosNewTb.Text + "' where positionID = '" + MainMenu.MainVM.SelectedEmpPosition.PositionID + "'";
-                    if (dbCon.insertQuery(query, dbCon.Connection))
-                    {
-                        MessageBox.Show("Employee Poisition saved");
-                        empPosNewTb.Clear();
-                        setListBoxControls();
-                        dbCon.Close();
-                    }
-                }
-            }
-
-        }
 
         private void deleteEmpPosBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -1093,18 +1065,53 @@ namespace prototype2
         {
             var dbCon = DBConnection.Instance();
             dbCon.DatabaseName = dbname;
-
-            if (employeePositionLb.SelectedItems.Count > 0)
+            if (dbCon.IsConnect())
             {
-                empPosNewTb.Text = MainMenu.MainVM.SelectedEmpPosition.PositionName;
-            }
-            else
-            {
-                MessageBox.Show("Please select an employee position first.");
+                if (employeePositionLb.SelectedItems.Count > 0)
+                {
+                    empPosNewTb.Text = MainMenu.MainVM.SelectedEmpPosition.PositionName;
+                    saveEmpPosBtn.Visibility = Visibility.Visible;
+                    addEmpPosBtn.Visibility = Visibility.Hidden;
+                   
+                }
+                else
+                {
+                    MessageBox.Show("Please select an employee position first.");
+                }
             }
             dbCon.Close();
         }
 
+        private void saveEmpPosBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = dbname;
+            if (String.IsNullOrWhiteSpace(empPosNewTb.Text))
+            {
+                MessageBox.Show("Employee Position must be filled");
+            }
+            else
+            {
+                if (employeePositionLb.Items.Contains(empPosNewTb.Text))
+                {
+                    MessageBox.Show("Employee Position already exists");
+                }
+                if (dbCon.IsConnect())
+                {
+                    string query = "UPDATE `odc_db`.`position_t` set `positionName` = '" + empPosNewTb.Text + "' where positionID = '" + MainMenu.MainVM.SelectedEmpPosition.PositionID + "'";
+                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    {
+                        MessageBox.Show("Employee Poisition saved");
+                        saveEmpPosBtn.Visibility = Visibility.Hidden;
+                        addEmpPosBtn.Visibility = Visibility.Visible;
+                        empPosNewTb.Clear();
+                        setListBoxControls();
+                        dbCon.Close();
+                    }
+                }
+            }
+
+        }
 
         //CONTRACTOR PART
         private void addContJobBtn_Click(object sender, RoutedEventArgs e)
@@ -1145,37 +1152,9 @@ namespace prototype2
                     }
                 }
             }
-
         }
 
-        private void saveContJobBtn_Click(object sender, RoutedEventArgs e)
-        {
-            var dbCon = DBConnection.Instance();
-            dbCon.DatabaseName = dbname;
-            if (String.IsNullOrWhiteSpace(contNewJobTb.Text))
-            {
-                MessageBox.Show("Contractor Job Title field must be filled");
-            }
-            else
-            {
-                if (contJobLb.Items.Contains(contNewJobTb.Text))
-                {
-                    MessageBox.Show("Job Title already exists");
-                }
-                if (dbCon.IsConnect())
-                {
-                    string query = "UPDATE `odc_db`.`job_title_t` set `jobName` = '" + contNewJobTb.Text + "' where positionID = '" + MainMenu.MainVM.SelectedJobTitle.JobID + "'";
-                    if (dbCon.insertQuery(query, dbCon.Connection))
-                    {
-                        MessageBox.Show("Job Title successfully saved");
-                        contNewJobTb.Clear();
-                        setListBoxControls();
-                        dbCon.Close();
-                    }
-                }
-            }
 
-        }
         private void deleteContJobBtn_Click(object sender, RoutedEventArgs e)
         {
             if (contJobLb.SelectedItems.Count > 0)
@@ -1212,7 +1191,6 @@ namespace prototype2
 
             if (contJobLb.SelectedItems.Count > 0)
             {
-
                 contNewJobTb.Text = MainMenu.MainVM.SelectedJobTitle.JobName;
             }
             else
@@ -1220,11 +1198,99 @@ namespace prototype2
                 MessageBox.Show("Please select a record first.");
             }
             dbCon.Close();
-        }
-        
+            saveContJobBtn.Visibility = Visibility.Visible;
+            addContJobBtn.Visibility = Visibility.Hidden;
 
-        //product category
-        private void deleteCategoryBtn_Click(object sender, RoutedEventArgs e)
+        }
+
+        //empPosNewTb.Text = MainMenu.MainVM.SelectedEmpPosition.PositionName
+        private void saveContJobBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = dbname;
+            if (String.IsNullOrWhiteSpace(contNewJobTb.Text))
+            {
+                MessageBox.Show("Contractor Job Title field must be filled");
+            }
+            else
+            {
+                if (contJobLb.Items.Contains(contNewJobTb.Text))
+                {
+                    MessageBox.Show("Job Title already exists");
+                }
+                if (dbCon.IsConnect())
+                {
+                    string query = "UPDATE `odc_db`.`job_title_t` set `jobName` = '" + contNewJobTb.Text + "' where jobID = '" + MainMenu.MainVM.SelectedJobTitle.JobID + "'";
+                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    {
+                        MessageBox.Show("Job Title successfully saved");
+                        contNewJobTb.Clear();
+                        setListBoxControls();
+                        dbCon.Close();
+                        contNewJobTb.Clear();
+                        addContJobBtn.Visibility = Visibility.Visible;
+                        saveContJobBtn.Visibility = Visibility.Hidden;
+                       
+
+                    }
+                }
+            }
+        }
+
+
+        //private void editEmpPosBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var dbCon = DBConnection.Instance();
+        //    dbCon.DatabaseName = dbname;
+        //    if (dbCon.IsConnect())
+        //    {
+        //        if (employeePositionLb.SelectedItems.Count > 0)
+        //        {
+        //            empPosNewTb.Text = MainMenu.MainVM.SelectedEmpPosition.PositionName;
+        //            saveEmpPosBtn.Visibility = Visibility.Visible;
+        //            addEmpPosBtn.Visibility = Visibility.Hidden;
+
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Please select an employee position first.");
+        //        }
+        //    }
+        //    dbCon.Close();
+        //}
+
+        //private void saveEmpPosBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var dbCon = DBConnection.Instance();
+        //    dbCon.DatabaseName = dbname;
+        //    if (String.IsNullOrWhiteSpace(empPosNewTb.Text))
+        //    {
+        //        MessageBox.Show("Employee Position must be filled");
+        //    }
+        //    else
+        //    {
+        //        if (employeePositionLb.Items.Contains(empPosNewTb.Text))
+        //        {
+        //            MessageBox.Show("Employee Position already exists");
+        //        }
+        //        if (dbCon.IsConnect())
+        //        {
+        //            string query = "UPDATE `odc_db`.`position_t` set `positionName` = '" + empPosNewTb.Text + "' where positionID = '" + MainMenu.MainVM.SelectedEmpPosition.PositionID + "'";
+        //            if (dbCon.insertQuery(query, dbCon.Connection))
+        //            {
+        //                MessageBox.Show("Employee Poisition saved");
+        //                saveEmpPosBtn.Visibility = Visibility.Hidden;
+        //                addEmpPosBtn.Visibility = Visibility.Visible;
+        //                empPosNewTb.Clear();
+        //                setListBoxControls();
+        //                dbCon.Close();
+        //            }
+        //        }
+        //    }
+
+
+            //product category
+            private void deleteCategoryBtn_Click(object sender, RoutedEventArgs e)
         {
             var dbCon = DBConnection.Instance();
             dbCon.DatabaseName = dbname;
@@ -3349,5 +3415,6 @@ namespace prototype2
             if(MainVM.SelectedAdditionalFee!=null)
             MainVM.AdditionalFees.Remove(MainVM.SelectedAdditionalFee);
         }
+
     }
 }
