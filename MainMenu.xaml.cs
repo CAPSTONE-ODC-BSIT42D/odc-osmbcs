@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using MigraDoc.DocumentObjectModel;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -337,6 +338,11 @@ namespace prototype2
                 transactionQuotationsGrid.Children[x].Visibility = Visibility.Collapsed;
             }
             makeSalesQuoteGrid.Visibility = Visibility.Visible;
+            Document document;
+            DocumentFormat df = new DocumentFormat();
+            document = df.CreateDocument("sdadsa", "asdsadsa");
+            string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
+            pagePreview.Ddl = ddl;
         }
 
         private void transQuotationFormBack_Click(object sender, RoutedEventArgs e)
@@ -370,7 +376,14 @@ namespace prototype2
             {
                 transactionQuotationsGrid.Children[x].Visibility = Visibility.Collapsed;
             }
+            Document document;
+            DocumentFormat df = new DocumentFormat();
+            document = df.CreateDocument("sdadsa", "asdsadsa");
+            string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
+            //.Ddl = ddl;
+            pagePreview.Document = document;
             viewQuotationGrid.Visibility = Visibility.Visible;
+            
         }
 
         private void transViewSaveOnlyBtn_Click(object sender, RoutedEventArgs e)

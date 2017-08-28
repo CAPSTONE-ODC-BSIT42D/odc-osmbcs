@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:prototype2"
         xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-    xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms" xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit" x:Class="prototype2.MainMenu"
+    xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms" xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit" xmlns:Windows="clr-namespace:MigraDoc.Rendering.Windows;assembly=MigraDoc.Rendering-WPF" x:Class="prototype2.MainMenu"
         mc:Ignorable="d"
         Title="MainMenu" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" Loaded="Window_Loaded" WindowState="Maximized" MinWidth="763" MinHeight="535" d:DesignWidth="1320" d:DesignHeight="904.8">
     <Window.Resources>
@@ -68,12 +68,11 @@
                         <DockPanel LastChildFill="true">
                             <Border Background="OrangeRed" DockPanel.Dock="right" Margin="5,0,0,0" 
                                 Width="20" Height="20" CornerRadius="5"
-                                ToolTip="{Binding ElementName=customAdorner, 
-                                          Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                ToolTip="{Binding AdornedElement.(Validation.Errors)[0].ErrorContent, ElementName=customAdorner}">
                                 <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" 
                                    FontWeight="Bold" Foreground="white" />
                             </Border>
-                            <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
+                            <AdornedElementPlaceholder x:Name="customAdorner" VerticalAlignment="Center" >
                                 <Border BorderBrush="red" BorderThickness="1" />
                             </AdornedElementPlaceholder>
                         </DockPanel>
@@ -88,12 +87,11 @@
                         <DockPanel LastChildFill="true">
                             <Border Background="OrangeRed" DockPanel.Dock="right" Margin="5,0,0,0" 
                                 Width="20" Height="20" CornerRadius="5"
-                                ToolTip="{Binding ElementName=customAdorner, 
-                                          Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                ToolTip="{Binding AdornedElement.(Validation.Errors)[0].ErrorContent, ElementName=customAdorner}">
                                 <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" 
                                    FontWeight="Bold" Foreground="white" />
                             </Border>
-                            <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
+                            <AdornedElementPlaceholder x:Name="customAdorner" VerticalAlignment="Center" >
                                 <Border BorderBrush="red" BorderThickness="1" />
                             </AdornedElementPlaceholder>
                         </DockPanel>
@@ -108,12 +106,11 @@
                         <DockPanel LastChildFill="true">
                             <Border Background="OrangeRed" DockPanel.Dock="right" Margin="5,0,0,0" 
                                 Width="20" Height="20" CornerRadius="5"
-                                ToolTip="{Binding ElementName=customAdorner, 
-                                          Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                ToolTip="{Binding AdornedElement.(Validation.Errors)[0].ErrorContent, ElementName=customAdorner}">
                                 <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" 
                                    FontWeight="Bold" Foreground="white" />
                             </Border>
-                            <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
+                            <AdornedElementPlaceholder x:Name="customAdorner" VerticalAlignment="Center" >
                                 <Border BorderBrush="red" BorderThickness="1" />
                             </AdornedElementPlaceholder>
                         </DockPanel>
@@ -128,12 +125,11 @@
                         <DockPanel LastChildFill="true">
                             <Border Background="OrangeRed" DockPanel.Dock="right" Margin="5,0,0,0" 
                                 Width="20" Height="20" CornerRadius="5"
-                                ToolTip="{Binding ElementName=customAdorner, 
-                                          Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                ToolTip="{Binding AdornedElement.(Validation.Errors)[0].ErrorContent, ElementName=customAdorner}">
                                 <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" 
                                    FontWeight="Bold" Foreground="white" />
                             </Border>
-                            <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
+                            <AdornedElementPlaceholder x:Name="customAdorner" VerticalAlignment="Center" >
                                 <Border BorderBrush="red" BorderThickness="1" />
                             </AdornedElementPlaceholder>
                         </DockPanel>
@@ -501,19 +497,19 @@
             </Grid>
         </Grid>
         <Grid x:Name="containerGrid" Grid.Row="1" Background="#FF1695A3">
-            <Grid x:Name="manageSubMenugrid" HorizontalAlignment="Right" Width="175" Background="#FF395066" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Height="173" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden" d:IsHidden="True">
+            <Grid x:Name="manageSubMenugrid" HorizontalAlignment="Right" Width="175" Background="#FF395066" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Height="173" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden" >
                 <Button x:Name="employeeManageMenuBtn" Content="Employees" Margin="0,1,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="175" Click="employeeManageMenuBtn_Click" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="customerManageMenuBtn" Content="Customers" Margin="0,36,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Foreground="White" Width="175" Click="customerManageMenuBtn_Click" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="supplierManageMenuBtn" Content="Suppliers" Margin="0,71,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="175" Click="supplierManageMenuBtn_Click" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="contractorManageMenuBtn" Content="Contractor" Margin="0,106,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="contractorManageMenuBtn_Click" Width="175" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="settingsManageMenuBtn" Content="Settings" Margin="0,141,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="settingsManageMenuBtn_Click" Width="175" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
             </Grid>
-            <Grid x:Name="saleSubMenuGrid" Width="175" Margin="0,0,369,0" Background="#FF395066" HorizontalAlignment="Right" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden" d:IsHidden="True">
+            <Grid x:Name="saleSubMenuGrid" Width="175" Margin="0,0,369,0" Background="#FF395066" HorizontalAlignment="Right" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden" >
                 <Button x:Name="quotesSalesMenuBtn" Content="Quotations" Margin="0,75,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="quotesSalesMenuBtn_Click" Width="175" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1"/>
                 <Button x:Name="ordersSalesMenuBtn" Content="Orders" Margin="0,40,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="ordersSalesMenuBtn_Click" Width="175" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1"/>
                 <Button x:Name="invoiceSalesMenuBtn" Content="Invoices" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="invoiceSalesMenuBtn_Click" Width="175" Margin="0,5,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1"/>
             </Grid>
-            <Grid x:Name="dashboardGrid" Margin="10,0" Background="#FFECF0F1">
+            <Grid x:Name="dashboardGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -522,10 +518,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Grid Margin="10,83,10,10" RenderTransformOrigin="0.5,0.5">
-                    <Grid.Background>
-                        <SolidColorBrush Color="#FFA4A4A4"/>
-                    </Grid.Background>
+                <Grid Margin="10,83,10,10" RenderTransformOrigin="0.5,0.5" Background="#FFA4A4A4">
                     <Border BorderBrush="Black" BorderThickness="1" Height="1" Margin="10,48,5,0" VerticalAlignment="Top"/>
                     <Label x:Name="label1" Content="Today's Appointment" Height="33" Margin="19,10,242,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Foreground="Black"/>
                     <Label x:Name="label2" Content="No appointment/s to show." Height="37" Margin="19,59,22,0" VerticalAlignment="Top" Foreground="Black" FontSize="14"/>
@@ -563,11 +556,11 @@
                     </Grid>
                 </Button>
             </Grid>
-            <Grid x:Name="transactionGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True">
-                <Grid x:Name="transactionQuotationsGrid" d:IsHidden="True">
-                    <Label x:Name="transQuotationHeader" Content="Transaction - Quotations" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" Margin="10,0" d:IsHidden="True"/>
-                    <Grid x:Name="quotationsGridHome" Margin="10,70,10,10" d:IsHidden="True">
-                        <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" d:IsHidden="True">
+            <Grid x:Name="transactionGrid" Margin="10,0" Background="#FFECF0F1" >
+                <Grid x:Name="transactionQuotationsGrid" >
+                    <Label x:Name="transQuotationHeader" Content="Transaction - Quotations" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" Margin="10,0" d:IsHidden="True" />
+                    <Grid x:Name="quotationsGridHome" Margin="10,70,10,10" d:IsHidden="True" >
+                        <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                             <Label x:Name="label8" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
                             <TextBox x:Name="searchBox" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317"/>
                             <Button x:Name="button" Content="Search" HorizontalAlignment="Left" Margin="402,3,-11,0" VerticalAlignment="Top" Width="85" Height="29" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
@@ -576,19 +569,19 @@
                         <Button x:Name="transQuoteAddBtn" Content="Add" HorizontalAlignment="Right" Height="29" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Click="transQuoteAddBtn_Click" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70" FontFamily="Segoe UI Semibold"/>
                         <DataGrid x:Name="quotationsDataGrid" Margin="0,44,0,-3" AutoGenerateColumns="False">
                             <DataGrid.Columns >
-                                <DataGridTextColumn Binding="{Binding sqNoChar}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Sales Quote ID" d:IsHidden="True" />
-                                <DataGridTextColumn Binding="{Binding dateofIssue}" ClipboardContentBinding="{x:Null}" Header="Date of Issue" Width="200" CanUserResize="False" d:IsHidden="True" />
-                                <DataGridTextColumn Binding="{Binding custCompanyName}" ClipboardContentBinding="{x:Null}" Header="Customer Name" Width="350" d:IsHidden="True"  />
-                                <DataGridTextColumn Binding="{Binding quoteSubject}" ClipboardContentBinding="{x:Null}" Header="Subject" Width="200" CanUserResize="False" d:IsHidden="True" />
-                                <DataGridTextColumn Binding="{Binding status}" ClipboardContentBinding="{x:Null}" Header="Status" Width="200" CanUserResize="False" d:IsHidden="True" />
-                                <DataGridTemplateColumn x:Name="columnEditBtn1" Width="100" CanUserResize="False" d:IsHidden="True" >
+                                <DataGridTextColumn Binding="{Binding sqNoChar}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Sales Quote ID"  />
+                                <DataGridTextColumn Binding="{Binding dateofIssue}" ClipboardContentBinding="{x:Null}" Header="Date of Issue" Width="200" CanUserResize="False"  />
+                                <DataGridTextColumn Binding="{Binding custCompanyName}" ClipboardContentBinding="{x:Null}" Header="Customer Name" Width="350"   />
+                                <DataGridTextColumn Binding="{Binding quoteSubject}" ClipboardContentBinding="{x:Null}" Header="Subject" Width="200" CanUserResize="False"  />
+                                <DataGridTextColumn Binding="{Binding status}" ClipboardContentBinding="{x:Null}" Header="Status" Width="200" CanUserResize="False"  />
+                                <DataGridTemplateColumn x:Name="columnEditBtn1" Width="100" CanUserResize="False"  >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button x:Name="btnEdit1" Content="Edit" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn x:Name="columnDelBtn1" Width="100" CanUserResize="False" d:IsHidden="True" >
+                                <DataGridTemplateColumn x:Name="columnDelBtn1" Width="100" CanUserResize="False"  >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button x:Name="btnDelete" Content="Delete" />
@@ -603,7 +596,7 @@
                             <ComboBoxItem Content="APPROVED"/>
                         </ComboBox>
                     </Grid>
-                    <Grid x:Name="selectCustomerGrid" Margin="10,70,10,10" d:IsHidden="True">
+                    <Grid x:Name="selectCustomerGrid" Margin="10,70,10,10" d:IsHidden="True" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="19*"/>
                             <ColumnDefinition Width="599*"/>
@@ -615,12 +608,12 @@
                         <DataGrid x:Name="selectCustomerDg" Margin="0,101,10,35" Grid.Column="1" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" CanUserResizeRows="False" CanUserAddRows="False" IsReadOnly="True">
                             <DataGrid.Columns >
 
-                                <DataGridTextColumn Binding="{Binding CompanyName}" ClipboardContentBinding="{x:Null}" Header="Company Name" Width="200" CanUserResize="False" d:IsHidden="True"/>
-                                <DataGridTextColumn Binding="{Binding CompanyDesc}" ClipboardContentBinding="{x:Null}" Header="Description" Width="200" d:IsHidden="True"  />
-                                <DataGridTextColumn Binding="{Binding CompanyAddress}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350" CanUserResize="False" d:IsHidden="True" />
-                                <DataGridTextColumn Binding="{Binding CompanyCity}" ClipboardContentBinding="{x:Null}" Header="City" Width="200" CanUserResize="False" d:IsHidden="True" />
-                                <DataGridTextColumn Binding="{Binding CompanyProvinceName}" ClipboardContentBinding="{x:Null}" Header="Province" Width="200" CanUserResize="False" d:IsHidden="True" />
-                                <DataGridTemplateColumn x:Name="columnSelectBtn" Width="100" d:IsHidden="True" >
+                                <DataGridTextColumn Binding="{Binding CompanyName}" ClipboardContentBinding="{x:Null}" Header="Company Name" Width="200" CanUserResize="False" />
+                                <DataGridTextColumn Binding="{Binding CompanyDesc}" ClipboardContentBinding="{x:Null}" Header="Description" Width="200"   />
+                                <DataGridTextColumn Binding="{Binding CompanyAddress}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350" CanUserResize="False"  />
+                                <DataGridTextColumn Binding="{Binding CompanyCity}" ClipboardContentBinding="{x:Null}" Header="City" Width="200" CanUserResize="False"  />
+                                <DataGridTextColumn Binding="{Binding CompanyProvinceName}" ClipboardContentBinding="{x:Null}" Header="Province" Width="200" CanUserResize="False"  />
+                                <DataGridTemplateColumn x:Name="columnSelectBtn" Width="100"  >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button x:Name="selectCustBtn" Click="selectCustBtn_Click" Content="Select This Customer" />
@@ -631,7 +624,7 @@
                         </DataGrid>
 
                     </Grid>
-                    <Grid x:Name="addRequestionGrid" Margin="10,70,10,10">
+                    <Grid x:Name="addRequestionGrid" Margin="10,70,10,10" d:IsHidden="True">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1214*"/>
                             <ColumnDefinition Width="23*"/>
@@ -723,19 +716,15 @@
                         </GroupBox>
                         <Button x:Name="transQuotationSaveBtn" Content="Next &gt;" HorizontalAlignment="Right" Margin="0,0,14,8" VerticalAlignment="Bottom" Width="74" Height="24" Click="transQuotationSaveBtn_Click"/>
                     </Grid>
-                    <Grid x:Name="viewQuotationGrid" Margin="10,70,10,10">
-                        <Button x:Name="transViewBackBtn" Content="&lt; Back" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="74" Height="24" Click="transViewBackBtn_Click"/>
-                        <GroupBox x:Name="groupBox3" Header="View Sale Quotation" Margin="10,29,10,42" FontFamily="Segoe UI Symbol" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderBrush="Black" VerticalContentAlignment="Stretch">
-                            <ScrollViewer Margin="1,1,-2,1">
-                                <Grid>
-                                    <Label x:Name="label16" Content="CREATED SALES QUOTATION HERE (PDF) VIEWER HERE" HorizontalAlignment="Left" Margin="375,273,0,0" VerticalAlignment="Top" FontSize="20"/>
-                                </Grid>
-                            </ScrollViewer>
+                    <Grid x:Name="viewQuotationGrid" Margin="10,70,10,10" d:IsHidden="True">
+                        <Button x:Name="transViewBackBtn" Content="&lt; Back" Margin="0,0,128,10" Click="transViewBackBtn_Click" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="74"/>
+                        <GroupBox x:Name="groupBox3" Header="View Sale Quotation" Margin="10,10,10,42" FontFamily="Segoe UI Symbol" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderBrush="Black" VerticalContentAlignment="Stretch">
+                            <Windows:DocumentPreview x:Name="pagePreview" Margin="0,0,16,2"/>
                         </GroupBox>
                         <Button x:Name="transViewSaveSend" Content="Save and Send" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="98" Height="24" Click="transViewSaveSend_Click"/>
                     </Grid>
                 </Grid>
-                <Grid x:Name="transactionInvoiceGrid">
+                <Grid x:Name="transactionInvoiceGrid" d:IsHidden="True">
                     <Label x:Name="label7_Copy1" Content="Transaction - Invoice" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" Margin="10,0"/>
                     <Grid Margin="10,70,10,10">
                         <Grid Margin="10,7,461,383" HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -747,7 +736,7 @@
                         <DataGrid x:Name="quotationsDataGrid2" Margin="0,41,0,0" AutoGenerateColumns="False"/>
                     </Grid>
                 </Grid>
-                <Grid x:Name="transactionReceiptGrid">
+                <Grid x:Name="transactionReceiptGrid" d:IsHidden="True">
                     <Label x:Name="label7_Copy2" Content="Transaction - Receipts" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" Margin="10,0"/>
                     <Grid Margin="10,70,10,10">
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="478">
@@ -759,7 +748,7 @@
                         <DataGrid x:Name="quotationsDataGrid3" Margin="0,41,0,0" AutoGenerateColumns="False"/>
                     </Grid>
                 </Grid>
-                <Grid x:Name="transactionOrdersGrid">
+                <Grid x:Name="transactionOrdersGrid" d:IsHidden="True">
                     <Label x:Name="label7_Copy3" Content="Transaction - Purchase Orders" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" Margin="10,0"/>
                     <Grid x:Name="transOrdersGridHome" Margin="10,70,10,10">
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="474">
@@ -796,14 +785,14 @@
                                 <TextBox x:Name="totalPrice_Copy1" HorizontalAlignment="Left" Height="23" Margin="728,237,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="12" FontFamily="Segoe UI" FontStyle="Normal" FontWeight="Normal" Grid.Column="1" IsEnabled="False"/>
                                 <DataGrid x:Name="itemDg1" Margin="10,300,10,10" ItemsSource="{Binding items}" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" Grid.ColumnSpan="2" CanUserReorderColumns="False" CanUserResizeColumns="False">
                                     <DataGrid.Columns >
-                                        <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Width="25" CanUserResize="False" d:IsHidden="True" />
-                                        <DataGridTextColumn Binding="{Binding lineNo}" ClipboardContentBinding="{x:Null}" Header="Line #" Width="50" CanUserResize="False" d:IsHidden="True" />
-                                        <DataGridTextColumn Binding="{Binding itemCode}" ClipboardContentBinding="{x:Null}" Header="Item Code" Width="100" CanUserResize="False" d:IsHidden="True" />
-                                        <DataGridTextColumn Binding="{Binding desc}" ClipboardContentBinding="{x:Null}" Header="Description" Width="400" d:IsHidden="True"  />
-                                        <DataGridTextColumn Binding="{Binding unit}" ClipboardContentBinding="{x:Null}" Header="Unit" Width="50" CanUserResize="False" d:IsHidden="True"  />
-                                        <DataGridTextColumn Binding="{Binding qty}" ClipboardContentBinding="{x:Null}" Header="Qty" Width="50" CanUserResize="False" d:IsHidden="True"  />
-                                        <DataGridTextColumn Binding="{Binding unitPrice}" ClipboardContentBinding="{x:Null}" Header="Unit Price" Width="100" d:IsHidden="True"  />
-                                        <DataGridTextColumn Binding="{Binding totalAmount}" ClipboardContentBinding="{x:Null}" Header="Total Amount" Width="100" d:IsHidden="True"  />
+                                        <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Width="25" CanUserResize="False"  />
+                                        <DataGridTextColumn Binding="{Binding lineNo}" ClipboardContentBinding="{x:Null}" Header="Line #" Width="50" CanUserResize="False"  />
+                                        <DataGridTextColumn Binding="{Binding itemCode}" ClipboardContentBinding="{x:Null}" Header="Item Code" Width="100" CanUserResize="False"  />
+                                        <DataGridTextColumn Binding="{Binding desc}" ClipboardContentBinding="{x:Null}" Header="Description" Width="400"   />
+                                        <DataGridTextColumn Binding="{Binding unit}" ClipboardContentBinding="{x:Null}" Header="Unit" Width="50" CanUserResize="False"   />
+                                        <DataGridTextColumn Binding="{Binding qty}" ClipboardContentBinding="{x:Null}" Header="Qty" Width="50" CanUserResize="False"   />
+                                        <DataGridTextColumn Binding="{Binding unitPrice}" ClipboardContentBinding="{x:Null}" Header="Unit Price" Width="100"   />
+                                        <DataGridTextColumn Binding="{Binding totalAmount}" ClipboardContentBinding="{x:Null}" Header="Total Amount" Width="100"   />
                                     </DataGrid.Columns>
                                 </DataGrid>
                                 <Button x:Name="button8" Content="+add" Grid.Column="1" HorizontalAlignment="Left" Margin="871,221,0,0" VerticalAlignment="Top" Width="75" FontFamily="Segoe UI" FontSize="12" FontWeight="Normal" FontStyle="Normal" Height="20"/>
@@ -826,7 +815,7 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid x:Name="servicesGrid" Margin="10,0" Background="#FFECF0F1">
+            <Grid x:Name="servicesGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True">
                 <Grid x:Name="servicesHome" Margin="10,70,10,10">
                     <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476">
                         <Label x:Name="label17" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -836,21 +825,21 @@
                     <Button x:Name="newServiceSched" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Click="transQuoteAddBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Foreground="#FFFFFCFC" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
                     <DataGrid x:Name="servicesDg" Margin="10,82,10,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" SelectionChanged="servicesDg_SelectionChanged">
                         <DataGrid.Columns >
-                            <DataGridTextColumn Binding="{Binding serviceId}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible" d:IsHidden="True" />
-                            <DataGridTextColumn Binding="{Binding serviceName}" ClipboardContentBinding="{x:Null}" Header="Service Name" Width="200" CanUserResize="False" d:IsHidden="True" />
-                            <DataGridTextColumn Binding="{Binding serviceStatus}" ClipboardContentBinding="{x:Null}" Header="Status" Width="350" d:IsHidden="True"  />
-                            <DataGridTextColumn Binding="{Binding dateStarted}" ClipboardContentBinding="{x:Null}" Header="Date Started" Width="200" CanUserResize="False" d:IsHidden="True" />
-                            <DataGridTextColumn Binding="{Binding dateEnded}" ClipboardContentBinding="{x:Null}" Header="Date Ended" Width="200" CanUserResize="False" d:IsHidden="True" />
-                            <DataGridTextColumn Binding="{Binding location}" ClipboardContentBinding="{x:Null}" Header="Location" Width="200" CanUserResize="False" d:IsHidden="True"  />
-                            <DataGridTextColumn Binding="{Binding salesNote}" ClipboardContentBinding="{x:Null}" Header="Note" Width="100" CanUserResize="False" d:IsHidden="True"  />
-                            <DataGridTemplateColumn x:Name="columnEditBtn4" Width="100" CanUserResize="False" d:IsHidden="True" >
+                            <DataGridTextColumn Binding="{Binding serviceId}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"  />
+                            <DataGridTextColumn Binding="{Binding serviceName}" ClipboardContentBinding="{x:Null}" Header="Service Name" Width="200" CanUserResize="False"  />
+                            <DataGridTextColumn Binding="{Binding serviceStatus}" ClipboardContentBinding="{x:Null}" Header="Status" Width="350"   />
+                            <DataGridTextColumn Binding="{Binding dateStarted}" ClipboardContentBinding="{x:Null}" Header="Date Started" Width="200" CanUserResize="False"  />
+                            <DataGridTextColumn Binding="{Binding dateEnded}" ClipboardContentBinding="{x:Null}" Header="Date Ended" Width="200" CanUserResize="False"  />
+                            <DataGridTextColumn Binding="{Binding location}" ClipboardContentBinding="{x:Null}" Header="Location" Width="200" CanUserResize="False"   />
+                            <DataGridTextColumn Binding="{Binding salesNote}" ClipboardContentBinding="{x:Null}" Header="Note" Width="100" CanUserResize="False"   />
+                            <DataGridTemplateColumn x:Name="columnEditBtn4" Width="100" CanUserResize="False"  >
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button x:Name="btnEdit1" Content="Edit" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn x:Name="columnDelBtn4" Width="100" CanUserResize="False" d:IsHidden="True" >
+                            <DataGridTemplateColumn x:Name="columnDelBtn4" Width="100" CanUserResize="False"  >
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button x:Name="btnDelete" Content="Delete" />
@@ -906,9 +895,9 @@
                     </Button>
                 </Grid>
             </Grid>
-            <Grid x:Name="reportsGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True"/>
-            <Grid x:Name="manageGrid" Margin="10,0" Background="#FFECF0F1" >
-                <Grid x:Name="manageCustomerGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged" d:IsHidden="True">
+            <Grid x:Name="reportsGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True" />
+            <Grid x:Name="manageGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True" >
+                <Grid x:Name="manageCustomerGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged" >
                     <Label x:Name="label7_Copy" Content="Manage - Customer" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid x:Name="manageCustomerHomeGrid" Margin="10,70,10,10">
                         <Grid Margin="10,1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -919,20 +908,20 @@
                         <Button x:Name="manageCustomerAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,0,10,0" VerticalAlignment="Top" Width="85" Click="manageCustomerAddBtn_Click" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13"/>
                         <DataGrid x:Name="manageCustomeDataGrid" Margin="10,41,10,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="manageCustomeDataGrid_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}">
                             <DataGrid.Columns >
-                                <DataGridTextColumn Binding="{Binding CompanyID}" ClipboardContentBinding="{x:Null}" Width="30" CanUserResize="False" Visibility="Visible" d:IsHidden="True" />
-                                <DataGridTextColumn Binding="{Binding CompanyName}" ClipboardContentBinding="{x:Null}" Header="Company Name" Width="200" CanUserResize="False" d:IsHidden="True" />
-                                <DataGridTextColumn Binding="{Binding CompanyDesc}" ClipboardContentBinding="{x:Null}" Header="Description" Width="200" d:IsHidden="True"  />
-                                <DataGridTextColumn Binding="{Binding CompanyAddress}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350" CanUserResize="False" d:IsHidden="True" />
-                                <DataGridTextColumn Binding="{Binding CompanyCity}" ClipboardContentBinding="{x:Null}" Header="City" Width="200" CanUserResize="False" d:IsHidden="True" />
-                                <DataGridTextColumn Binding="{Binding CompanyProvinceName}" ClipboardContentBinding="{x:Null}" Header="Province" Width="200" CanUserResize="False" d:IsHidden="True" />
-                                <DataGridTemplateColumn x:Name="columnEditCustBtn" Width="100" CanUserResize="False" d:IsHidden="True" >
+                                <DataGridTextColumn Binding="{Binding CompanyID}" ClipboardContentBinding="{x:Null}" Width="30" CanUserResize="False" Visibility="Visible"  />
+                                <DataGridTextColumn Binding="{Binding CompanyName}" ClipboardContentBinding="{x:Null}" Header="Company Name" Width="200" CanUserResize="False"  />
+                                <DataGridTextColumn Binding="{Binding CompanyDesc}" ClipboardContentBinding="{x:Null}" Header="Description" Width="200"   />
+                                <DataGridTextColumn Binding="{Binding CompanyAddress}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350" CanUserResize="False"  />
+                                <DataGridTextColumn Binding="{Binding CompanyCity}" ClipboardContentBinding="{x:Null}" Header="City" Width="200" CanUserResize="False"  />
+                                <DataGridTextColumn Binding="{Binding CompanyProvinceName}" ClipboardContentBinding="{x:Null}" Header="Province" Width="200" CanUserResize="False"  />
+                                <DataGridTemplateColumn x:Name="columnEditCustBtn" Width="100" CanUserResize="False"  >
                                     <DataGridTemplateColumn.CellTemplate  >
                                         <DataTemplate>
                                             <Button x:Name="btnEditCust" Click="btnEditCust_Click" Content="Edit" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn x:Name="columnDeleteCustBtn" Width="100" CanUserResize="False" d:IsHidden="True" >
+                                <DataGridTemplateColumn x:Name="columnDeleteCustBtn" Width="100" CanUserResize="False"  >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button x:Name="btnDeleteCust" Click="btnDeleteCust_Click" Content="Delete" />
@@ -998,20 +987,20 @@
                         <Button x:Name="manageEmployeeAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,0,10,0" VerticalAlignment="Top" Width="85" Click="manageEmployeeAddBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>
                         <DataGrid x:Name="manageEmployeeDataGrid" Margin="10,41,10,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="manageEmployeeDataGrid_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" IsVisibleChanged="manageEmployeeDataGrid_IsVisibleChanged" RowHeight="30" ItemsSource="{Binding Employees}" SelectedItem ="{Binding SelectedEmployee}">
                             <DataGrid.Columns >
-                                <DataGridTextColumn Binding="{Binding EmpID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible" d:IsHidden="True" />
-                                <DataGridTextColumn Binding="{Binding EmpFname}" ClipboardContentBinding="{x:Null}" Header="First Name" Width="75" CanUserResize="False" Visibility="Visible" d:IsHidden="True" />
-                                <DataGridTextColumn Binding="{Binding EmpLName}" ClipboardContentBinding="{x:Null}" Header="Last Name" Width="200" CanUserResize="False" d:IsHidden="True" />
-                                <DataGridTextColumn Binding="{Binding EmpAddress}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350" d:IsHidden="True"  />
-                                <DataGridTextColumn Binding="{Binding EmpCity}" ClipboardContentBinding="{x:Null}" Header="City" Width="200" CanUserResize="False" d:IsHidden="True" />
-                                <DataGridTextColumn Binding="{Binding PositionName}" ClipboardContentBinding="{x:Null}" Header="Position" Width="100" CanUserResize="False" d:IsHidden="True"  />
-                                <DataGridTemplateColumn x:Name="columnEditBtnEmp" Width="100" CanUserResize="False" d:IsHidden="True" >
+                                <DataGridTextColumn Binding="{Binding EmpID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"  />
+                                <DataGridTextColumn Binding="{Binding EmpFname}" ClipboardContentBinding="{x:Null}" Header="First Name" Width="75" CanUserResize="False" Visibility="Visible"  />
+                                <DataGridTextColumn Binding="{Binding EmpLName}" ClipboardContentBinding="{x:Null}" Header="Last Name" Width="200" CanUserResize="False"  />
+                                <DataGridTextColumn Binding="{Binding EmpAddress}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350"   />
+                                <DataGridTextColumn Binding="{Binding EmpCity}" ClipboardContentBinding="{x:Null}" Header="City" Width="200" CanUserResize="False"  />
+                                <DataGridTextColumn Binding="{Binding PositionName}" ClipboardContentBinding="{x:Null}" Header="Position" Width="100" CanUserResize="False"   />
+                                <DataGridTemplateColumn x:Name="columnEditBtnEmp" Width="100" CanUserResize="False"  >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button x:Name="btnEditEmp" Click="btnEditEmp_Click" Content="Edit" Foreground="Snow" Background="#FF194E84" BorderBrush="#FF0B3D70" Width="70" Height="24" FontFamily="Segoe UI Semibold" FontSize="13" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn x:Name="columnDelBtnEmp" Width="100"  CanUserResize="False" d:IsHidden="True" >
+                                <DataGridTemplateColumn x:Name="columnDelBtnEmp" Width="100"  CanUserResize="False"  >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button x:Name="btnDeleteEmp" Click="btnDeleteEmp_Click" Content="Delete" Foreground="White" Background="#FFC50919" BorderBrush="#FFA50311" Width="70" Height="24" FontFamily="Segoe UI Semibold" FontSize="13" />
@@ -1033,20 +1022,20 @@
                         <Button x:Name="manageSupplierAddbtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,4,10,0" VerticalAlignment="Top" Width="85" Click="manageSupplierAddbtn_Click" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="14"/>
                         <DataGrid x:Name="manageSupplierDataGrid" Margin="10,41,10,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="manageSupplierDataGrid_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" ItemsSource="{Binding Suppliers}" SelectedItem="{Binding SelectedSupplier}">
                             <DataGrid.Columns >
-                                <DataGridTextColumn Binding="{Binding CompanyID}" ClipboardContentBinding="{x:Null}" Width="30" CanUserResize="False" Visibility="Visible" d:IsHidden="True" />
-                                <DataGridTextColumn Binding="{Binding CompanyName}" ClipboardContentBinding="{x:Null}" Header="Company Name" Width="200" CanUserResize="False" d:IsHidden="True" />
-                                <DataGridTextColumn Binding="{Binding CompanyDesc}" ClipboardContentBinding="{x:Null}" Header="Description" Width="200" d:IsHidden="True"  />
-                                <DataGridTextColumn Binding="{Binding CompanyAddress}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350" CanUserResize="False" d:IsHidden="True" />
-                                <DataGridTextColumn Binding="{Binding CompanyCity}" ClipboardContentBinding="{x:Null}" Header="City" Width="200" CanUserResize="False" d:IsHidden="True" />
-                                <DataGridTextColumn Binding="{Binding CompanyProvinceName}" ClipboardContentBinding="{x:Null}" Header="Province" Width="200" CanUserResize="False" d:IsHidden="True" />
-                                <DataGridTemplateColumn x:Name="columnEditSuppBtn" Width="100" d:IsHidden="True"  >
+                                <DataGridTextColumn Binding="{Binding CompanyID}" ClipboardContentBinding="{x:Null}" Width="30" CanUserResize="False" Visibility="Visible"  />
+                                <DataGridTextColumn Binding="{Binding CompanyName}" ClipboardContentBinding="{x:Null}" Header="Company Name" Width="200" CanUserResize="False"  />
+                                <DataGridTextColumn Binding="{Binding CompanyDesc}" ClipboardContentBinding="{x:Null}" Header="Description" Width="200"   />
+                                <DataGridTextColumn Binding="{Binding CompanyAddress}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350" CanUserResize="False"  />
+                                <DataGridTextColumn Binding="{Binding CompanyCity}" ClipboardContentBinding="{x:Null}" Header="City" Width="200" CanUserResize="False"  />
+                                <DataGridTextColumn Binding="{Binding CompanyProvinceName}" ClipboardContentBinding="{x:Null}" Header="Province" Width="200" CanUserResize="False"  />
+                                <DataGridTemplateColumn x:Name="columnEditSuppBtn" Width="100"   >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button x:Name="btnEditSupp" Click="btnEditSupp_Click" Content="Edit" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn x:Name="columnDeleteSuppBtn" Width="100" d:IsHidden="True"  >
+                                <DataGridTemplateColumn x:Name="columnDeleteSuppBtn" Width="100"   >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button x:Name="btnDeleteSuppBtn" Click="btnDeleteSupp_Click" Content="Delete" />
@@ -1067,20 +1056,20 @@
                         <Button x:Name="manageContractorAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,8,10,0" VerticalAlignment="Top" Width="85" Click="manageContractorAddBtn_Click" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13"/>
                         <DataGrid x:Name="manageContractorDataGrid" Margin="20,41,0,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="manageContractorDataGrid_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" IsVisibleChanged="manageEmployeeDataGrid_IsVisibleChanged" RowHeight="30" ItemsSource="{Binding Employees}" SelectedItem ="{Binding SelectedEmployee}">
                             <DataGrid.Columns >
-                                <DataGridTextColumn Binding="{Binding EmpID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible" d:IsHidden="True" />
-                                <DataGridTextColumn Binding="{Binding EmpFName}" ClipboardContentBinding="{x:Null}" Header="First Name" Width="75" CanUserResize="False" Visibility="Visible" d:IsHidden="True" />
-                                <DataGridTextColumn Binding="{Binding EmpLName}" ClipboardContentBinding="{x:Null}" Header="Last Name" Width="200" CanUserResize="False" d:IsHidden="True" />
-                                <DataGridTextColumn Binding="{Binding EmpAddress}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350" d:IsHidden="True"  />
-                                <DataGridTextColumn Binding="{Binding EmpCity}" ClipboardContentBinding="{x:Null}" Header="City" Width="200" CanUserResize="False" d:IsHidden="True" />
-                                <DataGridTextColumn Binding="{Binding PositionName}" ClipboardContentBinding="{x:Null}" Header="Position" Width="100" CanUserResize="False" d:IsHidden="True"  />
-                                <DataGridTemplateColumn x:Name="columnEditBtnCont" Width="100"  CanUserResize="False" d:IsHidden="True" >
+                                <DataGridTextColumn Binding="{Binding EmpID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"  />
+                                <DataGridTextColumn Binding="{Binding EmpFName}" ClipboardContentBinding="{x:Null}" Header="First Name" Width="75" CanUserResize="False" Visibility="Visible"  />
+                                <DataGridTextColumn Binding="{Binding EmpLName}" ClipboardContentBinding="{x:Null}" Header="Last Name" Width="200" CanUserResize="False"  />
+                                <DataGridTextColumn Binding="{Binding EmpAddress}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350"   />
+                                <DataGridTextColumn Binding="{Binding EmpCity}" ClipboardContentBinding="{x:Null}" Header="City" Width="200" CanUserResize="False"  />
+                                <DataGridTextColumn Binding="{Binding PositionName}" ClipboardContentBinding="{x:Null}" Header="Position" Width="100" CanUserResize="False"   />
+                                <DataGridTemplateColumn x:Name="columnEditBtnCont" Width="100"  CanUserResize="False"  >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button x:Name="btnEditEmp" Click="btnEditCont_Click" Content="Edit" Background="#FF194E84" Foreground="White" BorderBrush="#FF0B3D70"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn x:Name="columnDelBtnCont" Width="100"  CanUserResize="False" d:IsHidden="True" >
+                                <DataGridTemplateColumn x:Name="columnDelBtnCont" Width="100"  CanUserResize="False"  >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button x:Name="btnDeleteEmp" Click="btnDeleteCont_Click" Content="Delete" Foreground="White" BorderBrush="#FFA50311" Background="#FFC50919" />
@@ -1147,18 +1136,18 @@
                                                 <Button x:Name="addServiceTypeBtn" Content="Add" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="75" Height="24" FontWeight="Normal" FontFamily="Segoe UI Semibold"  FontSize="13" Click="addServiceTypeBtn_Click" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>
                                                 <DataGrid x:Name="serviceTypeDg" Height="207" Margin="10,48,10,0" ItemsSource="{Binding ServicesList}" CanUserAddRows="False" MinColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" Grid.ColumnSpan="2" CanUserReorderColumns="False" CanUserResizeColumns="False" SelectedItem="{Binding SelectedService}">
                                                     <DataGrid.Columns >
-                                                        <DataGridTextColumn Binding="{Binding ServiceID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" d:IsHidden="True"/>
-                                                        <DataGridTextColumn Binding="{Binding ServiceName}" ClipboardContentBinding="{x:Null}" Header="Service Name" Width="150" CanUserResize="False" d:IsHidden="True"/>
-                                                        <DataGridTextColumn Binding="{Binding ServiceDesc}" ClipboardContentBinding="{x:Null}" Header="Description" Width="200" CanUserResize="False" d:IsHidden="True" />
-                                                        <DataGridTextColumn Binding="{Binding ServicePrice}" ClipboardContentBinding="{x:Null}" Header="Service Price" Width="175" d:IsHidden="True" />
-                                                        <DataGridTemplateColumn Width="100" d:IsHidden="True" >
+                                                        <DataGridTextColumn Binding="{Binding ServiceID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" />
+                                                        <DataGridTextColumn Binding="{Binding ServiceName}" ClipboardContentBinding="{x:Null}" Header="Service Name" Width="150" CanUserResize="False" />
+                                                        <DataGridTextColumn Binding="{Binding ServiceDesc}" ClipboardContentBinding="{x:Null}" Header="Description" Width="200" CanUserResize="False"  />
+                                                        <DataGridTextColumn Binding="{Binding ServicePrice}" ClipboardContentBinding="{x:Null}" Header="Service Price" Width="175"  />
+                                                        <DataGridTemplateColumn Width="100"  >
                                                             <DataGridTemplateColumn.CellTemplate>
                                                                 <DataTemplate>
                                                                     <Button x:Name="btnEditService" Click="btnEditService_Click" Content="Edit" />
                                                                 </DataTemplate>
                                                             </DataGridTemplateColumn.CellTemplate>
                                                         </DataGridTemplateColumn>
-                                                        <DataGridTemplateColumn Width="100" d:IsHidden="True" >
+                                                        <DataGridTemplateColumn Width="100"  >
                                                             <DataGridTemplateColumn.CellTemplate>
                                                                 <DataTemplate>
                                                                     <Button x:Name="btnDeleteService" Click="btnDeleteService_Click" Content="Delete" />
@@ -1227,18 +1216,18 @@
                                                         <Button x:Name="addSaveProductBtn" FontSize="13" Content="Add" HorizontalAlignment="Left" Margin="377,186,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="addNewProductBtn_Click" FontFamily="Segoe UI Semibold" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>
                                                         <DataGrid x:Name="productListTb" Margin="488,10,10,27" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}" AutoGenerateColumns="False" IsReadOnly="True">
                                                             <DataGrid.Columns >
-                                                                <DataGridTextColumn Binding="{Binding ItemName}" ClipboardContentBinding="{x:Null}" Width="150" CanUserResize="False" Visibility="Visible" Header="Product Name" d:IsHidden="True" />
-                                                                <DataGridTextColumn Binding="{Binding ItemDesc}" ClipboardContentBinding="{x:Null}" Header="Product Description" Width="200" CanUserResize="False" d:IsHidden="True" />
-                                                                <DataGridTextColumn Binding="{Binding CostPrice}" ClipboardContentBinding="{x:Null}" Header="Cost Price" Width="150" CanUserResize="False" d:IsHidden="True" />
-                                                                <DataGridTextColumn Binding="{Binding SalesPrice}" ClipboardContentBinding="{x:Null}" Header="Sales Price" Width="150" CanUserResize="False" d:IsHidden="True" />
-                                                                <DataGridTemplateColumn Width="100"  CanUserResize="False" d:IsHidden="True" >
+                                                                <DataGridTextColumn Binding="{Binding ItemName}" ClipboardContentBinding="{x:Null}" Width="150" CanUserResize="False" Visibility="Visible" Header="Product Name"  />
+                                                                <DataGridTextColumn Binding="{Binding ItemDesc}" ClipboardContentBinding="{x:Null}" Header="Product Description" Width="200" CanUserResize="False"  />
+                                                                <DataGridTextColumn Binding="{Binding CostPrice}" ClipboardContentBinding="{x:Null}" Header="Cost Price" Width="150" CanUserResize="False"  />
+                                                                <DataGridTextColumn Binding="{Binding SalesPrice}" ClipboardContentBinding="{x:Null}" Header="Sales Price" Width="150" CanUserResize="False"  />
+                                                                <DataGridTemplateColumn Width="100"  CanUserResize="False"  >
                                                                     <DataGridTemplateColumn.CellTemplate>
                                                                         <DataTemplate>
                                                                             <Button x:Name="editProductListBtn" Content="Edit" Click="editProductListBtn_Click"/>
                                                                         </DataTemplate>
                                                                     </DataGridTemplateColumn.CellTemplate>
                                                                 </DataGridTemplateColumn>
-                                                                <DataGridTemplateColumn Width="100"  CanUserResize="False" d:IsHidden="True" >
+                                                                <DataGridTemplateColumn Width="100"  CanUserResize="False"  >
                                                                     <DataGridTemplateColumn.CellTemplate>
                                                                         <DataTemplate>
                                                                             <Button x:Name="deleteProductListBtn" Click="deleteProductListBtn_Click" Content="Delete" />
@@ -1275,19 +1264,15 @@
                                     <Grid Margin="10,28,10,0" VerticalAlignment="Top" Height="50">
                                         <Label x:Name="label24" Content="* Company Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="135" FontWeight="Bold" Margin="0,2,0,0" FontStyle="Italic"/>
                                         <TextBox x:Name="custCompanyNameTb" Height="26" Margin="140,5,10,0" TextWrapping="Wrap" VerticalAlignment="Top" VerticalContentAlignment="Center" FontWeight="Normal">
-                                            <TextBox.Text>
-                                                <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                                                    <Binding.ValidationRules>
-                                                        <local:TextBoxValidation TextBoxType="String"/>
-                                                    </Binding.ValidationRules>
-                                                </Binding>
-                                            </TextBox.Text>
+                                            <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                                                <Binding.ValidationRules>
+                                                    <local:TextBoxValidation TextBoxType="String"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
                                         </TextBox>
                                     </Grid>
                                     <Grid Margin="10,87,10,0" VerticalAlignment="Top" Height="120">
-                                        <TextBox x:Name="custAddInfoTb" Height="120" TextWrapping="Wrap" VerticalAlignment="Top" Margin="140,0,10,0" FontWeight="Normal">
-                                            <Binding Path="AdditionaInfo" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
-                                        </TextBox>
+                                        <TextBox x:Name="custAddInfoTb" Height="120" TextWrapping="Wrap" VerticalAlignment="Top" Margin="140,0,10,0" FontWeight="Normal" Text="{Binding AdditionaInfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                         <Label x:Name="label_Copy" Content="Description:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="107" FontWeight="Bold" FontStyle="Italic"/>
                                     </Grid>
                                     <Grid Margin="10,205,10,0" VerticalAlignment="Top" Height="170">
@@ -1321,10 +1306,10 @@
                                     </Grid>
                                     <Label Content="* Contacts:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Margin="12,390,0,0" Height="30"/>
                                     <ComboBox x:Name="contactTypeCb" Margin="47,422,0,0" VerticalAlignment="Top" Height="25" Width="130" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" SelectionChanged="contactTypeCb_SelectionChanged" VerticalContentAlignment="Center" FontWeight="Normal" FontSize="12" SelectedValuePath="Content" >
-                                        <ComboBoxItem>[Contact Type]</ComboBoxItem>
-                                        <ComboBoxItem>Email Address</ComboBoxItem>
-                                        <ComboBoxItem>Phone Number</ComboBoxItem>
-                                        <ComboBoxItem>Mobile Number</ComboBoxItem>
+                                        <ComboBoxItem Content="[Contact Type]"/>
+                                        <ComboBoxItem Content="Email Address"/>
+                                        <ComboBoxItem Content="Phone Number"/>
+                                        <ComboBoxItem Content="Mobile Number"/>
                                     </ComboBox>
                                     <TextBox x:Name="contactDetailsEmailTb" HorizontalAlignment="Left" Height="25" Margin="192,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" FontWeight="Normal" TextChanged="contactDetailsEmailTb_TextChanged" VerticalContentAlignment="Center">
                                         <Binding Path="ContactValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
@@ -1350,23 +1335,19 @@
                                     <Button x:Name="addNewCustContactBtn" Content="Add" HorizontalAlignment="Left" Margin="512,422,0,0" VerticalAlignment="Top" Width="84" FontWeight="Normal" Height="26" Click="addNewCustContactBtn_Click" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="14"/>
                                     <Button x:Name="saveCustContactBtn" Content="save" HorizontalAlignment="Left" Margin="492,422,0,0" VerticalAlignment="Top" Width="110" FontWeight="Normal" Height="25" Click="saveCustContactBtn_Click" Visibility="Hidden" IsEnabled="False"/>
                                     <Button x:Name="cancelCustContactBtn" Content="cancel" HorizontalAlignment="Left" Margin="607,422,0,0" VerticalAlignment="Top" Width="110" FontWeight="Normal" Height="25" Click="cancelCustContactBtn_Click" IsEnabled="True" Visibility="Hidden"/>
-                                    <DataGrid x:Name="custContactDg" HorizontalAlignment="Left" Height="148" Margin="47,483,0,0" VerticalAlignment="Top" Width="549" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" SelectionChanged="custContactDg_SelectionChanged" SelectedItem="{Binding SelectedCustContact}" >
-                                        <DataGrid.ItemsSource>
-                                            <Binding Path="CustContacts" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                                            </Binding>
-                                        </DataGrid.ItemsSource>
+                                    <DataGrid x:Name="custContactDg" HorizontalAlignment="Left" Height="148" Margin="47,483,0,0" VerticalAlignment="Top" Width="549" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" SelectionChanged="custContactDg_SelectionChanged" SelectedItem="{Binding SelectedCustContact}" ItemsSource="{Binding CustContacts, Mode=TwoWay, UpdateSourceTrigger=Explicit}" >
                                         <DataGrid.Columns >
-                                            <DataGridTextColumn Binding="{Binding ContactTypeID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible" d:IsHidden="True" />
-                                            <DataGridTextColumn Binding="{Binding ContactType}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Contact Type" d:IsHidden="True" />
-                                            <DataGridTextColumn Binding="{Binding ContactDetails}" ClipboardContentBinding="{x:Null}" Header="Contact Details" Width="200" CanUserResize="False" d:IsHidden="True" />
-                                            <DataGridTemplateColumn x:Name="columnEditBtnCustCont" Width="100"  CanUserResize="False" d:IsHidden="True" >
+                                            <DataGridTextColumn Binding="{Binding ContactTypeID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"  />
+                                            <DataGridTextColumn Binding="{Binding ContactType}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Contact Type"  />
+                                            <DataGridTextColumn Binding="{Binding ContactDetails}" ClipboardContentBinding="{x:Null}" Header="Contact Details" Width="200" CanUserResize="False"  />
+                                            <DataGridTemplateColumn x:Name="columnEditBtnCustCont" Width="100"  CanUserResize="False"  >
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <Button x:Name="btnEditCustCont" Content="Edit" Click="btnEditCustCont_Click" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70" Width="70" Height="24"/>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
                                             </DataGridTemplateColumn>
-                                            <DataGridTemplateColumn x:Name="columnDelBtnCustCont" Width="100"  CanUserResize="False" d:IsHidden="True" >
+                                            <DataGridTemplateColumn x:Name="columnDelBtnCustCont" Width="100"  CanUserResize="False"  >
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <Button x:Name="btnDeleteCustCont" Click="btnDeleteCustCont_Click" Content="Delete" Background="#FF194E84" Foreground="White" BorderBrush="#FF0B3D70" Width="70" Height="24" />
@@ -1378,22 +1359,18 @@
 
                                     <Label x:Name="label1_Copy6" Content="Representative:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Width="129" FontStyle="Italic" Margin="14,642,0,0"/>
                                     <Button x:Name="newRepresentativeBtn" Content="Add" HorizontalAlignment="Left" Margin="512,652,0,0" VerticalAlignment="Top" Width="85" FontWeight="Normal" Click="newRepresentativeBtn_Click" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" Height="26" FontFamily="Segoe UI Semibold"/>
-                                    <DataGrid x:Name="customerRepresentativeDg" HorizontalAlignment="Left" Height="169" Margin="47,683,0,0" VerticalAlignment="Top" Width="555" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="customerRepresentativeDg_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30"  SelectedItem="{Binding SelectedRepresentative}">
-                                        <DataGrid.ItemsSource>
-                                            <Binding Path="CustRepresentatives" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                                            </Binding>
-                                        </DataGrid.ItemsSource>
+                                    <DataGrid x:Name="customerRepresentativeDg" HorizontalAlignment="Left" Height="169" Margin="47,683,0,0" VerticalAlignment="Top" Width="555" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="customerRepresentativeDg_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30"  SelectedItem="{Binding SelectedRepresentative}" ItemsSource="{Binding CustRepresentatives, Mode=TwoWay, UpdateSourceTrigger=Explicit}">
                                         <DataGrid.Columns >
-                                            <DataGridTextColumn Binding="{Binding RepFirstName}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="First Name" d:IsHidden="True" />
-                                            <DataGridTextColumn Binding="{Binding RepLastName}" ClipboardContentBinding="{x:Null}" Header="Last Name" Width="200" CanUserResize="False" d:IsHidden="True" />
-                                            <DataGridTemplateColumn x:Name="columnEditBtnCustContRep" Width="100" CanUserResize="False" d:IsHidden="True" >
+                                            <DataGridTextColumn Binding="{Binding RepFirstName}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="First Name"  />
+                                            <DataGridTextColumn Binding="{Binding RepLastName}" ClipboardContentBinding="{x:Null}" Header="Last Name" Width="200" CanUserResize="False"  />
+                                            <DataGridTemplateColumn x:Name="columnEditBtnCustContRep" Width="100" CanUserResize="False"  >
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <Button x:Name="editBtnCustContRep" Content="Edit" Click="editBtnCustContRep_Click" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70" Width="70" Height="24"/>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
                                             </DataGridTemplateColumn>
-                                            <DataGridTemplateColumn x:Name="columnDelBtnCustContRep" Width="100" CanUserResize="False" d:IsHidden="True" >
+                                            <DataGridTemplateColumn x:Name="columnDelBtnCustContRep" Width="100" CanUserResize="False"  >
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <Button x:Name="delBtnCustContRep" Content="Delete" Click="delBtnCustContRep_Click" Foreground="White" Background="#FFC50919" BorderBrush="#FFA50311" Width="70" Height="24" />
@@ -1513,17 +1490,17 @@
                                     <Button x:Name="cancelEmpContactBtn" Content="cancel" HorizontalAlignment="Left" Margin="548,333,0,0" VerticalAlignment="Top" Width="85" FontWeight="Normal" Height="26" Click="cancelEmpContactBtn_Click" IsEnabled="True" Grid.Column="1" Foreground="#FFFFFCFC" Background="#FFC50919" BorderBrush="#FFA50311" Visibility="Hidden"/>
                                     <DataGrid x:Name="empContactsDg" HorizontalAlignment="Left" Height="148" Margin="37,381,0,10" VerticalAlignment="Top" Width="547" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedEmpContact}" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30"  ItemsSource="{Binding EmpContacts}" Grid.Column="1" SelectionChanged="empContactsDg_SelectionChanged">
                                         <DataGrid.Columns >
-                                            <DataGridTextColumn Binding="{Binding ContactTypeID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible" d:IsHidden="True" />
-                                            <DataGridTextColumn Binding="{Binding ContactType}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Contact Type" d:IsHidden="True" />
-                                            <DataGridTextColumn Binding="{Binding ContactDetails}" ClipboardContentBinding="{x:Null}" Header="Contact Details" Width="200" CanUserResize="False" d:IsHidden="True" />
-                                            <DataGridTemplateColumn x:Name="colEditEmpContact" Width="100"  CanUserResize="False" d:IsHidden="True" >
+                                            <DataGridTextColumn Binding="{Binding ContactTypeID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"  />
+                                            <DataGridTextColumn Binding="{Binding ContactType}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Contact Type"  />
+                                            <DataGridTextColumn Binding="{Binding ContactDetails}" ClipboardContentBinding="{x:Null}" Header="Contact Details" Width="200" CanUserResize="False"  />
+                                            <DataGridTemplateColumn x:Name="colEditEmpContact" Width="100"  CanUserResize="False"  >
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <Button x:Name="editEmpContBtn" Click="editEmpContBtn_Click" Content="Edit" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70" Width="70" Height="26" FontFamily="Segoe UI Semibold" FontSize="13"/>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
                                             </DataGridTemplateColumn>
-                                            <DataGridTemplateColumn x:Name="colDelEmpContact" Width="100" CanUserResize="False" d:IsHidden="True" >
+                                            <DataGridTemplateColumn x:Name="colDelEmpContact" Width="100" CanUserResize="False"  >
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <Button x:Name="delEmpContBtn" Click="delEmpContBtn_Click" Content="Delete" Foreground="White" Background="#FFC50919" BorderBrush="#FFA50311" FontFamily="Segoe UI Semibold" FontSize="13" Width="70" Height="26" />
@@ -1547,12 +1524,7 @@
                                             <Label x:Name="label_Copy5" Content="Account Credentials" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Margin="0,79,0,0"/>
                                             <Label x:Name="label_Copy1" Content="* Username" HorizontalAlignment="Left" Margin="28,113,0,0" VerticalAlignment="Top" FontWeight="Normal" Width="99"/>
                                             <Label x:Name="label_Copy2" Content="* Password" HorizontalAlignment="Left" Margin="28,175,0,0" VerticalAlignment="Top" FontWeight="Normal" Width="99"/>
-                                            <TextBox x:Name="empUserNameTb" HorizontalAlignment="Left" Height="25" Margin="28,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center" TextChanged="empUserNameTb_TextChanged">
-                                                <TextBox.Text>
-                                                    <Binding Path="UserName" ValidatesOnDataErrors="True" ValidatesOnExceptions="True">
-                                                    </Binding>
-                                                </TextBox.Text>
-                                            </TextBox>
+                                            <TextBox x:Name="empUserNameTb" HorizontalAlignment="Left" Height="25" Margin="28,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center" TextChanged="empUserNameTb_TextChanged" Text="{Binding UserName, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"/>
                                             <PasswordBox x:Name="empPasswordTb" HorizontalAlignment="Left" Margin="28,209,0,0" VerticalAlignment="Top" Width="216"/>
                                         </Grid>
                                         <Grid x:Name="contractorOnlyGrid" VerticalAlignment="Top" HorizontalAlignment="Left" Height="232" Width="213">
