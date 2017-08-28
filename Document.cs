@@ -175,28 +175,33 @@ namespace prototype2
             row.Cells[2].AddParagraph("Description");
             row.Cells[2].Format.Alignment = ParagraphAlignment.Left;
             row.Cells[2].VerticalAlignment = VerticalAlignment.Bottom;
-            row.Cells[2].AddParagraph("Unit");
-            row.Cells[2].Format.Alignment = ParagraphAlignment.Left;
-            row.Cells[2].VerticalAlignment = VerticalAlignment.Bottom;
-            row.Cells[3].AddParagraph("Qty");
+            row.Cells[3].AddParagraph("Unit");
             row.Cells[3].Format.Alignment = ParagraphAlignment.Left;
             row.Cells[3].VerticalAlignment = VerticalAlignment.Bottom;
-            
-            row = table.AddRow();
-            row.HeadingFormat = true;
-            row.Format.Alignment = ParagraphAlignment.Center;
-            row.Format.Font.Bold = true;
-            row.Shading.Color = TableBlue;
-            row.Cells[1].AddParagraph("Quantity");
-            row.Cells[1].Format.Alignment = ParagraphAlignment.Left;
-            row.Cells[2].AddParagraph("Unit Price");
-            row.Cells[2].Format.Alignment = ParagraphAlignment.Left;
-            row.Cells[3].AddParagraph("Discount (%)");
-            row.Cells[3].Format.Alignment = ParagraphAlignment.Left;
-            row.Cells[4].AddParagraph("Taxable");
+            row.Cells[4].AddParagraph("Qty");
             row.Cells[4].Format.Alignment = ParagraphAlignment.Left;
+            row.Cells[4].VerticalAlignment = VerticalAlignment.Bottom;
+            row.Cells[5].AddParagraph("Unit Price");
+            row.Cells[5].Format.Alignment = ParagraphAlignment.Left;
+            row.Cells[5].VerticalAlignment = VerticalAlignment.Bottom;
+            row.Cells[6].AddParagraph("Total Amount");
+            row.Cells[6].Format.Alignment = ParagraphAlignment.Left;
+            row.Cells[6].VerticalAlignment = VerticalAlignment.Bottom;
+            //row = table.AddRow();
+            //row.HeadingFormat = true;
+            //row.Format.Alignment = ParagraphAlignment.Center;
+            //row.Format.Font.Bold = true;
+            //row.Shading.Color = TableBlue;
+            //row.Cells[1].AddParagraph("Quantity");
+            //row.Cells[1].Format.Alignment = ParagraphAlignment.Left;
+            //row.Cells[2].AddParagraph("Unit Price");
+            //row.Cells[2].Format.Alignment = ParagraphAlignment.Left;
+            //row.Cells[3].AddParagraph("Discount (%)");
+            //row.Cells[3].Format.Alignment = ParagraphAlignment.Left;
+            //row.Cells[4].AddParagraph("Taxable");
+            //row.Cells[4].Format.Alignment = ParagraphAlignment.Left;
 
-            this.table.SetEdge(0, 0, 6, 2, Edge.Box, BorderStyle.Single, 0.75, Color.Empty);
+            this.table.SetEdge(0, 0, 7, 1, Edge.Box, BorderStyle.Single, 0.25, Color.Empty);
         }
         //void FillContent()
         //{
