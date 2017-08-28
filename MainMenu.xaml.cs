@@ -2188,7 +2188,13 @@ namespace prototype2
             MessageBoxResult result = MessageBox.Show("Do you wish to delete this contact record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
             if (result == MessageBoxResult.OK)
             {
-                MainVM.CustContacts.Remove(MainVM.SelectedCustContact);
+                
+                if (MainVM.CustContacts.Count < 1)
+                {
+                    MessageBox.Show("Needs atleast 1 contact");
+                }
+                else
+                    MainVM.CustContacts.Remove(MainVM.SelectedCustContact);
             }
             else if (result == MessageBoxResult.Cancel)
             {
@@ -2234,7 +2240,7 @@ namespace prototype2
                         MainVM.CustRepresentatives.Remove(MainVM.SelectedRepresentative);
                     }
                     else
-                        MessageBox.Show("Need atleast 1 representative.");
+                        MessageBox.Show("Needs atleast 1 representative.");
                     
                 }
                 catch (Exception) { throw; }

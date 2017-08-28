@@ -933,7 +933,7 @@
                     </Grid>
 
                 </Grid>
-                <Grid x:Name="manageEmployeeGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged">
+                <Grid x:Name="manageEmployeeGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged" d:IsHidden="True">
                     <Grid Height="57" Margin="10,0" VerticalAlignment="Top" Background="#FF1695A3">
                         <Label x:Name="label7_Copy4" Content="Manage - Employee" Margin="0,0,307,0" FontSize="20" FontWeight="Bold" Background="{x:Null}" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                         <Button x:Name="settingsEmployeeGridBtn" Margin="1170,0,0,0" Style="{StaticResource settingsButton}" HorizontalAlignment="Right" Width="59" Foreground="White"  Click="settingsEmployeeGridBtn_Click" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Background="{x:Null}" Visibility="Collapsed">
@@ -1011,7 +1011,7 @@
                         </DataGrid>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageSupplierGrid" IsVisibleChanged="manageSupplierGrid_IsVisibleChanged">
+                <Grid x:Name="manageSupplierGrid" IsVisibleChanged="manageSupplierGrid_IsVisibleChanged" d:IsHidden="True">
                     <Label x:Name="label7_Copy5" Content="Manage - Supplier" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid x:Name="manageSupplierHome" Margin="10,70,10,10">
                         <Grid Margin="10,1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -1019,7 +1019,7 @@
                             <TextBox x:Name="manageSupplierSearchTb" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317" TextChanged="manageSupplierSearchTb_TextChanged"/>
                             <Button x:Name="manageSupplierSearchBtn" Content="Search" HorizontalAlignment="Left" Margin="404,3,-8,0" VerticalAlignment="Top" Width="85" Height="26" Click="manageSupplierSearchBtn_Click" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="14"/>
                         </Grid>
-                        <Button x:Name="manageSupplierAddbtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,4,10,0" VerticalAlignment="Top" Width="85" Click="manageSupplierAddbtn_Click" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="14"/>
+                        <Button x:Name="manageSupplierAddbtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,4,10,0" VerticalAlignment="Top" Width="85" Click="manageSupplierAddbtn_Click" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="14"/>
                         <DataGrid x:Name="manageSupplierDataGrid" Margin="10,41,10,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="manageSupplierDataGrid_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" ItemsSource="{Binding Suppliers}" SelectedItem="{Binding SelectedSupplier}">
                             <DataGrid.Columns >
                                 <DataGridTextColumn Binding="{Binding CompanyID}" ClipboardContentBinding="{x:Null}" Width="30" CanUserResize="False" Visibility="Visible"  />
@@ -1046,7 +1046,7 @@
                         </DataGrid>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageContractorGrid" IsVisibleChanged="manageContractorGrid_IsVisibleChanged">
+                <Grid x:Name="manageContractorGrid" IsVisibleChanged="manageContractorGrid_IsVisibleChanged" d:IsHidden="True">
                     <Grid Margin="10,70,10,10">
                         <Grid Margin="10,1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Label x:Name="label22" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -1083,7 +1083,7 @@
                         <Label x:Name="label7_Copy9" Content="Manage - Contractor" Margin="0,0,307,0" FontSize="20" FontWeight="Bold" Background="{x:Null}" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageSettingsGrid">
+                <Grid x:Name="manageSettingsGrid" d:IsHidden="True">
                     <Label x:Name="label7_Copy6" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid Margin="10,70,10,10">
                         <TabControl x:Name="tabControl" Margin="24,26,29,10">
@@ -1246,7 +1246,7 @@
                         </TabControl>
                     </Grid>
                 </Grid>
-                <Grid x:Name="companyDetailsGrid">
+                <Grid x:Name="companyDetailsGrid" d:IsHidden="True">
                     <Label x:Name="companyDetailsHeader" Content="" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid Margin="10,70,10,10"/>
                     <Grid x:Name="customerDetailsGrid" Margin="10,70,10,10">
@@ -1388,7 +1388,7 @@
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid x:Name="employeeDetailsGrid">
+                <Grid x:Name="employeeDetailsGrid" d:IsHidden="True">
                     <Label x:Name="employeeDetailsHeader" Content="" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid Margin="10,70,10,10"/>
                     <Grid x:Name="employeeDetails" Margin="10,70,10,10">
