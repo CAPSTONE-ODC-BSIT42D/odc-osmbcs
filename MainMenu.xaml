@@ -578,14 +578,14 @@
             <Grid x:Name="transactionGrid" Margin="10,0" Background="#FFECF0F1" >
                 <Grid x:Name="transactionQuotationsGrid" >
                     <Label x:Name="transQuotationHeader" Content="Transaction - Quotations" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" Margin="10,0" />
-                    <Grid x:Name="quotationsGridHome" Margin="10,70,10,10" d:IsHidden="True" >
+                    <Grid x:Name="quotationsGridHome" Margin="10,70,10,10" >
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                             <Label x:Name="label8" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
                             <TextBox x:Name="searchBox" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317"/>
                             <Button x:Name="button" Content="Search" HorizontalAlignment="Left" Margin="402,3,-11,0" VerticalAlignment="Top" Width="85" Height="29" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
                         </Grid>
                         <Label x:Name="label8_Copy" Content="Sort:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="525,9,0,0"/>
-                        <Button x:Name="transQuoteAddBtn" Content="Add" HorizontalAlignment="Right" Height="29" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Click="transQuoteAddBtn_Click" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70" FontFamily="Segoe UI Semibold"/>
+                        <Button x:Name="transQuoteAddBtn" Content="Add" HorizontalAlignment="Right" Height="29" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Click="transQuoteAddBtn_Click" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold"/>
                         <DataGrid x:Name="quotationsDataGrid" Margin="0,44,0,-3" AutoGenerateColumns="False">
                             <DataGrid.Columns >
                                 <DataGridTextColumn Binding="{Binding sqNoChar}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Sales Quote ID"  />
@@ -643,13 +643,13 @@
                         </DataGrid>
 
                     </Grid>
-                    <Grid x:Name="addRequestionGrid" Margin="10,70,10,10" d:IsHidden="True">
+                    <Grid x:Name="addRequestionGrid" Margin="10,70,10,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1214*"/>
                             <ColumnDefinition Width="23*"/>
                         </Grid.ColumnDefinitions>
                         <Button x:Name="transRequestBack" Content="Back" HorizontalAlignment="Left" Margin="892,975,0,0" VerticalAlignment="Top" Width="85" Height="26" Click="transRequestBack_Click" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
-                        <GroupBox x:Name="groupBox1" Header="Requisition Form" Margin="10,10,10,61" FontFamily="Segoe UI Symbol" FontSize="16" FontWeight="Bold"  BorderBrush="Black" VerticalContentAlignment="Stretch" Grid.ColumnSpan="2" Padding="5" BorderThickness="2,2,2.6,2">
+                        <GroupBox x:Name="groupBox1" Header="Requisition Form" Margin="10,10,10,61" FontFamily="Segoe UI Symbol" FontSize="16" FontWeight="Bold"  BorderBrush="Black" VerticalContentAlignment="Stretch" Grid.ColumnSpan="2" Padding="5" BorderThickness="2,2,2.6,2" d:IsHidden="True">
                             <ScrollViewer Margin="0,0,-2,4">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -663,7 +663,8 @@
                                     <Label x:Name="label32_Copy1" Content="Discount Price (Percent)" HorizontalAlignment="Left" Margin="10,432,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Segoe UI" Grid.Column="1"/>
                                     <Label Content="Requested Items" VerticalAlignment="Top" Height="37" Margin="10,72,0,0" HorizontalAlignment="Left" Width="241" FontSize="16" FontFamily="Segoe UI" FontWeight="Bold"/>
                                     <Label x:Name="label32_Copy2" Content="Additional Fees:" HorizontalAlignment="Left" Margin="10,394,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Segoe UI"/>
-                                    <Button x:Name="transReqAddNewItem" Content="Add New Item" Margin="0,72,10,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Normal" FontFamily="Segoe UI Semibold" FontSize="13" Click="transReqAddNewItem_Click" HorizontalAlignment="Right" Width="105" Foreground="White" Height="26" Background="#FF194E84" BorderBrush="#FF0B3D70" Grid.Column="1"/>
+                                    <Button x:Name="transReqAddNewItem" Content="Add New Item" Margin="0,72,10,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Normal" FontFamily="Segoe UI Semibold" FontSize="13" Click="transReqAddNewItem_Click" HorizontalAlignment="Right" Width="105"  Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"
+                                        Height="26" Grid.Column="1"/>
                                     <DataGrid x:Name="itemDg" Margin="10,109,24,0" ItemsSource="{Binding RequestedItems}" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="False" IsReadOnly="True" VerticalAlignment="Top" Height="275" Grid.ColumnSpan="2" SelectedItem="{Binding SelectedRequestedItem}" >
                                         <DataGrid.Columns >
                                             <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Width="25" CanUserResize="False" />
@@ -709,12 +710,12 @@
                                 </Grid>
                             </ScrollViewer>
                         </GroupBox>
-                        <Button x:Name="transRequestNext" Content="Next" HorizontalAlignment="Right" Margin="0,0,10,7" VerticalAlignment="Bottom" Width="85" Height="26" Click="transRequestNext_Click" Grid.ColumnSpan="2" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84"/>
+                        <Button x:Name="transRequestNext" Content="Next" HorizontalAlignment="Right" Margin="0,0,10,7" VerticalAlignment="Bottom" Width="85" Height="26" Click="transRequestNext_Click" Grid.ColumnSpan="2" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" d:IsHidden="True"/>
                     </Grid>
-                    <Grid x:Name="makeSalesQuoteGrid" Margin="10,70,10,10">
-                        <Button x:Name="transQuotationFormBack" Content="&lt; Back" HorizontalAlignment="Right" Margin="0,0,93,8" VerticalAlignment="Bottom" Width="74" Height="24" Click="transQuotationFormBack_Click"/>
-                        <GroupBox x:Name="groupBox2" Header="Quotation Form" Margin="10,29,10,42" FontFamily="Segoe UI Symbol" FontSize="16" FontWeight="Bold"  BorderBrush="Black" VerticalContentAlignment="Stretch">
-                            <ScrollViewer Margin="10,10,15,13">
+                    <Grid x:Name="makeSalesQuoteGrid" Margin="10,70,10,10" d:IsHidden="True">
+                        <Button x:Name="transQuotationFormBack" Content="&lt; Back" HorizontalAlignment="Right" Margin="0,0,93,8" VerticalAlignment="Bottom" Width="74" Height="24" Click="transQuotationFormBack_Click" d:IsHidden="True"/>
+                        <GroupBox x:Name="groupBox2" Header="Quotation Form" Margin="10,29,10,42" FontFamily="Segoe UI Symbol" FontSize="16" FontWeight="Bold"  BorderBrush="Black" VerticalContentAlignment="Stretch" d:IsHidden="True">
+                            <ScrollViewer Margin="10,10,15,13" d:IsHidden="True">
                                 <Grid>
                                     <Label x:Name="label16_Copy2" Content="Terms and Conditions" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" FontFamily="Segoe UI"/>
                                     <Label x:Name="label16_Copy3" Content="Price:" HorizontalAlignment="Left" Margin="36,46,0,0" VerticalAlignment="Top" FontWeight="Normal" FontSize="14" FontFamily="Segoe UI"/>
@@ -750,14 +751,16 @@
                                 </Grid>
                             </ScrollViewer>
                         </GroupBox>
-                        <Button x:Name="transQuotationSaveBtn" Content="Next &gt;" HorizontalAlignment="Right" Margin="0,0,14,8" VerticalAlignment="Bottom" Width="74" Height="24" Click="transQuotationSaveBtn_Click"/>
+                        <Button x:Name="transQuotationSaveBtn" Content="Next &gt;" HorizontalAlignment="Right" Margin="0,0,14,8" VerticalAlignment="Bottom" Width="74" Height="24" Click="transQuotationSaveBtn_Click" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70" d:IsLocked="True"/>
                     </Grid>
                     <Grid x:Name="viewQuotationGrid" Margin="10,70,10,10" d:IsHidden="True">
-                        <Button x:Name="transViewBackBtn" Content="&lt; Back" Margin="0,0,128,10" Click="transViewBackBtn_Click" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="74"/>
-                        <GroupBox x:Name="groupBox3" Header="View Sale Quotation" Margin="10,10,10,42" FontFamily="Segoe UI Symbol" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderBrush="Black" VerticalContentAlignment="Stretch">
-                            <Windows:DocumentPreview x:Name="pagePreview" Margin="0,0,16,2"/>
+                        <Button x:Name="transViewBackBtn" Content="&lt; Back" Margin="0,0,128,10" Click="transViewBackBtn_Click" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="74" d:IsHidden="True"/>
+                        <GroupBox x:Name="groupBox3" Header="View Sale Quotation" Margin="10,10,10,42" FontFamily="Segoe UI Symbol" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderBrush="Black" VerticalContentAlignment="Stretch" d:IsHidden="True">
+                            <Windows:DocumentPreview x:Name="pagePreview" Margin="0,0,16,2" d:IsHidden="True"/>
                         </GroupBox>
-                        <Button x:Name="transViewSaveSend" Content="Save and Send" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="98" Height="24" Click="transViewSaveSend_Click"/>
+                        <Button x:Name="transViewSaveSend" Content="Save and Send" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="98" Height="24" Click="transViewSaveSend_Click"
+                                 Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" d:IsHidden="True"
+/>
                     </Grid>
                 </Grid>
                 <Grid x:Name="transactionInvoiceGrid" d:IsHidden="True">
@@ -795,7 +798,7 @@
                         <Button x:Name="transOrdersAddBtn" Content="add" HorizontalAlignment="Right" Height="26" Margin="0,10,10,0" VerticalAlignment="Top" Width="90" Click="transOrdersAddBtn_Click"/>
                         <DataGrid x:Name="quotationsDataGrid1" Margin="0,41,0,0" AutoGenerateColumns="False"/>
                     </Grid>
-                    <Grid x:Name="orderFormGrid" Margin="10,70,10,10" d:IsHidden="True">
+                    <Grid x:Name="orderFormGrid" Margin="10,70,10,10">
                         <Button x:Name="orderFormBack" Content="&lt; Back" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="74" Height="24" Click="orderFormBack_Click" Visibility="Hidden"/>
                         <GroupBox x:Name="groupBox4" Header="Order Form" Margin="10,29,10,42" FontFamily="Segoe UI Symbol" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderBrush="Black" VerticalContentAlignment="Stretch" Visibility="Hidden">
                             <Grid Margin="0,0,-2,0" Visibility="Hidden">
@@ -999,7 +1002,7 @@
                     </Grid>
 
                 </Grid>
-                <Grid x:Name="manageEmployeeGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged">
+                <Grid x:Name="manageEmployeeGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged" d:IsHidden="True">
                     <Grid Height="57" Margin="10,0" VerticalAlignment="Top" Background="#FF1695A3">
                         <Label x:Name="label7_Copy4" Content="Manage - Employee" Margin="0,0,307,0" FontSize="20" FontWeight="Bold" Background="{x:Null}" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                         <Button x:Name="settingsEmployeeGridBtn" Margin="1170,0,0,0" Style="{StaticResource settingsButton}" HorizontalAlignment="Right" Width="59" Foreground="White"  Click="settingsEmployeeGridBtn_Click" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Background="{x:Null}" Visibility="Collapsed">
