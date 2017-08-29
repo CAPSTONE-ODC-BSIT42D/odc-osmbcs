@@ -556,7 +556,7 @@
                     </Grid>
                 </Button>
             </Grid>
-            <Grid x:Name="transactionGrid" Margin="10,0" Background="#FFECF0F1" >
+            <Grid x:Name="transactionGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True" >
                 <Grid x:Name="transactionQuotationsGrid" d:IsHidden="True" >
                     <Label x:Name="transQuotationHeader" Content="Transaction - Quotations" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" Margin="10,0" d:IsHidden="True" />
                     <Grid x:Name="quotationsGridHome" Margin="10,70,10,10" d:IsHidden="True" >
@@ -939,7 +939,7 @@
                 </Grid>
             </Grid>
             <Grid x:Name="reportsGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True" />
-            <Grid x:Name="manageGrid" Margin="10,0,10,10" Background="#FFECF0F1" d:IsHidden="True" >
+            <Grid x:Name="manageGrid" Margin="10,0,10,10" Background="#FFECF0F1" >
                 <Grid x:Name="manageCustomerGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged" d:IsHidden="True" >
                     <Label x:Name="label7_Copy" Content="Manage - Customer" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid x:Name="manageCustomerHomeGrid" Margin="10,70,10,10">
@@ -1089,7 +1089,7 @@
                         </DataGrid>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageContractorGrid" IsVisibleChanged="manageContractorGrid_IsVisibleChanged" d:IsHidden="True">
+                <Grid x:Name="manageContractorGrid" IsVisibleChanged="manageContractorGrid_IsVisibleChanged">
                     <Grid Margin="10,70,10,10">
                         <Grid Margin="10,1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Label x:Name="label22" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -1097,14 +1097,14 @@
                             <Button x:Name="button4" Content="Search" HorizontalAlignment="Left" Margin="402,3,-6,0" VerticalAlignment="Top" Width="85" Height="26" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70" FontFamily="Segoe UI Semibold" FontSize="13"/>
                         </Grid>
                         <Button x:Name="manageContractorAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,8,10,0" VerticalAlignment="Top" Width="85" Click="manageContractorAddBtn_Click" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13"/>
-                        <DataGrid x:Name="manageContractorDataGrid" Margin="20,41,0,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="manageContractorDataGrid_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" IsVisibleChanged="manageEmployeeDataGrid_IsVisibleChanged" RowHeight="30" ItemsSource="{Binding Employees}" SelectedItem ="{Binding SelectedEmployee}">
+                        <DataGrid x:Name="manageContractorDataGrid" Margin="20,41,0,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="manageContractorDataGrid_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" IsVisibleChanged="manageContractorGrid_IsVisibleChanged" RowHeight="30" ItemsSource="{Binding Employees}" SelectedItem ="{Binding SelectedEmployee}">
                             <DataGrid.Columns >
                                 <DataGridTextColumn Binding="{Binding EmpID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"  />
-                                <DataGridTextColumn Binding="{Binding EmpFName}" ClipboardContentBinding="{x:Null}" Header="First Name" Width="75" CanUserResize="False" Visibility="Visible"  />
+                                <DataGridTextColumn Binding="{Binding EmpFname}" ClipboardContentBinding="{x:Null}" Header="First Name" Width="75" CanUserResize="False" Visibility="Visible"  />
                                 <DataGridTextColumn Binding="{Binding EmpLName}" ClipboardContentBinding="{x:Null}" Header="Last Name" Width="200" CanUserResize="False"  />
                                 <DataGridTextColumn Binding="{Binding EmpAddress}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350"   />
                                 <DataGridTextColumn Binding="{Binding EmpCity}" ClipboardContentBinding="{x:Null}" Header="City" Width="200" CanUserResize="False"  />
-                                <DataGridTextColumn Binding="{Binding PositionName}" ClipboardContentBinding="{x:Null}" Header="Position" Width="100" CanUserResize="False"   />
+                                <DataGridTextColumn Binding="{Binding JobName}" ClipboardContentBinding="{x:Null}" Header="Job Name" Width="100" CanUserResize="False"   />
                                 <DataGridTemplateColumn x:Name="columnEditBtnCont" Width="100"  CanUserResize="False"  >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -1432,7 +1432,7 @@
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid x:Name="employeeDetailsGrid" d:IsHidden="True">
+                <Grid x:Name="employeeDetailsGrid">
                     <Label x:Name="employeeDetailsHeader" Content="" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid Margin="10,70,10,10"/>
                     <Grid x:Name="employeeDetails" Margin="10,70,10,10">
@@ -1594,7 +1594,7 @@
 
                         </GroupBox>
                         <Grid Margin="0,0,10,10" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                            <Button x:Name="saveEmpBtn" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" IsEnabled="False" Click="saveEmpBtn_Click" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" Margin="-52,-10,0,0" Height="26" FontSize="13" FontFamily="Segoe UI Semibold"/>
+                            <Button x:Name="saveEmpBtn" Content="Save" HorizontalAlignment="Left" Width="85" IsEnabled="False" Click="saveEmpBtn_Click" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" Margin="-52,-10,0,4" FontSize="13" FontFamily="Segoe UI Semibold"/>
                             <Button x:Name="cancelEmpBtn" Content="Cancel" HorizontalAlignment="Left" Margin="56,-10,0,0" VerticalAlignment="Top" Width="85" Click="cancelEmpBtn_Click" Background="#FFC50919" BorderBrush="#FFA50311" Foreground="#FFFBF8F8" Height="26" FontSize="13" FontFamily="Segoe UI Semibold"/>
                         </Grid>
                     </Grid>
