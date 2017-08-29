@@ -28,13 +28,13 @@ namespace prototype2
     /// </summary>
     public partial class MainMenu : Window
     {
-        public static MainViewModel MainVM = new MainViewModel();
+        
         public MainMenu()
         {
             InitializeComponent();
             this.DataContext = MainVM;
         }
-        
+        public static MainViewModel MainVM = new MainViewModel();
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             for (int x = 0; x < containerGrid.Children.Count; x++)
@@ -98,30 +98,6 @@ namespace prototype2
             if (!visual.IsDescendantOf(saleSubMenuGrid) && !visual.IsDescendantOf(manageSubMenugrid))
                 saleSubMenuGrid.Visibility = Visibility.Collapsed;
             manageSubMenugrid.Visibility = Visibility.Collapsed;
-            //if (!visual.IsDescendantOf(manageEmployeeDataGrid))
-            //{
-            //    if (manageEmployeeDataGrid.SelectedItems.Count > 0)
-            //    {
-            //        manageEmployeeDataGrid.Columns[manageEmployeeDataGrid.Columns.IndexOf(columnEditBtnEmp)].Visibility = Visibility.Hidden;
-            //        manageEmployeeDataGrid.Columns[manageEmployeeDataGrid.Columns.IndexOf(columnDelBtnEmp)].Visibility = Visibility.Hidden;
-            //    }
-            //}
-            //if (!visual.IsDescendantOf(manageSupplierDataGrid))
-            //{
-            //    if (manageSupplierDataGrid.SelectedItems.Count > 0)
-            //    {
-            //        manageSupplierDataGrid.Columns[manageSupplierDataGrid.Columns.IndexOf(columnEditSuppBtn)].Visibility = Visibility.Hidden;
-            //        manageSupplierDataGrid.Columns[manageSupplierDataGrid.Columns.IndexOf(columnDeleteSuppBtn)].Visibility = Visibility.Hidden;
-            //    }
-            //}
-            //if (!visual.IsDescendantOf(manageCustomeDataGrid))
-            //{
-            //    if (manageCustomeDataGrid.SelectedItems.Count > 0)
-            //    {
-            //        manageCustomeDataGrid.Columns[manageContractorDataGrid.Columns.IndexOf(columnEditBtnCont)].Visibility = Visibility.Hidden;
-            //        manageCustomeDataGrid.Columns[manageContractorDataGrid.Columns.IndexOf(columnDelBtnCont)].Visibility = Visibility.Hidden;
-            //    }
-            //}
         }
 
         /*-----------------MENU BAR BUTTONS-------------------*/
@@ -338,11 +314,7 @@ namespace prototype2
                 transactionQuotationsGrid.Children[x].Visibility = Visibility.Collapsed;
             }
             makeSalesQuoteGrid.Visibility = Visibility.Visible;
-            Document document;
-            DocumentFormat df = new DocumentFormat();
-            document = df.CreateDocument("sdadsa", "asdsadsa");
-            string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
-            pagePreview.Ddl = ddl;
+            
         }
 
         private void transQuotationFormBack_Click(object sender, RoutedEventArgs e)
@@ -380,8 +352,7 @@ namespace prototype2
             DocumentFormat df = new DocumentFormat();
             document = df.CreateDocument("sdadsa", "asdsadsa");
             string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
-            //.Ddl = ddl;
-            pagePreview.Document = document;
+            pagePreview.Ddl = ddl;
             viewQuotationGrid.Visibility = Visibility.Visible;
             
         }
@@ -1049,7 +1020,7 @@ namespace prototype2
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             {
-                                MessageBox.Show("Employee Poisition successfully added");
+                                MessageBox.Show("Employee Position successfully added");
                                 empPosNewTb.Clear();
                                 setListBoxControls();
                                 dbCon.Close();
@@ -1058,6 +1029,57 @@ namespace prototype2
                     }
                 }
             }
+        }
+
+
+        private void deleteEmpPosBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (employeePositionLb.SelectedItems.Count > 0)
+            {
+                var dbCon = DBConnection.Instance();
+                dbCon.DatabaseName = dbname;
+                if (dbCon.IsConnect())
+                {
+                    try
+                    {
+                        string query = "DELETE FROM `odc_db`.`position_t` WHERE `positionID`='" + MainMenu.MainVM.SelectedEmpPosition.PositionID + "';";
+
+                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        {
+                            dbCon.Close();
+                            MessageBox.Show("Employee position successfully deleted.");
+                            setListBoxControls();
+                        }
+                    }
+                    catch (Exception) { throw; }
+                } 
+            }
+            else
+            {
+                MessageBox.Show("Select an employee position first.");
+            }
+
+        }
+
+        private void editEmpPosBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = dbname;
+            if (dbCon.IsConnect())
+            {
+                if (employeePositionLb.SelectedItems.Count > 0)
+                {
+                    empPosNewTb.Text = MainMenu.MainVM.SelectedEmpPosition.PositionName;
+                    saveEmpPosBtn.Visibility = Visibility.Visible;
+                    addEmpPosBtn.Visibility = Visibility.Hidden;
+                   
+                }
+                else
+                {
+                    MessageBox.Show("Please select an employee position first.");
+                }
+            }
+            dbCon.Close();
         }
 
         private void saveEmpPosBtn_Click(object sender, RoutedEventArgs e)
@@ -1080,6 +1102,8 @@ namespace prototype2
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
                         MessageBox.Show("Employee Poisition saved");
+                        saveEmpPosBtn.Visibility = Visibility.Hidden;
+                        addEmpPosBtn.Visibility = Visibility.Visible;
                         empPosNewTb.Clear();
                         setListBoxControls();
                         dbCon.Close();
@@ -1088,52 +1112,6 @@ namespace prototype2
             }
 
         }
-
-        private void deleteEmpPosBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (employeePositionLb.SelectedItems.Count > 0)
-            {
-                var dbCon = DBConnection.Instance();
-                dbCon.DatabaseName = dbname;
-                if (dbCon.IsConnect())
-                {
-                    try
-                    {
-                        string query = "DELETE FROM `odc_db`.`position_t` WHERE `positionID`='" + MainMenu.MainVM.SelectedEmpPosition.PositionID + "';";
-
-                        if (dbCon.insertQuery(query, dbCon.Connection))
-                        {
-                            dbCon.Close();
-                            MessageBox.Show("Employee position successfully deleted.");
-                            setListBoxControls();
-                        }
-                    }
-                    catch (Exception) { throw; }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Select an employee position first.");
-            }
-
-        }
-
-        private void editEmpPosBtn_Click(object sender, RoutedEventArgs e)
-        {
-            var dbCon = DBConnection.Instance();
-            dbCon.DatabaseName = dbname;
-
-            if (employeePositionLb.SelectedItems.Count > 0)
-            {
-                empPosNewTb.Text = MainMenu.MainVM.SelectedEmpPosition.PositionName;
-            }
-            else
-            {
-                MessageBox.Show("Please select an employee position first.");
-            }
-            dbCon.Close();
-        }
-
 
         //CONTRACTOR PART
         private void addContJobBtn_Click(object sender, RoutedEventArgs e)
@@ -1174,37 +1152,9 @@ namespace prototype2
                     }
                 }
             }
-
         }
 
-        private void saveContJobBtn_Click(object sender, RoutedEventArgs e)
-        {
-            var dbCon = DBConnection.Instance();
-            dbCon.DatabaseName = dbname;
-            if (String.IsNullOrWhiteSpace(contNewJobTb.Text))
-            {
-                MessageBox.Show("Contractor Job Title field must be filled");
-            }
-            else
-            {
-                if (contJobLb.Items.Contains(contNewJobTb.Text))
-                {
-                    MessageBox.Show("Job Title already exists");
-                }
-                if (dbCon.IsConnect())
-                {
-                    string query = "UPDATE `odc_db`.`job_title_t` set `jobName` = '" + contNewJobTb.Text + "' where positionID = '" + MainMenu.MainVM.SelectedJobTitle.JobID + "'";
-                    if (dbCon.insertQuery(query, dbCon.Connection))
-                    {
-                        MessageBox.Show("Job Title successfully saved");
-                        contNewJobTb.Clear();
-                        setListBoxControls();
-                        dbCon.Close();
-                    }
-                }
-            }
 
-        }
         private void deleteContJobBtn_Click(object sender, RoutedEventArgs e)
         {
             if (contJobLb.SelectedItems.Count > 0)
@@ -1231,7 +1181,6 @@ namespace prototype2
             {
                 MessageBox.Show("Select a Job Position first.");
             }
-
         }
 
         private void editContJobBtn_Click(object sender, RoutedEventArgs e)
@@ -1241,7 +1190,6 @@ namespace prototype2
 
             if (contJobLb.SelectedItems.Count > 0)
             {
-
                 contNewJobTb.Text = MainMenu.MainVM.SelectedJobTitle.JobName;
             }
             else
@@ -1249,8 +1197,43 @@ namespace prototype2
                 MessageBox.Show("Please select a record first.");
             }
             dbCon.Close();
+            saveContJobBtn.Visibility = Visibility.Visible;
+            addContJobBtn.Visibility = Visibility.Hidden;
         }
-        
+
+        //empPosNewTb.Text = MainMenu.MainVM.SelectedEmpPosition.PositionName
+        private void saveContJobBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = dbname;
+            if (String.IsNullOrWhiteSpace(contNewJobTb.Text))
+            {
+                MessageBox.Show("Contractor Job Title field must be filled");
+            }
+            else
+            {
+                if (contJobLb.Items.Contains(contNewJobTb.Text))
+                {
+                    MessageBox.Show("Job Title already exists");
+                }
+                if (dbCon.IsConnect())
+                {
+                    string query = "UPDATE `odc_db`.`job_title_t` set `jobName` = '" + contNewJobTb.Text + "' where jobID = '" + MainMenu.MainVM.SelectedJobTitle.JobID + "'";
+                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    {
+                        MessageBox.Show("Job Title successfully saved");
+                        contNewJobTb.Clear();
+                        setListBoxControls();
+                        dbCon.Close();
+                        contNewJobTb.Clear();
+                        addContJobBtn.Visibility = Visibility.Visible;
+                        saveContJobBtn.Visibility = Visibility.Hidden;
+                       
+
+                    }
+                }
+            }
+        }
 
         //product category
         private void deleteCategoryBtn_Click(object sender, RoutedEventArgs e)
@@ -1324,13 +1307,20 @@ namespace prototype2
             dbCon.DatabaseName = dbname;
             if (invProductsCategoryLb.SelectedItems.Count > 0)
             {
-                //empPosNewTb.Text = MainMenu.MainVM.SelectedEmpPosition.PositionName;
+                //invCategoryTb.Text = MainMenu.MainVM.SelectedEmpPosition.PositionName;
+                saveProdCatBtn.Visibility = Visibility.Visible;
             }
             else
             {
                 MessageBox.Show("Please select a product category first.");
             }
             dbCon.Close();
+        }
+
+        private void saveProdCatBtn_Click(object sender, RoutedEventArgs e)
+        {
+            saveProdCatBtn.Visibility = Visibility.Hidden;
+
         }
 
         //product list
@@ -2131,7 +2121,7 @@ namespace prototype2
                         if (!String.IsNullOrWhiteSpace(contactDetailsEmailTb.Text))
                         {
 
-                            MainVM.CustContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            MainVM.SelectedCustContact.ContactDetails = contactDetailsEmailTb.Text;
                             clearContactsBoxes();
                         }
                         else
@@ -2143,7 +2133,7 @@ namespace prototype2
                         if (!String.IsNullOrWhiteSpace(contactDetailsPhoneTb.Text))
                         {
 
-                            MainVM.CustContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            MainVM.SelectedCustContact.ContactDetails = contactDetailsPhoneTb.Text;
                             clearContactsBoxes();
                         }
                         else
@@ -2154,7 +2144,7 @@ namespace prototype2
                     {
                         if (!String.IsNullOrWhiteSpace(contactDetailsMobileTb.Text))
                         {
-                            MainVM.CustContacts.Add(new Contact() { ContactTypeID = contactTypeCb.SelectedIndex.ToString(), ContactType = contactTypeCb.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            MainVM.SelectedCustContact.ContactDetails = contactDetailsMobileTb.Text;
                             clearContactsBoxes();
                         }
                         else
@@ -2795,9 +2785,8 @@ namespace prototype2
                     {
                         if (!String.IsNullOrWhiteSpace(contactDetailsEmailTb1.Text))
                         {
-
                             MainVM.EmpContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
-                            clearContactsBoxes();
+
                         }
                         else
                         {
@@ -2809,6 +2798,7 @@ namespace prototype2
                         {
 
                             MainVM.EmpContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
+
                             clearContactsBoxes();
                         }
                         else
@@ -2820,6 +2810,7 @@ namespace prototype2
                         if (!String.IsNullOrWhiteSpace(contactDetailsMobileTb1.Text))
                         {
                             MainVM.EmpContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
+
                             clearContactsBoxes();
                         }
                         else
@@ -2885,8 +2876,12 @@ namespace prototype2
                         if (!String.IsNullOrWhiteSpace(contactDetailsEmailTb1.Text))
                         {
 
-                            MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            MainVM.SelectedEmpContact.ContactDetails = contactDetailsEmailTb1.Text;
                             clearContactsBoxes();
+
+                            addNewEmpContactBtn.Visibility = Visibility.Visible;
+                            cancelEmpContactBtn.Visibility = Visibility.Hidden;
+                            saveEmpContactBtn.Visibility = Visibility.Hidden;
                         }
                         else
                         {
@@ -2896,9 +2891,12 @@ namespace prototype2
                     {
                         if (!String.IsNullOrWhiteSpace(contactDetailsPhoneTb1.Text))
                         {
-
-                            MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            MainVM.SelectedEmpContact.ContactDetails = contactDetailsPhoneTb1.Text;
                             clearContactsBoxes();
+
+                            addNewEmpContactBtn.Visibility = Visibility.Visible;
+                            cancelEmpContactBtn.Visibility = Visibility.Hidden;
+                            saveEmpContactBtn.Visibility = Visibility.Hidden;
                         }
                         else
                         {
@@ -2908,8 +2906,12 @@ namespace prototype2
                     {
                         if (!String.IsNullOrWhiteSpace(contactDetailsMobileTb1.Text))
                         {
-                            MainVM.RepContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
+                            MainVM.SelectedEmpContact.ContactDetails = contactDetailsMobileTb1.Text;
                             clearContactsBoxes();
+
+                            addNewEmpContactBtn.Visibility = Visibility.Visible;
+                            cancelEmpContactBtn.Visibility = Visibility.Hidden;
+                            saveEmpContactBtn.Visibility = Visibility.Hidden;
                         }
                         else
                         {
@@ -3374,6 +3376,7 @@ namespace prototype2
             if(MainVM.SelectedAdditionalFee!=null)
             MainVM.AdditionalFees.Remove(MainVM.SelectedAdditionalFee);
         }
+
 
         private void searchBox1_TextChanged(object sender, TextChangedEventArgs e)
         {
