@@ -556,8 +556,8 @@
                     </Grid>
                 </Button>
             </Grid>
-            <Grid x:Name="transactionGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True" >
-                <Grid x:Name="transactionQuotationsGrid" >
+            <Grid x:Name="transactionGrid" Margin="10,0" Background="#FFECF0F1" >
+                <Grid x:Name="transactionQuotationsGrid" d:IsHidden="True" >
                     <Label x:Name="transQuotationHeader" Content="Transaction - Quotations" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" Margin="10,0" d:IsHidden="True" />
                     <Grid x:Name="quotationsGridHome" Margin="10,70,10,10" d:IsHidden="True" >
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
@@ -624,7 +624,7 @@
                         </DataGrid>
 
                     </Grid>
-                    <Grid x:Name="addRequestionGrid" Margin="10,70,10,10">
+                    <Grid x:Name="addRequestionGrid" Margin="10,70,10,10" d:IsHidden="True">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1214*"/>
                             <ColumnDefinition Width="23*"/>
@@ -761,9 +761,9 @@
                         <DataGrid x:Name="quotationsDataGrid3" Margin="0,41,0,0" AutoGenerateColumns="False"/>
                     </Grid>
                 </Grid>
-                <Grid x:Name="transactionOrdersGrid" d:IsHidden="True">
+                <Grid x:Name="transactionOrdersGrid">
                     <Label x:Name="label7_Copy3" Content="Transaction - Purchase Orders" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" Margin="10,0"/>
-                    <Grid x:Name="transOrdersGridHome" Margin="10,70,10,10">
+                    <Grid x:Name="transOrdersGridHome" Margin="10,70,10,10" d:IsHidden="True">
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="474">
                             <Label x:Name="label9" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
                             <TextBox x:Name="searchBox1" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="317"/>
@@ -772,10 +772,10 @@
                         <Button x:Name="transOrdersAddBtn" Content="add" HorizontalAlignment="Right" Height="26" Margin="0,10,10,0" VerticalAlignment="Top" Width="90" Click="transOrdersAddBtn_Click"/>
                         <DataGrid x:Name="quotationsDataGrid1" Margin="0,41,0,0" AutoGenerateColumns="False"/>
                     </Grid>
-                    <Grid x:Name="orderFormGrid" Margin="10,70,10,10" Visibility="Hidden">
-                        <Button x:Name="orderFormBack" Content="&lt; Back" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="74" Height="24" Click="orderFormBack_Click"/>
-                        <GroupBox x:Name="groupBox4" Header="Order Form" Margin="10,29,10,42" FontFamily="Segoe UI Symbol" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderBrush="Black" VerticalContentAlignment="Stretch">
-                            <Grid Margin="0,0,-2,0">
+                    <Grid x:Name="orderFormGrid" Margin="10,70,10,10" d:IsHidden="True">
+                        <Button x:Name="orderFormBack" Content="&lt; Back" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="74" Height="24" Click="orderFormBack_Click" Visibility="Hidden"/>
+                        <GroupBox x:Name="groupBox4" Header="Order Form" Margin="10,29,10,42" FontFamily="Segoe UI Symbol" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderBrush="Black" VerticalContentAlignment="Stretch" Visibility="Hidden">
+                            <Grid Margin="0,0,-2,0" Visibility="Hidden">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="6*"/>
                                     <ColumnDefinition Width="455*"/>
@@ -811,10 +811,10 @@
                                 <Button x:Name="button8" Content="+add" Grid.Column="1" HorizontalAlignment="Left" Margin="871,221,0,0" VerticalAlignment="Top" Width="75" FontFamily="Segoe UI" FontSize="12" FontWeight="Normal" FontStyle="Normal" Height="20"/>
                             </Grid>
                         </GroupBox>
-                        <Button x:Name="orderFormNext" Content="Next &gt;" HorizontalAlignment="Right" Margin="0,0,14,8" VerticalAlignment="Bottom" Width="74" Height="24" Click="transRequestNext_Click"/>
+                        <Button x:Name="orderFormNext" Content="Next &gt;" HorizontalAlignment="Right" Margin="0,0,14,8" VerticalAlignment="Bottom" Width="74" Height="24" Click="transRequestNext_Click" Visibility="Hidden"/>
                     </Grid>
                     <Grid x:Name="viewPurchaseOrder" Margin="10,70,10,10" Visibility="Hidden">
-                        <Button x:Name="transViewBackBtn1" Content="&lt; Back" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="74" Height="24" Click="transViewBackBtn_Click"/>
+                        <Button x:Name="transViewBackBtn1" Content="&lt; Back" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="74" Height="24" Click="transViewBackBtn_Click" Visibility="Hidden"/>
                         <GroupBox x:Name="groupBox5" Header="View Purchase Order" Margin="10,29,10,42" FontFamily="Segoe UI Symbol" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderBrush="Black" VerticalContentAlignment="Stretch"/>
                         <Button x:Name="transOrderSaveOnly" Content="Save and Close" HorizontalAlignment="Right" Margin="0,0,113,10" VerticalAlignment="Bottom" Width="104" Height="24" Click="transOrderSaveOnly_Click"/>
                         <Button x:Name="transOrderSaveSend" Content="Save and Send" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="98" Height="24" Click="transOrderSaveSend_Click"/>
@@ -829,44 +829,10 @@
                 </Grid>
             </Grid>
             <Grid x:Name="servicesGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True">
-                <Grid x:Name="servicesHome" Margin="10,70,10,10">
-                    <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476">
-                        <Label x:Name="label17" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-                        <TextBox x:Name="searchBox8" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317"/>
-                        <Button x:Name="button9" Content="Search" Margin="378,3,0,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="85" FontFamily="Segoe UI Semibold" FontSize="13" Foreground="#FFFFFCFC" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
-                    </Grid>
-                    <Button x:Name="newServiceSched" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Click="transQuoteAddBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Foreground="#FFFFFCFC" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
-                    <DataGrid x:Name="servicesDg" Margin="10,82,10,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" SelectionChanged="servicesDg_SelectionChanged">
-                        <DataGrid.Columns >
-                            <DataGridTextColumn Binding="{Binding serviceId}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"  />
-                            <DataGridTextColumn Binding="{Binding serviceName}" ClipboardContentBinding="{x:Null}" Header="Service Name" Width="200" CanUserResize="False"  />
-                            <DataGridTextColumn Binding="{Binding serviceStatus}" ClipboardContentBinding="{x:Null}" Header="Status" Width="350"   />
-                            <DataGridTextColumn Binding="{Binding dateStarted}" ClipboardContentBinding="{x:Null}" Header="Date Started" Width="200" CanUserResize="False"  />
-                            <DataGridTextColumn Binding="{Binding dateEnded}" ClipboardContentBinding="{x:Null}" Header="Date Ended" Width="200" CanUserResize="False"  />
-                            <DataGridTextColumn Binding="{Binding location}" ClipboardContentBinding="{x:Null}" Header="Location" Width="200" CanUserResize="False"   />
-                            <DataGridTextColumn Binding="{Binding salesNote}" ClipboardContentBinding="{x:Null}" Header="Note" Width="100" CanUserResize="False"   />
-                            <DataGridTemplateColumn x:Name="columnEditBtn4" Width="100" CanUserResize="False"  >
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button x:Name="btnEdit1" Content="Edit" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn x:Name="columnDelBtn4" Width="100" CanUserResize="False"  >
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button x:Name="btnDelete" Content="Delete" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                    <DatePicker HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top" Width="167"/>
-                </Grid>
-                <Grid Height="57" Margin="10,0" VerticalAlignment="Top" Background="#FF1695A3">
+                <Grid Height="57" Margin="10,0" VerticalAlignment="Top" Background="#FF1695A3" d:IsHidden="True">
                     <Label x:Name="label7_Copy7" Content="Services" Margin="0,0,307,0" FontSize="20" FontWeight="Bold" Background="{x:Null}" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Button x:Name="settingsServicesGridBtn" Margin="1170,0,0,0" Style="{StaticResource settingsButton}" HorizontalAlignment="Right" Width="59" Foreground="White"  Click="settingsServicesGridBtn_Click" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Background="{x:Null}">
-                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="55">
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="55" d:IsHidden="True">
                             <Canvas x:Name="Capa_1g2" Width="30" Height="30">
                                 <Canvas.RenderTransform>
                                     <TranslateTransform X="0" Y="0"/>
@@ -907,9 +873,73 @@
                         </StackPanel>
                     </Button>
                 </Grid>
+                <Grid x:Name="servicesHome" Margin="10,70,10,10" d:IsHidden="True">
+                    <Grid x:Name="servicegrid" Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476">
+                        <Label x:Name="label17" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+                        <TextBox x:Name="searchBox8" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317"/>
+                        <Button x:Name="button9" Content="Search" Margin="378,3,0,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="85" FontFamily="Segoe UI Semibold" FontSize="13" Foreground="#FFFFFCFC" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
+                    </Grid>
+                    <Button x:Name="newServiceSched" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Click="transQuoteAddBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Foreground="#FFFFFCFC" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
+                    <DataGrid x:Name="servicesDg" Margin="10,82,10,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" SelectionChanged="servicesDg_SelectionChanged">
+                        <DataGrid.Columns >
+                            <DataGridTextColumn Binding="{Binding serviceId}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"  />
+                            <DataGridTextColumn Binding="{Binding serviceName}" ClipboardContentBinding="{x:Null}" Header="Service Name" Width="200" CanUserResize="False"  />
+                            <DataGridTextColumn Binding="{Binding serviceStatus}" ClipboardContentBinding="{x:Null}" Header="Status" Width="350"   />
+                            <DataGridTextColumn Binding="{Binding dateStarted}" ClipboardContentBinding="{x:Null}" Header="Date Started" Width="200" CanUserResize="False"  />
+                            <DataGridTextColumn Binding="{Binding dateEnded}" ClipboardContentBinding="{x:Null}" Header="Date Ended" Width="200" CanUserResize="False"  />
+                            <DataGridTextColumn Binding="{Binding location}" ClipboardContentBinding="{x:Null}" Header="Location" Width="200" CanUserResize="False"   />
+                            <DataGridTextColumn Binding="{Binding salesNote}" ClipboardContentBinding="{x:Null}" Header="Note" Width="100" CanUserResize="False"   />
+                            <DataGridTemplateColumn x:Name="columnEditBtn4" Width="100" CanUserResize="False"  >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="btnEdit1" Content="Edit" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn x:Name="columnDelBtn4" Width="100" CanUserResize="False"  >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="btnDelete" Content="Delete" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DatePicker HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top" Width="167"/>
+                </Grid>
+                <Grid x:Name="servicesScheduling" Margin="10,70,10,10">
+                    <ScrollViewer x:Name="serviceAssignSV" HorizontalAlignment="Left" Height="578" Margin="26,92,0,0" VerticalAlignment="Top" Width="1248" Visibility="Hidden" >
+                        <DataGrid x:Name="serviceAssignGrid" Height="600" Width="1230" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Status" Binding="{x:Null}" ClipboardContentBinding="{x:Null}"  Width="100"/>
+                                <DataGridTextColumn  Header="Invoice ID" Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Width="100"/>
+                                <DataGridTextColumn Header="Customer" Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Width="300"/>
+                                <DataGridTextColumn Header="Date Issue" Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Width="150"/>
+                                <DataGridTextColumn Header="Assign" Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Width="200"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </ScrollViewer>
+                    <Button x:Name="btnServiceBack" Content="Back" HorizontalAlignment="Left" Margin="26,10,0,0" VerticalAlignment="Top" Width="75" Click="btnServiceBack_Click" Visibility="Hidden"/>
+                    <Button x:Name="assignEmpNextBtn" Content="Next" HorizontalAlignment="Left" Margin="1176,44,0,0" VerticalAlignment="Top" Width="75" Click="assignEmpNextBtn_Click" Visibility="Hidden"/>
+                    <Grid x:Name="Assign_Grid" HorizontalAlignment="Left" Height="682" Margin="26,10,0,0" VerticalAlignment="Top" Width="1280" Visibility="Hidden">
+                        <ScrollViewer x:Name="AssignEmpSV" HorizontalAlignment="Left" Height="573" Margin="30,99,0,0" VerticalAlignment="Top" Width="1216" Visibility="Hidden">
+                            <DataGrid Height="573" Width="1216">
+                                <DataGrid.Columns>
+                                    <DataGridCheckBoxColumn Binding="{x:Null}" Header="" Width="50" ClipboardContentBinding="{x:Null}"/>
+                                    <DataGridTextColumn Binding="{x:Null}" Header="Personnel" Width="200" ClipboardContentBinding="{x:Null}"/>
+                                    <DataGridTextColumn Binding="{x:Null}" Header="Contact" Width="200" ClipboardContentBinding="{x:Null}"/>
+                                    <DataGridTextColumn Binding="{x:Null}" Header="Position" Width="200" ClipboardContentBinding="{x:Null}"/>
+                                    <DataGridTextColumn Binding="{x:Null}" Header ="Availabilty                                                     " ClipboardContentBinding="{x:Null}"/>
+
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </ScrollViewer>
+                        <Button x:Name="AssignEmpBackBtn" Content="Back" HorizontalAlignment="Left" Margin="30,29,0,0" VerticalAlignment="Top" Width="75" Click="AssignEmpBackBtn_Click"/>
+                    </Grid>
+                </Grid>
             </Grid>
             <Grid x:Name="reportsGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True" />
-            <Grid x:Name="manageGrid" Margin="10,0" Background="#FFECF0F1" >
+            <Grid x:Name="manageGrid" Margin="10,0,10,10" Background="#FFECF0F1" d:IsHidden="True" >
                 <Grid x:Name="manageCustomerGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged" d:IsHidden="True" >
                     <Label x:Name="label7_Copy" Content="Manage - Customer" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid x:Name="manageCustomerHomeGrid" Margin="10,70,10,10">
@@ -946,7 +976,7 @@
                     </Grid>
 
                 </Grid>
-                <Grid x:Name="manageEmployeeGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged">
+                <Grid x:Name="manageEmployeeGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged" d:IsHidden="True">
                     <Grid Height="57" Margin="10,0" VerticalAlignment="Top" Background="#FF1695A3">
                         <Label x:Name="label7_Copy4" Content="Manage - Employee" Margin="0,0,307,0" FontSize="20" FontWeight="Bold" Background="{x:Null}" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                         <Button x:Name="settingsEmployeeGridBtn" Margin="1170,0,0,0" Style="{StaticResource settingsButton}" HorizontalAlignment="Right" Width="59" Foreground="White"  Click="settingsEmployeeGridBtn_Click" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Background="{x:Null}" Visibility="Collapsed">
@@ -1122,7 +1152,7 @@
                                     </Grid>
                                     <Label x:Name="label20" Content="Employee" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top"/>
                                     <Label x:Name="label20_Copy1" Content="Contractor" HorizontalAlignment="Left" Margin="10,255,0,0" VerticalAlignment="Top"/>
-                                   </Grid>
+                                </Grid>
                             </TabItem>
                             <TabItem Header="Services">
                                 <Grid Background="#FFE5E5E5">
@@ -1402,7 +1432,7 @@
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid x:Name="employeeDetailsGrid">
+                <Grid x:Name="employeeDetailsGrid" d:IsHidden="True">
                     <Label x:Name="employeeDetailsHeader" Content="" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid Margin="10,70,10,10"/>
                     <Grid x:Name="employeeDetails" Margin="10,70,10,10">

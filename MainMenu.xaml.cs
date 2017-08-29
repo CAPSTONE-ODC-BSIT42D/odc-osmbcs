@@ -244,12 +244,50 @@ namespace prototype2
             selectCustomerDg.ItemsSource = observable;
         }
 
+        private void AssignEmpBackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            serviceAssignSV.Visibility = Visibility.Visible;
+            Assign_Grid.Visibility = Visibility.Hidden;
+            AssignEmpSV.Visibility = Visibility.Hidden;
+            btnServiceBack.Visibility = Visibility.Visible;
+            serviceAssignSV.Visibility = Visibility.Visible;
+            assignEmpNextBtn.Visibility = Visibility.Visible;
+        }
+
+        private void assignEmpNextBtn_Click(object sender, RoutedEventArgs e)
+        {
+            serviceAssignSV.Visibility = Visibility.Hidden;
+            Assign_Grid.Visibility = Visibility.Visible;
+            AssignEmpSV.Visibility = Visibility.Visible;
+            btnServiceBack.Visibility = Visibility.Hidden;
+            serviceAssignSV.Visibility = Visibility.Hidden;
+            assignEmpNextBtn.Visibility = Visibility.Hidden;
+        }
+
+        private void btnServiceBack_Click(object sender, RoutedEventArgs e)
+        {
+            servicesHome.Visibility = Visibility.Visible;
+            serviceAssignGrid.Visibility = Visibility.Hidden;
+            btnServiceBack.Visibility = Visibility.Hidden;
+            serviceAssignSV.Visibility = Visibility.Hidden;
+            assignEmpNextBtn.Visibility = Visibility.Hidden;
+        }
+
         private void transQuoteAddBtn_Click(object sender, RoutedEventArgs e)
         {
             for (int x = 1; x < transactionQuotationsGrid.Children.Count; x++)
             {
                 transactionQuotationsGrid.Children[x].Visibility = Visibility.Collapsed;
+
+                servicesHome.Visibility = Visibility.Hidden;
+                serviceAssignGrid.Visibility = Visibility.Visible;
+                btnServiceBack.Visibility = Visibility.Visible;
+                serviceAssignSV.Visibility = Visibility.Visible;
+                assignEmpNextBtn.Visibility = Visibility.Visible;
+
             }
+
+
             selectCustomerGrid.Visibility = Visibility.Visible;
             if (MainVM.Customers.Count == 0)
             {
