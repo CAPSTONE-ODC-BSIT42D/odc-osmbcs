@@ -424,13 +424,13 @@ namespace prototype2
 
         private void validtycustomRd_Checked(object sender, RoutedEventArgs e)
         {
-            ValidityCustom.IsEnabled = true;
+            validityTb.IsEnabled = true;
             validtycustomlbl.IsEnabled = true;
         }
 
         private void validtycustomRd_Unchecked(object sender, RoutedEventArgs e)
         {
-            ValidityCustom.IsEnabled = false;
+            validityTb.IsEnabled = false;
             validtycustomlbl.IsEnabled = false;
         }
 
@@ -692,11 +692,12 @@ namespace prototype2
 
         private void btnEditEmp_Click(object sender, RoutedEventArgs e)
         {
-            setManageEmployeeGridControls();
+            empType = 0;
+            loadEmpContDetails();
             manageEmployeeGrid.Visibility = Visibility.Hidden;
             employeeDetailsGrid.Visibility = Visibility.Visible;
             employeeDetailsHeader.Content = "Manage Employee - Edit Employee";
-            empType = 0;
+            
             isEdit = true;
             employeeOnlyGrid.Visibility = Visibility.Visible;
             contractorOnlyGrid.Visibility = Visibility.Collapsed;
@@ -774,12 +775,14 @@ namespace prototype2
         }
 
         private void btnEditCont_Click(object sender, RoutedEventArgs e)
-        {
+        { 
+
+            empType = 1;
             loadEmpContDetails();
             manageContractorGrid.Visibility = Visibility.Hidden;
             employeeDetailsGrid.Visibility = Visibility.Visible;
             employeeDetailsHeader.Content = "Manage Contractor - Edit Contractor";
-            empType = 1;
+            
             isEdit = true;
             contractorOnlyGrid.Visibility = Visibility.Visible;
             empJobCb.IsEnabled = true;
@@ -1433,6 +1436,20 @@ namespace prototype2
                 Validation.ClearInvalid(costPriceTbBindingExpressionBase);
             }
 
+            BindingExpression unitTbBindingExpression = BindingOperations.GetBindingExpression(unitTb, TextBox.TextProperty);
+            BindingExpressionBase unitTbBindingExpressionBase = BindingOperations.GetBindingExpressionBase(unitTb, TextBox.TextProperty);
+
+            if (String.IsNullOrWhiteSpace(productNameTb.Text))
+            {
+                ValidationError validationError = new ValidationError(new ExceptionValidationRule(), unitTbBindingExpression);
+                validationError.ErrorContent = "*Please fill out this field";
+                Validation.MarkInvalid(unitTbBindingExpressionBase, validationError);
+            }
+            else if (Validation.GetHasError(productNameTb))
+            {
+
+                Validation.ClearInvalid(unitTbBindingExpressionBase);
+            }
             //BindingExpression salesPriceTbBindingExpression = BindingOperations.GetBindingExpression(salesPriceTb, Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
             //BindingExpressionBase salesPriceTbBindingExpressionBase = BindingOperations.GetBindingExpressionBase(salesPriceTb, Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
 
@@ -1516,8 +1533,8 @@ namespace prototype2
                         cmd.Parameters.AddWithValue("@costPrice", costPriceTb.Value);
                         cmd.Parameters["@costPrice"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@salesPrice", salesPriceTb.Value);
-                        //cmd.Parameters["@salesPrice"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@itemUnit", unitTb.Text);
+                        cmd.Parameters["@itemUnit"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@typeID", productCategoryCb.SelectedValue);
                         cmd.Parameters["@typeID"].Direction = ParameterDirection.Input;
@@ -1868,7 +1885,7 @@ namespace prototype2
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
                     MainVM.SelectedSupplier = MainVM.Suppliers.Where(x => x.CompanyID.Equals(dr["supplierID"].ToString())).FirstOrDefault();
-                    MainMenu.MainVM.ProductList.Add(new Item() { ItemNo = dr["itemNo"].ToString(), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), Quantity = 1, SupplierID = dr["supplierID"].ToString(), SupplierName = MainVM.SelectedSupplier.CompanyName});
+                    MainMenu.MainVM.ProductList.Add(new Item() { ItemNo = dr["itemNo"].ToString(), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), Unit = dr["itemUnit"].ToString() ,Quantity = 1, SupplierID = dr["supplierID"].ToString(), SupplierName = MainVM.SelectedSupplier.CompanyName});
                 }
                 dbCon.Close();
             }
@@ -3277,7 +3294,7 @@ namespace prototype2
                 {
                     empPostionCb.SelectedIndex = int.Parse(MainVM.SelectedEmployee.PositionID);
                 }
-                employeeOnlyGrid.Visibility = Visibility.Hidden;
+                
                 if (MainVM.SelectedEmployee.EmpPic != null)
                 {
                     using (System.IO.MemoryStream ms = new System.IO.MemoryStream(MainVM.SelectedEmployee.EmpPic))
@@ -3384,14 +3401,18 @@ namespace prototype2
             }
             foreach (RequestedItem item in MainVM.RequestedItems)
             {
-                item.totalAmount = item.unitPrice * item.qty;
                 if (item.itemType == 0)
                 {
-                    item.totalAmountMarkUp = ((item.unitPrice * item.qty) + (((item.unitPrice * item.qty) / 100) * (decimal)markupPriceTb.Value)) - (((item.unitPrice * item.qty) / 100) * (decimal)discountPriceTb.Value);
+                    item.unitPriceMarkUp = item.unitPrice + (item.unitPrice / 100 * (decimal)markupPriceTb.Value);
+                    item.totalAmountMarkUp = (item.unitPriceMarkUp * item.qty) - ((item.unitPriceMarkUp * item.qty) / 100) * (decimal)discountPriceTb.Value;
+                    item.totalAmount = item.unitPriceMarkUp * item.qty;
+                    
                 }
                 else if (item.itemType == 1)
                 {
+                    item.unitPriceMarkUp = (item.unitPrice+totalFee) + ((item.unitPrice + totalFee) / 100 * (decimal)markupPriceTb.Value);
                     item.totalAmountMarkUp = (item.unitPrice+totalFee+(((item.unitPrice + totalFee) / 100) * (decimal)markupPriceTb.Value)) - ((item.unitPrice + totalFee) / 100) * (decimal)discountPriceTb.Value;
+                    item.totalAmount = item.unitPrice + totalFee;
                 }
                 totalPrice += item.totalAmountMarkUp;
             }

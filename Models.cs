@@ -377,6 +377,7 @@ namespace prototype2
         protected string itemName;
         protected string itemDesc;
         protected decimal costPrice;
+        protected string unit;
         protected int quantity;
         protected string typeID;
         protected string supplierID;
@@ -408,6 +409,11 @@ namespace prototype2
         {
             get { return costPrice; }
             set { SetProperty(ref costPrice, value); }
+        }
+        public string Unit
+        {
+            get { return unit; }
+            set { SetProperty(ref unit, value); }
         }
         public int Quantity
         {
@@ -579,6 +585,12 @@ namespace prototype2
             get { return _unitprice; }
             set { SetProperty(ref _unitprice, value); }
         }
+        private decimal _unitpricemarkup;
+        public decimal unitPriceMarkUp
+        {
+            get { return _unitpricemarkup; }
+            set { SetProperty(ref _unitpricemarkup, value); }
+        }
 
         private decimal _totalAmount;
         public decimal totalAmount
@@ -586,6 +598,7 @@ namespace prototype2
             get { return _totalAmount; }
             set { SetProperty(ref _totalAmount, value); }
         }
+
 
         private decimal _totalAmountMarkUp;
         public decimal totalAmountMarkUp
@@ -600,6 +613,41 @@ namespace prototype2
             get { return _qtyEditable; }
             set { SetProperty(ref _qtyEditable, value); }
         }
+    }
+
+    public class SalesQuote : ViewModelEntity
+    {
+        public SalesQuote()
+        {
+
+        }
+
+        protected string sqNoChar;
+        protected DateTime dateOfIssue;
+        protected int custID;
+        protected int custRepID;
+        protected string quoteSubject;
+        protected string body1;
+        protected string priceNote;
+        protected int ptID;
+        protected DateTime deliveryDate;
+        protected int estDelivery;
+        protected int validityDays;
+        protected DateTime validityDate;
+        protected string otherTerms;
+        protected string body2;
+        protected DateTime expiration;
+        protected decimal vat;
+        protected bool vatexcluded;
+        protected bool paymentIsLanded;
+        protected bool paymentCurrency;
+        protected string deliveryAddress;
+        protected string status;
+        protected int termsDays;
+        protected int termsDP;
+        protected decimal penaltyAmt;
+
+        
     }
 
 }
