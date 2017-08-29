@@ -497,19 +497,19 @@
             </Grid>
         </Grid>
         <Grid x:Name="containerGrid" Grid.Row="1" Background="#FF1695A3">
-            <Grid x:Name="manageSubMenugrid" HorizontalAlignment="Right" Width="175" Background="#FF395066" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Height="173" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden" >
+            <Grid x:Name="manageSubMenugrid" HorizontalAlignment="Right" Width="175" Background="#FF395066" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Height="173" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden" d:IsHidden="True" >
                 <Button x:Name="employeeManageMenuBtn" Content="Employees" Margin="0,1,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="175" Click="employeeManageMenuBtn_Click" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="customerManageMenuBtn" Content="Customers" Margin="0,36,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Foreground="White" Width="175" Click="customerManageMenuBtn_Click" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="supplierManageMenuBtn" Content="Suppliers" Margin="0,71,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="175" Click="supplierManageMenuBtn_Click" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="contractorManageMenuBtn" Content="Contractor" Margin="0,106,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="contractorManageMenuBtn_Click" Width="175" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
                 <Button x:Name="settingsManageMenuBtn" Content="Settings" Margin="0,141,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="settingsManageMenuBtn_Click" Width="175" HorizontalContentAlignment="Right" Padding="1,1,10,1"/>
             </Grid>
-            <Grid x:Name="saleSubMenuGrid" Width="175" Margin="0,0,369,0" Background="#FF395066" HorizontalAlignment="Right" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden" >
+            <Grid x:Name="saleSubMenuGrid" Width="175" Margin="0,0,369,0" Background="#FF395066" HorizontalAlignment="Right" Panel.ZIndex="999999" VerticalAlignment="Top" Visibility="Hidden" d:IsHidden="True" >
                 <Button x:Name="quotesSalesMenuBtn" Content="Quotations" Margin="0,75,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="quotesSalesMenuBtn_Click" Width="175" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1"/>
                 <Button x:Name="ordersSalesMenuBtn" Content="Orders" Margin="0,40,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="ordersSalesMenuBtn_Click" Width="175" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1"/>
                 <Button x:Name="invoiceSalesMenuBtn" Content="Invoices" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="invoiceSalesMenuBtn_Click" Width="175" Margin="0,5,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1"/>
             </Grid>
-            <Grid x:Name="dashboardGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True">
+            <Grid x:Name="dashboardGrid" Margin="10,0" Background="#FFECF0F1">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -527,37 +527,37 @@
                     <ListBox x:Name="listBox" Margin="13,131,11,10"/>
                 </Grid>
                 <Label x:Name="label7" Content="Dashboard" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Grid.ColumnSpan="2" Height="57" VerticalAlignment="Top" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
-                <Button x:Name="btReceivables" Margin="27,83,0,273" Foreground="White" Background="#FF1A3A5D" BorderBrush="#FF0F2D4B" Grid.Column="1" HorizontalAlignment="Left" Width="221">
+                <Button x:Name="btReceivables" Margin="61,83,0,194" Foreground="White" Background="#FF1A3A5D" BorderBrush="#FF0F2D4B" Grid.Column="1" HorizontalAlignment="Left" Width="210" Height="125">
                     <Grid Height="158" Width="216">
-                        <Label x:Name="LblReceivables" Content="25, 000" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="63" Width="210" FontSize="36" FontWeight="Bold" Foreground="White"/>
-                        <Label Content="RECEIVABLES" HorizontalAlignment="Left" Margin="8,122,0,-17" VerticalAlignment="Top" Width="183" Height="53" FontSize="25" FontWeight="Bold" Foreground="#FFFBFBFB"/>
-                        <Label Content="WEEKLY" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" Width="102" Foreground="White"/>
+                        <Label x:Name="LblReceivables" Content="25, 000" HorizontalAlignment="Left" Margin="6,-6,0,0" VerticalAlignment="Top" Height="63" Width="210" FontSize="36" FontWeight="Bold" Foreground="White"/>
+                        <Label Content="RECEIVABLES" HorizontalAlignment="Left" Margin="8,88,0,0" VerticalAlignment="Top" Width="183" Height="41" FontSize="18" FontWeight="Bold" Foreground="#FFFBFBFB"/>
+                        <Label Content="WEEKLY" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="15" Width="102" Foreground="White"/>
                     </Grid>
                 </Button>
-                <Button x:Name="btPayables" Margin="339,83,0,0" VerticalAlignment="Top" Height="190" Background="#FF08AE4D" BorderBrush="#FF027431" Grid.Column="1" HorizontalAlignment="Left" Width="223">
+                <Button x:Name="btPayables" Margin="373,83,0,0" VerticalAlignment="Top" Height="125" Background="#FF08AE4D" BorderBrush="#FF027431" Grid.Column="1" HorizontalAlignment="Left" Width="210">
                     <Grid Height="175" Width="215">
-                        <Label Content="10, 000" HorizontalAlignment="Left" Margin="-4,8,0,0" VerticalAlignment="Top" Height="63" Width="210" FontSize="36" FontWeight="Bold" Foreground="White"/>
-                        <Label Content="WEEKLY" HorizontalAlignment="Left" Margin="4,98,0,0" VerticalAlignment="Top" Width="93" Height="34" FontSize="18" FontWeight="Bold" Foreground="White"/>
-                        <Label Content="PAYABLES" HorizontalAlignment="Left" Margin="4,123,0,-1" VerticalAlignment="Top" Width="183" Height="53" FontWeight="Bold" FontSize="25" Foreground="White"/>
+                        <Label Content="10, 000" HorizontalAlignment="Left" Margin="2,-6,0,0" VerticalAlignment="Top" Height="63" Width="210" FontSize="36" FontWeight="Bold" Foreground="White"/>
+                        <Label Content="WEEKLY" HorizontalAlignment="Left" Margin="4,58,0,0" VerticalAlignment="Top" Width="93" Height="34" FontSize="15" FontWeight="Bold" Foreground="White"/>
+                        <Label Content="PAYABLES" HorizontalAlignment="Left" Margin="4,85,0,0" VerticalAlignment="Top" Width="183" Height="39" FontWeight="Bold" FontSize="18" Foreground="White"/>
                     </Grid>
                 </Button>
-                <Button x:Name="btPendingSQ" Margin="27,334,0,22" Background="#FF2A80B9" BorderBrush="#FF0C65A0" Grid.Column="1" HorizontalAlignment="Left" Width="221">
+                <Button x:Name="btPendingSQ" Margin="61,256,0,20" Background="#FF2A80B9" BorderBrush="#FF0C65A0" Grid.Column="1" HorizontalAlignment="Left" Width="210" Height="125">
                     <Grid Height="162" Width="205">
-                        <Label Content="25" HorizontalAlignment="Left" Margin="0,12,-5,0" VerticalAlignment="Top" Foreground="White" Width="210" Height="63" FontWeight="Bold" FontSize="36"/>
-                        <Label Content="PENDING" HorizontalAlignment="Left" Margin="2,85,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" Width="113"/>
-                        <Label Content="SALES QUOTE" HorizontalAlignment="Left" Margin="2,116,0,0" VerticalAlignment="Top" Foreground="White" FontSize="25" Width="185" FontWeight="Bold"/>
+                        <Label Content="25" HorizontalAlignment="Left" Margin="-2,-8,-3,0" VerticalAlignment="Top" Foreground="White" Width="210" Height="63" FontWeight="Bold" FontSize="36"/>
+                        <Label Content="PENDING" HorizontalAlignment="Left" Margin="2,59,0,0" VerticalAlignment="Top" Foreground="White" FontSize="15" FontWeight="Bold" Width="113"/>
+                        <Label Content="SALES QUOTE" HorizontalAlignment="Left" Margin="2,84,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18" Width="185" FontWeight="Bold"/>
                     </Grid>
                 </Button>
-                <Button Margin="339,336,0,20" Background="#FFBF3A2B" BorderBrush="#FFA21717" HorizontalAlignment="Left" Width="232" Grid.Column="1">
+                <Button Margin="373,256,0,20" Background="#FFBF3A2B" BorderBrush="#FFA21717" HorizontalAlignment="Left" Width="210" Grid.Column="1" Height="125">
                     <Grid Height="151" Width="210">
-                        <Label Content="52" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Height="63" FontWeight="Bold" FontSize="36" Foreground="#FFFBFBFB" Margin="0,4,0,0"/>
-                        <Label Content="SERVICES" HorizontalAlignment="Left" Margin="-2,111,0,-6" VerticalAlignment="Top" FontWeight="Bold" FontSize="25" Width="138" Height="46" Foreground="#FFFBFBFB"/>
-                        <Label Content="PENDING" HorizontalAlignment="Left" Margin="0,81,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Foreground="#FFFBF6F6"/>
+                        <Label Content="52" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Height="58" FontWeight="Bold" FontSize="36" Foreground="#FFFBFBFB" Margin="0,-6,0,0"/>
+                        <Label Content="SERVICES" HorizontalAlignment="Left" Margin="0,87,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" Width="138" Height="37" Foreground="#FFFBFBFB"/>
+                        <Label Content="PENDING" HorizontalAlignment="Left" Margin="0,57,0,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#FFFBF6F6"/>
                     </Grid>
                 </Button>
             </Grid>
-            <Grid x:Name="transactionGrid" Margin="10,0" Background="#FFECF0F1" >
-                <Grid x:Name="transactionQuotationsGrid" >
+            <Grid x:Name="transactionGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True" >
+                <Grid x:Name="transactionQuotationsGrid" d:IsHidden="True" >
                     <Label x:Name="transQuotationHeader" Content="Transaction - Quotations" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" Margin="10,0" d:IsHidden="True" />
                     <Grid x:Name="quotationsGridHome" Margin="10,70,10,10" d:IsHidden="True" >
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
@@ -680,41 +680,41 @@
                         <Button x:Name="transRequestNext" Content="Next" HorizontalAlignment="Right" Margin="0,0,10,7" VerticalAlignment="Bottom" Width="85" Height="26" Click="transRequestNext_Click" Grid.ColumnSpan="2" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84"/>
                     </Grid>
                     <Grid x:Name="makeSalesQuoteGrid" Margin="10,70,10,10">
-                        <Button x:Name="transQuotationFormBack" Content="&lt; Back" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="74" Height="24" Click="transQuotationFormBack_Click"/>
+                        <Button x:Name="transQuotationFormBack" Content="&lt; Back" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="85" Height="26" Click="transQuotationFormBack_Click" FontFamily="Segoe UI Semibold" FontSize="10"/>
                         <GroupBox x:Name="groupBox2" Header="Quotation Form" Margin="10,29,10,42" FontFamily="Segoe UI Symbol" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderBrush="Black" VerticalContentAlignment="Stretch">
                             <ScrollViewer Margin="10,10,15,13">
                                 <Grid>
                                     <Label x:Name="label16_Copy2" Content="Terms and Conditions" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" FontSize="14" FontFamily="Segoe UI"/>
-                                    <Label x:Name="label16_Copy3" Content="Price:" HorizontalAlignment="Left" Margin="36,46,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="14" FontFamily="Segoe UI"/>
-                                    <ComboBox x:Name="moneyType" HorizontalAlignment="Left" Margin="140,50,0,0" VerticalAlignment="Top" Width="120" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
-                                    <CheckBox x:Name="landedCheckBox" Content="Landed Price" HorizontalAlignment="Left" Margin="280,52,0,0" VerticalAlignment="Top" IsChecked="True" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
-                                    <CheckBox x:Name="vatCheckBox" Content="VAT Exclusive" HorizontalAlignment="Left" Margin="425,52,0,0" VerticalAlignment="Top" IsChecked="True" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
-                                    <Label x:Name="label16_Copy4" Content="Payment :" HorizontalAlignment="Left" Margin="36,91,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="14" FontFamily="Segoe UI"/>
-                                    <RadioButton x:Name="paymentDefaultRd" Content="50% Downpayment (Upon Release of Order), 50% Balance Upon Delivery" HorizontalAlignment="Left" Margin="140,98,0,0" VerticalAlignment="Top" IsChecked="True" GroupName="Payment" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
-                                    <RadioButton x:Name="paymentCustomRb" Content="Custom" HorizontalAlignment="Left" Margin="140,131,0,0" VerticalAlignment="Top" GroupName="Payment" Checked="paymentCustomRb_Checked" Unchecked="paymentCustomRb_Unchecked" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
-                                    <xctk:IntegerUpDown x:Name="downpaymentPercentTb" HorizontalAlignment="Left" Margin="239,128,0,0" VerticalAlignment="Top" Width="55" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Height="20"/>
-                                    <Label x:Name="paymentDpLbl" Content="Downpayment (Upon Release of Order)" HorizontalAlignment="Left" Margin="294,125,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
-                                    <Label x:Name="deliveryLbl" Content="Delivery:" HorizontalAlignment="Left" Margin="36,178,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="14" FontFamily="Segoe UI"/>
-                                    <RadioButton x:Name="deliveryDefaultRd" Content="Thirty (30) days upon receipt of DP" HorizontalAlignment="Left" Margin="141,178,0,0" VerticalAlignment="Top" GroupName="Delivery" IsChecked="True" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
-                                    <RadioButton x:Name="deliveryCustomRd" Content="Custom" HorizontalAlignment="Left" Margin="141,203,0,0" VerticalAlignment="Top" GroupName="Delivery" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Checked="deliveryCustomRd_Checked" Unchecked="deliveryCustomRd_Unchecked"/>
-                                    <RadioButton x:Name="deliveryNoneRd" Content="None" HorizontalAlignment="Left" Margin="141,228,0,0" VerticalAlignment="Top" GroupName="Delivery" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
-                                    <xctk:IntegerUpDown x:Name="deliveryDaysTb" HorizontalAlignment="Left" Margin="239,203,0,0" VerticalAlignment="Top" Width="55" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Height="20"/>
-                                    <Label x:Name="deliveryDaysCustomLbl" Content="days" HorizontalAlignment="Left" Margin="294,197,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
-                                    <Label x:Name="warrantyLbl" Content="Warranty:" HorizontalAlignment="Left" Margin="36,271,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="14" FontFamily="Segoe UI"/>
-                                    <RadioButton x:Name="warrantyDefaultRd" Content="One (1) Year" HorizontalAlignment="Left" Margin="140,271,0,0" VerticalAlignment="Top" GroupName="warranty" IsChecked="True" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
-                                    <RadioButton x:Name="warrantycustomRd" Content="Custom" HorizontalAlignment="Left" Margin="140,296,0,0" VerticalAlignment="Top" GroupName="warranty" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Checked="warrantycustomRd_Checked" Unchecked="warrantycustomRd_Unchecked"/>
-                                    <RadioButton x:Name="warrantyNoneRd" Content="None" HorizontalAlignment="Left" Margin="141,319,0,0" VerticalAlignment="Top" GroupName="warranty" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
-                                    <xctk:IntegerUpDown x:Name="warrantyDaysCustom" HorizontalAlignment="Left" Margin="240,296,0,0" VerticalAlignment="Top" Width="55" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Height="20"/>
-                                    <Label x:Name="warrantyDaysCustomLbl" Content="Year" HorizontalAlignment="Left" Margin="298,292,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Height="28"/>
-                                    <Label x:Name="validityLbl" Content="Validity:" HorizontalAlignment="Left" Margin="36,362,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="14" FontFamily="Segoe UI"/>
-                                    <RadioButton x:Name="validityDefaultRd" Content="Thirty (30) days" HorizontalAlignment="Left" Margin="140,362,0,0" VerticalAlignment="Top" GroupName="validity" IsChecked="True" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
-                                    <RadioButton x:Name="validtycustomRd" Content="Custom" HorizontalAlignment="Left" Margin="140,387,0,0" VerticalAlignment="Top" GroupName="validity" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Checked="validtycustomRd_Checked" Unchecked="validtycustomRd_Unchecked"/>
-                                    <xctk:IntegerUpDown x:Name="ValidityCustom" HorizontalAlignment="Left" Margin="239,388,0,0" VerticalAlignment="Top" Width="55" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Height="20"/>
-                                    <Label x:Name="validtycustomlbl" Content="days" HorizontalAlignment="Left" Margin="294,383,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
+                                    <Label x:Name="label16_Copy3" Content="Price:" HorizontalAlignment="Left" Margin="36,66,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="14" FontFamily="Segoe UI"/>
+                                    <ComboBox x:Name="moneyType" HorizontalAlignment="Left" Margin="140,70,0,0" VerticalAlignment="Top" Width="120" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
+                                    <CheckBox x:Name="landedCheckBox" Content="Landed Price" HorizontalAlignment="Left" Margin="280,72,0,0" VerticalAlignment="Top" IsChecked="True" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
+                                    <CheckBox x:Name="vatCheckBox" Content="VAT Exclusive" HorizontalAlignment="Left" Margin="425,72,0,0" VerticalAlignment="Top" IsChecked="True" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
+                                    <Label x:Name="label16_Copy4" Content="Payment :" HorizontalAlignment="Left" Margin="36,135,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="14" FontFamily="Segoe UI"/>
+                                    <RadioButton x:Name="paymentDefaultRd" Content="50% Downpayment (Upon Release of Order), 50% Balance Upon Delivery" HorizontalAlignment="Left" Margin="140,142,0,0" VerticalAlignment="Top" IsChecked="True" GroupName="Payment" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
+                                    <RadioButton x:Name="paymentCustomRb" Content="Custom" HorizontalAlignment="Left" Margin="140,175,0,0" VerticalAlignment="Top" GroupName="Payment" Checked="paymentCustomRb_Checked" Unchecked="paymentCustomRb_Unchecked" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
+                                    <xctk:IntegerUpDown x:Name="downpaymentPercentTb" HorizontalAlignment="Left" Margin="239,172,0,0" VerticalAlignment="Top" Width="55" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Height="20"/>
+                                    <Label x:Name="paymentDpLbl" Content="Downpayment (Upon Release of Order)" HorizontalAlignment="Left" Margin="294,169,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
+                                    <Label x:Name="deliveryLbl" Content="Delivery:" HorizontalAlignment="Left" Margin="34,234,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="14" FontFamily="Segoe UI"/>
+                                    <RadioButton x:Name="deliveryDefaultRd" Content="Thirty (30) days upon receipt of DP" HorizontalAlignment="Left" Margin="139,234,0,0" VerticalAlignment="Top" GroupName="Delivery" IsChecked="True" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
+                                    <RadioButton x:Name="deliveryCustomRd" Content="Custom" HorizontalAlignment="Left" Margin="139,259,0,0" VerticalAlignment="Top" GroupName="Delivery" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Checked="deliveryCustomRd_Checked" Unchecked="deliveryCustomRd_Unchecked"/>
+                                    <RadioButton x:Name="deliveryNoneRd" Content="None" HorizontalAlignment="Left" Margin="139,284,0,0" VerticalAlignment="Top" GroupName="Delivery" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
+                                    <xctk:IntegerUpDown x:Name="deliveryDaysTb" HorizontalAlignment="Left" Margin="237,259,0,0" VerticalAlignment="Top" Width="55" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Height="20"/>
+                                    <Label x:Name="deliveryDaysCustomLbl" Content="days" HorizontalAlignment="Left" Margin="292,253,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
+                                    <Label x:Name="warrantyLbl" Content="Warranty:" HorizontalAlignment="Left" Margin="36,329,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="14" FontFamily="Segoe UI"/>
+                                    <RadioButton x:Name="warrantyDefaultRd" Content="One (1) Year" HorizontalAlignment="Left" Margin="140,329,0,0" VerticalAlignment="Top" GroupName="warranty" IsChecked="True" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
+                                    <RadioButton x:Name="warrantycustomRd" Content="Custom" HorizontalAlignment="Left" Margin="140,354,0,0" VerticalAlignment="Top" GroupName="warranty" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Checked="warrantycustomRd_Checked" Unchecked="warrantycustomRd_Unchecked"/>
+                                    <RadioButton x:Name="warrantyNoneRd" Content="None" HorizontalAlignment="Left" Margin="141,377,0,0" VerticalAlignment="Top" GroupName="warranty" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
+                                    <xctk:IntegerUpDown x:Name="warrantyDaysCustom" HorizontalAlignment="Left" Margin="240,354,0,0" VerticalAlignment="Top" Width="55" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Height="20"/>
+                                    <Label x:Name="warrantyDaysCustomLbl" Content="Year" HorizontalAlignment="Left" Margin="298,350,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Height="28"/>
+                                    <Label x:Name="validityLbl" Content="Validity:" HorizontalAlignment="Left" Margin="36,422,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="14" FontFamily="Segoe UI"/>
+                                    <RadioButton x:Name="validityDefaultRd" Content="Thirty (30) days" HorizontalAlignment="Left" Margin="140,422,0,0" VerticalAlignment="Top" GroupName="validity" IsChecked="True" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
+                                    <RadioButton x:Name="validtycustomRd" Content="Custom" HorizontalAlignment="Left" Margin="140,447,0,0" VerticalAlignment="Top" GroupName="validity" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Checked="validtycustomRd_Checked" Unchecked="validtycustomRd_Unchecked"/>
+                                    <xctk:IntegerUpDown x:Name="ValidityCustom" HorizontalAlignment="Left" Margin="239,448,0,0" VerticalAlignment="Top" Width="55" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Height="20"/>
+                                    <Label x:Name="validtycustomlbl" Content="days" HorizontalAlignment="Left" Margin="294,443,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
                                 </Grid>
                             </ScrollViewer>
                         </GroupBox>
-                        <Button x:Name="transQuotationSaveBtn" Content="Next &gt;" HorizontalAlignment="Right" Margin="0,0,14,8" VerticalAlignment="Bottom" Width="74" Height="24" Click="transQuotationSaveBtn_Click"/>
+                        <Button x:Name="transQuotationSaveBtn" Content="Next &gt;" HorizontalAlignment="Right" Margin="0,0,14,8" VerticalAlignment="Bottom" Width="85" Height="26" Click="transQuotationSaveBtn_Click" FontFamily="Segoe UI Semibold" FontSize="10"/>
                     </Grid>
                     <Grid x:Name="viewQuotationGrid" Margin="10,70,10,10" d:IsHidden="True">
                         <Button x:Name="transViewBackBtn" Content="&lt; Back" Margin="0,0,128,10" Click="transViewBackBtn_Click" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="74"/>
@@ -729,14 +729,13 @@
                     <Grid Margin="10,70,10,10">
                         <Grid Margin="10,7,461,383" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Label x:Name="label10" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-                            <TextBox x:Name="searchBox2" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="317"/>
+                            <TextBox x:Name="searchBox2" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317"/>
                             <Button x:Name="button2" Content="Search" HorizontalAlignment="Left" Margin="396,3,0,0" VerticalAlignment="Top" Width="85" Height="26" Foreground="White" FontSize="13" FontFamily="Segoe UI Semibold" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
                         </Grid>
                         <Button x:Name="transQuoteAddBtn2" Content="Convert" HorizontalAlignment="Right" Height="26" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Foreground="White" FontSize="13" FontFamily="Segoe UI Semibold" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
-                        <DataGrid x:Name="quotationsDataGrid2" Margin="0,41,0,0" AutoGenerateColumns="False"/>
                     </Grid>
                 </Grid>
-                <Grid x:Name="transactionReceiptGrid" d:IsHidden="True">
+                <Grid x:Name="transactionReceiptGrid">
                     <Label x:Name="label7_Copy2" Content="Transaction - Receipts" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" Margin="10,0"/>
                     <Grid Margin="10,70,10,10">
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="478">
@@ -747,16 +746,17 @@
                         <Button x:Name="transQuoteAddBtn3" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontSize="10"/>
                         <DataGrid x:Name="quotationsDataGrid3" Margin="0,41,0,0" AutoGenerateColumns="False"/>
                     </Grid>
+                    <DataGrid x:Name="quotationsDataGrid2" Margin="8,49,12,72" AutoGenerateColumns="False"/>
                 </Grid>
                 <Grid x:Name="transactionOrdersGrid" d:IsHidden="True">
                     <Label x:Name="label7_Copy3" Content="Transaction - Purchase Orders" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" Margin="10,0"/>
                     <Grid x:Name="transOrdersGridHome" Margin="10,70,10,10">
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="474">
                             <Label x:Name="label9" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-                            <TextBox x:Name="searchBox1" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="317"/>
-                            <Button x:Name="button1" Content="search" HorizontalAlignment="Left" Margin="396,3,0,0" VerticalAlignment="Top" Width="75" Height="23"/>
+                            <TextBox x:Name="searchBox1" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317" TextChanged="searchBox1_TextChanged"/>
+                            <Button x:Name="button1" Content="Search" HorizontalAlignment="Left" Margin="404,3,-15,0" VerticalAlignment="Top" Width="85" Height="26" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" Foreground="White" BorderBrush="#FF0B3D70"/>
                         </Grid>
-                        <Button x:Name="transOrdersAddBtn" Content="add" HorizontalAlignment="Right" Height="26" Margin="0,10,10,0" VerticalAlignment="Top" Width="90" Click="transOrdersAddBtn_Click"/>
+                        <Button x:Name="transOrdersAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,10,12,0" VerticalAlignment="Top" Width="85" Click="transOrdersAddBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" Foreground="White" BorderBrush="#FF0B3D70"/>
                         <DataGrid x:Name="quotationsDataGrid1" Margin="0,41,0,0" AutoGenerateColumns="False"/>
                     </Grid>
                     <Grid x:Name="orderFormGrid" Margin="10,70,10,10" Visibility="Hidden">
@@ -816,14 +816,14 @@
                 </Grid>
             </Grid>
             <Grid x:Name="servicesGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True">
-                <Grid x:Name="servicesHome" Margin="10,70,10,10">
-                    <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476">
-                        <Label x:Name="label17" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-                        <TextBox x:Name="searchBox8" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317"/>
-                        <Button x:Name="button9" Content="Search" Margin="378,3,0,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="85" FontFamily="Segoe UI Semibold" FontSize="13" Foreground="#FFFFFCFC" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
+                <Grid x:Name="servicesHome" Margin="10,70,10,10" d:IsHidden="True">
+                    <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" d:IsHidden="True">
+                        <Label x:Name="label17" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" d:IsHidden="True"/>
+                        <TextBox x:Name="searchBox8" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317" d:IsHidden="True"/>
+                        <Button x:Name="button9" Content="Search" Margin="400,3,-9,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="85" FontFamily="Segoe UI Semibold" FontSize="13" Foreground="#FFFFFCFC" Background="#FF194E84" BorderBrush="#FF0B3D70" d:IsHidden="True"/>
                     </Grid>
-                    <Button x:Name="newServiceSched" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Click="transQuoteAddBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Foreground="#FFFFFCFC" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
-                    <DataGrid x:Name="servicesDg" Margin="10,82,10,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" SelectionChanged="servicesDg_SelectionChanged">
+                    <Button x:Name="newServiceSched" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Click="transQuoteAddBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Foreground="#FFFFFCFC" Background="#FF194E84" BorderBrush="#FF0B3D70" d:IsHidden="True"/>
+                    <DataGrid x:Name="servicesDg" Margin="10,82,10,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" SelectionChanged="servicesDg_SelectionChanged" d:IsHidden="True">
                         <DataGrid.Columns >
                             <DataGridTextColumn Binding="{Binding serviceId}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"  />
                             <DataGridTextColumn Binding="{Binding serviceName}" ClipboardContentBinding="{x:Null}" Header="Service Name" Width="200" CanUserResize="False"  />
@@ -848,9 +848,9 @@
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <DatePicker HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top" Width="167"/>
+                    <DatePicker HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top" Width="167" d:IsHidden="True"/>
                 </Grid>
-                <Grid Height="57" Margin="10,0" VerticalAlignment="Top" Background="#FF1695A3">
+                <Grid Height="57" Margin="10,0" VerticalAlignment="Top" Background="#FF1695A3" d:IsHidden="True">
                     <Label x:Name="label7_Copy7" Content="Services" Margin="0,0,307,0" FontSize="20" FontWeight="Bold" Background="{x:Null}" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Button x:Name="settingsServicesGridBtn" Margin="1170,0,0,0" Style="{StaticResource settingsButton}" HorizontalAlignment="Right" Width="59" Foreground="White"  Click="settingsServicesGridBtn_Click" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Background="{x:Null}">
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="55">
@@ -894,18 +894,172 @@
                         </StackPanel>
                     </Button>
                 </Grid>
+                <GroupBox x:Name="groupBox_Copy" Header="Details" Margin="10,12,30,131" FontWeight="Bold" FontSize="14" d:IsHidden="True">
+                    <ScrollViewer Margin="0,0,0,2" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="193*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label x:Name="label19" Content="All required fields are marked with (*)" HorizontalAlignment="Left" Margin="3,4,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1" Width="240" FontStyle="Italic"/>
+                            <Label Content="Full Name" HorizontalAlignment="Left" Margin="2,25,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1"/>
+                            <Label Content="* First Name" HorizontalAlignment="Left" Margin="19,49,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
+                            <TextBox x:Name="empFirstNameTb" HorizontalAlignment="Left" Height="23" Margin="28,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="228" FontWeight="Normal" Grid.Column="1" TextChanged="empFirstNameTb_TextChanged">
+                                <Binding Path="FirstName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <local:TextBoxValidation TextBoxType="String"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox>
+                            <Label Content="* Middle Initial" HorizontalAlignment="Left" Margin="287,49,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
+                            <TextBox x:Name="empMiddleInitialTb" HorizontalAlignment="Left" Height="23" Margin="302,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" FontWeight="Normal" MaxLength="3" Grid.Column="1" TextChanged="empMiddleInitialTb_TextChanged">
+                                <Binding Path="MiddleName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <local:TextBoxValidation TextBoxType="String"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox>
+                            <Label Content="* Last Name" HorizontalAlignment="Left" Margin="445,49,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
+                            <TextBox x:Name="empLastNameTb" HorizontalAlignment="Left" Height="23" Margin="447,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="299" FontWeight="Normal" Grid.Column="1" RenderTransformOrigin="0.5,0.5" TextChanged="empLastNameTb_TextChanged">
+                                <Binding Path="LastName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <local:TextBoxValidation TextBoxType="String"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox>
+                            <Image x:Name="empImage" Grid.Column="1" HorizontalAlignment="Left" Height="151" Margin="1031,13,-6,0" VerticalAlignment="Top" Width="144" Source="Resources/picture.png" Stretch="Fill"/>
+                            <Button x:Name="openFileBtn" Content="Open Image" Grid.Column="1" HorizontalAlignment="Left" Margin="1034,158,0,0" VerticalAlignment="Top" Width="135" FontWeight="Normal" Click="openFileBtn_Click" FontSize="13" Height="26" FontFamily="Segoe UI Semibold" Background="#FF079907" BorderBrush="#FF016C01" Foreground="#FFFFF9F9"/>
+                            <Label Content="Address" HorizontalAlignment="Left" Margin="2,116,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1"/>
+                            <Label Content="* Address" VerticalAlignment="Top" Visibility="Visible" Margin="21,141,426,0" FontWeight="Normal" Grid.Column="1"/>
+                            <TextBox x:Name="empAddressTb" HorizontalAlignment="Left" Height="23" Margin="38,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="708" FontWeight="Normal" Grid.Column="1" TextChanged="empAddressTb_TextChanged">
+                                <Binding Path="Address" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <local:TextBoxValidation TextBoxType="String"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox>
+                            <Label Content="* City" VerticalAlignment="Top" Visibility="Visible" Margin="19,201,0,0" FontWeight="Normal" Grid.Column="1" HorizontalAlignment="Left" Width="90"/>
+                            <TextBox x:Name="empCityTb" HorizontalAlignment="Left" Height="23" Margin="38,232,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162" FontWeight="Normal" Grid.Column="1" TextChanged="empCityTb_TextChanged">
+                                <Binding Path="Address" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <local:TextBoxValidation TextBoxType="String"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox>
+                            <Label Content="* Province" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="229,201,0,0" FontWeight="Normal" Grid.Column="1"/>
+                            <ComboBox x:Name="empProvinceCb" Margin="246,232,0,0" VerticalAlignment="Top" Height="23" DisplayMemberPath = "ProvinceName" SelectedValuePath = "ProvinceID" ItemsSource ="{Binding Provinces}" Width="157" HorizontalAlignment="Left" FontWeight="Normal" Grid.Column="1" SelectionChanged="empProvinceCb_SelectionChanged">
+                                <ComboBox.SelectedItem>
+                                    <Binding Path="locProvinceId" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <local:TextBoxValidation TextBoxType="ComboBox"/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </ComboBox.SelectedItem>
+                            </ComboBox>
+                            <Label x:Name="label1_Copy7" Content="Contact Details" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="127" Margin="10,281,0,0" FontWeight="Bold" Grid.Column="1"/>
+                            <ComboBox x:Name="contactTypeCb1" Margin="38,331,0,0" VerticalAlignment="Top" Height="25" Width="130" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" FontWeight="Normal" FontSize="12" SelectedValuePath="Content" Grid.Column="1" SelectionChanged="contactTypeCb1_SelectionChanged">
+                                <ComboBoxItem Content="[Contact Type]"/>
+                                <ComboBoxItem Content="Email Address"/>
+                                <ComboBoxItem Content="Phone Number"/>
+                                <ComboBoxItem Content="Mobile Number"/>
+                            </ComboBox>
+                            <TextBox x:Name="contactDetailsEmailTb1" HorizontalAlignment="Left" Height="25" Margin="179,331,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center" IsEnabled="False" Grid.Column="1" TextChanged="contactDetailsEmailTb1_TextChanged">
+                                <Binding Path="ContactValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <local:TextBoxValidation TextBoxType="Email"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox>
+                            <TextBox x:Name="contactDetailsPhoneTb1" HorizontalAlignment="Left" Height="25" Margin="179,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center" IsEnabled="False" Grid.Column="1" TextChanged="contactDetailsPhoneTb1_TextChanged">
+                                <Binding Path="ContactValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <local:TextBoxValidation TextBoxType="Phone"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox>
+                            <TextBox x:Name="contactDetailsMobileTb1" HorizontalAlignment="Left" Height="25" Margin="179,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center" IsEnabled="False" Grid.Column="1" TextChanged="contactDetailsMobileTb1_TextChanged">
+                                <Binding Path="ContactValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <local:TextBoxValidation TextBoxType="Mobile"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox>
+                            <Button x:Name="addNewEmpContactBtn" Content="Add" HorizontalAlignment="Left" Margin="431,332,0,0" VerticalAlignment="Top" Width="85" FontWeight="Normal" Height="26" Click="addNewEmpContactBtn_Click" Background="#FF079907" BorderBrush="#FF016C01" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13" Grid.Column="1"/>
+                            <Button x:Name="saveEmpContactBtn" Content="save" HorizontalAlignment="Left" Margin="431,331,0,0" VerticalAlignment="Top" Width="85" FontWeight="Normal" Height="26" Click="saveEmpContactBtn_Click" IsEnabled="False" Grid.Column="1" Foreground="#FFFFFCFC" Background="#FF194E84" BorderBrush="#FF0B3D70" Visibility="Hidden"/>
+                            <Button x:Name="cancelEmpContactBtn" Content="cancel" HorizontalAlignment="Left" Margin="548,333,0,0" VerticalAlignment="Top" Width="85" FontWeight="Normal" Height="26" Click="cancelEmpContactBtn_Click" IsEnabled="True" Grid.Column="1" Foreground="#FFFFFCFC" Background="#FFC50919" BorderBrush="#FFA50311" Visibility="Hidden"/>
+                            <DataGrid x:Name="empContactsDg" HorizontalAlignment="Left" Height="148" Margin="37,381,0,10" VerticalAlignment="Top" Width="547" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedEmpContact}" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30"  ItemsSource="{Binding EmpContacts}" Grid.Column="1" SelectionChanged="empContactsDg_SelectionChanged">
+                                <DataGrid.Columns >
+                                    <DataGridTextColumn Binding="{Binding ContactTypeID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"  />
+                                    <DataGridTextColumn Binding="{Binding ContactType}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Contact Type"  />
+                                    <DataGridTextColumn Binding="{Binding ContactDetails}" ClipboardContentBinding="{x:Null}" Header="Contact Details" Width="200" CanUserResize="False"  />
+                                    <DataGridTemplateColumn x:Name="colEditEmpContact" Width="100"  CanUserResize="False"  >
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button x:Name="editEmpContBtn" Click="editEmpContBtn_Click" Content="Edit" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70" Width="70" Height="26" FontFamily="Segoe UI Semibold" FontSize="13"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn x:Name="colDelEmpContact" Width="100" CanUserResize="False"  >
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button x:Name="delEmpContBtn" Click="delEmpContBtn_Click" Content="Delete" Foreground="White" Background="#FFC50919" BorderBrush="#FFA50311" FontFamily="Segoe UI Semibold" FontSize="13" Width="70" Height="26" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <StackPanel Grid.Column="1" Margin="10,554,0,-20" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Width="244" Height="482">
+                                <Grid x:Name="employeeOnlyGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="240">
+                                    <Label Content="Position" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic"/>
+                                    <ComboBox x:Name="empPostionCb" HorizontalAlignment="Left" Margin="27,29,0,0" VerticalAlignment="Top" Width="162" Height="26" SelectedValuePath="positionid" DisplayMemberPath="positionName" FontWeight="Normal" SelectionChanged="empPostionCb_SelectionChanged">
+                                        <ComboBox.SelectedItem>
+                                            <Binding Path="positionSelected" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <local:TextBoxValidation TextBoxType="ComboBox"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </ComboBox.SelectedItem>
+                                    </ComboBox>
+                                    <Label x:Name="label_Copy5" Content="Account Credentials" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Margin="0,79,0,0"/>
+                                    <Label x:Name="label_Copy1" Content="* Username" HorizontalAlignment="Left" Margin="28,113,0,0" VerticalAlignment="Top" FontWeight="Normal" Width="99"/>
+                                    <Label x:Name="label_Copy2" Content="* Password" HorizontalAlignment="Left" Margin="28,175,0,0" VerticalAlignment="Top" FontWeight="Normal" Width="99"/>
+                                    <TextBox x:Name="empUserNameTb" HorizontalAlignment="Left" Height="25" Margin="28,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center" TextChanged="empUserNameTb_TextChanged" Text="{Binding UserName, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"/>
+                                    <PasswordBox x:Name="empPasswordTb" HorizontalAlignment="Left" Margin="28,209,0,0" VerticalAlignment="Top" Width="216"/>
+                                </Grid>
+                                <Grid x:Name="contractorOnlyGrid" VerticalAlignment="Top" HorizontalAlignment="Left" Height="232" Width="213">
+                                    <Label Content="* Job Title" HorizontalAlignment="Left" Margin="0,28,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Height="29"/>
+                                    <ComboBox x:Name="empJobCb" HorizontalAlignment="Left" Margin="33,62,0,0" VerticalAlignment="Top" Width="162" Height="26" SelectedValuePath="positionId" DisplayMemberPath="positionName" FontWeight="Normal" SelectionChanged="empJobCb_SelectionChanged">
+                                        <ComboBox.SelectedItem>
+                                            <Binding Path="positionSelected" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <local:TextBoxValidation TextBoxType="ComboBox"/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </ComboBox.SelectedItem>
+                                    </ComboBox>
+                                    <Label Content="Duration of Employment" HorizontalAlignment="Left" Margin="0,113,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic"/>
+                                    <Label Content="* Start Date" HorizontalAlignment="Left" Margin="16,150,0,0" VerticalAlignment="Top" FontWeight="Normal"/>
+                                    <xctk:DateTimePicker x:Name="empDateStarted" HorizontalAlignment="Left" Margin="33,180,0,0" VerticalAlignment="Top" Width="157" Format="Custom" FormatString="yyyy-MM-dd" ValueChanged="dateStarted_ValueChanged" TimePickerVisibility="Hidden" DisplayDefaultValueOnEmptyText="True" AllowTextInput="False"/>
+                                    <Label Content="* End date" HorizontalAlignment="Left" Margin="16,206,0,-3" VerticalAlignment="Top" FontWeight="Normal"/>
+                                    <xctk:DateTimePicker x:Name="empDateEnded" HorizontalAlignment="Left" Margin="33,236,0,-26" Width="157" Format="Custom" FormatString="yyyy-MM-dd" ValueChanged="dateEnded_ValueChanged" TimePickerVisibility="Hidden" DisplayDefaultValueOnEmptyText="True" AllowTextInput="False" Height="22" VerticalAlignment="Top"/>
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                    </ScrollViewer>
+
+                </GroupBox>
             </Grid>
             <Grid x:Name="reportsGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True" />
             <Grid x:Name="manageGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True" >
-                <Grid x:Name="manageCustomerGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged" >
+                <Grid x:Name="manageCustomerGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged" d:IsHidden="True" >
                     <Label x:Name="label7_Copy" Content="Manage - Customer" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid x:Name="manageCustomerHomeGrid" Margin="10,70,10,10">
                         <Grid Margin="10,1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Label x:Name="label13" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
                             <TextBox x:Name="searchBox4" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317"/>
-                            <Button x:Name="button5" Content="Search" HorizontalAlignment="Left" Margin="396,3,0,0" VerticalAlignment="Top" Width="85" Height="26" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="13"/>
+                            <Button x:Name="button5" Content="Search" HorizontalAlignment="Left" Margin="402,3,-6,0" VerticalAlignment="Top" Width="85" Height="26" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="13"/>
                         </Grid>
-                        <Button x:Name="manageCustomerAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,0,10,0" VerticalAlignment="Top" Width="85" Click="manageCustomerAddBtn_Click" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13"/>
+                        <Button x:Name="manageCustomerAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,0,10,0" VerticalAlignment="Top" Width="85" Click="manageCustomerAddBtn_Click" Background="#FF079907" BorderBrush="#FF016C01" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13"/>
                         <DataGrid x:Name="manageCustomeDataGrid" Margin="10,41,10,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="manageCustomeDataGrid_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}">
                             <DataGrid.Columns >
                                 <DataGridTextColumn Binding="{Binding CompanyID}" ClipboardContentBinding="{x:Null}" Width="30" CanUserResize="False" Visibility="Visible"  />
@@ -984,7 +1138,7 @@
                             <TextBox x:Name="searchBox5" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317"/>
                             <Button x:Name="button6" Content="Search" HorizontalAlignment="Left" Margin="396,3,0,0" VerticalAlignment="Top" Width="85" Height="26" FontFamily="Segoe UI Semibold" FontSize="13" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
                         </Grid>
-                        <Button x:Name="manageEmployeeAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,0,10,0" VerticalAlignment="Top" Width="85" Click="manageEmployeeAddBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>
+                        <Button x:Name="manageEmployeeAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,0,10,0" VerticalAlignment="Top" Width="85" Click="manageEmployeeAddBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF079907" BorderBrush="#FF016C01" Foreground="#FFFFF9F9"/>
                         <DataGrid x:Name="manageEmployeeDataGrid" Margin="10,41,10,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="manageEmployeeDataGrid_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" IsVisibleChanged="manageEmployeeDataGrid_IsVisibleChanged" RowHeight="30" ItemsSource="{Binding Employees}" SelectedItem ="{Binding SelectedEmployee}">
                             <DataGrid.Columns >
                                 <DataGridTextColumn Binding="{Binding EmpID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"  />
@@ -1017,9 +1171,9 @@
                         <Grid Margin="10,1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Label x:Name="label15" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
                             <TextBox x:Name="manageSupplierSearchTb" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317" TextChanged="manageSupplierSearchTb_TextChanged"/>
-                            <Button x:Name="manageSupplierSearchBtn" Content="Search" HorizontalAlignment="Left" Margin="404,3,-8,0" VerticalAlignment="Top" Width="85" Height="26" Click="manageSupplierSearchBtn_Click" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="14"/>
+                            <Button x:Name="manageSupplierSearchBtn" Content="Search" HorizontalAlignment="Left" Margin="404,3,-8,0" VerticalAlignment="Top" Width="85" Height="26" Click="manageSupplierSearchBtn_Click" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="10"/>
                         </Grid>
-                        <Button x:Name="manageSupplierAddbtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,4,10,0" VerticalAlignment="Top" Width="85" Click="manageSupplierAddbtn_Click" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="14"/>
+                        <Button x:Name="manageSupplierAddbtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,4,10,0" VerticalAlignment="Top" Width="85" Click="manageSupplierAddbtn_Click" Background="#FF079907" BorderBrush="#FF016C01" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13"/>
                         <DataGrid x:Name="manageSupplierDataGrid" Margin="10,41,10,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="manageSupplierDataGrid_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" ItemsSource="{Binding Suppliers}" SelectedItem="{Binding SelectedSupplier}">
                             <DataGrid.Columns >
                                 <DataGridTextColumn Binding="{Binding CompanyID}" ClipboardContentBinding="{x:Null}" Width="30" CanUserResize="False" Visibility="Visible"  />
@@ -1053,7 +1207,7 @@
                             <TextBox x:Name="searchBox7" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317"/>
                             <Button x:Name="button4" Content="Search" HorizontalAlignment="Left" Margin="402,3,-6,0" VerticalAlignment="Top" Width="85" Height="26" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70" FontFamily="Segoe UI Semibold" FontSize="13"/>
                         </Grid>
-                        <Button x:Name="manageContractorAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,8,10,0" VerticalAlignment="Top" Width="85" Click="manageContractorAddBtn_Click" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13"/>
+                        <Button x:Name="manageContractorAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,4,10,0" VerticalAlignment="Top" Width="85" Click="manageContractorAddBtn_Click" Background="#FF079907" BorderBrush="#FF016C01" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13"/>
                         <DataGrid x:Name="manageContractorDataGrid" Margin="20,41,0,10" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionChanged="manageContractorDataGrid_SelectionChanged" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" IsVisibleChanged="manageEmployeeDataGrid_IsVisibleChanged" RowHeight="30" ItemsSource="{Binding Employees}" SelectedItem ="{Binding SelectedEmployee}">
                             <DataGrid.Columns >
                                 <DataGridTextColumn Binding="{Binding EmpID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"  />
@@ -1088,27 +1242,27 @@
                     <Grid Margin="10,70,10,10">
                         <TabControl x:Name="tabControl" Margin="24,26,29,10">
                             <TabItem Header="Employee &amp; Contractor" RenderTransformOrigin="0.284,0.568">
-                                <Grid Background="#FFE5E5E5">
-                                    <Grid Margin="34,49,707,0" Height="188" VerticalAlignment="Top">
+                                <Grid Background="#FFE5E5E5" d:IsHidden="True">
+                                    <Grid Margin="34,49,707,0" Height="188" VerticalAlignment="Top" d:IsHidden="True">
                                         <Label Content="Position Name:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13"/>
                                         <TextBox x:Name="empPosNewTb" HorizontalAlignment="Left" Height="23" Margin="105,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" FontSize="13" />
-                                        <Button x:Name="addEmpPosBtn" Content="Add" HorizontalAlignment="Left" Margin="370,4,-19,0" VerticalAlignment="Top" Width="85" Click="addEmpPosBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>
-                                        <Button x:Name="saveEmpPosBtn" Content="save" HorizontalAlignment="Left" Margin="346,4,0,0" VerticalAlignment="Top" Width="90" Click="saveEmpPosBtn_Click" Visibility="Hidden"/>
-                                        <ListBox x:Name="employeePositionLb" HorizontalAlignment="Left" Height="127" Margin="4,46,0,0" VerticalAlignment="Top" Width="337" FontSize="13" ItemsSource="{Binding EmpPosition}" SelectedItem="{Binding SelectedEmpPosition}" DisplayMemberPath="PositionName" />
-                                        <Button x:Name="deleteEmpPosBtn" Content="Delete" HorizontalAlignment="Left" Margin="370,81,-19,0" VerticalAlignment="Top" Width="85" Click="deleteEmpPosBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FFC50919" BorderBrush="#FFA50311" Foreground="#FFF9F3F3"/>
-                                        <Button x:Name="editEmpPosBtn" Content="Edit" HorizontalAlignment="Left" Margin="370,48,-19,0" VerticalAlignment="Top" Width="85" Click="editEmpPosBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF194E84" BorderBrush="#FF0B3D70" Foreground="#FFF9F9F9"/>
+                                        <Button x:Name="addEmpPosBtn" Content="Add" HorizontalAlignment="Left" Margin="370,4,-19,0" VerticalAlignment="Top" Width="85" Click="addEmpPosBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF079907" BorderBrush="#FF016C01" Foreground="#FFFFF9F9"/>
+                                        <Button x:Name="saveEmpPosBtn" Content="save" HorizontalAlignment="Left" Margin="346,4,0,0" VerticalAlignment="Top" Width="90" Click="saveEmpPosBtn_Click" Visibility="Hidden" d:IsHidden="True"/>
+                                        <ListBox x:Name="employeePositionLb" HorizontalAlignment="Left" Height="127" Margin="4,46,0,0" VerticalAlignment="Top" Width="337" FontSize="13" ItemsSource="{Binding EmpPosition}" SelectedItem="{Binding SelectedEmpPosition}" DisplayMemberPath="PositionName" d:IsHidden="True" />
+                                        <Button x:Name="deleteEmpPosBtn" Content="Delete" HorizontalAlignment="Left" Margin="370,81,-19,0" VerticalAlignment="Top" Width="85" Click="deleteEmpPosBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FFC50919" BorderBrush="#FFA50311" Foreground="#FFF9F3F3" d:IsHidden="True"/>
+                                        <Button x:Name="editEmpPosBtn" Content="Edit" HorizontalAlignment="Left" Margin="370,48,-19,0" VerticalAlignment="Top" Width="85" Click="editEmpPosBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF194E84" BorderBrush="#FF0B3D70" Foreground="#FFF9F9F9" d:IsHidden="True"/>
                                     </Grid>
-                                    <Grid Margin="34,286,707,0" Height="188" VerticalAlignment="Top">
-                                        <Label Content="Job Name:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13"/>
-                                        <TextBox x:Name="contNewJobTb" HorizontalAlignment="Left" Height="23" Margin="105,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" FontSize="13"/>
-                                        <Button x:Name="addContJobBtn" Content="Add" HorizontalAlignment="Left" Margin="370,4,-19,0" VerticalAlignment="Top" Width="85" Click="addContJobBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>
-                                        <Button x:Name="saveContJobBtn" Content="save" HorizontalAlignment="Left" Margin="346,4,0,0" VerticalAlignment="Top" Width="90" Click="saveEmpPosBtn_Click" Visibility="Hidden"/>
-                                        <ListBox x:Name="contJobLb" HorizontalAlignment="Left" Height="127" Margin="4,46,0,0" VerticalAlignment="Top" Width="337" FontSize="13" ItemsSource="{Binding ContJobTitle}" SelectedItem="{Binding SelectedJobTitle}" DisplayMemberPath="JobName" />
-                                        <Button x:Name="deleteContJobBtn" Content="Delete" HorizontalAlignment="Left" Margin="370,81,-19,0" VerticalAlignment="Top" Width="85" Click="deleteContJobBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FFC50919" BorderBrush="#FFA50311" Foreground="#FFF9F3F3"/>
-                                        <Button x:Name="editContJobBtn" Content="Edit" HorizontalAlignment="Left" Margin="370,48,-19,0" VerticalAlignment="Top" Width="85" Click="editContJobBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF194E84" BorderBrush="#FF0B3D70" Foreground="#FFF9F9F9"/>
+                                    <Grid Margin="34,286,707,0" Height="188" VerticalAlignment="Top" d:IsHidden="True">
+                                        <Label Content="Job Name:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13" d:IsHidden="True"/>
+                                        <TextBox x:Name="contNewJobTb" HorizontalAlignment="Left" Height="23" Margin="105,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" FontSize="13" d:IsHidden="True"/>
+                                        <Button x:Name="addContJobBtn" Content="Add" HorizontalAlignment="Left" Margin="370,4,-19,0" VerticalAlignment="Top" Width="85" Click="addContJobBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF079907" BorderBrush="#FF016C01" Foreground="#FFFFF9F9" d:IsHidden="True"/>
+                                        <Button x:Name="saveContJobBtn" Content="save" HorizontalAlignment="Left" Margin="346,4,0,0" VerticalAlignment="Top" Width="90" Click="saveEmpPosBtn_Click" Visibility="Hidden" d:IsHidden="True"/>
+                                        <ListBox x:Name="contJobLb" HorizontalAlignment="Left" Height="127" Margin="4,46,0,0" VerticalAlignment="Top" Width="337" FontSize="13" ItemsSource="{Binding ContJobTitle}" SelectedItem="{Binding SelectedJobTitle}" DisplayMemberPath="JobName" d:IsHidden="True" />
+                                        <Button x:Name="deleteContJobBtn" Content="Delete" HorizontalAlignment="Left" Margin="370,81,-19,0" VerticalAlignment="Top" Width="85" Click="deleteContJobBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FFC50919" BorderBrush="#FFA50311" Foreground="#FFF9F3F3" d:IsHidden="True"/>
+                                        <Button x:Name="editContJobBtn" Content="Edit" HorizontalAlignment="Left" Margin="370,48,-19,0" VerticalAlignment="Top" Width="85" Click="editContJobBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF194E84" BorderBrush="#FF0B3D70" Foreground="#FFF9F9F9" d:IsHidden="True"/>
                                     </Grid>
-                                    <Label x:Name="label20" Content="Employee" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top"/>
-                                    <Label x:Name="label20_Copy1" Content="Contractor" HorizontalAlignment="Left" Margin="10,255,0,0" VerticalAlignment="Top"/>
+                                    <Label x:Name="label20" Content="Employee" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" d:IsHidden="True"/>
+                                    <Label x:Name="label20_Copy1" Content="Contractor" HorizontalAlignment="Left" Margin="10,255,0,0" VerticalAlignment="Top" d:IsHidden="True"/>
                                 </Grid>
                             </TabItem>
                             <TabItem Header="Services">
@@ -1332,10 +1486,10 @@
                                             </Binding.ValidationRules>
                                         </Binding>
                                     </TextBox>
-                                    <Button x:Name="addNewCustContactBtn" Content="Add" HorizontalAlignment="Left" Margin="512,422,0,0" VerticalAlignment="Top" Width="84" FontWeight="Normal" Height="26" Click="addNewCustContactBtn_Click" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="14"/>
+                                    <Button x:Name="addNewCustContactBtn" Content="Add" HorizontalAlignment="Left" Margin="522,422,0,0" VerticalAlignment="Top" Width="84" FontWeight="Normal" Height="26" Click="addNewCustContactBtn_Click" Background="#FF079907" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="14"/>
                                     <Button x:Name="saveCustContactBtn" Content="save" HorizontalAlignment="Left" Margin="492,422,0,0" VerticalAlignment="Top" Width="110" FontWeight="Normal" Height="25" Click="saveCustContactBtn_Click" Visibility="Hidden" IsEnabled="False"/>
                                     <Button x:Name="cancelCustContactBtn" Content="cancel" HorizontalAlignment="Left" Margin="607,422,0,0" VerticalAlignment="Top" Width="110" FontWeight="Normal" Height="25" Click="cancelCustContactBtn_Click" IsEnabled="True" Visibility="Hidden"/>
-                                    <DataGrid x:Name="custContactDg" HorizontalAlignment="Left" Height="148" Margin="47,483,0,0" VerticalAlignment="Top" Width="549" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" SelectionChanged="custContactDg_SelectionChanged" SelectedItem="{Binding SelectedCustContact}" ItemsSource="{Binding CustContacts, Mode=TwoWay, UpdateSourceTrigger=Explicit}" >
+                                    <DataGrid x:Name="custContactDg" HorizontalAlignment="Left" Height="148" Margin="47,483,0,0" VerticalAlignment="Top" Width="549" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30" SelectedItem="{Binding SelectedCustContact}" ItemsSource="{Binding CustContacts, Mode=TwoWay, UpdateSourceTrigger=Explicit}" >
                                         <DataGrid.Columns >
                                             <DataGridTextColumn Binding="{Binding ContactTypeID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"  />
                                             <DataGridTextColumn Binding="{Binding ContactType}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Contact Type"  />
@@ -1383,8 +1537,8 @@
                             </ScrollViewer>
                         </GroupBox>
                         <Grid Margin="0,0,10,10" Height="20" VerticalAlignment="Bottom" Grid.ColumnSpan="2" HorizontalAlignment="Right">
-                            <Button x:Name="saveCustBtn" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" Click="saveCustBtn_Click" FontFamily="Segoe UI Semibold" Margin="-37,-9,0,0" Height="26" FontSize="14" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>
-                            <Button x:Name="cancelCustBtn" Content="Cancel" HorizontalAlignment="Left" Margin="82,-9,0,0" VerticalAlignment="Top" Width="85" Click="cancelCustBtn_Click" FontFamily="Segoe UI Semibold" Height="26" FontSize="14" Background="#FFC50919" BorderBrush="#FFA50311" Foreground="White"/>
+                            <Button x:Name="saveCustBtn" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" Click="saveCustBtn_Click" FontFamily="Segoe UI Semibold" Margin="-219,-11,0,0" Height="26" FontSize="14" Background="#FF079907" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>
+                            <Button x:Name="cancelCustBtn" Content="Cancel" HorizontalAlignment="Left" Margin="-106,-11,0,0" VerticalAlignment="Top" Width="85" Click="cancelCustBtn_Click" FontFamily="Segoe UI Semibold" Height="26" FontSize="14" Background="#FFC50919" BorderBrush="#FFA50311" Foreground="White"/>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -1395,162 +1549,8 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <GroupBox x:Name="groupBox_Copy" Header="Details" Margin="10,12,10,51" FontWeight="Bold" FontSize="14">
-                            <ScrollViewer Margin="0,0,0,2" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="3*"/>
-                                        <ColumnDefinition Width="193*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Label x:Name="label19" Content="All required fields are marked with (*)" HorizontalAlignment="Left" Margin="3,4,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1" Width="240" FontStyle="Italic"/>
-                                    <Label Content="Full Name" HorizontalAlignment="Left" Margin="2,25,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1"/>
-                                    <Label Content="* First Name" HorizontalAlignment="Left" Margin="19,49,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
-                                    <TextBox x:Name="empFirstNameTb" HorizontalAlignment="Left" Height="23" Margin="28,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="228" FontWeight="Normal" Grid.Column="1" TextChanged="empFirstNameTb_TextChanged">
-                                        <Binding Path="FirstName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <local:TextBoxValidation TextBoxType="String"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox>
-                                    <Label Content="* Middle Initial" HorizontalAlignment="Left" Margin="287,49,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
-                                    <TextBox x:Name="empMiddleInitialTb" HorizontalAlignment="Left" Height="23" Margin="302,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" FontWeight="Normal" MaxLength="3" Grid.Column="1" TextChanged="empMiddleInitialTb_TextChanged">
-                                        <Binding Path="MiddleName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <local:TextBoxValidation TextBoxType="String"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox>
-                                    <Label Content="* Last Name" HorizontalAlignment="Left" Margin="445,49,0,0" VerticalAlignment="Top" FontWeight="Normal" Grid.Column="1"/>
-                                    <TextBox x:Name="empLastNameTb" HorizontalAlignment="Left" Height="23" Margin="447,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="299" FontWeight="Normal" Grid.Column="1" RenderTransformOrigin="0.5,0.5" TextChanged="empLastNameTb_TextChanged">
-                                        <Binding Path="LastName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <local:TextBoxValidation TextBoxType="String"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox>
-                                    <Image x:Name="empImage" Grid.Column="1" HorizontalAlignment="Left" Height="151" Margin="1031,13,-6,0" VerticalAlignment="Top" Width="144" Source="Resources/picture.png" Stretch="Fill"/>
-                                    <Button x:Name="openFileBtn" Content="Open Image" Grid.Column="1" HorizontalAlignment="Left" Margin="1038,158,-4,0" VerticalAlignment="Top" Width="135" FontWeight="Normal" Click="openFileBtn_Click" FontSize="13" Height="28" FontFamily="Segoe UI Semibold" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>
-                                    <Label Content="Address" HorizontalAlignment="Left" Margin="2,116,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Grid.Column="1"/>
-                                    <Label Content="* Address" VerticalAlignment="Top" Visibility="Visible" Margin="21,141,426,0" FontWeight="Normal" Grid.Column="1"/>
-                                    <TextBox x:Name="empAddressTb" HorizontalAlignment="Left" Height="23" Margin="38,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="708" FontWeight="Normal" Grid.Column="1" TextChanged="empAddressTb_TextChanged">
-                                        <Binding Path="Address" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <local:TextBoxValidation TextBoxType="String"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox>
-                                    <Label Content="* City" VerticalAlignment="Top" Visibility="Visible" Margin="19,201,0,0" FontWeight="Normal" Grid.Column="1" HorizontalAlignment="Left" Width="90"/>
-                                    <TextBox x:Name="empCityTb" HorizontalAlignment="Left" Height="23" Margin="38,232,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162" FontWeight="Normal" Grid.Column="1" TextChanged="empCityTb_TextChanged">
-                                        <Binding Path="Address" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <local:TextBoxValidation TextBoxType="String"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox>
-                                    <Label Content="* Province" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="229,201,0,0" FontWeight="Normal" Grid.Column="1"/>
-                                    <ComboBox x:Name="empProvinceCb" Margin="246,232,0,0" VerticalAlignment="Top" Height="23" DisplayMemberPath = "ProvinceName" SelectedValuePath = "ProvinceID" ItemsSource ="{Binding Provinces}" Width="157" HorizontalAlignment="Left" FontWeight="Normal" Grid.Column="1" SelectionChanged="empProvinceCb_SelectionChanged">
-                                        <ComboBox.SelectedItem>
-                                            <Binding Path="locProvinceId" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                                <Binding.ValidationRules>
-                                                    <local:TextBoxValidation TextBoxType="ComboBox"/>
-                                                </Binding.ValidationRules>
-                                            </Binding>
-                                        </ComboBox.SelectedItem>
-                                    </ComboBox>
-                                    <Label x:Name="label1_Copy7" Content="Contact Details" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="127" Margin="10,281,0,0" FontWeight="Bold" Grid.Column="1"/>
-                                    <ComboBox x:Name="contactTypeCb1" Margin="38,331,0,0" VerticalAlignment="Top" Height="25" Width="130" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" FontWeight="Normal" FontSize="12" SelectedValuePath="Content" Grid.Column="1" SelectionChanged="contactTypeCb1_SelectionChanged">
-                                        <ComboBoxItem Content="[Contact Type]"/>
-                                        <ComboBoxItem Content="Email Address"/>
-                                        <ComboBoxItem Content="Phone Number"/>
-                                        <ComboBoxItem Content="Mobile Number"/>
-                                    </ComboBox>
-                                    <TextBox x:Name="contactDetailsEmailTb1" HorizontalAlignment="Left" Height="25" Margin="179,331,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center" IsEnabled="False" Grid.Column="1" TextChanged="contactDetailsEmailTb1_TextChanged">
-                                        <Binding Path="ContactValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <local:TextBoxValidation TextBoxType="Email"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox>
-                                    <TextBox x:Name="contactDetailsPhoneTb1" HorizontalAlignment="Left" Height="25" Margin="179,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center" IsEnabled="False" Grid.Column="1" TextChanged="contactDetailsPhoneTb1_TextChanged">
-                                        <Binding Path="ContactValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <local:TextBoxValidation TextBoxType="Phone"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox>
-                                    <TextBox x:Name="contactDetailsMobileTb1" HorizontalAlignment="Left" Height="25" Margin="179,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center" IsEnabled="False" Grid.Column="1" TextChanged="contactDetailsMobileTb1_TextChanged">
-                                        <Binding Path="ContactValue" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <local:TextBoxValidation TextBoxType="Mobile"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox>
-                                    <Button x:Name="addNewEmpContactBtn" Content="Add" HorizontalAlignment="Left" Margin="431,332,0,0" VerticalAlignment="Top" Width="85" FontWeight="Normal" Height="26" Click="addNewEmpContactBtn_Click" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="14" Grid.Column="1"/>
-                                    <Button x:Name="saveEmpContactBtn" Content="save" HorizontalAlignment="Left" Margin="431,331,0,0" VerticalAlignment="Top" Width="85" FontWeight="Normal" Height="26" Click="saveEmpContactBtn_Click" IsEnabled="False" Grid.Column="1" Foreground="#FFFFFCFC" Background="#FF194E84" BorderBrush="#FF0B3D70" Visibility="Hidden"/>
-                                    <Button x:Name="cancelEmpContactBtn" Content="cancel" HorizontalAlignment="Left" Margin="548,333,0,0" VerticalAlignment="Top" Width="85" FontWeight="Normal" Height="26" Click="cancelEmpContactBtn_Click" IsEnabled="True" Grid.Column="1" Foreground="#FFFFFCFC" Background="#FFC50919" BorderBrush="#FFA50311" Visibility="Hidden"/>
-                                    <DataGrid x:Name="empContactsDg" HorizontalAlignment="Left" Height="148" Margin="37,381,0,10" VerticalAlignment="Top" Width="547" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectedItem="{Binding SelectedEmpContact}" SelectionMode="Single" MinRowHeight="20" MinColumnWidth="0" RowHeight="30"  ItemsSource="{Binding EmpContacts}" Grid.Column="1" SelectionChanged="empContactsDg_SelectionChanged">
-                                        <DataGrid.Columns >
-                                            <DataGridTextColumn Binding="{Binding ContactTypeID}" ClipboardContentBinding="{x:Null}" Width="0" CanUserResize="False" Visibility="Visible"  />
-                                            <DataGridTextColumn Binding="{Binding ContactType}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Contact Type"  />
-                                            <DataGridTextColumn Binding="{Binding ContactDetails}" ClipboardContentBinding="{x:Null}" Header="Contact Details" Width="200" CanUserResize="False"  />
-                                            <DataGridTemplateColumn x:Name="colEditEmpContact" Width="100"  CanUserResize="False"  >
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <Button x:Name="editEmpContBtn" Click="editEmpContBtn_Click" Content="Edit" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70" Width="70" Height="26" FontFamily="Segoe UI Semibold" FontSize="13"/>
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                            <DataGridTemplateColumn x:Name="colDelEmpContact" Width="100" CanUserResize="False"  >
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <Button x:Name="delEmpContBtn" Click="delEmpContBtn_Click" Content="Delete" Foreground="White" Background="#FFC50919" BorderBrush="#FFA50311" FontFamily="Segoe UI Semibold" FontSize="13" Width="70" Height="26" />
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                        </DataGrid.Columns>
-                                    </DataGrid>
-                                    <StackPanel Grid.Column="1" Margin="10,554,0,-20" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Width="244" Height="482">
-                                        <Grid x:Name="employeeOnlyGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="240">
-                                            <Label Content="Position" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic"/>
-                                            <ComboBox x:Name="empPostionCb" HorizontalAlignment="Left" Margin="27,29,0,0" VerticalAlignment="Top" Width="162" Height="26" SelectedValuePath="positionid" DisplayMemberPath="positionName" FontWeight="Normal" SelectionChanged="empPostionCb_SelectionChanged">
-                                                <ComboBox.SelectedItem>
-                                                    <Binding Path="positionSelected" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                                        <Binding.ValidationRules>
-                                                            <local:TextBoxValidation TextBoxType="ComboBox"/>
-                                                        </Binding.ValidationRules>
-                                                    </Binding>
-                                                </ComboBox.SelectedItem>
-                                            </ComboBox>
-                                            <Label x:Name="label_Copy5" Content="Account Credentials" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Margin="0,79,0,0"/>
-                                            <Label x:Name="label_Copy1" Content="* Username" HorizontalAlignment="Left" Margin="28,113,0,0" VerticalAlignment="Top" FontWeight="Normal" Width="99"/>
-                                            <Label x:Name="label_Copy2" Content="* Password" HorizontalAlignment="Left" Margin="28,175,0,0" VerticalAlignment="Top" FontWeight="Normal" Width="99"/>
-                                            <TextBox x:Name="empUserNameTb" HorizontalAlignment="Left" Height="25" Margin="28,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center" TextChanged="empUserNameTb_TextChanged" Text="{Binding UserName, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"/>
-                                            <PasswordBox x:Name="empPasswordTb" HorizontalAlignment="Left" Margin="28,209,0,0" VerticalAlignment="Top" Width="216"/>
-                                        </Grid>
-                                        <Grid x:Name="contractorOnlyGrid" VerticalAlignment="Top" HorizontalAlignment="Left" Height="232" Width="213">
-                                            <Label Content="* Job Title" HorizontalAlignment="Left" Margin="0,28,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Height="29"/>
-                                            <ComboBox x:Name="empJobCb" HorizontalAlignment="Left" Margin="33,62,0,0" VerticalAlignment="Top" Width="162" Height="26" SelectedValuePath="positionId" DisplayMemberPath="positionName" FontWeight="Normal" SelectionChanged="empJobCb_SelectionChanged">
-                                                <ComboBox.SelectedItem>
-                                                    <Binding Path="positionSelected" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                                        <Binding.ValidationRules>
-                                                            <local:TextBoxValidation TextBoxType="ComboBox"/>
-                                                        </Binding.ValidationRules>
-                                                    </Binding>
-                                                </ComboBox.SelectedItem>
-                                            </ComboBox>
-                                            <Label Content="Duration of Employment" HorizontalAlignment="Left" Margin="0,113,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic"/>
-                                            <Label Content="* Start Date" HorizontalAlignment="Left" Margin="16,150,0,0" VerticalAlignment="Top" FontWeight="Normal"/>
-                                            <xctk:DateTimePicker x:Name="empDateStarted" HorizontalAlignment="Left" Margin="33,180,0,0" VerticalAlignment="Top" Width="157" Format="Custom" FormatString="yyyy-MM-dd" ValueChanged="dateStarted_ValueChanged" TimePickerVisibility="Hidden" DisplayDefaultValueOnEmptyText="True" AllowTextInput="False"/>
-                                            <Label Content="* End date" HorizontalAlignment="Left" Margin="16,206,0,-3" VerticalAlignment="Top" FontWeight="Normal"/>
-                                            <xctk:DateTimePicker x:Name="empDateEnded" HorizontalAlignment="Left" Margin="33,236,0,-26" Width="157" Format="Custom" FormatString="yyyy-MM-dd" ValueChanged="dateEnded_ValueChanged" TimePickerVisibility="Hidden" DisplayDefaultValueOnEmptyText="True" AllowTextInput="False" Height="22" VerticalAlignment="Top"/>
-                                        </Grid>
-                                    </StackPanel>
-                                </Grid>
-                            </ScrollViewer>
-
-                        </GroupBox>
                         <Grid Margin="0,0,10,10" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                            <Button x:Name="saveEmpBtn" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" IsEnabled="False" Click="saveEmpBtn_Click" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" Margin="-52,-10,0,0" Height="26" FontSize="13" FontFamily="Segoe UI Semibold"/>
+                            <Button x:Name="saveEmpBtn" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" Click="saveEmpBtn_Click" Background="#FF079907" BorderBrush="#FF016C01" Foreground="#FFFFF9F9" Margin="-58,-10,0,0" Height="26" FontSize="13" FontFamily="Segoe UI Semibold"/>
                             <Button x:Name="cancelEmpBtn" Content="Cancel" HorizontalAlignment="Left" Margin="56,-10,0,0" VerticalAlignment="Top" Width="85" Click="cancelEmpBtn_Click" Background="#FFC50919" BorderBrush="#FFA50311" Foreground="#FFFBF8F8" Height="26" FontSize="13" FontFamily="Segoe UI Semibold"/>
                         </Grid>
                     </Grid>

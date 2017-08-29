@@ -2201,10 +2201,6 @@ namespace prototype2
             }
         }
 
-        private void custContactDg_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-        }
-
 
         public String[] repDetails;
         private void newRepresentativeBtn_Click(object sender, RoutedEventArgs e)
@@ -3377,6 +3373,11 @@ namespace prototype2
         {
             if(MainVM.SelectedAdditionalFee!=null)
             MainVM.AdditionalFees.Remove(MainVM.SelectedAdditionalFee);
+        }
+
+        private void searchBox1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
