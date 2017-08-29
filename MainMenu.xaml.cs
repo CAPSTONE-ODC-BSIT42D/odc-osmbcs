@@ -589,24 +589,24 @@ namespace prototype2
         {
 
             var dbCon = DBConnection.Instance();
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * FROM position_t";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                dataAdapter.Fill(fromDb, "t");
-                empPostionCb.ItemsSource = fromDb.Tables["t"].DefaultView;
-                dbCon.Close();
-            }
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT jobID, jobName FROM job_title_t";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                dataAdapter.Fill(fromDb, "t");
-                empJobCb.ItemsSource = fromDb.Tables["t"].DefaultView;
-                dbCon.Close();
-            }
+            //if (dbCon.IsConnect())
+            //{
+            //    string query = "SELECT * FROM position_t";
+            //    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+            //    DataSet fromDb = new DataSet();
+            //    dataAdapter.Fill(fromDb, "t");
+            //    empPostionCb.ItemsSource = fromDb.Tables["t"].DefaultView;
+            //    dbCon.Close();
+            //}
+            //if (dbCon.IsConnect())
+            //{
+            //    string query = "SELECT jobID, jobName FROM job_title_t";
+            //    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+            //    DataSet fromDb = new DataSet();
+            //    dataAdapter.Fill(fromDb, "t");
+            //    empJobCb.ItemsSource = fromDb.Tables["t"].DefaultView;
+            //    dbCon.Close();
+            //}
             if (dbCon.IsConnect())
             {
                 string query = "SELECT a.empID, a.empFName,a.empLname, a.empMI, a.empAddinfo, a.empAddress, a.empCity, a.empProvinceID, a.empUserName, b.locprovince, a.positionID ,c.positionName, a.jobID, d.empPic, d.empSignature " +
@@ -3098,13 +3098,13 @@ namespace prototype2
 
                     if (empType == 1)
                     {
-                        cmd.Parameters.AddWithValue("@jobID", empJobCb);
+                        cmd.Parameters.AddWithValue("@jobID", empJobCb.SelectedValue);
                         cmd.Parameters["@jobID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@dateFrom", empDateStarted);
+                        cmd.Parameters.AddWithValue("@dateFrom", empDateStarted.Value);
                         cmd.Parameters["@dateFrom"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@dateTo", empDateEnded);
+                        cmd.Parameters.AddWithValue("@dateTo", empDateEnded.Value);
                         cmd.Parameters["@dateTo"].Direction = ParameterDirection.Input;
                     }
                     else

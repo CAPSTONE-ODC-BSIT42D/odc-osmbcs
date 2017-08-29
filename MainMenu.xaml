@@ -910,7 +910,7 @@
             </Grid>
             <Grid x:Name="reportsGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True" />
             <Grid x:Name="manageGrid" Margin="10,0" Background="#FFECF0F1" >
-                <Grid x:Name="manageCustomerGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged" >
+                <Grid x:Name="manageCustomerGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged" d:IsHidden="True" >
                     <Label x:Name="label7_Copy" Content="Manage - Customer" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid x:Name="manageCustomerHomeGrid" Margin="10,70,10,10">
                         <Grid Margin="10,1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -946,7 +946,7 @@
                     </Grid>
 
                 </Grid>
-                <Grid x:Name="manageEmployeeGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged" d:IsHidden="True">
+                <Grid x:Name="manageEmployeeGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged">
                     <Grid Height="57" Margin="10,0" VerticalAlignment="Top" Background="#FF1695A3">
                         <Label x:Name="label7_Copy4" Content="Manage - Employee" Margin="0,0,307,0" FontSize="20" FontWeight="Bold" Background="{x:Null}" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                         <Button x:Name="settingsEmployeeGridBtn" Margin="1170,0,0,0" Style="{StaticResource settingsButton}" HorizontalAlignment="Right" Width="59" Foreground="White"  Click="settingsEmployeeGridBtn_Click" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Background="{x:Null}" Visibility="Collapsed">
@@ -1059,7 +1059,7 @@
                         </DataGrid>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageContractorGrid" IsVisibleChanged="manageContractorGrid_IsVisibleChanged">
+                <Grid x:Name="manageContractorGrid" IsVisibleChanged="manageContractorGrid_IsVisibleChanged" d:IsHidden="True">
                     <Grid Margin="10,70,10,10">
                         <Grid Margin="10,1,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Label x:Name="label22" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -1402,7 +1402,7 @@
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid x:Name="employeeDetailsGrid" d:IsHidden="True">
+                <Grid x:Name="employeeDetailsGrid">
                     <Label x:Name="employeeDetailsHeader" Content="" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid Margin="10,70,10,10"/>
                     <Grid x:Name="employeeDetails" Margin="10,70,10,10">
@@ -1526,7 +1526,7 @@
                                     <StackPanel Grid.Column="1" Margin="10,554,0,-20" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Width="244" Height="482">
                                         <Grid x:Name="employeeOnlyGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="240">
                                             <Label Content="Position" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-                                            <ComboBox x:Name="empPostionCb" HorizontalAlignment="Left" Margin="27,29,0,0" VerticalAlignment="Top" Width="162" Height="26" SelectedValuePath="positionid" DisplayMemberPath="positionName" FontWeight="Normal" SelectionChanged="empPostionCb_SelectionChanged">
+                                            <ComboBox x:Name="empPostionCb" HorizontalAlignment="Left" Margin="27,29,0,0" VerticalAlignment="Top" Width="162" Height="26" ItemsSource="{Binding EmpPosition}" DisplayMemberPath="PositionName" SelectedValuePath="PositionID" FontWeight="Normal" SelectionChanged="empPostionCb_SelectionChanged">
                                                 <ComboBox.SelectedItem>
                                                     <Binding Path="positionSelected" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                                         <Binding.ValidationRules>
@@ -1543,14 +1543,14 @@
                                         </Grid>
                                         <Grid x:Name="contractorOnlyGrid" VerticalAlignment="Top" HorizontalAlignment="Left" Height="232" Width="213">
                                             <Label Content="* Job Title" HorizontalAlignment="Left" Margin="0,28,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="29"/>
-                                            <ComboBox x:Name="empJobCb" HorizontalAlignment="Left" Margin="33,62,0,0" VerticalAlignment="Top" Width="162" Height="26" SelectedValuePath="positionId" DisplayMemberPath="positionName" FontWeight="Normal" SelectionChanged="empJobCb_SelectionChanged">
-                                                <ComboBox.SelectedItem>
-                                                    <Binding Path="positionSelected" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                            <ComboBox x:Name="empJobCb" HorizontalAlignment="Left" Margin="33,62,0,0" VerticalAlignment="Top" Width="162" Height="26"  ItemsSource="{Binding ContJobTitle}" DisplayMemberPath="JobName" SelectedValuePath="JobID" FontWeight="Normal" SelectionChanged="empJobCb_SelectionChanged">
+                                                <!--<ComboBox.SelectedItem>
+                                                    <Binding Path="S" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                                         <Binding.ValidationRules>
                                                             <local:TextBoxValidation TextBoxType="ComboBox"/>
                                                         </Binding.ValidationRules>
                                                     </Binding>
-                                                </ComboBox.SelectedItem>
+                                                </ComboBox.SelectedItem>-->
                                             </ComboBox>
                                             <Label Content="Duration of Employment" HorizontalAlignment="Left" Margin="0,113,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                                             <Label Content="* Start Date" HorizontalAlignment="Left" Margin="16,150,0,0" VerticalAlignment="Top" FontWeight="Normal"/>
