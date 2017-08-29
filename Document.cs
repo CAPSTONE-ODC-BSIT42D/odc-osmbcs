@@ -44,7 +44,7 @@ namespace prototype2
             this.document.DefaultPageSetup.PageFormat = PageFormat.Letter;
             DefineStyles();
             CreatePage();
-            //FillContent();
+            FillContent();
             return document;
         }
 
@@ -182,7 +182,7 @@ namespace prototype2
             row.Cells[0].Format.Alignment = ParagraphAlignment.Left;
             row.Cells[0].VerticalAlignment = VerticalAlignment.Bottom;
             row.Cells[1].AddParagraph("Item");
-            row.Cells[1].AddParagraph("Code");
+            row.Cells[1].AddParagraph("Name");
             row.Cells[1].Format.Alignment = ParagraphAlignment.Left;
             row.Cells[2].AddParagraph("Description");
             row.Cells[2].Format.Alignment = ParagraphAlignment.Left;
@@ -205,7 +205,18 @@ namespace prototype2
         }
         void FillContent()
         {
-
+            Row row;
+            foreach (RequestedItem item in MainMenu.MainVM.RequestedItems)
+            {
+                row = table.AddRow();
+                row.Cells[0].AddParagraph(item.lineNo);
+                row.Cells[1].AddParagraph(item.itemName);
+                row.Cells[2].AddParagraph(item.desc);
+                row.Cells[3].AddParagraph("na");
+                row.Cells[4].AddParagraph(item.qty.ToString());
+                row.Cells[5].AddParagraph(item.unitPrice.ToString());
+                row.Cells[6].AddParagraph(item.totalAmountMarkUp.ToString());
+            }
             //// Fill address in address text frame
             //XPathNavigator item = SelectItem("/invoice/to");
             //Paragraph paragraph = this.addressFrame.AddParagraph();
