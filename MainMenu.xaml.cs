@@ -424,13 +424,13 @@ namespace prototype2
 
         private void validtycustomRd_Checked(object sender, RoutedEventArgs e)
         {
-            ValidityCustom.IsEnabled = true;
+            validityTb.IsEnabled = true;
             validtycustomlbl.IsEnabled = true;
         }
 
         private void validtycustomRd_Unchecked(object sender, RoutedEventArgs e)
         {
-            ValidityCustom.IsEnabled = false;
+            validityTb.IsEnabled = false;
             validtycustomlbl.IsEnabled = false;
         }
 
@@ -692,11 +692,12 @@ namespace prototype2
 
         private void btnEditEmp_Click(object sender, RoutedEventArgs e)
         {
-            setManageEmployeeGridControls();
+            empType = 0;
+            loadEmpContDetails();
             manageEmployeeGrid.Visibility = Visibility.Hidden;
             employeeDetailsGrid.Visibility = Visibility.Visible;
             employeeDetailsHeader.Content = "Manage Employee - Edit Employee";
-            empType = 0;
+            
             isEdit = true;
             employeeOnlyGrid.Visibility = Visibility.Visible;
             contractorOnlyGrid.Visibility = Visibility.Collapsed;
@@ -774,12 +775,14 @@ namespace prototype2
         }
 
         private void btnEditCont_Click(object sender, RoutedEventArgs e)
-        {
+        { 
+
+            empType = 1;
             loadEmpContDetails();
             manageContractorGrid.Visibility = Visibility.Hidden;
             employeeDetailsGrid.Visibility = Visibility.Visible;
             employeeDetailsHeader.Content = "Manage Contractor - Edit Contractor";
-            empType = 1;
+            
             isEdit = true;
             contractorOnlyGrid.Visibility = Visibility.Visible;
             empJobCb.IsEnabled = true;
@@ -3303,7 +3306,7 @@ namespace prototype2
                 {
                     empPostionCb.SelectedIndex = int.Parse(MainVM.SelectedEmployee.PositionID);
                 }
-                employeeOnlyGrid.Visibility = Visibility.Hidden;
+                
                 if (MainVM.SelectedEmployee.EmpPic != null)
                 {
                     using (System.IO.MemoryStream ms = new System.IO.MemoryStream(MainVM.SelectedEmployee.EmpPic))

@@ -615,4 +615,39 @@ namespace prototype2
         }
     }
 
+    public class SalesQuote : ViewModelEntity
+    {
+        public SalesQuote()
+        {
+
+        }
+
+        protected string sqNoChar;
+        protected DateTime dateOfIssue;
+        protected int custID;
+        protected int custRepID;
+        protected string quoteSubject;
+        protected string body1;
+        protected string priceNote;
+        protected int ptID;
+        protected DateTime deliveryDate;
+        protected int estDelivery;
+        protected int validityDays;
+        protected DateTime validityDate;
+        protected string otherTerms;
+        protected string body2;
+        protected DateTime expiration;
+        protected decimal vat;
+        protected bool vatexcluded;
+        protected bool paymentIsLanded;
+        protected bool paymentCurrency;
+        protected string deliveryAddress;
+        protected string status;
+        protected int termsDays;
+        protected int termsDP;
+        protected decimal penaltyAmt;
+
+        
+    }
+
 }
