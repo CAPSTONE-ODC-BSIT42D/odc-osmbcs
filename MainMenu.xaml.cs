@@ -28,7 +28,7 @@ namespace prototype2
     /// </summary>
     public partial class MainMenu : Window
     {
-        
+        private int empType = 0;
         public MainMenu()
         {
             InitializeComponent();
@@ -244,12 +244,50 @@ namespace prototype2
             selectCustomerDg.ItemsSource = observable;
         }
 
+        private void AssignEmpBackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            serviceAssignSV.Visibility = Visibility.Visible;
+            Assign_Grid.Visibility = Visibility.Hidden;
+            AssignEmpSV.Visibility = Visibility.Hidden;
+            btnServiceBack.Visibility = Visibility.Visible;
+            serviceAssignSV.Visibility = Visibility.Visible;
+            assignEmpNextBtn.Visibility = Visibility.Visible;
+        }
+
+        private void assignEmpNextBtn_Click(object sender, RoutedEventArgs e)
+        {
+            serviceAssignSV.Visibility = Visibility.Hidden;
+            Assign_Grid.Visibility = Visibility.Visible;
+            AssignEmpSV.Visibility = Visibility.Visible;
+            btnServiceBack.Visibility = Visibility.Hidden;
+            serviceAssignSV.Visibility = Visibility.Hidden;
+            assignEmpNextBtn.Visibility = Visibility.Hidden;
+        }
+
+        private void btnServiceBack_Click(object sender, RoutedEventArgs e)
+        {
+            servicesHome.Visibility = Visibility.Visible;
+            serviceAssignGrid.Visibility = Visibility.Hidden;
+            btnServiceBack.Visibility = Visibility.Hidden;
+            serviceAssignSV.Visibility = Visibility.Hidden;
+            assignEmpNextBtn.Visibility = Visibility.Hidden;
+        }
+
         private void transQuoteAddBtn_Click(object sender, RoutedEventArgs e)
         {
             for (int x = 1; x < transactionQuotationsGrid.Children.Count; x++)
             {
                 transactionQuotationsGrid.Children[x].Visibility = Visibility.Collapsed;
+
+                servicesHome.Visibility = Visibility.Hidden;
+                serviceAssignGrid.Visibility = Visibility.Visible;
+                btnServiceBack.Visibility = Visibility.Visible;
+                serviceAssignSV.Visibility = Visibility.Visible;
+                assignEmpNextBtn.Visibility = Visibility.Visible;
+
             }
+
+
             selectCustomerGrid.Visibility = Visibility.Visible;
             if (MainVM.Customers.Count == 0)
             {
@@ -589,24 +627,24 @@ namespace prototype2
         {
 
             var dbCon = DBConnection.Instance();
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * FROM position_t";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                dataAdapter.Fill(fromDb, "t");
-                empPostionCb.ItemsSource = fromDb.Tables["t"].DefaultView;
-                dbCon.Close();
-            }
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT jobID, jobName FROM job_title_t";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                dataAdapter.Fill(fromDb, "t");
-                empJobCb.ItemsSource = fromDb.Tables["t"].DefaultView;
-                dbCon.Close();
-            }
+            //if (dbCon.IsConnect())
+            //{
+            //    string query = "SELECT * FROM position_t";
+            //    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+            //    DataSet fromDb = new DataSet();
+            //    dataAdapter.Fill(fromDb, "t");
+            //    empPostionCb.ItemsSource = fromDb.Tables["t"].DefaultView;
+            //    dbCon.Close();
+            //}
+            //if (dbCon.IsConnect())
+            //{
+            //    string query = "SELECT jobID, jobName FROM job_title_t";
+            //    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+            //    DataSet fromDb = new DataSet();
+            //    dataAdapter.Fill(fromDb, "t");
+            //    empJobCb.ItemsSource = fromDb.Tables["t"].DefaultView;
+            //    dbCon.Close();
+            //}
             if (dbCon.IsConnect())
             {
                 string query = "SELECT a.empID, a.empFName,a.empLname, a.empMI, a.empAddinfo, a.empAddress, a.empCity, a.empProvinceID, a.empUserName, b.locprovince, a.positionID ,c.positionName, a.jobID, d.empPic, d.empSignature " +
@@ -690,7 +728,7 @@ namespace prototype2
                 else if (result == MessageBoxResult.Cancel)
                 {
                 }
-                setManageCustomerGridControls();
+                setManageEmployeeGridControls();
             }
         }
 
@@ -737,7 +775,7 @@ namespace prototype2
 
         private void btnEditCont_Click(object sender, RoutedEventArgs e)
         {
-            setManageContractorGridControls();
+            loadEmpContDetails();
             manageContractorGrid.Visibility = Visibility.Hidden;
             employeeDetailsGrid.Visibility = Visibility.Visible;
             employeeDetailsHeader.Content = "Manage Contractor - Edit Contractor";
@@ -761,7 +799,7 @@ namespace prototype2
                 {
                     using (MySqlConnection conn = dbCon.Connection)
                     {
-                        string query = "UPDATE `contractor_t` SET `isDeleted`= 1 WHERE contID = '" + id + "';";
+                        string query = "UPDATE `emp_cont_t` SET `isDeleted`= 1 WHERE empID = '" + id + "';";
                         if (dbCon.insertQuery(query, conn))
                         {
                             MessageBox.Show("Record successfully deleted!");
@@ -787,10 +825,10 @@ namespace prototype2
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
-                string query = "SELECT a.empID, a.empFName,a.empLname, a.empMI, a.empAddinfo, a.empAddress, a.empCity, a.empProvinceID, b.locprovince, a.positionID ,c.positionName, a.jobID, d.jobName " +
+                string query = "SELECT a.empID, a.empFName,a.empLname, a.empMI, a.empAddinfo, a.empAddress, a.empCity, a.empProvinceID, b.locprovince, a.jobID, d.jobName " +
                     "FROM emp_cont_t a  " +
                     "JOIN provinces_t b ON a.empProvinceID = b.locProvinceId " +
-                    "JOIN position_t c ON a.positionID = c.positionid " +
+                    //"JOIN position_t c ON a.positionID = c.positionid " +
                     "JOIN job_title_t d ON a.jobID = d.jobID " +
                     "WHERE a.isDeleted = 0 AND a.empType = 1;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
@@ -801,7 +839,7 @@ namespace prototype2
                 MainVM.Employees.Clear();
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    MainVM.Employees.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), PositionID = dr["positionID"].ToString(), PositionName = dr["positionName"].ToString(), JobID = dr["jobID"].ToString(), JobName = dr["jobName"].ToString() });
+                    MainVM.Employees.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), JobID = dr["jobID"].ToString(), JobName = dr["jobName"].ToString() });
                 }
                 dbCon.Close();
             }
@@ -3050,7 +3088,7 @@ namespace prototype2
         
 
         private string empId;
-        private int empType = 0;
+        
         private void empDataToDb()
         {
             var dbCon = DBConnection.Instance();
@@ -3112,13 +3150,13 @@ namespace prototype2
 
                     if (empType == 1)
                     {
-                        cmd.Parameters.AddWithValue("@jobID", empJobCb);
+                        cmd.Parameters.AddWithValue("@jobID", empJobCb.SelectedValue);
                         cmd.Parameters["@jobID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@dateFrom", empDateStarted);
+                        cmd.Parameters.AddWithValue("@dateFrom", empDateStarted.Value);
                         cmd.Parameters["@dateFrom"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@dateTo", empDateEnded);
+                        cmd.Parameters.AddWithValue("@dateTo", empDateEnded.Value);
                         cmd.Parameters["@dateTo"].Direction = ParameterDirection.Input;
                     }
                     else
@@ -3240,62 +3278,66 @@ namespace prototype2
         private void loadEmpContDetails()
         {
 
-            try
+            //try
+            //{
+                
+            //}
+            //catch (Exception)
+            //{
+            //    throw;
+            //}
+            //finally
+            //{
+            //}
+            var dbCon = DBConnection.Instance();
+            using (MySqlConnection conn = dbCon.Connection)
             {
-                var dbCon = DBConnection.Instance();
-                using (MySqlConnection conn = dbCon.Connection)
+                conn.Open();
+                empFirstNameTb.Text = MainVM.SelectedEmployee.EmpFname;
+                empMiddleInitialTb.Text = MainVM.SelectedEmployee.EmpMiddleInitial;
+                empLastNameTb.Text = MainVM.SelectedEmployee.EmpLName;
+                empAddressTb.Text = MainVM.SelectedEmployee.EmpAddress;
+                empCityTb.Text = MainVM.SelectedEmployee.EmpCity;
+                empProvinceCb.SelectedIndex = int.Parse(MainVM.SelectedEmployee.EmpProvinceID);
+                if (empType == 0)
                 {
-                    conn.Open();
-                    empFirstNameTb.Text = MainVM.SelectedEmployee.EmpFname;
-                    empMiddleInitialTb.Text = MainVM.SelectedEmployee.EmpMiddleInitial;
-                    empLastNameTb.Text = MainVM.SelectedEmployee.EmpLName;
-                    empAddressTb.Text = MainVM.SelectedEmployee.EmpAddress;
-                    empCityTb.Text = MainVM.SelectedEmployee.EmpCity;
-                    empProvinceCb.SelectedIndex = int.Parse(MainVM.SelectedEmployee.EmpProvinceID);
                     empPostionCb.SelectedIndex = int.Parse(MainVM.SelectedEmployee.PositionID);
-                    employeeOnlyGrid.Visibility = Visibility.Hidden;
-                    if (MainVM.SelectedEmployee.EmpPic!=null)
-                    {
-                        using (System.IO.MemoryStream ms = new System.IO.MemoryStream(MainVM.SelectedEmployee.EmpPic))
-                        {
-                            var imageSource = new BitmapImage();
-                            imageSource.BeginInit();
-                            imageSource.StreamSource = ms;
-                            imageSource.CacheOption = BitmapCacheOption.OnLoad;
-                            imageSource.EndInit();
-                            // Assign the Source property of your image
-                            empImage.Source = imageSource;
-                        }
-                    }
-                    string query = "SELECT cs.tableID," +
-                        "cs.empId," +
-                        "cs.contactTypeID," +
-                        "cs.contactValue," +
-                        "cont.contactType" +
-                        " FROM employee_t_contact_t cs" +
-                        " JOIN contacts_t cont" +
-                        " ON cont.contactTypeID = cs.contactTypeID" +
-                        " WHERE cs.compID = '" + MainVM.SelectedEmployee.EmpID + "';";
-                    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, conn);
-                    DataSet fromDb = new DataSet();
-                    DataTable fromDbTable = new DataTable();
-                    dataAdapter.Fill(fromDb, "t");
-                    fromDbTable = fromDb.Tables["t"];
-                    foreach (DataRow dr in fromDbTable.Rows)
-                    {
-                        MainVM.EmpContacts.Add(new Contact() { TableID = dr["tableID"].ToString(), ContactDetails = dr["contactValue"].ToString(), ContactType = dr["contactType"].ToString(), ContactTypeID = dr["contactTypeID"].ToString() });
-                    }
-
                 }
-                validateEmployeeTextBoxes();
+                employeeOnlyGrid.Visibility = Visibility.Hidden;
+                if (MainVM.SelectedEmployee.EmpPic != null)
+                {
+                    using (System.IO.MemoryStream ms = new System.IO.MemoryStream(MainVM.SelectedEmployee.EmpPic))
+                    {
+                        var imageSource = new BitmapImage();
+                        imageSource.BeginInit();
+                        imageSource.StreamSource = ms;
+                        imageSource.CacheOption = BitmapCacheOption.OnLoad;
+                        imageSource.EndInit();
+                        // Assign the Source property of your image
+                        empImage.Source = imageSource;
+                    }
+                }
+                string query = "SELECT cs.tableID," +
+                    "cs.empId," +
+                    "cs.contactTypeID," +
+                    "cs.contactValue," +
+                    "cont.contactType" +
+                    " FROM employee_t_contact_t cs" +
+                    " JOIN contacts_t cont" +
+                    " ON cont.contactTypeID = cs.contactTypeID" +
+                    " WHERE cs.compID = '" + MainVM.SelectedEmployee.EmpID + "';";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, conn);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.EmpContacts.Add(new Contact() { TableID = dr["tableID"].ToString(), ContactDetails = dr["contactValue"].ToString(), ContactType = dr["contactType"].ToString(), ContactTypeID = dr["contactTypeID"].ToString() });
+                }
+
             }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-            }
+            validateEmployeeTextBoxes();
         }
 
         String SecureStringToString(SecureString value)
