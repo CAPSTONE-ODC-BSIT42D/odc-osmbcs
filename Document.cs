@@ -104,7 +104,7 @@ namespace prototype2
             this.customerName = section.AddParagraph();
             this.addressFrame = section.AddParagraph();
             this.letterHeaderFrame = section.AddParagraph();
-            
+            this.paragraph1 = section.AddParagraph();
             // Put sender in address frame
             DateTime timeToday = new DateTime();
             timeToday = DateTime.Today;
@@ -206,6 +206,7 @@ namespace prototype2
         void FillContent()
         {
             Row row;
+            decimal totalPrice = 0;
             foreach (RequestedItem item in MainMenu.MainVM.RequestedItems)
             {
                 row = table.AddRow();
@@ -214,9 +215,14 @@ namespace prototype2
                 row.Cells[2].AddParagraph(item.desc);
                 row.Cells[3].AddParagraph("na");
                 row.Cells[4].AddParagraph(item.qty.ToString());
-                row.Cells[5].AddParagraph(item.unitPrice.ToString());
+                row.Cells[5].AddParagraph(item.unitPriceMarkUp.ToString());
                 row.Cells[6].AddParagraph(item.totalAmountMarkUp.ToString());
+                totalPrice += item.totalAmountMarkUp;
             }
+            row = table.AddRow();
+            row.Cells[0].AddParagraph("Total Price");
+            row.Cells[0].MergeRight = 5;
+            row.Cells[6].AddParagraph(""+totalPrice.ToString());
             //// Fill address in address text frame
             //XPathNavigator item = SelectItem("/invoice/to");
             //Paragraph paragraph = this.addressFrame.AddParagraph();

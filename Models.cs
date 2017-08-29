@@ -377,6 +377,7 @@ namespace prototype2
         protected string itemName;
         protected string itemDesc;
         protected decimal costPrice;
+        protected string unit;
         protected int quantity;
         protected string typeID;
         protected string supplierID;
@@ -408,6 +409,11 @@ namespace prototype2
         {
             get { return costPrice; }
             set { SetProperty(ref costPrice, value); }
+        }
+        public string Unit
+        {
+            get { return unit; }
+            set { SetProperty(ref unit, value); }
         }
         public int Quantity
         {
@@ -579,6 +585,12 @@ namespace prototype2
             get { return _unitprice; }
             set { SetProperty(ref _unitprice, value); }
         }
+        private decimal _unitpricemarkup;
+        public decimal unitPriceMarkUp
+        {
+            get { return _unitpricemarkup; }
+            set { SetProperty(ref _unitpricemarkup, value); }
+        }
 
         private decimal _totalAmount;
         public decimal totalAmount
@@ -586,6 +598,7 @@ namespace prototype2
             get { return _totalAmount; }
             set { SetProperty(ref _totalAmount, value); }
         }
+
 
         private decimal _totalAmountMarkUp;
         public decimal totalAmountMarkUp

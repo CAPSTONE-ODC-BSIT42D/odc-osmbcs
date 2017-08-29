@@ -732,7 +732,7 @@ namespace prototype2
                 manageGrid.Children[x].Visibility = Visibility.Collapsed;
             }
             manageContractorGrid.Visibility = Visibility.Visible;
-            setManageEmployeeGridControls();
+            setManageContractorGridControls();
         }
 
         private void btnEditCont_Click(object sender, RoutedEventArgs e)
@@ -1395,6 +1395,20 @@ namespace prototype2
                 Validation.ClearInvalid(costPriceTbBindingExpressionBase);
             }
 
+            BindingExpression unitTbBindingExpression = BindingOperations.GetBindingExpression(unitTb, TextBox.TextProperty);
+            BindingExpressionBase unitTbBindingExpressionBase = BindingOperations.GetBindingExpressionBase(unitTb, TextBox.TextProperty);
+
+            if (String.IsNullOrWhiteSpace(productNameTb.Text))
+            {
+                ValidationError validationError = new ValidationError(new ExceptionValidationRule(), unitTbBindingExpression);
+                validationError.ErrorContent = "*Please fill out this field";
+                Validation.MarkInvalid(unitTbBindingExpressionBase, validationError);
+            }
+            else if (Validation.GetHasError(productNameTb))
+            {
+
+                Validation.ClearInvalid(unitTbBindingExpressionBase);
+            }
             //BindingExpression salesPriceTbBindingExpression = BindingOperations.GetBindingExpression(salesPriceTb, Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
             //BindingExpressionBase salesPriceTbBindingExpressionBase = BindingOperations.GetBindingExpressionBase(salesPriceTb, Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
 
@@ -1478,8 +1492,8 @@ namespace prototype2
                         cmd.Parameters.AddWithValue("@costPrice", costPriceTb.Value);
                         cmd.Parameters["@costPrice"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@salesPrice", salesPriceTb.Value);
-                        //cmd.Parameters["@salesPrice"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@itemUnit", unitTb.Text);
+                        cmd.Parameters["@itemUnit"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@typeID", productCategoryCb.SelectedValue);
                         cmd.Parameters["@typeID"].Direction = ParameterDirection.Input;
@@ -1830,7 +1844,7 @@ namespace prototype2
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
                     MainVM.SelectedSupplier = MainVM.Suppliers.Where(x => x.CompanyID.Equals(dr["supplierID"].ToString())).FirstOrDefault();
-                    MainMenu.MainVM.ProductList.Add(new Item() { ItemNo = dr["itemNo"].ToString(), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), Quantity = 1, SupplierID = dr["supplierID"].ToString(), SupplierName = MainVM.SelectedSupplier.CompanyName});
+                    MainMenu.MainVM.ProductList.Add(new Item() { ItemNo = dr["itemNo"].ToString(), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), Unit = dr["itemUnit"].ToString() ,Quantity = 1, SupplierID = dr["supplierID"].ToString(), SupplierName = MainVM.SelectedSupplier.CompanyName});
                 }
                 dbCon.Close();
             }
@@ -3354,14 +3368,18 @@ namespace prototype2
             }
             foreach (RequestedItem item in MainVM.RequestedItems)
             {
-                item.totalAmount = item.unitPrice * item.qty;
                 if (item.itemType == 0)
                 {
-                    item.totalAmountMarkUp = ((item.unitPrice * item.qty) + (((item.unitPrice * item.qty) / 100) * (decimal)markupPriceTb.Value)) - (((item.unitPrice * item.qty) / 100) * (decimal)discountPriceTb.Value);
+                    item.unitPriceMarkUp = item.unitPrice + (item.unitPrice / 100 * (decimal)markupPriceTb.Value);
+                    item.totalAmountMarkUp = (item.unitPriceMarkUp * item.qty) - ((item.unitPriceMarkUp * item.qty) / 100) * (decimal)discountPriceTb.Value;
+                    item.totalAmount = item.unitPriceMarkUp * item.qty;
+                    
                 }
                 else if (item.itemType == 1)
                 {
+                    item.unitPriceMarkUp = (item.unitPrice+totalFee) + ((item.unitPrice + totalFee) / 100 * (decimal)markupPriceTb.Value);
                     item.totalAmountMarkUp = (item.unitPrice+totalFee+(((item.unitPrice + totalFee) / 100) * (decimal)markupPriceTb.Value)) - ((item.unitPrice + totalFee) / 100) * (decimal)discountPriceTb.Value;
+                    item.totalAmount = item.unitPrice + totalFee;
                 }
                 totalPrice += item.totalAmountMarkUp;
             }
