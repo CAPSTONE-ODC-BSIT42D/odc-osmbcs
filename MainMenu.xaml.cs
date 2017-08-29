@@ -692,17 +692,30 @@ namespace prototype2
 
         private void btnEditEmp_Click(object sender, RoutedEventArgs e)
         {
-            setManageEmployeeGridControls();
-            manageEmployeeGrid.Visibility = Visibility.Hidden;
-            employeeDetailsGrid.Visibility = Visibility.Visible;
-            employeeDetailsHeader.Content = "Manage Employee - Edit Employee";
-            empType = 0;
-            isEdit = true;
-            employeeOnlyGrid.Visibility = Visibility.Visible;
-            contractorOnlyGrid.Visibility = Visibility.Collapsed;
-            empJobCb.IsEnabled = false;
-            empDateStarted.IsEnabled = false;
-            empDateEnded.IsEnabled = false;
+            if (manageEmployeeDataGrid.SelectedItem != null)
+            {
+                empFirstNameTb.Text = MainVM.SelectedEmployee.EmpFname;
+                empMiddleInitialTb.Text = MainVM.SelectedEmployee.EmpMiddleInitial;
+                empLastNameTb.Text = MainVM.SelectedEmployee.EmpLName;
+                empAddressTb.Text = MainVM.SelectedEmployee.EmpAddress;
+                empCityTb.Text = MainVM.SelectedEmployee.EmpCity;
+                empProvinceCb.SelectedIndex = int.Parse(MainVM.SelectedEmployee.EmpProvinceID);
+                //empContactsDg
+                empPostionCb.SelectedIndex = int.Parse(MainVM.SelectedEmployee.PositionID);
+                empUserNameTb.Text = MainVM.SelectedEmployee.EmpUserName;
+                empPasswordTb.Password = MainVM.SelectedEmployee.EmpPassword;
+                setManageEmployeeGridControls();
+                manageEmployeeGrid.Visibility = Visibility.Hidden;
+                employeeDetailsGrid.Visibility = Visibility.Visible;
+                employeeDetailsHeader.Content = "Manage Employee - Edit Employee";
+                empType = 0;
+                isEdit = true;
+                employeeOnlyGrid.Visibility = Visibility.Visible;
+                contractorOnlyGrid.Visibility = Visibility.Collapsed;
+                empJobCb.IsEnabled = false;
+                empDateStarted.IsEnabled = false;
+                empDateEnded.IsEnabled = false;
+            }
         }
 
         private void btnDeleteEmp_Click(object sender, RoutedEventArgs e)
