@@ -225,6 +225,24 @@ namespace prototype2
             get { return selectedservice; }
             set { SetProperty(ref selectedservice, value); }
         }
+
+        //----- Sales Quote
+        protected ObservableCollection<SalesQuote> salesQuote = new ObservableCollection<SalesQuote>();
+
+        protected SalesQuote selectedSalesQuote = null;
+
+        public ObservableCollection<SalesQuote> SalesQuotes
+        {
+            get { return salesQuote; }
+            set { salesQuote = value; }
+        }
+
+        public SalesQuote SelectedSalesQuote
+        {
+            get { return selectedSalesQuote; }
+            set { SetProperty(ref selectedSalesQuote, value); }
+        }
+
         //----- Requested Item
         protected ObservableCollection<RequestedItem> requestedItems = new ObservableCollection<RequestedItem>();
 

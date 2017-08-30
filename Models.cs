@@ -16,6 +16,7 @@ namespace prototype2
         protected string firstname;
         protected string middlename;
         protected string lastname;
+        protected string fullname;
         protected string representativeID;
         protected bool isDefault;
         protected ObservableCollection<Contact> contactsOfRep = new ObservableCollection<Contact>();
@@ -34,6 +35,12 @@ namespace prototype2
         {
             get { return lastname; }
             set { SetProperty(ref lastname, value); }
+        }
+
+        public string RepFullName
+        {
+            get { return fullname; }
+            set { SetProperty(ref fullname, value); }
         }
 
         public string RepresentativeID
@@ -730,8 +737,8 @@ namespace prototype2
             get { return paymentIsLanded; }
             set { SetProperty(ref paymentIsLanded, value); }
         }
-        protected bool paymentCurrency;
-        public bool paymentCurrency_
+        protected string paymentCurrency;
+        public string paymentCurrency_
         {
             get { return paymentCurrency; }
             set { SetProperty(ref paymentCurrency, value); }
@@ -772,7 +779,18 @@ namespace prototype2
             get { return penaltyPercent; }
             set { SetProperty(ref penaltyPercent, value); }
         }
-
+        protected int warrantyDays;
+        public int warrantyDays_
+        {
+            get { return warrantyDays; }
+            set { SetProperty(ref warrantyDays, value); }
+        }
+        protected string additionalTerms;
+        public string additionalTerms_
+        {
+            get { return additionalTerms; }
+            set { SetProperty(ref additionalTerms, value); }
+        }
 
     }
 

@@ -24,6 +24,7 @@ namespace prototype2
         private Paragraph dateFrame;
         private Paragraph paragraph1;
         private Paragraph letterHeaderFrame;
+        private Paragraph paragraph2;
         private Table table;
         readonly XPathNavigator navigator;
         public Color TableBorder { get; private set; }
@@ -121,17 +122,17 @@ namespace prototype2
             addressFrame.Format.Font.Size = 11;
             addressFrame.Format.SpaceAfter = "1.0cm";
             letterHeaderFrame.AddFormattedText("Attention: ", TextFormat.Bold);
-            letterHeaderFrame.AddFormattedText("<placeholder>");
+            letterHeaderFrame.AddFormattedText(""+MainMenu.MainVM.SelectedRepresentative.RepFullName);
             letterHeaderFrame.AddLineBreak();
             letterHeaderFrame.AddFormattedText("Subject: ", TextFormat.Bold);
-            letterHeaderFrame.AddFormattedText("<placeholder>");
+            letterHeaderFrame.AddFormattedText(""+MainMenu.MainVM.SelectedSalesQuote.sqNoChar_);
             addressFrame.Format.Font.Name = "Calibri";
             addressFrame.Format.Font.Size = 11;
             addressFrame.Format.SpaceAfter = "1.0cm";
             paragraph1.AddText("Dear");
-            paragraph1.AddFormattedText("<placeholder>", TextFormat.Bold);
+            paragraph1.AddFormattedText(""+ MainMenu.MainVM.SelectedRepresentative.RepLastName, TextFormat.Bold);
             paragraph1.AddLineBreak();
-            paragraph1.AddText("As per your request last January 18, 2017, we are formally offering our price proposal for the above subject as follows:");
+            paragraph1.AddText("As per your request, we are formally offering our price proposal for the above subject as follows:");
             addressFrame.Format.Font.Name = "Calibri";
             addressFrame.Format.Font.Size = 11;
             addressFrame.Format.SpaceAfter = "1.0cm";
@@ -202,10 +203,7 @@ namespace prototype2
 
 
             this.table.SetEdge(0, 0, 7, 1, Edge.Box, BorderStyle.Single, 0.25, Color.Empty);
-        }
-        void FillContent()
-        {
-            Row row;
+            
             decimal totalPrice = 0;
             foreach (RequestedItem item in MainMenu.MainVM.RequestedItems)
             {
@@ -222,110 +220,88 @@ namespace prototype2
             row = table.AddRow();
             row.Cells[0].AddParagraph("Total Price");
             row.Cells[0].MergeRight = 5;
-            row.Cells[6].AddParagraph(""+totalPrice.ToString());
-            //// Fill address in address text frame
-            //XPathNavigator item = SelectItem("/invoice/to");
-            //Paragraph paragraph = this.addressFrame.AddParagraph();
-            //paragraph.AddText(GetValue(item, "name/singleName"));
-            //paragraph.AddLineBreak();
-            //paragraph.AddText(GetValue(item, "address/line1"));
-            //paragraph.AddLineBreak();
-            //paragraph.AddText(GetValue(item, "address/postalCode") + " " + GetValue(item, "address/city"));
+            row.Cells[6].AddParagraph("" + totalPrice.ToString());
 
-            //// Iterate the invoice items
-            //double totalExtendedPrice = 0;
-            //XPathNodeIterator iter = this.navigator.Select("/invoice/items/*");
-            //while (iter.MoveNext())
-            //{
-            //    item = iter.Current;
-            //    double quantity = GetValueAsDouble(item, "quantity");
-            //    double price = GetValueAsDouble(item, "price");
-            //    double discount = GetValueAsDouble(item, "discount");
+            // Create the item table
 
-            //    // Each item fills two rows
-            //    Row row1 = this.table.AddRow();
-            //    Row row2 = this.table.AddRow();
-            //    row1.TopPadding = 1.5;
-            //    row1.Cells[0].Shading.Color = TableGray;
-            //    row1.Cells[0].VerticalAlignment = VerticalAlignment.Center;
-            //    row1.Cells[0].MergeDown = 1;
-            //    row1.Cells[1].Format.Alignment = ParagraphAlignment.Left;
-            //    row1.Cells[1].MergeRight = 3;
-            //    row1.Cells[5].Shading.Color = TableGray;
-            //    row1.Cells[5].MergeDown = 1;
+            this.table = section.AddTable();
+            this.table.Style = "Table";
+            this.table.Borders.Color = TableBorder;
+            this.table.Borders.Width = 0.25;
+            this.table.Borders.Left.Width = 0.5;
+            this.table.Borders.Right.Width = 0.5;
+            this.table.Rows.LeftIndent = 0;
 
-            //    row1.Cells[0].AddParagraph(GetValue(item, "itemNumber"));
-            //    paragraph = row1.Cells[1].AddParagraph();
-            //    paragraph.AddFormattedText(GetValue(item, "title"), TextFormat.Bold);
-            //    paragraph.AddFormattedText(" by ", TextFormat.Italic);
-            //    paragraph.AddText(GetValue(item, "author"));
-            //    row2.Cells[1].AddParagraph(GetValue(item, "quantity"));
-            //    row2.Cells[2].AddParagraph(price.ToString("0.00") + " €");
-            //    row2.Cells[3].AddParagraph(discount.ToString("0.0"));
-            //    row2.Cells[4].AddParagraph();
-            //    row2.Cells[5].AddParagraph(price.ToString("0.00"));
-            //    double extendedPrice = quantity * price;
-            //    extendedPrice = extendedPrice * (100 - discount) / 100;
-            //    row1.Cells[5].AddParagraph(extendedPrice.ToString("0.00") + " €");
-            //    row1.Cells[5].VerticalAlignment = VerticalAlignment.Bottom;
-            //    totalExtendedPrice += extendedPrice;
+            // Before you can add a row, you must define the columns
+            column = this.table.AddColumn("1cm");
+            column.Format.Alignment = ParagraphAlignment.Center;
 
-            //    this.table.SetEdge(0, this.table.Rows.Count - 2, 6, 2, Edge.Box, BorderStyle.Single, 0.75);
-            //}
+            column = this.table.AddColumn();
+            column.Format.Alignment = ParagraphAlignment.Right;
+            
 
-            //// Add an invisible row as a space line to the table
-            //Row row = this.table.AddRow();
-            //row.Borders.Visible = false;
 
-            //// Add the total price row
-            //row = this.table.AddRow();
-            //row.Cells[0].Borders.Visible = false;
-            //row.Cells[0].AddParagraph("Total Price");
-            //row.Cells[0].Format.Font.Bold = true;
-            //row.Cells[0].Format.Alignment = ParagraphAlignment.Right;
-            //row.Cells[0].MergeRight = 4;
-            //row.Cells[5].AddParagraph(totalExtendedPrice.ToString("0.00") + " €");
+            // Create the header of the table
+            row = table.AddRow();
+            row.HeadingFormat = true;
+            row.Format.Alignment = ParagraphAlignment.Center;
+            row.Format.Font.Bold = true;
+            row.Shading.Color = TableBlue;
+            row.Cells[0].AddParagraph("TERMS AND CONDITIONS:");
+            row.Cells[0].Format.Font.Bold = true;
+            row.Cells[0].MergeRight = 1;
+            row.Cells[0].Format.Alignment = ParagraphAlignment.Left;
+            row.Cells[0].VerticalAlignment = VerticalAlignment.Bottom;
+            row = table.AddRow();
+            row.Cells[0].AddParagraph("PRICE: ");
+            row.Cells[1].AddParagraph(MainMenu.MainVM.SelectedSalesQuote.priceNote_);
+            row = table.AddRow();
+            row.Cells[0].AddParagraph("PAYMENT: ");
+            row.Cells[1].AddParagraph(MainMenu.MainVM.SelectedSalesQuote.termsDP_+"% DP upon release of order and "+ (MainMenu.MainVM.SelectedSalesQuote.termsDP_-100)+"% Balacne upon delivery");
+            row = table.AddRow();
+            row.Cells[0].AddParagraph("DELIVERY: ");
+            if (MainMenu.MainVM.SelectedSalesQuote.estDelivery_ != 0)
+            {
+                row.Cells[1].AddParagraph(MainMenu.MainVM.SelectedSalesQuote.estDelivery_ + " days upon receipt of DP");
+            }
+            else
+                row.Cells[1].AddParagraph("None");
+            row = table.AddRow();
+            row.Cells[0].AddParagraph("WARRANTY: ");
+            if (MainMenu.MainVM.SelectedSalesQuote.warrantyDays_ != 0)
+            {
+                row.Cells[1].AddParagraph(MainMenu.MainVM.SelectedSalesQuote.warrantyDays_ + " year from the date of delivery");
+            }
+            else
+                row.Cells[1].AddParagraph("None");
 
-            //// Add the VAT row
-            //row = this.table.AddRow();
-            //row.Cells[0].Borders.Visible = false;
-            //row.Cells[0].AddParagraph("VAT (19%)");
-            //row.Cells[0].Format.Font.Bold = true;
-            //row.Cells[0].Format.Alignment = ParagraphAlignment.Right;
-            //row.Cells[0].MergeRight = 4;
-            //row.Cells[5].AddParagraph((0.19 * totalExtendedPrice).ToString("0.00") + " €");
+            row = table.AddRow();
+            row.Cells[0].AddParagraph("VALIDITY: ");
+            row.Cells[1].AddParagraph(MainMenu.MainVM.SelectedSalesQuote.validityDays_ + " days (price increase will take effect after validity period)");
 
-            //// Add the additional fee row
-            //row = this.table.AddRow();
-            //row.Cells[0].Borders.Visible = false;
-            //row.Cells[0].AddParagraph("Shipping and Handling");
-            //row.Cells[5].AddParagraph(0.ToString("0.00") + " €");
-            //row.Cells[0].Format.Font.Bold = true;
-            //row.Cells[0].Format.Alignment = ParagraphAlignment.Right;
-            //row.Cells[0].MergeRight = 4;
+            row = table.AddRow();
+            row.Cells[0].AddParagraph("PENALTY: ");
+            row.Cells[1].AddParagraph(MainMenu.MainVM.SelectedSalesQuote.penaltyPercent_ + "% of balance");
 
-            //// Add the total due row
-            //row = this.table.AddRow();
-            //row.Cells[0].AddParagraph("Total Due");
-            //row.Cells[0].Borders.Visible = false;
-            //row.Cells[0].Format.Font.Bold = true;
-            //row.Cells[0].Format.Alignment = ParagraphAlignment.Right;
-            //row.Cells[0].MergeRight = 4;
-            //totalExtendedPrice += 0.19 * totalExtendedPrice;
-            //row.Cells[5].AddParagraph(totalExtendedPrice.ToString("0.00") + " €");
+            row = table.AddRow();
+            row.Cells[0].AddParagraph("ADDITIONAL TERMS: ");
+            row.Cells[1].AddParagraph(MainMenu.MainVM.SelectedSalesQuote.additionalTerms_);
 
-            //// Set the borders of the specified cell range
-            //this.table.SetEdge(5, this.table.Rows.Count - 4, 1, 4, Edge.Box, BorderStyle.Single, 0.75);
+            
+            this.table.SetEdge(0, 0, 2, 1, Edge.Box, BorderStyle.None, 0.25, Color.Empty);
 
-            //// Add the notes paragraph
-            //paragraph = this.document.LastSection.AddParagraph();
-            //paragraph.Format.SpaceBefore = "1cm";
-            //paragraph.Format.Borders.Width = 0.75;
-            //paragraph.Format.Borders.Distance = 3;
-            //paragraph.Format.Borders.Color = TableBorder;
-            //paragraph.Format.Shading.Color = TableGray;
-            //item = SelectItem("/invoice");
-            //paragraph.AddText(GetValue(item, "notes"));
+            paragraph2.AddText("Thank you very much and we are looking forward for your valued order soon.");
+            paragraph2.AddLineBreak();
+            paragraph2.AddText("Very Truly Yours,");
+            paragraph2.AddLineBreak();
+            paragraph2.AddLineBreak();
+            paragraph2.AddLineBreak();
+            paragraph2.AddFormattedText("DANNY M. ORCENA", TextFormat.Bold);
+            paragraph2.AddFormattedText("Chief Marketing Officer - Director", TextFormat.Italic);
+        }
+        void FillContent()
+        {
+            
         }
         /// <summary>
         /// Selects a subtree in the XML data.

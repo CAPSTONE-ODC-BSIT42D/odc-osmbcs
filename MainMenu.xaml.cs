@@ -313,24 +313,58 @@ namespace prototype2
             {
                 transactionQuotationsGrid.Children[x].Visibility = Visibility.Collapsed;
             }
+            var dbCon = DBConnection.Instance();
+            using (MySqlConnection conn = dbCon.Connection)
+            {
+                string query = "SELECT representativeID," +
+                    "repTitle," +
+                    "repLName," +
+                    "repFName," +
+                    "repMInitial " +
+                    "FROM representative_t " +
+                    "WHERE companyID = '" + compID + "'; ";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, conn);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.CustRepresentatives.Add(new Representative() { RepFirstName = dr["repFName"].ToString(), RepLastName = dr["RepLName"].ToString(), RepMiddleName = dr["RepMInitial"].ToString(), RepFullName = dr["repFName"].ToString()+ dr["RepLName"].ToString(), RepresentativeID = dr["representativeID"].ToString() });
+                    query = "SELECT rc.tableID," +
+                    "rc.repID," +
+                    "rc.contactTypeID," +
+                    "rc.contactValue," +
+                    "cont.contactType" +
+                    " FROM rep_t_contact_t rc" +
+                    " JOIN contacts_t cont" +
+                    " ON cont.contactTypeID = rc.contactTypeID" +
+                    " WHERE rc.repID = '" + dr["representativeID"].ToString() + "';";
+                    dataAdapter = dbCon.selectQuery(query, conn);
+                    fromDb = new DataSet();
+                    fromDbTable = new DataTable();
+                    dataAdapter.Fill(fromDb, "t");
+                    fromDbTable = fromDb.Tables["t"];
+                    MainVM.SelectedRepresentative = MainVM.CustRepresentatives.Last();
+                    foreach (DataRow dr1 in fromDbTable.Rows)
+                    {
+                        MainVM.SelectedRepresentative.ContactsOfRep.Add(new Contact() { TableID = dr1["tableID"].ToString(), ContactDetails = dr1["contactValue"].ToString(), ContactType = dr1["contactType"].ToString(), ContactTypeID = dr1["contactTypeID"].ToString() });
+                    }
+                }
+            }
+            
             addRequestionGrid.Visibility = Visibility.Visible;
+
+
         }
 
         private void transRequestBack_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Do you want to cancel this transaction?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
-            if (result == MessageBoxResult.OK)
+            for (int x = 1; x < transactionQuotationsGrid.Children.Count; x++)
             {
-                for (int x = 1; x < transactionQuotationsGrid.Children.Count; x++)
-                {
-                    transactionQuotationsGrid.Children[x].Visibility = Visibility.Collapsed;
-                }
-                selectCustomerGrid.Visibility = Visibility.Visible;
+                transactionQuotationsGrid.Children[x].Visibility = Visibility.Collapsed;
             }
-            else if (result == MessageBoxResult.Cancel)
-            {
-
-            }
+            selectCustomerGrid.Visibility = Visibility.Visible;
         }
         
         
@@ -347,19 +381,11 @@ namespace prototype2
 
         private void transQuotationFormBack_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Do you want to save this progress?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
-            if (result == MessageBoxResult.Yes)
+            for (int x = 1; x < transactionQuotationsGrid.Children.Count; x++)
             {
-                for (int x = 1; x < transactionQuotationsGrid.Children.Count; x++)
-                {
-                    transactionQuotationsGrid.Children[x].Visibility = Visibility.Collapsed;
-                }
-                addRequestionGrid.Visibility = Visibility.Visible;
+                transactionQuotationsGrid.Children[x].Visibility = Visibility.Collapsed;
             }
-            else if (result == MessageBoxResult.No)
-            {
-
-            }
+            addRequestionGrid.Visibility = Visibility.Visible;
 
         }
 
@@ -376,13 +402,105 @@ namespace prototype2
             {
                 transactionQuotationsGrid.Children[x].Visibility = Visibility.Collapsed;
             }
+            viewQuotationGrid.Visibility = Visibility.Visible;
+            salesQuoteToMemory();
             Document document;
             DocumentFormat df = new DocumentFormat();
             document = df.CreateDocument("sdadsa", "asdsadsa");
             string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
             pagePreview.Ddl = ddl;
-            viewQuotationGrid.Visibility = Visibility.Visible;
             
+            
+        }
+
+        void salesQuoteToMemory()
+        {
+            string landed = "";
+            decimal vat = 0;
+            string vatExc = "VAT Exclusive";
+            int estDel = 0;
+            int valid = 30;
+            if ((bool)landedCheckBox.IsChecked)
+            {
+                landed = "Landed,";
+            }
+            if (!(bool)vatCheckBox.IsChecked)
+            {
+                vat = (decimal)vatInclusiveTb.Value;
+            }
+            if ((bool)deliveryDefaultRd.IsChecked)
+            {
+                estDel = 30;
+            }
+            else
+                estDel = int.Parse(deliveryDaysTb.Value.ToString());
+
+            if (!(bool)validityDefaultRd.IsChecked)
+            {
+                valid = int.Parse(validityTb.Value.ToString());
+            }
+
+            DateTime endDate = new DateTime();
+            endDate = DateTime.Today.AddDays(valid);
+
+            int downP = 50;
+            if (!(bool)paymentDefaultRd.IsChecked)
+                downP = int.Parse(downpaymentPercentTb.Value.ToString());
+
+            decimal penaltyP = 0.1M;
+            if (!(bool)penaltyDefaultRd.IsChecked)
+                penaltyP = (decimal)customPenaltyTb.Value;
+            int warr = 0;
+            if ((bool)warrantyDefaultRd.IsChecked)
+            {
+                warr = 1;
+            }
+            else if ((bool)warrantycustomRd.IsChecked)
+            {
+                warr = int.Parse(warrantyDaysCustom.Value.ToString());
+            }
+            //    MainVM.SalesQuotes.Add(new SalesQuote()
+            //    {
+            //        sqNoChar_ = MainVM.SelectedCustomer.CompanyName.Substring(0, 5) + "" + (MainVM.SalesQuotes.Count + 1),
+            //        custID_ = int.Parse(MainVM.SelectedCustomer.CompanyID),
+            //        custRepID_ = int.Parse(selectedRepresentativeCb.SelectedValue.ToString()),
+            //        quoteSubject_ = MainVM.SelectedCustomer.CompanyName.Substring(0, 5).Replace(" ", String.Empty) + "" + (MainVM.SalesQuotes.Count + 1),
+            //        priceNote_ = "In Philippine Peso, " + landed + ", " + vatExc,
+            //        vatexcluded_ = (bool)vatCheckBox.IsChecked,
+            //        vat_ = vat,
+            //        paymentIsLanded_ = (bool)landedCheckBox.IsChecked,
+            //        paymentCurrency_ = "Peso",
+            //        estDelivery_ = estDel,
+            //        validityDays_ = valid,
+            //        validityDate_ = endDate,
+            //        status_ = "PENDING",
+            //        termsDP_ = downP,
+            //        penaltyPercent_ = penaltyP
+
+            //});
+            MainVM.SelectedSalesQuote = new SalesQuote()
+            {
+                sqNoChar_ = MainVM.SelectedCustomer.CompanyName.Substring(0, 5) + "" + (MainVM.SalesQuotes.Count + 1),
+                custID_ = int.Parse(MainVM.SelectedCustomer.CompanyID),
+                custRepID_ = int.Parse(selectedRepresentativeCb.SelectedValue.ToString()),
+                quoteSubject_ = MainVM.SelectedCustomer.CompanyName.Substring(0, 5).Replace(" ", String.Empty) + "" + (MainVM.SalesQuotes.Count + 1),
+                priceNote_ = "In Philippine Peso, " + landed + ", " + vatExc,
+                vatexcluded_ = (bool)vatCheckBox.IsChecked,
+                vat_ = vat,
+                paymentIsLanded_ = (bool)landedCheckBox.IsChecked,
+                paymentCurrency_ = "Peso",
+                estDelivery_ = estDel,
+                validityDays_ = valid,
+                validityDate_ = endDate,
+                status_ = "PENDING",
+                termsDP_ = downP,
+                penaltyPercent_ = penaltyP,
+                warrantyDays_ = warr,
+                additionalTerms_ = additionalTermsTb.Text
+
+            };
+            MainVM.SalesQuotes.Add(MainVM.SelectedSalesQuote);
+            MainVM.SelectedRepresentative = MainVM.CustRepresentatives.Where(x => x.RepresentativeID.Equals(selectedRepresentativeCb.SelectedValue)).First();
         }
 
         private void transViewSaveOnlyBtn_Click(object sender, RoutedEventArgs e)
