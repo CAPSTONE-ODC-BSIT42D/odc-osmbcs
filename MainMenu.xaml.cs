@@ -1968,7 +1968,7 @@ namespace prototype2
             if (!custContactDg.HasItems)
             {
                 ValidationError validationError = new ValidationError(new ExceptionValidationRule(), companyContactDgBindingExp);
-                validationError.ErrorContent = "*Empt contact list";
+                validationError.ErrorContent = "*Empty contact list";
                 Validation.MarkInvalid(companyContactDgBindingExpBase, validationError);
             }
             else if (Validation.GetHasError(custContactDg))
@@ -2688,7 +2688,7 @@ namespace prototype2
             }
             else
             {
-                if (String.IsNullOrWhiteSpace(empFirstNameTb.Text) || String.IsNullOrWhiteSpace(empLastNameTb.Text) || String.IsNullOrWhiteSpace(empMiddleInitialTb.Text) || String.IsNullOrWhiteSpace(empCityTb.Text) || empJobCb.SelectedIndex == -1 || empProvinceCb.SelectedIndex == -1 || String.IsNullOrWhiteSpace(empDateStarted.Text) || String.IsNullOrWhiteSpace(empDateEnded.Text))
+                if (String.IsNullOrWhiteSpace(empFirstNameTb.Text) || String.IsNullOrWhiteSpace(empLastNameTb.Text) || String.IsNullOrWhiteSpace(empCityTb.Text) || empJobCb.SelectedIndex == -1 || empProvinceCb.SelectedIndex == -1 || String.IsNullOrWhiteSpace(empDateStarted.Text) || String.IsNullOrWhiteSpace(empDateEnded.Text))
                 {
                     saveEmpBtn.IsEnabled = false;
                 }
@@ -3078,7 +3078,7 @@ namespace prototype2
                 
 
                 ValidationError validationError = new ValidationError(new ExceptionValidationRule(), bindingExpression);
-                validationError.ErrorContent = "The username is already exist.";
+                validationError.ErrorContent = "The username already exist.";
                 Validation.MarkInvalid(bindingExpressionBase, validationError);
             }
             else
@@ -3311,18 +3311,6 @@ namespace prototype2
         }
         private void loadEmpContDetails()
         {
-
-            //try
-            //{
-                
-            //}
-            //catch (Exception)
-            //{
-            //    throw;
-            //}
-            //finally
-            //{
-            //}
             var dbCon = DBConnection.Instance();
             using (MySqlConnection conn = dbCon.Connection)
             {
