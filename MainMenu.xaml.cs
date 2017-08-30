@@ -333,17 +333,7 @@ namespace prototype2
             }
         }
         
-        private void paymentCustomRb_Checked(object sender, RoutedEventArgs e)
-        {
-            downpaymentPercentTb.IsEnabled = true;
-            paymentDpLbl.IsEnabled = true;
-        }
-
-        private void paymentCustomRb_Unchecked(object sender, RoutedEventArgs e)
-        {
-            downpaymentPercentTb.IsEnabled = false;
-            paymentDpLbl.IsEnabled = false;
-        }
+        
 
         private void transRequestNext_Click(object sender, RoutedEventArgs e)
         {
@@ -422,6 +412,18 @@ namespace prototype2
             makeSalesQuoteGrid.Visibility = Visibility.Visible;
         }
 
+        private void paymentCustomRb_Checked(object sender, RoutedEventArgs e)
+        {
+            downpaymentPercentTb.IsEnabled = true;
+            paymentDpLbl.IsEnabled = true;
+        }
+
+        private void paymentCustomRb_Unchecked(object sender, RoutedEventArgs e)
+        {
+            downpaymentPercentTb.IsEnabled = false;
+            paymentDpLbl.IsEnabled = false;
+        }
+
         private void validtycustomRd_Checked(object sender, RoutedEventArgs e)
         {
             validityTb.IsEnabled = true;
@@ -456,6 +458,35 @@ namespace prototype2
         {
             deliveryDaysCustomLbl.IsEnabled = false;
             deliveryDaysTb.IsEnabled = false;
+        }
+
+        private void customPenaltyRd_Checked(object sender, RoutedEventArgs e)
+        {
+            customPenaltyTb.IsEnabled = true;
+            customPenaltyLbl.IsEnabled = true;
+        }
+
+        private void customPenaltyRd_Unchecked(object sender, RoutedEventArgs e)
+        {
+            customPenaltyTb.IsEnabled = false;
+            customPenaltyLbl.IsEnabled = false;
+        }
+
+        private void vatCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (vatInclusiveTb!=null&&vatInclusiveTb.IsEnabled==true)
+            {
+                vatInclusiveTb.IsEnabled = false;
+            }
+            
+        }
+
+        private void vatCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (vatInclusiveTb!=null&&vatInclusiveTb.IsEnabled==false)
+            {
+                vatInclusiveTb.IsEnabled = true;
+            }
         }
 
         private void orderFormBack_Click(object sender, RoutedEventArgs e)
@@ -924,8 +955,8 @@ namespace prototype2
 
         private void btnEditSupp_Click(object sender, RoutedEventArgs e)
         {
-            loadCustSuppDetails();
             compType = 1;
+            loadCustSuppDetails();
             manageSupplierGrid.Visibility = Visibility.Hidden;
             companyDetailsGrid.Visibility = Visibility.Visible;
             companyDetailsHeader.Content = "Manage Supplier - Edit Supplier";
@@ -2491,88 +2522,88 @@ namespace prototype2
         private void loadCustSuppDetails()
         {
             var dbCon = DBConnection.Instance();
-            
-            try
+            using (MySqlConnection conn = dbCon.Connection)
             {
-                using (MySqlConnection conn = dbCon.Connection)
+                conn.Open();
+                if (compType == 1)
                 {
-                    conn.Open();
-                    if (compType == 0)
-                    {
-                        compID = MainVM.SelectedSupplier.CompanyID;
-                        custCompanyNameTb.Text = MainVM.SelectedSupplier.CompanyName;
-                        custAddInfoTb.Text = MainVM.SelectedSupplier.CompanyDesc;
-                        custAddressTb.Text = MainVM.SelectedSupplier.CompanyAddress;
-                        custCityTb.Text = MainVM.SelectedSupplier.CompanyCity;
-                        custProvinceCb.SelectedIndex = int.Parse(MainVM.SelectedSupplier.CompanyProvinceID) - 1;
-                    }
-                    else
-                    {
-                        compID = MainVM.SelectedCustomer.CompanyID;
-                        custCompanyNameTb.Text = MainVM.SelectedCustomer.CompanyName;
-                        custAddInfoTb.Text = MainVM.SelectedCustomer.CompanyDesc;
-                        custAddressTb.Text = MainVM.SelectedCustomer.CompanyAddress;
-                        custCityTb.Text = MainVM.SelectedCustomer.CompanyCity;
-                        custProvinceCb.SelectedIndex = int.Parse(MainVM.SelectedCustomer.CompanyProvinceID) - 1;
-                    }
+                    compID = MainVM.SelectedSupplier.CompanyID;
+                    custCompanyNameTb.Text = MainVM.SelectedSupplier.CompanyName;
+                    custAddInfoTb.Text = MainVM.SelectedSupplier.CompanyDesc;
+                    custAddressTb.Text = MainVM.SelectedSupplier.CompanyAddress;
+                    custCityTb.Text = MainVM.SelectedSupplier.CompanyCity;
+                    custProvinceCb.SelectedIndex = int.Parse(MainVM.SelectedSupplier.CompanyProvinceID) - 1;
+                }
+                else
+                {
+                    compID = MainVM.SelectedCustomer.CompanyID;
+                    custCompanyNameTb.Text = MainVM.SelectedCustomer.CompanyName;
+                    custAddInfoTb.Text = MainVM.SelectedCustomer.CompanyDesc;
+                    custAddressTb.Text = MainVM.SelectedCustomer.CompanyAddress;
+                    custCityTb.Text = MainVM.SelectedCustomer.CompanyCity;
+                    custProvinceCb.SelectedIndex = int.Parse(MainVM.SelectedCustomer.CompanyProvinceID) - 1;
+                }
 
-                    string query = "SELECT representativeID," +
-                        "repTitle," +
-                        "repLName," +
-                        "repFName," +
-                        "repMInitial " +
-                        "FROM representative_t " +
-                        "WHERE companyID = '" + compID + "'; ";
-                    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, conn);
-                    DataSet fromDb = new DataSet();
-                    DataTable fromDbTable = new DataTable();
-                    dataAdapter.Fill(fromDb, "t");
-                    fromDbTable = fromDb.Tables["t"];
-                    foreach (DataRow dr in fromDbTable.Rows)
-                    {
-                        MainVM.CustRepresentatives.Add(new Representative() { RepFirstName = dr["repFName"].ToString(), RepLastName = dr["RepLName"].ToString(), RepMiddleName = dr["RepMInitial"].ToString(), RepresentativeID = dr["representativeID"].ToString() });
-                        query = "SELECT rc.tableID," +
-                        "rc.repID," +
-                        "rc.contactTypeID," +
-                        "rc.contactValue," +
-                        "cont.contactType" +
-                        " FROM rep_t_contact_t rc" +
-                        " JOIN contacts_t cont" +
-                        " ON cont.contactTypeID = rc.contactTypeID" +
-                        " WHERE rc.repID = '" + dr["representativeID"].ToString() + "';";
-                        dataAdapter = dbCon.selectQuery(query, conn);
-                        fromDb = new DataSet();
-                        fromDbTable = new DataTable();
-                        dataAdapter.Fill(fromDb, "t");
-                        fromDbTable = fromDb.Tables["t"];
-                        MainVM.SelectedRepresentative = MainVM.CustRepresentatives.Last();
-                        foreach (DataRow dr1 in fromDbTable.Rows)
-                        {
-                            MainVM.SelectedRepresentative.ContactsOfRep.Add(new Contact() { TableID = dr1["tableID"].ToString(), ContactDetails = dr1["contactValue"].ToString(), ContactType = dr1["contactType"].ToString(), ContactTypeID = dr1["contactTypeID"].ToString() });
-                        }
-                    }
-
-                    query = "SELECT cs.tableID," +
-                        "cs.compID," +
-                        "cs.contactTypeID," +
-                        "cs.contactValue," +
-                        "cont.contactType" +
-                        " FROM cust_supp_t_contact_t cs" +
-                        " JOIN contacts_t cont" +
-                        " ON cont.contactTypeID = cs.contactTypeID" +
-                        " WHERE cs.compID = '" + compID + "';";
+                string query = "SELECT representativeID," +
+                    "repTitle," +
+                    "repLName," +
+                    "repFName," +
+                    "repMInitial " +
+                    "FROM representative_t " +
+                    "WHERE companyID = '" + compID + "'; ";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, conn);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.CustRepresentatives.Add(new Representative() { RepFirstName = dr["repFName"].ToString(), RepLastName = dr["RepLName"].ToString(), RepMiddleName = dr["RepMInitial"].ToString(), RepresentativeID = dr["representativeID"].ToString() });
+                    query = "SELECT rc.tableID," +
+                    "rc.repID," +
+                    "rc.contactTypeID," +
+                    "rc.contactValue," +
+                    "cont.contactType" +
+                    " FROM rep_t_contact_t rc" +
+                    " JOIN contacts_t cont" +
+                    " ON cont.contactTypeID = rc.contactTypeID" +
+                    " WHERE rc.repID = '" + dr["representativeID"].ToString() + "';";
                     dataAdapter = dbCon.selectQuery(query, conn);
                     fromDb = new DataSet();
                     fromDbTable = new DataTable();
                     dataAdapter.Fill(fromDb, "t");
                     fromDbTable = fromDb.Tables["t"];
-                    foreach (DataRow dr in fromDbTable.Rows)
+                    MainVM.SelectedRepresentative = MainVM.CustRepresentatives.Last();
+                    foreach (DataRow dr1 in fromDbTable.Rows)
                     {
-                        MainVM.CustContacts.Add(new Contact() { TableID = dr["tableID"].ToString(), ContactDetails = dr["contactValue"].ToString(), ContactType = dr["contactType"].ToString(), ContactTypeID = dr["contactTypeID"].ToString() });
+                        MainVM.SelectedRepresentative.ContactsOfRep.Add(new Contact() { TableID = dr1["tableID"].ToString(), ContactDetails = dr1["contactValue"].ToString(), ContactType = dr1["contactType"].ToString(), ContactTypeID = dr1["contactTypeID"].ToString() });
                     }
-
                 }
-                validateCustomerDetailsTextBoxes();
+
+                query = "SELECT cs.tableID," +
+                    "cs.compID," +
+                    "cs.contactTypeID," +
+                    "cs.contactValue," +
+                    "cont.contactType" +
+                    " FROM cust_supp_t_contact_t cs" +
+                    " JOIN contacts_t cont" +
+                    " ON cont.contactTypeID = cs.contactTypeID" +
+                    " WHERE cs.compID = '" + compID + "';";
+                dataAdapter = dbCon.selectQuery(query, conn);
+                fromDb = new DataSet();
+                fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.CustContacts.Add(new Contact() { TableID = dr["tableID"].ToString(), ContactDetails = dr["contactValue"].ToString(), ContactType = dr["contactType"].ToString(), ContactTypeID = dr["contactTypeID"].ToString() });
+                }
+
+            }
+            validateCustomerDetailsTextBoxes();
+            try
+            {
+                
             }
             catch (Exception)
             {
@@ -2644,7 +2675,7 @@ namespace prototype2
                 }
                 else
                 {
-                    if (String.IsNullOrWhiteSpace(empFirstNameTb.Text) || String.IsNullOrWhiteSpace(empLastNameTb.Text) || String.IsNullOrWhiteSpace(empCityTb.Text) || empPostionCb.SelectedIndex == -1 || empProvinceCb.SelectedIndex == -1)
+                    if (String.IsNullOrWhiteSpace(empFirstNameTb.Text) || String.IsNullOrWhiteSpace(empLastNameTb.Text) || String.IsNullOrWhiteSpace(empCityTb.Text) || empPostionCb.SelectedIndex == -1 || String.IsNullOrWhiteSpace(empUserNameTb.Text) || String.IsNullOrWhiteSpace(empPasswordTb.Password) || empProvinceCb.SelectedIndex == -1)
                     {
                         saveEmpBtn.IsEnabled = false;
                     }
@@ -2841,7 +2872,7 @@ namespace prototype2
                         if (!String.IsNullOrWhiteSpace(contactDetailsEmailTb1.Text))
                         {
                             MainVM.EmpContacts.Add(new Contact() { ContactTypeID = contactTypeCb1.SelectedIndex.ToString(), ContactType = contactTypeCb1.SelectedValue.ToString(), ContactDetails = contactDetail });
-
+                            clearContactsBoxes();
                         }
                         else
                         {
@@ -3301,7 +3332,7 @@ namespace prototype2
                 empLastNameTb.Text = MainVM.SelectedEmployee.EmpLName;
                 empAddressTb.Text = MainVM.SelectedEmployee.EmpAddress;
                 empCityTb.Text = MainVM.SelectedEmployee.EmpCity;
-                empProvinceCb.SelectedIndex = int.Parse(MainVM.SelectedEmployee.EmpProvinceID);
+                empProvinceCb.SelectedIndex = (int.Parse(MainVM.SelectedEmployee.EmpProvinceID))-1;
                 if (empType == 0)
                 {
                     empPostionCb.SelectedIndex = int.Parse(MainVM.SelectedEmployee.PositionID);
@@ -3328,7 +3359,7 @@ namespace prototype2
                     " FROM employee_t_contact_t cs" +
                     " JOIN contacts_t cont" +
                     " ON cont.contactTypeID = cs.contactTypeID" +
-                    " WHERE cs.compID = '" + MainVM.SelectedEmployee.EmpID + "';";
+                    " WHERE cs.empID = '" + MainVM.SelectedEmployee.EmpID + "';";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, conn);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
@@ -3445,5 +3476,7 @@ namespace prototype2
         {
 
         }
+
+       
     }
 }

@@ -623,31 +623,157 @@ namespace prototype2
         }
 
         protected string sqNoChar;
+        public string sqNoChar_
+        {
+            get { return sqNoChar; }
+            set { SetProperty(ref sqNoChar, value); }
+        }
         protected DateTime dateOfIssue;
+        public DateTime dateOfIssue_
+        {
+            get { return dateOfIssue; }
+            set { SetProperty(ref dateOfIssue, value); }
+        }
         protected int custID;
+        public int custID_
+        {
+            get { return custID; }
+            set { SetProperty(ref custID, value); }
+        }
         protected int custRepID;
+        public int custRepID_
+        {
+            get { return custRepID; }
+            set { SetProperty(ref custRepID, value); }
+        }
         protected string quoteSubject;
+        public string quoteSubject_
+        {
+            get { return quoteSubject; }
+            set { SetProperty(ref quoteSubject  , value); }
+        }
         protected string body1;
+        public string body1_
+        {
+            get { return body1; }
+            set { SetProperty(ref body1, value); }
+        }
         protected string priceNote;
+        public string priceNote_
+        {
+            get { return priceNote; }
+            set { SetProperty(ref priceNote, value); }
+        }
         protected int ptID;
+        public int ptID_
+        {
+            get { return ptID; }
+            set { SetProperty(ref ptID, value); }
+        }
         protected DateTime deliveryDate;
+        public DateTime deliveryDate_
+        {
+            get { return deliveryDate; }
+            set { SetProperty(ref deliveryDate, value); }
+        }
         protected int estDelivery;
+        public int estDelivery_
+        {
+            get { return estDelivery; }
+            set { SetProperty(ref estDelivery, value); }
+        }
         protected int validityDays;
+        public int validityDays_
+        {
+            get { return validityDays; }
+            set { SetProperty(ref validityDays, value); }
+        }
         protected DateTime validityDate;
+        public DateTime validityDate_
+        {
+            get { return validityDate; }
+            set { SetProperty(ref validityDate, value); }
+        }
         protected string otherTerms;
+        public string otherTerms_
+        {
+            get { return otherTerms; }
+            set { SetProperty(ref otherTerms, value); }
+        }
         protected string body2;
+        public string body2_
+        {
+            get { return body2; }
+            set { SetProperty(ref body2, value); }
+        }
         protected DateTime expiration;
+        public DateTime expiration_
+        {
+            get { return expiration; }
+            set { SetProperty(ref expiration, value); }
+        }
         protected decimal vat;
+        public decimal vat_
+        {
+            get { return vat; }
+            set { SetProperty(ref vat, value); }
+        }
         protected bool vatexcluded;
+        public bool vatexcluded_
+        {
+            get { return vatexcluded; }
+            set { SetProperty(ref vatexcluded, value); }
+        }
         protected bool paymentIsLanded;
+        public bool paymentIsLanded_
+        {
+            get { return paymentIsLanded; }
+            set { SetProperty(ref paymentIsLanded, value); }
+        }
         protected bool paymentCurrency;
+        public bool paymentCurrency_
+        {
+            get { return paymentCurrency; }
+            set { SetProperty(ref paymentCurrency, value); }
+        }
         protected string deliveryAddress;
+        public string deliveryAddress_
+        {
+            get { return deliveryAddress; }
+            set { SetProperty(ref deliveryAddress, value); }
+        }
         protected string status;
+        public string status_
+        {
+            get { return status; }
+            set { SetProperty(ref status, value); }
+        }
         protected int termsDays;
+        public int termsDays_
+        {
+            get { return termsDays; }
+            set { SetProperty(ref termsDays, value); }
+        }
         protected int termsDP;
+        public int termsDP_
+        {
+            get { return termsDP; }
+            set { SetProperty(ref termsDP, value); }
+        }
         protected decimal penaltyAmt;
+        public decimal penaltyAmt_
+        {
+            get { return penaltyAmt; }
+            set { SetProperty(ref penaltyAmt, value); }
+        }
+        protected decimal penaltyPercent;
+        public decimal penaltyPercent_
+        {
+            get { return penaltyPercent; }
+            set { SetProperty(ref penaltyPercent, value); }
+        }
 
-        
+
     }
 
 }
