@@ -3583,6 +3583,11 @@ namespace prototype2
 
         }
 
-       
+        private void custCompanyNameTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+   
     }
 }
