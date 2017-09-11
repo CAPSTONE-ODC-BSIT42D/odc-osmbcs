@@ -113,11 +113,11 @@ namespace prototype2
             dateFrame.Format.Font.Name = "Calibri";
             dateFrame.Format.Font.Size = 11;
             dateFrame.Format.SpaceAfter = "1.0cm";
-            customerName.AddFormattedText(MainMenu.MainVM.SelectedCustomer.CompanyName);
+            customerName.AddFormattedText(MainMenu.MainVM.SelectedCustomerSupplier.CompanyName);
             customerName.Format.Font.Name = "Calibri";
             customerName.Format.Font.Size = 11;
             customerName.Format.Font.Bold = true;
-            addressFrame.AddFormattedText(MainMenu.MainVM.SelectedCustomer.CompanyAddress +"\n"+ MainMenu.MainVM.SelectedCustomer.CompanyCity + "\n" + MainMenu.MainVM.SelectedCustomer.CompanyProvinceName);
+            addressFrame.AddFormattedText(MainMenu.MainVM.SelectedCustomerSupplier.CompanyAddress +"\n"+ MainMenu.MainVM.SelectedCustomerSupplier.CompanyCity + "\n" + MainMenu.MainVM.SelectedCustomerSupplier.CompanyProvinceName);
             addressFrame.Format.Font.Name = "Calibri";
             addressFrame.Format.Font.Size = 11;
             addressFrame.Format.SpaceAfter = "1.0cm";

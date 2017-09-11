@@ -75,6 +75,10 @@ namespace prototype2
         protected string companyCity;
         protected string companyProvinceID;
         protected string companyProvinceName;
+        protected string companyEmail;
+        protected string companyTelephone;
+        protected string companyMobile;
+        protected string repid;
 
         public string CompanyID
         {
@@ -111,6 +115,30 @@ namespace prototype2
             get { return companyProvinceName; }
             set { SetProperty(ref companyProvinceName, value); }
         }
+
+        public string CompanyEmail
+        {
+            get { return companyEmail; }
+            set { SetProperty(ref companyEmail, value); }
+        }
+
+        public string CompanyTelephone
+        {
+            get { return companyTelephone; }
+            set { SetProperty(ref companyTelephone, value); }
+        }
+
+        public string CompanyMobile
+        {
+            get { return companyMobile; }
+            set { SetProperty(ref companyMobile, value); }
+        }
+
+        public string RepresentativeID
+        {
+            get { return repid; }
+            set { SetProperty(ref repid, value); }
+        }
     }
 
     public class Employee : ViewModelEntity
@@ -131,6 +159,9 @@ namespace prototype2
         protected string empProvinceName;
         protected string positionID;
         protected string positionName;
+        protected string empEmail;
+        protected string empTelephone;
+        protected string empMobile;
         protected string empUsername;
         protected string empPassword;
         protected string jobID;
@@ -212,6 +243,24 @@ namespace prototype2
             set { SetProperty(ref positionName, value); }
         }
 
+        public string EmpEmail
+        {
+            get { return empEmail; }
+            set { SetProperty(ref empEmail, value); }
+        }
+
+        public string EmpTelephone
+        {
+            get { return empTelephone; }
+            set { SetProperty(ref empTelephone, value); }
+        }
+
+        public string EmpMobile
+        {
+            get { return empMobile; }
+            set { SetProperty(ref empMobile, value); }
+        }
+
         public string EmpUserName
         {
             get { return empUsername; }
@@ -271,6 +320,7 @@ namespace prototype2
         protected string typename;
         protected string details;
         protected string tableID;
+        protected int id;
         protected bool isDefault;
         public string ContactTypeID
         {
@@ -292,7 +342,13 @@ namespace prototype2
             get { return tableID; }
             set { SetProperty(ref tableID, value); }
         }
-        
+
+        public int ID
+        {
+            get { return id; }
+            set { SetProperty(ref id, value); }
+        }
+
         public bool IsDefault
         {
             get { return isDefault; }
@@ -371,6 +427,31 @@ namespace prototype2
             get { return provincePrice; }
             set { SetProperty(ref provincePrice, value); }
         }
+    }
+
+    public class ItemType : ViewModelEntity
+    {
+        public ItemType()
+        {
+
+        }
+
+        protected int typeID;
+
+        public int TypeID
+        {
+            get { return typeID; }
+            set { SetProperty(ref typeID, value); }
+        }
+
+        protected string typeName;
+
+        public string TypeName
+        {
+            get { return typeName; }
+            set { SetProperty(ref typeName, value); }
+        }
+
     }
 
     public class Item : ViewModelEntity

@@ -11,55 +11,57 @@ namespace prototype2
         public override ValidationResult Validate (object value, System.Globalization.CultureInfo cultureInfo)
         {
             var str = TextBoxType as string;
-
-            if (str.Equals("String"))
+            if (value == null)
             {
-                if (value == null)
+                return new ValidationResult(false, "*This field must be filled.");
+
+            }
+            else if(str!=null)
+            {
+                if (str.Equals("Mobile"))
                 {
-                    return new ValidationResult(false, "*This field must be filled.");
+                    if (!regex.IsValidMobileNumber(value.ToString()))
+                    {
+                        return new ValidationResult(false, "*Please follow the correct format for Mobile number. (Ex. (+63)-998-791 9482 or 0998-791-9482, with or without dashes as spaces(vice versa)");
+                    }
+                    return ValidationResult.ValidResult;
+
+
                 }
-                if (value.ToString().Length == 0)
-                    return new ValidationResult(false, "*This field must be filled.");
+                else if (str.Equals("Phone"))
+                {
+                    if (!regex.IsValidPhoneNumber(value.ToString()))
+                    {
+                        return new ValidationResult(false, "*Please follow the correct format for Phone Bumber. (Ex. 123-4567, (02)123-4567, with or without dashes as spaces(vice versa))");
+                    }
+                    return ValidationResult.ValidResult;
+
+                }
+                else if (str.Equals("Email"))
+                {
+                    if (!regex.IsValidEmail(value.ToString()))
+                    {
+                        return new ValidationResult(false, "*The E-mail is not a valid email.");
+                    }
+
+
+                }
+                else if (str.Equals("ComboBox"))
+                {
+                    if (value is null)
+                        return new ValidationResult(false, "Selection is invalid.");
+                    else
+                        return new ValidationResult(true, null);
+
+                }
+
                 return ValidationResult.ValidResult;
             }
-            else if (str.Equals("Mobile"))
+            else
             {
-                if (!regex.IsValidMobileNumber(value.ToString()))
-                {
-                    return new ValidationResult(false, "*Please follow the correct format for Mobile number. (Ex. (+63)-998-791 9482 or 0998-791-9482, with or without dashes as spaces(vice versa)");
-                }
                 return ValidationResult.ValidResult;
-                
-
             }
-            else if (str.Equals("Phone"))
-            {
-                if (!regex.IsValidPhoneNumber(value.ToString()))
-                {
-                    return new ValidationResult(false, "*Please follow the correct format for Phone Bumber. (Ex. 123-4567, (02)123-4567, with or without dashes as spaces(vice versa))");
-                }
-                return ValidationResult.ValidResult;
-
-            }
-            else if (str.Equals("Email"))
-            {
-                if (!regex.IsValidEmail(value.ToString()))
-                {
-                    return new ValidationResult(false, "*The E-mail is not a valid email.");
-                }
-                
-
-            }
-            else if (str.Equals("ComboBox"))
-            {
-                if (value is null)
-                    return new ValidationResult(false, "Selection is invalid.");
-                else
-                    return new ValidationResult(true, null);
-
-            }
-
-            return ValidationResult.ValidResult;
+            
         }
     }
     

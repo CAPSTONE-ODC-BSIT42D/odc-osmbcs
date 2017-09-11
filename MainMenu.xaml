@@ -509,7 +509,7 @@
                 <Button x:Name="ordersSalesMenuBtn" Content="Orders" Margin="0,40,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="ordersSalesMenuBtn_Click" Width="175" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1"/>
                 <Button x:Name="invoiceSalesMenuBtn" Content="Invoices" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="invoiceSalesMenuBtn_Click" Width="175" Margin="0,5,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1"/>
             </Grid>
-            <Grid x:Name="dashboardGrid" Margin="10,0" Background="#FFECF0F1">
+            <Grid x:Name="dashboardGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="485*"/>
                     <RowDefinition Height="308*"/>
@@ -973,7 +973,7 @@
                 </Grid>
             </Grid>
             <Grid x:Name="reportsGrid" Margin="10,0" Background="#FFECF0F1" d:IsHidden="True" />
-            <Grid x:Name="manageGrid" Margin="10,0,10,10" Background="#FFECF0F1" d:IsHidden="True" >
+            <Grid x:Name="manageGrid" Margin="10,0,10,10" Background="#FFECF0F1" >
                 <Grid x:Name="manageCustomerGrid" IsVisibleChanged="manageCustomerGrid_IsVisibleChanged" d:IsHidden="True" >
                     <Label x:Name="label7_Copy" Content="Manage - Customer" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF1695A3" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     <Grid x:Name="manageCustomerHomeGrid" Margin="10,70,10,10">
@@ -1160,13 +1160,13 @@
                         <Label x:Name="label7_Copy9" Content="Manage - Contractor" Margin="0,0,307,0" FontSize="20" FontWeight="Bold" Background="{x:Null}" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top"/>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageSettingsGrid" d:IsHidden="True">
+                <Grid x:Name="manageSettingsGrid">
                     <Label x:Name="label7_Copy6" Margin="10,0" FontSize="20" FontWeight="Bold" Background="#FF2980B9" Foreground="White" Padding="10,10,10,5" Height="57" VerticalAlignment="Top" Content="Manage - Settings"/>
                     <Grid Margin="10,70,10,10">
                         <TabControl x:Name="tabControl" Margin="24,26,29,10">
                             <TabItem Header="Employee &amp; Contractor" RenderTransformOrigin="0.284,0.568">
                                 <Grid Background="#FFE5E5E5">
-                                    <Grid Margin="34,49,707,0" Height="188" VerticalAlignment="Top">
+                                    <Grid Margin="34,49,619,0" Height="188" VerticalAlignment="Top">
                                         <Label Content="Position Name:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13"/>
                                         <TextBox x:Name="empPosNewTb" HorizontalAlignment="Left" Height="23" Margin="105,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" FontSize="13" />
                                         <Button x:Name="addEmpPosBtn" Content="Add" HorizontalAlignment="Left" Margin="370,4,-19,0" VerticalAlignment="Top" Width="85" Click="addEmpPosBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Height="24" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9"/>

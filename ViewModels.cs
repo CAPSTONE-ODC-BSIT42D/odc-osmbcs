@@ -1,7 +1,9 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +14,7 @@ namespace prototype2
     {
         public MainViewModel()
         {
-
+            
         }
 
         public String Name { get; set; }
@@ -24,14 +26,18 @@ namespace prototype2
         public object locProvinceId { get; set; }
         public object cbItem { get; set; }
         public object CityName { get; set; }
+        
         public String EmailAddress { get; set; }
         public String PhoneNumber { get; set; }
         public String MobileNumber { get; set; }
         public String ContactValue { get; set; }
+        public String RepTitle { get; set; }
         public String FirstName { get; set; }
         public String MiddleName { get; set; }
         public String LastName { get; set; }
         public String UserName { get; set; }
+        public String DateStarted { get; set; }
+        public String DateEnded { get; set; }
         public int Edit { get; set; }
 
         //-----REPRESENTATIVE
@@ -52,11 +58,18 @@ namespace prototype2
         }
         //-----END OF REPRESENTATIVE
 
-        //-----CUSTOMER
-        protected ObservableCollection<Customer> customers =
+        //-----CUSTOMER/ Supplier
+        protected ObservableCollection<Customer> allCustomerSupplier =
             new ObservableCollection<Customer>();
 
-        protected Customer selectedCustomer = null;
+        public ObservableCollection<Customer> AllCustomerSupplier
+        {
+            get { return allCustomerSupplier; }
+            set { allCustomerSupplier = value; }
+        }
+
+        protected ObservableCollection<Customer> customers =
+            new ObservableCollection<Customer>();
 
         public ObservableCollection<Customer> Customers
         {
@@ -64,17 +77,8 @@ namespace prototype2
             set { customers = value; }
         }
 
-        public Customer SelectedCustomer
-        {
-            get { return selectedCustomer; }
-            set { SetProperty(ref selectedCustomer, value); }
-        }
-
-        //-----CUSTOMER
         protected ObservableCollection<Customer> suppliers =
             new ObservableCollection<Customer>();
-
-        protected Customer selectedSupplier = null;
 
         public ObservableCollection<Customer> Suppliers
         {
@@ -82,17 +86,29 @@ namespace prototype2
             set { suppliers = value; }
         }
 
-        public Customer SelectedSupplier
+        protected Customer selectedCustomerSupplier = null;
+
+        public Customer SelectedCustomerSupplier
         {
-            get { return selectedSupplier; }
-            set { SetProperty(ref selectedSupplier, value); }
+            get { return selectedCustomerSupplier; }
+            set { SetProperty(ref selectedCustomerSupplier, value); }
         }
 
-        //-----Employee
-        protected ObservableCollection<Employee> employees =
+
+
+        //-----Employee/contractor
+
+        protected ObservableCollection<Employee> allEmployeesContractor =
             new ObservableCollection<Employee>();
 
-        protected Employee selectedEmployee = null;
+        public ObservableCollection<Employee> AllEmployeesContractor
+        {
+            get { return allEmployeesContractor; }
+            set { allEmployeesContractor = value; }
+        }
+
+        protected ObservableCollection<Employee> employees =
+            new ObservableCollection<Employee>();
 
         public ObservableCollection<Employee> Employees
         {
@@ -100,12 +116,25 @@ namespace prototype2
             set { employees = value; }
         }
 
-        public Employee SelectedEmployee
+        protected ObservableCollection<Employee> contractor =
+            new ObservableCollection<Employee>();
+
+        public ObservableCollection<Employee> Contractor
         {
-            get { return selectedEmployee; }
-            set { SetProperty(ref selectedEmployee, value); }
+            get { return contractor; }
+            set { contractor = value; }
+        }
+
+        protected Employee selectedEmployeeContractor = null;
+
+        public Employee SelectedEmployeeContractor
+        {
+            get { return selectedEmployeeContractor; }
+            set { SetProperty(ref selectedEmployeeContractor, value); }
         }
         //-----End of Employee
+        
+        //-----End of contractor
 
         //-----Selected CustContact
         protected ObservableCollection<Contact> empcontacts = new ObservableCollection<Contact>();
@@ -209,6 +238,22 @@ namespace prototype2
             get { return selectedProduct; }
             set { SetProperty(ref selectedProduct, value); }
         }
+        //----- Product Category
+        protected ObservableCollection<ItemType> productCategory = new ObservableCollection<ItemType>();
+
+        protected ItemType selectedProductCategory = null;
+
+        public ObservableCollection<ItemType> ProductCategory
+        {
+            get { return productCategory; }
+            set { productCategory = value; }
+        }
+
+        public ItemType SelectedProductCategory
+        {
+            get { return selectedProductCategory; }
+            set { SetProperty(ref selectedProductCategory, value); }
+        }
         //-----services
         protected ObservableCollection<Service> servicesList = new ObservableCollection<Service>();
 
@@ -292,5 +337,6 @@ namespace prototype2
             get { return selectedProvince; }
             set { SetProperty(ref selectedProvince, value); }
         }
+        
     }
 }

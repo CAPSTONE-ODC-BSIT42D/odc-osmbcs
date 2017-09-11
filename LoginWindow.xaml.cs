@@ -97,7 +97,7 @@ namespace prototype2
         public void toLogin()
         {
             this.Hide();
-            MainMenu mainMenu = new MainMenu();
+            MainScreen mainMenu = new MainScreen();
             mainMenu.ShowDialog();
             this.Show();
         }
