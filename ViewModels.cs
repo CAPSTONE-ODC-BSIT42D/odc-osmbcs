@@ -21,6 +21,7 @@ namespace prototype2
         public String AdditionalInfo { get; set; }
         public String Address { get; set; }
         public String City { get; set; }
+        public String PostalCode { get; set; }
         public String Number { get; set; }
         public String Email { get; set; }
         public object locProvinceId { get; set; }
@@ -41,14 +42,14 @@ namespace prototype2
         public int Edit { get; set; }
 
         //-----REPRESENTATIVE
-        protected ObservableCollection<Representative> custrepresentative = new ObservableCollection<Representative>();
+        protected ObservableCollection<Representative> representative = new ObservableCollection<Representative>();
 
         protected Representative selectedRepresentative = null;
 
-        public ObservableCollection<Representative> CustRepresentatives
+        public ObservableCollection<Representative> Representatives
         {
-            get { return custrepresentative; }
-            set { custrepresentative = value; }
+            get { return representative; }
+            set { representative = value; }
         }
 
         public Representative SelectedRepresentative

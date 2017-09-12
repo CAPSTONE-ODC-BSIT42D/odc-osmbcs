@@ -21,6 +21,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace prototype2
 {
@@ -32,11 +33,12 @@ namespace prototype2
         public MainScreen()
         {
             InitializeComponent();
-            
+            worker.DoWork += worker_DoWork;
+            worker.RunWorkerCompleted += worker_RunWorkerCompleted;
         }
         public static Commands commands = new Commands();
-        private static MainViewModel MainVM = new MainViewModel();
-
+        private readonly BackgroundWorker worker = new BackgroundWorker();
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             foreach (var obj in containerGrid.Children)
@@ -47,36 +49,268 @@ namespace prototype2
             employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
             dashboardGrid.Visibility = Visibility.Visible;
             settingsBtn.Visibility = Visibility.Hidden;
-            loadDataToUi();
+            worker.RunWorkerAsync();
+            //loadDataToUi();
         }
 
-        private async void loadDataToUi()
+        private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            var slowTask = Task<MainViewModel>.Factory.StartNew(() => commands.FillViewModels());
-            await slowTask;
-            MainVM.Customers = slowTask.Result.Customers;
-            MainVM.Suppliers = slowTask.Result.Suppliers;
-            MainVM.Employees = slowTask.Result.Employees;
-            MainVM.Contractor = slowTask.Result.Contractor;
-            MainVM.ContJobTitle = slowTask.Result.ContJobTitle;
-            MainVM.EmpPosition = slowTask.Result.EmpPosition;
-            MainVM.ProductList = slowTask.Result.ProductList;
-            MainVM.ProductCategory = slowTask.Result.ProductCategory;
-            MainVM.ServicesList = slowTask.Result.ServicesList;
-            MainVM.Provinces = slowTask.Result.Provinces;
+            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => { loadDataToUi();}));
+            
 
+            
+        }
+
+        private void worker_RunWorkerCompleted(object sender,
+                                               RunWorkerCompletedEventArgs e)
+        {
+            //update ui once worker complete his work
+        }
+
+        private void loadDataToUi()
+        {
+            var dbCon = DBConnection.Instance();
+            MainVM.Provinces.Clear();
+            MainVM.EmpPosition.Clear();
+            MainVM.ContJobTitle.Clear();
+            MainVM.ProductCategory.Clear();
+            MainVM.ServicesList.Clear();
+            MainVM.ProductList.Clear();
+            MainVM.Customers.Clear();
+            MainVM.Suppliers.Clear();
+            MainVM.Representatives.Clear();
             MainVM.AllCustomerSupplier.Clear();
-            foreach(var obj in MainVM.Customers)
+            if (dbCon.IsConnect())
             {
-                MainVM.AllCustomerSupplier.Add(obj);
+                string query = "SELECT locProvinceID, locProvince FROM provinces_t";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.Provinces.Add(new Province() { ProvinceID = (int)dr["locProvinceID"], ProvinceName = dr["locProvince"].ToString() });
+                }
+                dbCon.Close();
             }
 
-            foreach (var obj in MainVM.Suppliers)
+            if (dbCon.IsConnect())
             {
-                MainVM.AllCustomerSupplier.Add(obj);
+                string query = "SELECT locationProvinceID, locationPrice FROM location_details_t";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    foreach (Province prov in MainVM.Provinces)
+                    {
+                        if (prov.ProvinceID == (int)dr["locationProvinceID"])
+                            prov.ProvincePrice = (decimal)dr["locationPrice"];
+                    }
+                }
+                dbCon.Close();
             }
 
-            this.DataContext = MainVM;
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM POSITION_T;";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.EmpPosition.Add(new EmpPosition() { PositionID = dr["positionid"].ToString(), PositionName = dr["positionName"].ToString() });
+                }
+                dbCon.Close();
+            }
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM JOB_TITLE_T;";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.ContJobTitle.Add(new ContJobName() { JobID = dr["jobID"].ToString(), JobName = dr["jobName"].ToString() });
+                }
+                dbCon.Close();
+            }
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM ITEM_TYPE_T;";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.ProductCategory.Add(new ItemType() { TypeID = int.Parse(dr["typeID"].ToString()), TypeName = dr["typeName"].ToString() });
+                }
+
+            }
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM service_t;";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.ServicesList.Add(new Service() { ServiceID = dr["serviceID"].ToString(), ServiceName = dr["serviceName"].ToString(), ServiceDesc = dr["serviceDesc"].ToString(), ServicePrice = (decimal)dr["ServicePrice"] });
+                }
+                dbCon.Close();
+            }
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM ITEM_T;";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.SelectedCustomerSupplier = MainVM.Suppliers.Where(x => x.CompanyID.Equals(dr["supplierID"].ToString())).FirstOrDefault();
+                    MainVM.ProductList.Add(new Item() { ItemNo = dr["itemNo"].ToString(), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), Unit = dr["itemUnit"].ToString(), Quantity = 1, SupplierID = dr["supplierID"].ToString(), SupplierName = MainVM.SelectedCustomerSupplier.CompanyName });
+                }
+                dbCon.Close();
+            }
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT locationProvinceID, locationPrice FROM location_details_t";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    foreach (Province prov in MainVM.Provinces)
+                    {
+                        if (prov.ProvinceID == (int)dr["locationProvinceID"])
+                            prov.ProvincePrice = (decimal)dr["locationPrice"];
+                    }
+                }
+                dbCon.Close();
+            }
+
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT cs.companyID, cs.companyName, cs.companyAddInfo, cs.companyAddress,cs.companyCity,p.locProvince,cs.companyProvinceID,cs.companyPostalCode, cs.companyEmail, cs.companyTelephone, cs.companyMobile, cs.representativeID ,cs.companyType " +
+                    "FROM cust_supp_t cs  " +
+                    "JOIN provinces_t p ON cs.companyProvinceID = p.locProvinceId " +
+                    "WHERE isDeleted = 0 AND companyType = 0;";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.Customers.Add(new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString(), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), RepresentativeID = dr["representativeID"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString() });
+                    MainVM.AllCustomerSupplier.Add(new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString(), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), RepresentativeID = dr["representativeID"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString() });
+                }
+            }
+
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT cs.companyID, cs.companyName, cs.companyAddInfo, cs.companyAddress,cs.companyCity,p.locProvince,cs.companyProvinceID,cs.companyPostalCode, cs.companyEmail, cs.companyTelephone, cs.companyMobile, cs.representativeID ,cs.companyType " +
+                    "FROM cust_supp_t cs  " +
+                    "JOIN provinces_t p ON cs.companyProvinceID = p.locProvinceId " +
+                    "WHERE isDeleted = 0 AND companyType = 1;";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.Suppliers.Add(new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString(), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), RepresentativeID = dr["representativeID"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString() });
+                    MainVM.AllCustomerSupplier.Add(new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString(), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), RepresentativeID = dr["representativeID"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString() });
+                }
+            }
+
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * from representative_t";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.Representatives.Add(new Representative(){ RepresentativeID = dr["representativeID"].ToString(), RepTitle = dr["repTitle"].ToString(), RepFirstName = dr["repFName"].ToString(), RepMiddleName = dr["repMInitial"].ToString(), RepLastName = dr["repLName"].ToString(), RepEmail = dr["repEmail"].ToString(), RepTelephone = dr["repTelephone"].ToString(), RepMobile = dr["repMobile"].ToString() });
+                }
+            }
+            //if (dbCon.IsConnect())
+            //{
+            //    string query = "SELECT a.empID, a.empFName,a.empLname, a.empMI, a.empAddinfo, a.empAddress, a.empCity, a.empProvinceID, a.empUserName, b.locprovince, a.positionID ,c.positionName, a.jobID, d.empPic, d.empSignature " +
+            //        "FROM emp_cont_t a  " +
+            //        "JOIN provinces_t b ON a.empProvinceID = b.locProvinceId " +
+            //        "JOIN position_t c ON a.positionID = c.positionid " +
+            //        "JOIN emp_pic_t d ON a.empID = d.empID " +
+            //        //"JOIN job_title_t d ON a.jobID = d.jobID " +
+            //        "WHERE isDeleted = 0 AND empType = 0;";
+            //    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+            //    DataSet fromDb = new DataSet();
+            //    DataTable fromDbTable = new DataTable();
+            //    dataAdapter.Fill(fromDb, "t");
+            //    fromDbTable = fromDb.Tables["t"];
+            //    MainScreen.MainVM.Employees.Clear();
+            //    foreach (DataRow dr in fromDbTable.Rows)
+            //    {
+            //        if (dr["empPic"].Equals(DBNull.Value))
+            //        {
+            //            MainScreen.MainVM.Employees.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), PositionID = dr["positionID"].ToString(), PositionName = dr["positionName"].ToString(), EmpUserName = dr["empUserName"].ToString() });
+            //        }
+            //        else
+            //        {
+            //            MainScreen.MainVM.Employees.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), PositionID = dr["positionID"].ToString(), PositionName = dr["positionName"].ToString(), EmpPic = (byte[])dr["empPic"], EmpUserName = dr["empUserName"].ToString() });
+            //        }
+
+            //    }
+            //    dbCon.Close();
+            //}
+            //if (dbCon.IsConnect())
+            //{
+            //    string query = "SELECT a.empID, a.empFName,a.empLname, a.empMI, a.empAddinfo, a.empAddress, a.empCity, a.empProvinceID, b.locprovince, a.jobID, d.jobName " +
+            //        "FROM emp_cont_t a  " +
+            //        "JOIN provinces_t b ON a.empProvinceID = b.locProvinceId " +
+            //        //"JOIN position_t c ON a.positionID = c.positionid " +
+            //        "JOIN job_title_t d ON a.jobID = d.jobID " +
+            //        "WHERE a.isDeleted = 0 AND a.empType = 1;";
+            //    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+            //    DataSet fromDb = new DataSet();
+            //    DataTable fromDbTable = new DataTable();
+            //    dataAdapter.Fill(fromDb, "t");
+            //    fromDbTable = fromDb.Tables["t"];
+            //    MainScreen.MainVM.Contractor.Clear();
+            //    foreach (DataRow dr in fromDbTable.Rows)
+            //    {
+            //        MainScreen.MainVM.Contractor.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), JobID = dr["jobID"].ToString(), JobName = dr["jobName"].ToString() });
+            //    }
+            //    dbCon.Close();
+            //}
         }
 
         private void dashBoardBtn_Click(object sender, RoutedEventArgs e)
@@ -302,6 +536,143 @@ namespace prototype2
             }
         }
 
+        private void viewRecordBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (manageCustomerGrid.IsVisible)
+            {
+                Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+                sb.Begin(companyDetailsFormGrid);
+                employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
+                saveCancelGrid.Visibility = Visibility.Collapsed;
+                editCloseGrid.Visibility = Visibility.Visible;
+                if (companyDetailsFormGrid.IsVisible)
+                {
+                    companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
+                }
+                else
+                    companyDetailsFormGridBg.Visibility = Visibility.Visible;
+                foreach (var element in companyDetailsFormGrid1.Children)
+                {
+                    if (element is TextBox)
+                    {
+                        ((TextBox)element).IsEnabled = false;
+                    }
+                    else if (element is ComboBox)
+                    {
+                        ((ComboBox)element).IsEnabled = false;
+                    }
+                    else if (element is CheckBox)
+                    {
+                        ((CheckBox)element).IsEnabled = false;
+                    }
+                }
+                loadRecordToFields();
+            }
+            else if (manageEmployeeGrid.IsVisible)
+            {
+            }
+            
+        }
+
+        private void editRecordBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (manageCustomerGrid.IsVisible)
+            {
+                Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+                sb.Begin(companyDetailsFormGrid);
+                employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
+                if (companyDetailsFormGrid.IsVisible)
+                {
+
+                    companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
+                }
+                else
+                    companyDetailsFormGridBg.Visibility = Visibility.Visible;
+                loadRecordToFields();
+                isEdit = true;
+                saveCancelGrid.Visibility = Visibility.Visible;
+                editCloseGrid.Visibility = Visibility.Collapsed;
+            }
+            else if (manageEmployeeGrid.IsVisible)
+            {
+            }
+            
+        }
+
+        private void deleteRecordBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (manageCustomerGrid.IsVisible)
+            {
+                String id = MainVM.SelectedCustomerSupplier.CompanyID;
+                var dbCon = DBConnection.Instance();
+                MessageBoxResult result = MessageBox.Show("Do you wish to delete this record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.OK)
+                {
+                    if (dbCon.IsConnect())
+                    {
+                        string query = "UPDATE `cust_supp_t` SET `isDeleted`= 1 WHERE companyID = '" + id + "';";
+                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        {
+                            MessageBox.Show("Record successfully deleted!");
+                            loadDataToUi();
+                        }
+                    }
+
+                }
+                else if (result == MessageBoxResult.Cancel)
+                {
+                }
+            }
+            else if (manageEmployeeGrid.IsVisible)
+            {
+            }
+        }
+
+        private void editCompanyBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var element in companyDetailsFormGrid1.Children)
+            {
+                if (element is TextBox)
+                {
+                    ((TextBox)element).IsEnabled = true;
+                }
+                else if (element is ComboBox)
+                {
+                    ((ComboBox)element).IsEnabled = true;
+                }
+                else if (element is CheckBox)
+                {
+                    ((CheckBox)element).IsEnabled = true;
+                }
+            }
+            editCloseGrid.Visibility = Visibility.Collapsed;
+            saveCancelGrid.Visibility = Visibility.Visible;
+            isEdit = true;
+        }
+
+        private void editEmployeeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var element in employeeDetailsFormGrid1.Children)
+            {
+                if (element is TextBox)
+                {
+                    ((TextBox)element).IsEnabled = true;
+                }
+                else if (element is ComboBox)
+                {
+                    ((ComboBox)element).IsEnabled = true;
+                }
+                else if (element is CheckBox)
+                {
+                    ((CheckBox)element).IsEnabled = true;
+                }
+            }
+            saveCancelGrid1.Visibility = Visibility.Visible;
+            editCloseGrid1.Visibility = Visibility.Collapsed;
+            isEdit = true;
+        }
+
         private void saveRecordBtn_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Do you want to save?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
@@ -309,13 +680,22 @@ namespace prototype2
             {
                 if (companyDetailsFormGridBg.IsVisible)
                 {
-                    foreach (var element in companyDetailsFormGrid.Children)
+                    foreach (var element in companyDetailsFormGrid1.Children)
                     {
                         if (element is TextBox)
                         {
                             BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-                            expression.UpdateSource();
-                            validationError = Validation.GetHasError((TextBox)element);
+                            Validation.ClearInvalid(expression);
+                            if (((TextBox)element).IsEnabled)
+                            {
+                                expression.UpdateSource();
+                                validationError = Validation.GetHasError((TextBox)element);
+                            }
+                            else
+                            {
+
+                            }
+                            
                         }
                         if (element is ComboBox)
                         {
@@ -327,13 +707,18 @@ namespace prototype2
                 }
                 else if (employeeDetailsFormGridBg.IsVisible)
                 {
-                    foreach (var element in employeeDetailsFormGrid.Children)
+                    foreach (var element in employeeDetailsFormGrid1.Children)
                     {
                         if (element is TextBox)
                         {
                             BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-                            expression.UpdateSource();
-                            validationError = Validation.GetHasError((TextBox)element);
+                            Validation.ClearInvalid(expression);
+                            if (((TextBox)element).IsEnabled)
+                            {
+                                
+                                expression.UpdateSource();
+                                validationError = Validation.GetHasError((TextBox)element);
+                            }
                         }
                         if (element is ComboBox)
                         {
@@ -344,7 +729,8 @@ namespace prototype2
                     }
                 }
                 if (!validationError)
-                    saveDataToDb();
+                saveDataToDb();
+                isEdit = false;
             }
             else if (result == MessageBoxResult.No)
             {
@@ -365,7 +751,208 @@ namespace prototype2
             
         }
 
+
+        private void empTelCb_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (empTelephoneTb.IsEnabled)
+            {
+                empTelephoneTb.IsEnabled = false;
+            }
+            else
+                empTelephoneTb.IsEnabled = true;
+        }
+
+        private void empMobCb_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (empMobileNumberTb.IsEnabled)
+            {
+                empMobileNumberTb.IsEnabled = false;
+            }
+            else
+                empMobileNumberTb.IsEnabled = true;
+        }
+
+        private void empTelCb_Checked(object sender, RoutedEventArgs e)
+        {
+            if (empTelephoneTb.IsEnabled)
+            {
+                empTelephoneTb.IsEnabled = false;
+                empTelephoneTb.Text = "";
+            }
+            else
+                empTelephoneTb.IsEnabled = true;
+        }
+
+        private void empMobCb_Checked(object sender, RoutedEventArgs e)
+        {
+            if (empMobileNumberTb.IsEnabled)
+            {
+                empMobileNumberTb.IsEnabled = false;
+                empMobileNumberTb.Text = "";
+            }
+            else
+                empMobileNumberTb.IsEnabled = true;
+        }
+
+        private void companyTelCb_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (companyTelephoneTb.IsEnabled)
+            {
+                companyTelephoneTb.IsEnabled = false;
+            }
+            else
+                companyTelephoneTb.IsEnabled = true;
+        }
+
+        private void companyMobCb_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (companyMobileTb.IsEnabled)
+            {
+                companyMobileTb.IsEnabled = false;
+            }
+            else
+                companyMobileTb.IsEnabled = true;
+        }
+
+        private void repTelCb_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (repTelephoneTb.IsEnabled)
+            {
+                repTelephoneTb.IsEnabled = false;
+            }
+            else
+                repTelephoneTb.IsEnabled = true;
+        }
+
+        private void repMobCb_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (repMobileTb.IsEnabled)
+            {
+                repMobileTb.IsEnabled = false;
+            }
+            else
+                repMobileTb.IsEnabled = true;
+        }
+
+        private void companyTelCb_Checked(object sender, RoutedEventArgs e)
+        {
+            if (companyTelephoneTb.IsEnabled)
+            {
+                companyTelephoneTb.IsEnabled = false;
+                companyTelephoneTb.Text = "";
+            }
+            else
+                companyTelephoneTb.IsEnabled = true;
+        }
+
+        private void companyMobCb_Checked(object sender, RoutedEventArgs e)
+        {
+            if (companyMobileTb.IsEnabled)
+            {
+                companyMobileTb.IsEnabled = false;
+                companyMobileTb.Text = "";
+            }
+            else
+                companyMobileTb.IsEnabled = true;
+        }
+
+        private void repTelCb_Checked(object sender, RoutedEventArgs e)
+        {
+            if (repTelephoneTb.IsEnabled)
+            {
+                repTelephoneTb.IsEnabled = false;
+                repTelephoneTb.Text = "";
+            }
+            else
+                repTelephoneTb.IsEnabled = true;
+        }
+
+        private void repMobCb_Checked(object sender, RoutedEventArgs e)
+        {
+            if (repMobileTb.IsEnabled)
+            {
+                repMobileTb.IsEnabled = false;
+                repMobileTb.Text = "";
+            }
+            else
+                repMobileTb.IsEnabled = true;
+        }
+
         private bool isEdit = false;
+
+        private void loadRecordToFields()
+        {
+            if (companyDetailsFormGridBg.IsVisible)
+            {
+                foreach (var element in companyDetailsFormGrid.Children)
+                {
+                    if (element is TextBox)
+                    {
+                        ((TextBox)element).IsEnabled = false;
+                    }
+                    else if (element is ComboBox)
+                    {
+                        ((ComboBox)element).IsEnabled = false;
+                    }
+                    else if(element is CheckBox)
+                    {
+                        ((CheckBox)element).IsEnabled = false;
+                    }
+                }
+                companyTypeCb.SelectedIndex = int.Parse(MainVM.SelectedCustomerSupplier.CompanyType);
+                companyNameTb.Text = MainVM.SelectedCustomerSupplier.CompanyName;
+                companyDescriptionTb.Text = MainVM.SelectedCustomerSupplier.CompanyDesc;
+                companyAddressTb.Text = MainVM.SelectedCustomerSupplier.CompanyAddress;
+                companyCityTb.Text = MainVM.SelectedCustomerSupplier.CompanyCity;
+                companyProvinceCb.SelectedValue = MainVM.SelectedCustomerSupplier.CompanyProvinceID;
+                companyEmailTb.Text = MainVM.SelectedCustomerSupplier.CompanyEmail;
+                companyTelephoneTb.Text = MainVM.SelectedCustomerSupplier.CompanyTelephone;
+                companyMobileTb.Text = MainVM.SelectedCustomerSupplier.CompanyMobile;
+                if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyTelephone))
+                {
+                    companyTelCb.IsChecked = true;
+                }
+                
+                if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyMobile))
+                {
+                    companyMobCb.IsChecked = true;
+                }
+                MainVM.SelectedRepresentative = MainVM.Representatives.Where(x => x.RepresentativeID.Equals(MainVM.SelectedCustomerSupplier.RepresentativeID)).FirstOrDefault();
+                representativeTitle.Text = MainVM.SelectedRepresentative.RepTitle;
+                repFirstNameTb.Text = MainVM.SelectedRepresentative.RepFirstName;
+                repMiddleInitialTb.Text = MainVM.SelectedRepresentative.RepMiddleName;
+                repLastNameTb.Text = MainVM.SelectedRepresentative.RepLastName;
+                repEmailTb.Text = MainVM.SelectedRepresentative.RepEmail;
+                repTelephoneTb.Text = MainVM.SelectedRepresentative.RepTelephone;
+                repMobileTb.Text = MainVM.SelectedRepresentative.RepMobile;
+                if (String.IsNullOrWhiteSpace(MainVM.SelectedRepresentative.RepTelephone))
+                {
+                    repTelCb.IsChecked = true;
+                }
+                if (String.IsNullOrWhiteSpace(MainVM.SelectedRepresentative.RepMobile))
+                {
+                    repMobCb.IsChecked = true;
+                }
+            }
+            else if (employeeDetailsFormGridBg.IsVisible)
+            {
+                foreach (var element in companyDetailsFormGrid.Children)
+                {
+                    if (element is TextBox)
+                    {
+                        ((TextBox)element).IsEnabled = false;
+                    }
+                    else if (element is ComboBox)
+                    {
+                        ((ComboBox)element).IsEnabled = false;
+                    }
+                    else if (element is CheckBox)
+                    {
+                        ((CheckBox)element).IsEnabled = false;
+                    }
+                }
+            }
+        }
         private void saveDataToDb()
         {
             
@@ -394,6 +981,9 @@ namespace prototype2
                         cmd = new MySqlCommand(proc[1], conn);
                         cmd.CommandType = CommandType.StoredProcedure;
 
+                        cmd.Parameters.AddWithValue("@repTitle", representativeTitle.Text);
+                        cmd.Parameters["@repTitle"].Direction = ParameterDirection.Input;
+
                         cmd.Parameters.AddWithValue("@repLName", repLastNameTb.Text);
                         cmd.Parameters["@repLName"].Direction = ParameterDirection.Input;
 
@@ -403,13 +993,13 @@ namespace prototype2
                         cmd.Parameters.AddWithValue("@repMName", repMiddleInitialTb.Text);
                         cmd.Parameters["@repMName"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@repEmail", repMiddleInitialTb.Text);
+                        cmd.Parameters.AddWithValue("@repEmail", repEmailTb.Text);
                         cmd.Parameters["@repEmail"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@repTelephone", repMiddleInitialTb.Text);
+                        cmd.Parameters.AddWithValue("@repTelephone", repTelephoneTb.Text);
                         cmd.Parameters["@repTelephone"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@repMobile", repMiddleInitialTb.Text);
+                        cmd.Parameters.AddWithValue("@repMobile", repMobileTb.Text);
                         cmd.Parameters["@repMobile"].Direction = ParameterDirection.Input;
                         if (!isEdit)
                         { 
@@ -444,13 +1034,13 @@ namespace prototype2
                         cmd.Parameters.AddWithValue("@province", companyProvinceCb.SelectedValue);
                         cmd.Parameters["@province"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@companyEmail", companyProvinceCb.SelectedValue);
+                        cmd.Parameters.AddWithValue("@companyEmail", companyEmailTb.Text);
                         cmd.Parameters["@companyEmail"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@companyTelephone", companyProvinceCb.SelectedValue);
+                        cmd.Parameters.AddWithValue("@companyTelephone", companyTelephoneTb.Text);
                         cmd.Parameters["@companyTelephone"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@companyMobile", companyProvinceCb.SelectedValue);
+                        cmd.Parameters.AddWithValue("@companyMobile", companyMobileTb.Text);
                         cmd.Parameters["@companyMobile"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@compType", companyTypeCb.SelectedIndex);
@@ -476,6 +1066,7 @@ namespace prototype2
                 finally
                 {
                     resetFieldsValue();
+                    loadDataToUi();
                 }
             }
             else if (employeeDetailsFormGridBg.IsVisible)
@@ -607,8 +1198,10 @@ namespace prototype2
                 {
                     resetFieldsValue();
                     loadDataToUi();
+
                 }
             }
+            
         }
 
         private void resetFieldsValue()
@@ -616,26 +1209,34 @@ namespace prototype2
 
             companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
             employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            foreach (var element in companyDetailsFormGrid.Children)
+            foreach (var element in companyDetailsFormGrid1.Children)
             {
                 if (element is TextBox)
                 {
                     ((TextBox)element).Text = string.Empty;
                 }
-                if (element is ComboBox)
+                else if (element is ComboBox)
                 {
                     ((ComboBox)element).SelectedIndex = -1;
+                }
+                else if (element is CheckBox)
+                {
+                    ((CheckBox)element).IsChecked = false;
                 }
             }
-            foreach (var element in employeeDetailsFormGrid.Children)
+            foreach (var element in employeeDetailsFormGrid1.Children)
             {
                 if (element is TextBox)
                 {
                     ((TextBox)element).Text = string.Empty;
                 }
-                if (element is ComboBox)
+                else if (element is ComboBox)
                 {
                     ((ComboBox)element).SelectedIndex = -1;
+                }
+                else if (element is CheckBox)
+                {
+                    ((CheckBox)element).IsChecked = false;
                 }
             }
         }
@@ -663,7 +1264,7 @@ namespace prototype2
                     }
                     if (dbCon.IsConnect())
                     {
-                        string query = "UPDATE `odc_db`.`position_t` set `positionName` = '" + empPosNewTb.Text + "' where positionID = '" + MainMenu.MainVM.SelectedEmpPosition.PositionID + "'";
+                        string query = "UPDATE `odc_db`.`position_t` set `positionName` = '" + empPosNewTb.Text + "' where positionID = '" + MainVM.SelectedEmpPosition.PositionID + "'";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             MessageBox.Show("Employee Poisition saved");
@@ -727,7 +1328,7 @@ namespace prototype2
                 {
                     try
                     {
-                        string query = "DELETE FROM `odc_db`.`position_t` WHERE `positionID`='" + MainMenu.MainVM.SelectedEmpPosition.PositionID + "';";
+                        string query = "DELETE FROM `odc_db`.`position_t` WHERE `positionID`='" + MainVM.SelectedEmpPosition.PositionID + "';";
 
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
@@ -754,7 +1355,7 @@ namespace prototype2
             {
                 if (employeePositionLb.SelectedItems.Count > 0)
                 {
-                    empPosNewTb.Text = MainMenu.MainVM.SelectedEmpPosition.PositionName;
+                    empPosNewTb.Text = MainVM.SelectedEmpPosition.PositionName;
                     addEmpPosBtn.Content = "Save";
 
                 }
@@ -785,7 +1386,7 @@ namespace prototype2
                     }
                     if (dbCon.IsConnect())
                     {
-                        string query = "UPDATE `odc_db`.`job_title_t` set `jobName` = '" + contNewJobTb.Text + "' where jobID = '" + MainMenu.MainVM.SelectedJobTitle.JobID + "'";
+                        string query = "UPDATE `odc_db`.`job_title_t` set `jobName` = '" + contNewJobTb.Text + "' where jobID = '" + MainVM.SelectedJobTitle.JobID + "'";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             MessageBox.Show("Job Title successfully saved");
@@ -852,7 +1453,7 @@ namespace prototype2
                 {
                     try
                     {
-                        string query = "DELETE FROM `odc_db`.`job_title_t` WHERE `JobID`='" + MainMenu.MainVM.SelectedJobTitle.JobID + "';";
+                        string query = "DELETE FROM `odc_db`.`job_title_t` WHERE `JobID`='" + MainVM.SelectedJobTitle.JobID + "';";
 
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
@@ -877,7 +1478,7 @@ namespace prototype2
 
             if (contJobLb.SelectedItems.Count > 0)
             {
-                contNewJobTb.Text = MainMenu.MainVM.SelectedJobTitle.JobName;
+                contNewJobTb.Text = MainVM.SelectedJobTitle.JobName;
             }
             else
             {

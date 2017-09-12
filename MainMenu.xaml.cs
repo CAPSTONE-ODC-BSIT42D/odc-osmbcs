@@ -330,7 +330,7 @@ namespace prototype2
                 fromDbTable = fromDb.Tables["t"];
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    MainVM.CustRepresentatives.Add(new Representative() { RepFirstName = dr["repFName"].ToString(), RepLastName = dr["RepLName"].ToString(), RepMiddleName = dr["RepMInitial"].ToString(), RepFullName = dr["repFName"].ToString() + dr["RepLName"].ToString(), RepresentativeID = dr["representativeID"].ToString() });
+                    MainVM.Representatives.Add(new Representative() { RepFirstName = dr["repFName"].ToString(), RepLastName = dr["RepLName"].ToString(), RepMiddleName = dr["RepMInitial"].ToString(), RepFullName = dr["repFName"].ToString() + dr["RepLName"].ToString(), RepresentativeID = dr["representativeID"].ToString() });
                     query = "SELECT rc.tableID," +
                     "rc.repID," +
                     "rc.contactTypeID," +
@@ -345,7 +345,7 @@ namespace prototype2
                     fromDbTable = new DataTable();
                     dataAdapter.Fill(fromDb, "t");
                     fromDbTable = fromDb.Tables["t"];
-                    MainVM.SelectedRepresentative = MainVM.CustRepresentatives.Last();
+                    MainVM.SelectedRepresentative = MainVM.Representatives.Last();
                     foreach (DataRow dr1 in fromDbTable.Rows)
                     {
                         MainVM.SelectedRepresentative.ContactsOfRep.Add(new Contact() { TableID = dr1["tableID"].ToString(), ContactDetails = dr1["contactValue"].ToString(), ContactType = dr1["contactType"].ToString(), ContactTypeID = dr1["contactTypeID"].ToString() });
@@ -2400,7 +2400,7 @@ namespace prototype2
         private void newRepresentativeBtn_Click(object sender, RoutedEventArgs e)
         {
             RepresentativeWindow repWindow = new RepresentativeWindow();
-            MainVM.CustRepresentatives.Add(new Representative());
+            MainVM.Representatives.Add(new Representative());
             customerRepresentativeDg.SelectedIndex = customerRepresentativeDg.Items.Count - 1;
             repWindow.ShowDialog();
             validateCustomerDetailsTextBoxes();
@@ -2425,9 +2425,9 @@ namespace prototype2
             {
                 try
                 {
-                    if (MainVM.CustRepresentatives.Count != 1)
+                    if (MainVM.Representatives.Count != 1)
                     {
-                        MainVM.CustRepresentatives.Remove(MainVM.SelectedRepresentative);
+                        MainVM.Representatives.Remove(MainVM.SelectedRepresentative);
                     }
                     else
                         MessageBox.Show("Needs atleast 1 representative.");
@@ -2517,7 +2517,7 @@ namespace prototype2
                     }
                     //INSERT REPRESENTATIVE TO DB;
                     string repID = "";
-                    foreach (Representative rep in MainVM.CustRepresentatives)
+                    foreach (Representative rep in MainVM.Representatives)
                     {
                         if (rep.RepresentativeID == null)
                         {
@@ -2604,7 +2604,7 @@ namespace prototype2
         {
             MainVM.CustContacts.Clear();
             MainVM.RepContacts.Clear();
-            MainVM.CustRepresentatives.Clear();
+            MainVM.Representatives.Clear();
             MainVM.Name = "";
             MainVM.Address = "";
             MainVM.City = "";

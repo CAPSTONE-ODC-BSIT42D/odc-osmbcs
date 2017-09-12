@@ -13,13 +13,29 @@ namespace prototype2
         {
 
         }
+        protected string representativeID;
+        protected string title;
         protected string firstname;
         protected string middlename;
         protected string lastname;
         protected string fullname;
-        protected string representativeID;
+        protected string emailAddress;
+        protected string telephone;
+        protected string mobilephone;
         protected bool isDefault;
         protected ObservableCollection<Contact> contactsOfRep = new ObservableCollection<Contact>();
+
+        public string RepresentativeID
+        {
+            get { return representativeID; }
+            set { SetProperty(ref representativeID, value); }
+        }
+
+        public string RepTitle
+        {
+            get { return title; }
+            set { SetProperty(ref title, value); }
+        }
 
         public string RepFirstName
         {
@@ -37,29 +53,29 @@ namespace prototype2
             set { SetProperty(ref lastname, value); }
         }
 
+        public string RepEmail
+        {
+            get { return emailAddress; }
+            set { SetProperty(ref emailAddress, value); }
+        }
+
+        public string RepTelephone
+        {
+            get { return telephone; }
+            set { SetProperty(ref telephone, value); }
+        }
+
+        public string RepMobile
+        {
+            get { return mobilephone; }
+            set { SetProperty(ref mobilephone, value); }
+        }
+
         public string RepFullName
         {
             get { return fullname; }
             set { SetProperty(ref fullname, value); }
         }
-
-        public string RepresentativeID
-        {
-            get { return representativeID; }
-            set { SetProperty(ref representativeID, value); }
-        }
-        public bool IsDefault
-        {
-            get { return isDefault; }
-            set { SetProperty(ref isDefault, value); }
-        }
-
-        public ObservableCollection<Contact> ContactsOfRep
-        {
-            get { return contactsOfRep; }
-            set { contactsOfRep = value; }
-        }
-
     }
 
     public class Customer : ViewModelEntity
@@ -75,9 +91,11 @@ namespace prototype2
         protected string companyCity;
         protected string companyProvinceID;
         protected string companyProvinceName;
+        protected string companyPostalCode;
         protected string companyEmail;
         protected string companyTelephone;
         protected string companyMobile;
+        protected string companyType;
         protected string repid;
 
         public string CompanyID
@@ -110,6 +128,12 @@ namespace prototype2
             get { return companyProvinceID; }
             set { SetProperty(ref companyProvinceID, value); }
         }
+
+        public string CompanyPostalCode
+        {
+            get { return companyPostalCode; }
+            set { SetProperty(ref companyPostalCode, value); }
+        }
         public string CompanyProvinceName
         {
             get { return companyProvinceName; }
@@ -132,6 +156,12 @@ namespace prototype2
         {
             get { return companyMobile; }
             set { SetProperty(ref companyMobile, value); }
+        }
+
+        public string CompanyType
+        {
+            get { return companyType; }
+            set { SetProperty(ref companyType, value); }
         }
 
         public string RepresentativeID

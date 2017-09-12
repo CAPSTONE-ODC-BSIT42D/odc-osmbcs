@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:prototype2"
              StartupUri="LoginWindow.xaml">
     <Application.Resources>
-         
+        <local:MainViewModel x:Key="MainVM" x:Name="MainVM" />
     </Application.Resources>
 </Application>

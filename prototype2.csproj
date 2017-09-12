@@ -214,7 +214,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands.cs" />
-    <Compile Include="Document.cs" />
     <Compile Include="MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
@@ -225,27 +224,7 @@
     </Compile>
     <Compile Include="ViewModelEntity.cs" />
     <Compile Include="ViewModels.cs" />
-    <Page Include="addContractor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="addNewItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="contactDetails.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="editContractor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="editEmployee.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="addEmployee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -257,40 +236,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="addContractor.xaml.cs">
-      <DependentUpon>addContractor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="addNewItem.xaml.cs">
-      <DependentUpon>addNewItem.xaml</DependentUpon>
-    </Compile>
     <Compile Include="contactDetails.xaml.cs">
       <DependentUpon>contactDetails.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="editContractor.xaml.cs">
-      <DependentUpon>editContractor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="editEmployee.xaml.cs">
-      <DependentUpon>editEmployee.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="addEmployee.xaml.cs">
-      <DependentUpon>addEmployee.xaml</DependentUpon>
     </Compile>
     <Compile Include="form.xaml.cs">
       <DependentUpon>form.xaml</DependentUpon>
     </Compile>
-    <Compile Include="manageEmployeeSettings.xaml.cs">
-      <DependentUpon>manageEmployeeSettings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="manageProductSettings.xaml.cs">
-      <DependentUpon>manageProductSettings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="manageServicesSettings.xaml.cs">
-      <DependentUpon>manageServicesSettings.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Models.cs" />
-    <Compile Include="RepresentativeWindow.xaml.cs">
-      <DependentUpon>RepresentativeWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="TextBoxValidation.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -301,35 +253,12 @@
       <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MainMenu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainScreen.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="manageEmployeeSettings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="manageProductSettings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="manageServicesSettings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="RepresentativeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainMenu.xaml.cs">
-      <DependentUpon>MainMenu.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

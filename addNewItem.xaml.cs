@@ -24,7 +24,6 @@ namespace prototype2
         {
             InitializeComponent();
             productRbtn.IsChecked = true;
-            this.DataContext = MainMenu.MainVM;
         }
 
         private void productRbtn_Checked(object sender, RoutedEventArgs e)
@@ -66,7 +65,7 @@ namespace prototype2
         {
             if ((bool)productRbtn.IsChecked)
             {
-                foreach (Item prd in MainMenu.MainVM.ProductList)
+                foreach (Item prd in.ProductList)
                 {
                     if (prd.IsChecked)
                     {
