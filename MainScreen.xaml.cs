@@ -635,6 +635,7 @@ namespace prototype2
             {
                 if (element is TextBox)
                 {
+                    
                     ((TextBox)element).IsEnabled = true;
                 }
                 else if (element is ComboBox)
@@ -649,6 +650,23 @@ namespace prototype2
             editCloseGrid.Visibility = Visibility.Collapsed;
             saveCancelGrid.Visibility = Visibility.Visible;
             isEdit = true;
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyTelephone))
+            {
+                companyTelCb.IsChecked = true;
+            }
+
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyMobile))
+            {
+                companyMobCb.IsChecked = true;
+            }
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedRepresentative.RepTelephone))
+            {
+                repTelCb.IsChecked = true;
+            }
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedRepresentative.RepMobile))
+            {
+                repMobCb.IsChecked = true;
+            }
         }
 
         private void editEmployeeBtn_Click(object sender, RoutedEventArgs e)
@@ -750,28 +768,7 @@ namespace prototype2
             }
             
         }
-
-
-        private void empTelCb_Unchecked(object sender, RoutedEventArgs e)
-        {
-            if (empTelephoneTb.IsEnabled)
-            {
-                empTelephoneTb.IsEnabled = false;
-            }
-            else
-                empTelephoneTb.IsEnabled = true;
-        }
-
-        private void empMobCb_Unchecked(object sender, RoutedEventArgs e)
-        {
-            if (empMobileNumberTb.IsEnabled)
-            {
-                empMobileNumberTb.IsEnabled = false;
-            }
-            else
-                empMobileNumberTb.IsEnabled = true;
-        }
-
+        
         private void empTelCb_Checked(object sender, RoutedEventArgs e)
         {
             if (empTelephoneTb.IsEnabled)
@@ -779,7 +776,11 @@ namespace prototype2
                 empTelephoneTb.IsEnabled = false;
                 empTelephoneTb.Text = "";
             }
-            else
+        }
+
+        private void empTelCb_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (!empTelephoneTb.IsEnabled)
                 empTelephoneTb.IsEnabled = true;
         }
 
@@ -794,45 +795,12 @@ namespace prototype2
                 empMobileNumberTb.IsEnabled = true;
         }
 
-        private void companyTelCb_Unchecked(object sender, RoutedEventArgs e)
+        private void empMobCb_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (companyTelephoneTb.IsEnabled)
-            {
-                companyTelephoneTb.IsEnabled = false;
-            }
-            else
-                companyTelephoneTb.IsEnabled = true;
+            if (!empMobileNumberTb.IsEnabled)
+                empMobileNumberTb.IsEnabled = true;
         }
 
-        private void companyMobCb_Unchecked(object sender, RoutedEventArgs e)
-        {
-            if (companyMobileTb.IsEnabled)
-            {
-                companyMobileTb.IsEnabled = false;
-            }
-            else
-                companyMobileTb.IsEnabled = true;
-        }
-
-        private void repTelCb_Unchecked(object sender, RoutedEventArgs e)
-        {
-            if (repTelephoneTb.IsEnabled)
-            {
-                repTelephoneTb.IsEnabled = false;
-            }
-            else
-                repTelephoneTb.IsEnabled = true;
-        }
-
-        private void repMobCb_Unchecked(object sender, RoutedEventArgs e)
-        {
-            if (repMobileTb.IsEnabled)
-            {
-                repMobileTb.IsEnabled = false;
-            }
-            else
-                repMobileTb.IsEnabled = true;
-        }
 
         private void companyTelCb_Checked(object sender, RoutedEventArgs e)
         {
@@ -841,7 +809,11 @@ namespace prototype2
                 companyTelephoneTb.IsEnabled = false;
                 companyTelephoneTb.Text = "";
             }
-            else
+        }
+
+        private void companyTelCb_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (!companyTelephoneTb.IsEnabled)
                 companyTelephoneTb.IsEnabled = true;
         }
 
@@ -852,7 +824,11 @@ namespace prototype2
                 companyMobileTb.IsEnabled = false;
                 companyMobileTb.Text = "";
             }
-            else
+        }
+
+        private void companyMobCb_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (!companyMobileTb.IsEnabled)
                 companyMobileTb.IsEnabled = true;
         }
 
@@ -863,7 +839,11 @@ namespace prototype2
                 repTelephoneTb.IsEnabled = false;
                 repTelephoneTb.Text = "";
             }
-            else
+        }
+
+        private void repTelCb_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (!repTelephoneTb.IsEnabled)
                 repTelephoneTb.IsEnabled = true;
         }
 
@@ -874,7 +854,11 @@ namespace prototype2
                 repMobileTb.IsEnabled = false;
                 repMobileTb.Text = "";
             }
-            else
+        }
+
+        private void repMobCb_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (!repMobileTb.IsEnabled)
                 repMobileTb.IsEnabled = true;
         }
 
@@ -884,21 +868,6 @@ namespace prototype2
         {
             if (companyDetailsFormGridBg.IsVisible)
             {
-                foreach (var element in companyDetailsFormGrid.Children)
-                {
-                    if (element is TextBox)
-                    {
-                        ((TextBox)element).IsEnabled = false;
-                    }
-                    else if (element is ComboBox)
-                    {
-                        ((ComboBox)element).IsEnabled = false;
-                    }
-                    else if(element is CheckBox)
-                    {
-                        ((CheckBox)element).IsEnabled = false;
-                    }
-                }
                 companyTypeCb.SelectedIndex = int.Parse(MainVM.SelectedCustomerSupplier.CompanyType);
                 companyNameTb.Text = MainVM.SelectedCustomerSupplier.CompanyName;
                 companyDescriptionTb.Text = MainVM.SelectedCustomerSupplier.CompanyDesc;
@@ -937,21 +906,6 @@ namespace prototype2
             }
             else if (employeeDetailsFormGridBg.IsVisible)
             {
-                foreach (var element in companyDetailsFormGrid.Children)
-                {
-                    if (element is TextBox)
-                    {
-                        ((TextBox)element).IsEnabled = false;
-                    }
-                    else if (element is ComboBox)
-                    {
-                        ((ComboBox)element).IsEnabled = false;
-                    }
-                    else if (element is CheckBox)
-                    {
-                        ((CheckBox)element).IsEnabled = false;
-                    }
-                }
             }
         }
         private void saveDataToDb()
