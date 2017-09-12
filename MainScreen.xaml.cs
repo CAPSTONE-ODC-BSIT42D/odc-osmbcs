@@ -905,6 +905,7 @@ namespace prototype2
                 companyAddressTb.Text = MainVM.SelectedCustomerSupplier.CompanyAddress;
                 companyCityTb.Text = MainVM.SelectedCustomerSupplier.CompanyCity;
                 companyProvinceCb.SelectedValue = MainVM.SelectedCustomerSupplier.CompanyProvinceID;
+                companyPostalCode.Text = MainVM.SelectedCustomerSupplier.CompanyPostalCode;
                 companyEmailTb.Text = MainVM.SelectedCustomerSupplier.CompanyEmail;
                 companyTelephoneTb.Text = MainVM.SelectedCustomerSupplier.CompanyTelephone;
                 companyMobileTb.Text = MainVM.SelectedCustomerSupplier.CompanyMobile;
@@ -1033,6 +1034,9 @@ namespace prototype2
 
                         cmd.Parameters.AddWithValue("@province", companyProvinceCb.SelectedValue);
                         cmd.Parameters["@province"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@companyPostalCode", companyPostalCode.Text);
+                        cmd.Parameters["@companyPostalCode"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@companyEmail", companyEmailTb.Text);
                         cmd.Parameters["@companyEmail"].Direction = ParameterDirection.Input;
@@ -1211,12 +1215,19 @@ namespace prototype2
             employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
             foreach (var element in companyDetailsFormGrid1.Children)
             {
+                
                 if (element is TextBox)
                 {
+                    BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
+                    if (expression != null)
+                        Validation.ClearInvalid(expression);
                     ((TextBox)element).Text = string.Empty;
                 }
                 else if (element is ComboBox)
                 {
+                    BindingExpression expression = ((ComboBox)element).GetBindingExpression(TextBox.TextProperty);
+                    if (expression != null)
+                        Validation.ClearInvalid(expression);
                     ((ComboBox)element).SelectedIndex = -1;
                 }
                 else if (element is CheckBox)
@@ -1228,10 +1239,16 @@ namespace prototype2
             {
                 if (element is TextBox)
                 {
+                    BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
+                    if (expression != null)
+                        Validation.ClearInvalid(expression);
                     ((TextBox)element).Text = string.Empty;
                 }
                 else if (element is ComboBox)
                 {
+                    BindingExpression expression = ((ComboBox)element).GetBindingExpression(TextBox.TextProperty);
+                    if (expression != null)
+                        Validation.ClearInvalid(expression);
                     ((ComboBox)element).SelectedIndex = -1;
                 }
                 else if (element is CheckBox)

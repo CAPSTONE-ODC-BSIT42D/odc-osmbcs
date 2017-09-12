@@ -664,17 +664,41 @@
                         <Button x:Name="manageCustomerAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,20,20,0" VerticalAlignment="Top" Width="85" Background="#FF0D9E0D" BorderBrush="#FF107C10" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13" Click="manageCustomerAddBtn_Click"/>
                         <DataGrid x:Name="manageCustomerDataGrid" Margin="20,60,20,20" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionMode="Single" MinRowHeight="20"  MinColumnWidth="0" EnableColumnVirtualization="True" ItemsSource="{Binding AllCustomerSupplier}" SelectedItem="{Binding SelectedCustomerSupplier}">
                             <DataGrid.Columns >
-                                <DataGridTextColumn Binding="{Binding CompanyName}" ClipboardContentBinding="{x:Null}" Header="Company Name" Width="200" CanUserResize="False"  />
-                                <DataGridTemplateColumn Width="100" CanUserResize="False"  >
+                                <DataGridTemplateColumn Width="200" CanUserResize="False" Header="Company Name" >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock TextWrapping="Wrap" Text="{Binding CompanyDesc}">
-                                            </TextBlock>
+                                            <Label Content="{Binding CompanyName}" VerticalContentAlignment="Center"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTextColumn Binding="{Binding CompanyCity}" ClipboardContentBinding="{x:Null}" Header="City" Width="200" CanUserResize="False"  />
-                                <DataGridTextColumn Binding="{Binding CompanyPostalCode}" ClipboardContentBinding="{x:Null}" Header="Postal Code" Width="200" CanUserResize="False"  />
+                                <DataGridTemplateColumn Width="200" CanUserResize="False" Header="Description" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding CompanyDesc}" VerticalContentAlignment="Center"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="200" CanUserResize="False" Header="Address" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding CompanyAddress}" VerticalContentAlignment="Center"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="100" CanUserResize="False" Header="Province" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding CompanyProvinceName}" VerticalContentAlignment="Center"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="100" CanUserResize="False" Header="Postal Code" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding CompanyPostalCode}" VerticalContentAlignment="Center"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                                 <DataGridTemplateColumn  Width="115" CanUserResize="False" Header="Actions"  >
                                     <DataGridTemplateColumn.CellTemplate  >
                                         <DataTemplate>
@@ -827,13 +851,43 @@
                             <ComboBoxItem>Contractor</ComboBoxItem>
                         </ComboBox>
                         <Button x:Name="manageEmployeeAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,20,20,0" VerticalAlignment="Top" Width="85" Background="#FF0D9E0D" BorderBrush="#FF107C10" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13" Click="manageEmployeeAddBtn_Click"/>
-                        <DataGrid x:Name="manageEmployeeDataGrid" Margin="20,60,20,20" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionMode="Single" MinRowHeight="20"  MinColumnWidth="0" ItemsSource="{Binding AllEmployeesContractor}" SelectedItem ="{Binding SelectedEmployeeContractor}">
+                        <DataGrid x:Name="manageEmployeeDataGrid" Margin="20,60,20,20" CanUserAddRows="False" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionMode="Single" MinRowHeight="20"  MinColumnWidth="0" ItemsSource="{Binding AllEmployeesContractor}" SelectedItem ="{Binding SelectedEmployeeContractor}">
                             <DataGrid.Columns >
-                                <DataGridTextColumn Binding="{Binding EmpFname}" ClipboardContentBinding="{x:Null}" Header="First Name" Width="75" CanUserResize="False" Visibility="Visible"  />
-                                <DataGridTextColumn Binding="{Binding EmpLName}" ClipboardContentBinding="{x:Null}" Header="Last Name" Width="200" CanUserResize="False"  />
-                                <DataGridTextColumn Binding="{Binding EmpAddress}" ClipboardContentBinding="{x:Null}" Header="Address" Width="350"   />
-                                <DataGridTextColumn Binding="{Binding EmpCity}" ClipboardContentBinding="{x:Null}" Header="City" Width="200" CanUserResize="False"  />
-                                <DataGridTextColumn Binding="{Binding PositionName}" ClipboardContentBinding="{x:Null}" Header="Position" Width="100" CanUserResize="False"   />
+                                <DataGridTemplateColumn Width="150" CanUserResize="False" Header="First Name" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding EmpFname}" VerticalContentAlignment="Center"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Last Name" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding EmpLName}" VerticalContentAlignment="Center"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="200" CanUserResize="False" Header="Address" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding EmpAddress}" VerticalContentAlignment="Center"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Province" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding EmpProvinceName}" VerticalContentAlignment="Center"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Position" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding PositionName}" VerticalContentAlignment="Center"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                                 <DataGridTemplateColumn  Width="115" CanUserResize="False" Header="Actions"  >
                                     <DataGridTemplateColumn.CellTemplate  >
                                         <DataTemplate>
