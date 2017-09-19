@@ -39,6 +39,11 @@ namespace prototype2
         public String UserName { get; set; }
         public String DateStarted { get; set; }
         public String DateEnded { get; set; }
+
+        public String ProductName { get; set; }
+        public String ProductDesc { get; set; }
+        public String ProductUnit { get; set; }
+        public decimal ProductPrice { get; set; }
         public int Edit { get; set; }
 
         //-----REPRESENTATIVE
