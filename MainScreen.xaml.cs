@@ -47,6 +47,9 @@ namespace prototype2
             }
             companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
             employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
+            productDetailsFormGridBg.Visibility = Visibility.Collapsed;
+            settingGridBg.Visibility = Visibility.Collapsed;
+            addNewItemFormGridBg.Visibility = Visibility.Collapsed;
             dashboardGrid.Visibility = Visibility.Visible;
             settingsBtn.Visibility = Visibility.Hidden;
             worker.RunWorkerAsync();
@@ -77,10 +80,18 @@ namespace prototype2
             MainVM.ProductCategory.Clear();
             MainVM.ServicesList.Clear();
             MainVM.ProductList.Clear();
+            
+            
+            MainVM.AllCustomerSupplier.Clear();
             MainVM.Customers.Clear();
             MainVM.Suppliers.Clear();
             MainVM.Representatives.Clear();
-            MainVM.AllCustomerSupplier.Clear();
+
+            MainVM.AllEmployeesContractor.Clear();
+            MainVM.Employees.Clear();
+            MainVM.Contractor.Clear();
+
+            MainVM.RequestedItems.Clear();
             if (dbCon.IsConnect())
             {
                 string query = "SELECT locProvinceID, locProvince FROM provinces_t";
@@ -365,6 +376,8 @@ namespace prototype2
                     ((Grid)obj).Visibility = Visibility.Collapsed;
                 }
             }
+
+
             if (manageEmployeeGrid.IsVisible)
             {
                 employeeSettings1.Visibility = Visibility.Visible;
@@ -375,6 +388,7 @@ namespace prototype2
                 productSettings1.Visibility = Visibility.Visible;
             }
             settingGridBg.Visibility = Visibility.Visible;
+
         }
 
         private void closeSideMenuBtn_Click(object sender, RoutedEventArgs e)
@@ -384,7 +398,22 @@ namespace prototype2
 
         private void quotesSalesMenuBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            foreach (var obj in containerGrid.Children)
+            {
+                ((Grid)obj).Visibility = Visibility.Collapsed;
+            }
+            trasanctionGrid.Visibility = Visibility.Visible;
+            foreach (var obj in trasanctionGrid.Children)
+            {
+                ((Grid)obj).Visibility = Visibility.Collapsed;
+            }
+            transQuotationGrid.Visibility = Visibility.Visible;
+            foreach (var obj in transQuotationGrid.Children)
+            {
+                ((Grid)obj).Visibility = Visibility.Collapsed;
+            }
+            quotationsGridHome.Visibility = Visibility.Visible;
+            settingsBtn.Visibility = Visibility.Hidden;
         }
 
         private void ordersSalesMenuBtn_Click(object sender, RoutedEventArgs e)
@@ -465,7 +494,7 @@ namespace prototype2
         {
             if (IsLoaded)
             {
-                if (manageEmployeeGrid.IsVisible)
+                if (manageCustomerGrid.IsVisible)
                 {
                     if (compType.SelectedIndex == 0)
                     {
@@ -817,9 +846,6 @@ namespace prototype2
                     ((CheckBox)element).IsEnabled = true;
                 }
             }
-            editCloseGrid.Visibility = Visibility.Collapsed;
-            saveCancelGrid.Visibility = Visibility.Visible;
-            isEdit = true;
             if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyTelephone))
             {
                 companyTelCb.IsChecked = true;
@@ -829,6 +855,12 @@ namespace prototype2
             {
                 companyMobCb.IsChecked = true;
             }
+
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyEmail))
+            {
+                companyEmailCb.IsChecked = true;
+            }
+
             if (String.IsNullOrWhiteSpace(MainVM.SelectedRepresentative.RepTelephone))
             {
                 repTelCb.IsChecked = true;
@@ -837,6 +869,15 @@ namespace prototype2
             {
                 repMobCb.IsChecked = true;
             }
+
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedRepresentative.RepEmail))
+            {
+                repEmailCb.IsChecked = true;
+            }
+            editCloseGrid.Visibility = Visibility.Collapsed;
+            saveCancelGrid.Visibility = Visibility.Visible;
+            isEdit = true;
+            
         }
 
         private void editEmployeeBtn_Click(object sender, RoutedEventArgs e)
@@ -855,6 +896,20 @@ namespace prototype2
                 {
                     ((CheckBox)element).IsEnabled = true;
                 }
+            }
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedEmployeeContractor.EmpTelephone))
+            {
+                empTelCb.IsChecked = true;
+            }
+
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedEmployeeContractor.EmpMobile))
+            {
+                empMobCb.IsChecked = true;
+            }
+
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedEmployeeContractor.EmpEmail))
+            {
+                empEmailCb.IsChecked = true;
             }
             saveCancelGrid1.Visibility = Visibility.Visible;
             editCloseGrid1.Visibility = Visibility.Collapsed;
@@ -2304,6 +2359,469 @@ namespace prototype2
             {
                 Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
             }
+        }
+
+        //Transaction
+
+        private void transQuotationAddBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var element in transQuotationGrid.Children)
+            {
+                if(element is Grid)
+                {
+                    if (!(((Grid)element).Name.Equals(selectCustomerGrid.Name)))
+                    {
+                        ((Grid)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((Grid)element).Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+        private void findBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var linqResults = MainVM.Customers.Where(x => x.CompanyName.ToLower().Contains(transSearchBoxSelectCustGridTb.Text.ToLower()));
+            var observable = new ObservableCollection<Customer>(linqResults);
+            selectCustomerDg.ItemsSource = observable;
+        }
+
+        private void selectCustBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var element in transQuotationGrid.Children)
+            {
+                if (element is Grid)
+                {
+                    if (!(((Grid)element).Name.Equals(newRequisitionGrid.Name)))
+                    {
+                        ((Grid)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((Grid)element).Visibility = Visibility.Visible;
+                }
+            }
+            selectedCustNameLbl.Content = MainVM.SelectedCustomerSupplier.CompanyName;
+        }
+
+        private void transRequestBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (newRequisitionGrid.IsVisible)
+            {
+                foreach (var element in transQuotationGrid.Children)
+                {
+                    if (element is Grid)
+                    {
+                        if (!(((Grid)element).Name.Equals(selectCustomerGrid.Name)))
+                        {
+                            ((Grid)element).Visibility = Visibility.Collapsed;
+                        }
+                        else
+                            ((Grid)element).Visibility = Visibility.Visible;
+                    }
+                }
+            }
+        }
+
+        private void transRequestNext_Click(object sender, RoutedEventArgs e)
+        {
+            if (newRequisitionGrid.IsVisible)
+            {
+                foreach (var element in transQuotationGrid.Children)
+                {
+                    if (element is Grid)
+                    {
+                        if (!(((Grid)element).Name.Equals(makeSalesQuoteGrid.Name)))
+                        {
+                            ((Grid)element).Visibility = Visibility.Collapsed;
+                        }
+                        else
+                            ((Grid)element).Visibility = Visibility.Visible;
+                    }
+                }
+            }
+            else if (makeSalesQuoteGrid.IsVisible)
+            {
+                foreach (var element in transQuotationGrid.Children)
+                {
+                    if (element is Grid)
+                    {
+                        if (!(((Grid)element).Name.Equals(viewQuotationGrid.Name)))
+                        {
+                            ((Grid)element).Visibility = Visibility.Collapsed;
+                        }
+                        else
+                            ((Grid)element).Visibility = Visibility.Visible;
+                    }
+                }
+                salesQuoteToMemory();
+                Document document;
+                DocumentFormat df = new DocumentFormat();
+                document = df.CreateDocument("sdadsa", "asdsadsa");
+                string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
+                pagePreview.Ddl = ddl;
+            }
+        }
+
+        private void transReqAddNewItem_Click(object sender, RoutedEventArgs e)
+        {
+            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+            sb.Begin(addNewItemFormGridBg);
+            companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
+            employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
+            productDetailsFormGridBg.Visibility = Visibility.Collapsed;
+            settingsGrid.Visibility = Visibility.Collapsed;
+            if (addNewItemFormGridBg.IsVisible)
+            {
+                addNewItemFormGridBg.Visibility = Visibility.Collapsed;
+            }
+            else
+                addNewItemFormGridBg.Visibility = Visibility.Visible;
+        }
+
+        private void addProductBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
+            sb.Begin(addNewItemFormGridBg);
+            companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
+            employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
+            productDetailsFormGridBg.Visibility = Visibility.Collapsed;
+            settingsGrid.Visibility = Visibility.Collapsed;
+            if (addNewItemFormGridBg.IsVisible)
+            {
+                addNewItemFormGridBg.Visibility = Visibility.Collapsed;
+            }
+            else
+                addNewItemFormGridBg.Visibility = Visibility.Visible;
+
+            //Add Item In to List
+            if ((bool)productRbtn.IsChecked)
+            {
+                foreach (Item prd in MainVM.ProductList)
+                {
+                    if (prd.IsChecked)
+                    {
+                        MainVM.RequestedItems.Add(new RequestedItem() { lineNo = (MainVM.RequestedItems.Count + 1).ToString(), itemName = prd.ItemName, desc = prd.ItemDesc, itemTypeName = "Product", itemType = 0, qty = prd.Quantity, unitPrice = prd.CostPrice, totalAmount = prd.Quantity * prd.CostPrice, totalAmountMarkUp = prd.Quantity * prd.CostPrice, qtyEditable = true });
+                    }
+                }
+            }
+            else if ((bool)serviceRbtn.IsChecked)
+            {
+                MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(serviceTypeCb.SelectedValue.ToString())).First();
+                MainVM.SelectedProvince = MainVM.Provinces.Where(x => x.ProvinceID == int.Parse(provinceCb.SelectedValue.ToString())).First();
+                MainVM.RequestedItems.Add(new RequestedItem() { lineNo = (MainVM.RequestedItems.Count + 1).ToString(), itemName = MainVM.SelectedService.ServiceName, desc = serviceDescTb.Text, itemTypeName = "Service", itemType = 1, qty = 1, unitPrice = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, totalAmount = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, totalAmountMarkUp = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, qtyEditable = false });
+            }
+            computePrice();
+        }
+
+        private void cancelAddProductBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
+            sb.Begin(addNewItemFormGridBg);
+            companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
+            employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
+            productDetailsFormGridBg.Visibility = Visibility.Collapsed;
+            settingsGrid.Visibility = Visibility.Collapsed;
+            if (addNewItemFormGridBg.IsVisible)
+            {
+                addNewItemFormGridBg.Visibility = Visibility.Collapsed;
+            }
+            else
+                addNewItemFormGridBg.Visibility = Visibility.Visible;
+            computePrice();
+        }
+
+        private void productRbtn_Checked(object sender, RoutedEventArgs e)
+        {
+            if (IsLoaded)
+            {
+                for (int x = 1; x < forms.Children.Count; x++)
+                {
+                    forms.Children[x].Visibility = Visibility.Hidden;
+                }
+                product.Visibility = Visibility.Visible;
+                service.Visibility = Visibility.Hidden;
+            }
+            
+        }
+
+        private void productRbtn_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void serviceRbtn_Checked(object sender, RoutedEventArgs e)
+        {
+            if (IsLoaded)
+            {
+                for (int x = 1; x < forms.Children.Count; x++)
+                {
+                    forms.Children[x].Visibility = Visibility.Hidden;
+                }
+                product.Visibility = Visibility.Hidden;
+                service.Visibility = Visibility.Visible;
+            }
+            
+        }
+
+        private void serviceRbtn_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void searchBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var linqResults = MainVM.ProductList.Where(x => x.ItemName.ToLower().Contains(searchTb.Text.ToLower()));
+            var observable = new ObservableCollection<Item>(linqResults);
+            addGridProductListDg.ItemsSource = observable;
+        }
+
+        private void provinceCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MainVM.SelectedProvince = MainVM.Provinces.Where(x => x.ProvinceID == int.Parse(provinceCb.SelectedValue.ToString())).First();
+            if (MainVM.SelectedProvince.ProvincePrice == 0)
+            {
+                MessageBox.Show("This location has no price set. Please set it in Settings.");
+            }
+        }
+
+        private void paymentCustomRb_Checked(object sender, RoutedEventArgs e)
+        {
+            downpaymentPercentTb.IsEnabled = true;
+            paymentDpLbl.IsEnabled = true;
+        }
+
+        private void paymentCustomRb_Unchecked(object sender, RoutedEventArgs e)
+        {
+            downpaymentPercentTb.IsEnabled = false;
+            paymentDpLbl.IsEnabled = false;
+        }
+
+        private void validtycustomRd_Checked(object sender, RoutedEventArgs e)
+        {
+            validityTb.IsEnabled = true;
+            validtycustomlbl.IsEnabled = true;
+        }
+
+        private void validtycustomRd_Unchecked(object sender, RoutedEventArgs e)
+        {
+            validityTb.IsEnabled = false;
+            validtycustomlbl.IsEnabled = false;
+        }
+
+        private void warrantycustomRd_Checked(object sender, RoutedEventArgs e)
+        {
+            warrantyDaysCustom.IsEnabled = true;
+            warrantyDaysCustomLbl.IsEnabled = true;
+        }
+
+        private void warrantycustomRd_Unchecked(object sender, RoutedEventArgs e)
+        {
+            warrantyDaysCustom.IsEnabled = false;
+            warrantyDaysCustomLbl.IsEnabled = false;
+        }
+
+        private void deliveryCustomRd_Checked(object sender, RoutedEventArgs e)
+        {
+            deliveryDaysCustomLbl.IsEnabled = true;
+            deliveryDaysTb.IsEnabled = true;
+        }
+
+        private void deliveryCustomRd_Unchecked(object sender, RoutedEventArgs e)
+        {
+            deliveryDaysCustomLbl.IsEnabled = false;
+            deliveryDaysTb.IsEnabled = false;
+        }
+
+        private void customPenaltyRd_Checked(object sender, RoutedEventArgs e)
+        {
+            customPenaltyTb.IsEnabled = true;
+            customPenaltyLbl.IsEnabled = true;
+        }
+
+        private void customPenaltyRd_Unchecked(object sender, RoutedEventArgs e)
+        {
+            customPenaltyTb.IsEnabled = false;
+            customPenaltyLbl.IsEnabled = false;
+        }
+
+        private void vatCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (vatInclusiveTb != null && vatInclusiveTb.IsEnabled == true)
+            {
+                vatInclusiveTb.IsEnabled = false;
+            }
+
+        }
+
+        private void vatCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (vatInclusiveTb != null && vatInclusiveTb.IsEnabled == false)
+            {
+                vatInclusiveTb.IsEnabled = true;
+            }
+        }
+
+        private void markupPriceTb_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            computePrice();
+        }
+
+        private void additionalFeesDg_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+            computePrice();
+        }
+
+        private void discountPriceTb_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            computePrice();
+        }
+
+        private void qtyTb_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            computePrice();
+        }
+
+        private void IntegerUpDown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            computePrice();
+        }
+
+        private void computePrice()
+        {
+            decimal totalFee = 0;
+            decimal totalPrice = 0;
+            foreach (AdditionalFee aF in MainVM.AdditionalFees)
+            {
+                if (!(aF.FeePrice == 0))
+                {
+                    totalFee += aF.FeePrice;
+                }
+            }
+            foreach (RequestedItem item in MainVM.RequestedItems)
+            {
+                if (item.itemType == 0)
+                {
+                    item.unitPriceMarkUp = item.unitPrice + (item.unitPrice / 100 * (decimal)markupPriceTb.Value);
+                    item.totalAmountMarkUp = (item.unitPriceMarkUp * item.qty) - ((item.unitPriceMarkUp * item.qty) / 100) * (decimal)discountPriceTb.Value;
+                    item.totalAmount = item.unitPriceMarkUp * item.qty;
+
+                }
+                else if (item.itemType == 1)
+                {
+                    item.unitPriceMarkUp = (item.unitPrice + totalFee) + ((item.unitPrice + totalFee) / 100 * (decimal)markupPriceTb.Value);
+                    item.totalAmountMarkUp = (item.unitPrice + totalFee + (((item.unitPrice + totalFee) / 100) * (decimal)markupPriceTb.Value)) - ((item.unitPrice + totalFee) / 100) * (decimal)discountPriceTb.Value;
+                    item.totalAmount = item.unitPrice + totalFee;
+                }
+                totalPrice += item.totalAmountMarkUp;
+            }
+            if (totalPriceLbl != null)
+            {
+                totalPriceLbl.Content = "" + totalPrice;
+            }
+        }
+
+        private void feeDeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MainVM.SelectedAdditionalFee != null)
+                MainVM.AdditionalFees.Remove(MainVM.SelectedAdditionalFee);
+        }
+
+        void salesQuoteToMemory()
+        {
+            string landed = "";
+            decimal vat = 0;
+            string vatExc = "VAT Exclusive";
+            int estDel = 0;
+            int valid = 30;
+            if ((bool)landedCheckBox.IsChecked)
+            {
+                landed = "Landed,";
+            }
+            if (!(bool)vatCheckBox.IsChecked)
+            {
+                vat = (decimal)vatInclusiveTb.Value;
+            }
+            if ((bool)deliveryDefaultRd.IsChecked)
+            {
+                estDel = 30;
+            }
+            else
+                estDel = int.Parse(deliveryDaysTb.Value.ToString());
+
+            if (!(bool)validityDefaultRd.IsChecked)
+            {
+                valid = int.Parse(validityTb.Value.ToString());
+            }
+
+            DateTime endDate = new DateTime();
+            endDate = DateTime.Today.AddDays(valid);
+
+            int downP = 50;
+            if (!(bool)paymentDefaultRd.IsChecked)
+                downP = int.Parse(downpaymentPercentTb.Value.ToString());
+
+            decimal penaltyP = 0.1M;
+            if (!(bool)penaltyDefaultRd.IsChecked)
+                penaltyP = (decimal)customPenaltyTb.Value;
+            int warr = 0;
+            if ((bool)warrantyDefaultRd.IsChecked)
+            {
+                warr = 1;
+            }
+            else if ((bool)warrantycustomRd.IsChecked)
+            {
+                warr = int.Parse(warrantyDaysCustom.Value.ToString());
+            }
+            string quoteName = "";
+            if (MainVM.SelectedCustomerSupplier.CompanyName.Length > 5)
+            {
+                quoteName = MainVM.SelectedCustomerSupplier.CompanyName.Substring(0, 5).Replace(" ", String.Empty) + "" + (MainVM.SalesQuotes.Count + 1);
+            }
+            else
+                quoteName = MainVM.SelectedCustomerSupplier.CompanyName.Replace(" ", String.Empty) + "" + (MainVM.SalesQuotes.Count + 1);
+
+            MainVM.SalesQuotes.Add(new SalesQuote()
+            {
+                sqNoChar_ = quoteName + "" + (MainVM.SalesQuotes.Count + 1),
+                custID_ = int.Parse(MainVM.SelectedCustomerSupplier.CompanyID),
+                custRepID_ = int.Parse(MainVM.SelectedCustomerSupplier.RepresentativeID),
+                quoteSubject_ = quoteName,
+                priceNote_ = "In Philippine Peso, " + landed + ", " + vatExc,
+                vatexcluded_ = (bool)vatCheckBox.IsChecked,
+                vat_ = vat,
+                paymentIsLanded_ = (bool)landedCheckBox.IsChecked,
+                paymentCurrency_ = "Peso",
+                estDelivery_ = estDel,
+                validityDays_ = valid,
+                validityDate_ = endDate,
+                status_ = "PENDING",
+                termsDP_ = downP,
+                penaltyPercent_ = penaltyP
+
+            });
+            MainVM.SelectedSalesQuote = new SalesQuote()
+            {
+                sqNoChar_ = quoteName + "" + (MainVM.SalesQuotes.Count + 1),
+                custID_ = int.Parse(MainVM.SelectedCustomerSupplier.CompanyID),
+                custRepID_ = int.Parse(MainVM.SelectedCustomerSupplier.RepresentativeID),
+                quoteSubject_ = quoteName.Replace(" ", String.Empty) + "" + (MainVM.SalesQuotes.Count + 1),
+                priceNote_ = "In Philippine Peso, " + landed + ", " + vatExc,
+                vatexcluded_ = (bool)vatCheckBox.IsChecked,
+                vat_ = vat,
+                paymentIsLanded_ = (bool)landedCheckBox.IsChecked,
+                paymentCurrency_ = "Peso",
+                estDelivery_ = estDel,
+                validityDays_ = valid,
+                validityDate_ = endDate,
+                status_ = "PENDING",
+                termsDP_ = downP,
+                penaltyPercent_ = penaltyP,
+                warrantyDays_ = warr,
+                additionalTerms_ = additionalTermsTb.Text
+
+            };
+            MainVM.SalesQuotes.Add(MainVM.SelectedSalesQuote);
+            MainVM.SelectedRepresentative = MainVM.Representatives.Where(x => x.RepresentativeID.Equals(MainVM.SelectedCustomerSupplier.RepresentativeID)).First();
         }
 
         

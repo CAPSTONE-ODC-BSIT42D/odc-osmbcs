@@ -65,7 +65,7 @@ namespace prototype2
         {
             if ((bool)productRbtn.IsChecked)
             {
-                foreach (Item prd in.ProductList)
+                foreach (Item prd in ProductList)
                 {
                     if (prd.IsChecked)
                     {

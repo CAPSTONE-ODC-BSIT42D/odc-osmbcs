@@ -15,7 +15,7 @@
                     <RadioButton x:Name="productRbtn" Content="Product" HorizontalAlignment="Left" Margin="37,39,0,0" VerticalAlignment="Top" GroupName="itemType" Checked="productRbtn_Checked" Unchecked="productRbtn_Unchecked"/>
                     <RadioButton x:Name="serviceRbtn" Content="Service" HorizontalAlignment="Left" Margin="37,59,0,0" VerticalAlignment="Top" GroupName="itemType" Checked="serviceRbtn_Checked" Unchecked="serviceRbtn_Unchecked"/>
                     <Grid x:Name="forms" Margin="10,79,10,10">
-                        <Border x:Name="service" Margin="0,0,0,90" BorderThickness="1" BorderBrush="Black" Panel.ZIndex="-1" d:IsHidden="True">
+                        <Border x:Name="service" Margin="0,0,0,90" BorderThickness="1" BorderBrush="Black" Panel.ZIndex="-1">
                             <Grid>
                                 <Label Content="Service Type:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic"/>
                                 <ComboBox x:Name="serviceTypeCb" HorizontalAlignment="Left" Margin="27,31,0,0" VerticalAlignment="Top" Width="186" ItemsSource="{Binding ServicesList}" DisplayMemberPath="ServiceName" SelectedValuePath="ServiceID"/>

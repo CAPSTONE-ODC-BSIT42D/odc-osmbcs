@@ -13,6 +13,7 @@ using System.IO;
 using System.Xml.XPath;
 using System.Diagnostics;
 using System.Globalization;
+using System.Windows;
 
 namespace prototype2
 {
@@ -30,6 +31,9 @@ namespace prototype2
         public Color TableBorder { get; private set; }
         public Color TableBlue { get; private set; }
         public Color TableGray { get; private set; }
+
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
+
 
         public DocumentFormat()
         {
@@ -52,7 +56,7 @@ namespace prototype2
         void DefineStyles()
         {
             // Get the predefined style Normal.
-            Style style = this.document.Styles["Normal"];
+            MigraDoc.DocumentObjectModel.Style style = this.document.Styles["Normal"];
             // Because all styles are derived from Normal, the next line changes the 
             // font of the whole document. Or, more exactly, it changes the font of
             // all styles and paragraphs that do not redefine the font.
@@ -106,6 +110,7 @@ namespace prototype2
             this.addressFrame = section.AddParagraph();
             this.letterHeaderFrame = section.AddParagraph();
             this.paragraph1 = section.AddParagraph();
+            this.paragraph2 = section.AddParagraph();
             // Put sender in address frame
             DateTime timeToday = new DateTime();
             timeToday = DateTime.Today;
@@ -113,24 +118,24 @@ namespace prototype2
             dateFrame.Format.Font.Name = "Calibri";
             dateFrame.Format.Font.Size = 11;
             dateFrame.Format.SpaceAfter = "1.0cm";
-            customerName.AddFormattedText(MainMenu.MainVM.SelectedCustomerSupplier.CompanyName);
+            customerName.AddFormattedText(MainVM.SelectedCustomerSupplier.CompanyName);
             customerName.Format.Font.Name = "Calibri";
             customerName.Format.Font.Size = 11;
             customerName.Format.Font.Bold = true;
-            addressFrame.AddFormattedText(MainMenu.MainVM.SelectedCustomerSupplier.CompanyAddress +"\n"+ MainMenu.MainVM.SelectedCustomerSupplier.CompanyCity + "\n" + MainMenu.MainVM.SelectedCustomerSupplier.CompanyProvinceName);
+            addressFrame.AddFormattedText(MainVM.SelectedCustomerSupplier.CompanyAddress +"\n"+ MainVM.SelectedCustomerSupplier.CompanyCity + "\n" + MainVM.SelectedCustomerSupplier.CompanyProvinceName);
             addressFrame.Format.Font.Name = "Calibri";
             addressFrame.Format.Font.Size = 11;
             addressFrame.Format.SpaceAfter = "1.0cm";
             letterHeaderFrame.AddFormattedText("Attention: ", TextFormat.Bold);
-            letterHeaderFrame.AddFormattedText(""+MainMenu.MainVM.SelectedRepresentative.RepFullName);
+            letterHeaderFrame.AddFormattedText(""+MainVM.SelectedRepresentative.RepFullName);
             letterHeaderFrame.AddLineBreak();
             letterHeaderFrame.AddFormattedText("Subject: ", TextFormat.Bold);
-            letterHeaderFrame.AddFormattedText(""+MainMenu.MainVM.SelectedSalesQuote.sqNoChar_);
+            letterHeaderFrame.AddFormattedText(""+MainVM.SelectedSalesQuote.sqNoChar_);
             addressFrame.Format.Font.Name = "Calibri";
             addressFrame.Format.Font.Size = 11;
             addressFrame.Format.SpaceAfter = "1.0cm";
             paragraph1.AddText("Dear");
-            paragraph1.AddFormattedText(""+ MainMenu.MainVM.SelectedRepresentative.RepLastName, TextFormat.Bold);
+            paragraph1.AddFormattedText(""+ MainVM.SelectedRepresentative.RepLastName, TextFormat.Bold);
             paragraph1.AddLineBreak();
             paragraph1.AddText("As per your request, we are formally offering our price proposal for the above subject as follows:");
             addressFrame.Format.Font.Name = "Calibri";
@@ -181,31 +186,31 @@ namespace prototype2
             row.Cells[0].AddParagraph("No.");
             row.Cells[0].Format.Font.Bold = true;
             row.Cells[0].Format.Alignment = ParagraphAlignment.Left;
-            row.Cells[0].VerticalAlignment = VerticalAlignment.Bottom;
+            row.Cells[0].VerticalAlignment = MigraDoc.DocumentObjectModel.Tables.VerticalAlignment.Bottom;
             row.Cells[1].AddParagraph("Item");
             row.Cells[1].AddParagraph("Name");
             row.Cells[1].Format.Alignment = ParagraphAlignment.Left;
             row.Cells[2].AddParagraph("Description");
             row.Cells[2].Format.Alignment = ParagraphAlignment.Left;
-            row.Cells[2].VerticalAlignment = VerticalAlignment.Bottom;
+            row.Cells[2].VerticalAlignment = MigraDoc.DocumentObjectModel.Tables.VerticalAlignment.Bottom;
             row.Cells[3].AddParagraph("Unit");
             row.Cells[3].Format.Alignment = ParagraphAlignment.Left;
-            row.Cells[3].VerticalAlignment = VerticalAlignment.Bottom;
+            row.Cells[3].VerticalAlignment = MigraDoc.DocumentObjectModel.Tables.VerticalAlignment.Bottom;
             row.Cells[4].AddParagraph("Qty");
             row.Cells[4].Format.Alignment = ParagraphAlignment.Left;
-            row.Cells[4].VerticalAlignment = VerticalAlignment.Bottom;
+            row.Cells[4].VerticalAlignment = MigraDoc.DocumentObjectModel.Tables.VerticalAlignment.Bottom;
             row.Cells[5].AddParagraph("Unit Price");
             row.Cells[5].Format.Alignment = ParagraphAlignment.Left;
-            row.Cells[5].VerticalAlignment = VerticalAlignment.Bottom;
+            row.Cells[5].VerticalAlignment = MigraDoc.DocumentObjectModel.Tables.VerticalAlignment.Bottom;
             row.Cells[6].AddParagraph("Total Amount");
             row.Cells[6].Format.Alignment = ParagraphAlignment.Left;
-            row.Cells[6].VerticalAlignment = VerticalAlignment.Bottom;
+            row.Cells[6].VerticalAlignment = MigraDoc.DocumentObjectModel.Tables.VerticalAlignment.Bottom;
 
 
             this.table.SetEdge(0, 0, 7, 1, Edge.Box, BorderStyle.Single, 0.25, Color.Empty);
             
             decimal totalPrice = 0;
-            foreach (RequestedItem item in MainMenu.MainVM.RequestedItems)
+            foreach (RequestedItem item in MainVM.RequestedItems)
             {
                 row = table.AddRow();
                 row.Cells[0].AddParagraph(item.lineNo);
@@ -251,44 +256,46 @@ namespace prototype2
             row.Cells[0].Format.Font.Bold = true;
             row.Cells[0].MergeRight = 1;
             row.Cells[0].Format.Alignment = ParagraphAlignment.Left;
-            row.Cells[0].VerticalAlignment = VerticalAlignment.Bottom;
+            row.Cells[0].VerticalAlignment = MigraDoc.DocumentObjectModel.Tables.VerticalAlignment.Bottom;
             row = table.AddRow();
             row.Cells[0].AddParagraph("PRICE: ");
-            row.Cells[1].AddParagraph(MainMenu.MainVM.SelectedSalesQuote.priceNote_);
+            row.Cells[1].AddParagraph(MainVM.SelectedSalesQuote.priceNote_);
             row = table.AddRow();
             row.Cells[0].AddParagraph("PAYMENT: ");
-            row.Cells[1].AddParagraph(MainMenu.MainVM.SelectedSalesQuote.termsDP_+"% DP upon release of order and "+ (MainMenu.MainVM.SelectedSalesQuote.termsDP_-100)+"% Balacne upon delivery");
+            row.Cells[1].AddParagraph(MainVM.SelectedSalesQuote.termsDP_+"% DP upon release of order and "+ (MainVM.SelectedSalesQuote.termsDP_-100)+"% Balacne upon delivery");
             row = table.AddRow();
             row.Cells[0].AddParagraph("DELIVERY: ");
-            if (MainMenu.MainVM.SelectedSalesQuote.estDelivery_ != 0)
+            if (MainVM.SelectedSalesQuote.estDelivery_ != 0)
             {
-                row.Cells[1].AddParagraph(MainMenu.MainVM.SelectedSalesQuote.estDelivery_ + " days upon receipt of DP");
+                row.Cells[1].AddParagraph(MainVM.SelectedSalesQuote.estDelivery_ + " days upon receipt of DP");
             }
             else
                 row.Cells[1].AddParagraph("None");
             row = table.AddRow();
             row.Cells[0].AddParagraph("WARRANTY: ");
-            if (MainMenu.MainVM.SelectedSalesQuote.warrantyDays_ != 0)
+            if (MainVM.SelectedSalesQuote.warrantyDays_ != 0)
             {
-                row.Cells[1].AddParagraph(MainMenu.MainVM.SelectedSalesQuote.warrantyDays_ + " year from the date of delivery");
+                row.Cells[1].AddParagraph(MainVM.SelectedSalesQuote.warrantyDays_ + " year from the date of delivery");
             }
             else
                 row.Cells[1].AddParagraph("None");
 
             row = table.AddRow();
             row.Cells[0].AddParagraph("VALIDITY: ");
-            row.Cells[1].AddParagraph(MainMenu.MainVM.SelectedSalesQuote.validityDays_ + " days (price increase will take effect after validity period)");
+            row.Cells[1].AddParagraph(MainVM.SelectedSalesQuote.validityDays_ + " days (price increase will take effect after validity period)");
 
             row = table.AddRow();
             row.Cells[0].AddParagraph("PENALTY: ");
-            row.Cells[1].AddParagraph(MainMenu.MainVM.SelectedSalesQuote.penaltyPercent_ + "% of balance");
+            row.Cells[1].AddParagraph(MainVM.SelectedSalesQuote.penaltyPercent_ + "% of balance");
 
             row = table.AddRow();
             row.Cells[0].AddParagraph("ADDITIONAL TERMS: ");
-            row.Cells[1].AddParagraph(MainMenu.MainVM.SelectedSalesQuote.additionalTerms_);
+            row.Cells[1].AddParagraph(MainVM.SelectedSalesQuote.additionalTerms_);
 
             
             this.table.SetEdge(0, 0, 2, 1, Edge.Box, BorderStyle.None, 0.25, Color.Empty);
+
+
 
             paragraph2.AddText("Thank you very much and we are looking forward for your valued order soon.");
             paragraph2.AddLineBreak();

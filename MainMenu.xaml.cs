@@ -403,12 +403,7 @@ namespace prototype2
                 transactionQuotationsGrid.Children[x].Visibility = Visibility.Collapsed;
             }
             viewQuotationGrid.Visibility = Visibility.Visible;
-            salesQuoteToMemory();
-            Document document;
-            DocumentFormat df = new DocumentFormat();
-            document = df.CreateDocument("sdadsa", "asdsadsa");
-            string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
-            pagePreview.Ddl = ddl;
+            
 
 
         }
