@@ -11,14 +11,18 @@ namespace prototype2
         public override ValidationResult Validate (object value, System.Globalization.CultureInfo cultureInfo)
         {
             var str = TextBoxType as string;
-            if (value == null)
+            
+            if(str!=null)
             {
-                return new ValidationResult(false, "*This field must be filled.");
-
-            }
-            else if(str!=null)
-            {
-                if (str.Equals("Mobile"))
+                if (str.Equals("IsEmpty"))
+                {
+                    if (String.IsNullOrWhiteSpace(value.ToString()))
+                    {
+                        return new ValidationResult(false, "*This field must be filled.");
+                    }
+                    return ValidationResult.ValidResult;
+                }
+                else if (str.Equals("Mobile"))
                 {
                     if (!regex.IsValidMobileNumber(value.ToString()))
                     {

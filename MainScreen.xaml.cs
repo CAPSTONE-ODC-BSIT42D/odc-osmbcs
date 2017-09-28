@@ -1,11 +1,13 @@
 ﻿using Microsoft.Win32;
 using MigraDoc.DocumentObjectModel;
+using MigraDoc.Rendering;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -50,6 +52,7 @@ namespace prototype2
             productDetailsFormGridBg.Visibility = Visibility.Collapsed;
             settingGridBg.Visibility = Visibility.Collapsed;
             addNewItemFormGridBg.Visibility = Visibility.Collapsed;
+            additionalFeesGridBg.Visibility = Visibility.Collapsed;
             dashboardGrid.Visibility = Visibility.Visible;
             settingsBtn.Visibility = Visibility.Hidden;
             worker.RunWorkerAsync();
@@ -174,7 +177,7 @@ namespace prototype2
             }
             if (dbCon.IsConnect())
             {
-                string query = "SELECT * FROM service_t;";
+                string query = "SELECT * FROM services_t;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
@@ -189,7 +192,7 @@ namespace prototype2
             }
             if (dbCon.IsConnect())
             {
-                string query = "SELECT * FROM ITEM_T;";
+                string query = "SELECT * FROM ITEM_T WHERE isDeleted = 0;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
@@ -199,12 +202,13 @@ namespace prototype2
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
                     MainVM.SelectedCustomerSupplier = MainVM.Suppliers.Where(x => x.CompanyID.Equals(dr["supplierID"].ToString())).FirstOrDefault();
+                    MainVM.SelectedProductCategory = MainVM.ProductCategory.Where(x => x.TypeID == int.Parse(dr["typeID"].ToString())).FirstOrDefault();
                     if (MainVM.SelectedCustomerSupplier != null)
                     {
-                        MainVM.ProductList.Add(new Item() { ItemNo = dr["itemNo"].ToString(), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), Unit = dr["itemUnit"].ToString(), Quantity = 1, SupplierID = dr["supplierID"].ToString(), SupplierName = MainVM.SelectedCustomerSupplier.CompanyName });
+                        MainVM.ProductList.Add(new Item() { ItemNo = dr["itemNo"].ToString(), ItemCode = dr["itemCode"].ToString(),ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), Unit = dr["itemUnit"].ToString(),TypeName = MainVM.SelectedProductCategory.TypeName, Quantity = 1, SupplierID = dr["supplierID"].ToString(), SupplierName = MainVM.SelectedCustomerSupplier.CompanyName });
                     }
                     else
-                        MainVM.ProductList.Add(new Item() { ItemNo = dr["itemNo"].ToString(), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), Unit = dr["itemUnit"].ToString(), Quantity = 1, SupplierID = dr["supplierID"].ToString()});
+                        MainVM.ProductList.Add(new Item() { ItemNo = dr["itemNo"].ToString(), ItemCode = dr["itemCode"].ToString(), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), Unit = dr["itemUnit"].ToString(), TypeName = MainVM.SelectedProductCategory.TypeName, Quantity = 1, SupplierID = dr["supplierID"].ToString()});
                 }
                 dbCon.Close();
             }
@@ -414,6 +418,7 @@ namespace prototype2
             }
             quotationsGridHome.Visibility = Visibility.Visible;
             settingsBtn.Visibility = Visibility.Hidden;
+            headerLbl.Content = "Trasanction - Sales Quote";
         }
 
         private void ordersSalesMenuBtn_Click(object sender, RoutedEventArgs e)
@@ -476,6 +481,10 @@ namespace prototype2
 
         private void settingsManageMenuBtn_Click(object sender, RoutedEventArgs e)
         {
+            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+            sb.Begin(settingGridBg);
+            companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
+            productDetailsFormGridBg.Visibility = Visibility.Collapsed;
             settingGridBg.Visibility = Visibility.Visible;
             foreach (var obj in settingsGridStackPanel.Children)
             {
@@ -563,6 +572,7 @@ namespace prototype2
             sb.Begin(productDetailsFormGrid);
             companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
             employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
+            saveCancelGrid3.Visibility = Visibility.Visible;
             if (productDetailsFormGrid.IsVisible)
             {
 
@@ -571,6 +581,37 @@ namespace prototype2
             else
                 productDetailsFormGridBg.Visibility = Visibility.Visible;
         }
+
+        private void generateProductCodeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(productNameTb.Text))
+            {
+                MessageBox.Show("For meaningful product code, enter product name first");
+                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                var stringChars = new char[8];
+                var random = new Random();
+
+                for (int i = 0; i < stringChars.Length; i++)
+                {
+                    stringChars[i] = chars[random.Next(chars.Length)];
+                }
+
+                var finalString = new String(stringChars);
+                productCodeTb.Text = finalString;
+            }
+            else
+            {
+                if (productNameTb.Text.Length > 4)
+                {
+                    productCodeTb.Text = productNameTb.Text.Substring(0, 4) + MainVM.ProductList.Count;
+                }
+                else
+                {
+                    productCodeTb.Text = productNameTb.Text + MainVM.ProductList.Count;
+                }
+            }
+        }
+
         private bool validationError = false;
 
         byte[] picdata;
@@ -939,8 +980,8 @@ namespace prototype2
 
         private void saveRecordBtn_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Do you want to save?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
-            if (result == MessageBoxResult.Yes)
+            MessageBoxResult result = MessageBox.Show("Do you want to save?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+            if (result == MessageBoxResult.OK)
             {
                 if (companyDetailsFormGridBg.IsVisible)
                 {
@@ -1034,7 +1075,7 @@ namespace prototype2
                 saveDataToDb();
                 isEdit = false;
             }
-            else if (result == MessageBoxResult.No)
+            else if (result == MessageBoxResult.Cancel)
             {
             }
             
@@ -1051,6 +1092,12 @@ namespace prototype2
             {
             }
             
+        }
+
+        private void closeModalBtn_Click(object sender, RoutedEventArgs e)
+        {
+            resetFieldsValue();
+
         }
 
         private void employeeType_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1651,6 +1698,9 @@ namespace prototype2
 
                     //INSERT NEW Product TO DB;
 
+                    cmd.Parameters.AddWithValue("@itemCode", productCodeTb.Text);
+                    cmd.Parameters["@itemCode"].Direction = ParameterDirection.Input;
+
                     cmd.Parameters.AddWithValue("@itemName", productNameTb.Text);
                     cmd.Parameters["@itemName"].Direction = ParameterDirection.Input;
 
@@ -1690,6 +1740,9 @@ namespace prototype2
             companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
             employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
             productDetailsFormGridBg.Visibility = Visibility.Collapsed;
+            additionalFeesGridBg.Visibility = Visibility.Collapsed;
+            addNewItemFormGridBg.Visibility = Visibility.Collapsed;
+            settingGridBg.Visibility = Visibility.Collapsed;
             companyDetailsFormGridSv.ScrollToTop();
             employeeDetailsFormGridSv.ScrollToTop();
             productDetailsFormGridSv.ScrollToTop();
@@ -1699,6 +1752,7 @@ namespace prototype2
                 
                 if (element is TextBox)
                 {
+                    ((TextBox)element).IsEnabled = true;
                     BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
                     if (expression != null)
                         Validation.ClearInvalid(expression);
@@ -1706,6 +1760,7 @@ namespace prototype2
                 }
                 else if (element is ComboBox)
                 {
+                    ((ComboBox)element).IsEnabled = true;
                     BindingExpression expression = ((ComboBox)element).GetBindingExpression(TextBox.TextProperty);
                     if (expression != null)
                         Validation.ClearInvalid(expression);
@@ -1713,6 +1768,7 @@ namespace prototype2
                 }
                 else if (element is CheckBox)
                 {
+                    ((CheckBox)element).IsEnabled = true;
                     ((CheckBox)element).IsChecked = false;
                 }
             }
@@ -1720,6 +1776,57 @@ namespace prototype2
             {
                 if (element is TextBox)
                 {
+                    ((TextBox)element).IsEnabled = true;
+                    BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
+                    if (expression != null)
+                        Validation.ClearInvalid(expression);
+                    ((TextBox)element).Text = string.Empty;
+                }
+                else if (element is ComboBox)
+                {
+                    ((ComboBox)element).IsEnabled = true;
+                    BindingExpression expression = ((ComboBox)element).GetBindingExpression(TextBox.TextProperty);
+                    if (expression != null)
+                        Validation.ClearInvalid(expression);
+                    ((ComboBox)element).SelectedIndex = -1;
+                }
+                else if (element is CheckBox)
+                {
+                    ((CheckBox)element).IsEnabled = true;
+                    ((CheckBox)element).IsChecked = false;
+                }
+            }
+            foreach (var element in productDetailsFormGrid1.Children)
+            {
+                if (element is TextBox)
+                {
+                    ((TextBox)element).IsEnabled = true;
+                    BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
+                    if (expression != null)
+                        Validation.ClearInvalid(expression);
+                    ((TextBox)element).Text = string.Empty;
+                }
+                else if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
+                {
+                    ((Xceed.Wpf.Toolkit.DecimalUpDown)element).IsEnabled = true;
+                    BindingExpression expression = ((Xceed.Wpf.Toolkit.DecimalUpDown)element).GetBindingExpression(Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
+                    if (expression != null)
+                        Validation.ClearInvalid(expression);
+                    ((Xceed.Wpf.Toolkit.DecimalUpDown)element).Value = 0;
+                }
+                else if (element is ComboBox)
+                {
+                    ((ComboBox)element).IsEnabled = true;
+                    BindingExpression expression = ((ComboBox)element).GetBindingExpression(TextBox.TextProperty);
+                    if (expression != null)
+                        Validation.ClearInvalid(expression);
+                    ((ComboBox)element).SelectedIndex = -1;
+                }
+            }
+            foreach (var element in addNewServiceForm.Children)
+            {
+                if (element is TextBox)
+                {
                     BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
                     if (expression != null)
                         Validation.ClearInvalid(expression);
@@ -1735,30 +1842,6 @@ namespace prototype2
                 else if (element is CheckBox)
                 {
                     ((CheckBox)element).IsChecked = false;
-                }
-            }
-            foreach (var element in productDetailsFormGrid1.Children)
-            {
-                if (element is TextBox)
-                {
-                    BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-                    if (expression != null)
-                        Validation.ClearInvalid(expression);
-                    ((TextBox)element).Text = string.Empty;
-                }
-                else if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
-                {
-                    BindingExpression expression = ((Xceed.Wpf.Toolkit.DecimalUpDown)element).GetBindingExpression(Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
-                    if (expression != null)
-                        Validation.ClearInvalid(expression);
-                    ((Xceed.Wpf.Toolkit.DecimalUpDown)element).Value = 0;
-                }
-                else if (element is ComboBox)
-                {
-                    BindingExpression expression = ((ComboBox)element).GetBindingExpression(TextBox.TextProperty);
-                    if (expression != null)
-                        Validation.ClearInvalid(expression);
-                    ((ComboBox)element).SelectedIndex = -1;
                 }
             }
 
@@ -2158,7 +2241,7 @@ namespace prototype2
             {
                 if (id.Equals(""))
                 {
-                    string query = "INSERT INTO service_t (serviceName,serviceDesc,servicePrice) VALUES ('" + serviceName.Text + "','" + serviceDesc.Text + "', '" + servicePrice.Value + "')";
+                    string query = "INSERT INTO services_t (serviceName,serviceDesc,servicePrice) VALUES ('" + serviceName.Text + "','" + serviceDesc.Text + "', '" + servicePrice.Value + "')";
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
                         MessageBox.Show("Service type successfully added!");
@@ -2174,7 +2257,7 @@ namespace prototype2
                 }
                 else
                 {
-                    string query = "UPDATE `service_T` SET serviceName = '" + serviceName.Text + "',serviceDesc = '" + serviceDesc.Text + "', servicePrice = '" + servicePrice.Value + "' WHERE serviceID = '" + id + "'";
+                    string query = "UPDATE `services_T` SET serviceName = '" + serviceName.Text + "',serviceDesc = '" + serviceDesc.Text + "', servicePrice = '" + servicePrice.Value + "' WHERE serviceID = '" + id + "'";
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
                         //MessageBox.Show("Sevice type sucessfully updated");
@@ -2367,6 +2450,19 @@ namespace prototype2
         {
             foreach (var element in transQuotationGrid.Children)
             {
+                if (element is Grid)
+                {
+                    if (!(((Grid)element).Name.Equals(transQuoatationGridForm.Name)))
+                    {
+                        ((Grid)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((Grid)element).Visibility = Visibility.Visible;
+                }
+            }
+            
+            foreach (var element in transQuoatationGridForm.Children)
+            {
                 if(element is Grid)
                 {
                     if (!(((Grid)element).Name.Equals(selectCustomerGrid.Name)))
@@ -2377,6 +2473,7 @@ namespace prototype2
                         ((Grid)element).Visibility = Visibility.Visible;
                 }
             }
+            transRequestNext.Visibility = Visibility.Collapsed;
         }
 
         private void findBtn_Click(object sender, RoutedEventArgs e)
@@ -2388,7 +2485,7 @@ namespace prototype2
 
         private void selectCustBtn_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var element in transQuotationGrid.Children)
+            foreach (var element in transQuoatationGridForm.Children)
             {
                 if (element is Grid)
                 {
@@ -2400,14 +2497,31 @@ namespace prototype2
                         ((Grid)element).Visibility = Visibility.Visible;
                 }
             }
+            transRequestNext.Visibility = Visibility.Visible;
             selectedCustNameLbl.Content = MainVM.SelectedCustomerSupplier.CompanyName;
+            
         }
 
         private void transRequestBack_Click(object sender, RoutedEventArgs e)
         {
-            if (newRequisitionGrid.IsVisible)
+            if (selectCustomerGrid.IsVisible)
             {
                 foreach (var element in transQuotationGrid.Children)
+                {
+                    if (element is Grid)
+                    {
+                        if (!(((Grid)element).Name.Equals(quotationsGridHome.Name)))
+                        {
+                            ((Grid)element).Visibility = Visibility.Collapsed;
+                        }
+                        else
+                            ((Grid)element).Visibility = Visibility.Visible;
+                    }
+                }
+            }
+            else if (newRequisitionGrid.IsVisible)
+            {
+                foreach (var element in transQuoatationGridForm.Children)
                 {
                     if (element is Grid)
                     {
@@ -2419,14 +2533,27 @@ namespace prototype2
                             ((Grid)element).Visibility = Visibility.Visible;
                     }
                 }
+                transRequestNext.Visibility = Visibility.Collapsed;
             }
-        }
-
-        private void transRequestNext_Click(object sender, RoutedEventArgs e)
-        {
-            if (newRequisitionGrid.IsVisible)
+            else if (makeSalesQuoteGrid.IsVisible)
             {
-                foreach (var element in transQuotationGrid.Children)
+                foreach (var element in transQuoatationGridForm.Children)
+                {
+                    if (element is Grid)
+                    {
+                        if (!(((Grid)element).Name.Equals(newRequisitionGrid.Name)))
+                        {
+                            ((Grid)element).Visibility = Visibility.Collapsed;
+                        }
+                        else
+                            ((Grid)element).Visibility = Visibility.Visible;
+                    }
+                }
+            }
+            else if (viewQuotationGrid.IsVisible)
+            {
+                MainVM.SalesQuotes.Remove(MainVM.SelectedSalesQuote);
+                foreach (var element in transQuoatationGridForm.Children)
                 {
                     if (element is Grid)
                     {
@@ -2439,9 +2566,29 @@ namespace prototype2
                     }
                 }
             }
+        }
+        Document document;
+        private void transRequestNext_Click(object sender, RoutedEventArgs e)
+        {
+            if (newRequisitionGrid.IsVisible)
+            {
+                foreach (var element in transQuoatationGridForm.Children)
+                {
+                    if (element is Grid)
+                    {
+                        if (!(((Grid)element).Name.Equals(makeSalesQuoteGrid.Name)))
+                        {
+                            ((Grid)element).Visibility = Visibility.Collapsed;
+                        }
+                        else
+                            ((Grid)element).Visibility = Visibility.Visible;
+                    }
+                }
+            }
+
             else if (makeSalesQuoteGrid.IsVisible)
             {
-                foreach (var element in transQuotationGrid.Children)
+                foreach (var element in transQuoatationGridForm.Children)
                 {
                     if (element is Grid)
                     {
@@ -2453,14 +2600,48 @@ namespace prototype2
                             ((Grid)element).Visibility = Visibility.Visible;
                     }
                 }
-                salesQuoteToMemory();
-                Document document;
-                DocumentFormat df = new DocumentFormat();
-                document = df.CreateDocument("sdadsa", "asdsadsa");
-                string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
-                pagePreview.Ddl = ddl;
+                if (MainVM.RequestedItems.Count != 0)
+                {
+                    transRequestNext.Content = "Save";
+                    salesQuoteToMemory();
+                    DocumentFormat df = new DocumentFormat();
+                    document = df.CreateDocument("SalesQuote", "asdsadsa");
+                    string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
+                    pagePreview.Ddl = ddl;
+                }
+                else
+                    MessageBox.Show("No items on the list.");
+            }
+            else if (viewQuotationGrid.IsVisible){
+                transRequestNext.Content = "Next";
+                PdfDocumentRenderer renderer = new PdfDocumentRenderer(true);
+                renderer.Document = document;
+                renderer.RenderDocument();
+                string filename = @"d:\test\" + MainVM.SelectedSalesQuote.sqNoChar_ + ".pdf";
+                renderer.PdfDocument.Save(filename);
+                saveSalesQuoteToDb();
+                Process.Start(filename);
+                foreach (var obj in containerGrid.Children)
+                {
+                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                }
+                trasanctionGrid.Visibility = Visibility.Visible;
+                foreach (var obj in trasanctionGrid.Children)
+                {
+                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                }
+                transQuotationGrid.Visibility = Visibility.Visible;
+                foreach (var obj in transQuotationGrid.Children)
+                {
+                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                }
+                quotationsGridHome.Visibility = Visibility.Visible;
+                settingsBtn.Visibility = Visibility.Hidden;
+                headerLbl.Content = "Trasanction - Sales Quote";
             }
         }
+
+        
 
         private void transReqAddNewItem_Click(object sender, RoutedEventArgs e)
         {
@@ -2469,7 +2650,7 @@ namespace prototype2
             companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
             employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
             productDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            settingsGrid.Visibility = Visibility.Collapsed;
+            settingGridBg.Visibility = Visibility.Collapsed;
             if (addNewItemFormGridBg.IsVisible)
             {
                 addNewItemFormGridBg.Visibility = Visibility.Collapsed;
@@ -2478,56 +2659,133 @@ namespace prototype2
                 addNewItemFormGridBg.Visibility = Visibility.Visible;
         }
 
-        private void addProductBtn_Click(object sender, RoutedEventArgs e)
+        private void feesBtn_Click(object sender, RoutedEventArgs e)
         {
-            Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
-            sb.Begin(addNewItemFormGridBg);
+            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+            sb.Begin(additionalFeesGridBg);
             companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
             employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
             productDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            settingsGrid.Visibility = Visibility.Collapsed;
-            if (addNewItemFormGridBg.IsVisible)
+            settingGridBg.Visibility = Visibility.Collapsed;
+            addNewItemFormGridBg.Visibility = Visibility.Collapsed;
+            if (additionalFeesGridBg.IsVisible)
             {
-                addNewItemFormGridBg.Visibility = Visibility.Collapsed;
+                additionalFeesGridBg.Visibility = Visibility.Collapsed;
             }
             else
-                addNewItemFormGridBg.Visibility = Visibility.Visible;
+                additionalFeesGridBg.Visibility = Visibility.Visible;
+            MainVM.SelectedAddedService = MainVM.AddedServices.Where(x => x.TableNoChar.Equals(MainVM.SelectedRequestedItem.itemCode)).FirstOrDefault();
+            MainVM.AdditionalFees = MainVM.SelectedAddedService.AdditionalFees;
+        }
 
-            //Add Item In to List
-            if ((bool)productRbtn.IsChecked)
+        private void editFeeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (ComboBoxItem cbi in feeTypeCb.Items)
             {
-                foreach (Item prd in MainVM.ProductList)
+                if (cbi.Content.Equals(MainVM.SelectedAdditionalFee.FeeName))
                 {
-                    if (prd.IsChecked)
-                    {
-                        MainVM.RequestedItems.Add(new RequestedItem() { lineNo = (MainVM.RequestedItems.Count + 1).ToString(), itemName = prd.ItemName, desc = prd.ItemDesc, itemTypeName = "Product", itemType = 0, qty = prd.Quantity, unitPrice = prd.CostPrice, totalAmount = prd.Quantity * prd.CostPrice, totalAmountMarkUp = prd.Quantity * prd.CostPrice, qtyEditable = true });
-                    }
+                    feeTypeCb.SelectedValue = MainVM.SelectedAdditionalFee.FeeName;
+                    feeCostTb.Value = MainVM.SelectedAdditionalFee.FeePrice;
+                    addSaveAdditionalFeesBtn.Content = "Save";
+                    isEdit = true;
+                    break;
+                }
+                else
+                {
+                    feeTypeCb.SelectedIndex = feeTypeCb.Items.Count - 1;
+                    otherFeenameTb.Text = MainVM.SelectedAdditionalFee.FeeName;
+                    feeCostTb.Value = MainVM.SelectedAdditionalFee.FeePrice;
+                    addSaveAdditionalFeesBtn.Content = "Save";
+                    isEdit = true;
+                    break;
                 }
             }
-            else if ((bool)serviceRbtn.IsChecked)
-            {
-                MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(serviceTypeCb.SelectedValue.ToString())).First();
-                MainVM.SelectedProvince = MainVM.Provinces.Where(x => x.ProvinceID == int.Parse(provinceCb.SelectedValue.ToString())).First();
-                MainVM.RequestedItems.Add(new RequestedItem() { lineNo = (MainVM.RequestedItems.Count + 1).ToString(), itemName = MainVM.SelectedService.ServiceName, desc = serviceDescTb.Text, itemTypeName = "Service", itemType = 1, qty = 1, unitPrice = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, totalAmount = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, totalAmountMarkUp = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, qtyEditable = false });
-            }
-            computePrice();
+            
         }
 
-        private void cancelAddProductBtn_Click(object sender, RoutedEventArgs e)
+        private void deleteFeeBtn_Click(object sender, RoutedEventArgs e)
         {
-            Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
-            sb.Begin(addNewItemFormGridBg);
+            MainVM.AdditionalFees.Remove(MainVM.SelectedAdditionalFee);
+        }
+
+        private void addSaveAdditionalFeesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (isEdit)
+            {
+                if (feeTypeCb.SelectedIndex == feeTypeCb.Items.Count - 1)
+                {
+                    MainVM.SelectedAdditionalFee.FeeName = otherFeenameTb.Text;
+                    MainVM.SelectedAdditionalFee.FeePrice = (decimal)feeCostTb.Value;
+                }
+                else
+                {
+                    MainVM.SelectedAdditionalFee.FeeName = feeTypeCb.SelectedValue.ToString();
+                    MainVM.SelectedAdditionalFee.FeePrice = (decimal)feeCostTb.Value;
+                }
+                addSaveAdditionalFeesBtn.Content = "Add";
+            }
+            else
+            {
+                if (feeTypeCb.SelectedIndex == feeTypeCb.Items.Count - 1)
+                {
+                    MainVM.AdditionalFees.Add(new AdditionalFee() { FeeName = otherFeenameTb.Text, FeePrice = (decimal)feeCostTb.Value });
+                }
+                else
+                {
+                    MainVM.AdditionalFees.Add(new AdditionalFee() { FeeName = feeTypeCb.SelectedValue.ToString(), FeePrice = (decimal)feeCostTb.Value });
+                }
+                
+                
+            }
+            feeTypeCb.SelectedIndex = -1;
+            otherFeenameTb.Text = "";
+            feeCostTb.Value = 0;
+            isEdit = false;
+
+        }
+
+        private void saveAdditionalFees_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.SelectedAddedService = MainVM.AddedServices.Where(x => x.TableNoChar.Equals(MainVM.SelectedRequestedItem.itemCode)).FirstOrDefault();
+            MainVM.SelectedAddedService.AdditionalFees = MainVM.AdditionalFees;
+            MainVM.AdditionalFees.Clear();
             companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
             employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
             productDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            settingsGrid.Visibility = Visibility.Collapsed;
-            if (addNewItemFormGridBg.IsVisible)
-            {
-                addNewItemFormGridBg.Visibility = Visibility.Collapsed;
-            }
-            else
-                addNewItemFormGridBg.Visibility = Visibility.Visible;
+            settingGridBg.Visibility = Visibility.Collapsed;
+            addNewItemFormGridBg.Visibility = Visibility.Collapsed;
+            additionalFeesGridBg.Visibility = Visibility.Collapsed;
+            
             computePrice();
+        }
+
+        private void cancelAdditionalFees_Click(object sender, RoutedEventArgs e)
+        {
+            companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
+            employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
+            productDetailsFormGridBg.Visibility = Visibility.Collapsed;
+            settingGridBg.Visibility = Visibility.Collapsed;
+            addNewItemFormGridBg.Visibility = Visibility.Collapsed;
+            additionalFeesGridBg.Visibility = Visibility.Collapsed;
+            computePrice();
+            
+        }
+
+        private void feeTypeCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (IsLoaded)
+            {
+                if (feeTypeCb.SelectedIndex == feeTypeCb.Items.Count - 1)
+                {
+                    if (!otherFeenameTb.IsVisible)
+                        otherFeenameTb.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    if (otherFeenameTb.IsVisible)
+                        otherFeenameTb.Visibility = Visibility.Hidden;
+                }
+            }
         }
 
         private void productRbtn_Checked(object sender, RoutedEventArgs e)
@@ -2539,9 +2797,9 @@ namespace prototype2
                     forms.Children[x].Visibility = Visibility.Hidden;
                 }
                 product.Visibility = Visibility.Visible;
-                service.Visibility = Visibility.Hidden;
+                addNewServiceForm.Visibility = Visibility.Hidden;
             }
-            
+
         }
 
         private void productRbtn_Unchecked(object sender, RoutedEventArgs e)
@@ -2558,15 +2816,194 @@ namespace prototype2
                     forms.Children[x].Visibility = Visibility.Hidden;
                 }
                 product.Visibility = Visibility.Hidden;
-                service.Visibility = Visibility.Visible;
+                addNewServiceForm.Visibility = Visibility.Visible;
             }
-            
+
         }
 
         private void serviceRbtn_Unchecked(object sender, RoutedEventArgs e)
         {
 
         }
+
+        private void addressOfCustomerCb_Checked(object sender, RoutedEventArgs e)
+        {
+            foreach (var element in addNewServiceForm.Children)
+            {
+                if (element is TextBox)
+                {
+                    if (((TextBox)element).Name.Equals(serviceAddressTb.Name))
+                    {
+                        serviceAddressTb.Text = MainVM.SelectedCustomerSupplier.CompanyAddress;
+                        serviceAddressTb.IsEnabled = false;
+                    }
+                    if (((TextBox)element).Name.Equals(serviceAddressTb.Name))
+                    {
+                        serviceCityTb.Text = MainVM.SelectedCustomerSupplier.CompanyCity;
+                        serviceCityTb.IsEnabled = false;
+                    }
+
+                }
+                if (element is ComboBox)
+                {
+                    if (((ComboBox)element).Name.Equals(serviceProvinceCb.Name))
+                    {
+                        serviceProvinceCb.SelectedIndex = int.Parse(MainVM.SelectedCustomerSupplier.CompanyProvinceID)-1;
+                        serviceProvinceCb.IsEnabled = false;
+                    }
+                }
+            }
+        }
+
+        private void addressOfCustomerCb_Unchecked(object sender, RoutedEventArgs e)
+        {
+            foreach (var element in addNewServiceForm.Children)
+            {
+                if (element is TextBox)
+                {
+                    if (((TextBox)element).Name.Equals(serviceAddressTb.Name))
+                    {
+                        serviceAddressTb.Text = "";
+                        serviceAddressTb.IsEnabled = true;
+                    }
+                    if (((TextBox)element).Name.Equals(serviceAddressTb.Name))
+                    {
+                        serviceCityTb.Text = "";
+                        serviceCityTb.IsEnabled = true;
+                    }
+
+                }
+                if (element is ComboBox)
+                {
+                    if (((ComboBox)element).Name.Equals(serviceProvinceCb.Name))
+                    {
+                        serviceProvinceCb.SelectedIndex = -1;
+                        serviceProvinceCb.IsEnabled = true;
+                    }
+                }
+            }
+        }
+
+        
+
+        private void addProductBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            //Add Item In to List
+            if ((bool)productRbtn.IsChecked)
+            {
+                foreach (Item prd in MainVM.ProductList)
+                {
+                    if (prd.IsChecked)
+                    {
+                        var linqResults = MainVM.RequestedItems.Where(x => x.itemCode.Equals(prd.ItemCode)).FirstOrDefault();
+                        if (linqResults == null)
+                        {
+                            MainVM.RequestedItems.Add(new RequestedItem() { lineNo = (MainVM.RequestedItems.Count + 1).ToString(), itemCode = prd.ItemCode, itemName = prd.ItemName, desc = prd.ItemDesc, itemTypeName = "Product", itemType = 0, qty = prd.Quantity, unitPrice = prd.CostPrice, totalAmount = prd.Quantity * prd.CostPrice, totalAmountMarkUp = prd.Quantity * prd.CostPrice, qtyEditable = true });
+                        }
+                        else
+                        {
+                            MessageBox.Show("Already added in the list.");
+                        }
+                        
+                    }
+                }
+                resetFieldsValue();
+            }
+            else if ((bool)serviceRbtn.IsChecked)
+            {
+                foreach (var element in addNewServiceForm.Children)
+                {
+                    if (element is TextBox)
+                    {
+                        BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
+                        if (expression != null)
+                        {
+                            Validation.ClearInvalid(expression);
+                            expression.UpdateSource();
+                            validationError = Validation.GetHasError((TextBox)element);
+                        }
+                        
+
+                    }
+                    if (element is ComboBox)
+                    {
+                        BindingExpression expression = ((ComboBox)element).GetBindingExpression(ComboBox.SelectedItemProperty);
+                        Validation.ClearInvalid(expression);
+                        expression.UpdateSource();
+                        validationError = Validation.GetHasError((ComboBox)element);
+                    }
+                }
+                if (!validationError)
+                {
+                    MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(serviceTypeCb.SelectedValue.ToString())).First();
+                    MainVM.SelectedProvince = MainVM.Provinces.Where(x => x.ProvinceID == int.Parse(serviceProvinceCb.SelectedValue.ToString())).First();
+
+                    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                    var numbs = "01234567890123456789";
+
+                    var random = new Random();
+                    string serviceNoChar = "";
+
+                    if (MainVM.SelectedService.ServiceName.Length > 5)
+                    {
+                        serviceNoChar = MainVM.SelectedService.ServiceName.Substring(0, 5).Replace(" ", String.Empty);
+
+                    }
+                    else
+                        serviceNoChar = MainVM.SelectedService.ServiceName.Replace(" ", String.Empty);
+                    var stringChars = new char[8 + serviceNoChar.Length];
+                    for (int i = 0; i < stringChars.Length; i++)
+                    {
+                        if (!(i > 3))
+                        {
+                            stringChars[i] = chars[random.Next(chars.Length)];
+                        }
+                        else if (i == 4)
+                        {
+                            int x = i;
+                            foreach (char c in serviceNoChar)
+                            {
+                                stringChars[x] = c;
+                                x++;
+                            }
+                            stringChars[x] = '-';
+                        }
+                        else
+                            stringChars[i] = numbs[random.Next(numbs.Length)];
+                    }
+
+                    var finalString = new String(stringChars);
+
+                    MainVM.AddedServices.Add(new AddedService() {TableNoChar = finalString, ServiceID = MainVM.SelectedService.ServiceID, ProvinceID = MainVM.SelectedProvince.ProvinceID, Address = serviceAddressTb.Text, City = serviceCityTb.Text});
+
+                    MainVM.RequestedItems.Add(new RequestedItem() { lineNo = (MainVM.RequestedItems.Count + 1).ToString(),itemCode = finalString, itemName = MainVM.SelectedService.ServiceName, desc = serviceDescTb.Text, itemTypeName = "Service", itemType = 1, qty = 1, unitPrice = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, totalAmount = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, totalAmountMarkUp = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, qtyEditable = false });
+                    
+                    resetFieldsValue();
+                }
+                
+            }
+            computePrice();
+        }
+
+        private void cancelAddProductBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
+            sb.Begin(addNewItemFormGridBg);
+            companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
+            employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
+            productDetailsFormGridBg.Visibility = Visibility.Collapsed;
+            settingGridBg.Visibility = Visibility.Collapsed;
+            if (addNewItemFormGridBg.IsVisible)
+            {
+                addNewItemFormGridBg.Visibility = Visibility.Collapsed;
+            }
+            else
+                addNewItemFormGridBg.Visibility = Visibility.Visible;
+            computePrice();
+        }
+
+       
 
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -2575,13 +3012,23 @@ namespace prototype2
             addGridProductListDg.ItemsSource = observable;
         }
 
-        private void provinceCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void serviceProvinceCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            MainVM.SelectedProvince = MainVM.Provinces.Where(x => x.ProvinceID == int.Parse(provinceCb.SelectedValue.ToString())).First();
-            if (MainVM.SelectedProvince.ProvincePrice == 0)
+            if (serviceProvinceCb.SelectedIndex != -1)
             {
-                MessageBox.Show("This location has no price set. Please set it in Settings.");
+                MainVM.SelectedProvince = MainVM.Provinces.Where(x => x.ProvinceID == int.Parse(serviceProvinceCb.SelectedValue.ToString())).First();
+                if (MainVM.SelectedProvince.ProvincePrice == 0)
+                {
+                    MessageBox.Show("This location has no price set. Please set it in Settings.");
+                }
             }
+            
+        }
+
+        private void deleteRequestedItemBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.RequestedItems.Remove(MainVM.SelectedRequestedItem);
+            MainVM.AddedServices.Remove(MainVM.AddedServices.Where(x => x.TableNoChar.Equals(MainVM.SelectedRequestedItem.itemCode)).FirstOrDefault());
         }
 
         private void paymentCustomRb_Checked(object sender, RoutedEventArgs e)
@@ -2690,13 +3137,7 @@ namespace prototype2
         {
             decimal totalFee = 0;
             decimal totalPrice = 0;
-            foreach (AdditionalFee aF in MainVM.AdditionalFees)
-            {
-                if (!(aF.FeePrice == 0))
-                {
-                    totalFee += aF.FeePrice;
-                }
-            }
+            
             foreach (RequestedItem item in MainVM.RequestedItems)
             {
                 if (item.itemType == 0)
@@ -2708,6 +3149,14 @@ namespace prototype2
                 }
                 else if (item.itemType == 1)
                 {
+                    MainVM.SelectedAddedService = MainVM.AddedServices.Where(x => x.TableNoChar.Equals(item.itemCode)).FirstOrDefault();
+                    foreach (AdditionalFee af in MainVM.SelectedAddedService.AdditionalFees)
+                    {
+                        if (!(af.FeePrice == 0))
+                        {
+                            totalFee += af.FeePrice;
+                        }
+                    }
                     item.unitPriceMarkUp = (item.unitPrice + totalFee) + ((item.unitPrice + totalFee) / 100 * (decimal)markupPriceTb.Value);
                     item.totalAmountMarkUp = (item.unitPrice + totalFee + (((item.unitPrice + totalFee) / 100) * (decimal)markupPriceTb.Value)) - ((item.unitPrice + totalFee) / 100) * (decimal)discountPriceTb.Value;
                     item.totalAmount = item.unitPrice + totalFee;
@@ -2720,11 +3169,7 @@ namespace prototype2
             }
         }
 
-        private void feeDeleteBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (MainVM.SelectedAdditionalFee != null)
-                MainVM.AdditionalFees.Remove(MainVM.SelectedAdditionalFee);
-        }
+        
 
         void salesQuoteToMemory()
         {
@@ -2735,7 +3180,7 @@ namespace prototype2
             int valid = 30;
             if ((bool)landedCheckBox.IsChecked)
             {
-                landed = "Landed,";
+                landed = "Landed";
             }
             if (!(bool)vatCheckBox.IsChecked)
             {
@@ -2745,7 +3190,7 @@ namespace prototype2
             {
                 estDel = 30;
             }
-            else
+            else if((bool)deliveryCustomRd.IsChecked)
                 estDel = int.Parse(deliveryDaysTb.Value.ToString());
 
             if (!(bool)validityDefaultRd.IsChecked)
@@ -2754,8 +3199,11 @@ namespace prototype2
             }
 
             DateTime endDate = new DateTime();
-            endDate = DateTime.Today.AddDays(valid);
+            endDate = DateTime.Now;
+            endDate.AddDays(valid);
 
+            DateTime deliveryDate = new DateTime();
+            deliveryDate = DateTime.Now;
             int downP = 50;
             if (!(bool)paymentDefaultRd.IsChecked)
                 downP = int.Parse(downpaymentPercentTb.Value.ToString());
@@ -2773,39 +3221,43 @@ namespace prototype2
                 warr = int.Parse(warrantyDaysCustom.Value.ToString());
             }
             string quoteName = "";
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            var numbs = "01234567890123456789";
+            
+            var random = new Random();
+
+
             if (MainVM.SelectedCustomerSupplier.CompanyName.Length > 5)
             {
-                quoteName = MainVM.SelectedCustomerSupplier.CompanyName.Substring(0, 5).Replace(" ", String.Empty) + "" + (MainVM.SalesQuotes.Count + 1);
+                quoteName = MainVM.SelectedCustomerSupplier.CompanyName.Trim().Substring(0, 5).ToUpper();
+
             }
             else
-                quoteName = MainVM.SelectedCustomerSupplier.CompanyName.Replace(" ", String.Empty) + "" + (MainVM.SalesQuotes.Count + 1);
-
-            MainVM.SalesQuotes.Add(new SalesQuote()
+                quoteName = MainVM.SelectedCustomerSupplier.CompanyName.Trim().ToUpper();
+            string stringChars = "";
+            for (int i = 0; i < 4; i++)
             {
-                sqNoChar_ = quoteName + "" + (MainVM.SalesQuotes.Count + 1),
-                custID_ = int.Parse(MainVM.SelectedCustomerSupplier.CompanyID),
-                custRepID_ = int.Parse(MainVM.SelectedCustomerSupplier.RepresentativeID),
-                quoteSubject_ = quoteName,
-                priceNote_ = "In Philippine Peso, " + landed + ", " + vatExc,
-                vatexcluded_ = (bool)vatCheckBox.IsChecked,
-                vat_ = vat,
-                paymentIsLanded_ = (bool)landedCheckBox.IsChecked,
-                paymentCurrency_ = "Peso",
-                estDelivery_ = estDel,
-                validityDays_ = valid,
-                validityDate_ = endDate,
-                status_ = "PENDING",
-                termsDP_ = downP,
-                penaltyPercent_ = penaltyP
-
-            });
+                if (!(i > 3))
+                {
+                    stringChars += chars[random.Next(chars.Length)];
+                }
+            }
+            stringChars += MainVM.SalesQuotes.Count + 1;
+            stringChars += "-";
+            foreach (char c in quoteName)
+            {
+                stringChars += c;
+            }
+            stringChars += "-";
+            stringChars += DateTime.Now.ToString("yyyy-MM-dd");
+            
             MainVM.SelectedSalesQuote = new SalesQuote()
             {
-                sqNoChar_ = quoteName + "" + (MainVM.SalesQuotes.Count + 1),
+                sqNoChar_ = stringChars,
                 custID_ = int.Parse(MainVM.SelectedCustomerSupplier.CompanyID),
                 custRepID_ = int.Parse(MainVM.SelectedCustomerSupplier.RepresentativeID),
-                quoteSubject_ = quoteName.Replace(" ", String.Empty) + "" + (MainVM.SalesQuotes.Count + 1),
-                priceNote_ = "In Philippine Peso, " + landed + ", " + vatExc,
+                quoteSubject_ = stringChars,
+                priceNote_ = ""+ moneyType.SelectedValue.ToString()+", " + landed + ", " + vatExc,
                 vatexcluded_ = (bool)vatCheckBox.IsChecked,
                 vat_ = vat,
                 paymentIsLanded_ = (bool)landedCheckBox.IsChecked,
@@ -2822,8 +3274,104 @@ namespace prototype2
             };
             MainVM.SalesQuotes.Add(MainVM.SelectedSalesQuote);
             MainVM.SelectedRepresentative = MainVM.Representatives.Where(x => x.RepresentativeID.Equals(MainVM.SelectedCustomerSupplier.RepresentativeID)).First();
+
         }
 
-        
+        private void saveSalesQuoteToDb()
+        {
+            var dbCon = DBConnection.Instance();
+            bool noError = true;
+            if (dbCon.IsConnect())
+            {
+                string query = "INSERT INTO `odc_db`.`sales_quote_t` " + "(`sqNoChar`,`custID`,`custRepID`,`quoteSubject`,`priceNote`,`deliveryDate`,`estDelivery`,`validityDays`,`validityDate`,`otherTerms`,`expiration`,`VAT`,`vatIsExcluded`,`paymentIsLanded`,`paymentCurrency`,`status`,`termsDays`,`termsDP`,`penaltyAmt`,`penaltyPerc`)" +
+                    " VALUES " +
+                    "('" + MainVM.SelectedSalesQuote.sqNoChar_ + "','" + 
+                    MainVM.SelectedSalesQuote.custID_ + "','" + 
+                    MainVM.SelectedSalesQuote.custRepID_ + "','" +
+                    MainVM.SelectedSalesQuote.quoteSubject_ + "','" +
+                    MainVM.SelectedSalesQuote.priceNote_ + "','" +
+                    MainVM.SelectedSalesQuote.deliveryDate_.ToString("yyyy-MM-dd") + "','" +
+                    MainVM.SelectedSalesQuote.estDelivery_ + "','" +
+                    MainVM.SelectedSalesQuote.validityDays_ + "','" +
+                    MainVM.SelectedSalesQuote.validityDate_.ToString("yyyy-MM-dd") + "','" +
+                    MainVM.SelectedSalesQuote.otherTerms_ + "','" +
+                    MainVM.SelectedSalesQuote.expiration_.ToString("yyyy-MM-dd") + "','" + 
+                    MainVM.SelectedSalesQuote.vat_ + "'," + 
+                    MainVM.SelectedSalesQuote.vatexcluded_ + "," +
+                    MainVM.SelectedSalesQuote.paymentIsLanded_ + ",'" +
+                    MainVM.SelectedSalesQuote.paymentCurrency_ + "','" +
+                    MainVM.SelectedSalesQuote.status_ + "','" +
+                    MainVM.SelectedSalesQuote.termsDays_ + "','" +
+                    MainVM.SelectedSalesQuote.termsDP_ + "','" +
+                    MainVM.SelectedSalesQuote.penaltyAmt_ + "','" +
+                    MainVM.SelectedSalesQuote.penaltyPercent_ + "');";
+                if (dbCon.insertQuery(query, dbCon.Connection))
+                {
+                    if (dbCon.IsConnect())
+                    {
+                        foreach(RequestedItem item in MainVM.RequestedItems)
+                        {
+                            if (item.itemType == 0)
+                            {
+                                MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ItemCode.Equals(item.itemCode)).FirstOrDefault();
+                                query = "INSERT INTO `odc_db`.`items_availed_t`(`itemNo`,`itemQnty`,`sqNoChar`)" +
+                                    " VALUES " +
+                                    "(" + MainVM.SelectedProduct.ItemNo + ", " + item.qty + ", '" + MainVM.SelectedSalesQuote.sqNoChar_ + "');";
+                                noError = dbCon.insertQuery(query, dbCon.Connection);                            }
+                            else if (item.itemType == 1)
+                            {
+                                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                                var numbs = "01234567890123456789";
+
+                                var random = new Random();
+                                string serviceNoChar = "";
+                                for (int i = 0; i < 4; i++)
+                                {
+                                    if (!(i > 3))
+                                    {
+                                        serviceNoChar += chars[random.Next(chars.Length)];
+                                    }
+                                }
+                                serviceNoChar += MainVM.SalesQuotes.Count + 1;
+                                serviceNoChar += "-";
+                                if (item.itemName.Length > 5)
+                                {
+                                    serviceNoChar = item.itemName.Trim().Substring(0, 5).ToUpper();
+                                }
+                                else
+                                    serviceNoChar = item.itemName.Trim().ToUpper();
+                                serviceNoChar += "-";
+                                serviceNoChar += DateTime.Now.ToString("yyyy-MM-dd");
+                                MainVM.SelectedAddedService = MainVM.AddedServices.Where(x => x.TableNoChar.Equals(item.itemCode)).FirstOrDefault();
+                                query = "INSERT INTO `odc_db`.`services_availed_t`(`tableNoChar`,`serviceID`,`provinceID`,`sqNoChar`,`city`,`address`,`totalCost`)" +
+                                    " VALUES " +
+                                    "(" + serviceNoChar + ", " + 
+                                    MainVM.SelectedAddedService.ServiceID + ", " + 
+                                    MainVM.SelectedAddedService.ProvinceID + ", '" + 
+                                    MainVM.SelectedSalesQuote.sqNoChar_ + "', " + 
+                                    MainVM.SelectedAddedService.City + ", " + 
+                                    MainVM.SelectedAddedService.Address + ");";
+                                noError = dbCon.insertQuery(query, dbCon.Connection);
+                                foreach (AdditionalFee af in MainVM.SelectedAddedService.AdditionalFees)
+                                {
+                                    query = "INSERT INTO `odc_db`.`fees_per_transaction_t`(`serviceNoChar`,`feeName`,`feeValue`)" +
+                                    " VALUES " +
+                                    "(" + serviceNoChar + ", " + af.FeeName + ", " + af.FeePrice + ");";
+                                    noError = dbCon.insertQuery(query, dbCon.Connection);
+                                }
+                            }
+                        }
+                        if (noError)
+                        {
+                            MessageBox.Show("Successfully added.");
+                            loadDataToUi();
+                        }
+                            
+                        else
+                            MessageBox.Show("Theres an error occured in saving the record");
+                    }
+                }
+            }
+        }
     }
 }

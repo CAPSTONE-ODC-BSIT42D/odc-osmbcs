@@ -55,25 +55,17 @@ namespace prototype2
             if (query.Length > 0)
             {
                 con.Open();
-                
+                sqlCommand = new MySqlCommand();
+                sqlCommand.Connection = con;
+                sqlCommand.CommandText = query;
+                sqlCommand.ExecuteNonQuery();
                 try
                 {
-                    sqlCommand = new MySqlCommand();
-                    sqlCommand.Connection = con;
-                    sqlCommand.CommandText = query;
-                    sqlCommand.ExecuteNonQuery();
+                    
                 }
                 catch (MySqlException ex)
                 {
-                    int errorcode = ex.Number;
-                    if (errorcode == 1062)
-                    {
-                        MessageBox.Show("Duplicate Entry");
-                    }
-                    else
-                    {
-                        MessageBox.Show(""+ex);
-                    }
+                    return false;
                 }
                
                 con.Close();

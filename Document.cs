@@ -110,7 +110,7 @@ namespace prototype2
             this.addressFrame = section.AddParagraph();
             this.letterHeaderFrame = section.AddParagraph();
             this.paragraph1 = section.AddParagraph();
-            this.paragraph2 = section.AddParagraph();
+            
             // Put sender in address frame
             DateTime timeToday = new DateTime();
             timeToday = DateTime.Today;
@@ -134,8 +134,8 @@ namespace prototype2
             addressFrame.Format.Font.Name = "Calibri";
             addressFrame.Format.Font.Size = 11;
             addressFrame.Format.SpaceAfter = "1.0cm";
-            paragraph1.AddText("Dear");
-            paragraph1.AddFormattedText(""+ MainVM.SelectedRepresentative.RepLastName, TextFormat.Bold);
+            paragraph1.AddText("Dear ");
+            paragraph1.AddFormattedText(""+MainVM.SelectedRepresentative.RepTitle+" "+ MainVM.SelectedRepresentative.RepLastName, TextFormat.Bold);
             paragraph1.AddLineBreak();
             paragraph1.AddText("As per your request, we are formally offering our price proposal for the above subject as follows:");
             addressFrame.Format.Font.Name = "Calibri";
@@ -224,9 +224,12 @@ namespace prototype2
             }
             row = table.AddRow();
             row.Cells[0].AddParagraph("Total Price");
+            row.Cells[0].Format.Alignment = ParagraphAlignment.Right;
             row.Cells[0].MergeRight = 5;
             row.Cells[6].AddParagraph("" + totalPrice.ToString());
-
+            //
+            var filler = section.AddParagraph();
+            filler.AddLineBreak();
             // Create the item table
 
             this.table = section.AddTable();
@@ -238,7 +241,7 @@ namespace prototype2
             this.table.Rows.LeftIndent = 0;
 
             // Before you can add a row, you must define the columns
-            column = this.table.AddColumn("1cm");
+            column = this.table.AddColumn();
             column.Format.Alignment = ParagraphAlignment.Center;
 
             column = this.table.AddColumn();
@@ -296,7 +299,10 @@ namespace prototype2
             this.table.SetEdge(0, 0, 2, 1, Edge.Box, BorderStyle.None, 0.25, Color.Empty);
 
 
-
+            this.paragraph2 = section.AddParagraph();
+            paragraph2.AddLineBreak();
+            paragraph2.AddLineBreak();
+            paragraph2.AddLineBreak();
             paragraph2.AddText("Thank you very much and we are looking forward for your valued order soon.");
             paragraph2.AddLineBreak();
             paragraph2.AddText("Very Truly Yours,");
@@ -304,6 +310,7 @@ namespace prototype2
             paragraph2.AddLineBreak();
             paragraph2.AddLineBreak();
             paragraph2.AddFormattedText("DANNY M. ORCENA", TextFormat.Bold);
+            paragraph2.AddLineBreak();
             paragraph2.AddFormattedText("Chief Marketing Officer - Director", TextFormat.Italic);
         }
         void FillContent()

@@ -499,6 +499,7 @@ namespace prototype2
         }
         protected bool isChecked;
         protected string itemNo;
+        protected string itemCode;
         protected string itemName;
         protected string itemDesc;
         protected decimal costPrice;
@@ -520,6 +521,13 @@ namespace prototype2
             get { return itemNo; }
             set { SetProperty(ref itemNo, value); }
         }
+
+        public string ItemCode
+        {
+            get { return itemCode; }
+            set { SetProperty(ref itemCode, value); }
+        }
+
         public string ItemName
         {
             get { return itemName; }
@@ -610,30 +618,48 @@ namespace prototype2
         {
 
         }
-
+        protected string tableNoChar;
         protected string serviceID;
         protected string serviceName;
         protected decimal servicePrice;
         protected string address;
         protected string city;
         protected string provinceName;
-        protected string provinceID;
+        protected int provinceID;
+
+        public string TableNoChar
+        {
+            get { return tableNoChar; }
+            set { SetProperty(ref tableNoChar, value); }
+        }
+
         public string ServiceID
         {
             get { return serviceID; }
             set { SetProperty(ref serviceID, value); }
         }
-
-        public string ServiceName
+        public string Address
         {
-            get { return serviceName; }
-            set { SetProperty(ref serviceName, value); }
+            get { return address; }
+            set { SetProperty(ref address, value); }
+        }
+        public string City
+        {
+            get { return city; }
+            set { SetProperty(ref city, value); }
+        }
+        public int ProvinceID
+        {
+            get { return provinceID; }
+            set { SetProperty(ref provinceID, value); }
         }
 
-        public decimal ServicePrice
+        protected ObservableCollection<AdditionalFee> additionalFees = new ObservableCollection<AdditionalFee>();
+
+        public ObservableCollection<AdditionalFee> AdditionalFees
         {
-            get { return servicePrice; }
-            set { SetProperty(ref servicePrice, value); }
+            get { return additionalFees; }
+            set { SetProperty(ref additionalFees, value); }
         }
     }
 
@@ -646,6 +672,14 @@ namespace prototype2
 
         protected string feeName;
         protected decimal feePrice;
+        protected string tableNoChar;
+
+        public string TableNoChar
+        {
+            get { return tableNoChar; }
+            set { SetProperty(ref tableNoChar, value); }
+        }
+
 
         public string FeeName
         {
@@ -673,10 +707,16 @@ namespace prototype2
             set { SetProperty(ref _lineNo, value); }
         }
         private string _itemCode;
-        public string itemName
+        public string itemCode
         {
             get { return _itemCode; }
             set { SetProperty(ref _itemCode, value); }
+        }
+        private string _itemName;
+        public string itemName
+        {
+            get { return _itemName; }
+            set { SetProperty(ref _itemName, value); }
         }
         private string _desc;
         public string desc
@@ -737,6 +777,14 @@ namespace prototype2
         {
             get { return _qtyEditable; }
             set { SetProperty(ref _qtyEditable, value); }
+        }
+
+        protected ObservableCollection<AdditionalFee> _additionalFees = new ObservableCollection<AdditionalFee>();
+
+        public ObservableCollection<AdditionalFee> additionalFees
+        {
+            get { return additionalFees; }
+            set { additionalFees = value; }
         }
     }
 
