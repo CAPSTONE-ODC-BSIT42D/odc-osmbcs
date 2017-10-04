@@ -344,10 +344,7 @@ namespace prototype2
             }
             if (dbCon.IsConnect())
             {
-                string query = "SELECT `sales_quote_t`.`sqNoChar`,`sales_quote_t`.`dateOfIssue`,`sales_quote_t`.`custID`,`sales_quote_t`.`custRepID`,`sales_quote_t`.`quoteSubject`,`sales_quote_t`.`body1`,`sales_quote_t`.`priceNote`,`sales_quote_t`.`deliveryDate`,`sales_quote_t`.`estDelivery`,`sales_quote_t`.`validityDays`,`sales_quote_t`.`validityDate`,`sales_quote_t`.`otherTerms`,`sales_quote_t`.`body2`,`sales_quote_t`.`expiration`,`sales_quote_t`.`VAT`,`sales_quote_t`.`vatIsExcluded`,`sales_quote_t`.`paymentIsLanded`,`sales_quote_t`.`paymentCurrency`,`sales_quote_t`.`status`,`sales_quote_t`.`termsDays`,`sales_quote_t`.`termsDP`,`sales_quote_t`.`penaltyAmt`,`sales_quote_t`.`penaltyPerc`,`sales_quote_t`.`markUpPercent`,`sales_quote_t`.`discountPercent`" +
-                    " FROM sales_quote_t a " +
-                    " JOIN services_availed_t b ON a.sqNoChar = b.sqNoChar" +
-                    ";";
+                string query = "SELECT * FROM sales_quote_t a JOIN services_availed_t b ON a.sqNoChar = b.sqNoChar JOIN items_availed_t c ON a.sqNoChar = c.sqNoChar;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
