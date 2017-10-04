@@ -30,6 +30,7 @@ namespace prototype2
         {
             InitializeComponent();
         }
+        string empId = "";
 
         private void loginBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -75,18 +76,19 @@ namespace prototype2
 
                         cmd.ExecuteNonQuery();
                         //Gets the output key from the stored procedure/database;
-                        string empId = cmd.Parameters["@insertedid"].Value.ToString();
+                        empId = cmd.Parameters["@insertedid"].Value.ToString();
 
                         //Checks if the empID variable is null, if not do the toLogin(); function
                         if (!String.IsNullOrWhiteSpace(empId))
                         {
                             toLogin();
+                            usernameTb.Clear();
+                            passwordBox.Clear();
                         }
                         //If its null, this.
                         else
                         {
-                            usernameTb.Clear();
-                            passwordBox.Clear();
+                            
                             MessageBox.Show("Username or Password is incorrect.");
                         }
                     }
@@ -97,7 +99,7 @@ namespace prototype2
         public void toLogin()
         {
             this.Hide();
-            MainScreen mainMenu = new MainScreen();
+            MainScreen mainMenu = new MainScreen(empId);
             mainMenu.ShowDialog();
             this.Show();
         }

@@ -626,6 +626,7 @@ namespace prototype2
         protected string city;
         protected string provinceName;
         protected int provinceID;
+        protected decimal totalCost;
 
         public string TableNoChar
         {
@@ -654,12 +655,55 @@ namespace prototype2
             set { SetProperty(ref provinceID, value); }
         }
 
+        public decimal TotalCost
+        {
+            get { return totalCost; }
+            set { SetProperty(ref totalCost, value); }
+        }
+
         protected ObservableCollection<AdditionalFee> additionalFees = new ObservableCollection<AdditionalFee>();
 
         public ObservableCollection<AdditionalFee> AdditionalFees
         {
             get { return additionalFees; }
             set { SetProperty(ref additionalFees, value); }
+        }
+    }
+
+    public class AddedItem : ViewModelEntity
+    {
+        public AddedItem()
+        {
+
+        }
+
+        protected string sqNoChar;
+        protected int itemNo;
+        protected int itemQty;
+        protected decimal totalCost;
+
+        public string SqNoChar
+        {
+            get { return sqNoChar; }
+            set { SetProperty(ref sqNoChar, value); }
+        }
+
+        public int ItemNo
+        {
+            get { return itemNo; }
+            set { SetProperty(ref itemNo, value); }
+        }
+
+        public int ItemQty
+        {
+            get { return itemQty; }
+            set { SetProperty(ref itemQty, value); }
+        }
+
+        public decimal TotalCost
+        {
+            get { return totalCost; }
+            set { SetProperty(ref totalCost, value); }
         }
     }
 
@@ -672,12 +716,12 @@ namespace prototype2
 
         protected string feeName;
         protected decimal feePrice;
-        protected string tableNoChar;
+        protected string serviceNoChar;
 
-        public string TableNoChar
+        public string ServiceNoChar
         {
-            get { return tableNoChar; }
-            set { SetProperty(ref tableNoChar, value); }
+            get { return serviceNoChar; }
+            set { SetProperty(ref serviceNoChar, value); }
         }
 
 
@@ -812,6 +856,12 @@ namespace prototype2
         {
             get { return custID; }
             set { SetProperty(ref custID, value); }
+        }
+        protected string custName;
+        public string custName_
+        {
+            get { return custName; }
+            set { SetProperty(ref custName, value); }
         }
         protected int custRepID;
         public int custRepID_
@@ -958,6 +1008,126 @@ namespace prototype2
             set { SetProperty(ref additionalTerms, value); }
         }
 
-    }
+        protected decimal markUpPercent;
+        public decimal markUpPercent_
+        {
+            get { return markUpPercent; }
+            set { SetProperty(ref markUpPercent, value); }
+        }
 
+        protected decimal discountPercent;
+        public decimal discountPercent_
+        {
+            get { return discountPercent; }
+            set { SetProperty(ref discountPercent, value); }
+        }
+
+        protected ObservableCollection<AddedService> addedServices = new ObservableCollection<AddedService>();
+
+        public ObservableCollection<AddedService> AddedServices
+        {
+            get { return addedServices; }
+            set { addedServices = value; }
+        }
+
+        protected ObservableCollection<AddedItem> addedItem = new ObservableCollection<AddedItem>();
+
+        public ObservableCollection<AddedItem> AddedItems
+        {
+            get { return addedItem; }
+            set { addedItem = value; }
+        }
+    }
+    public class SalesInvoice : ViewModelEntity
+    {
+        public SalesInvoice()
+        {
+
+        }
+
+        protected string invoiceNoChar;
+        public string invoiceNoChar_
+        {
+            get { return invoiceNoChar; }
+            set { SetProperty(ref invoiceNoChar, value); }
+        }
+
+        protected int custID;
+        public int custID_
+        {
+            get { return custID; }
+            set { SetProperty(ref custID, value); }
+        }
+
+        protected int empID;
+        public int empID_
+        {
+            get { return empID; }
+            set { SetProperty(ref empID, value); }
+        }
+
+        protected string sqNoChar;
+        public string sqNoChar_
+        {
+            get { return sqNoChar; }
+            set { SetProperty(ref sqNoChar, value); }
+        }
+
+        protected string tin;
+        public string tin_
+        {
+            get { return tin; }
+            set { SetProperty(ref tin, value); }
+        }
+
+        protected string busStyle;
+        public string busStyle_
+        {
+            get { return busStyle; }
+            set { SetProperty(ref busStyle, value); }
+        }
+
+        protected DateTime dateOfIssue;
+        public DateTime dateOfIssue_
+        {
+            get { return dateOfIssue; }
+            set { SetProperty(ref dateOfIssue, value); }
+        }
+
+        protected DateTime dueDate;
+        public DateTime dueDate_
+        {
+            get { return dueDate; }
+            set { SetProperty(ref dueDate, value); }
+        }
+
+        protected string purchaseOrderNumber;
+        public string purchaseOrderNumber_
+        {
+            get { return purchaseOrderNumber; }
+            set { SetProperty(ref purchaseOrderNumber, value); }
+        }
+
+        protected string paymentStatus;
+        public string paymentStatus_
+        {
+            get { return paymentStatus; }
+            set { SetProperty(ref paymentStatus, value); }
+        }
+
+        protected decimal vat;
+        public decimal vat_
+        {
+            get { return vat; }
+            set { SetProperty(ref vat, value); }
+        }
+
+        public string notes;
+        public string notes_
+        {
+            get { return notes; }
+            set { SetProperty(ref notes, value); }
+        }
+
+    }
 }

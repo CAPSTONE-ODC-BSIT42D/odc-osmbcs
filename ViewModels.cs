@@ -47,6 +47,8 @@ namespace prototype2
         public decimal ProductPrice { get; set; }
         public int Edit { get; set; }
 
+
+        public String SearchQuery { get; set; }
         //-----REPRESENTATIVE
         protected ObservableCollection<Representative> representative = new ObservableCollection<Representative>();
 
@@ -327,8 +329,24 @@ namespace prototype2
             get { return selectedAdditionalFee; }
             set { SetProperty(ref selectedAdditionalFee, value); }
         }
+        //-----Added Items
 
-        //-----Additional Services
+        protected ObservableCollection<AddedItem> addedItem = new ObservableCollection<AddedItem>();
+
+        public ObservableCollection<AddedItem> AddedItems
+        {
+            get { return addedItem; }
+            set { addedItem = value; }
+        }
+
+        protected AddedItem selectedAddedItem = null;
+
+        public AddedItem SelectedAddedItem
+        {
+            get { return selectedAddedItem; }
+            set { SetProperty(ref selectedAddedItem, value); }
+        }
+        //-----Added Services
         protected ObservableCollection<AddedService> addedServices = new ObservableCollection<AddedService>();
 
         protected AddedService selectedAddedService = null;

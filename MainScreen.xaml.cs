@@ -32,12 +32,16 @@ namespace prototype2
     /// </summary>
     public partial class MainScreen : Window
     {
-        public MainScreen()
+        string empID;
+
+        public MainScreen(string empID)
         {
             InitializeComponent();
+            this.empID = empID;
             worker.DoWork += worker_DoWork;
             worker.RunWorkerCompleted += worker_RunWorkerCompleted;
         }
+
         public static Commands commands = new Commands();
         private readonly BackgroundWorker worker = new BackgroundWorker();
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
@@ -47,14 +51,13 @@ namespace prototype2
             {
                 ((Grid)obj).Visibility = Visibility.Collapsed;
             }
-            companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            productDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            settingGridBg.Visibility = Visibility.Collapsed;
-            addNewItemFormGridBg.Visibility = Visibility.Collapsed;
-            additionalFeesGridBg.Visibility = Visibility.Collapsed;
+            foreach(var obj in formGridBg.Children)
+            {
+                ((Grid)obj).Visibility = Visibility.Collapsed;
+            }
             dashboardGrid.Visibility = Visibility.Visible;
             settingsBtn.Visibility = Visibility.Hidden;
+            formGridBg.Visibility = Visibility.Collapsed;
             worker.RunWorkerAsync();
             
             //loadDataToUi();
@@ -95,6 +98,12 @@ namespace prototype2
             MainVM.Contractor.Clear();
 
             MainVM.RequestedItems.Clear();
+
+            MainVM.SalesQuotes.Clear();
+
+            MainVM.SelectedCustomerSupplier = null;
+            MainVM.SelectedEmployeeContractor = null;
+
             if (dbCon.IsConnect())
             {
                 string query = "SELECT locProvinceID, locProvince FROM provinces_t";
@@ -333,6 +342,55 @@ namespace prototype2
                 }
                 dbCon.Close();
             }
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT `sales_quote_t`.`sqNoChar`,`sales_quote_t`.`dateOfIssue`,`sales_quote_t`.`custID`,`sales_quote_t`.`custRepID`,`sales_quote_t`.`quoteSubject`,`sales_quote_t`.`body1`,`sales_quote_t`.`priceNote`,`sales_quote_t`.`deliveryDate`,`sales_quote_t`.`estDelivery`,`sales_quote_t`.`validityDays`,`sales_quote_t`.`validityDate`,`sales_quote_t`.`otherTerms`,`sales_quote_t`.`body2`,`sales_quote_t`.`expiration`,`sales_quote_t`.`VAT`,`sales_quote_t`.`vatIsExcluded`,`sales_quote_t`.`paymentIsLanded`,`sales_quote_t`.`paymentCurrency`,`sales_quote_t`.`status`,`sales_quote_t`.`termsDays`,`sales_quote_t`.`termsDP`,`sales_quote_t`.`penaltyAmt`,`sales_quote_t`.`penaltyPerc`,`sales_quote_t`.`markUpPercent`,`sales_quote_t`.`discountPercent`" +
+                    " FROM sales_quote_t a " +
+                    " JOIN services_availed_t b ON a.sqNoChar = b.sqNoChar" +
+                    ";";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                MainVM.SalesQuotes.Clear();
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    DateTime dateOfIssue = new DateTime();
+                    DateTime.TryParse(dr["dateOfIssue"].ToString(), out dateOfIssue);
+
+                    DateTime deliveryDate = new DateTime();
+                    DateTime.TryParse(dr["dateOfIssue"].ToString(), out deliveryDate);
+
+                    DateTime validityDate = new DateTime();
+                    DateTime.TryParse(dr["dateOfIssue"].ToString(), out validityDate);
+
+                    DateTime expiration = new DateTime();
+                    DateTime.TryParse(dr["dateOfIssue"].ToString(), out expiration);
+
+                    bool vatIsExcluded = false;
+
+                    if (dr["vatIsExcluded"].ToString().Equals("1"))
+                    {
+                        vatIsExcluded = true;
+                    }
+
+                    bool paymentIsLanded = false;
+
+                    if (dr["paymentIsLanded"].ToString().Equals("1"))
+                    {
+                        paymentIsLanded = true;
+                    }
+                    MainVM.SelectedCustomerSupplier = MainVM.Customers.Where(x => x.CompanyID.Equals(dr["custID"].ToString())).FirstOrDefault();
+                    if(MainVM.SelectedCustomerSupplier != null)
+                    {
+                        MainVM.SelectedSalesQuote = (new SalesQuote() { sqNoChar_ = dr["sqNoChar"].ToString(), dateOfIssue_ = dateOfIssue, custID_ = int.Parse(dr["custID"].ToString()), custRepID_ = int.Parse(dr["custRepID"].ToString()), custName_ = MainVM.SelectedCustomerSupplier.CompanyName, quoteSubject_ = dr["quoteSubject"].ToString(), priceNote_ = dr["priceNote"].ToString(), deliveryDate_ = deliveryDate, estDelivery_ = int.Parse(dr["estDelivery"].ToString()), validityDays_ = int.Parse(dr["validityDays"].ToString()), validityDate_ = validityDate, otherTerms_ = dr["otherTerms"].ToString(), expiration_ = expiration, vat_ = Decimal.Parse(dr["vat"].ToString()), vatexcluded_ = vatIsExcluded, paymentIsLanded_ = paymentIsLanded, paymentCurrency_ = dr["paymentCurrency"].ToString(), status_ = dr["status"].ToString(), termsDays_ = int.Parse(dr["termsDays"].ToString()), termsDP_ = int.Parse(dr["termsDP"].ToString()), penaltyAmt_ = Decimal.Parse(dr["penaltyAmt"].ToString()), penaltyPercent_ = int.Parse(dr["penaltyPerc"].ToString()), markUpPercent_ = decimal.Parse(dr["markUpPercent"].ToString()), discountPercent_ = decimal.Parse(dr["discountPercent"].ToString()) });
+                    }
+                    
+                    
+                }
+                dbCon.Close();
+            }
         }
 
         private void dashBoardBtn_Click(object sender, RoutedEventArgs e)
@@ -391,13 +449,32 @@ namespace prototype2
             {
                 productSettings1.Visibility = Visibility.Visible;
             }
-            settingGridBg.Visibility = Visibility.Visible;
+            foreach (var obj in formGridBg.Children)
+            {
+
+                if (!((Grid)obj).Name.Equals("settingsFormGrid"))
+                {
+                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    ((Grid)obj).Visibility = Visibility.Visible;
+                }
+                
+            }
+            formGridBg.Visibility = Visibility.Visible;
 
         }
 
         private void closeSideMenuBtn_Click(object sender, RoutedEventArgs e)
         {
-            settingGridBg.Visibility = Visibility.Collapsed;
+            foreach (var obj in formGridBg.Children)
+            {
+
+                ((Grid)obj).Visibility = Visibility.Collapsed;
+
+            }
+            formGridBg.Visibility = Visibility.Collapsed;
         }
 
         private void quotesSalesMenuBtn_Click(object sender, RoutedEventArgs e)
@@ -482,10 +559,21 @@ namespace prototype2
         private void settingsManageMenuBtn_Click(object sender, RoutedEventArgs e)
         {
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
-            sb.Begin(settingGridBg);
-            companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            productDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            settingGridBg.Visibility = Visibility.Visible;
+            sb.Begin(formGridBg);
+            foreach (var obj in formGridBg.Children)
+            {
+
+                if (!((Grid)obj).Name.Equals("settingsFormGrid"))
+                {
+                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    ((Grid)obj).Visibility = Visibility.Visible;
+                }
+
+            }
+            formGridBg.Visibility = Visibility.Visible;
             foreach (var obj in settingsGridStackPanel.Children)
             {
                 if (obj is Grid)
@@ -540,46 +628,62 @@ namespace prototype2
         private void manageEmployeeAddBtn_Click(object sender, RoutedEventArgs e)
         {
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
-            sb.Begin(employeeDetailsFormGrid);
-            companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            productDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            if (employeeDetailsFormGridBg.IsVisible)
+            sb.Begin(formGridBg);
+            foreach (var obj in formGridBg.Children)
             {
-                employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
+
+                if (!((Grid)obj).Name.Equals("employeeDetailsFormGrid"))
+                {
+                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    ((Grid)obj).Visibility = Visibility.Visible;
+                }
+
             }
-            else
-                employeeDetailsFormGridBg.Visibility = Visibility.Visible;
+            formGridBg.Visibility = Visibility.Visible;
         }
 
         private void manageCustomerAddBtn_Click(object sender, RoutedEventArgs e)
         {
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
-            sb.Begin(companyDetailsFormGrid);
-            employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            productDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            if (companyDetailsFormGrid.IsVisible)
+            sb.Begin(formGridBg);
+            foreach (var obj in formGridBg.Children)
             {
-                companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
+
+                if (!((Grid)obj).Name.Equals("companyDetailsFormGrid"))
+                {
+                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    ((Grid)obj).Visibility = Visibility.Visible;
+                }
+
             }
-            else
-                companyDetailsFormGridBg.Visibility = Visibility.Visible;
+            formGridBg.Visibility = Visibility.Visible;
         }
 
         private void manageProductAddBtn_Click(object sender, RoutedEventArgs e)
         {
             
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
-            sb.Begin(productDetailsFormGrid);
-            companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            saveCancelGrid3.Visibility = Visibility.Visible;
-            if (productDetailsFormGrid.IsVisible)
+            sb.Begin(formGridBg);
+            foreach (var obj in formGridBg.Children)
             {
 
-                productDetailsFormGridBg.Visibility = Visibility.Collapsed;
+                if (!((Grid)obj).Name.Equals("productDetailsFormGrid"))
+                {
+                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    ((Grid)obj).Visibility = Visibility.Visible;
+                }
+
             }
-            else
-                productDetailsFormGridBg.Visibility = Visibility.Visible;
+            formGridBg.Visibility = Visibility.Visible;
         }
 
         private void generateProductCodeBtn_Click(object sender, RoutedEventArgs e)
@@ -587,27 +691,59 @@ namespace prototype2
             if (String.IsNullOrWhiteSpace(productNameTb.Text))
             {
                 MessageBox.Show("For meaningful product code, enter product name first");
-                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-                var stringChars = new char[8];
+                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                string productCode = "";
                 var random = new Random();
 
-                for (int i = 0; i < stringChars.Length; i++)
+                for (int i = 0; i < 4; i++)
                 {
-                    stringChars[i] = chars[random.Next(chars.Length)];
+                    productCode += chars[random.Next(chars.Length)];
                 }
+                productCode += "-";
 
-                var finalString = new String(stringChars);
-                productCodeTb.Text = finalString;
+                for (int i = 0; i < 4; i++)
+                {
+                    productCode += chars[random.Next(chars.Length)];
+                }
+                productCode += MainVM.ProductList.Count + 1;
+
+                productCodeTb.Text = productCode;
             }
             else
             {
                 if (productNameTb.Text.Length > 4)
                 {
-                    productCodeTb.Text = productNameTb.Text.Substring(0, 4) + MainVM.ProductList.Count;
+                    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                    string productCode = "";
+                    var random = new Random();
+
+                    for (int i = 0; i < 4; i++)
+                    {
+                        productCode += chars[random.Next(chars.Length)];
+                    }
+                    productCode += "-";
+
+                    productCode += productNameTb.Text.Trim().Substring(0, 4).ToUpper();
+                    productCode += MainVM.ProductList.Count + 1;
+
+                    productCodeTb.Text = productCode;
                 }
                 else
                 {
-                    productCodeTb.Text = productNameTb.Text + MainVM.ProductList.Count;
+                    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                    string productCode = "";
+                    var random = new Random();
+
+                    for (int i = 0; i < 4; i++)
+                    {
+                        productCode += chars[random.Next(chars.Length)];
+                    }
+                    productCode += "-";
+
+                    productCode += productNameTb.Text.Trim().ToUpper();
+                    productCode += MainVM.ProductList.Count + 1;
+
+                    productCodeTb.Text = productCode;
                 }
             }
         }
@@ -642,20 +778,26 @@ namespace prototype2
 
         private void viewRecordBtn_Click(object sender, RoutedEventArgs e)
         {
+            formGridBg.Visibility = Visibility.Visible;
             if (manageCustomerGrid.IsVisible)
             {
                 Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
-                sb.Begin(companyDetailsFormGrid);
-                employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
-                productDetailsFormGridBg.Visibility = Visibility.Collapsed;
+                sb.Begin(formGridBg);
+                foreach (var obj in formGridBg.Children)
+                {
+
+                    if (!((Grid)obj).Name.Equals("companyDetailsFormGrid"))
+                    {
+                        ((Grid)obj).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        ((Grid)obj).Visibility = Visibility.Visible;
+                    }
+
+                }
                 saveCancelGrid.Visibility = Visibility.Collapsed;
                 editCloseGrid.Visibility = Visibility.Visible;
-                if (companyDetailsFormGrid.IsVisible)
-                {
-                    companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
-                }
-                else
-                    companyDetailsFormGridBg.Visibility = Visibility.Visible;
                 foreach (var element in companyDetailsFormGrid1.Children)
                 {
                     if (element is TextBox)
@@ -676,17 +818,22 @@ namespace prototype2
             else if (manageEmployeeGrid.IsVisible)
             {
                 Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
-                sb.Begin(employeeDetailsFormGridBg);
-                companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
-                productDetailsFormGridBg.Visibility = Visibility.Collapsed;
+                sb.Begin(formGridBg);
+                foreach (var obj in formGridBg.Children)
+                {
+
+                    if (!((Grid)obj).Name.Equals("employeeDetailsFormGrid"))
+                    {
+                        ((Grid)obj).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        ((Grid)obj).Visibility = Visibility.Visible;
+                    }
+
+                }
                 saveCancelGrid1.Visibility = Visibility.Collapsed;
                 editCloseGrid1.Visibility = Visibility.Visible;
-                if (companyDetailsFormGrid.IsVisible)
-                {
-                    employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
-                }
-                else
-                    employeeDetailsFormGridBg.Visibility = Visibility.Visible;
                 foreach (var element in employeeDetailsFormGrid1.Children)
                 {
                     if (element is TextBox)
@@ -707,18 +854,22 @@ namespace prototype2
             else if (manageProductListGrid.IsVisible)
             {
                 Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
-                sb.Begin(productDetailsFormGrid);
-                companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
-                employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
-                saveCancelGrid2.Visibility = Visibility.Collapsed;
-                editCloseGrid2.Visibility = Visibility.Visible;
-                if (productDetailsFormGrid.IsVisible)
+                sb.Begin(formGridBg);
+                foreach (var obj in formGridBg.Children)
                 {
 
-                    productDetailsFormGridBg.Visibility = Visibility.Collapsed;
+                    if (!((Grid)obj).Name.Equals("productDetailsFormGrid"))
+                    {
+                        ((Grid)obj).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        ((Grid)obj).Visibility = Visibility.Visible;
+                    }
+
                 }
-                else
-                    productDetailsFormGridBg.Visibility = Visibility.Visible;
+                saveCancelGrid2.Visibility = Visibility.Collapsed;
+                editCloseGrid2.Visibility = Visibility.Visible;
                 foreach (var element in productDetailsFormGrid1.Children)
                 {
                     if (element is TextBox)
@@ -741,19 +892,24 @@ namespace prototype2
 
         private void editRecordBtn_Click(object sender, RoutedEventArgs e)
         {
+            formGridBg.Visibility = Visibility.Visible;
             if (manageCustomerGrid.IsVisible)
             {
                 Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
-                sb.Begin(companyDetailsFormGrid);
-                employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
-                productDetailsFormGridBg.Visibility = Visibility.Collapsed;
-                if (companyDetailsFormGrid.IsVisible)
+                sb.Begin(formGridBg);
+                foreach (var obj in formGridBg.Children)
                 {
 
-                    companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
+                    if (!((Grid)obj).Name.Equals("companyDetailsFormGrid"))
+                    {
+                        ((Grid)obj).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        ((Grid)obj).Visibility = Visibility.Visible;
+                    }
+
                 }
-                else
-                    companyDetailsFormGridBg.Visibility = Visibility.Visible;
                 loadRecordToFields();
                 isEdit = true;
                 saveCancelGrid.Visibility = Visibility.Visible;
@@ -762,16 +918,20 @@ namespace prototype2
             else if (manageEmployeeGrid.IsVisible)
             {
                 Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
-                sb.Begin(employeeDetailsFormGrid);
-                companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
-                productDetailsFormGridBg.Visibility = Visibility.Collapsed;
-                if (employeeDetailsFormGrid.IsVisible)
+                sb.Begin(formGridBg);
+                foreach (var obj in formGridBg.Children)
                 {
 
-                    employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
+                    if (!((Grid)obj).Name.Equals("employeeDetailsFormGrid"))
+                    {
+                        ((Grid)obj).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        ((Grid)obj).Visibility = Visibility.Visible;
+                    }
+
                 }
-                else
-                    employeeDetailsFormGridBg.Visibility = Visibility.Visible;
                 loadRecordToFields();
                 isEdit = true;
                 saveCancelGrid1.Visibility = Visibility.Visible;
@@ -780,16 +940,20 @@ namespace prototype2
             else if (manageProductListGrid.IsVisible)
             {
                 Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
-                sb.Begin(productDetailsFormGrid);
-                companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
-                employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
-                if (productDetailsFormGrid.IsVisible)
+                sb.Begin(formGridBg);
+                foreach (var obj in formGridBg.Children)
                 {
 
-                    productDetailsFormGridBg.Visibility = Visibility.Collapsed;
+                    if (!((Grid)obj).Name.Equals("productDetailsFormGrid"))
+                    {
+                        ((Grid)obj).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        ((Grid)obj).Visibility = Visibility.Visible;
+                    }
+
                 }
-                else
-                    productDetailsFormGridBg.Visibility = Visibility.Visible;
                 loadRecordToFields();
                 isEdit = true;
                 saveCancelGrid2.Visibility = Visibility.Visible;
@@ -983,7 +1147,7 @@ namespace prototype2
             MessageBoxResult result = MessageBox.Show("Do you want to save?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Information);
             if (result == MessageBoxResult.OK)
             {
-                if (companyDetailsFormGridBg.IsVisible)
+                if (companyDetailsFormGrid.IsVisible)
                 {
                     foreach (var element in companyDetailsFormGrid1.Children)
                     {
@@ -1010,7 +1174,7 @@ namespace prototype2
                         }
                     }
                 }
-                else if (employeeDetailsFormGridBg.IsVisible)
+                else if (employeeDetailsFormGrid.IsVisible)
                 {
                     foreach (var element in employeeDetailsFormGrid1.Children)
                     {
@@ -1033,7 +1197,7 @@ namespace prototype2
                         }
                     }
                 }
-                else if (productDetailsFormGridBg.IsVisible)
+                else if (productDetailsFormGrid.IsVisible)
                 {
                     foreach (var element in productDetailsFormGrid1.Children)
                     {
@@ -1319,7 +1483,7 @@ namespace prototype2
 
         private void loadRecordToFields()
         {
-            if (companyDetailsFormGridBg.IsVisible)
+            if (companyDetailsFormGrid.IsVisible)
             {
                 companyTypeCb.SelectedIndex = int.Parse(MainVM.SelectedCustomerSupplier.CompanyType);
                 companyNameTb.Text = MainVM.SelectedCustomerSupplier.CompanyName;
@@ -1365,7 +1529,7 @@ namespace prototype2
                     repMobCb.IsChecked = true;
                 }
             }
-            else if (employeeDetailsFormGridBg.IsVisible)
+            else if (employeeDetailsFormGrid.IsVisible)
             {
                 employeeType.SelectedIndex = int.Parse(MainVM.SelectedEmployeeContractor.EmpType);
                 empFirstNameTb.Text = MainVM.SelectedEmployeeContractor.EmpFname;
@@ -1406,7 +1570,7 @@ namespace prototype2
                     empDateEnded.Text = MainVM.SelectedEmployeeContractor.EmpDateFrom;
                 }
             }
-            else if (productDetailsFormGridBg.IsVisible)
+            else if (productDetailsFormGrid.IsVisible)
             {
                 productNameTb.Text = MainVM.SelectedProduct.ItemName;
                 productDescTb.Text = MainVM.SelectedProduct.ItemDesc;
@@ -1419,7 +1583,7 @@ namespace prototype2
         private void saveDataToDb()
         {
             var dbCon = DBConnection.Instance();
-            if (companyDetailsFormGridBg.IsVisible)
+            if (companyDetailsFormGrid.IsVisible)
             {
                 string[] proc = { "", "", "", "" };
 
@@ -1534,7 +1698,7 @@ namespace prototype2
                     loadDataToUi();
                 }
             }
-            else if (employeeDetailsFormGridBg.IsVisible)
+            else if (employeeDetailsFormGrid.IsVisible)
             {
                
                 string[] proc = { "", "", "", "" };
@@ -1675,7 +1839,7 @@ namespace prototype2
 
                 }
             }
-            else if (productDetailsFormGridBg.IsVisible)
+            else if (productDetailsFormGrid.IsVisible)
             {
                 using (MySqlConnection conn = dbCon.Connection)
                 {
@@ -1737,12 +1901,15 @@ namespace prototype2
         private void resetFieldsValue()
         {
 
-            companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            productDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            additionalFeesGridBg.Visibility = Visibility.Collapsed;
-            addNewItemFormGridBg.Visibility = Visibility.Collapsed;
-            settingGridBg.Visibility = Visibility.Collapsed;
+            Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
+            sb.Begin(formGridBg);
+            foreach (var obj in formGridBg.Children)
+            {
+
+                ((Grid)obj).Visibility = Visibility.Collapsed;
+
+            }
+            formGridBg.Visibility = Visibility.Collapsed;
             companyDetailsFormGridSv.ScrollToTop();
             employeeDetailsFormGridSv.ScrollToTop();
             productDetailsFormGridSv.ScrollToTop();
@@ -2222,14 +2389,7 @@ namespace prototype2
 
         private void validateTextBoxes()
         {
-            if (serviceName.Text.Equals("") || servicePrice.Value == 0)
-            {
-                saveServiceTypeBtn.IsEnabled = false;
-            }
-            else
-            {
-                saveServiceTypeBtn.IsEnabled = true;
-            }
+            
         }
         private string id = "";
         private void saveServiceTypeBtn_Click(object sender, RoutedEventArgs e)
@@ -2465,7 +2625,7 @@ namespace prototype2
             {
                 if(element is Grid)
                 {
-                    if (!(((Grid)element).Name.Equals(selectCustomerGrid.Name)))
+                    if (!(((Grid)element).Name.Equals(newRequisitionGrid.Name)))
                     {
                         ((Grid)element).Visibility = Visibility.Collapsed;
                     }
@@ -2473,7 +2633,6 @@ namespace prototype2
                         ((Grid)element).Visibility = Visibility.Visible;
                 }
             }
-            transRequestNext.Visibility = Visibility.Collapsed;
         }
 
         private void findBtn_Click(object sender, RoutedEventArgs e)
@@ -2485,21 +2644,37 @@ namespace prototype2
 
         private void selectCustBtn_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var element in transQuoatationGridForm.Children)
+            MainVM.SelectedRepresentative = MainVM.Representatives.Where(x => x.RepresentativeID.Equals(MainVM.SelectedCustomerSupplier.RepresentativeID.ToString())).FirstOrDefault();
+            Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
+            sb.Begin(formGridBg);
+            formGridBg.Visibility = Visibility.Collapsed;
+            foreach (var obj in formGridBg.Children)
             {
-                if (element is Grid)
-                {
-                    if (!(((Grid)element).Name.Equals(newRequisitionGrid.Name)))
-                    {
-                        ((Grid)element).Visibility = Visibility.Collapsed;
-                    }
-                    else
-                        ((Grid)element).Visibility = Visibility.Visible;
-                }
+
+                ((Grid)obj).Visibility = Visibility.Collapsed;
+
             }
-            transRequestNext.Visibility = Visibility.Visible;
-            selectedCustNameLbl.Content = MainVM.SelectedCustomerSupplier.CompanyName;
-            
+        }
+
+        private void selectCustomerBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+            sb.Begin(formGridBg);
+            formGridBg.Visibility = Visibility.Visible;
+            foreach (var obj in formGridBg.Children)
+            {
+
+                if (!((Grid)obj).Name.Equals("selectCustomerGrid"))
+                {
+                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    ((Grid)obj).Visibility = Visibility.Visible;
+                }
+
+            }
         }
 
         private void transRequestBack_Click(object sender, RoutedEventArgs e)
@@ -2518,22 +2693,6 @@ namespace prototype2
                             ((Grid)element).Visibility = Visibility.Visible;
                     }
                 }
-            }
-            else if (newRequisitionGrid.IsVisible)
-            {
-                foreach (var element in transQuoatationGridForm.Children)
-                {
-                    if (element is Grid)
-                    {
-                        if (!(((Grid)element).Name.Equals(selectCustomerGrid.Name)))
-                        {
-                            ((Grid)element).Visibility = Visibility.Collapsed;
-                        }
-                        else
-                            ((Grid)element).Visibility = Visibility.Visible;
-                    }
-                }
-                transRequestNext.Visibility = Visibility.Collapsed;
             }
             else if (makeSalesQuoteGrid.IsVisible)
             {
@@ -2646,34 +2805,41 @@ namespace prototype2
         private void transReqAddNewItem_Click(object sender, RoutedEventArgs e)
         {
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
-            sb.Begin(addNewItemFormGridBg);
-            companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            productDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            settingGridBg.Visibility = Visibility.Collapsed;
-            if (addNewItemFormGridBg.IsVisible)
+            sb.Begin(formGridBg);
+            formGridBg.Visibility = Visibility.Visible;
+            foreach (var obj in formGridBg.Children)
             {
-                addNewItemFormGridBg.Visibility = Visibility.Collapsed;
+
+                if (!((Grid)obj).Name.Equals("addNewItemFormGrid"))
+                {
+                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    ((Grid)obj).Visibility = Visibility.Visible;
+                }
+
             }
-            else
-                addNewItemFormGridBg.Visibility = Visibility.Visible;
         }
 
         private void feesBtn_Click(object sender, RoutedEventArgs e)
         {
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
-            sb.Begin(additionalFeesGridBg);
-            companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            productDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            settingGridBg.Visibility = Visibility.Collapsed;
-            addNewItemFormGridBg.Visibility = Visibility.Collapsed;
-            if (additionalFeesGridBg.IsVisible)
+            sb.Begin(formGridBg);
+            formGridBg.Visibility = Visibility.Visible;
+            foreach (var obj in formGridBg.Children)
             {
-                additionalFeesGridBg.Visibility = Visibility.Collapsed;
+
+                if (!((Grid)obj).Name.Equals("additionalFeesGrid"))
+                {
+                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    ((Grid)obj).Visibility = Visibility.Visible;
+                }
+
             }
-            else
-                additionalFeesGridBg.Visibility = Visibility.Visible;
             MainVM.SelectedAddedService = MainVM.AddedServices.Where(x => x.TableNoChar.Equals(MainVM.SelectedRequestedItem.itemCode)).FirstOrDefault();
             MainVM.AdditionalFees = MainVM.SelectedAddedService.AdditionalFees;
         }
@@ -2749,24 +2915,37 @@ namespace prototype2
             MainVM.SelectedAddedService = MainVM.AddedServices.Where(x => x.TableNoChar.Equals(MainVM.SelectedRequestedItem.itemCode)).FirstOrDefault();
             MainVM.SelectedAddedService.AdditionalFees = MainVM.AdditionalFees;
             MainVM.AdditionalFees.Clear();
-            companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            productDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            settingGridBg.Visibility = Visibility.Collapsed;
-            addNewItemFormGridBg.Visibility = Visibility.Collapsed;
-            additionalFeesGridBg.Visibility = Visibility.Collapsed;
-            
+            Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
+            sb.Begin(formGridBg);
+            formGridBg.Visibility = Visibility.Collapsed;
+            foreach (var obj in formGridBg.Children)
+            {
+
+                if (!((Grid)obj).Name.Equals("additionalFeesGrid"))
+                {
+                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    ((Grid)obj).Visibility = Visibility.Visible;
+                }
+
+            }
+
             computePrice();
         }
 
         private void cancelAdditionalFees_Click(object sender, RoutedEventArgs e)
         {
-            companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            productDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            settingGridBg.Visibility = Visibility.Collapsed;
-            addNewItemFormGridBg.Visibility = Visibility.Collapsed;
-            additionalFeesGridBg.Visibility = Visibility.Collapsed;
+            Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
+            sb.Begin(formGridBg);
+            formGridBg.Visibility = Visibility.Collapsed;
+            foreach (var obj in formGridBg.Children)
+            {
+
+                ((Grid)obj).Visibility = Visibility.Collapsed;
+
+            }
             computePrice();
             
         }
@@ -2975,7 +3154,7 @@ namespace prototype2
 
                     var finalString = new String(stringChars);
 
-                    MainVM.AddedServices.Add(new AddedService() {TableNoChar = finalString, ServiceID = MainVM.SelectedService.ServiceID, ProvinceID = MainVM.SelectedProvince.ProvinceID, Address = serviceAddressTb.Text, City = serviceCityTb.Text});
+                    MainVM.AddedServices.Add(new AddedService() {TableNoChar = finalString, ServiceID = MainVM.SelectedService.ServiceID, ProvinceID = MainVM.SelectedProvince.ProvinceID, Address = serviceAddressTb.Text, City = serviceCityTb.Text, TotalCost = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice });
 
                     MainVM.RequestedItems.Add(new RequestedItem() { lineNo = (MainVM.RequestedItems.Count + 1).ToString(),itemCode = finalString, itemName = MainVM.SelectedService.ServiceName, desc = serviceDescTb.Text, itemTypeName = "Service", itemType = 1, qty = 1, unitPrice = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, totalAmount = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, totalAmountMarkUp = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, qtyEditable = false });
                     
@@ -2989,17 +3168,21 @@ namespace prototype2
         private void cancelAddProductBtn_Click(object sender, RoutedEventArgs e)
         {
             Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
-            sb.Begin(addNewItemFormGridBg);
-            companyDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            employeeDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            productDetailsFormGridBg.Visibility = Visibility.Collapsed;
-            settingGridBg.Visibility = Visibility.Collapsed;
-            if (addNewItemFormGridBg.IsVisible)
+            sb.Begin(formGridBg);
+            formGridBg.Visibility = Visibility.Collapsed;
+            foreach (var obj in formGridBg.Children)
             {
-                addNewItemFormGridBg.Visibility = Visibility.Collapsed;
+
+                if (!((Grid)obj).Name.Equals("addNewItemFormGrid"))
+                {
+                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    ((Grid)obj).Visibility = Visibility.Visible;
+                }
+
             }
-            else
-                addNewItemFormGridBg.Visibility = Visibility.Visible;
             computePrice();
         }
 
@@ -3007,9 +3190,19 @@ namespace prototype2
 
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
-            var linqResults = MainVM.ProductList.Where(x => x.ItemName.ToLower().Contains(searchTb.Text.ToLower()));
-            var observable = new ObservableCollection<Item>(linqResults);
-            addGridProductListDg.ItemsSource = observable;
+            if (addNewItemFormGrid.IsVisible)
+            {
+                var linqResults = MainVM.ProductList.Where(x => x.ItemName.ToLower().Contains(searchTb.Text.ToLower()));
+                var observable = new ObservableCollection<Item>(linqResults);
+                addGridProductListDg.ItemsSource = observable;
+            }
+            else if (quotationsGridHome.IsVisible)
+            {
+                var linqResults = MainVM.ProductList.Where(x => x.ItemName.ToLower().Contains(searchTb.Text.ToLower()));
+                var observable = new ObservableCollection<Item>(linqResults);
+                addGridProductListDg.ItemsSource = observable;
+            }
+            
         }
 
         private void serviceProvinceCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -3204,6 +3397,8 @@ namespace prototype2
 
             DateTime deliveryDate = new DateTime();
             deliveryDate = DateTime.Now;
+            deliveryDate.AddDays(estDel);
+
             int downP = 50;
             if (!(bool)paymentDefaultRd.IsChecked)
                 downP = int.Parse(downpaymentPercentTb.Value.ToString());
@@ -3250,40 +3445,42 @@ namespace prototype2
             }
             stringChars += "-";
             stringChars += DateTime.Now.ToString("yyyy-MM-dd");
-            
+
             MainVM.SelectedSalesQuote = new SalesQuote()
             {
                 sqNoChar_ = stringChars,
                 custID_ = int.Parse(MainVM.SelectedCustomerSupplier.CompanyID),
                 custRepID_ = int.Parse(MainVM.SelectedCustomerSupplier.RepresentativeID),
                 quoteSubject_ = stringChars,
-                priceNote_ = ""+ moneyType.SelectedValue.ToString()+", " + landed + ", " + vatExc,
+                priceNote_ = "" + moneyType.SelectedValue.ToString() + ", " + landed + ", " + vatExc,
                 vatexcluded_ = (bool)vatCheckBox.IsChecked,
                 vat_ = vat,
                 paymentIsLanded_ = (bool)landedCheckBox.IsChecked,
                 paymentCurrency_ = "Peso",
                 estDelivery_ = estDel,
+                deliveryDate_ = deliveryDate,
                 validityDays_ = valid,
                 validityDate_ = endDate,
                 status_ = "PENDING",
                 termsDP_ = downP,
                 penaltyPercent_ = penaltyP,
                 warrantyDays_ = warr,
-                additionalTerms_ = additionalTermsTb.Text
-
+                additionalTerms_ = additionalTermsTb.Text,
+                markUpPercent_ = (decimal)markupPriceTb.Value,
+                discountPercent_ = (decimal)discountPriceTb.Value
             };
             MainVM.SalesQuotes.Add(MainVM.SelectedSalesQuote);
             MainVM.SelectedRepresentative = MainVM.Representatives.Where(x => x.RepresentativeID.Equals(MainVM.SelectedCustomerSupplier.RepresentativeID)).First();
 
         }
 
-        private void saveSalesQuoteToDb()
+        void saveSalesQuoteToDb()
         {
             var dbCon = DBConnection.Instance();
             bool noError = true;
             if (dbCon.IsConnect())
             {
-                string query = "INSERT INTO `odc_db`.`sales_quote_t` " + "(`sqNoChar`,`custID`,`custRepID`,`quoteSubject`,`priceNote`,`deliveryDate`,`estDelivery`,`validityDays`,`validityDate`,`otherTerms`,`expiration`,`VAT`,`vatIsExcluded`,`paymentIsLanded`,`paymentCurrency`,`status`,`termsDays`,`termsDP`,`penaltyAmt`,`penaltyPerc`)" +
+                string query = "INSERT INTO `odc_db`.`sales_quote_t` " + "(`sqNoChar`,`custID`,`custRepID`,`quoteSubject`,`priceNote`,`deliveryDate`,`estDelivery`,`validityDays`,`validityDate`,`otherTerms`,`expiration`,`VAT`,`vatIsExcluded`,`paymentIsLanded`,`paymentCurrency`,`status`,`termsDays`,`termsDP`,`penaltyAmt`,`penaltyPerc`,`markUpPercent`,`discountPercent`)" +
                     " VALUES " +
                     "('" + MainVM.SelectedSalesQuote.sqNoChar_ + "','" + 
                     MainVM.SelectedSalesQuote.custID_ + "','" + 
@@ -3304,7 +3501,9 @@ namespace prototype2
                     MainVM.SelectedSalesQuote.termsDays_ + "','" +
                     MainVM.SelectedSalesQuote.termsDP_ + "','" +
                     MainVM.SelectedSalesQuote.penaltyAmt_ + "','" +
-                    MainVM.SelectedSalesQuote.penaltyPercent_ + "');";
+                    MainVM.SelectedSalesQuote.penaltyPercent_ + "','" +
+                    MainVM.SelectedSalesQuote.markUpPercent_ + "','" +
+                    MainVM.SelectedSalesQuote.discountPercent_ + "'); ";
                 if (dbCon.insertQuery(query, dbCon.Connection))
                 {
                     if (dbCon.IsConnect())
@@ -3314,9 +3513,9 @@ namespace prototype2
                             if (item.itemType == 0)
                             {
                                 MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ItemCode.Equals(item.itemCode)).FirstOrDefault();
-                                query = "INSERT INTO `odc_db`.`items_availed_t`(`itemNo`,`itemQnty`,`sqNoChar`)" +
+                                query = "INSERT INTO `odc_db`.`items_availed_t`(`sqNoChar,`itemNo`,`itemQnty`,`totalCost`)" +
                                     " VALUES " +
-                                    "(" + MainVM.SelectedProduct.ItemNo + ", " + item.qty + ", '" + MainVM.SelectedSalesQuote.sqNoChar_ + "');";
+                                    "(" + MainVM.SelectedSalesQuote.sqNoChar_+ ", "+ MainVM.SelectedProduct.ItemNo + "," + item.qty + ", " + item.totalAmount + ");";
                                 noError = dbCon.insertQuery(query, dbCon.Connection);                            }
                             else if (item.itemType == 1)
                             {
@@ -3372,6 +3571,32 @@ namespace prototype2
                     }
                 }
             }
+        }
+
+        void loadSalesQuoteToUi()
+        {
+            MainVM.SelectedCustomerSupplier = MainVM.Customers.Where(x => x.CompanyID.Equals(MainVM.SelectedSalesQuote.custID_.ToString())).FirstOrDefault();
+            MainVM.SelectedRepresentative = MainVM.Representatives.Where(x => x.RepresentativeID.Equals(MainVM.SelectedCustomerSupplier.RepresentativeID.ToString())).FirstOrDefault();
+
+        }
+        private void viewQuoteRecordBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void editQuoteRecordBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void deleteQuoteRecordBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void convertToInvoiceBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
