@@ -128,7 +128,7 @@ namespace prototype2
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
                     mV.SelectedCustomerSupplier = mV.Suppliers.Where(x => x.CompanyID.Equals(dr["supplierID"].ToString())).FirstOrDefault();
-                    mV.ProductList.Add(new Item() { ItemNo = dr["itemNo"].ToString(), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), Unit = dr["itemUnit"].ToString(), Quantity = 1, SupplierID = dr["supplierID"].ToString(), SupplierName = mV.SelectedCustomerSupplier.CompanyName });
+                    mV.ProductList.Add(new Item() { ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), Unit = dr["itemUnit"].ToString(), Quantity = 1, SupplierID = dr["supplierID"].ToString(), SupplierName = mV.SelectedCustomerSupplier.CompanyName });
                 }
                 dbCon.Close();
             }

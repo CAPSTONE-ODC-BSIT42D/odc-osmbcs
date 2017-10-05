@@ -96,8 +96,7 @@ namespace prototype2
             MainVM.AllEmployeesContractor.Clear();
             MainVM.Employees.Clear();
             MainVM.Contractor.Clear();
-
-            MainVM.RequestedItems.Clear();
+            
 
             MainVM.SalesQuotes.Clear();
 
@@ -106,7 +105,7 @@ namespace prototype2
 
             if (dbCon.IsConnect())
             {
-                string query = "SELECT locProvinceID, locProvince FROM provinces_t";
+                string query = "SELECT locProvinceID, locProvince, locPrice FROM provinces_t";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
@@ -115,29 +114,11 @@ namespace prototype2
                 
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    MainVM.Provinces.Add(new Province() { ProvinceID = (int)dr["locProvinceID"], ProvinceName = dr["locProvince"].ToString() });
+                    MainVM.Provinces.Add(new Province() { ProvinceID = (int)dr["locProvinceID"], ProvinceName = dr["locProvince"].ToString(), ProvincePrice = decimal.Parse(dr["locPrice"].ToString()) });
                 }
                 dbCon.Close();
             }
-
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT locationProvinceID, locationPrice FROM location_details_t";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    foreach (Province prov in MainVM.Provinces)
-                    {
-                        if (prov.ProvinceID == (int)dr["locationProvinceID"])
-                            prov.ProvincePrice = (decimal)dr["locationPrice"];
-                    }
-                }
-                dbCon.Close();
-            }
+            
 
             if (dbCon.IsConnect())
             {
@@ -214,28 +195,10 @@ namespace prototype2
                     MainVM.SelectedProductCategory = MainVM.ProductCategory.Where(x => x.TypeID == int.Parse(dr["typeID"].ToString())).FirstOrDefault();
                     if (MainVM.SelectedCustomerSupplier != null)
                     {
-                        MainVM.ProductList.Add(new Item() { ItemNo = dr["itemNo"].ToString(), ItemCode = dr["itemCode"].ToString(),ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), Unit = dr["itemUnit"].ToString(),TypeName = MainVM.SelectedProductCategory.TypeName, Quantity = 1, SupplierID = dr["supplierID"].ToString(), SupplierName = MainVM.SelectedCustomerSupplier.CompanyName });
+                        MainVM.ProductList.Add(new Item() { ItemCode = dr["itemCode"].ToString(),ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), Unit = dr["itemUnit"].ToString(),TypeName = MainVM.SelectedProductCategory.TypeName, Quantity = 1, SupplierID = dr["supplierID"].ToString(), SupplierName = MainVM.SelectedCustomerSupplier.CompanyName });
                     }
                     else
-                        MainVM.ProductList.Add(new Item() { ItemNo = dr["itemNo"].ToString(), ItemCode = dr["itemCode"].ToString(), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), Unit = dr["itemUnit"].ToString(), TypeName = MainVM.SelectedProductCategory.TypeName, Quantity = 1, SupplierID = dr["supplierID"].ToString()});
-                }
-                dbCon.Close();
-            }
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT locationProvinceID, locationPrice FROM location_details_t";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    foreach (Province prov in MainVM.Provinces)
-                    {
-                        if (prov.ProvinceID == (int)dr["locationProvinceID"])
-                            prov.ProvincePrice = (decimal)dr["locationPrice"];
-                    }
+                        MainVM.ProductList.Add(new Item() { ItemCode = dr["itemCode"].ToString(), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), Unit = dr["itemUnit"].ToString(), TypeName = MainVM.SelectedProductCategory.TypeName, Quantity = 1, SupplierID = dr["supplierID"].ToString()});
                 }
                 dbCon.Close();
             }
@@ -254,8 +217,9 @@ namespace prototype2
                 
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    MainVM.Customers.Add(new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString(), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), RepresentativeID = dr["representativeID"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString() });
-                    MainVM.AllCustomerSupplier.Add(new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString(), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), RepresentativeID = dr["representativeID"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString() });
+                    var customer = (new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString(), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), RepresentativeID = dr["representativeID"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString() });
+                    MainVM.Customers.Add(customer);
+                    MainVM.AllCustomerSupplier.Add(customer);
                 }
             }
 
@@ -344,7 +308,7 @@ namespace prototype2
             }
             if (dbCon.IsConnect())
             {
-                string query = "SELECT * FROM sales_quote_t a JOIN services_availed_t b ON a.sqNoChar = b.sqNoChar JOIN items_availed_t c ON a.sqNoChar = c.sqNoChar;";
+                string query = "SELECT * FROM sales_quote_t;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
@@ -381,10 +345,54 @@ namespace prototype2
                     MainVM.SelectedCustomerSupplier = MainVM.Customers.Where(x => x.CompanyID.Equals(dr["custID"].ToString())).FirstOrDefault();
                     if(MainVM.SelectedCustomerSupplier != null)
                     {
-                        MainVM.SelectedSalesQuote = (new SalesQuote() { sqNoChar_ = dr["sqNoChar"].ToString(), dateOfIssue_ = dateOfIssue, custID_ = int.Parse(dr["custID"].ToString()), custRepID_ = int.Parse(dr["custRepID"].ToString()), custName_ = MainVM.SelectedCustomerSupplier.CompanyName, quoteSubject_ = dr["quoteSubject"].ToString(), priceNote_ = dr["priceNote"].ToString(), deliveryDate_ = deliveryDate, estDelivery_ = int.Parse(dr["estDelivery"].ToString()), validityDays_ = int.Parse(dr["validityDays"].ToString()), validityDate_ = validityDate, otherTerms_ = dr["otherTerms"].ToString(), expiration_ = expiration, vat_ = Decimal.Parse(dr["vat"].ToString()), vatexcluded_ = vatIsExcluded, paymentIsLanded_ = paymentIsLanded, paymentCurrency_ = dr["paymentCurrency"].ToString(), status_ = dr["status"].ToString(), termsDays_ = int.Parse(dr["termsDays"].ToString()), termsDP_ = int.Parse(dr["termsDP"].ToString()), penaltyAmt_ = Decimal.Parse(dr["penaltyAmt"].ToString()), penaltyPercent_ = int.Parse(dr["penaltyPerc"].ToString()), markUpPercent_ = decimal.Parse(dr["markUpPercent"].ToString()), discountPercent_ = decimal.Parse(dr["discountPercent"].ToString()) });
+                        MainVM.SalesQuotes.Add(new SalesQuote() { sqNoChar_ = dr["sqNoChar"].ToString(), dateOfIssue_ = dateOfIssue, custID_ = int.Parse(dr["custID"].ToString()), custRepID_ = int.Parse(dr["custRepID"].ToString()), custName_ = MainVM.SelectedCustomerSupplier.CompanyName, quoteSubject_ = dr["quoteSubject"].ToString(), priceNote_ = dr["priceNote"].ToString(), deliveryDate_ = deliveryDate, estDelivery_ = int.Parse(dr["estDelivery"].ToString()), validityDays_ = int.Parse(dr["validityDays"].ToString()), validityDate_ = validityDate, otherTerms_ = dr["otherTerms"].ToString(), expiration_ = expiration, vat_ = Decimal.Parse(dr["vat"].ToString()), vatexcluded_ = vatIsExcluded, paymentIsLanded_ = paymentIsLanded, paymentCurrency_ = dr["paymentCurrency"].ToString(), status_ = dr["status"].ToString(), termsDays_ = int.Parse(dr["termsDays"].ToString()), termsDP_ = int.Parse(dr["termsDP"].ToString()), penaltyAmt_ = Decimal.Parse(dr["penaltyAmt"].ToString()), penaltyPercent_ = int.Parse(dr["penaltyPerc"].ToString()), markUpPercent_ = decimal.Parse(dr["markUpPercent"].ToString()), discountPercent_ = decimal.Parse(dr["discountPercent"].ToString()) });
+
                     }
-                    
-                    
+                }
+                query = "SELECT * FROM services_availed_t;";
+                dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                fromDb = new DataSet();
+                fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                query = "SELECT * FROM services_availed_t;";
+                dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb3 = new DataSet();
+                DataTable fromDbTable3 = new DataTable();
+                dataAdapter.Fill(fromDb3, "t");
+                fromDbTable3 = fromDb.Tables["t"];
+                query = "SELECT * FROM fees_per_transaction_t;";
+                dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb2 = new DataSet();
+                DataTable fromDbTable2 = new DataTable();
+                dataAdapter.Fill(fromDb2, "t");
+                fromDbTable2 = fromDb2.Tables["t"];
+                foreach (SalesQuote sq in MainVM.SalesQuotes)
+                {
+                    foreach (DataRow dr in fromDbTable.Rows)
+                    {
+                        if (dr["sqNoChar"].ToString().Equals(sq.sqNoChar_))
+                        {
+                            MainVM.SelectedAddedService = (new AddedService(){ TableNoChar = dr["tableNoChar"].ToString(), ServiceID = dr["serviceID"].ToString(), ProvinceID = int.Parse(dr["provinceID"].ToString()), City = dr["city"].ToString(), Address = dr["address"].ToString(), TotalCost = decimal.Parse(dr["totalCost"].ToString()) });
+                            foreach(DataRow dr2 in fromDbTable2.Rows)
+                            {
+                                if (dr["tableNoChar"].ToString().Equals(dr2["servicesNochar"].ToString()))
+                                {
+                                    MainVM.SelectedAddedService.AdditionalFees.Add(new AdditionalFee() { ServiceNoChar = dr["serviceNoChar"].ToString(), FeeName = dr["feeName"].ToString(), FeePrice = decimal.Parse(dr["feeValue"].ToString())});
+                                }
+                            }
+                            sq.AddedServices.Add(MainVM.SelectedAddedService);
+                        }
+                    }
+                    foreach(DataRow dr3 in fromDbTable3.Rows)
+                    {
+                        if (dr3["sqNoChar"].ToString().Equals(sq.sqNoChar_))
+                        {
+                            sq.AddedItems.Add(new AddedItem() { TableID = int.Parse(dr3["tableID"].ToString()), SqNoChar = dr3["sqNoChar"].ToString(), ItemCode = dr3["itemCode"].ToString(), ItemQty = int.Parse(dr3["itemQnty"].ToString()), TotalCost = decimal.Parse(dr3["totalCost"].ToString())});
+                        }
+                    }
+
+                        
                 }
                 dbCon.Close();
             }
@@ -1008,14 +1016,13 @@ namespace prototype2
             }
             else if (manageProductListGrid.IsVisible)
             {
-                String id = MainVM.SelectedProduct.ItemNo;
                 var dbCon = DBConnection.Instance();
                 MessageBoxResult result = MessageBox.Show("Do you wish to delete this record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.OK)
                 {
                     if (dbCon.IsConnect())
                     {
-                        string query = "UPDATE `item_t` SET `isDeleted`= 1 WHERE itemNo = '" + id + "';";
+                        string query = "UPDATE `item_t` SET `isDeleted`= 1 WHERE itemCode = '" + MainVM.SelectedProduct.ItemCode + "';";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             MessageBox.Show("Record successfully deleted!");
@@ -1852,7 +1859,7 @@ namespace prototype2
                     {
                         cmd = new MySqlCommand("UPDATE_ITEM", conn);
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@itemNo", MainVM.SelectedProduct.ItemNo);
+                        cmd.Parameters.AddWithValue("@itemNo", MainVM.SelectedProduct.ItemCode);
                         cmd.Parameters["@itemNo"].Direction = ParameterDirection.Input;
                         isEdit = false;
                     }
@@ -2499,32 +2506,8 @@ namespace prototype2
             else
             {
                 setPriceBtn.IsEnabled = true;
-                var dbCon = DBConnection.Instance();
-                dbCon.DatabaseName = dbname;
-                if (dbCon.IsConnect())
-                {
-                    string query = "SELECT locationID,locationPrice FROM location_details_t " +
-                        "WHERE locationProvinceId = '" + provinceCb.SelectedValue + "';";
-                    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                    DataSet fromDb = new DataSet();
-                    DataTable fromDbTable = new DataTable();
-                    dataAdapter.Fill(fromDb, "t");
-                    fromDbTable = fromDb.Tables["t"];
-                    if (fromDbTable.Rows.Count != 0)
-                    {
-                        initPrice = false;
-                        foreach (DataRow dr in fromDbTable.Rows)
-                        {
-                            locationPrice.Value = Decimal.Parse(dr["locationPrice"].ToString());
-                            locationid = dr["locationId"].ToString();
-                        }
-                    }
-                    else
-                    {
-                        locationPrice.Value = 0;
-                        initPrice = true;
-                    }
-                }
+                MainVM.SelectedProvince = MainVM.Provinces.Where(x => x.ProvinceID == int.Parse(provinceCb.SelectedValue.ToString())).First();
+                locationPrice.Value = MainVM.SelectedProvince.ProvincePrice;
             }
 
         }
@@ -2535,48 +2518,28 @@ namespace prototype2
             {
                 var dbCon = DBConnection.Instance();
                 dbCon.DatabaseName = dbname;
-                MessageBoxResult result = MessageBox.Show("Do you want to save this price?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
-                if (result == MessageBoxResult.Yes)
+                MainVM.SelectedProvince = MainVM.Provinces.Where(x => x.ProvinceID == int.Parse(provinceCb.SelectedValue.ToString())).First();
+                MessageBoxResult result = MessageBox.Show("Do you want to save this price?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.OK)
                 {
-                    if (initPrice)
+                    string query = "UPDATE `provinces_t` SET locPrice = '" + locationPrice.Value + "' WHERE locProvinceID = '" + MainVM.SelectedProvince.ProvinceID + "'";
+                    if (dbCon.insertQuery(query, dbCon.Connection))
                     {
-                        string query = "INSERT INTO location_details_t (locationProvinceID,locationPrice) VALUES ('" + provinceCb.SelectedValue + "', '" + locationPrice.Value + "')";
-                        if (dbCon.insertQuery(query, dbCon.Connection))
-                        {
-                            MessageBox.Show("Price saved.");
-                            provinceCb.SelectedValue = -1;
-                            locationPrice.Value = 0;
-
-                            serviceName.Clear();
-                            serviceDesc.Clear();
-                            servicePrice.Value = 0;
-                            loadDataToUi();
-                        }
-                    }
-                    else
-                    {
-                        string query = "UPDATE `location_details_t` SET locationPrice = '" + locationPrice.Value + "' WHERE locationId = '" + locationid + "'";
-                        if (dbCon.insertQuery(query, dbCon.Connection))
-                        {
-                            //MessageBox.Show("Price updated.");
-                            id = "";
-                            provinceCb.SelectedValue = -1;
-                            locationPrice.Value = 0;
-                            initPrice = true;
-                            loadDataToUi();
-                        }
+                        MessageBox.Show("Price saved.");
+                        id = "";
+                        provinceCb.SelectedValue = -1;
+                        locationPrice.Value = 0;
+                        initPrice = true;
+                        loadDataToUi();
                     }
 
 
 
-                }
-                else if (result == MessageBoxResult.No)
-                {
-                    provinceCb.SelectedValue = -1;
-                    locationPrice.Value = 0;
                 }
                 else if (result == MessageBoxResult.Cancel)
                 {
+                    provinceCb.SelectedValue = -1;
+                    locationPrice.Value = 0;
                 }
             }
             else
@@ -2630,6 +2593,8 @@ namespace prototype2
                         ((Grid)element).Visibility = Visibility.Visible;
                 }
             }
+            viewSalesQuoteBtns.Visibility = Visibility.Collapsed;
+            newSalesQuoteBtns.Visibility = Visibility.Visible;
         }
 
         private void findBtn_Click(object sender, RoutedEventArgs e)
@@ -2641,7 +2606,7 @@ namespace prototype2
 
         private void selectCustBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainVM.SelectedRepresentative = MainVM.Representatives.Where(x => x.RepresentativeID.Equals(MainVM.SelectedCustomerSupplier.RepresentativeID.ToString())).FirstOrDefault();
+            MainVM.SelectedRepresentative = MainVM.Representatives.Where(x => x.RepresentativeID.Equals(MainVM.SelectedCustomerSupplier.RepresentativeID)).FirstOrDefault();
             Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
             sb.Begin(formGridBg);
             formGridBg.Visibility = Visibility.Collapsed;
@@ -2691,7 +2656,7 @@ namespace prototype2
                     }
                 }
             }
-            else if (makeSalesQuoteGrid.IsVisible)
+            else if (termsAndConditionGrid.IsVisible)
             {
                 foreach (var element in transQuoatationGridForm.Children)
                 {
@@ -2713,7 +2678,7 @@ namespace prototype2
                 {
                     if (element is Grid)
                     {
-                        if (!(((Grid)element).Name.Equals(makeSalesQuoteGrid.Name)))
+                        if (!(((Grid)element).Name.Equals(termsAndConditionGrid.Name)))
                         {
                             ((Grid)element).Visibility = Visibility.Collapsed;
                         }
@@ -2732,7 +2697,7 @@ namespace prototype2
                 {
                     if (element is Grid)
                     {
-                        if (!(((Grid)element).Name.Equals(makeSalesQuoteGrid.Name)))
+                        if (!(((Grid)element).Name.Equals(termsAndConditionGrid.Name)))
                         {
                             ((Grid)element).Visibility = Visibility.Collapsed;
                         }
@@ -2742,7 +2707,7 @@ namespace prototype2
                 }
             }
 
-            else if (makeSalesQuoteGrid.IsVisible)
+            else if (termsAndConditionGrid.IsVisible)
             {
                 foreach (var element in transQuoatationGridForm.Children)
                 {
@@ -2827,7 +2792,7 @@ namespace prototype2
             foreach (var obj in formGridBg.Children)
             {
 
-                if (!((Grid)obj).Name.Equals("additionalFeesGrid"))
+                if (!((Grid)obj).Name.Equals("additionalFeesFormGrid"))
                 {
                     ((Grid)obj).Visibility = Visibility.Collapsed;
                 }
@@ -2838,7 +2803,7 @@ namespace prototype2
 
             }
             MainVM.SelectedAddedService = MainVM.AddedServices.Where(x => x.TableNoChar.Equals(MainVM.SelectedRequestedItem.itemCode)).FirstOrDefault();
-            MainVM.AdditionalFees = MainVM.SelectedAddedService.AdditionalFees;
+            //MainVM.AdditionalFees = MainVM.SelectedAddedService.AdditionalFees;
         }
 
         private void editFeeBtn_Click(object sender, RoutedEventArgs e)
@@ -2868,7 +2833,7 @@ namespace prototype2
 
         private void deleteFeeBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainVM.AdditionalFees.Remove(MainVM.SelectedAdditionalFee);
+            MainVM.SelectedAddedService.AdditionalFees.Remove(MainVM.SelectedAdditionalFee);
         }
 
         private void addSaveAdditionalFeesBtn_Click(object sender, RoutedEventArgs e)
@@ -2891,11 +2856,11 @@ namespace prototype2
             {
                 if (feeTypeCb.SelectedIndex == feeTypeCb.Items.Count - 1)
                 {
-                    MainVM.AdditionalFees.Add(new AdditionalFee() { FeeName = otherFeenameTb.Text, FeePrice = (decimal)feeCostTb.Value });
+                    MainVM.SelectedAddedService.AdditionalFees.Add(new AdditionalFee() { FeeName = otherFeenameTb.Text, FeePrice = (decimal)feeCostTb.Value });
                 }
                 else
                 {
-                    MainVM.AdditionalFees.Add(new AdditionalFee() { FeeName = feeTypeCb.SelectedValue.ToString(), FeePrice = (decimal)feeCostTb.Value });
+                    MainVM.SelectedAddedService.AdditionalFees.Add(new AdditionalFee() { FeeName = feeTypeCb.SelectedValue.ToString(), FeePrice = (decimal)feeCostTb.Value });
                 }
                 
                 
@@ -2904,21 +2869,20 @@ namespace prototype2
             otherFeenameTb.Text = "";
             feeCostTb.Value = 0;
             isEdit = false;
-
         }
 
         private void saveAdditionalFees_Click(object sender, RoutedEventArgs e)
         {
-            MainVM.SelectedAddedService = MainVM.AddedServices.Where(x => x.TableNoChar.Equals(MainVM.SelectedRequestedItem.itemCode)).FirstOrDefault();
-            MainVM.SelectedAddedService.AdditionalFees = MainVM.AdditionalFees;
-            MainVM.AdditionalFees.Clear();
+            //MainVM.SelectedAddedService = MainVM.AddedServices.Where(x => x.TableNoChar.Equals(MainVM.SelectedRequestedItem.itemCode)).FirstOrDefault();
+            //MainVM.SelectedAddedService.AdditionalFees = MainVM.AdditionalFees;
+            //MainVM.AdditionalFees.Clear();
             Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
             sb.Begin(formGridBg);
             formGridBg.Visibility = Visibility.Collapsed;
             foreach (var obj in formGridBg.Children)
             {
 
-                if (!((Grid)obj).Name.Equals("additionalFeesGrid"))
+                if (!((Grid)obj).Name.Equals("additionalFeesGridForm"))
                 {
                     ((Grid)obj).Visibility = Visibility.Collapsed;
                 }
@@ -3004,31 +2968,39 @@ namespace prototype2
 
         private void addressOfCustomerCb_Checked(object sender, RoutedEventArgs e)
         {
-            foreach (var element in addNewServiceForm.Children)
+            if (MainVM.SelectedCustomerSupplier != null)
             {
-                if (element is TextBox)
+                foreach (var element in addNewServiceForm.Children)
                 {
-                    if (((TextBox)element).Name.Equals(serviceAddressTb.Name))
+                    if (element is TextBox)
                     {
-                        serviceAddressTb.Text = MainVM.SelectedCustomerSupplier.CompanyAddress;
-                        serviceAddressTb.IsEnabled = false;
-                    }
-                    if (((TextBox)element).Name.Equals(serviceAddressTb.Name))
-                    {
-                        serviceCityTb.Text = MainVM.SelectedCustomerSupplier.CompanyCity;
-                        serviceCityTb.IsEnabled = false;
-                    }
+                        if (((TextBox)element).Name.Equals(serviceAddressTb.Name))
+                        {
+                            serviceAddressTb.Text = MainVM.SelectedCustomerSupplier.CompanyAddress;
+                            serviceAddressTb.IsEnabled = false;
+                        }
+                        if (((TextBox)element).Name.Equals(serviceAddressTb.Name))
+                        {
+                            serviceCityTb.Text = MainVM.SelectedCustomerSupplier.CompanyCity;
+                            serviceCityTb.IsEnabled = false;
+                        }
 
-                }
-                if (element is ComboBox)
-                {
-                    if (((ComboBox)element).Name.Equals(serviceProvinceCb.Name))
+                    }
+                    if (element is ComboBox)
                     {
-                        serviceProvinceCb.SelectedIndex = int.Parse(MainVM.SelectedCustomerSupplier.CompanyProvinceID)-1;
-                        serviceProvinceCb.IsEnabled = false;
+                        if (((ComboBox)element).Name.Equals(serviceProvinceCb.Name))
+                        {
+                            serviceProvinceCb.SelectedIndex = int.Parse(MainVM.SelectedCustomerSupplier.CompanyProvinceID) - 1;
+                            serviceProvinceCb.IsEnabled = false;
+                        }
                     }
                 }
             }
+            else
+            {
+                MessageBox.Show("No Custoemr selected");
+            }
+            
         }
 
         private void addressOfCustomerCb_Unchecked(object sender, RoutedEventArgs e)
@@ -3116,44 +3088,31 @@ namespace prototype2
                     MainVM.SelectedProvince = MainVM.Provinces.Where(x => x.ProvinceID == int.Parse(serviceProvinceCb.SelectedValue.ToString())).First();
 
                     var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                    var numbs = "01234567890123456789";
 
                     var random = new Random();
                     string serviceNoChar = "";
-
-                    if (MainVM.SelectedService.ServiceName.Length > 5)
-                    {
-                        serviceNoChar = MainVM.SelectedService.ServiceName.Substring(0, 5).Replace(" ", String.Empty);
-
-                    }
-                    else
-                        serviceNoChar = MainVM.SelectedService.ServiceName.Replace(" ", String.Empty);
-                    var stringChars = new char[8 + serviceNoChar.Length];
-                    for (int i = 0; i < stringChars.Length; i++)
+                    for (int i = 0; i < 4; i++)
                     {
                         if (!(i > 3))
                         {
-                            stringChars[i] = chars[random.Next(chars.Length)];
+                            serviceNoChar += chars[random.Next(chars.Length)];
                         }
-                        else if (i == 4)
-                        {
-                            int x = i;
-                            foreach (char c in serviceNoChar)
-                            {
-                                stringChars[x] = c;
-                                x++;
-                            }
-                            stringChars[x] = '-';
-                        }
-                        else
-                            stringChars[i] = numbs[random.Next(numbs.Length)];
                     }
+                    serviceNoChar += MainVM.SalesQuotes.Count + 1;
+                    serviceNoChar += "-";
+                    if (MainVM.SelectedService.ServiceName.Length > 5)
+                    {
+                        serviceNoChar += MainVM.SelectedService.ServiceName.Trim().Substring(0, 5).ToUpper();
+                    }
+                    else
+                        serviceNoChar += MainVM.SelectedService.ServiceName.Trim().ToUpper();
+                    serviceNoChar += "-";
+                    serviceNoChar += DateTime.Now.ToString("yyyy-MM-dd");
+                    
 
-                    var finalString = new String(stringChars);
+                    MainVM.AddedServices.Add(new AddedService() {TableNoChar = serviceNoChar, ServiceID = MainVM.SelectedService.ServiceID, ProvinceID = MainVM.SelectedProvince.ProvinceID, Address = serviceAddressTb.Text, City = serviceCityTb.Text, TotalCost = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice });
 
-                    MainVM.AddedServices.Add(new AddedService() {TableNoChar = finalString, ServiceID = MainVM.SelectedService.ServiceID, ProvinceID = MainVM.SelectedProvince.ProvinceID, Address = serviceAddressTb.Text, City = serviceCityTb.Text, TotalCost = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice });
-
-                    MainVM.RequestedItems.Add(new RequestedItem() { lineNo = (MainVM.RequestedItems.Count + 1).ToString(),itemCode = finalString, itemName = MainVM.SelectedService.ServiceName, desc = serviceDescTb.Text, itemTypeName = "Service", itemType = 1, qty = 1, unitPrice = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, totalAmount = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, totalAmountMarkUp = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, qtyEditable = false });
+                    MainVM.RequestedItems.Add(new RequestedItem() { lineNo = (MainVM.RequestedItems.Count + 1).ToString(),itemCode = serviceNoChar, itemName = MainVM.SelectedService.ServiceName, desc = serviceDescTb.Text, itemTypeName = "Service", itemType = 1, qty = 1, unitPrice = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, totalAmount = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, totalAmountMarkUp = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, qtyEditable = false });
                     
                     resetFieldsValue();
                 }
@@ -3303,11 +3262,6 @@ namespace prototype2
             computePrice();
         }
 
-        private void additionalFeesDg_SourceUpdated(object sender, DataTransferEventArgs e)
-        {
-            computePrice();
-        }
-
         private void discountPriceTb_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             computePrice();
@@ -3453,7 +3407,7 @@ namespace prototype2
                 vatexcluded_ = (bool)vatCheckBox.IsChecked,
                 vat_ = vat,
                 paymentIsLanded_ = (bool)landedCheckBox.IsChecked,
-                paymentCurrency_ = "Peso",
+                paymentCurrency_ = moneyType.SelectedValue.ToString(),
                 estDelivery_ = estDel,
                 deliveryDate_ = deliveryDate,
                 validityDays_ = valid,
@@ -3510,49 +3464,29 @@ namespace prototype2
                             if (item.itemType == 0)
                             {
                                 MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ItemCode.Equals(item.itemCode)).FirstOrDefault();
-                                query = "INSERT INTO `odc_db`.`items_availed_t`(`sqNoChar,`itemNo`,`itemQnty`,`totalCost`)" +
+                                query = "INSERT INTO `odc_db`.`items_availed_t`(`sqNoChar`,`itemCode`,`itemQnty`,`totalCost`)" +
                                     " VALUES " +
-                                    "(" + MainVM.SelectedSalesQuote.sqNoChar_+ ", "+ MainVM.SelectedProduct.ItemNo + "," + item.qty + ", " + item.totalAmount + ");";
+                                    "(" + MainVM.SelectedSalesQuote.sqNoChar_+ ", "+ MainVM.SelectedProduct.ItemCode + "," + item.qty + ", " + item.totalAmount + ");";
                                 noError = dbCon.insertQuery(query, dbCon.Connection);                            }
                             else if (item.itemType == 1)
                             {
-                                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                                var numbs = "01234567890123456789";
-
-                                var random = new Random();
-                                string serviceNoChar = "";
-                                for (int i = 0; i < 4; i++)
-                                {
-                                    if (!(i > 3))
-                                    {
-                                        serviceNoChar += chars[random.Next(chars.Length)];
-                                    }
-                                }
-                                serviceNoChar += MainVM.SalesQuotes.Count + 1;
-                                serviceNoChar += "-";
-                                if (item.itemName.Length > 5)
-                                {
-                                    serviceNoChar = item.itemName.Trim().Substring(0, 5).ToUpper();
-                                }
-                                else
-                                    serviceNoChar = item.itemName.Trim().ToUpper();
-                                serviceNoChar += "-";
-                                serviceNoChar += DateTime.Now.ToString("yyyy-MM-dd");
+                                
                                 MainVM.SelectedAddedService = MainVM.AddedServices.Where(x => x.TableNoChar.Equals(item.itemCode)).FirstOrDefault();
                                 query = "INSERT INTO `odc_db`.`services_availed_t`(`tableNoChar`,`serviceID`,`provinceID`,`sqNoChar`,`city`,`address`,`totalCost`)" +
                                     " VALUES " +
-                                    "(" + serviceNoChar + ", " + 
-                                    MainVM.SelectedAddedService.ServiceID + ", " + 
-                                    MainVM.SelectedAddedService.ProvinceID + ", '" + 
-                                    MainVM.SelectedSalesQuote.sqNoChar_ + "', " + 
-                                    MainVM.SelectedAddedService.City + ", " + 
-                                    MainVM.SelectedAddedService.Address + ");";
+                                    "('" + MainVM.SelectedAddedService.TableNoChar + "', '" + 
+                                    MainVM.SelectedAddedService.ServiceID + "', '" + 
+                                    MainVM.SelectedAddedService.ProvinceID + "', '" + 
+                                    MainVM.SelectedSalesQuote.sqNoChar_ + "', '" + 
+                                    MainVM.SelectedAddedService.City + "', '" + 
+                                    MainVM.SelectedAddedService.Address + "', '" +
+                                    MainVM.SelectedAddedService.TotalCost+ "');";
                                 noError = dbCon.insertQuery(query, dbCon.Connection);
                                 foreach (AdditionalFee af in MainVM.SelectedAddedService.AdditionalFees)
                                 {
                                     query = "INSERT INTO `odc_db`.`fees_per_transaction_t`(`serviceNoChar`,`feeName`,`feeValue`)" +
                                     " VALUES " +
-                                    "(" + serviceNoChar + ", " + af.FeeName + ", " + af.FeePrice + ");";
+                                    "(" + item.itemCode + ", " + af.FeeName + ", " + af.FeePrice + ");";
                                     noError = dbCon.insertQuery(query, dbCon.Connection);
                                 }
                             }
@@ -3572,18 +3506,77 @@ namespace prototype2
 
         void loadSalesQuoteToUi()
         {
-            MainVM.SelectedCustomerSupplier = MainVM.Customers.Where(x => x.CompanyID.Equals(MainVM.SelectedSalesQuote.custID_.ToString())).FirstOrDefault();
             MainVM.SelectedRepresentative = MainVM.Representatives.Where(x => x.RepresentativeID.Equals(MainVM.SelectedCustomerSupplier.RepresentativeID.ToString())).FirstOrDefault();
+            MainVM.SelectedCustomerSupplier = MainVM.Customers.Where(x => x.CompanyID.Equals(MainVM.SelectedSalesQuote.custID_.ToString())).FirstOrDefault();
+            foreach(AddedItem item in MainVM.SelectedSalesQuote.AddedItems)
+            {
+                MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ItemCode.Equals(item.ItemCode)).First();
+                MainVM.RequestedItems.Add(new RequestedItem()
+                {
+                    lineNo = (MainVM.RequestedItems.Count + 1).ToString(),
+                    itemCode = item.ItemCode,
+                    desc = MainVM.SelectedProduct.ItemDesc,
+                    itemName = MainVM.SelectedProduct.ItemName,
+                    qty = item.ItemQty,
+                    qtyEditable = true,
+                    totalAmount = item.TotalCost,
+                    itemType = 0,
+                    unitPrice = MainVM.SelectedProduct.CostPrice,
+                    
+                });
+            }
+            foreach(AddedService service in MainVM.SelectedSalesQuote.AddedServices)
+            {
+                MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(service.ServiceID)).First();
+                MainVM.SelectedProvince = MainVM.Provinces.Where(x => x.ProvinceID == service.ProvinceID).First();
+                MainVM.RequestedItems.Add(new RequestedItem()
+                {
+                    lineNo = (MainVM.RequestedItems.Count + 1).ToString(),
+                    itemCode = service.TableNoChar,
+                    desc = MainVM.SelectedService.ServiceDesc,
+                    itemName = MainVM.SelectedService.ServiceName,
+                    qty = 1,
+                    qtyEditable = false,
+                    totalAmount = service.TotalCost,
+                    itemType = 1,
+                    unitPrice = service.TotalCost,
+
+                });
+            }
+            MainVM.AddedServices = MainVM.SelectedSalesQuote.AddedServices;
+            MainVM.AddedItems = MainVM.SelectedSalesQuote.AddedItems;
+
+            computePrice();
+            
 
         }
         private void viewQuoteRecordBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            viewSalesQuoteBtns.Visibility = Visibility.Collapsed;
+            newSalesQuoteBtns.Visibility = Visibility.Visible;
+            foreach(var obj in newRequisitionGridForm.Children)
+            {
+                bool isEnabled = false;
+                if (obj is Button)
+                    ((Button)obj).IsEnabled = isEnabled;
+                else if (obj is Xceed.Wpf.Toolkit.IntegerUpDown)
+                    ((Xceed.Wpf.Toolkit.IntegerUpDown)obj).IsEnabled = isEnabled;
+            }
+            foreach (var obj in newRequisitionGridForm.Children)
+            {
+                bool isEnabled = false;
+                if (obj is Button)
+                    ((Button)obj).IsEnabled = isEnabled;
+                else if (obj is Xceed.Wpf.Toolkit.IntegerUpDown)
+                    ((Xceed.Wpf.Toolkit.IntegerUpDown)obj).IsEnabled = isEnabled;
+            }
+            loadSalesQuoteToUi();
         }
 
         private void editQuoteRecordBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            viewSalesQuoteBtns.Visibility = Visibility.Collapsed;
+            newSalesQuoteBtns.Visibility = Visibility.Visible;
         }
 
         private void deleteQuoteRecordBtn_Click(object sender, RoutedEventArgs e)

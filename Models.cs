@@ -498,7 +498,6 @@ namespace prototype2
 
         }
         protected bool isChecked;
-        protected string itemNo;
         protected string itemCode;
         protected string itemName;
         protected string itemDesc;
@@ -514,12 +513,6 @@ namespace prototype2
         {
             get { return isChecked; }
             set { SetProperty(ref isChecked, value); }
-        }
-
-        public string ItemNo
-        {
-            get { return itemNo; }
-            set { SetProperty(ref itemNo, value); }
         }
 
         public string ItemCode
@@ -676,11 +669,17 @@ namespace prototype2
         {
 
         }
-
+        protected int tableID;
         protected string sqNoChar;
-        protected int itemNo;
+        protected string itemCode;
         protected int itemQty;
         protected decimal totalCost;
+
+        public int TableID
+        {
+            get { return tableID; }
+            set { SetProperty(ref tableID, value); }
+        }
 
         public string SqNoChar
         {
@@ -688,10 +687,10 @@ namespace prototype2
             set { SetProperty(ref sqNoChar, value); }
         }
 
-        public int ItemNo
+        public string ItemCode
         {
-            get { return itemNo; }
-            set { SetProperty(ref itemNo, value); }
+            get { return itemCode; }
+            set { SetProperty(ref itemCode, value); }
         }
 
         public int ItemQty
