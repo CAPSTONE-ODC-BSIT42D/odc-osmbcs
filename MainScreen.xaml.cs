@@ -114,7 +114,10 @@ namespace prototype2
                 
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    MainVM.Provinces.Add(new Province() { ProvinceID = (int)dr["locProvinceID"], ProvinceName = dr["locProvince"].ToString(), ProvincePrice = decimal.Parse(dr["locPrice"].ToString()) });
+                    if(dr["locPrice"].ToString().Equals(""))
+                        MainVM.Provinces.Add(new Province() { ProvinceID = (int)dr["locProvinceID"], ProvinceName = dr["locProvince"].ToString() });
+                    else
+                        MainVM.Provinces.Add(new Province() { ProvinceID = (int)dr["locProvinceID"], ProvinceName = dr["locProvince"].ToString(), ProvincePrice = (decimal)dr["locPrice"] });
                 }
                 dbCon.Close();
             }
@@ -355,18 +358,20 @@ namespace prototype2
                 fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
                 fromDbTable = fromDb.Tables["t"];
-                query = "SELECT * FROM services_availed_t;";
-                dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb3 = new DataSet();
-                DataTable fromDbTable3 = new DataTable();
-                dataAdapter.Fill(fromDb3, "t");
-                fromDbTable3 = fromDb.Tables["t"];
+
                 query = "SELECT * FROM fees_per_transaction_t;";
                 dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb2 = new DataSet();
                 DataTable fromDbTable2 = new DataTable();
                 dataAdapter.Fill(fromDb2, "t");
                 fromDbTable2 = fromDb2.Tables["t"];
+
+                query = "SELECT * FROM items_availed_t;";
+                dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb3 = new DataSet();
+                DataTable fromDbTable3 = new DataTable();
+                dataAdapter.Fill(fromDb3, "t");
+                fromDbTable3 = fromDb3.Tables["t"];
                 foreach (SalesQuote sq in MainVM.SalesQuotes)
                 {
                     foreach (DataRow dr in fromDbTable.Rows)
@@ -376,9 +381,9 @@ namespace prototype2
                             MainVM.SelectedAddedService = (new AddedService(){ TableNoChar = dr["tableNoChar"].ToString(), ServiceID = dr["serviceID"].ToString(), ProvinceID = int.Parse(dr["provinceID"].ToString()), City = dr["city"].ToString(), Address = dr["address"].ToString(), TotalCost = decimal.Parse(dr["totalCost"].ToString()) });
                             foreach(DataRow dr2 in fromDbTable2.Rows)
                             {
-                                if (dr["tableNoChar"].ToString().Equals(dr2["servicesNochar"].ToString()))
+                                if (dr2["tableNoChar"].ToString().Equals(dr2["servicesNochar"].ToString()))
                                 {
-                                    MainVM.SelectedAddedService.AdditionalFees.Add(new AdditionalFee() { ServiceNoChar = dr["serviceNoChar"].ToString(), FeeName = dr["feeName"].ToString(), FeePrice = decimal.Parse(dr["feeValue"].ToString())});
+                                    MainVM.SelectedAddedService.AdditionalFees.Add(new AdditionalFee() { ServiceNoChar = dr2["serviceNoChar"].ToString(), FeeName = dr2["feeName"].ToString(), FeePrice = decimal.Parse(dr2["feeValue"].ToString())});
                                 }
                             }
                             sq.AddedServices.Add(MainVM.SelectedAddedService);
@@ -2739,9 +2744,18 @@ namespace prototype2
                 renderer.Document = document;
                 renderer.RenderDocument();
                 string filename = @"d:\test\" + MainVM.SelectedSalesQuote.sqNoChar_ + ".pdf";
-                renderer.PdfDocument.Save(filename);
+                
                 saveSalesQuoteToDb();
-                Process.Start(filename);
+                SaveFileDialog dlg = new SaveFileDialog();
+                dlg.FileName = ""+MainVM.SelectedSalesQuote.sqNoChar_;
+                dlg.DefaultExt = ".pdf";
+                dlg.Filter = "Text documents (.pdf)|*.pdf";
+                if (dlg.ShowDialog() == true)
+                {
+                    filename = dlg.FileName;
+                    renderer.PdfDocument.Save(filename);
+                }
+                
                 foreach (var obj in containerGrid.Children)
                 {
                     ((Grid)obj).Visibility = Visibility.Collapsed;
@@ -3343,12 +3357,10 @@ namespace prototype2
             }
 
             DateTime endDate = new DateTime();
-            endDate = DateTime.Now;
-            endDate.AddDays(valid);
+            endDate = DateTime.Now.AddDays(valid);
 
             DateTime deliveryDate = new DateTime();
-            deliveryDate = DateTime.Now;
-            deliveryDate.AddDays(estDel);
+            deliveryDate = DateTime.Now.AddDays(estDel);
 
             int downP = 50;
             if (!(bool)paymentDefaultRd.IsChecked)
@@ -3466,7 +3478,7 @@ namespace prototype2
                                 MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ItemCode.Equals(item.itemCode)).FirstOrDefault();
                                 query = "INSERT INTO `odc_db`.`items_availed_t`(`sqNoChar`,`itemCode`,`itemQnty`,`totalCost`)" +
                                     " VALUES " +
-                                    "(" + MainVM.SelectedSalesQuote.sqNoChar_+ ", "+ MainVM.SelectedProduct.ItemCode + "," + item.qty + ", " + item.totalAmount + ");";
+                                    "('" + MainVM.SelectedSalesQuote.sqNoChar_+ "', '"+ MainVM.SelectedProduct.ItemCode + "','" + item.qty + "', '" + item.totalAmount + "');";
                                 noError = dbCon.insertQuery(query, dbCon.Connection);                            }
                             else if (item.itemType == 1)
                             {
@@ -3486,7 +3498,7 @@ namespace prototype2
                                 {
                                     query = "INSERT INTO `odc_db`.`fees_per_transaction_t`(`serviceNoChar`,`feeName`,`feeValue`)" +
                                     " VALUES " +
-                                    "(" + item.itemCode + ", " + af.FeeName + ", " + af.FeePrice + ");";
+                                    "('" + item.itemCode + "', '" + af.FeeName + "', '" + af.FeePrice + "');";
                                     noError = dbCon.insertQuery(query, dbCon.Connection);
                                 }
                             }
@@ -3552,9 +3564,34 @@ namespace prototype2
         }
         private void viewQuoteRecordBtn_Click(object sender, RoutedEventArgs e)
         {
-            viewSalesQuoteBtns.Visibility = Visibility.Collapsed;
-            newSalesQuoteBtns.Visibility = Visibility.Visible;
-            foreach(var obj in newRequisitionGridForm.Children)
+            viewSalesQuoteBtns.Visibility = Visibility.Visible;
+            newSalesQuoteBtns.Visibility = Visibility.Collapsed;
+
+            foreach (var element in transQuotationGrid.Children)
+            {
+                if (element is Grid)
+                {
+                    if (!(((Grid)element).Name.Equals(transQuoatationGridForm.Name)))
+                    {
+                        ((Grid)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((Grid)element).Visibility = Visibility.Visible;
+                }
+            }
+            foreach (var element in transQuoatationGridForm.Children)
+            {
+                if (element is Grid)
+                {
+                    if (!(((Grid)element).Name.Equals(newRequisitionGrid.Name)))
+                    {
+                        ((Grid)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((Grid)element).Visibility = Visibility.Visible;
+                }
+            }
+            foreach (var obj in newRequisitionGridForm.Children)
             {
                 bool isEnabled = false;
                 if (obj is Button)
@@ -3584,9 +3621,38 @@ namespace prototype2
 
         }
 
+        private void generatePDFBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var element in transQuoatationGridForm.Children)
+            {
+                if (element is Grid)
+                {
+                    if (!(((Grid)element).Name.Equals(viewQuotationGrid.Name)))
+                    {
+                        ((Grid)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((Grid)element).Visibility = Visibility.Visible;
+                }
+            }
+            if (MainVM.RequestedItems.Count != 0)
+            {
+                transRequestNext.Content = "Save";
+                salesQuoteToMemory();
+                DocumentFormat df = new DocumentFormat();
+                document = df.CreateDocument("SalesQuote", "asdsadsa");
+                string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
+                pagePreview.Ddl = ddl;
+            }
+            else
+                MessageBox.Show("No items on the list.");
+        }
+
         private void convertToInvoiceBtn_Click(object sender, RoutedEventArgs e)
         {
 
         }
+
+        
     }
 }

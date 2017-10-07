@@ -8,7 +8,7 @@
     xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms" xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit" xmlns:Windows="clr-namespace:MigraDoc.Rendering.Windows;assembly=MigraDoc.Rendering-WPF"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="prototype2.MainScreen"
         mc:Ignorable="d"
-        Title="Olive Date Center" d:DesignWidth="1147.763" d:DesignHeight="914.725" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Maximized" Visibility="Visible"
+        Title="Olive Date Center" d:DesignWidth="1249.763" d:DesignHeight="1452.363" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Maximized" Visibility="Visible"
        >
     <Window.Resources>
         <Storyboard x:Key="sbShowRightMenu" >
@@ -663,7 +663,7 @@
                         <DataGrid x:Name="quotationsDataGrid" Margin="0,44,0,-3" ItemsSource="{Binding SalesQuotes}" SelectedItem="{Binding SelectedSalesQuote}" CanUserAddRows="False" AutoGenerateColumns="False" EnableColumnVirtualization="True" IsReadOnly="True">
                             <DataGrid.Columns >
                                 <DataGridTextColumn Binding="{Binding sqNoChar_}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Sales Quote ID"  />
-                                <DataGridTextColumn Binding="{Binding dateofIssue_}" ClipboardContentBinding="{x:Null}" Header="Date of Issue" Width="200" CanUserResize="False"  />
+                                <DataGridTextColumn Binding="{Binding dateOfIssue_}" ClipboardContentBinding="{x:Null}" Header="Date of Issue" Width="200" CanUserResize="False"  />
                                 <DataGridTextColumn Binding="{Binding custName_}" ClipboardContentBinding="{x:Null}" Header="Customer Name" Width="350"   />
                                 <DataGridTextColumn Binding="{Binding status_}" ClipboardContentBinding="{x:Null}" Header="Status" Width="200" CanUserResize="False"  />
                                 <DataGridTemplateColumn  Width="115" CanUserResize="False" Header="Actions"  >
@@ -806,7 +806,7 @@
                             <ComboBoxItem Content="APPROVED"/>
                         </ComboBox>
                     </Grid>
-                    <Grid x:Name="transQuoatationGridForm" Margin="10">
+                    <Grid x:Name="transQuoatationGridForm" Margin="10" d:IsHidden="True">
 
                         <Grid x:Name="newRequisitionGrid" Margin="0,0,0,40">
                             <Grid.ColumnDefinitions>
@@ -1082,15 +1082,15 @@
                             <Grid x:Name="viewSalesQuoteBtns" Margin="0">
                                 <Button x:Name="convertToInvoiceBtn" Content="Convert To Invoice" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="139" Height="26" Click="convertToInvoiceBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="0,0,288,0"/>
                                 <Button x:Name="editSalesQuoteBtn" Content="Edit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="84" Height="26" Click="transRequestBack_Click" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="0,0,67,0"/>
-                                <Button x:Name="GeneratePDFBtn" Content="Generate PDF" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="127" Height="26" Click="transRequestBack_Click" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="0,0,156,0"/>
+                                <Button x:Name="generatePDFBtn" Content="Generate PDF" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="127" Height="26" Click="generatePDFBtn_Click" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="0,0,156,0"/>
                             </Grid>
                         </StackPanel>
 
                     </Grid>
 
                 </Grid>
-                <Grid x:Name="transInvoiceGrid" Margin="0,0,1,0" d:IsHidden="True" >
-                    <Grid x:Name="invoiceGridHome" Margin="10" >
+                <Grid x:Name="transInvoiceGrid" Margin="0,0,1,0" >
+                    <Grid x:Name="invoiceGridHome" Margin="10" d:IsHidden="True" >
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                             <Label x:Name="label22" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
                             <TextBox x:Name="searchBox3" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317" Text="{Binding SearchQuery}"/>
@@ -1244,7 +1244,39 @@
                             <ComboBoxItem Content="APPROVED"/>
                         </ComboBox>
                     </Grid>
-                    <Grid x:Name="transInvoiceGrid1" Margin="10" d:IsHidden="True">
+                    <Grid x:Name="transInvoiceGridForm" Margin="10">
+
+                        <ScrollViewer x:Name="newInvoiceForm" Margin="0" VerticalScrollBarVisibility="Auto">
+                            <Grid Height="1351" Width="921">
+                                <Label x:Name="label12_Copy" Content="Invoice Details" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI"/>
+                                <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,39,10,0" VerticalAlignment="Top"/>
+                                <Label x:Name="label19_Copy1" Content="Sold To:" HorizontalAlignment="Left" Margin="40,53,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+                                <Label x:Name="label19_Copy2" Content="TIN #:" HorizontalAlignment="Left" Margin="40,87,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+                                <Label x:Name="label19_Copy3" Content="Address:" HorizontalAlignment="Left" Margin="40,121,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+                                <Label x:Name="label19_Copy4" Content="Business Style:" HorizontalAlignment="Left" Margin="40,155,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+                                <Label x:Name="label19_Copy5" Content="Date:" HorizontalAlignment="Left" Margin="602,53,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+                                <Label x:Name="label19_Copy6" Content="Terms:" HorizontalAlignment="Left" Margin="602,87,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+                                <Label x:Name="label12_Copy2" Content="Requested Items:" HorizontalAlignment="Left" Margin="10,198,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI"/>
+                                <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,227,10,0" VerticalAlignment="Top"/>
+                                <Label x:Name="label12_Copy3" Content="Other Details" HorizontalAlignment="Left" Margin="10,433,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI"/>
+                                <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,462,10,0" VerticalAlignment="Top"/>
+                                <Label x:Name="label19_Copy7" Content="Vatable Sales:" HorizontalAlignment="Left" Margin="40,485,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+                                <Label x:Name="label19_Copy8" Content="VAT-Exempted Sales:" HorizontalAlignment="Left" Margin="40,519,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+                                <Label x:Name="label19_Copy9" Content="Zero - Rated Sales:" HorizontalAlignment="Left" Margin="40,553,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+                                <Label x:Name="label19_Copy10" Content="VAT Amount" HorizontalAlignment="Left" Margin="40,587,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+                                <Label x:Name="label19_Copy11" Content="TOTAL SALES:" HorizontalAlignment="Left" Margin="40,621,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+                                <Label x:Name="label19_Copy12" Content="Total Sale VAT Inclusive:" HorizontalAlignment="Left" Margin="602,485,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+                                <Label x:Name="label19_Copy13" Content="Less: VAT" HorizontalAlignment="Left" Margin="602,519,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+                                <Label x:Name="label19_Copy14" Content="TOTAL:" HorizontalAlignment="Left" Margin="602,553,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+                                <Label x:Name="label19_Copy15" Content="Less: SC/PWD Discount:" HorizontalAlignment="Left" Margin="602,587,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+                                <Label x:Name="label19_Copy16" Content="Total Due:" HorizontalAlignment="Left" Margin="602,621,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+                                <Label x:Name="label19_Copy17" Content="Less: Withholding Tax:" HorizontalAlignment="Left" Margin="602,655,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+                                <Label x:Name="label19_Copy18" Content="Add: VAT" HorizontalAlignment="Left" Margin="602,684,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+                                <Label x:Name="label19_Copy19" Content="AMOUNT DUE:" HorizontalAlignment="Left" Margin="602,718,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+                            </Grid>
+
+                        </ScrollViewer>
+
                         <StackPanel Margin="0,0,10,10" Height="26" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="195" Orientation="Horizontal" FlowDirection="RightToLeft">
                             <Button x:Name="transRequestNext1" Content="Next" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" Height="26" Click="transRequestNext_Click" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="5,0,10,0"/>
                             <Button x:Name="transRequestBack1" Content="Back" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="84" Height="26" Click="transRequestBack_Click" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="10,0,5,0"/>
@@ -1820,7 +1852,7 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Grid x:Name="formGridBg" Margin="0" Background="#80000000" Grid.Column="1">
+        <Grid x:Name="formGridBg" Margin="0" Background="#80000000" Grid.Column="1" d:IsHidden="True">
 
             <Grid x:Name="companyDetailsFormGrid" d:IsHidden="True">
                 <ScrollViewer x:Name="companyDetailsFormGridSv" MinWidth="611" Margin="0,0,0,40" HorizontalAlignment="Center" VerticalScrollBarVisibility="Auto">
@@ -2558,7 +2590,7 @@
                 </Grid>
 
             </Grid>
-            <Grid x:Name="settingsFormGrid" Margin="0" d:IsHidden="True">
+            <Grid x:Name="settingsFormGrid" Margin="0">
                 <ScrollViewer Margin="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Right">
                     <Grid x:Name="settingsGrid" Background="White" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Right" Width="724">
                         <Grid.ColumnDefinitions>
@@ -2686,9 +2718,9 @@
                             <Grid x:Name="productSettings1" Margin="10">
                                 <Label x:Name="label5_Copy7" Content="Product Category" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
                                 <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="0,34,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
-                                <Button x:Name="deleteCategoryBtn" Content="Delete" HorizontalAlignment="Right" Margin="0,154,0,0" Width="75" Click="deleteCategoryBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Background="#FFEC1717" BorderBrush="#FFBB0000" Foreground="#FFF9F5F5" Height="24" VerticalAlignment="Top"/>
-                                <Button x:Name="addCategoryBtn" Content="Add" Margin="0,71,0,0" Click="addCategoryBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" Height="24" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75"/>
-                                <Button x:Name="editCategoryBtn" Content="Edit" HorizontalAlignment="Right" Margin="0,125,0,0" Width="75" Click="editCategoryBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF6D08C1" Foreground="#FFF9F9F9" Height="24" VerticalAlignment="Top"/>
+                                <Button x:Name="deleteCategoryBtn" Content="Delete" HorizontalAlignment="Right" Margin="0,154,200,0" Width="74" Click="deleteCategoryBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Background="#FFEC1717" BorderBrush="#FFBB0000" Foreground="#FFF9F5F5" Height="24" VerticalAlignment="Top"/>
+                                <Button x:Name="addCategoryBtn" Content="Add" Margin="0,71,200,0" Click="addCategoryBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" Height="24" VerticalAlignment="Top" HorizontalAlignment="Right" Width="74"/>
+                                <Button x:Name="editCategoryBtn" Content="Edit" HorizontalAlignment="Right" Margin="0,125,200,0" Width="74" Click="editCategoryBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF6D08C1" Foreground="#FFF9F9F9" Height="24" VerticalAlignment="Top"/>
                                 <ListBox x:Name="invProductsCategoryLb" HorizontalAlignment="Left" Margin="9,100,0,0" Width="366" FontSize="13" ItemsSource="{Binding ProductCategory}" SelectedItem="{Binding SelectedProductCategory}" DisplayMemberPath="TypeName" Height="127" VerticalAlignment="Top"/>
                                 <TextBox x:Name="invCategoryTb" HorizontalAlignment="Left" Margin="117,71,0,0" TextWrapping="Wrap" Width="262" FontSize="13" Height="23" VerticalAlignment="Top"/>
                                 <Label x:Name="label28" Content="Category Name:" HorizontalAlignment="Left" Margin="9,68,0,0" FontSize="13" Height="27" VerticalAlignment="Top"/>
