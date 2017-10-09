@@ -43,7 +43,7 @@ namespace prototype2
         }
 
         public static Commands commands = new Commands();
-        private readonly BackgroundWorker worker = new BackgroundWorker();
+        public static readonly BackgroundWorker worker = new BackgroundWorker();
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -1488,7 +1488,7 @@ namespace prototype2
             }
         }
 
-        private bool isEdit = false;
+        public bool isEdit = false;
 
         private void loadRecordToFields()
         {

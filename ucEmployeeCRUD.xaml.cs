@@ -1,0 +1,424 @@
+﻿using Microsoft.Win32;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Security;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace prototype2
+{
+    /// <summary>
+    /// Interaction logic for ucEmployeeCRUD.xaml
+    /// </summary>
+    public partial class ucEmployeeCRUD : UserControl
+    {
+        public ucEmployeeCRUD()
+        {
+            InitializeComponent();
+        }
+
+        private bool validationError = false;
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
+
+        private void editEmployeeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var element in employeeDetailsFormGrid1.Children)
+            {
+                if (element is TextBox)
+                {
+                    ((TextBox)element).IsEnabled = true;
+                }
+                else if (element is ComboBox)
+                {
+                    ((ComboBox)element).IsEnabled = true;
+                }
+                else if (element is CheckBox)
+                {
+                    ((CheckBox)element).IsEnabled = true;
+                }
+            }
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedEmployeeContractor.EmpTelephone))
+            {
+                empTelCb.IsChecked = true;
+            }
+
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedEmployeeContractor.EmpMobile))
+            {
+                empMobCb.IsChecked = true;
+            }
+
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedEmployeeContractor.EmpEmail))
+            {
+                empEmailCb.IsChecked = true;
+            }
+            saveCancelGrid1.Visibility = Visibility.Visible;
+            editCloseGrid1.Visibility = Visibility.Collapsed;
+            MainVM.isEdit = true;
+        }
+
+        private void cancelRecordBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Do you want to cancel?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                resetFieldsValue();
+            }
+            else if (result == MessageBoxResult.No)
+            {
+            }
+
+        }
+
+        private void saveRecordBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Do you want to save?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+            if (result == MessageBoxResult.OK)
+            {
+                foreach (var element in employeeDetailsFormGrid1.Children)
+                {
+                    if (element is TextBox)
+                    {
+                        BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
+                        Validation.ClearInvalid(expression);
+                        if (((TextBox)element).IsEnabled)
+                        {
+
+                            expression.UpdateSource();
+                            validationError = Validation.GetHasError((TextBox)element);
+                        }
+                    }
+                    if (element is ComboBox)
+                    {
+                        BindingExpression expression = ((ComboBox)element).GetBindingExpression(ComboBox.SelectedItemProperty);
+                        expression.UpdateSource();
+                        validationError = Validation.GetHasError((ComboBox)element);
+                    }
+                }
+                if (!validationError)
+                    saveDataToDb();
+                MainVM.isEdit = false;
+            }
+            else if (result == MessageBoxResult.Cancel)
+            {
+            }
+
+        }
+
+        byte[] picdata;
+        byte[] sigdata;
+        private void openFileBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                try
+                {
+                    FileStream fs = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read);
+                    BinaryReader br = new BinaryReader(fs);
+                    empImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                    picdata = br.ReadBytes((int)fs.Length);
+                    br.Close();
+                    fs.Close();
+
+                }
+                catch (Exception ex)
+                {
+                    //MessageBox.Show(ex.Message);
+                }
+
+            }
+        }
+
+        private void employeeType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (employeeType.SelectedIndex == 0)
+            {
+                contractorOnlyGrid.Visibility = Visibility.Collapsed;
+                employeeOnlyGrid.Visibility = Visibility.Visible;
+            }
+            if (employeeType.SelectedIndex == 1)
+            {
+                contractorOnlyGrid.Visibility = Visibility.Visible;
+                employeeOnlyGrid.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void contactDetails_Checked(object sender, RoutedEventArgs e)
+        {
+            string propertyName = ((CheckBox)sender).Name;
+            if (propertyName.Equals(empTelCb.Name))
+            {
+                if ((bool)empTelCb.IsChecked && (bool)empMobCb.IsChecked && (bool)empEmailCb.IsChecked)
+                {
+                    MessageBox.Show("Atleast one contact information is needed");
+                    empTelCb.IsChecked = false;
+                }
+                else
+                {
+                    if (empTelephoneTb.IsEnabled)
+                    {
+                        empTelephoneTb.IsEnabled = false;
+                        empTelephoneTb.Text = "";
+                    }
+                }
+
+            }
+            else if (propertyName.Equals(empMobCb.Name))
+            {
+                if ((bool)empTelCb.IsChecked && (bool)empMobCb.IsChecked && (bool)empEmailCb.IsChecked)
+                {
+                    MessageBox.Show("Atleast one contact information is needed");
+                    empMobCb.IsChecked = false;
+                }
+                else
+                {
+                    if (empMobileNumberTb.IsEnabled)
+                    {
+                        empMobileNumberTb.IsEnabled = false;
+                        empMobileNumberTb.Text = "";
+                    }
+                }
+            }
+            else if (propertyName.Equals(empEmailCb.Name))
+            {
+                if ((bool)empTelCb.IsChecked && (bool)empMobCb.IsChecked && (bool)empEmailCb.IsChecked)
+                {
+                    MessageBox.Show("Atleast one contact information is needed");
+                    empEmailCb.IsChecked = false;
+                }
+                else
+                {
+                    if (empEmailAddressTb.IsEnabled)
+                    {
+                        empEmailAddressTb.IsEnabled = false;
+                        empEmailAddressTb.Text = "";
+                    }
+                }
+            }
+            
+        }
+
+        private void contactDetail_Unchecked(object sender, RoutedEventArgs e)
+        {
+            string propertyName = ((CheckBox)sender).Name;
+            if (propertyName.Equals(empTelCb.Name))
+            {
+                if (!empTelephoneTb.IsEnabled)
+                    empTelephoneTb.IsEnabled = true;
+
+            }
+            else if (propertyName.Equals(empMobCb.Name))
+            {
+                if (!empMobileNumberTb.IsEnabled)
+                    empMobileNumberTb.IsEnabled = true;
+            }
+            else if (propertyName.Equals(empEmailCb.Name))
+            {
+                if (!empEmailAddressTb.IsEnabled)
+                    empEmailAddressTb.IsEnabled = true;
+            }
+            
+        }
+
+        private void saveDataToDb()
+        {
+            var dbCon = DBConnection.Instance();
+            string[] proc = { "", "", "", "" };
+
+            if (!MainVM.isEdit)
+            {
+                proc[0] = "INSERT_EMPLOYEE";
+            }
+            else
+            {
+                proc[0] = "UPDATE_EMPLOYEE";
+            }
+
+            try
+            {
+                using (MySqlConnection conn = dbCon.Connection)
+                {
+                    conn.Open();
+                    string empID = "";
+                    MySqlCommand cmd = new MySqlCommand(proc[0], conn);
+                    //INSERT NEW EMPLOYEE TO DB;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@fName", empFirstNameTb.Text);
+                    cmd.Parameters["@fName"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@lName", empLastNameTb.Text);
+                    cmd.Parameters["@lName"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@middleInitial", empMiddleInitialTb.Text);
+                    cmd.Parameters["@middleInitial"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@address", empAddressTb.Text);
+                    cmd.Parameters["@address"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@city", empCityTb.Text);
+                    cmd.Parameters["@city"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@provinceID", empProvinceCb.SelectedValue);
+                    cmd.Parameters["@provinceID"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@username", empUserNameTb.Text);
+                    cmd.Parameters["@username"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@positionID", empPostionCb.SelectedValue);
+                    cmd.Parameters["@positionID"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@empEmail", empEmailAddressTb.Text);
+                    cmd.Parameters["@empEmail"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@empTelephone", empTelephoneTb.Text);
+                    cmd.Parameters["@empTelephone"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@empMobile", empMobileNumberTb.Text);
+                    cmd.Parameters["@empMobile"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@empType", employeeType.SelectedIndex);
+                    cmd.Parameters["@empType"].Direction = ParameterDirection.Input;
+
+                    if (employeeType.SelectedIndex == 1)
+                    {
+                        cmd.Parameters.AddWithValue("@jobID", empJobCb.SelectedValue);
+                        cmd.Parameters["@jobID"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@dateFrom", empDateStarted.Value);
+                        cmd.Parameters["@dateFrom"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@dateTo", empDateEnded.Value);
+                        cmd.Parameters["@dateTo"].Direction = ParameterDirection.Input;
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@jobID", DBNull.Value);
+                        cmd.Parameters["@jobID"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@dateFrom", DBNull.Value);
+                        cmd.Parameters["@dateFrom"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@dateTo", DBNull.Value);
+                        cmd.Parameters["@dateTo"].Direction = ParameterDirection.Input;
+                    }
+                    if (!MainVM.isEdit)
+                    {
+                        SecureString passwordsalt = empPasswordTb.SecurePassword;
+                        foreach (Char c in "$w0rdf!$h")
+                        {
+                            passwordsalt.AppendChar(c);
+                        }
+                        passwordsalt.MakeReadOnly();
+
+                        cmd.Parameters.AddWithValue("@upassword", SecureStringToString(passwordsalt));
+                        cmd.Parameters["@upassword"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
+                        cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
+                        cmd.ExecuteNonQuery();
+                        empID = cmd.Parameters["@insertedid"].Value.ToString();
+
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@empID", MainVM.SelectedEmployeeContractor.EmpID);
+                        cmd.Parameters["@empID"].Direction = ParameterDirection.Input;
+                        cmd.ExecuteNonQuery();
+                    }
+                    if (!MainVM.isEdit)
+                    {
+                        cmd = new MySqlCommand("INSERT_EMPLOYEE_PIC_T", conn);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@picBLOB", picdata);
+                        cmd.Parameters["@picBLOB"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@sigBLOB", null);
+                        cmd.Parameters["@sigBLOB"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@empID", empID);
+                        cmd.Parameters["@empID"].Direction = ParameterDirection.Input;
+                        cmd.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        cmd = new MySqlCommand("UPDATE_EMPLOYEE_PIC_T", conn);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@picBLOB", picdata);
+                        cmd.Parameters["@picBLOB"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@sigBLOB", null);
+                        cmd.Parameters["@sigBLOB"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@empID", MainVM.SelectedEmployeeContractor.EmpID);
+                        cmd.Parameters["@empID"].Direction = ParameterDirection.Input;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                resetFieldsValue();
+                var worker = MainScreen.worker;
+                worker.RunWorkerAsync();
+            }
+        }
+
+        String SecureStringToString(SecureString value)
+        {
+            IntPtr valuePtr = IntPtr.Zero;
+            try
+            {
+                valuePtr = Marshal.SecureStringToGlobalAllocUnicode(value);
+                return Marshal.PtrToStringUni(valuePtr);
+            }
+            finally
+            {
+                Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
+            }
+        }
+
+        private void resetFieldsValue()
+        {
+
+            foreach (var element in employeeDetailsFormGrid1.Children)
+            {
+                if (element is TextBox)
+                {
+                    ((TextBox)element).IsEnabled = true;
+                    BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
+                    if (expression != null)
+                        Validation.ClearInvalid(expression);
+                    ((TextBox)element).Text = string.Empty;
+                }
+                else if (element is ComboBox)
+                {
+                    ((ComboBox)element).IsEnabled = true;
+                    BindingExpression expression = ((ComboBox)element).GetBindingExpression(TextBox.TextProperty);
+                    if (expression != null)
+                        Validation.ClearInvalid(expression);
+                    ((ComboBox)element).SelectedIndex = -1;
+                }
+                else if (element is CheckBox)
+                {
+                    ((CheckBox)element).IsEnabled = true;
+                    ((CheckBox)element).IsChecked = false;
+                }
+            }
+
+        }
+    }
+}

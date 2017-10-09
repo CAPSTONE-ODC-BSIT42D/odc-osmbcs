@@ -14,7 +14,7 @@ namespace prototype2
     {
         public MainViewModel()
         {
-            
+            isEdit = false;
         }
 
         public String Name { get; set; }
@@ -46,6 +46,71 @@ namespace prototype2
         public String ProductUnit { get; set; }
         public decimal ProductPrice { get; set; }
         public int Edit { get; set; }
+
+        public bool isEdit { get; set; }
+
+        //Invoice Variables
+        private decimal VatableSales_;
+        public decimal VatableSale {
+            get { return VatableSales_; }
+            set { SetProperty(ref VatableSales_, value); }
+        }
+        public decimal VatExemptedSales_;
+        public decimal VatExemptedSales {
+            get { return VatExemptedSales_; }
+            set { SetProperty(ref VatExemptedSales_, value); }
+        }
+
+        public decimal ZeroRatedSales_;
+        public decimal ZeroRatedSales {
+            get { return ZeroRatedSales_; }
+            set { SetProperty(ref ZeroRatedSales_, value); }
+        }
+
+        public decimal VatAmount_;
+        public decimal VatAmount {
+            get { return VatAmount_; }
+            set { SetProperty(ref VatAmount_, value); }
+        }
+
+        public decimal TotalSales_;
+        public decimal TotalSales {
+            get { return TotalSales_; }
+            set { SetProperty(ref TotalSales_, value); }
+        }
+
+        public decimal TotalSalesNoVat_;
+        public decimal TotalSalesNoVat
+        {
+            get { return TotalSalesNoVat_; }
+            set { SetProperty(ref TotalSalesNoVat_, value); }
+        }
+
+        public decimal TotalDue_;
+        public decimal TotalDue {
+            get { return TotalDue_; }
+            set { SetProperty(ref TotalDue_, value); }
+        }
+
+        public decimal TotalDueNoVat_;
+        public decimal TotalDueNoVat
+        {
+            get { return TotalDueNoVat_; }
+            set { SetProperty(ref TotalDueNoVat_, value); }
+        }
+
+        public decimal DiscountAmount_;
+        public decimal DiscountAmount {
+            get { return DiscountAmount_; }
+            set { SetProperty(ref DiscountAmount_, value); }
+        }
+
+        public decimal WithHoldingTax_;
+        public decimal WithHoldingTax {
+            get { return WithHoldingTax_; }
+            set { SetProperty(ref WithHoldingTax_, value); }
+        }
+        
 
 
         public String SearchQuery { get; set; }
