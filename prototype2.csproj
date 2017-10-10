@@ -223,8 +223,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="TextBoxValidation.cs" />
+    <Compile Include="ucCustSuppCRUD.xaml.cs">
+      <DependentUpon>ucCustSuppCRUD.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ucEmployeeCRUD.xaml.cs">
       <DependentUpon>ucEmployeeCRUD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ucProductsCRUD.xaml.cs">
+      <DependentUpon>ucProductsCRUD.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModelEntity.cs" />
     <Compile Include="ViewModels.cs" />
@@ -253,7 +259,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ucCustSuppCRUD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ucEmployeeCRUD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ucProductsCRUD.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

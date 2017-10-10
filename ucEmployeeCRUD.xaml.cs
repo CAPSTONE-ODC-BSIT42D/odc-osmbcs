@@ -34,6 +34,14 @@ namespace prototype2
         private bool validationError = false;
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
 
+        public event EventHandler SaveCloseButtonClicked;
+        protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
+        {
+            var handler = SaveCloseButtonClicked;
+            if (handler != null)
+                handler(this, e);
+        }
+
         private void editEmployeeBtn_Click(object sender, RoutedEventArgs e)
         {
             foreach (var element in employeeDetailsFormGrid1.Children)
@@ -76,6 +84,7 @@ namespace prototype2
             if (result == MessageBoxResult.Yes)
             {
                 resetFieldsValue();
+                OnSaveCloseButtonClicked(e);
             }
             else if (result == MessageBoxResult.No)
             {
@@ -96,7 +105,6 @@ namespace prototype2
                         Validation.ClearInvalid(expression);
                         if (((TextBox)element).IsEnabled)
                         {
-
                             expression.UpdateSource();
                             validationError = Validation.GetHasError((TextBox)element);
                         }
@@ -109,8 +117,11 @@ namespace prototype2
                     }
                 }
                 if (!validationError)
+                {
                     saveDataToDb();
-                MainVM.isEdit = false;
+                    
+                }
+                OnSaveCloseButtonClicked(e);
             }
             else if (result == MessageBoxResult.Cancel)
             {
@@ -146,16 +157,20 @@ namespace prototype2
 
         private void employeeType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (employeeType.SelectedIndex == 0)
+            if (IsLoaded)
             {
-                contractorOnlyGrid.Visibility = Visibility.Collapsed;
-                employeeOnlyGrid.Visibility = Visibility.Visible;
+                if (employeeType.SelectedIndex == 0)
+                {
+                    contractorOnlyGrid.Visibility = Visibility.Collapsed;
+                    employeeOnlyGrid.Visibility = Visibility.Visible;
+                }
+                else if (employeeType.SelectedIndex == 1)
+                {
+                    contractorOnlyGrid.Visibility = Visibility.Visible;
+                    employeeOnlyGrid.Visibility = Visibility.Collapsed;
+                }
             }
-            if (employeeType.SelectedIndex == 1)
-            {
-                contractorOnlyGrid.Visibility = Visibility.Visible;
-                employeeOnlyGrid.Visibility = Visibility.Collapsed;
-            }
+            
         }
 
         private void contactDetails_Checked(object sender, RoutedEventArgs e)
@@ -234,90 +249,21 @@ namespace prototype2
             }
             
         }
-
+        MySqlCommand cmd;
         private void saveDataToDb()
         {
             var dbCon = DBConnection.Instance();
-            string[] proc = { "", "", "", "" };
-
-            if (!MainVM.isEdit)
-            {
-                proc[0] = "INSERT_EMPLOYEE";
-            }
-            else
-            {
-                proc[0] = "UPDATE_EMPLOYEE";
-            }
-
+            string empID = "";
             try
             {
                 using (MySqlConnection conn = dbCon.Connection)
                 {
                     conn.Open();
-                    string empID = "";
-                    MySqlCommand cmd = new MySqlCommand(proc[0], conn);
-                    //INSERT NEW EMPLOYEE TO DB;
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@fName", empFirstNameTb.Text);
-                    cmd.Parameters["@fName"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@lName", empLastNameTb.Text);
-                    cmd.Parameters["@lName"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@middleInitial", empMiddleInitialTb.Text);
-                    cmd.Parameters["@middleInitial"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@address", empAddressTb.Text);
-                    cmd.Parameters["@address"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@city", empCityTb.Text);
-                    cmd.Parameters["@city"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@provinceID", empProvinceCb.SelectedValue);
-                    cmd.Parameters["@provinceID"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@username", empUserNameTb.Text);
-                    cmd.Parameters["@username"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@positionID", empPostionCb.SelectedValue);
-                    cmd.Parameters["@positionID"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@empEmail", empEmailAddressTb.Text);
-                    cmd.Parameters["@empEmail"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@empTelephone", empTelephoneTb.Text);
-                    cmd.Parameters["@empTelephone"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@empMobile", empMobileNumberTb.Text);
-                    cmd.Parameters["@empMobile"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@empType", employeeType.SelectedIndex);
-                    cmd.Parameters["@empType"].Direction = ParameterDirection.Input;
-
-                    if (employeeType.SelectedIndex == 1)
-                    {
-                        cmd.Parameters.AddWithValue("@jobID", empJobCb.SelectedValue);
-                        cmd.Parameters["@jobID"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@dateFrom", empDateStarted.Value);
-                        cmd.Parameters["@dateFrom"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@dateTo", empDateEnded.Value);
-                        cmd.Parameters["@dateTo"].Direction = ParameterDirection.Input;
-                    }
-                    else
-                    {
-                        cmd.Parameters.AddWithValue("@jobID", DBNull.Value);
-                        cmd.Parameters["@jobID"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@dateFrom", DBNull.Value);
-                        cmd.Parameters["@dateFrom"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@dateTo", DBNull.Value);
-                        cmd.Parameters["@dateTo"].Direction = ParameterDirection.Input;
-                    }
                     if (!MainVM.isEdit)
                     {
+                        
+                        cmd = new MySqlCommand("INSERT_EMPLOYEE", conn);
+                        cmdParameters();
                         SecureString passwordsalt = empPasswordTb.SecurePassword;
                         foreach (Char c in "$w0rdf!$h")
                         {
@@ -327,39 +273,14 @@ namespace prototype2
 
                         cmd.Parameters.AddWithValue("@upassword", SecureStringToString(passwordsalt));
                         cmd.Parameters["@upassword"].Direction = ParameterDirection.Input;
-                        cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
-                        cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
-                        cmd.ExecuteNonQuery();
-                        empID = cmd.Parameters["@insertedid"].Value.ToString();
-
-                    }
-                    else
-                    {
-                        cmd.Parameters.AddWithValue("@empID", MainVM.SelectedEmployeeContractor.EmpID);
-                        cmd.Parameters["@empID"].Direction = ParameterDirection.Input;
-                        cmd.ExecuteNonQuery();
-                    }
-                    if (!MainVM.isEdit)
-                    {
-                        cmd = new MySqlCommand("INSERT_EMPLOYEE_PIC_T", conn);
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@picBLOB", picdata);
-                        cmd.Parameters["@picBLOB"].Direction = ParameterDirection.Input;
-                        cmd.Parameters.AddWithValue("@sigBLOB", null);
-                        cmd.Parameters["@sigBLOB"].Direction = ParameterDirection.Input;
-                        cmd.Parameters.AddWithValue("@empID", empID);
-                        cmd.Parameters["@empID"].Direction = ParameterDirection.Input;
                         cmd.ExecuteNonQuery();
                     }
                     else
                     {
-                        cmd = new MySqlCommand("UPDATE_EMPLOYEE_PIC_T", conn);
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@picBLOB", picdata);
-                        cmd.Parameters["@picBLOB"].Direction = ParameterDirection.Input;
-                        cmd.Parameters.AddWithValue("@sigBLOB", null);
-                        cmd.Parameters["@sigBLOB"].Direction = ParameterDirection.Input;
+                        cmd = new MySqlCommand("UPDATE_EMPLOYEE", conn);
+                        cmdParameters();
                         cmd.Parameters.AddWithValue("@empID", MainVM.SelectedEmployeeContractor.EmpID);
+                        
                         cmd.Parameters["@empID"].Direction = ParameterDirection.Input;
                         cmd.ExecuteNonQuery();
                     }
@@ -372,8 +293,76 @@ namespace prototype2
             finally
             {
                 resetFieldsValue();
-                var worker = MainScreen.worker;
-                worker.RunWorkerAsync();
+                MainVM.isEdit = false;
+            }
+        }
+        void cmdParameters()
+        {
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@fName", empFirstNameTb.Text);
+            cmd.Parameters["@fName"].Direction = ParameterDirection.Input;
+
+            cmd.Parameters.AddWithValue("@lName", empLastNameTb.Text);
+            cmd.Parameters["@lName"].Direction = ParameterDirection.Input;
+
+            cmd.Parameters.AddWithValue("@middleInitial", empMiddleInitialTb.Text);
+            cmd.Parameters["@middleInitial"].Direction = ParameterDirection.Input;
+
+            cmd.Parameters.AddWithValue("@address", empAddressTb.Text);
+            cmd.Parameters["@address"].Direction = ParameterDirection.Input;
+
+            cmd.Parameters.AddWithValue("@city", empCityTb.Text);
+            cmd.Parameters["@city"].Direction = ParameterDirection.Input;
+
+            cmd.Parameters.AddWithValue("@provinceID", empProvinceCb.SelectedValue);
+            cmd.Parameters["@provinceID"].Direction = ParameterDirection.Input;
+
+            cmd.Parameters.AddWithValue("@username", empUserNameTb.Text);
+            cmd.Parameters["@username"].Direction = ParameterDirection.Input;
+
+            cmd.Parameters.AddWithValue("@picBLOB", picdata);
+            cmd.Parameters["@picBLOB"].Direction = ParameterDirection.Input;
+            cmd.Parameters.AddWithValue("@sigBLOB", null);
+            cmd.Parameters["@sigBLOB"].Direction = ParameterDirection.Input;
+
+            cmd.Parameters.AddWithValue("@positionID", empPostionCb.SelectedValue);
+            cmd.Parameters["@positionID"].Direction = ParameterDirection.Input;
+
+            cmd.Parameters.AddWithValue("@empEmail", empEmailAddressTb.Text);
+            cmd.Parameters["@empEmail"].Direction = ParameterDirection.Input;
+
+            cmd.Parameters.AddWithValue("@empTelephone", empTelephoneTb.Text);
+            cmd.Parameters["@empTelephone"].Direction = ParameterDirection.Input;
+
+            cmd.Parameters.AddWithValue("@empMobile", empMobileNumberTb.Text);
+            cmd.Parameters["@empMobile"].Direction = ParameterDirection.Input;
+
+            cmd.Parameters.AddWithValue("@empType", employeeType.SelectedIndex);
+            cmd.Parameters["@empType"].Direction = ParameterDirection.Input;
+
+
+
+            if (employeeType.SelectedIndex == 1)
+            {
+                cmd.Parameters.AddWithValue("@jobID", empJobCb.SelectedValue);
+                cmd.Parameters["@jobID"].Direction = ParameterDirection.Input;
+
+                cmd.Parameters.AddWithValue("@dateFrom", empDateStarted.Value);
+                cmd.Parameters["@dateFrom"].Direction = ParameterDirection.Input;
+
+                cmd.Parameters.AddWithValue("@dateTo", empDateEnded.Value);
+                cmd.Parameters["@dateTo"].Direction = ParameterDirection.Input;
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@jobID", DBNull.Value);
+                cmd.Parameters["@jobID"].Direction = ParameterDirection.Input;
+
+                cmd.Parameters.AddWithValue("@dateFrom", DBNull.Value);
+                cmd.Parameters["@dateFrom"].Direction = ParameterDirection.Input;
+
+                cmd.Parameters.AddWithValue("@dateTo", DBNull.Value);
+                cmd.Parameters["@dateTo"].Direction = ParameterDirection.Input;
             }
         }
 
@@ -393,7 +382,7 @@ namespace prototype2
 
         private void resetFieldsValue()
         {
-
+            employeeDetailsFormGridSv.ScrollToTop();
             foreach (var element in employeeDetailsFormGrid1.Children)
             {
                 if (element is TextBox)
@@ -418,7 +407,11 @@ namespace prototype2
                     ((CheckBox)element).IsChecked = false;
                 }
             }
+        }
 
+        private void closeModalBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OnSaveCloseButtonClicked(e);
         }
     }
 }

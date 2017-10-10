@@ -16,7 +16,7 @@ namespace prototype2
             {
                 if (str.Equals("IsEmpty"))
                 {
-                    if (String.IsNullOrWhiteSpace(value.ToString()))
+                    if (value is null)
                     {
                         return new ValidationResult(false, "*This field must be filled.");
                     }
@@ -24,29 +24,47 @@ namespace prototype2
                 }
                 else if (str.Equals("Mobile"))
                 {
-                    if (!regex.IsValidMobileNumber(value.ToString()))
+                    if (!(value is null))
                     {
-                        return new ValidationResult(false, "*Please follow the correct format for Mobile number. (Ex. (+63)-998-791 9482 or 0998-791-9482, with or without dashes as spaces(vice versa)");
+                        if (!regex.IsValidMobileNumber(value.ToString()))
+                        {
+                            return new ValidationResult(false, "*Please follow the correct format for Mobile number. (Ex. (+63)-998-791 9482 or 0998-791-9482, with or without dashes as spaces(vice versa)");
+                        }
                     }
+                    else
+                        return new ValidationResult(false, "*This field must be filled.");
+
                     return ValidationResult.ValidResult;
 
 
                 }
                 else if (str.Equals("Phone"))
                 {
-                    if (!regex.IsValidPhoneNumber(value.ToString()))
+                    if (!(value is null))
                     {
-                        return new ValidationResult(false, "*Please follow the correct format for Phone Bumber. (Ex. 123-4567, (02)123-4567, with or without dashes as spaces(vice versa))");
+                        if (!regex.IsValidPhoneNumber(value.ToString()))
+                        {
+                            return new ValidationResult(false, "*Please follow the correct format for Phone Bumber. (Ex. 123-4567, (02)123-4567, with or without dashes as spaces(vice versa))");
+                        }
                     }
+                    else
+                        return new ValidationResult(false, "*This field must be filled.");
+                    
                     return ValidationResult.ValidResult;
 
                 }
                 else if (str.Equals("Email"))
                 {
-                    if (!regex.IsValidEmail(value.ToString()))
+                    if (!(value is null))
                     {
-                        return new ValidationResult(false, "*The E-mail is not a valid email.");
+                        if (!regex.IsValidEmail(value.ToString()))
+                        {
+                            return new ValidationResult(false, "*The E-mail is not a valid email.");
+                        }
                     }
+                    else
+                        return new ValidationResult(false, "*This field must be filled.");
+                    
 
 
                 }
