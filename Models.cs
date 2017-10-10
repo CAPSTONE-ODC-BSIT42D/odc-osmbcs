@@ -1121,6 +1121,20 @@ namespace prototype2
             set { SetProperty(ref vat, value); }
         }
 
+        protected decimal sc_pwd_discount;
+        public decimal sc_pwd_discount_
+        {
+            get { return sc_pwd_discount; }
+            set { SetProperty(ref sc_pwd_discount, value); }
+        }
+
+        protected decimal withholdingTax;
+        public decimal withholdingTax_
+        {
+            get { return withholdingTax; }
+            set { SetProperty(ref withholdingTax, value); }
+        }
+
         public string notes;
         public string notes_
         {

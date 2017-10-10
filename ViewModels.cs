@@ -49,6 +49,13 @@ namespace prototype2
 
         public bool isEdit { get; set; }
 
+        public string Ddl;
+        public string Ddl_
+        {
+            get { return Ddl; }
+            set { SetProperty(ref Ddl, value); }
+        }
+
         //Invoice Variables
         private decimal VatableSales_;
         public decimal VatableSale {
@@ -360,6 +367,24 @@ namespace prototype2
         {
             get { return selectedSalesQuote; }
             set { SetProperty(ref selectedSalesQuote, value); }
+        }
+
+        //----- Sales Invoice
+
+        protected ObservableCollection<SalesInvoice> salesInvoice = new ObservableCollection<SalesInvoice>();
+
+        protected SalesInvoice selectedSalesInvoice = null;
+
+        public ObservableCollection<SalesInvoice> SalesInvoice
+        {
+            get { return salesInvoice; }
+            set { salesInvoice = value; }
+        }
+
+        public SalesInvoice SelectedSalesInvoice
+        {
+            get { return selectedSalesInvoice; }
+            set { SetProperty(ref selectedSalesInvoice, value); }
         }
 
         //----- Requested Item

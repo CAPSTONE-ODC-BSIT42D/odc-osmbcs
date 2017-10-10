@@ -6,13 +6,13 @@
              xmlns:local="clr-namespace:prototype2"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="prototype2.ucEmployeeCRUD"
              mc:Ignorable="d" 
-             d:DesignHeight="660" d:DesignWidth="618">
+             d:DesignHeight="990" d:DesignWidth="618" IsVisibleChanged="UserControl_IsVisibleChanged">
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>
     <Grid Background="White">
-        <ScrollViewer x:Name="employeeDetailsFormGridSv" MinWidth="600" Margin="0,0,0,40" VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-            <Grid Height="891" Width="599">
+        <ScrollViewer x:Name="employeeDetailsFormGridSv" MinWidth="600" Margin="0,0,0,40" VerticalScrollBarVisibility="Auto">
+            <Grid>
                 <Grid x:Name="employeeDetailsFormGrid1" Background="White" Margin="0,30,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -33,7 +33,7 @@
                     <Label x:Name="label4_Copy24" Content="First Name:" HorizontalAlignment="Left" Margin="40,87,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                     <Label x:Name="label4_Copy25" Content="Middle Initial:" HorizontalAlignment="Left" Margin="194,86,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="93" VerticalContentAlignment="Center"/>
                     <Label x:Name="label4_Copy26" Content="Last Name:" HorizontalAlignment="Left" Margin="329,87,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <ComboBox x:Name="employeeType" HorizontalAlignment="Left" Margin="103,54,0,0" VerticalAlignment="Top" Width="125" SelectionChanged="employeeType_SelectionChanged">
+                    <ComboBox x:Name="employeeType" HorizontalAlignment="Left" Margin="103,54,0,0" VerticalAlignment="Top" Width="125" SelectionChanged="employeeType_SelectionChanged" SelectedValue="{Binding SelectedEmployeeContractor.EmpType}">
                         <ComboBox.SelectedItem>
                             <Binding Path="cbItem" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                 <Binding.ValidationRules>
@@ -41,10 +41,10 @@
                                 </Binding.ValidationRules>
                             </Binding>
                         </ComboBox.SelectedItem>
-                        <ComboBoxItem Content="Employee" IsSelected="True"/>
-                        <ComboBoxItem Content="Contractor"/>
+                        <ComboBoxItem Content="Employee" Tag="0" IsSelected="True"/>
+                        <ComboBoxItem Content="Contractor" Tag="1"/>
                     </ComboBox>
-                    <TextBox x:Name="empFirstNameTb" HorizontalAlignment="Left" Height="23" Margin="40,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" FontWeight="Normal" >
+                    <TextBox x:Name="empFirstNameTb" HorizontalAlignment="Left" Height="23" Margin="40,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" FontWeight="Normal">
                         <Binding Path="FirstName" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
                                 <local:TextBoxValidation TextBoxType="IsEmpty" />

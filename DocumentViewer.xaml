@@ -1,0 +1,18 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:prototype2"
+             xmlns:Windows="clr-namespace:MigraDoc.Rendering.Windows;assembly=MigraDoc.Rendering-wpf" x:Class="prototype2.DocumentViewer"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <StaticResource ResourceKey="MainVM"/>
+    </UserControl.DataContext>
+    <Grid x:Name="viewQuotationGrid" Margin="0" Background="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}">
+        <GroupBox x:Name="groupBox3" Header="View Sale Quotation" Margin="10" FontFamily="Segoe UI Symbol" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderBrush="Black" VerticalContentAlignment="Stretch">
+            <Windows:DocumentPreview x:Name="pagePreview" Margin="0"/>
+        </GroupBox>
+    </Grid>
+</UserControl>

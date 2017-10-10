@@ -5,7 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:prototype2"
              mc:Ignorable="d" 
-             d:DesignHeight="945" Width="670">
+             d:DesignHeight="945" Width="670" IsVisibleChanged="UserControl_IsVisibleChanged_1">
+    <UserControl.DataContext>
+        <StaticResource ResourceKey="MainVM"/>
+    </UserControl.DataContext>
     <Grid Margin="0">
         <ScrollViewer x:Name="companyDetailsFormGridSv" MinWidth="611" Margin="0,0,0,40" VerticalScrollBarVisibility="Auto">
             <Grid x:Name="companyDetailsFormGrid1" Background="White">
@@ -13,7 +16,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Label x:Name="label5" Content="Company Details" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-                <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,47,10,0" VerticalAlignment="Top" Width="560"/>
+                <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,47,10,0" VerticalAlignment="Top"/>
                 <Label x:Name="label4" Content="Type:" HorizontalAlignment="Left" Margin="40,52,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <Label x:Name="label4_Copy" Content="Name:" HorizontalAlignment="Left" Margin="40,83,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <Label x:Name="label4_Copy1" Content="Description:" HorizontalAlignment="Left" Margin="40,114,0,0" VerticalAlignment="Top" FontWeight="Bold"/>

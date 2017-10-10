@@ -41,35 +41,41 @@ namespace prototype2
             worker.DoWork += worker_DoWork;
             worker.RunWorkerCompleted += worker_RunWorkerCompleted;
         }
-        
+
         public static Commands commands = new Commands();
         public static readonly BackgroundWorker worker = new BackgroundWorker();
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.ucEmployee.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
+            this.ucCustSupp.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
+            this.ucInvoice.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
+            this.ucProduct.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
             foreach (var obj in containerGrid.Children)
             {
                 ((Grid)obj).Visibility = Visibility.Collapsed;
             }
-            foreach(var obj in formGridBg.Children)
+            foreach (var obj in formGridBg.Children)
             {
-                ((Grid)obj).Visibility = Visibility.Collapsed;
+                if(obj is UserControl)
+                    ((UserControl)obj).Visibility = Visibility.Collapsed;
+                else if(obj is Grid)
+                    ((Grid)obj).Visibility = Visibility.Collapsed;
             }
             dashboardGrid.Visibility = Visibility.Visible;
             settingsBtn.Visibility = Visibility.Hidden;
             formGridBg.Visibility = Visibility.Collapsed;
             worker.RunWorkerAsync();
-            
+
             //loadDataToUi();
         }
 
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => { loadDataToUi();}));
-            
+            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => { loadDataToUi(); }));
 
-            
+
+
         }
 
         private void worker_RunWorkerCompleted(object sender,
@@ -87,8 +93,8 @@ namespace prototype2
             MainVM.ProductCategory.Clear();
             MainVM.ServicesList.Clear();
             MainVM.ProductList.Clear();
-            
-            
+
+
             MainVM.AllCustomerSupplier.Clear();
             MainVM.Customers.Clear();
             MainVM.Suppliers.Clear();
@@ -97,7 +103,7 @@ namespace prototype2
             MainVM.AllEmployeesContractor.Clear();
             MainVM.Employees.Clear();
             MainVM.Contractor.Clear();
-            
+
 
             MainVM.SalesQuotes.Clear();
 
@@ -112,17 +118,17 @@ namespace prototype2
                 DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
                 fromDbTable = fromDb.Tables["t"];
-                
+
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    if(dr["locPrice"].ToString().Equals(""))
+                    if (dr["locPrice"].ToString().Equals(""))
                         MainVM.Provinces.Add(new Province() { ProvinceID = (int)dr["locProvinceID"], ProvinceName = dr["locProvince"].ToString() });
                     else
                         MainVM.Provinces.Add(new Province() { ProvinceID = (int)dr["locProvinceID"], ProvinceName = dr["locProvince"].ToString(), ProvincePrice = (decimal)dr["locPrice"] });
                 }
                 dbCon.Close();
             }
-            
+
 
             if (dbCon.IsConnect())
             {
@@ -132,7 +138,7 @@ namespace prototype2
                 DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
                 fromDbTable = fromDb.Tables["t"];
-                
+
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
                     MainVM.EmpPosition.Add(new EmpPosition() { PositionID = dr["positionid"].ToString(), PositionName = dr["positionName"].ToString() });
@@ -147,7 +153,7 @@ namespace prototype2
                 DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
                 fromDbTable = fromDb.Tables["t"];
-                
+
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
                     MainVM.ContJobTitle.Add(new ContJobName() { JobID = dr["jobID"].ToString(), JobName = dr["jobName"].ToString() });
@@ -162,7 +168,7 @@ namespace prototype2
                 DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
                 fromDbTable = fromDb.Tables["t"];
-                
+
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
                     MainVM.ProductCategory.Add(new ItemType() { TypeID = int.Parse(dr["typeID"].ToString()), TypeName = dr["typeName"].ToString() });
@@ -177,7 +183,7 @@ namespace prototype2
                 DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
                 fromDbTable = fromDb.Tables["t"];
-                
+
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
                     MainVM.ServicesList.Add(new Service() { ServiceID = dr["serviceID"].ToString(), ServiceName = dr["serviceName"].ToString(), ServiceDesc = dr["serviceDesc"].ToString(), ServicePrice = (decimal)dr["ServicePrice"] });
@@ -192,17 +198,17 @@ namespace prototype2
                 DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
                 fromDbTable = fromDb.Tables["t"];
-                
+
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
                     MainVM.SelectedCustomerSupplier = MainVM.Suppliers.Where(x => x.CompanyID.Equals(dr["supplierID"].ToString())).FirstOrDefault();
                     MainVM.SelectedProductCategory = MainVM.ProductCategory.Where(x => x.TypeID == int.Parse(dr["typeID"].ToString())).FirstOrDefault();
                     if (MainVM.SelectedCustomerSupplier != null)
                     {
-                        MainVM.ProductList.Add(new Item() { ItemCode = dr["itemCode"].ToString(),ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), Unit = dr["itemUnit"].ToString(),TypeName = MainVM.SelectedProductCategory.TypeName, Quantity = 1, SupplierID = dr["supplierID"].ToString(), SupplierName = MainVM.SelectedCustomerSupplier.CompanyName });
+                        MainVM.ProductList.Add(new Item() { ItemCode = dr["itemCode"].ToString(), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), Unit = dr["itemUnit"].ToString(), TypeName = MainVM.SelectedProductCategory.TypeName, Quantity = 1, SupplierID = dr["supplierID"].ToString(), SupplierName = MainVM.SelectedCustomerSupplier.CompanyName });
                     }
                     else
-                        MainVM.ProductList.Add(new Item() { ItemCode = dr["itemCode"].ToString(), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), Unit = dr["itemUnit"].ToString(), TypeName = MainVM.SelectedProductCategory.TypeName, Quantity = 1, SupplierID = dr["supplierID"].ToString()});
+                        MainVM.ProductList.Add(new Item() { ItemCode = dr["itemCode"].ToString(), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), Unit = dr["itemUnit"].ToString(), TypeName = MainVM.SelectedProductCategory.TypeName, Quantity = 1, SupplierID = dr["supplierID"].ToString() });
                 }
                 dbCon.Close();
             }
@@ -218,7 +224,7 @@ namespace prototype2
                 DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
                 fromDbTable = fromDb.Tables["t"];
-                
+
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
                     var customer = (new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString(), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), RepresentativeID = dr["representativeID"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString() });
@@ -238,7 +244,7 @@ namespace prototype2
                 DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
                 fromDbTable = fromDb.Tables["t"];
-                
+
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
                     MainVM.Suppliers.Add(new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString(), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), RepresentativeID = dr["representativeID"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString() });
@@ -254,10 +260,10 @@ namespace prototype2
                 DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
                 fromDbTable = fromDb.Tables["t"];
-                
+
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    MainVM.Representatives.Add(new Representative(){ RepresentativeID = dr["representativeID"].ToString(), RepTitle = dr["repTitle"].ToString(), RepFirstName = dr["repFName"].ToString(), RepMiddleName = dr["repMInitial"].ToString(), RepLastName = dr["repLName"].ToString(), RepEmail = dr["repEmail"].ToString(), RepTelephone = dr["repTelephone"].ToString(), RepMobile = dr["repMobile"].ToString() });
+                    MainVM.Representatives.Add(new Representative() { RepresentativeID = dr["representativeID"].ToString(), RepTitle = dr["repTitle"].ToString(), RepFirstName = dr["repFName"].ToString(), RepMiddleName = dr["repMInitial"].ToString(), RepLastName = dr["repLName"].ToString(), RepEmail = dr["repEmail"].ToString(), RepTelephone = dr["repTelephone"].ToString(), RepMobile = dr["repMobile"].ToString() });
                 }
             }
             if (dbCon.IsConnect())
@@ -277,7 +283,7 @@ namespace prototype2
                     }
                     MainVM.Employees.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), PositionID = dr["positionID"].ToString(), PositionName = dr["positionName"].ToString(), EmpUserName = dr["empUserName"].ToString(), EmpEmail = dr["empEmail"].ToString(), EmpMobile = dr["empMobile"].ToString(), EmpTelephone = dr["empTelephone"].ToString(), EmpPic = empPic, EmpType = dr["empType"].ToString() });
                     MainVM.AllEmployeesContractor.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), PositionID = dr["positionID"].ToString(), PositionName = dr["positionName"].ToString(), EmpUserName = dr["empUserName"].ToString(), EmpEmail = dr["empEmail"].ToString(), EmpMobile = dr["empMobile"].ToString(), EmpTelephone = dr["empTelephone"].ToString(), EmpPic = empPic, EmpType = dr["empType"].ToString() });
-                    
+
 
                 }
                 dbCon.Close();
@@ -344,7 +350,7 @@ namespace prototype2
                         paymentIsLanded = true;
                     }
                     MainVM.SelectedCustomerSupplier = MainVM.Customers.Where(x => x.CompanyID.Equals(dr["custID"].ToString())).FirstOrDefault();
-                    if(MainVM.SelectedCustomerSupplier != null)
+                    if (MainVM.SelectedCustomerSupplier != null)
                     {
                         MainVM.SalesQuotes.Add(new SalesQuote() { sqNoChar_ = dr["sqNoChar"].ToString(), dateOfIssue_ = dateOfIssue, custID_ = int.Parse(dr["custID"].ToString()), custRepID_ = int.Parse(dr["custRepID"].ToString()), custName_ = MainVM.SelectedCustomerSupplier.CompanyName, quoteSubject_ = dr["quoteSubject"].ToString(), priceNote_ = dr["priceNote"].ToString(), deliveryDate_ = deliveryDate, estDelivery_ = int.Parse(dr["estDelivery"].ToString()), validityDays_ = int.Parse(dr["validityDays"].ToString()), validityDate_ = validityDate, otherTerms_ = dr["otherTerms"].ToString(), expiration_ = expiration, vat_ = Decimal.Parse(dr["vat"].ToString()), vatexcluded_ = vatIsExcluded, paymentIsLanded_ = paymentIsLanded, paymentCurrency_ = dr["paymentCurrency"].ToString(), status_ = dr["status"].ToString(), termsDays_ = int.Parse(dr["termsDays"].ToString()), termsDP_ = int.Parse(dr["termsDP"].ToString()), penaltyAmt_ = Decimal.Parse(dr["penaltyAmt"].ToString()), penaltyPercent_ = int.Parse(dr["penaltyPerc"].ToString()), markUpPercent_ = decimal.Parse(dr["markUpPercent"].ToString()), discountPercent_ = decimal.Parse(dr["discountPercent"].ToString()) });
 
@@ -376,26 +382,26 @@ namespace prototype2
                     {
                         if (dr["sqNoChar"].ToString().Equals(sq.sqNoChar_))
                         {
-                            MainVM.SelectedAddedService = (new AddedService(){ TableNoChar = dr["tableNoChar"].ToString(), ServiceID = dr["serviceID"].ToString(), ProvinceID = int.Parse(dr["provinceID"].ToString()), City = dr["city"].ToString(), Address = dr["address"].ToString(), TotalCost = decimal.Parse(dr["totalCost"].ToString()) });
-                            foreach(DataRow dr2 in fromDbTable2.Rows)
+                            MainVM.SelectedAddedService = (new AddedService() { TableNoChar = dr["tableNoChar"].ToString(), ServiceID = dr["serviceID"].ToString(), ProvinceID = int.Parse(dr["provinceID"].ToString()), City = dr["city"].ToString(), Address = dr["address"].ToString(), TotalCost = decimal.Parse(dr["totalCost"].ToString()) });
+                            foreach (DataRow dr2 in fromDbTable2.Rows)
                             {
                                 if (dr2["tableNoChar"].ToString().Equals(dr2["servicesNochar"].ToString()))
                                 {
-                                    MainVM.SelectedAddedService.AdditionalFees.Add(new AdditionalFee() { ServiceNoChar = dr2["serviceNoChar"].ToString(), FeeName = dr2["feeName"].ToString(), FeePrice = decimal.Parse(dr2["feeValue"].ToString())});
+                                    MainVM.SelectedAddedService.AdditionalFees.Add(new AdditionalFee() { ServiceNoChar = dr2["serviceNoChar"].ToString(), FeeName = dr2["feeName"].ToString(), FeePrice = decimal.Parse(dr2["feeValue"].ToString()) });
                                 }
                             }
                             sq.AddedServices.Add(MainVM.SelectedAddedService);
                         }
                     }
-                    foreach(DataRow dr3 in fromDbTable3.Rows)
+                    foreach (DataRow dr3 in fromDbTable3.Rows)
                     {
                         if (dr3["sqNoChar"].ToString().Equals(sq.sqNoChar_))
                         {
-                            sq.AddedItems.Add(new AddedItem() { TableID = int.Parse(dr3["tableID"].ToString()), SqNoChar = dr3["sqNoChar"].ToString(), ItemCode = dr3["itemCode"].ToString(), ItemQty = int.Parse(dr3["itemQnty"].ToString()), TotalCost = decimal.Parse(dr3["totalCost"].ToString())});
+                            sq.AddedItems.Add(new AddedItem() { TableID = int.Parse(dr3["tableID"].ToString()), SqNoChar = dr3["sqNoChar"].ToString(), ItemCode = dr3["itemCode"].ToString(), ItemQty = int.Parse(dr3["itemQnty"].ToString()), TotalCost = decimal.Parse(dr3["totalCost"].ToString()) });
                         }
                     }
 
-                        
+
                 }
                 dbCon.Close();
             }
@@ -446,8 +452,6 @@ namespace prototype2
                     ((Grid)obj).Visibility = Visibility.Collapsed;
                 }
             }
-
-
             if (manageEmployeeGrid.IsVisible)
             {
                 employeeSettings1.Visibility = Visibility.Visible;
@@ -459,16 +463,17 @@ namespace prototype2
             }
             foreach (var obj in formGridBg.Children)
             {
-
-                if (!((Grid)obj).Name.Equals("settingsFormGrid"))
+                if(obj is Grid)
                 {
-                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                    if (!((Grid)obj).Name.Equals("settingsFormGrid"))
+                    {
+                        ((Grid)obj).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        ((Grid)obj).Visibility = Visibility.Visible;
+                    }
                 }
-                else
-                {
-                    ((Grid)obj).Visibility = Visibility.Visible;
-                }
-                
             }
             formGridBg.Visibility = Visibility.Visible;
 
@@ -476,13 +481,7 @@ namespace prototype2
 
         private void closeSideMenuBtn_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var obj in formGridBg.Children)
-            {
-
-                ((Grid)obj).Visibility = Visibility.Collapsed;
-
-            }
-            formGridBg.Visibility = Visibility.Collapsed;
+            closeModals();
         }
 
         private void quotesSalesMenuBtn_Click(object sender, RoutedEventArgs e)
@@ -570,15 +569,18 @@ namespace prototype2
             sb.Begin(formGridBg);
             foreach (var obj in formGridBg.Children)
             {
-
-                if (!((Grid)obj).Name.Equals("settingsFormGrid"))
+                if (obj is Grid)
                 {
-                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                    if (!((Grid)obj).Name.Equals("settingsFormGrid"))
+                    {
+                        ((Grid)obj).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        ((Grid)obj).Visibility = Visibility.Visible;
+                    }
                 }
-                else
-                {
-                    ((Grid)obj).Visibility = Visibility.Visible;
-                }
+               
 
             }
             formGridBg.Visibility = Visibility.Visible;
@@ -595,7 +597,7 @@ namespace prototype2
 
         private void saveCloseBtn_SaveCloseButtonClicked(object sender, EventArgs e)
         {
-            resetFieldsValue();
+            closeModals();
             worker.RunWorkerAsync();
         }
 
@@ -645,15 +647,18 @@ namespace prototype2
             sb.Begin(formGridBg);
             foreach (var obj in formGridBg.Children)
             {
-
-                if (!((Grid)obj).Name.Equals("employeeDetailsFormGrid"))
+                if (obj is UserControl)
                 {
-                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                    if (!((UserControl)obj).Name.Equals("ucEmployee"))
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Visible;
+                    }
                 }
-                else
-                {
-                    ((Grid)obj).Visibility = Visibility.Visible;
-                }
+                
 
             }
             formGridBg.Visibility = Visibility.Visible;
@@ -666,13 +671,17 @@ namespace prototype2
             foreach (var obj in formGridBg.Children)
             {
 
-                if (!((Grid)obj).Name.Equals("companyDetailsFormGrid"))
+                if (obj is UserControl)
                 {
-                    ((Grid)obj).Visibility = Visibility.Collapsed;
-                }
-                else
-                {
-                    ((Grid)obj).Visibility = Visibility.Visible;
+                    if (!((UserControl)obj).Name.Equals("ucCustSupp"))
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Visible;
+                    }
+
                 }
 
             }
@@ -681,106 +690,51 @@ namespace prototype2
 
         private void manageProductAddBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
             sb.Begin(formGridBg);
             foreach (var obj in formGridBg.Children)
             {
-
-                if (!((Grid)obj).Name.Equals("productDetailsFormGrid"))
+                if (obj is UserControl)
                 {
-                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                    if (!((UserControl)obj).Name.Equals("ucProduct"))
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Visible;
+                    }
                 }
-                else
-                {
-                    ((Grid)obj).Visibility = Visibility.Visible;
-                }
+                
 
             }
             formGridBg.Visibility = Visibility.Visible;
         }
 
-        private void generateProductCodeBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (String.IsNullOrWhiteSpace(productNameTb.Text))
-            {
-                MessageBox.Show("For meaningful product code, enter product name first");
-                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                string productCode = "";
-                var random = new Random();
-
-                for (int i = 0; i < 4; i++)
-                {
-                    productCode += chars[random.Next(chars.Length)];
-                }
-                productCode += "-";
-
-                for (int i = 0; i < 4; i++)
-                {
-                    productCode += chars[random.Next(chars.Length)];
-                }
-                productCode += MainVM.ProductList.Count + 1;
-
-                productCodeTb.Text = productCode;
-            }
-            else
-            {
-                if (productNameTb.Text.Length > 4)
-                {
-                    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                    string productCode = "";
-                    var random = new Random();
-
-                    for (int i = 0; i < 4; i++)
-                    {
-                        productCode += chars[random.Next(chars.Length)];
-                    }
-                    productCode += "-";
-
-                    productCode += productNameTb.Text.Trim().Substring(0, 4).ToUpper();
-                    productCode += MainVM.ProductList.Count + 1;
-
-                    productCodeTb.Text = productCode;
-                }
-                else
-                {
-                    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                    string productCode = "";
-                    var random = new Random();
-
-                    for (int i = 0; i < 4; i++)
-                    {
-                        productCode += chars[random.Next(chars.Length)];
-                    }
-                    productCode += "-";
-
-                    productCode += productNameTb.Text.Trim().ToUpper();
-                    productCode += MainVM.ProductList.Count + 1;
-
-                    productCodeTb.Text = productCode;
-                }
-            }
-        }
-
+        
         private bool validationError = false;
 
         private void viewRecordBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+            MainVM.isEdit = true;
             if (manageCustomerGrid.IsVisible)
             {
                 Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
                 sb.Begin(formGridBg);
                 foreach (var obj in formGridBg.Children)
                 {
+                    if (obj is UserControl)
+                    {
+                        if (!((UserControl)obj).Name.Equals("ucCustSupp"))
+                        {
+                            ((UserControl)obj).Visibility = Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            ((UserControl)obj).Visibility = Visibility.Visible;
+                        }
 
-                    if (!((Grid)obj).Name.Equals("companyDetailsFormGrid"))
-                    {
-                        ((Grid)obj).Visibility = Visibility.Collapsed;
-                    }
-                    else
-                    {
-                        ((Grid)obj).Visibility = Visibility.Visible;
                     }
 
                 }
@@ -801,7 +755,6 @@ namespace prototype2
                         ((CheckBox)element).IsEnabled = false;
                     }
                 }
-                loadRecordToFields();
             }
             else if (manageEmployeeGrid.IsVisible)
             {
@@ -809,20 +762,21 @@ namespace prototype2
                 sb.Begin(formGridBg);
                 foreach (var obj in formGridBg.Children)
                 {
-
-                    if (!((Grid)obj).Name.Equals("employeeDetailsFormGrid"))
+                    if(obj is UserControl)
                     {
-                        ((Grid)obj).Visibility = Visibility.Collapsed;
+                        if (!((UserControl)obj).Name.Equals("ucEmployee"))
+                        {
+                            ((UserControl)obj).Visibility = Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            ((UserControl)obj).Visibility = Visibility.Visible;
+                        }
                     }
-                    else
-                    {
-                        ((Grid)obj).Visibility = Visibility.Visible;
-                    }
-
                 }
                 ucEmployee.saveCancelGrid1.Visibility = Visibility.Collapsed;
                 ucEmployee.editCloseGrid1.Visibility = Visibility.Visible;
-                foreach(var element in ucEmployee.employeeDetailsFormGrid1.Children)
+                foreach (var element in ucEmployee.employeeDetailsFormGrid1.Children)
                 {
                     if (element is TextBox)
                     {
@@ -836,8 +790,15 @@ namespace prototype2
                     {
                         ((CheckBox)element).IsEnabled = false;
                     }
+                    else if(element is PasswordBox)
+                    {
+                        ((CheckBox)element).IsEnabled = false;
+                    }
+                    else if(element is Xceed.Wpf.Toolkit.DateTimePicker)
+                    {
+                        ((Xceed.Wpf.Toolkit.DateTimePicker)element).IsEnabled = false;
+                    }
                 }
-                loadRecordToFields();
             }
             else if (manageProductListGrid.IsVisible)
             {
@@ -845,20 +806,22 @@ namespace prototype2
                 sb.Begin(formGridBg);
                 foreach (var obj in formGridBg.Children)
                 {
-
-                    if (!((Grid)obj).Name.Equals("productDetailsFormGrid"))
+                    if (obj is UserControl)
                     {
-                        ((Grid)obj).Visibility = Visibility.Collapsed;
-                    }
-                    else
-                    {
-                        ((Grid)obj).Visibility = Visibility.Visible;
+                        if (!((UserControl)obj).Name.Equals("ucProduct"))
+                        {
+                            ((UserControl)obj).Visibility = Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            ((UserControl)obj).Visibility = Visibility.Visible;
+                        }
                     }
 
                 }
-                saveCancelGrid2.Visibility = Visibility.Collapsed;
-                editCloseGrid2.Visibility = Visibility.Visible;
-                foreach (var element in productDetailsFormGrid1.Children)
+                ucProduct.saveCancelGrid2.Visibility = Visibility.Collapsed;
+                ucProduct.editCloseGrid2.Visibility = Visibility.Visible;
+                foreach (var element in ucProduct.productDetailsFormGrid1.Children)
                 {
                     if (element is TextBox)
                     {
@@ -873,7 +836,6 @@ namespace prototype2
                         ((ComboBox)element).IsEnabled = false;
                     }
                 }
-                loadRecordToFields();
             }
             formGridBg.Visibility = Visibility.Visible;
         }
@@ -889,17 +851,19 @@ namespace prototype2
                 foreach (var obj in formGridBg.Children)
                 {
 
-                    if (!((Grid)obj).Name.Equals("companyDetailsFormGrid"))
+                    if (obj is UserControl)
                     {
-                        ((Grid)obj).Visibility = Visibility.Collapsed;
-                    }
-                    else
-                    {
-                        ((Grid)obj).Visibility = Visibility.Visible;
-                    }
+                        if (!((UserControl)obj).Name.Equals("ucCustSupp"))
+                        {
+                            ((UserControl)obj).Visibility = Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            ((UserControl)obj).Visibility = Visibility.Visible;
+                        }
 
+                    }
                 }
-                loadRecordToFields();
 
                 ucCustSupp.saveCancelGrid.Visibility = Visibility.Visible;
                 ucCustSupp.editCloseGrid.Visibility = Visibility.Collapsed;
@@ -911,17 +875,21 @@ namespace prototype2
                 foreach (var obj in formGridBg.Children)
                 {
 
-                    if (!((Grid)obj).Name.Equals("employeeDetailsFormGrid"))
+                    if (obj is UserControl)
                     {
-                        ((Grid)obj).Visibility = Visibility.Collapsed;
-                    }
-                    else
-                    {
-                        ((Grid)obj).Visibility = Visibility.Visible;
+                        if (!((UserControl)obj).Name.Equals("ucEmployee"))
+                        {
+                            ((UserControl)obj).Visibility = Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            ((UserControl)obj).Visibility = Visibility.Visible;
+                        }
                     }
 
                 }
-                loadRecordToFields();
+                ucEmployee.saveCancelGrid1.Visibility = Visibility.Visible;
+                ucEmployee.editCloseGrid1.Visibility = Visibility.Collapsed;
             }
             else if (manageProductListGrid.IsVisible)
             {
@@ -930,21 +898,23 @@ namespace prototype2
                 foreach (var obj in formGridBg.Children)
                 {
 
-                    if (!((Grid)obj).Name.Equals("productDetailsFormGrid"))
+                    if (obj is UserControl)
                     {
-                        ((Grid)obj).Visibility = Visibility.Collapsed;
+                        if (!((UserControl)obj).Name.Equals("ucProduct"))
+                        {
+                            ((UserControl)obj).Visibility = Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            ((UserControl)obj).Visibility = Visibility.Visible;
+                        }
                     }
-                    else
-                    {
-                        ((Grid)obj).Visibility = Visibility.Visible;
-                    }
-
                 }
-                loadRecordToFields();
-                saveCancelGrid2.Visibility = Visibility.Visible;
-                editCloseGrid2.Visibility = Visibility.Collapsed;
+                
+                ucProduct.saveCancelGrid2.Visibility = Visibility.Visible;
+                ucProduct.editCloseGrid2.Visibility = Visibility.Collapsed;
             }
-            
+
         }
 
         private void deleteRecordBtn_Click(object sender, RoutedEventArgs e)
@@ -1016,304 +986,31 @@ namespace prototype2
                 }
             }
         }
-        
-        
-        private void editProductBtn_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (var element in productDetailsFormGrid1.Children)
-            {
-                if (element is TextBox)
-                {
-                    ((TextBox)element).IsEnabled = true;
-                }
-                if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
-                {
-                    ((Xceed.Wpf.Toolkit.DecimalUpDown)element).IsEnabled = true;
-                }
-                if (element is ComboBox)
-                {
-                    ((ComboBox)element).IsEnabled = true;
-                }
-            }
-            saveCancelGrid2.Visibility = Visibility.Visible;
-            editCloseGrid2.Visibility = Visibility.Collapsed;
-            isEdit = true;
-        }
 
-        private void saveRecordBtn_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult result = MessageBox.Show("Do you want to save?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Information);
-            if (result == MessageBoxResult.OK)
-            {
-                if (productDetailsFormGrid.IsVisible)
-                {
-                    foreach (var element in productDetailsFormGrid1.Children)
-                    {
-                        if (element is TextBox)
-                        {
-                            BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-                            
-                            if (expression!=null)
-                            {
-                                Validation.ClearInvalid(expression);
-                                expression.UpdateSource();
-                                validationError = Validation.GetHasError((TextBox)element);
-                            }
-                        }
-                        if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
-                        {
-                            BindingExpression expression = ((Xceed.Wpf.Toolkit.DecimalUpDown)element).GetBindingExpression(Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
-                            Validation.ClearInvalid(expression);
-                            if (((Xceed.Wpf.Toolkit.DecimalUpDown)element).IsEnabled)
-                            {
-
-                                expression.UpdateSource();
-                                validationError = Validation.GetHasError((Xceed.Wpf.Toolkit.DecimalUpDown)element);
-                            }
-                        }
-                        if (element is ComboBox)
-                        {
-                            BindingExpression expression = ((ComboBox)element).GetBindingExpression(ComboBox.SelectedItemProperty);
-                            if (expression != null)
-                            {
-                                expression.UpdateSource();
-                                validationError = Validation.GetHasError((ComboBox)element);
-                            }
-                            
-                        }
-                    }
-                }
-                if (!validationError)
-                saveDataToDb();
-                isEdit = false;
-            }
-            else if (result == MessageBoxResult.Cancel)
-            {
-            }
-            
-        }
         
-        private void cancelRecordBtn_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult result = MessageBox.Show("Do you want to cancel?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
-            if (result == MessageBoxResult.Yes)
-            {
-                resetFieldsValue();
-            }
-            else if (result == MessageBoxResult.No)
-            {
-            }
-            
-        }
 
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)
         {
-            resetFieldsValue();
+            closeModals();
         }
         public bool isEdit = false;
 
-        private void loadRecordToFields()
-        {
-            if (companyDetailsFormGrid.IsVisible)
-            {
-                ucCustSupp.companyTypeCb.SelectedIndex = int.Parse(MainVM.SelectedCustomerSupplier.CompanyType);
-                ucCustSupp.companyNameTb.Text = MainVM.SelectedCustomerSupplier.CompanyName;
-                ucCustSupp.companyDescriptionTb.Text = MainVM.SelectedCustomerSupplier.CompanyDesc;
-                ucCustSupp.companyAddressTb.Text = MainVM.SelectedCustomerSupplier.CompanyAddress;
-                ucCustSupp.companyCityTb.Text = MainVM.SelectedCustomerSupplier.CompanyCity;
-                ucCustSupp.companyProvinceCb.SelectedValue = MainVM.SelectedCustomerSupplier.CompanyProvinceID;
-                ucCustSupp.companyPostalCode.Text = MainVM.SelectedCustomerSupplier.CompanyPostalCode;
-                ucCustSupp.companyEmailTb.Text = MainVM.SelectedCustomerSupplier.CompanyEmail;
-                ucCustSupp.companyTelephoneTb.Text = MainVM.SelectedCustomerSupplier.CompanyTelephone;
-                ucCustSupp.companyMobileTb.Text = MainVM.SelectedCustomerSupplier.CompanyMobile;
-                if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyTelephone))
-                {
-                    ucCustSupp.companyTelCb.IsChecked = true;
-                }
-                
-                if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyMobile))
-                {
-                    ucCustSupp.companyMobCb.IsChecked = true;
-                }
-                if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyEmail))
-                {
-                    ucCustSupp.companyEmailCb.IsChecked = true;
-                }
-                MainVM.SelectedRepresentative = MainVM.Representatives.Where(x => x.RepresentativeID.Equals(MainVM.SelectedCustomerSupplier.RepresentativeID)).FirstOrDefault();
-                ucCustSupp.representativeTitle.Text = MainVM.SelectedRepresentative.RepTitle;
-                ucCustSupp.repFirstNameTb.Text = MainVM.SelectedRepresentative.RepFirstName;
-                ucCustSupp.repMiddleInitialTb.Text = MainVM.SelectedRepresentative.RepMiddleName;
-                ucCustSupp.repLastNameTb.Text = MainVM.SelectedRepresentative.RepLastName;
-                ucCustSupp.repEmailTb.Text = MainVM.SelectedRepresentative.RepEmail;
-                ucCustSupp.repTelephoneTb.Text = MainVM.SelectedRepresentative.RepTelephone;
-                ucCustSupp.repMobileTb.Text = MainVM.SelectedRepresentative.RepMobile;
-                if (String.IsNullOrWhiteSpace(MainVM.SelectedRepresentative.RepTelephone))
-                {
-                    ucCustSupp.repTelCb.IsChecked = true;
-                }
-                if (String.IsNullOrWhiteSpace(MainVM.SelectedRepresentative.RepMobile))
-                {
-                    ucCustSupp.repMobCb.IsChecked = true;
-                }
-                if (String.IsNullOrWhiteSpace(MainVM.SelectedRepresentative.RepEmail))
-                {
-                    ucCustSupp.repMobCb.IsChecked = true;
-                }
-            }
-            else if (employeeDetailsFormGrid.IsVisible)
-            {
-                ucEmployee.employeeType.SelectedIndex = int.Parse(MainVM.SelectedEmployeeContractor.EmpType);
-                ucEmployee.empFirstNameTb.Text = MainVM.SelectedEmployeeContractor.EmpFname;
-                ucEmployee.empLastNameTb.Text = MainVM.SelectedEmployeeContractor.EmpLName;
-                ucEmployee.empMiddleInitialTb.Text = MainVM.SelectedEmployeeContractor.EmpMiddleInitial;
-                ucEmployee.empAddressTb.Text = MainVM.SelectedEmployeeContractor.EmpAddress;
-                ucEmployee.empCityTb.Text = MainVM.SelectedEmployeeContractor.EmpCity;
-                ucEmployee.empProvinceCb.SelectedValue = MainVM.SelectedEmployeeContractor.EmpProvinceID;
-                var stride = (ucEmployee.empImage.ActualWidth * PixelFormats.Rgba64.BitsPerPixel + 7) / 8;
-                if (MainVM.SelectedEmployeeContractor.EmpPic != null)
-                    ucEmployee.empImage.Source = BitmapSource.Create((int)ucEmployee.empImage.Width, (int)ucEmployee.empImage.Height, 96, 96, PixelFormats.Rgba64, null, MainVM.SelectedEmployeeContractor.EmpPic, (int)stride);
-
-                if (String.IsNullOrWhiteSpace(MainVM.SelectedEmployeeContractor.EmpTelephone))
-                {
-                    ucEmployee.empTelCb.IsChecked = true;
-                }
-                if (String.IsNullOrWhiteSpace(MainVM.SelectedEmployeeContractor.EmpMobile))
-                {
-                    ucEmployee.empMobCb.IsChecked = true;
-                }
-                if (String.IsNullOrWhiteSpace(MainVM.SelectedEmployeeContractor.EmpEmail))
-                {
-                    ucEmployee.empEmailCb.IsChecked = true;
-                }
-                ucEmployee.empTelephoneTb.Text = MainVM.SelectedEmployeeContractor.EmpTelephone;
-                ucEmployee.empMobileNumberTb.Text = MainVM.SelectedEmployeeContractor.EmpMobile;
-                ucEmployee.empEmailAddressTb.Text = MainVM.SelectedEmployeeContractor.EmpEmail;
-                if (ucEmployee.employeeType.SelectedIndex == 0)
-                {
-                    ucEmployee.empPostionCb.SelectedValue = MainVM.SelectedEmployeeContractor.PositionID;
-                    ucEmployee.empUserNameTb.Text = MainVM.SelectedEmployeeContractor.EmpUserName;
-                    ucEmployee.empPasswordTb.IsEnabled = false;
-                }
-                else if (ucEmployee.employeeType.SelectedIndex == 1)
-                {
-                    ucEmployee.empJobCb.SelectedValue = MainVM.SelectedEmployeeContractor.JobID;
-                    ucEmployee.empDateStarted.Text = MainVM.SelectedEmployeeContractor.EmpDateTo;
-                    ucEmployee.empDateEnded.Text = MainVM.SelectedEmployeeContractor.EmpDateFrom;
-                }
-            }
-            else if (productDetailsFormGrid.IsVisible)
-            {
-                productNameTb.Text = MainVM.SelectedProduct.ItemName;
-                productDescTb.Text = MainVM.SelectedProduct.ItemDesc;
-                categoryCb.SelectedValue = MainVM.SelectedProduct.TypeID;
-                costPriceTb.Value = MainVM.SelectedProduct.CostPrice;
-                unitTb.Text = MainVM.SelectedProduct.Unit;
-                supplierCb.SelectedValue = MainVM.SelectedProduct.SupplierID;
-            }
-        }
-        private void saveDataToDb()
-        {
-            var dbCon = DBConnection.Instance();
-            if (productDetailsFormGrid.IsVisible)
-            {
-                using (MySqlConnection conn = dbCon.Connection)
-                {
-
-                    conn.Open();
-                    MySqlCommand cmd = null;
-                    if (!isEdit)
-                    {
-                        cmd = new MySqlCommand("INSERT_ITEM", conn);
-                        cmd.CommandType = CommandType.StoredProcedure;
-                    }
-                    else
-                    {
-                        cmd = new MySqlCommand("UPDATE_ITEM", conn);
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@itemNo", MainVM.SelectedProduct.ItemCode);
-                        cmd.Parameters["@itemNo"].Direction = ParameterDirection.Input;
-                        isEdit = false;
-                    }
-
-                    //INSERT NEW Product TO DB;
-
-                    cmd.Parameters.AddWithValue("@itemCode", productCodeTb.Text);
-                    cmd.Parameters["@itemCode"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@itemName", productNameTb.Text);
-                    cmd.Parameters["@itemName"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@itemDesc", productDescTb.Text);
-                    cmd.Parameters["@itemDesc"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@costPrice", costPriceTb.Value);
-                    cmd.Parameters["@costPrice"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@itemUnit", unitTb.Text);
-                    cmd.Parameters["@itemUnit"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@typeID", categoryCb.SelectedValue);
-                    cmd.Parameters["@typeID"].Direction = ParameterDirection.Input;
-
-                    if(supplierCb.SelectedIndex == 0)
-                    {
-                        cmd.Parameters.AddWithValue("@supplierID", DBNull.Value);
-                        cmd.Parameters["@supplierID"].Direction = ParameterDirection.Input;
-                    }
-                    else
-                    {
-                        cmd.Parameters.AddWithValue("@supplierID", supplierCb.SelectedValue);
-                        cmd.Parameters["@supplierID"].Direction = ParameterDirection.Input;
-                    }
-                    cmd.ExecuteNonQuery();
-                }
-                resetFieldsValue();
-                loadDataToUi();
-
-            }
-        }
-        public void resetFieldsValue()
+        
+        
+        public void closeModals()
         {
 
             Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
             sb.Begin(formGridBg);
+            formGridBg.Visibility = Visibility.Collapsed;
             foreach (var obj in formGridBg.Children)
             {
 
-                ((Grid)obj).Visibility = Visibility.Collapsed;
+                if(obj is UserControl)
+                    ((UserControl)obj).Visibility = Visibility.Collapsed;
+                else if(obj is Grid)
+                    ((Grid)obj).Visibility = Visibility.Collapsed;
 
-            }
-            formGridBg.Visibility = Visibility.Collapsed;
-            
-            productDetailsFormGridSv.ScrollToTop();
-            supplierCb.SelectedIndex = 0;
-            
-            foreach (var element in productDetailsFormGrid1.Children)
-            {
-                if (element is TextBox)
-                {
-                    ((TextBox)element).IsEnabled = true;
-                    BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-                    if (expression != null)
-                        Validation.ClearInvalid(expression);
-                    ((TextBox)element).Text = string.Empty;
-                }
-                else if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
-                {
-                    ((Xceed.Wpf.Toolkit.DecimalUpDown)element).IsEnabled = true;
-                    BindingExpression expression = ((Xceed.Wpf.Toolkit.DecimalUpDown)element).GetBindingExpression(Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
-                    if (expression != null)
-                        Validation.ClearInvalid(expression);
-                    ((Xceed.Wpf.Toolkit.DecimalUpDown)element).Value = 0;
-                }
-                else if (element is ComboBox)
-                {
-                    ((ComboBox)element).IsEnabled = true;
-                    BindingExpression expression = ((ComboBox)element).GetBindingExpression(TextBox.TextProperty);
-                    if (expression != null)
-                        Validation.ClearInvalid(expression);
-                    ((ComboBox)element).SelectedIndex = -1;
-                }
             }
             foreach (var element in addNewServiceForm.Children)
             {
@@ -1412,7 +1109,7 @@ namespace prototype2
                     }
                 }
             }
-            
+
         }
 
 
@@ -1585,7 +1282,7 @@ namespace prototype2
             dbCon.Close();
             addContJobBtn.Content = "Save";
         }
-        
+
 
         //product category
         private void deleteCategoryBtn_Click(object sender, RoutedEventArgs e)
@@ -1658,7 +1355,7 @@ namespace prototype2
                     MessageBox.Show("Product Category field must be filled");
                 }
             }
-            
+
         }
 
         private void editCategoryBtn_Click(object sender, RoutedEventArgs e)
@@ -1676,7 +1373,7 @@ namespace prototype2
             }
             dbCon.Close();
         }
-        
+
         //service types
         private void addServiceTypeBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -1714,7 +1411,7 @@ namespace prototype2
 
         private void validateTextBoxes()
         {
-            
+
         }
         private string id = "";
         private void saveServiceTypeBtn_Click(object sender, RoutedEventArgs e)
@@ -1893,18 +1590,18 @@ namespace prototype2
             {
                 if (element is Grid)
                 {
-                    if (!(((Grid)element).Name.Equals(transQuoatationGridForm.Name)))
+                    if (!(((UserControl)element).Name.Equals(transQuoatationGridForm.Name)))
                     {
-                        ((Grid)element).Visibility = Visibility.Collapsed;
+                        ((UserControl)element).Visibility = Visibility.Collapsed;
                     }
                     else
-                        ((Grid)element).Visibility = Visibility.Visible;
+                        ((UserControl)element).Visibility = Visibility.Visible;
                 }
             }
-            
+
             foreach (var element in transQuoatationGridForm.Children)
             {
-                if(element is Grid)
+                if (element is Grid)
                 {
                     if (!(((Grid)element).Name.Equals(newRequisitionGrid.Name)))
                     {
@@ -1928,15 +1625,7 @@ namespace prototype2
         private void selectCustBtn_Click(object sender, RoutedEventArgs e)
         {
             MainVM.SelectedRepresentative = MainVM.Representatives.Where(x => x.RepresentativeID.Equals(MainVM.SelectedCustomerSupplier.RepresentativeID)).FirstOrDefault();
-            Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
-            sb.Begin(formGridBg);
-            formGridBg.Visibility = Visibility.Collapsed;
-            foreach (var obj in formGridBg.Children)
-            {
-
-                ((Grid)obj).Visibility = Visibility.Collapsed;
-
-            }
+            closeModals();
         }
 
         private void selectCustomerBtn_Click(object sender, RoutedEventArgs e)
@@ -1947,15 +1636,18 @@ namespace prototype2
             formGridBg.Visibility = Visibility.Visible;
             foreach (var obj in formGridBg.Children)
             {
-
-                if (!((Grid)obj).Name.Equals("selectCustomerGrid"))
+                if(obj is Grid)
                 {
-                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                    if (!((Grid)obj).Name.Equals("selectCustomerGrid"))
+                    {
+                        ((Grid)obj).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        ((Grid)obj).Visibility = Visibility.Visible;
+                    }
                 }
-                else
-                {
-                    ((Grid)obj).Visibility = Visibility.Visible;
-                }
+                
 
             }
         }
@@ -2046,24 +1738,24 @@ namespace prototype2
                 {
                     transRequestNext.Content = "Save";
                     salesQuoteToMemory();
-                    DocumentFormat df = new DocumentFormat();
+                    SalesQuoteDocument df = new SalesQuoteDocument();
                     document = df.CreateDocument("SalesQuote", "asdsadsa");
                     string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
-                    pagePreview.Ddl = ddl;
+                    saleQuoteViewer.pagePreview.Ddl = ddl;
                 }
                 else
                     MessageBox.Show("No items on the list.");
             }
-            else if (viewQuotationGrid.IsVisible){
+            else if (viewQuotationGrid.IsVisible) {
                 transRequestNext.Content = "Next";
                 PdfDocumentRenderer renderer = new PdfDocumentRenderer(true);
                 renderer.Document = document;
                 renderer.RenderDocument();
                 string filename = @"d:\test\" + MainVM.SelectedSalesQuote.sqNoChar_ + ".pdf";
-                
+
                 saveSalesQuoteToDb();
                 SaveFileDialog dlg = new SaveFileDialog();
-                dlg.FileName = ""+MainVM.SelectedSalesQuote.sqNoChar_;
+                dlg.FileName = "" + MainVM.SelectedSalesQuote.sqNoChar_;
                 dlg.DefaultExt = ".pdf";
                 dlg.Filter = "Text documents (.pdf)|*.pdf";
                 if (dlg.ShowDialog() == true)
@@ -2071,7 +1763,7 @@ namespace prototype2
                     filename = dlg.FileName;
                     renderer.PdfDocument.Save(filename);
                 }
-                
+
                 foreach (var obj in containerGrid.Children)
                 {
                     ((Grid)obj).Visibility = Visibility.Collapsed;
@@ -2089,11 +1781,9 @@ namespace prototype2
                 quotationsGridHome.Visibility = Visibility.Visible;
                 settingsBtn.Visibility = Visibility.Hidden;
                 headerLbl.Content = "Trasanction - Sales Quote";
+                loadDataToUi();
             }
         }
-
-        
-
         private void transReqAddNewItem_Click(object sender, RoutedEventArgs e)
         {
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
@@ -2101,15 +1791,18 @@ namespace prototype2
             formGridBg.Visibility = Visibility.Visible;
             foreach (var obj in formGridBg.Children)
             {
-
-                if (!((Grid)obj).Name.Equals("addNewItemFormGrid"))
+                if (obj is Grid)
                 {
-                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                    if (!((Grid)obj).Name.Equals("addNewItemFormGrid"))
+                    {
+                        ((Grid)obj).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        ((Grid)obj).Visibility = Visibility.Visible;
+                    }
                 }
-                else
-                {
-                    ((Grid)obj).Visibility = Visibility.Visible;
-                }
+                
 
             }
         }
@@ -2121,15 +1814,18 @@ namespace prototype2
             formGridBg.Visibility = Visibility.Visible;
             foreach (var obj in formGridBg.Children)
             {
-
-                if (!((Grid)obj).Name.Equals("additionalFeesFormGrid"))
+                if (obj is Grid)
                 {
-                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                    if (!((Grid)obj).Name.Equals("additionalFeesFormGrid"))
+                    {
+                        ((Grid)obj).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        ((Grid)obj).Visibility = Visibility.Visible;
+                    }
                 }
-                else
-                {
-                    ((Grid)obj).Visibility = Visibility.Visible;
-                }
+                
 
             }
             MainVM.SelectedAddedService = MainVM.AddedServices.Where(x => x.TableNoChar.Equals(MainVM.SelectedRequestedItem.itemCode)).FirstOrDefault();
@@ -2158,7 +1854,7 @@ namespace prototype2
                     break;
                 }
             }
-            
+
         }
 
         private void deleteFeeBtn_Click(object sender, RoutedEventArgs e)
@@ -2192,8 +1888,8 @@ namespace prototype2
                 {
                     MainVM.SelectedAddedService.AdditionalFees.Add(new AdditionalFee() { FeeName = feeTypeCb.SelectedValue.ToString(), FeePrice = (decimal)feeCostTb.Value });
                 }
-                
-                
+
+
             }
             feeTypeCb.SelectedIndex = -1;
             otherFeenameTb.Text = "";
@@ -2206,22 +1902,7 @@ namespace prototype2
             //MainVM.SelectedAddedService = MainVM.AddedServices.Where(x => x.TableNoChar.Equals(MainVM.SelectedRequestedItem.itemCode)).FirstOrDefault();
             //MainVM.SelectedAddedService.AdditionalFees = MainVM.AdditionalFees;
             //MainVM.AdditionalFees.Clear();
-            Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
-            sb.Begin(formGridBg);
-            formGridBg.Visibility = Visibility.Collapsed;
-            foreach (var obj in formGridBg.Children)
-            {
-
-                if (!((Grid)obj).Name.Equals("additionalFeesGridForm"))
-                {
-                    ((Grid)obj).Visibility = Visibility.Collapsed;
-                }
-                else
-                {
-                    ((Grid)obj).Visibility = Visibility.Visible;
-                }
-
-            }
+            closeModals();
 
             computePrice();
         }
@@ -2238,7 +1919,7 @@ namespace prototype2
 
             }
             computePrice();
-            
+
         }
 
         private void feeTypeCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -2330,7 +2011,7 @@ namespace prototype2
             {
                 MessageBox.Show("No Custoemr selected");
             }
-            
+
         }
 
         private void addressOfCustomerCb_Unchecked(object sender, RoutedEventArgs e)
@@ -2362,7 +2043,7 @@ namespace prototype2
             }
         }
 
-        
+
 
         private void addProductBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -2383,10 +2064,10 @@ namespace prototype2
                         {
                             MessageBox.Show("Already added in the list.");
                         }
-                        
+
                     }
                 }
-                resetFieldsValue();
+                closeModals();
             }
             else if ((bool)serviceRbtn.IsChecked)
             {
@@ -2401,7 +2082,7 @@ namespace prototype2
                             expression.UpdateSource();
                             validationError = Validation.GetHasError((TextBox)element);
                         }
-                        
+
 
                     }
                     if (element is ComboBox)
@@ -2438,15 +2119,15 @@ namespace prototype2
                         serviceNoChar += MainVM.SelectedService.ServiceName.Trim().ToUpper();
                     serviceNoChar += "-";
                     serviceNoChar += DateTime.Now.ToString("yyyy-MM-dd");
-                    
 
-                    MainVM.AddedServices.Add(new AddedService() {TableNoChar = serviceNoChar, ServiceID = MainVM.SelectedService.ServiceID, ProvinceID = MainVM.SelectedProvince.ProvinceID, Address = serviceAddressTb.Text, City = serviceCityTb.Text, TotalCost = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice });
 
-                    MainVM.RequestedItems.Add(new RequestedItem() { lineNo = (MainVM.RequestedItems.Count + 1).ToString(),itemCode = serviceNoChar, itemName = MainVM.SelectedService.ServiceName, desc = serviceDescTb.Text, itemTypeName = "Service", itemType = 1, qty = 1, unitPrice = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, totalAmount = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, totalAmountMarkUp = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, qtyEditable = false });
-                    
-                    resetFieldsValue();
+                    MainVM.AddedServices.Add(new AddedService() { TableNoChar = serviceNoChar, ServiceID = MainVM.SelectedService.ServiceID, ProvinceID = MainVM.SelectedProvince.ProvinceID, Address = serviceAddressTb.Text, City = serviceCityTb.Text, TotalCost = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice });
+
+                    MainVM.RequestedItems.Add(new RequestedItem() { lineNo = (MainVM.RequestedItems.Count + 1).ToString(), itemCode = serviceNoChar, itemName = MainVM.SelectedService.ServiceName, desc = serviceDescTb.Text, itemTypeName = "Service", itemType = 1, qty = 1, unitPrice = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, totalAmount = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, totalAmountMarkUp = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, qtyEditable = false });
+
+                    closeModals();
                 }
-                
+
             }
             computePrice();
         }
@@ -2472,7 +2153,7 @@ namespace prototype2
             computePrice();
         }
 
-       
+
 
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -2488,7 +2169,7 @@ namespace prototype2
                 var observable = new ObservableCollection<Item>(linqResults);
                 addGridProductListDg.ItemsSource = observable;
             }
-            
+
         }
 
         private void serviceProvinceCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -2501,7 +2182,7 @@ namespace prototype2
                     MessageBox.Show("This location has no price set. Please set it in Settings.");
                 }
             }
-            
+
         }
 
         private void deleteRequestedItemBtn_Click(object sender, RoutedEventArgs e)
@@ -2611,7 +2292,7 @@ namespace prototype2
         {
             decimal totalFee = 0;
             decimal totalPrice = 0;
-            
+
             foreach (RequestedItem item in MainVM.RequestedItems)
             {
                 if (item.itemType == 0)
@@ -2643,7 +2324,7 @@ namespace prototype2
             }
         }
 
-        
+
 
         void salesQuoteToMemory()
         {
@@ -2664,7 +2345,7 @@ namespace prototype2
             {
                 estDel = 30;
             }
-            else if((bool)deliveryCustomRd.IsChecked)
+            else if ((bool)deliveryCustomRd.IsChecked)
                 estDel = int.Parse(deliveryDaysTb.Value.ToString());
 
             if (!(bool)validityDefaultRd.IsChecked)
@@ -2697,7 +2378,7 @@ namespace prototype2
             string quoteName = "";
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             var numbs = "01234567890123456789";
-            
+
             var random = new Random();
 
 
@@ -2759,10 +2440,10 @@ namespace prototype2
             bool noError = true;
             if (dbCon.IsConnect())
             {
-                string query = "INSERT INTO `odc_db`.`sales_quote_t` " + "(`sqNoChar`,`custID`,`custRepID`,`quoteSubject`,`priceNote`,`deliveryDate`,`estDelivery`,`validityDays`,`validityDate`,`otherTerms`,`expiration`,`VAT`,`vatIsExcluded`,`paymentIsLanded`,`paymentCurrency`,`status`,`termsDays`,`termsDP`,`penaltyAmt`,`penaltyPerc`,`markUpPercent`,`discountPercent`)" +
+                string query = "INSERT INTO `odc_db`.`sales_quote_t` " + "(`sqNoChar`,`custID`,`custRepID`,`quoteSubject`,`priceNote`,`deliveryDate`,`estDelivery`,`validityDays`,`validityDate`,`otherTerms`,`VAT`,`vatIsExcluded`,`paymentIsLanded`,`paymentCurrency`,`status`,`termsDays`,`termsDP`,`penaltyAmt`,`penaltyPerc`,`markUpPercent`,`discountPercent`)" +
                     " VALUES " +
-                    "('" + MainVM.SelectedSalesQuote.sqNoChar_ + "','" + 
-                    MainVM.SelectedSalesQuote.custID_ + "','" + 
+                    "('" + MainVM.SelectedSalesQuote.sqNoChar_ + "','" +
+                    MainVM.SelectedSalesQuote.custID_ + "','" +
                     MainVM.SelectedSalesQuote.custRepID_ + "','" +
                     MainVM.SelectedSalesQuote.quoteSubject_ + "','" +
                     MainVM.SelectedSalesQuote.priceNote_ + "','" +
@@ -2771,8 +2452,7 @@ namespace prototype2
                     MainVM.SelectedSalesQuote.validityDays_ + "','" +
                     MainVM.SelectedSalesQuote.validityDate_.ToString("yyyy-MM-dd") + "','" +
                     MainVM.SelectedSalesQuote.otherTerms_ + "','" +
-                    MainVM.SelectedSalesQuote.expiration_.ToString("yyyy-MM-dd") + "','" + 
-                    MainVM.SelectedSalesQuote.vat_ + "'," + 
+                    MainVM.SelectedSalesQuote.vat_ + "'," +
                     MainVM.SelectedSalesQuote.vatexcluded_ + "," +
                     MainVM.SelectedSalesQuote.paymentIsLanded_ + ",'" +
                     MainVM.SelectedSalesQuote.paymentCurrency_ + "','" +
@@ -2787,28 +2467,28 @@ namespace prototype2
                 {
                     if (dbCon.IsConnect())
                     {
-                        foreach(RequestedItem item in MainVM.RequestedItems)
+                        foreach (RequestedItem item in MainVM.RequestedItems)
                         {
                             if (item.itemType == 0)
                             {
                                 MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ItemCode.Equals(item.itemCode)).FirstOrDefault();
                                 query = "INSERT INTO `odc_db`.`items_availed_t`(`sqNoChar`,`itemCode`,`itemQnty`,`totalCost`)" +
                                     " VALUES " +
-                                    "('" + MainVM.SelectedSalesQuote.sqNoChar_+ "', '"+ MainVM.SelectedProduct.ItemCode + "','" + item.qty + "', '" + item.totalAmount + "');";
-                                noError = dbCon.insertQuery(query, dbCon.Connection);                            }
+                                    "('" + MainVM.SelectedSalesQuote.sqNoChar_ + "', '" + MainVM.SelectedProduct.ItemCode + "','" + item.qty + "', '" + item.totalAmount + "');";
+                                noError = dbCon.insertQuery(query, dbCon.Connection); }
                             else if (item.itemType == 1)
                             {
-                                
+
                                 MainVM.SelectedAddedService = MainVM.AddedServices.Where(x => x.TableNoChar.Equals(item.itemCode)).FirstOrDefault();
                                 query = "INSERT INTO `odc_db`.`services_availed_t`(`tableNoChar`,`serviceID`,`provinceID`,`sqNoChar`,`city`,`address`,`totalCost`)" +
                                     " VALUES " +
-                                    "('" + MainVM.SelectedAddedService.TableNoChar + "', '" + 
-                                    MainVM.SelectedAddedService.ServiceID + "', '" + 
-                                    MainVM.SelectedAddedService.ProvinceID + "', '" + 
-                                    MainVM.SelectedSalesQuote.sqNoChar_ + "', '" + 
-                                    MainVM.SelectedAddedService.City + "', '" + 
+                                    "('" + MainVM.SelectedAddedService.TableNoChar + "', '" +
+                                    MainVM.SelectedAddedService.ServiceID + "', '" +
+                                    MainVM.SelectedAddedService.ProvinceID + "', '" +
+                                    MainVM.SelectedSalesQuote.sqNoChar_ + "', '" +
+                                    MainVM.SelectedAddedService.City + "', '" +
                                     MainVM.SelectedAddedService.Address + "', '" +
-                                    MainVM.SelectedAddedService.TotalCost+ "');";
+                                    MainVM.SelectedAddedService.TotalCost + "');";
                                 noError = dbCon.insertQuery(query, dbCon.Connection);
                                 foreach (AdditionalFee af in MainVM.SelectedAddedService.AdditionalFees)
                                 {
@@ -2822,9 +2502,9 @@ namespace prototype2
                         if (noError)
                         {
                             MessageBox.Show("Successfully added.");
-                            loadDataToUi();
-                        }
                             
+                        }
+
                         else
                             MessageBox.Show("Theres an error occured in saving the record");
                     }
@@ -2836,7 +2516,7 @@ namespace prototype2
         {
             MainVM.SelectedRepresentative = MainVM.Representatives.Where(x => x.RepresentativeID.Equals(MainVM.SelectedCustomerSupplier.RepresentativeID.ToString())).FirstOrDefault();
             MainVM.SelectedCustomerSupplier = MainVM.Customers.Where(x => x.CompanyID.Equals(MainVM.SelectedSalesQuote.custID_.ToString())).FirstOrDefault();
-            foreach(AddedItem item in MainVM.SelectedSalesQuote.AddedItems)
+            foreach (AddedItem item in MainVM.SelectedSalesQuote.AddedItems)
             {
                 MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ItemCode.Equals(item.ItemCode)).First();
                 MainVM.RequestedItems.Add(new RequestedItem()
@@ -2850,10 +2530,10 @@ namespace prototype2
                     totalAmount = item.TotalCost,
                     itemType = 0,
                     unitPrice = MainVM.SelectedProduct.CostPrice,
-                    
+
                 });
             }
-            foreach(AddedService service in MainVM.SelectedSalesQuote.AddedServices)
+            foreach (AddedService service in MainVM.SelectedSalesQuote.AddedServices)
             {
                 MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(service.ServiceID)).First();
                 MainVM.SelectedProvince = MainVM.Provinces.Where(x => x.ProvinceID == service.ProvinceID).First();
@@ -2868,14 +2548,12 @@ namespace prototype2
                     totalAmount = service.TotalCost,
                     itemType = 1,
                     unitPrice = service.TotalCost,
-
+                    additionalFees = service.AdditionalFees
                 });
             }
-            MainVM.AddedServices = MainVM.SelectedSalesQuote.AddedServices;
-            MainVM.AddedItems = MainVM.SelectedSalesQuote.AddedItems;
 
             computePrice();
-            
+
 
         }
         private void viewQuoteRecordBtn_Click(object sender, RoutedEventArgs e)
@@ -2955,20 +2633,108 @@ namespace prototype2
             {
                 transRequestNext.Content = "Save";
                 salesQuoteToMemory();
-                DocumentFormat df = new DocumentFormat();
+                SalesQuoteDocument df = new SalesQuoteDocument();
                 document = df.CreateDocument("SalesQuote", "asdsadsa");
                 string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
-                pagePreview.Ddl = ddl;
+                saleQuoteViewer.pagePreview.Ddl = ddl;
             }
             else
                 MessageBox.Show("No items on the list.");
         }
-
+        //Inovice
         private void convertToInvoiceBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var element in transQuoatationGridForm.Children)
+            {
+                if (element is Grid)
+                {
+                    if (!(((Grid)element).Name.Equals(quotationsGridHome.Name)))
+                    {
+                        ((Grid)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((Grid)element).Visibility = Visibility.Visible;
+                }
+            }
+            foreach (var element in trasanctionGrid.Children)
+            {
+                if (element is Grid)
+                {
+                    if (!(((Grid)element).Name.Equals(transInvoiceGrid.Name)))
+                    {
+                        ((Grid)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((Grid)element).Visibility = Visibility.Visible;
+                }
+            }
+            foreach (var element in transInvoiceGrid.Children)
+            {
+                if (element is Grid)
+                {
+                    if (!(((Grid)element).Name.Equals(invoiceForm.Name)))
+                    {
+                        ((Grid)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((Grid)element).Visibility = Visibility.Visible;
+                }
+            }
+            computeInvoice();
+        }
+
+        private void trasancnvertToInvoiceBtn_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        
+        void computeInvoice()
+        {
+            MainVM.SelectedRepresentative = MainVM.Representatives.Where(x => x.RepresentativeID.Equals(MainVM.SelectedCustomerSupplier.RepresentativeID.ToString())).FirstOrDefault();
+            MainVM.SelectedCustomerSupplier = MainVM.Customers.Where(x => x.CompanyID.Equals(MainVM.SelectedSalesQuote.custID_.ToString())).FirstOrDefault();
+            
+            foreach (AddedItem item in MainVM.SelectedSalesQuote.AddedItems)
+            {
+                MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ItemCode.Equals(item.ItemCode)).First();
+                MainVM.RequestedItems.Add(new RequestedItem()
+                {
+                    lineNo = (MainVM.RequestedItems.Count + 1).ToString(),
+                    itemCode = item.ItemCode,
+                    desc = MainVM.SelectedProduct.ItemDesc,
+                    itemName = MainVM.SelectedProduct.ItemName,
+                    qty = item.ItemQty,
+                    qtyEditable = true,
+                    totalAmount = item.TotalCost,
+                    itemType = 0,
+                    unitPrice = MainVM.SelectedProduct.CostPrice,
+
+                });
+                MainVM.VatableSale += item.TotalCost;
+            }
+            foreach (AddedService service in MainVM.SelectedSalesQuote.AddedServices)
+            {
+                MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(service.ServiceID)).First();
+                MainVM.SelectedProvince = MainVM.Provinces.Where(x => x.ProvinceID == service.ProvinceID).First();
+                MainVM.RequestedItems.Add(new RequestedItem()
+                {
+                    lineNo = (MainVM.RequestedItems.Count + 1).ToString(),
+                    itemCode = service.TableNoChar,
+                    desc = MainVM.SelectedService.ServiceDesc,
+                    itemName = MainVM.SelectedService.ServiceName,
+                    qty = 1,
+                    qtyEditable = false,
+                    totalAmount = service.TotalCost,
+                    itemType = 1,
+                    unitPrice = service.TotalCost,
+                    additionalFees = service.AdditionalFees
+                });
+                MainVM.VatableSale += service.TotalCost;
+            }
+
+            MainVM.VatableSale = MainVM.VatableSale - (MainVM.VatableSale * (MainVM.SelectedSalesQuote.termsDP_/100));
+            MainVM.TotalSalesNoVat = MainVM.VatableSale;
+            MainVM.VatAmount = (MainVM.VatableSale * ((decimal)0.12));
+            MainVM.TotalSales = MainVM.VatableSale + (MainVM.VatableSale * ((decimal)0.12));
+        }
     }
 }

@@ -17,7 +17,7 @@ using System.Windows;
 
 namespace prototype2
 {
-    class DocumentFormat
+    class SalesQuoteDocument
     {
         public Document document;
         private Paragraph addressFrame;
@@ -35,7 +35,7 @@ namespace prototype2
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
 
 
-        public DocumentFormat()
+        public SalesQuoteDocument()
         {
 
         }

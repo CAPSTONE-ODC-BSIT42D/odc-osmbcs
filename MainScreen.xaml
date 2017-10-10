@@ -808,9 +808,9 @@
                             <ComboBoxItem Content="APPROVED"/>
                         </ComboBox>
                     </Grid>
-                    <Grid x:Name="transQuoatationGridForm" Margin="10" d:IsHidden="True">
+                    <Grid x:Name="transQuoatationGridForm" Margin="10">
 
-                        <Grid x:Name="newRequisitionGrid" Margin="0,0,0,40">
+                        <Grid x:Name="newRequisitionGrid" Margin="0,0,0,40" d:IsHidden="True">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
@@ -1071,10 +1071,8 @@
                                 </Grid>
                             </ScrollViewer>
                         </Grid>
-                        <Grid x:Name="viewQuotationGrid" Margin="0,0,0,40" d:IsHidden="True">
-                            <GroupBox x:Name="groupBox3" Header="View Sale Quotation" Margin="10,10,10,42" FontFamily="Segoe UI Symbol" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderBrush="Black" VerticalContentAlignment="Stretch">
-                                <Windows:DocumentPreview x:Name="pagePreview" Margin="0,0,16,2" d:IsHidden="True"/>
-                            </GroupBox>
+                        <Grid x:Name="viewQuotationGrid" Margin="0,0,0,40">
+                            <local:DocumentViewer x:Name="saleQuoteViewer" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         </Grid>
                         <StackPanel Margin="0,0,10,0" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="437" FlowDirection="RightToLeft">
                             <Grid x:Name="newSalesQuoteBtns" HorizontalAlignment="Left" Margin="10,0">
@@ -1091,17 +1089,17 @@
                     </Grid>
 
                 </Grid>
-                <Grid x:Name="transInvoiceGrid" Margin="0,0,1,0" >
-                    <Grid x:Name="invoiceGridHome" Margin="10" d:IsHidden="True" >
+                <Grid x:Name="transInvoiceGrid" Margin="0,0,1,0" d:IsHidden="True" >
+                    <Grid x:Name="invoiceGridHome" Margin="10" >
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                             <Label x:Name="label22" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
                             <TextBox x:Name="searchBox3" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317" Text="{Binding SearchQuery}"/>
                             <Button x:Name="button3" Content="Search" HorizontalAlignment="Left" Margin="402,3,-11,0" VerticalAlignment="Top" Width="85" Height="29" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
                         </Grid>
                         <Label x:Name="label8_Copy1" Content="Sort:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="525,9,0,0"/>
-                        <Button x:Name="trasancnvertToInvoiceBtn" Content="Add" HorizontalAlignment="Right" Height="29" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" />
-                        <DataGrid x:Name="invoiceDataGrid" Margin="0,44,0,-3" ItemsSource="{Binding SalesQuotes}" SelectedItem="{Binding SelectedSalesQuote}" CanUserAddRows="False" AutoGenerateColumns="False" EnableColumnVirtualization="True" IsReadOnly="True">
-                            <DataGrid.Columns >
+                        <Button x:Name="trasancnvertToInvoiceBtn" Content="Add" HorizontalAlignment="Right" Height="29" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" Click="trasancnvertToInvoiceBtn_Click" />
+                        <DataGrid x:Name="invoiceDataGrid" Margin="0,44,0,-3" ItemsSource="{Binding SalesInvoice}" SelectedItem="{Binding SelectedSalesInvoice}" CanUserAddRows="False" AutoGenerateColumns="true" EnableColumnVirtualization="True" IsReadOnly="True">
+                            <!--<DataGrid.Columns >
                                 <DataGridTextColumn Binding="{Binding sqNoChar_}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Sales Quote ID"  />
                                 <DataGridTextColumn Binding="{Binding dateofIssue_}" ClipboardContentBinding="{x:Null}" Header="Date of Issue" Width="200" CanUserResize="False"  />
                                 <DataGridTextColumn Binding="{Binding custName_}" ClipboardContentBinding="{x:Null}" Header="Customer Name" Width="350"   />
@@ -1116,8 +1114,10 @@
                                                             <Canvas.RenderTransform>
                                                                 <TranslateTransform X="0" Y="0"/>
                                                             </Canvas.RenderTransform>
-                                                            <!--Unknown tag: metadata-->
-                                                            <!--Unknown tag: sodipodi:namedview-->
+                                                            -->
+                            <!--Unknown tag: metadata-->
+                            <!--Unknown tag: sodipodi:namedview-->
+                            <!--
                                                             <Canvas x:Name="g4">
                                                                 <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2" Fill="Black">
                                                                     <Path.Data>
@@ -1149,8 +1149,10 @@
                                                             <Canvas.RenderTransform>
                                                                 <TranslateTransform X="0" Y="0"/>
                                                             </Canvas.RenderTransform>
-                                                            <!--Unknown tag: metadata-->
-                                                            <!--Unknown tag: sodipodi:namedview-->
+                                                            -->
+                            <!--Unknown tag: metadata-->
+                            <!--Unknown tag: sodipodi:namedview-->
+                            <!--
                                                             <Canvas x:Name="g10b">
                                                                 <Canvas x:Name="g8b">
                                                                     <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2b" Fill="Black">
@@ -1190,8 +1192,10 @@
                                                             <Canvas.RenderTransform>
                                                                 <TranslateTransform X="0" Y="0"/>
                                                             </Canvas.RenderTransform>
-                                                            <!--Unknown tag: metadata-->
-                                                            <!--Unknown tag: sodipodi:namedview-->
+                                                            -->
+                            <!--Unknown tag: metadata-->
+                            <!--Unknown tag: sodipodi:namedview-->
+                            <!--
                                                             <Canvas x:Name="g12c">
                                                                 <Canvas x:Name="g10c">
                                                                     <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2c" Fill="#000000">
@@ -1238,7 +1242,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                            </DataGrid.Columns>
+                            </DataGrid.Columns>-->
                         </DataGrid>
                         <ComboBox x:Name="sortQuoteCb1" HorizontalAlignment="Left" Margin="567,9,0,0" VerticalAlignment="Top" Width="120" Height="26">
                             <ComboBoxItem Content="[NONE]"/>
@@ -1246,244 +1250,8 @@
                             <ComboBoxItem Content="APPROVED"/>
                         </ComboBox>
                     </Grid>
-                    <Grid x:Name="transInvoiceGridForm" Margin="10">
-
-                        <ScrollViewer x:Name="newInvoiceForm" Margin="0" VerticalScrollBarVisibility="Auto">
-                            <Grid Height="1351" Width="921">
-                                <Label x:Name="label12_Copy" Content="Invoice Details" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI"/>
-                                <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,39,10,0" VerticalAlignment="Top"/>
-                                <Label x:Name="label19_Copy1" Content="Sold To:" HorizontalAlignment="Left" Margin="40,53,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                                <Label x:Name="label19_Copy2" Content="TIN #:" HorizontalAlignment="Left" Margin="40,87,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                                <Label x:Name="label19_Copy3" Content="Address:" HorizontalAlignment="Left" Margin="40,121,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                                <Label x:Name="label19_Copy4" Content="Business Style:" HorizontalAlignment="Left" Margin="40,155,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                                <Label x:Name="label19_Copy5" Content="Date:" HorizontalAlignment="Left" Margin="602,53,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                                <Label x:Name="label19_Copy6" Content="Terms:" HorizontalAlignment="Left" Margin="602,87,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                                <Label x:Name="label12_Copy2" Content="Requested Items:" HorizontalAlignment="Left" Margin="10,198,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI"/>
-                                <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,227,10,0" VerticalAlignment="Top"/>
-                                <Label x:Name="label12_Copy3" Content="Other Details" HorizontalAlignment="Left" Margin="10,488,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI"/>
-                                <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,517,10,0" VerticalAlignment="Top"/>
-                                <Label x:Name="label19_Copy7" Content="Vatable Sales:" HorizontalAlignment="Left" Margin="40,540,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                                <Label x:Name="label19_Copy8" Content="VAT-Exempted Sales:" HorizontalAlignment="Left" Margin="40,574,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                                <Label x:Name="label19_Copy9" Content="Zero - Rated Sales:" HorizontalAlignment="Left" Margin="40,608,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                                <Label x:Name="label19_Copy10" Content="VAT Amount" HorizontalAlignment="Left" Margin="40,642,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                                <Label x:Name="label19_Copy11" Content="TOTAL SALES:" HorizontalAlignment="Left" Margin="40,676,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                                <Label x:Name="label19_Copy12" Content="Total Sale VAT Inclusive:" HorizontalAlignment="Left" Margin="602,540,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                                <Label x:Name="label19_Copy13" Content="Less: VAT" HorizontalAlignment="Left" Margin="602,574,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                                <Label x:Name="label19_Copy14" Content="TOTAL:" HorizontalAlignment="Left" Margin="602,608,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                                <Label x:Name="label19_Copy15" Content="Less: SC/PWD Discount:" HorizontalAlignment="Left" Margin="602,642,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                                <Label x:Name="label19_Copy16" Content="Total Due:" HorizontalAlignment="Left" Margin="602,676,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                                <Label x:Name="label19_Copy17" Content="Less: Withholding Tax:" HorizontalAlignment="Left" Margin="602,710,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                                <Label x:Name="label19_Copy18" Content="Add: VAT" HorizontalAlignment="Left" Margin="602,744,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                                <Label x:Name="label19_Copy19" Content="AMOUNT DUE:" HorizontalAlignment="Left" Margin="602,778,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                                <Label x:Name="label19_Copy20" Content="{Binding SelectedCustomerSupplier.CompanyName}" HorizontalAlignment="Left" Margin="111,53,0,0" VerticalAlignment="Top" FontSize="14"/>
-                                <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="24" Margin="111,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
-                                <Label x:Name="label19_Copy21" Content="{Binding SelectedCustomerSupplier.CompanyAddress}" HorizontalAlignment="Left" Margin="111,121,0,0" VerticalAlignment="Top" FontSize="14"/>
-                                <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="24" Margin="151,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
-                                <Label x:Name="label19_Copy22" Content="{Binding SelectedCustomerSupplier.CompanyAddress}" HorizontalAlignment="Left" Margin="652,53,0,0" VerticalAlignment="Top" FontSize="14"/>
-                                <xctk:IntegerUpDown HorizontalAlignment="Left" Margin="660,91,0,0" VerticalAlignment="Top" Width="56"/>
-                                <Label x:Name="label19_Copy23" Content="Days" HorizontalAlignment="Left" Margin="721,87,0,0" VerticalAlignment="Top" FontSize="14"/>
-                                <DataGrid x:Name="itemDg_Copy" Margin="27,241,25,0" ItemsSource="{Binding RequestedItems}" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="False" IsReadOnly="True" VerticalAlignment="Top" Height="242" SelectedItem="{Binding SelectedRequestedItem}"  >
-                                    <DataGrid.Columns >
-                                        <!--<DataGridTextColumn Binding="{Binding totalAmountMarkUp}" ClipboardContentBinding="{x:Null}" Header="Total + Markup Price" Width="200"  />-->
-                                        <DataGridTextColumn Binding="{Binding itemCode}" ClipboardContentBinding="{x:Null}" Header="Item Code" Width="100" CanUserResize="False" />
-                                        <DataGridTextColumn Binding="{Binding itemName}" ClipboardContentBinding="{x:Null}" Header="Item Name" Width="100" CanUserResize="False" />
-                                        <DataGridTemplateColumn Width="200" CanUserResize="False" Header="Description" >
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <TextBlock Text= "{Binding itemDesc}" ClipToBounds="True" TextWrapping="Wrap"/>
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                        <!--<DataGridTextColumn Binding="{Binding itemTypeName}" ClipboardContentBinding="{x:Null}" Header="Item Type" Width="100" CanUserResize="False" />-->
-                                        <DataGridTemplateColumn Header="Item Type" Width="100">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <Label>
-                                                        <Label.Style>
-                                                            <Style TargetType="{x:Type Label}">
-                                                                <Setter Property="Content" Value="{Binding itemType}" />
-                                                                <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding itemType}" Value="0">
-                                                                        <Setter Property="Content" Value="Product" />
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding itemType}" Value="1">
-                                                                        <Setter Property="Content" Value = "Serivce" />
-                                                                    </DataTrigger>
-                                                                </Style.Triggers>
-                                                            </Style>
-                                                        </Label.Style>
-                                                    </Label>
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                            <DataGridTemplateColumn.CellStyle>
-                                                <Style TargetType="{x:Type DataGridCell}">
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding qtyEditable}" Value="false">
-                                                            <Setter Property="IsEnabled" Value="false"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </DataGridTemplateColumn.CellStyle>
-                                        </DataGridTemplateColumn>
-                                        <DataGridTemplateColumn Header="Qty" Width="60">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <xctk:IntegerUpDown x:Name="qtyTb" Value ="{Binding qty, UpdateSourceTrigger=PropertyChanged}" ValueChanged="qtyTb_ValueChanged" Minimum="1" Text="1" />
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                            <DataGridTemplateColumn.CellStyle>
-                                                <Style TargetType="{x:Type DataGridCell}">
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding qtyEditable}" Value="false">
-                                                            <Setter Property="IsEnabled" Value="false"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </DataGridTemplateColumn.CellStyle>
-                                        </DataGridTemplateColumn>
-                                        <DataGridTextColumn Binding="{Binding unitPriceMarkUp}" ClipboardContentBinding="{x:Null}" Header="Unit Price" Width="100"  />
-                                        <DataGridTextColumn Binding="{Binding totalAmountMarkUp}" ClipboardContentBinding="{x:Null}" Header="Total Amount" Width="100"  />
-                                        <DataGridTemplateColumn Header="Fees" Width="100">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <Button x:Name="feesBtn" Content="Fees" Click="feesBtn_Click" Margin="12"/>
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                            <DataGridTemplateColumn.CellStyle>
-                                                <Style TargetType="{x:Type DataGridCell}">
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding qtyEditable}" Value="true">
-                                                            <Setter Property="Visibility" Value="Collapsed"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </DataGridTemplateColumn.CellStyle>
-                                        </DataGridTemplateColumn>
-                                        <DataGridTemplateColumn  Width="50" CanUserResize="False" Header="Action"  >
-                                            <DataGridTemplateColumn.CellTemplate  >
-                                                <DataTemplate>
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <!--<Button x:Name="editFeeBtn" Width="Auto" Height="25" Click="editFeeBtn_Click" Background="{x:Null}" BorderBrush="Black" Margin="10,10,0,10" ToolTip="Edit Fee" >
-                                                                <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
-                                                                    <Canvas x:Name="Capa_1b" Width="438.536" Height="438.536" Canvas.Left="0" Canvas.Top="0">
-                                                                        <Canvas.RenderTransform>
-                                                                            <TranslateTransform X="0" Y="0"/>
-                                                                        </Canvas.RenderTransform>
-                                                                        -->
-                                                        <!--Unknown tag: metadata-->
-                                                        <!--Unknown tag: sodipodi:namedview-->
-                                                        <!--
-                                                                        <Canvas x:Name="g10b">
-                                                                            <Canvas x:Name="g8b">
-                                                                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2b" Fill="Black">
-                                                                                    <Path.Data>
-                                                                                        <PathGeometry Figures="M414.41 24.123C398.333 8.042 378.963 0 356.315 0H82.228C59.58 0 40.21 8.042 24.126 24.123    C8.045 40.207 0.003 59.576 0.003 82.225v274.084c0 22.647 8.042 42.018 24.123 58.102c16.084 16.084 35.454 24.126 58.102 24.126    h274.084c22.648 0 42.018-8.042 58.095-24.126c16.084-16.084 24.126-35.454 24.126-58.102V82.225    C438.532 59.576 430.49 40.204 414.41 24.123z M155.316 365.445H73.089v-82.228l155.316-155.311l82.221 82.224L155.316 365.445z     M355.169 165.592l-26.262 26.269l-82.228-82.229l26.262-26.265c5.331-5.325 11.8-7.993 19.417-7.993    c7.611 0 14.086 2.664 19.41 7.993l43.4 43.398c5.324 5.327 7.994 11.798 7.994 19.414    C363.163 153.792 360.501 160.262 355.169 165.592z" FillRule="NonZero"/>
-                                                                                    </Path.Data>
-                                                                                </Path>
-                                                                                <Polygon xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="100.502,294.642 100.502,310.623 127.91,310.623 127.91,338.038 143.896,338.038 158.744,323.189 115.347,279.789" x:Name="polygon4" FillRule="NonZero" Fill="#000000"/>
-                                                                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path6" Fill="#000000">
-                                                                                    <Path.Data>
-                                                                                        <PathGeometry Figures="M141.901 252.385c-3.237 3.23-3.521 6.084-0.859 8.562c2.474 2.67 5.33 2.382 8.566-0.855l83.081-83.083    c3.237-3.23 3.519-6.086 0.855-8.561c-2.478-2.667-5.328-2.383-8.562 0.855L141.901 252.385z" FillRule="NonZero"/>
-                                                                                    </Path.Data>
-                                                                                </Path>
-                                                                            </Canvas>
-                                                                        </Canvas>
-                                                                        <Canvas x:Name="g12b"/>
-                                                                        <Canvas x:Name="g14b"/>
-                                                                        <Canvas x:Name="g16b"/>
-                                                                        <Canvas x:Name="g18b"/>
-                                                                        <Canvas x:Name="g20b"/>
-                                                                        <Canvas x:Name="g22b"/>
-                                                                        <Canvas x:Name="g24b"/>
-                                                                        <Canvas x:Name="g26b"/>
-                                                                        <Canvas x:Name="g28b"/>
-                                                                        <Canvas x:Name="g30b"/>
-                                                                        <Canvas x:Name="g32b"/>
-                                                                        <Canvas x:Name="g34b"/>
-                                                                        <Canvas x:Name="g36"/>
-                                                                        <Canvas x:Name="g38"/>
-                                                                        <Canvas x:Name="g40"/>
-                                                                    </Canvas>
-                                                                </Viewbox>
-                                                            </Button>-->
-                                                        <Button x:Name="deleteRequestedItemBtn"  Width="Auto" Height="25" Click="deleteRequestedItemBtn_Click" BorderBrush="Black" Background="{x:Null}" Margin="10,10,0,10" ToolTip="Delete Record">
-                                                            <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
-                                                                <Canvas x:Name="Capa_1c" Width="438.529" Height="438.529" Canvas.Left="0" Canvas.Top="0">
-                                                                    <Canvas.RenderTransform>
-                                                                        <TranslateTransform X="0" Y="0"/>
-                                                                    </Canvas.RenderTransform>
-                                                                    <!--Unknown tag: metadata-->
-                                                                    <!--Unknown tag: sodipodi:namedview-->
-                                                                    <Canvas x:Name="g12c">
-                                                                        <Canvas x:Name="g10c">
-                                                                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2c" Fill="#000000">
-                                                                                <Path.Data>
-                                                                                    <PathGeometry Figures="M417.689 75.654c-1.711-1.709-3.901-2.568-6.563-2.568h-88.224L302.917 25.41c-2.854-7.044-7.994-13.04-15.413-17.989    C280.078 2.473 272.556 0 264.945 0h-91.363c-7.611 0-15.131 2.473-22.554 7.421c-7.424 4.949-12.563 10.944-15.419 17.989    l-19.985 47.676h-88.22c-2.667 0-4.853 0.859-6.567 2.568c-1.709 1.713-2.568 3.903-2.568 6.567v18.274    c0 2.664 0.855 4.854 2.568 6.564c1.714 1.712 3.904 2.568 6.567 2.568h27.406v271.8c0 15.803 4.473 29.266 13.418 40.398    c8.947 11.139 19.701 16.703 32.264 16.703h237.542c12.566 0 23.319-5.756 32.265-17.268c8.945-11.52 13.415-25.174 13.415-40.971    V109.627h27.411c2.662 0 4.853-0.856 6.563-2.568c1.708-1.709 2.57-3.9 2.57-6.564V82.221    C420.26 79.557 419.397 77.367 417.689 75.654z M169.301 39.678c1.331-1.712 2.95-2.762 4.853-3.14h90.504    c1.903 0.381 3.525 1.43 4.854 3.14l13.709 33.404H155.311L169.301 39.678z M347.173 380.291c0 4.186-0.664 8.042-1.999 11.561    c-1.334 3.518-2.717 6.088-4.141 7.706c-1.431 1.622-2.423 2.427-2.998 2.427H100.493c-0.571 0-1.565-0.805-2.996-2.427    c-1.429-1.618-2.81-4.188-4.143-7.706c-1.331-3.519-1.997-7.379-1.997-11.561V109.627h255.815V380.291z" FillRule="NonZero"/>
-                                                                                </Path.Data>
-                                                                            </Path>
-                                                                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path4" Fill="#000000">
-                                                                                <Path.Data>
-                                                                                    <PathGeometry Figures="M137.04 347.172h18.271c2.667 0 4.858-0.855 6.567-2.567c1.709-1.718 2.568-3.901 2.568-6.57V173.581    c0-2.663-0.859-4.853-2.568-6.567c-1.714-1.709-3.899-2.565-6.567-2.565H137.04c-2.667 0-4.854 0.855-6.567 2.565    c-1.711 1.714-2.568 3.904-2.568 6.567v164.454c0 2.669 0.854 4.853 2.568 6.57C132.186 346.316 134.373 347.172 137.04 347.172z" FillRule="NonZero"/>
-                                                                                </Path.Data>
-                                                                            </Path>
-                                                                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path6c" Fill="#000000">
-                                                                                <Path.Data>
-                                                                                    <PathGeometry Figures="M210.129 347.172h18.271c2.666 0 4.856-0.855 6.564-2.567c1.718-1.718 2.569-3.901 2.569-6.57V173.581    c0-2.663-0.852-4.853-2.569-6.567c-1.708-1.709-3.898-2.565-6.564-2.565h-18.271c-2.664 0-4.854 0.855-6.567 2.565    c-1.714 1.714-2.568 3.904-2.568 6.567v164.454c0 2.669 0.854 4.853 2.568 6.57C205.274 346.316 207.465 347.172 210.129 347.172z    " FillRule="NonZero"/>
-                                                                                </Path.Data>
-                                                                            </Path>
-                                                                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path8" Fill="#000000">
-                                                                                <Path.Data>
-                                                                                    <PathGeometry Figures="M283.22 347.172h18.268c2.669 0 4.859-0.855 6.57-2.567c1.711-1.718 2.562-3.901 2.562-6.57V173.581    c0-2.663-0.852-4.853-2.562-6.567c-1.711-1.709-3.901-2.565-6.57-2.565H283.22c-2.67 0-4.853 0.855-6.571 2.565    c-1.711 1.714-2.566 3.904-2.566 6.567v164.454c0 2.669 0.855 4.853 2.566 6.57C278.367 346.316 280.55 347.172 283.22 347.172z" FillRule="NonZero"/>
-                                                                                </Path.Data>
-                                                                            </Path>
-                                                                        </Canvas>
-                                                                    </Canvas>
-                                                                    <Canvas x:Name="g14c"/>
-                                                                    <Canvas x:Name="g16c"/>
-                                                                    <Canvas x:Name="g18c"/>
-                                                                    <Canvas x:Name="g20c"/>
-                                                                    <Canvas x:Name="g22c"/>
-                                                                    <Canvas x:Name="g24c"/>
-                                                                    <Canvas x:Name="g26c"/>
-                                                                    <Canvas x:Name="g28c"/>
-                                                                    <Canvas x:Name="g30c"/>
-                                                                    <Canvas x:Name="g32c"/>
-                                                                    <Canvas x:Name="g34c"/>
-                                                                    <Canvas x:Name="g36c"/>
-                                                                    <Canvas x:Name="g38c"/>
-                                                                    <Canvas x:Name="g40c"/>
-                                                                    <Canvas x:Name="g42"/>
-                                                                </Canvas>
-                                                            </Viewbox>
-                                                        </Button>
-                                                    </StackPanel>
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                                <Label x:Name="vatableSalesLbl" Content="{Binding VatableSale}" HorizontalAlignment="Left" Margin="197,540,0,0" VerticalAlignment="Top" FontSize="14"/>
-                                <Label x:Name="vatExcemptedSalesLbl" Content="{Binding VatExemptedSales}" HorizontalAlignment="Left" Margin="197,574,0,0" VerticalAlignment="Top" FontSize="14"/>
-                                <Label x:Name="zeroRatedSalesLbl" Content="{Binding ZeroRatedSales}" HorizontalAlignment="Left" Margin="197,608,0,0" VerticalAlignment="Top" FontSize="14"/>
-                                <Label x:Name="vatAmountLbl" Content="{Binding VatAmount}" HorizontalAlignment="Left" Margin="197,642,0,0" VerticalAlignment="Top" FontSize="14"/>
-                                <Label x:Name="totalSalesLbl" Content="{Binding TotalSales}" HorizontalAlignment="Left" Margin="197,676,0,0" VerticalAlignment="Top" FontSize="14"/>
-                                <Label x:Name="totalSalesVatIncluLbl" Content="{Binding TotalSales}" HorizontalAlignment="Left" Margin="777,540,0,0" VerticalAlignment="Top" FontSize="14"/>
-                                <Label x:Name="vatAmountLbl1" Content="{Binding VatAmount}" HorizontalAlignment="Left" Margin="775,574,0,0" VerticalAlignment="Top" FontSize="14"/>
-                                <Label x:Name="totalSalesLbl1" Content="{Binding TotalSalesNoVat}" HorizontalAlignment="Left" Margin="775,608,0,0" VerticalAlignment="Top" FontSize="14"/>
-                                <Label x:Name="discountLbl" Content="{Binding DiscountAmount}" HorizontalAlignment="Left" Margin="775,642,0,0" VerticalAlignment="Top" FontSize="14"/>
-                                <Label x:Name="totalDueLbl" Content="{Binding VatableSale}" HorizontalAlignment="Left" Margin="775,676,0,0" VerticalAlignment="Top" FontSize="14"/>
-                                <Label x:Name="withHoldingTaxLbl" Content="{Binding WithHoldingTax}" HorizontalAlignment="Left" Margin="775,710,0,0" VerticalAlignment="Top" FontSize="14"/>
-                                <Label x:Name="vatAmountLbl2" Content="{Binding VatAmount}" HorizontalAlignment="Left" Margin="775,744,0,0" VerticalAlignment="Top" FontSize="14"/>
-                                <Label x:Name="totalDue" Content="{Binding TotalSales}" HorizontalAlignment="Left" Margin="775,778,0,0" VerticalAlignment="Top" FontSize="14"/>
-                            </Grid>
-
-                        </ScrollViewer>
-
-                        <StackPanel Margin="0,0,10,10" Height="26" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="195" Orientation="Horizontal" FlowDirection="RightToLeft">
-                            <Button x:Name="transRequestNext1" Content="Next" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" Height="26" Click="transRequestNext_Click" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="5,0,10,0"/>
-                            <Button x:Name="transRequestBack1" Content="Back" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="84" Height="26" Click="transRequestBack_Click" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="10,0,5,0"/>
-                        </StackPanel>
-
+                    <Grid x:Name="invoiceForm" Margin="0,304,0,303">
+                        <local:ucInvoice Margin="0" x:Name="ucInvoice" d:IsHidden="True"/>
                     </Grid>
 
                 </Grid>
@@ -2056,97 +1824,9 @@
         </Grid>
         <Grid x:Name="formGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3">
 
-            <Grid x:Name="companyDetailsFormGrid">
-                <local:ucCustSuppCRUD x:Name="ucCustSupp" HorizontalAlignment="Center" Margin="1,0,0,0"/>
-            </Grid>
-            <Grid x:Name="employeeDetailsFormGrid" d:IsHidden="True">
-                <local:ucEmployeeCRUD x:Name="ucEmployee" HorizontalAlignment="Center" Margin="0"/>
-            </Grid>
-            <Grid x:Name="productDetailsFormGrid" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="380" MinHeight="380" Width="616" d:IsHidden="True">
-                <ScrollViewer x:Name="productDetailsFormGridSv" MinWidth="600" Margin="0,0,0,40" VerticalScrollBarVisibility="Auto">
-                    <Grid x:Name="productDetailsFormGrid1" Background="White">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Label x:Name="label14" Content="Product Details" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-                        <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,47,10,0" VerticalAlignment="Top" Width="560"/>
-                        <Label x:Name="label15" Content="Name:" HorizontalAlignment="Left" Margin="40,82,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                        <Label x:Name="label15_Copy" Content="Description:" HorizontalAlignment="Left" Margin="40,119,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                        <Label x:Name="label15_Copy1" Content="Cost Price:" HorizontalAlignment="Left" Margin="40,217,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                        <Label x:Name="label15_Copy2" Content="Unit:" HorizontalAlignment="Left" Margin="40,248,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                        <Label x:Name="label15_Copy3" Content="Supplier:" HorizontalAlignment="Left" Margin="40,279,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                        <Label x:Name="label15_Copy4" Content="Category:" HorizontalAlignment="Left" Margin="40,186,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                        <TextBox x:Name="productCodeTb" HorizontalAlignment="Left" Height="23" Margin="135,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220">
-                            <Binding Path="ProductCode" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                                <Binding.ValidationRules>
-                                    <local:TextBoxValidation TextBoxType="IsEmpty"/>
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox>
-                        <Button x:Name="generateProductCodeBtn" Content="Generate" HorizontalAlignment="Left" Margin="372,54,0,0" VerticalAlignment="Top" Width="75" Click="generateProductCodeBtn_Click"/>
-                        <TextBox x:Name="productNameTb" HorizontalAlignment="Left" Height="23" Margin="135,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220">
-                            <Binding Path="ProductName" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                                <Binding.ValidationRules>
-                                    <local:TextBoxValidation TextBoxType="IsEmpty"/>
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox>
-                        <TextBox x:Name="productDescTb" HorizontalAlignment="Left" Height="54" Margin="135,119,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="442"/>
-                        <ComboBox x:Name="categoryCb" HorizontalAlignment="Left" Margin="135,190,0,0" VerticalAlignment="Top" Width="220" ItemsSource="{Binding ProductCategory}" DisplayMemberPath="TypeName" SelectedValuePath="TypeID">
-                            <ComboBox.SelectedItem>
-                                <Binding Path="cbItem" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                                    <Binding.ValidationRules>
-                                        <local:TextBoxValidation TextBoxType="ComboBox"/>
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </ComboBox.SelectedItem>
-                        </ComboBox>
-                        <xctk:DecimalUpDown x:Name="costPriceTb" HorizontalAlignment="Left" Margin="135,223,0,0" VerticalAlignment="Top" Width="220">
-                            <xctk:DecimalUpDown.Value>
-                                <Binding Path="ProductPrice" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                                    <Binding.ValidationRules>
-                                        <local:TextBoxValidation TextBoxType="IsEmpty"/>
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </xctk:DecimalUpDown.Value>
-                        </xctk:DecimalUpDown>
-                        <TextBox x:Name="unitTb" HorizontalAlignment="Left" Height="23" Margin="135,252,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220">
-                            <Binding Path="ProductUnit" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                                <Binding.ValidationRules>
-                                    <local:TextBoxValidation TextBoxType="IsEmpty"/>
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox>
-                        <ComboBox x:Name="supplierCb" HorizontalAlignment="Left" Margin="135,283,0,0" VerticalAlignment="Top" Width="220" DisplayMemberPath="CompanyName" SelectedValuePath="CompanyID">
-                            <ComboBox.Resources>
-                                <CollectionViewSource x:Key="Items" Source="{Binding Suppliers}" />
-                            </ComboBox.Resources>
-                            <ComboBox.ItemsSource>
-                                <CompositeCollection>
-                                    <TextBlock />
-                                    <CollectionContainer Collection="{Binding Source={StaticResource Items}}" />
-                                </CompositeCollection>
-                            </ComboBox.ItemsSource>
-                        </ComboBox>
-                        <Label x:Name="label15_Copy6" Content="Product Code:" HorizontalAlignment="Left" Margin="40,51,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                    </Grid>
-
-                </ScrollViewer>
-                <Grid Margin="0,0,0,2" Height="40" VerticalAlignment="Bottom" Background="White" MinWidth="600">
-                    <StackPanel Orientation="Vertical" Width="190" HorizontalAlignment="Right" Margin="0">
-                        <Grid x:Name="saveCancelGrid2" Height="20" Margin="10">
-                            <Button x:Name="saveProductBtn" Content="Save" Click="saveRecordBtn_Click" Margin="0,0,94,0" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="76"/>
-                            <Button x:Name="cancelProductBtn" Content="Cancel" Click="cancelRecordBtn_Click" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="76"/>
-                        </Grid>
-                        <Grid x:Name="editCloseGrid2" Margin="13,10" Width="164">
-                            <Button x:Name="editProductBtn" Content="Edit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76"/>
-                            <Button x:Name="cancelProductBtn1" Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Click="cancelRecordBtn_Click" Margin="81,0,-5,0"/>
-                        </Grid>
-                    </StackPanel>
-
-                </Grid>
-
-            </Grid>
+            <local:ucCustSuppCRUD x:Name="ucCustSupp" HorizontalAlignment="Center" Margin="167,0,166,0" d:IsHidden="True" Visibility="Collapsed"/>
+            <local:ucEmployeeCRUD x:Name="ucEmployee" HorizontalAlignment="Center" Margin="202,0,201,0" Visibility="Collapsed" d:IsHidden="True"/>
+            <local:ucProductsCRUD x:Name="ucProduct" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Grid x:Name="additionalFeesFormGrid" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="380" MinHeight="380" Width="616" d:IsHidden="True">
                 <ScrollViewer x:Name="additionalFeesFormGridSv" MinWidth="600" Margin="0,0,0,40" VerticalScrollBarVisibility="Auto">
                     <Grid x:Name="additionalFeesFormGrid1" Background="White">
@@ -2326,10 +2006,6 @@
                             <Button x:Name="saveAdditionalFees" Content="Save" Margin="0,0,94,0" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="76" Click="saveAdditionalFees_Click"/>
                             <Button x:Name="cancelAdditionalFees" Content="Cancel" Click="cancelAdditionalFees_Click" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="76"/>
                         </Grid>
-                        <Grid x:Name="editCloseGrid4" Margin="13,10" Width="164">
-                            <Button x:Name="editProductBtn2" Content="Edit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" />
-                            <Button x:Name="cancelProductBtn4" Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Click="cancelRecordBtn_Click" Margin="81,0,-5,0"/>
-                        </Grid>
                     </StackPanel>
 
                 </Grid>
@@ -2428,10 +2104,6 @@
                         <Grid x:Name="saveCancelGrid3" Height="20" Margin="10">
                             <Button x:Name="addProductBtn" Content="Add" Margin="0,0,94,0" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="76" Click="addProductBtn_Click"/>
                             <Button x:Name="cancelAddProductBtn" Content="Cancel" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="76" Click="cancelAddProductBtn_Click"/>
-                        </Grid>
-                        <Grid x:Name="editCloseGrid3" Margin="13,10" Width="164">
-                            <Button x:Name="editProductBtn1" Content="Edit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" />
-                            <Button x:Name="cancelProductBtn3" Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Click="cancelRecordBtn_Click" Margin="81,0,-5,0"/>
                         </Grid>
                     </StackPanel>
 

@@ -87,7 +87,6 @@ namespace prototype2
             editCloseGrid.Visibility = Visibility.Collapsed;
             saveCancelGrid.Visibility = Visibility.Visible;
             MainVM.isEdit = true;
-
         }
 
 
@@ -233,7 +232,6 @@ namespace prototype2
             MessageBoxResult result = MessageBox.Show("Do you want to save?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Information);
             if (result == MessageBoxResult.OK)
             {
-
                 foreach (var element in companyDetailsFormGrid1.Children)
                 {
                     if (element is TextBox)
@@ -245,11 +243,6 @@ namespace prototype2
                             expression.UpdateSource();
                             validationError = Validation.GetHasError((TextBox)element);
                         }
-                        else
-                        {
-
-                        }
-
                     }
                     if (element is ComboBox)
                     {
@@ -259,8 +252,12 @@ namespace prototype2
                     }
                 }
                 if (!validationError)
+                {
                     saveDataToDb();
-                MainVM.isEdit = false;
+                    OnSaveCloseButtonClicked(e);
+                }
+                    
+                
             }
             else if (result == MessageBoxResult.Cancel)
             {
@@ -274,6 +271,7 @@ namespace prototype2
             if (result == MessageBoxResult.Yes)
             {
                 resetFieldsValue();
+                OnSaveCloseButtonClicked(e);
             }
             else if (result == MessageBoxResult.No)
             {
@@ -290,6 +288,7 @@ namespace prototype2
             {
                 using (MySqlConnection conn = dbCon.Connection)
                 {
+                    conn.Open();
                     if (!MainVM.isEdit)
                     {
                        cmd = new MySqlCommand("INSERT_REP", conn);
@@ -426,6 +425,62 @@ namespace prototype2
                     ((CheckBox)element).IsEnabled = true;
                     ((CheckBox)element).IsChecked = false;
                 }
+            }
+            MainVM.isEdit = false;
+        }
+
+        private void loadDataToUi()
+        {
+            companyTypeCb.SelectedIndex = int.Parse(MainVM.SelectedCustomerSupplier.CompanyType);
+            companyNameTb.Text = MainVM.SelectedCustomerSupplier.CompanyName;
+            companyDescriptionTb.Text = MainVM.SelectedCustomerSupplier.CompanyDesc;
+            companyAddressTb.Text = MainVM.SelectedCustomerSupplier.CompanyAddress;
+            companyCityTb.Text = MainVM.SelectedCustomerSupplier.CompanyCity;
+            companyProvinceCb.SelectedValue = MainVM.SelectedCustomerSupplier.CompanyProvinceID;
+            companyPostalCode.Text = MainVM.SelectedCustomerSupplier.CompanyPostalCode;
+            companyEmailTb.Text = MainVM.SelectedCustomerSupplier.CompanyEmail;
+            companyTelephoneTb.Text = MainVM.SelectedCustomerSupplier.CompanyTelephone;
+            companyMobileTb.Text = MainVM.SelectedCustomerSupplier.CompanyMobile;
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyTelephone))
+            {
+                companyTelCb.IsChecked = true;
+            }
+
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyMobile))
+            {
+                companyMobCb.IsChecked = true;
+            }
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyEmail))
+            {
+                companyEmailCb.IsChecked = true;
+            }
+            MainVM.SelectedRepresentative = MainVM.Representatives.Where(x => x.RepresentativeID.Equals(MainVM.SelectedCustomerSupplier.RepresentativeID)).FirstOrDefault();
+            representativeTitle.Text = MainVM.SelectedRepresentative.RepTitle;
+            repFirstNameTb.Text = MainVM.SelectedRepresentative.RepFirstName;
+            repMiddleInitialTb.Text = MainVM.SelectedRepresentative.RepMiddleName;
+            repLastNameTb.Text = MainVM.SelectedRepresentative.RepLastName;
+            repEmailTb.Text = MainVM.SelectedRepresentative.RepEmail;
+            repTelephoneTb.Text = MainVM.SelectedRepresentative.RepTelephone;
+            repMobileTb.Text = MainVM.SelectedRepresentative.RepMobile;
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedRepresentative.RepTelephone))
+            {
+                repTelCb.IsChecked = true;
+            }
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedRepresentative.RepMobile))
+            {
+                repMobCb.IsChecked = true;
+            }
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedRepresentative.RepEmail))
+            {
+                repEmailCb.IsChecked = true;
+            }
+        }
+
+        private void UserControl_IsVisibleChanged_1(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (MainVM.isEdit && this.IsVisible)
+            {
+                loadDataToUi();
             }
         }
     }

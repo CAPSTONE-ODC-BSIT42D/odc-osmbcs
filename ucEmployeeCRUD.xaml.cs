@@ -80,13 +80,13 @@ namespace prototype2
 
         private void cancelRecordBtn_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Do you want to cancel?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
-            if (result == MessageBoxResult.Yes)
+            MessageBoxResult result = MessageBox.Show("Do you want to cancel?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.OK)
             {
                 resetFieldsValue();
                 OnSaveCloseButtonClicked(e);
             }
-            else if (result == MessageBoxResult.No)
+            else if (result == MessageBoxResult.Cancel)
             {
             }
 
@@ -119,9 +119,9 @@ namespace prototype2
                 if (!validationError)
                 {
                     saveDataToDb();
-                    
+                    OnSaveCloseButtonClicked(e);
                 }
-                OnSaveCloseButtonClicked(e);
+                
             }
             else if (result == MessageBoxResult.Cancel)
             {
@@ -366,6 +366,48 @@ namespace prototype2
             }
         }
 
+        public void loadDataToUi()
+        {
+            employeeType.SelectedIndex = int.Parse(MainVM.SelectedEmployeeContractor.EmpType);
+            empFirstNameTb.Text = MainVM.SelectedEmployeeContractor.EmpFname;
+            empLastNameTb.Text = MainVM.SelectedEmployeeContractor.EmpLName;
+            empMiddleInitialTb.Text = MainVM.SelectedEmployeeContractor.EmpMiddleInitial;
+            empAddressTb.Text = MainVM.SelectedEmployeeContractor.EmpAddress;
+            empCityTb.Text = MainVM.SelectedEmployeeContractor.EmpCity;
+            empProvinceCb.SelectedValue = MainVM.SelectedEmployeeContractor.EmpProvinceID;
+            var stride = (empImage.ActualWidth * PixelFormats.Rgba64.BitsPerPixel + 7) / 8;
+            if (MainVM.SelectedEmployeeContractor.EmpPic != null)
+                empImage.Source = BitmapSource.Create((int)empImage.Width, (int)empImage.Height, 96, 96, PixelFormats.Rgba64, null, MainVM.SelectedEmployeeContractor.EmpPic, (int)stride);
+
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedEmployeeContractor.EmpTelephone))
+            {
+                empTelCb.IsChecked = true;
+            }
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedEmployeeContractor.EmpMobile))
+            {
+                empMobCb.IsChecked = true;
+            }
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedEmployeeContractor.EmpEmail))
+            {
+                empEmailCb.IsChecked = true;
+            }
+            empTelephoneTb.Text = MainVM.SelectedEmployeeContractor.EmpTelephone;
+            empMobileNumberTb.Text = MainVM.SelectedEmployeeContractor.EmpMobile;
+            empEmailAddressTb.Text = MainVM.SelectedEmployeeContractor.EmpEmail;
+            if (employeeType.SelectedIndex == 0)
+            {
+                empPostionCb.SelectedValue = MainVM.SelectedEmployeeContractor.PositionID;
+                empUserNameTb.Text = MainVM.SelectedEmployeeContractor.EmpUserName;
+                empPasswordTb.IsEnabled = false;
+            }
+            else if (employeeType.SelectedIndex == 1)
+            {
+                empJobCb.SelectedValue = MainVM.SelectedEmployeeContractor.JobID;
+                empDateStarted.Text = MainVM.SelectedEmployeeContractor.EmpDateTo;
+                empDateEnded.Text = MainVM.SelectedEmployeeContractor.EmpDateFrom;
+            }
+        }
+
         String SecureStringToString(SecureString value)
         {
             IntPtr valuePtr = IntPtr.Zero;
@@ -412,6 +454,14 @@ namespace prototype2
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)
         {
             OnSaveCloseButtonClicked(e);
+        }
+
+        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (MainVM.isEdit&&this.IsVisible)
+            {
+                loadDataToUi();
+            }
         }
     }
 }
