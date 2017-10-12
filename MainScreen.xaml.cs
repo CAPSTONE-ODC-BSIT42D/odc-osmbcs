@@ -503,13 +503,17 @@ namespace prototype2
             }
             foreach (var obj in transQuotationGrid.Children)
             {
-                if(obj is Grid)
+                if (obj is Grid)
+                {
                     if (((Grid)obj).Equals(quotationsGridHome))
                     {
                         headerLbl.Content = "Trasanction - Sales Quote";
                         ((Grid)obj).Visibility = Visibility.Visible;
                         settingsBtn.Visibility = Visibility.Hidden;
                     }
+                } 
+                else
+                    ((UserControl)obj).Visibility = Visibility.Collapsed;
                         
             }
             
@@ -1579,7 +1583,7 @@ namespace prototype2
         {
             foreach (var element in transQuotationGrid.Children)
             {
-                if (element is Grid)
+                if (element is UserControl)
                 {
                     if (!(((UserControl)element).Name.Equals(ucSalesQuote.Name)))
                     {

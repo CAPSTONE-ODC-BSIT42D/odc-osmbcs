@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:prototype2"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="prototype2.ucSalesQuote"
              mc:Ignorable="d" 
-             d:DesignHeight="717" d:DesignWidth="1041" IsVisibleChanged="UserControl_IsVisibleChanged">
+             d:DesignHeight="672" d:DesignWidth="960" IsVisibleChanged="UserControl_IsVisibleChanged">
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>
@@ -488,18 +488,18 @@
                 </Grid>
 
             </Grid>
-            <Grid x:Name="addNewItemFormGrid" Margin="144,82,117,81" HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="554" d:IsHidden="True">
-                <ScrollViewer x:Name="addNewItemFormGridSv" MinWidth="600" Margin="0,0,-1,40" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <Grid x:Name="addNewItemFormGrid" Margin="148,-54,120,-54" HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="554">
+                <ScrollViewer x:Name="addNewItemFormGridSv" Margin="0,0,-1,40" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                     <Grid x:Name="addNewItemFormGrid2" Background="White" Margin="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Label x:Name="label16" Content="Add Item To Sale Quote" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-                        <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,47,10,0" VerticalAlignment="Top"/>
-                        <Label x:Name="label15_Copy5" Content="Item Type:" HorizontalAlignment="Left" Margin="39,54,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                        <RadioButton x:Name="productRbtn" Content="Product" HorizontalAlignment="Left" Margin="112,61,0,0" VerticalAlignment="Top" GroupName="itemType" Checked="productRbtn_Checked" Unchecked="productRbtn_Unchecked" IsChecked="True"/>
-                        <RadioButton x:Name="serviceRbtn" Content="Service" HorizontalAlignment="Left" Margin="197,61,0,0" VerticalAlignment="Top" GroupName="itemType" Checked="serviceRbtn_Checked" Unchecked="serviceRbtn_Unchecked"/>
-                        <Grid x:Name="forms" Margin="30,95,30,0" VerticalAlignment="Top" Height="406">
+                        <Label x:Name="label16" Content="Add Item To Sale Quote" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+                        <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,67,10,0" VerticalAlignment="Top"/>
+                        <Label x:Name="label15_Copy5" Content="Item Type:" HorizontalAlignment="Left" Margin="39,73,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                        <RadioButton x:Name="productRbtn" Content="Product" HorizontalAlignment="Left" Margin="112,81,0,0" VerticalAlignment="Top" GroupName="itemType" Checked="productRbtn_Checked" Unchecked="productRbtn_Unchecked" IsChecked="True"/>
+                        <RadioButton x:Name="serviceRbtn" Content="Service" HorizontalAlignment="Left" Margin="197,81,0,0" VerticalAlignment="Top" GroupName="itemType" Checked="serviceRbtn_Checked" Unchecked="serviceRbtn_Unchecked"/>
+                        <Grid x:Name="forms" Margin="30,115,30,10" VerticalAlignment="Top" Height="406">
                             <Border Margin="0" BorderThickness="1" BorderBrush="Black" Panel.ZIndex="-1">
                                 <Grid x:Name="addNewServiceForm">
                                     <Label Content="Service Type:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic"/>
@@ -573,10 +573,43 @@
                                 </Grid>
                             </Border>
                         </Grid>
+                        <Button x:Name="closeModalBtn_Copy1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="25" Margin="5,5,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="closeModalBtn_Click">
+                            <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform" Height="23" Width="27" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Canvas x:Name="Capa_1d1" Width="438.533" Height="438.533" Canvas.Left="0" Canvas.Top="0">
+                                    <Canvas.RenderTransform>
+                                        <TranslateTransform X="0" Y="0"/>
+                                    </Canvas.RenderTransform>
+                                    <!--Unknown tag: metadata-->
+                                    <!--Unknown tag: sodipodi:namedview-->
+                                    <Canvas x:Name="g4d3">
+                                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2d3" Fill="#000000">
+                                            <Path.Data>
+                                                <PathGeometry Figures="M409.133 109.203c-19.608-33.592-46.205-60.189-79.798-79.796C295.736 9.801 259.058 0 219.273 0   c-39.781 0-76.47 9.801-110.063 29.407c-33.595 19.604-60.192 46.201-79.8 79.796C9.801 142.8 0 179.489 0 219.267   c0 39.78 9.804 76.463 29.407 110.062c19.607 33.592 46.204 60.189 79.799 79.798c33.597 19.605 70.283 29.407 110.063 29.407   s76.47-9.802 110.065-29.407c33.593-19.602 60.189-46.206 79.795-79.798c19.603-33.596 29.403-70.284 29.403-110.062   C438.533 179.485 428.732 142.795 409.133 109.203z M322.621 270.939c3.617 3.613 5.428 7.905 5.428 12.854   c0 5.133-1.811 9.514-5.428 13.127l-25.693 25.701c-3.614 3.613-7.994 5.42-13.135 5.42c-4.948 0-9.236-1.807-12.847-5.42   l-51.676-51.682l-51.678 51.682c-3.616 3.613-7.898 5.42-12.847 5.42c-5.14 0-9.517-1.807-13.134-5.42l-25.697-25.701   c-3.616-3.613-5.424-7.994-5.424-13.127c0-4.948 1.809-9.24 5.424-12.854l51.678-51.673l-51.678-51.678   c-3.616-3.612-5.424-7.898-5.424-12.847c0-5.14 1.809-9.517 5.424-13.134l25.697-25.693c3.617-3.616 7.994-5.424 13.134-5.424   c4.949 0 9.231 1.809 12.847 5.424l51.678 51.674l51.676-51.674c3.61-3.616 7.898-5.424 12.847-5.424   c5.141 0 9.521 1.809 13.135 5.424l25.693 25.693c3.617 3.617 5.428 7.994 5.428 13.134c0 4.948-1.811 9.235-5.428 12.847   l-51.675 51.678L322.621 270.939z" FillRule="NonZero"/>
+                                            </Path.Data>
+                                        </Path>
+                                    </Canvas>
+                                    <Canvas x:Name="g6d3"/>
+                                    <Canvas x:Name="g8d3"/>
+                                    <Canvas x:Name="g10d3"/>
+                                    <Canvas x:Name="g12d3"/>
+                                    <Canvas x:Name="g14d1"/>
+                                    <Canvas x:Name="g16d1"/>
+                                    <Canvas x:Name="g18d1"/>
+                                    <Canvas x:Name="g20d1"/>
+                                    <Canvas x:Name="g22d1"/>
+                                    <Canvas x:Name="g24d1"/>
+                                    <Canvas x:Name="g26d1"/>
+                                    <Canvas x:Name="g28d1"/>
+                                    <Canvas x:Name="g30d1"/>
+                                    <Canvas x:Name="g32d1"/>
+                                    <Canvas x:Name="g34d1"/>
+                                </Canvas>
+                            </Viewbox>
+                        </Button>
                     </Grid>
 
                 </ScrollViewer>
-                <Grid Margin="0" Height="40" VerticalAlignment="Bottom" Background="White" MinWidth="600">
+                <Grid Height="40" VerticalAlignment="Bottom" Background="White">
                     <StackPanel Orientation="Vertical" Width="190" HorizontalAlignment="Right" Margin="0">
                         <Grid x:Name="saveCancelGrid3" Height="20" Margin="10">
                             <Button x:Name="addProductBtn" Content="Add" Margin="0,0,94,0" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="76" Click="addProductBtn_Click"/>
@@ -587,7 +620,7 @@
                 </Grid>
 
             </Grid>
-            <Grid x:Name="selectCustomerGrid" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <Grid x:Name="selectCustomerGrid" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" d:IsHidden="True" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
