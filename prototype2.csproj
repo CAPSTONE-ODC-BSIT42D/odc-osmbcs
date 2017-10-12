@@ -239,6 +239,9 @@
     <Compile Include="ucProductsCRUD.xaml.cs">
       <DependentUpon>ucProductsCRUD.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ucSalesQuote.xaml.cs">
+      <DependentUpon>ucSalesQuote.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModelEntity.cs" />
     <Compile Include="ViewModels.cs" />
     <Page Include="contactDetails.xaml">
@@ -283,6 +286,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ucProductsCRUD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ucSalesQuote.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

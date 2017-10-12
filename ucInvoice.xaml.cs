@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using MigraDoc.DocumentObjectModel;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -41,22 +42,76 @@ namespace prototype2
             if (handler != null)
                 handler(this, e);
         }
-
+        Document document;
         private void invoiceNext_Click(object sender, RoutedEventArgs e)
         {
-
+            if (newInvoiceForm.IsVisible)
+            {
+                newInvoiceForm.Visibility = Visibility.Collapsed;
+                documentViewer.Visibility = Visibility.Visible;
+            }
+            else if (documentViewer.IsVisible)
+            {
+                salesInvoiceToMemory();
+                InvoiceDocument df = new InvoiceDocument();
+                document = df.CreateDocument("SalesQuote", "asdsadsa");
+                string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
+                documentViewer.pagePreview.Ddl = ddl;
+            }
+                
         }
 
         private void invoiceBack_Click(object sender, RoutedEventArgs e)
         {
+            if (newInvoiceForm.IsVisible)
+            {
+                newInvoiceForm.Visibility = Visibility.Collapsed;
+                documentViewer.Visibility = Visibility.Visible;
+                OnSaveCloseButtonClicked(e);
+            }
+            else if (documentViewer.IsVisible)
+            {
 
+            }
         }
 
         
 
         void salesInvoiceToMemory()
         {
+            string noChar = "";
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            var numbs = "01234567890123456789";
 
+            var random = new Random();
+
+
+            if (MainVM.SelectedCustomerSupplier.CompanyName.Length > 5)
+            {
+                noChar = MainVM.SelectedCustomerSupplier.CompanyName.Trim().Substring(0, 5).ToUpper();
+
+            }
+            else
+                noChar = MainVM.SelectedCustomerSupplier.CompanyName.Trim().ToUpper();
+            string stringChars = "";
+            for (int i = 0; i < 4; i++)
+            {
+                if (!(i > 3))
+                {
+                    stringChars += chars[random.Next(chars.Length)];
+                }
+            }
+            stringChars += "SI";
+            stringChars += MainVM.SalesInvoice.Count + 1;
+            stringChars += "-";
+            foreach (char c in noChar)
+            {
+                stringChars += c;
+            }
+            stringChars += "-";
+            stringChars += DateTime.Now.ToString("yyyy-MM-dd");
+
+            MainVM.SelectedSalesInvoice = (new SalesInvoice() { });
         }
     }
 }
