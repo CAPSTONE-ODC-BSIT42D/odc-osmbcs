@@ -5,114 +5,148 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:prototype2"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="prototype2.ucInvoice"
-             mc:Ignorable="d" HorizontalContentAlignment="Left" d:DesignHeight="872">
+             mc:Ignorable="d" d:DesignHeight="782" d:DesignWidth="970">
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>
-    <Grid Width="923">
-        <Grid x:Name="transInvoiceGridForm" Margin="0" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
-            <local:DocumentViewer x:Name="documentViewer" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed"/>
-            <ScrollViewer x:Name="newInvoiceForm" Margin="0,0,0,40" VerticalScrollBarVisibility="Auto">
-                <Grid Margin="0,0,0,10">
-                    <Label x:Name="label12_Copy" Content="Invoice Details" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI"/>
-                    <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,39,10,0" VerticalAlignment="Top"/>
-                    <Label x:Name="label19_Copy1" Content="Sold To:" HorizontalAlignment="Left" Margin="40,53,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                    <Label x:Name="label19_Copy2" Content="TIN #:" HorizontalAlignment="Left" Margin="40,87,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                    <Label x:Name="label19_Copy3" Content="Address:" HorizontalAlignment="Left" Margin="40,121,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                    <Label x:Name="label19_Copy4" Content="Business Style:" HorizontalAlignment="Left" Margin="40,155,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                    <Label x:Name="label19_Copy5" Content="Date:" HorizontalAlignment="Left" Margin="602,53,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                    <Label x:Name="label19_Copy6" Content="Terms:" HorizontalAlignment="Left" Margin="602,87,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                    <Label x:Name="label12_Copy2" Content="Requested Items:" HorizontalAlignment="Left" Margin="10,198,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI"/>
-                    <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,227,10,0" VerticalAlignment="Top"/>
-                    <Label x:Name="label12_Copy3" Content="Other Details" HorizontalAlignment="Left" Margin="10,488,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI"/>
-                    <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,517,10,0" VerticalAlignment="Top"/>
-                    <Label x:Name="label19_Copy7" Content="Vatable Sales:" HorizontalAlignment="Left" Margin="40,540,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                    <Label x:Name="label19_Copy8" Content="VAT-Exempted Sales:" HorizontalAlignment="Left" Margin="40,574,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                    <Label x:Name="label19_Copy9" Content="Zero - Rated Sales:" HorizontalAlignment="Left" Margin="40,608,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                    <Label x:Name="label19_Copy10" Content="VAT Amount" HorizontalAlignment="Left" Margin="40,642,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                    <Label x:Name="label19_Copy11" Content="TOTAL SALES:" HorizontalAlignment="Left" Margin="40,676,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                    <Label x:Name="label19_Copy12" Content="Total Sale VAT Inclusive:" HorizontalAlignment="Left" Margin="602,540,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                    <Label x:Name="label19_Copy13" Content="Less: VAT" HorizontalAlignment="Left" Margin="602,574,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                    <Label x:Name="label19_Copy14" Content="TOTAL:" HorizontalAlignment="Left" Margin="602,608,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                    <Label x:Name="label19_Copy15" Content="Less: SC/PWD Discount:" HorizontalAlignment="Left" Margin="602,642,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                    <Label x:Name="label19_Copy16" Content="Total Due:" HorizontalAlignment="Left" Margin="602,676,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                    <Label x:Name="label19_Copy17" Content="Less: Withholding Tax:" HorizontalAlignment="Left" Margin="602,710,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                    <Label x:Name="label19_Copy18" Content="Add: VAT" HorizontalAlignment="Left" Margin="602,744,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                    <Label x:Name="label19_Copy19" Content="AMOUNT DUE:" HorizontalAlignment="Left" Margin="602,778,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                    <Label x:Name="label19_Copy20" Content="{Binding SelectedCustomerSupplier.CompanyName}" HorizontalAlignment="Left" Margin="111,53,0,0" VerticalAlignment="Top" FontSize="14"/>
-                    <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="24" Margin="111,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
-                    <Label x:Name="label19_Copy21" Content="{Binding SelectedCustomerSupplier.CompanyAddress}" HorizontalAlignment="Left" Margin="111,121,0,0" VerticalAlignment="Top" FontSize="14"/>
-                    <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="24" Margin="151,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
-                    <Label x:Name="label19_Copy22" Content="{Binding SelectedCustomerSupplier.CompanyAddress}" HorizontalAlignment="Left" Margin="652,53,0,0" VerticalAlignment="Top" FontSize="14"/>
-                    <xctk:IntegerUpDown HorizontalAlignment="Left" Margin="660,91,0,0" VerticalAlignment="Top" Width="56"/>
-                    <Label x:Name="label19_Copy23" Content="Days" HorizontalAlignment="Left" Margin="721,87,0,0" VerticalAlignment="Top" FontSize="14"/>
-                    <DataGrid x:Name="itemDg_Copy" Margin="27,241,25,0" ItemsSource="{Binding RequestedItems}" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="False" IsReadOnly="True" VerticalAlignment="Top" Height="242" SelectedItem="{Binding SelectedRequestedItem}"  >
-                        <DataGrid.Columns >
-                            <!--<DataGridTextColumn Binding="{Binding totalAmountMarkUp}" ClipboardContentBinding="{x:Null}" Header="Total + Markup Price" Width="200"  />-->
-                            <DataGridTextColumn Binding="{Binding itemCode}" ClipboardContentBinding="{x:Null}" Header="Item Code" Width="100" CanUserResize="False" />
-                            <DataGridTextColumn Binding="{Binding itemName}" ClipboardContentBinding="{x:Null}" Header="Item Name" Width="100" CanUserResize="False" />
-                            <DataGridTemplateColumn Width="200" CanUserResize="False" Header="Description" >
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text= "{Binding itemDesc}" ClipToBounds="True" TextWrapping="Wrap"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <!--<DataGridTextColumn Binding="{Binding itemTypeName}" ClipboardContentBinding="{x:Null}" Header="Item Type" Width="100" CanUserResize="False" />-->
-                            <DataGridTemplateColumn Header="Item Type" Width="100">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Label>
-                                            <Label.Style>
-                                                <Style TargetType="{x:Type Label}">
-                                                    <Setter Property="Content" Value="{Binding itemType}" />
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding itemType}" Value="0">
-                                                            <Setter Property="Content" Value="Product" />
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding itemType}" Value="1">
-                                                            <Setter Property="Content" Value = "Serivce" />
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Label.Style>
-                                        </Label>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Header="Qty" Width="60">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text= "{Binding qty}" ClipToBounds="True" TextWrapping="Wrap"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTextColumn Binding="{Binding unitPriceMarkUp}" ClipboardContentBinding="{x:Null}" Header="Unit Price" Width="100"  />
-                            <DataGridTextColumn Binding="{Binding totalAmountMarkUp}" ClipboardContentBinding="{x:Null}" Header="Total Amount" Width="100"  />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                    <Label x:Name="vatableSalesLbl" Content="{Binding VatableSale}" HorizontalAlignment="Left" Margin="197,540,0,0" VerticalAlignment="Top" FontSize="14"/>
-                    <Label x:Name="vatExcemptedSalesLbl" Content="{Binding VatExemptedSales}" HorizontalAlignment="Left" Margin="197,574,0,0" VerticalAlignment="Top" FontSize="14"/>
-                    <Label x:Name="zeroRatedSalesLbl" Content="{Binding ZeroRatedSales}" HorizontalAlignment="Left" Margin="197,608,0,0" VerticalAlignment="Top" FontSize="14"/>
-                    <Label x:Name="vatAmountLbl" Content="{Binding VatAmount}" HorizontalAlignment="Left" Margin="197,642,0,0" VerticalAlignment="Top" FontSize="14"/>
-                    <Label x:Name="totalSalesLbl" Content="{Binding TotalSales}" HorizontalAlignment="Left" Margin="197,676,0,0" VerticalAlignment="Top" FontSize="14"/>
-                    <Label x:Name="totalSalesVatIncluLbl" Content="{Binding TotalSales}" HorizontalAlignment="Left" Margin="777,540,0,0" VerticalAlignment="Top" FontSize="14"/>
-                    <Label x:Name="vatAmountLbl1" Content="{Binding VatAmount}" HorizontalAlignment="Left" Margin="775,574,0,0" VerticalAlignment="Top" FontSize="14"/>
-                    <Label x:Name="totalSalesLbl1" Content="{Binding TotalSalesNoVat}" HorizontalAlignment="Left" Margin="775,608,0,0" VerticalAlignment="Top" FontSize="14"/>
-                    <Label x:Name="discountLbl" Content="{Binding DiscountAmount}" HorizontalAlignment="Left" Margin="775,642,0,0" VerticalAlignment="Top" FontSize="14"/>
-                    <Label x:Name="totalDueLbl" Content="{Binding VatableSale}" HorizontalAlignment="Left" Margin="775,676,0,0" VerticalAlignment="Top" FontSize="14"/>
-                    <Label x:Name="withHoldingTaxLbl" Content="{Binding WithHoldingTax}" HorizontalAlignment="Left" Margin="775,710,0,0" VerticalAlignment="Top" FontSize="14"/>
-                    <Label x:Name="vatAmountLbl2" Content="{Binding VatAmount}" HorizontalAlignment="Left" Margin="775,744,0,0" VerticalAlignment="Top" FontSize="14"/>
-                    <Label x:Name="totalDue" Content="{Binding TotalSales}" HorizontalAlignment="Left" Margin="775,778,0,0" VerticalAlignment="Top" FontSize="14"/>
-                </Grid>
+    <Grid x:Name="transInvoiceGridForm" Margin="0" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+        <local:DocumentViewer x:Name="documentViewer" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed"/>
+        <ScrollViewer x:Name="newInvoiceForm" Margin="0,0,0,40" VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0*"/>
+                    <ColumnDefinition Width="0*"/>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="label12_Copy" Content="Invoice Details" HorizontalAlignment="Left" Margin="10,10,-129,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31" Width="120" Grid.Column="1"/>
+                <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,39,-808,0" VerticalAlignment="Top" Grid.Column="1"/>
+                <Label x:Name="label19_Copy1" Content="Sold To:" HorizontalAlignment="Left" Margin="39,53,-100,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="62" Grid.Column="1"/>
+                <Label x:Name="label19_Copy2" Content="TIN #:" HorizontalAlignment="Left" Margin="40,87,-89,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="50" Grid.Column="1"/>
+                <Label x:Name="label19_Copy3" Content="Address:" HorizontalAlignment="Left" Margin="39,121,-104,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="66" Grid.Column="1"/>
+                <Label x:Name="label19_Copy4" Content="Business Style:" HorizontalAlignment="Left" Margin="39,155,-144,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="106" Grid.Column="1"/>
+                <Label x:Name="label19_Copy5" Content="Date:" HorizontalAlignment="Left" Margin="639,53,-682,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Grid.Column="1" Height="29" Width="44"/>
+                <Label x:Name="label19_Copy6" Content="Terms:" HorizontalAlignment="Left" Margin="635,87,-687,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Grid.Column="1" Height="29" Width="53"/>
+                <Label x:Name="label12_Copy2" Content="Requested Items:" HorizontalAlignment="Left" Margin="10,198,-148,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31" Width="139" Grid.Column="1"/>
+                <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="9,227,-808,0" VerticalAlignment="Top" Grid.Column="1"/>
+                <Label x:Name="label12_Copy3" Content="Other Details" HorizontalAlignment="Left" Margin="9,488,-117,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31" Width="109" Grid.Column="1"/>
+                <Border BorderBrush="Black" BorderThickness="1" Margin="9,517,-791,0" VerticalAlignment="Top" Grid.Column="1"/>
+                <Label x:Name="label19_Copy20" Content="{Binding SelectedCustomerSupplier.CompanyName}" HorizontalAlignment="Left" Margin="110,53,-215,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="106" Grid.Column="1"/>
+                <TextBox x:Name="tinNumTb" HorizontalAlignment="Left" Height="24" Margin="111,87,-310,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Grid.Column="1"/>
+                <Label x:Name="label19_Copy21" Content="{Binding SelectedCustomerSupplier.CompanyAddress}" HorizontalAlignment="Left" Margin="111,121,-229,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="119" Grid.Column="1"/>
+                <TextBox x:Name="busStyleTb" HorizontalAlignment="Left" Height="24" Margin="150,159,-309,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Grid.Column="1"/>
+                <Label x:Name="label19_Copy22" Content="{Binding SelectedCustomerSupplier.CompanyAddress}" HorizontalAlignment="Left" Margin="689,53,-808,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1" Height="29" Width="120"/>
+                <xctk:IntegerUpDown x:Name="dueDateTb" HorizontalAlignment="Left" Margin="693,91,-748,0" VerticalAlignment="Top" Width="56" Grid.Column="1" Height="20" RenderTransformOrigin="-0.482,0.45"/>
+                <Label x:Name="label19_Copy23" Content="Days" HorizontalAlignment="Left" Margin="754,87,-793,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1" Height="29" Width="40"/>
+                <DataGrid x:Name="itemDg_Copy" Margin="26,241,-793,0" ItemsSource="{Binding RequestedItems}" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="False" IsReadOnly="True" VerticalAlignment="Top" Height="242" SelectedItem="{Binding SelectedRequestedItem}" Grid.Column="1"  >
+                    <DataGrid.Columns >
+                        <!--<DataGridTextColumn Binding="{Binding totalAmountMarkUp}" ClipboardContentBinding="{x:Null}" Header="Total + Markup Price" Width="200"  />-->
+                        <DataGridTextColumn Binding="{Binding itemCode}" ClipboardContentBinding="{x:Null}" Header="Item Code" Width="100" CanUserResize="False" />
+                        <DataGridTextColumn Binding="{Binding itemName}" ClipboardContentBinding="{x:Null}" Header="Item Name" Width="100" CanUserResize="False" />
+                        <DataGridTemplateColumn Width="200" CanUserResize="False" Header="Description" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text= "{Binding itemDesc}" ClipToBounds="True" TextWrapping="Wrap"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!--<DataGridTextColumn Binding="{Binding itemTypeName}" ClipboardContentBinding="{x:Null}" Header="Item Type" Width="100" CanUserResize="False" />-->
+                        <DataGridTemplateColumn Header="Item Type" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label>
+                                        <Label.Style>
+                                            <Style TargetType="{x:Type Label}">
+                                                <Setter Property="Content" Value="{Binding itemType}" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding itemType}" Value="0">
+                                                        <Setter Property="Content" Value="Product" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding itemType}" Value="1">
+                                                        <Setter Property="Content" Value = "Serivce" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Qty" Width="60">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text= "{Binding qty}" ClipToBounds="True" TextWrapping="Wrap"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Binding="{Binding unitPriceMarkUp}" ClipboardContentBinding="{x:Null}" Header="Unit Price" Width="100"  />
+                        <DataGridTextColumn Binding="{Binding totalAmountMarkUp}" ClipboardContentBinding="{x:Null}" Header="Total Amount" Width="100"  />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel Grid.Column="1" Margin="39,540,-229,0" Orientation="Vertical" VerticalAlignment="Top" Height="182">
+                    <WrapPanel Margin="0" Orientation="Horizontal">
+                        <Label x:Name="label19_Copy7" Content="Vatable Sales:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="100"/>
+                        <Label x:Name="vatableSalesLbl" Content="{Binding VatableSale}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                    </WrapPanel>
+                    <WrapPanel Margin="0" Orientation="Horizontal">
+                        <Label x:Name="label19_Copy8" Content="VAT-Exempted Sales:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="148"/>
+                        <Label x:Name="vatExcemptedSalesLbl" Content="{Binding VatExemptedSales}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                    </WrapPanel>
+                    <WrapPanel Margin="0" Orientation="Horizontal">
+                        <Label x:Name="label19_Copy9" Content="Zero - Rated Sales:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="133"/>
+                        <Label x:Name="zeroRatedSalesLbl" Content="{Binding ZeroRatedSales}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                    </WrapPanel>
+                    <WrapPanel Margin="0" Orientation="Horizontal">
+                        <Label x:Name="label19_Copy10" Content="VAT Amount" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="93"/>
+                        <Label x:Name="vatAmountLbl" Content="{Binding VatAmount}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29" ContentStringFormat="{}{0:0.##}"/>
+                    </WrapPanel>
+                    <WrapPanel Margin="0" Orientation="Horizontal">
+                        <Label x:Name="label19_Copy11" Content="TOTAL SALES:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="100"/>
+                        <Label x:Name="totalSalesLbl" Content="{Binding TotalSales}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                    </WrapPanel>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Margin="519,540,-748,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="246" Width="230">
+                    <WrapPanel Margin="0">
+                        <Label x:Name="label19_Copy12" Content="Total Sale VAT Inclusive:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="168"/>
+                        <Label x:Name="totalSalesVatIncluLbl" Content="{Binding TotalSales}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                    </WrapPanel>
+                    <WrapPanel Margin="0" Orientation="Horizontal">
+                        <Label x:Name="label19_Copy13" Content="Less: VAT" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="70"/>
+                        <Label x:Name="vatAmountLbl1" Content="{Binding VatAmount}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                    </WrapPanel>
+                    <WrapPanel Margin="0" Orientation="Horizontal">
+                        <Label x:Name="label19_Copy14" Content="TOTAL:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="56"/>
+                        <Label x:Name="totalSalesLbl1" Content="{Binding TotalSalesNoVat}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                    </WrapPanel>
+                    <WrapPanel Margin="0" Orientation="Horizontal">
+                        <Label x:Name="label19_Copy15" Content="Less: SC/PWD Discount:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="167"/>
+                        <Label x:Name="discountLbl" Content="{Binding DiscountAmount}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                    </WrapPanel>
+                    <WrapPanel Margin="0" Orientation="Horizontal">
+                        <Label x:Name="label19_Copy16" Content="Total Due:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="76"/>
+                        <Label x:Name="totalDueLbl" Content="{Binding VatableSale}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                    </WrapPanel>
+                    <WrapPanel Margin="0" Orientation="Horizontal">
+                        <Label x:Name="label19_Copy17" Content="Less: Withholding Tax:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="157"/>
+                        <Label x:Name="withHoldingTaxLbl" Content="{Binding WithHoldingTax}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                    </WrapPanel>
+                    <WrapPanel Margin="0" Orientation="Horizontal">
+                        <Label x:Name="label19_Copy18" Content="Add: VAT" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="71"/>
+                        <Label x:Name="vatAmountLbl2" Content="{Binding VatAmount}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                    </WrapPanel>
+                    <WrapPanel Orientation="Horizontal" Height="29">
+                        <Label x:Name="label19_Copy19" Content="AMOUNT DUE:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="105"/>
+                        <Label x:Name="totalDue" Content="{Binding TotalSales}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29" Width="18"/>
+                    </WrapPanel>
+                </StackPanel>
+                <Label x:Name="label19_Copy" Content="P.O. #:" HorizontalAlignment="Left" Margin="643,155,-687,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Grid.Column="1"/>
+                <TextBox x:Name="purchaseOrdNumTb" HorizontalAlignment="Left" Height="24" Margin="693,160,-852,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Grid.Column="1"/>
+            </Grid>
 
-            </ScrollViewer>
+        </ScrollViewer>
 
-            <StackPanel Margin="0,0,10,9" Height="26" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="195" Orientation="Horizontal" FlowDirection="RightToLeft">
-                <Button x:Name="invoiceNext" Content="Next" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" Height="26"  FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="5,0,10,0" Click="invoiceNext_Click"/>
-                <Button x:Name="invoiceBack" Content="Back" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="84" Height="26"  Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="10,0,5,0" Click="invoiceBack_Click"/>
-            </StackPanel>
+        <StackPanel Margin="0,0,10,9" Height="26" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="195" Orientation="Horizontal" FlowDirection="RightToLeft">
+            <Button x:Name="invoiceNext" Content="Next" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" Height="26"  FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="5,0,10,0" Click="invoiceNext_Click"/>
+            <Button x:Name="invoiceBack" Content="Back" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="84" Height="26"  Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="10,0,5,0" Click="invoiceBack_Click"/>
+        </StackPanel>
 
-        </Grid>
     </Grid>
 </UserControl>

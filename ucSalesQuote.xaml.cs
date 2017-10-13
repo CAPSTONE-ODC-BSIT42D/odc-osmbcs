@@ -39,13 +39,21 @@ namespace prototype2
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
 
         public event EventHandler SaveCloseButtonClicked;
+        public event EventHandler ConvertToInvoice;
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
             var handler = SaveCloseButtonClicked;
             if (handler != null)
                 handler(this, e);
         }
-            
+
+        protected virtual void OnConvertToInvoice(RoutedEventArgs e)
+        {
+            var handler = ConvertToInvoice;
+            if (handler != null)
+                handler(this, e);
+        }
+
         private void transRequestBack_Click(object sender, RoutedEventArgs e)
         {
             if (newRequisitionGrid.IsVisible)
@@ -147,7 +155,7 @@ namespace prototype2
                     filename = dlg.FileName;
                     renderer.PdfDocument.Save(filename);
                 }
-
+                OnSaveCloseButtonClicked(e);
             }
         }
         private void selectCustomerBtn_Click(object sender, RoutedEventArgs e)
@@ -1021,43 +1029,7 @@ namespace prototype2
 
         private void convertToInvoiceBtn_Click(object sender, RoutedEventArgs e)
         {
-            //foreach (var element in transQuoatationGridForm.Children)
-            //{
-            //    if (element is Grid)
-            //    {
-            //        if (!(((Grid)element).Name.Equals(quotationsGridHome.Name)))
-            //        {
-            //            ((Grid)element).Visibility = Visibility.Collapsed;
-            //        }
-            //        else
-            //            ((Grid)element).Visibility = Visibility.Visible;
-            //    }
-            //}
-            //foreach (var element in trasanctionGrid.Children)
-            //{
-            //    if (element is Grid)
-            //    {
-            //        if (!(((Grid)element).Name.Equals(transInvoiceGrid.Name)))
-            //        {
-            //            ((Grid)element).Visibility = Visibility.Collapsed;
-            //        }
-            //        else
-            //            ((Grid)element).Visibility = Visibility.Visible;
-            //    }
-            //}
-            //foreach (var element in transInvoiceGrid.Children)
-            //{
-            //    if (element is UserControl)
-            //    {
-            //        if (!(((UserControl)element).Name.Equals(ucInvoice.Name)))
-            //        {
-            //            ((UserControl)element).Visibility = Visibility.Collapsed;
-            //        }
-            //        else
-            //            ((UserControl)element).Visibility = Visibility.Visible;
-            //    }
-            //}
-            //computeInvoice();
+            OnConvertToInvoice(e);
         }
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -1077,6 +1049,8 @@ namespace prototype2
                     }
                 }
                 closeModals();
+                if(MainVM.SelectedSalesQuote!=null)
+                    loadSalesQuoteToUi();
             }
             
         }

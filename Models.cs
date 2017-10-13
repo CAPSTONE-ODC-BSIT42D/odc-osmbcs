@@ -1044,11 +1044,11 @@ namespace prototype2
 
         }
 
-        protected string invoiceNoChar;
-        public string invoiceNoChar_
+        protected string invoiceNo;
+        public string invoiceNo_
         {
-            get { return invoiceNoChar; }
-            set { SetProperty(ref invoiceNoChar, value); }
+            get { return invoiceNo; }
+            set { SetProperty(ref invoiceNo, value); }
         }
 
         protected int custID;
@@ -1098,6 +1098,13 @@ namespace prototype2
         {
             get { return dueDate; }
             set { SetProperty(ref dueDate, value); }
+        }
+
+        protected int terms;
+        public int terms_
+        {
+            get { return terms; }
+            set { SetProperty(ref terms, value); }
         }
 
         protected string purchaseOrderNumber;

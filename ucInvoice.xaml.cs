@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using MigraDoc.DocumentObjectModel;
+using MigraDoc.Rendering;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -47,18 +48,36 @@ namespace prototype2
         {
             if (newInvoiceForm.IsVisible)
             {
+                salesInvoiceToMemory();
                 newInvoiceForm.Visibility = Visibility.Collapsed;
                 documentViewer.Visibility = Visibility.Visible;
-            }
-            else if (documentViewer.IsVisible)
-            {
-                salesInvoiceToMemory();
+                invoiceNext.Content = "Save";
                 InvoiceDocument df = new InvoiceDocument();
-                document = df.CreateDocument("SalesQuote", "asdsadsa");
+                document = df.CreateDocument(sqNo: MainVM.SelectedSalesInvoice.sqNoChar_, author: "admin");
                 string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
                 documentViewer.pagePreview.Ddl = ddl;
             }
-                
+            else if (documentViewer.IsVisible)
+            {
+                invoiceNext.Content = "Next";
+                PdfDocumentRenderer renderer = new PdfDocumentRenderer(true);
+                renderer.Document = document;
+                renderer.RenderDocument();
+                string filename = @"d:\test\" + MainVM.SelectedSalesInvoice.sqNoChar_ + "-INVOICE.pdf";
+                saveDataToDb();
+                SaveFileDialog dlg = new SaveFileDialog();
+                dlg.FileName = "" + MainVM.SelectedSalesQuote.sqNoChar_;
+                dlg.DefaultExt = ".pdf";
+                dlg.Filter = "Text documents (.pdf)|*.pdf";
+                if (dlg.ShowDialog() == true)
+                {
+                    filename = dlg.FileName;
+                    renderer.PdfDocument.Save(filename);
+                }
+                OnSaveCloseButtonClicked(e);
+
+            }
+
         }
 
         private void invoiceBack_Click(object sender, RoutedEventArgs e)
@@ -111,7 +130,42 @@ namespace prototype2
             stringChars += "-";
             stringChars += DateTime.Now.ToString("yyyy-MM-dd");
 
-            MainVM.SelectedSalesInvoice = (new SalesInvoice() { });
+            DateTime dueDate = new DateTime();
+            dueDate = DateTime.Now.AddDays(int.Parse(dueDateTb.Value.ToString()));
+
+            MainVM.SelectedSalesInvoice = (new SalesInvoice() { sqNoChar_ = MainVM.SelectedSalesQuote.sqNoChar_, busStyle_ = busStyleTb.Text, tin_ = tinNumTb.Text, custID_ = MainVM.SelectedSalesQuote.custID_, dueDate_ = dueDate, vat_ = MainVM.VatAmount_, withholdingTax_ = MainVM.WithHoldingTax_, purchaseOrderNumber_ = purchaseOrdNumTb.Text, terms_ = (int)dueDateTb.Value});
+
+       
+        }
+
+        void saveDataToDb()
+        {
+            var dbCon = DBConnection.Instance();
+            bool noError = true;
+            if (dbCon.IsConnect())
+            {
+                string query = "INSERT INTO `odc_db`.`sales_invoice_t`(custID`,`empID`,`sqNoChar`,`TIN`,`busStyle`,`dateOfIssue`,`dueDate`,`purchaseOrderNumber`,`paymentStatus`,`vat`,`sc_pwd_dsicount`,`withholdingTax`,`notes`)" +
+                    " VALUES " +
+                    "('" +
+                    MainVM.SelectedSalesInvoice.custID_ + "','" +
+                    MainVM.SelectedSalesInvoice.empID_ + "','" +
+                    MainVM.SelectedSalesInvoice.sqNoChar_ + "','" +
+                    MainVM.SelectedSalesInvoice.tin_ + "','" +
+                    MainVM.SelectedSalesInvoice.busStyle_ + "','" +
+                    MainVM.SelectedSalesInvoice.dateOfIssue_ + "','" +
+                    MainVM.SelectedSalesInvoice.dueDate_ + "','" +
+                    MainVM.SelectedSalesInvoice.purchaseOrderNumber_ + "','" +
+                    MainVM.SelectedSalesInvoice.paymentStatus_ + "','" +
+                    MainVM.SelectedSalesInvoice.vat_ + "','" +
+                    MainVM.SelectedSalesInvoice.sc_pwd_discount_ + "','" +
+                    MainVM.SelectedSalesInvoice.withholdingTax_ + "','" +
+                    MainVM.SelectedSalesInvoice.notes_ +
+                    "); ";
+                if (dbCon.insertQuery(query, dbCon.Connection))
+                {
+                    MessageBox.Show("Inovice is Saved");
+                }
+            }
         }
     }
 }
