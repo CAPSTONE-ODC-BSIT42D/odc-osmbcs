@@ -147,9 +147,13 @@
             <ColumnDefinition Width="220*"/>
         </Grid.ColumnDefinitions>
         <Grid Background="#FF002F2F" VerticalAlignment="Top" Height="100">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="97*"/>
+                <ColumnDefinition Width="143*"/>
+            </Grid.ColumnDefinitions>
             <Image x:Name="image" Width="45" Source="Resources/user-16.png" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="47"/>
-            <Label x:Name="label" Content="Lewis Ken Kinaadman" Margin="60,19,10,0" Foreground="White" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Top" Height="29" Panel.ZIndex="-1"/>
-            <Button x:Name="logoutBtn" HorizontalAlignment="Right" Margin="0,62,10,0" VerticalAlignment="Top" Width="26" Background="{x:Null}" BorderBrush="White" Height="28" ToolTip="Logout" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+            <Label x:Name="label" Content="{Binding SelectedEmployeeContractor.EmpFname}" Margin="60,19,10,0" Foreground="White" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Top" Height="29" Panel.ZIndex="-1" Grid.ColumnSpan="2"/>
+            <Button x:Name="logoutBtn" HorizontalAlignment="Right" Margin="0,62,10,0" VerticalAlignment="Top" Width="26" Background="{x:Null}" BorderBrush="White" Height="28" ToolTip="Logout" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Column="1">
                 <Viewbox x:Name="vbx1" Stretch="Fill" Margin="2" >
                     <Canvas x:Name="Capa_1" Height="19" Width="19">
                         <!--Unknown tag: metadata-->
@@ -653,7 +657,7 @@
                 </Grid>
             </Grid>
             <Grid x:Name="trasanctionGrid">
-                <Grid x:Name="transQuotationGrid" Margin="0,0,1,0" >
+                <Grid x:Name="transQuotationGrid" Margin="0,0,1,0" d:IsHidden="True" >
                     <Grid x:Name="quotationsGridHome" Margin="10" d:IsHidden="True" Width="915.2" >
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                             <Label x:Name="label18" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -808,10 +812,10 @@
                             <ComboBoxItem Content="APPROVED"/>
                         </ComboBox>
                     </Grid>
-                    <local:ucSalesQuote x:Name="ucSalesQuote" Margin="0"/>
+                    <local:ucSalesQuote x:Name="ucSalesQuote" Margin="0" Visibility="Collapsed"/>
 
                 </Grid>
-                <Grid x:Name="transInvoiceGrid" Margin="0,0,1,0" d:IsHidden="True" >
+                <Grid x:Name="transInvoiceGrid" Margin="0,0,1,0" >
                     <Grid x:Name="invoiceGridHome" Margin="10" d:IsHidden="True" >
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                             <Label x:Name="label22" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -972,7 +976,7 @@
                             <ComboBoxItem Content="APPROVED"/>
                         </ComboBox>
                     </Grid>
-                    <local:ucInvoice x:Name="ucInvoice" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"/>
+                    <local:ucInvoice x:Name="ucInvoice" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Visibility="Collapsed"/>
 
                 </Grid>
             </Grid>

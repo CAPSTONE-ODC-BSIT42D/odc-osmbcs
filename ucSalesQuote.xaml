@@ -236,8 +236,8 @@
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <xctk:IntegerUpDown x:Name="markupPriceTb" Margin="209,550,0,0" VerticalAlignment="Top" ValueChanged="markupPriceTb_ValueChanged" VerticalContentAlignment="Center" Height="24" DefaultValue="1" Minimum="1" DisplayDefaultValueOnEmptyText="True" ParsingNumberStyle="Integer" Text="{Binding SelectedSalesQuote.markUpPercent_}" FontWeight="Normal" FontStyle="Normal" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="104"/>
-                        <xctk:IntegerUpDown x:Name="discountPriceTb" HorizontalAlignment="Left" Margin="209,582,0,0" VerticalAlignment="Top" Width="104"  VerticalContentAlignment="Center" Height="22" DefaultValue="0" Minimum="0" DisplayDefaultValueOnEmptyText="True" ParsingNumberStyle="Integer" FontWeight="Normal" FontStyle="Normal" Text="{Binding SelectedSalesQuote.discountPercent_}" HorizontalContentAlignment="Center" ValueChanged="discountPriceTb_ValueChanged"/>
+                        <xctk:DecimalUpDown x:Name="markupPriceTb" Margin="209,550,0,0" VerticalAlignment="Top" ValueChanged="markupPriceTb_ValueChanged" VerticalContentAlignment="Center" Height="24" DefaultValue="1" Minimum="1" DisplayDefaultValueOnEmptyText="True" ParsingNumberStyle="AllowDecimalPoint" Text="{Binding SelectedSalesQuote.markUpPercent_}" FontWeight="Normal" FontStyle="Normal" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="104"/>
+                        <xctk:DecimalUpDown x:Name="discountPriceTb" HorizontalAlignment="Left" Margin="209,582,0,0" VerticalAlignment="Top" Width="104"  VerticalContentAlignment="Center" Height="22" DefaultValue="0" Minimum="0" DisplayDefaultValueOnEmptyText="True" ParsingNumberStyle="Integer" FontWeight="Normal" FontStyle="Normal" Text="{Binding SelectedSalesQuote.discountPercent_}" HorizontalContentAlignment="Center" ValueChanged="discountPriceTb_ValueChanged"/>
                         <Label x:Name="label32_Copy3" Content="Total Price:" HorizontalAlignment="Left" Margin="10,544,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Segoe UI" Grid.Column="1" RenderTransformOrigin="0.955,0.481"/>
                         <Label x:Name="totalPriceLbl" Content="Total Price:" HorizontalAlignment="Left" Margin="136,544,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Segoe UI" FontWeight="Normal" Grid.Column="1"/>
                     </Grid>
@@ -303,7 +303,7 @@
             </StackPanel>
 
         </Grid>
-        <Grid x:Name="formGridBg" Margin="0" Background="#80000000">
+        <Grid x:Name="formGridBg" Margin="0" Background="#80000000" d:IsHidden="True">
             <Grid x:Name="additionalFeesFormGrid" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="380" d:IsHidden="True">
                 <ScrollViewer x:Name="additionalFeesFormGridSv" MinWidth="600" Margin="0,0,0,40" VerticalScrollBarVisibility="Auto">
                     <Grid x:Name="additionalFeesFormGrid1" Background="White">

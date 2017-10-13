@@ -105,11 +105,14 @@
     <Reference Include="PdfSharp.Charting-wpf, Version=1.50.4619.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>packages\PDFsharp-MigraDoc-wpf.1.50.4619-beta4c\lib\net30\PdfSharp.Charting-wpf.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Gantt.WPF, Version=15.3460.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
-    <Reference Include="Syncfusion.Grid.Wpf, Version=15.3451.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
-    <Reference Include="Syncfusion.GridCommon.Wpf, Version=15.3451.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
-    <Reference Include="Syncfusion.ProjIO.Base, Version=15.3451.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
-    <Reference Include="Syncfusion.Shared.Wpf, Version=15.3451.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="Syncfusion.Pdf.Base, Version=15.3451.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
+    <Reference Include="Syncfusion.ReportControls.WPF, Version=15.3451.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
+    <Reference Include="Syncfusion.ReportDesigner.WPF, Version=15.3451.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
+    <Reference Include="Syncfusion.ReportViewer.WPF, Version=15.3451.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
+    <Reference Include="Syncfusion.ReportWriter.Base, Version=15.3451.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
+    <Reference Include="Syncfusion.Shared.Wpf, Version=15.3451.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
+    <Reference Include="Syncfusion.Tools.Wpf, Version=15.3451.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
     <Reference Include="System">
       <Private>True</Private>
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -122,6 +125,7 @@
       <Private>True</Private>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
+    <Reference Include="System.Printing" />
     <Reference Include="system.windows.controls.datavisualization.toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
@@ -239,6 +243,9 @@
     <Compile Include="ucProductsCRUD.xaml.cs">
       <DependentUpon>ucProductsCRUD.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ucReports.xaml.cs">
+      <DependentUpon>ucReports.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ucSalesQuote.xaml.cs">
       <DependentUpon>ucSalesQuote.xaml</DependentUpon>
     </Compile>
@@ -289,6 +296,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ucReports.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ucSalesQuote.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -303,6 +314,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Properties\DataSources\Representative.datasource" />
     <None Include="prototype2_TemporaryKey.pfx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -320,9 +332,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\user-16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Report1.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\photo-camera.png" />
@@ -349,6 +358,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Report1.rdlc" />
     <EmbeddedResource Include="Resources\odclogo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

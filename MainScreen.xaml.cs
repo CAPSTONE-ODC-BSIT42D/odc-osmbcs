@@ -52,7 +52,9 @@ namespace prototype2
             
             this.ucProduct.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
             this.ucInvoice.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
-            this.ucInvoice.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
+
+            this.ucSalesQuote.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
+            this.ucSalesQuote.ConvertToInvoice += convertToInvoice_BtnClicked;
             foreach (var obj in containerGrid.Children)
             {
                 ((Grid)obj).Visibility = Visibility.Collapsed;
@@ -109,8 +111,7 @@ namespace prototype2
 
             MainVM.SalesQuotes.Clear();
 
-            MainVM.SelectedCustomerSupplier = null;
-            MainVM.SelectedEmployeeContractor = null;
+            
 
             if (dbCon.IsConnect())
             {
@@ -352,10 +353,69 @@ namespace prototype2
                         paymentIsLanded = true;
                     }
                     MainVM.SelectedCustomerSupplier = MainVM.Customers.Where(x => x.CompanyID.Equals(dr["custID"].ToString())).FirstOrDefault();
+
+                    int custId;
+                    int.TryParse(dr["custID"].ToString(),out custId);
+
+                    int custRepId;
+                    int.TryParse(dr["custRepID"].ToString(), out custRepId);
+
+                    int estDelivery;
+                    int.TryParse(dr["estDelivery"].ToString(), out estDelivery);
+
+                    int validityDays;
+                    int.TryParse(dr["validityDays"].ToString(), out validityDays);
+
+                    decimal vat;
+                    decimal.TryParse(dr["vat"].ToString(), out vat);
+
+                    int termsDays;
+                    int.TryParse(dr["termsDays"].ToString(), out termsDays);
+
+                    int termsDP;
+                    int.TryParse(dr["termsDP"].ToString(), out termsDP);
+
+                    decimal penaltyAmt;
+                    decimal.TryParse(dr["penaltyAmt"].ToString(), out penaltyAmt);
+
+                    int penaltyPerc;
+                    int.TryParse(dr["penaltyPerc"].ToString(), out penaltyPerc);
+
+                    decimal markUpPerc;
+                    decimal.TryParse(dr["markUpPercent"].ToString(), out markUpPerc);
+
+                    decimal discountPerc;
+                    decimal.TryParse(dr["discountPercent"].ToString(), out discountPerc);
+
                     if (MainVM.SelectedCustomerSupplier != null)
                     {
-                        MainVM.SalesQuotes.Add(new SalesQuote() { sqNoChar_ = dr["sqNoChar"].ToString(), dateOfIssue_ = dateOfIssue, custID_ = int.Parse(dr["custID"].ToString()), custRepID_ = int.Parse(dr["custRepID"].ToString()), custName_ = MainVM.SelectedCustomerSupplier.CompanyName, quoteSubject_ = dr["quoteSubject"].ToString(), priceNote_ = dr["priceNote"].ToString(), deliveryDate_ = deliveryDate, estDelivery_ = int.Parse(dr["estDelivery"].ToString()), validityDays_ = int.Parse(dr["validityDays"].ToString()), validityDate_ = validityDate, otherTerms_ = dr["otherTerms"].ToString(), expiration_ = expiration, vat_ = Decimal.Parse(dr["vat"].ToString()), vatexcluded_ = vatIsExcluded, paymentIsLanded_ = paymentIsLanded, paymentCurrency_ = dr["paymentCurrency"].ToString(), status_ = dr["status"].ToString(), termsDays_ = int.Parse(dr["termsDays"].ToString()), termsDP_ = int.Parse(dr["termsDP"].ToString()), penaltyAmt_ = Decimal.Parse(dr["penaltyAmt"].ToString()), penaltyPercent_ = int.Parse(dr["penaltyPerc"].ToString()), markUpPercent_ = decimal.Parse(dr["markUpPercent"].ToString()), discountPercent_ = decimal.Parse(dr["discountPercent"].ToString()) });
-
+                        MainVM.SalesQuotes.Add(new SalesQuote()
+                        {
+                            sqNoChar_ = dr["sqNoChar"].ToString(),
+                            dateOfIssue_ = dateOfIssue,
+                            custID_ = custId,
+                            custRepID_ = custRepId,
+                            custName_ = MainVM.SelectedCustomerSupplier.CompanyName,
+                            quoteSubject_ = dr["quoteSubject"].ToString(),
+                            priceNote_ = dr["priceNote"].ToString(),
+                            deliveryDate_ = deliveryDate,
+                            estDelivery_ = estDelivery,
+                            validityDays_ = validityDays,
+                            validityDate_ = validityDate,
+                            otherTerms_ = dr["otherTerms"].ToString(),
+                            expiration_ = expiration,
+                            vat_ = vat,
+                            vatexcluded_ = vatIsExcluded,
+                            paymentIsLanded_ = paymentIsLanded,
+                            paymentCurrency_ = dr["paymentCurrency"].ToString(),
+                            status_ = dr["status"].ToString(),
+                            termsDays_ = termsDays,
+                            termsDP_ = termsDP,
+                            penaltyAmt_ = penaltyAmt,
+                            penaltyPercent_ = penaltyAmt,
+                            markUpPercent_ = markUpPerc,
+                            discountPercent_ = discountPerc
+                        });
                     }
                 }
                 query = "SELECT * FROM services_availed_t;";
@@ -407,6 +467,14 @@ namespace prototype2
                 }
                 dbCon.Close();
             }
+        }
+
+        private void resetValueofSelectedVariables()
+        {
+            MainVM.SelectedCustomerSupplier = null;
+            MainVM.SelectedEmployeeContractor = null;
+            MainVM.SelectedAddedItem = null;
+            MainVM.SelectedSalesQuote = null;
         }
 
         private void dashBoardBtn_Click(object sender, RoutedEventArgs e)
@@ -612,9 +680,42 @@ namespace prototype2
 
         private void saveCloseBtn_SaveCloseButtonClicked(object sender, EventArgs e)
         {
+            if (ucSalesQuote.IsVisible)
+            {
+                foreach (var obj in containerGrid.Children)
+                {
+                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                }
+                trasanctionGrid.Visibility = Visibility.Visible;
+                foreach (var obj in trasanctionGrid.Children)
+                {
+                    if (obj is Grid)
+                        if (((Grid)obj).Equals(transQuotationGrid))
+                            ((Grid)obj).Visibility = Visibility.Visible;
+                        else
+                            ((Grid)obj).Visibility = Visibility.Collapsed;
+                }
+                foreach (var obj in transQuotationGrid.Children)
+                {
+                    if (obj is Grid)
+                    {
+                        if (((Grid)obj).Equals(quotationsGridHome))
+                        {
+                            headerLbl.Content = "Trasanction - Sales Quote";
+                            ((Grid)obj).Visibility = Visibility.Visible;
+                            settingsBtn.Visibility = Visibility.Hidden;
+                        }
+                    }
+                    else
+                        ((UserControl)obj).Visibility = Visibility.Collapsed;
+
+                }
+            }
             closeModals();
             worker.RunWorkerAsync();
         }
+
+        
 
         //Maintenance
 
@@ -1595,57 +1696,27 @@ namespace prototype2
             }
             ucSalesQuote.viewSalesQuoteBtns.Visibility = Visibility.Collapsed;
             ucSalesQuote.newSalesQuoteBtns.Visibility = Visibility.Visible;
+            resetValueofSelectedVariables();
         }
-        
-        
 
         
+
         private void viewQuoteRecordBtn_Click(object sender, RoutedEventArgs e)
         {
-            //viewSalesQuoteBtns.Visibility = Visibility.Visible;
-            //newSalesQuoteBtns.Visibility = Visibility.Collapsed;
-
-            //foreach (var element in transQuotationGrid.Children)
-            //{
-            //    if (element is Grid)
-            //    {
-            //        if (!(((Grid)element).Name.Equals(transQuoatationGridForm.Name)))
-            //        {
-            //            ((Grid)element).Visibility = Visibility.Collapsed;
-            //        }
-            //        else
-            //            ((Grid)element).Visibility = Visibility.Visible;
-            //    }
-            //}
-            //foreach (var element in transQuoatationGridForm.Children)
-            //{
-            //    if (element is Grid)
-            //    {
-            //        if (!(((Grid)element).Name.Equals(newRequisitionGrid.Name)))
-            //        {
-            //            ((Grid)element).Visibility = Visibility.Collapsed;
-            //        }
-            //        else
-            //            ((Grid)element).Visibility = Visibility.Visible;
-            //    }
-            //}
-            //foreach (var obj in newRequisitionGridForm.Children)
-            //{
-            //    bool isEnabled = false;
-            //    if (obj is Button)
-            //        ((Button)obj).IsEnabled = isEnabled;
-            //    else if (obj is Xceed.Wpf.Toolkit.IntegerUpDown)
-            //        ((Xceed.Wpf.Toolkit.IntegerUpDown)obj).IsEnabled = isEnabled;
-            //}
-            //foreach (var obj in newRequisitionGridForm.Children)
-            //{
-            //    bool isEnabled = false;
-            //    if (obj is Button)
-            //        ((Button)obj).IsEnabled = isEnabled;
-            //    else if (obj is Xceed.Wpf.Toolkit.IntegerUpDown)
-            //        ((Xceed.Wpf.Toolkit.IntegerUpDown)obj).IsEnabled = isEnabled;
-            //}
-            //loadSalesQuoteToUi();
+            foreach (var element in transQuotationGrid.Children)
+            {
+                if (element is UserControl)
+                {
+                    if (!(((UserControl)element).Name.Equals(ucSalesQuote.Name)))
+                    {
+                        ((UserControl)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((UserControl)element).Visibility = Visibility.Visible;
+                }
+            }
+            ucSalesQuote.viewSalesQuoteBtns.Visibility = Visibility.Visible;
+            ucSalesQuote.newSalesQuoteBtns.Visibility = Visibility.Collapsed;
         }
 
         private void editQuoteRecordBtn_Click(object sender, RoutedEventArgs e)
@@ -1666,6 +1737,51 @@ namespace prototype2
 
         }
 
+        private void convertToInvoice_BtnClicked(object sender, EventArgs e)
+        {
+            foreach (var obj in transQuotationGrid.Children)
+            {
+                if (obj is Grid)
+                {
+                    if (((Grid)obj).Equals(quotationsGridHome))
+                    {
+                        
+                        ((Grid)obj).Visibility = Visibility.Visible;
+                        settingsBtn.Visibility = Visibility.Hidden;
+                    }
+                }
+                else
+                    ((UserControl)obj).Visibility = Visibility.Collapsed;
+
+            }
+            foreach (var element in trasanctionGrid.Children)
+            {
+                if (element is Grid)
+                {
+                    if (!(((Grid)element).Name.Equals(transInvoiceGrid.Name)))
+                    {
+                        ((Grid)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((Grid)element).Visibility = Visibility.Visible;
+                }
+            }
+            headerLbl.Content = "Trasanction - Sales Invoice";
+            foreach (var element in transInvoiceGrid.Children)
+            {
+                if (element is UserControl)
+                {
+                    if (!(((UserControl)element).Name.Equals(ucInvoice.Name)))
+                    {
+                        ((UserControl)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((UserControl)element).Visibility = Visibility.Visible;
+                }
+            }
+            computeInvoice();
+        }
+
         void computeInvoice()
         {
             MainVM.SelectedRepresentative = MainVM.Representatives.Where(x => x.RepresentativeID.Equals(MainVM.SelectedCustomerSupplier.RepresentativeID.ToString())).FirstOrDefault();
@@ -1682,10 +1798,9 @@ namespace prototype2
                     itemName = MainVM.SelectedProduct.ItemName,
                     qty = item.ItemQty,
                     qtyEditable = true,
-                    totalAmount = item.TotalCost,
+                    totalAmountMarkUp = item.TotalCost,
                     itemType = 0,
-                    unitPrice = MainVM.SelectedProduct.CostPrice,
-
+                    unitPrice = MainVM.SelectedProduct.CostPrice
                 });
                 MainVM.VatableSale += item.TotalCost;
             }
@@ -1710,9 +1825,11 @@ namespace prototype2
             }
 
             MainVM.VatableSale = MainVM.VatableSale - (MainVM.VatableSale * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01));
+            MainVM.VatableSale = Math.Round(MainVM.VatableSale, 3);
             MainVM.TotalSalesNoVat = MainVM.VatableSale;
             MainVM.VatAmount = (MainVM.VatableSale * ((decimal)0.12));
             MainVM.TotalSales = MainVM.VatableSale + (MainVM.VatableSale * ((decimal)0.12));
+            MainVM.TotalSales = Math.Round(MainVM.TotalSales, 3);
         }
     }
 }
