@@ -242,6 +242,9 @@
     <Compile Include="ucSalesQuote.xaml.cs">
       <DependentUpon>ucSalesQuote.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControl1.xaml.cs">
+      <DependentUpon>UserControl1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModelEntity.cs" />
     <Compile Include="ViewModels.cs" />
     <Page Include="contactDetails.xaml">
@@ -293,6 +296,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControl1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -320,9 +327,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\user-16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Report1.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\photo-camera.png" />
