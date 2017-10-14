@@ -31,7 +31,7 @@ namespace prototype2
             InitializeComponent();
         }
         string empId = "";
-
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
         private void loginBtn_Click(object sender, RoutedEventArgs e)
         {
             var dbCon = DBConnection.Instance();
@@ -81,6 +81,7 @@ namespace prototype2
                         //Checks if the empID variable is null, if not do the toLogin(); function
                         if (!String.IsNullOrWhiteSpace(empId))
                         {
+                            
                             toLogin();
                             usernameTb.Clear();
                             passwordBox.Clear();

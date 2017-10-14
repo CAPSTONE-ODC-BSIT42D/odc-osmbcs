@@ -130,10 +130,13 @@ namespace prototype2
             stringChars += "-";
             stringChars += DateTime.Now.ToString("yyyy-MM-dd");
 
-            DateTime dueDate = new DateTime();
-            dueDate = DateTime.Now.AddDays(int.Parse(dueDateTb.Value.ToString()));
+            DateTime dateOfIssue = new DateTime();
+            dateOfIssue = DateTime.Now;
 
-            MainVM.SelectedSalesInvoice = (new SalesInvoice() { sqNoChar_ = MainVM.SelectedSalesQuote.sqNoChar_, busStyle_ = busStyleTb.Text, tin_ = tinNumTb.Text, custID_ = MainVM.SelectedSalesQuote.custID_, dueDate_ = dueDate, vat_ = MainVM.VatAmount_, withholdingTax_ = MainVM.WithHoldingTax_, purchaseOrderNumber_ = purchaseOrdNumTb.Text, terms_ = (int)dueDateTb.Value});
+            DateTime dueDate = new DateTime();
+            dueDate = dateOfIssue.AddDays(int.Parse(dueDateTb.Value.ToString()));
+
+            MainVM.SelectedSalesInvoice = (new SalesInvoice() { sqNoChar_ = MainVM.SelectedSalesQuote.sqNoChar_, busStyle_ = busStyleTb.Text, tin_ = tinNumTb.Text, custID_ = MainVM.SelectedSalesQuote.custID_, empID_ = int.Parse(MainVM.LoginEmployee_.EmpID), dueDate_ = dueDate, vat_ = MainVM.VatAmount_, withholdingTax_ = MainVM.WithHoldingTax_, purchaseOrderNumber_ = purchaseOrdNumTb.Text, terms_ = (int)dueDateTb.Value});
 
        
         }
@@ -144,7 +147,7 @@ namespace prototype2
             bool noError = true;
             if (dbCon.IsConnect())
             {
-                string query = "INSERT INTO `odc_db`.`sales_invoice_t`(`custID`,`empID`,`sqNoChar`,`TIN`,`busStyle`,`dateOfIssue`,`dueDate`,`purchaseOrderNumber`,`paymentStatus`,`vat`,`sc_pwd_dsicount`,`withholdingTax`,`notes`)" +
+                string query = "INSERT INTO `odc_db`.`sales_invoice_t`(`custID`,`empID`,`sqNoChar`,`TIN`,`busStyle`,`dateOfIssue`,`termDays`,`dueDate`,`purchaseOrderNumber`,`paymentStatus`,`vat`,`sc_pwd_dsicount`,`withholdingTax`,`notes`)" +
                     " VALUES " +
                     "('" +
                     MainVM.SelectedSalesInvoice.custID_ + "','" +
@@ -152,17 +155,44 @@ namespace prototype2
                     MainVM.SelectedSalesInvoice.sqNoChar_ + "','" +
                     MainVM.SelectedSalesInvoice.tin_ + "','" +
                     MainVM.SelectedSalesInvoice.busStyle_ + "','" +
-                    MainVM.SelectedSalesInvoice.dateOfIssue_ + "','" +
-                    MainVM.SelectedSalesInvoice.dueDate_ + "','" +
+                    MainVM.SelectedSalesInvoice.dateOfIssue_.ToString("yyyy-MM-dd") + "','" +
+                    MainVM.SelectedSalesInvoice.terms_ + "','" +
+                    MainVM.SelectedSalesInvoice.dueDate_.ToString("yyyy-MM-dd") + "','" +
                     MainVM.SelectedSalesInvoice.purchaseOrderNumber_ + "','" +
                     MainVM.SelectedSalesInvoice.paymentStatus_ + "','" +
                     MainVM.SelectedSalesInvoice.vat_ + "','" +
                     MainVM.SelectedSalesInvoice.sc_pwd_discount_ + "','" +
                     MainVM.SelectedSalesInvoice.withholdingTax_ + "','" +
                     MainVM.SelectedSalesInvoice.notes_ +
-                    "); ";
+                    "'); ";
                 if (dbCon.insertQuery(query, dbCon.Connection))
                 {
+                    query = "SELECT invoiceNo FROM sales_invoice_t ORDER BY invoiceNo DESC LIMIT 1;";
+                    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                    DataSet fromDb = new DataSet();
+                    DataTable fromDbTable = new DataTable();
+                    dataAdapter.Fill(fromDb, "t");
+                    fromDbTable = fromDb.Tables["t"];
+                    MainVM.SalesQuotes.Clear();
+                    foreach (DataRow dr in fromDbTable.Rows)
+                    {
+                        query = "INSERT INTO `odc_db`.`payment_hist_t` " +
+                        "(`custBalance`,`invoiceNo`) " +
+                        "VALUES " +
+                        "('" +
+                        MainVM.TotalDue + "','" +
+                        dr["invoiceNo"].ToString() + "','" +
+                        "')";
+                        dbCon.insertQuery(query, dbCon.Connection);
+                        query = "INSERT INTO `odc_db`.`payment_hist_t` " +
+                        "(`custBalance`,`invoiceNo`) " +
+                        "VALUES " +
+                        "('" +
+                        (MainVM.TotalDue - MainVM.TotalSalesWithOutDp) + "','" +
+                        dr["invoiceNo"].ToString() + "','" +
+                        "')";
+                        dbCon.insertQuery(query, dbCon.Connection);
+                    }
                     MessageBox.Show("Inovice is Saved");
                 }
             }

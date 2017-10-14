@@ -152,7 +152,7 @@
                 <ColumnDefinition Width="143*"/>
             </Grid.ColumnDefinitions>
             <Image x:Name="image" Width="45" Source="Resources/user-16.png" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="47"/>
-            <Label x:Name="label" Content="{Binding SelectedEmployeeContractor.EmpFname}" Margin="60,19,10,0" Foreground="White" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Top" Height="29" Panel.ZIndex="-1" Grid.ColumnSpan="2"/>
+            <Label x:Name="label" Content="{Binding LoginEmployee_.EmpFname}" Margin="60,19,10,0" Foreground="White" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Top" Height="29" Panel.ZIndex="-1" Grid.ColumnSpan="2"/>
             <Button x:Name="logoutBtn" HorizontalAlignment="Right" Margin="0,62,10,0" VerticalAlignment="Top" Width="26" Background="{x:Null}" BorderBrush="White" Height="28" ToolTip="Logout" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Column="1">
                 <Viewbox x:Name="vbx1" Stretch="Fill" Margin="2" >
                     <Canvas x:Name="Capa_1" Height="19" Width="19">
@@ -656,7 +656,7 @@
                     </Button>
                 </Grid>
             </Grid>
-            <Grid x:Name="trasanctionGrid" d:IsHidden="True">
+            <Grid x:Name="trasanctionGrid">
                 <Grid x:Name="transQuotationGrid" Margin="0,0,1,0" d:IsHidden="True" >
                     <Grid x:Name="quotationsGridHome" Margin="10" d:IsHidden="True" Width="915.2" >
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
@@ -976,14 +976,14 @@
                             <ComboBoxItem Content="APPROVED"/>
                         </ComboBox>
                     </Grid>
-                    <local:ucInvoice x:Name="ucInvoice" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Visibility="Collapsed"/>
+                    <local:ucInvoice x:Name="ucInvoice" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"/>
 
                 </Grid>
             </Grid>
             <Grid x:Name="serviceGrid" d:IsHidden="True">
                 <Grid Height="952" Margin="0,2"/>
             </Grid>
-            <Grid x:Name="reportsGrid">
+            <Grid x:Name="reportsGrid" d:IsHidden="True">
                 <local:UserControl1 Margin="10"/>
             </Grid>
             <Grid x:Name="maintenanceGrid" d:IsHidden="True">

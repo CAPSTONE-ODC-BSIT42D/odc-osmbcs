@@ -6,7 +6,11 @@
         xmlns:local="clr-namespace:prototype2"
         mc:Ignorable="d"
         Title="Login" Height="391.893" Width="485.781" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <StaticResource ResourceKey="MainVM"/>
+    </Window.DataContext>
     <Window.Resources>
+        
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <Style TargetType="{x:Type Button}">
             <Setter Property="Background" Value="#2C3E50"/>

@@ -45,6 +45,15 @@ namespace prototype2
         public String ProductDesc { get; set; }
         public String ProductUnit { get; set; }
         public decimal ProductPrice { get; set; }
+
+        protected Employee LoginEmployee = null;
+
+        public Employee LoginEmployee_
+        {
+            get { return LoginEmployee; }
+            set { SetProperty(ref LoginEmployee, value); }
+        }
+
         public int Edit { get; set; }
 
         public bool isEdit { get; set; }
@@ -62,10 +71,19 @@ namespace prototype2
             get { return VatableSales_; }
             set { SetProperty(ref VatableSales_, value); }
         }
+
         public decimal VatExemptedSales_;
-        public decimal VatExemptedSales {
+        public decimal VatExemptedSales
+        {
             get { return VatExemptedSales_; }
             set { SetProperty(ref VatExemptedSales_, value); }
+        }
+
+        public decimal TotalSalesWithOutDp_;
+        public decimal TotalSalesWithOutDp
+        {
+            get { return TotalSalesWithOutDp_; }
+            set { SetProperty(ref TotalSalesWithOutDp_, value); }
         }
 
         public decimal ZeroRatedSales_;

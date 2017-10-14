@@ -13,6 +13,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -40,6 +41,7 @@ namespace prototype2
             this.empID = empID;
             worker.DoWork += worker_DoWork;
             worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+            worker.RunWorkerAsync();
         }
 
         public static Commands commands = new Commands();
@@ -69,23 +71,23 @@ namespace prototype2
             dashboardGrid.Visibility = Visibility.Visible;
             settingsBtn.Visibility = Visibility.Hidden;
             formGridBg.Visibility = Visibility.Collapsed;
-            worker.RunWorkerAsync();
-
-            //loadDataToUi();
+            MainVM.LoginEmployee_ = MainVM.Employees.Where(x => x.EmpID.Equals(empID)).FirstOrDefault();
         }
 
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
             Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => { loadDataToUi(); }));
-
-
-
         }
 
         private void worker_RunWorkerCompleted(object sender,
                                                RunWorkerCompletedEventArgs e)
         {
-            //update ui once worker complete his work
+            
+        }
+
+        private void monitoringOfData()
+        {
+
         }
 
         private void loadDataToUi()
@@ -291,6 +293,7 @@ namespace prototype2
                 }
                 dbCon.Close();
             }
+            MainVM.LoginEmployee_ = MainVM.Employees.Where(x => x.EmpID.Equals(empID)).FirstOrDefault();
             if (dbCon.IsConnect())
             {
                 string query = "SELECT * " +
@@ -331,10 +334,10 @@ namespace prototype2
                     DateTime.TryParse(dr["dateOfIssue"].ToString(), out dateOfIssue);
 
                     DateTime deliveryDate = new DateTime();
-                    DateTime.TryParse(dr["dateOfIssue"].ToString(), out deliveryDate);
+                    DateTime.TryParse(dr["deliveryDate"].ToString(), out deliveryDate);
 
                     DateTime validityDate = new DateTime();
-                    DateTime.TryParse(dr["dateOfIssue"].ToString(), out validityDate);
+                    DateTime.TryParse(dr["validityDate"].ToString(), out validityDate);
 
                     DateTime expiration = new DateTime();
                     DateTime.TryParse(dr["dateOfIssue"].ToString(), out expiration);
@@ -465,6 +468,50 @@ namespace prototype2
 
 
                 }
+                dbCon.Close();
+            }
+
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM sales_invoice_t;";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                MainVM.SalesQuotes.Clear();
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    DateTime dateOfIssue = new DateTime();
+                    DateTime.TryParse(dr["dateOfIssue"].ToString(), out dateOfIssue);
+
+                    DateTime dueDate = new DateTime();
+                    DateTime.TryParse(dr["dueDate"].ToString(), out dueDate);
+                    MainVM.SelectedCustomerSupplier = MainVM.Customers.Where(x => x.CompanyID.Equals(dr["custID"].ToString())).FirstOrDefault();
+
+                    int custId;
+                    int.TryParse(dr["custID"].ToString(), out custId);
+
+                    int custRepId;
+                    int.TryParse(dr["empID"].ToString(), out custRepId);
+
+                    int estDelivery;
+                    int.TryParse(dr["invoiceNo"].ToString(), out estDelivery);
+
+                    int termsDays;
+                    int.TryParse(dr["termsDays"].ToString(), out termsDays);
+
+                    decimal vat;
+                    decimal.TryParse(dr["vat"].ToString(), out vat);
+
+                    decimal penaltyAmt;
+                    decimal.TryParse(dr["sc_pwd_discount"].ToString(), out penaltyAmt);
+
+                    decimal markUpPerc;
+                    decimal.TryParse(dr["withholdingTax"].ToString(), out markUpPerc);
+                    
+                }
+               
                 dbCon.Close();
             }
         }
@@ -599,7 +646,34 @@ namespace prototype2
 
         private void invoiceSalesMenuBtn_Click(object sender, RoutedEventArgs e)
         {
+            foreach (var obj in containerGrid.Children)
+            {
+                ((Grid)obj).Visibility = Visibility.Collapsed;
+            }
+            trasanctionGrid.Visibility = Visibility.Visible;
+            foreach (var obj in trasanctionGrid.Children)
+            {
+                if (obj is Grid)
+                    if (((Grid)obj).Equals(transInvoiceGrid))
+                        ((Grid)obj).Visibility = Visibility.Visible;
+                    else
+                        ((Grid)obj).Visibility = Visibility.Collapsed;
+            }
+            foreach (var obj in transQuotationGrid.Children)
+            {
+                if (obj is Grid)
+                {
+                    if (((Grid)obj).Equals(invoiceGridHome))
+                    {
+                        headerLbl.Content = "Trasanction - Invoice Quote";
+                        ((Grid)obj).Visibility = Visibility.Visible;
+                        settingsBtn.Visibility = Visibility.Hidden;
+                    }
+                }
+                else
+                    ((UserControl)obj).Visibility = Visibility.Collapsed;
 
+            }
         }
 
         private void empContManageBtn_Click(object sender, RoutedEventArgs e)
@@ -1802,11 +1876,12 @@ namespace prototype2
                     itemName = MainVM.SelectedProduct.ItemName,
                     qty = item.ItemQty,
                     qtyEditable = true,
-                    totalAmountMarkUp = item.TotalCost,
+                    totalAmountMarkUp = Math.Round(item.TotalCost - (item.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)), 3),
                     itemType = 0,
                     unitPrice = MainVM.SelectedProduct.CostPrice
                 });
-                MainVM.VatableSale += item.TotalCost;
+                MainVM.VatableSale += Math.Round(item.TotalCost - (item.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)), 3);
+                MainVM.TotalSalesWithOutDp += Math.Round(item.TotalCost, 3);
             }
             foreach (AddedService service in MainVM.SelectedSalesQuote.AddedServices)
             {
@@ -1820,18 +1895,18 @@ namespace prototype2
                     itemName = MainVM.SelectedService.ServiceName,
                     qty = 1,
                     qtyEditable = false,
-                    totalAmount = service.TotalCost,
+                    totalAmountMarkUp = Math.Round(service.TotalCost - (service.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)), 3),
                     itemType = 1,
                     unitPrice = service.TotalCost,
                     additionalFees = service.AdditionalFees
                 });
-                MainVM.VatableSale += service.TotalCost;
+                MainVM.VatableSale += Math.Round(service.TotalCost - (service.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)), 3);
             }
-
             MainVM.VatableSale = MainVM.VatableSale - (MainVM.VatableSale * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01));
             MainVM.VatableSale = Math.Round(MainVM.VatableSale, 3);
             MainVM.TotalSalesNoVat = MainVM.VatableSale;
             MainVM.VatAmount = (MainVM.VatableSale * ((decimal)0.12));
+            MainVM.VatAmount = Math.Round(MainVM.VatAmount, 3);
             MainVM.TotalSales = MainVM.VatableSale + (MainVM.VatableSale * ((decimal)0.12));
             MainVM.TotalSales = Math.Round(MainVM.TotalSales, 3);
         }
