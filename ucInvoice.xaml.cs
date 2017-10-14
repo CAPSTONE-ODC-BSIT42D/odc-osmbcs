@@ -48,14 +48,42 @@ namespace prototype2
         {
             if (newInvoiceForm.IsVisible)
             {
-                salesInvoiceToMemory();
-                newInvoiceForm.Visibility = Visibility.Collapsed;
-                documentViewer.Visibility = Visibility.Visible;
-                invoiceNext.Content = "Save";
-                InvoiceDocument df = new InvoiceDocument();
-                document = df.CreateDocument(sqNo: MainVM.SelectedSalesInvoice.sqNoChar_, author: "admin");
-                string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
-                documentViewer.pagePreview.Ddl = ddl;
+                foreach (var element in newInvoiceFormGrid.Children)
+                {
+                    if(element is TextBox)
+                    {
+                        BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
+                        Validation.ClearInvalid(expression);
+                        if (((TextBox)element).IsEnabled)
+                        {
+                            expression.UpdateSource();
+                            validationError = Validation.GetHasError((TextBox)element);
+                        }
+                    }
+                    if (element is Xceed.Wpf.Toolkit.IntegerUpDown)
+                    {
+                        BindingExpression expression = ((Xceed.Wpf.Toolkit.IntegerUpDown)element).GetBindingExpression(Xceed.Wpf.Toolkit.IntegerUpDown.ValueProperty);
+                        Validation.ClearInvalid(expression);
+                        if (((Xceed.Wpf.Toolkit.IntegerUpDown)element).IsEnabled)
+                        {
+
+                            expression.UpdateSource();
+                            validationError = Validation.GetHasError((Xceed.Wpf.Toolkit.IntegerUpDown)element);
+                        }
+                    }
+                }
+                if (!validationError)
+                {
+                    salesInvoiceToMemory();
+                    newInvoiceForm.Visibility = Visibility.Collapsed;
+                    documentViewer.Visibility = Visibility.Visible;
+                    invoiceNext.Content = "Save";
+                    InvoiceDocument df = new InvoiceDocument();
+                    document = df.CreateDocument(sqNo: MainVM.SelectedSalesInvoice.sqNoChar_, author: "admin");
+                    string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
+                    documentViewer.pagePreview.Ddl = ddl;
+                }
+                
             }
             else if (documentViewer.IsVisible)
             {
@@ -94,7 +122,53 @@ namespace prototype2
             }
         }
 
-        
+        void computeInvoice()
+        {
+            
+            MainVM.RequestedItems.Clear();
+            foreach (AddedItem item in MainVM.SelectedSalesQuote.AddedItems)
+            {
+                MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ItemCode.Equals(item.ItemCode)).First();
+                MainVM.InvoiceItems.Add(new InvoiceItem()
+                {
+                    lineNo = (MainVM.RequestedItems.Count + 1).ToString(),
+                    itemCode = item.ItemCode,
+                    desc = MainVM.SelectedProduct.ItemDesc,
+                    itemName = MainVM.SelectedProduct.ItemName,
+                    qty = item.ItemQty,
+                    unitPrice = Math.Round(item.TotalCost - (item.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01))/item.ItemQty, 3),
+                    totalAmount = Math.Round(item.TotalCost - (item.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)),3),
+                    itemType = 0
+                });
+                MainVM.VatableSale += Math.Round(item.TotalCost - (item.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)), 3);
+                MainVM.TotalSalesWithOutDp += Math.Round(item.TotalCost, 3);
+
+            }
+            foreach (AddedService service in MainVM.SelectedSalesQuote.AddedServices)
+            {
+                MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(service.ServiceID)).First();
+                MainVM.SelectedProvince = MainVM.Provinces.Where(x => x.ProvinceID == service.ProvinceID).First();
+                MainVM.InvoiceItems.Add(new InvoiceItem()
+                {
+                    lineNo = (MainVM.RequestedItems.Count + 1).ToString(),
+                    itemCode = service.TableNoChar,
+                    desc = MainVM.SelectedService.ServiceDesc,
+                    itemName = MainVM.SelectedService.ServiceName,
+                    qty = 1,
+                    unitPrice = Math.Round(service.TotalCost - (service.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)), 3),
+                    totalAmount = Math.Round(service.TotalCost - (service.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)), 3),
+                    itemType = 1,
+                    additionalFees = service.AdditionalFees
+                });
+                MainVM.VatableSale += Math.Round(service.TotalCost - (service.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)), 3);
+                MainVM.TotalSalesWithOutDp += Math.Round(service.TotalCost, 3);
+            }
+            MainVM.TotalSalesNoVat = MainVM.VatableSale;
+            MainVM.VatAmount = (MainVM.VatableSale * ((decimal)0.12));
+            MainVM.VatAmount = Math.Round(MainVM.VatAmount, 3);
+            MainVM.TotalSales = MainVM.VatableSale + (MainVM.VatableSale * ((decimal)0.12));
+            MainVM.TotalSales = Math.Round(MainVM.TotalSales, 3);
+        }
 
         void salesInvoiceToMemory()
         {
@@ -140,6 +214,7 @@ namespace prototype2
 
        
         }
+
 
         void saveDataToDb()
         {
@@ -195,6 +270,15 @@ namespace prototype2
                     }
                     MessageBox.Show("Inovice is Saved");
                 }
+            }
+        }
+        
+
+        private void UserControlInvoice_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (this.IsVisible)
+            {
+                computeInvoice();
             }
         }
     }

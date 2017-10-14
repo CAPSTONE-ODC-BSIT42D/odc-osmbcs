@@ -4,15 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:prototype2"
-             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="prototype2.ucInvoice"
-             mc:Ignorable="d" d:DesignHeight="797.333" d:DesignWidth="1068">
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Name="UserControlInvoice" x:Class="prototype2.ucInvoice"
+             mc:Ignorable="d" d:DesignHeight="797.333" d:DesignWidth="1068" IsVisibleChanged="UserControlInvoice_IsVisibleChanged">
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>
     <Grid x:Name="transInvoiceGridForm" Margin="0" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
         <local:DocumentViewer x:Name="documentViewer" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed"/>
         <ScrollViewer x:Name="newInvoiceForm" Margin="0,0,0,40" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top">
-            <Grid>
+            <Grid x:Name="newInvoiceFormGrid">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
@@ -38,15 +38,42 @@
                 <Label x:Name="label12_Copy3" Content="Other Details" HorizontalAlignment="Left" Margin="10,488,-117,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31" Width="109"/>
                 <Border BorderBrush="Black" BorderThickness="1" Margin="10,517,10,0" VerticalAlignment="Top"/>
                 <Label x:Name="label19_Copy20" Content="{Binding SelectedCustomerSupplier.CompanyName}" HorizontalAlignment="Left" Margin="151,53,-255,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="106"/>
-                <TextBox x:Name="tinNumTb" HorizontalAlignment="Left" Height="24" Margin="151,87,-309,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
+                <TextBox x:Name="tinNumTb" HorizontalAlignment="Left" Height="24" Margin="151,87,-309,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160">
+                    <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
                 <Label x:Name="label19_Copy21" Content="{Binding SelectedCustomerSupplier.CompanyAddress}" HorizontalAlignment="Left" Margin="151,121,-268,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="119"/>
-                <TextBox x:Name="busStyleTb" HorizontalAlignment="Left" Height="24" Margin="151,159,-309,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
+                <TextBox x:Name="busStyleTb" HorizontalAlignment="Left" Height="24" Margin="151,159,-309,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160">
+                    <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
                 <Label x:Name="label19_Copy22" Content="{Binding SelectedCustomerSupplier.CompanyAddress}" HorizontalAlignment="Left" Margin="531,53,-649,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="120"/>
-                <xctk:IntegerUpDown x:Name="dueDateTb" HorizontalAlignment="Left" Margin="531,91,-585,0" VerticalAlignment="Top" Width="56" Height="20" RenderTransformOrigin="-0.482,0.45"/>
+                <xctk:IntegerUpDown x:Name="dueDateTb" HorizontalAlignment="Left" Margin="531,91,-585,0" VerticalAlignment="Top" Width="56" Height="20" RenderTransformOrigin="-0.482,0.45">
+                    <xctk:IntegerUpDown.Value>
+                        <Binding Path="IntegerTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </xctk:IntegerUpDown.Value>
+                </xctk:IntegerUpDown>
                 <Label x:Name="label19_Copy23" Content="Days" HorizontalAlignment="Left" Margin="587,87,-625,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="40"/>
-                <DataGrid x:Name="itemDg_Copy" Margin="40,241,40,0" ItemsSource="{Binding RequestedItems}" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="False" IsReadOnly="True" VerticalAlignment="Top" Height="242" SelectedItem="{Binding SelectedRequestedItem}"  >
+                <Label x:Name="label19_Copy" Content="P.O. #:" HorizontalAlignment="Left" Margin="473,121,-522,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="51"/>
+                <TextBox x:Name="purchaseOrdNumTb" HorizontalAlignment="Left" Height="24" Margin="531,126,-689,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160">
+                    <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+                <DataGrid x:Name="itemDg1" Margin="40,241,40,0" ItemsSource="{Binding InvoiceItems}" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" VerticalAlignment="Top" Height="242" >
                     <DataGrid.Columns >
-                        <!--<DataGridTextColumn Binding="{Binding totalAmountMarkUp}" ClipboardContentBinding="{x:Null}" Header="Total + Markup Price" Width="200"  />-->
                         <DataGridTextColumn Binding="{Binding itemCode}" ClipboardContentBinding="{x:Null}" Header="Item Code" Width="100" CanUserResize="False" />
                         <DataGridTextColumn Binding="{Binding itemName}" ClipboardContentBinding="{x:Null}" Header="Item Name" Width="100" CanUserResize="False" />
                         <DataGridTemplateColumn Width="200" CanUserResize="False" Header="Description" >
@@ -56,7 +83,6 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <!--<DataGridTextColumn Binding="{Binding itemTypeName}" ClipboardContentBinding="{x:Null}" Header="Item Type" Width="100" CanUserResize="False" />-->
                         <DataGridTemplateColumn Header="Item Type" Width="100">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -85,8 +111,20 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Binding="{Binding unitPriceMarkUp}" ClipboardContentBinding="{x:Null}" Header="Unit Price" Width="100"  />
-                        <DataGridTextColumn Binding="{Binding totalAmountMarkUp}" ClipboardContentBinding="{x:Null}" Header="Total Amount" Width="100"  />
+                        <DataGridTemplateColumn Header="Total Amount" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding unitPrice}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Total Amount" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding totalAmount}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
                 <StackPanel Margin="40,530,0,0" Orientation="Vertical" VerticalAlignment="Top" Height="182" HorizontalAlignment="Left">
@@ -145,8 +183,6 @@
                         <Label x:Name="totalDue" Content="{Binding TotalSales}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
                     </WrapPanel>
                 </StackPanel>
-                <Label x:Name="label19_Copy" Content="P.O. #:" HorizontalAlignment="Left" Margin="473,121,-522,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="51"/>
-                <TextBox x:Name="purchaseOrdNumTb" HorizontalAlignment="Left" Height="24" Margin="531,126,-689,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
             </Grid>
 
         </ScrollViewer>

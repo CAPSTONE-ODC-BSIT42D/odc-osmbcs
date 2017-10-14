@@ -17,34 +17,10 @@ namespace prototype2
             isEdit = false;
         }
 
-        public String Name { get; set; }
-        public String AdditionalInfo { get; set; }
-        public String Address { get; set; }
-        public String City { get; set; }
-        public String PostalCode { get; set; }
-        public String Number { get; set; }
-        public String Email { get; set; }
-        public object locProvinceId { get; set; }
         public object cbItem { get; set; }
-        public object CityName { get; set; }
-        
-        public String EmailAddress { get; set; }
-        public String PhoneNumber { get; set; }
-        public String MobileNumber { get; set; }
-        public String ContactValue { get; set; }
-        public String RepTitle { get; set; }
-        public String FirstName { get; set; }
-        public String MiddleName { get; set; }
-        public String LastName { get; set; }
-        public String UserName { get; set; }
-        public String DateStarted { get; set; }
-        public String DateEnded { get; set; }
-
-        public String ProductName { get; set; }
-        public String ProductCode { get; set; }
-        public String ProductDesc { get; set; }
-        public String ProductUnit { get; set; }
-        public decimal ProductPrice { get; set; }
+        public decimal DecimalTextBox { get; set; }
+        public int IntegerTextBox { get; set; }
+        public string StringTextBox { get; set; }
 
         protected Employee LoginEmployee = null;
 
@@ -420,6 +396,15 @@ namespace prototype2
         {
             get { return selectedRequestedItem; }
             set { SetProperty(ref selectedRequestedItem, value); }
+        }
+
+        //----- Invoice Item
+        protected ObservableCollection<InvoiceItem> InvoiceItems_ = new ObservableCollection<InvoiceItem>();
+
+        public ObservableCollection<InvoiceItem> InvoiceItems
+        {
+            get { return InvoiceItems_; }
+            set { InvoiceItems_ = value; }
         }
         //-----Additional Fees
         protected ObservableCollection<AdditionalFee> additionalFees = new ObservableCollection<AdditionalFee>();

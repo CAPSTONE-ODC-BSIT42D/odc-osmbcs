@@ -97,18 +97,38 @@ namespace prototype2
         {
             if (newRequisitionGrid.IsVisible)
             {
-                foreach (var element in transQuoatationGridForm.Children)
+                foreach (var element in newRequisitionGrid.Children)
                 {
-                    if (element is Grid)
+                    if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
                     {
-                        if (!(((Grid)element).Name.Equals(termsAndConditionGrid.Name)))
+                        BindingExpression expression = ((Xceed.Wpf.Toolkit.DecimalUpDown)element).GetBindingExpression(Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
+                        Validation.ClearInvalid(expression);
+                        if (((Xceed.Wpf.Toolkit.DecimalUpDown)element).IsEnabled)
                         {
-                            ((Grid)element).Visibility = Visibility.Collapsed;
+
+                            expression.UpdateSource();
+                            validationError = Validation.GetHasError((Xceed.Wpf.Toolkit.DecimalUpDown)element);
                         }
-                        else
-                            ((Grid)element).Visibility = Visibility.Visible;
                     }
                 }
+                if (!validationError)
+                {
+                    foreach (var element in transQuoatationGridForm.Children)
+                    {
+
+                        if (element is Grid)
+                        {
+                            if (!(((Grid)element).Name.Equals(termsAndConditionGrid.Name)))
+                            {
+                                ((Grid)element).Visibility = Visibility.Collapsed;
+                            }
+                            else
+                                ((Grid)element).Visibility = Visibility.Visible;
+                        }
+                    }
+                }
+                
+                
             }
 
             else if (termsAndConditionGrid.IsVisible)
@@ -968,8 +988,8 @@ namespace prototype2
                     qtyEditable = true,
                     totalAmount = item.TotalCost,
                     itemType = 0,
-                    unitPrice = MainVM.SelectedProduct.CostPrice,
-
+                    unitPrice = MainVM.SelectedProduct.CostPrice
+                    
                 });
             }
             foreach (AddedService service in MainVM.SelectedSalesQuote.AddedServices)
@@ -990,7 +1010,17 @@ namespace prototype2
                     additionalFees = service.AdditionalFees
                 });
             }
-
+            foreach(var obj in newRequisitionGridForm.Children)
+            {
+                if (obj is TextBox)
+                    ((TextBox)obj).IsEnabled = false;
+                else if (obj is Xceed.Wpf.Toolkit.DecimalUpDown)
+                    ((Xceed.Wpf.Toolkit.DecimalUpDown)obj).IsEnabled = false;
+                else if (obj is Button)
+                    ((Button)obj).IsEnabled = false;
+                else if (obj is DataGrid)
+                    ((DataGrid)obj).IsEnabled = false;
+            }
             computePrice();
 
 

@@ -826,8 +826,76 @@ namespace prototype2
 
         public ObservableCollection<AdditionalFee> additionalFees
         {
-            get { return additionalFees; }
-            set { additionalFees = value; }
+            get { return _additionalFees; }
+            set { _additionalFees = value; }
+        }
+    }
+
+    public class InvoiceItem : ViewModelEntity
+    {
+        public InvoiceItem()
+        {
+
+        }
+        private string _lineNo;
+        public string lineNo
+        {
+            get { return _lineNo; }
+            set { SetProperty(ref _lineNo, value); }
+        }
+        private string _itemCode;
+        public string itemCode
+        {
+            get { return _itemCode; }
+            set { SetProperty(ref _itemCode, value); }
+        }
+        private string _itemName;
+        public string itemName
+        {
+            get { return _itemName; }
+            set { SetProperty(ref _itemName, value); }
+        }
+        private string _desc;
+        public string desc
+        {
+            get { return _desc; }
+            set { SetProperty(ref _desc, value); }
+        }
+
+        private int _itemType;
+        public int itemType
+        {
+            get { return _itemType; }
+            set { SetProperty(ref _itemType, value); }
+        }
+
+        private int _qty;
+        public int qty
+        {
+            get { return _qty; }
+            set { SetProperty(ref _qty, value); }
+        }
+
+        private decimal _unitPrice;
+        public decimal unitPrice
+        {
+            get { return _unitPrice; }
+            set { SetProperty(ref _unitPrice, value); }
+        }
+
+        private decimal _totalAmount;
+        public decimal totalAmount
+        {
+            get { return _totalAmount; }
+            set { SetProperty(ref _totalAmount, value); }
+        }
+
+        protected ObservableCollection<AdditionalFee> _additionalFees = new ObservableCollection<AdditionalFee>();
+
+        public ObservableCollection<AdditionalFee> additionalFees
+        {
+            get { return _additionalFees; }
+            set { _additionalFees = value; }
         }
     }
 

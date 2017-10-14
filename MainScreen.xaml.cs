@@ -110,6 +110,10 @@ namespace prototype2
             MainVM.Employees.Clear();
             MainVM.Contractor.Clear();
 
+            MainVM.RequestedItems.Clear();
+            MainVM.AddedItems.Clear();
+            MainVM.AddedServices.Clear();
+            MainVM.AdditionalFees.Clear();
 
             MainVM.SalesQuotes.Clear();
 
@@ -450,7 +454,7 @@ namespace prototype2
                             MainVM.SelectedAddedService = (new AddedService() { TableNoChar = dr["tableNoChar"].ToString(), ServiceID = dr["serviceID"].ToString(), ProvinceID = int.Parse(dr["provinceID"].ToString()), City = dr["city"].ToString(), Address = dr["address"].ToString(), TotalCost = decimal.Parse(dr["totalCost"].ToString()) });
                             foreach (DataRow dr2 in fromDbTable2.Rows)
                             {
-                                if (dr2["tableNoChar"].ToString().Equals(dr2["servicesNochar"].ToString()))
+                                if (dr["tableNoChar"].ToString().Equals(dr2["serviceNochar"].ToString()))
                                 {
                                     MainVM.SelectedAddedService.AdditionalFees.Add(new AdditionalFee() { ServiceNoChar = dr2["serviceNoChar"].ToString(), FeeName = dr2["feeName"].ToString(), FeePrice = decimal.Parse(dr2["feeValue"].ToString()) });
                                 }
@@ -479,7 +483,7 @@ namespace prototype2
                 DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
                 fromDbTable = fromDb.Tables["t"];
-                MainVM.SalesQuotes.Clear();
+                MainVM.SalesInvoice.Clear();
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
                     DateTime dateOfIssue = new DateTime();
@@ -789,6 +793,10 @@ namespace prototype2
 
                 }
             }
+            MainVM.StringTextBox = null;
+            MainVM.DecimalTextBox = 0;
+            MainVM.IntegerTextBox = 0;
+            MainVM.cbItem = null;
             closeModals();
             worker.RunWorkerAsync();
         }
@@ -1857,58 +1865,9 @@ namespace prototype2
                         ((UserControl)element).Visibility = Visibility.Visible;
                 }
             }
-            computeInvoice();
+            
         }
 
-        void computeInvoice()
-        {
-            MainVM.SelectedRepresentative = MainVM.Representatives.Where(x => x.RepresentativeID.Equals(MainVM.SelectedCustomerSupplier.RepresentativeID.ToString())).FirstOrDefault();
-            MainVM.SelectedCustomerSupplier = MainVM.Customers.Where(x => x.CompanyID.Equals(MainVM.SelectedSalesQuote.custID_.ToString())).FirstOrDefault();
-            MainVM.RequestedItems.Clear();
-            foreach (AddedItem item in MainVM.SelectedSalesQuote.AddedItems)
-            {
-                MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ItemCode.Equals(item.ItemCode)).First();
-                MainVM.RequestedItems.Add(new RequestedItem()
-                {
-                    lineNo = (MainVM.RequestedItems.Count + 1).ToString(),
-                    itemCode = item.ItemCode,
-                    desc = MainVM.SelectedProduct.ItemDesc,
-                    itemName = MainVM.SelectedProduct.ItemName,
-                    qty = item.ItemQty,
-                    qtyEditable = true,
-                    totalAmountMarkUp = Math.Round(item.TotalCost - (item.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)), 3),
-                    itemType = 0,
-                    unitPrice = MainVM.SelectedProduct.CostPrice
-                });
-                MainVM.VatableSale += Math.Round(item.TotalCost - (item.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)), 3);
-                MainVM.TotalSalesWithOutDp += Math.Round(item.TotalCost, 3);
-            }
-            foreach (AddedService service in MainVM.SelectedSalesQuote.AddedServices)
-            {
-                MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(service.ServiceID)).First();
-                MainVM.SelectedProvince = MainVM.Provinces.Where(x => x.ProvinceID == service.ProvinceID).First();
-                MainVM.RequestedItems.Add(new RequestedItem()
-                {
-                    lineNo = (MainVM.RequestedItems.Count + 1).ToString(),
-                    itemCode = service.TableNoChar,
-                    desc = MainVM.SelectedService.ServiceDesc,
-                    itemName = MainVM.SelectedService.ServiceName,
-                    qty = 1,
-                    qtyEditable = false,
-                    totalAmountMarkUp = Math.Round(service.TotalCost - (service.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)), 3),
-                    itemType = 1,
-                    unitPrice = service.TotalCost,
-                    additionalFees = service.AdditionalFees
-                });
-                MainVM.VatableSale += Math.Round(service.TotalCost - (service.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)), 3);
-            }
-            MainVM.VatableSale = MainVM.VatableSale - (MainVM.VatableSale * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01));
-            MainVM.VatableSale = Math.Round(MainVM.VatableSale, 3);
-            MainVM.TotalSalesNoVat = MainVM.VatableSale;
-            MainVM.VatAmount = (MainVM.VatableSale * ((decimal)0.12));
-            MainVM.VatAmount = Math.Round(MainVM.VatAmount, 3);
-            MainVM.TotalSales = MainVM.VatableSale + (MainVM.VatableSale * ((decimal)0.12));
-            MainVM.TotalSales = Math.Round(MainVM.TotalSales, 3);
-        }
+        
     }
 }

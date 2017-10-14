@@ -61,7 +61,7 @@
                     <Label x:Name="label15_Copy3" Content="Supplier:" HorizontalAlignment="Left" Margin="40,279,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                     <Label x:Name="label15_Copy4" Content="Category:" HorizontalAlignment="Left" Margin="40,186,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                     <TextBox x:Name="productCodeTb" HorizontalAlignment="Left" Height="23" Margin="135,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220">
-                        <Binding Path="ProductCode" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
                                 <local:TextBoxValidation TextBoxType="IsEmpty"/>
                             </Binding.ValidationRules>
@@ -69,7 +69,7 @@
                     </TextBox>
                     <Button x:Name="generateProductCodeBtn" Content="Generate" HorizontalAlignment="Left" Margin="372,54,0,0" VerticalAlignment="Top" Width="75" Click="generateProductCodeBtn_Click"/>
                     <TextBox x:Name="productNameTb" HorizontalAlignment="Left" Height="23" Margin="135,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220">
-                        <Binding Path="ProductName" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
                                 <local:TextBoxValidation TextBoxType="IsEmpty"/>
                             </Binding.ValidationRules>
@@ -87,7 +87,7 @@
                     </ComboBox>
                     <xctk:DecimalUpDown x:Name="costPriceTb" HorizontalAlignment="Left" Margin="135,223,0,0" VerticalAlignment="Top" Width="220">
                         <xctk:DecimalUpDown.Value>
-                            <Binding Path="ProductPrice" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding Path="DecimalTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                 <Binding.ValidationRules>
                                     <local:TextBoxValidation TextBoxType="IsEmpty"/>
                                 </Binding.ValidationRules>
@@ -95,7 +95,7 @@
                         </xctk:DecimalUpDown.Value>
                     </xctk:DecimalUpDown>
                     <TextBox x:Name="unitTb" HorizontalAlignment="Left" Height="23" Margin="135,252,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220">
-                        <Binding Path="ProductUnit" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
                                 <local:TextBoxValidation TextBoxType="IsEmpty"/>
                             </Binding.ValidationRules>

@@ -56,34 +56,7 @@ namespace prototype2
                     ((CheckBox)element).IsEnabled = true;
                 }
             }
-            if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyTelephone))
-            {
-                companyTelCb.IsChecked = true;
-            }
-
-            if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyMobile))
-            {
-                companyMobCb.IsChecked = true;
-            }
-
-            if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyEmail))
-            {
-                companyEmailCb.IsChecked = true;
-            }
-
-            if (String.IsNullOrWhiteSpace(MainVM.SelectedRepresentative.RepTelephone))
-            {
-                repTelCb.IsChecked = true;
-            }
-            if (String.IsNullOrWhiteSpace(MainVM.SelectedRepresentative.RepMobile))
-            {
-                repMobCb.IsChecked = true;
-            }
-
-            if (String.IsNullOrWhiteSpace(MainVM.SelectedRepresentative.RepEmail))
-            {
-                repEmailCb.IsChecked = true;
-            }
+            loadDataToUi();
             editCloseGrid.Visibility = Visibility.Collapsed;
             saveCancelGrid.Visibility = Visibility.Visible;
             MainVM.isEdit = true;
@@ -443,15 +416,18 @@ namespace prototype2
             companyMobileTb.Text = MainVM.SelectedCustomerSupplier.CompanyMobile;
             if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyTelephone))
             {
+                companyTelCb.IsChecked = false;
                 companyTelCb.IsChecked = true;
             }
 
             if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyMobile))
             {
+                companyMobCb.IsChecked = false;
                 companyMobCb.IsChecked = true;
             }
             if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyEmail))
             {
+                companyEmailCb.IsChecked = false;
                 companyEmailCb.IsChecked = true;
             }
             MainVM.SelectedRepresentative = MainVM.Representatives.Where(x => x.RepresentativeID.Equals(MainVM.SelectedCustomerSupplier.RepresentativeID)).FirstOrDefault();
@@ -464,14 +440,17 @@ namespace prototype2
             repMobileTb.Text = MainVM.SelectedRepresentative.RepMobile;
             if (String.IsNullOrWhiteSpace(MainVM.SelectedRepresentative.RepTelephone))
             {
+                repTelCb.IsChecked = false;
                 repTelCb.IsChecked = true;
             }
             if (String.IsNullOrWhiteSpace(MainVM.SelectedRepresentative.RepMobile))
             {
+                repMobCb.IsChecked = false;
                 repMobCb.IsChecked = true;
             }
             if (String.IsNullOrWhiteSpace(MainVM.SelectedRepresentative.RepEmail))
             {
+                repEmailCb.IsChecked = false;
                 repEmailCb.IsChecked = true;
             }
         }

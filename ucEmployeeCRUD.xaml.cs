@@ -59,20 +59,7 @@ namespace prototype2
                     ((CheckBox)element).IsEnabled = true;
                 }
             }
-            if (String.IsNullOrWhiteSpace(MainVM.SelectedEmployeeContractor.EmpTelephone))
-            {
-                empTelCb.IsChecked = true;
-            }
-
-            if (String.IsNullOrWhiteSpace(MainVM.SelectedEmployeeContractor.EmpMobile))
-            {
-                empMobCb.IsChecked = true;
-            }
-
-            if (String.IsNullOrWhiteSpace(MainVM.SelectedEmployeeContractor.EmpEmail))
-            {
-                empEmailCb.IsChecked = true;
-            }
+            loadDataToUi();
             saveCancelGrid1.Visibility = Visibility.Visible;
             editCloseGrid1.Visibility = Visibility.Collapsed;
             MainVM.isEdit = true;
@@ -381,14 +368,17 @@ namespace prototype2
 
             if (String.IsNullOrWhiteSpace(MainVM.SelectedEmployeeContractor.EmpTelephone))
             {
+                empTelCb.IsChecked = false;
                 empTelCb.IsChecked = true;
             }
             if (String.IsNullOrWhiteSpace(MainVM.SelectedEmployeeContractor.EmpMobile))
             {
+                empMobCb.IsChecked = false;
                 empMobCb.IsChecked = true;
             }
             if (String.IsNullOrWhiteSpace(MainVM.SelectedEmployeeContractor.EmpEmail))
             {
+                empEmailCb.IsChecked = false;
                 empEmailCb.IsChecked = true;
             }
             empTelephoneTb.Text = MainVM.SelectedEmployeeContractor.EmpTelephone;
@@ -449,6 +439,7 @@ namespace prototype2
                     ((CheckBox)element).IsChecked = false;
                 }
             }
+            
         }
 
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)

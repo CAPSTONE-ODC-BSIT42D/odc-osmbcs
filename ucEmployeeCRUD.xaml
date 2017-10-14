@@ -45,21 +45,21 @@
                         <ComboBoxItem Content="Contractor" Tag="1"/>
                     </ComboBox>
                     <TextBox x:Name="empFirstNameTb" HorizontalAlignment="Left" Height="23" Margin="40,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" FontWeight="Normal">
-                        <Binding Path="FirstName" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
-                                <local:TextBoxValidation TextBoxType="IsEmpty" />
+                                <local:TextBoxValidation TextBoxType="IsEmpty"/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox>
                     <TextBox x:Name="empMiddleInitialTb" HorizontalAlignment="Left" Height="23" Margin="194,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" FontWeight="Normal" MaxLength="3" >
-                        <Binding Path="MiddleName" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
                                 <local:TextBoxValidation TextBoxType="IsEmpty"/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox>
                     <TextBox x:Name="empLastNameTb" HorizontalAlignment="Left" Height="23" Margin="329,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" FontWeight="Normal" RenderTransformOrigin="0.5,0.5">
-                        <Binding Path="LastName" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
                                 <local:TextBoxValidation TextBoxType="IsEmpty"/>
                             </Binding.ValidationRules>
@@ -68,14 +68,14 @@
                     <Image x:Name="empImage" HorizontalAlignment="Left" Height="90" Margin="494,56,0,0" VerticalAlignment="Top" Width="83" Source="Resources/picture.png" Stretch="Fill"/>
                     <Button x:Name="openFileBtn" Content="Open Image" HorizontalAlignment="Left" Margin="494,155,0,0" Width="83" FontWeight="Normal" Click="openFileBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" Height="28" VerticalAlignment="Top"/>
                     <TextBox x:Name="empAddressTb" HorizontalAlignment="Left" Height="23" Margin="103,152,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="273" FontWeight="Normal" >
-                        <Binding Path="Address" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
                                 <local:TextBoxValidation TextBoxType="IsEmpty"/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox>
                     <TextBox x:Name="empCityTb" HorizontalAlignment="Left" Height="23" Margin="103,181,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" FontWeight="Normal">
-                        <Binding Path="City" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
                                 <local:TextBoxValidation TextBoxType="IsEmpty"/>
                             </Binding.ValidationRules>
@@ -83,7 +83,7 @@
                     </TextBox>
                     <ComboBox x:Name="empProvinceCb" Margin="103,209,0,0" VerticalAlignment="Top" Height="23" ItemsSource="{Binding Provinces}" DisplayMemberPath="ProvinceName" SelectedValuePath="ProvinceID" Width="125" HorizontalAlignment="Left" FontWeight="Normal">
                         <ComboBox.SelectedItem>
-                            <Binding Path="locProvinceId" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding Path="cbItem" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                 <Binding.ValidationRules>
                                     <local:TextBoxValidation TextBoxType="ComboBox"/>
                                 </Binding.ValidationRules>
@@ -91,7 +91,7 @@
                         </ComboBox.SelectedItem>
                     </ComboBox>
                     <TextBox x:Name="empEmailAddressTb" HorizontalAlignment="Left" Height="25" Margin="160,302,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center">
-                        <Binding Path="EmailAddress" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
                                 <local:TextBoxValidation TextBoxType="Email"/>
                             </Binding.ValidationRules>
@@ -99,7 +99,7 @@
                     </TextBox>
                     <CheckBox x:Name="empEmailCb" Content="Not Applicable" HorizontalAlignment="Left" Margin="420,308,0,0" VerticalAlignment="Top" Checked="contactDetails_Checked" Unchecked="contactDetail_Unchecked"/>
                     <TextBox x:Name="empTelephoneTb" HorizontalAlignment="Left" Height="25" Margin="160,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="222" FontWeight="Normal" VerticalContentAlignment="Center">
-                        <Binding Path="PhoneNumber" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
                                 <local:TextBoxValidation TextBoxType="Phone"/>
                             </Binding.ValidationRules>
@@ -107,7 +107,7 @@
                     </TextBox>
                     <CheckBox x:Name="empTelCb" Content="Not Applicable" HorizontalAlignment="Left" Margin="420,338,0,0" VerticalAlignment="Top" Checked="contactDetails_Checked" Unchecked="contactDetail_Unchecked"/>
                     <TextBox x:Name="empMobileNumberTb" HorizontalAlignment="Left" Height="24" Margin="160,364,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center" >
-                        <Binding Path="MobileNumber" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
                                 <local:TextBoxValidation TextBoxType="Mobile"/>
                             </Binding.ValidationRules>
@@ -119,7 +119,7 @@
                             <Label Content="Position" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0"/>
                             <ComboBox x:Name="empPostionCb" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="216" Height="26" ItemsSource="{Binding EmpPosition}" DisplayMemberPath="PositionName" SelectedValuePath="PositionID" FontWeight="Normal" >
                                 <ComboBox.SelectedItem>
-                                    <Binding Path="positionSelected" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                                    <Binding Path="cbItem" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                         <Binding.ValidationRules>
                                             <local:TextBoxValidation TextBoxType="ComboBox"/>
                                         </Binding.ValidationRules>
@@ -130,7 +130,7 @@
                             <Label x:Name="label_Copy1" Content="* Username" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" FontWeight="Normal" Width="99"/>
                             <Label x:Name="label_Copy2" Content="* Password" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top" FontWeight="Normal" Width="99"/>
                             <TextBox x:Name="empUserNameTb" HorizontalAlignment="Left" Height="25" Margin="10,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center">
-                                <Binding Path="UserName" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                                <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                     <Binding.ValidationRules>
                                         <local:TextBoxValidation TextBoxType="IsEmpty"/>
                                     </Binding.ValidationRules>
@@ -153,7 +153,7 @@
                             <Label Content="* Start Date" HorizontalAlignment="Left" Margin="16,97,0,0" VerticalAlignment="Top" FontWeight="Normal"/>
                             <xctk:DateTimePicker x:Name="empDateStarted" HorizontalAlignment="Left" Margin="33,127,0,0" VerticalAlignment="Top" Width="157" Format="Custom" FormatString="yyyy-MM-dd" TimePickerVisibility="Hidden" DisplayDefaultValueOnEmptyText="True" AllowTextInput="False">
                                 <xctk:DateTimePicker.Value>
-                                    <Binding Path="DateStarted" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                                    <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                         <Binding.ValidationRules>
                                             <local:TextBoxValidation TextBoxType="IsEmpty"/>
                                         </Binding.ValidationRules>
@@ -163,7 +163,7 @@
                             <Label Content="* End date" HorizontalAlignment="Left" Margin="16,153,0,0" VerticalAlignment="Top" FontWeight="Normal"/>
                             <xctk:DateTimePicker x:Name="empDateEnded" HorizontalAlignment="Left" Margin="33,183,0,-47" Width="157" Format="Custom" FormatString="yyyy-MM-dd" TimePickerVisibility="Hidden" DisplayDefaultValueOnEmptyText="True" AllowTextInput="False" Height="22" VerticalAlignment="Top">
                                 <xctk:DateTimePicker.Value>
-                                    <Binding Path="DateEnded" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                                    <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                         <Binding.ValidationRules>
                                             <local:TextBoxValidation TextBoxType="IsEmpty"/>
                                         </Binding.ValidationRules>
