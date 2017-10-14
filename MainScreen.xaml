@@ -984,7 +984,7 @@
                 <Grid Height="952" Margin="0,2"/>
             </Grid>
             <Grid x:Name="reportsGrid">
-                <local:UserControl1 Margin="10"/>
+                <local:ucReports Margin="0"/>
             </Grid>
             <Grid x:Name="maintenanceGrid" d:IsHidden="True">
                 <Grid x:Name="manageCustomerGrid" Margin="0,0,1,0" d:IsHidden="True" >
