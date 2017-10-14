@@ -5,18 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:prototype2"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="prototype2.ucReports"
-             mc:Ignorable="d" Loaded="UserControl_Loaded" Height="890.606" Width="1282.737">
+             mc:Ignorable="d" d:DesignWidth="1655.342" d:DesignHeight="1138.947">
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>
-    <Grid Background="#FFF9F9F9" HorizontalAlignment="Left" Width="1283" Margin="0,0,0,10">
-        <local:UserControl1 x:Name="UCReportService" HorizontalAlignment="Left" Margin="10,85,0,34" Width="1263" Loaded="UserControl1_Loaded" Visibility="Hidden"/>
-        <ComboBox x:Name="ComboBoxReport" HorizontalAlignment="Left" Margin="1035,10,0,0" VerticalAlignment="Top" Width="215" Height="43" SelectionChanged="ComboBox_SelectionChanged">
+    <Grid Background="#FFF9F9F9" Margin="0,0,0,10">
+        <ComboBox x:Name="ComboBoxReport" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="215" Height="43" SelectionChanged="ComboBox_SelectionChanged">
             <ComboBoxItem Content="Service Report"/>
             <ComboBoxItem Content="Purchase Report"/>
             <ComboBoxItem Content="Sales Report"/>
         </ComboBox>
-        <local:UserControl2 x:Name="UCReportsItem" HorizontalAlignment="Left" Height="769" Margin="12,78,0,0" VerticalAlignment="Top" Width="1263" Visibility="Hidden"/>
-        <local:UserControl3 x:Name="UCReportSales" HorizontalAlignment="Left" Height="762" Margin="12,85,0,0" VerticalAlignment="Top" Width="1261" Visibility="Hidden"/>
+        <local:UserControl1 x:Name="UCReportService" Margin="10,85,0,34"/>
+        <local:UserControl2 x:Name="UCReportsItem" HorizontalAlignment="Left" Height="728" Margin="56,85,0,0" VerticalAlignment="Top" Width="1196" Visibility="Visible"/>
+        <local:UserControl3 x:Name="UCReportSales" HorizontalAlignment="Left" Height="693" Margin="12,85,0,0" VerticalAlignment="Top" Width="1261"/>
     </Grid>
 </UserControl>

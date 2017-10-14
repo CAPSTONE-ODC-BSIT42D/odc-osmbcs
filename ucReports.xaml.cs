@@ -28,16 +28,13 @@ namespace prototype2
 
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
 
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-        }
+        
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            Object SELECTEDITEM = ComboBoxReport.Text;
-            if (SELECTEDITEM.Equals("Service Report"))
+            Object SELECTEDINDEX = ComboBoxReport.SelectedIndex;
+            if (SELECTEDINDEX.Equals(0))
             {
                 UCReportService.Visibility = Visibility.Visible;
                 UCReportsItem.Visibility = Visibility.Hidden;
@@ -46,13 +43,13 @@ namespace prototype2
 
 
             }
-            if (SELECTEDITEM.Equals("Purchase Report"))
+            if (SELECTEDINDEX.Equals(1))
             {
                 UCReportsItem.Visibility = Visibility.Visible;
                 UCReportService.Visibility = Visibility.Hidden;
                 UCReportSales.Visibility = Visibility.Hidden;
             }
-            if (SELECTEDITEM.Equals("Sales Report"))
+            if (SELECTEDINDEX.Equals(2))
             {
 
                 UCReportsItem.Visibility = Visibility.Hidden;

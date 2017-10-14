@@ -26,6 +26,7 @@ namespace prototype2
         public UserControl1()
         {
             InitializeComponent();
+            DisplayReport();
         }
         private void DisplayReport()
         {

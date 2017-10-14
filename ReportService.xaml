@@ -6,11 +6,11 @@
              xmlns:RV="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"  
              xmlns:local="clr-namespace:prototype2"
              mc:Ignorable="d" 
-             d:DesignHeight="322.556" d:DesignWidth="518.797" IsVisibleChanged="UserControl_IsVisibleChanged">
+             d:DesignHeight="322.556" IsVisibleChanged="UserControl_IsVisibleChanged" Width="450.797">
     <Grid Margin="0">
-        <WindowsFormsHost x:Name="WinFormHost" Margin="0">
+        <WindowsFormsHost x:Name="WinFormHost">
             <RV:ReportViewer x:Name="ReportService"></RV:ReportViewer>
         </WindowsFormsHost>
-            
+
     </Grid>
 </UserControl>
