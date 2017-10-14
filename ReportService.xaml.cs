@@ -37,10 +37,10 @@ namespace prototype2
 
         private DataTable GetService()
         {
-            MySqlConnection conn = new MySqlConnection("Server=localhost; database=odc_db; UID=root; password=root");
-            conn.Open();
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
             MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = conn;
+            cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
             cmd.CommandText = "select s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus From Services_t s JOIN services_availed_t sa ON s.serviceID = sa.serviceID JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar order by ss.serviceStatus";

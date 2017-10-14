@@ -37,10 +37,10 @@ namespace prototype2
 
         private DataTable GetItem()
         {
-            MySqlConnection conn = new MySqlConnection("Server=localhost; database=odc_db; UID=root; password=root");
-            conn.Open();
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
             MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = conn;
+            cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
             cmd.CommandText = "select i.itemCode, i.itemName, i.costPrice, po.orderDate from item_t i JOIN po_line_t p ON i.itemCode = p.itemNo JOIN purchase_order_t po ON p.PONumChar = po.PONumChar";

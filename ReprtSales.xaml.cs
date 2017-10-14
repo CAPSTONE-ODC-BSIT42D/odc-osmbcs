@@ -38,10 +38,10 @@ namespace prototype2
 
         private DataTable GetSales()
         {
-            MySqlConnection conn = new MySqlConnection("Server=localhost; database=odc_db; UID=root; password=root");
-            conn.Open();
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
             MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = conn;
+            cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
             cmd.CommandText = "SELECT  i.itemCode, i.itemName, i.itemUnit, i.salesPrice, po.orderDate, s.serviceID, s.serviceName, s.serviceDesc, CONCAT(sa.address, sa.city) AS Location, ss.dateStarted, ss.dateEnded, sa.totalCost FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar INNER JOIN sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON i.itemCode = ia.itemCode INNER JOIN  po_line_t p ON i.itemCode = p.itemNo INNER JOIN purchase_order_t po ON p.PONumChar = po.PONumChar";
