@@ -9,16 +9,19 @@
               <Width>1.21875in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.94792in</Width>
+              <Width>1.55208in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.875in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.70833in</Width>
+              <Width>1.44792in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.53125in</Width>
+              <Width>1.32292in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.29167in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -34,7 +37,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Item Code</Value>
+                              <Value>Service ID</Value>
                               <Style>
                                 <FontFamily>Century Gothic</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -52,7 +55,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <BackgroundColor>DarkRed</BackgroundColor>
+                        <BackgroundColor>Black</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -70,7 +73,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Item Name</Value>
+                              <Value>Service Name</Value>
                               <Style>
                                 <FontFamily>Century Gothic</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -88,43 +91,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <BackgroundColor>DarkRed</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox8">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>item Unit</Value>
-                              <Style>
-                                <FontFamily>Century Gothic</FontFamily>
-                                <FontSize>11pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox8</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>DarkRed</BackgroundColor>
+                        <BackgroundColor>Black</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -142,7 +109,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Cost Price</Value>
+                              <Value>Service Description</Value>
                               <Style>
                                 <FontFamily>Century Gothic</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -160,7 +127,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <BackgroundColor>DarkRed</BackgroundColor>
+                        <BackgroundColor>Black</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -178,7 +145,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Order Date</Value>
+                              <Value>Date Started</Value>
                               <Style>
                                 <FontFamily>Century Gothic</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -196,7 +163,76 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <BackgroundColor>DarkRed</BackgroundColor>
+                        <BackgroundColor>Black</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox9">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Date Ended</Value>
+                              <Style>
+                                <FontFamily>Century Gothic</FontFamily>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>White</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox9</rd:DefaultName>
+                      <Style>
+                        <Border />
+                        <BackgroundColor>Black</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox11">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Service Status</Value>
+                              <Style>
+                                <FontFamily>Century Gothic</FontFamily>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>White</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox11</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>Black</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -212,52 +248,24 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="itemCode">
+                    <Textbox Name="serviceID">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!itemCode.Value</Value>
+                              <Value>=Fields!serviceID.Value</Value>
                               <Style>
                                 <FontFamily>Century Gothic</FontFamily>
+                                <FontSize>11pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>itemCode</rd:DefaultName>
-                      <Style>
-                        <Border />
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="itemName">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!itemName.Value</Value>
-                              <Style>
-                                <FontFamily>Century Gothic</FontFamily>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>itemName</rd:DefaultName>
+                      <rd:DefaultName>serviceID</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -273,23 +281,24 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="itemUnit">
+                    <Textbox Name="serviceName">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!itemUnit.Value</Value>
+                              <Value>=Fields!serviceName.Value</Value>
                               <Style>
                                 <FontFamily>Century Gothic</FontFamily>
+                                <FontSize>11pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>itemUnit</rd:DefaultName>
+                      <rd:DefaultName>serviceName</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -305,23 +314,24 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="costPrice">
+                    <Textbox Name="serviceDesc">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!costPrice.Value</Value>
+                              <Value>=Fields!serviceDesc.Value</Value>
                               <Style>
                                 <FontFamily>Century Gothic</FontFamily>
+                                <FontSize>11pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>costPrice</rd:DefaultName>
+                      <rd:DefaultName>serviceDesc</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -337,23 +347,90 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="orderDate">
+                    <Textbox Name="dateStarted">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!orderDate.Value</Value>
+                              <Value>=Fields!dateStarted.Value</Value>
                               <Style>
                                 <FontFamily>Century Gothic</FontFamily>
+                                <FontSize>11pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>orderDate</rd:DefaultName>
+                      <rd:DefaultName>dateStarted</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="dateEnded">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!dateEnded.Value</Value>
+                              <Style>
+                                <FontFamily>Century Gothic</FontFamily>
+                                <FontSize>11pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>dateEnded</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="serviceStatus">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!serviceStatus.Value</Value>
+                              <Style>
+                                <FontFamily>Century Gothic</FontFamily>
+                                <FontSize>11pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>serviceStatus</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -378,6 +455,7 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -391,10 +469,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>1.53in</Top>
-        <Left>0.44667in</Left>
+        <Top>1.41542in</Top>
+        <Left>0.36333in</Left>
         <Height>0.5in</Height>
-        <Width>7.40625in</Width>
+        <Width>8.70834in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -408,7 +486,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Purchase Report</Value>
+                <Value>Service Report</Value>
                 <Style>
                   <FontFamily>Century Gothic</FontFamily>
                   <FontSize>18pt</FontSize>
@@ -420,10 +498,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>1.13764in</Top>
-        <Left>2.94667in</Left>
-        <Height>0.32292in</Height>
-        <Width>2.26042in</Width>
+        <Top>1.00222in</Top>
+        <Left>3.51958in</Left>
+        <Height>0.39931in</Height>
+        <Width>1.9375in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -435,14 +513,14 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Image Name="Image1">
+      <Image Name="Image2">
         <Source>Embedded</Source>
         <Value>oliveLogo</Value>
         <Sizing>FitProportional</Sizing>
-        <Top>0.48139in</Top>
-        <Left>0.44667in</Left>
-        <Height>0.5in</Height>
-        <Width>1.92708in</Width>
+        <Top>0.41542in</Top>
+        <Left>0.4675in</Left>
+        <Height>0.54167in</Height>
+        <Width>1.98958in</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -451,10 +529,10 @@
         </Style>
       </Image>
     </ReportItems>
-    <Height>3.03125in</Height>
+    <Height>2.7175in</Height>
     <Style />
   </Body>
-  <Width>8.04167in</Width>
+  <Width>9.33209in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
@@ -469,14 +547,7 @@
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>74891514-6be2-4ccd-bd87-8504065f99b6</rd:DataSourceID>
-    </DataSource>
-    <DataSource Name="DataSet2">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>0902e34d-537a-4a5a-8d7c-49b10ef8d099</rd:DataSourceID>
+      <rd:DataSourceID>38a7d521-43bc-425a-ad5e-3dd8a0f359a1</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -486,34 +557,38 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="itemCode">
-          <DataField>itemCode</DataField>
+        <Field Name="serviceID">
+          <DataField>serviceID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="serviceName">
+          <DataField>serviceName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="itemName">
-          <DataField>itemName</DataField>
+        <Field Name="serviceDesc">
+          <DataField>serviceDesc</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="costPrice">
-          <DataField>costPrice</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="orderDate">
-          <DataField>orderDate</DataField>
+        <Field Name="dateStarted">
+          <DataField>dateStarted</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
-        <Field Name="itemUnit">
-          <DataField>itemUnit</DataField>
+        <Field Name="dateEnded">
+          <DataField>dateEnded</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="serviceStatus">
+          <DataField>serviceStatus</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DataSet1</rd:DataSetName>
         <rd:SchemaPath>C:\Users\Alexis\Source\Repos\odc-osmbcs\DataSet1.xsd</rd:SchemaPath>
-        <rd:TableName>DataTable2</rd:TableName>
-        <rd:TableAdapterFillMethod>FillbyItem</rd:TableAdapterFillMethod>
+        <rd:TableName>DataTable1</rd:TableName>
+        <rd:TableAdapterFillMethod>FillbyService</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>DataTable2TableAdapter</rd:TableAdapterName>
+        <rd:TableAdapterName>DataTable1TableAdapter</rd:TableAdapterName>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
@@ -535,5 +610,5 @@ LdX87eavkIuQ0ZU+SwbBUgyA87RTrxUZ8tKpdWve/XsEYRtrE0f+GYfhr/0TzwN/4IbX/wCN1l3Pwa+D
     </EmbeddedImage>
   </EmbeddedImages>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
-  <rd:ReportID>61492656-6cb9-46b5-a87c-0369a3d5d3ba</rd:ReportID>
+  <rd:ReportID>8d08b744-d1ec-4511-aa5d-1f78e9afed51</rd:ReportID>
 </Report>
