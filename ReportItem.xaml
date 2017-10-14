@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
               xmlns:RV="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"  
              xmlns:local="clr-namespace:prototype2"
-             mc:Ignorable="d" Width="625.488" Height="355.771">
-    <Grid Margin="-62,0,-188,-45">
-        <WindowsFormsHost x:Name="WinFormHost" Margin="61,10,191,53">
+             mc:Ignorable="d" Width="815.435" Height="405.519" IsVisibleChanged="UserControl_IsVisibleChanged">
+    <Grid Margin="-62,0,-27,-15">
+        <WindowsFormsHost x:Name="WinFormHost" Margin="10">
             <RV:ReportViewer x:Name="ReportItem"></RV:ReportViewer>
         </WindowsFormsHost>
 

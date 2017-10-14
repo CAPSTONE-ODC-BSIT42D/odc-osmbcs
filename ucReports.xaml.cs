@@ -32,5 +32,33 @@ namespace prototype2
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
         }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            Object SELECTEDITEM = ComboBoxReport.Text;
+            if (SELECTEDITEM.Equals("Service Report"))
+            {
+                UCReportService.Visibility = Visibility.Visible;
+                UCReportsItem.Visibility = Visibility.Hidden;
+                UCReportSales.Visibility = Visibility.Hidden;
+
+
+
+            }
+            if (SELECTEDITEM.Equals("Purchase Report"))
+            {
+                UCReportsItem.Visibility = Visibility.Visible;
+                UCReportService.Visibility = Visibility.Hidden;
+                UCReportSales.Visibility = Visibility.Hidden;
+            }
+            if (SELECTEDITEM.Equals("Sales Report"))
+            {
+
+                UCReportsItem.Visibility = Visibility.Hidden;
+                UCReportService.Visibility = Visibility.Hidden;
+                UCReportSales.Visibility = Visibility.Visible;
+            }
+        }
     }
 }

@@ -52,5 +52,10 @@ namespace prototype2
             return dSServices;
 
         }
+
+        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            ReportService.RefreshReport();
+        }
     }
 }

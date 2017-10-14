@@ -53,5 +53,10 @@ namespace prototype2
             return dSSales;
 
         }
+
+        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            ReportSales.RefreshReport();
+        }
     }
 }

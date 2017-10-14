@@ -52,5 +52,10 @@ namespace prototype2
             return dSItem;
 
         }
+
+        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            ReportItem.RefreshReport();
+        }
     }
 }
