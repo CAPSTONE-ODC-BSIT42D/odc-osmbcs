@@ -5,14 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:prototype2"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="prototype2.ucInvoice"
-             mc:Ignorable="d" d:DesignHeight="782" d:DesignWidth="970">
+             mc:Ignorable="d" d:DesignHeight="782" d:DesignWidth="832">
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>
     <Grid x:Name="transInvoiceGridForm" Margin="0" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
         <local:DocumentViewer x:Name="documentViewer" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed"/>
         <ScrollViewer x:Name="newInvoiceForm" Margin="0,0,0,40" VerticalScrollBarVisibility="Auto">
-            <Grid>
+            <Grid Height="742">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0*"/>
                     <ColumnDefinition Width="0*"/>
@@ -23,19 +23,19 @@
                 <Label x:Name="label19_Copy2" Content="TIN #:" HorizontalAlignment="Left" Margin="40,87,-89,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="50" Grid.Column="1"/>
                 <Label x:Name="label19_Copy3" Content="Address:" HorizontalAlignment="Left" Margin="39,121,-104,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="66" Grid.Column="1"/>
                 <Label x:Name="label19_Copy4" Content="Business Style:" HorizontalAlignment="Left" Margin="39,155,-144,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="106" Grid.Column="1"/>
-                <Label x:Name="label19_Copy5" Content="Date:" HorizontalAlignment="Left" Margin="639,53,-682,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Grid.Column="1" Height="29" Width="44"/>
-                <Label x:Name="label19_Copy6" Content="Terms:" HorizontalAlignment="Left" Margin="635,87,-687,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Grid.Column="1" Height="29" Width="53"/>
+                <Label x:Name="label19_Copy5" Content="Date:" HorizontalAlignment="Left" Margin="472,53,-515,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Grid.Column="1" Height="29" Width="44"/>
+                <Label x:Name="label19_Copy6" Content="Terms:" HorizontalAlignment="Left" Margin="472,87,-524,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Grid.Column="1" Height="29" Width="53"/>
                 <Label x:Name="label12_Copy2" Content="Requested Items:" HorizontalAlignment="Left" Margin="10,198,-148,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31" Width="139" Grid.Column="1"/>
                 <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="9,227,-808,0" VerticalAlignment="Top" Grid.Column="1"/>
                 <Label x:Name="label12_Copy3" Content="Other Details" HorizontalAlignment="Left" Margin="9,488,-117,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31" Width="109" Grid.Column="1"/>
                 <Border BorderBrush="Black" BorderThickness="1" Margin="9,517,-791,0" VerticalAlignment="Top" Grid.Column="1"/>
-                <Label x:Name="label19_Copy20" Content="{Binding SelectedCustomerSupplier.CompanyName}" HorizontalAlignment="Left" Margin="110,53,-215,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="106" Grid.Column="1"/>
-                <TextBox x:Name="tinNumTb" HorizontalAlignment="Left" Height="24" Margin="111,87,-310,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Grid.Column="1"/>
-                <Label x:Name="label19_Copy21" Content="{Binding SelectedCustomerSupplier.CompanyAddress}" HorizontalAlignment="Left" Margin="111,121,-229,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="119" Grid.Column="1"/>
+                <Label x:Name="label19_Copy20" Content="{Binding SelectedCustomerSupplier.CompanyName}" HorizontalAlignment="Left" Margin="150,53,-255,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="106" Grid.Column="1"/>
+                <TextBox x:Name="tinNumTb" HorizontalAlignment="Left" Height="24" Margin="150,87,-349,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Grid.Column="1"/>
+                <Label x:Name="label19_Copy21" Content="{Binding SelectedCustomerSupplier.CompanyAddress}" HorizontalAlignment="Left" Margin="150,121,-268,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="119" Grid.Column="1"/>
                 <TextBox x:Name="busStyleTb" HorizontalAlignment="Left" Height="24" Margin="150,159,-309,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Grid.Column="1"/>
-                <Label x:Name="label19_Copy22" Content="{Binding SelectedCustomerSupplier.CompanyAddress}" HorizontalAlignment="Left" Margin="689,53,-808,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1" Height="29" Width="120"/>
-                <xctk:IntegerUpDown x:Name="dueDateTb" HorizontalAlignment="Left" Margin="693,91,-748,0" VerticalAlignment="Top" Width="56" Grid.Column="1" Height="20" RenderTransformOrigin="-0.482,0.45"/>
-                <Label x:Name="label19_Copy23" Content="Days" HorizontalAlignment="Left" Margin="754,87,-793,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1" Height="29" Width="40"/>
+                <Label x:Name="label19_Copy22" Content="{Binding SelectedCustomerSupplier.CompanyAddress}" HorizontalAlignment="Left" Margin="530,53,-649,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1" Height="29" Width="120"/>
+                <xctk:IntegerUpDown x:Name="dueDateTb" HorizontalAlignment="Left" Margin="530,91,-585,0" VerticalAlignment="Top" Width="56" Grid.Column="1" Height="20" RenderTransformOrigin="-0.482,0.45"/>
+                <Label x:Name="label19_Copy23" Content="Days" HorizontalAlignment="Left" Margin="586,87,-625,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1" Height="29" Width="40"/>
                 <DataGrid x:Name="itemDg_Copy" Margin="26,241,-793,0" ItemsSource="{Binding RequestedItems}" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="False" IsReadOnly="True" VerticalAlignment="Top" Height="242" SelectedItem="{Binding SelectedRequestedItem}" Grid.Column="1"  >
                     <DataGrid.Columns >
                         <!--<DataGridTextColumn Binding="{Binding totalAmountMarkUp}" ClipboardContentBinding="{x:Null}" Header="Total + Markup Price" Width="200"  />-->
@@ -103,7 +103,7 @@
                         <Label x:Name="totalSalesLbl" Content="{Binding TotalSales}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
                     </WrapPanel>
                 </StackPanel>
-                <StackPanel Grid.Column="1" Margin="519,540,-748,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="246" Width="230">
+                <StackPanel Grid.Column="1" Margin="472,540,-701,-44" HorizontalAlignment="Left" VerticalAlignment="Top" Height="246" Width="230">
                     <WrapPanel Margin="0">
                         <Label x:Name="label19_Copy12" Content="Total Sale VAT Inclusive:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="168"/>
                         <Label x:Name="totalSalesVatIncluLbl" Content="{Binding TotalSales}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
@@ -137,8 +137,8 @@
                         <Label x:Name="totalDue" Content="{Binding TotalSales}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29" Width="18"/>
                     </WrapPanel>
                 </StackPanel>
-                <Label x:Name="label19_Copy" Content="P.O. #:" HorizontalAlignment="Left" Margin="643,155,-687,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Grid.Column="1"/>
-                <TextBox x:Name="purchaseOrdNumTb" HorizontalAlignment="Left" Height="24" Margin="693,160,-852,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Grid.Column="1"/>
+                <Label x:Name="label19_Copy" Content="P.O. #:" HorizontalAlignment="Left" Margin="472,121,-522,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Grid.Column="1" Width="51"/>
+                <TextBox x:Name="purchaseOrdNumTb" HorizontalAlignment="Left" Height="24" Margin="530,126,-689,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Grid.Column="1"/>
             </Grid>
 
         </ScrollViewer>

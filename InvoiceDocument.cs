@@ -104,10 +104,10 @@ namespace prototype2
             image.WrapFormat.Style = WrapStyle.TopBottom;
             Paragraph paragraph = section.Headers.Primary.AddParagraph("Suite 3A Amparo Garden Corperate Bldg., No. 2116 Amparo cor Felix St. Sta Ana, Manila, 1009 Philippines, Tel No: 742 - 4199 / 566 - 3153, email: o.danny@odcphils.com");
             paragraph.Format.Alignment = ParagraphAlignment.Center;
-            paragraph.Format.SpaceAfter = "1.0cm";
 
-
+            
             headerName = section.AddParagraph();
+            headerName.Format.SpaceBefore = "1.0cm";
             headerName.AddFormattedText("SALES INVOICE");
             headerName.Format.Font.Name = "Calibri";
             headerName.Format.Font.Bold = true;
@@ -120,9 +120,10 @@ namespace prototype2
             this.table.Style = "Table";
             this.table.Borders.Color = TableBorder;
             this.table.Borders.Width = 0;
-            table.Format.Alignment = ParagraphAlignment.Right;
+            table.Rows.Alignment = RowAlignment.Right;
+            
 
-            Column column = table.AddColumn("3cm");
+            Column column = table.AddColumn("5cm");
 
             Row row = table.AddRow();
             row.Cells[0].AddParagraph("No.: "+MainVM.SalesInvoice.Count + 1);
