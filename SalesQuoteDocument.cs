@@ -127,7 +127,7 @@ namespace prototype2
             addressFrame.Format.Font.Size = 11;
             addressFrame.Format.SpaceAfter = "1.0cm";
             letterHeaderFrame.AddFormattedText("Attention: ", TextFormat.Bold);
-            letterHeaderFrame.AddFormattedText(""+MainVM.SelectedRepresentative.RepFullName);
+            letterHeaderFrame.AddFormattedText(""+MainVM.SelectedCustomerSupplier.RepFullName);
             letterHeaderFrame.AddLineBreak();
             letterHeaderFrame.AddFormattedText("Subject: ", TextFormat.Bold);
             letterHeaderFrame.AddFormattedText(""+MainVM.SelectedSalesQuote.sqNoChar_);
@@ -135,7 +135,7 @@ namespace prototype2
             addressFrame.Format.Font.Size = 11;
             addressFrame.Format.SpaceAfter = "1.0cm";
             paragraph1.AddText("Dear ");
-            paragraph1.AddFormattedText(""+MainVM.SelectedRepresentative.RepTitle+" "+ MainVM.SelectedRepresentative.RepLastName, TextFormat.Bold);
+            paragraph1.AddFormattedText(""+MainVM.SelectedCustomerSupplier.RepTitle+" "+ MainVM.SelectedCustomerSupplier.RepLastName, TextFormat.Bold);
             paragraph1.AddLineBreak();
             paragraph1.AddText("As per your request, we are formally offering our price proposal for the above subject as follows:");
             addressFrame.Format.Font.Name = "Calibri";

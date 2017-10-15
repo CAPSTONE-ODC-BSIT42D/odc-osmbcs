@@ -211,7 +211,6 @@ namespace prototype2
 
         private void selectCustBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainVM.SelectedRepresentative = MainVM.Representatives.Where(x => x.RepresentativeID.Equals(MainVM.SelectedCustomerSupplier.RepresentativeID)).FirstOrDefault();
             closeModals();
         }
         private void transReqAddNewItem_Click(object sender, RoutedEventArgs e)
@@ -868,7 +867,6 @@ namespace prototype2
             {
                 sqNoChar_ = stringChars,
                 custID_ = int.Parse(MainVM.SelectedCustomerSupplier.CompanyID),
-                custRepID_ = int.Parse(MainVM.SelectedCustomerSupplier.RepresentativeID),
                 quoteSubject_ = stringChars,
                 priceNote_ = "" + moneyType.SelectedValue.ToString() + ", " + landed + ", " + vatExc,
                 vatexcluded_ = (bool)vatCheckBox.IsChecked,
@@ -888,7 +886,6 @@ namespace prototype2
                 discountPercent_ = (decimal)discountPriceTb.Value
             };
             MainVM.SalesQuotes.Add(MainVM.SelectedSalesQuote);
-            MainVM.SelectedRepresentative = MainVM.Representatives.Where(x => x.RepresentativeID.Equals(MainVM.SelectedCustomerSupplier.RepresentativeID)).First();
 
         }
 
@@ -898,11 +895,10 @@ namespace prototype2
             bool noError = true;
             if (dbCon.IsConnect())
             {
-                string query = "INSERT INTO `odc_db`.`sales_quote_t` " + "(`sqNoChar`,`custID`,`custRepID`,`quoteSubject`,`priceNote`,`deliveryDate`,`estDelivery`,`validityDays`,`validityDate`,`otherTerms`,`VAT`,`vatIsExcluded`,`paymentIsLanded`,`paymentCurrency`,`status`,`termsDays`,`termsDP`,`penaltyAmt`,`penaltyPerc`,`markUpPercent`,`discountPercent`)" +
+                string query = "INSERT INTO `odc_db`.`sales_quote_t` " + "(`sqNoChar`,`custID`,`quoteSubject`,`priceNote`,`deliveryDate`,`estDelivery`,`validityDays`,`validityDate`,`otherTerms`,`VAT`,`vatIsExcluded`,`paymentIsLanded`,`paymentCurrency`,`status`,`termsDays`,`termsDP`,`penaltyAmt`,`penaltyPerc`,`markUpPercent`,`discountPercent`)" +
                     " VALUES " +
                     "('" + MainVM.SelectedSalesQuote.sqNoChar_ + "','" +
                     MainVM.SelectedSalesQuote.custID_ + "','" +
-                    MainVM.SelectedSalesQuote.custRepID_ + "','" +
                     MainVM.SelectedSalesQuote.quoteSubject_ + "','" +
                     MainVM.SelectedSalesQuote.priceNote_ + "','" +
                     MainVM.SelectedSalesQuote.deliveryDate_.ToString("yyyy-MM-dd") + "','" +
@@ -973,7 +969,6 @@ namespace prototype2
 
         void loadSalesQuoteToUi()
         {
-            MainVM.SelectedRepresentative = MainVM.Representatives.Where(x => x.RepresentativeID.Equals(MainVM.SelectedCustomerSupplier.RepresentativeID.ToString())).FirstOrDefault();
             MainVM.SelectedCustomerSupplier = MainVM.Customers.Where(x => x.CompanyID.Equals(MainVM.SelectedSalesQuote.custID_.ToString())).FirstOrDefault();
             foreach (AddedItem item in MainVM.SelectedSalesQuote.AddedItems)
             {

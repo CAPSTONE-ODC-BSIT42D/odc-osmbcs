@@ -41,7 +41,7 @@
                                 </Binding.ValidationRules>
                             </Binding>
                         </ComboBox.SelectedItem>
-                        <ComboBoxItem Content="Employee" Tag="0" IsSelected="True"/>
+                        <ComboBoxItem Content="Employee" Tag="0"/>
                         <ComboBoxItem Content="Contractor" Tag="1"/>
                     </ComboBox>
                     <TextBox x:Name="empFirstNameTb" HorizontalAlignment="Left" Height="23" Margin="40,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" FontWeight="Normal">

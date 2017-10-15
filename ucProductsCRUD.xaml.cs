@@ -141,7 +141,6 @@ namespace prototype2
 
                             if (expression != null)
                             {
-                                Validation.ClearInvalid(expression);
                                 expression.UpdateSource();
                                 validationError = Validation.GetHasError((TextBox)element);
                             }
@@ -152,7 +151,6 @@ namespace prototype2
                             Validation.ClearInvalid(expression);
                             if (((Xceed.Wpf.Toolkit.DecimalUpDown)element).IsEnabled)
                             {
-
                                 expression.UpdateSource();
                                 validationError = Validation.GetHasError((Xceed.Wpf.Toolkit.DecimalUpDown)element);
                             }
@@ -266,26 +264,19 @@ namespace prototype2
             {
                 if (element is TextBox)
                 {
-                    ((TextBox)element).IsEnabled = true;
                     BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-                    if (expression != null)
-                        Validation.ClearInvalid(expression);
-                    ((TextBox)element).Text = string.Empty;
+                    Validation.ClearInvalid(expression);
                 }
                 else if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
                 {
-                    ((Xceed.Wpf.Toolkit.DecimalUpDown)element).IsEnabled = true;
                     BindingExpression expression = ((Xceed.Wpf.Toolkit.DecimalUpDown)element).GetBindingExpression(Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
-                    if (expression != null)
-                        Validation.ClearInvalid(expression);
+                    Validation.ClearInvalid(expression);
                     ((Xceed.Wpf.Toolkit.DecimalUpDown)element).Value = 0;
                 }
                 else if (element is ComboBox)
                 {
-                    ((ComboBox)element).IsEnabled = true;
                     BindingExpression expression = ((ComboBox)element).GetBindingExpression(TextBox.TextProperty);
-                    if (expression != null)
-                        Validation.ClearInvalid(expression);
+                    Validation.ClearInvalid(expression);
                     ((ComboBox)element).SelectedIndex = -1;
                 }
             }

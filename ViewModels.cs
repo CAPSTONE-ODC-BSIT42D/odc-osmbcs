@@ -115,24 +115,6 @@ namespace prototype2
 
 
         public String SearchQuery { get; set; }
-        //-----REPRESENTATIVE
-        protected ObservableCollection<Representative> representative = new ObservableCollection<Representative>();
-
-        protected Representative selectedRepresentative = null;
-
-        public ObservableCollection<Representative> Representatives
-        {
-            get { return representative; }
-            set { representative = value; }
-        }
-
-        public Representative SelectedRepresentative
-        {
-            get { return selectedRepresentative; }
-            set { SetProperty(ref selectedRepresentative, value); }
-        }
-        //-----END OF REPRESENTATIVE
-
         //-----CUSTOMER/ Supplier
         protected ObservableCollection<Customer> allCustomerSupplier =
             new ObservableCollection<Customer>();

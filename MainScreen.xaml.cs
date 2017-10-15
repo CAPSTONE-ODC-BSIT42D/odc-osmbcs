@@ -104,7 +104,6 @@ namespace prototype2
             MainVM.AllCustomerSupplier.Clear();
             MainVM.Customers.Clear();
             MainVM.Suppliers.Clear();
-            MainVM.Representatives.Clear();
 
             MainVM.AllEmployeesContractor.Clear();
             MainVM.Employees.Clear();
@@ -224,7 +223,7 @@ namespace prototype2
 
             if (dbCon.IsConnect())
             {
-                string query = "SELECT cs.companyID, cs.companyName, cs.companyAddInfo, cs.companyAddress,cs.companyCity,p.locProvince,cs.companyProvinceID,cs.companyPostalCode, cs.companyEmail, cs.companyTelephone, cs.companyMobile, cs.representativeID ,cs.companyType " +
+                string query = "SELECT * " +
                     "FROM cust_supp_t cs  " +
                     "JOIN provinces_t p ON cs.companyProvinceID = p.locProvinceId " +
                     "WHERE isDeleted = 0 AND companyType = 0;";
@@ -236,7 +235,7 @@ namespace prototype2
 
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    var customer = (new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString(), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), RepresentativeID = dr["representativeID"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString() });
+                    var customer = (new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString(), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString(), RepTitle = dr["repTitle"].ToString(), RepFirstName = dr["repFName"].ToString(), RepMiddleName = dr["repMInitial"].ToString(), RepLastName = dr["repLName"].ToString(), RepEmail = dr["repEmail"].ToString(), RepTelephone = dr["repTelephone"].ToString(), RepMobile = dr["repMobile"].ToString() });
                     MainVM.Customers.Add(customer);
                     MainVM.AllCustomerSupplier.Add(customer);
                 }
@@ -244,7 +243,7 @@ namespace prototype2
 
             if (dbCon.IsConnect())
             {
-                string query = "SELECT cs.companyID, cs.companyName, cs.companyAddInfo, cs.companyAddress,cs.companyCity,p.locProvince,cs.companyProvinceID,cs.companyPostalCode, cs.companyEmail, cs.companyTelephone, cs.companyMobile, cs.representativeID ,cs.companyType " +
+                string query = "SELECT * " +
                     "FROM cust_supp_t cs  " +
                     "JOIN provinces_t p ON cs.companyProvinceID = p.locProvinceId " +
                     "WHERE isDeleted = 0 AND companyType = 1;";
@@ -256,23 +255,9 @@ namespace prototype2
 
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    MainVM.Suppliers.Add(new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString(), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), RepresentativeID = dr["representativeID"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString() });
-                    MainVM.AllCustomerSupplier.Add(new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString(), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), RepresentativeID = dr["representativeID"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString() });
-                }
-            }
-
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * from representative_t";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    MainVM.Representatives.Add(new Representative() { RepresentativeID = dr["representativeID"].ToString(), RepTitle = dr["repTitle"].ToString(), RepFirstName = dr["repFName"].ToString(), RepMiddleName = dr["repMInitial"].ToString(), RepLastName = dr["repLName"].ToString(), RepEmail = dr["repEmail"].ToString(), RepTelephone = dr["repTelephone"].ToString(), RepMobile = dr["repMobile"].ToString() });
+                    var supplier = new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString(), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString(), RepTitle = dr["repTitle"].ToString(), RepFirstName = dr["repFName"].ToString(), RepMiddleName = dr["repMInitial"].ToString(), RepLastName = dr["repLName"].ToString(), RepEmail = dr["repEmail"].ToString(), RepTelephone = dr["repTelephone"].ToString(), RepMobile = dr["repMobile"].ToString() };
+                    MainVM.Suppliers.Add(supplier);
+                    MainVM.AllCustomerSupplier.Add(supplier);
                 }
             }
             if (dbCon.IsConnect())

@@ -72,8 +72,9 @@ namespace prototype2
                         }
                     }
                 }
-                if (!validationError)
+                if (!validationError && MainVM.LoginEmployee_ != null)
                 {
+                    
                     salesInvoiceToMemory();
                     newInvoiceForm.Visibility = Visibility.Collapsed;
                     documentViewer.Visibility = Visibility.Visible;
@@ -83,7 +84,10 @@ namespace prototype2
                     string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
                     documentViewer.pagePreview.Ddl = ddl;
                 }
-                
+                else
+                {
+                    MessageBox.Show("");
+                }
             }
             else if (documentViewer.IsVisible)
             {
@@ -255,17 +259,15 @@ namespace prototype2
                         "(`custBalance`,`invoiceNo`) " +
                         "VALUES " +
                         "('" +
-                        MainVM.TotalDue + "','" +
-                        dr["invoiceNo"].ToString() + "','" +
-                        "')";
+                        MainVM.TotalSales + "','" +
+                        dr["invoiceNo"].ToString() + "')";
                         dbCon.insertQuery(query, dbCon.Connection);
                         query = "INSERT INTO `odc_db`.`payment_hist_t` " +
                         "(`custBalance`,`invoiceNo`) " +
                         "VALUES " +
                         "('" +
-                        (MainVM.TotalDue - MainVM.TotalSalesWithOutDp) + "','" +
-                        dr["invoiceNo"].ToString() + "','" +
-                        "')";
+                        (MainVM.TotalSales - MainVM.TotalSalesWithOutDp) + "','" +
+                        dr["invoiceNo"].ToString() + "')";
                         dbCon.insertQuery(query, dbCon.Connection);
                     }
                     MessageBox.Show("Inovice is Saved");

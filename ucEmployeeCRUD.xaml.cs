@@ -29,6 +29,7 @@ namespace prototype2
         public ucEmployeeCRUD()
         {
             InitializeComponent();
+            
         }
 
         private bool validationError = false;
@@ -388,6 +389,7 @@ namespace prototype2
             {
                 empPostionCb.SelectedValue = MainVM.SelectedEmployeeContractor.PositionID;
                 empUserNameTb.Text = MainVM.SelectedEmployeeContractor.EmpUserName;
+
                 empPasswordTb.IsEnabled = false;
             }
             else if (employeeType.SelectedIndex == 1)
@@ -419,23 +421,17 @@ namespace prototype2
             {
                 if (element is TextBox)
                 {
-                    ((TextBox)element).IsEnabled = true;
                     BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-                    if (expression != null)
-                        Validation.ClearInvalid(expression);
-                    ((TextBox)element).Text = string.Empty;
+                    Validation.ClearInvalid(expression);
                 }
                 else if (element is ComboBox)
                 {
-                    ((ComboBox)element).IsEnabled = true;
-                    BindingExpression expression = ((ComboBox)element).GetBindingExpression(TextBox.TextProperty);
-                    if (expression != null)
-                        Validation.ClearInvalid(expression);
+                    BindingExpression expression = ((ComboBox)element).GetBindingExpression(ComboBox.SelectedItemProperty);
+                    Validation.ClearInvalid(expression);
                     ((ComboBox)element).SelectedIndex = -1;
                 }
                 else if (element is CheckBox)
                 {
-                    ((CheckBox)element).IsEnabled = true;
                     ((CheckBox)element).IsChecked = false;
                 }
             }
@@ -453,6 +449,7 @@ namespace prototype2
             {
                 loadDataToUi();
             }
+            employeeType.SelectedIndex = 0;
         }
     }
 }

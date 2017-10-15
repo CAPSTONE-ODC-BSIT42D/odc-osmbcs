@@ -58,11 +58,13 @@
                 </TextBox>
                 <TextBox x:Name="companyDescriptionTb" HorizontalAlignment="Left" Height="115" Margin="151,118,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="350" Text="{Binding AdditionalInfo, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
                 <TextBox x:Name="companyAddressTb" HorizontalAlignment="Left" Height="23" Margin="151,247,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="350">
-                    <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                        <Binding.ValidationRules>
-                            <local:TextBoxValidation TextBoxType="IsEmpty"/>
-                        </Binding.ValidationRules>
-                    </Binding>
+                    <TextBox.Text>
+                        <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
                 </TextBox>
                 <TextBox x:Name="companyCityTb" HorizontalAlignment="Left" Height="23" Margin="151,275,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200">
                     <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">

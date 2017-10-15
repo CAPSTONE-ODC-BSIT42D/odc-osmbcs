@@ -22,9 +22,6 @@ namespace prototype2
         protected string emailAddress;
         protected string telephone;
         protected string mobilephone;
-        protected bool isDefault;
-        protected ObservableCollection<Contact> contactsOfRep = new ObservableCollection<Contact>();
-
         public string RepresentativeID
         {
             get { return representativeID; }
@@ -96,7 +93,14 @@ namespace prototype2
         protected string companyTelephone;
         protected string companyMobile;
         protected string companyType;
-        protected string repid;
+        protected string title;
+        protected string firstname;
+        protected string middlename;
+        protected string lastname;
+        protected string fullname;
+        protected string emailAddress;
+        protected string telephone;
+        protected string mobilephone;
 
         public string CompanyID
         {
@@ -164,10 +168,50 @@ namespace prototype2
             set { SetProperty(ref companyType, value); }
         }
 
-        public string RepresentativeID
+        public string RepTitle
         {
-            get { return repid; }
-            set { SetProperty(ref repid, value); }
+            get { return title; }
+            set { SetProperty(ref title, value); }
+        }
+
+        public string RepFirstName
+        {
+            get { return firstname; }
+            set { SetProperty(ref firstname, value); }
+        }
+        public string RepMiddleName
+        {
+            get { return middlename; }
+            set { SetProperty(ref middlename, value); }
+        }
+        public string RepLastName
+        {
+            get { return lastname; }
+            set { SetProperty(ref lastname, value); }
+        }
+
+        public string RepEmail
+        {
+            get { return emailAddress; }
+            set { SetProperty(ref emailAddress, value); }
+        }
+
+        public string RepTelephone
+        {
+            get { return telephone; }
+            set { SetProperty(ref telephone, value); }
+        }
+
+        public string RepMobile
+        {
+            get { return mobilephone; }
+            set { SetProperty(ref mobilephone, value); }
+        }
+
+        public string RepFullName
+        {
+            get { return fullname; }
+            set { SetProperty(ref fullname, value); }
         }
     }
 

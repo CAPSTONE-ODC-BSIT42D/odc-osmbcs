@@ -210,17 +210,15 @@ namespace prototype2
                     if (element is TextBox)
                     {
                         BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-                        Validation.ClearInvalid(expression);
-                        if (((TextBox)element).IsEnabled)
-                        {
-                            expression.UpdateSource();
-                            validationError = Validation.GetHasError((TextBox)element);
-                        }
+                        BindingExpressionBase bindingExpressionBase = BindingOperations.GetBindingExpressionBase(((TextBox)element), TextBox.TextProperty);
+                        bindingExpressionBase.UpdateSource();
+                        validationError = Validation.GetHasError((TextBox)element);
                     }
                     if (element is ComboBox)
                     {
                         BindingExpression expression = ((ComboBox)element).GetBindingExpression(ComboBox.SelectedItemProperty);
-                        expression.UpdateSource();
+                        BindingExpressionBase bindingExpressionBase = BindingOperations.GetBindingExpressionBase(((ComboBox)element), ComboBox.SelectedItemProperty);
+                        bindingExpressionBase.UpdateSource();
                         validationError = Validation.GetHasError((ComboBox)element);
                     }
                 }
@@ -262,50 +260,6 @@ namespace prototype2
                 using (MySqlConnection conn = dbCon.Connection)
                 {
                     conn.Open();
-                    if (!MainVM.isEdit)
-                    {
-                       cmd = new MySqlCommand("INSERT_REP", conn);
-                    }
-                    else
-                    {
-                        cmd = new MySqlCommand("UPDATE_REP", conn);
-                    }
-                    
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    cmd.Parameters.AddWithValue("@repTitle", representativeTitle.Text);
-                    cmd.Parameters["@repTitle"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@repLName", repLastNameTb.Text);
-                    cmd.Parameters["@repLName"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@repFName", repFirstNameTb.Text);
-                    cmd.Parameters["@repFName"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@repMName", repMiddleInitialTb.Text);
-                    cmd.Parameters["@repMName"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@repEmail", repEmailTb.Text);
-                    cmd.Parameters["@repEmail"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@repTelephone", repTelephoneTb.Text);
-                    cmd.Parameters["@repTelephone"].Direction = ParameterDirection.Input;
-
-                    cmd.Parameters.AddWithValue("@repMobile", repMobileTb.Text);
-                    cmd.Parameters["@repMobile"].Direction = ParameterDirection.Input;
-                    if (!MainVM.isEdit)
-                    {
-                        cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
-                        cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
-                        cmd.ExecuteNonQuery();
-                        repID = cmd.Parameters["@insertedid"].Value.ToString();
-                    }
-                    else
-                    {
-                        cmd.Parameters.AddWithValue("@repID", MainVM.SelectedCustomerSupplier.RepresentativeID);
-                        cmd.Parameters["@repID"].Direction = ParameterDirection.Input;
-                        cmd.ExecuteNonQuery();
-                    }
 
                     if (!MainVM.isEdit)
                     {
@@ -345,20 +299,37 @@ namespace prototype2
                     cmd.Parameters.AddWithValue("@companyMobile", companyMobileTb.Text);
                     cmd.Parameters["@companyMobile"].Direction = ParameterDirection.Input;
 
+                    cmd.Parameters.AddWithValue("@repTitle", representativeTitle.Text);
+                    cmd.Parameters["@repTitle"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@repLName", repLastNameTb.Text);
+                    cmd.Parameters["@repLName"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@repFName", repFirstNameTb.Text);
+                    cmd.Parameters["@repFName"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@repMName", repMiddleInitialTb.Text);
+                    cmd.Parameters["@repMName"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@repEmail", repEmailTb.Text);
+                    cmd.Parameters["@repEmail"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@repTelephone", repTelephoneTb.Text);
+                    cmd.Parameters["@repTelephone"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@repMobile", repMobileTb.Text);
+                    cmd.Parameters["@repMobile"].Direction = ParameterDirection.Input;
+
                     cmd.Parameters.AddWithValue("@compType", companyTypeCb.SelectedIndex);
                     cmd.Parameters["@compType"].Direction = ParameterDirection.Input;
-                    if (!MainVM.isEdit)
-                    {
-                        cmd.Parameters.AddWithValue("@repID", repID);
-                        cmd.Parameters["@repID"].Direction = ParameterDirection.Input;
-                        cmd.ExecuteNonQuery();
-                    }
-                    else
+                    if (MainVM.isEdit)
                     {
                         cmd.Parameters.AddWithValue("@compID", MainVM.SelectedCustomerSupplier.CompanyID);
                         cmd.Parameters["@compID"].Direction = ParameterDirection.Input;
                         cmd.ExecuteNonQuery();
                     }
+                    else
+                        cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception)
@@ -379,26 +350,21 @@ namespace prototype2
 
                 if (element is TextBox)
                 {
-                    ((TextBox)element).IsEnabled = true;
                     BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-                    if (expression != null)
-                        Validation.ClearInvalid(expression);
-                    ((TextBox)element).Text = string.Empty;
+                    Validation.ClearInvalid(expression);
                 }
                 else if (element is ComboBox)
                 {
-                    ((ComboBox)element).IsEnabled = true;
-                    BindingExpression expression = ((ComboBox)element).GetBindingExpression(TextBox.TextProperty);
-                    if (expression != null)
-                        Validation.ClearInvalid(expression);
+                    BindingExpression expression = ((ComboBox)element).GetBindingExpression(ComboBox.SelectedItemProperty);
+                    Validation.ClearInvalid(expression);
                     ((ComboBox)element).SelectedIndex = -1;
                 }
                 else if (element is CheckBox)
                 {
-                    ((CheckBox)element).IsEnabled = true;
                     ((CheckBox)element).IsChecked = false;
                 }
             }
+            MainVM.StringTextBox = string.Empty;
             MainVM.isEdit = false;
         }
 
@@ -430,25 +396,24 @@ namespace prototype2
                 companyEmailCb.IsChecked = false;
                 companyEmailCb.IsChecked = true;
             }
-            MainVM.SelectedRepresentative = MainVM.Representatives.Where(x => x.RepresentativeID.Equals(MainVM.SelectedCustomerSupplier.RepresentativeID)).FirstOrDefault();
-            representativeTitle.Text = MainVM.SelectedRepresentative.RepTitle;
-            repFirstNameTb.Text = MainVM.SelectedRepresentative.RepFirstName;
-            repMiddleInitialTb.Text = MainVM.SelectedRepresentative.RepMiddleName;
-            repLastNameTb.Text = MainVM.SelectedRepresentative.RepLastName;
-            repEmailTb.Text = MainVM.SelectedRepresentative.RepEmail;
-            repTelephoneTb.Text = MainVM.SelectedRepresentative.RepTelephone;
-            repMobileTb.Text = MainVM.SelectedRepresentative.RepMobile;
-            if (String.IsNullOrWhiteSpace(MainVM.SelectedRepresentative.RepTelephone))
+            representativeTitle.Text = MainVM.SelectedCustomerSupplier.RepTitle;
+            repFirstNameTb.Text = MainVM.SelectedCustomerSupplier.RepFirstName;
+            repMiddleInitialTb.Text = MainVM.SelectedCustomerSupplier.RepMiddleName;
+            repLastNameTb.Text = MainVM.SelectedCustomerSupplier.RepLastName;
+            repEmailTb.Text = MainVM.SelectedCustomerSupplier.RepEmail;
+            repTelephoneTb.Text = MainVM.SelectedCustomerSupplier.RepTelephone;
+            repMobileTb.Text = MainVM.SelectedCustomerSupplier.RepMobile;
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.RepTelephone))
             {
                 repTelCb.IsChecked = false;
                 repTelCb.IsChecked = true;
             }
-            if (String.IsNullOrWhiteSpace(MainVM.SelectedRepresentative.RepMobile))
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.RepMobile))
             {
                 repMobCb.IsChecked = false;
                 repMobCb.IsChecked = true;
             }
-            if (String.IsNullOrWhiteSpace(MainVM.SelectedRepresentative.RepEmail))
+            if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.RepEmail))
             {
                 repEmailCb.IsChecked = false;
                 repEmailCb.IsChecked = true;
