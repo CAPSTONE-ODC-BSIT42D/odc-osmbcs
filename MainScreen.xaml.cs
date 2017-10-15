@@ -1805,7 +1805,46 @@ namespace prototype2
 
         private void trasancnvertToInvoiceBtn_Click(object sender, RoutedEventArgs e)
         {
+            foreach (var obj in transQuotationGrid.Children)
+            {
+                if (obj is Grid)
+                {
+                    if (((Grid)obj).Equals(quotationsGridHome))
+                    {
 
+                        ((Grid)obj).Visibility = Visibility.Visible;
+                        settingsBtn.Visibility = Visibility.Hidden;
+                    }
+                }
+                else
+                    ((UserControl)obj).Visibility = Visibility.Collapsed;
+
+            }
+            foreach (var element in trasanctionGrid.Children)
+            {
+                if (element is Grid)
+                {
+                    if (!(((Grid)element).Name.Equals(transInvoiceGrid.Name)))
+                    {
+                        ((Grid)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((Grid)element).Visibility = Visibility.Visible;
+                }
+            }
+            headerLbl.Content = "Trasanction - Sales Invoice";
+            foreach (var element in transInvoiceGrid.Children)
+            {
+                if (element is UserControl)
+                {
+                    if (!(((UserControl)element).Name.Equals(ucInvoice.Name)))
+                    {
+                        ((UserControl)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((UserControl)element).Visibility = Visibility.Visible;
+                }
+            }
         }
 
         private void convertToInvoice_BtnClicked(object sender, EventArgs e)

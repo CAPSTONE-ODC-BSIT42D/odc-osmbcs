@@ -815,8 +815,8 @@
                     <local:ucSalesQuote x:Name="ucSalesQuote" Margin="0" Visibility="Collapsed"/>
 
                 </Grid>
-                <Grid x:Name="transInvoiceGrid" Margin="0,0,1,0" d:IsHidden="True" >
-                    <Grid x:Name="invoiceGridHome" Margin="10" d:IsHidden="True" >
+                <Grid x:Name="transInvoiceGrid" Margin="0,0,1,0" >
+                    <Grid x:Name="invoiceGridHome" Margin="10" >
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                             <Label x:Name="label22" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
                             <TextBox x:Name="searchBox3" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317" Text="{Binding SearchQuery}"/>
@@ -976,7 +976,7 @@
                             <ComboBoxItem Content="APPROVED"/>
                         </ComboBox>
                     </Grid>
-                    <local:ucInvoice x:Name="ucInvoice" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Visibility="Collapsed"/>
+                    <local:ucInvoice x:Name="ucInvoice" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Visibility="Collapsed" d:IsHidden="True"/>
 
                 </Grid>
             </Grid>

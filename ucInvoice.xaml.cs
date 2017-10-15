@@ -4,6 +4,7 @@ using MigraDoc.Rendering;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -46,7 +47,14 @@ namespace prototype2
         Document document;
         private void invoiceNext_Click(object sender, RoutedEventArgs e)
         {
-            if (newInvoiceForm.IsVisible)
+            if (selectSalesQuoteGrid.IsVisible)
+            {
+                
+                newInvoiceForm.Visibility = Visibility.Visible;
+                documentViewer.Visibility = Visibility.Collapsed;
+                selectSalesQuoteGrid.Visibility = Visibility.Collapsed;
+            }
+            else if (newInvoiceForm.IsVisible)
             {
                 foreach (var element in newInvoiceFormGrid.Children)
                 {
@@ -76,6 +84,7 @@ namespace prototype2
                 {
                     
                     salesInvoiceToMemory();
+                    selectSalesQuoteGrid.Visibility = Visibility.Collapsed;
                     newInvoiceForm.Visibility = Visibility.Collapsed;
                     documentViewer.Visibility = Visibility.Visible;
                     invoiceNext.Content = "Save";
@@ -125,6 +134,14 @@ namespace prototype2
 
             }
         }
+
+        private void findBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var linqResults = MainVM.SalesQuotes.Where(x => x.sqNoChar_.ToLower().Contains(transSearchBoxSelectCustGridTb.Text.ToLower()));
+            var observable = new ObservableCollection<SalesQuote>(linqResults);
+            selectCustomerDg.ItemsSource = observable;
+        }
+
 
         void computeInvoice()
         {
@@ -278,9 +295,22 @@ namespace prototype2
 
         private void UserControlInvoice_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
+            
             if (this.IsVisible)
             {
-                computeInvoice();
+                if (MainVM.SelectedSalesQuote != null)
+                {
+                    newInvoiceForm.Visibility = Visibility.Visible;
+                    documentViewer.Visibility = Visibility.Collapsed;
+                    selectSalesQuoteGrid.Visibility = Visibility.Collapsed;
+                    computeInvoice();
+                }
+                else
+                {
+                    newInvoiceForm.Visibility = Visibility.Collapsed;
+                    documentViewer.Visibility = Visibility.Collapsed;
+                    selectSalesQuoteGrid.Visibility = Visibility.Visible;
+                }
             }
         }
     }
