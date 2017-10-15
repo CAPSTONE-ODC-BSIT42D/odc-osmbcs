@@ -422,12 +422,14 @@ namespace prototype2
                 if (element is TextBox)
                 {
                     BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-                    Validation.ClearInvalid(expression);
+                    if (expression != null)
+                        Validation.ClearInvalid(expression);
                 }
                 else if (element is ComboBox)
                 {
                     BindingExpression expression = ((ComboBox)element).GetBindingExpression(ComboBox.SelectedItemProperty);
-                    Validation.ClearInvalid(expression);
+                    if (expression != null)
+                        Validation.ClearInvalid(expression);
                     ((ComboBox)element).SelectedIndex = -1;
                 }
                 else if (element is CheckBox)
@@ -435,7 +437,7 @@ namespace prototype2
                     ((CheckBox)element).IsChecked = false;
                 }
             }
-            
+            MainVM.StringTextBox = string.Empty;
         }
 
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)

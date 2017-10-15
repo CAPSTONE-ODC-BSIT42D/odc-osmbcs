@@ -265,18 +265,21 @@ namespace prototype2
                 if (element is TextBox)
                 {
                     BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-                    Validation.ClearInvalid(expression);
+                    if (expression != null)
+                        Validation.ClearInvalid(expression);
                 }
                 else if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
                 {
                     BindingExpression expression = ((Xceed.Wpf.Toolkit.DecimalUpDown)element).GetBindingExpression(Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
-                    Validation.ClearInvalid(expression);
+                    if (expression != null)
+                        Validation.ClearInvalid(expression);
                     ((Xceed.Wpf.Toolkit.DecimalUpDown)element).Value = 0;
                 }
                 else if (element is ComboBox)
                 {
                     BindingExpression expression = ((ComboBox)element).GetBindingExpression(TextBox.TextProperty);
-                    Validation.ClearInvalid(expression);
+                    if (expression != null)
+                        Validation.ClearInvalid(expression);
                     ((ComboBox)element).SelectedIndex = -1;
                 }
             }

@@ -656,7 +656,7 @@
                     </Button>
                 </Grid>
             </Grid>
-            <Grid x:Name="trasanctionGrid">
+            <Grid x:Name="trasanctionGrid" d:IsHidden="True">
                 <Grid x:Name="transQuotationGrid" Margin="0,0,1,0" >
                     <Grid x:Name="quotationsGridHome" Margin="10" >
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
@@ -980,8 +980,8 @@
 
                 </Grid>
             </Grid>
-            <Grid x:Name="serviceGrid" d:IsHidden="True">
-                <Grid Height="952" Margin="0,2"/>
+            <Grid x:Name="serviceGrid">
+                <local:ucServiceSchedule Margin="10"/>
             </Grid>
             <Grid x:Name="reportsGrid" d:IsHidden="True">
                 <local:ucReports Margin="0"/>

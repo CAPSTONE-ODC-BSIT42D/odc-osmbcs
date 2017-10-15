@@ -131,7 +131,7 @@
                     </Binding>
 
                 </TextBox>
-                <TextBox x:Name="repMiddleInitialTb" HorizontalAlignment="Left" Height="24" Margin="160,605,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="124">
+                <TextBox x:Name="repMiddleInitialTb" HorizontalAlignment="Left" Height="24" Margin="160,605,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="124" BorderThickness="0,0,0,1" MaxLength="3">
                     <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                         <Binding.ValidationRules>
                             <local:TextBoxValidation TextBoxType="IsEmpty"/>

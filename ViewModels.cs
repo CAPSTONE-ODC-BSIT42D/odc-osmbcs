@@ -454,6 +454,22 @@ namespace prototype2
             get { return selectedProvince; }
             set { SetProperty(ref selectedProvince, value); }
         }
-        
+
+        //Schedule
+        protected ObservableCollection<ServiceSchedule> ServiceSchedules = new ObservableCollection<ServiceSchedule>();
+
+        protected ServiceSchedule SelectedServiceSchedule = null;
+
+        public ObservableCollection<ServiceSchedule> ServiceSchedules_
+        {
+            get { return ServiceSchedules; }
+            set { ServiceSchedules = value; }
+        }
+
+        public ServiceSchedule SelectedServiceSchedule_
+        {
+            get { return SelectedServiceSchedule; }
+            set { SetProperty(ref SelectedServiceSchedule, value); }
+        }
     }
 }

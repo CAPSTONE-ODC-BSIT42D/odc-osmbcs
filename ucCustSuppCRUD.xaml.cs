@@ -210,16 +210,21 @@ namespace prototype2
                     if (element is TextBox)
                     {
                         BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-                        BindingExpressionBase bindingExpressionBase = BindingOperations.GetBindingExpressionBase(((TextBox)element), TextBox.TextProperty);
-                        bindingExpressionBase.UpdateSource();
-                        validationError = Validation.GetHasError((TextBox)element);
+                        if (((TextBox)element).IsEnabled)
+                        {
+                            expression.UpdateSource();
+                            validationError = Validation.GetHasError((TextBox)element);
+                        }
                     }
                     if (element is ComboBox)
                     {
-                        BindingExpression expression = ((ComboBox)element).GetBindingExpression(ComboBox.SelectedItemProperty);
-                        BindingExpressionBase bindingExpressionBase = BindingOperations.GetBindingExpressionBase(((ComboBox)element), ComboBox.SelectedItemProperty);
-                        bindingExpressionBase.UpdateSource();
-                        validationError = Validation.GetHasError((ComboBox)element);
+                        if (((ComboBox)element).IsEnabled)
+                        {
+                            BindingExpression expression = ((ComboBox)element).GetBindingExpression(ComboBox.SelectedItemProperty);
+                            expression.UpdateSource();
+                            validationError = Validation.GetHasError((ComboBox)element);
+                        }
+                        
                     }
                 }
                 if (!validationError)
@@ -351,12 +356,14 @@ namespace prototype2
                 if (element is TextBox)
                 {
                     BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-                    Validation.ClearInvalid(expression);
+                    if(expression!=null)
+                        Validation.ClearInvalid(expression);
                 }
                 else if (element is ComboBox)
                 {
                     BindingExpression expression = ((ComboBox)element).GetBindingExpression(ComboBox.SelectedItemProperty);
-                    Validation.ClearInvalid(expression);
+                    if (expression != null)
+                        Validation.ClearInvalid(expression);
                     ((ComboBox)element).SelectedIndex = -1;
                 }
                 else if (element is CheckBox)

@@ -7,74 +7,7 @@ using System.Threading.Tasks;
 
 namespace prototype2
 {
-    public class Representative : ViewModelEntity
-    {
-        public Representative()
-        {
-
-        }
-        protected string representativeID;
-        protected string title;
-        protected string firstname;
-        protected string middlename;
-        protected string lastname;
-        protected string fullname;
-        protected string emailAddress;
-        protected string telephone;
-        protected string mobilephone;
-        public string RepresentativeID
-        {
-            get { return representativeID; }
-            set { SetProperty(ref representativeID, value); }
-        }
-
-        public string RepTitle
-        {
-            get { return title; }
-            set { SetProperty(ref title, value); }
-        }
-
-        public string RepFirstName
-        {
-            get { return firstname; }
-            set { SetProperty(ref firstname, value); }
-        }
-        public string RepMiddleName
-        {
-            get { return middlename; }
-            set { SetProperty(ref middlename, value); }
-        }
-        public string RepLastName
-        {
-            get { return lastname; }
-            set { SetProperty(ref lastname, value); }
-        }
-
-        public string RepEmail
-        {
-            get { return emailAddress; }
-            set { SetProperty(ref emailAddress, value); }
-        }
-
-        public string RepTelephone
-        {
-            get { return telephone; }
-            set { SetProperty(ref telephone, value); }
-        }
-
-        public string RepMobile
-        {
-            get { return mobilephone; }
-            set { SetProperty(ref mobilephone, value); }
-        }
-
-        public string RepFullName
-        {
-            get { return fullname; }
-            set { SetProperty(ref fullname, value); }
-        }
-    }
-
+    
     public class Customer : ViewModelEntity
     {
         public Customer()
@@ -1149,6 +1082,7 @@ namespace prototype2
             set { addedItem = value; }
         }
     }
+
     public class SalesInvoice : ViewModelEntity
     {
         public SalesInvoice()
@@ -1261,5 +1195,56 @@ namespace prototype2
             set { SetProperty(ref notes, value); }
         }
 
+    }
+
+    public class ServiceSchedule : ViewModelEntity
+    {
+        public ServiceSchedule()
+        {
+
+        }
+
+        protected string serviceSchedNoChar;
+        public string serviceSchedNoChar_
+        {
+            get { return serviceSchedNoChar; }
+            set { SetProperty(ref serviceSchedNoChar, value); }
+        }
+
+        protected int invoiceNo;
+        public int invoiceNo_
+        {
+            get { return invoiceNo; }
+            set { SetProperty(ref invoiceNo, value); }
+        }
+
+        protected string serviceStatus;
+        public string serviceStatus_
+        {
+            get { return serviceStatus; }
+            set { SetProperty(ref serviceStatus, value); }
+        }
+
+        protected DateTime dateStarted;
+        public DateTime dateStarted_
+        {
+            get { return dateStarted; }
+            set { SetProperty(ref dateStarted, value); }
+
+        }
+
+        protected DateTime dateEnded;
+        public DateTime dateEnded_
+        {
+            get { return dateEnded; }
+            set { SetProperty(ref dateEnded, value); }
+        }
+
+        protected string schedNotes;
+        public string schedNotes_
+        {
+            get { return schedNotes; }
+            set { SetProperty(ref schedNotes, value); }
+        }
     }
 }
