@@ -267,6 +267,7 @@ namespace prototype2
                     BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
                     if (expression != null)
                         Validation.ClearInvalid(expression);
+                    ((TextBox)element).Text = string.Empty;
                 }
                 else if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
                 {

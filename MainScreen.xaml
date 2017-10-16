@@ -981,7 +981,7 @@
                 </Grid>
             </Grid>
             <Grid x:Name="serviceGrid">
-                <local:ucServiceSchedule Margin="10"/>
+                <local:ucServiceSchedule Margin="0"/>
             </Grid>
             <Grid x:Name="reportsGrid" d:IsHidden="True">
                 <local:ucReports Margin="0"/>

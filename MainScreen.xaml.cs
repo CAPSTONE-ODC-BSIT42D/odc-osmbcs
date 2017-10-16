@@ -445,6 +445,7 @@ namespace prototype2
                                 }
                             }
                             sq.AddedServices.Add(MainVM.SelectedAddedService);
+                            MainVM.AddedServices.Add(MainVM.SelectedAddedService);
                         }
                     }
                     foreach (DataRow dr3 in fromDbTable3.Rows)

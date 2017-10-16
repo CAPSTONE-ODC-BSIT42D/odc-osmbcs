@@ -42,7 +42,9 @@ namespace prototype2
 
         private void scheduleServiceBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+            sb.Begin(formGridBg);
+            formGridBg.Visibility = Visibility.Collapsed;
         }
         private void Btn_ScheduleType_Click(object sender, RoutedEventArgs e)
         {
