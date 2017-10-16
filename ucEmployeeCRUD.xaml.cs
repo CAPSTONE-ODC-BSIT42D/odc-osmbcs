@@ -90,18 +90,22 @@ namespace prototype2
                     if (element is TextBox)
                     {
                         BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-                        Validation.ClearInvalid(expression);
-                        if (((TextBox)element).IsEnabled)
+                        if (expression != null)
                         {
-                            expression.UpdateSource();
-                            validationError = Validation.GetHasError((TextBox)element);
+                            if (((TextBox)element).IsEnabled)
+                            {
+                                expression.UpdateSource();
+                                if (Validation.GetHasError((TextBox)element))
+                                    validationError = true;
+                            }
                         }
                     }
-                    if (element is ComboBox)
+                    else if (element is ComboBox)
                     {
                         BindingExpression expression = ((ComboBox)element).GetBindingExpression(ComboBox.SelectedItemProperty);
                         expression.UpdateSource();
-                        validationError = Validation.GetHasError((ComboBox)element);
+                        if (Validation.GetHasError((ComboBox)element))
+                            validationError = true;
                     }
                 }
                 if (!validationError)
@@ -109,7 +113,11 @@ namespace prototype2
                     saveDataToDb();
                     OnSaveCloseButtonClicked(e);
                 }
-                
+                else
+                {
+                    MessageBox.Show("Resolve the error first");
+                    validationError = false;
+                }
             }
             else if (result == MessageBoxResult.Cancel)
             {
@@ -438,6 +446,7 @@ namespace prototype2
                     ((CheckBox)element).IsChecked = false;
                 }
             }
+            MainVM.isEdit = false;
         }
 
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)

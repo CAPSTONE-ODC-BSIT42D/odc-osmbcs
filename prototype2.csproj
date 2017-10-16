@@ -276,6 +276,7 @@
     <Compile Include="ucServiceSchedule.xaml.cs">
       <DependentUpon>ucServiceSchedule.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ValueConverter.cs" />
     <Compile Include="ViewModelEntity.cs" />
     <Compile Include="ViewModels.cs" />
     <Page Include="contactDetails.xaml">

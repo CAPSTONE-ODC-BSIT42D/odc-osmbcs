@@ -11,6 +11,8 @@
         Title="Olive Date Center" d:DesignWidth="1533.263" d:DesignHeight="1050.363" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Maximized" Visibility="Visible"
        >
     <Window.Resources>
+        <local:IdToNameConverter x:Key="IdToNameConverter" />
+
         <Storyboard x:Key="sbShowRightMenu" >
             <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,-150,0" To="0,0,0,0" DecelerationRatio="1" Duration="0:0:0.5" />
         </Storyboard>
@@ -986,7 +988,7 @@
             <Grid x:Name="reportsGrid" d:IsHidden="True">
                 <local:ucReports Margin="0"/>
             </Grid>
-            <Grid x:Name="maintenanceGrid" d:IsHidden="True">
+            <Grid x:Name="maintenanceGrid">
                 <Grid x:Name="manageCustomerGrid" Margin="0,0,1,0" d:IsHidden="True" >
                     <Grid x:Name="manageCustomerHomeGrid" Margin="0">
                         <Label x:Name="label13" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
@@ -1403,10 +1405,11 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
+                                
                                 <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Supplier" >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Label Content="{Binding SupplierName}" VerticalContentAlignment="Center"/>
+                                            <Label Content="{Binding SupplierID,NotifyOnTargetUpdated=True, Converter={StaticResource IdToNameConverter}}" VerticalContentAlignment="Center"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

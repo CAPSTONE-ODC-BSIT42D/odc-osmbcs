@@ -41,7 +41,7 @@ namespace prototype2
             this.empID = empID;
             worker.DoWork += worker_DoWork;
             worker.RunWorkerCompleted += worker_RunWorkerCompleted;
-            worker.RunWorkerAsync();
+            
         }
 
         public static Commands commands = new Commands();
@@ -49,6 +49,7 @@ namespace prototype2
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            worker.RunWorkerAsync();
             this.ucEmployee.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
             this.ucCustSupp.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
             
@@ -73,6 +74,8 @@ namespace prototype2
             formGridBg.Visibility = Visibility.Collapsed;
             MainVM.LoginEmployee_ = MainVM.Employees.Where(x => x.EmpID.Equals(empID)).FirstOrDefault();
         }
+
+        
 
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {

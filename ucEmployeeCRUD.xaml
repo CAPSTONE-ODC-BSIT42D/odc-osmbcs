@@ -152,23 +152,23 @@
                             <Label Content="Duration of Employment" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                             <Label Content="* Start Date" HorizontalAlignment="Left" Margin="16,97,0,0" VerticalAlignment="Top" FontWeight="Normal"/>
                             <xctk:DateTimePicker x:Name="empDateStarted" HorizontalAlignment="Left" Margin="33,127,0,0" VerticalAlignment="Top" Width="157" Format="Custom" FormatString="yyyy-MM-dd" TimePickerVisibility="Hidden" DisplayDefaultValueOnEmptyText="True" AllowTextInput="False">
-                                <xctk:DateTimePicker.Value>
+                                <!--<xctk:DateTimePicker.Value>
                                     <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                         <Binding.ValidationRules>
                                             <local:TextBoxValidation TextBoxType="IsEmpty"/>
                                         </Binding.ValidationRules>
                                     </Binding>
-                                </xctk:DateTimePicker.Value>
+                                </xctk:DateTimePicker.Value>-->
                             </xctk:DateTimePicker>
                             <Label Content="* End date" HorizontalAlignment="Left" Margin="16,153,0,0" VerticalAlignment="Top" FontWeight="Normal"/>
                             <xctk:DateTimePicker x:Name="empDateEnded" HorizontalAlignment="Left" Margin="33,183,0,-47" Width="157" Format="Custom" FormatString="yyyy-MM-dd" TimePickerVisibility="Hidden" DisplayDefaultValueOnEmptyText="True" AllowTextInput="False" Height="22" VerticalAlignment="Top">
-                                <xctk:DateTimePicker.Value>
+                                <!--<xctk:DateTimePicker.Value>
                                     <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                         <Binding.ValidationRules>
                                             <local:TextBoxValidation TextBoxType="IsEmpty"/>
                                         </Binding.ValidationRules>
                                     </Binding>
-                                </xctk:DateTimePicker.Value>
+                                </xctk:DateTimePicker.Value>-->
                             </xctk:DateTimePicker>
                         </Grid>
                     </StackPanel>

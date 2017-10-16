@@ -10,80 +10,74 @@ namespace prototype2
         RegexUtilities regex = new RegexUtilities();
         public override ValidationResult Validate (object value, System.Globalization.CultureInfo cultureInfo)
         {
-            var str = TextBoxType as string;
-            
-            if(str!=null)
+
+            //if(TextBoxType != null)
+            //{
+
+            //}
+            //else
+            //{
+            //    return ValidationResult.ValidResult;
+            //}
+            var tbValue = value as string;
+            if (TextBoxType.Equals("IsEmpty"))
             {
-                if (str.Equals("IsEmpty"))
+                if (String.IsNullOrWhiteSpace(tbValue))
                 {
-                    if (value is null)
-                    {
-                        return new ValidationResult(false, "*This field must be filled.");
-                    }
-                    return ValidationResult.ValidResult;
+                    return new ValidationResult(false, "*This field must be filled.");
                 }
-                else if (str.Equals("Mobile"))
-                {
-                    if (!(value is null))
-                    {
-                        if (!regex.IsValidMobileNumber(value.ToString()))
-                        {
-                            return new ValidationResult(false, "*Please follow the correct format for Mobile number. (Ex. (+63)-998-791 9482 or 0998-791-9482, with or without dashes as spaces(vice versa)");
-                        }
-                    }
-                    else
-                        return new ValidationResult(false, "*This field must be filled.");
-
-                    return ValidationResult.ValidResult;
-
-
-                }
-                else if (str.Equals("Phone"))
-                {
-                    if (!(value is null))
-                    {
-                        if (!regex.IsValidPhoneNumber(value.ToString()))
-                        {
-                            return new ValidationResult(false, "*Please follow the correct format for Phone Bumber. (Ex. 123-4567, (02)123-4567, with or without dashes as spaces(vice versa))");
-                        }
-                    }
-                    else
-                        return new ValidationResult(false, "*This field must be filled.");
-                    
-                    return ValidationResult.ValidResult;
-
-                }
-                else if (str.Equals("Email"))
-                {
-                    if (!(value is null))
-                    {
-                        if (!regex.IsValidEmail(value.ToString()))
-                        {
-                            return new ValidationResult(false, "*The E-mail is not a valid email.");
-                        }
-                    }
-                    else
-                        return new ValidationResult(false, "*This field must be filled.");
-                    
-
-
-                }
-                else if (str.Equals("ComboBox"))
-                {
-                    if (value is null)
-                        return new ValidationResult(false, "Selection is invalid.");
-                    else
-                        return new ValidationResult(true, null);
-
-                }
-
                 return ValidationResult.ValidResult;
             }
-            else
+            else if (TextBoxType.Equals("Mobile"))
             {
+                if (String.IsNullOrWhiteSpace(tbValue))
+                {
+                    return new ValidationResult(false, "*This field must be filled.");
+                }
+                else if (!regex.IsValidMobileNumber(tbValue.ToString()))
+                {
+                    return new ValidationResult(false, "*Please follow the correct format for Mobile number. (Ex. (+63)-998-791 9482 or 0998-791-9482, with or without dashes as spaces(vice versa)");
+                }
                 return ValidationResult.ValidResult;
             }
-            
+            else if (TextBoxType.Equals("Phone"))
+            {
+                if (String.IsNullOrWhiteSpace(tbValue))
+                {
+                    return new ValidationResult(false, "*This field must be filled.");
+                }
+                else if (!regex.IsValidPhoneNumber(tbValue.ToString()))
+                {
+                    return new ValidationResult(false, "*Please follow the correct format for Phone Bumber. (Ex. 123-4567, (02)123-4567, with or without dashes as spaces(vice versa))");
+                }
+                return ValidationResult.ValidResult;
+
+
+            }
+            else if (TextBoxType.Equals("Email"))
+            {
+                if (String.IsNullOrWhiteSpace(tbValue))
+                {
+                    return new ValidationResult(false, "*This field must be filled.");
+                }
+                else if (!regex.IsValidEmail(tbValue.ToString()))
+                {
+                    return new ValidationResult(false, "*The E-mail is not a valid email.");
+                }
+                return ValidationResult.ValidResult;
+
+
+
+            }
+            else if (TextBoxType.Equals("ComboBox"))
+            {
+                if (value is null)
+                    return new ValidationResult(false, "Selection is invalid.");
+                return ValidationResult.ValidResult;
+
+            }
+
+            return ValidationResult.ValidResult;
         }
     }
     
@@ -106,8 +100,9 @@ public class RegexUtilities
                 }
                 catch (RegexMatchTimeoutException)
                 {
-                    return false;
+                    
                 }
+                return false;
             }
             
         }
@@ -123,8 +118,9 @@ public class RegexUtilities
             }
             catch (RegexMatchTimeoutException)
             {
-                return false;
+                
             }
+            return false;
         }
    
         public bool IsValidMobileNumber(string strIn)
@@ -137,8 +133,9 @@ public class RegexUtilities
             }
             catch (RegexMatchTimeoutException)
             {
-                return false;
+                
             }
+            return false;
         }
     }
 }

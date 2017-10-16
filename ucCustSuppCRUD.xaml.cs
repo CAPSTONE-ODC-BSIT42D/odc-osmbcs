@@ -38,31 +38,6 @@ namespace prototype2
                 handler(this, e);
         }
 
-        private void editCompanyBtn_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (var element in companyDetailsFormGrid1.Children)
-            {
-                if (element is TextBox)
-                {
-
-                    ((TextBox)element).IsEnabled = true;
-                }
-                else if (element is ComboBox)
-                {
-                    ((ComboBox)element).IsEnabled = true;
-                }
-                else if (element is CheckBox)
-                {
-                    ((CheckBox)element).IsEnabled = true;
-                }
-            }
-            loadDataToUi();
-            editCloseGrid.Visibility = Visibility.Collapsed;
-            saveCancelGrid.Visibility = Visibility.Visible;
-            MainVM.isEdit = true;
-        }
-
-
         private void contactDetails_Checked(object sender, RoutedEventArgs e)
         {
             string propertyName = ((CheckBox)sender).Name;
@@ -200,6 +175,30 @@ namespace prototype2
             }
         }
 
+        private void editCompanyBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var element in companyDetailsFormGrid1.Children)
+            {
+                if (element is TextBox)
+                {
+
+                    ((TextBox)element).IsEnabled = true;
+                }
+                else if (element is ComboBox)
+                {
+                    ((ComboBox)element).IsEnabled = true;
+                }
+                else if (element is CheckBox)
+                {
+                    ((CheckBox)element).IsEnabled = true;
+                }
+            }
+            loadDataToUi();
+            editCloseGrid.Visibility = Visibility.Collapsed;
+            saveCancelGrid.Visibility = Visibility.Visible;
+            MainVM.isEdit = true;
+        }
+
         private void saveRecordBtn_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Do you want to save?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Information);
@@ -210,21 +209,22 @@ namespace prototype2
                     if (element is TextBox)
                     {
                         BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-                        if (((TextBox)element).IsEnabled)
+                        if (expression != null)
                         {
-                            expression.UpdateSource();
-                            validationError = Validation.GetHasError((TextBox)element);
+                            if (((TextBox)element).IsEnabled)
+                            {
+                                expression.UpdateSource();
+                                if (Validation.GetHasError((TextBox)element))
+                                    validationError = true;
+                            }
                         }
                     }
                     if (element is ComboBox)
                     {
-                        if (((ComboBox)element).IsEnabled)
-                        {
-                            BindingExpression expression = ((ComboBox)element).GetBindingExpression(ComboBox.SelectedItemProperty);
-                            expression.UpdateSource();
-                            validationError = Validation.GetHasError((ComboBox)element);
-                        }
-                        
+                        BindingExpression expression = ((ComboBox)element).GetBindingExpression(ComboBox.SelectedItemProperty);
+                        expression.UpdateSource();
+                        if (Validation.GetHasError((ComboBox)element))
+                            validationError = true;
                     }
                 }
                 if (!validationError)
@@ -232,11 +232,16 @@ namespace prototype2
                     saveDataToDb();
                     OnSaveCloseButtonClicked(e);
                 }
+                else
+                {
+                    MessageBox.Show("Resolve the error first");
+                    validationError = false;
+                }
                     
-                
             }
             else if (result == MessageBoxResult.Cancel)
             {
+
             }
 
         }
@@ -347,46 +352,19 @@ namespace prototype2
             }
         }
 
-        private void resetFieldsValue()
-        {
-            companyDetailsFormGridSv.ScrollToTop();
-            foreach (var element in companyDetailsFormGrid1.Children)
-            {
-
-                if (element is TextBox)
-                {
-                    BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-                    if(expression!=null)
-                        Validation.ClearInvalid(expression);
-                    ((TextBox)element).Text = string.Empty;
-                }
-                else if (element is ComboBox)
-                {
-                    BindingExpression expression = ((ComboBox)element).GetBindingExpression(ComboBox.SelectedItemProperty);
-                    if (expression != null)
-                        Validation.ClearInvalid(expression);
-                    ((ComboBox)element).SelectedIndex = -1;
-                }
-                else if (element is CheckBox)
-                {
-                    ((CheckBox)element).IsChecked = false;
-                }
-            }
-            MainVM.isEdit = false;
-        }
-
+       
         private void loadDataToUi()
         {
             companyTypeCb.SelectedIndex = int.Parse(MainVM.SelectedCustomerSupplier.CompanyType);
-            companyNameTb.Text = MainVM.SelectedCustomerSupplier.CompanyName;
+            MainVM.CompanyName_ = MainVM.SelectedCustomerSupplier.CompanyName;
             companyDescriptionTb.Text = MainVM.SelectedCustomerSupplier.CompanyDesc;
-            companyAddressTb.Text = MainVM.SelectedCustomerSupplier.CompanyAddress;
-            companyCityTb.Text = MainVM.SelectedCustomerSupplier.CompanyCity;
+            MainVM.CompanyAddress_ = MainVM.SelectedCustomerSupplier.CompanyAddress;
+            MainVM.CompanyCity_ = MainVM.SelectedCustomerSupplier.CompanyCity;
             companyProvinceCb.SelectedValue = MainVM.SelectedCustomerSupplier.CompanyProvinceID;
-            companyPostalCode.Text = MainVM.SelectedCustomerSupplier.CompanyPostalCode;
-            companyEmailTb.Text = MainVM.SelectedCustomerSupplier.CompanyEmail;
-            companyTelephoneTb.Text = MainVM.SelectedCustomerSupplier.CompanyTelephone;
-            companyMobileTb.Text = MainVM.SelectedCustomerSupplier.CompanyMobile;
+            MainVM.CompanyPostalCode_ = MainVM.SelectedCustomerSupplier.CompanyPostalCode;
+            MainVM.CompanyEmail_ = MainVM.SelectedCustomerSupplier.CompanyEmail;
+            MainVM.CompanyTelephone_ = MainVM.SelectedCustomerSupplier.CompanyTelephone;
+            MainVM.CompanyMobile_ = MainVM.SelectedCustomerSupplier.CompanyMobile;
             if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyTelephone))
             {
                 companyTelCb.IsChecked = false;
@@ -403,13 +381,13 @@ namespace prototype2
                 companyEmailCb.IsChecked = false;
                 companyEmailCb.IsChecked = true;
             }
-            representativeTitle.Text = MainVM.SelectedCustomerSupplier.RepTitle;
-            repFirstNameTb.Text = MainVM.SelectedCustomerSupplier.RepFirstName;
-            repMiddleInitialTb.Text = MainVM.SelectedCustomerSupplier.RepMiddleName;
-            repLastNameTb.Text = MainVM.SelectedCustomerSupplier.RepLastName;
-            repEmailTb.Text = MainVM.SelectedCustomerSupplier.RepEmail;
-            repTelephoneTb.Text = MainVM.SelectedCustomerSupplier.RepTelephone;
-            repMobileTb.Text = MainVM.SelectedCustomerSupplier.RepMobile;
+            MainVM.RepTitle_ = MainVM.SelectedCustomerSupplier.RepTitle;
+            MainVM.RepFName_ = MainVM.SelectedCustomerSupplier.RepFirstName;
+            MainVM.RepMName_ = MainVM.SelectedCustomerSupplier.RepMiddleName;
+            MainVM.RepLName_ = MainVM.SelectedCustomerSupplier.RepLastName;
+            MainVM.RepEmail_ = MainVM.SelectedCustomerSupplier.RepEmail;
+            MainVM.RepTelephone_ = MainVM.SelectedCustomerSupplier.RepTelephone;
+            MainVM.RepMobile_ = MainVM.SelectedCustomerSupplier.RepMobile;
             if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.RepTelephone))
             {
                 repTelCb.IsChecked = false;
@@ -426,6 +404,36 @@ namespace prototype2
                 repEmailCb.IsChecked = true;
             }
         }
+
+        private void resetFieldsValue()
+        {
+            companyDetailsFormGridSv.ScrollToTop();
+            foreach (var element in companyDetailsFormGrid1.Children)
+            {
+
+                if (element is TextBox)
+                {
+                    TextBox tb = element as TextBox;
+                    BindingExpression expression = tb.GetBindingExpression(TextBox.TextProperty);
+                    if (expression != null)
+                        Validation.ClearInvalid(expression);
+                    tb.Text = string.Empty;
+                }
+                else if (element is ComboBox)
+                {
+                    BindingExpression expression = ((ComboBox)element).GetBindingExpression(ComboBox.SelectedItemProperty);
+                    if (expression != null)
+                        Validation.ClearInvalid(expression);
+                    ((ComboBox)element).SelectedIndex = -1;
+                }
+                else if (element is CheckBox)
+                {
+                    ((CheckBox)element).IsChecked = false;
+                }
+            }
+            MainVM.isEdit = false;
+        }
+
 
         private void UserControl_IsVisibleChanged_1(object sender, DependencyPropertyChangedEventArgs e)
         {

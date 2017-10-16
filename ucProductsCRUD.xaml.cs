@@ -138,11 +138,14 @@ namespace prototype2
                         if (element is TextBox)
                         {
                             BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-
                             if (expression != null)
                             {
-                                expression.UpdateSource();
-                                validationError = Validation.GetHasError((TextBox)element);
+                                if (((TextBox)element).IsEnabled)
+                                {
+                                    expression.UpdateSource();
+                                    if (Validation.GetHasError((TextBox)element))
+                                        validationError = true;
+                                }
                             }
                         }
                         if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
@@ -152,7 +155,8 @@ namespace prototype2
                             if (((Xceed.Wpf.Toolkit.DecimalUpDown)element).IsEnabled)
                             {
                                 expression.UpdateSource();
-                                validationError = Validation.GetHasError((Xceed.Wpf.Toolkit.DecimalUpDown)element);
+                                if (Validation.GetHasError((TextBox)element))
+                                    validationError = true;
                             }
                         }
                         if (element is ComboBox)
@@ -161,7 +165,8 @@ namespace prototype2
                             if (expression != null)
                             {
                                 expression.UpdateSource();
-                                validationError = Validation.GetHasError((ComboBox)element);
+                                if (Validation.GetHasError((TextBox)element))
+                                    validationError = true;
                             }
 
                         }
@@ -173,8 +178,11 @@ namespace prototype2
                     MainVM.isEdit = false;
                     OnSaveCloseButtonClicked(e);
                 }
-                    
-
+                else
+                {
+                    MessageBox.Show("Resolve the error first");
+                    validationError = false;
+                }
                 
             }
             else if (result == MessageBoxResult.Cancel)
@@ -284,6 +292,7 @@ namespace prototype2
                     ((ComboBox)element).SelectedIndex = -1;
                 }
             }
+            MainVM.isEdit = false;
         }
 
         private void loadDataToUi()

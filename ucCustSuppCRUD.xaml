@@ -9,6 +9,7 @@
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>
+   
     <Grid Margin="0">
         <ScrollViewer x:Name="companyDetailsFormGridSv" MinWidth="611" Margin="0,0,0,40" VerticalScrollBarVisibility="Auto">
             <Grid x:Name="companyDetailsFormGrid1" Background="White">
@@ -40,7 +41,7 @@
                 <Label x:Name="label4_Copy14" Content="Mobile Number:" HorizontalAlignment="Left" Margin="40,766,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <ComboBox x:Name="companyTypeCb" HorizontalAlignment="Left" Margin="151,56,0,0" VerticalAlignment="Top" Width="200">
                     <ComboBox.SelectedItem>
-                        <Binding Path="cbItem" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding Path="CompanyType_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
                                 <local:TextBoxValidation TextBoxType="ComboBox"/>
                             </Binding.ValidationRules>
@@ -49,17 +50,19 @@
                     <ComboBoxItem Content="Customer"/>
                     <ComboBoxItem Content="Supplier"/>
                 </ComboBox>
-                <TextBox x:Name="companyNameTb" HorizontalAlignment="Left" Height="23" Margin="151,87,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="350">
-                    <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                        <Binding.ValidationRules>
-                            <local:TextBoxValidation TextBoxType="IsEmpty"/>
-                        </Binding.ValidationRules>
-                    </Binding>
+                <TextBox x:Name="companyNameTb" HorizontalAlignment="Left" Height="23" Margin="151,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350">
+                    <TextBox.Text>
+                        <Binding Path="CompanyName_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
                 </TextBox>
-                <TextBox x:Name="companyDescriptionTb" HorizontalAlignment="Left" Height="115" Margin="151,118,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="350" Text="{Binding AdditionalInfo, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+                <TextBox x:Name="companyDescriptionTb" HorizontalAlignment="Left" Height="115" Margin="151,118,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="350" Text=""/>
                 <TextBox x:Name="companyAddressTb" HorizontalAlignment="Left" Height="23" Margin="151,247,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="350">
                     <TextBox.Text>
-                        <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding Path="CompanyAddress_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
                                 <local:TextBoxValidation TextBoxType="IsEmpty"/>
                             </Binding.ValidationRules>
@@ -67,15 +70,17 @@
                     </TextBox.Text>
                 </TextBox>
                 <TextBox x:Name="companyCityTb" HorizontalAlignment="Left" Height="23" Margin="151,275,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200">
-                    <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                        <Binding.ValidationRules>
-                            <local:TextBoxValidation TextBoxType="IsEmpty"/>
-                        </Binding.ValidationRules>
-                    </Binding>
+                    <TextBox.Text>
+                        <Binding Path="CompanyCity_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
                 </TextBox>
                 <ComboBox x:Name="companyProvinceCb" HorizontalAlignment="Left" Margin="151,303,0,0" VerticalAlignment="Top" Width="200" ItemsSource="{Binding Provinces}" DisplayMemberPath="ProvinceName" SelectedValuePath="ProvinceID">
                     <ComboBox.SelectedItem>
-                        <Binding Path="cbItem" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding Path="CompanyProvince_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
                                 <local:TextBoxValidation TextBoxType="ComboBox"/>
                             </Binding.ValidationRules>
@@ -83,95 +88,108 @@
                     </ComboBox.SelectedItem>
                 </ComboBox>
                 <TextBox x:Name="companyPostalCode" HorizontalAlignment="Left" Height="23" Margin="151,330,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200">
-                    <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                        <Binding.ValidationRules>
-                            <local:TextBoxValidation TextBoxType="IsEmpty"/>
-                        </Binding.ValidationRules>
-                    </Binding>
+                    <TextBox.Text>
+                        <Binding Path="CompanyPostalCode_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
                 </TextBox>
                 <TextBox x:Name="companyEmailTb" HorizontalAlignment="Left" Height="24" Margin="160,401,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="250">
-                    <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                        <Binding.ValidationRules>
-                            <local:TextBoxValidation TextBoxType="Email"/>
-                        </Binding.ValidationRules>
-                    </Binding>
+                    <TextBox.Text>
+                        <Binding Path="CompanyEmail_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <local:TextBoxValidation TextBoxType="Email"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
                 </TextBox>
                 <CheckBox x:Name="companyEmailCb" Content="Not Applicable" HorizontalAlignment="Left" Margin="445,408,0,0" VerticalAlignment="Top" Checked="contactDetails_Checked" Unchecked="contactDetail_Unchecked"/>
                 <TextBox x:Name="companyTelephoneTb" HorizontalAlignment="Left" Height="24" Margin="160,435,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="250">
-                    <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                        <Binding.ValidationRules>
-                            <local:TextBoxValidation TextBoxType="Phone"/>
-                        </Binding.ValidationRules>
-                    </Binding>
-
+                    <TextBox.Text>
+                        <Binding Path="CompanyTelephone_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <local:TextBoxValidation TextBoxType="Phone"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
                 </TextBox>
                 <CheckBox x:Name="companyTelCb" Content="Not Applicable" HorizontalAlignment="Left" Margin="445,439,0,0" VerticalAlignment="Top" Checked="contactDetails_Checked" Unchecked="contactDetail_Unchecked"/>
                 <TextBox x:Name="companyMobileTb" HorizontalAlignment="Left" Height="22" Margin="160,467,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="250">
-                    <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                        <Binding.ValidationRules>
-                            <local:TextBoxValidation TextBoxType="Mobile"/>
-                        </Binding.ValidationRules>
-                    </Binding>
-
+                    <TextBox.Text>
+                        <Binding Path="CompanyMobile_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <local:TextBoxValidation TextBoxType="Mobile"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
                 </TextBox>
                 <CheckBox x:Name="companyMobCb" Content="Not Applicable" HorizontalAlignment="Left" Margin="445,469,0,0" VerticalAlignment="Top" Checked="contactDetails_Checked" Unchecked="contactDetail_Unchecked"/>
                 <TextBox x:Name="representativeTitle" HorizontalAlignment="Left" Height="22" Margin="160,545,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="191">
-                    <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                        <Binding.ValidationRules>
-                            <local:TextBoxValidation TextBoxType="IsEmpty"/>
-                        </Binding.ValidationRules>
-                    </Binding>
-
+                    <TextBox.Text>
+                        <Binding Path="RepTitle_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
                 </TextBox>
                 <TextBox x:Name="repFirstNameTb" HorizontalAlignment="Left" Height="24" Margin="160,576,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="191">
-                    <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                        <Binding.ValidationRules>
-                            <local:TextBoxValidation TextBoxType="IsEmpty"/>
-                        </Binding.ValidationRules>
-                    </Binding>
-
+                    <TextBox.Text>
+                        <Binding Path="RepFName_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
                 </TextBox>
                 <TextBox x:Name="repMiddleInitialTb" HorizontalAlignment="Left" Height="24" Margin="160,605,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="124" BorderThickness="0,0,0,1" MaxLength="3">
-                    <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                        <Binding.ValidationRules>
-                            <local:TextBoxValidation TextBoxType="IsEmpty"/>
-                        </Binding.ValidationRules>
-                    </Binding>
-
+                    <TextBox.Text>
+                        <Binding Path="ReMName_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
                 </TextBox>
                 <TextBox x:Name="repLastNameTb" HorizontalAlignment="Left" Height="24" Margin="160,636,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="191">
-                    <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                        <Binding.ValidationRules>
-                            <local:TextBoxValidation TextBoxType="IsEmpty"/>
-                        </Binding.ValidationRules>
-                    </Binding>
-
+                    <TextBox.Text>
+                        <Binding Path="RepLName_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
                 </TextBox>
                 <TextBox x:Name="repEmailTb" HorizontalAlignment="Left" Height="22" Margin="160,704,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="250">
-                    <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                        <Binding.ValidationRules>
-                            <local:TextBoxValidation TextBoxType="Email"/>
-                        </Binding.ValidationRules>
-                    </Binding>
-
+                    <TextBox.Text>
+                        <Binding Path="RepEmail_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <local:TextBoxValidation TextBoxType="Email"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
                 </TextBox>
                 <CheckBox x:Name="repEmailCb" Content="Not Applicable" HorizontalAlignment="Left" Margin="445,706,0,0" VerticalAlignment="Top" Checked="contactDetails_Checked" Unchecked="contactDetail_Unchecked"/>
                 <TextBox x:Name="repTelephoneTb" HorizontalAlignment="Left" Height="22" Margin="160,736,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="250">
-                    <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                        <Binding.ValidationRules>
-                            <local:TextBoxValidation TextBoxType="Phone"/>
-                        </Binding.ValidationRules>
-                    </Binding>
-
+                    <TextBox.Text>
+                        <Binding Path="RepTelephone_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <local:TextBoxValidation TextBoxType="Phone"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
                 </TextBox>
                 <CheckBox x:Name="repTelCb" Content="Not Applicable" HorizontalAlignment="Left" Margin="445,736,0,0" VerticalAlignment="Top" Checked="contactDetails_Checked" Unchecked="contactDetail_Unchecked"/>
                 <TextBox x:Name="repMobileTb" HorizontalAlignment="Left" Height="24" Margin="160,766,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="250">
-                    <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                        <Binding.ValidationRules>
-                            <local:TextBoxValidation TextBoxType="Mobile"/>
-                        </Binding.ValidationRules>
-                    </Binding>
-
+                    <TextBox.Text>
+                        <Binding Path="RepMobile_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <local:TextBoxValidation TextBoxType="Mobile"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
                 </TextBox>
                 <CheckBox x:Name="repMobCb" Content="Not Applicable" HorizontalAlignment="Left" Margin="445,766,0,0" VerticalAlignment="Top" Checked="contactDetails_Checked" Unchecked="contactDetail_Unchecked"/>
                 <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="42,695,184,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>

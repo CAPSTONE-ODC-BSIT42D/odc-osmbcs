@@ -82,7 +82,6 @@ namespace prototype2
                 }
                 if (!validationError && MainVM.LoginEmployee_ != null)
                 {
-                    
                     salesInvoiceToMemory();
                     selectSalesQuoteGrid.Visibility = Visibility.Collapsed;
                     newInvoiceForm.Visibility = Visibility.Collapsed;
@@ -302,6 +301,7 @@ namespace prototype2
             {
                 if (MainVM.SelectedSalesQuote != null)
                 {
+                    MainVM.InvoiceItems.Clear();
                     newInvoiceForm.Visibility = Visibility.Visible;
                     documentViewer.Visibility = Visibility.Collapsed;
                     selectSalesQuoteGrid.Visibility = Visibility.Collapsed;
@@ -309,6 +309,7 @@ namespace prototype2
                 }
                 else
                 {
+                    MainVM.InvoiceItems.Clear();
                     newInvoiceForm.Visibility = Visibility.Collapsed;
                     documentViewer.Visibility = Visibility.Collapsed;
                     selectSalesQuoteGrid.Visibility = Visibility.Visible;

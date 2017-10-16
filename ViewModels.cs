@@ -20,8 +20,123 @@ namespace prototype2
         public object cbItem { get; set; }
         public decimal DecimalTextBox { get; set; }
         public int IntegerTextBox { get; set; }
+
         public string StringTextBox { get; set; }
 
+        #region Customer/Supplier
+        public object CompanyType;
+        public object CompanyType_
+        {
+            get { return CompanyType; }
+            set { SetProperty(ref CompanyType, value); }
+        }
+
+        public string CompanyName;
+        public string CompanyName_
+        {
+            get { return CompanyName; }
+            set { SetProperty(ref CompanyName, value); }
+        }
+
+        public string CompanyAddress;
+        public string CompanyAddress_
+        {
+            get { return CompanyAddress; }
+            set { SetProperty(ref CompanyAddress, value); }
+        }
+
+        public string CompanyCity;
+        public string CompanyCity_
+        {
+            get { return CompanyCity; }
+            set { SetProperty(ref CompanyCity, value); }
+        }
+
+        public object CompanyProvince;
+        public object CompanyProvince_
+        {
+            get { return CompanyProvince; }
+            set { SetProperty(ref CompanyProvince, value); }
+        }
+
+        public string CompanyPostalCode;
+        public string CompanyPostalCode_
+        {
+            get { return CompanyPostalCode; }
+            set { SetProperty(ref CompanyPostalCode, value); }
+        }
+
+
+        public string CompanyEmail;
+        public string CompanyEmail_
+        {
+            get { return CompanyEmail; }
+            set { SetProperty(ref CompanyEmail, value); }
+        }
+
+        public string CompanyTelephone;
+        public string CompanyTelephone_
+        {
+            get { return CompanyTelephone; }
+            set { SetProperty(ref CompanyTelephone, value); }
+        }
+
+        public string CompanyMobile;
+        public string CompanyMobile_
+        {
+            get { return CompanyMobile; }
+            set { SetProperty(ref CompanyMobile, value); }
+        }
+
+        public string RepTitle;
+        public string RepTitle_
+        {
+            get { return RepTitle; }
+            set { SetProperty(ref RepTitle, value); }
+        }
+
+        public string RepFName;
+        public string RepFName_
+        {
+            get { return RepFName; }
+            set { SetProperty(ref RepFName, value); }
+        }
+
+        public string RepLName;
+        public string RepLName_
+        {
+            get { return RepLName; }
+            set { SetProperty(ref RepLName, value); }
+        }
+
+        public string RepMName;
+        public string RepMName_
+        {
+            get { return RepMName; }
+            set { SetProperty(ref RepMName, value); }
+        }
+
+        public string RepEmail;
+        public string RepEmail_
+        {
+            get { return RepEmail; }
+            set { SetProperty(ref RepEmail, value); }
+        }
+
+        public string RepTelephone;
+        public string RepTelephone_
+        {
+            get { return RepTelephone; }
+            set { SetProperty(ref RepTelephone, value); }
+        }
+
+        public string RepMobile;
+        public string RepMobile_
+        {
+            get { return RepMobile; }
+            set { SetProperty(ref RepMobile, value); }
+        }
+        #endregion
         protected Employee LoginEmployee = null;
 
         public Employee LoginEmployee_
