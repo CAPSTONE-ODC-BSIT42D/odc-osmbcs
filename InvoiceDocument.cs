@@ -114,8 +114,7 @@ namespace prototype2
             headerName.Format.Font.Size = 15;
             headerName.Format.SpaceAfter = "1.0cm";
             headerName.Format.Alignment = ParagraphAlignment.Left;
-
-
+            
             this.table = section.AddTable();
             this.table.Style = "Table";
             this.table.Borders.Color = TableBorder;
@@ -132,7 +131,7 @@ namespace prototype2
             dateToday = DateTime.Now;
 
             row = table.AddRow();
-            row.Cells[0].AddParagraph("Date Issued" + dateToday.ToLongDateString());
+            row.Cells[0].AddParagraph("Date Issued" + MainVM.SelectedSalesInvoice.dateOfIssue_.ToShortDateString());
 
             
             date = section.AddParagraph();
@@ -162,7 +161,7 @@ namespace prototype2
             date.AddText("DATE ISSSUED: ");
             date.Format.Font.Name = "Calibri";
             date.Format.Font.Size = 11;
-            
+            date.AddText(MainVM.SelectedSalesInvoice.dateOfIssue_.ToShortDateString());
             date.Format.Font.Name = "Calibri";
             date.Format.Font.Size = 11;
             date.Format.Font.Bold = true;
@@ -209,7 +208,7 @@ namespace prototype2
             this.table.Rows.LeftIndent = 0;
 
             // Before you can add a row, you must define the columns
-            column = this.table.AddColumn("1cm");
+            column = this.table.AddColumn();
             column.Format.Alignment = ParagraphAlignment.Center;
 
             column = this.table.AddColumn();
@@ -262,7 +261,7 @@ namespace prototype2
             row.Cells[6].VerticalAlignment = MigraDoc.DocumentObjectModel.Tables.VerticalAlignment.Bottom;
 
             decimal totalPrice = 0;
-            foreach (RequestedItem item in MainVM.RequestedItems)
+            foreach (InvoiceItem item in MainVM.InvoiceItems)
             {
                 row = table.AddRow();
                 row.Cells[0].AddParagraph(item.lineNo);
@@ -270,9 +269,9 @@ namespace prototype2
                 row.Cells[2].AddParagraph(item.desc);
                 row.Cells[3].AddParagraph("na");
                 row.Cells[4].AddParagraph(item.qty.ToString());
-                row.Cells[5].AddParagraph(item.unitPriceMarkUp.ToString());
-                row.Cells[6].AddParagraph(item.totalAmountMarkUp.ToString());
-                totalPrice += item.totalAmountMarkUp;
+                row.Cells[5].AddParagraph(item.unitPrice.ToString());
+                row.Cells[6].AddParagraph(item.totalAmount.ToString());
+                totalPrice += item.totalAmount;
             }
             //
             this.table.SetEdge(0, 0, 2, 1, Edge.Box, BorderStyle.None, 0.25, Color.Empty);
