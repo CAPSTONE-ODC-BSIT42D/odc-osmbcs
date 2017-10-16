@@ -112,7 +112,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Total Amount" Width="100">
+                        <DataGridTemplateColumn Header="Unit Price" Width="100">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Label Content="{Binding unitPrice}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>

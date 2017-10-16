@@ -96,57 +96,29 @@ public class RegexUtilities
             invalid = false;
             if (String.IsNullOrEmpty(strIn))
                 return false;
-
-            // Use IdnMapping class to convert Unicode domain names.
-            try
+            else
             {
-                 strIn = Regex.Replace(strIn, @"(@)(.+)$", this.DomainMapper,
-                                      RegexOptions.None, TimeSpan.FromMilliseconds(200));
+                try
+                {
+                    return Regex.IsMatch(strIn,
+                          @"([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})",
+                          RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+                }
+                catch (RegexMatchTimeoutException)
+                {
+                    return false;
+                }
             }
-            catch (RegexMatchTimeoutException)
-            {
-                return false;
-            }
-
-            if (invalid)
-                return false;
-
-            // Return true if strIn is in valid e-mail format.
-            try
-            {
-                return Regex.IsMatch(strIn,
-                      @"([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})",
-                      RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
-            }
-            catch (RegexMatchTimeoutException)
-            {
-                return false;
-            }
+            
         }
-
-        private string DomainMapper(Match match)
-        {
-            // IdnMapping class with default property values.
-            IdnMapping idn = new IdnMapping();
-
-            string domainName = match.Groups[2].Value;
-            try
-            {
-                domainName = idn.GetAscii(domainName);
-            }
-            catch (ArgumentException)
-            {
-                invalid = true;
-            }
-            return match.Groups[1].Value + domainName;
-        }
+        
 
         public bool IsValidPhoneNumber(string strIn)
         {
             invalid = false;
             try
             {
-                return Regex.IsMatch(strIn, @"\(?(?<AreaCode>\d{1,3})?\)?\s*(?<Number>\d{4}(?:-|\s*)\d{3})",
+                return Regex.IsMatch(strIn, @"((?:\()?(.?\d{2,3})?(?:\))?(?:-|\s*))?(?<Number>\d{3}(?:-|\s*)\d{4})",
                       RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
             }
             catch (RegexMatchTimeoutException)
@@ -160,7 +132,7 @@ public class RegexUtilities
             invalid = false;
             try
             {
-                return Regex.IsMatch(strIn, @"(\(?(?<AreaCode>.\d{2,3})\)?(?:-|\s*))?(?<Number>\d{3,4}(?:-|\s*)\d{3}(?:-|\s*)\d{4})",
+                return Regex.IsMatch(strIn, @"((?:\()?(.?\d{2,3})?(?:\))?(?:-|\s*))?(?<Number>\d{3,4}(?:-|\s*)\d{3}(?:-|\s*)\d{4})",
                       RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
             }
             catch (RegexMatchTimeoutException)

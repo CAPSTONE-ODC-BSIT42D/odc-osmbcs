@@ -157,7 +157,7 @@ namespace prototype2
                     desc = MainVM.SelectedProduct.ItemDesc,
                     itemName = MainVM.SelectedProduct.ItemName,
                     qty = item.ItemQty,
-                    unitPrice = Math.Round(item.TotalCost - (item.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01))/item.ItemQty, 3),
+                    unitPrice = Math.Round((item.TotalCost - (item.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)))/item.ItemQty, 3),
                     totalAmount = Math.Round(item.TotalCost - (item.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)),3),
                     itemType = 0
                 });
