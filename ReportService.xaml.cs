@@ -49,7 +49,7 @@ namespace prototype2
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSServices);
-
+       
             return dSServices;
 
         }
@@ -57,6 +57,137 @@ namespace prototype2
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             ReportService.RefreshReport();
+        }
+
+    
+
+        private DataTable GetServiceDay()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+
+            cmd.CommandText = "SELECT        s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar WHERE(s.isDeleted = 0) AND(Day(ss.dateStarted) = Day(CURDATE())) ORDER BY ss.serviceStatus";
+
+            DataSet1.DataTable1DataTable dSServices = new DataSet1.DataTable1DataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSServices);
+
+            return dSServices;
+
+        }
+        private void DisplayReportDay()
+        {
+            ReportService.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetServiceDay()));
+            ReportService.LocalReport.ReportEmbeddedResource = "prototype2.Report3.rdlc";
+            ReportService.RefreshReport();
+        }
+        private DataTable GetServiceWeek()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+
+            cmd.CommandText = "SELECT        s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar WHERE(s.isDeleted = 0) and YEARWEEK(ss.dateStarted, 1) = YEARWEEK(CURDATE(), 1) ORDER BY ss.serviceStatus";
+
+            DataSet1.DataTable1DataTable dSServices = new DataSet1.DataTable1DataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSServices);
+
+            return dSServices;
+
+        }
+        private void DisplayReportWeek()
+        {
+            ReportService.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetServiceWeek()));
+            ReportService.LocalReport.ReportEmbeddedResource = "prototype2.Report3.rdlc";
+            ReportService.RefreshReport();
+        }
+
+  
+        private void DisplayReportMonth()
+        {
+            ReportService.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetServiceWeek()));
+            ReportService.LocalReport.ReportEmbeddedResource = "prototype2.Report3.rdlc";
+            ReportService.RefreshReport();
+        }
+        private void ComboBoxSerFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Object SELECTEDINDEX = ComboBoxSerFilter.SelectedIndex;
+            if (SELECTEDINDEX.Equals(0))
+            {
+
+                DisplayReportDay();
+                ComboBoxYear.Visibility = Visibility.Hidden;
+                ComboBoxSerMonth.Visibility = Visibility.Hidden;
+                monthSer.Visibility = Visibility.Hidden;
+                YearSer.Visibility = Visibility.Hidden;
+                DatePickerStartSer.Visibility = Visibility.Hidden;
+                DatePickerEndSer.Visibility = Visibility.Hidden;
+                StartDateSer.Visibility = Visibility.Hidden;
+                EndDateSer.Visibility = Visibility.Hidden;
+
+
+
+            }
+            if (SELECTEDINDEX.Equals(1))
+            {
+                DisplayReportWeek();
+                ComboBoxYear.Visibility = Visibility.Hidden;
+                ComboBoxSerMonth.Visibility = Visibility.Hidden;
+                monthSer.Visibility = Visibility.Hidden;
+                YearSer.Visibility = Visibility.Hidden;
+                DatePickerStartSer.Visibility = Visibility.Hidden;
+                DatePickerEndSer.Visibility = Visibility.Hidden;
+                StartDateSer.Visibility = Visibility.Hidden;
+                EndDateSer.Visibility = Visibility.Hidden;
+
+
+            }
+            if (SELECTEDINDEX.Equals(2))
+            {
+                
+                ComboBoxYear.Visibility = Visibility.Hidden;
+                ComboBoxSerMonth.Visibility = Visibility.Visible;
+                monthSer.Visibility = Visibility.Visible;
+                YearSer.Visibility = Visibility.Hidden;
+                DatePickerStartSer.Visibility = Visibility.Hidden;
+                DatePickerEndSer.Visibility = Visibility.Hidden;
+                StartDateSer.Visibility = Visibility.Hidden;
+                EndDateSer.Visibility = Visibility.Hidden;
+
+            }
+            if (SELECTEDINDEX.Equals(3))
+            {
+                ComboBoxYear.Visibility = Visibility.Visible;
+                ComboBoxSerMonth.Visibility = Visibility.Hidden;
+                monthSer.Visibility = Visibility.Hidden;
+                YearSer.Visibility = Visibility.Visible;
+                DatePickerStartSer.Visibility = Visibility.Hidden;
+                DatePickerEndSer.Visibility = Visibility.Hidden;
+                StartDateSer.Visibility = Visibility.Hidden;
+                EndDateSer.Visibility = Visibility.Hidden;
+
+
+            }
+            if (SELECTEDINDEX.Equals(4))
+            {
+                ComboBoxYear.Visibility = Visibility.Hidden;
+                ComboBoxSerMonth.Visibility = Visibility.Hidden;
+                monthSer.Visibility = Visibility.Hidden;
+                YearSer.Visibility = Visibility.Hidden;
+                DatePickerStartSer.Visibility = Visibility.Visible;
+                DatePickerEndSer.Visibility = Visibility.Visible;
+                StartDateSer.Visibility = Visibility.Visible;
+                EndDateSer.Visibility = Visibility.Visible;
+
+            }
         }
     }
 }
