@@ -104,14 +104,14 @@ namespace prototype2
             image.WrapFormat.Style = WrapStyle.TopBottom;
             Paragraph paragraph = section.Headers.Primary.AddParagraph("Suite 3A Amparo Garden Corperate Bldg., No. 2116 Amparo cor Felix St. Sta Ana, Manila, 1009 Philippines");
             paragraph.AddLineBreak();
-            paragraph.AddText("Tel No: 742 - 4199 / 566 - 3153, email: o.danny@odcphils.com");
+            paragraph.AddText("Tel No: 742 - 4199 | 566 - 3153 | email: o.danny@odcphils.com");
             paragraph.Format.Alignment = ParagraphAlignment.Center;
 
             // Create footer
             Paragraph paragraphFooter = section.Footers.Primary.AddParagraph();
             paragraphFooter.AddText("Suite 3A Amparo Garden Corperate Bldg., No. 2116 Amparo cor Felix St. Sta Ana, Manila");
             paragraphFooter.AddLineBreak();
-            paragraphFooter.AddText(" Tel No: 742 - 4199 / 566 - 3153, email: o.danny@odcphils.com");
+            paragraphFooter.AddText(" Tel No: 742 - 4199 | 566 - 3153 | email: o.danny@odcphils.com");
             paragraphFooter.Format.Font.Size = 9;
             paragraphFooter.Format.Alignment = ParagraphAlignment.Center;
 
