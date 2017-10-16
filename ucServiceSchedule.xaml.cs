@@ -94,7 +94,12 @@ namespace prototype2
 
         private void saveSchedBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainVM.ServiceSchedules_.Add(new ServiceSchedule() { serviceSchedNoChar_ = serviceNoCb.SelectedValue.ToString(), dateStarted_ = (DateTime)startDate.SelectedDate, dateEnded_ = (DateTime)endDate.SelectedDate });
+            serviceSched.Appointments.Add(new ScheduleAppointment() { Subject = serviceNoCb.SelectedValue.ToString() , StartTime = (DateTime)startDate.SelectedDate , EndTime = (DateTime)endDate.SelectedDate});
+            MainVM.SelectedServiceSchedule_.serviceSchedNoChar_ = serviceNoCb.SelectedValue.ToString();
+            MainVM.SelectedServiceSchedule_.dateStarted_ = (DateTime)startDate.SelectedDate;
+            MainVM.SelectedServiceSchedule_.dateEnded_ = (DateTime)endDate.SelectedDate;
+            MainVM.SelectedServiceSchedule_.schedNotes_ = notesTb.Text;
+            
             Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
             sb.Begin(formGridBg);
             formGridBg.Visibility = Visibility.Collapsed;
@@ -115,6 +120,7 @@ namespace prototype2
                 Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
                 sb.Begin(formGridBg);
                 formGridBg.Visibility = Visibility.Collapsed;
+                MainVM.SelectedServiceSchedule_ = new ServiceSchedule();
             }
             else if(e.Action == EditorAction.Edit){
                 Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
