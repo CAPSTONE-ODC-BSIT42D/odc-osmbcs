@@ -58,7 +58,19 @@ namespace prototype2
         {
             if (newRequisitionGrid.IsVisible)
             {
+                foreach (var obj in newRequisitionGridForm.Children)
+                {
+                    if (obj is TextBox)
+                        ((TextBox)obj).IsEnabled = true;
+                    else if (obj is Xceed.Wpf.Toolkit.DecimalUpDown)
+                        ((Xceed.Wpf.Toolkit.DecimalUpDown)obj).IsEnabled = true;
+                    else if (obj is Button)
+                        ((Button)obj).IsEnabled = true;
+                    else if (obj is DataGrid)
+                        ((DataGrid)obj).IsEnabled = true;
+                }
                 OnSaveCloseButtonClicked(e);
+
             }
             else if (termsAndConditionGrid.IsVisible)
             {
@@ -1017,8 +1029,6 @@ namespace prototype2
                     ((DataGrid)obj).IsEnabled = false;
             }
             computePrice();
-
-
         }
         private void generatePDFBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -1061,21 +1071,37 @@ namespace prototype2
         {
             if (this.IsVisible)
             {
-                foreach (var element in transQuoatationGridForm.Children)
+                if (MainVM.SelectedSalesQuote != null)
+                    loadSalesQuoteToUi();
+                else
                 {
-                    if (element is Grid)
+                    foreach (var obj in newRequisitionGridForm.Children)
                     {
-                        if (!(((Grid)element).Name.Equals(newRequisitionGrid.Name)))
-                        {
-                            ((Grid)element).Visibility = Visibility.Collapsed;
-                        }
-                        else
-                            ((Grid)element).Visibility = Visibility.Visible;
+                        if (obj is TextBox)
+                            ((TextBox)obj).IsEnabled = true;
+                        else if (obj is Xceed.Wpf.Toolkit.DecimalUpDown)
+                            ((Xceed.Wpf.Toolkit.DecimalUpDown)obj).IsEnabled = true;
+                        else if (obj is Button)
+                            ((Button)obj).IsEnabled = true;
+                        else if (obj is DataGrid)
+                            ((DataGrid)obj).IsEnabled = true;
                     }
+                    foreach (var element in transQuoatationGridForm.Children)
+                    {
+                        if (element is Grid)
+                        {
+                            if (!(((Grid)element).Name.Equals(newRequisitionGrid.Name)))
+                            {
+                                ((Grid)element).Visibility = Visibility.Collapsed;
+                            }
+                            else
+                                ((Grid)element).Visibility = Visibility.Visible;
+                        }
+                    }
+                    
                 }
                 closeModals();
-                if(MainVM.SelectedSalesQuote!=null)
-                    loadSalesQuoteToUi();
+
             }
             
         }

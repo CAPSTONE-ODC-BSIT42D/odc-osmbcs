@@ -54,7 +54,7 @@
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox>
-                <Label x:Name="label19_Copy22" Content="{Binding SelectedCustomerSupplier.CompanyAddress}" HorizontalAlignment="Left" Margin="531,53,-649,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="120"/>
+                <Label x:Name="dateToday" Content="{Binding SelectedCustomerSupplier.CompanyAddress}" HorizontalAlignment="Left" Margin="531,53,-649,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="120"/>
                 <xctk:IntegerUpDown x:Name="dueDateTb" HorizontalAlignment="Left" Margin="531,91,-585,0" VerticalAlignment="Top" Width="56" Height="20" RenderTransformOrigin="-0.482,0.45">
                     <xctk:IntegerUpDown.Value>
                         <Binding Path="IntegerTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
@@ -112,7 +112,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Total Amount" Width="100">
+                        <DataGridTemplateColumn Header="Unit Price" Width="100">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Label Content="{Binding unitPrice}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
@@ -187,7 +187,7 @@
             </Grid>
 
         </ScrollViewer>
-        <Grid x:Name="selectSalesQuoteGrid" Margin="0,0,0,39" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" >
+        <Grid x:Name="selectSalesQuoteGrid" Margin="0,0,0,39" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" d:IsHidden="True" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>

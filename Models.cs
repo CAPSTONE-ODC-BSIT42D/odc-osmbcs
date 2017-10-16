@@ -1246,5 +1246,12 @@ namespace prototype2
             get { return schedNotes; }
             set { SetProperty(ref schedNotes, value); }
         }
+
+        protected ObservableCollection<Employee> assignedEmployee = new ObservableCollection<Employee>();
+        public ObservableCollection<Employee> assignedEmployee_
+        {
+            get { return assignedEmployee; }
+            set { SetProperty(ref assignedEmployee, value); }
+        }
     }
 }

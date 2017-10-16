@@ -36,7 +36,7 @@ namespace prototype2
 
         private bool validationError = false;
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
-
+        DateTime dateOfIssue = new DateTime();
         public event EventHandler SaveCloseButtonClicked;
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
@@ -157,7 +157,7 @@ namespace prototype2
                     desc = MainVM.SelectedProduct.ItemDesc,
                     itemName = MainVM.SelectedProduct.ItemName,
                     qty = item.ItemQty,
-                    unitPrice = Math.Round(item.TotalCost - (item.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01))/item.ItemQty, 3),
+                    unitPrice = Math.Round((item.TotalCost - (item.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)))/item.ItemQty, 3),
                     totalAmount = Math.Round(item.TotalCost - (item.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)),3),
                     itemType = 0
                 });
@@ -189,6 +189,8 @@ namespace prototype2
             MainVM.VatAmount = Math.Round(MainVM.VatAmount, 3);
             MainVM.TotalSales = MainVM.VatableSale + (MainVM.VatableSale * ((decimal)0.12));
             MainVM.TotalSales = Math.Round(MainVM.TotalSales, 3);
+            dateOfIssue = DateTime.Now;
+            dateToday.Content = dateOfIssue.ToShortDateString();
         }
 
         void salesInvoiceToMemory()
@@ -225,8 +227,8 @@ namespace prototype2
             stringChars += "-";
             stringChars += DateTime.Now.ToString("yyyy-MM-dd");
 
-            DateTime dateOfIssue = new DateTime();
-            dateOfIssue = DateTime.Now;
+            
+            
 
             DateTime dueDate = new DateTime();
             dueDate = dateOfIssue.AddDays(int.Parse(dueDateTb.Value.ToString()));

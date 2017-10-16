@@ -424,6 +424,7 @@ namespace prototype2
                     BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
                     if (expression != null)
                         Validation.ClearInvalid(expression);
+                    ((TextBox)element).Text = string.Empty;
                 }
                 else if (element is ComboBox)
                 {
@@ -437,7 +438,6 @@ namespace prototype2
                     ((CheckBox)element).IsChecked = false;
                 }
             }
-            MainVM.StringTextBox = string.Empty;
         }
 
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)
