@@ -102,10 +102,19 @@ namespace prototype2
             image.Top = ShapePosition.Center;
             image.Left = ShapePosition.Center;
             image.WrapFormat.Style = WrapStyle.TopBottom;
-            Paragraph paragraph = section.Headers.Primary.AddParagraph("Suite 3A Amparo Garden Corperate Bldg., No. 2116 Amparo cor Felix St. Sta Ana, Manila, 1009 Philippines, Tel No: 742 - 4199 / 566 - 3153, email: o.danny@odcphils.com");
+            Paragraph paragraph = section.Headers.Primary.AddParagraph("Suite 3A Amparo Garden Corperate Bldg., No. 2116 Amparo cor Felix St. Sta Ana, Manila, 1009 Philippines");
+            paragraph.AddLineBreak();
+            paragraph.AddText("Tel No: 742 - 4199 / 566 - 3153, email: o.danny@odcphils.com");
             paragraph.Format.Alignment = ParagraphAlignment.Center;
 
-            
+            // Create footer
+            Paragraph paragraphFooter = section.Footers.Primary.AddParagraph();
+            paragraphFooter.AddText("Suite 3A Amparo Garden Corperate Bldg., No. 2116 Amparo cor Felix St. Sta Ana, Manila");
+            paragraphFooter.AddLineBreak();
+            paragraphFooter.AddText(" Tel No: 742 - 4199 / 566 - 3153, email: o.danny@odcphils.com");
+            paragraphFooter.Format.Font.Size = 9;
+            paragraphFooter.Format.Alignment = ParagraphAlignment.Center;
+
             headerName = section.AddParagraph();
             headerName.Format.SpaceBefore = "1.0cm";
             headerName.AddFormattedText("SALES INVOICE");
@@ -121,7 +130,6 @@ namespace prototype2
             this.table.Borders.Color = TableBorder;
             this.table.Borders.Width = 0;
             table.Rows.Alignment = RowAlignment.Right;
-            
 
             Column column = table.AddColumn("5cm");
 
@@ -132,6 +140,7 @@ namespace prototype2
             dateToday = DateTime.Now;
 
             row = table.AddRow();
+            
             row.Cells[0].AddParagraph("Date Issued" + dateToday.ToLongDateString());
 
             
