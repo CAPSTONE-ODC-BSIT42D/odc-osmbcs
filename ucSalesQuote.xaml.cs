@@ -1073,20 +1073,35 @@ namespace prototype2
             {
                 if (MainVM.SelectedSalesQuote != null)
                     loadSalesQuoteToUi();
-                foreach (var element in transQuoatationGridForm.Children)
+                else
                 {
-                    if (element is Grid)
+                    foreach (var obj in newRequisitionGridForm.Children)
                     {
-                        if (!(((Grid)element).Name.Equals(newRequisitionGrid.Name)))
-                        {
-                            ((Grid)element).Visibility = Visibility.Collapsed;
-                        }
-                        else
-                            ((Grid)element).Visibility = Visibility.Visible;
+                        if (obj is TextBox)
+                            ((TextBox)obj).IsEnabled = true;
+                        else if (obj is Xceed.Wpf.Toolkit.DecimalUpDown)
+                            ((Xceed.Wpf.Toolkit.DecimalUpDown)obj).IsEnabled = true;
+                        else if (obj is Button)
+                            ((Button)obj).IsEnabled = true;
+                        else if (obj is DataGrid)
+                            ((DataGrid)obj).IsEnabled = true;
                     }
+                    foreach (var element in transQuoatationGridForm.Children)
+                    {
+                        if (element is Grid)
+                        {
+                            if (!(((Grid)element).Name.Equals(newRequisitionGrid.Name)))
+                            {
+                                ((Grid)element).Visibility = Visibility.Collapsed;
+                            }
+                            else
+                                ((Grid)element).Visibility = Visibility.Visible;
+                        }
+                    }
+                    
                 }
                 closeModals();
-                
+
             }
             
         }
