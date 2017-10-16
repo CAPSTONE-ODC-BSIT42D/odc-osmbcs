@@ -17,6 +17,6 @@
         </ComboBox>
         <local:UserControl1 x:Name="UCReportService" Margin="99,198,482,284" Visibility="Hidden"/>
         <local:UserControl2 x:Name="UCReportsItem" HorizontalAlignment="Left" Height="728" Margin="56,85,0,0" VerticalAlignment="Top" Width="1196" Visibility="Hidden"/>
-        <local:UserControl3 x:Name="UCReportSales" HorizontalAlignment="Left" Height="728" Margin="0,85,0,0" VerticalAlignment="Top" Width="1271" Visibility="Hidden"/>
+        <local:UserControl3 x:Name="UCReportSales" HorizontalAlignment="Left" Height="350" Margin="10,85,0,0" VerticalAlignment="Top" Width="1242"/>
     </Grid>
 </UserControl>
