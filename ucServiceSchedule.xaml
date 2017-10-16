@@ -68,7 +68,7 @@
                 <RadioButton Style="{StaticResource RadioButtonStyle}" x:Name="Month" IsChecked="True" Content="Month" Width="70" Height="25" Background="#F3F4F4" BorderBrush="#868686" Foreground="#2C2C2C" Margin="5,0,0,0"  Click="Btn_ScheduleType_Click"/>
                 <RadioButton Style="{StaticResource RadioButtonStyle}" x:Name="TimeLine" Content="Timeline" Width="70" Height="25" Background="#F3F4F4" BorderBrush="#868686" Foreground="#2C2C2C" Margin="5,0,20,0"  Click="Btn_ScheduleType_Click"/>
             </StackPanel>
-            <syncfusion:SfSchedule x:Name="serviceSched" FocusedMonth="GhostWhite" HorizontalAlignment="Left" Margin="0,45,0,0" NonFocusedMonth="LightGray" ScheduleType="Month" VerticalAlignment="Top" WorkEndHour="18" WorkStartHour="9" Height="617" Width="1206" AllowEditing="True" ItemsSource="{Binding ServiceSchedules_}" ScheduleClick="serviceSched_ScheduleClick" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" AppointmentEditorOpening="serviceSched_AppointmentEditorOpening" />
+            <syncfusion:SfSchedule x:Name="serviceSched" FocusedMonth="GhostWhite" HorizontalAlignment="Left" Margin="0,45,0,0" NonFocusedMonth="LightGray" ScheduleType="Month" VerticalAlignment="Top" WorkEndHour="18" WorkStartHour="9" Height="617" Width="1206" AllowEditing="True" ScheduleClick="serviceSched_ScheduleClick" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" AppointmentEditorOpening="serviceSched_AppointmentEditorOpening" />
         </Grid>
         <Grid x:Name="formGridBg" Margin="0" Background="#80000000">
             <Grid x:Name="newSchedule" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="380" Height="599" Width="700">
