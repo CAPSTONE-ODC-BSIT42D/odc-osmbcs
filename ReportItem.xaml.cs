@@ -58,12 +58,138 @@ namespace prototype2
         {
             ReportItem.RefreshReport();
         }
+        private void DisplayReportItemDay()
+        {
+            ReportItem.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetItemDay()));
+            ReportItem.LocalReport.ReportEmbeddedResource = "prototype2.Report1.rdlc";
+            ReportItem.RefreshReport();
+        }
 
+        private DataTable GetItemDay()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+
+            cmd.CommandText = "SELECT        i.itemCode, i.itemName, i.costPrice, i.itemUnit, po.orderDate FROM item_t i INNER JOIN po_line_t p ON i.itemCode = p.itemNo INNER JOIN purchase_order_t po ON p.PONumChar = po.PONumChar WHERE(i.isDeleted = 0) AND(Day(po.orderDate) = Day(CURDATE()))";
+
+            DataSet1.DataTable2DataTable dSItem = new DataSet1.DataTable2DataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSItem);
+
+            return dSItem;
+
+        }
+        private void DisplayReportItemWeek()
+        {
+            ReportItem.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetItemWeek()));
+            ReportItem.LocalReport.ReportEmbeddedResource = "prototype2.Report1.rdlc";
+            ReportItem.RefreshReport();
+        }
+
+        private DataTable GetItemWeek()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+
+            cmd.CommandText = "SELECT        i.itemCode, i.itemName, i.costPrice, i.itemUnit, po.orderDate FROM item_t i INNER JOIN po_line_t p ON i.itemCode = p.itemNo INNER JOIN purchase_order_t po ON p.PONumChar = po.PONumChar WHERE(i.isDeleted = 0) AND(YEARWEEK(po.orderDate, 1) = YEARWEEK(CURDATE(), 1))";
+
+            DataSet1.DataTable2DataTable dSItem = new DataSet1.DataTable2DataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSItem);
+
+            return dSItem;
+
+        }
+
+        private void DisplayReportItemMonth()
+        {
+            ReportItem.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetItemMonth()));
+            ReportItem.LocalReport.ReportEmbeddedResource = "prototype2.Report1.rdlc";
+            ReportItem.RefreshReport();
+        }
+
+        private DataTable GetItemMonth()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+
+            cmd.CommandText = "SELECT        i.itemCode, i.itemName, i.costPrice, i.itemUnit, po.orderDate FROM item_t i INNER JOIN po_line_t p ON i.itemCode = p.itemNo INNER JOIN  purchase_order_t po ON p.PONumChar = po.PONumChar WHERE(i.isDeleted = 0) AND(MONTH(po.orderDate) = '"+ ComboBoxItemMonth.SelectedItem.ToString()+ "')";
+
+            DataSet1.DataTable2DataTable dSItem = new DataSet1.DataTable2DataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSItem);
+
+            return dSItem;
+
+        }
+        private void DisplayReportItemYear()
+        {
+            ReportItem.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetItemYear()));
+            ReportItem.LocalReport.ReportEmbeddedResource = "prototype2.Report1.rdlc";
+            ReportItem.RefreshReport();
+        }
+
+        private DataTable GetItemYear()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+
+            cmd.CommandText = "SELECT        i.itemCode, i.itemName, i.costPrice, i.itemUnit, po.orderDate FROM item_t i INNER JOIN po_line_t p ON i.itemCode = p.itemNo INNER JOIN purchase_order_t po ON p.PONumChar = po.PONumChar WHERE(i.isDeleted = 0) AND(YEAR(po.orderDate) = '"+ ComboBoxItemYear .SelectedItem.ToString()+ "')";
+
+            DataSet1.DataTable2DataTable dSItem = new DataSet1.DataTable2DataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSItem);
+
+            return dSItem;
+
+        }
+        private void DisplayReportItemRange()
+        {
+            ReportItem.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetItemRange()));
+            ReportItem.LocalReport.ReportEmbeddedResource = "prototype2.Report1.rdlc";
+            ReportItem.RefreshReport();
+        }
+
+        private DataTable GetItemRange()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+
+            cmd.CommandText = "SELECT        i.itemCode, i.itemName, i.costPrice, i.itemUnit, po.orderDate FROM item_t i INNER JOIN po_line_t p ON i.itemCode = p.itemNo INNER JOIN purchase_order_t po ON p.PONumChar = po.PONumChar WHERE(i.isDeleted = 0) AND(po.orderDate BETWEEN '"+DatePickerItemStart.SelectedDate.ToString()+"' AND '"+DatePickerItemEnd.SelectedDate.ToString()+"')";
+
+            DataSet1.DataTable2DataTable dSItem = new DataSet1.DataTable2DataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSItem);
+
+            return dSItem;
+
+        }
         private void ComboBoxItemFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Object SELECTEDINDEX = ComboBoxItemFilter.SelectedIndex;
             if (SELECTEDINDEX.Equals(0))
             {
+                DisplayReportItemDay();
 
                 ComboBoxItemYear.Visibility = Visibility.Hidden;
                 ComboBoxItemMonth.Visibility = Visibility.Hidden;
@@ -79,6 +205,7 @@ namespace prototype2
             }
             if (SELECTEDINDEX.Equals(1))
             {
+                DisplayReportItemWeek();
                 ComboBoxItemYear.Visibility = Visibility.Hidden;
                 ComboBoxItemMonth.Visibility = Visibility.Hidden;
                 MonthItem.Visibility = Visibility.Hidden;
@@ -128,6 +255,26 @@ namespace prototype2
                 ItemEnd.Visibility = Visibility.Visible;
 
             }
+        }
+
+        private void ComboBoxItemMonth_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DisplayReportItemMonth();
+        }
+
+        private void ComboBoxItemYear_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DisplayReportItemYear();
+        }
+
+        private void DatePickerItemStart_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DisplayReportItemRange();
+        }
+
+        private void DatePickerItemEnd_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DisplayReportItemRange();
         }
     }
 }

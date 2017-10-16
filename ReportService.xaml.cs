@@ -43,7 +43,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "select s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus From Services_t s JOIN services_availed_t sa ON s.serviceID = sa.serviceID JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar order by ss.serviceStatus";
+            cmd.CommandText = "select s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus From Services_t s JOIN services_availed_t sa ON s.serviceID = sa.serviceID JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar WHERE (s.isDeleted = 0) order by ss.serviceStatus";
 
             DataSet1.DataTable1DataTable dSServices = new DataSet1.DataTable1DataTable();
 
@@ -109,14 +109,80 @@ namespace prototype2
             ReportService.LocalReport.ReportEmbeddedResource = "prototype2.Report3.rdlc";
             ReportService.RefreshReport();
         }
+        private DataTable GetServiceMonth()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
 
-  
+            cmd.CommandText = "SELECT        s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar WHERE(s.isDeleted = 0) AND(MONTH(ss.dateStarted) = '"+ ComboBoxSerMonth.SelectedItem.ToString()+ "') ORDER BY ss.serviceStatus";
+
+            DataSet1.DataTable1DataTable dSServices = new DataSet1.DataTable1DataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSServices);
+
+            return dSServices;
+
+        }
         private void DisplayReportMonth()
         {
-            ReportService.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetServiceWeek()));
+            ReportService.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetServiceMonth()));
             ReportService.LocalReport.ReportEmbeddedResource = "prototype2.Report3.rdlc";
             ReportService.RefreshReport();
         }
+
+        private DataTable GetServiceYear()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+
+            cmd.CommandText = "SELECT        s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar WHERE(s.isDeleted = 0) AND(YEAR(ss.dateStarted) = '"+ComboBoxYear.SelectedItem.ToString()+"') ORDER BY ss.serviceStatus";
+
+            DataSet1.DataTable1DataTable dSServices = new DataSet1.DataTable1DataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSServices);
+
+            return dSServices;
+
+        }
+        private void DisplayReportYear()
+        {
+            ReportService.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetServiceYear()));
+            ReportService.LocalReport.ReportEmbeddedResource = "prototype2.Report3.rdlc";
+            ReportService.RefreshReport();
+        }
+        private DataTable GetServiceRange()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+
+            cmd.CommandText = "SELECT s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar WHERE(s.isDeleted = 0) AND(ss.dateStarted BETWEEN '" + DatePickerStartSer.SelectedDate.ToString()+ "' AND '" + DatePickerEndSer.SelectedDate.ToString() + "') ORDER BY ss.serviceStatus";
+
+            DataSet1.DataTable1DataTable dSServices = new DataSet1.DataTable1DataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSServices);
+
+            return dSServices;
+
+        }
+        private void DisplayReportRange()
+        {
+            ReportService.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetServiceRange()));
+            ReportService.LocalReport.ReportEmbeddedResource = "prototype2.Report3.rdlc";
+            ReportService.RefreshReport();
+        }
+
         private void ComboBoxSerFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Object SELECTEDINDEX = ComboBoxSerFilter.SelectedIndex;
@@ -188,6 +254,26 @@ namespace prototype2
                 EndDateSer.Visibility = Visibility.Visible;
 
             }
+        }
+
+        private void ComboBoxSerMonth_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DisplayReportMonth();
+        }
+
+        private void ComboBoxYear_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DisplayReportYear();
+        }
+
+        private void DatePickerStartSer_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DisplayReportRange();
+        }
+
+        private void DatePickerEndSer_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DisplayReportRange();
         }
     }
 }
