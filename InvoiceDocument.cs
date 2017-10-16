@@ -164,7 +164,7 @@ namespace prototype2
             customerName.Format.Font.Name = "Calibri";
             customerName.Format.Font.Size = 11;
             customerName.Format.Font.Bold = true;
-            addressFrame.AddFormattedText(MainVM.SelectedCustomerSupplier.CompanyAddress + "\n" + MainVM.SelectedCustomerSupplier.CompanyCity + "\n" + MainVM.SelectedCustomerSupplier.CompanyProvinceName);
+            addressFrame.AddFormattedText(MainVM.SelectedCustomerSupplier.CompanyAddress + "\t" + MainVM.SelectedCustomerSupplier.CompanyCity + "\t" + MainVM.SelectedCustomerSupplier.CompanyProvinceName);
             addressFrame.Format.Font.Name = "Calibri";
             addressFrame.Format.Font.Size = 11;
 
@@ -201,10 +201,10 @@ namespace prototype2
             busStyle.Format.Font.Bold = true;
             busStyle.Format.SpaceAfter = "1.0cm";
 
-            signature.AddFormattedText("SIGNATURE: ");
-            signature.Format.Font.Name = "Calibri";
-            signature.Format.Font.Size = 11;
-            signature.Format.SpaceAfter = "1.0cm";
+            //signature.AddFormattedText("SIGNATURE: ");
+            //signature.Format.Font.Name = "Calibri";
+            //signature.Format.Font.Size = 11;
+            //signature.Format.SpaceAfter = "1.0cm";
 
 
             // Create the item table
