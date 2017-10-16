@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:prototype2"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="prototype2.ucReports"
-             mc:Ignorable="d" d:DesignWidth="1655.342" d:DesignHeight="1138.947">
+             mc:Ignorable="d" d:DesignHeight="1138.947" Width="1477.342">
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>
@@ -15,8 +15,8 @@
             <ComboBoxItem Content="Purchase Report"/>
             <ComboBoxItem Content="Sales Report"/>
         </ComboBox>
-        <local:UserControl1 x:Name="UCReportService" Margin="10,85,0,34"/>
-        <local:UserControl2 x:Name="UCReportsItem" HorizontalAlignment="Left" Height="728" Margin="56,85,0,0" VerticalAlignment="Top" Width="1196" Visibility="Visible"/>
-        <local:UserControl3 x:Name="UCReportSales" HorizontalAlignment="Left" Height="693" Margin="12,85,0,0" VerticalAlignment="Top" Width="1261"/>
+        <local:UserControl1 x:Name="UCReportService" Margin="99,198,482,284" Visibility="Hidden"/>
+        <local:UserControl2 x:Name="UCReportsItem" HorizontalAlignment="Left" Height="728" Margin="56,85,0,0" VerticalAlignment="Top" Width="1196" Visibility="Hidden"/>
+        <local:UserControl3 x:Name="UCReportSales" HorizontalAlignment="Left" Height="350" Margin="10,85,0,0" VerticalAlignment="Top" Width="1242"/>
     </Grid>
 </UserControl>

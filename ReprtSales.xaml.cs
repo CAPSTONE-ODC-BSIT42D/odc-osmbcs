@@ -59,5 +59,76 @@ namespace prototype2
         {
             ReportSales.RefreshReport();
         }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Object SELECTEDINDEX = ComboBoxSalesFilter.SelectedIndex;
+            if (SELECTEDINDEX.Equals(0))
+            {
+
+                ComboBoxYearSales.Visibility = Visibility.Hidden;
+                ComboBoxMonthSales.Visibility = Visibility.Hidden;
+                MonthSales.Visibility = Visibility.Hidden;
+                YearSales.Visibility = Visibility.Hidden;
+                DatePickerStartSales.Visibility = Visibility.Hidden;
+                DatePickerEndSales.Visibility = Visibility.Hidden;
+                startsales.Visibility = Visibility.Hidden;
+                EndSales.Visibility = Visibility.Hidden;
+
+
+
+            }
+            if (SELECTEDINDEX.Equals(1))
+            {
+                ComboBoxYearSales.Visibility = Visibility.Hidden;
+                ComboBoxMonthSales.Visibility = Visibility.Hidden;
+                MonthSales.Visibility = Visibility.Hidden;
+                YearSales.Visibility = Visibility.Hidden;
+                DatePickerStartSales.Visibility = Visibility.Hidden;
+                DatePickerEndSales.Visibility = Visibility.Hidden;
+                startsales.Visibility = Visibility.Hidden;
+                EndSales.Visibility = Visibility.Hidden;
+
+
+            }
+            if (SELECTEDINDEX.Equals(2))
+            {
+
+                ComboBoxYearSales.Visibility = Visibility.Hidden;
+                ComboBoxMonthSales.Visibility = Visibility.Visible;
+                MonthSales.Visibility = Visibility.Visible;
+                YearSales.Visibility = Visibility.Hidden;
+                DatePickerStartSales.Visibility = Visibility.Hidden;
+                DatePickerEndSales.Visibility = Visibility.Hidden;
+                startsales.Visibility = Visibility.Hidden;
+                EndSales.Visibility = Visibility.Hidden;
+
+            }
+            if (SELECTEDINDEX.Equals(3))
+            {
+                ComboBoxYearSales.Visibility = Visibility.Visible;
+                ComboBoxMonthSales.Visibility = Visibility.Hidden;
+                MonthSales.Visibility = Visibility.Hidden;
+                YearSales.Visibility = Visibility.Visible;
+                DatePickerStartSales.Visibility = Visibility.Hidden;
+                DatePickerEndSales.Visibility = Visibility.Hidden;
+                startsales.Visibility = Visibility.Hidden;
+                EndSales.Visibility = Visibility.Hidden;
+
+
+            }
+            if (SELECTEDINDEX.Equals(4))
+            {
+                ComboBoxYearSales.Visibility = Visibility.Hidden;
+                ComboBoxMonthSales.Visibility = Visibility.Hidden;
+                MonthSales.Visibility = Visibility.Hidden;
+                YearSales.Visibility = Visibility.Hidden;
+                DatePickerStartSales.Visibility = Visibility.Visible;
+                DatePickerEndSales.Visibility = Visibility.Visible;
+                startsales.Visibility = Visibility.Visible;
+                EndSales.Visibility = Visibility.Visible;
+
+            }
+        }
     }
 }

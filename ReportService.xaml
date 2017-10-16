@@ -5,12 +5,47 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:RV="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"  
              xmlns:local="clr-namespace:prototype2"
-             mc:Ignorable="d" 
-             d:DesignHeight="322.556" IsVisibleChanged="UserControl_IsVisibleChanged" Width="450.797">
-    <Grid Margin="0">
-        <WindowsFormsHost x:Name="WinFormHost">
+             mc:Ignorable="d" IsVisibleChanged="UserControl_IsVisibleChanged" Width="938.939" Height="465.842" Background="#FFDE2E2E">
+    <Grid Background="#FFF0ECEC" Height="415" VerticalAlignment="Top" Margin="0,-12,0,0">
+        <WindowsFormsHost x:Name="WinFormHost" Margin="11,67,19,0">
             <RV:ReportViewer x:Name="ReportService"></RV:ReportViewer>
         </WindowsFormsHost>
+        <Grid HorizontalAlignment="Left" Height="408" Margin="0,-5,0,0" VerticalAlignment="Bottom" Width="896">
+            <DatePicker x:Name="DatePickerStartSer" HorizontalAlignment="Left" Margin="380,22,0,0" VerticalAlignment="Top" Width="131" Height="31" Visibility="Hidden"/>
+            <DatePicker x:Name="DatePickerEndSer" HorizontalAlignment="Left" Margin="553,21,0,0" VerticalAlignment="Top" Width="131" Height="31" Visibility="Hidden"/>
+            <Label Content="Filter:" HorizontalAlignment="Left" Margin="12,-5,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="monthSer" Content="Month:" HorizontalAlignment="Left" Margin="203,-4,0,0" VerticalAlignment="Top" Height="23" Visibility="Hidden"/>
+            <Label x:Name="YearSer" Content="Year:" HorizontalAlignment="Left" Margin="203,-4,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+            <Label x:Name="StartDateSer" Content="Star Date:" HorizontalAlignment="Left" Margin="380,-4,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+            <Label x:Name="EndDateSer" Content="End Date:" HorizontalAlignment="Left" Margin="553,-3,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+            <ComboBox x:Name="ComboBoxSerFilter" HorizontalAlignment="Left" Margin="21,21,0,0" VerticalAlignment="Top" Width="131" Height="31" SelectionChanged="ComboBoxSerFilter_SelectionChanged" >
+                <ComboBoxItem Content="Day"/>
+                <ComboBoxItem Content="Week"/>
+                <ComboBoxItem Content="Month"/>
+                <ComboBoxItem Content="Year"/>
+                <ComboBoxItem Content="Range"/>
+            </ComboBox>
+            <ComboBox x:Name="ComboBoxSerMonth" HorizontalAlignment="Left" Margin="203,21,0,0" VerticalAlignment="Top" Width="131" Height="31" Visibility="Hidden">
+                <ComboBoxItem Content="January"/>
+                <ComboBoxItem Content="February"/>
+                <ComboBoxItem Content="March"/>
+                <ComboBoxItem Content="April"/>
+                <ComboBoxItem Content="May"/>
+                <ComboBoxItem Content="June"/>
+                <ComboBoxItem Content="July"/>
+                <ComboBoxItem Content="August"/>
+                <ComboBoxItem Content="September"/>
+                <ComboBoxItem Content="October"/>
+                <ComboBoxItem Content="November"/>
+                <ComboBoxItem Content="December"/>
+            </ComboBox>
+            <ComboBox x:Name="ComboBoxYear" HorizontalAlignment="Left" Margin="203,21,0,0" VerticalAlignment="Top" Width="131" Height="31" IsEditable="True" Visibility="Hidden">
+                <ComboBoxItem Content="2017"/>
+                <ComboBoxItem Content="2018"/>
+                <ComboBoxItem Content="2019"/>
+                <ComboBoxItem Content="2020"/>
+            </ComboBox>
+        </Grid>
 
     </Grid>
 </UserControl>
