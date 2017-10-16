@@ -164,7 +164,7 @@ namespace prototype2
             customerName.Format.Font.Name = "Calibri";
             customerName.Format.Font.Size = 11;
             customerName.Format.Font.Bold = true;
-            addressFrame.AddFormattedText(MainVM.SelectedCustomerSupplier.CompanyAddress + "\t" + MainVM.SelectedCustomerSupplier.CompanyCity + "\t" + MainVM.SelectedCustomerSupplier.CompanyProvinceName);
+            addressFrame.AddFormattedText(MainVM.SelectedCustomerSupplier.CompanyAddress +"," + "\t" + MainVM.SelectedCustomerSupplier.CompanyCity + "," + "\t" + MainVM.SelectedCustomerSupplier.CompanyProvinceName);
             addressFrame.Format.Font.Name = "Calibri";
             addressFrame.Format.Font.Size = 11;
 
