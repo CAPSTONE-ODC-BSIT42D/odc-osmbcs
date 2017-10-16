@@ -349,9 +349,6 @@ namespace prototype2
                     int custId;
                     int.TryParse(dr["custID"].ToString(),out custId);
 
-                    int custRepId;
-                    int.TryParse(dr["custRepID"].ToString(), out custRepId);
-
                     int estDelivery;
                     int.TryParse(dr["estDelivery"].ToString(), out estDelivery);
 
@@ -386,7 +383,6 @@ namespace prototype2
                             sqNoChar_ = dr["sqNoChar"].ToString(),
                             dateOfIssue_ = dateOfIssue,
                             custID_ = custId,
-                            custRepID_ = custRepId,
                             custName_ = MainVM.SelectedCustomerSupplier.CompanyName,
                             quoteSubject_ = dr["quoteSubject"].ToString(),
                             priceNote_ = dr["priceNote"].ToString(),

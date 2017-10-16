@@ -25,9 +25,7 @@ namespace prototype2
         public ucServiceSchedule()
         {
             InitializeComponent();
-            MainVM.ServiceSchedules_.Add(new ServiceSchedule() { serviceSchedNoChar_ = "sdadasdasdasdas", dateStarted_ = DateTime.Now, dateEnded_ = DateTime.Now.AddDays(10) });
-            MainVM.ServiceSchedules_.Add(new ServiceSchedule() { serviceSchedNoChar_ = "112321", dateStarted_ = DateTime.Now.AddDays(10), dateEnded_ = DateTime.Now.AddDays(20) });
-            MainVM.ServiceSchedules_.Add(new ServiceSchedule() { serviceSchedNoChar_ = "sdasdadas423adasdasdasdas", dateStarted_ = DateTime.Now.AddDays(20), dateEnded_ = DateTime.Now.AddDays(30) });
+            
         }
 
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
@@ -80,7 +78,6 @@ namespace prototype2
 
         private void serviceSched_ScheduleClick(object sender, ScheduleClickEventArgs e)
         {
-            MessageBox.Show("" + serviceSched.SelectedAppointment.Subject);
         }
 
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)
@@ -92,16 +89,44 @@ namespace prototype2
 
         private void addEmployeeBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void saveSchedBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            MainVM.ServiceSchedules_.Add(new ServiceSchedule() { serviceSchedNoChar_ = serviceNoCb.SelectedValue.ToString(), dateStarted_ = (DateTime)startDate.SelectedDate, dateEnded_ = (DateTime)endDate.SelectedDate });
+            Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
+            sb.Begin(formGridBg);
+            formGridBg.Visibility = Visibility.Collapsed;
         }
 
         private void cancelschedBtn_Click(object sender, RoutedEventArgs e)
         {
+            Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
+            sb.Begin(formGridBg);
+            formGridBg.Visibility = Visibility.Collapsed;
+        }
+
+        private void serviceSched_AppointmentEditorOpening(object sender, AppointmentEditorOpeningEventArgs e)
+        {
+            e.Cancel = true;
+            if(e.Action == EditorAction.Add)
+            {
+                Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
+                sb.Begin(formGridBg);
+                formGridBg.Visibility = Visibility.Collapsed;
+            }
+            else if(e.Action == EditorAction.Edit){
+                Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
+                sb.Begin(formGridBg);
+                formGridBg.Visibility = Visibility.Collapsed;
+                loadDataToUi();
+            }
+        }
+
+        void loadDataToUi()
+        {
+            MainVM.SelectedServiceSchedule_ = MainVM.ServiceSchedules_.Where(x => x.serviceSchedNoChar_.Equals(serviceSched.SelectedAppointment.Subject)).First();
 
         }
     }
