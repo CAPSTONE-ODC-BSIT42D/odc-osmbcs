@@ -106,9 +106,9 @@ namespace prototype2
                 string filename = @"d:\test\" + MainVM.SelectedSalesInvoice.sqNoChar_ + "-INVOICE.pdf";
                 saveDataToDb();
                 SaveFileDialog dlg = new SaveFileDialog();
-                dlg.FileName = "" + MainVM.SelectedSalesQuote.sqNoChar_;
+                dlg.FileName = "" + MainVM.SelectedSalesInvoice.sqNoChar_;
                 dlg.DefaultExt = ".pdf";
-                dlg.Filter = "Text documents (.pdf)|*.pdf";
+                dlg.Filter = "PDF documents (.pdf)|*.pdf";
                 if (dlg.ShowDialog() == true)
                 {
                     filename = dlg.FileName;
