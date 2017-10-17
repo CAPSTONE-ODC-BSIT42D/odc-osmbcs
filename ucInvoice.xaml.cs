@@ -94,7 +94,7 @@ namespace prototype2
                 }
                 else
                 {
-                    MessageBox.Show("");
+                    //MessageBox.Show("");
                 }
             }
             else if (documentViewer.IsVisible)

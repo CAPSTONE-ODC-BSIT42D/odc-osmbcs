@@ -261,7 +261,7 @@
         </Grid>
 
         <StackPanel Margin="0,0,10,9" Height="26" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="195" Orientation="Horizontal" FlowDirection="RightToLeft">
-            <Button x:Name="invoiceNext" Content="Next" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" Height="26"  FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="5,0,10,0" Click="invoiceNext_Click"/>
+            <Button x:Name="invoiceNext" Content="Next" HorizontalAlignment="Right" Width="85"  FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="5,0,10,0" Click="invoiceNext_Click"/>
             <Button x:Name="invoiceBack" Content="Back" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="84" Height="26"  Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="10,0,5,0" Click="invoiceBack_Click"/>
         </StackPanel>
 
