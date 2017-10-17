@@ -309,7 +309,55 @@ namespace prototype2
             column = this.table.AddColumn();
             column.Format.Alignment = ParagraphAlignment.Right;
 
+            //non tabular invoice
+            Paragraph inv = section.AddParagraph();
+            inv.AddLineBreak();
+            inv.AddLineBreak();
+            inv.AddLineBreak();
+            inv.AddLineBreak();
+            inv.AddLineBreak();
+            inv.AddLineBreak();
+            inv.AddLineBreak();
+            inv.AddLineBreak();
+            inv.AddLineBreak();
+            inv.AddLineBreak();
+            inv.AddLineBreak();
+            inv.AddLineBreak();
+            inv.AddLineBreak();
+            inv.AddLineBreak();
+
+            inv.AddText("Total Sale VAT Inclusive" + "\t\t" + " : " + "\t");
+            inv.AddText(MainVM.TotalSales_.ToString());
+            inv.AddLineBreak();
+            inv.AddText("Less Vat" + "\t\t\t\t" + " : " + "\t");
+            inv.AddText(MainVM.VatAmount_.ToString());
+            inv.AddLineBreak();
+            inv.AddText("Total" + "\t\t\t\t\t" + " : " + "\t");
+            inv.AddText(MainVM.TotalSalesNoVat_.ToString());
+            inv.AddLineBreak();
+            inv.AddText("Vatable Sales" + "\t\t\t\t" + " : " + "\t");
+            inv.AddText(MainVM.VatableSale.ToString());
+            inv.AddLineBreak();
+            inv.AddText("Less: SC/PWD Discount" + "\t\t" + " : " + "\t");
+            inv.AddLineBreak();
+            inv.AddText("Zero - Rated Sales" + "\t\t\t" + " : " + "\t");
+            inv.AddLineBreak();
+            inv.AddText("Less: Withholding tax" + "\t\t" + " : " + "\t");
+            inv.AddLineBreak();
+            inv.AddText("VAT Amount" + "\t\t\t\t" + " : " + "\t");
+            inv.AddText(MainVM.VatAmount.ToString());
+            inv.AddLineBreak();
+            inv.AddText("Add: VAT" + "\t\t\t\t" + " : " + "\t");
+            inv.AddText(MainVM.VatAmount.ToString());
+            inv.Format.Font.Bold = true;
+            inv.Format.Font.Size = 12;
+
+
+
+
+            // tabular SI
             // Create the header of the table
+            /*
             row = table.AddRow();
             row.Cells[0].AddParagraph("");
             row.Cells[0].AddParagraph("");
@@ -353,11 +401,11 @@ namespace prototype2
             row.Cells[1].AddParagraph(MainVM.TotalDue.ToString());
 
             this.table.SetEdge(0, 0, 2, 1, Edge.Box, BorderStyle.Single, 0.25, Color.Empty);
+            */
 
 
             this.paragraph2 = section.AddParagraph();
             paragraph2.Format.Alignment = ParagraphAlignment.Right;
-            paragraph2.AddLineBreak();
             paragraph2.AddLineBreak();
             paragraph2.AddLineBreak();
             paragraph2.AddLineBreak();

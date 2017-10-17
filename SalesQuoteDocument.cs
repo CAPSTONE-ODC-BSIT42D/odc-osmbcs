@@ -119,6 +119,8 @@ namespace prototype2
             DateTime timeToday = new DateTime();
             timeToday = DateTime.Today;
             dateFrame.AddLineBreak();
+            dateFrame.AddLineBreak();
+            dateFrame.AddLineBreak();
             dateFrame.AddFormattedText(timeToday.ToLongDateString());
             dateFrame.Format.Font.Name = "Calibri";
             dateFrame.Format.Font.Size = 11;
@@ -127,7 +129,7 @@ namespace prototype2
             customerName.Format.Font.Name = "Calibri";
             customerName.Format.Font.Size = 11;
             customerName.Format.Font.Bold = true;
-            addressFrame.AddFormattedText(MainVM.SelectedCustomerSupplier.CompanyAddress +"\n"+ MainVM.SelectedCustomerSupplier.CompanyCity + "\n" + MainVM.SelectedCustomerSupplier.CompanyProvinceName);
+            addressFrame.AddFormattedText(MainVM.SelectedCustomerSupplier.CompanyAddress + "," +"\n"+ MainVM.SelectedCustomerSupplier.CompanyCity + "," + "\n" + MainVM.SelectedCustomerSupplier.CompanyProvinceName);
             addressFrame.Format.Font.Name = "Calibri";
             addressFrame.Format.Font.Size = 11;
             addressFrame.Format.SpaceAfter = "1.0cm";
@@ -308,6 +310,10 @@ namespace prototype2
             tac.AddLineBreak();
             tac.AddText("ADDITIONAL TERMS " + "\t\t\t" + " : ");
             tac.AddText(MainVM.SelectedSalesQuote.additionalTerms_);
+
+            //terms and conditions font design
+            tac.Format.Font.Bold = true;
+            tac.Format.Font.Size = 12;
 
 
             //tabular format for terms and conditions
