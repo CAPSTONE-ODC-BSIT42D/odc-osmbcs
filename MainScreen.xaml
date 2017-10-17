@@ -1649,7 +1649,7 @@
                                     <Grid x:Name="serviceTypeAdd" Visibility="Hidden">
                                         <Label x:Name="label29" Content="Service Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="12"/>
                                         <TextBox x:Name="serviceName" HorizontalAlignment="Left" Height="23" Margin="120,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="252" FontWeight="Normal" FontStyle="Normal" FontSize="12" TextChanged="serviceName_TextChanged">
-                                            <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                                 <Binding.ValidationRules>
                                                     <local:TextBoxValidation TextBoxType="IsEmpty"/>
                                                 </Binding.ValidationRules>
@@ -1658,7 +1658,15 @@
                                         <Label x:Name="label_Copy3" Content="Service Description:" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="12"/>
                                         <TextBox x:Name="serviceDesc" HorizontalAlignment="Left" Height="82" Margin="120,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="547" FontWeight="Normal" FontStyle="Normal" FontSize="12"/>
                                         <Label x:Name="label_Copy4" Content="Service Price" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="12"/>
-                                        <xctk:DecimalUpDown x:Name="servicePrice" HorizontalAlignment="Left" Margin="120,161,0,0" VerticalAlignment="Top" Width="252" FontWeight="Normal" FontStyle="Normal" FontSize="12" CultureInfo="(Default)" ValueChanged="servicePrice_ValueChanged" Minimum="0" ParsingNumberStyle="AllowDecimalPoint"/>
+                                        <xctk:DecimalUpDown x:Name="servicePrice" HorizontalAlignment="Left" Margin="120,161,0,0" VerticalAlignment="Top" Width="252" FontWeight="Normal" FontStyle="Normal" FontSize="12" CultureInfo="(Default)" ValueChanged="servicePrice_ValueChanged" Minimum="0" DefaultValue="0" DisplayDefaultValueOnEmptyText="True" ParsingNumberStyle="AllowDecimalPoint">
+                                            <xctk:DecimalUpDown.Text>
+                                                <Binding Path="DecimalTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                                                    <Binding.ValidationRules>
+                                                        <local:TextBoxValidation TextBoxType="IsZero"/>
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </xctk:DecimalUpDown.Text>
+                                        </xctk:DecimalUpDown>
                                         <Button x:Name="saveServiceTypeBtn" Content="save" HorizontalAlignment="Left" Margin="502,230,0,0" VerticalAlignment="Top" Width="75" FontSize="12" FontWeight="Normal" FontStyle="Normal" Height="25" Click="saveServiceTypeBtn_Click"/>
                                         <Button x:Name="cancelServiceTypeBtn" Content="cancel" HorizontalAlignment="Left" Margin="592,230,0,0" VerticalAlignment="Top" Width="75" FontSize="12" FontWeight="Normal" FontStyle="Normal" Height="25" Click="cancelServiceTypeBtn_Click"/>
                                     </Grid>

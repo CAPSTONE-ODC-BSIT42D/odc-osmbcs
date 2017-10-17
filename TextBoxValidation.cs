@@ -20,7 +20,15 @@ namespace prototype2
             //    return ValidationResult.ValidResult;
             //}
             var tbValue = value as string;
-            if (TextBoxType.Equals("IsEmpty"))
+            if (TextBoxType.Equals("IsZero"))
+            {
+                if ((int.Parse(tbValue))==0)
+                {
+                    return new ValidationResult(false, "*This field must not be Zero.");
+                }
+                return ValidationResult.ValidResult;
+            }
+            else if (TextBoxType.Equals("IsEmpty"))
             {
                 if (String.IsNullOrWhiteSpace(tbValue))
                 {

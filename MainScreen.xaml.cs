@@ -1557,6 +1557,23 @@ namespace prototype2
 
         private void cancelServiceTypeBtn_Click(object sender, RoutedEventArgs e)
         {
+            foreach (var element in serviceTypeAdd.Children)
+            {
+                if (element is TextBox)
+                {
+                    BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
+                    if (expression != null)
+                        Validation.ClearInvalid(expression);
+                    ((TextBox)element).Text = string.Empty;
+                }
+                else if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
+                {
+                    BindingExpression expression = ((Xceed.Wpf.Toolkit.DecimalUpDown)element).GetBindingExpression(Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
+                    if (expression != null)
+                        Validation.ClearInvalid(expression);
+                    ((Xceed.Wpf.Toolkit.DecimalUpDown)element).Value = 0;
+                }
+            }
             serviceTypeList.Visibility = Visibility.Visible;
             serviceTypeAdd.Visibility = Visibility.Collapsed;
             loadDataToUi();
@@ -1595,35 +1612,66 @@ namespace prototype2
             MessageBoxResult result = MessageBox.Show("Do you want to save this service type?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
-                if (id.Equals(""))
+                foreach (var element in serviceTypeAdd.Children)
                 {
-                    string query = "INSERT INTO services_t (serviceName,serviceDesc,servicePrice) VALUES ('" + serviceName.Text + "','" + serviceDesc.Text + "', '" + servicePrice.Value + "')";
-                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    if (element is TextBox)
                     {
-                        MessageBox.Show("Service type successfully added!");
-                        serviceTypeList.Visibility = Visibility.Visible;
-                        serviceTypeAdd.Visibility = Visibility.Collapsed;
+                        BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
+                        if (expression != null)
+                        {
+                            if (((TextBox)element).IsEnabled)
+                            {
+                                expression.UpdateSource();
+                                if (Validation.GetHasError((TextBox)element))
+                                    validationError = true;
+                            }
+                        }
+                    }
+                    if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
+                    {
+                        BindingExpression expression = ((Xceed.Wpf.Toolkit.DecimalUpDown)element).GetBindingExpression(Xceed.Wpf.Toolkit.DecimalUpDown.TextProperty);
+                        Validation.ClearInvalid(expression);
+                        if (((Xceed.Wpf.Toolkit.DecimalUpDown)element).IsEnabled)
+                        {
+                            expression.UpdateSource();
+                            if (Validation.GetHasError((Xceed.Wpf.Toolkit.DecimalUpDown)element))
+                                validationError = true;
+                        }
+                    }
+                }
+                if (!validationError)
+                {
+                    if (id.Equals(""))
+                    {
+                        string query = "INSERT INTO services_t (serviceName,serviceDesc,servicePrice) VALUES ('" + serviceName.Text + "','" + serviceDesc.Text + "', '" + servicePrice.Value + "')";
+                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        {
+                            MessageBox.Show("Service type successfully added!");
+                            serviceTypeList.Visibility = Visibility.Visible;
+                            serviceTypeAdd.Visibility = Visibility.Collapsed;
 
-                        //clearing textboxes
-                        serviceName.Clear();
-                        serviceDesc.Clear();
-                        servicePrice.Value = 0;
-                        loadDataToUi();
+                            //clearing textboxes
+                            serviceName.Clear();
+                            serviceDesc.Clear();
+                            servicePrice.Value = 0;
+                            loadDataToUi();
+                        }
+                    }
+                    else
+                    {
+                        string query = "UPDATE `services_T` SET serviceName = '" + serviceName.Text + "',serviceDesc = '" + serviceDesc.Text + "', servicePrice = '" + servicePrice.Value + "' WHERE serviceID = '" + id + "'";
+                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        {
+                            //MessageBox.Show("Sevice type sucessfully updated");
+                            id = "";
+                            serviceTypeList.Visibility = Visibility.Visible;
+                            serviceTypeAdd.Visibility = Visibility.Collapsed;
+                            loadDataToUi();
+                        }
                     }
                 }
                 else
-                {
-                    string query = "UPDATE `services_T` SET serviceName = '" + serviceName.Text + "',serviceDesc = '" + serviceDesc.Text + "', servicePrice = '" + servicePrice.Value + "' WHERE serviceID = '" + id + "'";
-                    if (dbCon.insertQuery(query, dbCon.Connection))
-                    {
-                        //MessageBox.Show("Sevice type sucessfully updated");
-                        id = "";
-                        serviceTypeList.Visibility = Visibility.Visible;
-                        serviceTypeAdd.Visibility = Visibility.Collapsed;
-                        loadDataToUi();
-                    }
-                }
-
+                    MessageBox.Show("Resolve the error first");
             }
             else if (result == MessageBoxResult.No)
             {
