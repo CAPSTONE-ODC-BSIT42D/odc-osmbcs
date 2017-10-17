@@ -70,8 +70,8 @@
             </StackPanel>
             <syncfusion:SfSchedule x:Name="serviceSched" FocusedMonth="GhostWhite" HorizontalAlignment="Left" Margin="0,45,0,0" NonFocusedMonth="LightGray" ScheduleType="Month" VerticalAlignment="Top" WorkEndHour="18" WorkStartHour="9" Height="617" Width="1206" AllowEditing="True" ScheduleClick="serviceSched_ScheduleClick" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" AppointmentEditorOpening="serviceSched_AppointmentEditorOpening" />
         </Grid>
-        <Grid x:Name="formGridBg" Margin="0" Background="#80000000">
-            <Grid x:Name="newSchedule" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="380" Height="599" Width="700">
+        <Grid x:Name="formGridBg" Margin="0" Background="#80000000" d:IsHidden="True">
+            <Grid x:Name="newSchedule" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="380" Height="599" Width="700" d:IsHidden="True">
                 <ScrollViewer x:Name="newScheduleFormGridSv" Margin="0,0,0,40" VerticalScrollBarVisibility="Auto">
                     <Grid x:Name="additionalFeesFormGrid1" Background="White">
                         <Grid.ColumnDefinitions>
@@ -129,7 +129,7 @@
                         <Button x:Name="addEmployeeBtn" Content="+" HorizontalAlignment="Left" Margin="383,325,0,0" VerticalAlignment="Top" Width="27" Click="addEmployeeBtn_Click"/>
                         <Button x:Name="addEmployeeBtn_Copy" Content="-" HorizontalAlignment="Left" Margin="424,325,0,0" VerticalAlignment="Top" Width="26" Click="addEmployeeBtn_Click"/>
                         <Label x:Name="label21_Copy5" Content="Additional Notes:" HorizontalAlignment="Left" Margin="38,223,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                        <TextBox x:Name="notesTb" HorizontalAlignment="Left" Height="65" Margin="55,249,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="395"/>
+                        <TextBox x:Name="notesTb" HorizontalAlignment="Left" Height="65" Margin="55,249,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="395"/>
                     </Grid>
 
                 </ScrollViewer>

@@ -92,17 +92,21 @@ namespace prototype2
             Image image = section.Headers.Primary.AddImage(imageFilename);
             image.Height = "1cm";
             image.LockAspectRatio = true;
-            image.RelativeVertical = RelativeVertical.Line;
-            image.RelativeHorizontal = RelativeHorizontal.Margin;
-            image.Top = ShapePosition.Top;
-            image.Left = ShapePosition.Right;
-            image.WrapFormat.Style = WrapStyle.Through;
+            image.Top = ShapePosition.Center;
+            image.Left = ShapePosition.Center;
+            image.WrapFormat.Style = WrapStyle.TopBottom;
+            Paragraph paragraph = section.Headers.Primary.AddParagraph("Suite 3A Amparo Garden Corperate Bldg., No. 2116 Amparo cor Felix St. Sta Ana, Manila, 1009 Philippines");
+            paragraph.AddLineBreak();
+            paragraph.AddText("Tel No: 742 - 4199 | 566 - 3153 | email: o.danny@odcphils.com");
+            paragraph.Format.Alignment = ParagraphAlignment.Center;
 
             // Create footer
-            Paragraph paragraph = section.Footers.Primary.AddParagraph();
-            paragraph.AddText("Suite 3A Amparo Garden Corperate Bldg., No. 2116 Amparo cor Felix St. Sta Ana, Manila, 1009 Philippines, Tel No: 742 - 4199 / 566 - 3153, email: o.danny@odcphils.com");
-            paragraph.Format.Font.Size = 9;
-            paragraph.Format.Alignment = ParagraphAlignment.Center;
+            Paragraph paragraphFooter = section.Footers.Primary.AddParagraph();
+            paragraphFooter.AddText("Suite 3A Amparo Garden Corperate Bldg., No. 2116 Amparo cor Felix St. Sta Ana, Manila, 1009 Philippines");
+            paragraphFooter.AddLineBreak();
+            paragraphFooter.AddText(" Tel No: 742 - 4199 | 566 - 3153 | email: o.danny@odcphils.com");
+            paragraphFooter.Format.Font.Size = 9;
+            paragraphFooter.Format.Alignment = ParagraphAlignment.Center;
 
             // Create the text frame for the address
             this.dateFrame = section.AddParagraph();
@@ -114,6 +118,8 @@ namespace prototype2
             // Put sender in address frame
             DateTime timeToday = new DateTime();
             timeToday = DateTime.Today;
+            dateFrame.AddLineBreak();
+            dateFrame.AddLineBreak();
             dateFrame.AddFormattedText(timeToday.ToLongDateString());
             dateFrame.Format.Font.Name = "Calibri";
             dateFrame.Format.Font.Size = 11;
