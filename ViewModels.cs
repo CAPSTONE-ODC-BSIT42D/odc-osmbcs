@@ -586,5 +586,22 @@ namespace prototype2
             get { return SelectedServiceSchedule; }
             set { SetProperty(ref SelectedServiceSchedule, value); }
         }
+
+        //Schedule - Assigned Employee
+        protected ObservableCollection<AssignedEmployee> AssignedEmployees = new ObservableCollection<AssignedEmployee>();
+
+        protected AssignedEmployee SelectedAssignedEmployee = null;
+
+        public ObservableCollection<AssignedEmployee> AssignedEmployees_
+        {
+            get { return AssignedEmployees; }
+            set { AssignedEmployees = value; }
+        }
+
+        public AssignedEmployee SelectedAssignedEmployee_
+        {
+            get { return SelectedAssignedEmployee; }
+            set { SetProperty(ref SelectedAssignedEmployee, value); }
+        }
     }
 }

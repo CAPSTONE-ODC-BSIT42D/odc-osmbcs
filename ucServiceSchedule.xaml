@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:prototype2"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="prototype2.ucServiceSchedule"
              mc:Ignorable="d" 
-             d:DesignHeight="762.5" d:DesignWidth="1206">
+             d:DesignHeight="762.5" d:DesignWidth="1206" IsVisibleChanged="UserControl_IsVisibleChanged">
     <UserControl.Resources>
         <Storyboard x:Key="sbShowRightMenu" >
             <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,-150,0" To="0,0,0,0" DecelerationRatio="1" Duration="0:0:0.5" />
@@ -70,8 +70,8 @@
             </StackPanel>
             <syncfusion:SfSchedule x:Name="serviceSched" FocusedMonth="GhostWhite" HorizontalAlignment="Left" Margin="0,45,0,0" NonFocusedMonth="LightGray" ScheduleType="Month" VerticalAlignment="Top" WorkEndHour="18" WorkStartHour="9" Height="617" Width="1206" AllowEditing="True" ScheduleClick="serviceSched_ScheduleClick" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" AppointmentEditorOpening="serviceSched_AppointmentEditorOpening" />
         </Grid>
-        <Grid x:Name="formGridBg" Margin="0" Background="#80000000" d:IsHidden="True">
-            <Grid x:Name="newSchedule" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="380" Height="599" Width="700" d:IsHidden="True">
+        <Grid x:Name="formGridBg" Margin="0" Background="#80000000">
+            <Grid x:Name="newSchedule" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="380" Height="599" Width="700">
                 <ScrollViewer x:Name="newScheduleFormGridSv" Margin="0,0,0,40" VerticalScrollBarVisibility="Auto">
                     <Grid x:Name="additionalFeesFormGrid1" Background="White">
                         <Grid.ColumnDefinitions>
@@ -123,13 +123,18 @@
                         <ComboBox x:Name="serviceNoCb" HorizontalAlignment="Left" Margin="137,68,0,0" VerticalAlignment="Top" Width="309" Height="26" IsEditable="True" IsTextSearchCaseSensitive="True" ItemsSource="{Binding AddedServices}" DisplayMemberPath="TableNoChar" SelectedValuePath="TableNoChar"/>
                         <Label Content="Service Name:" HorizontalAlignment="Left" Margin="137,99,0,0" VerticalAlignment="Top"/>
                         <Label Content="Service Name:" HorizontalAlignment="Left" Margin="137,130,0,0" VerticalAlignment="Top"/>
-                        <DatePicker x:Name="startDate" HorizontalAlignment="Left" Margin="137,162,0,0" VerticalAlignment="Top" Height="26" Width="124"/>
-                        <DatePicker x:Name="endDate" HorizontalAlignment="Left" Margin="137,193,0,0" VerticalAlignment="Top" Height="26" Width="124"/>
-                        <ListBox x:Name="assignedEmployees" HorizontalAlignment="Left" Height="199" Margin="55,350,0,0" VerticalAlignment="Top" Width="391" ItemsSource="{Binding SelectedServiceSchedule_.assignedEmployee_}"/>
-                        <Button x:Name="addEmployeeBtn" Content="+" HorizontalAlignment="Left" Margin="383,325,0,0" VerticalAlignment="Top" Width="27" Click="addEmployeeBtn_Click"/>
-                        <Button x:Name="addEmployeeBtn_Copy" Content="-" HorizontalAlignment="Left" Margin="424,325,0,0" VerticalAlignment="Top" Width="26" Click="addEmployeeBtn_Click"/>
+                        <DatePicker x:Name="startDate" HorizontalAlignment="Left" Margin="137,162,0,0" VerticalAlignment="Top" Height="26" Width="124" SelectedDateChanged="startDate_SelectedDateChanged"/>
+                        <DatePicker x:Name="endDate" HorizontalAlignment="Left" Margin="137,193,0,0" VerticalAlignment="Top" Height="26" Width="124" SelectedDateChanged="endDate_SelectedDateChanged"/>
+                        
+                        <Button x:Name="transferToLeftBtn" Content="&lt;" HorizontalAlignment="Left" Margin="342,427,0,0" VerticalAlignment="Top" Width="36" Click="transferToLeftBtn_Click" ToolTip="Assign selected employee"/>
                         <Label x:Name="label21_Copy5" Content="Additional Notes:" HorizontalAlignment="Left" Margin="38,223,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                         <TextBox x:Name="notesTb" HorizontalAlignment="Left" Height="65" Margin="55,249,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="395"/>
+                        <ListBox x:Name="assignedEmployees" HorizontalAlignment="Left" Height="199" Margin="55,350,0,0" VerticalAlignment="Top" Width="282" ItemsSource="{Binding SelectedServiceSchedule_.assignedEmployee_}" DisplayMemberPath="EmpLName"/>
+                        <ListBox x:Name="availableEmployees" Margin="0,0,35,10"  HorizontalAlignment="Right" Width="282" Height="199" VerticalAlignment="Bottom" DisplayMemberPath="EmpLName">
+                        </ListBox>
+                        
+                        <Button x:Name="transferToRightBtn" Content="&gt;" HorizontalAlignment="Left" Margin="342,452,0,0" VerticalAlignment="Top" Width="36" Click="transferToRightBtn_Click" ToolTip="Unassign selected employee"/>
+                        <Label x:Name="label21_Copy6" Content="Available Employees:" HorizontalAlignment="Left" Margin="365,319,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                     </Grid>
 
                 </ScrollViewer>

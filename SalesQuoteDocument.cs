@@ -263,26 +263,13 @@ namespace prototype2
             Paragraph tac = section.AddParagraph();
             tac.AddLineBreak();
             tac.AddLineBreak();
-            tac.AddLineBreak();
-            tac.AddLineBreak();
-            tac.AddLineBreak();
-            tac.AddLineBreak();
-            tac.AddLineBreak();
-            tac.AddLineBreak();
-            tac.AddLineBreak();
-            tac.AddLineBreak();
-            tac.AddLineBreak();
-            tac.AddLineBreak();
-            tac.AddLineBreak();
-            tac.AddLineBreak();
-            tac.AddLineBreak();
             tac.AddText("TERMS AND CONDITIONS");
             tac.AddLineBreak();
             tac.AddText("PRICE" + "\t\t\t\t" + " : " + "\t");
             tac.AddText(MainVM.SelectedSalesQuote.priceNote_);
             tac.AddLineBreak();
             tac.AddText("PAYMENT" + "\t\t\t" + " : " + "\t");
-            tac.AddText(MainVM.SelectedSalesQuote.termsDP_ + "% DP upon release of order and " + (MainVM.SelectedSalesQuote.termsDP_ - 100) + "% Balacne upon delivery");
+            tac.AddText(MainVM.SelectedSalesQuote.termsDP_ + "% DP upon release of order and " + (MainVM.SelectedSalesQuote.termsDP_ - 100) + "% Balance upon delivery");
             tac.AddLineBreak();
             tac.AddText("DELIVERY" + "\t\t\t" + " : " + "\t");
             if (MainVM.SelectedSalesQuote.estDelivery_ != 0)
@@ -308,7 +295,7 @@ namespace prototype2
             tac.AddText(MainVM.SelectedSalesQuote.penaltyPercent_ + "% of balance");
 
             tac.AddLineBreak();
-            tac.AddText("ADDITIONAL TERMS " + "\t\t\t" + " : ");
+            tac.AddText("ADDITIONAL TERMS " + "\t" + " : ");
             tac.AddText(MainVM.SelectedSalesQuote.additionalTerms_);
 
             //terms and conditions font design

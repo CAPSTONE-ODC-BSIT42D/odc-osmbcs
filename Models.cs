@@ -1247,11 +1247,40 @@ namespace prototype2
             set { SetProperty(ref schedNotes, value); }
         }
 
-        protected ObservableCollection<Employee> assignedEmployee = new ObservableCollection<Employee>();
-        public ObservableCollection<Employee> assignedEmployee_
+        protected ObservableCollection<AssignedEmployee> assignedEmployees = new ObservableCollection<AssignedEmployee>();
+        public ObservableCollection<AssignedEmployee> assignedEmployees_
         {
-            get { return assignedEmployee; }
-            set { SetProperty(ref assignedEmployee, value); }
+            get { return assignedEmployees; }
+            set { SetProperty(ref assignedEmployees, value); }
+        }
+    }
+
+    public class AssignedEmployee : ViewModelEntity
+    {
+        public AssignedEmployee()
+        {
+
+        }
+
+        protected int TableID;
+        public int TableID_
+        {
+            get { return TableID; }
+            set { SetProperty(ref TableID, value); }
+        }
+
+        protected string serviceSqNoChar;
+        public string serviceSqNoChar_
+        {
+            get { return serviceSqNoChar; }
+            set { SetProperty(ref serviceSqNoChar, value); }
+        }
+
+        protected int EmpID;
+        public int EmpID_
+        {
+            get { return EmpID; }
+            set { SetProperty(ref EmpID, value); }
         }
     }
 }
