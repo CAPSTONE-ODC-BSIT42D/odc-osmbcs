@@ -140,8 +140,8 @@ namespace prototype2
             dateToday = DateTime.Now;
 
             row = table.AddRow();
-            
-            row.Cells[0].AddParagraph("Date Issued" + dateToday.ToLongDateString());
+            row.Cells[0].AddParagraph("Date Issued:");
+            row.Cells[0].AddParagraph(dateToday.ToLongDateString());
 
             
             date = section.AddParagraph();
@@ -164,7 +164,7 @@ namespace prototype2
             customerName.Format.Font.Name = "Calibri";
             customerName.Format.Font.Size = 11;
             customerName.Format.Font.Bold = true;
-            addressFrame.AddFormattedText(MainVM.SelectedCustomerSupplier.CompanyAddress +"," + "\t" + MainVM.SelectedCustomerSupplier.CompanyCity + "," + "\t" + MainVM.SelectedCustomerSupplier.CompanyProvinceName);
+            addressFrame.AddFormattedText("Address:" + "\t" +MainVM.SelectedCustomerSupplier.CompanyAddress +"," + "\t" + MainVM.SelectedCustomerSupplier.CompanyCity + "," + "\t" + MainVM.SelectedCustomerSupplier.CompanyProvinceName);
             addressFrame.Format.Font.Name = "Calibri";
             addressFrame.Format.Font.Size = 11;
 
@@ -187,7 +187,7 @@ namespace prototype2
             terms.AddText("TERMS: ");
             terms.Format.Font.Name = "Calibri";
             terms.Format.Font.Size = 11;
-            terms.AddFormattedText(MainVM.SelectedSalesInvoice.terms_.ToString()+" days");
+            terms.AddFormattedText(MainVM.SelectedSalesInvoice.terms_.ToString()+" Days");
             terms.Format.Font.Name = "Calibri";
             terms.Format.Font.Size = 11;
             terms.Format.Font.Bold = true;
@@ -358,6 +358,8 @@ namespace prototype2
 
             this.paragraph2 = section.AddParagraph();
             paragraph2.Format.Alignment = ParagraphAlignment.Right;
+            paragraph2.AddLineBreak();
+            paragraph2.AddLineBreak();
             paragraph2.AddLineBreak();
             paragraph2.AddLineBreak();
             paragraph2.AddLineBreak();
