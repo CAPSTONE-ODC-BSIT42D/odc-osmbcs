@@ -119,7 +119,6 @@ namespace prototype2
             DateTime timeToday = new DateTime();
             timeToday = DateTime.Today;
             dateFrame.AddLineBreak();
-            dateFrame.AddLineBreak();
             dateFrame.AddFormattedText(timeToday.ToLongDateString());
             dateFrame.Format.Font.Name = "Calibri";
             dateFrame.Format.Font.Size = 11;
@@ -141,7 +140,8 @@ namespace prototype2
             addressFrame.Format.Font.Size = 11;
             addressFrame.Format.SpaceAfter = "1.0cm";
             paragraph1.AddText("Dear ");
-            paragraph1.AddFormattedText(""+MainVM.SelectedCustomerSupplier.RepTitle+" "+ MainVM.SelectedCustomerSupplier.RepLastName, TextFormat.Bold);
+            paragraph1.AddFormattedText(""+MainVM.SelectedCustomerSupplier.RepTitle+" "+ MainVM.SelectedCustomerSupplier.RepLastName + ",", TextFormat.Bold);
+            paragraph1.AddLineBreak();
             paragraph1.AddLineBreak();
             paragraph1.AddText("As per your request, we are formally offering our price proposal for the above subject as follows:");
             addressFrame.Format.Font.Name = "Calibri";
@@ -252,10 +252,66 @@ namespace prototype2
 
             column = this.table.AddColumn();
             column.Format.Alignment = ParagraphAlignment.Right;
-            
+
 
 
             // Create the header of the table
+            //this.dateFrame = section.AddParagraph();
+            //non tabular format for terms and conditions
+            Paragraph tac = section.AddParagraph();
+            tac.AddLineBreak();
+            tac.AddLineBreak();
+            tac.AddLineBreak();
+            tac.AddLineBreak();
+            tac.AddLineBreak();
+            tac.AddLineBreak();
+            tac.AddLineBreak();
+            tac.AddLineBreak();
+            tac.AddLineBreak();
+            tac.AddLineBreak();
+            tac.AddLineBreak();
+            tac.AddLineBreak();
+            tac.AddLineBreak();
+            tac.AddLineBreak();
+            tac.AddLineBreak();
+            tac.AddText("TERMS AND CONDITIONS");
+            tac.AddLineBreak();
+            tac.AddText("PRICE" + "\t\t\t\t" + " : " + "\t");
+            tac.AddText(MainVM.SelectedSalesQuote.priceNote_);
+            tac.AddLineBreak();
+            tac.AddText("PAYMENT" + "\t\t\t" + " : " + "\t");
+            tac.AddText(MainVM.SelectedSalesQuote.termsDP_ + "% DP upon release of order and " + (MainVM.SelectedSalesQuote.termsDP_ - 100) + "% Balacne upon delivery");
+            tac.AddLineBreak();
+            tac.AddText("DELIVERY" + "\t\t\t" + " : " + "\t");
+            if (MainVM.SelectedSalesQuote.estDelivery_ != 0)
+            {
+                tac.AddText(MainVM.SelectedSalesQuote.estDelivery_ + " days upon receipt of DP");
+            }
+            else
+                row.Cells[1].AddParagraph("None");
+            tac.AddLineBreak();
+            tac.AddText("WARRANTY" + "\t\t\t" + " : " + "\t");
+            if (MainVM.SelectedSalesQuote.warrantyDays_ != 0)
+            {
+                tac.AddText(MainVM.SelectedSalesQuote.warrantyDays_ + " year from the date of delivery");
+            }
+            else
+                tac.AddText("None");
+            tac.AddLineBreak();
+            tac.AddText("VALIDITY " + "\t\t\t" + " : " + "\t");
+            tac.AddText(MainVM.SelectedSalesQuote.validityDays_ + " days (price increase will take effect after validity period)");
+
+            tac.AddLineBreak();
+            tac.AddText("PENALTY: " + "\t\t\t" + " : " + "\t");
+            tac.AddText(MainVM.SelectedSalesQuote.penaltyPercent_ + "% of balance");
+
+            tac.AddLineBreak();
+            tac.AddText("ADDITIONAL TERMS " + "\t\t\t" + " : ");
+            tac.AddText(MainVM.SelectedSalesQuote.additionalTerms_);
+
+
+            //tabular format for terms and conditions
+            /*
             row = table.AddRow();
             row.HeadingFormat = true;
             row.Format.Alignment = ParagraphAlignment.Center;
@@ -303,7 +359,7 @@ namespace prototype2
 
             
             this.table.SetEdge(0, 0, 2, 1, Edge.Box, BorderStyle.None, 0.25, Color.Empty);
-
+            */
 
             this.paragraph2 = section.AddParagraph();
             paragraph2.AddLineBreak();
