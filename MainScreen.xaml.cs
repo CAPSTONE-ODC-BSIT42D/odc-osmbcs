@@ -75,7 +75,10 @@ namespace prototype2
             MainVM.LoginEmployee_ = MainVM.Employees.Where(x => x.EmpID.Equals(empID)).FirstOrDefault();
         }
 
-        
+        private void logoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
 
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {

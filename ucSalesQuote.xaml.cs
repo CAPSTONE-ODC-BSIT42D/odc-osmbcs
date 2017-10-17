@@ -604,6 +604,7 @@ namespace prototype2
                     ((CheckBox)element).IsChecked = false;
                 }
             }
+            MainVM.isEdit = false;
         }
 
         private void cancelAddProductBtn_Click(object sender, RoutedEventArgs e)
@@ -1017,7 +1018,8 @@ namespace prototype2
                     additionalFees = service.AdditionalFees
                 });
             }
-            foreach(var obj in newRequisitionGridForm.Children)
+            markupPriceTb.Value = MainVM.SelectedSalesQuote.markUpPercent_;
+            foreach (var obj in newRequisitionGridForm.Children)
             {
                 if (obj is TextBox)
                     ((TextBox)obj).IsEnabled = false;
@@ -1069,10 +1071,24 @@ namespace prototype2
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (this.IsVisible)
+            if (this.IsVisible )
             {
-                if (MainVM.SelectedSalesQuote != null)
+                if (MainVM.SelectedSalesQuote != null && MainVM.isEdit)
+                {
+                    foreach (var element in transQuoatationGridForm.Children)
+                    {
+                        if (element is Grid)
+                        {
+                            if (!(((Grid)element).Name.Equals(newRequisitionGrid.Name)))
+                            {
+                                ((Grid)element).Visibility = Visibility.Collapsed;
+                            }
+                            else
+                                ((Grid)element).Visibility = Visibility.Visible;
+                        }
+                    }
                     loadSalesQuoteToUi();
+                }
                 else
                 {
                     foreach (var obj in newRequisitionGridForm.Children)

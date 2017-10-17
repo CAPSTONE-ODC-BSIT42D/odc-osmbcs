@@ -155,7 +155,7 @@
             </Grid.ColumnDefinitions>
             <Image x:Name="image" Width="45" Source="Resources/user-16.png" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="47"/>
             <Label x:Name="label" Content="{Binding LoginEmployee_.EmpFname}" Margin="60,19,10,0" Foreground="White" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" VerticalAlignment="Top" Height="29" Panel.ZIndex="-1" Grid.ColumnSpan="2"/>
-            <Button x:Name="logoutBtn" HorizontalAlignment="Right" Margin="0,62,10,0" VerticalAlignment="Top" Width="26" Background="{x:Null}" BorderBrush="White" Height="28" ToolTip="Logout" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Column="1">
+            <Button x:Name="logoutBtn" HorizontalAlignment="Right" Margin="0,62,10,0" VerticalAlignment="Top" Width="26" Background="{x:Null}" BorderBrush="White" Height="28" ToolTip="Logout" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Column="1" Click="logoutBtn_Click">
                 <Viewbox x:Name="vbx1" Stretch="Fill" Margin="2" >
                     <Canvas x:Name="Capa_1" Height="19" Width="19">
                         <!--Unknown tag: metadata-->

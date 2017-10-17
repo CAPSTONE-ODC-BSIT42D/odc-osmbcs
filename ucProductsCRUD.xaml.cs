@@ -150,12 +150,12 @@ namespace prototype2
                         }
                         if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
                         {
-                            BindingExpression expression = ((Xceed.Wpf.Toolkit.DecimalUpDown)element).GetBindingExpression(Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
+                            BindingExpression expression = ((Xceed.Wpf.Toolkit.DecimalUpDown)element).GetBindingExpression(Xceed.Wpf.Toolkit.DecimalUpDown.TextProperty);
                             Validation.ClearInvalid(expression);
                             if (((Xceed.Wpf.Toolkit.DecimalUpDown)element).IsEnabled)
                             {
                                 expression.UpdateSource();
-                                if (Validation.GetHasError((TextBox)element))
+                                if (Validation.GetHasError((Xceed.Wpf.Toolkit.DecimalUpDown)element))
                                     validationError = true;
                             }
                         }
@@ -165,7 +165,7 @@ namespace prototype2
                             if (expression != null)
                             {
                                 expression.UpdateSource();
-                                if (Validation.GetHasError((TextBox)element))
+                                if (Validation.GetHasError((ComboBox)element))
                                     validationError = true;
                             }
 

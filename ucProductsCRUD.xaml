@@ -86,13 +86,13 @@
                         </ComboBox.SelectedItem>
                     </ComboBox>
                     <xctk:DecimalUpDown x:Name="costPriceTb" HorizontalAlignment="Left" Margin="135,223,0,0" VerticalAlignment="Top" Width="220">
-                        <xctk:DecimalUpDown.Value>
+                        <xctk:DecimalUpDown.Text>
                             <Binding Path="DecimalTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                 <Binding.ValidationRules>
                                     <local:TextBoxValidation TextBoxType="IsEmpty"/>
                                 </Binding.ValidationRules>
                             </Binding>
-                        </xctk:DecimalUpDown.Value>
+                        </xctk:DecimalUpDown.Text>
                     </xctk:DecimalUpDown>
                     <TextBox x:Name="unitTb" HorizontalAlignment="Left" Height="23" Margin="135,252,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220">
                         <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">

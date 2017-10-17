@@ -124,7 +124,7 @@
                     ItemsSource="{Binding DataPoints}" 
                     Label="India" ShowTooltip="True" >
                     <syncfusion:LineSeries.AdornmentsInfo>
-                        <syncfusion:ChartAdornmentInfo Symbol="Custom"  ShowMarker="True" >
+                        <syncfusion:ChartAdornmentInfo Symbol="Custom" ShowMarker="True" >
                             <syncfusion:ChartAdornmentInfo.SymbolTemplate>
                                 <DataTemplate>
                                     <Grid IsHitTestVisible="False" >

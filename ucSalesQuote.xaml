@@ -236,7 +236,7 @@
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <xctk:DecimalUpDown x:Name="markupPriceTb" Margin="237,495,0,0" VerticalAlignment="Top" ValueChanged="markupPriceTb_ValueChanged" VerticalContentAlignment="Center" Height="24" DefaultValue="1" Minimum="1" DisplayDefaultValueOnEmptyText="True" ParsingNumberStyle="AllowDecimalPoint" Text="{Binding SelectedSalesQuote.markUpPercent_}" FontWeight="Normal" FontStyle="Normal" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="104">
+                        <xctk:DecimalUpDown x:Name="markupPriceTb" Margin="237,495,0,0" VerticalAlignment="Top" ValueChanged="markupPriceTb_ValueChanged" VerticalContentAlignment="Center" Height="24" DefaultValue="1" Minimum="1" DisplayDefaultValueOnEmptyText="True" ParsingNumberStyle="AllowDecimalPoint" FontWeight="Normal" FontStyle="Normal" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="104">
                             <xctk:DecimalUpDown.Value>
                                 <Binding Path="DecimalTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                     <Binding.ValidationRules>
@@ -245,14 +245,7 @@
                                 </Binding>
                             </xctk:DecimalUpDown.Value>
                         </xctk:DecimalUpDown>
-                        <xctk:DecimalUpDown x:Name="discountPriceTb" HorizontalAlignment="Left" Margin="237,535,0,0" VerticalAlignment="Top" Width="104"  VerticalContentAlignment="Center" Height="24" DefaultValue="0" Minimum="0" DisplayDefaultValueOnEmptyText="True" ParsingNumberStyle="Integer" FontWeight="Normal" FontStyle="Normal" Text="{Binding SelectedSalesQuote.discountPercent_}" HorizontalContentAlignment="Center" ValueChanged="discountPriceTb_ValueChanged">
-                            <xctk:DecimalUpDown.Value>
-                                <Binding Path="DecimalTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                                    <Binding.ValidationRules>
-                                        <local:TextBoxValidation TextBoxType="IsEmpty"/>
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </xctk:DecimalUpDown.Value>
+                        <xctk:DecimalUpDown x:Name="discountPriceTb" HorizontalAlignment="Left" Margin="237,535,0,0" VerticalAlignment="Top" Width="104"  VerticalContentAlignment="Center" Height="24" DefaultValue="0" Minimum="0" DisplayDefaultValueOnEmptyText="True" ParsingNumberStyle="Integer" FontWeight="Normal" FontStyle="Normal" Value="{Binding SelectedSalesQuote.discountPercent_ }" HorizontalContentAlignment="Center" ValueChanged="discountPriceTb_ValueChanged">
                         </xctk:DecimalUpDown>
                         <Label x:Name="label32_Copy3" Content="Total Price:" HorizontalAlignment="Left" Margin="10,501,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Segoe UI" Grid.Column="1" RenderTransformOrigin="0.955,0.481" FontWeight="Bold" FontSize="20" Height="37" Width="114"/>
                         <Label x:Name="totalPriceLbl" Content="Total Price:" Margin="129,504,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Segoe UI" FontWeight="Normal" Grid.Column="1" FontSize="18" Height="34" HorizontalAlignment="Left"/>

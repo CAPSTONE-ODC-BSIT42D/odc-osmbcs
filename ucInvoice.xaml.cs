@@ -145,7 +145,9 @@ namespace prototype2
         void computeInvoice()
         {
             
-            MainVM.RequestedItems.Clear();
+            MainVM.InvoiceItems.Clear();
+            MainVM.VatableSale = 0;
+            MainVM.TotalSalesWithOutDp = 0;
             foreach (AddedItem item in MainVM.SelectedSalesQuote.AddedItems)
             {
                 MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ItemCode.Equals(item.ItemCode)).First();
@@ -183,11 +185,15 @@ namespace prototype2
                 MainVM.VatableSale += Math.Round(service.TotalCost - (service.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)), 3);
                 MainVM.TotalSalesWithOutDp += Math.Round(service.TotalCost, 3);
             }
-            MainVM.TotalSalesNoVat = MainVM.VatableSale;
+            
+            MainVM.TotalSalesNoVat = Math.Round(MainVM.VatableSale, 3);
+
             MainVM.VatAmount = (MainVM.VatableSale * ((decimal)0.12));
             MainVM.VatAmount = Math.Round(MainVM.VatAmount, 3);
-            MainVM.TotalSales = MainVM.VatableSale + (MainVM.VatableSale * ((decimal)0.12));
+
+            MainVM.TotalSales = MainVM.VatableSale + MainVM.VatAmount;
             MainVM.TotalSales = Math.Round(MainVM.TotalSales, 3);
+
             dateOfIssue = DateTime.Now;
             dateToday.Content = dateOfIssue.ToShortDateString();
         }
@@ -301,7 +307,6 @@ namespace prototype2
             {
                 if (MainVM.SelectedSalesQuote != null)
                 {
-                    MainVM.InvoiceItems.Clear();
                     newInvoiceForm.Visibility = Visibility.Visible;
                     documentViewer.Visibility = Visibility.Collapsed;
                     selectSalesQuoteGrid.Visibility = Visibility.Collapsed;
@@ -309,7 +314,6 @@ namespace prototype2
                 }
                 else
                 {
-                    MainVM.InvoiceItems.Clear();
                     newInvoiceForm.Visibility = Visibility.Collapsed;
                     documentViewer.Visibility = Visibility.Collapsed;
                     selectSalesQuoteGrid.Visibility = Visibility.Visible;
