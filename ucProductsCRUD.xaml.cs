@@ -286,7 +286,7 @@ namespace prototype2
                 }
                 else if (element is ComboBox)
                 {
-                    BindingExpression expression = ((ComboBox)element).GetBindingExpression(TextBox.TextProperty);
+                    BindingExpression expression = ((ComboBox)element).GetBindingExpression(ComboBox.SelectedItemProperty);
                     if (expression != null)
                         Validation.ClearInvalid(expression);
                     ((ComboBox)element).SelectedIndex = -1;

@@ -356,15 +356,15 @@ namespace prototype2
         private void loadDataToUi()
         {
             companyTypeCb.SelectedIndex = int.Parse(MainVM.SelectedCustomerSupplier.CompanyType);
-            MainVM.CompanyName_ = MainVM.SelectedCustomerSupplier.CompanyName;
+            companyNameTb.Text = MainVM.SelectedCustomerSupplier.CompanyName;
             companyDescriptionTb.Text = MainVM.SelectedCustomerSupplier.CompanyDesc;
-            MainVM.CompanyAddress_ = MainVM.SelectedCustomerSupplier.CompanyAddress;
-            MainVM.CompanyCity_ = MainVM.SelectedCustomerSupplier.CompanyCity;
+            companyAddressTb.Text = MainVM.SelectedCustomerSupplier.CompanyAddress;
+            companyCityTb.Text = MainVM.SelectedCustomerSupplier.CompanyCity;
             companyProvinceCb.SelectedValue = MainVM.SelectedCustomerSupplier.CompanyProvinceID;
-            MainVM.CompanyPostalCode_ = MainVM.SelectedCustomerSupplier.CompanyPostalCode;
-            MainVM.CompanyEmail_ = MainVM.SelectedCustomerSupplier.CompanyEmail;
-            MainVM.CompanyTelephone_ = MainVM.SelectedCustomerSupplier.CompanyTelephone;
-            MainVM.CompanyMobile_ = MainVM.SelectedCustomerSupplier.CompanyMobile;
+            companyPostalCode.Text = MainVM.SelectedCustomerSupplier.CompanyPostalCode;
+            companyEmailTb.Text = MainVM.SelectedCustomerSupplier.CompanyEmail;
+            companyTelephoneTb.Text = MainVM.SelectedCustomerSupplier.CompanyTelephone;
+            companyMobileTb.Text = MainVM.SelectedCustomerSupplier.CompanyMobile;
             if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyTelephone))
             {
                 companyTelCb.IsChecked = false;
@@ -381,13 +381,13 @@ namespace prototype2
                 companyEmailCb.IsChecked = false;
                 companyEmailCb.IsChecked = true;
             }
-            MainVM.RepTitle_ = MainVM.SelectedCustomerSupplier.RepTitle;
-            MainVM.RepFName_ = MainVM.SelectedCustomerSupplier.RepFirstName;
-            MainVM.RepMName_ = MainVM.SelectedCustomerSupplier.RepMiddleName;
-            MainVM.RepLName_ = MainVM.SelectedCustomerSupplier.RepLastName;
-            MainVM.RepEmail_ = MainVM.SelectedCustomerSupplier.RepEmail;
-            MainVM.RepTelephone_ = MainVM.SelectedCustomerSupplier.RepTelephone;
-            MainVM.RepMobile_ = MainVM.SelectedCustomerSupplier.RepMobile;
+            representativeTitle.Text = MainVM.SelectedCustomerSupplier.RepTitle;
+            repFirstNameTb.Text = MainVM.SelectedCustomerSupplier.RepFirstName;
+            repMiddleInitialTb.Text = MainVM.SelectedCustomerSupplier.RepMiddleName;
+            repLastNameTb.Text = MainVM.SelectedCustomerSupplier.RepLastName;
+            repEmailTb.Text = MainVM.SelectedCustomerSupplier.RepEmail;
+            repTelephoneTb.Text = MainVM.SelectedCustomerSupplier.RepTelephone;
+            repMobileTb.Text = MainVM.SelectedCustomerSupplier.RepMobile;
             if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.RepTelephone))
             {
                 repTelCb.IsChecked = false;

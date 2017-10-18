@@ -852,6 +852,7 @@ namespace prototype2
 
         private void manageEmployeeAddBtn_Click(object sender, RoutedEventArgs e)
         {
+            MainVM.isEdit = false;
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
             sb.Begin(formGridBg);
             foreach (var obj in formGridBg.Children)
@@ -875,6 +876,7 @@ namespace prototype2
 
         private void manageCustomerAddBtn_Click(object sender, RoutedEventArgs e)
         {
+            MainVM.isEdit = false;
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
             sb.Begin(formGridBg);
             foreach (var obj in formGridBg.Children)
@@ -899,7 +901,7 @@ namespace prototype2
 
         private void manageProductAddBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            MainVM.isEdit = false;
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
             sb.Begin(formGridBg);
             foreach (var obj in formGridBg.Children)
