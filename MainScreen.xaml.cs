@@ -1080,7 +1080,21 @@ namespace prototype2
 
                     }
                 }
-
+                foreach (var element in ucCustSupp.companyDetailsFormGrid1.Children)
+                {
+                    if (element is TextBox)
+                    {
+                        ((TextBox)element).IsEnabled = true;
+                    }
+                    else if (element is ComboBox)
+                    {
+                        ((ComboBox)element).IsEnabled = true;
+                    }
+                    else if (element is CheckBox)
+                    {
+                        ((CheckBox)element).IsEnabled = true;
+                    }
+                }
                 ucCustSupp.saveCancelGrid.Visibility = Visibility.Visible;
                 ucCustSupp.editCloseGrid.Visibility = Visibility.Collapsed;
             }
@@ -1103,6 +1117,29 @@ namespace prototype2
                         }
                     }
 
+                }
+                foreach (var element in ucEmployee.employeeDetailsFormGrid1.Children)
+                {
+                    if (element is TextBox)
+                    {
+                        ((TextBox)element).IsEnabled = true;
+                    }
+                    else if (element is ComboBox)
+                    {
+                        ((ComboBox)element).IsEnabled = true;
+                    }
+                    else if (element is CheckBox)
+                    {
+                        ((CheckBox)element).IsEnabled = true;
+                    }
+                    else if (element is PasswordBox)
+                    {
+                        ((CheckBox)element).IsEnabled = true;
+                    }
+                    else if (element is Xceed.Wpf.Toolkit.DateTimePicker)
+                    {
+                        ((Xceed.Wpf.Toolkit.DateTimePicker)element).IsEnabled = true;
+                    }
                 }
                 ucEmployee.saveCancelGrid1.Visibility = Visibility.Visible;
                 ucEmployee.editCloseGrid1.Visibility = Visibility.Collapsed;

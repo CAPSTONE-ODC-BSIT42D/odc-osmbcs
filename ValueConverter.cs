@@ -35,7 +35,8 @@ namespace prototype2
         public object Convert(object value, Type targetType, object parameter,
                 System.Globalization.CultureInfo culture)
         {
-            if (!String.IsNullOrWhiteSpace(value.ToString()))
+            var valuea = value as string;
+            if (!String.IsNullOrWhiteSpace(valuea))
             {
                 if (value.ToString().Equals("0"))
                 {
