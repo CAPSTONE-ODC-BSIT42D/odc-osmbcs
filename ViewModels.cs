@@ -603,5 +603,23 @@ namespace prototype2
             get { return SelectedAssignedEmployee; }
             set { SetProperty(ref SelectedAssignedEmployee, value); }
         }
+
+        //Payments Hist
+
+        protected ObservableCollection<PaymentHist> PaymentHistory = new ObservableCollection<PaymentHist>();
+
+        protected PaymentHist SelectedPaymentHistory = null;
+
+        public ObservableCollection<PaymentHist> PaymentHistory_
+        {
+            get { return PaymentHistory; }
+            set { PaymentHistory = value; }
+        }
+
+        public PaymentHist SelectedPaymentHistory_
+        {
+            get { return SelectedPaymentHistory; }
+            set { SetProperty(ref SelectedPaymentHistory, value); }
+        }
     }
 }

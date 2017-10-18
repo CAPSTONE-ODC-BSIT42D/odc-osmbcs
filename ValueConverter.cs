@@ -16,10 +16,35 @@ namespace prototype2
         {
             if (!String.IsNullOrWhiteSpace(value.ToString()))
             {
-                MainVM.SelectedCustomerSupplier = MainVM.Suppliers.Where(x => x.CompanyID.Equals(value.ToString())).First();
+                MainVM.SelectedCustomerSupplier = MainVM.AllCustomerSupplier.Where(x => x.CompanyID.Equals(value.ToString())).First();
                 return MainVM.SelectedCustomerSupplier.CompanyName;
             }
             return "";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            return "no";
+        }
+    }
+
+    public class EmployeeTypeOfConverter : IValueConverter
+    {
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
+        public object Convert(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            if (!String.IsNullOrWhiteSpace(value.ToString()))
+            {
+                if (value.ToString().Equals("0"))
+                {
+                    return true;
+                }
+                else
+                    return false;
+            }
+            return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter,

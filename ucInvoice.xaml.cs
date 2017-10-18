@@ -273,31 +273,36 @@ namespace prototype2
                     "'); ";
                 if (dbCon.insertQuery(query, dbCon.Connection))
                 {
-                    query = "SELECT invoiceNo FROM sales_invoice_t ORDER BY invoiceNo DESC LIMIT 1;";
-                    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                    DataSet fromDb = new DataSet();
-                    DataTable fromDbTable = new DataTable();
-                    dataAdapter.Fill(fromDb, "t");
-                    fromDbTable = fromDb.Tables["t"];
-                    MainVM.SalesQuotes.Clear();
-                    foreach (DataRow dr in fromDbTable.Rows)
+                    query = "UPDATE `sales_quote_t` SET status = '" + "ACCEPTED" + "' WHERE sqNoChar = '" + MainVM.SelectedSalesInvoice.sqNoChar_ + "'";
+                    if (dbCon.insertQuery(query, dbCon.Connection))
                     {
-                        query = "INSERT INTO `odc_db`.`payment_hist_t` " +
-                        "(`custBalance`,`invoiceNo`) " +
-                        "VALUES " +
-                        "('" +
-                        MainVM.TotalSales + "','" +
-                        dr["invoiceNo"].ToString() + "')";
-                        dbCon.insertQuery(query, dbCon.Connection);
-                        query = "INSERT INTO `odc_db`.`payment_hist_t` " +
-                        "(`custBalance`,`invoiceNo`) " +
-                        "VALUES " +
-                        "('" +
-                        (MainVM.TotalSales - MainVM.TotalSalesWithOutDp) + "','" +
-                        dr["invoiceNo"].ToString() + "')";
-                        dbCon.insertQuery(query, dbCon.Connection);
+                        query = "SELECT invoiceNo FROM sales_invoice_t ORDER BY invoiceNo DESC LIMIT 1;";
+                        MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                        DataSet fromDb = new DataSet();
+                        DataTable fromDbTable = new DataTable();
+                        dataAdapter.Fill(fromDb, "t");
+                        fromDbTable = fromDb.Tables["t"];
+                        MainVM.SalesQuotes.Clear();
+                        foreach (DataRow dr in fromDbTable.Rows)
+                        {
+                            query = "INSERT INTO `odc_db`.`payment_hist_t` " +
+                            "(`custBalance`,`invoiceNo`) " +
+                            "VALUES " +
+                            "('" +
+                            MainVM.TotalSales + "','" +
+                            dr["invoiceNo"].ToString() + "')";
+                            dbCon.insertQuery(query, dbCon.Connection);
+                            query = "INSERT INTO `odc_db`.`payment_hist_t` " +
+                            "(`custBalance`,`invoiceNo`) " +
+                            "VALUES " +
+                            "('" +
+                            (MainVM.TotalSalesWithOutDp - MainVM.TotalSales) + "','" +
+                            dr["invoiceNo"].ToString() + "')";
+                            dbCon.insertQuery(query, dbCon.Connection);
+                        }
+                        MessageBox.Show("Invoice is Saved");
                     }
-                    MessageBox.Show("Inovice is Saved");
+                    
                 }
             }
         }
@@ -310,6 +315,7 @@ namespace prototype2
             {
                 if (MainVM.SelectedSalesQuote != null)
                 {
+                    paymentDetailsGrid.Visibility = Visibility.Collapsed;
                     newInvoiceForm.Visibility = Visibility.Visible;
                     documentViewer.Visibility = Visibility.Collapsed;
                     selectSalesQuoteGrid.Visibility = Visibility.Collapsed;
@@ -317,6 +323,7 @@ namespace prototype2
                 }
                 else
                 {
+                    paymentDetailsGrid.Visibility = Visibility.Collapsed;
                     newInvoiceForm.Visibility = Visibility.Collapsed;
                     documentViewer.Visibility = Visibility.Collapsed;
                     selectSalesQuoteGrid.Visibility = Visibility.Visible;

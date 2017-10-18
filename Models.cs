@@ -1197,6 +1197,49 @@ namespace prototype2
 
     }
 
+    public class PaymentHist : ViewModelEntity
+    {
+        public PaymentHist()
+        {
+
+        }
+
+        protected int custHistID;
+        public int custHistID_
+        {
+            get { return custHistID; }
+            set { SetProperty(ref custHistID, value); }
+        }
+
+        protected DateTime paymentDate;
+        public DateTime paymentDate_
+        {
+            get { return paymentDate; }
+            set { SetProperty(ref paymentDate, value); }
+        }
+
+        protected decimal custBalance;
+        public decimal custBalance_
+        {
+            get { return custBalance; }
+            set { SetProperty(ref custBalance, value); }
+        }
+
+        protected string paymentStatus;
+        public string paymentStatus_
+        {
+            get { return paymentStatus; }
+            set { SetProperty(ref paymentStatus, value); }
+        }
+
+        protected int invoiceNo;
+        public int invoiceNo_
+        {
+            get { return invoiceNo; }
+            set { SetProperty(ref invoiceNo, value); }
+        }
+    }
+
     public class ServiceSchedule : ViewModelEntity
     {
         public ServiceSchedule()

@@ -826,12 +826,18 @@
                         </Grid>
                         <Label x:Name="label8_Copy1" Content="Sort:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="525,9,0,0"/>
                         <Button x:Name="trasancnvertToInvoiceBtn" Content="Add" HorizontalAlignment="Right" Height="29" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" Click="trasancnvertToInvoiceBtn_Click" />
-                        <DataGrid x:Name="invoiceDataGrid" Margin="0,44,0,-3" ItemsSource="{Binding SalesInvoice}" SelectedItem="{Binding SelectedSalesInvoice}" CanUserAddRows="False" AutoGenerateColumns="true" EnableColumnVirtualization="True" IsReadOnly="True">
-                            <!--<DataGrid.Columns >
-                                <DataGridTextColumn Binding="{Binding sqNoChar_}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Sales Quote ID"  />
-                                <DataGridTextColumn Binding="{Binding dateofIssue_}" ClipboardContentBinding="{x:Null}" Header="Date of Issue" Width="200" CanUserResize="False"  />
-                                <DataGridTextColumn Binding="{Binding custName_}" ClipboardContentBinding="{x:Null}" Header="Customer Name" Width="350"   />
-                                <DataGridTextColumn Binding="{Binding status_}" ClipboardContentBinding="{x:Null}" Header="Status" Width="200" CanUserResize="False"  />
+                        <DataGrid x:Name="invoiceDataGrid" Margin="0,44,0,-3" ItemsSource="{Binding SalesInvoice}" SelectedItem="{Binding SelectedSalesInvoice}" CanUserAddRows="False" AutoGenerateColumns="false" EnableColumnVirtualization="True" IsReadOnly="True">
+                            <DataGrid.Columns >
+                                <DataGridTextColumn Binding="{Binding invoiceNo_}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Sales Invoice ID"  />
+                                <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Customer Name" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding custID_,NotifyOnTargetUpdated=True, Converter={StaticResource IdToNameConverter}}" VerticalContentAlignment="Center"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Binding="{Binding dateOfIssue_}" ClipboardContentBinding="{x:Null}" Header="Date of Issue" Width="350"   />
+                                <DataGridTextColumn Binding="{Binding paymentStatus_}" ClipboardContentBinding="{x:Null}" Header="Status" Width="200" CanUserResize="False"  />
                                 <DataGridTemplateColumn  Width="115" CanUserResize="False" Header="Actions"  >
                                     <DataGridTemplateColumn.CellTemplate  >
                                         <DataTemplate>
@@ -842,10 +848,6 @@
                                                             <Canvas.RenderTransform>
                                                                 <TranslateTransform X="0" Y="0"/>
                                                             </Canvas.RenderTransform>
-                                                            -->
-                            <!--Unknown tag: metadata-->
-                            <!--Unknown tag: sodipodi:namedview-->
-                            <!--
                                                             <Canvas x:Name="g4">
                                                                 <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2" Fill="Black">
                                                                     <Path.Data>
@@ -877,10 +879,6 @@
                                                             <Canvas.RenderTransform>
                                                                 <TranslateTransform X="0" Y="0"/>
                                                             </Canvas.RenderTransform>
-                                                            -->
-                            <!--Unknown tag: metadata-->
-                            <!--Unknown tag: sodipodi:namedview-->
-                            <!--
                                                             <Canvas x:Name="g10b">
                                                                 <Canvas x:Name="g8b">
                                                                     <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2b" Fill="Black">
@@ -920,10 +918,6 @@
                                                             <Canvas.RenderTransform>
                                                                 <TranslateTransform X="0" Y="0"/>
                                                             </Canvas.RenderTransform>
-                                                            -->
-                            <!--Unknown tag: metadata-->
-                            <!--Unknown tag: sodipodi:namedview-->
-                            <!--
                                                             <Canvas x:Name="g12c">
                                                                 <Canvas x:Name="g10c">
                                                                     <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2c" Fill="#000000">
@@ -970,7 +964,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                            </DataGrid.Columns>-->
+                            </DataGrid.Columns>
                         </DataGrid>
                         <ComboBox x:Name="sortQuoteCb1" HorizontalAlignment="Left" Margin="567,9,0,0" VerticalAlignment="Top" Width="120" Height="26">
                             <ComboBoxItem Content="[NONE]"/>
@@ -1224,8 +1218,25 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="150" CanUserResize="False" Header="" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button x:Name="genContractBtn" Content="Generate Contract" Click="genContractBtn_Click" Margin="12">
+                                            </Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <DataGridTemplateColumn.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding EmpType,NotifyOnTargetUpdated=True, Converter={StaticResource IdToNameConverter}}" Value="true">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridTemplateColumn.CellStyle>
+                                </DataGridTemplateColumn>
                                 <DataGridTemplateColumn  Width="115" CanUserResize="False" Header="Actions"  >
-                                    <DataGridTemplateColumn.CellTemplate  >
+                                    <DataGridTemplateColumn.CellTemplate >
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
                                                 <Button x:Name="viewRecordBtn" Foreground="White" Width="Auto" Height="25" Click="viewRecordBtn_Click" Margin="10,10,0,10" Background="{x:Null}" BorderBrush="Black" ToolTip="View Record">

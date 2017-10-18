@@ -122,7 +122,22 @@ namespace prototype2
 
             MainVM.SalesQuotes.Clear();
 
-            
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM payment_hist_t";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                foreach (DataRow dr in fromDbTable.Rows)
+                { 
+                    DateTime paymentDate = new DateTime();
+                    DateTime.TryParse(dr["paymentDate"].ToString(), out paymentDate);
+                    MainVM.PaymentHistory_.Add(new PaymentHist() { custHistID_ = int.Parse(dr["custHistID"].ToString()), paymentDate_ = paymentDate, custBalance_ = decimal.Parse(dr["custBalance"].ToString()), invoiceNo_ = int.Parse(dr["invoiceNo"].ToString()), paymentStatus_ = dr["paymentStatus"].ToString()});
+                }
+                dbCon.Close();
+            }
 
             if (dbCon.IsConnect())
             {
@@ -1946,6 +1961,9 @@ namespace prototype2
             
         }
 
-        
+        private void genContractBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
