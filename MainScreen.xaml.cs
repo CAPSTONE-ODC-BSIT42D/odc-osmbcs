@@ -191,7 +191,7 @@ namespace prototype2
             }
             if (dbCon.IsConnect())
             {
-                string query = "SELECT * FROM services_t;";
+                string query = "SELECT * FROM services_t where isDeleted = 0;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
@@ -1630,7 +1630,6 @@ namespace prototype2
                     if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
                     {
                         BindingExpression expression = ((Xceed.Wpf.Toolkit.DecimalUpDown)element).GetBindingExpression(Xceed.Wpf.Toolkit.DecimalUpDown.TextProperty);
-                        Validation.ClearInvalid(expression);
                         if (((Xceed.Wpf.Toolkit.DecimalUpDown)element).IsEnabled)
                         {
                             expression.UpdateSource();
@@ -1641,7 +1640,7 @@ namespace prototype2
                 }
                 if (!validationError)
                 {
-                    if (id.Equals(""))
+                    if (!MainVM.isEdit)
                     {
                         string query = "INSERT INTO services_t (serviceName,serviceDesc,servicePrice) VALUES ('" + serviceName.Text + "','" + serviceDesc.Text + "', '" + servicePrice.Value + "')";
                         if (dbCon.insertQuery(query, dbCon.Connection))
@@ -1656,10 +1655,11 @@ namespace prototype2
                             servicePrice.Value = 0;
                             loadDataToUi();
                         }
+                        MainVM.isEdit = false;
                     }
                     else
                     {
-                        string query = "UPDATE `services_T` SET serviceName = '" + serviceName.Text + "',serviceDesc = '" + serviceDesc.Text + "', servicePrice = '" + servicePrice.Value + "' WHERE serviceID = '" + id + "'";
+                        string query = "UPDATE `services_T` SET serviceName = '" + serviceName.Text + "',serviceDesc = '" + serviceDesc.Text + "', servicePrice = '" + servicePrice.Value + "' WHERE serviceID = '" + MainVM.SelectedService.ServiceID + "'";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             //MessageBox.Show("Sevice type sucessfully updated");
@@ -1668,10 +1668,12 @@ namespace prototype2
                             serviceTypeAdd.Visibility = Visibility.Collapsed;
                             loadDataToUi();
                         }
+                        MainVM.isEdit = false;
                     }
                 }
                 else
                     MessageBox.Show("Resolve the error first");
+                validationError = false;
             }
             else if (result == MessageBoxResult.No)
             {
@@ -1701,6 +1703,7 @@ namespace prototype2
                 serviceDesc.Text = MainVM.SelectedService.ServiceDesc;
                 servicePrice.Value = MainVM.SelectedService.ServicePrice;
                 dbCon.Close();
+                MainVM.isEdit = true;
                 serviceTypeList.Visibility = Visibility.Collapsed;
                 serviceTypeAdd.Visibility = Visibility.Visible;
             }
@@ -1714,25 +1717,21 @@ namespace prototype2
             if (serviceTypeDg.SelectedItems.Count > 0)
             {
                 id = (serviceTypeDg.Columns[0].GetCellContent(serviceTypeDg.SelectedItem) as TextBlock).Text;
-                serviceTypeList.Visibility = Visibility.Collapsed;
-                serviceTypeAdd.Visibility = Visibility.Visible;
                 MessageBoxResult result = MessageBox.Show("Do you wish to delete this record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.OK)
                 {
                     if (dbCon.IsConnect())
                     {
-                        string query = "UPDATE `service_t` SET `isDeleted`= 1 WHERE serviceID = '" + id + "';";
+                        string query = "UPDATE `services_t` SET `isDeleted`= 1 WHERE serviceID = '" + MainVM.SelectedService.ServiceID + "';";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             MessageBox.Show("Record successfully deleted!");
                         }
                     }
                     dbCon.Close();
-                    serviceTypeList.Visibility = Visibility.Collapsed;
-                    serviceTypeAdd.Visibility = Visibility.Visible;
                 }
             }
-
+            worker.RunWorkerAsync();
         }
 
         bool initPrice = true;

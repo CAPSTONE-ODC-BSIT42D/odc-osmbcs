@@ -27,7 +27,7 @@
     <Grid Margin="0">
         <Grid x:Name="transQuoatationGridForm" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
 
-            <Grid x:Name="newRequisitionGrid" Margin="0,0,0,40">
+            <Grid x:Name="newRequisitionGrid" Margin="0,0,0,40" d:IsHidden="True">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
@@ -252,7 +252,7 @@
                     </Grid>
                 </ScrollViewer>
             </Grid>
-            <Grid x:Name="termsAndConditionGrid" Margin="0,0,0,40" d:IsHidden="True">
+            <Grid x:Name="termsAndConditionGrid" Margin="0,0,0,40">
                 <ScrollViewer Margin="0">
                     <Grid x:Name="termsAndConditionGridForm">
                         <Label x:Name="label16_Copy2" Content="Terms and Conditions" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" FontFamily="Segoe UI"/>

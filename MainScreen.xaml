@@ -1636,7 +1636,7 @@
                                     </Grid>
                                     <Grid x:Name="serviceTypeAdd" Visibility="Hidden">
                                         <Label x:Name="label29" Content="Service Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="12"/>
-                                        <TextBox x:Name="serviceName" HorizontalAlignment="Left" Height="23" Margin="120,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="252" FontWeight="Normal" FontStyle="Normal" FontSize="12" TextChanged="serviceName_TextChanged">
+                                        <TextBox x:Name="serviceName" HorizontalAlignment="Left" Height="23" Margin="120,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="252" FontWeight="Normal" FontStyle="Normal" FontSize="12">
                                             <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                                 <Binding.ValidationRules>
                                                     <local:TextBoxValidation TextBoxType="IsEmpty"/>
