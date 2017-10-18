@@ -2007,7 +2007,7 @@ namespace prototype2
 
         private void genContractBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            ucContract.Visibility = Visibility.Visible;
         }
     }
 }

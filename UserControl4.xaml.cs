@@ -28,6 +28,8 @@ namespace prototype2
             InitializeComponent();
            
         }
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
+        
         private void DisplayReport()
         {
             Contract.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetContract()));
@@ -43,7 +45,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "Select e.empfname, e.empmi,e.empLName, e.empAddress, e.empCity, e.empdatefrom, e.empDateTo, j.jobname from emp_cont_t e JOIN job_title_t j ON e.jobID = j.jobID where isDeleted = 0 and emptype = 1 and CONCAT(e.empfname,' ', e.empmi,' ', e.empLName)  = '"+Nametxt.Text+"'";
+            cmd.CommandText = "Select e.empfname, e.empmi,e.empLName, e.empAddress, e.empCity, e.empdatefrom, e.empDateTo, j.jobname from emp_cont_t e JOIN job_title_t j ON e.jobID = j.jobID where isDeleted = 0 and emptype = 1 and e.empID  = '"+ MainVM.SelectedEmployeeContractor.EmpID + "'";
 
             DataSet1.DataTable4DataTable dSContract = new DataSet1.DataTable4DataTable();
 
@@ -61,15 +63,18 @@ namespace prototype2
             Contract.RefreshReport();
         }
 
-        private void Nametxt_TextChanged(object sender, TextChangedEventArgs e)
-        {
-           
-            
-        }
+   
 
         private void btnsubmit_Click(object sender, RoutedEventArgs e)
         {
             DisplayReport();
+           
+        }
+
+        private void btnback_Click(object sender, RoutedEventArgs e)
+        {
+            UcContract.Visibility = Visibility.Hidden;
+            
         }
     }
 }

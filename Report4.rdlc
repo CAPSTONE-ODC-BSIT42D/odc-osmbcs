@@ -6,31 +6,34 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.21875in</Width>
+              <Width>1.23646in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.78125in</Width>
+              <Width>0.79896in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.01771in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.01771in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.20833in</Width>
+              <Width>1.22604in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.5in</Width>
+              <Width>1.51771in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.01771in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.1875in</Width>
+              <Width>1.20521in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.13542in</Width>
+              <Width>1.15313in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.01771in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1in</Width>
@@ -390,6 +393,41 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox2">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Total</Value>
+                              <Style>
+                                <FontFamily>Century Gothic</FontFamily>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox2</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>Yellow</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
             <TablixRow>
@@ -715,12 +753,45 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox4">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Sum(Fields!salesPrice.Value, "DataSet1")+Sum(Fields!totalCost.Value, "DataSet1")</Value>
+                              <Style>
+                                <FontFamily>Century Gothic</FontFamily>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox4</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
           </TablixRows>
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
+            <TablixMember />
             <TablixMember />
             <TablixMember />
             <TablixMember />
@@ -747,7 +818,7 @@
         <Top>1.57167in</Top>
         <Left>0.16542in</Left>
         <Height>0.5in</Height>
-        <Width>11.03125in</Width>
+        <Width>12.20833in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -807,7 +878,7 @@
     <Height>3.67708in</Height>
     <Style />
   </Body>
-  <Width>11.37375in</Width>
+  <Width>12.37375in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
