@@ -49,10 +49,10 @@ namespace prototype2
         {
             if (selectSalesQuoteGrid.IsVisible)
             {
-                
                 newInvoiceForm.Visibility = Visibility.Visible;
                 documentViewer.Visibility = Visibility.Collapsed;
                 selectSalesQuoteGrid.Visibility = Visibility.Collapsed;
+                computeInvoice();
             }
             else if (newInvoiceForm.IsVisible)
             {
@@ -68,16 +68,7 @@ namespace prototype2
                                 validationError = true;
                         }
                     }
-                    if (element is Xceed.Wpf.Toolkit.IntegerUpDown)
-                    {
-                        BindingExpression expression = ((Xceed.Wpf.Toolkit.IntegerUpDown)element).GetBindingExpression(Xceed.Wpf.Toolkit.IntegerUpDown.ValueProperty);
-                        if (((Xceed.Wpf.Toolkit.IntegerUpDown)element).IsEnabled)
-                        {
-                            expression.UpdateSource();
-                            if (Validation.GetHasError((Xceed.Wpf.Toolkit.IntegerUpDown)element))
-                                validationError = true;
-                        }
-                    }
+                    
                 }
                 if (!validationError && MainVM.LoginEmployee_ != null)
                 {
@@ -123,15 +114,25 @@ namespace prototype2
 
         private void invoiceBack_Click(object sender, RoutedEventArgs e)
         {
-            if (newInvoiceForm.IsVisible)
+            if (selectSalesQuoteGrid.IsVisible)
             {
                 newInvoiceForm.Visibility = Visibility.Collapsed;
-                documentViewer.Visibility = Visibility.Visible;
+                documentViewer.Visibility = Visibility.Collapsed;
+                selectSalesQuoteGrid.Visibility = Visibility.Visible;
                 OnSaveCloseButtonClicked(e);
+
+            }
+            else if (newInvoiceForm.IsVisible)
+            {
+                newInvoiceForm.Visibility = Visibility.Collapsed;
+                documentViewer.Visibility = Visibility.Collapsed;
+                selectSalesQuoteGrid.Visibility = Visibility.Visible;
             }
             else if (documentViewer.IsVisible)
             {
-
+                newInvoiceForm.Visibility = Visibility.Visible;
+                documentViewer.Visibility = Visibility.Collapsed;
+                selectSalesQuoteGrid.Visibility = Visibility.Collapsed;
             }
         }
 
