@@ -59,7 +59,7 @@ namespace prototype2
         {
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
             sb.Begin(formGridBg);
-            formGridBg.Visibility = Visibility.Collapsed;
+            formGridBg.Visibility = Visibility.Visible;
             MainVM.SelectedServiceSchedule_ = new ServiceSchedule();
         }
         private void Btn_ScheduleType_Click(object sender, RoutedEventArgs e)

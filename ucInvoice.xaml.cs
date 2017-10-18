@@ -65,7 +65,8 @@ namespace prototype2
                         if (((TextBox)element).IsEnabled)
                         {
                             expression.UpdateSource();
-                            validationError = Validation.GetHasError((TextBox)element);
+                            if(Validation.GetHasError((TextBox)element))
+                                validationError = true;
                         }
                     }
                     if (element is Xceed.Wpf.Toolkit.IntegerUpDown)
@@ -74,9 +75,9 @@ namespace prototype2
                         Validation.ClearInvalid(expression);
                         if (((Xceed.Wpf.Toolkit.IntegerUpDown)element).IsEnabled)
                         {
-
                             expression.UpdateSource();
-                            validationError = Validation.GetHasError((Xceed.Wpf.Toolkit.IntegerUpDown)element);
+                            if (Validation.GetHasError((Xceed.Wpf.Toolkit.IntegerUpDown)element))
+                                validationError = true;
                         }
                     }
                 }
@@ -91,10 +92,12 @@ namespace prototype2
                     document = df.CreateDocument(sqNo: MainVM.SelectedSalesInvoice.sqNoChar_, author: "admin");
                     string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
                     documentViewer.pagePreview.Ddl = ddl;
+                    validationError = false;
                 }
                 else
                 {
-                    //MessageBox.Show("");
+                    MessageBox.Show("Resolve the error first");
+                    validationError = false;
                 }
             }
             else if (documentViewer.IsVisible)
@@ -250,7 +253,7 @@ namespace prototype2
             bool noError = true;
             if (dbCon.IsConnect())
             {
-                string query = "INSERT INTO `odc_db`.`sales_invoice_t`(`custID`,`empID`,`sqNoChar`,`TIN`,`busStyle`,`dateOfIssue`,`termsDays`,`dueDate`,`purchaseOrderNumber`,`paymentStatus`,`vat`,`sc_pwd_dsicount`,`withholdingTax`,`notes`)" +
+                string query = "INSERT INTO `odc_db`.`sales_invoice_t`(`custID`,`empID`,`sqNoChar`,`TIN`,`busStyle`,`dateOfIssue`,`termsDays`,`dueDate`,`purchaseOrderNumber`,`paymentStatus`,`vat`,`sc_pwd_discount`,`withholdingTax`,`notes`)" +
                     " VALUES " +
                     "('" +
                     MainVM.SelectedSalesInvoice.custID_ + "','" +

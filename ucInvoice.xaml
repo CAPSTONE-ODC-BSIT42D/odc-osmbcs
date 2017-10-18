@@ -59,7 +59,7 @@
                     <xctk:IntegerUpDown.Value>
                         <Binding Path="IntegerTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
-                                <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                                <local:TextBoxValidation TextBoxType="IsZero"/>
                             </Binding.ValidationRules>
                         </Binding>
                     </xctk:IntegerUpDown.Value>
