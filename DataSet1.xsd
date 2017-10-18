@@ -361,6 +361,31 @@ WHERE        (e.isDeleted = 0) AND (e.empType = 1) AND (CONCAT(e.empFName, ' ', 
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable5TableAdapter" GeneratorDataComponentClassName="DataTable5TableAdapter" Name="DataTable5" UserDataComponentName="DataTable5TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByReceipt" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="FillByReceipt" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="FillByReceipt">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        c.companyName, c.companyAddress, c.companyCity, pv.locProvince, si.invoiceNoChar, sp.SIpaymentAmount
+FROM            cust_supp_t c INNER JOIN
+                         sales_invoice_t si ON c.companyID = si.custID INNER JOIN
+                         si_payment_t sp ON si.invoiceNoChar = sp.invoiceChar INNER JOIN
+                         provinces_t pv ON pv.locProvinceID = c.companyProvinceID</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="companyName" DataSetColumn="companyName" />
+              <Mapping SourceColumn="companyAddress" DataSetColumn="companyAddress" />
+              <Mapping SourceColumn="companyCity" DataSetColumn="companyCity" />
+              <Mapping SourceColumn="locProvince" DataSetColumn="locProvince" />
+              <Mapping SourceColumn="invoiceNoChar" DataSetColumn="invoiceNoChar" />
+              <Mapping SourceColumn="SIpaymentAmount" DataSetColumn="SIpaymentAmount" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -532,6 +557,48 @@ WHERE        (e.isDeleted = 0) AND (e.empType = 1) AND (CONCAT(e.empFName, ' ', 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="DataTable5" msprop:Generator_TableClassName="DataTable5DataTable" msprop:Generator_TableVarName="tableDataTable5" msprop:Generator_TablePropName="DataTable5" msprop:Generator_RowDeletingName="DataTable5RowDeleting" msprop:Generator_RowChangingName="DataTable5RowChanging" msprop:Generator_RowEvHandlerName="DataTable5RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable5RowDeleted" msprop:Generator_UserTableName="DataTable5" msprop:Generator_RowChangedName="DataTable5RowChanged" msprop:Generator_RowEvArgName="DataTable5RowChangeEvent" msprop:Generator_RowClassName="DataTable5Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="companyName" msprop:Generator_ColumnVarNameInTable="columncompanyName" msprop:Generator_ColumnPropNameInRow="companyName" msprop:Generator_ColumnPropNameInTable="companyNameColumn" msprop:Generator_UserColumnName="companyName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="companyAddress" msprop:Generator_ColumnVarNameInTable="columncompanyAddress" msprop:Generator_ColumnPropNameInRow="companyAddress" msprop:Generator_ColumnPropNameInTable="companyAddressColumn" msprop:Generator_UserColumnName="companyAddress">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="21845" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="companyCity" msprop:Generator_ColumnVarNameInTable="columncompanyCity" msprop:Generator_ColumnPropNameInRow="companyCity" msprop:Generator_ColumnPropNameInTable="companyCityColumn" msprop:Generator_UserColumnName="companyCity">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="locProvince" msprop:Generator_ColumnVarNameInTable="columnlocProvince" msprop:Generator_ColumnPropNameInRow="locProvince" msprop:Generator_ColumnPropNameInTable="locProvinceColumn" msprop:Generator_UserColumnName="locProvince" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="invoiceNoChar" msprop:Generator_ColumnVarNameInTable="columninvoiceNoChar" msprop:Generator_ColumnPropNameInRow="invoiceNoChar" msprop:Generator_ColumnPropNameInTable="invoiceNoCharColumn" msprop:Generator_UserColumnName="invoiceNoChar">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SIpaymentAmount" msprop:Generator_ColumnVarNameInTable="columnSIpaymentAmount" msprop:Generator_ColumnPropNameInRow="SIpaymentAmount" msprop:Generator_ColumnPropNameInTable="SIpaymentAmountColumn" msprop:Generator_UserColumnName="SIpaymentAmount" type="xs:float" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
@@ -546,6 +613,10 @@ WHERE        (e.isDeleted = 0) AND (e.empType = 1) AND (CONCAT(e.empFName, ' ', 
       <xs:selector xpath=".//mstns:DataTable3" />
       <xs:field xpath="mstns:itemCode" />
       <xs:field xpath="mstns:serviceID" />
+    </xs:unique>
+    <xs:unique name="DataTable5_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:DataTable5" />
+      <xs:field xpath="mstns:invoiceNoChar" />
     </xs:unique>
   </xs:element>
 </xs:schema>

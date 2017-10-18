@@ -70,6 +70,7 @@ namespace prototype2
         private void btnsubmit_Click(object sender, RoutedEventArgs e)
         {
             DisplayReport();
+           
         }
     }
 }

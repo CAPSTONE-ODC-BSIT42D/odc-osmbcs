@@ -14,7 +14,7 @@
         <local:IdToNameConverter x:Key="IdToNameConverter" />
         <local:ServiceTypeConverter x:Key="ServiceTypeConverter" />
         <local:EmployeeTypeOfConverter x:Key="EmployeeTypeOfConverter" />
-        
+
         <Storyboard x:Key="sbShowRightMenu" >
             <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,-150,0" To="0,0,0,0" DecelerationRatio="1" Duration="0:0:0.5" />
         </Storyboard>
@@ -1371,6 +1371,7 @@
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
+                        <local:UserControl4 x:Name="ucContract" HorizontalAlignment="Left" Height="700" Margin="20,16,0,0" VerticalAlignment="Top" Width="1184" Visibility="Hidden"/>
                     </Grid>
                 </Grid>
                 <Grid x:Name="manageProductListGrid" Margin="0,0,1,0" d:IsHidden="True">
@@ -1418,7 +1419,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                
+
                                 <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Supplier" >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -1463,8 +1464,8 @@
                                                         </Canvas>
                                                     </Viewbox>
                                                 </Button>
-                                                
-                                               
+
+
                                                 <Button x:Name="editRecordBtn" Width="Auto" Height="25" Click="editRecordBtn_Click" Background="{x:Null}" BorderBrush="Black" Margin="10,10,0,10" ToolTip="Edit Record" >
                                                     <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
                                                         <Canvas x:Name="Capa_1b" Width="438.536" Height="438.536" Canvas.Left="0" Canvas.Top="0">
@@ -1488,7 +1489,7 @@
                                                                     </Path>
                                                                 </Canvas>
                                                             </Canvas>
-                                                          
+
                                                         </Canvas>
                                                     </Viewbox>
                                                 </Button>
