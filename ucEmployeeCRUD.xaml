@@ -52,11 +52,6 @@
                         </Binding>
                     </TextBox>
                     <TextBox x:Name="empMiddleInitialTb" HorizontalAlignment="Left" Height="23" Margin="194,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" FontWeight="Normal" MaxLength="3" >
-                        <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                            <Binding.ValidationRules>
-                                <local:TextBoxValidation TextBoxType="IsEmpty"/>
-                            </Binding.ValidationRules>
-                        </Binding>
                     </TextBox>
                     <TextBox x:Name="empLastNameTb" HorizontalAlignment="Left" Height="23" Margin="329,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" FontWeight="Normal" RenderTransformOrigin="0.5,0.5">
                         <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
