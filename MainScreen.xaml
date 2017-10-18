@@ -12,7 +12,9 @@
        >
     <Window.Resources>
         <local:IdToNameConverter x:Key="IdToNameConverter" />
-
+        <local:ServiceTypeConverter x:Key="ServiceTypeConverter" />
+        <local:EmployeeTypeOfConverter x:Key="EmployeeTypeOfConverter" />
+        
         <Storyboard x:Key="sbShowRightMenu" >
             <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,-150,0" To="0,0,0,0" DecelerationRatio="1" Duration="0:0:0.5" />
         </Storyboard>
@@ -1228,7 +1230,7 @@
                                     <DataGridTemplateColumn.CellStyle>
                                         <Style TargetType="{x:Type DataGridCell}">
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding EmpType,NotifyOnTargetUpdated=True, Converter={StaticResource IdToNameConverter}}" Value="true">
+                                                <DataTrigger Binding="{Binding EmpType,NotifyOnTargetUpdated=True, Converter={StaticResource EmployeeTypeOfConverter}}" Value="true">
                                                     <Setter Property="IsEnabled" Value="False"/>
                                                 </DataTrigger>
                                             </Style.Triggers>

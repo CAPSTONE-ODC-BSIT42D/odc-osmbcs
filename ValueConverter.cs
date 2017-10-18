@@ -53,4 +53,25 @@ namespace prototype2
             return "no";
         }
     }
+
+    public class ServiceTypeConverter : IValueConverter
+    {
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
+        public object Convert(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            if (!String.IsNullOrWhiteSpace(value.ToString()))
+            {
+                MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(value.ToString())).First();
+                return MainVM.SelectedService.ServiceName;
+            }
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            return "no";
+        }
+    }
 }

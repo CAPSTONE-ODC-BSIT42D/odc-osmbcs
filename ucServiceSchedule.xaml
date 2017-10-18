@@ -7,7 +7,14 @@
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="prototype2.ucServiceSchedule"
              mc:Ignorable="d" 
              d:DesignHeight="762.5" d:DesignWidth="1206" IsVisibleChanged="UserControl_IsVisibleChanged">
+    <UserControl.DataContext>
+        <StaticResource ResourceKey="MainVM"/>
+    </UserControl.DataContext>
     <UserControl.Resources>
+        <local:IdToNameConverter x:Key="IdToNameConverter" />
+        <local:ServiceTypeConverter x:Key="ServiceTypeConverter" />
+        <local:EmployeeTypeOfConverter x:Key="EmployeeTypeOfConverter" />
+        
         <Storyboard x:Key="sbShowRightMenu" >
             <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,-150,0" To="0,0,0,0" DecelerationRatio="1" Duration="0:0:0.5" />
         </Storyboard>
@@ -120,9 +127,9 @@
                         <Label x:Name="label21_Copy2" Content="Start Date:" HorizontalAlignment="Left" Margin="38,161,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                         <Label x:Name="label21_Copy3" Content="End Date:" HorizontalAlignment="Left" Margin="38,192,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                         <Label x:Name="label21_Copy4" Content="Assigned Employees:" HorizontalAlignment="Left" Margin="38,319,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                        <ComboBox x:Name="serviceNoCb" HorizontalAlignment="Left" Margin="137,68,0,0" VerticalAlignment="Top" Width="309" Height="26" IsEditable="True" IsTextSearchCaseSensitive="True" ItemsSource="{Binding AddedServices}" DisplayMemberPath="TableNoChar" SelectedValuePath="TableNoChar"/>
-                        <Label Content="Service Name:" HorizontalAlignment="Left" Margin="137,99,0,0" VerticalAlignment="Top"/>
-                        <Label Content="Service Name:" HorizontalAlignment="Left" Margin="137,130,0,0" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="serviceNoCb" HorizontalAlignment="Left" Margin="137,68,0,0" VerticalAlignment="Top" Width="309" Height="26" IsEditable="True" IsTextSearchCaseSensitive="True" ItemsSource="{Binding AddedServices}" DisplayMemberPath="TableNoChar" SelectedValuePath="TableNoChar" SelectedItem="{Binding SelectedAddedService}"/>
+                        <Label Content="{Binding SelectedAddedService.ServiceID,NotifyOnTargetUpdated=True, Converter={StaticResource ServiceTypeConverter}}" HorizontalAlignment="Left" Margin="137,99,0,0" VerticalAlignment="Top"/>
+                        <Label Content="" HorizontalAlignment="Left" Margin="137,130,0,0" VerticalAlignment="Top"/>
                         <DatePicker x:Name="startDate" HorizontalAlignment="Left" Margin="137,162,0,0" VerticalAlignment="Top" Height="26" Width="124" SelectedDateChanged="startDate_SelectedDateChanged"/>
                         <DatePicker x:Name="endDate" HorizontalAlignment="Left" Margin="137,193,0,0" VerticalAlignment="Top" Height="26" Width="124" SelectedDateChanged="endDate_SelectedDateChanged"/>
                         

@@ -496,11 +496,14 @@ namespace prototype2
                     DateTime.TryParse(dr["dueDate"].ToString(), out dueDate);
                     MainVM.SelectedCustomerSupplier = MainVM.Customers.Where(x => x.CompanyID.Equals(dr["custID"].ToString())).FirstOrDefault();
 
+                    int invoiceNo;
+                    int.TryParse(dr["invoiceNo"].ToString(), out invoiceNo);
+
                     int custId;
                     int.TryParse(dr["custID"].ToString(), out custId);
 
-                    int custRepId;
-                    int.TryParse(dr["empID"].ToString(), out custRepId);
+                    int empId;
+                    int.TryParse(dr["empID"].ToString(), out empId);
 
                     int estDelivery;
                     int.TryParse(dr["invoiceNo"].ToString(), out estDelivery);
@@ -511,11 +514,13 @@ namespace prototype2
                     decimal vat;
                     decimal.TryParse(dr["vat"].ToString(), out vat);
 
-                    decimal penaltyAmt;
-                    decimal.TryParse(dr["sc_pwd_discount"].ToString(), out penaltyAmt);
+                    decimal sc_pwd_discount;
+                    decimal.TryParse(dr["sc_pwd_discount"].ToString(), out sc_pwd_discount);
 
-                    decimal markUpPerc;
-                    decimal.TryParse(dr["withholdingTax"].ToString(), out markUpPerc);
+                    decimal withholdingTax;
+                    decimal.TryParse(dr["withholdingTax"].ToString(), out withholdingTax);
+
+                    MainVM.SalesInvoice.Add(new SalesInvoice() { invoiceNo_ = invoiceNo.ToString(), custID_ = custId, empID_ = empId, sqNoChar_ = dr["sqNoChar"].ToString(), tin_ = dr["tin"].ToString(), busStyle_ = dr["busStyle"].ToString(), dateOfIssue_ = dateOfIssue, terms_ = termsDays, dueDate_ = dueDate, purchaseOrderNumber_ = dr["purchaseOrderNumber"].ToString(), paymentStatus_ = dr["paymentStatus"].ToString(), vat_ = vat, sc_pwd_discount_ = sc_pwd_discount, withholdingTax_ = withholdingTax, notes_ = dr["notes"].ToString() });
                     
                 }
                
