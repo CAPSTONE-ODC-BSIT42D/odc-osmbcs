@@ -39,7 +39,7 @@ namespace prototype2
                 UCReportService.Visibility = Visibility.Visible;
                 UCReportsItem.Visibility = Visibility.Hidden;
                 UCReportSales.Visibility = Visibility.Hidden;
-                UcContract.Visibility = Visibility.Hidden;
+                
 
 
 
@@ -49,7 +49,7 @@ namespace prototype2
                 UCReportsItem.Visibility = Visibility.Visible;
                 UCReportService.Visibility = Visibility.Hidden;
                 UCReportSales.Visibility = Visibility.Hidden;
-                UcContract.Visibility = Visibility.Hidden;
+         
             }
             if (SELECTEDINDEX.Equals(2))
             {
@@ -57,16 +57,9 @@ namespace prototype2
                 UCReportsItem.Visibility = Visibility.Hidden;
                 UCReportService.Visibility = Visibility.Hidden;
                 UCReportSales.Visibility = Visibility.Visible;
-                UcContract.Visibility = Visibility.Hidden;
+              
             }
-            if (SELECTEDINDEX.Equals(3))
-            {
-
-                UCReportsItem.Visibility = Visibility.Hidden;
-                UCReportService.Visibility = Visibility.Hidden;
-                UCReportSales.Visibility = Visibility.Hidden;
-                UcContract.Visibility = Visibility.Visible;
-            }
+ 
         }
     }
 }
