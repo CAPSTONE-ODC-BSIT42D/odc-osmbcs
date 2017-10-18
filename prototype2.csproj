@@ -280,6 +280,9 @@
     <Compile Include="ucServiceSchedule.xaml.cs">
       <DependentUpon>ucServiceSchedule.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControl4.xaml.cs">
+      <DependentUpon>UserControl4.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ValueConverter.cs" />
     <Compile Include="ViewModelEntity.cs" />
     <Compile Include="ViewModels.cs" />
@@ -353,6 +356,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ucServiceSchedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl4.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -435,6 +442,8 @@
     <EmbeddedResource Include="Report1.rdlc" />
     <EmbeddedResource Include="Report3.rdlc" />
     <EmbeddedResource Include="Report4.rdlc" />
+    <EmbeddedResource Include="Report5.rdlc" />
+    <EmbeddedResource Include="Report6.rdlc" />
     <EmbeddedResource Include="Resources\odclogo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

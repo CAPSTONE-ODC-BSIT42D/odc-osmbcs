@@ -976,7 +976,7 @@
 
                 </Grid>
             </Grid>
-            <Grid x:Name="serviceGrid">
+            <Grid x:Name="serviceGrid" d:IsHidden="True">
                 <local:ucServiceSchedule Margin="0"/>
             </Grid>
             <Grid x:Name="reportsGrid" d:IsHidden="True">
@@ -1169,7 +1169,7 @@
                     </Grid>
 
                 </Grid>
-                <Grid x:Name="manageEmployeeGrid" Margin="0,0,1,0" d:IsHidden="True">
+                <Grid x:Name="manageEmployeeGrid" Margin="0,0,1,0">
                     <Grid x:Name="manageEmployeeGridHome" Margin="0">
                         <Label x:Name="label8" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
                         <TextBox x:Name="searchBox1" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>
@@ -1371,7 +1371,7 @@
                         </DataGrid>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageProductListGrid" Margin="0,0,1,0">
+                <Grid x:Name="manageProductListGrid" Margin="0,0,1,0" d:IsHidden="True">
                     <Grid x:Name="manageEmployeeGridHome1" Margin="0">
                         <Label x:Name="label11" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
                         <TextBox x:Name="searchBox2" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>
@@ -1461,6 +1461,8 @@
                                                         </Canvas>
                                                     </Viewbox>
                                                 </Button>
+                                                
+                                               
                                                 <Button x:Name="editRecordBtn" Width="Auto" Height="25" Click="editRecordBtn_Click" Background="{x:Null}" BorderBrush="Black" Margin="10,10,0,10" ToolTip="Edit Record" >
                                                     <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
                                                         <Canvas x:Name="Capa_1b" Width="438.536" Height="438.536" Canvas.Left="0" Canvas.Top="0">
@@ -1484,21 +1486,7 @@
                                                                     </Path>
                                                                 </Canvas>
                                                             </Canvas>
-                                                            <Canvas x:Name="g12b"/>
-                                                            <Canvas x:Name="g14b"/>
-                                                            <Canvas x:Name="g16b"/>
-                                                            <Canvas x:Name="g18b"/>
-                                                            <Canvas x:Name="g20b"/>
-                                                            <Canvas x:Name="g22b"/>
-                                                            <Canvas x:Name="g24b"/>
-                                                            <Canvas x:Name="g26b"/>
-                                                            <Canvas x:Name="g28b"/>
-                                                            <Canvas x:Name="g30b"/>
-                                                            <Canvas x:Name="g32b"/>
-                                                            <Canvas x:Name="g34b"/>
-                                                            <Canvas x:Name="g36"/>
-                                                            <Canvas x:Name="g38"/>
-                                                            <Canvas x:Name="g40"/>
+                                                          
                                                         </Canvas>
                                                     </Viewbox>
                                                 </Button>
