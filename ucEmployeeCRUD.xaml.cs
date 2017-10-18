@@ -111,6 +111,7 @@ namespace prototype2
                 if (!validationError)
                 {
                     saveDataToDb();
+                    resetFieldsValue();
                     OnSaveCloseButtonClicked(e);
                 }
                 else
@@ -432,7 +433,7 @@ namespace prototype2
                     BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
                     if (expression != null)
                         Validation.ClearInvalid(expression);
-                    ((TextBox)element).Text = string.Empty;
+                    ((TextBox)element).Text = "";
                 }
                 else if (element is ComboBox)
                 {
@@ -451,6 +452,7 @@ namespace prototype2
 
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)
         {
+            resetFieldsValue();
             OnSaveCloseButtonClicked(e);
         }
 
