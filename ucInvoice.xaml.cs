@@ -61,7 +61,6 @@ namespace prototype2
                     if(element is TextBox)
                     {
                         BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-                        Validation.ClearInvalid(expression);
                         if (((TextBox)element).IsEnabled)
                         {
                             expression.UpdateSource();
@@ -72,7 +71,6 @@ namespace prototype2
                     if (element is Xceed.Wpf.Toolkit.IntegerUpDown)
                     {
                         BindingExpression expression = ((Xceed.Wpf.Toolkit.IntegerUpDown)element).GetBindingExpression(Xceed.Wpf.Toolkit.IntegerUpDown.ValueProperty);
-                        Validation.ClearInvalid(expression);
                         if (((Xceed.Wpf.Toolkit.IntegerUpDown)element).IsEnabled)
                         {
                             expression.UpdateSource();
