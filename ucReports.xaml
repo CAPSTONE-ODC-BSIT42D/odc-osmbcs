@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:prototype2"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="prototype2.ucReports"
-             mc:Ignorable="d" d:DesignHeight="1138.947" Width="1477.342">
+             mc:Ignorable="d" Width="1330.342" Height="1255.947">
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>
@@ -14,9 +14,11 @@
             <ComboBoxItem Content="Service Report"/>
             <ComboBoxItem Content="Purchase Report"/>
             <ComboBoxItem Content="Sales Report"/>
+            <ComboBoxItem Content="Contract"/>
         </ComboBox>
         <local:UserControl1 x:Name="UCReportService" Margin="99,198,482,284" Visibility="Hidden"/>
         <local:UserControl2 x:Name="UCReportsItem" HorizontalAlignment="Left" Height="728" Margin="56,85,0,0" VerticalAlignment="Top" Width="1196" Visibility="Hidden"/>
         <local:UserControl3 x:Name="UCReportSales" HorizontalAlignment="Left" Height="350" Margin="10,85,0,0" VerticalAlignment="Top" Width="1242" Visibility="Hidden"/>
+        <local:UserControl4 HorizontalAlignment="Left" Height="1039" Margin="56,123,0,0" VerticalAlignment="Top" Width="1232"/>
     </Grid>
 </UserControl>
