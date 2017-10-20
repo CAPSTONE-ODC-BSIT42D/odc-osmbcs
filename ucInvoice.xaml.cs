@@ -49,6 +49,7 @@ namespace prototype2
         {
             if (selectSalesQuoteGrid.IsVisible)
             {
+                MainVM.SelectedCustomerSupplier = MainVM.AllCustomerSupplier.Where(x => x.CompanyID.Equals(MainVM.SelectedSalesQuote.custID_.ToString())).First();
                 newInvoiceForm.Visibility = Visibility.Visible;
                 documentViewer.Visibility = Visibility.Collapsed;
                 selectSalesQuoteGrid.Visibility = Visibility.Collapsed;
@@ -56,6 +57,7 @@ namespace prototype2
             }
             else if (newInvoiceForm.IsVisible)
             {
+                
                 foreach (var element in newInvoiceFormGrid.Children)
                 {
                     if(element is TextBox)
@@ -98,7 +100,7 @@ namespace prototype2
                 string filename = @"d:\test\" + MainVM.SelectedSalesInvoice.sqNoChar_ + "-INVOICE.pdf";
                 saveDataToDb();
                 SaveFileDialog dlg = new SaveFileDialog();
-                dlg.FileName = "" + MainVM.SelectedSalesInvoice.sqNoChar_;
+                dlg.FileName = "" + MainVM.SelectedSalesInvoice.sqNoChar_+ "-INVOICE";
                 dlg.DefaultExt = ".pdf";
                 dlg.Filter = "PDF documents (.pdf)|*.pdf";
                 if (dlg.ShowDialog() == true)
@@ -118,9 +120,7 @@ namespace prototype2
             {
                 newInvoiceForm.Visibility = Visibility.Collapsed;
                 documentViewer.Visibility = Visibility.Collapsed;
-                selectSalesQuoteGrid.Visibility = Visibility.Visible;
                 OnSaveCloseButtonClicked(e);
-
             }
             else if (newInvoiceForm.IsVisible)
             {
@@ -138,9 +138,9 @@ namespace prototype2
 
         private void findBtn_Click(object sender, RoutedEventArgs e)
         {
-            var linqResults = MainVM.SalesQuotes.Where(x => x.sqNoChar_.ToLower().Contains(transSearchBoxSelectCustGridTb.Text.ToLower()));
+            var linqResults = MainVM.SalesQuotes.Where(x => x.sqNoChar_.ToLower().Contains(transSearchBoxSelectCustGridTb.Text.ToLower()) && !(x.status_.Equals("ACCEPTED")));
             var observable = new ObservableCollection<SalesQuote>(linqResults);
-            selectCustomerDg.ItemsSource = observable;
+            selectSalesQuote.ItemsSource = observable;
         }
 
 
@@ -160,12 +160,11 @@ namespace prototype2
                     desc = MainVM.SelectedProduct.ItemDesc,
                     itemName = MainVM.SelectedProduct.ItemName,
                     qty = item.ItemQty,
-                    unitPrice = Math.Round((item.TotalCost - (item.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)))/item.ItemQty, 3),
-                    totalAmount = Math.Round(item.TotalCost - (item.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)),3),
+                    unitPrice = Math.Round(item.TotalCost / item.ItemQty, 3),
+                    totalAmount = Math.Round(item.TotalCost ,3),
                     itemType = 0
                 });
-                MainVM.VatableSale += Math.Round(item.TotalCost - (item.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)), 3);
-                MainVM.TotalSalesWithOutDp += Math.Round(item.TotalCost, 3);
+                MainVM.VatableSale += Math.Round(item.TotalCost, 3);
 
             }
             foreach (AddedService service in MainVM.SelectedSalesQuote.AddedServices)
@@ -179,13 +178,12 @@ namespace prototype2
                     desc = MainVM.SelectedService.ServiceDesc,
                     itemName = MainVM.SelectedService.ServiceName,
                     qty = 1,
-                    unitPrice = Math.Round(service.TotalCost - (service.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)), 3),
-                    totalAmount = Math.Round(service.TotalCost - (service.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)), 3),
+                    unitPrice = Math.Round(service.TotalCost , 3),
+                    totalAmount = Math.Round(service.TotalCost, 3),
                     itemType = 1,
                     additionalFees = service.AdditionalFees
                 });
-                MainVM.VatableSale += Math.Round(service.TotalCost - (service.TotalCost * (MainVM.SelectedSalesQuote.termsDP_ * (decimal)0.01)), 3);
-                MainVM.TotalSalesWithOutDp += Math.Round(service.TotalCost, 3);
+                MainVM.VatableSale += Math.Round(service.TotalCost, 3);
             }
             
             MainVM.TotalSalesNoVat = Math.Round(MainVM.VatableSale, 3);
@@ -320,13 +318,25 @@ namespace prototype2
                     selectSalesQuoteGrid.Visibility = Visibility.Collapsed;
                     computeInvoice();
                 }
+                else if (MainVM.isEdit && MainVM.SelectedSalesInvoice!=null)
+                {
+                    var linqResults = MainVM.PaymentHistory_.Where(x => !(MainVM.SelectedSalesInvoice.invoiceNo_.Equals(x.invoiceNo_)));
+                    var observable = new ObservableCollection<PaymentHist>(linqResults);
+                    paymentHistoryDg.ItemsSource = observable;
+                    transInvoiceGridForm.Visibility = Visibility.Collapsed;
+                    paymentDetailsGrid.Visibility = Visibility.Visible;
+                }
                 else
                 {
+                    var linqResults = MainVM.SalesQuotes.Where(x => !(x.status_.Equals("ACCEPTED")));
+                    var observable = new ObservableCollection<SalesQuote>(linqResults);
+                    selectSalesQuote.ItemsSource = observable;
                     paymentDetailsGrid.Visibility = Visibility.Collapsed;
                     newInvoiceForm.Visibility = Visibility.Collapsed;
                     documentViewer.Visibility = Visibility.Collapsed;
                     selectSalesQuoteGrid.Visibility = Visibility.Visible;
                 }
+
             }
         }
     }

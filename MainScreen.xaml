@@ -844,7 +844,7 @@
                                     <DataGridTemplateColumn.CellTemplate  >
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <Button x:Name="viewTrasancRecordBtn" Foreground="White" Width="Auto" Height="25"  Margin="10,10,0,10" Background="{x:Null}" BorderBrush="Black" ToolTip="View Record">
+                                                <Button x:Name="viewInvoiceRecord" Foreground="White" Width="Auto" Height="25"  Margin="10,10,0,10" Background="{x:Null}" BorderBrush="Black" ToolTip="View Record" Click="viewInvoiceRecord_Click">
                                                     <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
                                                         <Canvas x:Name="Capa_1" Width="511.626" Height="511.626" Canvas.Left="0" Canvas.Top="0">
                                                             <Canvas.RenderTransform>

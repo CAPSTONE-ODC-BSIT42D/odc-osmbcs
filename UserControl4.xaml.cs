@@ -26,14 +26,16 @@ namespace prototype2
         public UserControl4()
         {
             InitializeComponent();
-           
+            
         }
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
-        
         private void DisplayReport()
         {
-            Contract.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetContract()));
-            Contract.LocalReport.ReportEmbeddedResource = "prototype2.Report6.rdlc";
+            Contract.Reset();
+            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.Report6.rdlc");
+            Contract.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSet1", GetContract()));
+            Contract.LoadReport(rNames);
+            Contract.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             Contract.RefreshReport();
         }
 
