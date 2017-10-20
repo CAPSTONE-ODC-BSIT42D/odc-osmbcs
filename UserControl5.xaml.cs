@@ -49,7 +49,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT  c.companyName, c.companyAddress, c.companyCity, pv.locProvince, si.invoiceNo, sp.SIpaymentAmount, si.busStyle, sp.SIpaymentMethod, sp.SIcheckNo FROM cust_supp_t c INNER JOIN sales_invoice_t si ON c.companyID = si.custID INNER JOIN si_payment_t sp ON si.invoiceNo = sp.invoiceNo INNER JOIN provinces_t pv ON pv.locProvinceID = c.companyProvinceID";
+            cmd.CommandText = "SELECT     c.companyName, c.companyAddress, c.companyCity, pv.locProvince, si.invoiceNo, sp.SIpaymentAmount, si.busStyle, sp.SIpaymentMethod, sp.SIcheckNo FROM cust_supp_t c INNER JOIN sales_invoice_t si ON c.companyID = si.custID INNER JOIN si_payment_t sp ON si.invoiceNo = sp.invoiceNo INNER JOIN  provinces_t pv ON pv.locProvinceID = c.companyProvinceID";
 
             DataSet1.DataTable5DataTable dSReceipt = new DataSet1.DataTable5DataTable();
 
