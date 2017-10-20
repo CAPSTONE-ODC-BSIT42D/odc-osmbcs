@@ -291,6 +291,9 @@
     <Compile Include="UserControl5.xaml.cs">
       <DependentUpon>UserControl5.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControl6.xaml.cs">
+      <DependentUpon>UserControl6.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ValueConverter.cs" />
     <Compile Include="ViewModelEntity.cs" />
     <Compile Include="ViewModels.cs" />
@@ -372,6 +375,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControl5.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl6.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
