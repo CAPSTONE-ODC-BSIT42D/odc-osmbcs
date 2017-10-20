@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:prototype2"
              xmlns:RV="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"  
              mc:Ignorable="d" 
-             d:DesignHeight="350.752" IsVisibleChanged="UserControl_IsVisibleChanged" Background="#FF61E4D2" Width="698.128">
-    <Grid Background="#FFECECEC" Height="351" VerticalAlignment="Bottom">
+             d:DesignHeight="350.752" IsVisibleChanged="UserControl_IsVisibleChanged" Background="#FF61E4D2" Width="815.435" Height="405.519">
+    <Grid Background="#FFECECEC" Height="406" VerticalAlignment="Bottom">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="77*"/>
             <ColumnDefinition Width="130*"/>

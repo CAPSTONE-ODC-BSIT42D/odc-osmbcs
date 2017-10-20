@@ -1859,9 +1859,15 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columnlocProvince;
             
-            private global::System.Data.DataColumn columninvoiceNoChar;
-            
             private global::System.Data.DataColumn columnSIpaymentAmount;
+            
+            private global::System.Data.DataColumn columninvoiceNo;
+            
+            private global::System.Data.DataColumn columnbusStyle;
+            
+            private global::System.Data.DataColumn columnSIpaymentMethod;
+            
+            private global::System.Data.DataColumn columnSIcheckNo;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -1930,17 +1936,41 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn invoiceNoCharColumn {
+            public global::System.Data.DataColumn SIpaymentAmountColumn {
                 get {
-                    return this.columninvoiceNoChar;
+                    return this.columnSIpaymentAmount;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn SIpaymentAmountColumn {
+            public global::System.Data.DataColumn invoiceNoColumn {
                 get {
-                    return this.columnSIpaymentAmount;
+                    return this.columninvoiceNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn busStyleColumn {
+                get {
+                    return this.columnbusStyle;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SIpaymentMethodColumn {
+                get {
+                    return this.columnSIpaymentMethod;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SIcheckNoColumn {
+                get {
+                    return this.columnSIcheckNo;
                 }
             }
             
@@ -1981,15 +2011,18 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DataTable5Row AddDataTable5Row(string companyName, string companyAddress, string companyCity, string locProvince, string invoiceNoChar, float SIpaymentAmount) {
+            public DataTable5Row AddDataTable5Row(string companyName, string companyAddress, string companyCity, string locProvince, float SIpaymentAmount, string busStyle, string SIpaymentMethod, string SIcheckNo) {
                 DataTable5Row rowDataTable5Row = ((DataTable5Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         companyName,
                         companyAddress,
                         companyCity,
                         locProvince,
-                        invoiceNoChar,
-                        SIpaymentAmount};
+                        SIpaymentAmount,
+                        null,
+                        busStyle,
+                        SIpaymentMethod,
+                        SIcheckNo};
                 rowDataTable5Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDataTable5Row);
                 return rowDataTable5Row;
@@ -1997,9 +2030,9 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DataTable5Row FindByinvoiceNoChar(string invoiceNoChar) {
+            public DataTable5Row FindByinvoiceNo(int invoiceNo) {
                 return ((DataTable5Row)(this.Rows.Find(new object[] {
-                            invoiceNoChar})));
+                            invoiceNo})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2023,8 +2056,11 @@ namespace prototype2 {
                 this.columncompanyAddress = base.Columns["companyAddress"];
                 this.columncompanyCity = base.Columns["companyCity"];
                 this.columnlocProvince = base.Columns["locProvince"];
-                this.columninvoiceNoChar = base.Columns["invoiceNoChar"];
                 this.columnSIpaymentAmount = base.Columns["SIpaymentAmount"];
+                this.columninvoiceNo = base.Columns["invoiceNo"];
+                this.columnbusStyle = base.Columns["busStyle"];
+                this.columnSIpaymentMethod = base.Columns["SIpaymentMethod"];
+                this.columnSIcheckNo = base.Columns["SIcheckNo"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2038,12 +2074,18 @@ namespace prototype2 {
                 base.Columns.Add(this.columncompanyCity);
                 this.columnlocProvince = new global::System.Data.DataColumn("locProvince", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnlocProvince);
-                this.columninvoiceNoChar = new global::System.Data.DataColumn("invoiceNoChar", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columninvoiceNoChar);
                 this.columnSIpaymentAmount = new global::System.Data.DataColumn("SIpaymentAmount", typeof(float), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSIpaymentAmount);
+                this.columninvoiceNo = new global::System.Data.DataColumn("invoiceNo", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columninvoiceNo);
+                this.columnbusStyle = new global::System.Data.DataColumn("busStyle", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnbusStyle);
+                this.columnSIpaymentMethod = new global::System.Data.DataColumn("SIpaymentMethod", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSIpaymentMethod);
+                this.columnSIcheckNo = new global::System.Data.DataColumn("SIcheckNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSIcheckNo);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columninvoiceNoChar}, true));
+                                this.columninvoiceNo}, true));
                 this.columncompanyName.AllowDBNull = false;
                 this.columncompanyName.MaxLength = 50;
                 this.columncompanyAddress.AllowDBNull = false;
@@ -2051,9 +2093,14 @@ namespace prototype2 {
                 this.columncompanyCity.AllowDBNull = false;
                 this.columncompanyCity.MaxLength = 255;
                 this.columnlocProvince.MaxLength = 25;
-                this.columninvoiceNoChar.AllowDBNull = false;
-                this.columninvoiceNoChar.Unique = true;
-                this.columninvoiceNoChar.MaxLength = 255;
+                this.columninvoiceNo.AutoIncrement = true;
+                this.columninvoiceNo.AutoIncrementSeed = -1;
+                this.columninvoiceNo.AutoIncrementStep = -1;
+                this.columninvoiceNo.AllowDBNull = false;
+                this.columninvoiceNo.Unique = true;
+                this.columnbusStyle.MaxLength = 255;
+                this.columnSIpaymentMethod.MaxLength = 5;
+                this.columnSIcheckNo.MaxLength = 15;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2986,17 +3033,6 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string invoiceNoChar {
-                get {
-                    return ((string)(this[this.tableDataTable5.invoiceNoCharColumn]));
-                }
-                set {
-                    this[this.tableDataTable5.invoiceNoCharColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public float SIpaymentAmount {
                 get {
                     try {
@@ -3008,6 +3044,65 @@ namespace prototype2 {
                 }
                 set {
                     this[this.tableDataTable5.SIpaymentAmountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int invoiceNo {
+                get {
+                    return ((int)(this[this.tableDataTable5.invoiceNoColumn]));
+                }
+                set {
+                    this[this.tableDataTable5.invoiceNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string busStyle {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable5.busStyleColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'busStyle\' in table \'DataTable5\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable5.busStyleColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string SIpaymentMethod {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable5.SIpaymentMethodColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SIpaymentMethod\' in table \'DataTable5\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable5.SIpaymentMethodColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string SIcheckNo {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable5.SIcheckNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SIcheckNo\' in table \'DataTable5\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable5.SIcheckNoColumn] = value;
                 }
             }
             
@@ -3033,6 +3128,42 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetSIpaymentAmountNull() {
                 this[this.tableDataTable5.SIpaymentAmountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsbusStyleNull() {
+                return this.IsNull(this.tableDataTable5.busStyleColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetbusStyleNull() {
+                this[this.tableDataTable5.busStyleColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsSIpaymentMethodNull() {
+                return this.IsNull(this.tableDataTable5.SIpaymentMethodColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetSIpaymentMethodNull() {
+                this[this.tableDataTable5.SIpaymentMethodColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsSIcheckNoNull() {
+                return this.IsNull(this.tableDataTable5.SIcheckNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetSIcheckNoNull() {
+                this[this.tableDataTable5.SIcheckNoColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -4794,8 +4925,11 @@ WHERE        (e.isDeleted = 0) AND (e.empType = 1) AND (CONCAT(e.empFName, ' ', 
             tableMapping.ColumnMappings.Add("companyAddress", "companyAddress");
             tableMapping.ColumnMappings.Add("companyCity", "companyCity");
             tableMapping.ColumnMappings.Add("locProvince", "locProvince");
-            tableMapping.ColumnMappings.Add("invoiceNoChar", "invoiceNoChar");
             tableMapping.ColumnMappings.Add("SIpaymentAmount", "SIpaymentAmount");
+            tableMapping.ColumnMappings.Add("invoiceNo", "invoiceNo");
+            tableMapping.ColumnMappings.Add("busStyle", "busStyle");
+            tableMapping.ColumnMappings.Add("SIpaymentMethod", "SIpaymentMethod");
+            tableMapping.ColumnMappings.Add("SIcheckNo", "SIcheckNo");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -4812,10 +4946,10 @@ WHERE        (e.isDeleted = 0) AND (e.empType = 1) AND (CONCAT(e.empFName, ' ', 
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[1];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        c.companyName, c.companyAddress, c.companyCity, pv.locProvince, si.invoiceNoChar, sp.SIpaymentAmount
+            this._commandCollection[0].CommandText = @"SELECT        c.companyName, c.companyAddress, c.companyCity, pv.locProvince, si.invoiceNo, sp.SIpaymentAmount, si.busStyle, sp.SIpaymentMethod, sp.SIcheckNo
 FROM            cust_supp_t c INNER JOIN
                          sales_invoice_t si ON c.companyID = si.custID INNER JOIN
-                         si_payment_t sp ON si.invoiceNoChar = sp.invoiceChar INNER JOIN
+                         si_payment_t sp ON si.invoiceNo = sp.invoiceNo INNER JOIN
                          provinces_t pv ON pv.locProvinceID = c.companyProvinceID";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
