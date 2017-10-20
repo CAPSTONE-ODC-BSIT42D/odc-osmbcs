@@ -487,6 +487,13 @@ namespace prototype2
                 dataAdapter.Fill(fromDb, "t");
                 fromDbTable = fromDb.Tables["t"];
                 MainVM.SalesInvoice.Clear();
+
+                query = "SELECT * FROM payment_hist_t;";
+                MySqlDataAdapter dataAdapter2 = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb2 = new DataSet();
+                DataTable fromDbTable2 = new DataTable();
+                dataAdapter2.Fill(fromDb2, "t");
+                fromDbTable2 = fromDb2.Tables["t"];
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
                     DateTime dateOfIssue = new DateTime();
@@ -521,9 +528,22 @@ namespace prototype2
                     decimal.TryParse(dr["withholdingTax"].ToString(), out withholdingTax);
 
                     MainVM.SalesInvoice.Add(new SalesInvoice() { invoiceNo_ = invoiceNo.ToString(), custID_ = custId, empID_ = empId, sqNoChar_ = dr["sqNoChar"].ToString(), tin_ = dr["tin"].ToString(), busStyle_ = dr["busStyle"].ToString(), dateOfIssue_ = dateOfIssue, terms_ = termsDays, dueDate_ = dueDate, purchaseOrderNumber_ = dr["purchaseOrderNumber"].ToString(), paymentStatus_ = dr["paymentStatus"].ToString(), vat_ = vat, sc_pwd_discount_ = sc_pwd_discount, withholdingTax_ = withholdingTax, notes_ = dr["notes"].ToString() });
+
+
                     
                 }
-               
+                foreach (DataRow dr in fromDbTable2.Rows)
+                {
+                    DateTime paymentDate = new DateTime();
+                    DateTime.TryParse(dr["paymentDate"].ToString(), out paymentDate);
+
+                    int invoiceNo;
+                    int.TryParse(dr["invoiceNo"].ToString(), out invoiceNo);
+
+                    decimal custBalance;
+                    decimal.TryParse(dr["custBalance"].ToString(), out custBalance);
+                    MainVM.PaymentHistory_.Add(new PaymentHist() { custHistID_ = int.Parse(dr["custHistID"].ToString()), paymentDate_ = paymentDate, custBalance_ = custBalance, invoiceNo_ = invoiceNo, paymentStatus_ = dr["paymentStatus"].ToString() });
+                }
                 dbCon.Close();
             }
         }
@@ -796,6 +816,37 @@ namespace prototype2
                         if (((Grid)obj).Equals(quotationsGridHome))
                         {
                             headerLbl.Content = "Trasanction - Sales Quote";
+                            ((Grid)obj).Visibility = Visibility.Visible;
+                            settingsBtn.Visibility = Visibility.Hidden;
+                        }
+                    }
+                    else
+                        ((UserControl)obj).Visibility = Visibility.Collapsed;
+
+                }
+            }
+            if (ucInvoice.IsVisible)
+            {
+                foreach (var obj in containerGrid.Children)
+                {
+                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                }
+                trasanctionGrid.Visibility = Visibility.Visible;
+                foreach (var obj in trasanctionGrid.Children)
+                {
+                    if (obj is Grid)
+                        if (((Grid)obj).Equals(transInvoiceGrid))
+                            ((Grid)obj).Visibility = Visibility.Visible;
+                        else
+                            ((Grid)obj).Visibility = Visibility.Collapsed;
+                }
+                foreach (var obj in transInvoiceGrid.Children)
+                {
+                    if (obj is Grid)
+                    {
+                        if (((Grid)obj).Equals(invoiceGridHome))
+                        {
+                            headerLbl.Content = "Trasanction - Sales Invoice";
                             ((Grid)obj).Visibility = Visibility.Visible;
                             settingsBtn.Visibility = Visibility.Hidden;
                         }
@@ -2008,6 +2059,52 @@ namespace prototype2
         private void genContractBtn_Click(object sender, RoutedEventArgs e)
         {
             ucContract.Visibility = Visibility.Visible;
+        }
+
+        private void viewInvoiceRecord_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var obj in transQuotationGrid.Children)
+            {
+                if (obj is Grid)
+                {
+                    if (((Grid)obj).Equals(quotationsGridHome))
+                    {
+
+                        ((Grid)obj).Visibility = Visibility.Visible;
+                        settingsBtn.Visibility = Visibility.Hidden;
+                    }
+                }
+                else
+                    ((UserControl)obj).Visibility = Visibility.Collapsed;
+
+            }
+            foreach (var element in trasanctionGrid.Children)
+            {
+                if (element is Grid)
+                {
+                    if (!(((Grid)element).Name.Equals(transInvoiceGrid.Name)))
+                    {
+                        ((Grid)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((Grid)element).Visibility = Visibility.Visible;
+                }
+            }
+            headerLbl.Content = "Trasanction - Sales Invoice";
+            MainVM.isEdit = true;
+            foreach (var element in transInvoiceGrid.Children)
+            {
+                if (element is UserControl)
+                {
+                    if (!(((UserControl)element).Name.Equals(ucInvoice.Name)))
+                    {
+                        ((UserControl)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((UserControl)element).Visibility = Visibility.Visible;
+                }
+            }
+            
         }
     }
 }
