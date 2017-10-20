@@ -250,7 +250,6 @@ namespace prototype2
         private void saveDataToDb()
         {
             var dbCon = DBConnection.Instance();
-            string empID = "";
             try
             {
                 using (MySqlConnection conn = dbCon.Connection)
@@ -276,9 +275,8 @@ namespace prototype2
                     {
                         cmd = new MySqlCommand("UPDATE_EMPLOYEE", conn);
                         cmdParameters();
-                        cmd.Parameters.AddWithValue("@empID", MainVM.SelectedEmployeeContractor.EmpID);
-                        
-                        cmd.Parameters["@empID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@empIDinput", MainVM.SelectedEmployeeContractor.EmpID);
+                        cmd.Parameters["@empIDinput"].Direction = ParameterDirection.Input;
                         cmd.ExecuteNonQuery();
                     }
                 }

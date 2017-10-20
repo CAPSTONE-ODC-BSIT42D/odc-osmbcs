@@ -576,11 +576,16 @@ namespace prototype2
                     int.TryParse(dr["invoiceNo"].ToString(), out invoiceNo);
 
                     MainVM.SelectedServiceSchedule_ = (new ServiceSchedule() { serviceSchedNoChar_ = dr["serviceSchedNoChar"].ToString(), invoiceNo_ = invoiceNo , serviceStatus_ = dr["serviceStatus"].ToString(), dateStarted_ = dateStarted, dateEnded_ = dateEnded, schedNotes_ = dr["schedNotes"].ToString() });
-                    foreach (DataRow dr2 in fromDbTable2.Rows)
+                    if (fromDbTable2.Rows.Count > 0)
                     {
-                        MainVM.SelectedEmployeeContractor = MainVM.AllEmployeesContractor.Where(x => x.EmpID.Equals(dr2["empID"].ToString())).First();
-                        MainVM.SelectedServiceSchedule_.assignedEmployees_.Add(MainVM.SelectedEmployeeContractor);
+                        foreach (DataRow dr2 in fromDbTable2.Rows)
+                        {
+
+                            MainVM.SelectedEmployeeContractor = MainVM.AllEmployeesContractor.Where(x => x.EmpID.Equals(dr2["empID"].ToString())).FirstOrDefault();
+                            MainVM.SelectedServiceSchedule_.assignedEmployees_.Add(MainVM.SelectedEmployeeContractor);
+                        }
                     }
+                    
                 }
                 
                 

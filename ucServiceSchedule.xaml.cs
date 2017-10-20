@@ -283,7 +283,7 @@ namespace prototype2
 
         private void serviceNoCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(MainVM.SelectedAddedService.ServiceID)).First();
+            MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(MainVM.SelectedAddedService.ServiceID)).FirstOrDefault();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
