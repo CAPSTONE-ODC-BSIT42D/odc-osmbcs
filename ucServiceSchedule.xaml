@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:prototype2"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="prototype2.ucServiceSchedule"
              mc:Ignorable="d" 
-             d:DesignHeight="762.5" d:DesignWidth="1206" IsVisibleChanged="UserControl_IsVisibleChanged">
+             d:DesignHeight="762.5" d:DesignWidth="1206" IsVisibleChanged="UserControl_IsVisibleChanged" Loaded="UserControl_Loaded">
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>
@@ -75,7 +75,7 @@
                 <RadioButton Style="{StaticResource RadioButtonStyle}" x:Name="Month" IsChecked="True" Content="Month" Width="70" Height="25" Background="#F3F4F4" BorderBrush="#868686" Foreground="#2C2C2C" Margin="5,0,0,0"  Click="Btn_ScheduleType_Click"/>
                 <RadioButton Style="{StaticResource RadioButtonStyle}" x:Name="TimeLine" Content="Timeline" Width="70" Height="25" Background="#F3F4F4" BorderBrush="#868686" Foreground="#2C2C2C" Margin="5,0,20,0"  Click="Btn_ScheduleType_Click"/>
             </StackPanel>
-            <syncfusion:SfSchedule x:Name="serviceSched" FocusedMonth="GhostWhite" HorizontalAlignment="Left" Margin="0,45,0,0" NonFocusedMonth="LightGray" ScheduleType="Month" VerticalAlignment="Top" WorkEndHour="18" WorkStartHour="9" Height="617" Width="1206" AllowEditing="True" ScheduleClick="serviceSched_ScheduleClick" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" AppointmentEditorOpening="serviceSched_AppointmentEditorOpening" />
+            <syncfusion:SfSchedule x:Name="serviceSched" FocusedMonth="GhostWhite" HorizontalAlignment="Left" Margin="0,45,0,0" NonFocusedMonth="LightGray" ScheduleType="Month" VerticalAlignment="Top" WorkEndHour="18" WorkStartHour="9" Height="617" Width="1206" AllowEditing="False"  ScheduleClick="serviceSched_ScheduleClick" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" AppointmentEditorOpening="serviceSched_AppointmentEditorOpening" />
         </Grid>
         <Grid x:Name="formGridBg" Margin="0" Background="#80000000">
             <Grid x:Name="newSchedule" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="380" Height="599" Width="700">
@@ -127,17 +127,17 @@
                         <Label x:Name="label21_Copy2" Content="Start Date:" HorizontalAlignment="Left" Margin="38,161,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                         <Label x:Name="label21_Copy3" Content="End Date:" HorizontalAlignment="Left" Margin="38,192,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                         <Label x:Name="label21_Copy4" Content="Assigned Employees:" HorizontalAlignment="Left" Margin="38,319,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                        <ComboBox x:Name="serviceNoCb" HorizontalAlignment="Left" Margin="137,68,0,0" VerticalAlignment="Top" Width="309" Height="26" IsEditable="True" IsTextSearchCaseSensitive="True" ItemsSource="{Binding AddedServices}" DisplayMemberPath="TableNoChar" SelectedValuePath="TableNoChar" SelectedItem="{Binding SelectedAddedService}"/>
-                        <Label Content="{Binding SelectedAddedService.ServiceID,NotifyOnTargetUpdated=True, Converter={StaticResource ServiceTypeConverter}}" HorizontalAlignment="Left" Margin="137,99,0,0" VerticalAlignment="Top"/>
-                        <Label Content="" HorizontalAlignment="Left" Margin="137,130,0,0" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="serviceNoCb" HorizontalAlignment="Left" Margin="137,68,0,0" VerticalAlignment="Top" Width="309" Height="26" IsEditable="True" IsTextSearchCaseSensitive="True" ItemsSource="{Binding AddedServices}" DisplayMemberPath="TableNoChar" SelectedValuePath="TableNoChar" SelectedItem="{Binding SelectedAddedService}" SelectionChanged="serviceNoCb_SelectionChanged"/>
+                        <Label Content="{Binding SelectedService.ServiceName}" HorizontalAlignment="Left" Margin="137,99,0,0" VerticalAlignment="Top"/>
+                        <Label Content="{Binding SelectedService.ServiceDesc}" HorizontalAlignment="Left" Margin="137,130,0,0" VerticalAlignment="Top"/>
                         <DatePicker x:Name="startDate" HorizontalAlignment="Left" Margin="137,162,0,0" VerticalAlignment="Top" Height="26" Width="124" SelectedDateChanged="startDate_SelectedDateChanged"/>
                         <DatePicker x:Name="endDate" HorizontalAlignment="Left" Margin="137,193,0,0" VerticalAlignment="Top" Height="26" Width="124" SelectedDateChanged="endDate_SelectedDateChanged"/>
                         
                         <Button x:Name="transferToLeftBtn" Content="&lt;" HorizontalAlignment="Left" Margin="342,427,0,0" VerticalAlignment="Top" Width="36" Click="transferToLeftBtn_Click" ToolTip="Assign selected employee"/>
                         <Label x:Name="label21_Copy5" Content="Additional Notes:" HorizontalAlignment="Left" Margin="38,223,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                         <TextBox x:Name="notesTb" HorizontalAlignment="Left" Height="65" Margin="55,249,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="395"/>
-                        <ListBox x:Name="assignedEmployees" HorizontalAlignment="Left" Height="199" Margin="55,350,0,0" VerticalAlignment="Top" Width="282" ItemsSource="{Binding SelectedServiceSchedule_.assignedEmployee_}" DisplayMemberPath="EmpLName"/>
-                        <ListBox x:Name="availableEmployees" Margin="0,0,35,10"  HorizontalAlignment="Right" Width="282" Height="199" VerticalAlignment="Bottom" DisplayMemberPath="EmpLName">
+                        <ListBox x:Name="assignedEmployees" HorizontalAlignment="Left" Height="199" Margin="55,350,0,0" VerticalAlignment="Top" Width="282" ItemsSource="{Binding AssignedEmployees_}" SelectedItem="{Binding SelectedEmployeeContractor}"  DisplayMemberPath="EmpLName"/>
+                        <ListBox x:Name="availableEmployees" ItemsSource="{Binding AvailableEmployees_}" SelectedItem="{Binding SelectedEmployeeContractor}" Margin="0,0,35,10"  HorizontalAlignment="Right" Width="282" Height="199" VerticalAlignment="Bottom" DisplayMemberPath="EmpLName">
                         </ListBox>
                         
                         <Button x:Name="transferToRightBtn" Content="&gt;" HorizontalAlignment="Left" Margin="342,452,0,0" VerticalAlignment="Top" Width="36" Click="transferToRightBtn_Click" ToolTip="Unassign selected employee"/>

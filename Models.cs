@@ -322,6 +322,11 @@ namespace prototype2
             get { return empSig; }
             set { SetProperty(ref empSig, value); }
         }
+
+        public static implicit operator ObservableCollection<object>(Employee v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class Contact : ViewModelEntity
@@ -589,6 +594,7 @@ namespace prototype2
 
         }
         protected string tableNoChar;
+        protected string sqNoChar;
         protected string serviceID;
         protected string serviceName;
         protected decimal servicePrice;
@@ -629,6 +635,12 @@ namespace prototype2
         {
             get { return totalCost; }
             set { SetProperty(ref totalCost, value); }
+        }
+
+        public string SqNoChar
+        {
+            get { return sqNoChar; }
+            set { SetProperty(ref sqNoChar, value); }
         }
 
         protected ObservableCollection<AdditionalFee> additionalFees = new ObservableCollection<AdditionalFee>();
@@ -1290,8 +1302,8 @@ namespace prototype2
             set { SetProperty(ref schedNotes, value); }
         }
 
-        protected ObservableCollection<AssignedEmployee> assignedEmployees = new ObservableCollection<AssignedEmployee>();
-        public ObservableCollection<AssignedEmployee> assignedEmployees_
+        protected ObservableCollection<Employee> assignedEmployees = new ObservableCollection<Employee>();
+        public ObservableCollection<Employee> assignedEmployees_
         {
             get { return assignedEmployees; }
             set { SetProperty(ref assignedEmployees, value); }
@@ -1319,11 +1331,13 @@ namespace prototype2
             set { SetProperty(ref serviceSqNoChar, value); }
         }
 
-        protected int EmpID;
-        public int EmpID_
+        protected ObservableCollection<Employee> allEmployeesContractor =
+            new ObservableCollection<Employee>();
+
+        public ObservableCollection<Employee> AllEmployeesContractor
         {
-            get { return EmpID; }
-            set { SetProperty(ref EmpID, value); }
+            get { return allEmployeesContractor; }
+            set { allEmployeesContractor = value; }
         }
     }
 }

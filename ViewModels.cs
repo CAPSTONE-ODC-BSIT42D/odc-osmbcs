@@ -588,21 +588,23 @@ namespace prototype2
         }
 
         //Schedule - Assigned Employee
-        protected ObservableCollection<AssignedEmployee> AssignedEmployees = new ObservableCollection<AssignedEmployee>();
+        protected ObservableCollection<Employee> AssignedEmployees = new ObservableCollection<Employee>();
 
-        protected AssignedEmployee SelectedAssignedEmployee = null;
-
-        public ObservableCollection<AssignedEmployee> AssignedEmployees_
+        public ObservableCollection<Employee> AssignedEmployees_
         {
             get { return AssignedEmployees; }
             set { AssignedEmployees = value; }
         }
+        
+        protected ObservableCollection<Employee> AvailableEmployees =
+            new ObservableCollection<Employee>();
 
-        public AssignedEmployee SelectedAssignedEmployee_
+        public ObservableCollection<Employee> AvailableEmployees_
         {
-            get { return SelectedAssignedEmployee; }
-            set { SetProperty(ref SelectedAssignedEmployee, value); }
+            get { return AvailableEmployees; }
+            set { AvailableEmployees = value; }
         }
+        
 
         //Payments Hist
 

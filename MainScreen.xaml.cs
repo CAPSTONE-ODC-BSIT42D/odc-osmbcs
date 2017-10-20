@@ -453,7 +453,7 @@ namespace prototype2
                     {
                         if (dr["sqNoChar"].ToString().Equals(sq.sqNoChar_))
                         {
-                            MainVM.SelectedAddedService = (new AddedService() { TableNoChar = dr["tableNoChar"].ToString(), ServiceID = dr["serviceID"].ToString(), ProvinceID = int.Parse(dr["provinceID"].ToString()), City = dr["city"].ToString(), Address = dr["address"].ToString(), TotalCost = decimal.Parse(dr["totalCost"].ToString()) });
+                            MainVM.SelectedAddedService = (new AddedService() { TableNoChar = dr["tableNoChar"].ToString(), SqNoChar = dr["sqNoChar"].ToString(), ServiceID = dr["serviceID"].ToString(), ProvinceID = int.Parse(dr["provinceID"].ToString()), City = dr["city"].ToString(), Address = dr["address"].ToString(), TotalCost = decimal.Parse(dr["totalCost"].ToString()) });
                             foreach (DataRow dr2 in fromDbTable2.Rows)
                             {
                                 if (dr["tableNoChar"].ToString().Equals(dr2["serviceNochar"].ToString()))
@@ -544,6 +544,48 @@ namespace prototype2
                     decimal.TryParse(dr["custBalance"].ToString(), out custBalance);
                     MainVM.PaymentHistory_.Add(new PaymentHist() { custHistID_ = int.Parse(dr["custHistID"].ToString()), paymentDate_ = paymentDate, custBalance_ = custBalance, invoiceNo_ = invoiceNo, paymentStatus_ = dr["paymentStatus"].ToString() });
                 }
+                dbCon.Close();
+            }
+
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM service_sched_t;";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+
+                query = "SELECT * FROM assigned_employees_t;";
+                MySqlDataAdapter dataAdapter2 = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb2 = new DataSet();
+                DataTable fromDbTable2 = new DataTable();
+                dataAdapter2.Fill(fromDb2, "t");
+                fromDbTable2 = fromDb2.Tables["t"];
+
+                MainVM.ServiceSchedules_.Clear();
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    DateTime dateStarted = new DateTime();
+                    DateTime.TryParse(dr["dateStarted"].ToString(), out dateStarted);
+
+                    DateTime dateEnded = new DateTime();
+                    DateTime.TryParse(dr["dateEnded"].ToString(), out dateEnded);
+
+                    int invoiceNo;
+                    int.TryParse(dr["invoiceNo"].ToString(), out invoiceNo);
+
+                    MainVM.SelectedServiceSchedule_ = (new ServiceSchedule() { serviceSchedNoChar_ = dr["serviceSchedNoChar"].ToString(), invoiceNo_ = invoiceNo , serviceStatus_ = dr["serviceStatus"].ToString(), dateStarted_ = dateStarted, dateEnded_ = dateEnded, schedNotes_ = dr["schedNotes"].ToString() });
+                    foreach (DataRow dr2 in fromDbTable2.Rows)
+                    {
+                        MainVM.SelectedEmployeeContractor = MainVM.AllEmployeesContractor.Where(x => x.EmpID.Equals(dr2["empID"].ToString())).First();
+                        MainVM.SelectedServiceSchedule_.assignedEmployees_.Add(MainVM.SelectedEmployeeContractor);
+                    }
+                }
+                
+                
+
+                MainVM.ServiceSchedules_.Clear();
                 dbCon.Close();
             }
         }

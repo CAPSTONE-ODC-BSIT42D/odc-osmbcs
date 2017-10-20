@@ -111,11 +111,14 @@ namespace prototype2
             if (assignedEmployees.Items.Count != 0)
             {
                 serviceSched.Appointments.Add(new ScheduleAppointment() { Subject = serviceNoCb.SelectedValue.ToString(), StartTime = (DateTime)startDate.SelectedDate, EndTime = (DateTime)endDate.SelectedDate });
+                MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(MainVM.SelectedAddedService.SqNoChar)).First();
+                MainVM.SelectedSalesInvoice = MainVM.SalesInvoice.Where(x => x.sqNoChar_.Equals(MainVM.SelectedSalesQuote.sqNoChar_)).First();
+
                 MainVM.SelectedServiceSchedule_.serviceSchedNoChar_ = serviceNoCb.SelectedValue.ToString();
+                MainVM.SelectedServiceSchedule_.invoiceNo_ = int.Parse(MainVM.SelectedSalesInvoice.invoiceNo_);
                 MainVM.SelectedServiceSchedule_.dateStarted_ = (DateTime)startDate.SelectedDate;
                 MainVM.SelectedServiceSchedule_.dateEnded_ = (DateTime)endDate.SelectedDate;
                 MainVM.SelectedServiceSchedule_.schedNotes_ = notesTb.Text;
-
                 saveDataToDb();
                 Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
                 sb.Begin(formGridBg);
@@ -159,9 +162,6 @@ namespace prototype2
             var dbCon = DBConnection.Instance();
             using (MySqlConnection conn = dbCon.Connection)
             {
-
-                conn.Open();
-                MySqlCommand cmd = null;
                 if (!MainVM.isEdit)
                 {
                     string query = "INSERT INTO `odc_db`.`service_sched_t`(`serviceSchedNoChar`,`invoiceNo`,`dateStarted`,`dateEnded`,`schedNotes`)" +
@@ -171,17 +171,17 @@ namespace prototype2
                           MainVM.SelectedServiceSchedule_.invoiceNo_ + "','" +
                           MainVM.SelectedServiceSchedule_.dateStarted_.ToString("yyyy-MM-dd") + "','" +
                           MainVM.SelectedServiceSchedule_.dateEnded_.ToString("yyyy-MM-dd") + "','" +
-                          MainVM.SelectedServiceSchedule_.schedNotes_ + "','" +
+                          MainVM.SelectedServiceSchedule_.schedNotes_ +
                         "');";
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
-                        foreach (AssignedEmployee emp in MainVM.SelectedServiceSchedule_.assignedEmployees_)
+                        foreach (Employee emp in MainVM.AssignedEmployees_)
                         {
                            query = "INSERT INTO `odc_db`.`assigned_employees_t`(`serviceSqNoChar`,`empID`)" +
                         " VALUES" +
                         "('"
                         + MainVM.SelectedServiceSchedule_.serviceSchedNoChar_ + "','" +
-                          emp.EmpID_ +
+                          emp.EmpID +
                         "');";
                             dbCon.insertQuery(query, dbCon.Connection);
                         }
@@ -201,12 +201,17 @@ namespace prototype2
                         ";";
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
-                        foreach (AssignedEmployee emp in MainVM.SelectedServiceSchedule_.assignedEmployees_)
+                        query = "DELETE FROM `odc_db`.`assigned_employees_t` " +
+                                "WHERE `serviceSqNoChar` = '" + MainVM.SelectedServiceSchedule_.serviceSchedNoChar_ + "';";
+                        dbCon.insertQuery(query, dbCon.Connection);
+                        foreach (Employee emp in MainVM.SelectedServiceSchedule_.assignedEmployees_)
                         {
-                            query = "UPDATE `odc_db`.`assigned_employees_t` SET " +
-                                "`serviceSqNoChar` = '" + MainVM.SelectedServiceSchedule_.serviceSchedNoChar_ + "','" +
-                                "`empID` =  '" + emp.EmpID_ + "' "+
-                                "WHERE `assignEmployeeID` = '"+emp.TableID_+"';";
+                            query = "INSERT INTO `odc_db`.`assigned_employees_t`(`serviceSqNoChar`,`empID`)" +
+                             " VALUES" +
+                             "('"
+                             + MainVM.SelectedServiceSchedule_.serviceSchedNoChar_ + "','" +
+                               emp.EmpID +
+                             "');";
                             dbCon.insertQuery(query, dbCon.Connection);
                         }
                         MessageBox.Show("Succesfully updated the schedule");
@@ -224,37 +229,67 @@ namespace prototype2
 
         void searchForAvailableEmployees()
         {
-            IEnumerable<Employee> observable = null;
-            foreach (AssignedEmployee ae in MainVM.AssignedEmployees_)
+            if (MainVM.ServiceSchedules_.Count>0)
             {
-                observable = MainVM.AllEmployeesContractor.Where(x => !(x.EmpID.Equals(ae.EmpID_)));
+                foreach (ServiceSchedule sched in MainVM.ServiceSchedules_)
+                {
+                    foreach (Employee ae in sched.assignedEmployees_)
+                    {
+                        MainVM.SelectedEmployeeContractor = MainVM.AllEmployeesContractor.Where(x => x.EmpID.Equals(ae.EmpID)).First();
+                        if (!(sched.dateStarted_ < startDate.SelectedDate && sched.dateEnded_ > startDate.SelectedDate))
+                        {
+                            MainVM.AvailableEmployees_.Add(MainVM.SelectedEmployeeContractor);
+                        }
+                    }
+                }
             }
-            availableEmployees.ItemsSource = new ObservableCollection<Employee>(observable);
+            else
+            {
+                foreach(Employee emp in MainVM.AllEmployeesContractor)
+                {
+                    MainVM.AvailableEmployees_.Add(emp);
+                }
+            }
         }
 
         private void transferToLeftBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            
+            MainVM.AssignedEmployees_.Add(MainVM.SelectedEmployeeContractor);
+            MainVM.AvailableEmployees_.Remove(MainVM.SelectedEmployeeContractor);
         }
 
         private void transferToRightBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+            MainVM.AvailableEmployees_.Add(MainVM.SelectedEmployeeContractor);
+            MainVM.AssignedEmployees_.Remove(MainVM.SelectedEmployeeContractor);
         }
 
         private void startDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
+            endDate.DisplayDateStart = startDate.SelectedDate;
             workerAtServiceSched.RunWorkerAsync();
         }
 
         private void endDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            workerAtServiceSched.RunWorkerAsync();
+            
         }
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
 
+        }
+
+        private void serviceNoCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(MainVM.SelectedAddedService.ServiceID)).First();
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            foreach(ServiceSchedule ss in MainVM.ServiceSchedules_)
+            serviceSched.Appointments.Add(new ScheduleAppointment() { Subject = ss.serviceSchedNoChar_, StartTime = (DateTime)ss.dateStarted_, EndTime = (DateTime)ss.dateEnded_ });
         }
     }
 }
