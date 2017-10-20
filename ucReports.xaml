@@ -18,5 +18,6 @@
         <local:UserControl1 x:Name="UCReportService" Margin="56,102,335,738" Height="881" Width="939" Visibility="Hidden"/>
         <local:UserControl2 x:Name="UCReportsItem" HorizontalAlignment="Left" Height="881" Margin="56,85,0,0" VerticalAlignment="Top" Width="939" Visibility="Hidden"/>
         <local:UserControl3 x:Name="UCReportSales" HorizontalAlignment="Left" Height="398" Margin="56,102,0,0" VerticalAlignment="Top" Width="939" Visibility="Hidden"/>
+        <local:UserControl5 HorizontalAlignment="Left" Height="517" Margin="10,145,0,0" VerticalAlignment="Top" Width="876"/>
     </Grid>
 </UserControl>
