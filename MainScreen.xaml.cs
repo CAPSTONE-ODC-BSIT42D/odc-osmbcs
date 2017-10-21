@@ -296,8 +296,10 @@ namespace prototype2
                     {
                         empPic = (byte[])dr["empPic"];
                     }
-                    MainVM.Employees.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), PositionID = dr["positionID"].ToString(), PositionName = dr["positionName"].ToString(), EmpUserName = dr["empUserName"].ToString(), EmpEmail = dr["empEmail"].ToString(), EmpMobile = dr["empMobile"].ToString(), EmpTelephone = dr["empTelephone"].ToString(), EmpPic = empPic, EmpType = dr["empType"].ToString() });
-                    MainVM.AllEmployeesContractor.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), PositionID = dr["positionID"].ToString(), PositionName = dr["positionName"].ToString(), EmpUserName = dr["empUserName"].ToString(), EmpEmail = dr["empEmail"].ToString(), EmpMobile = dr["empMobile"].ToString(), EmpTelephone = dr["empTelephone"].ToString(), EmpPic = empPic, EmpType = dr["empType"].ToString() });
+                    int empType;
+                    int.TryParse(dr["empType"].ToString(), out empType);
+                    MainVM.Employees.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), PositionID = dr["positionID"].ToString(), PositionName = dr["positionName"].ToString(), EmpUserName = dr["empUserName"].ToString(), EmpEmail = dr["empEmail"].ToString(), EmpMobile = dr["empMobile"].ToString(), EmpTelephone = dr["empTelephone"].ToString(), EmpPic = empPic, EmpType = empType });
+                    MainVM.AllEmployeesContractor.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), PositionID = dr["positionID"].ToString(), PositionName = dr["positionName"].ToString(), EmpUserName = dr["empUserName"].ToString(), EmpEmail = dr["empEmail"].ToString(), EmpMobile = dr["empMobile"].ToString(), EmpTelephone = dr["empTelephone"].ToString(), EmpPic = empPic, EmpType = empType });
 
 
                 }
@@ -324,8 +326,10 @@ namespace prototype2
                     {
                         empPic = (byte[])dr["empPic"];
                     }
-                    MainVM.Contractor.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), JobID = dr["jobID"].ToString(), JobName = dr["jobName"].ToString(), EmpUserName = dr["empUserName"].ToString(), EmpEmail = dr["empEmail"].ToString(), EmpMobile = dr["empMobile"].ToString(), EmpTelephone = dr["empTelephone"].ToString(), EmpPic = empPic, EmpType = dr["empType"].ToString() });
-                    MainVM.AllEmployeesContractor.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), JobID = dr["jobID"].ToString(), JobName = dr["jobName"].ToString(), EmpUserName = dr["empUserName"].ToString(), EmpEmail = dr["empEmail"].ToString(), EmpMobile = dr["empMobile"].ToString(), EmpTelephone = dr["empTelephone"].ToString(), EmpPic = empPic, EmpType = dr["empType"].ToString() });
+                    int empType;
+                    int.TryParse(dr["empType"].ToString(), out empType);
+                    MainVM.Contractor.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), JobID = dr["jobID"].ToString(), JobName = dr["jobName"].ToString(), EmpUserName = dr["empUserName"].ToString(), EmpEmail = dr["empEmail"].ToString(), EmpMobile = dr["empMobile"].ToString(), EmpTelephone = dr["empTelephone"].ToString(), EmpPic = empPic, EmpType = empType });
+                    MainVM.AllEmployeesContractor.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), JobID = dr["jobID"].ToString(), JobName = dr["jobName"].ToString(), EmpUserName = dr["empUserName"].ToString(), EmpEmail = dr["empEmail"].ToString(), EmpMobile = dr["empMobile"].ToString(), EmpTelephone = dr["empTelephone"].ToString(), EmpPic = empPic, EmpType = empType });
                 }
                 dbCon.Close();
             }
@@ -628,6 +632,7 @@ namespace prototype2
                 ((Grid)obj).Visibility = Visibility.Collapsed;
             }
             serviceGrid.Visibility = Visibility.Visible;
+            ucService.Visibility = Visibility.Visible;
         }
 
         private void reportsBtn_Click(object sender, RoutedEventArgs e)
@@ -873,6 +878,36 @@ namespace prototype2
                 }
             }
             if (ucInvoice.IsVisible)
+            {
+                foreach (var obj in containerGrid.Children)
+                {
+                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                }
+                trasanctionGrid.Visibility = Visibility.Visible;
+                foreach (var obj in trasanctionGrid.Children)
+                {
+                    if (obj is Grid)
+                        if (((Grid)obj).Equals(transInvoiceGrid))
+                            ((Grid)obj).Visibility = Visibility.Visible;
+                        else
+                            ((Grid)obj).Visibility = Visibility.Collapsed;
+                }
+                foreach (var obj in transInvoiceGrid.Children)
+                {
+                    if (obj is Grid)
+                    {
+                        if (((Grid)obj).Equals(invoiceGridHome))
+                        {
+                            headerLbl.Content = "Trasanction - Sales Invoice";
+                            ((Grid)obj).Visibility = Visibility.Visible;
+                            settingsBtn.Visibility = Visibility.Hidden;
+                        }
+                    }
+                    else
+                        ((UserControl)obj).Visibility = Visibility.Collapsed;
+
+                }
+            }
             {
                 foreach (var obj in containerGrid.Children)
                 {

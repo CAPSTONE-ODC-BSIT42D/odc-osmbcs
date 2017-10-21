@@ -363,7 +363,7 @@ namespace prototype2
 
         public void loadDataToUi()
         {
-            employeeType.SelectedIndex = int.Parse(MainVM.SelectedEmployeeContractor.EmpType);
+            employeeType.SelectedIndex = MainVM.SelectedEmployeeContractor.EmpType;
             empFirstNameTb.Text = MainVM.SelectedEmployeeContractor.EmpFname;
             empLastNameTb.Text = MainVM.SelectedEmployeeContractor.EmpLName;
             empMiddleInitialTb.Text = MainVM.SelectedEmployeeContractor.EmpMiddleInitial;

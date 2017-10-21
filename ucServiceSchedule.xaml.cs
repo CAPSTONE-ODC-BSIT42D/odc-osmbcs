@@ -108,11 +108,12 @@ namespace prototype2
 
         private void saveSchedBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (assignedEmployees.Items.Count != 0)
+            MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(MainVM.SelectedAddedService.SqNoChar)).First();
+            MainVM.SelectedSalesInvoice = MainVM.SalesInvoice.Where(x => x.sqNoChar_.Equals(MainVM.SelectedSalesQuote.sqNoChar_)).First();
+            if (assignedEmployees.Items.Count != 0 && MainVM.SelectedSalesInvoice!=null)
             {
                 serviceSched.Appointments.Add(new ScheduleAppointment() { Subject = serviceNoCb.SelectedValue.ToString(), StartTime = (DateTime)startDate.SelectedDate, EndTime = (DateTime)endDate.SelectedDate });
-                MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(MainVM.SelectedAddedService.SqNoChar)).First();
-                MainVM.SelectedSalesInvoice = MainVM.SalesInvoice.Where(x => x.sqNoChar_.Equals(MainVM.SelectedSalesQuote.sqNoChar_)).First();
+                
 
                 MainVM.SelectedServiceSchedule_.serviceSchedNoChar_ = serviceNoCb.SelectedValue.ToString();
                 MainVM.SelectedServiceSchedule_.invoiceNo_ = int.Parse(MainVM.SelectedSalesInvoice.invoiceNo_);
@@ -123,6 +124,7 @@ namespace prototype2
                 Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
                 sb.Begin(formGridBg);
                 formGridBg.Visibility = Visibility.Collapsed;
+                MainVM.AssignedEmployees_.Clear();
             }
             else
             {
@@ -229,6 +231,7 @@ namespace prototype2
 
         void searchForAvailableEmployees()
         {
+            MainVM.AvailableEmployees_.Clear();
             if (MainVM.ServiceSchedules_.Count>0)
             {
                 foreach (ServiceSchedule sched in MainVM.ServiceSchedules_)
@@ -276,14 +279,31 @@ namespace prototype2
             
         }
 
-        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-
-        }
-
         private void serviceNoCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(MainVM.SelectedAddedService.ServiceID)).FirstOrDefault();
+            if (this.IsVisible)
+            {
+                MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(MainVM.SelectedAddedService.SqNoChar)).FirstOrDefault();
+                MainVM.SelectedSalesInvoice = MainVM.SalesInvoice.Where(x => x.sqNoChar_.Equals(MainVM.SelectedSalesQuote.sqNoChar_)).FirstOrDefault();
+                if (MainVM.SelectedSalesInvoice != null)
+                {
+                    MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(MainVM.SelectedAddedService.ServiceID)).FirstOrDefault();
+                }
+                else
+                {
+                    MessageBox.Show("This service have no invoice");
+                    serviceNoCb.SelectedIndex = -1;
+                }
+            }
+            
+        }
+
+        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (this.IsVisible)
+            {
+
+            }
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

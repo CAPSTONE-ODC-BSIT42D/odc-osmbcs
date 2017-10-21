@@ -656,8 +656,8 @@ namespace prototype2
 
         private void deleteRequestedItemBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainVM.RequestedItems.Remove(MainVM.SelectedRequestedItem);
             MainVM.AddedServices.Remove(MainVM.AddedServices.Where(x => x.TableNoChar.Equals(MainVM.SelectedRequestedItem.itemCode)).FirstOrDefault());
+            MainVM.RequestedItems.Remove(MainVM.SelectedRequestedItem);
         }
 
         private void paymentCustomRb_Checked(object sender, RoutedEventArgs e)

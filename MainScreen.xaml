@@ -979,7 +979,7 @@
                 </Grid>
             </Grid>
             <Grid x:Name="serviceGrid" d:IsHidden="True">
-                <local:ucServiceSchedule Margin="0"/>
+                <local:ucServiceSchedule x:Name="ucService" Margin="0" Visibility="Collapsed"/>
             </Grid>
             <Grid x:Name="reportsGrid" d:IsHidden="True">
                 <local:ucReports Margin="0"/>
@@ -1231,7 +1231,7 @@
                                         <Style TargetType="{x:Type DataGridCell}">
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding EmpType,NotifyOnTargetUpdated=True, Converter={StaticResource EmployeeTypeOfConverter}}" Value="true">
-                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                    <Setter Property="IsEnabled" Value="false"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
