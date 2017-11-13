@@ -27,39 +27,6 @@ namespace prototype2
         }
 
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
-
         
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            Object SELECTEDINDEX = ComboBoxReport.SelectedIndex;
-            if (SELECTEDINDEX.Equals(0))
-            {
-                UCReportService.Visibility = Visibility.Visible;
-                UCReportsItem.Visibility = Visibility.Hidden;
-                UCReportSales.Visibility = Visibility.Hidden;
-                
-
-
-
-            }
-            if (SELECTEDINDEX.Equals(1))
-            {
-                UCReportsItem.Visibility = Visibility.Visible;
-                UCReportService.Visibility = Visibility.Hidden;
-                UCReportSales.Visibility = Visibility.Hidden;
-         
-            }
-            if (SELECTEDINDEX.Equals(2))
-            {
-
-                UCReportsItem.Visibility = Visibility.Hidden;
-                UCReportService.Visibility = Visibility.Hidden;
-                UCReportSales.Visibility = Visibility.Visible;
-              
-            }
- 
-        }
     }
 }

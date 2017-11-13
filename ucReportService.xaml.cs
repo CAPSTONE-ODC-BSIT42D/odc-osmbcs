@@ -21,12 +21,12 @@ namespace prototype2
     /// <summary>
     /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class UserControl1 : UserControl
+    public partial class ucReportService : UserControl
     {
-        public UserControl1()
+        public ucReportService()
         {
             InitializeComponent();
-            DisplayReport();
+            //DisplayReport();
         }
         private void DisplayReport()
         {
@@ -45,7 +45,7 @@ namespace prototype2
 
             cmd.CommandText = "select s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus From Services_t s JOIN services_availed_t sa ON s.serviceID = sa.serviceID JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar WHERE (s.isDeleted = 0) order by ss.serviceStatus";
 
-            DataSet1.DataTable1DataTable dSServices = new DataSet1.DataTable1DataTable();
+            DataSet1.service_tDataTable dSServices = new DataSet1.service_tDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSServices);
@@ -71,7 +71,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar WHERE(s.isDeleted = 0) AND(Day(ss.dateStarted) = Day(CURDATE())) ORDER BY ss.serviceStatus";
 
-            DataSet1.DataTable1DataTable dSServices = new DataSet1.DataTable1DataTable();
+            DataSet1.service_tDataTable dSServices = new DataSet1.service_tDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSServices);
@@ -95,7 +95,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar WHERE(s.isDeleted = 0) and YEARWEEK(ss.dateStarted, 1) = YEARWEEK(CURDATE(), 1) ORDER BY ss.serviceStatus";
 
-            DataSet1.DataTable1DataTable dSServices = new DataSet1.DataTable1DataTable();
+            DataSet1.service_tDataTable dSServices = new DataSet1.service_tDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSServices);
@@ -119,7 +119,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar WHERE(s.isDeleted = 0) AND(MONTH(ss.dateStarted) = '"+ ComboBoxSerMonth.SelectedItem.ToString()+ "') ORDER BY ss.serviceStatus";
 
-            DataSet1.DataTable1DataTable dSServices = new DataSet1.DataTable1DataTable();
+            DataSet1.service_tDataTable dSServices = new DataSet1.service_tDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSServices);
@@ -144,7 +144,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar WHERE(s.isDeleted = 0) AND(YEAR(ss.dateStarted) = '"+ComboBoxYear.SelectedItem.ToString()+"') ORDER BY ss.serviceStatus";
 
-            DataSet1.DataTable1DataTable dSServices = new DataSet1.DataTable1DataTable();
+            DataSet1.service_tDataTable dSServices = new DataSet1.service_tDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSServices);
@@ -168,7 +168,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar WHERE(s.isDeleted = 0) AND(ss.dateStarted BETWEEN '" + DatePickerStartSer.SelectedDate.ToString()+ "' AND '" + DatePickerEndSer.SelectedDate.ToString() + "') ORDER BY ss.serviceStatus";
 
-            DataSet1.DataTable1DataTable dSServices = new DataSet1.DataTable1DataTable();
+            DataSet1.service_tDataTable dSServices = new DataSet1.service_tDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSServices);
@@ -258,22 +258,22 @@ namespace prototype2
 
         private void ComboBoxSerMonth_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DisplayReportMonth();
+            //DisplayReportMonth();
         }
 
         private void ComboBoxYear_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DisplayReportYear();
+            //DisplayReportYear();
         }
 
         private void DatePickerStartSer_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            DisplayReportRange();
+            //DisplayReportRange();
         }
 
         private void DatePickerEndSer_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            DisplayReportRange();
+            //DisplayReportRange();
         }
     }
 }

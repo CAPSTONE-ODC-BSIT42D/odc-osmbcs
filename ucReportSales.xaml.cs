@@ -22,9 +22,9 @@ namespace prototype2
     /// <summary>
     /// Interaction logic for UserControl3.xaml
     /// </summary>
-    public partial class UserControl3 : UserControl
+    public partial class ucReportSales : UserControl
     {
-        public UserControl3()
+        public ucReportSales()
         {
             InitializeComponent();
             DisplayReport();
@@ -46,7 +46,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT  i.itemCode, i.itemName, i.itemUnit, i.salesPrice, po.orderDate, s.serviceID, s.serviceName, s.serviceDesc, CONCAT(sa.address, sa.city) AS Location, ss.dateStarted, ss.dateEnded, sa.totalCost FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar INNER JOIN sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON i.itemCode = ia.itemCode INNER JOIN  po_line_t p ON i.itemCode = p.itemNo INNER JOIN purchase_order_t po ON p.PONumChar = po.PONumChar";
 
-            DataSet1.DataTable3DataTable dSSales = new DataSet1.DataTable3DataTable();
+            DataSet1.salesReportDataTable dSSales = new DataSet1.salesReportDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSSales);
@@ -72,7 +72,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        i.itemCode, i.itemName, i.itemUnit, i.salesPrice, po.orderDate, s.serviceID, s.serviceName, s.serviceDesc, CONCAT(sa.address, sa.city) AS Location, ss.dateStarted, ss.dateEnded, sa.totalCost FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar INNER JOIN sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON i.itemCode = ia.itemCode INNER JOIN po_line_t p ON i.itemCode = p.itemNo INNER JOIN purchase_order_t po ON p.PONumChar = po.PONumChar WHERE(i.isDeleted = 0) AND(s.isDeleted = 0) AND(Day(ss.dateStarted) = Day(CURDATE()))";
 
-            DataSet1.DataTable3DataTable dSSales = new DataSet1.DataTable3DataTable();
+            DataSet1.salesReportDataTable dSSales = new DataSet1.salesReportDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSSales);
@@ -98,7 +98,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        i.itemCode, i.itemName, i.itemUnit, i.salesPrice, po.orderDate, s.serviceID, s.serviceName, s.serviceDesc, CONCAT(sa.address, sa.city) AS Location, ss.dateStarted, ss.dateEnded, sa.totalCost FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar INNER JOIN sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON i.itemCode = ia.itemCode INNER JOIN po_line_t p ON i.itemCode = p.itemNo INNER JOIN purchase_order_t po ON p.PONumChar = po.PONumChar WHERE(i.isDeleted = 0) AND(s.isDeleted = 0) AND(YEARWEEK(ss.dateStarted, 1) = YEARWEEK(CURDATE(), 1))";
 
-            DataSet1.DataTable3DataTable dSSales = new DataSet1.DataTable3DataTable();
+            DataSet1.salesReportDataTable dSSales = new DataSet1.salesReportDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSSales);
@@ -124,7 +124,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        i.itemCode, i.itemName, i.itemUnit, i.salesPrice, po.orderDate, s.serviceID, s.serviceName, s.serviceDesc, CONCAT(sa.address, sa.city) AS Location, ss.dateStarted, ss.dateEnded, sa.totalCost FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar INNER JOIN sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON i.itemCode = ia.itemCode INNER JOIN po_line_t p ON i.itemCode = p.itemNo INNER JOIN purchase_order_t po ON p.PONumChar = po.PONumChar WHERE(i.isDeleted = 0) AND(s.isDeleted = 0) AND(YEAR(ss.dateStarted) ='" + ComboBoxYearSales.SelectedItem.ToString() + "')";
 
-            DataSet1.DataTable3DataTable dSSales = new DataSet1.DataTable3DataTable();
+            DataSet1.salesReportDataTable dSSales = new DataSet1.salesReportDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSSales);
@@ -150,7 +150,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        i.itemCode, i.itemName, i.itemUnit, i.salesPrice, po.orderDate, s.serviceID, s.serviceName, s.serviceDesc, CONCAT(sa.address, sa.city) AS Location, ss.dateStarted, ss.dateEnded, sa.totalCost FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar INNER JOIN sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON i.itemCode = ia.itemCode INNER JOIN po_line_t p ON i.itemCode = p.itemNo INNER JOIN purchase_order_t po ON p.PONumChar = po.PONumChar WHERE(i.isDeleted = 0) AND(s.isDeleted = 0) AND(YEAR(ss.dateStarted) = '"+ ComboBoxMonthSales.SelectedItem.ToString() + "')";
 
-            DataSet1.DataTable3DataTable dSSales = new DataSet1.DataTable3DataTable();
+            DataSet1.salesReportDataTable dSSales = new DataSet1.salesReportDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSSales);
@@ -176,7 +176,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        i.itemCode, i.itemName, i.itemUnit, i.salesPrice, po.orderDate, s.serviceID, s.serviceName, s.serviceDesc, CONCAT(sa.address, sa.city) AS Location, ss.dateStarted, ss.dateEnded, sa.totalCost FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar INNER JOIN sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON i.itemCode = ia.itemCode INNER JOIN po_line_t p ON i.itemCode = p.itemNo INNER JOIN purchase_order_t po ON p.PONumChar = po.PONumChar WHERE(i.isDeleted = 0) AND(s.isDeleted = 0) AND(ss.dateStarted BETWEEN '" + DatePickerStartSales.SelectedDate.ToString() +"' AND '"+DatePickerEndSales.SelectedDate.ToString()+"')";
 
-            DataSet1.DataTable3DataTable dSSales = new DataSet1.DataTable3DataTable();
+            DataSet1.salesReportDataTable dSSales = new DataSet1.salesReportDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSSales);

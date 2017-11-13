@@ -21,9 +21,9 @@ namespace prototype2
     /// <summary>
     /// Interaction logic for UserControl2.xaml
     /// </summary>
-    public partial class UserControl2 : UserControl
+    public partial class ucReportItem : UserControl
     {
-        public UserControl2()
+        public ucReportItem()
         {
             InitializeComponent();
             DisplayReport();
@@ -45,7 +45,7 @@ namespace prototype2
 
             cmd.CommandText = "select i.itemCode, i.itemName, i.costPrice, po.orderDate from item_t i JOIN po_line_t p ON i.itemCode = p.itemNo JOIN purchase_order_t po ON p.PONumChar = po.PONumChar";
 
-            DataSet1.DataTable2DataTable dSItem = new DataSet1.DataTable2DataTable();
+            DataSet1.item_tDataTable dSItem = new DataSet1.item_tDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
@@ -75,7 +75,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        i.itemCode, i.itemName, i.costPrice, i.itemUnit, po.orderDate FROM item_t i INNER JOIN po_line_t p ON i.itemCode = p.itemNo INNER JOIN purchase_order_t po ON p.PONumChar = po.PONumChar WHERE(i.isDeleted = 0) AND(Day(po.orderDate) = Day(CURDATE()))";
 
-            DataSet1.DataTable2DataTable dSItem = new DataSet1.DataTable2DataTable();
+            DataSet1.item_tDataTable dSItem = new DataSet1.item_tDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
@@ -100,7 +100,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        i.itemCode, i.itemName, i.costPrice, i.itemUnit, po.orderDate FROM item_t i INNER JOIN po_line_t p ON i.itemCode = p.itemNo INNER JOIN purchase_order_t po ON p.PONumChar = po.PONumChar WHERE(i.isDeleted = 0) AND(YEARWEEK(po.orderDate, 1) = YEARWEEK(CURDATE(), 1))";
 
-            DataSet1.DataTable2DataTable dSItem = new DataSet1.DataTable2DataTable();
+            DataSet1.item_tDataTable dSItem = new DataSet1.item_tDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
@@ -126,7 +126,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        i.itemCode, i.itemName, i.costPrice, i.itemUnit, po.orderDate FROM item_t i INNER JOIN po_line_t p ON i.itemCode = p.itemNo INNER JOIN  purchase_order_t po ON p.PONumChar = po.PONumChar WHERE(i.isDeleted = 0) AND(MONTH(po.orderDate) = '"+ ComboBoxItemMonth.SelectedItem.ToString()+ "')";
 
-            DataSet1.DataTable2DataTable dSItem = new DataSet1.DataTable2DataTable();
+            DataSet1.item_tDataTable dSItem = new DataSet1.item_tDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
@@ -151,7 +151,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        i.itemCode, i.itemName, i.costPrice, i.itemUnit, po.orderDate FROM item_t i INNER JOIN po_line_t p ON i.itemCode = p.itemNo INNER JOIN purchase_order_t po ON p.PONumChar = po.PONumChar WHERE(i.isDeleted = 0) AND(YEAR(po.orderDate) = '"+ ComboBoxItemYear .SelectedItem.ToString()+ "')";
 
-            DataSet1.DataTable2DataTable dSItem = new DataSet1.DataTable2DataTable();
+            DataSet1.item_tDataTable dSItem = new DataSet1.item_tDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
@@ -176,7 +176,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        i.itemCode, i.itemName, i.costPrice, i.itemUnit, po.orderDate FROM item_t i INNER JOIN po_line_t p ON i.itemCode = p.itemNo INNER JOIN purchase_order_t po ON p.PONumChar = po.PONumChar WHERE(i.isDeleted = 0) AND(po.orderDate BETWEEN '"+DatePickerItemStart.SelectedDate.ToString()+"' AND '"+DatePickerItemEnd.SelectedDate.ToString()+"')";
 
-            DataSet1.DataTable2DataTable dSItem = new DataSet1.DataTable2DataTable();
+            DataSet1.item_tDataTable dSItem = new DataSet1.item_tDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);

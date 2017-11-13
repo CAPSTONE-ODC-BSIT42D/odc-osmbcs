@@ -9,15 +9,5 @@
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>
-    <Grid Background="#FFF9F9F9" Margin="0,0,0,10">
-        <ComboBox x:Name="ComboBoxReport" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="215" Height="43" SelectionChanged="ComboBox_SelectionChanged">
-            <ComboBoxItem Content="Service Report"/>
-            <ComboBoxItem Content="Purchase Report"/>
-            <ComboBoxItem Content="Sales Report"/>
-        </ComboBox>
-        <local:UserControl1 x:Name="UCReportService" Margin="56,102,335,738" Height="881" Width="939" Visibility="Hidden"/>
-        <local:UserControl2 x:Name="UCReportsItem" HorizontalAlignment="Left" Height="881" Margin="56,85,0,0" VerticalAlignment="Top" Width="939" Visibility="Hidden"/>
-        <local:UserControl3 x:Name="UCReportSales" HorizontalAlignment="Left" Height="398" Margin="56,102,0,0" VerticalAlignment="Top" Width="939" Visibility="Hidden"/>
-        <local:UserControl5 HorizontalAlignment="Left" Height="517" Margin="10,145,0,0" VerticalAlignment="Top" Width="876"/>
-    </Grid>
+    <Grid Background="#FFF9F9F9" Margin="0,0,0,10"/>
 </UserControl>

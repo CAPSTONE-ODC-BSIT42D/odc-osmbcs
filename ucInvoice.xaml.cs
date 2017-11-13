@@ -282,7 +282,7 @@ namespace prototype2
                         MainVM.SalesQuotes.Clear();
                         foreach (DataRow dr in fromDbTable.Rows)
                         {
-                            query = "INSERT INTO `odc_db`.`si_payment_t` " +
+                            query = "INSERT INTO `odc_db`.`payment_hist_t` " +
                             "(`custBalance`,`invoiceNo`) " +
                             "VALUES " +
                             "('" +

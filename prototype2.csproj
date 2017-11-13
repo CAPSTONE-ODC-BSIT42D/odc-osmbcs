@@ -229,14 +229,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
-    <Compile Include="DataSet2.cs">
-      <DependentUpon>DataSet2.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="DataSet2.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSet2.xsd</DependentUpon>
-    </Compile>
     <Compile Include="DocumentViewer.xaml.cs">
       <DependentUpon>DocumentViewer.xaml</DependentUpon>
     </Compile>
@@ -273,26 +265,26 @@
     <Compile Include="ucSalesQuote.xaml.cs">
       <DependentUpon>ucSalesQuote.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ReportService.xaml.cs">
-      <DependentUpon>ReportService.xaml</DependentUpon>
+    <Compile Include="ucReportService.xaml.cs">
+      <DependentUpon>ucReportService.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ReportItem.xaml.cs">
-      <DependentUpon>ReportItem.xaml</DependentUpon>
+    <Compile Include="ucReportItem.xaml.cs">
+      <DependentUpon>ucReportItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ReprtSales.xaml.cs">
-      <DependentUpon>ReprtSales.xaml</DependentUpon>
+    <Compile Include="ucReportSales.xaml.cs">
+      <DependentUpon>ucReportSales.xaml</DependentUpon>
     </Compile>
     <Compile Include="ucServiceSchedule.xaml.cs">
       <DependentUpon>ucServiceSchedule.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl4.xaml.cs">
-      <DependentUpon>UserControl4.xaml</DependentUpon>
+    <Compile Include="ucNoticeOfEmployment.xaml.cs">
+      <DependentUpon>ucNoticeOfEmployment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl5.xaml.cs">
-      <DependentUpon>UserControl5.xaml</DependentUpon>
+    <Compile Include="ucOfficialReceipt.xaml.cs">
+      <DependentUpon>ucOfficialReceipt.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl6.xaml.cs">
-      <DependentUpon>UserControl6.xaml</DependentUpon>
+    <Compile Include="ucPurchaseOrder.xaml.cs">
+      <DependentUpon>ucPurchaseOrder.xaml</DependentUpon>
     </Compile>
     <Compile Include="ValueConverter.cs" />
     <Compile Include="ViewModelEntity.cs" />
@@ -354,15 +346,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ReportService.xaml">
+    <Page Include="ucReportService.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ReportItem.xaml">
+    <Page Include="ucReportItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ReprtSales.xaml">
+    <Page Include="ucReportSales.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -370,15 +362,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl4.xaml">
+    <Page Include="ucNoticeOfEmployment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl5.xaml">
+    <Page Include="ucOfficialReceipt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl6.xaml">
+    <Page Include="ucPurchaseOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -403,18 +395,6 @@
     <None Include="DataSet1.xss">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </None>
-    <None Include="DataSet2.xsc">
-      <DependentUpon>DataSet2.xsd</DependentUpon>
-    </None>
-    <None Include="DataSet2.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSet2.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="DataSet2.xss">
-      <DependentUpon>DataSet2.xsd</DependentUpon>
-    </None>
-    <None Include="Properties\DataSources\Representative.datasource" />
     <None Include="prototype2_TemporaryKey.pfx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -458,15 +438,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Report1.rdlc" />
-    <EmbeddedResource Include="Report3.rdlc" />
-    <EmbeddedResource Include="Report4.rdlc" />
-    <EmbeddedResource Include="Report5.rdlc" />
-    <EmbeddedResource Include="Report6.rdlc">
+    <EmbeddedResource Include="rdlcfiles\PurchaseReport.rdlc" />
+    <EmbeddedResource Include="rdlcfiles\ServiceReport.rdlc" />
+    <EmbeddedResource Include="rdlcfiles\SalesReport.rdlc" />
+    <EmbeddedResource Include="rdlcfiles\NoticeOfEmployment.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report7.rdlc" />
-    <EmbeddedResource Include="Report8.rdlc" />
+    <EmbeddedResource Include="rdlcfiles\OfficialReceipt.rdlc" />
+    <EmbeddedResource Include="rdlcfiles\PurchaseOrder.rdlc" />
     <EmbeddedResource Include="Resources\odclogo.png" />
   </ItemGroup>
   <ItemGroup>
@@ -483,6 +462,9 @@
     <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -465,6 +465,11 @@
                     <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Reports" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="50"/>
                 </StackPanel>
             </Button>
+            <StackPanel x:Name="reportsSubMenuGrid" Margin="0" Orientation="Vertical" Background="#FF046380">
+                <Button x:Name="salesReportBtn" Content="Employees/Contractor" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0,0,0,5"/>
+                <Button x:Name="salesReportBtn_Copy" Content="Employees/Contractor" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5"/>
+                <Button x:Name="salesReportBtn_Copy1" Content="Employees/Contractor" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5"/>
+            </StackPanel>
             <Button x:Name="manageBtn" Margin="0" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" Height="70" VerticalAlignment="Top" Click="manageBtn_Click">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="-100,0,0,0" HorizontalAlignment="Left" Width="115">
                     <Canvas x:Name="Capa_1g" Width="30" Height="30">
@@ -540,12 +545,12 @@
                     <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Manage" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="50"/>
                 </StackPanel>
             </Button>
-            <Grid x:Name="manageSubMenugrid" Background="#FF046380" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Height="147" VerticalAlignment="Top" Margin="0" >
-                <Button x:Name="empContManageBtn" Content="Employees/Contractor" Margin="0,2,1,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Click="empContManageBtn_Click"/>
-                <Button x:Name="custSuppManageBtn" Content="Customers/Suppliers" Margin="0,37,1,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Foreground="White" Click="custSuppManageBtn_Click" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238"/>
-                <Button x:Name="productManageBtn" Content="Product List" Margin="0,72,1,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="productManageBtn_Click" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238"/>
-                <Button x:Name="settingsManageMenuBtn" Content="Services" Margin="1,107,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238" Click="settingsManageMenuBtn_Click"/>
-            </Grid>
+            <StackPanel x:Name="manageSubMenugrid" Orientation="Vertical" Margin="0" Background="#FF046380">
+                <Button x:Name="empContManageBtn" Content="Employees/Contractor" Margin="0,0,1,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Click="empContManageBtn_Click"/>
+                <Button x:Name="custSuppManageBtn" Content="Customers/Suppliers" Margin="0,0,1,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Foreground="White" Click="custSuppManageBtn_Click" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238"/>
+                <Button x:Name="productManageBtn" Content="Product List" Margin="0,0,1,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="productManageBtn_Click" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238"/>
+                <Button x:Name="settingsManageMenuBtn" Content="Services" Margin="1,0,0,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238" Click="settingsManageMenuBtn_Click"/>
+            </StackPanel>
         </StackPanel>
         <Grid x:Name="headerGrid" Grid.Column="1" Height="100" VerticalAlignment="Top" Background="#FF046380" Grid.ColumnSpan="3">
             <Label x:Name="headerLbl" Content="Dashboard" Margin="10,0,80,0" FontSize="20" FontWeight="Bold" Background="{x:Null}" Foreground="White" Padding="10,10,10,5" Height="50" VerticalAlignment="Top"/>
@@ -1371,7 +1376,7 @@
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <local:UserControl4 x:Name="ucContract" HorizontalAlignment="Left" Height="700" Margin="20,16,0,0" VerticalAlignment="Top" Width="1184" Visibility="Hidden"/>
+                        <local:ucNoticeOfEmployment x:Name="ucContract" HorizontalAlignment="Left" Height="700" Margin="20,16,0,0" VerticalAlignment="Top" Width="1184" Visibility="Hidden"/>
                     </Grid>
                 </Grid>
                 <Grid x:Name="manageProductListGrid" Margin="0,0,1,0" d:IsHidden="True">
