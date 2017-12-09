@@ -72,7 +72,7 @@ namespace prototype2
                     }
                     
                 }
-                if (!validationError && MainVM.LoginEmployee_ != null)
+                if (!validationError /*&& MainVM.LoginEmployee_ != null*/)
                 {
                     salesInvoiceToMemory();
                     selectSalesQuoteGrid.Visibility = Visibility.Collapsed;
@@ -270,35 +270,7 @@ namespace prototype2
                 if (dbCon.insertQuery(query, dbCon.Connection))
                 {
                     query = "UPDATE `sales_quote_t` SET status = '" + "ACCEPTED" + "' WHERE sqNoChar = '" + MainVM.SelectedSalesInvoice.sqNoChar_ + "'";
-                    if (dbCon.insertQuery(query, dbCon.Connection))
-                    {
-                        query = "SELECT invoiceNo FROM sales_invoice_t ORDER BY invoiceNo DESC LIMIT 1;";
-                        MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                        DataSet fromDb = new DataSet();
-                        DataTable fromDbTable = new DataTable();
-                        dataAdapter.Fill(fromDb, "t");
-                        fromDbTable = fromDb.Tables["t"];
-                        MainVM.SalesQuotes.Clear();
-                        foreach (DataRow dr in fromDbTable.Rows)
-                        {
-                            query = "INSERT INTO `odc_db`.`payment_hist_t` " +
-                            "(`custBalance`,`invoiceNo`) " +
-                            "VALUES " +
-                            "('" +
-                            MainVM.TotalSales + "','" +
-                            dr["invoiceNo"].ToString() + "')";
-                            dbCon.insertQuery(query, dbCon.Connection);
-                            query = "INSERT INTO `odc_db`.`payment_hist_t` " +
-                            "(`custBalance`,`invoiceNo`) " +
-                            "VALUES " +
-                            "('" +
-                            (MainVM.TotalSalesWithOutDp - MainVM.TotalSales) + "','" +
-                            dr["invoiceNo"].ToString() + "')";
-                            dbCon.insertQuery(query, dbCon.Connection);
-                        }
-                        MessageBox.Show("Invoice is Saved");
-                    }
-                    
+                    MessageBox.Show("Invoice is Saved");
                 }
             }
         }
@@ -337,6 +309,41 @@ namespace prototype2
                 }
 
             }
+        }
+
+        private void savePrintBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            string query = "SELECT invoiceNo FROM sales_invoice_t ORDER BY invoiceNo DESC LIMIT 1;";
+            MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+            DataSet fromDb = new DataSet();
+            DataTable fromDbTable = new DataTable();
+            dataAdapter.Fill(fromDb, "t");
+            fromDbTable = fromDb.Tables["t"];
+            MainVM.SalesQuotes.Clear();
+            foreach (DataRow dr in fromDbTable.Rows)
+            {
+                query = "INSERT INTO `odc_db`.`si_payment_t` " +
+                "(`SIpaymentAmount`,`SIpaymentMethod`,`SIcheckNo`,`invoiceNo`) " +
+                "VALUES " +
+                "('" + amountTb.Value + "','" +
+                paymentMethodCb.SelectedValue + "','" +
+                checkNoTb.Text + "','" +
+                dr["invoiceNo"].ToString() + "')";
+                dbCon.insertQuery(query, dbCon.Connection);
+            }
+            query = "SELECT SIpaymentID FROM si_payment_t ORDER BY SIpaymentID DESC LIMIT 1;";
+            dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+            fromDb = new DataSet();
+            fromDbTable = new DataTable();
+            dataAdapter.Fill(fromDb, "t");
+            fromDbTable = fromDb.Tables["t"];
+            foreach (DataRow dr in fromDbTable.Rows)
+            {
+                MainVM.PaymentID = dr["SIpaymentID"].ToString();
+            }
+           
+            receiptVeiwer.Visibility = Visibility.Visible;
         }
     }
 }

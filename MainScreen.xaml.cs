@@ -513,8 +513,8 @@ namespace prototype2
                     int custId;
                     int.TryParse(dr["custID"].ToString(), out custId);
 
-                    int empId;
-                    int.TryParse(dr["empID"].ToString(), out empId);
+                    //int empId;
+                    //int.TryParse(dr["empID"].ToString(), out empId);
 
                     int estDelivery;
                     int.TryParse(dr["invoiceNo"].ToString(), out estDelivery);
@@ -531,7 +531,7 @@ namespace prototype2
                     decimal withholdingTax;
                     decimal.TryParse(dr["withholdingTax"].ToString(), out withholdingTax);
 
-                    MainVM.SalesInvoice.Add(new SalesInvoice() { invoiceNo_ = invoiceNo.ToString(), custID_ = custId, empID_ = empId, sqNoChar_ = dr["sqNoChar"].ToString(), tin_ = dr["tin"].ToString(), busStyle_ = dr["busStyle"].ToString(), dateOfIssue_ = dateOfIssue, terms_ = termsDays, dueDate_ = dueDate, purchaseOrderNumber_ = dr["purchaseOrderNumber"].ToString(), paymentStatus_ = dr["paymentStatus"].ToString(), vat_ = vat, sc_pwd_discount_ = sc_pwd_discount, withholdingTax_ = withholdingTax, notes_ = dr["notes"].ToString() });
+                    MainVM.SalesInvoice.Add(new SalesInvoice() { invoiceNo_ = invoiceNo.ToString(), custID_ = custId, sqNoChar_ = dr["sqNoChar"].ToString(), tin_ = dr["tin"].ToString(), busStyle_ = dr["busStyle"].ToString(), dateOfIssue_ = dateOfIssue, terms_ = termsDays, dueDate_ = dueDate, purchaseOrderNumber_ = dr["purchaseOrderNumber"].ToString(), paymentStatus_ = dr["paymentStatus"].ToString(), vat_ = vat, sc_pwd_discount_ = sc_pwd_discount, withholdingTax_ = withholdingTax, notes_ = dr["notes"].ToString() });
 
 
                     
@@ -2187,6 +2187,36 @@ namespace prototype2
                 }
             }
             
+        }
+
+        private void receivePaymentBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var element in trasanctionGrid.Children)
+            {
+                if (element is Grid)
+                {
+                    if (!(((Grid)element).Name.Equals(transInvoiceGrid.Name)))
+                    {
+                        ((Grid)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((Grid)element).Visibility = Visibility.Visible;
+                }
+            }
+            headerLbl.Content = "Trasanction - Sales Invoice";
+            foreach (var element in transInvoiceGrid.Children)
+            {
+                if (element is UserControl)
+                {
+                    if (!(((UserControl)element).Name.Equals(ucInvoice.Name)))
+                    {
+                        ((UserControl)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((UserControl)element).Visibility = Visibility.Visible;
+                }
+            }
+            ucInvoice.paymentDetailsGrid.Visibility = Visibility.Visible;
         }
     }
 }

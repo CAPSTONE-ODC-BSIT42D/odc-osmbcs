@@ -156,6 +156,13 @@ namespace prototype2
             set { SetProperty(ref Ddl, value); }
         }
 
+        private string PaymentID_;
+        public string PaymentID
+        {
+            get { return PaymentID_; }
+            set { SetProperty(ref PaymentID_, value); }
+        }
+
         //Invoice Variables
         private decimal VatableSales_;
         public decimal VatableSale {

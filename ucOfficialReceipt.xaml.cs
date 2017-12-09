@@ -23,6 +23,7 @@ namespace prototype2
     /// </summary>
     public partial class ucOfficialReceipt : UserControl
     {
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
         public ucOfficialReceipt()
         {
             InitializeComponent();
@@ -47,7 +48,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT     c.companyName, c.companyAddress, c.companyCity, pv.locProvince, si.invoiceNo, sp.SIpaymentAmount, si.busStyle, sp.SIpaymentMethod, sp.SIcheckNo FROM cust_supp_t c INNER JOIN sales_invoice_t si ON c.companyID = si.custID INNER JOIN si_payment_t sp ON si.invoiceNo = sp.invoiceNo INNER JOIN  provinces_t pv ON pv.locProvinceID = c.companyProvinceID";
+            cmd.CommandText = "SELECT c.companyName, c.companyAddress, c.companyCity, pv.locProvince, si.invoiceNo, sp.SIpaymentAmount, si.busStyle, sp.SIpaymentMethod, sp.SIcheckNo FROM cust_supp_t c INNER JOIN sales_invoice_t si ON c.companyID = si.custID INNER JOIN si_payment_t sp ON si.invoiceNo = sp.invoiceNo INNER JOIN  provinces_t pv ON pv.locProvinceID = c.companyProvinceID WHERE sp.SIpaymentID = " + MainVM.PaymentID + ";";
 
             DataSet1.officialReceiptDataTable dSReceipt = new DataSet1.officialReceiptDataTable();
 
@@ -63,6 +64,10 @@ namespace prototype2
             if (this.IsVisible)
             {
                 DisplayReport();
+            }
+            else
+            {
+                ucReportViewer.Reset();
             }
         }
     }
