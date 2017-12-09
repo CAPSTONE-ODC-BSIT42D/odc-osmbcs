@@ -238,7 +238,7 @@ namespace prototype2
             DateTime dueDate = new DateTime();
             dueDate = dateOfIssue.AddDays(int.Parse(dueDateTb.Value.ToString()));
 
-            MainVM.SelectedSalesInvoice = (new SalesInvoice() { sqNoChar_ = MainVM.SelectedSalesQuote.sqNoChar_, busStyle_ = busStyleTb.Text, tin_ = tinNumTb.Text, custID_ = MainVM.SelectedSalesQuote.custID_, empID_ = int.Parse(MainVM.LoginEmployee_.EmpID), dueDate_ = dueDate, vat_ = MainVM.VatAmount_, withholdingTax_ = MainVM.WithHoldingTax_, purchaseOrderNumber_ = purchaseOrdNumTb.Text, terms_ = (int)dueDateTb.Value});
+            MainVM.SelectedSalesInvoice = (new SalesInvoice() { sqNoChar_ = MainVM.SelectedSalesQuote.sqNoChar_, busStyle_ = busStyleTb.Text, tin_ = tinNumTb.Text, custID_ = MainVM.SelectedSalesQuote.custID_, dueDate_ = dueDate, vat_ = MainVM.VatAmount_, withholdingTax_ = MainVM.WithHoldingTax_, purchaseOrderNumber_ = purchaseOrdNumTb.Text, terms_ = (int)dueDateTb.Value});
 
        
         }
@@ -250,11 +250,10 @@ namespace prototype2
             bool noError = true;
             if (dbCon.IsConnect())
             {
-                string query = "INSERT INTO `odc_db`.`sales_invoice_t`(`custID`,`empID`,`sqNoChar`,`TIN`,`busStyle`,`dateOfIssue`,`termsDays`,`dueDate`,`purchaseOrderNumber`,`paymentStatus`,`vat`,`sc_pwd_discount`,`withholdingTax`,`notes`)" +
+                string query = "INSERT INTO `odc_db`.`sales_invoice_t`(`custID`,`sqNoChar`,`TIN`,`busStyle`,`dateOfIssue`,`termsDays`,`dueDate`,`purchaseOrderNumber`,`paymentStatus`,`vat`,`sc_pwd_discount`,`withholdingTax`,`notes`)" +
                     " VALUES " +
                     "('" +
                     MainVM.SelectedSalesInvoice.custID_ + "','" +
-                    MainVM.SelectedSalesInvoice.empID_ + "','" +
                     MainVM.SelectedSalesInvoice.sqNoChar_ + "','" +
                     MainVM.SelectedSalesInvoice.tin_ + "','" +
                     MainVM.SelectedSalesInvoice.busStyle_ + "','" +

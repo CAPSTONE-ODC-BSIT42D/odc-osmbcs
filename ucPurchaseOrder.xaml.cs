@@ -12,49 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Microsoft.Reporting.WinForms;
-using MySql.Data.MySqlClient;
-using System.Data;
 
 namespace prototype2
 {
     /// <summary>
-    /// Interaction logic for UserControl6.xaml
+    /// Interaction logic for ucPurchaseOrder.xaml
     /// </summary>
-    public partial class UserControl6 : UserControl
+    public partial class ucPurchaseOrder : UserControl
     {
-        public UserControl6()
+        public ucPurchaseOrder()
         {
             InitializeComponent();
-            DisplayReport();
-        }
-        private void DisplayReport()
-        {
-            ucReportViewer.Reset();
-            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.RDLC.PurchaseOrder.rdlc");
-            ucReportViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSet1", GetPurchase()));
-            ucReportViewer.LoadReport(rNames);
-            ucReportViewer.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
-            ucReportViewer.RefreshReport();
-        }
-
-        private DataTable GetPurchase()
-        {
-            var dbCon = DBConnection.Instance();
-            dbCon.IsConnect();
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = dbCon.Connection;
-            cmd.CommandType = CommandType.Text;
-
-            cmd.CommandText = "SELECT po.PONumChar, cs.companyName, cs.companyType, cs.companyAddress, cs.companyCity, pr.locProvince, cs.repFName, cs.repMInitial, cs.repLName, cs.repEmail, cs.repTelephone, cs.repMobile, po.orderDate,  po.requisitioner, po.POdueDate, po.incoterms, po.termsDays, po.termsDP, po.currency, it.itemCode, ia.itemQnty, it.itemUnit, it.itemDescr, it.salesPrice, ia.totalCost, po.preparedBy, po.approvedBy, po.shipVia,  po.shipTo FROM   purchase_order_t po INNER JOIN cust_supp_t cs ON po.suppID = cs.companyID INNER JOIN item_t it ON it.supplierID = cs.companyID INNER JOIN  items_availed_t ia ON it.itemCode = ia.itemCode INNER JOIN provinces_t pr ON cs.companyProvinceID = pr.locProvinceID";
-
-            DataSet1.purchaseOrderDataTable dSPurchase = new DataSet1.purchaseOrderDataTable();
-
-            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
-            mySqlDa.Fill(dSPurchase);
-
-            return dSPurchase;
-
         }
     }
 }

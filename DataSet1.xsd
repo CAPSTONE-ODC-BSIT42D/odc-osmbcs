@@ -2,14 +2,15 @@
 <xs:schema id="DataSet1" targetNamespace="http://tempuri.org/DataSet1.xsd" xmlns:mstns="http://tempuri.org/DataSet1.xsd" xmlns="http://tempuri.org/DataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
   <xs:annotation>
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
-      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
           <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="odc_dbConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="odc_dbConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.prototype2.Properties.Settings.GlobalReference.Default.odc_dbConnectionString" Provider="MySql.Data.MySqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="odc_dbConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="odc_dbConnectionString1 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.prototype2.Properties.Settings.GlobalReference.Default.odc_dbConnectionString1" Provider="MySql.Data.MySqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="service_tTableAdapter" GeneratorDataComponentClassName="service_tTableAdapter" Name="service_t" UserDataComponentName="service_tTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillbyServiceWeekly" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="FillbyServiceWeekly" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="FillbyServiceWeekly">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillbyServiceWeekly" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="FillbyServiceWeekly" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="FillbyServiceWeekly">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus
@@ -32,7 +33,7 @@ ORDER BY ss.serviceStatus</CommandText>
               <Mapping SourceColumn="serviceStatus" DataSetColumn="serviceStatus" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByServiceDay" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy3" GeneratorSourceName="FillByServiceDay" GetMethodModifier="Public" GetMethodName="GetDataBy3" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="FillByServiceDay">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByServiceDay" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy3" GeneratorSourceName="FillByServiceDay" GetMethodModifier="Public" GetMethodName="GetDataBy3" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="FillByServiceDay">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus
@@ -45,7 +46,7 @@ ORDER BY ss.serviceStatus</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByServiceMonth" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy1" GeneratorSourceName="FillByServiceMonth" GetMethodModifier="Public" GetMethodName="GetDataBy1" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="FillByServiceMonth">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByServiceMonth" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy1" GeneratorSourceName="FillByServiceMonth" GetMethodModifier="Public" GetMethodName="GetDataBy1" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="FillByServiceMonth">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus
@@ -60,7 +61,7 @@ ORDER BY ss.serviceStatus</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByServiceRange" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy2" GeneratorSourceName="FillByServiceRange" GetMethodModifier="Public" GetMethodName="GetDataBy2" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="FillByServiceRange">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByServiceRange" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy2" GeneratorSourceName="FillByServiceRange" GetMethodModifier="Public" GetMethodName="GetDataBy2" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="FillByServiceRange">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus
@@ -76,7 +77,7 @@ ORDER BY ss.serviceStatus</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByServiceYear" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="FillByServiceYear" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillByServiceYear">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByServiceYear" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="FillByServiceYear" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillByServiceYear">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus
@@ -95,7 +96,7 @@ ORDER BY ss.serviceStatus</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="item_tTableAdapter" GeneratorDataComponentClassName="item_tTableAdapter" Name="item_t" UserDataComponentName="item_tTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillbyItemsYear" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="FillbyItemsYear" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="FillbyItemsYear">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillbyItemsYear" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="FillbyItemsYear" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="FillbyItemsYear">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        i.itemCode, i.itemName, i.costPrice, i.itemUnit, po.orderDate
@@ -118,7 +119,7 @@ WHERE        (i.isDeleted = 0) AND (YEAR(po.orderDate) = @A)</CommandText>
               <Mapping SourceColumn="itemUnit" DataSetColumn="itemUnit" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByItemDay" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="FillByItemDay" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillByItemDay">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByItemDay" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="FillByItemDay" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillByItemDay">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        i.itemCode, i.itemName, i.costPrice, i.itemUnit, po.orderDate
@@ -130,7 +131,7 @@ WHERE        (i.isDeleted = 0) AND (Day(po.orderDate) = Day(CURDATE()))</Command
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByItemMonth" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy2" GeneratorSourceName="FillByItemMonth" GetMethodModifier="Public" GetMethodName="GetDataBy2" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="FillByItemMonth">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByItemMonth" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy2" GeneratorSourceName="FillByItemMonth" GetMethodModifier="Public" GetMethodName="GetDataBy2" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="FillByItemMonth">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        i.itemCode, i.itemName, i.costPrice, i.itemUnit, po.orderDate
@@ -144,7 +145,7 @@ WHERE        (i.isDeleted = 0) AND (MONTH(po.orderDate) = @B)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByItemRange" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy5" GeneratorSourceName="FillByItemRange" GetMethodModifier="Public" GetMethodName="GetDataBy5" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy5" UserSourceName="FillByItemRange">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByItemRange" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy5" GeneratorSourceName="FillByItemRange" GetMethodModifier="Public" GetMethodName="GetDataBy5" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy5" UserSourceName="FillByItemRange">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        i.itemCode, i.itemName, i.costPrice, i.itemUnit, po.orderDate
@@ -159,7 +160,7 @@ WHERE        (i.isDeleted = 0) AND (po.orderDate BETWEEN @D AND @E)</CommandText
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByItemWeek" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy1" GeneratorSourceName="FillByItemWeek" GetMethodModifier="Public" GetMethodName="GetDataBy1" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="FillByItemWeek">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByItemWeek" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy1" GeneratorSourceName="FillByItemWeek" GetMethodModifier="Public" GetMethodName="GetDataBy1" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="FillByItemWeek">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        i.itemCode, i.itemName, i.costPrice, i.itemUnit, po.orderDate
@@ -171,7 +172,7 @@ WHERE        (i.isDeleted = 0) AND (YEARWEEK(po.orderDate, 1) = YEARWEEK(CURDATE
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByItemYear" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy3" GeneratorSourceName="FillByItemYear" GetMethodModifier="Public" GetMethodName="GetDataBy3" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="FillByItemYear">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByItemYear" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy3" GeneratorSourceName="FillByItemYear" GetMethodModifier="Public" GetMethodName="GetDataBy3" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="FillByItemYear">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        i.itemCode, i.itemName, i.costPrice, i.itemUnit, po.orderDate
@@ -185,7 +186,7 @@ WHERE        (i.isDeleted = 0) AND (YEAR(po.orderDate) = @A)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBySalesYear" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy4" GeneratorSourceName="FillBySalesYear" GetMethodModifier="Public" GetMethodName="GetDataBy4" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="FillBySalesYear">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBySalesYear" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy4" GeneratorSourceName="FillBySalesYear" GetMethodModifier="Public" GetMethodName="GetDataBy4" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="FillBySalesYear">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        i.itemCode, i.itemName, i.costPrice, i.itemUnit, po.orderDate
@@ -204,7 +205,7 @@ WHERE        (i.isDeleted = 0) AND (po.orderDate BETWEEN @D AND @E)</CommandText
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="salesReportTableAdapter" GeneratorDataComponentClassName="salesReportTableAdapter" Name="salesReport" UserDataComponentName="salesReportTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillbySaleYear" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="FillbySaleYear" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="FillbySaleYear">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillbySaleYear" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="FillbySaleYear" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="FillbySaleYear">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        i.itemCode, i.itemName, i.itemUnit, i.salesPrice, po.orderDate, s.serviceID, s.serviceName, s.serviceDesc, CONCAT(sa.address, sa.city) AS Location, ss.dateStarted, ss.dateEnded, sa.totalCost
@@ -239,7 +240,7 @@ WHERE        (i.isDeleted = 0) AND (s.isDeleted = 0) AND (YEAR(ss.dateStarted) =
               <Mapping SourceColumn="totalCost" DataSetColumn="totalCost" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBySalesDay" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="FillBySalesDay" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillBySalesDay">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBySalesDay" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="FillBySalesDay" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillBySalesDay">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        i.itemCode, i.itemName, i.itemUnit, i.salesPrice, po.orderDate, s.serviceID, s.serviceName, s.serviceDesc, CONCAT(sa.address, sa.city) AS Location, ss.dateStarted, ss.dateEnded, sa.totalCost
@@ -256,7 +257,7 @@ WHERE        (i.isDeleted = 0) AND (s.isDeleted = 0) AND (Day(ss.dateStarted) = 
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBySalesMonth" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy2" GeneratorSourceName="FillBySalesMonth" GetMethodModifier="Public" GetMethodName="GetDataBy2" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="FillBySalesMonth">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBySalesMonth" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy2" GeneratorSourceName="FillBySalesMonth" GetMethodModifier="Public" GetMethodName="GetDataBy2" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="FillBySalesMonth">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        i.itemCode, i.itemName, i.itemUnit, i.salesPrice, po.orderDate, s.serviceID, s.serviceName, s.serviceDesc, CONCAT(sa.address, sa.city) AS Location, ss.dateStarted, ss.dateEnded, sa.totalCost
@@ -275,7 +276,7 @@ WHERE        (i.isDeleted = 0) AND (s.isDeleted = 0) AND (MONTH(ss.dateStarted) 
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBySalesRange" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy4" GeneratorSourceName="FillBySalesRange" GetMethodModifier="Public" GetMethodName="GetDataBy4" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="FillBySalesRange">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBySalesRange" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy4" GeneratorSourceName="FillBySalesRange" GetMethodModifier="Public" GetMethodName="GetDataBy4" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="FillBySalesRange">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        i.itemCode, i.itemName, i.itemUnit, i.salesPrice, po.orderDate, s.serviceID, s.serviceName, s.serviceDesc, CONCAT(sa.address, sa.city) AS Location, ss.dateStarted, ss.dateEnded, sa.totalCost
@@ -295,7 +296,7 @@ WHERE        (i.isDeleted = 0) AND (s.isDeleted = 0) AND (ss.dateStarted BETWEEN
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBySalesWeek" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy1" GeneratorSourceName="FillBySalesWeek" GetMethodModifier="Public" GetMethodName="GetDataBy1" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="FillBySalesWeek">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBySalesWeek" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy1" GeneratorSourceName="FillBySalesWeek" GetMethodModifier="Public" GetMethodName="GetDataBy1" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="FillBySalesWeek">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        i.itemCode, i.itemName, i.itemUnit, i.salesPrice, po.orderDate, s.serviceID, s.serviceName, s.serviceDesc, CONCAT(sa.address, sa.city) AS Location, ss.dateStarted, ss.dateEnded, sa.totalCost
@@ -312,7 +313,7 @@ WHERE        (i.isDeleted = 0) AND (s.isDeleted = 0) AND (YEARWEEK(ss.dateStarte
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBySalesYear" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy3" GeneratorSourceName="FillBySalesYear" GetMethodModifier="Public" GetMethodName="GetDataBy3" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="FillBySalesYear">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBySalesYear" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy3" GeneratorSourceName="FillBySalesYear" GetMethodModifier="Public" GetMethodName="GetDataBy3" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="FillBySalesYear">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        i.itemCode, i.itemName, i.itemUnit, i.salesPrice, po.orderDate, s.serviceID, s.serviceName, s.serviceDesc, CONCAT(sa.address, sa.city) AS Location, ss.dateStarted, ss.dateEnded, sa.totalCost
@@ -335,7 +336,7 @@ WHERE        (i.isDeleted = 0) AND (s.isDeleted = 0) AND (YEAR(ss.dateStarted) =
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="noticeOfEmploymentTableAdapter" GeneratorDataComponentClassName="noticeOfEmploymentTableAdapter" Name="noticeOfEmployment" UserDataComponentName="noticeOfEmploymentTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByContract" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="FillByContract" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="FillByContract">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByContract" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="FillByContract" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="FillByContract">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        e.empFName, e.empMI, e.empLName, e.empAddress, e.empCity, e.empDateFrom, e.empDateTo, j.jobName
@@ -363,7 +364,7 @@ WHERE        (e.isDeleted = 0) AND (e.empType = 1) AND (CONCAT(e.empFName, ' ', 
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="officialReceiptTableAdapter" GeneratorDataComponentClassName="officialReceiptTableAdapter" Name="officialReceipt" UserDataComponentName="officialReceiptTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByReceipt" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="FillByReceipt" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="FillByReceipt">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByReceipt" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="FillByReceipt" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="FillByReceipt">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        c.companyName, c.companyAddress, c.companyCity, pv.locProvince, si.invoiceNo, sp.SIpaymentAmount, si.busStyle, sp.SIpaymentMethod, sp.SIcheckNo
@@ -391,7 +392,7 @@ FROM            cust_supp_t c INNER JOIN
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="purchaseOrderTableAdapter" GeneratorDataComponentClassName="purchaseOrderTableAdapter" Name="purchaseOrder" UserDataComponentName="purchaseOrderTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByPurchaseOrder" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="FillByPurchaseOrder" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="FillByPurchaseOrder">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByPurchaseOrder" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="FillByPurchaseOrder" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="FillByPurchaseOrder">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        po.PONumChar, cs.companyName, cs.companyType, cs.companyAddress, cs.companyCity, pr.locProvince, cs.repFName, cs.repMInitial, cs.repLName, cs.repEmail, cs.repTelephone, cs.repMobile, po.orderDate, 
@@ -448,7 +449,7 @@ FROM            purchase_order_t po INNER JOIN
   <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet1" msprop:Generator_UserDSName="DataSet1">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="service_t" msprop:Generator_TableClassName="service_tDataTable" msprop:Generator_TableVarName="tableservice_t" msprop:Generator_TablePropName="service_t" msprop:Generator_RowDeletingName="service_tRowDeleting" msprop:Generator_RowChangingName="service_tRowChanging" msprop:Generator_RowEvHandlerName="service_tRowChangeEventHandler" msprop:Generator_RowDeletedName="service_tRowDeleted" msprop:Generator_UserTableName="service_t" msprop:Generator_RowChangedName="service_tRowChanged" msprop:Generator_RowEvArgName="service_tRowChangeEvent" msprop:Generator_RowClassName="service_tRow">
+        <xs:element name="service_t" msprop:Generator_TableClassName="service_tDataTable" msprop:Generator_TableVarName="tableservice_t" msprop:Generator_RowChangedName="service_tRowChanged" msprop:Generator_TablePropName="service_t" msprop:Generator_RowDeletingName="service_tRowDeleting" msprop:Generator_RowChangingName="service_tRowChanging" msprop:Generator_RowEvHandlerName="service_tRowChangeEventHandler" msprop:Generator_RowDeletedName="service_tRowDeleted" msprop:Generator_RowClassName="service_tRow" msprop:Generator_UserTableName="service_t" msprop:Generator_RowEvArgName="service_tRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="serviceID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnserviceID" msprop:Generator_ColumnPropNameInRow="serviceID" msprop:Generator_ColumnPropNameInTable="serviceIDColumn" msprop:Generator_UserColumnName="serviceID" type="xs:int" />
@@ -478,7 +479,7 @@ FROM            purchase_order_t po INNER JOIN
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="item_t" msprop:Generator_TableClassName="item_tDataTable" msprop:Generator_TableVarName="tableitem_t" msprop:Generator_TablePropName="item_t" msprop:Generator_RowDeletingName="item_tRowDeleting" msprop:Generator_RowChangingName="item_tRowChanging" msprop:Generator_RowEvHandlerName="item_tRowChangeEventHandler" msprop:Generator_RowDeletedName="item_tRowDeleted" msprop:Generator_UserTableName="item_t" msprop:Generator_RowChangedName="item_tRowChanged" msprop:Generator_RowEvArgName="item_tRowChangeEvent" msprop:Generator_RowClassName="item_tRow">
+        <xs:element name="item_t" msprop:Generator_TableClassName="item_tDataTable" msprop:Generator_TableVarName="tableitem_t" msprop:Generator_RowChangedName="item_tRowChanged" msprop:Generator_TablePropName="item_t" msprop:Generator_RowDeletingName="item_tRowDeleting" msprop:Generator_RowChangingName="item_tRowChanging" msprop:Generator_RowEvHandlerName="item_tRowChangeEventHandler" msprop:Generator_RowDeletedName="item_tRowDeleted" msprop:Generator_RowClassName="item_tRow" msprop:Generator_UserTableName="item_t" msprop:Generator_RowEvArgName="item_tRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="itemCode" msprop:Generator_ColumnVarNameInTable="columnitemCode" msprop:Generator_ColumnPropNameInRow="itemCode" msprop:Generator_ColumnPropNameInTable="itemCodeColumn" msprop:Generator_UserColumnName="itemCode">
@@ -507,7 +508,7 @@ FROM            purchase_order_t po INNER JOIN
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="salesReport" msprop:Generator_TableClassName="salesReportDataTable" msprop:Generator_TableVarName="tablesalesReport" msprop:Generator_RowChangedName="salesReportRowChanged" msprop:Generator_TablePropName="salesReport" msprop:Generator_RowDeletingName="salesReportRowDeleting" msprop:Generator_RowChangingName="salesReportRowChanging" msprop:Generator_RowEvHandlerName="salesReportRowChangeEventHandler" msprop:Generator_RowDeletedName="salesReportRowDeleted" msprop:Generator_RowClassName="salesReportRow" msprop:Generator_UserTableName="salesReport" msprop:Generator_RowEvArgName="salesReportRowChangeEvent">
+        <xs:element name="salesReport" msprop:Generator_TableClassName="salesReportDataTable" msprop:Generator_TableVarName="tablesalesReport" msprop:Generator_TablePropName="salesReport" msprop:Generator_RowDeletingName="salesReportRowDeleting" msprop:Generator_RowChangingName="salesReportRowChanging" msprop:Generator_RowEvHandlerName="salesReportRowChangeEventHandler" msprop:Generator_RowDeletedName="salesReportRowDeleted" msprop:Generator_UserTableName="salesReport" msprop:Generator_RowChangedName="salesReportRowChanged" msprop:Generator_RowEvArgName="salesReportRowChangeEvent" msprop:Generator_RowClassName="salesReportRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="itemCode" msprop:Generator_ColumnVarNameInTable="columnitemCode" msprop:Generator_ColumnPropNameInRow="itemCode" msprop:Generator_ColumnPropNameInTable="itemCodeColumn" msprop:Generator_UserColumnName="itemCode">
@@ -561,7 +562,7 @@ FROM            purchase_order_t po INNER JOIN
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="noticeOfEmployment" msprop:Generator_TableClassName="noticeOfEmploymentDataTable" msprop:Generator_TableVarName="tablenoticeOfEmployment" msprop:Generator_RowChangedName="noticeOfEmploymentRowChanged" msprop:Generator_TablePropName="noticeOfEmployment" msprop:Generator_RowDeletingName="noticeOfEmploymentRowDeleting" msprop:Generator_RowChangingName="noticeOfEmploymentRowChanging" msprop:Generator_RowEvHandlerName="noticeOfEmploymentRowChangeEventHandler" msprop:Generator_RowDeletedName="noticeOfEmploymentRowDeleted" msprop:Generator_RowClassName="noticeOfEmploymentRow" msprop:Generator_UserTableName="noticeOfEmployment" msprop:Generator_RowEvArgName="noticeOfEmploymentRowChangeEvent">
+        <xs:element name="noticeOfEmployment" msprop:Generator_TableClassName="noticeOfEmploymentDataTable" msprop:Generator_TableVarName="tablenoticeOfEmployment" msprop:Generator_TablePropName="noticeOfEmployment" msprop:Generator_RowDeletingName="noticeOfEmploymentRowDeleting" msprop:Generator_RowChangingName="noticeOfEmploymentRowChanging" msprop:Generator_RowEvHandlerName="noticeOfEmploymentRowChangeEventHandler" msprop:Generator_RowDeletedName="noticeOfEmploymentRowDeleted" msprop:Generator_UserTableName="noticeOfEmployment" msprop:Generator_RowChangedName="noticeOfEmploymentRowChanged" msprop:Generator_RowEvArgName="noticeOfEmploymentRowChangeEvent" msprop:Generator_RowClassName="noticeOfEmploymentRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="jobName" msprop:Generator_ColumnVarNameInTable="columnjobName" msprop:Generator_ColumnPropNameInRow="jobName" msprop:Generator_ColumnPropNameInTable="jobNameColumn" msprop:Generator_UserColumnName="jobName" minOccurs="0">
@@ -611,7 +612,7 @@ FROM            purchase_order_t po INNER JOIN
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="officialReceipt" msprop:Generator_TableClassName="officialReceiptDataTable" msprop:Generator_TableVarName="tableofficialReceipt" msprop:Generator_TablePropName="officialReceipt" msprop:Generator_RowDeletingName="officialReceiptRowDeleting" msprop:Generator_RowChangingName="officialReceiptRowChanging" msprop:Generator_RowEvHandlerName="officialReceiptRowChangeEventHandler" msprop:Generator_RowDeletedName="officialReceiptRowDeleted" msprop:Generator_UserTableName="officialReceipt" msprop:Generator_RowChangedName="officialReceiptRowChanged" msprop:Generator_RowEvArgName="officialReceiptRowChangeEvent" msprop:Generator_RowClassName="officialReceiptRow">
+        <xs:element name="officialReceipt" msprop:Generator_TableClassName="officialReceiptDataTable" msprop:Generator_TableVarName="tableofficialReceipt" msprop:Generator_RowChangedName="officialReceiptRowChanged" msprop:Generator_TablePropName="officialReceipt" msprop:Generator_RowDeletingName="officialReceiptRowDeleting" msprop:Generator_RowChangingName="officialReceiptRowChanging" msprop:Generator_RowEvHandlerName="officialReceiptRowChangeEventHandler" msprop:Generator_RowDeletedName="officialReceiptRowDeleted" msprop:Generator_RowClassName="officialReceiptRow" msprop:Generator_UserTableName="officialReceipt" msprop:Generator_RowEvArgName="officialReceiptRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="companyName" msprop:Generator_ColumnVarNameInTable="columncompanyName" msprop:Generator_ColumnPropNameInRow="companyName" msprop:Generator_ColumnPropNameInTable="companyNameColumn" msprop:Generator_UserColumnName="companyName">
@@ -668,7 +669,7 @@ FROM            purchase_order_t po INNER JOIN
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="purchaseOrder" msprop:Generator_TableClassName="purchaseOrderDataTable" msprop:Generator_TableVarName="tablepurchaseOrder" msprop:Generator_RowChangedName="purchaseOrderRowChanged" msprop:Generator_TablePropName="purchaseOrder" msprop:Generator_RowDeletingName="purchaseOrderRowDeleting" msprop:Generator_RowChangingName="purchaseOrderRowChanging" msprop:Generator_RowEvHandlerName="purchaseOrderRowChangeEventHandler" msprop:Generator_RowDeletedName="purchaseOrderRowDeleted" msprop:Generator_RowClassName="purchaseOrderRow" msprop:Generator_UserTableName="purchaseOrder" msprop:Generator_RowEvArgName="purchaseOrderRowChangeEvent">
+        <xs:element name="purchaseOrder" msprop:Generator_TableClassName="purchaseOrderDataTable" msprop:Generator_TableVarName="tablepurchaseOrder" msprop:Generator_TablePropName="purchaseOrder" msprop:Generator_RowDeletingName="purchaseOrderRowDeleting" msprop:Generator_RowChangingName="purchaseOrderRowChanging" msprop:Generator_RowEvHandlerName="purchaseOrderRowChangeEventHandler" msprop:Generator_RowDeletedName="purchaseOrderRowDeleted" msprop:Generator_UserTableName="purchaseOrder" msprop:Generator_RowChangedName="purchaseOrderRowChanged" msprop:Generator_RowEvArgName="purchaseOrderRowChangeEvent" msprop:Generator_RowClassName="purchaseOrderRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="PONumChar" msprop:Generator_ColumnVarNameInTable="columnPONumChar" msprop:Generator_ColumnPropNameInRow="PONumChar" msprop:Generator_ColumnPropNameInTable="PONumCharColumn" msprop:Generator_UserColumnName="PONumChar">

@@ -259,6 +259,9 @@
     <Compile Include="ucProductsCRUD.xaml.cs">
       <DependentUpon>ucProductsCRUD.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ucPurchaseOrder.xaml.cs">
+      <DependentUpon>ucPurchaseOrder.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ucReports.xaml.cs">
       <DependentUpon>ucReports.xaml</DependentUpon>
     </Compile>
@@ -283,8 +286,8 @@
     <Compile Include="ucOfficialReceipt.xaml.cs">
       <DependentUpon>ucOfficialReceipt.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucPurchaseOrder.xaml.cs">
-      <DependentUpon>ucPurchaseOrder.xaml</DependentUpon>
+    <Compile Include="ucPurchaseOrderViewer.xaml.cs">
+      <DependentUpon>ucPurchaseOrderViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="ValueConverter.cs" />
     <Compile Include="ViewModelEntity.cs" />
@@ -338,6 +341,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ucPurchaseOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ucReports.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -370,7 +377,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucPurchaseOrder.xaml">
+    <Page Include="ucPurchaseOrderViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

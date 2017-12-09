@@ -8,7 +8,7 @@
     xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms" xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit" xmlns:Windows="clr-namespace:MigraDoc.Rendering.Windows;assembly=MigraDoc.Rendering-WPF"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="prototype2.MainScreen"
         mc:Ignorable="d"
-        Title="Olive Date Center" d:DesignWidth="1533.263" d:DesignHeight="1050.363" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Maximized" Visibility="Visible"
+        Title="Olive Date Center" d:DesignWidth="1425.263" d:DesignHeight="606.363" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Maximized" Visibility="Visible"
        >
     <Window.Resources>
         <local:IdToNameConverter x:Key="IdToNameConverter" />
@@ -229,329 +229,331 @@
                 </StackPanel>
             </Button>
         </Grid>
-        <StackPanel Margin="0,100,0,0" Background="#FF395066" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True">
-            <Button x:Name="dashBoardBtn" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" Height="70" VerticalAlignment="Top" Margin="0" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Click="dashBoardBtn_Click">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-100,0,0,0" Width="115">
-                    <Canvas x:Name="Capa_2" Canvas.Left="0" Canvas.Top="0" Width="30" Height="30">
-                        <Canvas.RenderTransform>
-                            <TranslateTransform X="0" Y="0"/>
-                        </Canvas.RenderTransform>
-                        <!--Unknown tag: metadata-->
-                        <!--Unknown tag: sodipodi:namedview-->
-                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path1" Fill="White" Height="30" Stretch="Fill" Width="30">
-                            <Path.Data>
-                                <PathGeometry Figures="M57.863 26.632L29.182 0L0.502 26.632c-0.404 0.376-0.428 1.009-0.052 1.414c0.374 0.404 1.009 0.427 1.413 0.052  l4.319-4.011v3.278v31h16v-18c0-3.866 3.134-7 7-7s7 3.134 7 7v18h16v-31v-3.278l4.319 4.011c0.192 0.179 0.437 0.267 0.681 0.267  c0.269 0 0.536-0.107 0.732-0.319C58.291 27.641 58.267 27.008 57.863 26.632z" FillRule="NonZero"/>
-                            </Path.Data>
-                        </Path>
-                        <Canvas x:Name="g4a"/>
-                        <Canvas x:Name="g1"/>
-                        <Canvas x:Name="g2"/>
-                        <Canvas x:Name="g3"/>
-                        <Canvas x:Name="g5"/>
-                        <Canvas x:Name="g7"/>
-                        <Canvas x:Name="g9"/>
-                        <Canvas x:Name="g11"/>
-                        <Canvas x:Name="g13"/>
-                        <Canvas x:Name="g15"/>
-                        <Canvas x:Name="g17"/>
-                        <Canvas x:Name="g19"/>
-                        <Canvas x:Name="g21"/>
-                        <Canvas x:Name="g23"/>
-                        <Canvas x:Name="g25"/>
-                    </Canvas>
-                    <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="70" Height="17"><Run Text="Dashboard"/><LineBreak/><Run/></TextBlock>
-                </StackPanel>
-            </Button>
-            <Button x:Name="salesBtn" Margin="0" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="5" ScrollViewer.CanContentScroll="True" Height="70" VerticalAlignment="Top" Click="salesBtn_Click">
-                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-100,0,0,0" Orientation="Horizontal" Width="115">
-                    <Canvas x:Name="Capa_3" Width="29.875" Height="29.875" Canvas.Left="0" Canvas.Top="0">
-                        <!--Unknown tag: metadata-->
-                        <Canvas.RenderTransform>
-                            <TranslateTransform X="0" Y="0"/>
-                        </Canvas.RenderTransform>
-                        <!--Unknown tag: sodipodi:namedview-->
-                        <Canvas x:Name="g42">
-                            <Canvas x:Name="g40">
-                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2c" Fill="White">
-                                    <Path.Data>
-                                        <PathGeometry Figures="M21.699 5.323c0.688 0.216 1.277 0.516 1.691 0.905h5.578v9.637c0.293 0.335 0.463 0.728 0.463 1.183v0.422    c0 0.246-0.054 0.474-0.146 0.686l0.146 0.004v1.098c0 0.236-0.048 0.455-0.133 0.658l0.133 0.004v1.099    c0 0.215-0.043 0.415-0.115 0.603h0.559V5.323H21.699z" FillRule="NonZero"/>
-                                    </Path.Data>
-                                </Path>
-                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path4b" Fill="White">
-                                    <Path.Data>
-                                        <PathGeometry Figures="M15.663 5.323H0v16.295h13.778c-0.224-0.265-0.366-0.566-0.414-0.904H0.905V6.229H13.97    C14.385 5.839 14.976 5.54 15.663 5.323z" FillRule="NonZero"/>
-                                    </Path.Data>
-                                </Path>
-                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path6c" Fill="White">
-                                    <Path.Data>
-                                        <PathGeometry Figures="M23.117 8.69c0 0.98-1.986 1.774-4.436 1.774c-2.451 0-4.437-0.794-4.437-1.774v1.097c0 0.98 1.983 1.774 4.437 1.774    c2.448 0 4.436-0.794 4.436-1.774V8.69z" FillRule="NonZero"/>
-                                    </Path.Data>
-                                </Path>
-                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path8c" Fill="White">
-                                    <Path.Data>
-                                        <PathGeometry Figures="M23.117 10.451c0 0.98-1.986 1.773-4.436 1.773c-2.451 0-4.437-0.793-4.437-1.773v1.098c0 0.98 1.983 1.774 4.437 1.774    c2.448 0 4.436-0.794 4.436-1.774V10.451z" FillRule="NonZero"/>
-                                    </Path.Data>
-                                </Path>
-                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path10c" Fill="White">
-                                    <Path.Data>
-                                        <PathGeometry Figures="M23.117 12.21c0 0.98-1.986 1.774-4.436 1.774c-2.451 0-4.437-0.794-4.437-1.774v1.098c0 0.98 1.983 1.774 4.437 1.774    c2.448 0 4.436-0.793 4.436-1.774V12.21z" FillRule="NonZero"/>
-                                    </Path.Data>
-                                </Path>
-                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path12c" Fill="White">
-                                    <Path.Data>
-                                        <PathGeometry Figures="M23.117 7.579c0-0.98-1.986-1.774-4.436-1.774c-2.451 0-4.437 0.794-4.437 1.774V8c0 0.98 1.983 1.774 4.437 1.774    c2.448 0 4.436-0.793 4.436-1.774V7.579z M18.682 8.91c-2.438 0-3.993-0.788-3.993-1.331s1.555-1.331 3.993-1.331    c2.437 0 3.99 0.788 3.99 1.331S21.118 8.91 18.682 8.91z" FillRule="NonZero"/>
-                                    </Path.Data>
-                                </Path>
-                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path14c" Fill="White">
-                                    <Path.Data>
-                                        <PathGeometry Figures="M23.117 14.639v-0.668c0 0.251-0.133 0.489-0.368 0.707C22.871 14.663 22.993 14.649 23.117 14.639z" FillRule="NonZero"/>
-                                    </Path.Data>
-                                </Path>
-                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path16c" Fill="White">
-                                    <Path.Data>
-                                        <PathGeometry Figures="M18.682 15.745c-2.451 0-4.437-0.793-4.437-1.773v1.098c0 0.98 1.983 1.774 4.437 1.774c0.106 0 0.213-0.005 0.318-0.007    c0.066-0.448 0.339-0.832 0.757-1.146C19.412 15.725 19.053 15.745 18.682 15.745z" FillRule="NonZero"/>
-                                    </Path.Data>
-                                </Path>
-                                <Path
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path18c" Fill="White">
-                                    <Path.Data>
-                                        <PathGeometry Figures="M14.246 15.852v1.099c0 0.979 1.984 1.773 4.436 1.773c0.102 0 0.199-0.004 0.299-0.006c0-0.493 0-0.891 0-1.098    c-0.1 0.002-0.197 0.006-0.299 0.006C16.23 17.626 14.246 16.833 14.246 15.852z" FillRule="NonZero"/>
-                                    </Path.Data>
-                                </Path>
-                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path20c" Fill="White">
-                                    <Path.Data>
-                                        <PathGeometry Figures="M14.246 17.611v1.099c0 0.979 1.984 1.773 4.436 1.773c0.102 0 0.199-0.004 0.299-0.006c0-0.367 0-0.74 0-1.098    c-0.1 0.002-0.197 0.006-0.299 0.006C16.23 19.387 14.246 18.593 14.246 17.611z" FillRule="NonZero"/>
-                                    </Path.Data>
-                                </Path>
-                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path22c" Fill="White">
-                                    <Path.Data>
-                                        <PathGeometry Figures="M14.246 19.372v1.099c0 0.979 1.984 1.774 4.436 1.774c0.102 0 0.199-0.004 0.299-0.006c0-0.289 0-0.671 0-1.098    c-0.1 0.002-0.197 0.006-0.299 0.006C16.23 21.146 14.246 20.353 14.246 19.372z" FillRule="NonZero"/>
-                                    </Path.Data>
-                                </Path>
-                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path24c" Fill="White">
-                                    <Path.Data>
-                                        <PathGeometry Figures="M24.09 19.934c-2.449 0-4.436-0.794-4.436-1.774v1.098c0 0.98 1.986 1.774 4.436 1.774c2.451 0 4.436-0.794 4.436-1.774    v-1.098C28.525 19.14 26.541 19.934 24.09 19.934z" FillRule="NonZero"/>
-                                    </Path.Data>
-                                </Path>
-                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path26c" Fill="White">
-                                    <Path.Data>
-                                        <PathGeometry Figures="M24.09 21.693c-2.449 0-4.436-0.793-4.436-1.774v1.099c0 0.979 1.986 1.774 4.436 1.774c2.451 0 4.436-0.795 4.436-1.774    v-1.099C28.525 20.899 26.541 21.693 24.09 21.693z" FillRule="NonZero"/>
-                                    </Path.Data>
-                                </Path>
-                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path28c" Fill="White">
-                                    <Path.Data>
-                                        <PathGeometry Figures="M24.09 23.454c-2.449 0-4.436-0.795-4.436-1.774v1.098c0 0.979 1.986 1.774 4.436 1.774c2.451 0 4.436-0.795 4.436-1.774    V21.68C28.525 22.659 26.541 23.454 24.09 23.454z" FillRule="NonZero"/>
-                                    </Path.Data>
-                                </Path>
-                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path30c" Fill="White">
-                                    <Path.Data>
-                                        <PathGeometry Figures="M24.09 15.272c-2.449 0-4.436 0.794-4.436 1.773v0.423c0 0.979 1.986 1.774 4.436 1.774c2.451 0 4.436-0.793 4.436-1.774    v-0.421C28.525 16.066 26.541 15.272 24.09 15.272z M24.09 18.378c-2.438 0-3.99-0.789-3.99-1.332s1.555-1.33 3.99-1.33    c2.438 0 3.992 0.787 3.992 1.33S26.527 18.378 24.09 18.378z" FillRule="NonZero"/>
-                                    </Path.Data>
-                                </Path>
-                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path32c" Fill="White">
-                                    <Path.Data>
-                                        <PathGeometry Figures="M13.34 20.261V7.579c0-0.332 0.093-0.629 0.255-0.896H1.358v13.579L13.34 20.261L13.34 20.261z M5.741 10.47    c0.392-0.39 0.911-0.616 1.557-0.68V8.805h0.773v0.964c0.745 0.035 1.301 0.155 1.668 0.36v1.429    c-0.494-0.299-1.051-0.483-1.668-0.55v2.007c0.773 0.279 1.327 0.597 1.663 0.956c0.335 0.358 0.503 0.792 0.503 1.3    c0 0.585-0.188 1.059-0.562 1.416s-0.909 0.576-1.604 0.654v1.148H7.297v-1.117c-0.717-0.004-1.383-0.166-2.001-0.486v-1.469    c0.205 0.166 0.51 0.32 0.916 0.461c0.405 0.142 0.768 0.223 1.085 0.244v-1.928c-0.825-0.307-1.391-0.64-1.691-0.998    c-0.302-0.358-0.453-0.795-0.453-1.311C5.153 11.332 5.349 10.859 5.741 10.47z" FillRule="NonZero"/>
-                                    </Path.Data>
-                                </Path>
-                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path34c" Fill="White">
-                                    <Path.Data>
-                                        <PathGeometry Figures="M24.09 14.368c1.661 0 3.398 0.352 4.426 1.094v-8.78h-4.748c0.162 0.268 0.254 0.565 0.254 0.896v6.791    C24.044 14.37 24.068 14.368 24.09 14.368z" FillRule="NonZero"/>
-                                    </Path.Data>
-                                </Path>
-                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path36c" Fill="White">
-                                    <Path.Data>
-                                        <PathGeometry Figures="M7.297 12.707v-1.678c-0.49 0.088-0.736 0.344-0.736 0.767C6.561 12.16 6.807 12.462 7.297 12.707z" FillRule="NonZero"/>
-                                    </Path.Data>
-                                </Path>
-                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path38c" Fill="White">
-                                    <Path.Data>
-                                        <PathGeometry Figures="M8.828 15.344c0-0.347-0.252-0.628-0.757-0.847v1.604C8.576 16.022 8.828 15.771 8.828 15.344z" FillRule="NonZero"/>
-                                    </Path.Data>
-                                </Path>
-                            </Canvas>
+        <ScrollViewer Margin="0,100,0,0" VerticalScrollBarVisibility="Hidden" >
+            <StackPanel Background="#FF395066" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" CanHorizontallyScroll="True">
+                <Button x:Name="dashBoardBtn" Style="{StaticResource mainButton}" Foreground="White" Height="70" VerticalAlignment="Top" Margin="0" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Click="dashBoardBtn_Click" Padding="1">
+                    <StackPanel Margin="-100,0,0,0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Canvas x:Name="Capa_2" Canvas.Left="0" Canvas.Top="0" Width="30" Height="30">
+                            <Canvas.RenderTransform>
+                                <TranslateTransform X="0" Y="0"/>
+                            </Canvas.RenderTransform>
+                            <!--Unknown tag: metadata-->
+                            <!--Unknown tag: sodipodi:namedview-->
+                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path1" Fill="White" Height="30" Stretch="Fill" Width="30">
+                                <Path.Data>
+                                    <PathGeometry Figures="M57.863 26.632L29.182 0L0.502 26.632c-0.404 0.376-0.428 1.009-0.052 1.414c0.374 0.404 1.009 0.427 1.413 0.052  l4.319-4.011v3.278v31h16v-18c0-3.866 3.134-7 7-7s7 3.134 7 7v18h16v-31v-3.278l4.319 4.011c0.192 0.179 0.437 0.267 0.681 0.267  c0.269 0 0.536-0.107 0.732-0.319C58.291 27.641 58.267 27.008 57.863 26.632z" FillRule="NonZero"/>
+                                </Path.Data>
+                            </Path>
+                            <Canvas x:Name="g4a"/>
+                            <Canvas x:Name="g1"/>
+                            <Canvas x:Name="g2"/>
+                            <Canvas x:Name="g3"/>
+                            <Canvas x:Name="g5"/>
+                            <Canvas x:Name="g7"/>
+                            <Canvas x:Name="g9"/>
+                            <Canvas x:Name="g11"/>
+                            <Canvas x:Name="g13"/>
+                            <Canvas x:Name="g15"/>
+                            <Canvas x:Name="g17"/>
+                            <Canvas x:Name="g19"/>
+                            <Canvas x:Name="g21"/>
+                            <Canvas x:Name="g23"/>
+                            <Canvas x:Name="g25"/>
                         </Canvas>
-                        <Canvas x:Name="g44c"/>
-                        <Canvas x:Name="g46c"/>
-                        <Canvas x:Name="g48c"/>
-                        <Canvas x:Name="g50c"/>
-                        <Canvas x:Name="g52c"/>
-                        <Canvas x:Name="g54c"/>
-                        <Canvas x:Name="g56c"/>
-                        <Canvas x:Name="g58c"/>
-                        <Canvas x:Name="g60c"/>
-                        <Canvas x:Name="g62c"/>
-                        <Canvas x:Name="g64c"/>
-                        <Canvas x:Name="g66c"/>
-                        <Canvas x:Name="g68c"/>
-                        <Canvas x:Name="g70c"/>
-                        <Canvas x:Name="g72c"/>
-                    </Canvas>
-                    <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="70" Height="18" Text="Transaction"/>
-                </StackPanel>
-            </Button>
-            <Grid x:Name="salesBtnSubMenuGrid" Height="114" Background="#FF046380" Visibility="Collapsed">
-                <Button x:Name="quotesSalesMenuBtn" Content="Quotations" Margin="0,2,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1" Width="239.2" Click="quotesSalesMenuBtn_Click"/>
-                <Button x:Name="ordersSalesMenuBtn" Content="Orders" Margin="0,37,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1" Click="ordersSalesMenuBtn_Click"/>
-                <Button x:Name="invoiceSalesMenuBtn" Content="Invoices" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Margin="0,72,-1,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1" Click="invoiceSalesMenuBtn_Click"/>
-            </Grid>
-            <Button x:Name="serviceBtn" Margin="0" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="5" ScrollViewer.CanContentScroll="True" Height="70" VerticalAlignment="Top" Click="serviceBtn_Click">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="-100,0,0,0" Width="115">
-                    <Canvas x:Name="Capa_1gh" Width="30" Height="30" Canvas.Left="0" Canvas.Top="0">
-                        <Canvas.RenderTransform>
-                            <TranslateTransform X="0" Y="0"/>
-                        </Canvas.RenderTransform>
-                        <!--Unknown tag: metadata-->
-                        <!--Unknown tag: sodipodi:namedview-->
-                        <Canvas x:Name="g4gh">
-                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2gh" Fill="#FFFFFFFF" Height="25.001" Stretch="Fill" Width="23.438" Canvas.Left="3.333" Canvas.Top="3.333">
-                                <Path.Data>
-                                    <PathGeometry Figures="M453.584 405.715L298.332 250.457c-1.454-1.46-3.009-2.755-4.61-3.967l27.497-28.954c1.406-1.416 2.736-2.905 3.96-4.436   c36.505 13.77 79.34 6.029 108.682-23.309c21.402-21.409 32.195-51.013 29.583-81.226c-0.283-3.419-2.548-6.375-5.769-7.542   c-3.228-1.179-6.845-0.375-9.274 2.045l-49.757 49.754l-50.377-12.699l-14.287-51.967l49.745-49.748   c2.441-2.433 3.239-6.053 2.063-9.277c-1.171-3.233-4.126-5.479-7.555-5.78c-30.21-2.604-59.816 8.183-81.226 29.592   c-29.317 29.317-37.078 72.129-23.323 108.619c-1.496 1.265-2.985 2.61-4.445 4.049l-40.471 38.869l-74.319-74.312   c-0.928-0.931-1.918-1.75-2.938-2.519c0.872-1.53 1.72-3.105 2.512-4.74c15.696 3.021 44.39-27.544 68.76-51.905L151.787 0   c-31.747 31.752-54.929 53.061-51.92 68.757c-7.258 3.546-13.728 7.882-18.326 12.486l-10.001 9.998   c-6.493 6.502-10.409 14.588-11.807 23.014c-0.97 1.108-1.957 2.275-2.938 3.523l-3.727 4.684   c-0.104 0.115-0.425 0.576-0.514 0.694l-3.378 4.729c-2.113 2.819-3.96 5.881-5.746 8.836c-0.659 1.097-1.33 2.196-2.015 3.292   c-0.109 0.189-0.216 0.375-0.313 0.562l-1.501 2.828c-1.814 3.402-3.697 6.924-5.308 10.799l-0.26 0.617   c-1.9 4.513-3.869 9.186-5.243 14.139l-0.665 2.143c-0.544 1.762-1.097 3.52-1.605 5.621l-1.38 6.833   c-1.029 4.273-1.375 8.488-1.676 12.221l-0.201 2.453c-0.508 3.871-0.36 7.521-0.222 10.742c0.047 1.079 0.089 2.137 0.121 3.564   c0.036 0.594 0.042 1.173 0.06 1.744c0.035 1.439 0.074 3.074 0.352 4.793l0.866 5.545c0.186 1.072 0.343 2.113 0.491 3.111   c0.331 2.252 0.671 4.581 1.342 6.792l3.632 12.602c1.12 3.83 4.758 6.366 8.739 6.088c2.107-0.147 4.001-1.058 5.411-2.471   c1.259-1.259 2.131-2.914 2.397-4.781l1.883-12.812c0.139-1.017 0.576-2.506 1.028-4.082c0.322-1.093 0.635-2.208 0.877-3.159   l1.339-4.782c0.163-0.647 0.479-1.277 0.757-1.924c0.266-0.6 0.532-1.218 0.769-1.827c0.449-1.017 0.872-2.033 1.288-3.076   c0.825-2.045 1.605-3.969 2.796-5.858c0.518-0.872 0.999-1.738 1.49-2.622c1.241-2.222 2.42-4.32 3.821-6.059   c0.088-0.103 0.168-0.218 0.26-0.34l3.159-4.356c0.647-0.819 1.374-1.593 2.081-2.373c0.502-0.55 1.005-1.103 1.64-1.83   c1.865-2.243 4.055-4.199 6.168-6.124l1.132-1.017c1.566-1.454 3.378-2.822 5.284-4.268c0.78-0.583 1.543-1.162 2.293-1.732   c0.963-0.624 1.895-1.247 2.813-1.865c1.72-1.162 3.209-2.167 4.93-3.062l3.745-2.131l3.789-1.858   c1.321-0.683 2.622-1.209 3.821-1.693c0.712-0.296 1.416-0.583 2.069-0.866c0.665-0.23 1.306-0.479 1.912-0.703   c0.812-0.296 1.513-0.58 2.465-0.828l1.022-0.23c1.114 1.803 2.42 3.517 3.987 5.083l73.515 73.518L31.647 393.822   c-0.062 0.059-0.121 0.124-0.178 0.178c-19.529 19.529-22.709 48.131-3.177 67.666c19.532 19.529 46.316 14.522 65.84-5   c0.086-0.083 0.16-0.16 0.236-0.249l138.448-145.782c0.812 0.957 1.616 1.92 2.518 2.824l155.24 155.253   c17.396 17.401 45.613 17.401 63.009 0C470.974 451.322 470.974 423.104 453.584 405.715z M73.871 440.564   c-7.191 7.199-18.855 7.199-26.052 0c-7.19-7.193-7.19-18.85 0-26.043c7.19-7.188 18.855-7.193 26.052 0   C81.055 421.715 81.055 433.371 73.871 440.564z" FillRule="NonZero"/>
-                                </Path.Data>
-                            </Path>
-                        </Canvas>
-                        <Canvas x:Name="g6gh"/>
-                        <Canvas x:Name="g8gh"/>
-                        <Canvas x:Name="g10gh"/>
-                        <Canvas x:Name="g12gh"/>
-                        <Canvas x:Name="g14gh"/>
-                        <Canvas x:Name="g16gh"/>
-                        <Canvas x:Name="g18gh"/>
-                        <Canvas x:Name="g20gh"/>
-                        <Canvas x:Name="g22gh"/>
-                        <Canvas x:Name="g24gh"/>
-                        <Canvas x:Name="g26gh"/>
-                        <Canvas x:Name="g28gh"/>
-                        <Canvas x:Name="g30gh"/>
-                        <Canvas x:Name="g32gh"/>
-                        <Canvas x:Name="g34gh"/>
-                    </Canvas>
-                    <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="47" Height="18" Text="Services"/>
-                </StackPanel>
-            </Button>
-            <Button x:Name="reportsBtn" Margin="0" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" Height="70" VerticalAlignment="Top" Click="reportsBtn_Click">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-100,0,0,0" Width="115">
-                    <Canvas x:Name="Capa_1d1" Width="27.646" Height="27.647" Canvas.Left="0" Canvas.Top="0">
-                        <Canvas.RenderTransform>
-                            <TranslateTransform X="0" Y="0"/>
-                        </Canvas.RenderTransform>
-                        <!--Unknown tag: metadata-->
-                        <!--Unknown tag: sodipodi:namedview-->
-                        <Canvas x:Name="g16d1">
-                            <Canvas x:Name="g14d1">
-                                <Polygon xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="2.17,25.847 6.069,25.847 6.069,14.02 2.17,16.157" x:Name="polygon1" FillRule="NonZero" Fill="White"/>
-                                <Polygon xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="7.258,13.37 7.258,25.847 11.156,25.847 11.156,18.424 8.127,12.893" x:Name="polygon3" FillRule="NonZero" Fill="White"/>
-                                <Polygon xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="12.344,25.847 16.244,25.847 16.244,17.188 12.344,20.593" x:Name="polygon5" FillRule="NonZero" Fill="White"/>
-                                <Polygon xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="17.432,25.847 21.331,25.847 21.331,12.745 17.432,16.151" x:Name="polygon7" FillRule="NonZero" Fill="White"/>
-                                <Polygon xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="22.518,11.708 22.518,25.847 26.418,25.847 26.418,13.212 23.799,10.591" x:Name="polygon9" FillRule="NonZero" Fill="White"/>
-                                <Polygon xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="12.927,17.938 23.869,8.297 25.719,10.147 27.646,1.799 19.299,3.725 21.023,5.452 13.972,11.665 10.299,5.216 0,10.859 1.928,14.381 8.765,10.635" x:Name="polygon11" FillRule="NonZero" Fill="White"/>
-                            </Canvas>
-                        </Canvas>
-                        <Canvas x:Name="g18d1"/>
-                        <Canvas x:Name="g20d1"/>
-                        <Canvas x:Name="g22d1"/>
-                        <Canvas x:Name="g24d1"/>
-                        <Canvas x:Name="g26d1"/>
-                        <Canvas x:Name="g28d1"/>
-                        <Canvas x:Name="g30d1"/>
-                        <Canvas x:Name="g32d1"/>
-                        <Canvas x:Name="g34d1"/>
-                        <Canvas x:Name="g36d1"/>
-                        <Canvas x:Name="g38d1"/>
-                        <Canvas x:Name="g40d1"/>
-                        <Canvas x:Name="g42d1"/>
-                        <Canvas x:Name="g44d1"/>
-                        <Canvas x:Name="g46d1"/>
-                    </Canvas>
-                    <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Reports" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="50"/>
-                </StackPanel>
-            </Button>
-            <StackPanel x:Name="reportsSubMenuGrid" Margin="0" Orientation="Vertical" Background="#FF046380">
-                <Button x:Name="salesReportBtn" Content="Employees/Contractor" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0,0,0,5"/>
-                <Button x:Name="salesReportBtn_Copy" Content="Employees/Contractor" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5"/>
-                <Button x:Name="salesReportBtn_Copy1" Content="Employees/Contractor" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5"/>
-            </StackPanel>
-            <Button x:Name="manageBtn" Margin="0" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" Height="70" VerticalAlignment="Top" Click="manageBtn_Click">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="-100,0,0,0" HorizontalAlignment="Left" Width="115">
-                    <Canvas x:Name="Capa_1g" Width="30" Height="30">
-                        <Canvas.RenderTransform>
-                            <TranslateTransform X="0" Y="0"/>
-                        </Canvas.RenderTransform>
-                        <!--Unknown tag: metadata-->
-                        <!--Unknown tag: sodipodi:namedview-->
-                        <Canvas x:Name="g24g">
-                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2g" Fill="White" Canvas.Left="7.917" Canvas.Top="18.75" Height="3.499" Stretch="Fill" Width="3.499">
-                                <Path.Data>
-                                    <PathGeometry Figures="M19 45c2.206 0 4-1.794 4-4s-1.794-4-4-4s-4 1.794-4 4S16.794 45 19 45z M19 39c1.103 0 2 0.897 2 2s-0.897 2-2 2   s-2-0.897-2-2S17.897 39 19 39z" FillRule="NonZero"/>
-                                </Path.Data>
-                            </Path>
-                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path4g" Fill="White" Canvas.Left="20.25" Canvas.Top="6" Height="4.001" Stretch="Fill" Width="4.001">
-                                <Path.Data>
-                                    <PathGeometry Figures="M44 12c-2.206 0-4 1.794-4 4s1.794 4 4 4s4-1.794 4-4S46.206 12 44 12z M44 18c-1.103 0-2-0.897-2-2s0.897-2 2-2   s2 0.897 2 2S45.103 18 44 18z" FillRule="NonZero"/>
-                                </Path.Data>
-                            </Path>
-                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path6g" Fill="White" Canvas.Left="6" Canvas.Top="16.834" Height="6.832" Stretch="Fill" Width="6.833">
-                                <Path.Data>
-                                    <PathGeometry Figures="M19 49c4.411 0 8-3.589 8-8s-3.589-8-8-8s-8 3.589-8 8S14.589 49 19 49z M19 35c3.309 0 6 2.691 6 6s-2.691 6-6 6   s-6-2.691-6-6S15.691 35 19 35z" FillRule="NonZero"/>
-                                </Path.Data>
-                            </Path>
-                            <Canvas x:Name="g22g">
-                                <Canvas x:Name="g20g">
-                                    <Canvas x:Name="g16g">
-                                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path8" Fill="White">
-                                            <Path.Data>
-                                                <PathGeometry Figures="M35.529 24.491c-0.007-0.007-0.013-0.013-0.02-0.02c0.003 0.004 0.002 0.011 0.005 0.014S35.525 24.488 35.529 24.491z" FillRule="NonZero"/>
-                                            </Path.Data>
-                                        </Path>
-                                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path10g" Fill="White">
-                                            <Path.Data>
-                                                <PathGeometry Figures="M35.516 7.546c0.016-0.016 0.032-0.032 0.048-0.047c-0.016 0.006-0.038 0.005-0.049 0.016      C35.51 7.52 35.517 7.537 35.516 7.546z" FillRule="NonZero"/>
-                                            </Path.Data>
-                                        </Path>
-                                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path12g" Fill="White">
-                                            <Path.Data>
-                                                <PathGeometry Figures="M52.503 24.434c-0.023 0.023-0.045 0.046-0.068 0.068c0.016-0.006 0.039-0.006 0.05-0.017      C52.497 24.474 52.497 24.451 52.503 24.434z" FillRule="NonZero"/>
-                                            </Path.Data>
-                                        </Path>
-                                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path14g" Fill="White" Height="30" Stretch="Fill" Width="30">
-                                            <Path.Data>
-                                                <PathGeometry Figures="M57.649 18.36c-0.006-0.016-0.006-0.034-0.013-0.05c-1.161-2.74-2.739-5.284-4.643-7.551      c-1.12-1.336-2.354-2.572-3.686-3.695c-2.284-1.929-4.85-3.528-7.617-4.699c-0.015-0.007-0.032-0.007-0.048-0.012      C38.061 0.838 34.126 0 30 0c-1.738 0-3.44 0.157-5.098 0.442c-0.003 0-0.006 0-0.008 0c-0.028 0.005-0.056 0.012-0.085 0.017      c-0.405 0.071-0.808 0.148-1.207 0.235c-0.023 0.005-0.047 0.011-0.07 0.016c-1.591 0.351-3.134 0.83-4.621 1.423      c-0.142 0.056-0.286 0.11-0.427 0.168c-0.22 0.092-0.436 0.19-0.654 0.287c-0.22 0.098-0.44 0.195-0.657 0.298      c-0.171 0.082-0.34 0.167-0.51 0.251c-0.05 0.025-0.1 0.049-0.15 0.074c-0.013 0.006-0.028 0.006-0.041 0.012      c-0.059 0.03-0.116 0.064-0.175 0.094c-0.142 0.073-0.282 0.149-0.422 0.224c-0.122 0.065-0.243 0.132-0.364 0.199      c-0.142 0.078-0.285 0.153-0.425 0.234c-0.169 0.097-0.334 0.199-0.501 0.299c-0.083 0.05-0.167 0.101-0.25 0.152      c-0.35 0.215-0.696 0.437-1.038 0.666c-0.033 0.022-0.066 0.044-0.098 0.066c-0.179 0.121-0.359 0.241-0.535 0.366      c-0.021 0.015-0.04 0.03-0.061 0.045c-0.376 0.268-0.745 0.545-1.109 0.83c-0.011 0.009-0.023 0.017-0.034 0.025      c-0.002 0.002-0.004 0.005-0.006 0.007c-1.644 1.293-3.162 2.759-4.518 4.388c-0.018 0.021-0.027 0.047-0.042 0.07      C2.591 16.082 0 22.744 0 30c0 2.995 0.447 5.887 1.268 8.618c0.002 0.007-0.001 0.015 0.001 0.022      c0.01 0.032 0.022 0.062 0.031 0.094c0.166 0.544 0.344 1.083 0.54 1.613c0.069 0.189 0.148 0.373 0.221 0.56      c0.121 0.31 0.243 0.619 0.374 0.923c0.134 0.313 0.276 0.62 0.42 0.927c0.068 0.143 0.135 0.286 0.205 0.427      c2.928 6.002 7.763 10.836 13.766 13.762c0.134 0.066 0.27 0.13 0.405 0.194c0.313 0.147 0.627 0.292 0.946 0.428      c0.29 0.125 0.584 0.24 0.879 0.356c0.201 0.079 0.399 0.164 0.603 0.238c0.525 0.193 1.059 0.37 1.597 0.534      c0.035 0.011 0.068 0.024 0.104 0.035c0.012 0.004 0.025 0.002 0.037 0.005C24.124 59.555 27.011 60 30 60      c4.995 0 9.705-1.234 13.852-3.402c0.027-0.011 0.055-0.017 0.082-0.031c0.073-0.038 0.141-0.082 0.214-0.12      c0.243-0.131 0.481-0.269 0.72-0.406c0.224-0.128 0.451-0.252 0.671-0.386c0.422-0.256 0.837-0.523 1.245-0.8      c0.175-0.118 0.343-0.245 0.515-0.367c0.272-0.193 0.543-0.386 0.808-0.588c0.149-0.114 0.295-0.231 0.442-0.347      c0.295-0.232 0.585-0.469 0.871-0.712c0.107-0.091 0.213-0.183 0.318-0.276c0.348-0.304 0.688-0.617 1.021-0.937      c0.039-0.038 0.079-0.074 0.118-0.113c0.482-0.468 0.952-0.949 1.402-1.448c0.015-0.015 0.037-0.021 0.051-0.038      c2.222-2.475 3.994-5.267 5.285-8.31c0.047-0.11 0.089-0.222 0.134-0.332c0.108-0.262 0.218-0.522 0.319-0.788      c0.004-0.01 0.002-0.021 0.005-0.031c0.435-1.152 0.799-2.338 1.091-3.552c0.008-0.034 0.016-0.069 0.024-0.104      c0.12-0.507 0.227-1.018 0.32-1.534c0.005-0.027 0.012-0.053 0.017-0.08c0.001-0.006 0-0.012 0.001-0.018      C59.831 33.564 60 31.802 60 30C60 25.874 59.162 21.941 57.649 18.36z M29 15h3.043c0.213-2.527 1.233-4.864 2.811-6.731      l-2.168-2.168c-0.391-0.391-0.391-1.023 0-1.414s1.023-0.391 1.414 0l2.166 2.166c1.395-1.185 3.063-2.069 4.917-2.515      c1.948 0.852 3.782 1.917 5.47 3.169c0.033 0.025 0.067 0.048 0.1 0.073c0.275 0.206 0.542 0.42 0.809 0.636      c0.086 0.069 0.175 0.136 0.26 0.206c0.2 0.166 0.394 0.339 0.589 0.51c0.142 0.124 0.287 0.244 0.427 0.372      c0.074 0.068 0.145 0.14 0.219 0.208c0.508 0.473 0.998 0.963 1.47 1.472c0.055 0.059 0.112 0.115 0.167 0.175      c0.132 0.145 0.258 0.297 0.387 0.445c0.166 0.19 0.335 0.377 0.496 0.572c0.073 0.088 0.142 0.18 0.214 0.27      c0.213 0.264 0.425 0.528 0.628 0.799c0.028 0.037 0.054 0.076 0.082 0.114c1.25 1.685 2.311 3.516 3.162 5.46      c-0.446 1.854-1.329 3.52-2.514 4.915l2.164 2.168c0.391 0.391 0.391 1.023 0 1.414c-0.195 0.195-0.451 0.293-0.707 0.293      s-0.512-0.098-0.707-0.293l-2.166-2.169c-1.868 1.579-4.206 2.599-6.733 2.813V31c0 0.553-0.448 1-1 1s-1-0.447-1-1v-3.051      c-2.559-0.212-4.89-1.227-6.743-2.796l-2.157 2.161c-0.195 0.195-0.451 0.293-0.707 0.293s-0.512-0.098-0.707-0.293      c-0.391-0.391-0.391-1.023 0-1.414l2.157-2.161c-1.568-1.852-2.58-4.182-2.793-6.739H29c-0.552 0-1-0.447-1-1S28.448 15 29 15z       M13.01 7.772c0.081-0.062 0.159-0.127 0.24-0.188c0.402-0.301 0.816-0.584 1.233-0.863c0.203-0.135 0.403-0.276 0.609-0.406      c0.027-0.017 0.053-0.034 0.08-0.051C15.594 6 16.028 5.757 16.463 5.516c0.192-0.106 0.379-0.22 0.573-0.322      C18.208 5.623 19 6.73 19 8c0 1.654-1.346 3-3 3s-3-1.346-3-3C13 7.925 13.004 7.849 13.01 7.772z M8.352 15.013      c0.677-1 0.851-2.209 0.509-3.342c0.1-0.115 0.198-0.232 0.299-0.345c0.255-0.285 0.518-0.562 0.784-0.835      c0.275-0.283 0.557-0.559 0.843-0.83c0.133-0.125 0.269-0.247 0.404-0.369C11.764 11.42 13.693 13 16 13c2.757 0 5-2.243 5-5      c0-1.527-0.693-2.904-1.807-3.827c0.612-0.256 1.235-0.488 1.865-0.7c0.065-0.022 0.129-0.044 0.194-0.066      c0.65-0.214 1.308-0.407 1.975-0.573c-0.157 0.745-0.097 1.53 0.193 2.268c0.5 1.274 1.602 2.19 2.947 2.449L27 7.672v1.086      L26.333 8.86c-1.353 0.208-2.488 1.081-3.036 2.336c-0.548 1.256-0.417 2.683 0.352 3.816l0.361 0.534l-0.768 0.767l-0.177-0.13      c-0.688-0.505-1.498-0.771-2.339-0.771c-1.98 0-3.635 1.417-3.935 3.37L16.757 19h-1.085l-0.122-0.632      c-0.359-1.869-2.003-3.226-3.909-3.226c-0.842 0-1.651 0.268-2.339 0.771l-0.544 0.399L7.99 15.547L8.352 15.013z       M37.914 49.406C37.748 49.778 37.383 50 37 50c-0.136 0-0.273-0.027-0.406-0.086l-3.405-1.505      c-1.306 2.51-3.275 4.616-5.688 6.122l1.15 1.771c0.301 0.464 0.169 1.083-0.294 1.384c-0.168 0.109-0.357 0.161-0.543 0.161      c-0.327 0-0.648-0.16-0.84-0.455l-1.237-1.904c-1.255 0.578-2.595 1.018-4.019 1.261c-0.003-0.001-0.005-0.001-0.008-0.002      c-0.493-0.152-0.977-0.322-1.458-0.5c-0.225-0.083-0.446-0.175-0.668-0.264c-0.23-0.092-0.459-0.186-0.686-0.283      c-0.297-0.129-0.593-0.262-0.885-0.401c-0.107-0.051-0.213-0.104-0.32-0.156c-5.57-2.738-10.103-7.271-12.839-12.841      c-0.051-0.104-0.102-0.208-0.152-0.313c-0.14-0.293-0.273-0.59-0.403-0.889c-0.098-0.227-0.191-0.456-0.283-0.686      c-0.089-0.221-0.18-0.442-0.263-0.666c-0.178-0.482-0.348-0.968-0.501-1.462c0-0.002-0.001-0.003-0.001-0.005      c0.271-1.588 0.771-3.081 1.455-4.455l-2.413-1.393c-0.478-0.276-0.642-0.888-0.366-1.366c0.276-0.478 0.886-0.644 1.366-0.366      l2.413 1.393c1.627-2.442 3.898-4.386 6.563-5.615l-1.202-3.118c-0.2-0.515 0.055-1.095 0.57-1.294      c0.514-0.202 1.094 0.055 1.294 0.569l1.206 3.127C15.675 25.278 17.304 25 19 25c1.963 0 3.836 0.373 5.576 1.022      c0.203-0.481 0.361-0.842 0.411-0.956l1.099-2.473c0.226-0.504 0.815-0.73 1.32-0.508c0.504 0.225 0.732 0.815 0.508 1.32      l-1.099 2.473c-0.04 0.089-0.234 0.434-0.51 0.903c3.165 1.633 5.702 4.298 7.203 7.538l3.129-1.251      c0.517-0.203 1.095 0.055 1.294 0.569c0.2 0.515-0.055 1.094-0.57 1.294l-3.127 1.251C34.721 37.705 35 39.318 35 41      c0 1.961-0.375 3.831-1.021 5.571l3.427 1.515C37.911 48.311 38.138 48.901 37.914 49.406z M55.381 41.789      c-0.018 0.039-0.036 0.077-0.054 0.115c-0.992 2.097-2.245 4.064-3.716 5.856C51.213 47.08 51 46.306 51 45.5      c0-2.481 2.019-4.5 4.5-4.5c0.076 0 0.151 0.002 0.226 0.006C55.613 41.268 55.501 41.531 55.381 41.789z M56.476 39.073      C56.154 39.024 55.828 39 55.5 39c-3.584 0-6.5 2.916-6.5 6.5c0 1.386 0.44 2.705 1.242 3.808      c-0.355 0.373-0.717 0.739-1.093 1.092c-0.037 0.035-0.073 0.07-0.11 0.104c-0.25 0.233-0.507 0.459-0.766 0.683      c-0.098 0.085-0.195 0.172-0.295 0.256c-0.203 0.172-0.412 0.337-0.621 0.502c-0.16 0.127-0.318 0.255-0.481 0.378      c-0.16 0.121-0.323 0.238-0.486 0.356c-0.152 0.11-0.304 0.219-0.458 0.326c0.215-0.959 0.125-1.974-0.283-2.909      c-0.65-1.49-1.998-2.527-3.604-2.774L41 47.161v-1.777l0.994-0.19c1.597-0.308 2.905-1.395 3.499-2.908      c0.594-1.513 0.375-3.199-0.587-4.511l-0.626-0.853l1.257-1.258l1.281 0.869c0.787 0.532 1.698 0.814 2.634 0.814      c2.262 0 4.213-1.61 4.64-3.828L54.384 32h1.777l0.161 1.046c0.141 0.915 0.53 1.739 1.137 2.414      C57.215 36.69 56.882 37.896 56.476 39.073z" FillRule="NonZero"/>
-                                            </Path.Data>
-                                        </Path>
-                                    </Canvas>
-                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path18g" Fill="White">
+                        <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="70" Height="17"><Run Text="Dashboard"/><LineBreak/><Run/></TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="salesBtn" Margin="0" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="5" ScrollViewer.CanContentScroll="True" Height="70" VerticalAlignment="Top" Click="salesBtn_Click">
+                    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-100,0,0,0" Orientation="Horizontal" Width="115">
+                        <Canvas x:Name="Capa_3" Width="29.875" Height="29.875" Canvas.Left="0" Canvas.Top="0">
+                            <!--Unknown tag: metadata-->
+                            <Canvas.RenderTransform>
+                                <TranslateTransform X="0" Y="0"/>
+                            </Canvas.RenderTransform>
+                            <!--Unknown tag: sodipodi:namedview-->
+                            <Canvas x:Name="g42">
+                                <Canvas x:Name="g40">
+                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2c" Fill="White">
                                         <Path.Data>
-                                            <PathGeometry Figures="M33.91 35.221c-0.004-0.01-0.008-0.019-0.012-0.028c0.001 0.004 0.001 0.008 0.002 0.012     C33.903 35.211 33.907 35.215 33.91 35.221z" FillRule="NonZero"/>
+                                            <PathGeometry Figures="M21.699 5.323c0.688 0.216 1.277 0.516 1.691 0.905h5.578v9.637c0.293 0.335 0.463 0.728 0.463 1.183v0.422    c0 0.246-0.054 0.474-0.146 0.686l0.146 0.004v1.098c0 0.236-0.048 0.455-0.133 0.658l0.133 0.004v1.099    c0 0.215-0.043 0.415-0.115 0.603h0.559V5.323H21.699z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path4b" Fill="White">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M15.663 5.323H0v16.295h13.778c-0.224-0.265-0.366-0.566-0.414-0.904H0.905V6.229H13.97    C14.385 5.839 14.976 5.54 15.663 5.323z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path6c" Fill="White">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M23.117 8.69c0 0.98-1.986 1.774-4.436 1.774c-2.451 0-4.437-0.794-4.437-1.774v1.097c0 0.98 1.983 1.774 4.437 1.774    c2.448 0 4.436-0.794 4.436-1.774V8.69z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path8c" Fill="White">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M23.117 10.451c0 0.98-1.986 1.773-4.436 1.773c-2.451 0-4.437-0.793-4.437-1.773v1.098c0 0.98 1.983 1.774 4.437 1.774    c2.448 0 4.436-0.794 4.436-1.774V10.451z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path10c" Fill="White">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M23.117 12.21c0 0.98-1.986 1.774-4.436 1.774c-2.451 0-4.437-0.794-4.437-1.774v1.098c0 0.98 1.983 1.774 4.437 1.774    c2.448 0 4.436-0.793 4.436-1.774V12.21z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path12c" Fill="White">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M23.117 7.579c0-0.98-1.986-1.774-4.436-1.774c-2.451 0-4.437 0.794-4.437 1.774V8c0 0.98 1.983 1.774 4.437 1.774    c2.448 0 4.436-0.793 4.436-1.774V7.579z M18.682 8.91c-2.438 0-3.993-0.788-3.993-1.331s1.555-1.331 3.993-1.331    c2.437 0 3.99 0.788 3.99 1.331S21.118 8.91 18.682 8.91z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path14c" Fill="White">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M23.117 14.639v-0.668c0 0.251-0.133 0.489-0.368 0.707C22.871 14.663 22.993 14.649 23.117 14.639z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path16c" Fill="White">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M18.682 15.745c-2.451 0-4.437-0.793-4.437-1.773v1.098c0 0.98 1.983 1.774 4.437 1.774c0.106 0 0.213-0.005 0.318-0.007    c0.066-0.448 0.339-0.832 0.757-1.146C19.412 15.725 19.053 15.745 18.682 15.745z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path
+                                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path18c" Fill="White">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M14.246 15.852v1.099c0 0.979 1.984 1.773 4.436 1.773c0.102 0 0.199-0.004 0.299-0.006c0-0.493 0-0.891 0-1.098    c-0.1 0.002-0.197 0.006-0.299 0.006C16.23 17.626 14.246 16.833 14.246 15.852z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path20c" Fill="White">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M14.246 17.611v1.099c0 0.979 1.984 1.773 4.436 1.773c0.102 0 0.199-0.004 0.299-0.006c0-0.367 0-0.74 0-1.098    c-0.1 0.002-0.197 0.006-0.299 0.006C16.23 19.387 14.246 18.593 14.246 17.611z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path22c" Fill="White">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M14.246 19.372v1.099c0 0.979 1.984 1.774 4.436 1.774c0.102 0 0.199-0.004 0.299-0.006c0-0.289 0-0.671 0-1.098    c-0.1 0.002-0.197 0.006-0.299 0.006C16.23 21.146 14.246 20.353 14.246 19.372z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path24c" Fill="White">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M24.09 19.934c-2.449 0-4.436-0.794-4.436-1.774v1.098c0 0.98 1.986 1.774 4.436 1.774c2.451 0 4.436-0.794 4.436-1.774    v-1.098C28.525 19.14 26.541 19.934 24.09 19.934z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path26c" Fill="White">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M24.09 21.693c-2.449 0-4.436-0.793-4.436-1.774v1.099c0 0.979 1.986 1.774 4.436 1.774c2.451 0 4.436-0.795 4.436-1.774    v-1.099C28.525 20.899 26.541 21.693 24.09 21.693z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path28c" Fill="White">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M24.09 23.454c-2.449 0-4.436-0.795-4.436-1.774v1.098c0 0.979 1.986 1.774 4.436 1.774c2.451 0 4.436-0.795 4.436-1.774    V21.68C28.525 22.659 26.541 23.454 24.09 23.454z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path30c" Fill="White">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M24.09 15.272c-2.449 0-4.436 0.794-4.436 1.773v0.423c0 0.979 1.986 1.774 4.436 1.774c2.451 0 4.436-0.793 4.436-1.774    v-0.421C28.525 16.066 26.541 15.272 24.09 15.272z M24.09 18.378c-2.438 0-3.99-0.789-3.99-1.332s1.555-1.33 3.99-1.33    c2.438 0 3.992 0.787 3.992 1.33S26.527 18.378 24.09 18.378z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path32c" Fill="White">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M13.34 20.261V7.579c0-0.332 0.093-0.629 0.255-0.896H1.358v13.579L13.34 20.261L13.34 20.261z M5.741 10.47    c0.392-0.39 0.911-0.616 1.557-0.68V8.805h0.773v0.964c0.745 0.035 1.301 0.155 1.668 0.36v1.429    c-0.494-0.299-1.051-0.483-1.668-0.55v2.007c0.773 0.279 1.327 0.597 1.663 0.956c0.335 0.358 0.503 0.792 0.503 1.3    c0 0.585-0.188 1.059-0.562 1.416s-0.909 0.576-1.604 0.654v1.148H7.297v-1.117c-0.717-0.004-1.383-0.166-2.001-0.486v-1.469    c0.205 0.166 0.51 0.32 0.916 0.461c0.405 0.142 0.768 0.223 1.085 0.244v-1.928c-0.825-0.307-1.391-0.64-1.691-0.998    c-0.302-0.358-0.453-0.795-0.453-1.311C5.153 11.332 5.349 10.859 5.741 10.47z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path34c" Fill="White">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M24.09 14.368c1.661 0 3.398 0.352 4.426 1.094v-8.78h-4.748c0.162 0.268 0.254 0.565 0.254 0.896v6.791    C24.044 14.37 24.068 14.368 24.09 14.368z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path36c" Fill="White">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M7.297 12.707v-1.678c-0.49 0.088-0.736 0.344-0.736 0.767C6.561 12.16 6.807 12.462 7.297 12.707z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path38c" Fill="White">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M8.828 15.344c0-0.347-0.252-0.628-0.757-0.847v1.604C8.576 16.022 8.828 15.771 8.828 15.344z" FillRule="NonZero"/>
                                         </Path.Data>
                                     </Path>
                                 </Canvas>
                             </Canvas>
+                            <Canvas x:Name="g44c"/>
+                            <Canvas x:Name="g46c"/>
+                            <Canvas x:Name="g48c"/>
+                            <Canvas x:Name="g50c"/>
+                            <Canvas x:Name="g52c"/>
+                            <Canvas x:Name="g54c"/>
+                            <Canvas x:Name="g56c"/>
+                            <Canvas x:Name="g58c"/>
+                            <Canvas x:Name="g60c"/>
+                            <Canvas x:Name="g62c"/>
+                            <Canvas x:Name="g64c"/>
+                            <Canvas x:Name="g66c"/>
+                            <Canvas x:Name="g68c"/>
+                            <Canvas x:Name="g70c"/>
+                            <Canvas x:Name="g72c"/>
                         </Canvas>
-                        <Canvas x:Name="g26g"/>
-                        <Canvas x:Name="g28g"/>
-                        <Canvas x:Name="g30g"/>
-                        <Canvas x:Name="g32g"/>
-                        <Canvas x:Name="g34g"/>
-                        <Canvas x:Name="g36g"/>
-                        <Canvas x:Name="g38g"/>
-                        <Canvas x:Name="g40g"/>
-                        <Canvas x:Name="g42g"/>
-                        <Canvas x:Name="g44g"/>
-                        <Canvas x:Name="g46g"/>
-                        <Canvas x:Name="g48g"/>
-                        <Canvas x:Name="g50g"/>
-                        <Canvas x:Name="g52g"/>
-                        <Canvas x:Name="g54g"/>
-                    </Canvas>
-                    <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Manage" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="50"/>
+                        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="70" Height="18" Text="Transaction"/>
+                    </StackPanel>
+                </Button>
+                <Grid x:Name="salesBtnSubMenuGrid" Height="114" Background="#FF046380" Visibility="Collapsed">
+                    <Button x:Name="quotesSalesMenuBtn" Content="Quotations" Margin="0,2,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1" Width="239.2" Click="quotesSalesMenuBtn_Click"/>
+                    <Button x:Name="ordersSalesMenuBtn" Content="Orders" Margin="0,37,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1" Click="ordersSalesMenuBtn_Click"/>
+                    <Button x:Name="invoiceSalesMenuBtn" Content="Invoices" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Margin="0,72,-1,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1" Click="invoiceSalesMenuBtn_Click"/>
+                </Grid>
+                <Button x:Name="serviceBtn" Margin="0" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="5" ScrollViewer.CanContentScroll="True" Height="70" VerticalAlignment="Top" Click="serviceBtn_Click">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="-100,0,0,0" Width="115">
+                        <Canvas x:Name="Capa_1gh" Width="30" Height="30" Canvas.Left="0" Canvas.Top="0">
+                            <Canvas.RenderTransform>
+                                <TranslateTransform X="0" Y="0"/>
+                            </Canvas.RenderTransform>
+                            <!--Unknown tag: metadata-->
+                            <!--Unknown tag: sodipodi:namedview-->
+                            <Canvas x:Name="g4gh">
+                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2gh" Fill="#FFFFFFFF" Height="25.001" Stretch="Fill" Width="23.438" Canvas.Left="3.333" Canvas.Top="3.333">
+                                    <Path.Data>
+                                        <PathGeometry Figures="M453.584 405.715L298.332 250.457c-1.454-1.46-3.009-2.755-4.61-3.967l27.497-28.954c1.406-1.416 2.736-2.905 3.96-4.436   c36.505 13.77 79.34 6.029 108.682-23.309c21.402-21.409 32.195-51.013 29.583-81.226c-0.283-3.419-2.548-6.375-5.769-7.542   c-3.228-1.179-6.845-0.375-9.274 2.045l-49.757 49.754l-50.377-12.699l-14.287-51.967l49.745-49.748   c2.441-2.433 3.239-6.053 2.063-9.277c-1.171-3.233-4.126-5.479-7.555-5.78c-30.21-2.604-59.816 8.183-81.226 29.592   c-29.317 29.317-37.078 72.129-23.323 108.619c-1.496 1.265-2.985 2.61-4.445 4.049l-40.471 38.869l-74.319-74.312   c-0.928-0.931-1.918-1.75-2.938-2.519c0.872-1.53 1.72-3.105 2.512-4.74c15.696 3.021 44.39-27.544 68.76-51.905L151.787 0   c-31.747 31.752-54.929 53.061-51.92 68.757c-7.258 3.546-13.728 7.882-18.326 12.486l-10.001 9.998   c-6.493 6.502-10.409 14.588-11.807 23.014c-0.97 1.108-1.957 2.275-2.938 3.523l-3.727 4.684   c-0.104 0.115-0.425 0.576-0.514 0.694l-3.378 4.729c-2.113 2.819-3.96 5.881-5.746 8.836c-0.659 1.097-1.33 2.196-2.015 3.292   c-0.109 0.189-0.216 0.375-0.313 0.562l-1.501 2.828c-1.814 3.402-3.697 6.924-5.308 10.799l-0.26 0.617   c-1.9 4.513-3.869 9.186-5.243 14.139l-0.665 2.143c-0.544 1.762-1.097 3.52-1.605 5.621l-1.38 6.833   c-1.029 4.273-1.375 8.488-1.676 12.221l-0.201 2.453c-0.508 3.871-0.36 7.521-0.222 10.742c0.047 1.079 0.089 2.137 0.121 3.564   c0.036 0.594 0.042 1.173 0.06 1.744c0.035 1.439 0.074 3.074 0.352 4.793l0.866 5.545c0.186 1.072 0.343 2.113 0.491 3.111   c0.331 2.252 0.671 4.581 1.342 6.792l3.632 12.602c1.12 3.83 4.758 6.366 8.739 6.088c2.107-0.147 4.001-1.058 5.411-2.471   c1.259-1.259 2.131-2.914 2.397-4.781l1.883-12.812c0.139-1.017 0.576-2.506 1.028-4.082c0.322-1.093 0.635-2.208 0.877-3.159   l1.339-4.782c0.163-0.647 0.479-1.277 0.757-1.924c0.266-0.6 0.532-1.218 0.769-1.827c0.449-1.017 0.872-2.033 1.288-3.076   c0.825-2.045 1.605-3.969 2.796-5.858c0.518-0.872 0.999-1.738 1.49-2.622c1.241-2.222 2.42-4.32 3.821-6.059   c0.088-0.103 0.168-0.218 0.26-0.34l3.159-4.356c0.647-0.819 1.374-1.593 2.081-2.373c0.502-0.55 1.005-1.103 1.64-1.83   c1.865-2.243 4.055-4.199 6.168-6.124l1.132-1.017c1.566-1.454 3.378-2.822 5.284-4.268c0.78-0.583 1.543-1.162 2.293-1.732   c0.963-0.624 1.895-1.247 2.813-1.865c1.72-1.162 3.209-2.167 4.93-3.062l3.745-2.131l3.789-1.858   c1.321-0.683 2.622-1.209 3.821-1.693c0.712-0.296 1.416-0.583 2.069-0.866c0.665-0.23 1.306-0.479 1.912-0.703   c0.812-0.296 1.513-0.58 2.465-0.828l1.022-0.23c1.114 1.803 2.42 3.517 3.987 5.083l73.515 73.518L31.647 393.822   c-0.062 0.059-0.121 0.124-0.178 0.178c-19.529 19.529-22.709 48.131-3.177 67.666c19.532 19.529 46.316 14.522 65.84-5   c0.086-0.083 0.16-0.16 0.236-0.249l138.448-145.782c0.812 0.957 1.616 1.92 2.518 2.824l155.24 155.253   c17.396 17.401 45.613 17.401 63.009 0C470.974 451.322 470.974 423.104 453.584 405.715z M73.871 440.564   c-7.191 7.199-18.855 7.199-26.052 0c-7.19-7.193-7.19-18.85 0-26.043c7.19-7.188 18.855-7.193 26.052 0   C81.055 421.715 81.055 433.371 73.871 440.564z" FillRule="NonZero"/>
+                                    </Path.Data>
+                                </Path>
+                            </Canvas>
+                            <Canvas x:Name="g6gh"/>
+                            <Canvas x:Name="g8gh"/>
+                            <Canvas x:Name="g10gh"/>
+                            <Canvas x:Name="g12gh"/>
+                            <Canvas x:Name="g14gh"/>
+                            <Canvas x:Name="g16gh"/>
+                            <Canvas x:Name="g18gh"/>
+                            <Canvas x:Name="g20gh"/>
+                            <Canvas x:Name="g22gh"/>
+                            <Canvas x:Name="g24gh"/>
+                            <Canvas x:Name="g26gh"/>
+                            <Canvas x:Name="g28gh"/>
+                            <Canvas x:Name="g30gh"/>
+                            <Canvas x:Name="g32gh"/>
+                            <Canvas x:Name="g34gh"/>
+                        </Canvas>
+                        <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="47" Height="18" Text="Services"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="reportsBtn" Margin="0" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" Height="70" VerticalAlignment="Top" Click="reportsBtn_Click">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-100,0,0,0" Width="115">
+                        <Canvas x:Name="Capa_1d1" Width="27.646" Height="27.647" Canvas.Left="0" Canvas.Top="0">
+                            <Canvas.RenderTransform>
+                                <TranslateTransform X="0" Y="0"/>
+                            </Canvas.RenderTransform>
+                            <!--Unknown tag: metadata-->
+                            <!--Unknown tag: sodipodi:namedview-->
+                            <Canvas x:Name="g16d1">
+                                <Canvas x:Name="g14d1">
+                                    <Polygon xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="2.17,25.847 6.069,25.847 6.069,14.02 2.17,16.157" x:Name="polygon1" FillRule="NonZero" Fill="White"/>
+                                    <Polygon xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="7.258,13.37 7.258,25.847 11.156,25.847 11.156,18.424 8.127,12.893" x:Name="polygon3" FillRule="NonZero" Fill="White"/>
+                                    <Polygon xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="12.344,25.847 16.244,25.847 16.244,17.188 12.344,20.593" x:Name="polygon5" FillRule="NonZero" Fill="White"/>
+                                    <Polygon xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="17.432,25.847 21.331,25.847 21.331,12.745 17.432,16.151" x:Name="polygon7" FillRule="NonZero" Fill="White"/>
+                                    <Polygon xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="22.518,11.708 22.518,25.847 26.418,25.847 26.418,13.212 23.799,10.591" x:Name="polygon9" FillRule="NonZero" Fill="White"/>
+                                    <Polygon xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="12.927,17.938 23.869,8.297 25.719,10.147 27.646,1.799 19.299,3.725 21.023,5.452 13.972,11.665 10.299,5.216 0,10.859 1.928,14.381 8.765,10.635" x:Name="polygon11" FillRule="NonZero" Fill="White"/>
+                                </Canvas>
+                            </Canvas>
+                            <Canvas x:Name="g18d1"/>
+                            <Canvas x:Name="g20d1"/>
+                            <Canvas x:Name="g22d1"/>
+                            <Canvas x:Name="g24d1"/>
+                            <Canvas x:Name="g26d1"/>
+                            <Canvas x:Name="g28d1"/>
+                            <Canvas x:Name="g30d1"/>
+                            <Canvas x:Name="g32d1"/>
+                            <Canvas x:Name="g34d1"/>
+                            <Canvas x:Name="g36d1"/>
+                            <Canvas x:Name="g38d1"/>
+                            <Canvas x:Name="g40d1"/>
+                            <Canvas x:Name="g42d1"/>
+                            <Canvas x:Name="g44d1"/>
+                            <Canvas x:Name="g46d1"/>
+                        </Canvas>
+                        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Reports" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="50"/>
+                    </StackPanel>
+                </Button>
+                <StackPanel x:Name="reportsSubMenuGrid" Margin="0" Orientation="Vertical" Background="#FF046380" Visibility="Collapsed">
+                    <Button x:Name="salesReportBtn" Content="Employees/Contractor" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0,0,0,5"/>
+                    <Button x:Name="salesReportBtn_Copy" Content="Employees/Contractor" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5"/>
+                    <Button x:Name="salesReportBtn_Copy1" Content="Employees/Contractor" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5"/>
                 </StackPanel>
-            </Button>
-            <StackPanel x:Name="manageSubMenugrid" Orientation="Vertical" Margin="0" Background="#FF046380">
-                <Button x:Name="empContManageBtn" Content="Employees/Contractor" Margin="0,0,1,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Click="empContManageBtn_Click"/>
-                <Button x:Name="custSuppManageBtn" Content="Customers/Suppliers" Margin="0,0,1,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Foreground="White" Click="custSuppManageBtn_Click" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238"/>
-                <Button x:Name="productManageBtn" Content="Product List" Margin="0,0,1,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="productManageBtn_Click" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238"/>
-                <Button x:Name="settingsManageMenuBtn" Content="Services" Margin="1,0,0,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238" Click="settingsManageMenuBtn_Click"/>
+                <Button x:Name="manageBtn" Margin="0" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" Height="70" VerticalAlignment="Top" Click="manageBtn_Click" HorizontalContentAlignment="Center">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="-100,0,0,0" HorizontalAlignment="Left" Width="115">
+                        <Canvas x:Name="Capa_1g" Width="30" Height="30">
+                            <Canvas.RenderTransform>
+                                <TranslateTransform X="0" Y="0"/>
+                            </Canvas.RenderTransform>
+                            <!--Unknown tag: metadata-->
+                            <!--Unknown tag: sodipodi:namedview-->
+                            <Canvas x:Name="g24g">
+                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2g" Fill="White" Canvas.Left="7.917" Canvas.Top="18.75" Height="3.499" Stretch="Fill" Width="3.499">
+                                    <Path.Data>
+                                        <PathGeometry Figures="M19 45c2.206 0 4-1.794 4-4s-1.794-4-4-4s-4 1.794-4 4S16.794 45 19 45z M19 39c1.103 0 2 0.897 2 2s-0.897 2-2 2   s-2-0.897-2-2S17.897 39 19 39z" FillRule="NonZero"/>
+                                    </Path.Data>
+                                </Path>
+                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path4g" Fill="White" Canvas.Left="20.25" Canvas.Top="6" Height="4.001" Stretch="Fill" Width="4.001">
+                                    <Path.Data>
+                                        <PathGeometry Figures="M44 12c-2.206 0-4 1.794-4 4s1.794 4 4 4s4-1.794 4-4S46.206 12 44 12z M44 18c-1.103 0-2-0.897-2-2s0.897-2 2-2   s2 0.897 2 2S45.103 18 44 18z" FillRule="NonZero"/>
+                                    </Path.Data>
+                                </Path>
+                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path6g" Fill="White" Canvas.Left="6" Canvas.Top="16.834" Height="6.832" Stretch="Fill" Width="6.833">
+                                    <Path.Data>
+                                        <PathGeometry Figures="M19 49c4.411 0 8-3.589 8-8s-3.589-8-8-8s-8 3.589-8 8S14.589 49 19 49z M19 35c3.309 0 6 2.691 6 6s-2.691 6-6 6   s-6-2.691-6-6S15.691 35 19 35z" FillRule="NonZero"/>
+                                    </Path.Data>
+                                </Path>
+                                <Canvas x:Name="g22g">
+                                    <Canvas x:Name="g20g">
+                                        <Canvas x:Name="g16g">
+                                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path8" Fill="White">
+                                                <Path.Data>
+                                                    <PathGeometry Figures="M35.529 24.491c-0.007-0.007-0.013-0.013-0.02-0.02c0.003 0.004 0.002 0.011 0.005 0.014S35.525 24.488 35.529 24.491z" FillRule="NonZero"/>
+                                                </Path.Data>
+                                            </Path>
+                                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path10g" Fill="White">
+                                                <Path.Data>
+                                                    <PathGeometry Figures="M35.516 7.546c0.016-0.016 0.032-0.032 0.048-0.047c-0.016 0.006-0.038 0.005-0.049 0.016      C35.51 7.52 35.517 7.537 35.516 7.546z" FillRule="NonZero"/>
+                                                </Path.Data>
+                                            </Path>
+                                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path12g" Fill="White">
+                                                <Path.Data>
+                                                    <PathGeometry Figures="M52.503 24.434c-0.023 0.023-0.045 0.046-0.068 0.068c0.016-0.006 0.039-0.006 0.05-0.017      C52.497 24.474 52.497 24.451 52.503 24.434z" FillRule="NonZero"/>
+                                                </Path.Data>
+                                            </Path>
+                                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path14g" Fill="White" Height="30" Stretch="Fill" Width="30">
+                                                <Path.Data>
+                                                    <PathGeometry Figures="M57.649 18.36c-0.006-0.016-0.006-0.034-0.013-0.05c-1.161-2.74-2.739-5.284-4.643-7.551      c-1.12-1.336-2.354-2.572-3.686-3.695c-2.284-1.929-4.85-3.528-7.617-4.699c-0.015-0.007-0.032-0.007-0.048-0.012      C38.061 0.838 34.126 0 30 0c-1.738 0-3.44 0.157-5.098 0.442c-0.003 0-0.006 0-0.008 0c-0.028 0.005-0.056 0.012-0.085 0.017      c-0.405 0.071-0.808 0.148-1.207 0.235c-0.023 0.005-0.047 0.011-0.07 0.016c-1.591 0.351-3.134 0.83-4.621 1.423      c-0.142 0.056-0.286 0.11-0.427 0.168c-0.22 0.092-0.436 0.19-0.654 0.287c-0.22 0.098-0.44 0.195-0.657 0.298      c-0.171 0.082-0.34 0.167-0.51 0.251c-0.05 0.025-0.1 0.049-0.15 0.074c-0.013 0.006-0.028 0.006-0.041 0.012      c-0.059 0.03-0.116 0.064-0.175 0.094c-0.142 0.073-0.282 0.149-0.422 0.224c-0.122 0.065-0.243 0.132-0.364 0.199      c-0.142 0.078-0.285 0.153-0.425 0.234c-0.169 0.097-0.334 0.199-0.501 0.299c-0.083 0.05-0.167 0.101-0.25 0.152      c-0.35 0.215-0.696 0.437-1.038 0.666c-0.033 0.022-0.066 0.044-0.098 0.066c-0.179 0.121-0.359 0.241-0.535 0.366      c-0.021 0.015-0.04 0.03-0.061 0.045c-0.376 0.268-0.745 0.545-1.109 0.83c-0.011 0.009-0.023 0.017-0.034 0.025      c-0.002 0.002-0.004 0.005-0.006 0.007c-1.644 1.293-3.162 2.759-4.518 4.388c-0.018 0.021-0.027 0.047-0.042 0.07      C2.591 16.082 0 22.744 0 30c0 2.995 0.447 5.887 1.268 8.618c0.002 0.007-0.001 0.015 0.001 0.022      c0.01 0.032 0.022 0.062 0.031 0.094c0.166 0.544 0.344 1.083 0.54 1.613c0.069 0.189 0.148 0.373 0.221 0.56      c0.121 0.31 0.243 0.619 0.374 0.923c0.134 0.313 0.276 0.62 0.42 0.927c0.068 0.143 0.135 0.286 0.205 0.427      c2.928 6.002 7.763 10.836 13.766 13.762c0.134 0.066 0.27 0.13 0.405 0.194c0.313 0.147 0.627 0.292 0.946 0.428      c0.29 0.125 0.584 0.24 0.879 0.356c0.201 0.079 0.399 0.164 0.603 0.238c0.525 0.193 1.059 0.37 1.597 0.534      c0.035 0.011 0.068 0.024 0.104 0.035c0.012 0.004 0.025 0.002 0.037 0.005C24.124 59.555 27.011 60 30 60      c4.995 0 9.705-1.234 13.852-3.402c0.027-0.011 0.055-0.017 0.082-0.031c0.073-0.038 0.141-0.082 0.214-0.12      c0.243-0.131 0.481-0.269 0.72-0.406c0.224-0.128 0.451-0.252 0.671-0.386c0.422-0.256 0.837-0.523 1.245-0.8      c0.175-0.118 0.343-0.245 0.515-0.367c0.272-0.193 0.543-0.386 0.808-0.588c0.149-0.114 0.295-0.231 0.442-0.347      c0.295-0.232 0.585-0.469 0.871-0.712c0.107-0.091 0.213-0.183 0.318-0.276c0.348-0.304 0.688-0.617 1.021-0.937      c0.039-0.038 0.079-0.074 0.118-0.113c0.482-0.468 0.952-0.949 1.402-1.448c0.015-0.015 0.037-0.021 0.051-0.038      c2.222-2.475 3.994-5.267 5.285-8.31c0.047-0.11 0.089-0.222 0.134-0.332c0.108-0.262 0.218-0.522 0.319-0.788      c0.004-0.01 0.002-0.021 0.005-0.031c0.435-1.152 0.799-2.338 1.091-3.552c0.008-0.034 0.016-0.069 0.024-0.104      c0.12-0.507 0.227-1.018 0.32-1.534c0.005-0.027 0.012-0.053 0.017-0.08c0.001-0.006 0-0.012 0.001-0.018      C59.831 33.564 60 31.802 60 30C60 25.874 59.162 21.941 57.649 18.36z M29 15h3.043c0.213-2.527 1.233-4.864 2.811-6.731      l-2.168-2.168c-0.391-0.391-0.391-1.023 0-1.414s1.023-0.391 1.414 0l2.166 2.166c1.395-1.185 3.063-2.069 4.917-2.515      c1.948 0.852 3.782 1.917 5.47 3.169c0.033 0.025 0.067 0.048 0.1 0.073c0.275 0.206 0.542 0.42 0.809 0.636      c0.086 0.069 0.175 0.136 0.26 0.206c0.2 0.166 0.394 0.339 0.589 0.51c0.142 0.124 0.287 0.244 0.427 0.372      c0.074 0.068 0.145 0.14 0.219 0.208c0.508 0.473 0.998 0.963 1.47 1.472c0.055 0.059 0.112 0.115 0.167 0.175      c0.132 0.145 0.258 0.297 0.387 0.445c0.166 0.19 0.335 0.377 0.496 0.572c0.073 0.088 0.142 0.18 0.214 0.27      c0.213 0.264 0.425 0.528 0.628 0.799c0.028 0.037 0.054 0.076 0.082 0.114c1.25 1.685 2.311 3.516 3.162 5.46      c-0.446 1.854-1.329 3.52-2.514 4.915l2.164 2.168c0.391 0.391 0.391 1.023 0 1.414c-0.195 0.195-0.451 0.293-0.707 0.293      s-0.512-0.098-0.707-0.293l-2.166-2.169c-1.868 1.579-4.206 2.599-6.733 2.813V31c0 0.553-0.448 1-1 1s-1-0.447-1-1v-3.051      c-2.559-0.212-4.89-1.227-6.743-2.796l-2.157 2.161c-0.195 0.195-0.451 0.293-0.707 0.293s-0.512-0.098-0.707-0.293      c-0.391-0.391-0.391-1.023 0-1.414l2.157-2.161c-1.568-1.852-2.58-4.182-2.793-6.739H29c-0.552 0-1-0.447-1-1S28.448 15 29 15z       M13.01 7.772c0.081-0.062 0.159-0.127 0.24-0.188c0.402-0.301 0.816-0.584 1.233-0.863c0.203-0.135 0.403-0.276 0.609-0.406      c0.027-0.017 0.053-0.034 0.08-0.051C15.594 6 16.028 5.757 16.463 5.516c0.192-0.106 0.379-0.22 0.573-0.322      C18.208 5.623 19 6.73 19 8c0 1.654-1.346 3-3 3s-3-1.346-3-3C13 7.925 13.004 7.849 13.01 7.772z M8.352 15.013      c0.677-1 0.851-2.209 0.509-3.342c0.1-0.115 0.198-0.232 0.299-0.345c0.255-0.285 0.518-0.562 0.784-0.835      c0.275-0.283 0.557-0.559 0.843-0.83c0.133-0.125 0.269-0.247 0.404-0.369C11.764 11.42 13.693 13 16 13c2.757 0 5-2.243 5-5      c0-1.527-0.693-2.904-1.807-3.827c0.612-0.256 1.235-0.488 1.865-0.7c0.065-0.022 0.129-0.044 0.194-0.066      c0.65-0.214 1.308-0.407 1.975-0.573c-0.157 0.745-0.097 1.53 0.193 2.268c0.5 1.274 1.602 2.19 2.947 2.449L27 7.672v1.086      L26.333 8.86c-1.353 0.208-2.488 1.081-3.036 2.336c-0.548 1.256-0.417 2.683 0.352 3.816l0.361 0.534l-0.768 0.767l-0.177-0.13      c-0.688-0.505-1.498-0.771-2.339-0.771c-1.98 0-3.635 1.417-3.935 3.37L16.757 19h-1.085l-0.122-0.632      c-0.359-1.869-2.003-3.226-3.909-3.226c-0.842 0-1.651 0.268-2.339 0.771l-0.544 0.399L7.99 15.547L8.352 15.013z       M37.914 49.406C37.748 49.778 37.383 50 37 50c-0.136 0-0.273-0.027-0.406-0.086l-3.405-1.505      c-1.306 2.51-3.275 4.616-5.688 6.122l1.15 1.771c0.301 0.464 0.169 1.083-0.294 1.384c-0.168 0.109-0.357 0.161-0.543 0.161      c-0.327 0-0.648-0.16-0.84-0.455l-1.237-1.904c-1.255 0.578-2.595 1.018-4.019 1.261c-0.003-0.001-0.005-0.001-0.008-0.002      c-0.493-0.152-0.977-0.322-1.458-0.5c-0.225-0.083-0.446-0.175-0.668-0.264c-0.23-0.092-0.459-0.186-0.686-0.283      c-0.297-0.129-0.593-0.262-0.885-0.401c-0.107-0.051-0.213-0.104-0.32-0.156c-5.57-2.738-10.103-7.271-12.839-12.841      c-0.051-0.104-0.102-0.208-0.152-0.313c-0.14-0.293-0.273-0.59-0.403-0.889c-0.098-0.227-0.191-0.456-0.283-0.686      c-0.089-0.221-0.18-0.442-0.263-0.666c-0.178-0.482-0.348-0.968-0.501-1.462c0-0.002-0.001-0.003-0.001-0.005      c0.271-1.588 0.771-3.081 1.455-4.455l-2.413-1.393c-0.478-0.276-0.642-0.888-0.366-1.366c0.276-0.478 0.886-0.644 1.366-0.366      l2.413 1.393c1.627-2.442 3.898-4.386 6.563-5.615l-1.202-3.118c-0.2-0.515 0.055-1.095 0.57-1.294      c0.514-0.202 1.094 0.055 1.294 0.569l1.206 3.127C15.675 25.278 17.304 25 19 25c1.963 0 3.836 0.373 5.576 1.022      c0.203-0.481 0.361-0.842 0.411-0.956l1.099-2.473c0.226-0.504 0.815-0.73 1.32-0.508c0.504 0.225 0.732 0.815 0.508 1.32      l-1.099 2.473c-0.04 0.089-0.234 0.434-0.51 0.903c3.165 1.633 5.702 4.298 7.203 7.538l3.129-1.251      c0.517-0.203 1.095 0.055 1.294 0.569c0.2 0.515-0.055 1.094-0.57 1.294l-3.127 1.251C34.721 37.705 35 39.318 35 41      c0 1.961-0.375 3.831-1.021 5.571l3.427 1.515C37.911 48.311 38.138 48.901 37.914 49.406z M55.381 41.789      c-0.018 0.039-0.036 0.077-0.054 0.115c-0.992 2.097-2.245 4.064-3.716 5.856C51.213 47.08 51 46.306 51 45.5      c0-2.481 2.019-4.5 4.5-4.5c0.076 0 0.151 0.002 0.226 0.006C55.613 41.268 55.501 41.531 55.381 41.789z M56.476 39.073      C56.154 39.024 55.828 39 55.5 39c-3.584 0-6.5 2.916-6.5 6.5c0 1.386 0.44 2.705 1.242 3.808      c-0.355 0.373-0.717 0.739-1.093 1.092c-0.037 0.035-0.073 0.07-0.11 0.104c-0.25 0.233-0.507 0.459-0.766 0.683      c-0.098 0.085-0.195 0.172-0.295 0.256c-0.203 0.172-0.412 0.337-0.621 0.502c-0.16 0.127-0.318 0.255-0.481 0.378      c-0.16 0.121-0.323 0.238-0.486 0.356c-0.152 0.11-0.304 0.219-0.458 0.326c0.215-0.959 0.125-1.974-0.283-2.909      c-0.65-1.49-1.998-2.527-3.604-2.774L41 47.161v-1.777l0.994-0.19c1.597-0.308 2.905-1.395 3.499-2.908      c0.594-1.513 0.375-3.199-0.587-4.511l-0.626-0.853l1.257-1.258l1.281 0.869c0.787 0.532 1.698 0.814 2.634 0.814      c2.262 0 4.213-1.61 4.64-3.828L54.384 32h1.777l0.161 1.046c0.141 0.915 0.53 1.739 1.137 2.414      C57.215 36.69 56.882 37.896 56.476 39.073z" FillRule="NonZero"/>
+                                                </Path.Data>
+                                            </Path>
+                                        </Canvas>
+                                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path18g" Fill="White">
+                                            <Path.Data>
+                                                <PathGeometry Figures="M33.91 35.221c-0.004-0.01-0.008-0.019-0.012-0.028c0.001 0.004 0.001 0.008 0.002 0.012     C33.903 35.211 33.907 35.215 33.91 35.221z" FillRule="NonZero"/>
+                                            </Path.Data>
+                                        </Path>
+                                    </Canvas>
+                                </Canvas>
+                            </Canvas>
+                            <Canvas x:Name="g26g"/>
+                            <Canvas x:Name="g28g"/>
+                            <Canvas x:Name="g30g"/>
+                            <Canvas x:Name="g32g"/>
+                            <Canvas x:Name="g34g"/>
+                            <Canvas x:Name="g36g"/>
+                            <Canvas x:Name="g38g"/>
+                            <Canvas x:Name="g40g"/>
+                            <Canvas x:Name="g42g"/>
+                            <Canvas x:Name="g44g"/>
+                            <Canvas x:Name="g46g"/>
+                            <Canvas x:Name="g48g"/>
+                            <Canvas x:Name="g50g"/>
+                            <Canvas x:Name="g52g"/>
+                            <Canvas x:Name="g54g"/>
+                        </Canvas>
+                        <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Manage" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="50"/>
+                    </StackPanel>
+                </Button>
+                <StackPanel x:Name="manageSubMenugrid" Orientation="Vertical" Margin="0" Background="#FF046380">
+                    <Button x:Name="empContManageBtn" Content="Employees/Contractor" Margin="0,0,1,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Click="empContManageBtn_Click"/>
+                    <Button x:Name="custSuppManageBtn" Content="Customers/Suppliers" Margin="0,0,1,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Foreground="White" Click="custSuppManageBtn_Click" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238"/>
+                    <Button x:Name="productManageBtn" Content="Product List" Margin="0,0,1,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="productManageBtn_Click" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238"/>
+                    <Button x:Name="settingsManageMenuBtn" Content="Services" Margin="1,0,0,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238" Click="settingsManageMenuBtn_Click"/>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+        </ScrollViewer>
         <Grid x:Name="headerGrid" Grid.Column="1" Height="100" VerticalAlignment="Top" Background="#FF046380" Grid.ColumnSpan="3">
             <Label x:Name="headerLbl" Content="Dashboard" Margin="10,0,80,0" FontSize="20" FontWeight="Bold" Background="{x:Null}" Foreground="White" Padding="10,10,10,5" Height="50" VerticalAlignment="Top"/>
             <Button x:Name="settingsBtn" Width="55" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="settingsBtn_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Height="47" Style="{StaticResource settingsButton}">
@@ -665,9 +667,9 @@
                     </Button>
                 </Grid>
             </Grid>
-            <Grid x:Name="trasanctionGrid" d:IsHidden="True">
-                <Grid x:Name="transQuotationGrid" Margin="0,0,1,0" >
-                    <Grid x:Name="quotationsGridHome" Margin="10" >
+            <Grid x:Name="trasanctionGrid">
+                <Grid x:Name="transQuotationGrid" Margin="0,0,1,0" d:IsHidden="True" >
+                    <Grid x:Name="quotationsGridHome" Margin="10" d:IsHidden="True" >
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                             <Label x:Name="label18" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
                             <TextBox x:Name="searchBox" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317" Text="{Binding SearchQuery}"/>
@@ -824,7 +826,7 @@
                     <local:ucSalesQuote x:Name="ucSalesQuote" Margin="0" Visibility="Collapsed"/>
 
                 </Grid>
-                <Grid x:Name="transInvoiceGrid" Margin="0,0,1,0" >
+                <Grid x:Name="transInvoiceGrid" Margin="0,0,1,0" d:IsHidden="True" >
                     <Grid x:Name="invoiceGridHome" Margin="10" >
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                             <Label x:Name="label22" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -982,6 +984,163 @@
                     <local:ucInvoice x:Name="ucInvoice" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Visibility="Collapsed" d:IsHidden="True"/>
 
                 </Grid>
+                <Grid x:Name="transOrderGrid" Margin="0,0,1,0" >
+                    <Grid x:Name="invoiceGridHome1" Margin="10" >
+                        <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
+                            <Label x:Name="label4" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+                            <TextBox x:Name="searchBox5" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317" Text="{Binding SearchQuery}"/>
+                            <Button x:Name="button4" Content="Search" HorizontalAlignment="Left" Margin="402,3,-11,0" VerticalAlignment="Top" Width="85" Height="29" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
+                        </Grid>
+                        <Label x:Name="label8_Copy2" Content="Sort:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="525,9,0,0"/>
+                        <Button x:Name="newPurchaseOrder" Content="Add" HorizontalAlignment="Right" Height="29" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" Click="trasancnvertToInvoiceBtn_Click" />
+                        <DataGrid x:Name="purchaseOrderDg" Margin="0,44,0,-3" ItemsSource="{Binding SalesInvoice}" SelectedItem="{Binding SelectedSalesInvoice}" CanUserAddRows="False" AutoGenerateColumns="false" EnableColumnVirtualization="True" IsReadOnly="True">
+                            <DataGrid.Columns >
+                                <DataGridTextColumn Binding="{Binding invoiceNo_}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Sales Invoice ID"  />
+                                <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Customer Name" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding custID_, Converter={StaticResource IdToNameConverter}, NotifyOnTargetUpdated=True}" VerticalContentAlignment="Center"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Binding="{Binding dateOfIssue_}" ClipboardContentBinding="{x:Null}" Header="Date of Issue" Width="350"   />
+                                <DataGridTextColumn Binding="{Binding paymentStatus_}" ClipboardContentBinding="{x:Null}" Header="Status" Width="200" CanUserResize="False"  />
+                                <DataGridTemplateColumn  Width="115" CanUserResize="False" Header="Actions"  >
+                                    <DataGridTemplateColumn.CellTemplate  >
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button x:Name="viewInvoiceRecord" Foreground="White" Width="Auto" Height="25"  Margin="10,10,0,10" Background="{x:Null}" BorderBrush="Black" ToolTip="View Record" Click="viewInvoiceRecord_Click">
+                                                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                                                        <Canvas x:Name="Capa_1" Width="511.626" Height="511.626" Canvas.Left="0" Canvas.Top="0">
+                                                            <Canvas.RenderTransform>
+                                                                <TranslateTransform X="0" Y="0"/>
+                                                            </Canvas.RenderTransform>
+                                                            <Canvas x:Name="g4">
+                                                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2" Fill="Black">
+                                                                    <Path.Data>
+                                                                        <PathGeometry Figures="M505.918 236.117c-26.651-43.587-62.485-78.609-107.497-105.065c-45.015-26.457-92.549-39.687-142.608-39.687   c-50.059 0-97.595 13.225-142.61 39.687C68.187 157.508 32.355 192.53 5.708 236.117C1.903 242.778 0 249.345 0 255.818   c0 6.473 1.903 13.04 5.708 19.699c26.647 43.589 62.479 78.614 107.495 105.064c45.015 26.46 92.551 39.68 142.61 39.68   c50.06 0 97.594-13.176 142.608-39.536c45.012-26.361 80.852-61.432 107.497-105.208c3.806-6.659 5.708-13.223 5.708-19.699   C511.626 249.345 509.724 242.778 505.918 236.117z M194.568 158.03c17.034-17.034 37.447-25.554 61.242-25.554   c3.805 0 7.043 1.336 9.709 3.999c2.662 2.664 4 5.901 4 9.707c0 3.809-1.338 7.044-3.994 9.704   c-2.662 2.667-5.902 3.999-9.708 3.999c-16.368 0-30.362 5.808-41.971 17.416c-11.613 11.615-17.416 25.603-17.416 41.971   c0 3.811-1.336 7.044-3.999 9.71c-2.667 2.668-5.901 3.999-9.707 3.999c-3.809 0-7.044-1.334-9.71-3.999   c-2.667-2.666-3.999-5.903-3.999-9.71C169.015 195.482 177.535 175.065 194.568 158.03z M379.867 349.04   c-38.164 23.12-79.514 34.687-124.054 34.687c-44.539 0-85.889-11.56-124.051-34.687s-69.901-54.2-95.215-93.222   c28.931-44.921 65.19-78.518 108.777-100.783c-11.61 19.792-17.417 41.207-17.417 64.236c0 35.216 12.517 65.329 37.544 90.362   s55.151 37.544 90.362 37.544c35.214 0 65.329-12.518 90.362-37.544s37.545-55.146 37.545-90.362   c0-23.029-5.808-44.447-17.419-64.236c43.585 22.265 79.846 55.865 108.776 100.783C449.767 294.84 418.031 325.913 379.867 349.04   z" FillRule="NonZero"/>
+                                                                    </Path.Data>
+                                                                </Path>
+                                                            </Canvas>
+                                                            <Canvas x:Name="g6"/>
+                                                            <Canvas x:Name="g8"/>
+                                                            <Canvas x:Name="g10"/>
+                                                            <Canvas x:Name="g12"/>
+                                                            <Canvas x:Name="g14"/>
+                                                            <Canvas x:Name="g16"/>
+                                                            <Canvas x:Name="g18"/>
+                                                            <Canvas x:Name="g20"/>
+                                                            <Canvas x:Name="g22"/>
+                                                            <Canvas x:Name="g24"/>
+                                                            <Canvas x:Name="g26"/>
+                                                            <Canvas x:Name="g28"/>
+                                                            <Canvas x:Name="g30"/>
+                                                            <Canvas x:Name="g32"/>
+                                                            <Canvas x:Name="g34"/>
+                                                        </Canvas>
+                                                    </Viewbox>
+                                                </Button>
+                                                <Button x:Name="editTransancRecordBtn" Width="Auto" Height="25" Background="{x:Null}" BorderBrush="Black" Margin="10,10,0,10" ToolTip="Edit Record" >
+                                                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                                                        <Canvas x:Name="Capa_1b" Width="438.536" Height="438.536" Canvas.Left="0" Canvas.Top="0">
+                                                            <Canvas.RenderTransform>
+                                                                <TranslateTransform X="0" Y="0"/>
+                                                            </Canvas.RenderTransform>
+                                                            <Canvas x:Name="g10b">
+                                                                <Canvas x:Name="g8b">
+                                                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2b" Fill="Black">
+                                                                        <Path.Data>
+                                                                            <PathGeometry Figures="M414.41 24.123C398.333 8.042 378.963 0 356.315 0H82.228C59.58 0 40.21 8.042 24.126 24.123    C8.045 40.207 0.003 59.576 0.003 82.225v274.084c0 22.647 8.042 42.018 24.123 58.102c16.084 16.084 35.454 24.126 58.102 24.126    h274.084c22.648 0 42.018-8.042 58.095-24.126c16.084-16.084 24.126-35.454 24.126-58.102V82.225    C438.532 59.576 430.49 40.204 414.41 24.123z M155.316 365.445H73.089v-82.228l155.316-155.311l82.221 82.224L155.316 365.445z     M355.169 165.592l-26.262 26.269l-82.228-82.229l26.262-26.265c5.331-5.325 11.8-7.993 19.417-7.993    c7.611 0 14.086 2.664 19.41 7.993l43.4 43.398c5.324 5.327 7.994 11.798 7.994 19.414    C363.163 153.792 360.501 160.262 355.169 165.592z" FillRule="NonZero"/>
+                                                                        </Path.Data>
+                                                                    </Path>
+                                                                    <Polygon xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="100.502,294.642 100.502,310.623 127.91,310.623 127.91,338.038 143.896,338.038 158.744,323.189 115.347,279.789" x:Name="polygon4" FillRule="NonZero" Fill="#000000"/>
+                                                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path6" Fill="#000000">
+                                                                        <Path.Data>
+                                                                            <PathGeometry Figures="M141.901 252.385c-3.237 3.23-3.521 6.084-0.859 8.562c2.474 2.67 5.33 2.382 8.566-0.855l83.081-83.083    c3.237-3.23 3.519-6.086 0.855-8.561c-2.478-2.667-5.328-2.383-8.562 0.855L141.901 252.385z" FillRule="NonZero"/>
+                                                                        </Path.Data>
+                                                                    </Path>
+                                                                </Canvas>
+                                                            </Canvas>
+                                                            <Canvas x:Name="g12b"/>
+                                                            <Canvas x:Name="g14b"/>
+                                                            <Canvas x:Name="g16b"/>
+                                                            <Canvas x:Name="g18b"/>
+                                                            <Canvas x:Name="g20b"/>
+                                                            <Canvas x:Name="g22b"/>
+                                                            <Canvas x:Name="g24b"/>
+                                                            <Canvas x:Name="g26b"/>
+                                                            <Canvas x:Name="g28b"/>
+                                                            <Canvas x:Name="g30b"/>
+                                                            <Canvas x:Name="g32b"/>
+                                                            <Canvas x:Name="g34b"/>
+                                                            <Canvas x:Name="g36"/>
+                                                            <Canvas x:Name="g38"/>
+                                                            <Canvas x:Name="g40"/>
+                                                        </Canvas>
+                                                    </Viewbox>
+                                                </Button>
+                                                <Button x:Name="deleteTransancRecordBtn"  Width="Auto" Height="25" BorderBrush="Black" Background="{x:Null}" Margin="10,10,0,10" ToolTip="Delete Record">
+                                                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                                                        <Canvas x:Name="Capa_1c" Width="438.529" Height="438.529" Canvas.Left="0" Canvas.Top="0">
+                                                            <Canvas.RenderTransform>
+                                                                <TranslateTransform X="0" Y="0"/>
+                                                            </Canvas.RenderTransform>
+                                                            <Canvas x:Name="g12c">
+                                                                <Canvas x:Name="g10c">
+                                                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2c" Fill="#000000">
+                                                                        <Path.Data>
+                                                                            <PathGeometry Figures="M417.689 75.654c-1.711-1.709-3.901-2.568-6.563-2.568h-88.224L302.917 25.41c-2.854-7.044-7.994-13.04-15.413-17.989    C280.078 2.473 272.556 0 264.945 0h-91.363c-7.611 0-15.131 2.473-22.554 7.421c-7.424 4.949-12.563 10.944-15.419 17.989    l-19.985 47.676h-88.22c-2.667 0-4.853 0.859-6.567 2.568c-1.709 1.713-2.568 3.903-2.568 6.567v18.274    c0 2.664 0.855 4.854 2.568 6.564c1.714 1.712 3.904 2.568 6.567 2.568h27.406v271.8c0 15.803 4.473 29.266 13.418 40.398    c8.947 11.139 19.701 16.703 32.264 16.703h237.542c12.566 0 23.319-5.756 32.265-17.268c8.945-11.52 13.415-25.174 13.415-40.971    V109.627h27.411c2.662 0 4.853-0.856 6.563-2.568c1.708-1.709 2.57-3.9 2.57-6.564V82.221    C420.26 79.557 419.397 77.367 417.689 75.654z M169.301 39.678c1.331-1.712 2.95-2.762 4.853-3.14h90.504    c1.903 0.381 3.525 1.43 4.854 3.14l13.709 33.404H155.311L169.301 39.678z M347.173 380.291c0 4.186-0.664 8.042-1.999 11.561    c-1.334 3.518-2.717 6.088-4.141 7.706c-1.431 1.622-2.423 2.427-2.998 2.427H100.493c-0.571 0-1.565-0.805-2.996-2.427    c-1.429-1.618-2.81-4.188-4.143-7.706c-1.331-3.519-1.997-7.379-1.997-11.561V109.627h255.815V380.291z" FillRule="NonZero"/>
+                                                                        </Path.Data>
+                                                                    </Path>
+                                                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path4" Fill="#000000">
+                                                                        <Path.Data>
+                                                                            <PathGeometry Figures="M137.04 347.172h18.271c2.667 0 4.858-0.855 6.567-2.567c1.709-1.718 2.568-3.901 2.568-6.57V173.581    c0-2.663-0.859-4.853-2.568-6.567c-1.714-1.709-3.899-2.565-6.567-2.565H137.04c-2.667 0-4.854 0.855-6.567 2.565    c-1.711 1.714-2.568 3.904-2.568 6.567v164.454c0 2.669 0.854 4.853 2.568 6.57C132.186 346.316 134.373 347.172 137.04 347.172z" FillRule="NonZero"/>
+                                                                        </Path.Data>
+                                                                    </Path>
+                                                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path6c" Fill="#000000">
+                                                                        <Path.Data>
+                                                                            <PathGeometry Figures="M210.129 347.172h18.271c2.666 0 4.856-0.855 6.564-2.567c1.718-1.718 2.569-3.901 2.569-6.57V173.581    c0-2.663-0.852-4.853-2.569-6.567c-1.708-1.709-3.898-2.565-6.564-2.565h-18.271c-2.664 0-4.854 0.855-6.567 2.565    c-1.714 1.714-2.568 3.904-2.568 6.567v164.454c0 2.669 0.854 4.853 2.568 6.57C205.274 346.316 207.465 347.172 210.129 347.172z    " FillRule="NonZero"/>
+                                                                        </Path.Data>
+                                                                    </Path>
+                                                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path8" Fill="#000000">
+                                                                        <Path.Data>
+                                                                            <PathGeometry Figures="M283.22 347.172h18.268c2.669 0 4.859-0.855 6.57-2.567c1.711-1.718 2.562-3.901 2.562-6.57V173.581    c0-2.663-0.852-4.853-2.562-6.567c-1.711-1.709-3.901-2.565-6.57-2.565H283.22c-2.67 0-4.853 0.855-6.571 2.565    c-1.711 1.714-2.566 3.904-2.566 6.567v164.454c0 2.669 0.855 4.853 2.566 6.57C278.367 346.316 280.55 347.172 283.22 347.172z" FillRule="NonZero"/>
+                                                                        </Path.Data>
+                                                                    </Path>
+                                                                </Canvas>
+                                                            </Canvas>
+                                                            <Canvas x:Name="g14c"/>
+                                                            <Canvas x:Name="g16c"/>
+                                                            <Canvas x:Name="g18c"/>
+                                                            <Canvas x:Name="g20c"/>
+                                                            <Canvas x:Name="g22c"/>
+                                                            <Canvas x:Name="g24c"/>
+                                                            <Canvas x:Name="g26c"/>
+                                                            <Canvas x:Name="g28c"/>
+                                                            <Canvas x:Name="g30c"/>
+                                                            <Canvas x:Name="g32c"/>
+                                                            <Canvas x:Name="g34c"/>
+                                                            <Canvas x:Name="g36c"/>
+                                                            <Canvas x:Name="g38c"/>
+                                                            <Canvas x:Name="g40c"/>
+                                                            <Canvas x:Name="g42"/>
+                                                        </Canvas>
+                                                    </Viewbox>
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <ComboBox x:Name="sortQuoteCb2" HorizontalAlignment="Left" Margin="567,9,0,0" VerticalAlignment="Top" Width="120" Height="26">
+                            <ComboBoxItem Content="[NONE]"/>
+                            <ComboBoxItem Content="PENDING"/>
+                            <ComboBoxItem Content="APPROVED"/>
+                        </ComboBox>
+                    </Grid>
+
+                </Grid>
             </Grid>
             <Grid x:Name="serviceGrid" d:IsHidden="True">
                 <local:ucServiceSchedule x:Name="ucService" Margin="0" Visibility="Collapsed"/>
@@ -989,7 +1148,7 @@
             <Grid x:Name="reportsGrid" d:IsHidden="True">
                 <local:ucReports Margin="0"/>
             </Grid>
-            <Grid x:Name="maintenanceGrid">
+            <Grid x:Name="maintenanceGrid" d:IsHidden="True">
                 <Grid x:Name="manageCustomerGrid" Margin="0,0,1,0" d:IsHidden="True" >
                     <Grid x:Name="manageCustomerHomeGrid" Margin="0">
                         <Label x:Name="label13" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
