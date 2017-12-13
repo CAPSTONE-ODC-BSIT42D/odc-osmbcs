@@ -62,37 +62,37 @@ namespace prototype2
             formGridBg.Visibility = Visibility.Visible;
             MainVM.SelectedServiceSchedule_ = new ServiceSchedule();
         }
-        private void Btn_ScheduleType_Click(object sender, RoutedEventArgs e)
-        {
-            switch ((sender as RadioButton).Name)
-            {
-                case "Day":
-                    {
-                        serviceSched.ScheduleType = ScheduleType.Day;
-                        break;
-                    }
-                case "Week":
-                    {
-                        serviceSched.ScheduleType = ScheduleType.Week;
-                        break;
-                    }
-                case "WorkWeek":
-                    {
-                        serviceSched.ScheduleType = ScheduleType.WorkWeek;
-                        break;
-                    }
-                case "Month":
-                    {
-                        serviceSched.ScheduleType = ScheduleType.Month;
-                        break;
-                    }
-                case "TimeLine":
-                    {
-                        serviceSched.ScheduleType = ScheduleType.TimeLine;
-                        break;
-                    }
-            }
-        }
+        //private void Btn_ScheduleType_Click(object sender, RoutedEventArgs e)
+        //{
+        //    switch ((sender as RadioButton).Name)
+        //    {
+        //        case "Day":
+        //            {
+        //                serviceSched.ScheduleType = ScheduleType.Day;
+        //                break;
+        //            }
+        //        case "Week":
+        //            {
+        //                serviceSched.ScheduleType = ScheduleType.Week;
+        //                break;
+        //            }
+        //        case "WorkWeek":
+        //            {
+        //                serviceSched.ScheduleType = ScheduleType.WorkWeek;
+        //                break;
+        //            }
+        //        case "Month":
+        //            {
+        //                serviceSched.ScheduleType = ScheduleType.Month;
+        //                break;
+        //            }
+        //        case "TimeLine":
+        //            {
+        //                serviceSched.ScheduleType = ScheduleType.TimeLine;
+        //                break;
+        //            }
+        //    }
+        //}
 
         private void serviceSched_ScheduleClick(object sender, ScheduleClickEventArgs e)
         {
@@ -112,7 +112,7 @@ namespace prototype2
             MainVM.SelectedSalesInvoice = MainVM.SalesInvoice.Where(x => x.sqNoChar_.Equals(MainVM.SelectedSalesQuote.sqNoChar_)).First();
             if (assignedEmployees.Items.Count != 0 && MainVM.SelectedSalesInvoice!=null)
             {
-                serviceSched.Appointments.Add(new ScheduleAppointment() { Subject = serviceNoCb.SelectedValue.ToString(), StartTime = (DateTime)startDate.SelectedDate, EndTime = (DateTime)endDate.SelectedDate });
+                //serviceSched.Appointments.Add(new ScheduleAppointment() { Subject = serviceNoCb.SelectedValue.ToString(), StartTime = (DateTime)startDate.SelectedDate, EndTime = (DateTime)endDate.SelectedDate });
                 
 
                 MainVM.SelectedServiceSchedule_.serviceSchedNoChar_ = serviceNoCb.SelectedValue.ToString();
@@ -226,7 +226,7 @@ namespace prototype2
         void loadDataToUi()
         {
             MainVM.isEdit = true;
-            MainVM.SelectedServiceSchedule_ = MainVM.ServiceSchedules_.Where(x => x.serviceSchedNoChar_.Equals(serviceSched.SelectedAppointment.Subject)).First();
+            //MainVM.SelectedServiceSchedule_ = MainVM.ServiceSchedules_.Where(x => x.serviceSchedNoChar_.Equals(serviceSched.SelectedAppointment.Subject)).First();
         }
 
         void searchForAvailableEmployees()
@@ -308,8 +308,8 @@ namespace prototype2
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach(ServiceSchedule ss in MainVM.ServiceSchedules_)
-            serviceSched.Appointments.Add(new ScheduleAppointment() { Subject = ss.serviceSchedNoChar_, StartTime = (DateTime)ss.dateStarted_, EndTime = (DateTime)ss.dateEnded_ });
+            //foreach(ServiceSchedule ss in MainVM.ServiceSchedules_)
+            //serviceSched.Appointments.Add(new ScheduleAppointment() { Subject = ss.serviceSchedNoChar_, StartTime = (DateTime)ss.dateStarted_, EndTime = (DateTime)ss.dateEnded_ });
         }
     }
 }

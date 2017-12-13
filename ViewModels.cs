@@ -149,6 +149,10 @@ namespace prototype2
 
         public bool isEdit { get; set; }
 
+        public bool isPaymentInvoice { get; set; }
+        public bool isViewHome { get; set; }
+        public bool isNewRecord { get; set; }
+
         public string Ddl;
         public string Ddl_
         {
@@ -615,20 +619,20 @@ namespace prototype2
 
         //Payments Hist
 
-        protected ObservableCollection<PaymentHist> PaymentHistory = new ObservableCollection<PaymentHist>();
+        protected ObservableCollection<PaymentT> PaymentList = new ObservableCollection<PaymentT>();
 
-        protected PaymentHist SelectedPaymentHistory = null;
+        protected PaymentT SelectedPaymentR = null;
 
-        public ObservableCollection<PaymentHist> PaymentHistory_
+        public ObservableCollection<PaymentT> PaymentList_
         {
-            get { return PaymentHistory; }
-            set { PaymentHistory = value; }
+            get { return PaymentList; }
+            set { PaymentList = value; }
         }
 
-        public PaymentHist SelectedPaymentHistory_
+        public PaymentT SelectedPaymentR_
         {
-            get { return SelectedPaymentHistory; }
-            set { SetProperty(ref SelectedPaymentHistory, value); }
+            get { return SelectedPaymentR; }
+            set { SetProperty(ref SelectedPaymentR, value); }
         }
     }
 }

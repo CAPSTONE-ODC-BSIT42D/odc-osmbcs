@@ -250,7 +250,7 @@ namespace prototype2
             bool noError = true;
             if (dbCon.IsConnect())
             {
-                string query = "INSERT INTO `odc_db`.`sales_invoice_t`(`custID`,`sqNoChar`,`TIN`,`busStyle`,`dateOfIssue`,`termsDays`,`dueDate`,`purchaseOrderNumber`,`paymentStatus`,`vat`,`sc_pwd_discount`,`withholdingTax`,`notes`)" +
+                string query = "INSERT INTO `odc_db`.`sales_invoice_t`(`custID`,`sqNoChar`,`TIN`,`busStyle`,`dateOfIssue`,`termsDays`,`dueDate`,`purchaseOrderNumber`,`vat`,`sc_pwd_discount`,`withholdingTax`,`notes`)" +
                     " VALUES " +
                     "('" +
                     MainVM.SelectedSalesInvoice.custID_ + "','" +
@@ -261,7 +261,6 @@ namespace prototype2
                     MainVM.SelectedSalesInvoice.terms_ + "','" +
                     MainVM.SelectedSalesInvoice.dueDate_.ToString("yyyy-MM-dd") + "','" +
                     MainVM.SelectedSalesInvoice.purchaseOrderNumber_ + "','" +
-                    MainVM.SelectedSalesInvoice.paymentStatus_ + "','" +
                     MainVM.SelectedSalesInvoice.vat_ + "','" +
                     MainVM.SelectedSalesInvoice.sc_pwd_discount_ + "','" +
                     MainVM.SelectedSalesInvoice.withholdingTax_ + "','" +
@@ -270,6 +269,7 @@ namespace prototype2
                 if (dbCon.insertQuery(query, dbCon.Connection))
                 {
                     query = "UPDATE `sales_quote_t` SET status = '" + "ACCEPTED" + "' WHERE sqNoChar = '" + MainVM.SelectedSalesInvoice.sqNoChar_ + "'";
+                    dbCon.insertQuery(query, dbCon.Connection);
                     MessageBox.Show("Invoice is Saved");
                 }
             }
@@ -278,37 +278,12 @@ namespace prototype2
 
         private void UserControlInvoice_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            
+
             if (this.IsVisible)
             {
-                if (MainVM.SelectedSalesQuote != null)
-                {
-                    paymentDetailsGrid.Visibility = Visibility.Collapsed;
-                    newInvoiceForm.Visibility = Visibility.Visible;
-                    documentViewer.Visibility = Visibility.Collapsed;
-                    selectSalesQuoteGrid.Visibility = Visibility.Collapsed;
-                    computeInvoice();
-                }
-                else if (MainVM.isEdit && MainVM.SelectedSalesInvoice!=null)
-                {
-                    var linqResults = MainVM.PaymentHistory_.Where(x => !(MainVM.SelectedSalesInvoice.invoiceNo_.Equals(x.invoiceNo_)));
-                    var observable = new ObservableCollection<PaymentHist>(linqResults);
-                    paymentHistoryDg.ItemsSource = observable;
-                    transInvoiceGridForm.Visibility = Visibility.Collapsed;
-                    paymentDetailsGrid.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    var linqResults = MainVM.SalesQuotes.Where(x => !(x.status_.Equals("ACCEPTED")));
-                    var observable = new ObservableCollection<SalesQuote>(linqResults);
-                    selectSalesQuote.ItemsSource = observable;
-                    paymentDetailsGrid.Visibility = Visibility.Collapsed;
-                    newInvoiceForm.Visibility = Visibility.Collapsed;
-                    documentViewer.Visibility = Visibility.Collapsed;
-                    selectSalesQuoteGrid.Visibility = Visibility.Visible;
-                }
-
+                changeGridView();
             }
+            
         }
 
         private void savePrintBtn_Click(object sender, RoutedEventArgs e)
@@ -321,6 +296,7 @@ namespace prototype2
             dataAdapter.Fill(fromDb, "t");
             fromDbTable = fromDb.Tables["t"];
             MainVM.SalesQuotes.Clear();
+            
             foreach (DataRow dr in fromDbTable.Rows)
             {
                 query = "INSERT INTO `odc_db`.`si_payment_t` " +
@@ -329,9 +305,10 @@ namespace prototype2
                 "('" + amountTb.Value + "','" +
                 paymentMethodCb.SelectedValue + "','" +
                 checkNoTb.Text + "','" +
-                dr["invoiceNo"].ToString() + "')";
+                MainVM.SelectedSalesInvoice.invoiceNo_ + "')";
                 dbCon.insertQuery(query, dbCon.Connection);
             }
+
             query = "SELECT SIpaymentID FROM si_payment_t ORDER BY SIpaymentID DESC LIMIT 1;";
             dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
             fromDb = new DataSet();
@@ -342,8 +319,88 @@ namespace prototype2
             {
                 MainVM.PaymentID = dr["SIpaymentID"].ToString();
             }
-           
+            decimal linqResults = MainVM.PaymentList_.Where(x => !(MainVM.SelectedSalesInvoice.invoiceNo_.Equals(x.invoiceNo_))).Select(x => x.SIpaymentAmount_).Sum();
+            
+            if (((double)linqResults+amountTb.Value) < (double)MainVM.TotalSales)
+            {
+                query = "UPDATE `sales_invoice_t` SET paymentStatus = '" + "PARTIALLY PAID" + "' WHERE invoiceNo = '" + MainVM.SelectedSalesInvoice.invoiceNo_ + "'";
+                dbCon.insertQuery(query, dbCon.Connection);
+            }
+            else if(((double)linqResults + amountTb.Value) >= (double)MainVM.TotalSales)
+            {
+                query = "UPDATE `sales_invoice_t` SET paymentStatus = '" + "FULLY PAID" + "' WHERE invoiceNo = '" + MainVM.SelectedSalesInvoice.invoiceNo_ + "'";
+                dbCon.insertQuery(query, dbCon.Connection);
+            }
             receiptVeiwer.Visibility = Visibility.Visible;
+            OnSaveCloseButtonClicked(e);
+        }
+
+        private void cancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OnSaveCloseButtonClicked(e);
+        }
+
+        private void saveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OnSaveCloseButtonClicked(e);
+        }
+
+        private void newInvoiceBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.isNewRecord = true;
+            changeGridView();
+        }
+
+        private void viewInvoiceRecord_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.isEdit = true;
+            changeGridView();
+        }
+
+        private void receivePaymentBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.isPaymentInvoice = true;
+            changeGridView();
+        }
+
+        void changeGridView()
+        {
+            foreach (Grid gr in InvoiceGrid.Children)
+            {
+                gr.Visibility = Visibility.Collapsed;
+            }
+            if (MainVM.isViewHome)
+            {
+                invoiceGridHome.Visibility = Visibility.Visible;
+            }
+            else if (MainVM.isNewRecord && MainVM.SelectedSalesQuote != null)
+            {
+                newInvoiceForm.Visibility = Visibility.Visible;
+                computeInvoice();
+            }
+            else if (MainVM.isPaymentInvoice && MainVM.SelectedSalesInvoice != null)
+            {
+
+                //var linqResults = MainVM.PaymentHistory_.Where(x => !(MainVM.SelectedSalesInvoice.invoiceNo_.Equals(x.invoiceNo_)));
+                //var observable = new ObservableCollection<PaymentHist>(linqResults);
+                //paymentHistoryDg.ItemsSource = observable;
+                MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(MainVM.SelectedSalesInvoice.sqNoChar_.ToString())).First();
+                paymentDetailsGrid.Visibility = Visibility.Visible;
+                paymentDetails.Visibility = Visibility.Visible;
+                computeInvoice();
+                amountTb.Value = (double)MainVM.TotalSales;
+            }
+            else if (MainVM.isNewRecord)
+            {
+                var linqResults = MainVM.SalesQuotes.Where(x => !(x.status_.Equals("ACCEPTED")));
+                var observable = new ObservableCollection<SalesQuote>(linqResults);
+                selectSalesQuote.ItemsSource = observable;
+                transInvoiceGridForm.Visibility = Visibility.Visible;
+                selectSalesQuoteGrid.Visibility = Visibility.Visible;
+            }
+            MainVM.isNewRecord = false;
+            MainVM.isViewHome = false;
+            MainVM.isPaymentInvoice = false;
         }
     }
 }

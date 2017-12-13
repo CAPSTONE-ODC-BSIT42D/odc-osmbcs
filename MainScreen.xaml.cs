@@ -124,7 +124,7 @@ namespace prototype2
 
             if (dbCon.IsConnect())
             {
-                string query = "SELECT * FROM payment_hist_t";
+                string query = "SELECT * FROM si_payment_t";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
@@ -133,8 +133,8 @@ namespace prototype2
                 foreach (DataRow dr in fromDbTable.Rows)
                 { 
                     DateTime paymentDate = new DateTime();
-                    DateTime.TryParse(dr["paymentDate"].ToString(), out paymentDate);
-                    MainVM.PaymentHistory_.Add(new PaymentHist() { custHistID_ = int.Parse(dr["custHistID"].ToString()), paymentDate_ = paymentDate, custBalance_ = decimal.Parse(dr["custBalance"].ToString()), invoiceNo_ = int.Parse(dr["invoiceNo"].ToString()), paymentStatus_ = dr["paymentStatus"].ToString()});
+                    DateTime.TryParse(dr["SIpaymentDate"].ToString(), out paymentDate);
+                    MainVM.PaymentList_.Add(new PaymentT() { SIpaymentID_ = int.Parse(dr["SIpaymentID"].ToString()), SIpaymentDate_ = paymentDate, SIpaymentAmount_ = decimal.Parse(dr["SIpaymentAmount"].ToString()), invoiceNo_ = int.Parse(dr["invoiceNo"].ToString()), SIpaymentMethod_ = dr["SIpaymentMethod"].ToString(), SIcheckNo_ = dr["SIcheckNo"].ToString()});
                 }
                 dbCon.Close();
             }
@@ -492,12 +492,12 @@ namespace prototype2
                 fromDbTable = fromDb.Tables["t"];
                 MainVM.SalesInvoice.Clear();
 
-                query = "SELECT * FROM payment_hist_t;";
-                MySqlDataAdapter dataAdapter2 = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb2 = new DataSet();
-                DataTable fromDbTable2 = new DataTable();
-                dataAdapter2.Fill(fromDb2, "t");
-                fromDbTable2 = fromDb2.Tables["t"];
+                //query = "SELECT * FROM payment_hist_t;";
+                //MySqlDataAdapter dataAdapter2 = dbCon.selectQuery(query, dbCon.Connection);
+                //DataSet fromDb2 = new DataSet();
+                //DataTable fromDbTable2 = new DataTable();
+                //dataAdapter2.Fill(fromDb2, "t");
+                //fromDbTable2 = fromDb2.Tables["t"];
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
                     DateTime dateOfIssue = new DateTime();
@@ -536,18 +536,18 @@ namespace prototype2
 
                     
                 }
-                foreach (DataRow dr in fromDbTable2.Rows)
-                {
-                    DateTime paymentDate = new DateTime();
-                    DateTime.TryParse(dr["paymentDate"].ToString(), out paymentDate);
+                //foreach (DataRow dr in fromDbTable2.Rows)
+                //{
+                //    DateTime paymentDate = new DateTime();
+                //    DateTime.TryParse(dr["paymentDate"].ToString(), out paymentDate);
 
-                    int invoiceNo;
-                    int.TryParse(dr["invoiceNo"].ToString(), out invoiceNo);
+                //    int invoiceNo;
+                //    int.TryParse(dr["invoiceNo"].ToString(), out invoiceNo);
 
-                    decimal custBalance;
-                    decimal.TryParse(dr["custBalance"].ToString(), out custBalance);
-                    MainVM.PaymentHistory_.Add(new PaymentHist() { custHistID_ = int.Parse(dr["custHistID"].ToString()), paymentDate_ = paymentDate, custBalance_ = custBalance, invoiceNo_ = invoiceNo, paymentStatus_ = dr["paymentStatus"].ToString() });
-                }
+                //    decimal custBalance;
+                //    decimal.TryParse(dr["custBalance"].ToString(), out custBalance);
+                //    MainVM.PaymentHistory_.Add(new PaymentHist() { custHistID_ = int.Parse(dr["custHistID"].ToString()), paymentDate_ = paymentDate, custBalance_ = custBalance, invoiceNo_ = invoiceNo, paymentStatus_ = dr["paymentStatus"].ToString() });
+                //}
                 dbCon.Close();
             }
 
@@ -734,6 +734,8 @@ namespace prototype2
 
         private void invoiceSalesMenuBtn_Click(object sender, RoutedEventArgs e)
         {
+            MainVM.isViewHome = true;
+            headerLbl.Content = "Trasanction - Sales Invoice";
             foreach (var obj in containerGrid.Children)
             {
                 ((Grid)obj).Visibility = Visibility.Collapsed;
@@ -742,25 +744,10 @@ namespace prototype2
             foreach (var obj in trasanctionGrid.Children)
             {
                 if (obj is Grid)
-                    if (((Grid)obj).Equals(transInvoiceGrid))
-                        ((Grid)obj).Visibility = Visibility.Visible;
-                    else
-                        ((Grid)obj).Visibility = Visibility.Collapsed;
-            }
-            foreach (var obj in transQuotationGrid.Children)
-            {
-                if (obj is Grid)
-                {
-                    if (((Grid)obj).Equals(invoiceGridHome))
-                    {
-                        headerLbl.Content = "Trasanction - Invoice Quote";
-                        ((Grid)obj).Visibility = Visibility.Visible;
-                        settingsBtn.Visibility = Visibility.Hidden;
-                    }
-                }
-                else
-                    ((UserControl)obj).Visibility = Visibility.Collapsed;
-
+                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                else if (obj is UserControl)
+                    if(((UserControl)obj).Equals(ucInvoice))
+                        ((UserControl)obj).Visibility = Visibility.Visible;
             }
         }
 
@@ -878,70 +865,76 @@ namespace prototype2
                 }
             }
             if (ucInvoice.IsVisible)
-            {
-                foreach (var obj in containerGrid.Children)
-                {
-                    ((Grid)obj).Visibility = Visibility.Collapsed;
-                }
-                trasanctionGrid.Visibility = Visibility.Visible;
-                foreach (var obj in trasanctionGrid.Children)
-                {
-                    if (obj is Grid)
-                        if (((Grid)obj).Equals(transInvoiceGrid))
-                            ((Grid)obj).Visibility = Visibility.Visible;
-                        else
-                            ((Grid)obj).Visibility = Visibility.Collapsed;
-                }
-                foreach (var obj in transInvoiceGrid.Children)
-                {
-                    if (obj is Grid)
-                    {
-                        if (((Grid)obj).Equals(invoiceGridHome))
-                        {
-                            headerLbl.Content = "Trasanction - Sales Invoice";
-                            ((Grid)obj).Visibility = Visibility.Visible;
-                            settingsBtn.Visibility = Visibility.Hidden;
-                        }
-                    }
-                    else
-                        ((UserControl)obj).Visibility = Visibility.Collapsed;
+                ucInvoice.Visibility = Visibility.Collapsed;
+            //if (ucInvoice.IsVisible)
+            //{
+            //    foreach (var obj in containerGrid.Children)
+            //    {
+            //        ((Grid)obj).Visibility = Visibility.Collapsed;
+            //    }
+            //    trasanctionGrid.Visibility = Visibility.Visible;
+            //    foreach (var obj in trasanctionGrid.Children)
+            //    {
+            //        if (obj is Grid)
+            //            if (((Grid)obj).Equals(transInvoiceGrid))
+            //                ((Grid)obj).Visibility = Visibility.Visible;
+            //            else
+            //                ((Grid)obj).Visibility = Visibility.Collapsed;
+            //    }
+            //    foreach (var obj in transInvoiceGrid.Children)
+            //    {
+            //        if (obj is Grid)
+            //        {
+            //            if (((Grid)obj).Equals(invoiceGridHome))
+            //            {
+            //                headerLbl.Content = "Trasanction - Sales Invoice";
+            //                ((Grid)obj).Visibility = Visibility.Visible;
+            //                settingsBtn.Visibility = Visibility.Hidden;
+            //            }
+            //        }
+            //        else
+            //            ((UserControl)obj).Visibility = Visibility.Collapsed;
 
-                }
-            }
-            {
-                foreach (var obj in containerGrid.Children)
-                {
-                    ((Grid)obj).Visibility = Visibility.Collapsed;
-                }
-                trasanctionGrid.Visibility = Visibility.Visible;
-                foreach (var obj in trasanctionGrid.Children)
-                {
-                    if (obj is Grid)
-                        if (((Grid)obj).Equals(transInvoiceGrid))
-                            ((Grid)obj).Visibility = Visibility.Visible;
-                        else
-                            ((Grid)obj).Visibility = Visibility.Collapsed;
-                }
-                foreach (var obj in transInvoiceGrid.Children)
-                {
-                    if (obj is Grid)
-                    {
-                        if (((Grid)obj).Equals(invoiceGridHome))
-                        {
-                            headerLbl.Content = "Trasanction - Sales Invoice";
-                            ((Grid)obj).Visibility = Visibility.Visible;
-                            settingsBtn.Visibility = Visibility.Hidden;
-                        }
-                    }
-                    else
-                        ((UserControl)obj).Visibility = Visibility.Collapsed;
+            //    }
+            //}
+            //{
+            //    foreach (var obj in containerGrid.Children)
+            //    {
+            //        ((Grid)obj).Visibility = Visibility.Collapsed;
+            //    }
+            //    trasanctionGrid.Visibility = Visibility.Visible;
+            //    foreach (var obj in trasanctionGrid.Children)
+            //    {
+            //        if (obj is Grid)
+            //            if (((Grid)obj).Equals(transInvoiceGrid))
+            //                ((Grid)obj).Visibility = Visibility.Visible;
+            //            else
+            //                ((Grid)obj).Visibility = Visibility.Collapsed;
+            //    }
+            //    foreach (var obj in transInvoiceGrid.Children)
+            //    {
+            //        if (obj is Grid)
+            //        {
+            //            if (((Grid)obj).Equals(invoiceGridHome))
+            //            {
+            //                headerLbl.Content = "Trasanction - Sales Invoice";
+            //                ((Grid)obj).Visibility = Visibility.Visible;
+            //                settingsBtn.Visibility = Visibility.Hidden;
+            //            }
+            //        }
+            //        else
+            //            ((UserControl)obj).Visibility = Visibility.Collapsed;
 
-                }
-            }
+            //    }
+            //}
             MainVM.StringTextBox = null;
             MainVM.DecimalTextBox = 0;
             MainVM.IntegerTextBox = 0;
             MainVM.cbItem = null;
+            MainVM.isNewRecord = false;
+            MainVM.isViewHome = false;
+            MainVM.isEdit = false;
+            MainVM.isPaymentInvoice = false;
             closeModals();
             worker.RunWorkerAsync();
         }
@@ -2047,95 +2040,23 @@ namespace prototype2
 
         }
 
-        
-
-        private void trasancnvertToInvoiceBtn_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (var obj in transQuotationGrid.Children)
-            {
-                if (obj is Grid)
-                {
-                    if (((Grid)obj).Equals(quotationsGridHome))
-                    {
-
-                        ((Grid)obj).Visibility = Visibility.Visible;
-                        settingsBtn.Visibility = Visibility.Hidden;
-                    }
-                }
-                else
-                    ((UserControl)obj).Visibility = Visibility.Collapsed;
-
-            }
-            foreach (var element in trasanctionGrid.Children)
-            {
-                if (element is Grid)
-                {
-                    if (!(((Grid)element).Name.Equals(transInvoiceGrid.Name)))
-                    {
-                        ((Grid)element).Visibility = Visibility.Collapsed;
-                    }
-                    else
-                        ((Grid)element).Visibility = Visibility.Visible;
-                }
-            }
-            headerLbl.Content = "Trasanction - Sales Invoice";
-            foreach (var element in transInvoiceGrid.Children)
-            {
-                if (element is UserControl)
-                {
-                    if (!(((UserControl)element).Name.Equals(ucInvoice.Name)))
-                    {
-                        ((UserControl)element).Visibility = Visibility.Collapsed;
-                    }
-                    else
-                        ((UserControl)element).Visibility = Visibility.Visible;
-                }
-            }
-        }
-
         private void convertToInvoice_BtnClicked(object sender, EventArgs e)
         {
-            foreach (var obj in transQuotationGrid.Children)
+            MainVM.isNewRecord = true;
+            headerLbl.Content = "Trasanction - Sales Invoice";
+            foreach (var obj in containerGrid.Children)
+            {
+                ((Grid)obj).Visibility = Visibility.Collapsed;
+            }
+            trasanctionGrid.Visibility = Visibility.Visible;
+            foreach (var obj in trasanctionGrid.Children)
             {
                 if (obj is Grid)
-                {
-                    if (((Grid)obj).Equals(quotationsGridHome))
-                    {
-                        
-                        ((Grid)obj).Visibility = Visibility.Visible;
-                        settingsBtn.Visibility = Visibility.Hidden;
-                    }
-                }
-                else
-                    ((UserControl)obj).Visibility = Visibility.Collapsed;
-
+                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                else if (obj is UserControl)
+                    if (((UserControl)obj).Equals(ucInvoice))
+                        ((UserControl)obj).Visibility = Visibility.Collapsed;
             }
-            foreach (var element in trasanctionGrid.Children)
-            {
-                if (element is Grid)
-                {
-                    if (!(((Grid)element).Name.Equals(transInvoiceGrid.Name)))
-                    {
-                        ((Grid)element).Visibility = Visibility.Collapsed;
-                    }
-                    else
-                        ((Grid)element).Visibility = Visibility.Visible;
-                }
-            }
-            headerLbl.Content = "Trasanction - Sales Invoice";
-            foreach (var element in transInvoiceGrid.Children)
-            {
-                if (element is UserControl)
-                {
-                    if (!(((UserControl)element).Name.Equals(ucInvoice.Name)))
-                    {
-                        ((UserControl)element).Visibility = Visibility.Collapsed;
-                    }
-                    else
-                        ((UserControl)element).Visibility = Visibility.Visible;
-                }
-            }
-            
         }
 
         private void genContractBtn_Click(object sender, RoutedEventArgs e)
@@ -2143,80 +2064,6 @@ namespace prototype2
             ucContract.Visibility = Visibility.Visible;
         }
 
-        private void viewInvoiceRecord_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (var obj in transQuotationGrid.Children)
-            {
-                if (obj is Grid)
-                {
-                    if (((Grid)obj).Equals(quotationsGridHome))
-                    {
-
-                        ((Grid)obj).Visibility = Visibility.Visible;
-                        settingsBtn.Visibility = Visibility.Hidden;
-                    }
-                }
-                else
-                    ((UserControl)obj).Visibility = Visibility.Collapsed;
-
-            }
-            foreach (var element in trasanctionGrid.Children)
-            {
-                if (element is Grid)
-                {
-                    if (!(((Grid)element).Name.Equals(transInvoiceGrid.Name)))
-                    {
-                        ((Grid)element).Visibility = Visibility.Collapsed;
-                    }
-                    else
-                        ((Grid)element).Visibility = Visibility.Visible;
-                }
-            }
-            headerLbl.Content = "Trasanction - Sales Invoice";
-            MainVM.isEdit = true;
-            foreach (var element in transInvoiceGrid.Children)
-            {
-                if (element is UserControl)
-                {
-                    if (!(((UserControl)element).Name.Equals(ucInvoice.Name)))
-                    {
-                        ((UserControl)element).Visibility = Visibility.Collapsed;
-                    }
-                    else
-                        ((UserControl)element).Visibility = Visibility.Visible;
-                }
-            }
-            
-        }
-
-        private void receivePaymentBtn_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (var element in trasanctionGrid.Children)
-            {
-                if (element is Grid)
-                {
-                    if (!(((Grid)element).Name.Equals(transInvoiceGrid.Name)))
-                    {
-                        ((Grid)element).Visibility = Visibility.Collapsed;
-                    }
-                    else
-                        ((Grid)element).Visibility = Visibility.Visible;
-                }
-            }
-            headerLbl.Content = "Trasanction - Sales Invoice";
-            foreach (var element in transInvoiceGrid.Children)
-            {
-                if (element is UserControl)
-                {
-                    if (!(((UserControl)element).Name.Equals(ucInvoice.Name)))
-                    {
-                        ((UserControl)element).Visibility = Visibility.Collapsed;
-                    }
-                    else
-                        ((UserControl)element).Visibility = Visibility.Visible;
-                }
-            }
-            ucInvoice.paymentDetailsGrid.Visibility = Visibility.Visible;
-        }
+        
     }
 }

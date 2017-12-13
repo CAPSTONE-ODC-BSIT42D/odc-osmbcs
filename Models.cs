@@ -1209,39 +1209,46 @@ namespace prototype2
 
     }
 
-    public class PaymentHist : ViewModelEntity
+    public class PaymentT : ViewModelEntity
     {
-        public PaymentHist()
+        public PaymentT()
         {
 
         }
 
-        protected int custHistID;
-        public int custHistID_
+        protected int SIpaymentID;
+        public int SIpaymentID_
         {
-            get { return custHistID; }
-            set { SetProperty(ref custHistID, value); }
+            get { return SIpaymentID; }
+            set { SetProperty(ref SIpaymentID, value); }
         }
 
-        protected DateTime paymentDate;
-        public DateTime paymentDate_
+        protected decimal SIpaymentAmount;
+        public decimal SIpaymentAmount_
         {
-            get { return paymentDate; }
-            set { SetProperty(ref paymentDate, value); }
+            get { return SIpaymentAmount; }
+            set { SetProperty(ref SIpaymentAmount, value); }
         }
 
-        protected decimal custBalance;
-        public decimal custBalance_
+        protected DateTime SIpaymentDate;
+        public DateTime SIpaymentDate_
         {
-            get { return custBalance; }
-            set { SetProperty(ref custBalance, value); }
+            get { return SIpaymentDate; }
+            set { SetProperty(ref SIpaymentDate, value); }
         }
 
-        protected string paymentStatus;
-        public string paymentStatus_
+        protected string SIpaymentMethod;
+        public string SIpaymentMethod_
         {
-            get { return paymentStatus; }
-            set { SetProperty(ref paymentStatus, value); }
+            get { return SIpaymentMethod; }
+            set { SetProperty(ref SIpaymentMethod, value); }
+        }
+
+        protected string SIcheckNo;
+        public string SIcheckNo_
+        {
+            get { return SIcheckNo; }
+            set { SetProperty(ref SIcheckNo, value); }
         }
 
         protected int invoiceNo;
