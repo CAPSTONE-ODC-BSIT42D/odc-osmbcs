@@ -319,14 +319,20 @@ namespace prototype2
             {
                 MainVM.PaymentID = dr["SIpaymentID"].ToString();
             }
-            decimal linqResults = MainVM.PaymentList_.Where(x => !(MainVM.SelectedSalesInvoice.invoiceNo_.Equals(x.invoiceNo_))).Select(x => x.SIpaymentAmount_).Sum();
+            decimal total = 0;
+            foreach(PaymentT pt in MainVM.PaymentList_)
+            {
+                if (pt.invoiceNo_.ToString().Equals(MainVM.SelectedSalesInvoice.invoiceNo_))
+                    total += pt.SIpaymentAmount_;
+            }
+            //decimal total = linqResults.Select(x => x.SIpaymentAmount_).Sum();
             
-            if (((double)linqResults+amountTb.Value) < (double)MainVM.TotalSales)
+            if (((double)total + amountTb.Value) < (double)MainVM.TotalSales)
             {
                 query = "UPDATE `sales_invoice_t` SET paymentStatus = '" + "PARTIALLY PAID" + "' WHERE invoiceNo = '" + MainVM.SelectedSalesInvoice.invoiceNo_ + "'";
                 dbCon.insertQuery(query, dbCon.Connection);
             }
-            else if(((double)linqResults + amountTb.Value) >= (double)MainVM.TotalSales)
+            else if(((double)total + amountTb.Value) >= (double)MainVM.TotalSales)
             {
                 query = "UPDATE `sales_invoice_t` SET paymentStatus = '" + "FULLY PAID" + "' WHERE invoiceNo = '" + MainVM.SelectedSalesInvoice.invoiceNo_ + "'";
                 dbCon.insertQuery(query, dbCon.Connection);

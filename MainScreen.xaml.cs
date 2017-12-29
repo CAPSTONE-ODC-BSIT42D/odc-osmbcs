@@ -121,7 +121,8 @@ namespace prototype2
             MainVM.AdditionalFees.Clear();
 
             MainVM.SalesQuotes.Clear();
-
+            MainVM.SalesInvoice.Clear();
+            MainVM.PaymentList_.Clear();
             if (dbCon.IsConnect())
             {
                 string query = "SELECT * FROM si_payment_t";
@@ -723,8 +724,6 @@ namespace prototype2
                     ((UserControl)obj).Visibility = Visibility.Collapsed;
                         
             }
-            
-            
         }
 
         private void ordersSalesMenuBtn_Click(object sender, RoutedEventArgs e)

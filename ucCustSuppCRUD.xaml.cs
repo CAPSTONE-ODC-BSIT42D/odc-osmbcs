@@ -330,7 +330,7 @@ namespace prototype2
                     cmd.Parameters.AddWithValue("@repMobile", repMobileTb.Text);
                     cmd.Parameters["@repMobile"].Direction = ParameterDirection.Input;
 
-                    cmd.Parameters.AddWithValue("@compType", companyTypeCb.SelectedIndex);
+                    cmd.Parameters.AddWithValue("@compType", "1");
                     cmd.Parameters["@compType"].Direction = ParameterDirection.Input;
                     if (MainVM.isEdit)
                     {
@@ -355,7 +355,6 @@ namespace prototype2
        
         private void loadDataToUi()
         {
-            companyTypeCb.SelectedIndex = int.Parse(MainVM.SelectedCustomerSupplier.CompanyType);
             companyNameTb.Text = MainVM.SelectedCustomerSupplier.CompanyName;
             companyDescriptionTb.Text = MainVM.SelectedCustomerSupplier.CompanyDesc;
             companyAddressTb.Text = MainVM.SelectedCustomerSupplier.CompanyAddress;

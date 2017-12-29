@@ -668,8 +668,8 @@
                 </Grid>
             </Grid>
             <Grid x:Name="trasanctionGrid">
-                <Grid x:Name="transQuotationGrid" Margin="0,0,1,0" d:IsHidden="True" >
-                    <Grid x:Name="quotationsGridHome" Margin="10" d:IsHidden="True" >
+                <Grid x:Name="transQuotationGrid" Margin="0,0,1,0" >
+                    <Grid x:Name="quotationsGridHome" Margin="10" >
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                             <Label x:Name="label18" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
                             <TextBox x:Name="searchBox" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317" Text="{Binding SearchQuery}"/>
@@ -823,10 +823,10 @@
                             <ComboBoxItem Content="APPROVED"/>
                         </ComboBox>
                     </Grid>
-                    <local:ucSalesQuote x:Name="ucSalesQuote" Margin="0" Visibility="Collapsed"/>
+                    <local:ucSalesQuote x:Name="ucSalesQuote" Margin="0" Visibility="Collapsed" d:IsHidden="True"/>
 
                 </Grid>
-                <local:ucInvoice x:Name="ucInvoice" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Margin="0,0,1,0" Visibility="Collapsed"/>
+                <local:ucInvoice x:Name="ucInvoice" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Margin="0,0,1,0" Visibility="Collapsed" d:IsHidden="True"/>
                 <Grid x:Name="transOrderGrid" Margin="0,0,1,0" d:IsHidden="True" >
                     <Grid x:Name="invoiceGridHome1" Margin="10" >
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >

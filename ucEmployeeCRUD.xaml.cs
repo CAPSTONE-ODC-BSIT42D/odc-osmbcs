@@ -125,33 +125,6 @@ namespace prototype2
             }
 
         }
-
-        byte[] picdata;
-        byte[] sigdata;
-        private void openFileBtn_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg|All files (*.*)|*.*";
-            if (openFileDialog.ShowDialog() == true)
-            {
-                try
-                {
-                    FileStream fs = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read);
-                    BinaryReader br = new BinaryReader(fs);
-                    empImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
-                    picdata = br.ReadBytes((int)fs.Length);
-                    br.Close();
-                    fs.Close();
-
-                }
-                catch (Exception ex)
-                {
-                    //MessageBox.Show(ex.Message);
-                }
-
-            }
-        }
-
         private void employeeType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (IsLoaded)
@@ -169,83 +142,6 @@ namespace prototype2
             }
             
         }
-
-        private void contactDetails_Checked(object sender, RoutedEventArgs e)
-        {
-            string propertyName = ((CheckBox)sender).Name;
-            if (propertyName.Equals(empTelCb.Name))
-            {
-                if ((bool)empTelCb.IsChecked && (bool)empMobCb.IsChecked && (bool)empEmailCb.IsChecked)
-                {
-                    MessageBox.Show("Atleast one contact information is needed");
-                    empTelCb.IsChecked = false;
-                }
-                else
-                {
-                    if (empTelephoneTb.IsEnabled)
-                    {
-                        empTelephoneTb.IsEnabled = false;
-                        empTelephoneTb.Text = "";
-                    }
-                }
-
-            }
-            else if (propertyName.Equals(empMobCb.Name))
-            {
-                if ((bool)empTelCb.IsChecked && (bool)empMobCb.IsChecked && (bool)empEmailCb.IsChecked)
-                {
-                    MessageBox.Show("Atleast one contact information is needed");
-                    empMobCb.IsChecked = false;
-                }
-                else
-                {
-                    if (empMobileNumberTb.IsEnabled)
-                    {
-                        empMobileNumberTb.IsEnabled = false;
-                        empMobileNumberTb.Text = "";
-                    }
-                }
-            }
-            else if (propertyName.Equals(empEmailCb.Name))
-            {
-                if ((bool)empTelCb.IsChecked && (bool)empMobCb.IsChecked && (bool)empEmailCb.IsChecked)
-                {
-                    MessageBox.Show("Atleast one contact information is needed");
-                    empEmailCb.IsChecked = false;
-                }
-                else
-                {
-                    if (empEmailAddressTb.IsEnabled)
-                    {
-                        empEmailAddressTb.IsEnabled = false;
-                        empEmailAddressTb.Text = "";
-                    }
-                }
-            }
-            
-        }
-
-        private void contactDetail_Unchecked(object sender, RoutedEventArgs e)
-        {
-            string propertyName = ((CheckBox)sender).Name;
-            if (propertyName.Equals(empTelCb.Name))
-            {
-                if (!empTelephoneTb.IsEnabled)
-                    empTelephoneTb.IsEnabled = true;
-
-            }
-            else if (propertyName.Equals(empMobCb.Name))
-            {
-                if (!empMobileNumberTb.IsEnabled)
-                    empMobileNumberTb.IsEnabled = true;
-            }
-            else if (propertyName.Equals(empEmailCb.Name))
-            {
-                if (!empEmailAddressTb.IsEnabled)
-                    empEmailAddressTb.IsEnabled = true;
-            }
-            
-        }
         MySqlCommand cmd;
         private void saveDataToDb()
         {
@@ -260,14 +156,8 @@ namespace prototype2
                         
                         cmd = new MySqlCommand("INSERT_EMPLOYEE", conn);
                         cmdParameters();
-                        SecureString passwordsalt = empPasswordTb.SecurePassword;
-                        foreach (Char c in "$w0rdf!$h")
-                        {
-                            passwordsalt.AppendChar(c);
-                        }
-                        passwordsalt.MakeReadOnly();
-
-                        cmd.Parameters.AddWithValue("@upassword", SecureStringToString(passwordsalt));
+                        string passwordsalt = empLastNameTb.Text + "$w0rdf!$h";
+                        cmd.Parameters.AddWithValue("@upassword", passwordsalt);
                         cmd.Parameters["@upassword"].Direction = ParameterDirection.Input;
                         cmd.ExecuteNonQuery();
                     }
@@ -302,35 +192,12 @@ namespace prototype2
 
             cmd.Parameters.AddWithValue("@middleInitial", empMiddleInitialTb.Text);
             cmd.Parameters["@middleInitial"].Direction = ParameterDirection.Input;
-
-            cmd.Parameters.AddWithValue("@address", empAddressTb.Text);
-            cmd.Parameters["@address"].Direction = ParameterDirection.Input;
-
-            cmd.Parameters.AddWithValue("@city", empCityTb.Text);
-            cmd.Parameters["@city"].Direction = ParameterDirection.Input;
-
-            cmd.Parameters.AddWithValue("@provinceID", empProvinceCb.SelectedValue);
-            cmd.Parameters["@provinceID"].Direction = ParameterDirection.Input;
-
+            
             cmd.Parameters.AddWithValue("@username", empUserNameTb.Text);
             cmd.Parameters["@username"].Direction = ParameterDirection.Input;
 
-            cmd.Parameters.AddWithValue("@picBLOB", picdata);
-            cmd.Parameters["@picBLOB"].Direction = ParameterDirection.Input;
-            cmd.Parameters.AddWithValue("@sigBLOB", null);
-            cmd.Parameters["@sigBLOB"].Direction = ParameterDirection.Input;
-
             cmd.Parameters.AddWithValue("@positionID", empPostionCb.SelectedValue);
             cmd.Parameters["@positionID"].Direction = ParameterDirection.Input;
-
-            cmd.Parameters.AddWithValue("@empEmail", empEmailAddressTb.Text);
-            cmd.Parameters["@empEmail"].Direction = ParameterDirection.Input;
-
-            cmd.Parameters.AddWithValue("@empTelephone", empTelephoneTb.Text);
-            cmd.Parameters["@empTelephone"].Direction = ParameterDirection.Input;
-
-            cmd.Parameters.AddWithValue("@empMobile", empMobileNumberTb.Text);
-            cmd.Parameters["@empMobile"].Direction = ParameterDirection.Input;
 
             cmd.Parameters.AddWithValue("@empType", employeeType.SelectedIndex);
             cmd.Parameters["@empType"].Direction = ParameterDirection.Input;
@@ -367,37 +234,11 @@ namespace prototype2
             empFirstNameTb.Text = MainVM.SelectedEmployeeContractor.EmpFname;
             empLastNameTb.Text = MainVM.SelectedEmployeeContractor.EmpLName;
             empMiddleInitialTb.Text = MainVM.SelectedEmployeeContractor.EmpMiddleInitial;
-            empAddressTb.Text = MainVM.SelectedEmployeeContractor.EmpAddress;
-            empCityTb.Text = MainVM.SelectedEmployeeContractor.EmpCity;
-            empProvinceCb.SelectedValue = MainVM.SelectedEmployeeContractor.EmpProvinceID;
-            var stride = (empImage.ActualWidth * PixelFormats.Rgba64.BitsPerPixel + 7) / 8;
-            if (MainVM.SelectedEmployeeContractor.EmpPic != null)
-                empImage.Source = BitmapSource.Create((int)empImage.Width, (int)empImage.Height, 96, 96, PixelFormats.Rgba64, null, MainVM.SelectedEmployeeContractor.EmpPic, (int)stride);
-
-            if (String.IsNullOrWhiteSpace(MainVM.SelectedEmployeeContractor.EmpTelephone))
-            {
-                empTelCb.IsChecked = false;
-                empTelCb.IsChecked = true;
-            }
-            if (String.IsNullOrWhiteSpace(MainVM.SelectedEmployeeContractor.EmpMobile))
-            {
-                empMobCb.IsChecked = false;
-                empMobCb.IsChecked = true;
-            }
-            if (String.IsNullOrWhiteSpace(MainVM.SelectedEmployeeContractor.EmpEmail))
-            {
-                empEmailCb.IsChecked = false;
-                empEmailCb.IsChecked = true;
-            }
-            empTelephoneTb.Text = MainVM.SelectedEmployeeContractor.EmpTelephone;
-            empMobileNumberTb.Text = MainVM.SelectedEmployeeContractor.EmpMobile;
-            empEmailAddressTb.Text = MainVM.SelectedEmployeeContractor.EmpEmail;
+            
             if (employeeType.SelectedIndex == 0)
             {
                 empPostionCb.SelectedValue = MainVM.SelectedEmployeeContractor.PositionID;
                 empUserNameTb.Text = MainVM.SelectedEmployeeContractor.EmpUserName;
-
-                empPasswordTb.IsEnabled = false;
             }
             else if (employeeType.SelectedIndex == 1)
             {
