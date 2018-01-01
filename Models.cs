@@ -7,14 +7,151 @@ using System.Threading.Tasks;
 
 namespace prototype2
 {
-    
+    //--Minor Tables--//
+    public class EmpPosition : ViewModelEntity
+    {
+        public EmpPosition()
+        {
+
+        }
+
+        protected int positionid;
+        protected string positionName;
+
+        public int PositionID
+        {
+            get { return positionid; }
+            set { SetProperty(ref positionid, value); }
+        }
+
+        public string PositionName
+        {
+            get { return positionName; }
+            set { SetProperty(ref positionName, value); }
+        }
+    }
+
+    public class ContJobName : ViewModelEntity
+    {
+        public ContJobName()
+        {
+
+        }
+
+        protected int jobid;
+        protected string jobName;
+
+        public int JobID
+        {
+            get { return jobid; }
+            set { SetProperty(ref jobid, value); }
+        }
+
+        public string JobName
+        {
+            get { return jobName; }
+            set { SetProperty(ref jobName, value); }
+        }
+    }
+
+    public class Province : ViewModelEntity
+    {
+        public Province()
+        {
+
+        }
+        protected int provinceID;
+        protected string provinceName;
+        protected int regionID;
+        public int ProvinceID
+        {
+            get { return provinceID; }
+            set { SetProperty(ref provinceID, value); }
+        }
+        public string ProvinceName
+        {
+            get { return provinceName; }
+            set { SetProperty(ref provinceName, value); }
+        }
+        public int RegionID
+        {
+            get { return regionID; }
+            set { SetProperty(ref regionID, value); }
+        }
+    }
+
+    public class ItemType : ViewModelEntity
+    {
+        public ItemType()
+        {
+
+        }
+
+        protected int typeID;
+
+        public int TypeID
+        {
+            get { return typeID; }
+            set { SetProperty(ref typeID, value); }
+        }
+
+        protected string typeName;
+
+        public string TypeName
+        {
+            get { return typeName; }
+            set { SetProperty(ref typeName, value); }
+        }
+
+    }
+
+    public class AdditionalFee : ViewModelEntity
+    {
+        public AdditionalFee()
+        {
+
+        }
+
+        protected int feeID;
+        protected int servicesAvailedID;
+        protected string feeName;
+        protected decimal feePrice;
+
+        public int FeeID
+        {
+            get { return feeID; }
+            set { SetProperty(ref feeID, value); }
+        }
+
+        public int ServicesAvailedID
+        {
+            get { return servicesAvailedID; }
+            set { SetProperty(ref servicesAvailedID, value); }
+        }
+
+        public string FeeName
+        {
+            get { return feeName; }
+            set { SetProperty(ref feeName, value); }
+        }
+
+        public decimal FeePrice
+        {
+            get { return feePrice; }
+            set { SetProperty(ref feePrice, value); }
+        }
+    }
+
+
+
+    //---Major Tables---//
     public class Customer : ViewModelEntity
     {
         public Customer()
         {
 
         }
-        protected string companyID;
+        protected int companyID;
         protected string companyName;
         protected string companyDesc;
         protected string companyAddress;
@@ -35,7 +172,7 @@ namespace prototype2
         protected string telephone;
         protected string mobilephone;
 
-        public string CompanyID
+        public int CompanyID
         {
             get { return companyID; }
             set { SetProperty(ref companyID, value); }
@@ -154,33 +291,20 @@ namespace prototype2
         {
 
         }
-        protected string empID;
+        protected int empID;
         protected string empTitle;
         protected string empFName;
         protected string empLName;
         protected string empMI;
-        protected string empAddInfo;
-        protected string empAddress;
-        protected string empCity;
-        protected string empProvinceID;
-        protected string empProvinceName;
-        protected string positionID;
-        protected string positionName;
-        protected string empEmail;
-        protected string empTelephone;
-        protected string empMobile;
+        protected int positionID;
         protected string empUsername;
         protected string empPassword;
-        protected string jobID;
-        protected string jobName;
-        protected string empDateFrom;
-        protected string empDateTo;
+        protected int jobID;
+        protected DateTime empDateFrom;
+        protected DateTime empDateTo;
         protected int empType;
-        protected byte[] empPic;
-        protected byte[] empSig;
-        
 
-        public string EmpID
+        public int EmpID
         {
             get { return empID; }
             set { SetProperty(ref empID, value); }
@@ -209,64 +333,10 @@ namespace prototype2
             set { SetProperty(ref empMI, value); }
         }
 
-        public string EmpAddInfo
-        {
-            get { return empAddInfo; }
-            set { SetProperty(ref empAddInfo, value); }
-        }
-
-        public string EmpAddress
-        {
-            get { return empAddress; }
-            set { SetProperty(ref empAddress, value); }
-        }
-
-        public string EmpCity
-        {
-            get { return empCity; }
-            set { SetProperty(ref empCity, value); }
-        }
-
-        public string EmpProvinceID
-        {
-            get { return empProvinceID; }
-            set { SetProperty(ref empProvinceID, value); }
-        }
-
-        public string EmpProvinceName
-        {
-            get { return empProvinceName; }
-            set { SetProperty(ref empProvinceName, value); }
-        }
-
-        public string PositionID
+        public int PositionID
         {
             get { return positionID; }
             set { SetProperty(ref positionID, value); }
-        }
-
-        public string PositionName
-        {
-            get { return positionName; }
-            set { SetProperty(ref positionName, value); }
-        }
-
-        public string EmpEmail
-        {
-            get { return empEmail; }
-            set { SetProperty(ref empEmail, value); }
-        }
-
-        public string EmpTelephone
-        {
-            get { return empTelephone; }
-            set { SetProperty(ref empTelephone, value); }
-        }
-
-        public string EmpMobile
-        {
-            get { return empMobile; }
-            set { SetProperty(ref empMobile, value); }
         }
 
         public string EmpUserName
@@ -281,25 +351,19 @@ namespace prototype2
             set { SetProperty(ref empPassword, value); }
         }
 
-        public string JobID
+        public int JobID
         {
             get { return jobID; }
             set { SetProperty(ref jobID, value); }
         }
 
-        public string JobName
-        {
-            get { return jobName; }
-            set { SetProperty(ref jobName, value); }
-        }
-
-        public string EmpDateFrom
+        public DateTime EmpDateFrom
         {
             get { return empDateFrom; }
             set { SetProperty(ref empDateFrom, value); }
         }
 
-        public string EmpDateTo
+        public DateTime EmpDateTo
         {
             get { return empDateTo; }
             set { SetProperty(ref empDateFrom, value); }
@@ -311,166 +375,12 @@ namespace prototype2
             set { SetProperty(ref empType, value); }
         }
 
-        public byte[] EmpPic
+        protected bool hasAccess;
+        public bool HasAccess
         {
-            get { return empPic; }
-            set { SetProperty(ref empPic, value); }
+            get { return hasAccess; }
+            set { SetProperty(ref hasAccess, value); }
         }
-
-        public byte[] EmpSig
-        {
-            get { return empSig; }
-            set { SetProperty(ref empSig, value); }
-        }
-
-        public static implicit operator ObservableCollection<object>(Employee v)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class Contact : ViewModelEntity
-    {
-        public Contact()
-        {
-
-        }
-        protected string typeid;
-        protected string typename;
-        protected string details;
-        protected string tableID;
-        protected int id;
-        protected bool isDefault;
-        public string ContactTypeID
-        {
-            get { return typeid; }
-            set { SetProperty(ref typeid, value); }
-        }
-        public string ContactType
-        {
-            get { return typename; }
-            set { SetProperty(ref typename, value); }
-        }
-        public string ContactDetails
-        {
-            get { return details; }
-            set { SetProperty(ref details, value); }
-        }
-        public string TableID
-        {
-            get { return tableID; }
-            set { SetProperty(ref tableID, value); }
-        }
-
-        public int ID
-        {
-            get { return id; }
-            set { SetProperty(ref id, value); }
-        }
-
-        public bool IsDefault
-        {
-            get { return isDefault; }
-            set { SetProperty(ref isDefault, value); }
-        }
-
-    }
-
-    public class EmpPosition : ViewModelEntity
-    {
-        public EmpPosition()
-        {
-
-        }
-
-        protected string positionid;
-        protected string positionName;
-
-        public string PositionID
-        {
-            get { return positionid; }
-            set { SetProperty(ref positionid, value); }
-        }
-
-        public string PositionName
-        {
-            get { return positionName; }
-            set { SetProperty(ref positionName, value); }
-        }
-    }
-
-    public class ContJobName : ViewModelEntity
-    {
-        public ContJobName()
-        {
-
-        }
-
-        protected string jobid;
-        protected string jobName;
-
-        public string JobID
-        {
-            get { return jobid; }
-            set { SetProperty(ref jobid, value); }
-        }
-
-        public string JobName
-        {
-            get { return jobName; }
-            set { SetProperty(ref jobName, value); }
-        }
-    }
-
-    public class Province : ViewModelEntity
-    {
-        public Province()
-        {
-
-        }
-        protected int provinceID;
-        protected string provinceName;
-        protected decimal provincePrice;
-        public int ProvinceID
-        {
-            get { return provinceID; }
-            set { SetProperty(ref provinceID, value); }
-        }
-        public string ProvinceName
-        {
-            get { return provinceName; }
-            set { SetProperty(ref provinceName, value); }
-        }
-        public decimal ProvincePrice
-        {
-            get { return provincePrice; }
-            set { SetProperty(ref provincePrice, value); }
-        }
-    }
-
-    public class ItemType : ViewModelEntity
-    {
-        public ItemType()
-        {
-
-        }
-
-        protected int typeID;
-
-        public int TypeID
-        {
-            get { return typeID; }
-            set { SetProperty(ref typeID, value); }
-        }
-
-        protected string typeName;
-
-        public string TypeName
-        {
-            get { return typeName; }
-            set { SetProperty(ref typeName, value); }
-        }
-
     }
 
     public class Item : ViewModelEntity
@@ -479,74 +389,54 @@ namespace prototype2
         {
 
         }
-        protected bool isChecked;
-        protected string itemCode;
+
+        protected int id;
+        public int ID
+        {
+            get { return id; }
+            set { SetProperty(ref id, value); }
+        }
+
         protected string itemName;
-        protected string itemDesc;
-        protected decimal costPrice;
-        protected string unit;
-        protected int quantity;
-        protected string typeID;
-        protected string supplierID;
-        protected string typeName;
-        protected string supplierName;
-
-        public bool IsChecked
-        {
-            get { return isChecked; }
-            set { SetProperty(ref isChecked, value); }
-        }
-
-        public string ItemCode
-        {
-            get { return itemCode; }
-            set { SetProperty(ref itemCode, value); }
-        }
-
         public string ItemName
         {
             get { return itemName; }
             set { SetProperty(ref itemName, value); }
         }
+
+        protected string itemDesc;
         public string ItemDesc
         {
             get { return itemDesc; }
             set { SetProperty(ref itemDesc, value); }
         }
-        public decimal CostPrice
+
+        protected decimal markupPerc;
+        public decimal MarkUpPerc
         {
-            get { return costPrice; }
-            set { SetProperty(ref costPrice, value); }
+            get { return markupPerc; }
+            set { SetProperty(ref markupPerc, value); }
         }
-        public string Unit
+
+        protected int unitId;
+        public int UnitID
         {
-            get { return unit; }
-            set { SetProperty(ref unit, value); }
+            get { return unitId; }
+            set { SetProperty(ref unitId, value); }
         }
-        public int Quantity
-        {
-            get { return quantity; }
-            set { SetProperty(ref quantity, value); }
-        }
-        public string TypeID
+
+        protected int typeID;
+        public int TypeID
         {
             get { return typeID; }
             set { SetProperty(ref typeID, value); }
         }
-        public string TypeName
-        {
-            get { return typeName; }
-            set { SetProperty(ref typeName, value); }
-        }
-        public string SupplierID
+
+        protected int supplierID;
+        public int SupplierID
         {
             get { return supplierID; }
             set { SetProperty(ref supplierID, value); }
-        }
-        public string SupplierName
-        {
-            get { return supplierName; }
-            set { SetProperty(ref supplierName, value); }
         }
     }
 
@@ -557,12 +447,12 @@ namespace prototype2
 
         }
 
-        protected string serviceID;
+        protected int serviceID;
         protected string serviceName;
         protected string serviceDesc;
         protected decimal servicePrice;
 
-        public string ServiceID
+        public int ServiceID
         {
             get { return serviceID; }
             set { SetProperty(ref serviceID, value); }
@@ -587,60 +477,53 @@ namespace prototype2
         }
     }
 
-    public class AddedService : ViewModelEntity
+    public class AvailedService : ViewModelEntity
     {
-        public AddedService()
+        public AvailedService()
         {
 
         }
-        protected string tableNoChar;
-        protected string sqNoChar;
-        protected string serviceID;
-        protected string serviceName;
-        protected decimal servicePrice;
-        protected string address;
-        protected string city;
-        protected string provinceName;
-        protected int provinceID;
-        protected decimal totalCost;
-
-        public string TableNoChar
+        protected int availedServiceID;
+        public int AvailedServiceID
         {
-            get { return tableNoChar; }
-            set { SetProperty(ref tableNoChar, value); }
+            get { return availedServiceID; }
+            set { SetProperty(ref availedServiceID, value); }
         }
 
-        public string ServiceID
+        protected int serviceID;
+        public int ServiceID
         {
             get { return serviceID; }
             set { SetProperty(ref serviceID, value); }
         }
-        public string Address
-        {
-            get { return address; }
-            set { SetProperty(ref address, value); }
-        }
-        public string City
-        {
-            get { return city; }
-            set { SetProperty(ref city, value); }
-        }
+
+        protected int provinceID;
         public int ProvinceID
         {
             get { return provinceID; }
             set { SetProperty(ref provinceID, value); }
         }
 
-        public decimal TotalCost
+
+        protected string city;
+        public string City
         {
-            get { return totalCost; }
-            set { SetProperty(ref totalCost, value); }
+            get { return city; }
+            set { SetProperty(ref city, value); }
         }
 
+        protected string sqNoChar;
         public string SqNoChar
         {
             get { return sqNoChar; }
             set { SetProperty(ref sqNoChar, value); }
+        }
+
+        protected decimal totalCost;
+        public decimal TotalCost
+        {
+            get { return totalCost; }
+            set { SetProperty(ref totalCost, value); }
         }
 
         protected ObservableCollection<AdditionalFee> additionalFees = new ObservableCollection<AdditionalFee>();
@@ -652,22 +535,22 @@ namespace prototype2
         }
     }
 
-    public class AddedItem : ViewModelEntity
+    public class AvailedItem : ViewModelEntity
     {
-        public AddedItem()
+        public AvailedItem()
         {
 
         }
-        protected int tableID;
+        protected int availedItemID;
         protected string sqNoChar;
-        protected string itemCode;
+        protected int itemID;
         protected int itemQty;
         protected decimal totalCost;
 
-        public int TableID
+        public int AvailedItemID
         {
-            get { return tableID; }
-            set { SetProperty(ref tableID, value); }
+            get { return availedItemID; }
+            set { SetProperty(ref availedItemID, value); }
         }
 
         public string SqNoChar
@@ -676,10 +559,10 @@ namespace prototype2
             set { SetProperty(ref sqNoChar, value); }
         }
 
-        public string ItemCode
+        public int ItemID
         {
-            get { return itemCode; }
-            set { SetProperty(ref itemCode, value); }
+            get { return itemID; }
+            set { SetProperty(ref itemID, value); }
         }
 
         public int ItemQty
@@ -692,37 +575,6 @@ namespace prototype2
         {
             get { return totalCost; }
             set { SetProperty(ref totalCost, value); }
-        }
-    }
-
-    public class AdditionalFee : ViewModelEntity
-    {
-        public AdditionalFee()
-        {
-
-        }
-
-        protected string feeName;
-        protected decimal feePrice;
-        protected string serviceNoChar;
-
-        public string ServiceNoChar
-        {
-            get { return serviceNoChar; }
-            set { SetProperty(ref serviceNoChar, value); }
-        }
-
-
-        public string FeeName
-        {
-            get { return feeName; }
-            set { SetProperty(ref feeName, value); }
-        }
-
-        public decimal FeePrice
-        {
-            get { return feePrice; }
-            set { SetProperty(ref feePrice, value); }
         }
     }
 
@@ -1078,20 +930,20 @@ namespace prototype2
             set { SetProperty(ref discountPercent, value); }
         }
 
-        protected ObservableCollection<AddedService> addedServices = new ObservableCollection<AddedService>();
+        protected ObservableCollection<AvailedService> availedServices = new ObservableCollection<AvailedService>();
 
-        public ObservableCollection<AddedService> AddedServices
+        public ObservableCollection<AvailedService> AvailedServices
         {
-            get { return addedServices; }
-            set { addedServices = value; }
+            get { return availedServices; }
+            set { availedServices = value; }
         }
 
-        protected ObservableCollection<AddedItem> addedItem = new ObservableCollection<AddedItem>();
+        protected ObservableCollection<AvailedItem> availedItems = new ObservableCollection<AvailedItem>();
 
-        public ObservableCollection<AddedItem> AddedItems
+        public ObservableCollection<AvailedItem> AvailedItems
         {
-            get { return addedItem; }
-            set { addedItem = value; }
+            get { return availedItems; }
+            set { availedItems = value; }
         }
     }
 

@@ -317,57 +317,6 @@ namespace prototype2
         }
         //-----End of Employee
         
-        //-----End of contractor
-
-        //-----Selected CustContact
-        protected ObservableCollection<Contact> empcontacts = new ObservableCollection<Contact>();
-
-        protected Contact selectedContact = null;
-
-        public ObservableCollection<Contact> EmpContacts
-        {
-            get { return empcontacts; }
-            set { empcontacts = value; }
-        }
-
-        public Contact SelectedEmpContact
-        {
-            get { return selectedContact; }
-            set { SetProperty(ref selectedContact, value); }
-        }
-        //----- END of Selected CustContact
-
-        //-----Selected CustContact
-        protected ObservableCollection<Contact> custcontact = new ObservableCollection<Contact>();
-
-        public ObservableCollection<Contact> CustContacts
-        {
-            get { return custcontact; }
-            set { custcontact = value; }
-        }
-
-        public Contact SelectedCustContact
-        {
-            get { return selectedContact; }
-            set { SetProperty(ref selectedContact, value); }
-        }
-        //----- END of Selected CustContact
-
-        //----- RepContacts
-        protected ObservableCollection<Contact> repcontact = new ObservableCollection<Contact>();
-
-        public ObservableCollection<Contact> RepContacts
-        {
-            get { return repcontact; }
-            set { repcontact = value; }
-        }
-
-        public Contact SelectedRepContact
-        {
-            get { return selectedContact; }
-            set { SetProperty(ref selectedContact, value); }
-        }
-        //----- END of REpContacts
 
         //----- Employee Position
         protected ObservableCollection<EmpPosition> empPosition = new ObservableCollection<EmpPosition>();
@@ -532,36 +481,36 @@ namespace prototype2
         }
         //-----Added Items
 
-        protected ObservableCollection<AddedItem> addedItem = new ObservableCollection<AddedItem>();
+        protected ObservableCollection<AvailedItem> availedItems = new ObservableCollection<AvailedItem>();
 
-        public ObservableCollection<AddedItem> AddedItems
+        public ObservableCollection<AvailedItem> AvailedItems
         {
-            get { return addedItem; }
-            set { addedItem = value; }
+            get { return availedItems; }
+            set { availedItems = value; }
         }
 
-        protected AddedItem selectedAddedItem = null;
+        protected AvailedItem selectedAvailedItem = null;
 
-        public AddedItem SelectedAddedItem
+        public AvailedItem SelectedAvailedItem
         {
-            get { return selectedAddedItem; }
-            set { SetProperty(ref selectedAddedItem, value); }
+            get { return selectedAvailedItem; }
+            set { SetProperty(ref selectedAvailedItem, value); }
         }
         //-----Added Services
-        protected ObservableCollection<AddedService> addedServices = new ObservableCollection<AddedService>();
+        protected ObservableCollection<AvailedService> availedServices = new ObservableCollection<AvailedService>();
 
-        protected AddedService selectedAddedService = null;
+        protected AvailedService selectedAvailedServices = null;
 
-        public ObservableCollection<AddedService> AddedServices
+        public ObservableCollection<AvailedService> AvailedServices
         {
-            get { return addedServices; }
-            set { addedServices = value; }
+            get { return availedServices; }
+            set { availedServices = value; }
         }
 
-        public AddedService SelectedAddedService
+        public AvailedService SelectedAvailedServices
         {
-            get { return selectedAddedService; }
-            set { SetProperty(ref selectedAddedService, value); }
+            get { return selectedAvailedServices; }
+            set { SetProperty(ref selectedAvailedServices, value); }
         }
         //----- Provinces
 

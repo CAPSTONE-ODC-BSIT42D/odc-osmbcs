@@ -116,13 +116,14 @@ namespace prototype2
             MainVM.Contractor.Clear();
 
             MainVM.RequestedItems.Clear();
-            MainVM.AddedItems.Clear();
-            MainVM.AddedServices.Clear();
+            MainVM.AvailedItems.Clear();
+            MainVM.AvailedServices.Clear();
             MainVM.AdditionalFees.Clear();
 
             MainVM.SalesQuotes.Clear();
             MainVM.SalesInvoice.Clear();
             MainVM.PaymentList_.Clear();
+
             if (dbCon.IsConnect())
             {
                 string query = "SELECT * FROM si_payment_t";
@@ -148,13 +149,9 @@ namespace prototype2
                 DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
                 fromDbTable = fromDb.Tables["t"];
-
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    if (dr["locPrice"].ToString().Equals(""))
-                        MainVM.Provinces.Add(new Province() { ProvinceID = (int)dr["locProvinceID"], ProvinceName = dr["locProvince"].ToString() });
-                    else
-                        MainVM.Provinces.Add(new Province() { ProvinceID = (int)dr["locProvinceID"], ProvinceName = dr["locProvince"].ToString(), ProvincePrice = (decimal)dr["locPrice"] });
+                    MainVM.Provinces.Add(new Province() { ProvinceID = (int)dr["locProvinceID"], ProvinceName = dr["locProvince"].ToString(), RegionID = int.Parse(dr[2].ToString())});
                 }
                 dbCon.Close();
             }
@@ -171,7 +168,7 @@ namespace prototype2
 
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    MainVM.EmpPosition.Add(new EmpPosition() { PositionID = dr["positionid"].ToString(), PositionName = dr["positionName"].ToString() });
+                    MainVM.EmpPosition.Add(new EmpPosition() { PositionID = int.Parse(dr["positionid"].ToString()), PositionName = dr["positionName"].ToString() });
                 }
                 dbCon.Close();
             }
@@ -186,7 +183,7 @@ namespace prototype2
 
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    MainVM.ContJobTitle.Add(new ContJobName() { JobID = dr["jobID"].ToString(), JobName = dr["jobName"].ToString() });
+                    MainVM.ContJobTitle.Add(new ContJobName() { JobID = int.Parse(dr["jobID"].ToString()), JobName = dr["jobName"].ToString() });
                 }
                 dbCon.Close();
             }
@@ -216,7 +213,7 @@ namespace prototype2
 
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    MainVM.ServicesList.Add(new Service() { ServiceID = dr["serviceID"].ToString(), ServiceName = dr["serviceName"].ToString(), ServiceDesc = dr["serviceDesc"].ToString(), ServicePrice = (decimal)dr["ServicePrice"] });
+                    MainVM.ServicesList.Add(new Service() { ServiceID = int.Parse(dr["serviceID"].ToString()), ServiceName = dr["serviceName"].ToString(), ServiceDesc = dr["serviceDesc"].ToString(), ServicePrice = (decimal)dr["ServicePrice"] });
                 }
                 dbCon.Close();
             }
@@ -231,14 +228,7 @@ namespace prototype2
 
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    MainVM.SelectedCustomerSupplier = MainVM.Suppliers.Where(x => x.CompanyID.Equals(dr["supplierID"].ToString())).FirstOrDefault();
-                    MainVM.SelectedProductCategory = MainVM.ProductCategory.Where(x => x.TypeID == int.Parse(dr["typeID"].ToString())).FirstOrDefault();
-                    if (MainVM.SelectedCustomerSupplier != null)
-                    {
-                        MainVM.ProductList.Add(new Item() { ItemCode = dr["itemCode"].ToString(), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), Unit = dr["itemUnit"].ToString(), TypeName = MainVM.SelectedProductCategory.TypeName, Quantity = 1, SupplierID = dr["supplierID"].ToString(), SupplierName = MainVM.SelectedCustomerSupplier.CompanyName });
-                    }
-                    else
-                        MainVM.ProductList.Add(new Item() { ItemCode = dr["itemCode"].ToString(), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), CostPrice = (decimal)dr["costPrice"], TypeID = dr["typeID"].ToString(), Unit = dr["itemUnit"].ToString(), TypeName = MainVM.SelectedProductCategory.TypeName, Quantity = 1, SupplierID = dr["supplierID"].ToString() });
+                    MainVM.ProductList.Add(new Item() { ID = int.Parse(dr["id"].ToString()), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), MarkUpPerc = (decimal)dr["markupPerc"], TypeID = int.Parse(dr["typeID"].ToString()), UnitID = int.Parse(dr["unitID"].ToString()), SupplierID = int.Parse(dr["supplierID"].ToString()) });
                 }
                 dbCon.Close();
             }
@@ -257,9 +247,8 @@ namespace prototype2
 
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    var customer = (new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString(), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString(), RepTitle = dr["repTitle"].ToString(), RepFirstName = dr["repFName"].ToString(), RepMiddleName = dr["repMInitial"].ToString(), RepLastName = dr["repLName"].ToString(), RepEmail = dr["repEmail"].ToString(), RepTelephone = dr["repTelephone"].ToString(), RepMobile = dr["repMobile"].ToString() });
+                    var customer = (new Customer() { CompanyID = int.Parse(dr["companyID"].ToString()), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString(), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString(), RepTitle = dr["repTitle"].ToString(), RepFirstName = dr["repFName"].ToString(), RepMiddleName = dr["repMInitial"].ToString(), RepLastName = dr["repLName"].ToString(), RepEmail = dr["repEmail"].ToString(), RepTelephone = dr["repTelephone"].ToString(), RepMobile = dr["repMobile"].ToString() });
                     MainVM.Customers.Add(customer);
-                    MainVM.AllCustomerSupplier.Add(customer);
                 }
             }
 
@@ -277,9 +266,8 @@ namespace prototype2
 
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    var supplier = new Customer() { CompanyID = dr["companyID"].ToString(), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString(), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString(), RepTitle = dr["repTitle"].ToString(), RepFirstName = dr["repFName"].ToString(), RepMiddleName = dr["repMInitial"].ToString(), RepLastName = dr["repLName"].ToString(), RepEmail = dr["repEmail"].ToString(), RepTelephone = dr["repTelephone"].ToString(), RepMobile = dr["repMobile"].ToString() };
+                    var supplier = new Customer() { CompanyID = int.Parse(dr["companyID"].ToString()), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString(), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString(), RepTitle = dr["repTitle"].ToString(), RepFirstName = dr["repFName"].ToString(), RepMiddleName = dr["repMInitial"].ToString(), RepLastName = dr["repLName"].ToString(), RepEmail = dr["repEmail"].ToString(), RepTelephone = dr["repTelephone"].ToString(), RepMobile = dr["repMobile"].ToString() };
                     MainVM.Suppliers.Add(supplier);
-                    MainVM.AllCustomerSupplier.Add(supplier);
                 }
             }
             if (dbCon.IsConnect())
@@ -299,10 +287,8 @@ namespace prototype2
                     }
                     int empType;
                     int.TryParse(dr["empType"].ToString(), out empType);
-                    MainVM.Employees.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), PositionID = dr["positionID"].ToString(), PositionName = dr["positionName"].ToString(), EmpUserName = dr["empUserName"].ToString(), EmpEmail = dr["empEmail"].ToString(), EmpMobile = dr["empMobile"].ToString(), EmpTelephone = dr["empTelephone"].ToString(), EmpPic = empPic, EmpType = empType });
-                    MainVM.AllEmployeesContractor.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), PositionID = dr["positionID"].ToString(), PositionName = dr["positionName"].ToString(), EmpUserName = dr["empUserName"].ToString(), EmpEmail = dr["empEmail"].ToString(), EmpMobile = dr["empMobile"].ToString(), EmpTelephone = dr["empTelephone"].ToString(), EmpPic = empPic, EmpType = empType });
-
-
+                    MainVM.Employees.Add(new Employee() { EmpID = int.Parse(dr["empID"].ToString()), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), PositionID = int.Parse(dr["positionID"].ToString()), EmpUserName = dr["empUserName"].ToString(), EmpType = empType, HasAccess = bool.Parse(dr["hasAccess"].ToString()) });
+                    MainVM.AllEmployeesContractor.Add(new Employee() { EmpID = int.Parse(dr["empID"].ToString()), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), PositionID = int.Parse(dr["positionID"].ToString()), EmpUserName = dr["empUserName"].ToString(), EmpType = empType, HasAccess = bool.Parse(dr["hasAccess"].ToString()) });
                 }
                 dbCon.Close();
             }
@@ -322,17 +308,55 @@ namespace prototype2
                 MainVM.Contractor.Clear();
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    byte[] empPic = null;
-                    if (!dr["empPic"].Equals(DBNull.Value))
-                    {
-                        empPic = (byte[])dr["empPic"];
-                    }
                     int empType;
                     int.TryParse(dr["empType"].ToString(), out empType);
-                    MainVM.Contractor.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), JobID = dr["jobID"].ToString(), JobName = dr["jobName"].ToString(), EmpUserName = dr["empUserName"].ToString(), EmpEmail = dr["empEmail"].ToString(), EmpMobile = dr["empMobile"].ToString(), EmpTelephone = dr["empTelephone"].ToString(), EmpPic = empPic, EmpType = empType });
-                    MainVM.AllEmployeesContractor.Add(new Employee() { EmpID = dr["empID"].ToString(), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), EmpAddInfo = dr["empAddInfo"].ToString(), EmpAddress = dr["empAddress"].ToString(), EmpCity = dr["empCity"].ToString(), EmpProvinceID = dr["empProvinceID"].ToString(), EmpProvinceName = dr["locprovince"].ToString(), JobID = dr["jobID"].ToString(), JobName = dr["jobName"].ToString(), EmpUserName = dr["empUserName"].ToString(), EmpEmail = dr["empEmail"].ToString(), EmpMobile = dr["empMobile"].ToString(), EmpTelephone = dr["empTelephone"].ToString(), EmpPic = empPic, EmpType = empType });
+                    MainVM.Contractor.Add(new Employee() { EmpID = int.Parse(dr["empID"].ToString()), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), JobID = int.Parse(dr["jobID"].ToString()),EmpDateFrom = DateTime.Parse(dr["empDateFrom"].ToString()), EmpDateTo = DateTime.Parse(dr["empDateTo"].ToString()), EmpUserName = dr["empUserName"].ToString(), EmpType = empType, HasAccess = bool.Parse(dr["hasAccess"].ToString()) });
+                    MainVM.AllEmployeesContractor.Add(new Employee() { EmpID = int.Parse(dr["empID"].ToString()), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), JobID = int.Parse(dr["jobID"].ToString()), EmpDateFrom = DateTime.Parse(dr["empDateFrom"].ToString()), EmpDateTo = DateTime.Parse(dr["empDateTo"].ToString()), EmpUserName = dr["empUserName"].ToString(), EmpType = empType, HasAccess = bool.Parse(dr["hasAccess"].ToString()) });
                 }
                 dbCon.Close();
+            }
+
+
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM items_availed_t;";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    var availedItems = new AvailedItem() { AvailedItemID = int.Parse(dr["id"].ToString()), SqNoChar = dr["sqNoChar"].ToString(), ItemID = int.Parse(dr["itemID"].ToString()), ItemQty = int.Parse(dr["itemQnty"].ToString()), TotalCost = decimal.Parse(dr["totalCost"].ToString()) };
+                    MainVM.AvailedItems.Add(availedItems);
+                }
+            }
+
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM services_availed_t;";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    var availedservices = new AvailedService() { AvailedServiceID = int.Parse(dr["ID"].ToString()), SqNoChar = dr["sqNoChar"].ToString(), ServiceID = int.Parse(dr["serviceID"].ToString()), ProvinceID = int.Parse(dr["provinceID"].ToString()), City = dr["city"].ToString(), TotalCost = decimal.Parse(dr["totalCost"].ToString()) };
+                    query = "SELECT * FROM fees_per_transaction_t WHERE servicesAvailedID = "+ dr["ID"].ToString() + ";";
+                    dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                    DataSet fromDb2 = new DataSet();
+                    DataTable fromDbTable2 = new DataTable();
+                    dataAdapter.Fill(fromDb2, "t");
+                    fromDbTable2 = fromDb2.Tables["t"];
+                    foreach (DataRow dr2 in fromDbTable2.Rows)
+                    {
+                        availedservices.AdditionalFees.Add(new AdditionalFee() { FeeID = int.Parse(dr2["feeID"].ToString()), ServicesAvailedID = int.Parse(dr2["servicesAvailedID"].ToString()), FeeName = dr2["feeName"].ToString(), FeePrice = decimal.Parse(dr2["feeValue"].ToString()) });
+                    }
+                    MainVM.AvailedServices.Add(availedservices);
+                }
             }
             if (dbCon.IsConnect())
             {
@@ -432,7 +456,7 @@ namespace prototype2
                         });
                     }
                 }
-                query = "SELECT * FROM services_availed_t;";
+                query = "";
                 dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 fromDb = new DataSet();
                 fromDbTable = new DataTable();
@@ -452,34 +476,7 @@ namespace prototype2
                 DataTable fromDbTable3 = new DataTable();
                 dataAdapter.Fill(fromDb3, "t");
                 fromDbTable3 = fromDb3.Tables["t"];
-                foreach (SalesQuote sq in MainVM.SalesQuotes)
-                {
-                    foreach (DataRow dr in fromDbTable.Rows)
-                    {
-                        if (dr["sqNoChar"].ToString().Equals(sq.sqNoChar_))
-                        {
-                            MainVM.SelectedAddedService = (new AddedService() { TableNoChar = dr["tableNoChar"].ToString(), SqNoChar = dr["sqNoChar"].ToString(), ServiceID = dr["serviceID"].ToString(), ProvinceID = int.Parse(dr["provinceID"].ToString()), City = dr["city"].ToString(), Address = dr["address"].ToString(), TotalCost = decimal.Parse(dr["totalCost"].ToString()) });
-                            foreach (DataRow dr2 in fromDbTable2.Rows)
-                            {
-                                if (dr["tableNoChar"].ToString().Equals(dr2["serviceNochar"].ToString()))
-                                {
-                                    MainVM.SelectedAddedService.AdditionalFees.Add(new AdditionalFee() { ServiceNoChar = dr2["serviceNoChar"].ToString(), FeeName = dr2["feeName"].ToString(), FeePrice = decimal.Parse(dr2["feeValue"].ToString()) });
-                                }
-                            }
-                            sq.AddedServices.Add(MainVM.SelectedAddedService);
-                            MainVM.AddedServices.Add(MainVM.SelectedAddedService);
-                        }
-                    }
-                    foreach (DataRow dr3 in fromDbTable3.Rows)
-                    {
-                        if (dr3["sqNoChar"].ToString().Equals(sq.sqNoChar_))
-                        {
-                            sq.AddedItems.Add(new AddedItem() { TableID = int.Parse(dr3["tableID"].ToString()), SqNoChar = dr3["sqNoChar"].ToString(), ItemCode = dr3["itemCode"].ToString(), ItemQty = int.Parse(dr3["itemQnty"].ToString()), TotalCost = decimal.Parse(dr3["totalCost"].ToString()) });
-                        }
-                    }
-
-
-                }
+                
                 dbCon.Close();
             }
 
@@ -604,7 +601,7 @@ namespace prototype2
         {
             MainVM.SelectedCustomerSupplier = null;
             MainVM.SelectedEmployeeContractor = null;
-            MainVM.SelectedAddedItem = null;
+            MainVM.SelectedAvailedItem = null;
             MainVM.SelectedSalesQuote = null;
         }
 
@@ -1300,14 +1297,13 @@ namespace prototype2
 
             if (manageCustomerGrid.IsVisible)
             {
-                String id = MainVM.SelectedCustomerSupplier.CompanyID;
                 var dbCon = DBConnection.Instance();
                 MessageBoxResult result = MessageBox.Show("Do you wish to delete this record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.OK)
                 {
                     if (dbCon.IsConnect())
                     {
-                        string query = "UPDATE `cust_supp_t` SET `isDeleted`= 1 WHERE companyID = '" + id + "';";
+                        string query = "UPDATE `cust_supp_t` SET `isDeleted`= 1 WHERE companyID = '" + MainVM.SelectedCustomerSupplier.CompanyID + "';";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             MessageBox.Show("Record successfully deleted!");
@@ -1322,14 +1318,13 @@ namespace prototype2
             }
             else if (manageEmployeeGrid.IsVisible)
             {
-                String id = MainVM.SelectedEmployeeContractor.EmpID;
                 var dbCon = DBConnection.Instance();
                 MessageBoxResult result = MessageBox.Show("Do you wish to delete this record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.OK)
                 {
                     if (dbCon.IsConnect())
                     {
-                        string query = "UPDATE `emp_cont_t` SET `isDeleted`= 1 WHERE empID = '" + id + "';";
+                        string query = "UPDATE `emp_cont_t` SET `isDeleted`= 1 WHERE empID = '" + MainVM.SelectedEmployeeContractor.EmpID + "';";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             MessageBox.Show("Record successfully deleted!");
@@ -1350,7 +1345,7 @@ namespace prototype2
                 {
                     if (dbCon.IsConnect())
                     {
-                        string query = "UPDATE `item_t` SET `isDeleted`= 1 WHERE itemCode = '" + MainVM.SelectedProduct.ItemCode + "';";
+                        string query = "UPDATE `item_t` SET `isDeleted`= 1 WHERE itemCode = '" + MainVM.SelectedProduct.ID + "';";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             MessageBox.Show("Record successfully deleted!");
@@ -1930,7 +1925,7 @@ namespace prototype2
             {
                 setPriceBtn.IsEnabled = true;
                 MainVM.SelectedProvince = MainVM.Provinces.Where(x => x.ProvinceID == int.Parse(provinceCb.SelectedValue.ToString())).First();
-                locationPrice.Value = MainVM.SelectedProvince.ProvincePrice;
+                //locationPrice.Value = MainVM.SelectedProvince.ProvincePrice;
             }
 
         }
