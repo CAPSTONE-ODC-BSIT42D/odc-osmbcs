@@ -49,7 +49,7 @@ namespace prototype2
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             worker.RunWorkerAsync();
-            this.ucEmployee.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
+            //this.ucEmployee.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
             this.ucCustSupp.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
             
             this.ucProduct.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
@@ -142,7 +142,7 @@ namespace prototype2
 
             if (dbCon.IsConnect())
             {
-                string query = "SELECT locProvinceID, locProvince, locPrice FROM provinces_t";
+                string query = "SELECT * FROM provinces_t";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
@@ -150,7 +150,10 @@ namespace prototype2
                 fromDbTable = fromDb.Tables["t"];
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    MainVM.Provinces.Add(new Province() { ProvinceID = (int)dr["locProvinceID"], ProvinceName = dr["locProvince"].ToString(), RegionID = int.Parse(dr[2].ToString())});
+                    int regionID = 0;
+                    if (!String.IsNullOrEmpty(dr[2].ToString()))
+                        regionID = int.Parse(dr[2].ToString());
+                    MainVM.Provinces.Add(new Province() { ProvinceID = int.Parse(dr[0].ToString()), ProvinceName = dr[1].ToString(), RegionID = regionID});
                 }
                 dbCon.Close();
             }
@@ -236,7 +239,7 @@ namespace prototype2
             {
                 string query = "SELECT * " +
                     "FROM cust_supp_t cs  " +
-                    "JOIN provinces_t p ON cs.companyProvinceID = p.locProvinceId " +
+                    "JOIN provinces_t p ON cs.companyProvinceID = p.id " +
                     "WHERE isDeleted = 0 AND companyType = 0;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
@@ -255,7 +258,7 @@ namespace prototype2
             {
                 string query = "SELECT * " +
                     "FROM cust_supp_t cs  " +
-                    "JOIN provinces_t p ON cs.companyProvinceID = p.locProvinceId " +
+                    "JOIN provinces_t p ON cs.companyProvinceID = p.id " +
                     "WHERE isDeleted = 0 AND companyType = 1;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
@@ -271,7 +274,7 @@ namespace prototype2
             }
             if (dbCon.IsConnect())
             {
-                string query = "SELECT * FROM emp_cont_t a JOIN provinces_t b ON a.empProvinceID = b.locProvinceId JOIN position_t c ON a.positionID = c.positionid  WHERE isDeleted = 0 AND empType = 0;";
+                string query = "SELECT * FROM emp_cont_t a JOIN position_t c ON a.positionID = c.positionid  WHERE isDeleted = 0 AND empType = 0;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
@@ -296,7 +299,6 @@ namespace prototype2
             {
                 string query = "SELECT * " +
                     "FROM emp_cont_t a  " +
-                    "JOIN provinces_t b ON a.empProvinceID = b.locProvinceId " +
                     "JOIN job_title_t d ON a.jobID = d.jobID " +
                     "WHERE a.isDeleted = 0 AND a.empType = 1;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
@@ -455,27 +457,6 @@ namespace prototype2
                         });
                     }
                 }
-                query = "";
-                dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                fromDb = new DataSet();
-                fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-
-                query = "SELECT * FROM fees_per_transaction_t;";
-                dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb2 = new DataSet();
-                DataTable fromDbTable2 = new DataTable();
-                dataAdapter.Fill(fromDb2, "t");
-                fromDbTable2 = fromDb2.Tables["t"];
-
-                query = "SELECT * FROM items_availed_t;";
-                dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb3 = new DataSet();
-                DataTable fromDbTable3 = new DataTable();
-                dataAdapter.Fill(fromDb3, "t");
-                fromDbTable3 = fromDb3.Tables["t"];
-                
                 dbCon.Close();
             }
 
@@ -1113,29 +1094,29 @@ namespace prototype2
                 }
                 ucEmployee.saveCancelGrid1.Visibility = Visibility.Collapsed;
                 ucEmployee.editCloseGrid1.Visibility = Visibility.Visible;
-                foreach (var element in ucEmployee.employeeDetailsFormGrid1.Children)
-                {
-                    if (element is TextBox)
-                    {
-                        ((TextBox)element).IsEnabled = false;
-                    }
-                    else if (element is ComboBox)
-                    {
-                        ((ComboBox)element).IsEnabled = false;
-                    }
-                    else if (element is CheckBox)
-                    {
-                        ((CheckBox)element).IsEnabled = false;
-                    }
-                    else if(element is PasswordBox)
-                    {
-                        ((CheckBox)element).IsEnabled = false;
-                    }
-                    else if(element is Xceed.Wpf.Toolkit.DateTimePicker)
-                    {
-                        ((Xceed.Wpf.Toolkit.DateTimePicker)element).IsEnabled = false;
-                    }
-                }
+                //foreach (var element in ucEmployee.employeeDetailsFormGrid1.Children)
+                //{
+                //    if (element is TextBox)
+                //    {
+                //        ((TextBox)element).IsEnabled = false;
+                //    }
+                //    else if (element is ComboBox)
+                //    {
+                //        ((ComboBox)element).IsEnabled = false;
+                //    }
+                //    else if (element is CheckBox)
+                //    {
+                //        ((CheckBox)element).IsEnabled = false;
+                //    }
+                //    else if(element is PasswordBox)
+                //    {
+                //        ((CheckBox)element).IsEnabled = false;
+                //    }
+                //    else if(element is Xceed.Wpf.Toolkit.DateTimePicker)
+                //    {
+                //        ((Xceed.Wpf.Toolkit.DateTimePicker)element).IsEnabled = false;
+                //    }
+                //}
             }
             else if (manageProductListGrid.IsVisible)
             {
@@ -1239,29 +1220,29 @@ namespace prototype2
                     }
 
                 }
-                foreach (var element in ucEmployee.employeeDetailsFormGrid1.Children)
-                {
-                    if (element is TextBox)
-                    {
-                        ((TextBox)element).IsEnabled = true;
-                    }
-                    else if (element is ComboBox)
-                    {
-                        ((ComboBox)element).IsEnabled = true;
-                    }
-                    else if (element is CheckBox)
-                    {
-                        ((CheckBox)element).IsEnabled = true;
-                    }
-                    else if (element is PasswordBox)
-                    {
-                        ((CheckBox)element).IsEnabled = true;
-                    }
-                    else if (element is Xceed.Wpf.Toolkit.DateTimePicker)
-                    {
-                        ((Xceed.Wpf.Toolkit.DateTimePicker)element).IsEnabled = true;
-                    }
-                }
+                //foreach (var element in ucEmployee.employeeDetailsFormGrid1.Children)
+                //{
+                //    if (element is TextBox)
+                //    {
+                //        ((TextBox)element).IsEnabled = true;
+                //    }
+                //    else if (element is ComboBox)
+                //    {
+                //        ((ComboBox)element).IsEnabled = true;
+                //    }
+                //    else if (element is CheckBox)
+                //    {
+                //        ((CheckBox)element).IsEnabled = true;
+                //    }
+                //    else if (element is PasswordBox)
+                //    {
+                //        ((CheckBox)element).IsEnabled = true;
+                //    }
+                //    else if (element is Xceed.Wpf.Toolkit.DateTimePicker)
+                //    {
+                //        ((Xceed.Wpf.Toolkit.DateTimePicker)element).IsEnabled = true;
+                //    }
+                //}
                 ucEmployee.saveCancelGrid1.Visibility = Visibility.Visible;
                 ucEmployee.editCloseGrid1.Visibility = Visibility.Collapsed;
             }

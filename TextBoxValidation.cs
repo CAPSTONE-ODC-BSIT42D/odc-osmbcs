@@ -85,6 +85,13 @@ namespace prototype2
 
             }
 
+            else if (TextBoxType.Equals("Date"))
+            {
+                if (value is null)
+                    return new ValidationResult(false, "Selection is invalid.");
+                return ValidationResult.ValidResult;
+            }
+
             return ValidationResult.ValidResult;
         }
     }

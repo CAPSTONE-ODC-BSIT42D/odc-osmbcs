@@ -18,11 +18,32 @@ namespace prototype2
         }
 
         public object cbItem { get; set; }
-        public decimal DecimalTextBox { get; set; }
-        public int IntegerTextBox { get; set; }
 
-        public string StringTextBox { get; set; }
+        public decimal DecimalTextBox_;
+        public decimal DecimalTextBox
+        {
+            get { return DecimalTextBox_; }
+            set { SetProperty(ref DecimalTextBox_, value); }
+        }
 
+        public int IntegerTextBox_;
+        public int IntegerTextBox
+        {
+            get { return IntegerTextBox_; }
+            set { SetProperty(ref IntegerTextBox_, value); }
+        }
+        public string StringTextBox_;
+        public string StringTextBox
+        {
+            get { return StringTextBox_; }
+            set { SetProperty(ref StringTextBox_, value); }
+        }
+        public DateTime DatePickerBox_;
+        public DateTime DatePickerBox
+        {
+            get { return DatePickerBox_; }
+            set { SetProperty(ref DatePickerBox_, value); }
+        }
         #region Customer/Supplier
         public object CompanyType;
         public object CompanyType_

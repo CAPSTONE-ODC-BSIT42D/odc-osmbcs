@@ -249,11 +249,11 @@
     <Compile Include="ucDashboard.xaml.cs">
       <DependentUpon>ucDashboard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucEmployeeCRUD.xaml.cs">
-      <DependentUpon>ucEmployeeCRUD.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ucInvoice.xaml.cs">
       <DependentUpon>ucInvoice.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="uControlsMaintenance\ucEmployeeForm.xaml.cs">
+      <DependentUpon>ucEmployeeForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="ucProductsCRUD.xaml.cs">
       <DependentUpon>ucProductsCRUD.xaml</DependentUpon>
@@ -328,11 +328,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucEmployeeCRUD.xaml">
+    <Page Include="ucInvoice.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucInvoice.xaml">
+    <Page Include="uControlsMaintenance\ucEmployeeForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
