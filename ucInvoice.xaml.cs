@@ -150,41 +150,41 @@ namespace prototype2
             MainVM.InvoiceItems.Clear();
             MainVM.VatableSale = 0;
             MainVM.TotalSalesWithOutDp = 0;
-            foreach (AddedItem item in MainVM.SelectedSalesQuote.AddedItems)
-            {
-                MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ItemCode.Equals(item.ItemCode)).First();
-                MainVM.InvoiceItems.Add(new InvoiceItem()
-                {
-                    lineNo = (MainVM.RequestedItems.Count + 1).ToString(),
-                    itemCode = item.ItemCode,
-                    desc = MainVM.SelectedProduct.ItemDesc,
-                    itemName = MainVM.SelectedProduct.ItemName,
-                    qty = item.ItemQty,
-                    unitPrice = Math.Round(item.TotalCost / item.ItemQty, 3),
-                    totalAmount = Math.Round(item.TotalCost ,3),
-                    itemType = 0
-                });
-                MainVM.VatableSale += Math.Round(item.TotalCost, 3);
+            //foreach (AvailedItem item in MainVM.SelectedSalesQuote.AvailedItems)
+            //{
+            //    MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ItemCode.Equals(item.ItemCode)).First();
+            //    MainVM.InvoiceItems.Add(new InvoiceItem()
+            //    {
+            //        lineNo = (MainVM.RequestedItems.Count + 1).ToString(),
+            //        itemCode = item.ItemCode,
+            //        desc = MainVM.SelectedProduct.ItemDesc,
+            //        itemName = MainVM.SelectedProduct.ItemName,
+            //        qty = item.ItemQty,
+            //        unitPrice = Math.Round(item.TotalCost / item.ItemQty, 3),
+            //        totalAmount = Math.Round(item.TotalCost ,3),
+            //        itemType = 0
+            //    });
+            //    MainVM.VatableSale += Math.Round(item.TotalCost, 3);
 
-            }
-            foreach (AddedService service in MainVM.SelectedSalesQuote.AddedServices)
-            {
-                MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(service.ServiceID)).First();
-                MainVM.SelectedProvince = MainVM.Provinces.Where(x => x.ProvinceID == service.ProvinceID).First();
-                MainVM.InvoiceItems.Add(new InvoiceItem()
-                {
-                    lineNo = (MainVM.RequestedItems.Count + 1).ToString(),
-                    itemCode = service.TableNoChar,
-                    desc = MainVM.SelectedService.ServiceDesc,
-                    itemName = MainVM.SelectedService.ServiceName,
-                    qty = 1,
-                    unitPrice = Math.Round(service.TotalCost , 3),
-                    totalAmount = Math.Round(service.TotalCost, 3),
-                    itemType = 1,
-                    additionalFees = service.AdditionalFees
-                });
-                MainVM.VatableSale += Math.Round(service.TotalCost, 3);
-            }
+            //}
+            //foreach (AddedService service in MainVM.SelectedSalesQuote.AddedServices)
+            //{
+            //    MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(service.ServiceID)).First();
+            //    MainVM.SelectedProvince = MainVM.Provinces.Where(x => x.ProvinceID == service.ProvinceID).First();
+            //    MainVM.InvoiceItems.Add(new InvoiceItem()
+            //    {
+            //        lineNo = (MainVM.RequestedItems.Count + 1).ToString(),
+            //        itemCode = service.TableNoChar,
+            //        desc = MainVM.SelectedService.ServiceDesc,
+            //        itemName = MainVM.SelectedService.ServiceName,
+            //        qty = 1,
+            //        unitPrice = Math.Round(service.TotalCost , 3),
+            //        totalAmount = Math.Round(service.TotalCost, 3),
+            //        itemType = 1,
+            //        additionalFees = service.AdditionalFees
+            //    });
+            //    MainVM.VatableSale += Math.Round(service.TotalCost, 3);
+            //}
             
             MainVM.TotalSalesNoVat = Math.Round(MainVM.VatableSale, 3);
 

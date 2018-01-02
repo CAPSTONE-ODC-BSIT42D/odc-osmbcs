@@ -108,7 +108,7 @@ namespace prototype2
 
         private void saveSchedBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(MainVM.SelectedAddedService.SqNoChar)).First();
+            //MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(MainVM.SelectedAddedService.SqNoChar)).First();
             MainVM.SelectedSalesInvoice = MainVM.SalesInvoice.Where(x => x.sqNoChar_.Equals(MainVM.SelectedSalesQuote.sqNoChar_)).First();
             if (assignedEmployees.Items.Count != 0 && MainVM.SelectedSalesInvoice!=null)
             {
@@ -283,11 +283,11 @@ namespace prototype2
         {
             if (this.IsVisible)
             {
-                MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(MainVM.SelectedAddedService.SqNoChar)).FirstOrDefault();
+                //MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(MainVM.SelectedAddedService.SqNoChar)).FirstOrDefault();
                 MainVM.SelectedSalesInvoice = MainVM.SalesInvoice.Where(x => x.sqNoChar_.Equals(MainVM.SelectedSalesQuote.sqNoChar_)).FirstOrDefault();
                 if (MainVM.SelectedSalesInvoice != null)
                 {
-                    MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(MainVM.SelectedAddedService.ServiceID)).FirstOrDefault();
+                   // MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(MainVM.SelectedAddedService.ServiceID)).FirstOrDefault();
                 }
                 else
                 {

@@ -224,7 +224,7 @@ namespace prototype2
                     {
                         cmd = new MySqlCommand("UPDATE_ITEM", conn);
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@itemNo", MainVM.SelectedProduct.ItemCode);
+                        cmd.Parameters.AddWithValue("@itemNo", MainVM.SelectedProduct.ID);
                         cmd.Parameters["@itemNo"].Direction = ParameterDirection.Input;
                         MainVM.isEdit = false;
                     }
@@ -300,8 +300,8 @@ namespace prototype2
             productNameTb.Text = MainVM.SelectedProduct.ItemName;
             productDescTb.Text = MainVM.SelectedProduct.ItemDesc;
             categoryCb.SelectedValue = MainVM.SelectedProduct.TypeID;
-            costPriceTb.Value = MainVM.SelectedProduct.CostPrice;
-            unitTb.Text = MainVM.SelectedProduct.Unit;
+            //costPriceTb.Value = MainVM.SelectedProduct.CostPrice;
+            //unitTb.Text = MainVM.SelectedProduct.Unit;
             supplierCb.SelectedValue = MainVM.SelectedProduct.SupplierID;
         }
 

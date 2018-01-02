@@ -43,8 +43,7 @@ namespace prototype2
             worker.RunWorkerCompleted += worker_RunWorkerCompleted;
             
         }
-
-        public static Commands commands = new Commands();
+        
         public static readonly BackgroundWorker worker = new BackgroundWorker();
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
         private void Window_Loaded(object sender, RoutedEventArgs e)

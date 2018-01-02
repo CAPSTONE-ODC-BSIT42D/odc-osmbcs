@@ -8,7 +8,7 @@
     xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms" xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit" xmlns:Windows="clr-namespace:MigraDoc.Rendering.Windows;assembly=MigraDoc.Rendering-WPF"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="prototype2.MainScreen"
         mc:Ignorable="d"
-        Title="Olive Date Center" d:DesignWidth="1425.263" d:DesignHeight="606.363" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Maximized" Visibility="Visible"
+        Title="Olive Date Center" d:DesignWidth="1425.263" d:DesignHeight="814.863" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Maximized" Visibility="Visible"
        >
     <Window.Resources>
         <local:IdToNameConverter x:Key="IdToNameConverter" />
@@ -548,9 +548,12 @@
                 </Button>
                 <StackPanel x:Name="manageSubMenugrid" Orientation="Vertical" Margin="0" Background="#FF046380">
                     <Button x:Name="empContManageBtn" Content="Employees/Contractor" Margin="0,0,1,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Click="empContManageBtn_Click"/>
-                    <Button x:Name="custSuppManageBtn" Content="Customers/Suppliers" Margin="0,0,1,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Foreground="White" Click="custSuppManageBtn_Click" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238"/>
+                    <Button x:Name="custSuppManageBtn" Content="Suppliers" Margin="0,0,1,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Foreground="White" Click="custSuppManageBtn_Click" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238"/>
+                    <Button x:Name="servicesManageBtn" Content="Services" Margin="1,0,0,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238"/>
+                    <Button x:Name="unitsManageBtn" Content="Units" Margin="1,0,0,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238"/>
                     <Button x:Name="productManageBtn" Content="Product List" Margin="0,0,1,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="productManageBtn_Click" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238"/>
-                    <Button x:Name="settingsManageMenuBtn" Content="Services" Margin="1,0,0,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238" Click="settingsManageMenuBtn_Click"/>
+                    <Button x:Name="ratesManageBtn" Content="Rates" Margin="1,0,0,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238"/>
+                    <Button x:Name="locationManageBtn" Content="Location" Margin="1,0,0,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238"/>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

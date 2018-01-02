@@ -243,8 +243,8 @@ namespace prototype2
             else if (employeeType.SelectedIndex == 1)
             {
                 empJobCb.SelectedValue = MainVM.SelectedEmployeeContractor.JobID;
-                empDateStarted.Text = MainVM.SelectedEmployeeContractor.EmpDateTo;
-                empDateEnded.Text = MainVM.SelectedEmployeeContractor.EmpDateFrom;
+                //empDateStarted.Text = MainVM.SelectedEmployeeContractor.EmpDateTo;
+                //empDateEnded.Text = MainVM.SelectedEmployeeContractor.EmpDateFrom;
             }
         }
 
