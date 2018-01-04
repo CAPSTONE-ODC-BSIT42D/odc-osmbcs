@@ -36,64 +36,65 @@ namespace prototype2
         {
             var dbCon = DBConnection.Instance();
 
-            //Checks if the fields are null
-            if (String.IsNullOrWhiteSpace(usernameTb.Text) && String.IsNullOrWhiteSpace(passwordBox.Password.ToString()))
-            {
-                MessageBox.Show("Username and Password must be filled.");
-            }
-            //If the fields are not empty
-            else
-            {
-                //Checks if the fields are equal to admin, admin
-                if (usernameTb.Text.Equals("admin") && passwordBox.Password.Equals("admin"))
-                {
-                    toLogin();
-                }
-                //If not then, checks the database for registered employee
-                else if (dbCon.IsConnect())
-                {
-                    using (MySqlConnection conn = dbCon.Connection)
-                    {
-                        SecureString passwordsalt = passwordBox.SecurePassword;
-                        foreach (Char c in "$w0rdf!$h")//hashing password
-                        {
-                            passwordsalt.AppendChar(c);
-                        }
-                        passwordsalt.MakeReadOnly();
+            ////Checks if the fields are null
+            //if (String.IsNullOrWhiteSpace(usernameTb.Text) && String.IsNullOrWhiteSpace(passwordBox.Password.ToString()))
+            //{
+            //    MessageBox.Show("Username and Password must be filled.");
+            //}
+            ////If the fields are not empty
+            //else
+            //{
+            //    //Checks if the fields are equal to admin, admin
+            //    if (usernameTb.Text.Equals("admin") && passwordBox.Password.Equals("admin"))
+            //    {
+            //        toLogin();
+            //    }
+            //    //If not then, checks the database for registered employee
+            //    else if (dbCon.IsConnect())
+            //    {
+            //        using (MySqlConnection conn = dbCon.Connection)
+            //        {
+            //            SecureString passwordsalt = passwordBox.SecurePassword;
+            //            foreach (Char c in "$w0rdf!$h")//hashing password
+            //            {
+            //                passwordsalt.AppendChar(c);
+            //            }
+            //            passwordsalt.MakeReadOnly();
 
-                        conn.Open();
-                        MySqlCommand cmd = new MySqlCommand("LOGIN_PROC", conn);//stored proc ng login
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@username", usernameTb.Text);
-                        cmd.Parameters["@username"].Direction = ParameterDirection.Input;
+            //            conn.Open();
+            //            MySqlCommand cmd = new MySqlCommand("LOGIN_PROC", conn);//stored proc ng login
+            //            cmd.CommandType = CommandType.StoredProcedure;
+            //            cmd.Parameters.AddWithValue("@username", usernameTb.Text);
+            //            cmd.Parameters["@username"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@upassword", SecureStringToString(passwordsalt));
-                        cmd.Parameters["@upassword"].Direction = ParameterDirection.Input;
+            //            cmd.Parameters.AddWithValue("@upassword", SecureStringToString(passwordsalt));
+            //            cmd.Parameters["@upassword"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
-                        cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
+            //            cmd.Parameters.Add("@insertedid", MySqlDbType.Int32);
+            //            cmd.Parameters["@insertedid"].Direction = ParameterDirection.Output;
 
 
-                        cmd.ExecuteNonQuery();
-                        //Gets the output key from the stored procedure/database;
-                        empId = cmd.Parameters["@insertedid"].Value.ToString();
+            //            cmd.ExecuteNonQuery();
+            //            //Gets the output key from the stored procedure/database;
+            //            empId = cmd.Parameters["@insertedid"].Value.ToString();
 
-                        //Checks if the empID variable is null, if not do the toLogin(); function
-                        if (!String.IsNullOrWhiteSpace(empId))
-                        {
-                            
-                            toLogin();
-                            usernameTb.Clear();
-                            passwordBox.Clear();
-                        }
-                        //If its null, this.
-                        else
-                        {
-                            MessageBox.Show("Username or Password is incorrect.");
-                        }
-                    }
-                }
-            }    
+            //            //Checks if the empID variable is null, if not do the toLogin(); function
+            //            if (!String.IsNullOrWhiteSpace(empId))
+            //            {
+
+            //                toLogin();
+            //                usernameTb.Clear();
+            //                passwordBox.Clear();
+            //            }
+            //            //If its null, this.
+            //            else
+            //            {
+            //                MessageBox.Show("Username or Password is incorrect.");
+            //            }
+            //        }
+            //    }
+            //}    
+            toLogin();
         }
 
         public void toLogin()

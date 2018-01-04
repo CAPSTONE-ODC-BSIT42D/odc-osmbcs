@@ -15,6 +15,13 @@ namespace prototype2
         public MainViewModel()
         {
             isEdit = false;
+
+        }
+
+        private LoadDataToUI ldt = new LoadDataToUI();
+        public LoadDataToUI Ldt
+        {
+            get { return ldt; }
         }
 
         public object cbItem { get; set; }
@@ -170,8 +177,13 @@ namespace prototype2
 
         public bool isEdit { get; set; }
 
+        public bool isNewTrans_ = false;
+        public bool isNewTrans{ get; set; }
+
         public bool isPaymentInvoice { get; set; }
+
         public bool isViewHome { get; set; }
+
         public bool isNewRecord { get; set; }
 
         public string Ddl;

@@ -330,7 +330,12 @@ namespace prototype2
                     cmd.Parameters.AddWithValue("@repMobile", repMobileTb.Text);
                     cmd.Parameters["@repMobile"].Direction = ParameterDirection.Input;
 
-                    cmd.Parameters.AddWithValue("@compType", "1");
+                    string compType = "1";
+
+                    if (MainVM.isNewTrans)
+                        compType = "0";
+
+                    cmd.Parameters.AddWithValue("@compType", compType);
                     cmd.Parameters["@compType"].Direction = ParameterDirection.Input;
                     if (MainVM.isEdit)
                     {

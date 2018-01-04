@@ -35,8 +35,7 @@ namespace prototype2
         public object Convert(object value, Type targetType, object parameter,
                 System.Globalization.CultureInfo culture)
         {
-            var valuea = value as string;
-            if (!String.IsNullOrWhiteSpace(valuea))
+            if (!String.IsNullOrWhiteSpace(value.ToString()))
             {
                 if (value.ToString().Equals("0"))
                 {
@@ -46,6 +45,27 @@ namespace prototype2
                     return false;
             }
             return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            return "no";
+        }
+    }
+
+    public class EmployeePositionConverter : IValueConverter
+    {
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
+        public object Convert(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            if (!String.IsNullOrWhiteSpace(value.ToString()))
+            {
+                MainVM.SelectedEmpPosition = MainVM.EmpPosition.Where(x => x.PositionID.Equals(value)).First();
+                return MainVM.SelectedEmpPosition.PositionName;
+            }
+            return "";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter,

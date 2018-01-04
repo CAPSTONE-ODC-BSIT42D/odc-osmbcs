@@ -39,17 +39,14 @@ namespace prototype2
         {
             InitializeComponent();
             this.empID = empID;
-            worker.DoWork += worker_DoWork;
-            worker.RunWorkerCompleted += worker_RunWorkerCompleted;
             
         }
         
-        public static readonly BackgroundWorker worker = new BackgroundWorker();
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            worker.RunWorkerAsync();
-            //this.ucEmployee.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
+            
+            this.ucEmployee.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
             this.ucCustSupp.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
             
             this.ucProduct.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
@@ -72,6 +69,7 @@ namespace prototype2
             settingsBtn.Visibility = Visibility.Hidden;
             formGridBg.Visibility = Visibility.Collapsed;
             MainVM.LoginEmployee_ = MainVM.Employees.Where(x => x.EmpID.Equals(empID)).FirstOrDefault();
+            MainVM.Ldt.worker.RunWorkerAsync();
         }
 
         private void logoutBtn_Click(object sender, RoutedEventArgs e)
@@ -79,503 +77,14 @@ namespace prototype2
             this.Close();
         }
 
-        private void worker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => { loadDataToUi(); }));
-        }
-
-        private void worker_RunWorkerCompleted(object sender,
-                                               RunWorkerCompletedEventArgs e)
-        {
-            
-        }
+        
 
         private void monitoringOfData()
         {
 
         }
 
-        private void loadDataToUi()
-        {
-            var dbCon = DBConnection.Instance();
-            MainVM.Provinces.Clear();
-            MainVM.EmpPosition.Clear();
-            MainVM.ContJobTitle.Clear();
-            MainVM.ProductCategory.Clear();
-            MainVM.ServicesList.Clear();
-            MainVM.ProductList.Clear();
-
-
-            MainVM.AllCustomerSupplier.Clear();
-            MainVM.Customers.Clear();
-            MainVM.Suppliers.Clear();
-
-            MainVM.AllEmployeesContractor.Clear();
-            MainVM.Employees.Clear();
-            MainVM.Contractor.Clear();
-
-            MainVM.RequestedItems.Clear();
-            MainVM.AvailedItems.Clear();
-            MainVM.AvailedServices.Clear();
-            MainVM.AdditionalFees.Clear();
-
-            MainVM.SalesQuotes.Clear();
-            MainVM.SalesInvoice.Clear();
-            MainVM.PaymentList_.Clear();
-
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * FROM si_payment_t";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-                foreach (DataRow dr in fromDbTable.Rows)
-                { 
-                    DateTime paymentDate = new DateTime();
-                    DateTime.TryParse(dr["SIpaymentDate"].ToString(), out paymentDate);
-                    MainVM.PaymentList_.Add(new PaymentT() { SIpaymentID_ = int.Parse(dr["SIpaymentID"].ToString()), SIpaymentDate_ = paymentDate, SIpaymentAmount_ = decimal.Parse(dr["SIpaymentAmount"].ToString()), invoiceNo_ = int.Parse(dr["invoiceNo"].ToString()), SIpaymentMethod_ = dr["SIpaymentMethod"].ToString(), SIcheckNo_ = dr["SIcheckNo"].ToString()});
-                }
-                dbCon.Close();
-            }
-
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * FROM provinces_t";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    int regionID = 0;
-                    if (!String.IsNullOrEmpty(dr[2].ToString()))
-                        regionID = int.Parse(dr[2].ToString());
-                    MainVM.Provinces.Add(new Province() { ProvinceID = int.Parse(dr[0].ToString()), ProvinceName = dr[1].ToString(), RegionID = regionID});
-                }
-                dbCon.Close();
-            }
-
-
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * FROM POSITION_T;";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    MainVM.EmpPosition.Add(new EmpPosition() { PositionID = int.Parse(dr["positionid"].ToString()), PositionName = dr["positionName"].ToString() });
-                }
-                dbCon.Close();
-            }
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * FROM JOB_TITLE_T;";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    MainVM.ContJobTitle.Add(new ContJobName() { JobID = int.Parse(dr["jobID"].ToString()), JobName = dr["jobName"].ToString() });
-                }
-                dbCon.Close();
-            }
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * FROM ITEM_TYPE_T;";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    MainVM.ProductCategory.Add(new ItemType() { TypeID = int.Parse(dr["typeID"].ToString()), TypeName = dr["typeName"].ToString() });
-                }
-
-            }
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * FROM services_t where isDeleted = 0;";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    MainVM.ServicesList.Add(new Service() { ServiceID = int.Parse(dr["serviceID"].ToString()), ServiceName = dr["serviceName"].ToString(), ServiceDesc = dr["serviceDesc"].ToString(), ServicePrice = (decimal)dr["ServicePrice"] });
-                }
-                dbCon.Close();
-            }
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * FROM ITEM_T WHERE isDeleted = 0;";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    MainVM.ProductList.Add(new Item() { ID = int.Parse(dr["id"].ToString()), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), MarkUpPerc = (decimal)dr["markupPerc"], TypeID = int.Parse(dr["typeID"].ToString()), UnitID = int.Parse(dr["unitID"].ToString()), SupplierID = int.Parse(dr["supplierID"].ToString()) });
-                }
-                dbCon.Close();
-            }
-
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * " +
-                    "FROM cust_supp_t cs  " +
-                    "JOIN provinces_t p ON cs.companyProvinceID = p.id " +
-                    "WHERE isDeleted = 0 AND companyType = 0;";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    var customer = (new Customer() { CompanyID = int.Parse(dr["companyID"].ToString()), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString(), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString(), RepTitle = dr["repTitle"].ToString(), RepFirstName = dr["repFName"].ToString(), RepMiddleName = dr["repMInitial"].ToString(), RepLastName = dr["repLName"].ToString(), RepEmail = dr["repEmail"].ToString(), RepTelephone = dr["repTelephone"].ToString(), RepMobile = dr["repMobile"].ToString() });
-                    MainVM.Customers.Add(customer);
-                }
-            }
-
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * " +
-                    "FROM cust_supp_t cs  " +
-                    "JOIN provinces_t p ON cs.companyProvinceID = p.id " +
-                    "WHERE isDeleted = 0 AND companyType = 1;";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    var supplier = new Customer() { CompanyID = int.Parse(dr["companyID"].ToString()), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceName = dr["locProvince"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString(), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString(), RepTitle = dr["repTitle"].ToString(), RepFirstName = dr["repFName"].ToString(), RepMiddleName = dr["repMInitial"].ToString(), RepLastName = dr["repLName"].ToString(), RepEmail = dr["repEmail"].ToString(), RepTelephone = dr["repTelephone"].ToString(), RepMobile = dr["repMobile"].ToString() };
-                    MainVM.Suppliers.Add(supplier);
-                }
-            }
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * FROM emp_cont_t a JOIN position_t c ON a.positionID = c.positionid  WHERE isDeleted = 0 AND empType = 0;";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    byte[] empPic = null;
-                    if (!dr["empPic"].Equals(DBNull.Value))
-                    {
-                        empPic = (byte[])dr["empPic"];
-                    }
-                    int empType;
-                    int.TryParse(dr["empType"].ToString(), out empType);
-                    MainVM.Employees.Add(new Employee() { EmpID = int.Parse(dr["empID"].ToString()), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), PositionID = int.Parse(dr["positionID"].ToString()), EmpUserName = dr["empUserName"].ToString(), EmpType = empType, HasAccess = bool.Parse(dr["hasAccess"].ToString()) });
-                    MainVM.AllEmployeesContractor.Add(new Employee() { EmpID = int.Parse(dr["empID"].ToString()), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), PositionID = int.Parse(dr["positionID"].ToString()), EmpUserName = dr["empUserName"].ToString(), EmpType = empType, HasAccess = bool.Parse(dr["hasAccess"].ToString()) });
-                }
-                dbCon.Close();
-            }
-            MainVM.LoginEmployee_ = MainVM.Employees.Where(x => x.EmpID.Equals(empID)).FirstOrDefault();
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * " +
-                    "FROM emp_cont_t a  " +
-                    "JOIN job_title_t d ON a.jobID = d.jobID " +
-                    "WHERE a.isDeleted = 0 AND a.empType = 1;";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-                MainVM.Contractor.Clear();
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    int empType;
-                    int.TryParse(dr["empType"].ToString(), out empType);
-                    MainVM.Contractor.Add(new Employee() { EmpID = int.Parse(dr["empID"].ToString()), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), JobID = int.Parse(dr["jobID"].ToString()),EmpDateFrom = DateTime.Parse(dr["empDateFrom"].ToString()), EmpDateTo = DateTime.Parse(dr["empDateTo"].ToString()), EmpUserName = dr["empUserName"].ToString(), EmpType = empType, HasAccess = bool.Parse(dr["hasAccess"].ToString()) });
-                    MainVM.AllEmployeesContractor.Add(new Employee() { EmpID = int.Parse(dr["empID"].ToString()), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), JobID = int.Parse(dr["jobID"].ToString()), EmpDateFrom = DateTime.Parse(dr["empDateFrom"].ToString()), EmpDateTo = DateTime.Parse(dr["empDateTo"].ToString()), EmpUserName = dr["empUserName"].ToString(), EmpType = empType, HasAccess = bool.Parse(dr["hasAccess"].ToString()) });
-                }
-                dbCon.Close();
-            }
-
-
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * FROM items_availed_t;";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    var availedItems = new AvailedItem() { AvailedItemID = int.Parse(dr["id"].ToString()), SqNoChar = dr["sqNoChar"].ToString(), ItemID = int.Parse(dr["itemID"].ToString()), ItemQty = int.Parse(dr["itemQnty"].ToString()), TotalCost = decimal.Parse(dr["totalCost"].ToString()) };
-                    MainVM.AvailedItems.Add(availedItems);
-                }
-            }
-
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * FROM services_availed_t;";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    var availedservices = new AvailedService() { AvailedServiceID = int.Parse(dr["ID"].ToString()), SqNoChar = dr["sqNoChar"].ToString(), ServiceID = int.Parse(dr["serviceID"].ToString()), ProvinceID = int.Parse(dr["provinceID"].ToString()), City = dr["city"].ToString(), TotalCost = decimal.Parse(dr["totalCost"].ToString()) };
-                    query = "SELECT * FROM fees_per_transaction_t WHERE servicesAvailedID = "+ dr["ID"].ToString() + ";";
-                    dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                    DataSet fromDb2 = new DataSet();
-                    DataTable fromDbTable2 = new DataTable();
-                    dataAdapter.Fill(fromDb2, "t");
-                    fromDbTable2 = fromDb2.Tables["t"];
-                    foreach (DataRow dr2 in fromDbTable2.Rows)
-                    {
-                        availedservices.AdditionalFees.Add(new AdditionalFee() { FeeID = int.Parse(dr2["feeID"].ToString()), ServicesAvailedID = int.Parse(dr2["servicesAvailedID"].ToString()), FeeName = dr2["feeName"].ToString(), FeePrice = decimal.Parse(dr2["feeValue"].ToString()) });
-                    }
-                    MainVM.AvailedServices.Add(availedservices);
-                }
-            }
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * FROM sales_quote_t;";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-                MainVM.SalesQuotes.Clear();
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    DateTime dateOfIssue = new DateTime();
-                    DateTime.TryParse(dr["dateOfIssue"].ToString(), out dateOfIssue);
-
-                    DateTime deliveryDate = new DateTime();
-                    DateTime.TryParse(dr["deliveryDate"].ToString(), out deliveryDate);
-
-                    DateTime validityDate = new DateTime();
-                    DateTime.TryParse(dr["validityDate"].ToString(), out validityDate);
-
-                    DateTime expiration = new DateTime();
-                    DateTime.TryParse(dr["dateOfIssue"].ToString(), out expiration);
-
-                    bool vatIsExcluded = false;
-
-                    if (dr["vatIsExcluded"].ToString().Equals("1"))
-                    {
-                        vatIsExcluded = true;
-                    }
-
-                    bool paymentIsLanded = false;
-
-                    if (dr["paymentIsLanded"].ToString().Equals("1"))
-                    {
-                        paymentIsLanded = true;
-                    }
-                    MainVM.SelectedCustomerSupplier = MainVM.Customers.Where(x => x.CompanyID.Equals(dr["custID"].ToString())).FirstOrDefault();
-
-                    int custId;
-                    int.TryParse(dr["custID"].ToString(),out custId);
-
-                    int estDelivery;
-                    int.TryParse(dr["estDelivery"].ToString(), out estDelivery);
-
-                    int validityDays;
-                    int.TryParse(dr["validityDays"].ToString(), out validityDays);
-
-                    decimal vat;
-                    decimal.TryParse(dr["vat"].ToString(), out vat);
-
-                    int termsDays;
-                    int.TryParse(dr["termsDays"].ToString(), out termsDays);
-
-                    int termsDP;
-                    int.TryParse(dr["termsDP"].ToString(), out termsDP);
-
-                    decimal penaltyAmt;
-                    decimal.TryParse(dr["penaltyAmt"].ToString(), out penaltyAmt);
-
-                    int penaltyPerc;
-                    int.TryParse(dr["penaltyPerc"].ToString(), out penaltyPerc);
-
-                    decimal markUpPerc;
-                    decimal.TryParse(dr["markUpPercent"].ToString(), out markUpPerc);
-
-                    decimal discountPerc;
-                    decimal.TryParse(dr["discountPercent"].ToString(), out discountPerc);
-
-                    if (MainVM.SelectedCustomerSupplier != null)
-                    {
-                        MainVM.SalesQuotes.Add(new SalesQuote()
-                        {
-                            sqNoChar_ = dr["sqNoChar"].ToString(),
-                            dateOfIssue_ = dateOfIssue,
-                            custID_ = custId,
-                            custName_ = MainVM.SelectedCustomerSupplier.CompanyName,
-                            quoteSubject_ = dr["quoteSubject"].ToString(),
-                            priceNote_ = dr["priceNote"].ToString(),
-                            deliveryDate_ = deliveryDate,
-                            estDelivery_ = estDelivery,
-                            validityDays_ = validityDays,
-                            validityDate_ = validityDate,
-                            otherTerms_ = dr["otherTerms"].ToString(),
-                            expiration_ = expiration,
-                            vat_ = vat,
-                            vatexcluded_ = vatIsExcluded,
-                            paymentIsLanded_ = paymentIsLanded,
-                            paymentCurrency_ = dr["paymentCurrency"].ToString(),
-                            status_ = dr["status"].ToString(),
-                            termsDays_ = termsDays,
-                            termsDP_ = termsDP,
-                            penaltyAmt_ = penaltyAmt,
-                            penaltyPercent_ = penaltyAmt,
-                            markUpPercent_ = markUpPerc,
-                            discountPercent_ = discountPerc
-                        });
-                    }
-                }
-                dbCon.Close();
-            }
-
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * FROM sales_invoice_t;";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-                MainVM.SalesInvoice.Clear();
-
-                //query = "SELECT * FROM payment_hist_t;";
-                //MySqlDataAdapter dataAdapter2 = dbCon.selectQuery(query, dbCon.Connection);
-                //DataSet fromDb2 = new DataSet();
-                //DataTable fromDbTable2 = new DataTable();
-                //dataAdapter2.Fill(fromDb2, "t");
-                //fromDbTable2 = fromDb2.Tables["t"];
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    DateTime dateOfIssue = new DateTime();
-                    DateTime.TryParse(dr["dateOfIssue"].ToString(), out dateOfIssue);
-
-                    DateTime dueDate = new DateTime();
-                    DateTime.TryParse(dr["dueDate"].ToString(), out dueDate);
-                    MainVM.SelectedCustomerSupplier = MainVM.Customers.Where(x => x.CompanyID.Equals(dr["custID"].ToString())).FirstOrDefault();
-
-                    int invoiceNo;
-                    int.TryParse(dr["invoiceNo"].ToString(), out invoiceNo);
-
-                    int custId;
-                    int.TryParse(dr["custID"].ToString(), out custId);
-
-                    //int empId;
-                    //int.TryParse(dr["empID"].ToString(), out empId);
-
-                    int estDelivery;
-                    int.TryParse(dr["invoiceNo"].ToString(), out estDelivery);
-
-                    int termsDays;
-                    int.TryParse(dr["termsDays"].ToString(), out termsDays);
-
-                    decimal vat;
-                    decimal.TryParse(dr["vat"].ToString(), out vat);
-
-                    decimal sc_pwd_discount;
-                    decimal.TryParse(dr["sc_pwd_discount"].ToString(), out sc_pwd_discount);
-
-                    decimal withholdingTax;
-                    decimal.TryParse(dr["withholdingTax"].ToString(), out withholdingTax);
-
-                    MainVM.SalesInvoice.Add(new SalesInvoice() { invoiceNo_ = invoiceNo.ToString(), custID_ = custId, sqNoChar_ = dr["sqNoChar"].ToString(), tin_ = dr["tin"].ToString(), busStyle_ = dr["busStyle"].ToString(), dateOfIssue_ = dateOfIssue, terms_ = termsDays, dueDate_ = dueDate, purchaseOrderNumber_ = dr["purchaseOrderNumber"].ToString(), paymentStatus_ = dr["paymentStatus"].ToString(), vat_ = vat, sc_pwd_discount_ = sc_pwd_discount, withholdingTax_ = withholdingTax, notes_ = dr["notes"].ToString() });
-
-
-                    
-                }
-                //foreach (DataRow dr in fromDbTable2.Rows)
-                //{
-                //    DateTime paymentDate = new DateTime();
-                //    DateTime.TryParse(dr["paymentDate"].ToString(), out paymentDate);
-
-                //    int invoiceNo;
-                //    int.TryParse(dr["invoiceNo"].ToString(), out invoiceNo);
-
-                //    decimal custBalance;
-                //    decimal.TryParse(dr["custBalance"].ToString(), out custBalance);
-                //    MainVM.PaymentHistory_.Add(new PaymentHist() { custHistID_ = int.Parse(dr["custHistID"].ToString()), paymentDate_ = paymentDate, custBalance_ = custBalance, invoiceNo_ = invoiceNo, paymentStatus_ = dr["paymentStatus"].ToString() });
-                //}
-                dbCon.Close();
-            }
-
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * FROM service_sched_t;";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-
-                query = "SELECT * FROM assigned_employees_t;";
-                MySqlDataAdapter dataAdapter2 = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb2 = new DataSet();
-                DataTable fromDbTable2 = new DataTable();
-                dataAdapter2.Fill(fromDb2, "t");
-                fromDbTable2 = fromDb2.Tables["t"];
-
-                MainVM.ServiceSchedules_.Clear();
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    DateTime dateStarted = new DateTime();
-                    DateTime.TryParse(dr["dateStarted"].ToString(), out dateStarted);
-
-                    DateTime dateEnded = new DateTime();
-                    DateTime.TryParse(dr["dateEnded"].ToString(), out dateEnded);
-
-                    int invoiceNo;
-                    int.TryParse(dr["invoiceNo"].ToString(), out invoiceNo);
-
-                    MainVM.SelectedServiceSchedule_ = (new ServiceSchedule() { serviceSchedNoChar_ = dr["serviceSchedNoChar"].ToString(), invoiceNo_ = invoiceNo , serviceStatus_ = dr["serviceStatus"].ToString(), dateStarted_ = dateStarted, dateEnded_ = dateEnded, schedNotes_ = dr["schedNotes"].ToString() });
-                    if (fromDbTable2.Rows.Count > 0)
-                    {
-                        foreach (DataRow dr2 in fromDbTable2.Rows)
-                        {
-
-                            MainVM.SelectedEmployeeContractor = MainVM.AllEmployeesContractor.Where(x => x.EmpID.Equals(dr2["empID"].ToString())).FirstOrDefault();
-                            MainVM.SelectedServiceSchedule_.assignedEmployees_.Add(MainVM.SelectedEmployeeContractor);
-                        }
-                    }
-                    
-                }
-                
-                
-
-                MainVM.ServiceSchedules_.Clear();
-                dbCon.Close();
-            }
-        }
+        
 
         private void resetValueofSelectedVariables()
         {
@@ -809,39 +318,45 @@ namespace prototype2
 
         private void saveCloseBtn_SaveCloseButtonClicked(object sender, EventArgs e)
         {
-            if (ucSalesQuote.IsVisible)
+            foreach(var obj in formGridBg.Children)
             {
-                foreach (var obj in containerGrid.Children)
-                {
-                    ((Grid)obj).Visibility = Visibility.Collapsed;
-                }
-                trasanctionGrid.Visibility = Visibility.Visible;
-                foreach (var obj in trasanctionGrid.Children)
-                {
-                    if (obj is Grid)
-                        if (((Grid)obj).Equals(transQuotationGrid))
-                            ((Grid)obj).Visibility = Visibility.Visible;
-                        else
-                            ((Grid)obj).Visibility = Visibility.Collapsed;
-                }
-                foreach (var obj in transQuotationGrid.Children)
-                {
-                    if (obj is Grid)
-                    {
-                        if (((Grid)obj).Equals(quotationsGridHome))
-                        {
-                            headerLbl.Content = "Trasanction - Sales Quote";
-                            ((Grid)obj).Visibility = Visibility.Visible;
-                            settingsBtn.Visibility = Visibility.Hidden;
-                        }
-                    }
-                    else
-                        ((UserControl)obj).Visibility = Visibility.Collapsed;
-
-                }
+                if (obj is UserControl)
+                    ((UserControl)obj).Visibility = Visibility.Collapsed;
             }
-            if (ucInvoice.IsVisible)
-                ucInvoice.Visibility = Visibility.Collapsed;
+            formGridBg.Visibility = Visibility.Collapsed;
+            //if (ucSalesQuote.IsVisible)
+            //{
+            //    foreach (var obj in containerGrid.Children)
+            //    {
+            //        ((Grid)obj).Visibility = Visibility.Collapsed;
+            //    }
+            //    trasanctionGrid.Visibility = Visibility.Visible;
+            //    foreach (var obj in trasanctionGrid.Children)
+            //    {
+            //        if (obj is Grid)
+            //            if (((Grid)obj).Equals(transQuotationGrid))
+            //                ((Grid)obj).Visibility = Visibility.Visible;
+            //            else
+            //                ((Grid)obj).Visibility = Visibility.Collapsed;
+            //    }
+            //    foreach (var obj in transQuotationGrid.Children)
+            //    {
+            //        if (obj is Grid)
+            //        {
+            //            if (((Grid)obj).Equals(quotationsGridHome))
+            //            {
+            //                headerLbl.Content = "Trasanction - Sales Quote";
+            //                ((Grid)obj).Visibility = Visibility.Visible;
+            //                settingsBtn.Visibility = Visibility.Hidden;
+            //            }
+            //        }
+            //        else
+            //            ((UserControl)obj).Visibility = Visibility.Collapsed;
+
+            //    }
+            //}
+            //if (ucInvoice.IsVisible)
+            //    ucInvoice.Visibility = Visibility.Collapsed;
             //if (ucInvoice.IsVisible)
             //{
             //    foreach (var obj in containerGrid.Children)
@@ -912,7 +427,7 @@ namespace prototype2
             MainVM.isEdit = false;
             MainVM.isPaymentInvoice = false;
             closeModals();
-            worker.RunWorkerAsync();
+            MainVM.Ldt.worker.RunWorkerAsync();
         }
 
         
@@ -1287,7 +802,7 @@ namespace prototype2
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             MessageBox.Show("Record successfully deleted!");
-                            loadDataToUi();
+                            MainVM.Ldt.worker.RunWorkerAsync();
                         }
                     }
 
@@ -1308,7 +823,7 @@ namespace prototype2
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             MessageBox.Show("Record successfully deleted!");
-                            loadDataToUi();
+                            MainVM.Ldt.worker.RunWorkerAsync();
                         }
                     }
 
@@ -1329,7 +844,7 @@ namespace prototype2
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             MessageBox.Show("Record successfully deleted!");
-                            loadDataToUi();
+                            MainVM.Ldt.worker.RunWorkerAsync();
                         }
                     }
 
@@ -1398,7 +913,7 @@ namespace prototype2
                             MessageBox.Show("Employee Poisition saved");
                             addEmpPosBtn.Content = "Add";
                             empPosNewTb.Clear();
-                            loadDataToUi();
+                            MainVM.Ldt.worker.RunWorkerAsync();
                             dbCon.Close();
                         }
                     }
@@ -1434,7 +949,7 @@ namespace prototype2
                                 {
                                     MessageBox.Show("Employee Position successfully added");
                                     empPosNewTb.Clear();
-                                    loadDataToUi();
+                                    MainVM.Ldt.worker.RunWorkerAsync();
                                     dbCon.Close();
                                 }
                             }
@@ -1462,7 +977,7 @@ namespace prototype2
                         {
                             dbCon.Close();
                             MessageBox.Show("Employee position successfully deleted.");
-                            loadDataToUi();
+                            MainVM.Ldt.worker.RunWorkerAsync();
                         }
                     }
                     catch (Exception) { throw; }
@@ -1519,7 +1034,7 @@ namespace prototype2
                         {
                             MessageBox.Show("Job Title successfully saved");
                             contNewJobTb.Clear();
-                            loadDataToUi();
+                            MainVM.Ldt.worker.RunWorkerAsync();
                             dbCon.Close();
                             contNewJobTb.Clear();
                             addContJobBtn.Content = "Add";
@@ -1560,7 +1075,7 @@ namespace prototype2
                                 {
                                     MessageBox.Show("Contractor Job Title successfully added");
                                     contNewJobTb.Clear();
-                                    loadDataToUi();
+                                    MainVM.Ldt.worker.RunWorkerAsync();
                                     dbCon.Close();
                                 }
                             }
@@ -1587,7 +1102,7 @@ namespace prototype2
                         {
                             dbCon.Close();
                             MessageBox.Show("Job Position successfully deleted.");
-                            loadDataToUi();
+                            MainVM.Ldt.worker.RunWorkerAsync();
                         }
                     }
                     catch (Exception) { throw; }
@@ -1630,7 +1145,7 @@ namespace prototype2
                     if (dbCon.deleteQuery(query, dbCon.Connection))
                     {
                         dbCon.Close();
-                        loadDataToUi();
+                        MainVM.Ldt.worker.RunWorkerAsync();
                         MessageBox.Show("Product Category successfully deleted");
                     }
                 }
@@ -1675,7 +1190,7 @@ namespace prototype2
                                 {
 
                                     MessageBox.Show("Product Category successfully added");
-                                    loadDataToUi();
+                                    MainVM.Ldt.worker.RunWorkerAsync();
                                     invCategoryTb.Clear();
                                     dbCon.Close();
                                 }
@@ -1735,7 +1250,7 @@ namespace prototype2
             }
             serviceTypeList.Visibility = Visibility.Visible;
             serviceTypeAdd.Visibility = Visibility.Collapsed;
-            loadDataToUi();
+            MainVM.Ldt.worker.RunWorkerAsync();
         }
 
         private void serviceName_TextChanged(object sender, TextChangedEventArgs e)
@@ -1812,7 +1327,7 @@ namespace prototype2
                             serviceName.Clear();
                             serviceDesc.Clear();
                             servicePrice.Value = 0;
-                            loadDataToUi();
+                            MainVM.Ldt.worker.RunWorkerAsync();
                         }
                         MainVM.isEdit = false;
                     }
@@ -1825,7 +1340,7 @@ namespace prototype2
                             id = "";
                             serviceTypeList.Visibility = Visibility.Visible;
                             serviceTypeAdd.Visibility = Visibility.Collapsed;
-                            loadDataToUi();
+                            MainVM.Ldt.worker.RunWorkerAsync();
                         }
                         MainVM.isEdit = false;
                     }
@@ -1841,7 +1356,7 @@ namespace prototype2
                     serviceTypeGrid.Children[x].Visibility = Visibility.Collapsed;
                 }
                 serviceTypeList.Visibility = Visibility.Visible;
-                loadDataToUi();
+                MainVM.Ldt.worker.RunWorkerAsync();
             }
             else if (result == MessageBoxResult.Cancel)
             {
@@ -1890,7 +1405,7 @@ namespace prototype2
                     dbCon.Close();
                 }
             }
-            worker.RunWorkerAsync();
+            MainVM.Ldt.worker.RunWorkerAsync();
         }
 
         bool initPrice = true;
@@ -1928,7 +1443,7 @@ namespace prototype2
                         provinceCb.SelectedValue = -1;
                         locationPrice.Value = 0;
                         initPrice = true;
-                        loadDataToUi();
+                        MainVM.Ldt.worker.RunWorkerAsync();
                     }
 
 

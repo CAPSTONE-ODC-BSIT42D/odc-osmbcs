@@ -14,7 +14,7 @@
         <local:IdToNameConverter x:Key="IdToNameConverter" />
         <local:ServiceTypeConverter x:Key="ServiceTypeConverter" />
         <local:EmployeeTypeOfConverter x:Key="EmployeeTypeOfConverter" />
-
+        <local:EmployeePositionConverter x:Key="EmployeePositionConverter" />
         <Storyboard x:Key="sbShowRightMenu" >
             <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,-150,0" To="0,0,0,0" DecelerationRatio="1" Duration="0:0:0.5" />
         </Storyboard>
@@ -1195,7 +1195,7 @@
                         </ComboBox>
                         <Button x:Name="manageEmployeeAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,20,20,0" VerticalAlignment="Top" Width="85" Background="#FF0D9E0D" BorderBrush="#FF107C10" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13" Click="manageEmployeeAddBtn_Click"/>
                         <DataGrid x:Name="manageEmployeeDataGrid" Margin="20,60,20,20" CanUserAddRows="False" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionMode="Single" MinRowHeight="20"  MinColumnWidth="0" ItemsSource="{Binding AllEmployeesContractor}" SelectedItem ="{Binding SelectedEmployeeContractor}">
-                            <DataGrid.Columns >
+                            <DataGrid.Columns>
                                 <DataGridTemplateColumn Width="150" CanUserResize="False" Header="First Name" >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -1210,42 +1210,12 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Width="200" CanUserResize="False" Header="Address" >
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Label Content="{Binding EmpAddress}" VerticalContentAlignment="Center"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Province" >
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Label Content="{Binding EmpProvinceName}" VerticalContentAlignment="Center"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
                                 <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Position" >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Label Content="{Binding PositionName}" VerticalContentAlignment="Center"/>
+                                            <Label Content="{Binding PositionID, Converter={StaticResource EmployeePositionConverter}, NotifyOnTargetUpdated=True}" VerticalContentAlignment="Center"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Width="150" CanUserResize="False" Header="" >
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button x:Name="genContractBtn" Content="Generate Contract" Click="genContractBtn_Click" Margin="12"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                    <DataGridTemplateColumn.CellStyle>
-                                        <Style TargetType="{x:Type DataGridCell}">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding EmpType, Converter={StaticResource EmployeeTypeOfConverter}, NotifyOnTargetUpdated=True}" Value="true">
-                                                    <Setter Property="IsEnabled" Value="false"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </DataGridTemplateColumn.CellStyle>
                                 </DataGridTemplateColumn>
                                 <DataGridTemplateColumn  Width="115" CanUserResize="False" Header="Actions"  >
                                     <DataGridTemplateColumn.CellTemplate >
@@ -1374,6 +1344,17 @@
                                                             <Canvas x:Name="g42"/>
                                                         </Canvas>
                                                     </Viewbox>
+                                                </Button>
+                                                <Button x:Name="genContractBtn" Content="Generate Contract" Click="genContractBtn_Click" Margin="12">
+                                                    <Button.Style>
+                                                        <Style TargetType="{x:Type Button}">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding EmpType, Converter={StaticResource EmployeeTypeOfConverter}, NotifyOnTargetUpdated=True}" Value="true">
+                                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Button.Style>
                                                 </Button>
                                             </StackPanel>
                                         </DataTemplate>
@@ -1563,7 +1544,7 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Grid x:Name="formGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3">
+        <Grid x:Name="formGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3" d:IsHidden="True">
 
             <local:ucCustSuppCRUD x:Name="ucCustSupp" HorizontalAlignment="Center" Margin="167,0,166,0" d:IsHidden="True" Visibility="Collapsed"/>
             <local:ucProductsCRUD x:Name="ucProduct" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>

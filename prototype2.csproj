@@ -232,6 +232,7 @@
       <DependentUpon>DocumentViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="InvoiceDocument.cs" />
+    <Compile Include="LoadDataToUI.cs" />
     <Compile Include="SalesQuoteDocument.cs" />
     <Compile Include="MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>

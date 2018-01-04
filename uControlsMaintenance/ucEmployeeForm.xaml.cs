@@ -200,6 +200,39 @@ namespace prototype2.uControlsMaintenance
             
         }
 
+        private void addPosBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = "odc_db";
+            if (newPosTb.IsVisible)
+            {
+                newPosTb.Visibility = Visibility.Collapsed;
+                addPosBtn.Content = "+";
+                string query = "INSERT INTO `odc_db`.`position_t` (`positionName`) VALUES('" + newPosTb.Text + "')";
+                if (dbCon.insertQuery(query, dbCon.Connection))
+                {
+                    {
+                        MessageBox.Show("Employee Position successfully added");
+                        newPosTb.Clear();
+                        MainVM.Ldt.worker.RunWorkerAsync();
+                        dbCon.Close();
+                    }
+                }
+            }
+            else
+            {
+                newPosTb.Visibility = Visibility.Visible;
+                addPosBtn.Content = "Save";
+            }
+                
+
+        }
+
+        private void addJobBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         void saveDataToDb()
         {
             var dbCon = DBConnection.Instance();
@@ -248,6 +281,7 @@ namespace prototype2.uControlsMaintenance
                 if (dbCon.insertQuery(query, dbCon.Connection))
                 {
                     MessageBox.Show("Record is Saved");
+                    
                 }
             }
         }
@@ -255,5 +289,7 @@ namespace prototype2.uControlsMaintenance
         void resetFieldsValue()
         {
         }
+
+        
     }
 }
