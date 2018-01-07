@@ -256,6 +256,12 @@
     <Compile Include="uControlsMaintenance\ucEmployeeForm.xaml.cs">
       <DependentUpon>ucEmployeeForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="uControlsMaintenance\ucLocation.xaml.cs">
+      <DependentUpon>ucLocation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="uControlsMaintenance\ucServices.xaml.cs">
+      <DependentUpon>ucServices.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ucProductsCRUD.xaml.cs">
       <DependentUpon>ucProductsCRUD.xaml</DependentUpon>
     </Compile>
@@ -334,6 +340,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="uControlsMaintenance\ucEmployeeForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="uControlsMaintenance\ucLocation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="uControlsMaintenance\ucServices.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -456,6 +470,7 @@
     <EmbeddedResource Include="Resources\odclogo.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Image3.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -48,7 +48,9 @@ namespace prototype2
             
             this.ucEmployee.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
             this.ucCustSupp.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
-            
+
+            this.ucServices.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
+
             this.ucProduct.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
             this.ucInvoice.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
 
@@ -66,7 +68,6 @@ namespace prototype2
                     ((Grid)obj).Visibility = Visibility.Collapsed;
             }
             dashboardGrid.Visibility = Visibility.Visible;
-            settingsBtn.Visibility = Visibility.Hidden;
             formGridBg.Visibility = Visibility.Collapsed;
             MainVM.LoginEmployee_ = MainVM.Employees.Where(x => x.EmpID.Equals(empID)).FirstOrDefault();
             MainVM.Ldt.worker.RunWorkerAsync();
@@ -101,7 +102,6 @@ namespace prototype2
                 ((Grid)obj).Visibility = Visibility.Collapsed;
             }
             dashboardGrid.Visibility = Visibility.Visible;
-            settingsBtn.Visibility = Visibility.Hidden;
         }
 
         private void salesBtn_Click(object sender, RoutedEventArgs e)
@@ -139,41 +139,41 @@ namespace prototype2
                 manageSubMenugrid.Visibility = Visibility.Visible;
         }
 
-        private void settingsBtn_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (var obj in settingsGridStackPanel.Children)
-            {
-                if (obj is Grid)
-                {
-                    ((Grid)obj).Visibility = Visibility.Collapsed;
-                }
-            }
-            if (manageEmployeeGrid.IsVisible)
-            {
-                employeeSettings1.Visibility = Visibility.Visible;
-                employeeSettings2.Visibility = Visibility.Visible;
-            }
-            else if (manageProductListGrid.IsVisible)
-            {
-                productSettings1.Visibility = Visibility.Visible;
-            }
-            foreach (var obj in formGridBg.Children)
-            {
-                if(obj is Grid)
-                {
-                    if (!((Grid)obj).Name.Equals("settingsFormGrid"))
-                    {
-                        ((Grid)obj).Visibility = Visibility.Collapsed;
-                    }
-                    else
-                    {
-                        ((Grid)obj).Visibility = Visibility.Visible;
-                    }
-                }
-            }
-            formGridBg.Visibility = Visibility.Visible;
+        //private void settingsBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    foreach (var obj in settingsGridStackPanel.Children)
+        //    {
+        //        if (obj is Grid)
+        //        {
+        //            ((Grid)obj).Visibility = Visibility.Collapsed;
+        //        }
+        //    }
+        //    if (manageEmployeeGrid.IsVisible)
+        //    {
+        //        employeeSettings1.Visibility = Visibility.Visible;
+        //        employeeSettings2.Visibility = Visibility.Visible;
+        //    }
+        //    else if (manageProductListGrid.IsVisible)
+        //    {
+        //        productSettings1.Visibility = Visibility.Visible;
+        //    }
+        //    foreach (var obj in formGridBg.Children)
+        //    {
+        //        if(obj is Grid)
+        //        {
+        //            if (!((Grid)obj).Name.Equals("settingsFormGrid"))
+        //            {
+        //                ((Grid)obj).Visibility = Visibility.Collapsed;
+        //            }
+        //            else
+        //            {
+        //                ((Grid)obj).Visibility = Visibility.Visible;
+        //            }
+        //        }
+        //    }
+        //    formGridBg.Visibility = Visibility.Visible;
 
-        }
+        //}
 
         private void closeSideMenuBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -203,7 +203,6 @@ namespace prototype2
                     {
                         headerLbl.Content = "Trasanction - Sales Quote";
                         ((Grid)obj).Visibility = Visibility.Visible;
-                        settingsBtn.Visibility = Visibility.Hidden;
                     }
                 } 
                 else
@@ -248,7 +247,6 @@ namespace prototype2
                 ((Grid)obj).Visibility = Visibility.Collapsed;
             }
             manageEmployeeGrid.Visibility = Visibility.Visible;
-            settingsBtn.Visibility = Visibility.Visible;
             headerLbl.Content = "Manage Employee/Contractor";
         }
 
@@ -264,8 +262,7 @@ namespace prototype2
                 ((Grid)obj).Visibility = Visibility.Collapsed;
             }
             manageCustomerGrid.Visibility = Visibility.Visible;
-            settingsBtn.Visibility = Visibility.Hidden;
-            headerLbl.Content = "Manage Customer/Supplier";
+            headerLbl.Content = "Manage Supplier";
         }
 
         private void productManageBtn_Click(object sender, RoutedEventArgs e)
@@ -281,40 +278,54 @@ namespace prototype2
                 ((Grid)obj).Visibility = Visibility.Collapsed;
             }
             manageProductListGrid.Visibility = Visibility.Visible;
-            settingsBtn.Visibility = Visibility.Visible;
         }
 
-        private void settingsManageMenuBtn_Click(object sender, RoutedEventArgs e)
+        private void servicesManageBtn_Click(object sender, RoutedEventArgs e)
         {
-            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
-            sb.Begin(formGridBg);
-            foreach (var obj in formGridBg.Children)
+            foreach (var obj in containerGrid.Children)
             {
-                if (obj is Grid)
-                {
-                    if (!((Grid)obj).Name.Equals("settingsFormGrid"))
-                    {
-                        ((Grid)obj).Visibility = Visibility.Collapsed;
-                    }
-                    else
-                    {
-                        ((Grid)obj).Visibility = Visibility.Visible;
-                    }
-                }
-               
-
+                ((Grid)obj).Visibility = Visibility.Collapsed;
             }
-            formGridBg.Visibility = Visibility.Visible;
-            foreach (var obj in settingsGridStackPanel.Children)
+            maintenanceGrid.Visibility = Visibility.Visible;
+            foreach (var obj in maintenanceGrid.Children)
             {
-                if (obj is Grid)
-                {
-                    ((Grid)obj).Visibility = Visibility.Collapsed;
-                }
+                ((Grid)obj).Visibility = Visibility.Collapsed;
             }
-            serviceSettings1.Visibility = Visibility.Visible;
-            serviceSettings2.Visibility = Visibility.Visible;
+            manageServicesGrid.Visibility = Visibility.Visible;
+            headerLbl.Content = "Manage Services";
         }
+
+        //private void settingsManageMenuBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+        //    sb.Begin(formGridBg);
+        //    foreach (var obj in formGridBg.Children)
+        //    {
+        //        if (obj is Grid)
+        //        {
+        //            if (!((Grid)obj).Name.Equals("settingsFormGrid"))
+        //            {
+        //                ((Grid)obj).Visibility = Visibility.Collapsed;
+        //            }
+        //            else
+        //            {
+        //                ((Grid)obj).Visibility = Visibility.Visible;
+        //            }
+        //        }
+
+
+        //    }
+        //    formGridBg.Visibility = Visibility.Visible;
+        //    foreach (var obj in settingsGridStackPanel.Children)
+        //    {
+        //        if (obj is Grid)
+        //        {
+        //            ((Grid)obj).Visibility = Visibility.Collapsed;
+        //        }
+        //    }
+        //    serviceSettings1.Visibility = Visibility.Visible;
+        //    serviceSettings2.Visibility = Visibility.Visible;
+        //}
 
         private void saveCloseBtn_SaveCloseButtonClicked(object sender, EventArgs e)
         {
@@ -324,100 +335,7 @@ namespace prototype2
                     ((UserControl)obj).Visibility = Visibility.Collapsed;
             }
             formGridBg.Visibility = Visibility.Collapsed;
-            //if (ucSalesQuote.IsVisible)
-            //{
-            //    foreach (var obj in containerGrid.Children)
-            //    {
-            //        ((Grid)obj).Visibility = Visibility.Collapsed;
-            //    }
-            //    trasanctionGrid.Visibility = Visibility.Visible;
-            //    foreach (var obj in trasanctionGrid.Children)
-            //    {
-            //        if (obj is Grid)
-            //            if (((Grid)obj).Equals(transQuotationGrid))
-            //                ((Grid)obj).Visibility = Visibility.Visible;
-            //            else
-            //                ((Grid)obj).Visibility = Visibility.Collapsed;
-            //    }
-            //    foreach (var obj in transQuotationGrid.Children)
-            //    {
-            //        if (obj is Grid)
-            //        {
-            //            if (((Grid)obj).Equals(quotationsGridHome))
-            //            {
-            //                headerLbl.Content = "Trasanction - Sales Quote";
-            //                ((Grid)obj).Visibility = Visibility.Visible;
-            //                settingsBtn.Visibility = Visibility.Hidden;
-            //            }
-            //        }
-            //        else
-            //            ((UserControl)obj).Visibility = Visibility.Collapsed;
-
-            //    }
-            //}
-            //if (ucInvoice.IsVisible)
-            //    ucInvoice.Visibility = Visibility.Collapsed;
-            //if (ucInvoice.IsVisible)
-            //{
-            //    foreach (var obj in containerGrid.Children)
-            //    {
-            //        ((Grid)obj).Visibility = Visibility.Collapsed;
-            //    }
-            //    trasanctionGrid.Visibility = Visibility.Visible;
-            //    foreach (var obj in trasanctionGrid.Children)
-            //    {
-            //        if (obj is Grid)
-            //            if (((Grid)obj).Equals(transInvoiceGrid))
-            //                ((Grid)obj).Visibility = Visibility.Visible;
-            //            else
-            //                ((Grid)obj).Visibility = Visibility.Collapsed;
-            //    }
-            //    foreach (var obj in transInvoiceGrid.Children)
-            //    {
-            //        if (obj is Grid)
-            //        {
-            //            if (((Grid)obj).Equals(invoiceGridHome))
-            //            {
-            //                headerLbl.Content = "Trasanction - Sales Invoice";
-            //                ((Grid)obj).Visibility = Visibility.Visible;
-            //                settingsBtn.Visibility = Visibility.Hidden;
-            //            }
-            //        }
-            //        else
-            //            ((UserControl)obj).Visibility = Visibility.Collapsed;
-
-            //    }
-            //}
-            //{
-            //    foreach (var obj in containerGrid.Children)
-            //    {
-            //        ((Grid)obj).Visibility = Visibility.Collapsed;
-            //    }
-            //    trasanctionGrid.Visibility = Visibility.Visible;
-            //    foreach (var obj in trasanctionGrid.Children)
-            //    {
-            //        if (obj is Grid)
-            //            if (((Grid)obj).Equals(transInvoiceGrid))
-            //                ((Grid)obj).Visibility = Visibility.Visible;
-            //            else
-            //                ((Grid)obj).Visibility = Visibility.Collapsed;
-            //    }
-            //    foreach (var obj in transInvoiceGrid.Children)
-            //    {
-            //        if (obj is Grid)
-            //        {
-            //            if (((Grid)obj).Equals(invoiceGridHome))
-            //            {
-            //                headerLbl.Content = "Trasanction - Sales Invoice";
-            //                ((Grid)obj).Visibility = Visibility.Visible;
-            //                settingsBtn.Visibility = Visibility.Hidden;
-            //            }
-            //        }
-            //        else
-            //            ((UserControl)obj).Visibility = Visibility.Collapsed;
-
-            //    }
-            //}
+            
             MainVM.StringTextBox = null;
             MainVM.DecimalTextBox = 0;
             MainVM.IntegerTextBox = 0;
@@ -476,7 +394,7 @@ namespace prototype2
         {
             MainVM.isEdit = false;
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
-            sb.Begin(formGridBg);
+            
             foreach (var obj in formGridBg.Children)
             {
                 if (obj is UserControl)
@@ -488,6 +406,7 @@ namespace prototype2
                     else
                     {
                         ((UserControl)obj).Visibility = Visibility.Visible;
+                        sb.Begin(((UserControl)obj));
                     }
                 }
                 
@@ -545,7 +464,32 @@ namespace prototype2
             formGridBg.Visibility = Visibility.Visible;
         }
 
-        
+        private void manageServiceAddBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.isEdit = false;
+            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+
+            foreach (var obj in formGridBg.Children)
+            {
+                if (obj is UserControl)
+                {
+                    if (!((UserControl)obj).Name.Equals("ucServices"))
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Visible;
+                        sb.Begin(((UserControl)obj));
+                    }
+                }
+
+
+            }
+            formGridBg.Visibility = Visibility.Visible;
+        }
+
+
         private bool validationError = false;
 
         private void viewRecordBtn_Click(object sender, RoutedEventArgs e)
@@ -888,248 +832,248 @@ namespace prototype2
 
         private static String dbname = "odc_db";
 
-        //EMPLOYEE PART
-        private void addEmpPosBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (addEmpPosBtn.Content.Equals("Save"))
-            {
-                var dbCon = DBConnection.Instance();
-                dbCon.DatabaseName = dbname;
-                if (String.IsNullOrWhiteSpace(empPosNewTb.Text))
-                {
-                    MessageBox.Show("Employee Position must be filled");
-                }
-                else
-                {
-                    if (employeePositionLb.Items.Contains(empPosNewTb.Text))
-                    {
-                        MessageBox.Show("Employee Position already exists");
-                    }
-                    if (dbCon.IsConnect())
-                    {
-                        string query = "UPDATE `odc_db`.`position_t` set `positionName` = '" + empPosNewTb.Text + "' where positionID = '" + MainVM.SelectedEmpPosition.PositionID + "'";
-                        if (dbCon.insertQuery(query, dbCon.Connection))
-                        {
-                            MessageBox.Show("Employee Poisition saved");
-                            addEmpPosBtn.Content = "Add";
-                            empPosNewTb.Clear();
-                            MainVM.Ldt.worker.RunWorkerAsync();
-                            dbCon.Close();
-                        }
-                    }
-                }
-            }
-            else
-            {
-                string strPosition = empPosNewTb.Text;
-                if (String.IsNullOrWhiteSpace(empPosNewTb.Text))
-                {
-                    MessageBox.Show("Employee Position field must be filled");
-                }
-                else
-                {
-                    var dbCon = DBConnection.Instance();
-                    dbCon.DatabaseName = dbname;
-                    if (employeePositionLb.Items.Contains(empPosNewTb.Text))
-                    {
-                        MessageBox.Show("Employee position already exists");
-                    }
-                    if (dbCon.IsConnect())
-                    {
-                        if (!Regex.IsMatch(strPosition, @"[a-zA-Z -]"))
-                        {
-                            MessageBox.Show("Special characters are not accepted");
-                            empPosNewTb.Clear();
-                        }
-                        else
-                        {
-                            string query = "INSERT INTO `odc_db`.`position_t` (`positionName`) VALUES('" + empPosNewTb.Text + "')";
-                            if (dbCon.insertQuery(query, dbCon.Connection))
-                            {
-                                {
-                                    MessageBox.Show("Employee Position successfully added");
-                                    empPosNewTb.Clear();
-                                    MainVM.Ldt.worker.RunWorkerAsync();
-                                    dbCon.Close();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        ////EMPLOYEE PART
+        //private void addEmpPosBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (addEmpPosBtn.Content.Equals("Save"))
+        //    {
+        //        var dbCon = DBConnection.Instance();
+        //        dbCon.DatabaseName = dbname;
+        //        if (String.IsNullOrWhiteSpace(empPosNewTb.Text))
+        //        {
+        //            MessageBox.Show("Employee Position must be filled");
+        //        }
+        //        else
+        //        {
+        //            if (employeePositionLb.Items.Contains(empPosNewTb.Text))
+        //            {
+        //                MessageBox.Show("Employee Position already exists");
+        //            }
+        //            if (dbCon.IsConnect())
+        //            {
+        //                string query = "UPDATE `odc_db`.`position_t` set `positionName` = '" + empPosNewTb.Text + "' where positionID = '" + MainVM.SelectedEmpPosition.PositionID + "'";
+        //                if (dbCon.insertQuery(query, dbCon.Connection))
+        //                {
+        //                    MessageBox.Show("Employee Poisition saved");
+        //                    addEmpPosBtn.Content = "Add";
+        //                    empPosNewTb.Clear();
+        //                    MainVM.Ldt.worker.RunWorkerAsync();
+        //                    dbCon.Close();
+        //                }
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        string strPosition = empPosNewTb.Text;
+        //        if (String.IsNullOrWhiteSpace(empPosNewTb.Text))
+        //        {
+        //            MessageBox.Show("Employee Position field must be filled");
+        //        }
+        //        else
+        //        {
+        //            var dbCon = DBConnection.Instance();
+        //            dbCon.DatabaseName = dbname;
+        //            if (employeePositionLb.Items.Contains(empPosNewTb.Text))
+        //            {
+        //                MessageBox.Show("Employee position already exists");
+        //            }
+        //            if (dbCon.IsConnect())
+        //            {
+        //                if (!Regex.IsMatch(strPosition, @"[a-zA-Z -]"))
+        //                {
+        //                    MessageBox.Show("Special characters are not accepted");
+        //                    empPosNewTb.Clear();
+        //                }
+        //                else
+        //                {
+        //                    string query = "INSERT INTO `odc_db`.`position_t` (`positionName`) VALUES('" + empPosNewTb.Text + "')";
+        //                    if (dbCon.insertQuery(query, dbCon.Connection))
+        //                    {
+        //                        {
+        //                            MessageBox.Show("Employee Position successfully added");
+        //                            empPosNewTb.Clear();
+        //                            MainVM.Ldt.worker.RunWorkerAsync();
+        //                            dbCon.Close();
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
 
-        }
-
-
-        private void deleteEmpPosBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (employeePositionLb.SelectedItems.Count > 0)
-            {
-                var dbCon = DBConnection.Instance();
-                dbCon.DatabaseName = dbname;
-                if (dbCon.IsConnect())
-                {
-                    try
-                    {
-                        string query = "DELETE FROM `odc_db`.`position_t` WHERE `positionID`='" + MainVM.SelectedEmpPosition.PositionID + "';";
-
-                        if (dbCon.insertQuery(query, dbCon.Connection))
-                        {
-                            dbCon.Close();
-                            MessageBox.Show("Employee position successfully deleted.");
-                            MainVM.Ldt.worker.RunWorkerAsync();
-                        }
-                    }
-                    catch (Exception) { throw; }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Select an employee position first.");
-            }
-
-        }
-
-        private void editEmpPosBtn_Click(object sender, RoutedEventArgs e)
-        {
-            var dbCon = DBConnection.Instance();
-            dbCon.DatabaseName = dbname;
-            if (dbCon.IsConnect())
-            {
-                if (employeePositionLb.SelectedItems.Count > 0)
-                {
-                    empPosNewTb.Text = MainVM.SelectedEmpPosition.PositionName;
-                    addEmpPosBtn.Content = "Save";
-
-                }
-                else
-                {
-                    MessageBox.Show("Please select an employee position first.");
-                }
-            }
-            dbCon.Close();
-        }
-
-        //CONTRACTOR PART
-        private void addContJobBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (addContJobBtn.Content.Equals("Save"))
-            {
-                var dbCon = DBConnection.Instance();
-                dbCon.DatabaseName = dbname;
-                if (String.IsNullOrWhiteSpace(contNewJobTb.Text))
-                {
-                    MessageBox.Show("Contractor Job Title field must be filled");
-                }
-                else
-                {
-                    if (contJobLb.Items.Contains(contNewJobTb.Text))
-                    {
-                        MessageBox.Show("Job Title already exists");
-                    }
-                    if (dbCon.IsConnect())
-                    {
-                        string query = "UPDATE `odc_db`.`job_title_t` set `jobName` = '" + contNewJobTb.Text + "' where jobID = '" + MainVM.SelectedJobTitle.JobID + "'";
-                        if (dbCon.insertQuery(query, dbCon.Connection))
-                        {
-                            MessageBox.Show("Job Title successfully saved");
-                            contNewJobTb.Clear();
-                            MainVM.Ldt.worker.RunWorkerAsync();
-                            dbCon.Close();
-                            contNewJobTb.Clear();
-                            addContJobBtn.Content = "Add";
+        //}
 
 
-                        }
-                    }
-                }
-            }
-            else
-            {
-                string strJobTitle = contNewJobTb.Text;
-                var dbCon = DBConnection.Instance();
-                dbCon.DatabaseName = dbname;
-                if (String.IsNullOrWhiteSpace(contNewJobTb.Text))
-                {
-                    MessageBox.Show("Contractor Job Title field must be field");
-                }
-                else
-                {
-                    if (contJobLb.Items.Contains(contNewJobTb.Text))
-                    {
-                        MessageBox.Show("Contractor Job Title already exists");
-                    }
-                    else
-                    {
-                        if (!Regex.IsMatch(strJobTitle, @"[a-zA-Z -]"))
-                        {
-                            MessageBox.Show("Special Characters are not accepted");
-                            contNewJobTb.Clear();
-                        }
-                        else
-                        {
-                            if (dbCon.IsConnect())
-                            {
-                                string query = "INSERT INTO `odc_db`.`job_title_t` (`jobName`) VALUES('" + contNewJobTb.Text + "')";
-                                if (dbCon.insertQuery(query, dbCon.Connection))
-                                {
-                                    MessageBox.Show("Contractor Job Title successfully added");
-                                    contNewJobTb.Clear();
-                                    MainVM.Ldt.worker.RunWorkerAsync();
-                                    dbCon.Close();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        //private void deleteEmpPosBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (employeePositionLb.SelectedItems.Count > 0)
+        //    {
+        //        var dbCon = DBConnection.Instance();
+        //        dbCon.DatabaseName = dbname;
+        //        if (dbCon.IsConnect())
+        //        {
+        //            try
+        //            {
+        //                string query = "DELETE FROM `odc_db`.`position_t` WHERE `positionID`='" + MainVM.SelectedEmpPosition.PositionID + "';";
+
+        //                if (dbCon.insertQuery(query, dbCon.Connection))
+        //                {
+        //                    dbCon.Close();
+        //                    MessageBox.Show("Employee position successfully deleted.");
+        //                    MainVM.Ldt.worker.RunWorkerAsync();
+        //                }
+        //            }
+        //            catch (Exception) { throw; }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Select an employee position first.");
+        //    }
+
+        //}
+
+        //private void editEmpPosBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var dbCon = DBConnection.Instance();
+        //    dbCon.DatabaseName = dbname;
+        //    if (dbCon.IsConnect())
+        //    {
+        //        if (employeePositionLb.SelectedItems.Count > 0)
+        //        {
+        //            empPosNewTb.Text = MainVM.SelectedEmpPosition.PositionName;
+        //            addEmpPosBtn.Content = "Save";
+
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Please select an employee position first.");
+        //        }
+        //    }
+        //    dbCon.Close();
+        //}
+
+        ////CONTRACTOR PART
+        //private void addContJobBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (addContJobBtn.Content.Equals("Save"))
+        //    {
+        //        var dbCon = DBConnection.Instance();
+        //        dbCon.DatabaseName = dbname;
+        //        if (String.IsNullOrWhiteSpace(contNewJobTb.Text))
+        //        {
+        //            MessageBox.Show("Contractor Job Title field must be filled");
+        //        }
+        //        else
+        //        {
+        //            if (contJobLb.Items.Contains(contNewJobTb.Text))
+        //            {
+        //                MessageBox.Show("Job Title already exists");
+        //            }
+        //            if (dbCon.IsConnect())
+        //            {
+        //                string query = "UPDATE `odc_db`.`job_title_t` set `jobName` = '" + contNewJobTb.Text + "' where jobID = '" + MainVM.SelectedJobTitle.JobID + "'";
+        //                if (dbCon.insertQuery(query, dbCon.Connection))
+        //                {
+        //                    MessageBox.Show("Job Title successfully saved");
+        //                    contNewJobTb.Clear();
+        //                    MainVM.Ldt.worker.RunWorkerAsync();
+        //                    dbCon.Close();
+        //                    contNewJobTb.Clear();
+        //                    addContJobBtn.Content = "Add";
 
 
-        private void deleteContJobBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (contJobLb.SelectedItems.Count > 0)
-            {
-                var dbCon = DBConnection.Instance();
-                dbCon.DatabaseName = dbname;
-                if (dbCon.IsConnect())
-                {
-                    try
-                    {
-                        string query = "DELETE FROM `odc_db`.`job_title_t` WHERE `JobID`='" + MainVM.SelectedJobTitle.JobID + "';";
+        //                }
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        string strJobTitle = contNewJobTb.Text;
+        //        var dbCon = DBConnection.Instance();
+        //        dbCon.DatabaseName = dbname;
+        //        if (String.IsNullOrWhiteSpace(contNewJobTb.Text))
+        //        {
+        //            MessageBox.Show("Contractor Job Title field must be field");
+        //        }
+        //        else
+        //        {
+        //            if (contJobLb.Items.Contains(contNewJobTb.Text))
+        //            {
+        //                MessageBox.Show("Contractor Job Title already exists");
+        //            }
+        //            else
+        //            {
+        //                if (!Regex.IsMatch(strJobTitle, @"[a-zA-Z -]"))
+        //                {
+        //                    MessageBox.Show("Special Characters are not accepted");
+        //                    contNewJobTb.Clear();
+        //                }
+        //                else
+        //                {
+        //                    if (dbCon.IsConnect())
+        //                    {
+        //                        string query = "INSERT INTO `odc_db`.`job_title_t` (`jobName`) VALUES('" + contNewJobTb.Text + "')";
+        //                        if (dbCon.insertQuery(query, dbCon.Connection))
+        //                        {
+        //                            MessageBox.Show("Contractor Job Title successfully added");
+        //                            contNewJobTb.Clear();
+        //                            MainVM.Ldt.worker.RunWorkerAsync();
+        //                            dbCon.Close();
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
-                        if (dbCon.insertQuery(query, dbCon.Connection))
-                        {
-                            dbCon.Close();
-                            MessageBox.Show("Job Position successfully deleted.");
-                            MainVM.Ldt.worker.RunWorkerAsync();
-                        }
-                    }
-                    catch (Exception) { throw; }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Select a Job Position first.");
-            }
-        }
 
-        private void editContJobBtn_Click(object sender, RoutedEventArgs e)
-        {
-            var dbCon = DBConnection.Instance();
-            dbCon.DatabaseName = dbname;
+        //private void deleteContJobBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (contJobLb.SelectedItems.Count > 0)
+        //    {
+        //        var dbCon = DBConnection.Instance();
+        //        dbCon.DatabaseName = dbname;
+        //        if (dbCon.IsConnect())
+        //        {
+        //            try
+        //            {
+        //                string query = "DELETE FROM `odc_db`.`job_title_t` WHERE `JobID`='" + MainVM.SelectedJobTitle.JobID + "';";
 
-            if (contJobLb.SelectedItems.Count > 0)
-            {
-                contNewJobTb.Text = MainVM.SelectedJobTitle.JobName;
-            }
-            else
-            {
-                MessageBox.Show("Please select a record first.");
-            }
-            dbCon.Close();
-            addContJobBtn.Content = "Save";
-        }
+        //                if (dbCon.insertQuery(query, dbCon.Connection))
+        //                {
+        //                    dbCon.Close();
+        //                    MessageBox.Show("Job Position successfully deleted.");
+        //                    MainVM.Ldt.worker.RunWorkerAsync();
+        //                }
+        //            }
+        //            catch (Exception) { throw; }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Select a Job Position first.");
+        //    }
+        //}
+
+        //private void editContJobBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var dbCon = DBConnection.Instance();
+        //    dbCon.DatabaseName = dbname;
+
+        //    if (contJobLb.SelectedItems.Count > 0)
+        //    {
+        //        contNewJobTb.Text = MainVM.SelectedJobTitle.JobName;
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Please select a record first.");
+        //    }
+        //    dbCon.Close();
+        //    addContJobBtn.Content = "Save";
+        //}
 
 
         //product category
@@ -1222,37 +1166,6 @@ namespace prototype2
             dbCon.Close();
         }
 
-        //service types
-        private void addServiceTypeBtn_Click(object sender, RoutedEventArgs e)
-        {
-            serviceTypeList.Visibility = Visibility.Collapsed;
-            serviceTypeAdd.Visibility = Visibility.Visible;
-        }
-
-        private void cancelServiceTypeBtn_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (var element in serviceTypeAdd.Children)
-            {
-                if (element is TextBox)
-                {
-                    BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-                    if (expression != null)
-                        Validation.ClearInvalid(expression);
-                    ((TextBox)element).Text = string.Empty;
-                }
-                else if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
-                {
-                    BindingExpression expression = ((Xceed.Wpf.Toolkit.DecimalUpDown)element).GetBindingExpression(Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
-                    if (expression != null)
-                        Validation.ClearInvalid(expression);
-                    ((Xceed.Wpf.Toolkit.DecimalUpDown)element).Value = 0;
-                }
-            }
-            serviceTypeList.Visibility = Visibility.Visible;
-            serviceTypeAdd.Visibility = Visibility.Collapsed;
-            MainVM.Ldt.worker.RunWorkerAsync();
-        }
-
         private void serviceName_TextChanged(object sender, TextChangedEventArgs e)
         {
             string strService = (sender as TextBox).Text;
@@ -1281,107 +1194,33 @@ namespace prototype2
         private string id = "";
         private void saveServiceTypeBtn_Click(object sender, RoutedEventArgs e)
         {
-            var dbCon = DBConnection.Instance();
-            dbCon.DatabaseName = dbname;
-            MessageBoxResult result = MessageBox.Show("Do you want to save this service type?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
-            if (result == MessageBoxResult.Yes)
-            {
-                foreach (var element in serviceTypeAdd.Children)
-                {
-                    if (element is TextBox)
-                    {
-                        BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-                        if (expression != null)
-                        {
-                            if (((TextBox)element).IsEnabled)
-                            {
-                                expression.UpdateSource();
-                                if (Validation.GetHasError((TextBox)element))
-                                    validationError = true;
-                            }
-                        }
-                    }
-                    if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
-                    {
-                        BindingExpression expression = ((Xceed.Wpf.Toolkit.DecimalUpDown)element).GetBindingExpression(Xceed.Wpf.Toolkit.DecimalUpDown.TextProperty);
-                        if (((Xceed.Wpf.Toolkit.DecimalUpDown)element).IsEnabled)
-                        {
-                            expression.UpdateSource();
-                            if (Validation.GetHasError((Xceed.Wpf.Toolkit.DecimalUpDown)element))
-                                validationError = true;
-                        }
-                    }
-                }
-                if (!validationError)
-                {
-                    if (!MainVM.isEdit)
-                    {
-                        string query = "INSERT INTO services_t (serviceName,serviceDesc,servicePrice) VALUES ('" + serviceName.Text + "','" + serviceDesc.Text + "', '" + servicePrice.Value + "')";
-                        if (dbCon.insertQuery(query, dbCon.Connection))
-                        {
-                            MessageBox.Show("Service type successfully added!");
-                            serviceTypeList.Visibility = Visibility.Visible;
-                            serviceTypeAdd.Visibility = Visibility.Collapsed;
-
-                            //clearing textboxes
-                            serviceName.Clear();
-                            serviceDesc.Clear();
-                            servicePrice.Value = 0;
-                            MainVM.Ldt.worker.RunWorkerAsync();
-                        }
-                        MainVM.isEdit = false;
-                    }
-                    else
-                    {
-                        string query = "UPDATE `services_T` SET serviceName = '" + serviceName.Text + "',serviceDesc = '" + serviceDesc.Text + "', servicePrice = '" + servicePrice.Value + "' WHERE serviceID = '" + MainVM.SelectedService.ServiceID + "'";
-                        if (dbCon.insertQuery(query, dbCon.Connection))
-                        {
-                            //MessageBox.Show("Sevice type sucessfully updated");
-                            id = "";
-                            serviceTypeList.Visibility = Visibility.Visible;
-                            serviceTypeAdd.Visibility = Visibility.Collapsed;
-                            MainVM.Ldt.worker.RunWorkerAsync();
-                        }
-                        MainVM.isEdit = false;
-                    }
-                }
-                else
-                    MessageBox.Show("Resolve the error first");
-                validationError = false;
-            }
-            else if (result == MessageBoxResult.No)
-            {
-                for (int x = 1; x < serviceTypeGrid.Children.Count; x++)
-                {
-                    serviceTypeGrid.Children[x].Visibility = Visibility.Collapsed;
-                }
-                serviceTypeList.Visibility = Visibility.Visible;
-                MainVM.Ldt.worker.RunWorkerAsync();
-            }
-            else if (result == MessageBoxResult.Cancel)
-            {
-            }
+            
 
         }
 
         private void btnEditService_Click(object sender, RoutedEventArgs e)
         {
-            var dbCon = DBConnection.Instance();
-            dbCon.DatabaseName = dbname;
-            if (serviceTypeDg.SelectedItems.Count > 0)
+            MainVM.isEdit = true;
+            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+
+            foreach (var obj in formGridBg.Children)
             {
+                if (obj is UserControl)
+                {
+                    if (!((UserControl)obj).Name.Equals("ucServices"))
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Visible;
+                        sb.Begin(((UserControl)obj));
+                    }
+                }
 
-                serviceTypeList.Visibility = Visibility.Collapsed;
-                serviceTypeAdd.Visibility = Visibility.Visible;
-                serviceName.Text = MainVM.SelectedService.ServiceName;
-                serviceDesc.Text = MainVM.SelectedService.ServiceDesc;
-                servicePrice.Value = MainVM.SelectedService.ServicePrice;
-                dbCon.Close();
-                MainVM.isEdit = true;
-                serviceTypeList.Visibility = Visibility.Collapsed;
-                serviceTypeAdd.Visibility = Visibility.Visible;
+
             }
-
+            formGridBg.Visibility = Visibility.Visible;
         }
 
         private void btnDeleteService_Click(object sender, RoutedEventArgs e)

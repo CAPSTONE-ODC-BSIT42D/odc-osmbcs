@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:prototype2.uControlsMaintenance"
              xmlns:prototype2="clr-namespace:prototype2" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Name="uControlEmployeeForm" x:Class="prototype2.uControlsMaintenance.ucEmployeeForm"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="652">
+             d:DesignHeight="700" d:DesignWidth="652" IsVisibleChanged="uControlEmployeeForm_IsVisibleChanged">
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>
@@ -59,7 +59,7 @@
                             </Binding>
                         </ComboBox.SelectedItem>
                     </ComboBox>
-                    <TextBox x:Name="newPosTb" TextWrapping="Wrap" Text="TextBox" Margin="10,36,373,165"/>
+                    <TextBox x:Name="newPosTb" TextWrapping="Wrap" Text="TextBox" Margin="10,36,373,165" Visibility="Collapsed"/>
                     <Button x:Name="addPosBtn" Content="+" HorizontalAlignment="Left" Margin="169,36,0,0" VerticalAlignment="Top" Width="26" Height="26" Click="addPosBtn_Click"/>
                     <Grid x:Name="accountCredentialsForm" Margin="10,105,256,10">
                         <Label x:Name="label_Copy5" Content="Account Credentials" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>

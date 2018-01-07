@@ -290,6 +290,33 @@ namespace prototype2.uControlsMaintenance
         {
         }
 
-        
+        void loadDataToUi()
+        {
+            employeeType.SelectedIndex = MainVM.SelectedEmployeeContractor.EmpType;
+            empFirstNameTb.Text = MainVM.SelectedEmployeeContractor.EmpFname;
+            empLastNameTb.Text = MainVM.SelectedEmployeeContractor.EmpLName;
+            empMiddleInitialTb.Text = MainVM.SelectedEmployeeContractor.EmpMiddleInitial;
+            employeeType.SelectedValue = MainVM.SelectedEmployeeContractor.EmpType;
+            hasAccessCb.IsChecked = MainVM.SelectedEmployeeContractor.HasAccess;
+            if (MainVM.SelectedEmployeeContractor.EmpType == 0)
+            {
+                empPostionCb.SelectedValue = MainVM.SelectedEmployeeContractor.PositionID;
+                empUserNameTb.Text = MainVM.SelectedEmployeeContractor.EmpUserName;
+            }
+            else if (MainVM.SelectedEmployeeContractor.EmpType == 1)
+            {
+                empJobCb.SelectedValue = MainVM.SelectedEmployeeContractor.JobID;
+                empDateStarted.SelectedDate = MainVM.SelectedEmployeeContractor.EmpDateTo;
+                empDateEnded.SelectedDate = MainVM.SelectedEmployeeContractor.EmpDateFrom;
+            }
+        }
+
+        private void uControlEmployeeForm_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (MainVM.isEdit && this.IsVisible)
+            {
+                loadDataToUi();
+            }
+        }
     }
 }
