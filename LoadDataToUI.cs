@@ -164,6 +164,22 @@ namespace prototype2
                 }
 
             }
+
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM unit_t;";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.Units.Add(new Unit() { ID = int.Parse(dr["id"].ToString()), UnitName = dr["unitName"].ToString(), UnitShorthand = dr["unitShorthand"].ToString() });
+                }
+
+            }
             if (dbCon.IsConnect())
             {
                 string query = "SELECT * FROM services_t where isDeleted = 0;";

@@ -545,6 +545,26 @@ namespace prototype2
             get { return selectedAvailedServices; }
             set { SetProperty(ref selectedAvailedServices, value); }
         }
+
+        //----- Units
+
+        protected ObservableCollection<Unit> units = new ObservableCollection<Unit>();
+
+        protected Unit selectedUnit = null;
+
+        public ObservableCollection<Unit> Units
+        {
+            get { return units; }
+            set { units = value; }
+        }
+
+        public Unit SelectedUnit
+        {
+            get { return selectedUnit; }
+            set { SetProperty(ref selectedUnit, value); }
+        }
+
+
         //----- Provinces
 
         protected ObservableCollection<Province> provinces = new ObservableCollection<Province>();

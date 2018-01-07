@@ -1502,12 +1502,10 @@
                     </Grid>
                 </Grid>
                 <Grid x:Name="manageServicesGrid" Margin="0,0,1,0">
-                    <Grid x:Name="manageEmployeeGridHome2" Margin="0">
+                    <Grid Margin="0">
                         <Label x:Name="label5" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
                         <TextBox x:Name="searchBox3" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>
                         <Button x:Name="button3" Content="Search" HorizontalAlignment="Left" Margin="398,20,0,0" VerticalAlignment="Top" Width="84" Height="26" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="13"/>
-                        <Label x:Name="label6" Content="Category:" HorizontalAlignment="Left" Margin="548,16,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                        <ComboBox x:Name="categoryCb" HorizontalAlignment="Left" Margin="613,20,0,0" VerticalAlignment="Top" Width="120"/>
                         <Button x:Name="manageServiceAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,20,20,0" VerticalAlignment="Top" Width="85" Background="#FF0D9E0D" BorderBrush="#FF107C10" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13" Click="manageServiceAddBtn_Click"/>
                         <DataGrid x:Name="serviceTypeDg" Margin="20,60,20,20" ItemsSource="{Binding ServicesList}" CanUserAddRows="False" MinColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="False" SelectedItem="{Binding SelectedService}">
                             <DataGrid.Columns >
@@ -1533,9 +1531,37 @@
                         </DataGrid>
                     </Grid>
                 </Grid>
+                <Grid x:Name="manageUnitsGrid" Margin="0,0,1,0">
+                    <Grid Margin="0">
+                        <Label x:Name="label6" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
+                        <TextBox x:Name="searchBox6" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>
+                        <Button x:Name="button6" Content="Search" HorizontalAlignment="Left" Margin="398,20,0,0" VerticalAlignment="Top" Width="84" Height="26" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="13"/>
+                        <Button x:Name="manageServiceAddBtn1" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,20,20,0" VerticalAlignment="Top" Width="85" Background="#FF0D9E0D" BorderBrush="#FF107C10" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13" Click="manageServiceAddBtn_Click"/>
+                        <DataGrid x:Name="unitListDg" Margin="20,60,20,20" ItemsSource="{Binding Units}" CanUserAddRows="False" MinColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="False" SelectedItem="{Binding SelectedUnit}">
+                            <DataGrid.Columns >
+                                <DataGridTextColumn Binding="{Binding UnitName}" ClipboardContentBinding="{x:Null}" Header="Service Name" Width="150" CanUserResize="False" />
+                                <DataGridTextColumn Binding="{Binding UnitShorthand}" ClipboardContentBinding="{x:Null}" Header="Description" Width="200" CanUserResize="False"/>
+                                <DataGridTemplateColumn Width="100"  >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button x:Name="btnEditService" Click="btnEditService_Click" Content="Edit" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="100"  >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button x:Name="btnDeleteService" Click="btnDeleteService_Click" Content="Delete" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Grid>
             </Grid>
         </Grid>
-        <Grid x:Name="formGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3">
+        <Grid x:Name="formGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3" d:IsHidden="True">
 
             <local:ucCustSuppCRUD x:Name="ucCustSupp" HorizontalAlignment="Center" Margin="167,0,166,0" d:IsHidden="True" Visibility="Collapsed"/>
             <local:ucProductsCRUD x:Name="ucProduct" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>

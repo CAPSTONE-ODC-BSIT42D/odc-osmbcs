@@ -50,7 +50,7 @@
             <StackPanel x:Name="perTypeField" Margin="40,146,0,0" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Width="537">
                 <Grid x:Name="employeeOnlyGrid" VerticalAlignment="Top" Height="227">
                     <Label Content="Position" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0"/>
-                    <ComboBox x:Name="empPostionCb" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="154" Height="26" DisplayMemberPath="PositionName" SelectedValuePath="PositionID" FontWeight="Normal" >
+                    <ComboBox x:Name="empPostionCb" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="154" ItemsSource = "{Binding EmpPosition}" Height="26" DisplayMemberPath="PositionName" SelectedValuePath="PositionID" FontWeight="Normal" >
                         <ComboBox.SelectedItem>
                             <Binding Path="cbItem" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                 <Binding.ValidationRules>

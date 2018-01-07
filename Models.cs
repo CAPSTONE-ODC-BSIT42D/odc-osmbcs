@@ -142,6 +142,35 @@ namespace prototype2
         }
     }
 
+    public class Unit : ViewModelEntity
+    {
+        public Unit()
+        {
+
+        }
+
+        protected int id;
+        public int ID
+        {
+            get { return id; }
+            set { SetProperty(ref id, value); }
+        }
+
+        protected string unitName;
+        public string UnitName
+        {
+            get { return unitName; }
+            set { SetProperty(ref unitName, value); }
+        }
+
+        protected string unitShorthand;
+        public string UnitShorthand
+        {
+            get { return unitShorthand; }
+            set { SetProperty(ref unitShorthand, value); }
+        }
+    }
+
 
 
     //---Major Tables---//
@@ -438,6 +467,14 @@ namespace prototype2
             get { return supplierID; }
             set { SetProperty(ref supplierID, value); }
         }
+
+        protected DateTime dateEffective;
+        public DateTime DateEffective
+        {
+            get { return dateEffective; }
+            set { SetProperty(ref dateEffective, value); }
+        }
+
     }
 
     public class Service : ViewModelEntity

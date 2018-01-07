@@ -236,54 +236,81 @@ namespace prototype2.uControlsMaintenance
         void saveDataToDb()
         {
             var dbCon = DBConnection.Instance();
-            if (dbCon.IsConnect())
+            if (MainVM.isEdit)
             {
-                string query = "";
-                if (employeeType.SelectedIndex.ToString().Equals("0"))
+                if (dbCon.IsConnect())
                 {
-                    query = "INSERT INTO `odc_db`.`emp_cont_t`   (`empFName`,`empLName`,`empMI`,`positionID`,`empUserName`,`empPassword`,`empDateFrom`,`empDateTo`,`empType`, `hasAccess`) " +
-                    " VALUES " +
-                    "('"
-                    + empFirstNameTb.Text + "','" +
-                    empLastNameTb.Text + "','" +
-                    empMiddleInitialTb.Text + "','" +
-                    empPostionCb.SelectedValue + "','" +
-                    empUserNameTb.Text + "'," +
-                    "md5('" +
-                    empLastNameTb.Text +
-                    "'),'" +
-                    empDateStarted.SelectedDate + "','" +
-                    empDateEnded.SelectedDate + "','" +
-                    employeeType.SelectedIndex + "','" +
-                    (bool)hasAccessCb.IsChecked +
-                    "'); ";
-                }
-                else
-                {
-                    query = "INSERT INTO `odc_db`.`emp_cont_t`   (`empFName`,`empLName`,`empMI`,`empUserName`,`empPassword`,`jobID`,`empDateFrom`,`empDateTo`,`empType`, `hasAccess`) " +
-                    " VALUES " +
-                    "('" 
-                    + empFirstNameTb.Text + "','" +
-                    empLastNameTb.Text + "','" +
-                    empMiddleInitialTb.Text + "','" +
-                    empUserNameTb.Text + "'," +
-                    "md5('" +
-                    empLastNameTb.Text +
-                    "'),'" +
-                    empJobCb.SelectedValue + "','" +
-                    empDateStarted.SelectedDate + "','" +
-                    empDateEnded.SelectedDate + "','" +
-                    employeeType.SelectedIndex + "','" +
-                    (bool)hasAccessCb.IsChecked +
-                    "'); ";
-                }
-                
-                if (dbCon.insertQuery(query, dbCon.Connection))
-                {
-                    MessageBox.Show("Record is Saved");
-                    
+                    string query = "UPDATE `odc_db`.`emp_cont_t`" +
+                        "SET `empFName` = " + empFirstNameTb.Text + "','" +
+                        ",`empLName` = " + empLastNameTb.Text + "','" +
+                        ",`empMI` = " + empMiddleInitialTb.Text + "','" +
+                        ",`positionID` = " + empPostionCb.SelectedValue + "','" +
+                        ",`empUserName` = " + empUserNameTb.Text + "'," +
+                        ",`empDateFrom` = " + empDateStarted.SelectedDate + "','" +
+                        ",`empDateTo` = " + empDateEnded.SelectedDate + "','" +
+                        ", `hasAccess` = " + (bool)hasAccessCb.IsChecked +
+                        ") " +
+                        " WHERE empID = " + MainVM.SelectedEmployeeContractor.EmpID +
+                        ";";
+                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    {
+                        MessageBox.Show("Record is Saved");
+
+                    }
                 }
             }
+            else
+            {
+                if (dbCon.IsConnect())
+                {
+                    string query = "";
+                    if (employeeType.SelectedIndex.ToString().Equals("0"))
+                    {
+                        query = "INSERT INTO `odc_db`.`emp_cont_t`   (`empFName`,`empLName`,`empMI`,`positionID`,`empUserName`,`empPassword`,`empDateFrom`,`empDateTo`,`empType`, `hasAccess`) " +
+                        " VALUES " +
+                        "('"
+                        + empFirstNameTb.Text + "','" +
+                        empLastNameTb.Text + "','" +
+                        empMiddleInitialTb.Text + "','" +
+                        empPostionCb.SelectedValue + "','" +
+                        empUserNameTb.Text + "'," +
+                        "md5('" +
+                        empLastNameTb.Text +
+                        "'),'" +
+                        empDateStarted.SelectedDate + "','" +
+                        empDateEnded.SelectedDate + "','" +
+                        employeeType.SelectedIndex + "'," +
+                        hasAccessCb.IsChecked +
+                        "); ";
+                    }
+                    else
+                    {
+                        query = "INSERT INTO `odc_db`.`emp_cont_t`   (`empFName`,`empLName`,`empMI`,`empUserName`,`empPassword`,`jobID`,`empDateFrom`,`empDateTo`,`empType`, `hasAccess`) " +
+                        " VALUES " +
+                        "('"
+                        + empFirstNameTb.Text + "','" +
+                        empLastNameTb.Text + "','" +
+                        empMiddleInitialTb.Text + "','" +
+                        empUserNameTb.Text + "'," +
+                        "md5('" +
+                        empLastNameTb.Text +
+                        "'),'" +
+                        empJobCb.SelectedValue + "','" +
+                        empDateStarted.SelectedDate + "','" +
+                        empDateEnded.SelectedDate + "','" +
+                        employeeType.SelectedIndex + "'," +
+                        hasAccessCb.IsChecked +
+                        "); ";
+                    }
+
+                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    {
+                        MessageBox.Show("Record is Saved");
+
+                    }
+                }
+            }
+            
         }
 
         void resetFieldsValue()

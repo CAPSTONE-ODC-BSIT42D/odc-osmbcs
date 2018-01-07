@@ -244,7 +244,7 @@
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="TextBoxValidation.cs" />
-    <Compile Include="ucCustSuppCRUD.xaml.cs">
+    <Compile Include="uControlsMaintenance\ucCustSuppCRUD.xaml.cs">
       <DependentUpon>ucCustSuppCRUD.xaml</DependentUpon>
     </Compile>
     <Compile Include="ucDashboard.xaml.cs">
@@ -262,7 +262,7 @@
     <Compile Include="uControlsMaintenance\ucServices.xaml.cs">
       <DependentUpon>ucServices.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucProductsCRUD.xaml.cs">
+    <Compile Include="uControlsMaintenance\ucProductsCRUD.xaml.cs">
       <DependentUpon>ucProductsCRUD.xaml</DependentUpon>
     </Compile>
     <Compile Include="ucPurchaseOrder.xaml.cs">
@@ -327,7 +327,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucCustSuppCRUD.xaml">
+    <Page Include="uControlsMaintenance\ucCustSuppCRUD.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -351,7 +351,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucProductsCRUD.xaml">
+    <Page Include="uControlsMaintenance\ucProductsCRUD.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
