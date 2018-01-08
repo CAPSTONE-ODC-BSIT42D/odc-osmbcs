@@ -238,5 +238,35 @@ namespace prototype2
                 loadDataToUi();
             }
         }
+
+        private void addPosBtn_Click(object sender, RoutedEventArgs e)
+        {
+            categoryNameTb.Visibility = Visibility.Visible;
+            addCategoryBtn.Content = "Save";
+
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = "odc_db";
+            if (categoryNameTb.IsVisible)
+            {
+                categoryNameTb.Visibility = Visibility.Collapsed;
+                addCategoryBtn.Content = "+";
+                string query = "INSERT INTO `odc_db`.`item_type_t` (`typeName`) VALUES('" + categoryNameTb.Text + "')";
+                if (dbCon.insertQuery(query, dbCon.Connection))
+                {
+                    {
+                        MessageBox.Show("Employee Position successfully added");
+                        categoryNameTb.Clear();
+                        MainVM.Ldt.worker.RunWorkerAsync();
+                        dbCon.Close();
+                    }
+                }
+            }
+            else
+            {
+                categoryNameTb.Visibility = Visibility.Visible;
+                addCategoryBtn.Content = "Save";
+            }
+
+        }
     }
 }

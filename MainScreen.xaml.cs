@@ -1290,6 +1290,55 @@ namespace prototype2
             MainVM.Ldt.worker.RunWorkerAsync();
         }
 
+        private void btnEditUnit_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.isEdit = true;
+            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+
+            foreach (var obj in formGridBg.Children)
+            {
+                if (obj is UserControl)
+                {
+                    if (!((UserControl)obj).Name.Equals("ucUnit"))
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Visible;
+                        sb.Begin(((UserControl)obj));
+                    }
+                }
+
+
+            }
+            formGridBg.Visibility = Visibility.Visible;
+        }
+
+        private void btnDeleteUnit_Click(object sender, RoutedEventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = dbname;
+            if (serviceTypeDg.SelectedItems.Count > 0)
+            {
+                id = (serviceTypeDg.Columns[0].GetCellContent(serviceTypeDg.SelectedItem) as TextBlock).Text;
+                MessageBoxResult result = MessageBox.Show("Do you wish to delete this record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.OK)
+                {
+                    if (dbCon.IsConnect())
+                    {
+                        string query = "UPDATE `unit_t` SET `isDeleted`= 1 WHERE ID = '" + MainVM.SelectedUnit.ID + "';";
+                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        {
+                            MessageBox.Show("Record successfully deleted!");
+                        }
+                    }
+                    dbCon.Close();
+                }
+            }
+            MainVM.Ldt.worker.RunWorkerAsync();
+        }
+
         bool initPrice = true;
         string locationid = "";
         private void custProvinceCb1_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1435,5 +1484,6 @@ namespace prototype2
             ucContract.Visibility = Visibility.Visible;
         }
 
+        
     }
 }

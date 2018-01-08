@@ -79,6 +79,8 @@ namespace prototype2
             MainVM.AvailedServices.Clear();
             MainVM.AdditionalFees.Clear();
 
+            MainVM.Units.Clear();
+
             MainVM.SalesQuotes.Clear();
             MainVM.SalesInvoice.Clear();
             MainVM.PaymentList_.Clear();

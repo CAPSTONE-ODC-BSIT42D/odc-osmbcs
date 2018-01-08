@@ -83,7 +83,6 @@ namespace prototype2.uControlsMaintenance
                 {
                     saveDataToDb();
                     MainVM.isEdit = false;
-                    MainVM.Ldt.worker.RunWorkerAsync();
                     OnSaveCloseButtonClicked(e);
                 }
                 else
@@ -133,9 +132,9 @@ namespace prototype2.uControlsMaintenance
                 else
                 {
                     string query = "UPDATE unit_t SET " +
-                        "unitName = " + unitNameTb.Text +
-                        ", unitShorthand = " + unitShorthandTb.Text +
-                        " WHERE id = "+MainVM.SelectedUnit.ID+";";
+                        "unitName = '" + unitNameTb.Text +
+                        "', unitShorthand = '" + unitShorthandTb.Text +
+                        "' WHERE id = "+MainVM.SelectedUnit.ID+";";
 
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {

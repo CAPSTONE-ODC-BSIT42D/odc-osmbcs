@@ -1544,14 +1544,14 @@
                                 <DataGridTemplateColumn Width="100"  >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button x:Name="btnEditUnit" Content="Edit" />
+                                            <Button x:Name="btnEditUnit" Content="Edit" Click="btnEditUnit_Click" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                                 <DataGridTemplateColumn Width="100"  >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button x:Name="btnDeleteUnit"  Content="Delete" />
+                                            <Button x:Name="btnDeleteUnit"  Content="Delete" Click="btnDeleteUnit_Click" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
