@@ -265,6 +265,9 @@
     <Compile Include="uControlsMaintenance\ucProductsCRUD.xaml.cs">
       <DependentUpon>ucProductsCRUD.xaml</DependentUpon>
     </Compile>
+    <Compile Include="uControlsMaintenance\ucUnit.xaml.cs">
+      <DependentUpon>ucUnit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ucPurchaseOrder.xaml.cs">
       <DependentUpon>ucPurchaseOrder.xaml</DependentUpon>
     </Compile>
@@ -352,6 +355,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="uControlsMaintenance\ucProductsCRUD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="uControlsMaintenance\ucUnit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

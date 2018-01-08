@@ -1,12 +1,6 @@
-﻿using Microsoft.Win32;
-using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace prototype2
+namespace prototype2.uControlsMaintenance
 {
     /// <summary>
-    /// Interaction logic for ucProductsCRUD.xaml
+    /// Interaction logic for ucUnit.xaml
     /// </summary>
-    public partial class ucProductsCRUD : UserControl
+    public partial class ucUnit : UserControl
     {
-        public ucProductsCRUD()
+        public ucUnit()
         {
             InitializeComponent();
         }
@@ -42,34 +36,12 @@ namespace prototype2
                 handler(this, e);
         }
 
-        private void editProductBtn_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (var element in productDetailsFormGrid1.Children)
-            {
-                if (element is TextBox)
-                {
-                    ((TextBox)element).IsEnabled = true;
-                }
-                if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
-                {
-                    ((Xceed.Wpf.Toolkit.DecimalUpDown)element).IsEnabled = true;
-                }
-                if (element is ComboBox)
-                {
-                    ((ComboBox)element).IsEnabled = true;
-                }
-            }
-            saveCancelGrid2.Visibility = Visibility.Visible;
-            editCloseGrid2.Visibility = Visibility.Collapsed;
-            MainVM.isEdit = true;
-        }
-
         private void saveRecordBtn_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Do you want to save?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Information);
             if (result == MessageBoxResult.OK)
             {
-                foreach (var element in productDetailsFormGrid1.Children)
+                foreach (var element in unitForm.Children)
                 {
                     if (element is TextBox)
                     {
@@ -111,6 +83,7 @@ namespace prototype2
                 {
                     saveDataToDb();
                     MainVM.isEdit = false;
+                    MainVM.Ldt.worker.RunWorkerAsync();
                     OnSaveCloseButtonClicked(e);
                 }
                 else
@@ -118,7 +91,7 @@ namespace prototype2
                     MessageBox.Show("Resolve the error first");
                     validationError = false;
                 }
-                
+
             }
             else if (result == MessageBoxResult.Cancel)
             {
@@ -145,17 +118,11 @@ namespace prototype2
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
-                if (MainVM.isEdit)
+                if (!MainVM.isEdit)
                 {
-                    string query = "UPDATE item_t SET " +
-                        "itemName = " + productNameTb.Text+", "+
-                        "itemDescr= " + productDescTb.Text + ", " +
-                        "markUpPerc = " + markUpPriceTb.Text + ", " +
-                        "unitID = " + unitCb.Text + ", " +
-                        "typeID = " + categoryCb.SelectedValue + ", " +
-                        "supplierID = " + supplierCb.SelectedValue + ", " +
-                        " dateEffective = " + dateEffective.SelectedDate + ", " +
-                        "WHERE id = " +MainVM.SelectedProduct.ID;
+                    string query = "INSERT INTO unit_t (unitName, unitShorthand) VALUES ('" +
+                    unitNameTb.Text + "','" +
+                    unitShorthandTb.Text +"');";
 
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
@@ -165,15 +132,10 @@ namespace prototype2
                 }
                 else
                 {
-                    string query = "INSERT INTO item_t (itemName,itemDescr,markUpPerc,unitID,typeID,supplierID, dateEffective) VALUES ('" +
-                    productNameTb.Text + "','" +
-                    productDescTb.Text + "'," +
-                    markUpPriceTb.Value + "," +
-                    unitCb.SelectedValue + "," +
-                    categoryCb.SelectedValue + "," +
-                    supplierCb.SelectedValue + "," +
-                    dateEffective.SelectedDate + "','" +
-                    ");";
+                    string query = "UPDATE unit_t SET " +
+                        "unitName = " + unitNameTb.Text +
+                        ", unitShorthand = " + unitShorthandTb.Text +
+                        " WHERE id = "+MainVM.SelectedUnit.ID+";";
 
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
@@ -188,7 +150,7 @@ namespace prototype2
 
         private void resetFieldsValue()
         {
-            foreach (var element in productDetailsFormGrid1.Children)
+            foreach (var element in unitForm.Children)
             {
                 if (element is TextBox)
                 {
@@ -217,13 +179,8 @@ namespace prototype2
 
         private void loadDataToUi()
         {
-            productNameTb.Text = MainVM.SelectedProduct.ItemName;
-            productDescTb.Text = MainVM.SelectedProduct.ItemDesc;
-            categoryCb.SelectedValue = MainVM.SelectedProduct.TypeID;
-            markUpPriceTb.Value = MainVM.SelectedProduct.MarkUpPerc;
-            unitCb.SelectedValue = MainVM.SelectedProduct.UnitID;
-            supplierCb.SelectedValue = MainVM.SelectedProduct.SupplierID;
-            dateEffective.SelectedDate = MainVM.SelectedProduct.DateEffective;
+            unitNameTb.Text = MainVM.SelectedUnit.UnitName;
+            unitShorthandTb.Text = MainVM.SelectedUnit.UnitShorthand;
         }
 
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)

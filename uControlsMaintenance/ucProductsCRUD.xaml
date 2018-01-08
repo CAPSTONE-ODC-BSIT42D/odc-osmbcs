@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:prototype2"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="prototype2.ucProductsCRUD"
              mc:Ignorable="d" 
-             d:DesignHeight="345" d:DesignWidth="696" IsVisibleChanged="UserControl_IsVisibleChanged" Height="348">
+             d:DesignHeight="345" d:DesignWidth="696" IsVisibleChanged="UserControl_IsVisibleChanged" Height="Auto">
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>
@@ -23,6 +23,7 @@
             <Label x:Name="label15_Copy2" Content="Unit:" HorizontalAlignment="Left" Margin="28,212,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
             <Label x:Name="label15_Copy3" Content="Supplier:" HorizontalAlignment="Left" Margin="28,243,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
             <Label x:Name="label15_Copy4" Content="Category:" HorizontalAlignment="Left" Margin="28,150,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label x:Name="label15_Copy5" Content="date Effective:" HorizontalAlignment="Left" Margin="28,278,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
             <TextBox x:Name="productNameTb" HorizontalAlignment="Left" Height="23" Margin="132,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220">
                 <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                     <Binding.ValidationRules>
@@ -40,7 +41,7 @@
                     </Binding>
                 </ComboBox.SelectedItem>
             </ComboBox>
-            <xctk:DecimalUpDown x:Name="costPriceTb" HorizontalAlignment="Left" Margin="132,187,0,0" VerticalAlignment="Top" Width="220">
+            <xctk:DecimalUpDown x:Name="markUpPriceTb" HorizontalAlignment="Left" Margin="132,187,0,0" VerticalAlignment="Top" Width="220">
                 <xctk:DecimalUpDown.Text>
                     <Binding Path="DecimalTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                         <Binding.ValidationRules>
@@ -49,7 +50,7 @@
                     </Binding>
                 </xctk:DecimalUpDown.Text>
             </xctk:DecimalUpDown>
-            <ComboBox x:Name="unitCb" HorizontalAlignment="Left" Margin="132,216,0,0" VerticalAlignment="Top" Width="220" DisplayMemberPath="CompanyName" SelectedValuePath="CompanyID">
+            <ComboBox x:Name="unitCb" HorizontalAlignment="Left" Margin="132,216,0,0" VerticalAlignment="Top" Width="220" DisplayMemberPath="UnitName" SelectedValuePath="ID">
                 <ComboBox.Resources>
                     <CollectionViewSource x:Key="Items" Source="{Binding Units}" />
                 </ComboBox.Resources>
@@ -71,9 +72,9 @@
                     </CompositeCollection>
                 </ComboBox.ItemsSource>
             </ComboBox>
+            <DatePicker x:Name="dateEffective" HorizontalAlignment="Left" Margin="132,277,0,10" VerticalAlignment="Top" Width="220"/>
         </Grid>
-
-        <Grid Height="40" VerticalAlignment="Bottom" Background="White" MinWidth="600">
+        <Grid VerticalAlignment="Bottom" Background="White" MinWidth="600" Height="40">
             <StackPanel Orientation="Vertical" Width="190" HorizontalAlignment="Right" Margin="0">
                 <Grid x:Name="saveCancelGrid2" Height="20" Margin="10">
                     <Button x:Name="saveProductBtn" Content="Save" Click="saveRecordBtn_Click" Margin="0,0,94,0" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="76"/>
