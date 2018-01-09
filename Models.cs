@@ -320,6 +320,7 @@ namespace prototype2
         protected string empMI;
         protected int positionID;
         protected string empUsername;
+        protected string empAddress;
         protected string empPassword;
         protected int jobID;
         protected DateTime empDateFrom;
@@ -353,6 +354,12 @@ namespace prototype2
         {
             get { return empMI; }
             set { SetProperty(ref empMI, value); }
+        }
+
+        public string EmpAddress
+        {
+            get { return empAddress; }
+            set { SetProperty(ref empAddress, value); }
         }
 
         public int PositionID

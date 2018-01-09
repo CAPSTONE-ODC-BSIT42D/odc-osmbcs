@@ -6,48 +6,36 @@
              xmlns:local="clr-namespace:prototype2.uControlsMaintenance"
              xmlns:prototype2="clr-namespace:prototype2" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Name="uControlEmployeeForm" x:Class="prototype2.uControlsMaintenance.ucEmployeeForm"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="652" IsVisibleChanged="uControlEmployeeForm_IsVisibleChanged">
+             d:DesignHeight="418" d:DesignWidth="652" IsVisibleChanged="uControlEmployeeForm_IsVisibleChanged" VerticalAlignment="Top">
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>
-    <StackPanel Orientation="Vertical" Background="White">
-        <Grid x:Name="employeeForm" Background="White" Margin="0" Height="662">
+    <StackPanel Orientation="Vertical" Background="White" VerticalAlignment="Top" Margin="0,0,0,-335">
+        <Grid x:Name="employeeForm" Background="White" Margin="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Label x:Name="label6" Content="Employee Details" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-            <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,47,10,0" VerticalAlignment="Top"/>
-            <Label x:Name="label7" Content="Type:" HorizontalAlignment="Left" Margin="40,52,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-            <Label x:Name="label4_Copy24" Content="First Name:" HorizontalAlignment="Left" Margin="40,87,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-            <Label x:Name="label4_Copy25" Content="Middle Initial:" HorizontalAlignment="Left" Margin="219,87,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="93" VerticalContentAlignment="Center"/>
-            <Label x:Name="label4_Copy26" Content="Last Name:" HorizontalAlignment="Left" Margin="363,87,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-            <ComboBox x:Name="employeeType" HorizontalAlignment="Left" Margin="103,54,0,0" VerticalAlignment="Top" Width="125" SelectionChanged="employeeType_SelectionChanged" SelectedValue="{Binding SelectedEmployeeContractor.EmpType}">
-                <ComboBox.SelectedItem>
-                    <Binding Path="cbItem" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                        <Binding.ValidationRules>
-                            <prototype2:TextBoxValidation TextBoxType="ComboBox"/>
-                        </Binding.ValidationRules>
-                    </Binding>
-                </ComboBox.SelectedItem>
-                <ComboBoxItem Content="Employee" Tag="0"/>
-                <ComboBoxItem Content="Contractor" Tag="1"/>
-            </ComboBox>
-            <TextBox x:Name="empFirstNameTb" HorizontalAlignment="Left" Height="23" Margin="64,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" FontWeight="Normal">
+            <Label x:Name="formHeader" Content="Employee Details" HorizontalAlignment="Left" Margin="10,18,0,5" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+            <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,47,10,5" VerticalAlignment="Top"/>
+            <Label x:Name="label4_Copy24" Content="First Name:" HorizontalAlignment="Left" Margin="40,87,0,5" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label x:Name="label4_Copy25" Content="Middle Initial:" HorizontalAlignment="Left" Margin="219,87,0,5" VerticalAlignment="Top" FontWeight="Bold" Width="93" VerticalContentAlignment="Center"/>
+            <Label x:Name="label4_Copy26" Content="Last Name:" HorizontalAlignment="Left" Margin="363,87,0,5" VerticalAlignment="Top" FontWeight="Bold"/>
+            <TextBox x:Name="empFirstNameTb" HorizontalAlignment="Left" Height="23" Margin="64,118,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" FontWeight="Normal">
                 <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                     <Binding.ValidationRules>
                         <prototype2:TextBoxValidation TextBoxType="IsEmpty"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox>
-            <TextBox x:Name="empMiddleInitialTb" HorizontalAlignment="Left" Height="23" Margin="231,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" FontWeight="Normal" MaxLength="3" />
-            <TextBox x:Name="empLastNameTb" HorizontalAlignment="Left" Height="23" Margin="363,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" FontWeight="Normal" RenderTransformOrigin="0.5,0.5">
+            <TextBox x:Name="empMiddleInitialTb" HorizontalAlignment="Left" Height="23" Margin="231,117,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" FontWeight="Normal" MaxLength="3" />
+            <TextBox x:Name="empLastNameTb" HorizontalAlignment="Left" Height="23" Margin="363,118,0,5" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" FontWeight="Normal" RenderTransformOrigin="0.5,0.5">
                 <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                     <Binding.ValidationRules>
                         <prototype2:TextBoxValidation TextBoxType="IsEmpty"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox>
-            <StackPanel x:Name="perTypeField" Margin="40,146,0,0" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Width="537">
+            <StackPanel x:Name="perTypeField" Margin="40,146,0,5" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Width="537">
                 <Grid x:Name="employeeOnlyGrid" VerticalAlignment="Top" Height="227">
                     <Label Content="Position" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0"/>
                     <ComboBox x:Name="empPostionCb" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="154" ItemsSource = "{Binding EmpPosition}" Height="26" DisplayMemberPath="PositionName" SelectedValuePath="PositionID" FontWeight="Normal" >
@@ -74,9 +62,17 @@
                     </Grid>
                     <CheckBox x:Name="hasAccessCb" Content="Has System Access" HorizontalAlignment="Left" Margin="0,83,0,0" VerticalAlignment="Top" Width="127" Height="17" Checked="hasAccessCb_Checked" Unchecked="hasAccessCb_Unchecked"/>
                 </Grid>
-                <Grid x:Name="contractorOnlyGrid" VerticalAlignment="Top" Height="222">
-                    <Label Content="* Job Title" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" FontWeight="Bold" Height="29"/>
-                    <ComboBox x:Name="empJobCb" HorizontalAlignment="Left" Margin="10,29,0,0" VerticalAlignment="Top" Width="162" Height="26"  ItemsSource="{Binding ContJobTitle}" DisplayMemberPath="JobName" SelectedValuePath="JobID" FontWeight="Normal">
+                <Grid x:Name="contractorOnlyGrid" VerticalAlignment="Top">
+                    <Label x:Name="label4_Copy" Content="Address" HorizontalAlignment="Left" Margin="4,6,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <TextBox x:Name="empAddressTb" HorizontalAlignment="Left" Height="23" Margin="16,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="345" FontWeight="Normal">
+                        <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <prototype2:TextBoxValidation TextBoxType="IsEmpty"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox>
+                    <Label Content="* Job Title" HorizontalAlignment="Left" Margin="4,57,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="29"/>
+                    <ComboBox x:Name="empJobCb" HorizontalAlignment="Left" Margin="14,86,0,0" VerticalAlignment="Top" Width="162" Height="26"  ItemsSource="{Binding ContJobTitle}" DisplayMemberPath="JobName" SelectedValuePath="JobID" FontWeight="Normal">
                         <ComboBox.SelectedItem>
                             <Binding Path="cbItem" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                 <Binding.ValidationRules>
@@ -85,10 +81,11 @@
                             </Binding>
                         </ComboBox.SelectedItem>
                     </ComboBox>
-                    <Button x:Name="addJobBtn" Content="+" HorizontalAlignment="Left" Margin="177,29,0,0" VerticalAlignment="Top" Width="26" Height="26" Click="addJobBtn_Click"/>
-                    <Label Content="Duration of Employment" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <Label Content="* Start Date" HorizontalAlignment="Left" Margin="16,97,0,0" VerticalAlignment="Top" FontWeight="Normal"/>
-                    <DatePicker x:Name="empDateStarted" HorizontalAlignment="Left" Margin="33,124,0,0" VerticalAlignment="Top" Width="157">
+                    <TextBox x:Name="newJobTb" TextWrapping="Wrap" Text="`" Margin="14,86,362,0" Height="26" VerticalAlignment="Top" Visibility="Hidden"/>
+                    <Button x:Name="addJobBtn" Content="+" HorizontalAlignment="Left" Margin="181,86,0,0" VerticalAlignment="Top" Width="26" Height="26" Click="addJobBtn_Click"/>
+                    <Label Content="Duration of Employment" HorizontalAlignment="Left" Margin="0,121,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="* Start Date" HorizontalAlignment="Left" Margin="16,158,0,0" VerticalAlignment="Top" FontWeight="Normal"/>
+                    <DatePicker x:Name="empDateStarted" HorizontalAlignment="Left" Margin="33,185,0,0" VerticalAlignment="Top" Width="157">
                         <DatePicker.SelectedDate>
                             <Binding Path="DatePickerBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                 <Binding.ValidationRules>
@@ -97,8 +94,8 @@
                             </Binding>
                         </DatePicker.SelectedDate>
                     </DatePicker>
-                    <Label Content="* End date" HorizontalAlignment="Left" Margin="16,153,0,0" VerticalAlignment="Top" FontWeight="Normal"/>
-                    <DatePicker x:Name="empDateEnded" HorizontalAlignment="Left" Margin="33,184,0,0" VerticalAlignment="Top" Width="157">
+                    <Label Content="* End date" HorizontalAlignment="Left" Margin="16,214,0,-18" VerticalAlignment="Top" FontWeight="Normal"/>
+                    <DatePicker x:Name="empDateEnded" HorizontalAlignment="Left" Margin="33,245,0,0" VerticalAlignment="Top" Width="157">
                         <DatePicker.SelectedDate>
                             <Binding Path="DatePickerBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                 <Binding.ValidationRules>

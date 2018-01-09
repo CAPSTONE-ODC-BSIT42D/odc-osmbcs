@@ -169,6 +169,8 @@ namespace prototype2
 
         public bool isNewRecord { get; set; }
 
+        public bool isContractor { get; set; }
+
         public string Ddl;
         public string Ddl_
         {

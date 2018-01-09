@@ -252,6 +252,7 @@ namespace prototype2
             manageEmployeeDataGrid.ItemsSource = MainVM.Employees;
             jobName.Visibility = Visibility.Collapsed;
             position.Visibility = Visibility.Visible;
+            MainVM.isContractor = false;
         }
 
         private void contManageBtn_Click(object sender, RoutedEventArgs e)
@@ -270,6 +271,7 @@ namespace prototype2
             manageEmployeeDataGrid.ItemsSource = MainVM.Contractor;
             position.Visibility = Visibility.Collapsed;
             jobName.Visibility = Visibility.Visible;
+            MainVM.isContractor = true;
         }
 
         private void custSuppManageBtn_Click(object sender, RoutedEventArgs e)
@@ -437,7 +439,6 @@ namespace prototype2
                         sb.Begin(((UserControl)obj));
                     }
                 }
-                
 
             }
             formGridBg.Visibility = Visibility.Visible;

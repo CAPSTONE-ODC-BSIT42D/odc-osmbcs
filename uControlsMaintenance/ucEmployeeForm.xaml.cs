@@ -159,24 +159,6 @@ namespace prototype2.uControlsMaintenance
 
         }
 
-        private void employeeType_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (IsLoaded)
-            {
-                if (employeeType.SelectedIndex == 0)
-                {
-                    contractorOnlyGrid.Visibility = Visibility.Collapsed;
-                    employeeOnlyGrid.Visibility = Visibility.Visible;
-                }
-                else if (employeeType.SelectedIndex == 1)
-                {
-                    contractorOnlyGrid.Visibility = Visibility.Visible;
-                    employeeOnlyGrid.Visibility = Visibility.Collapsed;
-                }
-            }
-
-        }
-
         private void hasAccessCb_Checked(object sender, RoutedEventArgs e)
         {
             foreach (var element in accountCredentialsForm.Children)
@@ -231,6 +213,29 @@ namespace prototype2.uControlsMaintenance
         private void addJobBtn_Click(object sender, RoutedEventArgs e)
         {
 
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = "odc_db";
+            if (newPosTb.IsVisible)
+            {
+                newJobTb.Visibility = Visibility.Collapsed;
+                addJobBtn.Content = "+";
+                string query = "INSERT INTO `odc_db`.`job_title_t` (`jobName`) VALUES('" + newJobTb.Text + "')";
+                if (dbCon.insertQuery(query, dbCon.Connection))
+                {
+                    {
+                        MessageBox.Show("Successfully added");
+                        newJobTb.Clear();
+                        MainVM.Ldt.worker.RunWorkerAsync();
+                        dbCon.Close();
+                    }
+                }
+            }
+            else
+            {
+                newJobTb.Visibility = Visibility.Visible;
+                addJobBtn.Content = "Save";
+            }
+            
         }
 
         void saveDataToDb()
@@ -240,18 +245,35 @@ namespace prototype2.uControlsMaintenance
             {
                 if (dbCon.IsConnect())
                 {
-                    string query = "UPDATE `odc_db`.`emp_cont_t`" +
+                    string query = "";
+                    if (!MainVM.isContractor)
+                    {
+                        query = "UPDATE `odc_db`.`emp_cont_t`" +
                         "SET `empFName` = " + empFirstNameTb.Text + "','" +
                         ",`empLName` = " + empLastNameTb.Text + "','" +
                         ",`empMI` = " + empMiddleInitialTb.Text + "','" +
                         ",`positionID` = " + empPostionCb.SelectedValue + "','" +
                         ",`empUserName` = " + empUserNameTb.Text + "'," +
-                        ",`empDateFrom` = " + empDateStarted.SelectedDate + "','" +
-                        ",`empDateTo` = " + empDateEnded.SelectedDate + "','" +
                         ", `hasAccess` = " + (bool)hasAccessCb.IsChecked +
                         ") " +
                         " WHERE empID = " + MainVM.SelectedEmployeeContractor.EmpID +
                         ";";
+                    }
+                    else
+                    {
+                        query = "UPDATE `odc_db`.`emp_cont_t`" +
+                        "SET `empFName` = " + empFirstNameTb.Text + "','" +
+                        ",`empLName` = " + empLastNameTb.Text + "','" +
+                        ",`empMI` = " + empMiddleInitialTb.Text + "','" +
+                        ",`positionID` = " + empPostionCb.SelectedValue + "','" +
+                        ",`empAddress` = " + empAddressTb.Text + "'," +
+                        ",`empDateFrom` = " + empDateStarted.SelectedDate + "','" +
+                        ",`empDateTo` = " + empDateEnded.SelectedDate +
+                        ") " +
+                        " WHERE empID = " + MainVM.SelectedEmployeeContractor.EmpID +
+                        ";";
+                    }
+
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
                         MessageBox.Show("Record is Saved");
@@ -264,7 +286,7 @@ namespace prototype2.uControlsMaintenance
                 if (dbCon.IsConnect())
                 {
                     string query = "";
-                    if (employeeType.SelectedIndex.ToString().Equals("0"))
+                    if (!MainVM.isContractor)
                     {
                         query = "INSERT INTO `odc_db`.`emp_cont_t`   (`empFName`,`empLName`,`empMI`,`positionID`,`empUserName`,`empPassword`,`empDateFrom`,`empDateTo`,`empType`, `hasAccess`) " +
                         " VALUES " +
@@ -278,27 +300,23 @@ namespace prototype2.uControlsMaintenance
                         empLastNameTb.Text +
                         "'),'" +
                         empDateStarted.SelectedDate + "','" +
-                        empDateEnded.SelectedDate + "','" +
-                        employeeType.SelectedIndex + "'," +
+                        empDateEnded.SelectedDate + "','0'," +
                         hasAccessCb.IsChecked +
                         "); ";
                     }
                     else
                     {
-                        query = "INSERT INTO `odc_db`.`emp_cont_t`   (`empFName`,`empLName`,`empMI`,`empUserName`,`empPassword`,`jobID`,`empDateFrom`,`empDateTo`,`empType`, `hasAccess`) " +
+                        query = "INSERT INTO `odc_db`.`emp_cont_t`   (`empFName`,`empLName`,`empMI`,`empAddress`,`jobID`,`empDateFrom`,`empDateTo`,`empType`, `hasAccess`) " +
                         " VALUES " +
                         "('"
                         + empFirstNameTb.Text + "','" +
                         empLastNameTb.Text + "','" +
                         empMiddleInitialTb.Text + "','" +
-                        empUserNameTb.Text + "'," +
-                        "md5('" +
-                        empLastNameTb.Text +
-                        "'),'" +
+                        empAddressTb.Text + "','" +
+                        "','" +
                         empJobCb.SelectedValue + "','" +
                         empDateStarted.SelectedDate + "','" +
-                        empDateEnded.SelectedDate + "','" +
-                        employeeType.SelectedIndex + "'," +
+                        empDateEnded.SelectedDate + "','1'," +
                         hasAccessCb.IsChecked +
                         "); ";
                     }
@@ -319,19 +337,24 @@ namespace prototype2.uControlsMaintenance
 
         void loadDataToUi()
         {
-            employeeType.SelectedIndex = MainVM.SelectedEmployeeContractor.EmpType;
             empFirstNameTb.Text = MainVM.SelectedEmployeeContractor.EmpFname;
             empLastNameTb.Text = MainVM.SelectedEmployeeContractor.EmpLName;
             empMiddleInitialTb.Text = MainVM.SelectedEmployeeContractor.EmpMiddleInitial;
-            employeeType.SelectedValue = MainVM.SelectedEmployeeContractor.EmpType;
             hasAccessCb.IsChecked = MainVM.SelectedEmployeeContractor.HasAccess;
             if (MainVM.SelectedEmployeeContractor.EmpType == 0)
             {
+                contractorOnlyGrid.Visibility = Visibility.Collapsed;
+                employeeOnlyGrid.Visibility = Visibility.Visible;
+                formHeader.Content = "Employee Details";
                 empPostionCb.SelectedValue = MainVM.SelectedEmployeeContractor.PositionID;
                 empUserNameTb.Text = MainVM.SelectedEmployeeContractor.EmpUserName;
             }
-            else if (MainVM.SelectedEmployeeContractor.EmpType == 1)
+            else if (MainVM.SelectedEmployeeContractor.EmpType == 1 && MainVM.isContractor)
             {
+                contractorOnlyGrid.Visibility = Visibility.Visible;
+                employeeOnlyGrid.Visibility = Visibility.Collapsed;
+                formHeader.Content = "Employee Details";
+                empAddressTb.Text = MainVM.SelectedEmployeeContractor.EmpAddress;
                 empJobCb.SelectedValue = MainVM.SelectedEmployeeContractor.JobID;
                 empDateStarted.SelectedDate = MainVM.SelectedEmployeeContractor.EmpDateTo;
                 empDateEnded.SelectedDate = MainVM.SelectedEmployeeContractor.EmpDateFrom;
@@ -343,6 +366,21 @@ namespace prototype2.uControlsMaintenance
             if (MainVM.isEdit && this.IsVisible)
             {
                 loadDataToUi();
+            }
+            else
+            {
+                if (!MainVM.isContractor)
+                {
+                    contractorOnlyGrid.Visibility = Visibility.Collapsed;
+                    employeeOnlyGrid.Visibility = Visibility.Visible;
+                    formHeader.Content = "Employee Details";
+                }
+                else
+                {
+                    contractorOnlyGrid.Visibility = Visibility.Visible;
+                    employeeOnlyGrid.Visibility = Visibility.Collapsed;
+                    formHeader.Content = "Contractor Details";
+                }
             }
         }
     }

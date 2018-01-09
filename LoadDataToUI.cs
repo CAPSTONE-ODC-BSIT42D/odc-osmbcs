@@ -284,7 +284,7 @@ namespace prototype2
                 {
                     int empType;
                     int.TryParse(dr["empType"].ToString(), out empType);
-                    MainVM.Contractor.Add(new Employee() { EmpID = int.Parse(dr["empID"].ToString()), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), JobID = int.Parse(dr["jobID"].ToString()), EmpDateFrom = DateTime.Parse(dr["empDateFrom"].ToString()), EmpDateTo = DateTime.Parse(dr["empDateTo"].ToString()), EmpUserName = dr["empUserName"].ToString(), EmpType = empType, HasAccess = bool.Parse(dr["hasAccess"].ToString()) });
+                    MainVM.Contractor.Add(new Employee() { EmpID = int.Parse(dr["empID"].ToString()), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(),EmpAddress = dr["empAddress"].ToString() ,JobID = int.Parse(dr["jobID"].ToString()), EmpDateFrom = DateTime.Parse(dr["empDateFrom"].ToString()), EmpDateTo = DateTime.Parse(dr["empDateTo"].ToString()), EmpUserName = dr["empUserName"].ToString(), EmpType = empType, HasAccess = bool.Parse(dr["hasAccess"].ToString()) });
                     MainVM.AllEmployeesContractor.Add(new Employee() { EmpID = int.Parse(dr["empID"].ToString()), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), JobID = int.Parse(dr["jobID"].ToString()), EmpDateFrom = DateTime.Parse(dr["empDateFrom"].ToString()), EmpDateTo = DateTime.Parse(dr["empDateTo"].ToString()), EmpUserName = dr["empUserName"].ToString(), EmpType = empType, HasAccess = bool.Parse(dr["hasAccess"].ToString()) });
                 }
                 dbCon.Close();
