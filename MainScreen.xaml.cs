@@ -236,7 +236,7 @@ namespace prototype2
             }
         }
 
-        private void empContManageBtn_Click(object sender, RoutedEventArgs e)
+        private void empManageBtn_Click(object sender, RoutedEventArgs e)
         {
             foreach (var obj in containerGrid.Children)
             {
@@ -248,7 +248,28 @@ namespace prototype2
                 ((Grid)obj).Visibility = Visibility.Collapsed;
             }
             manageEmployeeGrid.Visibility = Visibility.Visible;
-            headerLbl.Content = "Manage Employee/Contractor";
+            headerLbl.Content = "Manage Employee";
+            manageEmployeeDataGrid.ItemsSource = MainVM.Employees;
+            jobName.Visibility = Visibility.Collapsed;
+            position.Visibility = Visibility.Visible;
+        }
+
+        private void contManageBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var obj in containerGrid.Children)
+            {
+                ((Grid)obj).Visibility = Visibility.Collapsed;
+            }
+            maintenanceGrid.Visibility = Visibility.Visible;
+            foreach (var obj in maintenanceGrid.Children)
+            {
+                ((Grid)obj).Visibility = Visibility.Collapsed;
+            }
+            manageEmployeeGrid.Visibility = Visibility.Visible;
+            headerLbl.Content = "Manage Contractor";
+            manageEmployeeDataGrid.ItemsSource = MainVM.Contractor;
+            position.Visibility = Visibility.Collapsed;
+            jobName.Visibility = Visibility.Visible;
         }
 
         private void custSuppManageBtn_Click(object sender, RoutedEventArgs e)
@@ -391,18 +412,7 @@ namespace prototype2
                 }
                 else if (manageEmployeeGrid.IsVisible)
                 {
-                    if (empType.SelectedIndex == 0)
-                    {
-                        manageEmployeeDataGrid.ItemsSource = MainVM.AllEmployeesContractor;
-                    }
-                    else if (empType.SelectedIndex == 1)
-                    {
-                        manageEmployeeDataGrid.ItemsSource = MainVM.Employees;
-                    }
-                    else if (empType.SelectedIndex == 2)
-                    {
-                        manageEmployeeDataGrid.ItemsSource = MainVM.Contractor;
-                    }
+                    
                 }
             }
         }

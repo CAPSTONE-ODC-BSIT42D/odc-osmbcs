@@ -75,6 +75,27 @@ namespace prototype2
         }
     }
 
+    public class ContractorJobConverter : IValueConverter
+    {
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
+        public object Convert(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            if (!String.IsNullOrWhiteSpace(value.ToString()))
+            {
+                MainVM.SelectedJobTitle = MainVM.ContJobTitle.Where(x => x.JobID.Equals(value)).First();
+                return MainVM.SelectedJobTitle.JobName;
+            }
+            return "";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            return "no";
+        }
+    }
+
     public class ServiceTypeConverter : IValueConverter
     {
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;

@@ -41,6 +41,14 @@
                     </Binding>
                 </ComboBox.SelectedItem>
             </ComboBox>
+            <TextBox x:Name="categoryNameTb" HorizontalAlignment="Left" Height="23" Margin="132,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Visibility="Hidden">
+                <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                    <Binding.ValidationRules>
+                        <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+            <Button x:Name="addCategoryBtn" Content="+" HorizontalAlignment="Left" Margin="357,154,0,0" VerticalAlignment="Top" Width="26" Height="26" Click="addPosBtn_Click"/>
             <xctk:DecimalUpDown x:Name="markUpPriceTb" HorizontalAlignment="Left" Margin="132,187,0,0" VerticalAlignment="Top" Width="220">
                 <xctk:DecimalUpDown.Text>
                     <Binding Path="DecimalTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">

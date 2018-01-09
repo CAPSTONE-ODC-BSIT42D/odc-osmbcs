@@ -547,7 +547,8 @@
                     </StackPanel>
                 </Button>
                 <StackPanel x:Name="manageSubMenugrid" Orientation="Vertical" Margin="0" Background="#FF046380">
-                    <Button x:Name="empContManageBtn" Content="Employees/Contractor" Margin="0,0,1,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Click="empContManageBtn_Click"/>
+                    <Button x:Name="empManageBtn" Content="Employee" Margin="0,0,1,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Click="empManageBtn_Click"/>
+                    <Button x:Name="contManageBtn" Content="Contractor" Margin="0,0,1,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Click="contManageBtn_Click"/>
                     <Button x:Name="custSuppManageBtn" Content="Suppliers" Margin="0,0,1,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Foreground="White" Click="custSuppManageBtn_Click" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238"/>
                     <Button x:Name="servicesManageBtn" Content="Services" Margin="1,0,0,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238" Click="servicesManageBtn_Click"/>
                     <Button x:Name="unitsManageBtn" Content="Units" Margin="1,0,0,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238" Click="unitsManageBtn_Click"/>
@@ -1141,17 +1142,11 @@
                     </Grid>
 
                 </Grid>
-                <Grid x:Name="manageEmployeeGrid" Margin="0,0,1,0" d:IsHidden="True">
+                <Grid x:Name="manageEmployeeGrid" Margin="0,0,1,0">
                     <Grid x:Name="manageEmployeeGridHome" Margin="0">
                         <Label x:Name="label8" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
                         <TextBox x:Name="searchBox1" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>
                         <Button x:Name="button1" Content="Search" HorizontalAlignment="Left" Margin="398,20,0,0" VerticalAlignment="Top" Width="84" Height="26" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="13"/>
-                        <Label x:Name="label9" Content="Type:" HorizontalAlignment="Left" Margin="557,20,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                        <ComboBox x:Name="empType" HorizontalAlignment="Left" Margin="613,20,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="dataGridType_SelectionChanged">
-                            <ComboBoxItem IsSelected="True" Content="[All]"/>
-                            <ComboBoxItem Content="Employee"/>
-                            <ComboBoxItem Content="Contractor"/>
-                        </ComboBox>
                         <Button x:Name="manageEmployeeAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,20,20,0" VerticalAlignment="Top" Width="85" Background="#FF0D9E0D" BorderBrush="#FF107C10" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13" Click="manageEmployeeAddBtn_Click"/>
                         <DataGrid x:Name="manageEmployeeDataGrid" Margin="20,60,20,20" CanUserAddRows="False" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionMode="Single" MinRowHeight="20"  MinColumnWidth="0" ItemsSource="{Binding AllEmployeesContractor}" SelectedItem ="{Binding SelectedEmployeeContractor}">
                             <DataGrid.Columns>
@@ -1169,10 +1164,17 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Position" >
+                                <DataGridTemplateColumn x:Name="position" Width="150" CanUserResize="False" Header="Position" >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Label Content="{Binding PositionID, Converter={StaticResource EmployeePositionConverter}, NotifyOnTargetUpdated=True}" VerticalContentAlignment="Center"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn x:Name="jobName" Width="150" CanUserResize="False" Header="Job Name" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding JobID, Converter={StaticResource ContractorJobConverter}, NotifyOnTargetUpdated=True}" VerticalContentAlignment="Center"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -1501,7 +1503,7 @@
                         </DataGrid>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageServicesGrid" Margin="0,0,1,0">
+                <Grid x:Name="manageServicesGrid" Margin="0,0,1,0" d:IsHidden="True">
                     <Grid Margin="0">
                         <Label x:Name="label5" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
                         <TextBox x:Name="searchBox3" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>
@@ -1531,7 +1533,7 @@
                         </DataGrid>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageUnitsGrid" Margin="0,0,1,0">
+                <Grid x:Name="manageUnitsGrid" Margin="0,0,1,0" d:IsHidden="True">
                     <Grid Margin="0">
                         <Label x:Name="label6" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
                         <TextBox x:Name="searchBox6" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>
