@@ -568,6 +568,25 @@ namespace prototype2
             set { SetProperty(ref selectedProvince, value); }
         }
 
+        //----- Regions
+
+        protected ObservableCollection<Region> regions = new ObservableCollection<Region>();
+
+        protected Region selectedRegion = null;
+
+        public ObservableCollection<Region> Regions
+        {
+            get { return regions; }
+            set { regions = value; }
+        }
+
+        public Region SelectedRegion
+        {
+            get { return selectedRegion; }
+            set { SetProperty(ref selectedRegion, value); }
+        }
+
+
         //Schedule
         protected ObservableCollection<ServiceSchedule> ServiceSchedules = new ObservableCollection<ServiceSchedule>();
 

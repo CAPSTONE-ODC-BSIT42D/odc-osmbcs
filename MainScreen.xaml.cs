@@ -51,6 +51,8 @@ namespace prototype2
 
             this.ucServices.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
             this.ucUnit.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
+            this.ucLocation.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
+
 
             this.ucProduct.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
             this.ucInvoice.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
@@ -335,6 +337,20 @@ namespace prototype2
             headerLbl.Content = "Manage Unit";
         }
 
+        private void locationManageBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var obj in containerGrid.Children)
+            {
+                ((Grid)obj).Visibility = Visibility.Collapsed;
+            }
+            maintenanceGrid.Visibility = Visibility.Visible;
+            foreach (var obj in maintenanceGrid.Children)
+            {
+                ((Grid)obj).Visibility = Visibility.Collapsed;
+            }
+            manageLocationsGrid.Visibility = Visibility.Visible;
+            headerLbl.Content = "Manage Locations";
+        }
 
         //private void settingsManageMenuBtn_Click(object sender, RoutedEventArgs e)
         //{
@@ -529,6 +545,31 @@ namespace prototype2
                 if (obj is UserControl)
                 {
                     if (!((UserControl)obj).Name.Equals("ucUnit"))
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Visible;
+                        sb.Begin(((UserControl)obj));
+                    }
+                }
+
+
+            }
+            formGridBg.Visibility = Visibility.Visible;
+        }
+
+        private void managemanageAddRegionBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.isEdit = false;
+            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+
+            foreach (var obj in formGridBg.Children)
+            {
+                if (obj is UserControl)
+                {
+                    if (!((UserControl)obj).Name.Equals("ucLocation"))
                     {
                         ((UserControl)obj).Visibility = Visibility.Collapsed;
                     }

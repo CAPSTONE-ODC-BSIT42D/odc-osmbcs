@@ -254,7 +254,7 @@ namespace prototype2
                 if (dbCon.insertQuery(query, dbCon.Connection))
                 {
                     {
-                        MessageBox.Show("Employee Position successfully added");
+                        MessageBox.Show("Item Category successfully added");
                         categoryNameTb.Clear();
                         MainVM.Ldt.worker.RunWorkerAsync();
                         dbCon.Close();
@@ -268,5 +268,32 @@ namespace prototype2
             }
 
         }
+        private void addUnitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.DatabaseName = "odc_db";
+            if (unitNameTb.IsVisible)
+            {
+                unitNameTb.Visibility = Visibility.Collapsed;
+                addUnitBtn.Content = "+";
+                string query = "INSERT INTO `odc_db`.`unit_t` (`unitName`) VALUES('" + unitNameTb.Text + "')";
+                if (dbCon.insertQuery(query, dbCon.Connection))
+                {
+                    {
+                        MessageBox.Show("Unit successfully added");
+                        unitNameTb.Clear();
+                        MainVM.Ldt.worker.RunWorkerAsync();
+                        dbCon.Close();
+                    }
+                }
+            }
+            else
+            {
+                unitNameTb.Visibility = Visibility.Visible;
+                addUnitBtn.Content = "Save";
+            }
+
+        }
+        
     }
 }

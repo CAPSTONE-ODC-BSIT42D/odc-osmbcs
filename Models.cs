@@ -80,6 +80,44 @@ namespace prototype2
         }
     }
 
+    public class Region : ViewModelEntity
+    {
+        public Region()
+        {
+
+        }
+
+        protected int regionID;
+
+        public int RegionID
+        {
+            get { return regionID; }
+            set { SetProperty(ref regionID, value); }
+        }
+
+        protected string regionName;
+        public string RegionName
+        {
+            get { return regionName; }
+            set { SetProperty(ref regionName, value); }
+        }
+
+        protected decimal ratePrice;
+        public decimal RatePrice
+        {
+            get { return ratePrice; }
+            set { SetProperty(ref ratePrice, value); }
+        }
+
+        protected ObservableCollection<Province> provinces = new ObservableCollection<Province>();
+
+        public ObservableCollection<Province> Provinces
+        {
+            get { return provinces; }
+            set { provinces = value; }
+        }
+    }
+
     public class ItemType : ViewModelEntity
     {
         public ItemType()

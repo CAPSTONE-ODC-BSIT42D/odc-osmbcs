@@ -249,12 +249,12 @@ namespace prototype2.uControlsMaintenance
                     if (!MainVM.isContractor)
                     {
                         query = "UPDATE `odc_db`.`emp_cont_t`" +
-                        "SET `empFName` = " + empFirstNameTb.Text + "','" +
-                        ",`empLName` = " + empLastNameTb.Text + "','" +
-                        ",`empMI` = " + empMiddleInitialTb.Text + "','" +
-                        ",`positionID` = " + empPostionCb.SelectedValue + "','" +
-                        ",`empUserName` = " + empUserNameTb.Text + "'," +
-                        ", `hasAccess` = " + (bool)hasAccessCb.IsChecked +
+                        "SET `empFName` = '" + empFirstNameTb.Text + "'," +
+                        "`empLName` = '" + empLastNameTb.Text + "'," +
+                        "`empMI` = '" + empMiddleInitialTb.Text + "'," +
+                        "`positionID` = '" + empPostionCb.SelectedValue + "'," +
+                        "`empUserName` = '" + empUserNameTb.Text + "'," +
+                        " `hasAccess` = " + (bool)hasAccessCb.IsChecked +
                         ") " +
                         " WHERE empID = " + MainVM.SelectedEmployeeContractor.EmpID +
                         ";";
@@ -262,14 +262,14 @@ namespace prototype2.uControlsMaintenance
                     else
                     {
                         query = "UPDATE `odc_db`.`emp_cont_t`" +
-                        "SET `empFName` = " + empFirstNameTb.Text + "','" +
-                        ",`empLName` = " + empLastNameTb.Text + "','" +
-                        ",`empMI` = " + empMiddleInitialTb.Text + "','" +
-                        ",`positionID` = " + empPostionCb.SelectedValue + "','" +
-                        ",`empAddress` = " + empAddressTb.Text + "'," +
-                        ",`empDateFrom` = " + empDateStarted.SelectedDate + "','" +
-                        ",`empDateTo` = " + empDateEnded.SelectedDate +
-                        ") " +
+                        "SET `empFName` = '" + empFirstNameTb.Text + "'," +
+                        "`empLName` = '" + empLastNameTb.Text + "'," +
+                        "`empMI` = '" + empMiddleInitialTb.Text + "'," +
+                        "`jobID` = '" + empJobCb.SelectedValue + "'," +
+                        "`empAddress` = '" + empAddressTb.Text + "'," +
+                        "`empDateFrom` = '" + empDateStarted.SelectedDate + "'," +
+                        "`empDateTo` = '" + empDateEnded.SelectedDate +
+                        "') " +
                         " WHERE empID = " + MainVM.SelectedEmployeeContractor.EmpID +
                         ";";
                     }
@@ -313,7 +313,6 @@ namespace prototype2.uControlsMaintenance
                         empLastNameTb.Text + "','" +
                         empMiddleInitialTb.Text + "','" +
                         empAddressTb.Text + "','" +
-                        "','" +
                         empJobCb.SelectedValue + "','" +
                         empDateStarted.SelectedDate + "','" +
                         empDateEnded.SelectedDate + "','1'," +
