@@ -215,7 +215,7 @@ namespace prototype2.uControlsMaintenance
 
             var dbCon = DBConnection.Instance();
             dbCon.DatabaseName = "odc_db";
-            if (newPosTb.IsVisible)
+            if (newJobTb.IsVisible)
             {
                 newJobTb.Visibility = Visibility.Collapsed;
                 addJobBtn.Content = "+";
@@ -306,13 +306,14 @@ namespace prototype2.uControlsMaintenance
                     }
                     else
                     {
-                        query = "INSERT INTO `odc_db`.`emp_cont_t`   (`empFName`,`empLName`,`empMI`,`empAddress`,`jobID`,`empDateFrom`,`empDateTo`,`empType`, `hasAccess`) " +
+                        query = "INSERT INTO `odc_db`.`emp_cont_t`   (`empFName`,`empLName`,`empMI`,`empAddress`,`positionID`,`jobID`,`empDateFrom`,`empDateTo`,`empType`, `hasAccess`) " +
                         " VALUES " +
                         "('"
                         + empFirstNameTb.Text + "','" +
                         empLastNameTb.Text + "','" +
                         empMiddleInitialTb.Text + "','" +
-                        empAddressTb.Text + "','" +
+                        empAddressTb.Text + "'," +
+                        "null,'" +
                         empJobCb.SelectedValue + "','" +
                         empDateStarted.SelectedDate + "','" +
                         empDateEnded.SelectedDate + "','1'," +

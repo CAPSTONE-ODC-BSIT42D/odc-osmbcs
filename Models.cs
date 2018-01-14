@@ -114,7 +114,7 @@ namespace prototype2
         public ObservableCollection<Province> Provinces
         {
             get { return provinces; }
-            set { provinces = value; }
+            set { SetProperty(ref provinces, value); }
         }
     }
 

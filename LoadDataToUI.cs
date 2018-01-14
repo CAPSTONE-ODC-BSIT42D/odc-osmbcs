@@ -104,6 +104,26 @@ namespace prototype2
 
             if (dbCon.IsConnect())
             {
+                string query = "SELECT * FROM regions_t";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    var obj = new Region()
+                    {
+                        RegionID = int.Parse(dr[0].ToString()),
+                        RegionName = dr[1].ToString()
+                    };
+                    MainVM.Regions.Add(obj);
+                }
+                dbCon.Close();
+            }
+
+            if (dbCon.IsConnect())
+            {
                 string query = "SELECT * FROM provinces_t";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();

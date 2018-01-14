@@ -140,27 +140,20 @@ namespace prototype2.uControlsMaintenance
             {
                 if (MainVM.isEdit)
                 {
-                    //string query = "UPDATE item_t SET " +
-                    //    "itemName = " + productNameTb.Text + ", " +
-                    //    "itemDescr= " + productDescTb.Text + ", " +
-                    //    "markUpPerc = " + markUpPriceTb.Text + ", " +
-                    //    "unitID = " + unitCb.Text + ", " +
-                    //    "typeID = " + categoryCb.SelectedValue + ", " +
-                    //    "supplierID = " + supplierCb.SelectedValue + ", " +
-                    //    " dateEffective = " + dateEffective.SelectedDate + ", " +
-                    //    "WHERE id = " + MainVM.SelectedProduct.ID;
-
-                    //if (dbCon.insertQuery(query, dbCon.Connection))
-                    //{
-                    //    MessageBox.Show("Record is Saved");
-
-                    //}
+                    string query = "UPDATE regions_t SET " +
+                        "regionName = " + regionNameTb.Text + ", " +
+                        "ratePrice = " + ratePriceTb.Value +
+                        " WHERE id = " + MainVM.SelectedRegion.RegionID;
+                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    {
+                        MessageBox.Show("Record is Saved");
+                    }
                 }
                 else
                 {
                     string query = "INSERT INTO regions_t (regionName,ratePrice) VALUES ('" +
-                    productNameTb.Text + "'," +
-                    ratePriceTb.Value + ");";
+                    regionNameTb.Text + "','" +
+                    ratePriceTb.Value + "');";
 
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
@@ -175,7 +168,7 @@ namespace prototype2.uControlsMaintenance
                             regionID = dr[0].ToString();
                         foreach (Province pr in MainVM.SelectedRegion.Provinces)
                         {
-                            query = "INSERT INTO `odc_db`.`provinces_t` (`provinces_t`,`regionID`) VALUES('" + pr.ProvinceName + "','"+ regionID + ")";
+                            query = "INSERT INTO `odc_db`.`provinces_t` (`provinces_t`,`regionID`) VALUES('" + pr.ProvinceName + "','"+ regionID + "')";
                             if (dbCon.insertQuery(query, dbCon.Connection))
                             {
                                 {
@@ -231,6 +224,19 @@ namespace prototype2.uControlsMaintenance
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)
         {
             OnSaveCloseButtonClicked(e);
+        }
+
+        private void uControlLocation_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (this.IsVisible&&MainVM.isEdit)
+            {
+                loadDataToUi();
+            }
+            else
+            {
+                MainVM.SelectedRegion = new Region();
+            }
+            
         }
     }
 }

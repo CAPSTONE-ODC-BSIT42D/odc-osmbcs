@@ -69,6 +69,14 @@
                     </CompositeCollection>
                 </ComboBox.ItemsSource>
             </ComboBox>
+            <TextBox x:Name="unitNameTb" HorizontalAlignment="Left" Height="20" Margin="132,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Visibility="Hidden">
+                <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                    <Binding.ValidationRules>
+                        <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+            <Button x:Name="addUnitBtn" Content="+" HorizontalAlignment="Left" Margin="357,216,0,0" VerticalAlignment="Top" Width="26" Height="22" Click="addUnitBtn_Click"/>
             <ComboBox x:Name="supplierCb" HorizontalAlignment="Left" Margin="132,247,0,0" VerticalAlignment="Top" Width="220" DisplayMemberPath="CompanyName" SelectedValuePath="CompanyID">
                 <ComboBox.Resources>
                     <CollectionViewSource x:Key="Items" Source="{Binding Suppliers}" />

@@ -6,14 +6,17 @@
              xmlns:local="clr-namespace:prototype2.uControlsMaintenance"
              xmlns:prototype2="clr-namespace:prototype2" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Name="uControlLocation" x:Class="prototype2.uControlsMaintenance.ucLocation"
              mc:Ignorable="d" 
-             d:DesignHeight="486.926" d:DesignWidth="480.559">
+             d:DesignHeight="486.926" d:DesignWidth="480.559" IsVisibleChanged="uControlLocation_IsVisibleChanged">
+    <UserControl.DataContext>
+        <StaticResource ResourceKey="MainVM"/>
+    </UserControl.DataContext>
     <StackPanel Orientation="Vertical">
         <Grid x:Name="form" Background="White">
             <Label x:Name="label5_Copy6" Content="Region Details" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
             <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,33,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
 
             <Label VerticalAlignment="Top" Margin="28,55,0,0" HorizontalAlignment="Left" FontWeight="Bold" Content="Name:"/>
-            <TextBox x:Name="productNameTb" HorizontalAlignment="Left" Height="23" Margin="96,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220">
+            <TextBox x:Name="regionNameTb" HorizontalAlignment="Left" Height="23" Margin="96,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220">
                 <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                     <Binding.ValidationRules>
                         <prototype2:TextBoxValidation TextBoxType="IsEmpty"/>
@@ -30,7 +33,7 @@
                     </Binding>
                 </xctk:DecimalUpDown.Text>
             </xctk:DecimalUpDown>
-            <DataGrid x:Name="provinceList" Height="270" Margin="33,182,33,0" VerticalAlignment="Top"/>
+            <DataGrid x:Name="provinceList" Height="270" Margin="33,182,33,0" VerticalAlignment="Top" ItemsSource="{Binding SelectedRegion.Provinces}"/>
             <Label VerticalAlignment="Top" Margin="28,121,0,0" HorizontalAlignment="Left" FontWeight="Bold" Content="Provinces:" RenderTransformOrigin="0.427,-3.038"/>
             <Button x:Name="addProvinceBtn" Content="Add" HorizontalAlignment="Right" Margin="0,154,37,0" VerticalAlignment="Top" Width="76" Height="23" Click="addProvinceBtn_Click"/>
             <Label x:Name="provinceLbl" VerticalAlignment="Top" Margin="38,151,0,0" HorizontalAlignment="Left" FontWeight="Bold" Content="Province Name:"/>
