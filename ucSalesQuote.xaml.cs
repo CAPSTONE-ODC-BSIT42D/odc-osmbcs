@@ -40,6 +40,8 @@ namespace prototype2
 
         public event EventHandler SaveCloseButtonClicked;
         public event EventHandler ConvertToInvoice;
+        public event EventHandler SelectCustomer;
+
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
             var handler = SaveCloseButtonClicked;
@@ -50,6 +52,13 @@ namespace prototype2
         protected virtual void OnConvertToInvoice(RoutedEventArgs e)
         {
             var handler = ConvertToInvoice;
+            if (handler != null)
+                handler(this, e);
+        }
+
+        protected virtual void OnSelectCustomerClicked(RoutedEventArgs e)
+        {
+            var handler = SelectCustomer;
             if (handler != null)
                 handler(this, e);
         }
@@ -192,34 +201,8 @@ namespace prototype2
         }
         private void selectCustomerBtn_Click(object sender, RoutedEventArgs e)
         {
-
-            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
-            sb.Begin(formGridBg);
-            formGridBg.Visibility = Visibility.Visible;
-            foreach (var obj in formGridBg.Children)
-            {
-                if (obj is Grid)
-                {
-                    if (!((Grid)obj).Name.Equals("selectCustomerGrid"))
-                    {
-                        ((Grid)obj).Visibility = Visibility.Collapsed;
-                    }
-                    else
-                    {
-                        ((Grid)obj).Visibility = Visibility.Visible;
-                    }
-                }
-
-
-            }
+            OnSelectCustomerClicked(e);
         }
-        private void findBtn_Click(object sender, RoutedEventArgs e)
-        {
-            var linqResults = MainVM.Customers.Where(x => x.CompanyName.ToLower().Contains(transSearchBoxSelectCustGridTb.Text.ToLower()));
-            var observable = new ObservableCollection<Customer>(linqResults);
-            selectCustomerDg.ItemsSource = observable;
-        }
-
 
         private void selectCustBtn_Click(object sender, RoutedEventArgs e)
         {

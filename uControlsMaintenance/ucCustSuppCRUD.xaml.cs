@@ -31,9 +31,18 @@ namespace prototype2
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
 
         public event EventHandler SaveCloseButtonClicked;
+        public event EventHandler BackToSelectCustomerClicked;
+
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
             var handler = SaveCloseButtonClicked;
+            if (handler != null)
+                handler(this, e);
+        }
+
+        protected virtual void OnBackToSelectCustomerClicked(RoutedEventArgs e)
+        {
+            var handler = BackToSelectCustomerClicked;
             if (handler != null)
                 handler(this, e);
         }
@@ -230,7 +239,12 @@ namespace prototype2
                 if (!validationError)
                 {
                     saveDataToDb();
-                    OnSaveCloseButtonClicked(e);
+                    if (MainVM.isNewTrans)
+                    {
+                        OnBackToSelectCustomerClicked(e);
+                    }
+                    else
+                        OnSaveCloseButtonClicked(e);
                 }
                 else
                 {
@@ -252,7 +266,12 @@ namespace prototype2
             if (result == MessageBoxResult.Yes)
             {
                 resetFieldsValue();
-                OnSaveCloseButtonClicked(e);
+                if (MainVM.isNewTrans)
+                {
+                    OnBackToSelectCustomerClicked(e);
+                }
+                else
+                    OnSaveCloseButtonClicked(e);
             }
             else if (result == MessageBoxResult.No)
             {

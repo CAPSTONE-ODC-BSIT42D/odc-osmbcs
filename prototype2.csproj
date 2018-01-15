@@ -259,6 +259,9 @@
     <Compile Include="uControlsMaintenance\ucLocation.xaml.cs">
       <DependentUpon>ucLocation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="uControlsMaintenance\ucSelectCustomer.xaml.cs">
+      <DependentUpon>ucSelectCustomer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="uControlsMaintenance\ucServices.xaml.cs">
       <DependentUpon>ucServices.xaml</DependentUpon>
     </Compile>
@@ -347,6 +350,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="uControlsMaintenance\ucLocation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="uControlsMaintenance\ucSelectCustomer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

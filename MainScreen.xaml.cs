@@ -47,7 +47,9 @@ namespace prototype2
         {
             
             this.ucEmployee.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
+
             this.ucCustSupp.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
+            this.ucCustSupp.BackToSelectCustomerClicked += selectCustomer_BtnClicked;
 
             this.ucServices.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
             this.ucUnit.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
@@ -59,6 +61,10 @@ namespace prototype2
 
             this.ucSalesQuote.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
             this.ucSalesQuote.ConvertToInvoice += convertToInvoice_BtnClicked;
+            this.ucSalesQuote.SelectCustomer += selectCustomer_BtnClicked;
+
+            this.ucSelectCustomer.AddNewCustomer += addNewCustomer_BtnClicked;
+            this.ucSelectCustomer.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
             foreach (var obj in containerGrid.Children)
             {
                 ((Grid)obj).Visibility = Visibility.Collapsed;
@@ -74,6 +80,77 @@ namespace prototype2
             formGridBg.Visibility = Visibility.Collapsed;
             MainVM.LoginEmployee_ = MainVM.Employees.Where(x => x.EmpID.Equals(empID)).FirstOrDefault();
             MainVM.Ldt.worker.RunWorkerAsync();
+        }
+
+        private void addNewCustomer_BtnClicked(object sender, EventArgs e)
+        {
+            MainVM.isEdit = false;
+            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+            MainVM.isNewTrans = true;
+            formGridBg.Visibility = Visibility.Visible;
+            foreach (var obj in formGridBg.Children)
+            {
+                if (obj is UserControl)
+                {
+                    if (!((UserControl)obj).Name.Equals("ucCustSupp"))
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Visible;
+                        sb.Begin(((UserControl)obj));
+                    }
+                }
+
+            }
+        }
+
+
+        private void saveCloseBtn_SaveCloseButtonClicked(object sender, EventArgs e)
+        {
+            foreach (var obj in formGridBg.Children)
+            {
+                if (obj is UserControl)
+                    ((UserControl)obj).Visibility = Visibility.Collapsed;
+            }
+            formGridBg.Visibility = Visibility.Collapsed;
+
+            MainVM.isNewTrans = false;
+            MainVM.StringTextBox = null;
+            MainVM.DecimalTextBox = 0;
+            MainVM.IntegerTextBox = 0;
+            MainVM.cbItem = null;
+            MainVM.isNewRecord = false;
+            MainVM.isViewHome = false;
+            MainVM.isEdit = false;
+            MainVM.isPaymentInvoice = false;
+            closeModals();
+            MainVM.Ldt.worker.RunWorkerAsync();
+        }
+
+        private void selectCustomer_BtnClicked(object sender, EventArgs e)
+        {
+            MainVM.isEdit = false;
+            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+
+            formGridBg.Visibility = Visibility.Visible;
+            foreach (var obj in formGridBg.Children)
+            {
+                if (obj is UserControl)
+                {
+                    if (!((UserControl)obj).Name.Equals("ucSelectCustomer"))
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Visible;
+                        //sb.Begin(((UserControl)obj));
+                    }
+                }
+
+            }
         }
 
         private void logoutBtn_Click(object sender, RoutedEventArgs e)
@@ -384,27 +461,6 @@ namespace prototype2
         //    serviceSettings2.Visibility = Visibility.Visible;
         //}
 
-        private void saveCloseBtn_SaveCloseButtonClicked(object sender, EventArgs e)
-        {
-            foreach(var obj in formGridBg.Children)
-            {
-                if (obj is UserControl)
-                    ((UserControl)obj).Visibility = Visibility.Collapsed;
-            }
-            formGridBg.Visibility = Visibility.Collapsed;
-            
-            MainVM.StringTextBox = null;
-            MainVM.DecimalTextBox = 0;
-            MainVM.IntegerTextBox = 0;
-            MainVM.cbItem = null;
-            MainVM.isNewRecord = false;
-            MainVM.isViewHome = false;
-            MainVM.isEdit = false;
-            MainVM.isPaymentInvoice = false;
-            closeModals();
-            MainVM.Ldt.worker.RunWorkerAsync();
-        }
-
         
 
         //Maintenance
@@ -462,6 +518,7 @@ namespace prototype2
 
         private void manageCustomerAddBtn_Click(object sender, RoutedEventArgs e)
         {
+
             MainVM.isEdit = false;
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
             sb.Begin(formGridBg);
@@ -648,29 +705,7 @@ namespace prototype2
                 }
                 ucEmployee.saveCancelGrid1.Visibility = Visibility.Collapsed;
                 ucEmployee.editCloseGrid1.Visibility = Visibility.Visible;
-                //foreach (var element in ucEmployee.employeeDetailsFormGrid1.Children)
-                //{
-                //    if (element is TextBox)
-                //    {
-                //        ((TextBox)element).IsEnabled = false;
-                //    }
-                //    else if (element is ComboBox)
-                //    {
-                //        ((ComboBox)element).IsEnabled = false;
-                //    }
-                //    else if (element is CheckBox)
-                //    {
-                //        ((CheckBox)element).IsEnabled = false;
-                //    }
-                //    else if(element is PasswordBox)
-                //    {
-                //        ((CheckBox)element).IsEnabled = false;
-                //    }
-                //    else if(element is Xceed.Wpf.Toolkit.DateTimePicker)
-                //    {
-                //        ((Xceed.Wpf.Toolkit.DateTimePicker)element).IsEnabled = false;
-                //    }
-                //}
+                
             }
             else if (manageProductListGrid.IsVisible)
             {
@@ -731,7 +766,8 @@ namespace prototype2
                         }
                         else
                         {
-                            ((UserControl)obj).Visibility = Visibility.Visible;             sb.Begin(((UserControl)obj));
+                            ((UserControl)obj).Visibility = Visibility.Visible;
+                            sb.Begin(((UserControl)obj));
                         }
 
                     }
