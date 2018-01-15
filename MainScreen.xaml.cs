@@ -719,7 +719,7 @@ namespace prototype2
             if (manageCustomerGrid.IsVisible)
             {
                 Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
-                sb.Begin(formGridBg);
+               
                 foreach (var obj in formGridBg.Children)
                 {
 
@@ -731,7 +731,7 @@ namespace prototype2
                         }
                         else
                         {
-                            ((UserControl)obj).Visibility = Visibility.Visible;
+                            ((UserControl)obj).Visibility = Visibility.Visible;             sb.Begin(((UserControl)obj));
                         }
 
                     }
@@ -757,7 +757,6 @@ namespace prototype2
             else if (manageEmployeeGrid.IsVisible)
             {
                 Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
-                sb.Begin(formGridBg);
                 foreach (var obj in formGridBg.Children)
                 {
 
@@ -770,40 +769,17 @@ namespace prototype2
                         else
                         {
                             ((UserControl)obj).Visibility = Visibility.Visible;
+                            sb.Begin(((UserControl)obj));
                         }
                     }
 
                 }
-                //foreach (var element in ucEmployee.employeeDetailsFormGrid1.Children)
-                //{
-                //    if (element is TextBox)
-                //    {
-                //        ((TextBox)element).IsEnabled = true;
-                //    }
-                //    else if (element is ComboBox)
-                //    {
-                //        ((ComboBox)element).IsEnabled = true;
-                //    }
-                //    else if (element is CheckBox)
-                //    {
-                //        ((CheckBox)element).IsEnabled = true;
-                //    }
-                //    else if (element is PasswordBox)
-                //    {
-                //        ((CheckBox)element).IsEnabled = true;
-                //    }
-                //    else if (element is Xceed.Wpf.Toolkit.DateTimePicker)
-                //    {
-                //        ((Xceed.Wpf.Toolkit.DateTimePicker)element).IsEnabled = true;
-                //    }
-                //}
                 ucEmployee.saveCancelGrid1.Visibility = Visibility.Visible;
                 ucEmployee.editCloseGrid1.Visibility = Visibility.Collapsed;
             }
             else if (manageProductListGrid.IsVisible)
             {
                 Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
-                sb.Begin(formGridBg);
                 foreach (var obj in formGridBg.Children)
                 {
 
@@ -816,12 +792,33 @@ namespace prototype2
                         else
                         {
                             ((UserControl)obj).Visibility = Visibility.Visible;
+                            sb.Begin(((UserControl)obj));
                         }
                     }
                 }
                 
                 ucProduct.saveCancelGrid2.Visibility = Visibility.Visible;
                 ucProduct.editCloseGrid2.Visibility = Visibility.Collapsed;
+            }
+            else if (manageLocationsGrid.IsVisible)
+            {
+                Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+                foreach (var obj in formGridBg.Children)
+                {
+
+                    if (obj is UserControl)
+                    {
+                        if (!((UserControl)obj).Name.Equals("ucLocation"))
+                        {
+                            ((UserControl)obj).Visibility = Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            ((UserControl)obj).Visibility = Visibility.Visible;
+                            sb.Begin(((UserControl)obj));
+                        }
+                    }
+                }
             }
 
         }
@@ -880,6 +877,27 @@ namespace prototype2
                     if (dbCon.IsConnect())
                     {
                         string query = "UPDATE `item_t` SET `isDeleted`= 1 WHERE itemCode = '" + MainVM.SelectedProduct.ID + "';";
+                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        {
+                            MessageBox.Show("Record successfully deleted!");
+                            MainVM.Ldt.worker.RunWorkerAsync();
+                        }
+                    }
+
+                }
+                else if (result == MessageBoxResult.Cancel)
+                {
+                }
+            }
+            else if (manageLocationsGrid.IsVisible)
+            {
+                var dbCon = DBConnection.Instance();
+                MessageBoxResult result = MessageBox.Show("Do you wish to delete this record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.OK)
+                {
+                    if (dbCon.IsConnect())
+                    {
+                        string query = "UPDATE `regions_t` SET `isDeleted`= 1 WHERE id = '" + MainVM.SelectedRegion.RegionID + "';";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             MessageBox.Show("Record successfully deleted!");

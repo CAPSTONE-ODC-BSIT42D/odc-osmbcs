@@ -38,24 +38,73 @@ namespace prototype2.uControlsMaintenance
         
         private void addProvinceBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainVM.SelectedRegion = new Region();
+            
             var dbCon = DBConnection.Instance();
             dbCon.DatabaseName = "odc_db";
-            if (provinceNameTb.IsVisible)
+            if (MainVM.isEdit)
             {
-                provinceNameTb.Visibility = Visibility.Collapsed;
-                provinceLbl.Visibility = Visibility.Collapsed;
-                MainVM.SelectedRegion.Provinces.Add(new Province() { ProvinceName = provinceNameTb.Text });
-                addProvinceBtn.Content = "Add";
+                if(MainVM.SelectedProvince != null)
+                {
+                    string query = "UPDATE provinces_t SET " +
+                        "provinceName = " + regionNameTb.Text +
+                        " WHERE id = " + MainVM.SelectedProvince.ProvinceID;
+                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    {
+                        MessageBox.Show("Record is Saved");
+                    }
+                }
+                else
+                {
+                    string query = "INSERT INTO `odc_db`.`provinces_t` (`provinceName`,`regionID`) VALUES('" + provinceNameTb.Text+ "','" + MainVM.SelectedRegion.RegionID + "')";
+                }
+                
             }
             else
             {
-                provinceNameTb.Visibility = Visibility.Visible;
-                provinceLbl.Visibility = Visibility.Visible;
-                addProvinceBtn.Content = "Save";
+                if (provinceNameTb.IsVisible)
+                {
+                    provinceNameTb.Visibility = Visibility.Collapsed;
+                    provinceLbl.Visibility = Visibility.Collapsed;
+                    MainVM.SelectedRegion.Provinces.Add(new Province() { ProvinceName = provinceNameTb.Text });
+                    addProvinceBtn.Content = "Add";
+                }
+                else
+                {
+                    provinceNameTb.Visibility = Visibility.Visible;
+                    provinceLbl.Visibility = Visibility.Visible;
+                    addProvinceBtn.Content = "Save";
+                }
             }
             
+            
         }
+
+        private void editRecordBtn_Click(object sender, RoutedEventArgs e)
+        {
+            addProvinceBtn.Content = "Save";
+            provinceNameTb.Visibility = Visibility.Visible;
+            provinceLbl.Visibility = Visibility.Visible;
+            provinceNameTb.Text = MainVM.SelectedProvince.ProvinceName;
+        }
+
+        private void deleteRecordBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MainVM.isEdit)
+            {
+                var dbCon = DBConnection.Instance();
+                dbCon.DatabaseName = "odc_db";
+                string query = "UPDATE provinces_t SET " +
+                            "isDeleted = true;" +
+                            " WHERE id = " + MainVM.SelectedProvince.ProvinceID;
+                if (dbCon.insertQuery(query, dbCon.Connection))
+                {
+                    MessageBox.Show("Record is deleted");
+                }
+            }
+            else
+                MainVM.SelectedRegion.Provinces.Remove(MainVM.SelectedProvince);
+        }
+
         private bool validationError = false;
         private void saveRecordBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -168,7 +217,7 @@ namespace prototype2.uControlsMaintenance
                             regionID = dr[0].ToString();
                         foreach (Province pr in MainVM.SelectedRegion.Provinces)
                         {
-                            query = "INSERT INTO `odc_db`.`provinces_t` (`provinces_t`,`regionID`) VALUES('" + pr.ProvinceName + "','"+ regionID + "')";
+                            query = "INSERT INTO `odc_db`.`provinces_t` (`provinceName`,`regionID`) VALUES('" + pr.ProvinceName + "','"+ regionID + "')";
                             if (dbCon.insertQuery(query, dbCon.Connection))
                             {
                                 {
@@ -217,7 +266,7 @@ namespace prototype2.uControlsMaintenance
 
         private void loadDataToUi()
         {
-            productNameTb.Text = MainVM.SelectedRegion.RegionName;
+            regionNameTb.Text = MainVM.SelectedRegion.RegionName;
             ratePriceTb.Value = MainVM.SelectedRegion.RatePrice;
         }
 
@@ -238,5 +287,7 @@ namespace prototype2.uControlsMaintenance
             }
             
         }
+
+        
     }
 }

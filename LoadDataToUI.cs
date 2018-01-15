@@ -59,11 +59,13 @@ namespace prototype2
             MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
             var dbCon = DBConnection.Instance();
             MainVM.Provinces.Clear();
+            MainVM.Regions.Clear();
             MainVM.EmpPosition.Clear();
             MainVM.ContJobTitle.Clear();
             MainVM.ProductCategory.Clear();
             MainVM.ServicesList.Clear();
             MainVM.ProductList.Clear();
+
 
 
             MainVM.AllCustomerSupplier.Clear();
@@ -115,30 +117,43 @@ namespace prototype2
                     var obj = new Region()
                     {
                         RegionID = int.Parse(dr[0].ToString()),
-                        RegionName = dr[1].ToString()
+                        RegionName = dr[1].ToString(),
+                        RatePrice = decimal.Parse(dr[2].ToString())
                     };
+                    query = "SELECT * FROM provinces_t WHERE regionID = " + dr[0].ToString() + ";";
+                    dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                    DataSet fromDb2 = new DataSet();
+                    DataTable fromDbTable2 = new DataTable();
+                    dataAdapter.Fill(fromDb2, "t");
+                    fromDbTable2 = fromDb2.Tables["t"];
+                    foreach (DataRow dr2 in fromDbTable2.Rows)
+                    {
+                        var province = new Province() { ProvinceID = int.Parse(dr[0].ToString()), ProvinceName = dr[1].ToString(), RegionID = obj.RegionID };
+                        obj.Provinces.Add(province);
+                        MainVM.Provinces.Add(province);
+                    }
                     MainVM.Regions.Add(obj);
                 }
                 dbCon.Close();
             }
 
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * FROM provinces_t";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    int regionID = 0;
-                    if (!String.IsNullOrEmpty(dr[2].ToString()))
-                        regionID = int.Parse(dr[2].ToString());
-                    MainVM.Provinces.Add(new Province() { ProvinceID = int.Parse(dr[0].ToString()), ProvinceName = dr[1].ToString(), RegionID = regionID });
-                }
-                dbCon.Close();
-            }
+            //if (dbCon.IsConnect())
+            //{
+            //    string query = "SELECT * FROM provinces_t";
+            //    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+            //    DataSet fromDb = new DataSet();
+            //    DataTable fromDbTable = new DataTable();
+            //    dataAdapter.Fill(fromDb, "t");
+            //    fromDbTable = fromDb.Tables["t"];
+            //    foreach (DataRow dr in fromDbTable.Rows)
+            //    {
+            //        int regionID = 0;
+            //        if (!String.IsNullOrEmpty(dr[2].ToString()))
+            //            regionID = int.Parse(dr[2].ToString());
+            //        MainVM.Provinces.Add(new Province() { ProvinceID = int.Parse(dr[0].ToString()), ProvinceName = dr[1].ToString(), RegionID = regionID });
+            //    }
+            //    dbCon.Close();
+            //}
 
 
             if (dbCon.IsConnect())
@@ -238,7 +253,7 @@ namespace prototype2
                 string query = "SELECT * " +
                     "FROM cust_supp_t cs  " +
                     "JOIN provinces_t p ON cs.companyProvinceID = p.id " +
-                    "WHERE isDeleted = 0 AND companyType = 0;";
+                    "WHERE cs.isDeleted = 0 AND cs.companyType = 0;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
@@ -257,7 +272,7 @@ namespace prototype2
                 string query = "SELECT * " +
                     "FROM cust_supp_t cs  " +
                     "JOIN provinces_t p ON cs.companyProvinceID = p.id " +
-                    "WHERE isDeleted = 0 AND companyType = 1;";
+                    "WHERE cs.isDeleted = 0 AND cs.companyType = 1;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
