@@ -373,27 +373,7 @@ namespace prototype2
 
 
             }
-            foreach (var element in addNewServiceForm.Children)
-            {
-                if (element is TextBox)
-                {
-                    BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-                    if (expression != null)
-                        Validation.ClearInvalid(expression);
-                    ((TextBox)element).Text = string.Empty;
-                }
-                else if (element is ComboBox)
-                {
-                    BindingExpression expression = ((ComboBox)element).GetBindingExpression(TextBox.TextProperty);
-                    if (expression != null)
-                        Validation.ClearInvalid(expression);
-                    ((ComboBox)element).SelectedIndex = -1;
-                }
-                else if (element is CheckBox)
-                {
-                    ((CheckBox)element).IsChecked = false;
-                }
-            }
+           
             MainVM.isEdit = false;
         }
 
@@ -417,32 +397,7 @@ namespace prototype2
             }
             computePrice();
         }
-
-
-
-        private void searchBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (addNewItemFormGrid.IsVisible)
-            {
-                var linqResults = MainVM.ProductList.Where(x => x.ItemName.ToLower().Contains(searchTb.Text.ToLower()));
-                var observable = new ObservableCollection<Item>(linqResults);
-                addGridProductListDg.ItemsSource = observable;
-            }
-
-        }
-
-        private void serviceProvinceCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (serviceProvinceCb.SelectedIndex != -1)
-            {
-                //MainVM.SelectedProvince = MainVM.Provinces.Where(x => x.ProvinceID == int.Parse(serviceProvinceCb.SelectedValue.ToString())).First();
-                //if (MainVM.SelectedProvince.ProvincePrice == 0)
-                //{
-                //    MessageBox.Show("This location has no price set. Please set it in Settings.");
-                //}
-            }
-
-        }
+        
 
         private void deleteRequestedItemBtn_Click(object sender, RoutedEventArgs e)
         {
