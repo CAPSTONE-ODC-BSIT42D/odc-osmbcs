@@ -38,26 +38,45 @@ namespace prototype2.uControlsMaintenance
         
         private void addProvinceBtn_Click(object sender, RoutedEventArgs e)
         {
-            
             var dbCon = DBConnection.Instance();
             dbCon.DatabaseName = "odc_db";
             if (MainVM.isEdit)
             {
-                if(MainVM.SelectedProvince != null)
+                if (provinceNameTb.IsVisible)
                 {
-                    string query = "UPDATE provinces_t SET " +
-                        "provinceName = " + regionNameTb.Text +
-                        " WHERE id = " + MainVM.SelectedProvince.ProvinceID;
-                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    provinceNameTb.Visibility = Visibility.Collapsed;
+                    provinceLbl.Visibility = Visibility.Collapsed;
+                    if (MainVM.SelectedProvince != null)
                     {
-                        MessageBox.Show("Record is Saved");
+                        string query = "UPDATE provinces_t SET " +
+                            "provinceName = " + provinceNameTb.Text +
+                            " WHERE id = " + MainVM.SelectedProvince.ProvinceID;
+                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        {
+                            MessageBox.Show("Record is Saved");
+                            MainVM.Ldt.worker.RunWorkerAsync();
+
+                            MainVM.Provinces = MainVM.SelectedRegion.Provinces;
+                        }
                     }
+                    else
+                    {
+                        string query = "INSERT INTO `odc_db`.`provinces_t` (`provinceName`,`regionID`) VALUES('" + provinceNameTb.Text + "','" + MainVM.SelectedRegion.RegionID + "')";
+                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        {
+                            MessageBox.Show("Record is Saved");
+                            MainVM.Ldt.worker.RunWorkerAsync();
+                            MainVM.Provinces = MainVM.SelectedRegion.Provinces;
+                        }
+                    }
+                    addProvinceBtn.Content = "Add";
                 }
                 else
                 {
-                    string query = "INSERT INTO `odc_db`.`provinces_t` (`provinceName`,`regionID`) VALUES('" + provinceNameTb.Text+ "','" + MainVM.SelectedRegion.RegionID + "')";
+                    provinceNameTb.Visibility = Visibility.Visible;
+                    provinceLbl.Visibility = Visibility.Visible;
+                    addProvinceBtn.Content = "Save";
                 }
-                
             }
             else
             {
@@ -75,8 +94,6 @@ namespace prototype2.uControlsMaintenance
                     addProvinceBtn.Content = "Save";
                 }
             }
-            
-            
         }
 
         private void editRecordBtn_Click(object sender, RoutedEventArgs e)
@@ -94,15 +111,17 @@ namespace prototype2.uControlsMaintenance
                 var dbCon = DBConnection.Instance();
                 dbCon.DatabaseName = "odc_db";
                 string query = "UPDATE provinces_t SET " +
-                            "isDeleted = true;" +
+                            "isDeleted = true" +
                             " WHERE id = " + MainVM.SelectedProvince.ProvinceID;
                 if (dbCon.insertQuery(query, dbCon.Connection))
                 {
                     MessageBox.Show("Record is deleted");
+                    MainVM.Ldt.worker.RunWorkerAsync();
                 }
             }
             else
                 MainVM.SelectedRegion.Provinces.Remove(MainVM.SelectedProvince);
+
         }
 
         private bool validationError = false;
@@ -126,7 +145,7 @@ namespace prototype2.uControlsMaintenance
                             }
                         }
                     }
-                    if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
+                    else if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
                     {
                         BindingExpression expression = ((Xceed.Wpf.Toolkit.DecimalUpDown)element).GetBindingExpression(Xceed.Wpf.Toolkit.DecimalUpDown.TextProperty);
                         Validation.ClearInvalid(expression);
@@ -137,7 +156,7 @@ namespace prototype2.uControlsMaintenance
                                 validationError = true;
                         }
                     }
-                    if (element is ComboBox)
+                    else if (element is ComboBox)
                     {
                         BindingExpression expression = ((ComboBox)element).GetBindingExpression(ComboBox.SelectedItemProperty);
                         if (expression != null)
@@ -153,6 +172,7 @@ namespace prototype2.uControlsMaintenance
                 {
                     saveDataToDb();
                     MainVM.isEdit = false;
+                    MainVM.Ldt.worker.RunWorkerAsync();
                     OnSaveCloseButtonClicked(e);
                 }
                 else
@@ -190,9 +210,9 @@ namespace prototype2.uControlsMaintenance
                 if (MainVM.isEdit)
                 {
                     string query = "UPDATE regions_t SET " +
-                        "regionName = " + regionNameTb.Text + ", " +
-                        "ratePrice = " + ratePriceTb.Value +
-                        " WHERE id = " + MainVM.SelectedRegion.RegionID;
+                        "regionName = '" + regionNameTb.Text + "', " +
+                        "ratePrice = '" + ratePriceTb.Value +
+                        "' WHERE id = " + MainVM.SelectedRegion.RegionID;
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
                         MessageBox.Show("Record is Saved");
@@ -268,6 +288,7 @@ namespace prototype2.uControlsMaintenance
         {
             regionNameTb.Text = MainVM.SelectedRegion.RegionName;
             ratePriceTb.Value = MainVM.SelectedRegion.RatePrice;
+            MainVM.Provinces = MainVM.SelectedRegion.Provinces;
         }
 
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)

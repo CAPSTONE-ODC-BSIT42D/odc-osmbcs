@@ -239,11 +239,8 @@ namespace prototype2
             }
         }
 
-        private void addPosBtn_Click(object sender, RoutedEventArgs e)
+        private void addCategoryBtn_Click(object sender, RoutedEventArgs e)
         {
-            categoryNameTb.Visibility = Visibility.Visible;
-            addCategoryBtn.Content = "Save";
-
             var dbCon = DBConnection.Instance();
             dbCon.DatabaseName = "odc_db";
             if (categoryNameTb.IsVisible)

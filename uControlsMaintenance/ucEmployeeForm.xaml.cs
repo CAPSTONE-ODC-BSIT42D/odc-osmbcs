@@ -328,7 +328,7 @@ namespace prototype2.uControlsMaintenance
                     }
                 }
             }
-            
+            MainVM.Ldt.worker.RunWorkerAsync();
         }
 
         void resetFieldsValue()

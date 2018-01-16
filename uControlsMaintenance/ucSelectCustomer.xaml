@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:prototype2.uControlsMaintenance"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="972" Width="Auto">
     <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Margin="0">
         <Button x:Name="closeModalBtn_Copy" HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Margin="13,10,10,10" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="closeModalBtn_Click">

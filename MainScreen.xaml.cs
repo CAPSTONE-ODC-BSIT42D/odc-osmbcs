@@ -126,7 +126,6 @@ namespace prototype2
             MainVM.isEdit = false;
             MainVM.isPaymentInvoice = false;
             closeModals();
-            MainVM.Ldt.worker.RunWorkerAsync();
         }
 
         private void selectCustomer_BtnClicked(object sender, EventArgs e)

@@ -112,7 +112,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="{TemplateBinding Background}" BorderBrush="{x:Null}" BorderThickness="0">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -232,8 +232,8 @@
         </Grid>
         <ScrollViewer Margin="0,100,0,0" VerticalScrollBarVisibility="Hidden" >
             <StackPanel Background="#FF395066" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" CanHorizontallyScroll="True">
-                <Button x:Name="dashBoardBtn" Style="{StaticResource mainButton}" Foreground="White" Height="70" VerticalAlignment="Top" Margin="0" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Click="dashBoardBtn_Click" Padding="1">
-                    <StackPanel Margin="-100,0,0,0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Button x:Name="dashBoardBtn" Style="{StaticResource mainButton}" Foreground="White" Height="45" Margin="0,5,0,0" Grid.Row="0" HorizontalContentAlignment="Stretch" Click="dashBoardBtn_Click" Padding="1" VerticalContentAlignment="Stretch">
+                    <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
                         <Canvas x:Name="Capa_2" Canvas.Left="0" Canvas.Top="0" Width="30" Height="30">
                             <Canvas.RenderTransform>
                                 <TranslateTransform X="0" Y="0"/>
@@ -261,11 +261,11 @@
                             <Canvas x:Name="g23"/>
                             <Canvas x:Name="g25"/>
                         </Canvas>
-                        <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="70" Height="17"><Run Text="Dashboard"/><LineBreak/><Run/></TextBlock>
+                        <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="15,8,0,0" Padding="0" VerticalAlignment="Center" Width="70" Height="17"><Run Text="Dashboard"/><LineBreak/><Run/></TextBlock>
                     </StackPanel>
                 </Button>
-                <Button x:Name="salesBtn" Margin="0" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="5" ScrollViewer.CanContentScroll="True" Height="70" VerticalAlignment="Top" Click="salesBtn_Click">
-                    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-100,0,0,0" Orientation="Horizontal" Width="115">
+                <Button x:Name="salesBtn" Margin="0,5,0,0" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="0" ScrollViewer.CanContentScroll="True" Height="45" VerticalAlignment="Top" Click="salesBtn_Click">
+                    <StackPanel Margin="10,0,0,0" Orientation="Horizontal" Grid.IsSharedSizeScope="True">
                         <Canvas x:Name="Capa_3" Width="29.875" Height="29.875" Canvas.Left="0" Canvas.Top="0">
                             <!--Unknown tag: metadata-->
                             <Canvas.RenderTransform>
@@ -388,7 +388,7 @@
                             <Canvas x:Name="g70c"/>
                             <Canvas x:Name="g72c"/>
                         </Canvas>
-                        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="70" Height="18" Text="Transaction"/>
+                        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Height="18" Text="Order Management"/>
                     </StackPanel>
                 </Button>
                 <Grid x:Name="salesBtnSubMenuGrid" Height="114" Background="#FF046380" Visibility="Collapsed">
@@ -396,8 +396,8 @@
                     <Button x:Name="ordersSalesMenuBtn" Content="Orders" Margin="0,37,0,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1" Click="ordersSalesMenuBtn_Click"/>
                     <Button x:Name="invoiceSalesMenuBtn" Content="Invoices" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Margin="0,72,-1,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1" Click="invoiceSalesMenuBtn_Click"/>
                 </Grid>
-                <Button x:Name="serviceBtn" Margin="0" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="5" ScrollViewer.CanContentScroll="True" Height="70" VerticalAlignment="Top" Click="serviceBtn_Click">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="-100,0,0,0" Width="115">
+                <Button x:Name="serviceBtn" Margin="0,5,0,0" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="5" ScrollViewer.CanContentScroll="True" Height="45" VerticalAlignment="Top" Click="serviceBtn_Click">
+                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
                         <Canvas x:Name="Capa_1gh" Width="30" Height="30" Canvas.Left="0" Canvas.Top="0">
                             <Canvas.RenderTransform>
                                 <TranslateTransform X="0" Y="0"/>
@@ -430,8 +430,8 @@
                         <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="47" Height="18" Text="Services"/>
                     </StackPanel>
                 </Button>
-                <Button x:Name="reportsBtn" Margin="0" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" Height="70" VerticalAlignment="Top" Click="reportsBtn_Click">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-100,0,0,0" Width="115">
+                <Button x:Name="reportsBtn" Margin="0,5,0,0" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" Height="45" VerticalAlignment="Top" Click="reportsBtn_Click">
+                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
                         <Canvas x:Name="Capa_1d1" Width="27.646" Height="27.647" Canvas.Left="0" Canvas.Top="0">
                             <Canvas.RenderTransform>
                                 <TranslateTransform X="0" Y="0"/>
@@ -472,8 +472,8 @@
                     <Button x:Name="salesReportBtn_Copy" Content="Employees/Contractor" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5"/>
                     <Button x:Name="salesReportBtn_Copy1" Content="Employees/Contractor" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5"/>
                 </StackPanel>
-                <Button x:Name="manageBtn" Margin="0" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" Height="70" VerticalAlignment="Top" Click="manageBtn_Click" HorizontalContentAlignment="Center">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="-100,0,0,0" HorizontalAlignment="Left" Width="115">
+                <Button x:Name="manageBtn" Margin="0,5,0,0" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" Height="45" VerticalAlignment="Top" Click="manageBtn_Click" HorizontalContentAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
                         <Canvas x:Name="Capa_1g" Width="30" Height="30">
                             <Canvas.RenderTransform>
                                 <TranslateTransform X="0" Y="0"/>
@@ -544,7 +544,7 @@
                             <Canvas x:Name="g52g"/>
                             <Canvas x:Name="g54g"/>
                         </Canvas>
-                        <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Manage" Margin="15,8,0,0" Padding="0" VerticalAlignment="Top" Width="50"/>
+                        <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Manage" Margin="15,8,0,0" Padding="0" VerticalAlignment="Center" Width="50"/>
                     </StackPanel>
                 </Button>
                 <StackPanel x:Name="manageSubMenugrid" Orientation="Vertical" Margin="0" Background="#FF046380">

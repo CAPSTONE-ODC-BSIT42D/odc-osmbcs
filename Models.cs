@@ -659,37 +659,19 @@ namespace prototype2
         {
 
         }
-        private string _lineNo;
-        public string lineNo
+        private int _lineNo;
+        public int lineNo
         {
             get { return _lineNo; }
             set { SetProperty(ref _lineNo, value); }
         }
-        private string _itemCode;
-        public string itemCode
+        private int _itemID;
+        public int itemID
         {
-            get { return _itemCode; }
-            set { SetProperty(ref _itemCode, value); }
+            get { return _itemID; }
+            set { SetProperty(ref _itemID, value); }
         }
-        private string _itemName;
-        public string itemName
-        {
-            get { return _itemName; }
-            set { SetProperty(ref _itemName, value); }
-        }
-        private string _desc;
-        public string desc
-        {
-            get { return _desc; }
-            set { SetProperty(ref _desc, value); }
-        }
-        private string _itemTypeName;
-        public string itemTypeName
-        {
-            get { return _itemTypeName; }
-            set { SetProperty(ref _itemTypeName, value); }
-        }
-
+        
         private int _itemType;
         public int itemType
         {
@@ -703,6 +685,7 @@ namespace prototype2
             get { return _qty; }
             set { SetProperty(ref _qty, value); }
         }
+
         private decimal _unitprice;
         public decimal unitPrice
         {
@@ -722,8 +705,7 @@ namespace prototype2
             get { return _totalAmount; }
             set { SetProperty(ref _totalAmount, value); }
         }
-
-
+        
         private decimal _totalAmountMarkUp;
         public decimal totalAmountMarkUp
         {

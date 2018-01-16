@@ -60,7 +60,7 @@ namespace prototype2
         public object Convert(object value, Type targetType, object parameter,
                 System.Globalization.CultureInfo culture)
         {
-            if (!String.IsNullOrWhiteSpace(value.ToString()) && MainVM.EmpPosition.Count != 0)
+            if (!value.Equals(0) && MainVM.EmpPosition.Count != 0)
             {
                 MainVM.SelectedEmpPosition = MainVM.EmpPosition.Where(x => x.PositionID.Equals(value)).First();
                 return MainVM.SelectedEmpPosition.PositionName;
@@ -81,7 +81,7 @@ namespace prototype2
         public object Convert(object value, Type targetType, object parameter,
                 System.Globalization.CultureInfo culture)
         {
-            if (!String.IsNullOrWhiteSpace(value.ToString())&& MainVM.ContJobTitle.Count!=0)
+            if (!value.Equals(0) && MainVM.ContJobTitle.Count!=0)
             {
                 MainVM.SelectedJobTitle = MainVM.ContJobTitle.Where(x => x.JobID.Equals(value)).First();
                 return MainVM.SelectedJobTitle.JobName;

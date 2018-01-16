@@ -48,7 +48,7 @@
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox>
-            <Button x:Name="addCategoryBtn" Content="+" HorizontalAlignment="Left" Margin="357,154,0,0" VerticalAlignment="Top" Width="26" Height="26" Click="addPosBtn_Click"/>
+            <Button x:Name="addCategoryBtn" Content="+" HorizontalAlignment="Left" Margin="357,154,0,0" VerticalAlignment="Top" Width="26" Height="26" Click="addCategoryBtn_Click"/>
             <xctk:DecimalUpDown x:Name="markUpPriceTb" HorizontalAlignment="Left" Margin="132,187,0,0" VerticalAlignment="Top" Width="220">
                 <xctk:DecimalUpDown.Text>
                     <Binding Path="DecimalTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
