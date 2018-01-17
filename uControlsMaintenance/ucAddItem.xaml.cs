@@ -29,6 +29,14 @@ namespace prototype2.uControlsMaintenance
         private bool validationError = false;
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
 
+        public event EventHandler SaveCloseButtonClicked;
+        protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
+        {
+            var handler = SaveCloseButtonClicked;
+            if (handler != null)
+                handler(this, e);
+        }
+
         private void productRbtn_Checked(object sender, RoutedEventArgs e)
         {
             if (IsLoaded)
@@ -173,7 +181,7 @@ namespace prototype2.uControlsMaintenance
                 }
             }
         }
-
+        //---- Service Part
         private void addProductBtn_Click(object sender, RoutedEventArgs e)
         {
 
@@ -240,6 +248,16 @@ namespace prototype2.uControlsMaintenance
                 }
 
             }
+        }
+
+        private void cancelAddProductBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OnSaveCloseButtonClicked(e);
+        }
+
+        private void closeModalBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OnSaveCloseButtonClicked(e);
         }
 
         void resetFields()

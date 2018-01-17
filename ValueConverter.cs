@@ -14,7 +14,7 @@ namespace prototype2
         public object Convert(object value, Type targetType, object parameter,
                 System.Globalization.CultureInfo culture)
         {
-            if (!String.IsNullOrWhiteSpace(value.ToString()))
+            if (!value.Equals(0) && MainVM.AllCustomerSupplier.Count != 0)
             {
                 MainVM.SelectedCustomerSupplier = MainVM.AllCustomerSupplier.Where(x => x.CompanyID.Equals(value.ToString())).First();
                 return MainVM.SelectedCustomerSupplier.CompanyName;

@@ -218,18 +218,18 @@ namespace prototype2
             this.table.SetEdge(0, 0, 7, 1, Edge.Box, BorderStyle.Single, 0.25, Color.Empty);
             
             decimal totalPrice = 0;
-            foreach (RequestedItem item in MainVM.RequestedItems)
-            {
-                row = table.AddRow();
-                row.Cells[0].AddParagraph(item.lineNo);
-                row.Cells[1].AddParagraph(item.itemName);
-                row.Cells[2].AddParagraph(item.desc);
-                row.Cells[3].AddParagraph("na");
-                row.Cells[4].AddParagraph(item.qty.ToString());
-                row.Cells[5].AddParagraph(item.unitPriceMarkUp.ToString());
-                row.Cells[6].AddParagraph(item.totalAmountMarkUp.ToString());
-                totalPrice += item.totalAmountMarkUp;
-            }
+            //foreach (RequestedItem item in MainVM.RequestedItems)
+            //{
+            //    row = table.AddRow();
+            //    row.Cells[0].AddParagraph(item.lineNo);
+            //    row.Cells[1].AddParagraph(item.itemName);
+            //    row.Cells[2].AddParagraph(item.desc);
+            //    row.Cells[3].AddParagraph("na");
+            //    row.Cells[4].AddParagraph(item.qty.ToString());
+            //    row.Cells[5].AddParagraph(item.unitPriceMarkUp.ToString());
+            //    row.Cells[6].AddParagraph(item.totalAmountMarkUp.ToString());
+            //    totalPrice += item.totalAmountMarkUp;
+            //}
             row = table.AddRow();
             row.Cells[0].AddParagraph("Total Price");
             row.Cells[0].Format.Alignment = ParagraphAlignment.Right;

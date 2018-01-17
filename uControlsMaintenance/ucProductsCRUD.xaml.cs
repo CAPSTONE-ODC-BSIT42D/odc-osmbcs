@@ -73,14 +73,17 @@ namespace prototype2
                 {
                     if (element is TextBox)
                     {
-                        BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-                        if (expression != null)
+                        if (((TextBox)element).IsVisible)
                         {
-                            if (((TextBox)element).IsEnabled)
+                            BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
+                            if (expression != null)
                             {
-                                expression.UpdateSource();
-                                if (Validation.GetHasError((TextBox)element))
-                                    validationError = true;
+                                if (((TextBox)element).IsEnabled)
+                                {
+                                    expression.UpdateSource();
+                                    if (Validation.GetHasError((TextBox)element))
+                                        validationError = true;
+                                }
                             }
                         }
                     }
@@ -143,6 +146,17 @@ namespace prototype2
         private void saveDataToDb()
         {
             var dbCon = DBConnection.Instance();
+            string unitID = "null";
+            if (unitCb.SelectedValue != null)
+                unitID = unitCb.SelectedValue.ToString();
+
+            string typeID = "null";
+            if(categoryCb.SelectedValue != null)
+                typeID = categoryCb.SelectedValue.ToString();
+            
+            string supplierID = "null";
+            if(supplierCb.SelectedValue != null)
+                supplierID = supplierCb.SelectedValue.ToString();
             if (dbCon.IsConnect())
             {
                 if (MainVM.isEdit)
@@ -151,10 +165,10 @@ namespace prototype2
                         "itemName = " + productNameTb.Text+", "+
                         "itemDescr= " + productDescTb.Text + ", " +
                         "markUpPerc = " + markUpPriceTb.Text + ", " +
-                        "unitID = " + unitCb.Text + ", " +
-                        "typeID = " + categoryCb.SelectedValue + ", " +
-                        "supplierID = " + supplierCb.SelectedValue + ", " +
-                        " dateEffective = " + dateEffective.SelectedDate + ", " +
+                        "unitID = " + unitID+ ", " +
+                        "typeID = " + typeID + ", " +
+                        "supplierID = " + supplierID + ", " +
+                        " dateEffective = '" + dateEffective.SelectedDate.Value.ToString("yyyy-MM-dd") + "', " +
                         "WHERE id = " +MainVM.SelectedProduct.ID;
 
                     if (dbCon.insertQuery(query, dbCon.Connection))
@@ -169,11 +183,11 @@ namespace prototype2
                     productNameTb.Text + "','" +
                     productDescTb.Text + "'," +
                     markUpPriceTb.Value + "," +
-                    unitCb.SelectedValue + "," +
-                    categoryCb.SelectedValue + "," +
-                    supplierCb.SelectedValue + "," +
-                    dateEffective.SelectedDate + "','" +
-                    ");";
+                    unitID + "," +
+                    typeID + "," +
+                    supplierID+ ",'" +
+                    dateEffective.SelectedDate.Value.ToString("yyyy-MM-dd") +
+                    "');";
 
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
@@ -280,7 +294,6 @@ namespace prototype2
                         MessageBox.Show("Unit successfully added");
                         unitNameTb.Clear();
                         MainVM.Ldt.worker.RunWorkerAsync();
-                        dbCon.Close();
                     }
                 }
             }

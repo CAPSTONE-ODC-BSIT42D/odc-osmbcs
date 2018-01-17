@@ -243,7 +243,9 @@ namespace prototype2
 
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    MainVM.ProductList.Add(new Item() { ID = int.Parse(dr["id"].ToString()), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), MarkUpPerc = (decimal)dr["markupPerc"], TypeID = int.Parse(dr["typeID"].ToString()), UnitID = int.Parse(dr["unitID"].ToString()), SupplierID = int.Parse(dr["supplierID"].ToString()) });
+                    int supplierID;
+                    int.TryParse(dr["supplierID"].ToString(), out supplierID);
+                    MainVM.ProductList.Add(new Item() { ID = int.Parse(dr["id"].ToString()), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), MarkUpPerc = decimal.Parse(dr["markupPerc"].ToString()), TypeID = int.Parse(dr["typeID"].ToString()), UnitID = int.Parse(dr["unitID"].ToString()), SupplierID = supplierID, DateEffective = DateTime.Parse(dr["dateEffective"].ToString()) });
                 }
                 dbCon.Close();
             }

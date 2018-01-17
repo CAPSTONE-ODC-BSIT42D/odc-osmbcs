@@ -41,6 +41,7 @@ namespace prototype2
         public event EventHandler SaveCloseButtonClicked;
         public event EventHandler ConvertToInvoice;
         public event EventHandler SelectCustomer;
+        public event EventHandler SelectItem;
 
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
@@ -59,6 +60,13 @@ namespace prototype2
         protected virtual void OnSelectCustomerClicked(RoutedEventArgs e)
         {
             var handler = SelectCustomer;
+            if (handler != null)
+                handler(this, e);
+        }
+
+        protected virtual void OnSelectItemClicked(RoutedEventArgs e)
+        {
+            var handler = SelectItem;
             if (handler != null)
                 handler(this, e);
         }
@@ -210,25 +218,7 @@ namespace prototype2
         }
         private void transReqAddNewItem_Click(object sender, RoutedEventArgs e)
         {
-            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
-            sb.Begin(formGridBg);
-            formGridBg.Visibility = Visibility.Visible;
-            foreach (var obj in formGridBg.Children)
-            {
-                if (obj is Grid)
-                {
-                    if (!((Grid)obj).Name.Equals("addNewItemFormGrid"))
-                    {
-                        ((Grid)obj).Visibility = Visibility.Collapsed;
-                    }
-                    else
-                    {
-                        ((Grid)obj).Visibility = Visibility.Visible;
-                    }
-                }
-
-
-            }
+            OnSelectItemClicked(e);
         }
 
         private void feesBtn_Click(object sender, RoutedEventArgs e)
@@ -497,6 +487,12 @@ namespace prototype2
             computePrice();
         }
 
+
+        private void unitPriceTb_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            computePrice();
+        }
+
         private void IntegerUpDown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             computePrice();
@@ -511,9 +507,9 @@ namespace prototype2
             {
                 if (item.itemType == 0)
                 {
-                    item.unitPriceMarkUp = item.unitPrice + (item.unitPrice / 100 * (decimal)markupPriceTb.Value);
-                    item.totalAmountMarkUp = (item.unitPriceMarkUp * item.qty) - ((item.unitPriceMarkUp * item.qty) / 100) * (decimal)discountPriceTb.Value;
-                    item.totalAmount = item.unitPriceMarkUp * item.qty;
+                    MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ID == item.itemID).FirstOrDefault();
+                    item.unitPrice = item.unitPrice + (item.unitPrice / 100 * (decimal)MainVM.SelectedProduct.MarkUpPerc);
+                    item.totalAmount = (item.unitPrice * item.qty) - ((item.unitPrice * item.qty) / 100) * (decimal)discountPriceTb.Value;
 
                 }
                 else if (item.itemType == 1)
@@ -525,12 +521,12 @@ namespace prototype2
                     //    {
                     //        totalFee += af.FeePrice;
                     //    }
-                    //}
-                    item.unitPriceMarkUp = (item.unitPrice + totalFee) + ((item.unitPrice + totalFee) / 100 * (decimal)markupPriceTb.Value);
-                    item.totalAmountMarkUp = (item.unitPrice + totalFee + (((item.unitPrice + totalFee) / 100) * (decimal)markupPriceTb.Value)) - ((item.unitPrice + totalFee) / 100) * (decimal)discountPriceTb.Value;
-                    item.totalAmount = item.unitPrice + totalFee;
+                    ////}
+                    //item.unitPriceMarkUp = (item.unitPrice + totalFee) + ((item.unitPrice + totalFee) / 100 * (decimal)markupPriceTb.Value);
+                    //item.totalAmountMarkUp = (item.unitPrice + totalFee + (((item.unitPrice + totalFee) / 100) * (decimal)markupPriceTb.Value)) - ((item.unitPrice + totalFee) / 100) * (decimal)discountPriceTb.Value;
+                    //item.totalAmount = item.unitPrice + totalFee;
                 }
-                totalPrice += item.totalAmountMarkUp;
+                totalPrice += item.totalAmount;
             }
             if (totalPriceLbl != null)
             {
@@ -866,6 +862,7 @@ namespace prototype2
             }
             
         }
+
     }
     
 }

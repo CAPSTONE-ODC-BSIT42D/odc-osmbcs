@@ -112,7 +112,7 @@
                                     </DataGridTemplateColumn>
                                     <DataGridTextColumn Binding="{Binding ItemName}" ClipboardContentBinding="{x:Null}" Width="150" CanUserResize="False" Visibility="Visible" Header="Product Name" />
                                     <DataGridTextColumn Binding="{Binding ItemDesc}" ClipboardContentBinding="{x:Null}" Header="Product Description" Width="200" CanUserResize="False" />
-                                    <DataGridTemplateColumn  Width="115" CanUserResize="False" Header="Supplier"  >
+                                    <DataGridTemplateColumn  Width="115" CanUserResize="False" Header="Supplier" Visibility="Hidden"  >
                                         <DataGridTemplateColumn.CellTemplate  >
                                             <DataTemplate>
                                                 <ComboBox x:Name="supplierCb" HorizontalAlignment="Stretch" VerticalAlignment="Center" DisplayMemberPath="CompanyName" SelectedValuePath="CompanyID">
@@ -129,7 +129,7 @@
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
-                                    <DataGridTextColumn Binding="{Binding}" ClipboardContentBinding="{x:Null}" Header="Price" Width="150" CanUserResize="False" />
+                                    <DataGridTextColumn Binding="{Binding}" ClipboardContentBinding="{x:Null}" Header="Price" Width="150" CanUserResize="False" Visibility="Hidden" />
                                     <DataGridTemplateColumn  Width="115" CanUserResize="False" Header="Action"  >
                                         <DataGridTemplateColumn.CellTemplate  >
                                             <DataTemplate>
@@ -192,7 +192,7 @@
             <StackPanel Orientation="Vertical" Width="190" HorizontalAlignment="Right" Margin="0">
                 <Grid x:Name="saveCancelGrid3" Height="20" Margin="10">
                     <Button x:Name="addProductBtn" Content="Add" Margin="0,0,94,0" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="76" Click="addProductBtn_Click"/>
-                    <Button x:Name="cancelAddProductBtn" Content="Cancel" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="76" Click="cancelAddProductBtn_Click"/>
+                    <Button x:Name="cancelAddProductBtn" Content="Cancel" HorizontalAlignment="Right" Width="76" Click="cancelAddProductBtn_Click"/>
                 </Grid>
             </StackPanel>
 

@@ -62,6 +62,8 @@ namespace prototype2
             this.ucSalesQuote.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
             this.ucSalesQuote.ConvertToInvoice += convertToInvoice_BtnClicked;
             this.ucSalesQuote.SelectCustomer += selectCustomer_BtnClicked;
+            this.ucSalesQuote.SelectItem += selectItem_BtnClicked;
+
 
             this.ucSelectCustomer.AddNewCustomer += addNewCustomer_BtnClicked;
             this.ucSelectCustomer.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
@@ -109,12 +111,8 @@ namespace prototype2
 
         private void saveCloseBtn_SaveCloseButtonClicked(object sender, EventArgs e)
         {
-            foreach (var obj in formGridBg.Children)
-            {
-                if (obj is UserControl)
-                    ((UserControl)obj).Visibility = Visibility.Collapsed;
-            }
-            formGridBg.Visibility = Visibility.Collapsed;
+
+            closeModals();
 
             MainVM.isNewTrans = false;
             MainVM.StringTextBox = null;
@@ -125,7 +123,6 @@ namespace prototype2
             MainVM.isViewHome = false;
             MainVM.isEdit = false;
             MainVM.isPaymentInvoice = false;
-            closeModals();
         }
 
         private void selectCustomer_BtnClicked(object sender, EventArgs e)
@@ -139,6 +136,30 @@ namespace prototype2
                 if (obj is UserControl)
                 {
                     if (!((UserControl)obj).Name.Equals("ucSelectCustomer"))
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Visible;
+                        //sb.Begin(((UserControl)obj));
+                    }
+                }
+
+            }
+        }
+
+        private void selectItem_BtnClicked(object sender, EventArgs e)
+        {
+            MainVM.isEdit = false;
+            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+
+            formGridBg.Visibility = Visibility.Visible;
+            foreach (var obj in formGridBg.Children)
+            {
+                if (obj is UserControl)
+                {
+                    if (!((UserControl)obj).Name.Equals("ucAddItem"))
                     {
                         ((UserControl)obj).Visibility = Visibility.Collapsed;
                     }
@@ -972,7 +993,7 @@ namespace prototype2
                     ((Grid)obj).Visibility = Visibility.Collapsed;
 
             }
-            
+            MainVM.Ldt.worker.RunWorkerAsync();
 
         }
 
