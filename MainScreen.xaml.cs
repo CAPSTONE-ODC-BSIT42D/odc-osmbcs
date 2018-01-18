@@ -64,6 +64,7 @@ namespace prototype2
             this.ucSalesQuote.SelectCustomer += selectCustomer_BtnClicked;
             this.ucSalesQuote.SelectItem += selectItem_BtnClicked;
 
+            this.ucAddItem.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
 
             this.ucSelectCustomer.AddNewCustomer += addNewCustomer_BtnClicked;
             this.ucSelectCustomer.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
@@ -113,8 +114,6 @@ namespace prototype2
         {
 
             closeModals();
-
-            MainVM.isNewTrans = false;
             MainVM.StringTextBox = null;
             MainVM.DecimalTextBox = 0;
             MainVM.IntegerTextBox = 0;
@@ -124,6 +123,8 @@ namespace prototype2
             MainVM.isEdit = false;
             MainVM.isPaymentInvoice = false;
         }
+
+
 
         private void selectCustomer_BtnClicked(object sender, EventArgs e)
         {
@@ -993,7 +994,8 @@ namespace prototype2
                     ((Grid)obj).Visibility = Visibility.Collapsed;
 
             }
-            MainVM.Ldt.worker.RunWorkerAsync();
+            if(!MainVM.isNewTrans)
+                MainVM.Ldt.worker.RunWorkerAsync();
 
         }
 
@@ -1538,6 +1540,7 @@ namespace prototype2
 
         private void transQuotationAddBtn_Click(object sender, RoutedEventArgs e)
         {
+            MainVM.isNewTrans = true;
             foreach (var element in transQuotationGrid.Children)
             {
                 if (element is UserControl)

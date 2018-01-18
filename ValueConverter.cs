@@ -116,4 +116,25 @@ namespace prototype2
             return "no";
         }
     }
+
+    public class ProductNameConverter : IValueConverter
+    {
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
+        public object Convert(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            if (!value.Equals(0) && MainVM.ProductList.Count != 0)
+            {
+                MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ID.Equals(value)).First();
+                return MainVM.SelectedProduct.ItemName;
+            }
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            return "no";
+        }
+    }
 }

@@ -168,17 +168,19 @@ namespace prototype2.uControlsMaintenance
 
         private void selectProductBtn_Click(object sender, RoutedEventArgs e)
         {
+            object linqResults = null;
             foreach (Item prd in MainVM.ProductList)
             {
-                var linqResults = MainVM.RequestedItems.Where(x => x.itemID.Equals(prd.ID)).FirstOrDefault();
-                if (linqResults == null)
-                {
-                    MainVM.RequestedItems.Add(new RequestedItem() { lineNo = MainVM.RequestedItems.Count + 1, itemID = prd.ID, itemType = 0, unitPrice = 0, qtyEditable = true });
-                }
-                else
-                {
-                    MessageBox.Show("Already added in the list.");
-                }
+                linqResults = MainVM.RequestedItems.Where(x => x.itemID.Equals(prd.ID)).FirstOrDefault();
+               
+            }
+            if (linqResults == null)
+            {
+                MainVM.RequestedItems.Add(new RequestedItem() { lineNo = MainVM.RequestedItems.Count + 1, itemID = MainVM.SelectedProduct.ID, itemType = 0, unitPrice = 0, qtyEditable = true });
+            }
+            else
+            {
+                MessageBox.Show("Already added in the list.");
             }
         }
         //---- Service Part

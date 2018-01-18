@@ -81,7 +81,7 @@
                     </Binding>
                 </xctk:DecimalUpDown.Text>
             </xctk:DecimalUpDown>
-            <DatePicker x:Name="dateEffective" HorizontalAlignment="Left" Margin="132,245,0,0" VerticalAlignment="Top" Width="220" IsDropDownOpen="True"/>
+            <DatePicker x:Name="dateEffective" HorizontalAlignment="Left" Margin="132,245,0,0" VerticalAlignment="Top" Width="220"/>
             <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="28,277,0,0" Width="621" Height="100" VerticalAlignment="Top"/>
         </Grid>
         <Grid VerticalAlignment="Bottom" Background="White" MinWidth="600" Height="40">

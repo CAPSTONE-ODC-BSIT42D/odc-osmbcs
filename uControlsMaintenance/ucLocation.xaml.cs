@@ -28,6 +28,8 @@ namespace prototype2.uControlsMaintenance
         }
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
 
+        Region region = new Region();
+
         public event EventHandler SaveCloseButtonClicked;
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
@@ -55,17 +57,17 @@ namespace prototype2.uControlsMaintenance
                         {
                             MessageBox.Show("Record is Saved");
                             MainVM.Ldt.worker.RunWorkerAsync();
-
                             MainVM.Provinces = MainVM.SelectedRegion.Provinces;
                         }
                     }
                     else
                     {
-                        string query = "INSERT INTO `odc_db`.`provinces_t` (`provinceName`,`regionID`) VALUES('" + provinceNameTb.Text + "','" + MainVM.SelectedRegion.RegionID + "')";
+                        string query = "INSERT INTO `odc_db`.`provinces_t` (`provinceName`,`regionID`) VALUES('" + provinceNameTb.Text + "','" + region.RegionID + "')";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             MessageBox.Show("Record is Saved");
                             MainVM.Ldt.worker.RunWorkerAsync();
+                            MainVM.SelectedRegion = MainVM.Regions.Where(x => x.RegionID == region.RegionID).FirstOrDefault();
                             MainVM.Provinces = MainVM.SelectedRegion.Provinces;
                         }
                     }
@@ -84,7 +86,7 @@ namespace prototype2.uControlsMaintenance
                 {
                     provinceNameTb.Visibility = Visibility.Collapsed;
                     provinceLbl.Visibility = Visibility.Collapsed;
-                    MainVM.SelectedRegion.Provinces.Add(new Province() { ProvinceName = provinceNameTb.Text });
+                    region.Provinces.Add(new Province() { ProvinceName = provinceNameTb.Text });
                     addProvinceBtn.Content = "Add";
                 }
                 else
@@ -120,7 +122,7 @@ namespace prototype2.uControlsMaintenance
                 }
             }
             else
-                MainVM.SelectedRegion.Provinces.Remove(MainVM.SelectedProvince);
+                region.Provinces.Remove(MainVM.SelectedProvince);
 
         }
 
@@ -172,7 +174,6 @@ namespace prototype2.uControlsMaintenance
                 {
                     saveDataToDb();
                     MainVM.isEdit = false;
-                    MainVM.Ldt.worker.RunWorkerAsync();
                     OnSaveCloseButtonClicked(e);
                 }
                 else
@@ -212,7 +213,7 @@ namespace prototype2.uControlsMaintenance
                     string query = "UPDATE regions_t SET " +
                         "regionName = '" + regionNameTb.Text + "', " +
                         "ratePrice = '" + ratePriceTb.Value +
-                        "' WHERE id = " + MainVM.SelectedRegion.RegionID;
+                        "' WHERE id = " + region.RegionID;
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
                         MessageBox.Show("Record is Saved");
@@ -235,7 +236,7 @@ namespace prototype2.uControlsMaintenance
                         string regionID = "";
                         foreach (DataRow dr in fromDbTable.Rows)
                             regionID = dr[0].ToString();
-                        foreach (Province pr in MainVM.SelectedRegion.Provinces)
+                        foreach (Province pr in region.Provinces)
                         {
                             query = "INSERT INTO `odc_db`.`provinces_t` (`provinceName`,`regionID`) VALUES('" + pr.ProvinceName + "','"+ regionID + "')";
                             if (dbCon.insertQuery(query, dbCon.Connection))
@@ -298,13 +299,10 @@ namespace prototype2.uControlsMaintenance
 
         private void uControlLocation_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (this.IsVisible&&MainVM.isEdit)
+            if (this.IsVisible && MainVM.isEdit)
             {
                 loadDataToUi();
-            }
-            else
-            {
-                MainVM.SelectedRegion = new Region();
+                region = MainVM.SelectedRegion;
             }
             
         }

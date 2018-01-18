@@ -953,11 +953,11 @@
             <Grid x:Name="serviceGrid" d:IsHidden="True">
                 <local:ucServiceSchedule x:Name="ucService" Margin="0" Visibility="Collapsed"/>
             </Grid>
-            <Grid x:Name="reportsGrid" d:IsHidden="True">
+            <Grid x:Name="reportsGrid">
                 <local:ucReports Margin="0"/>
             </Grid>
             <Grid x:Name="maintenanceGrid">
-                <Grid x:Name="manageCustomerGrid" Margin="0,0,1,0" d:IsHidden="True" >
+                <Grid x:Name="manageCustomerGrid" Margin="0,0,1,0" >
                     <Grid x:Name="manageCustomerHomeGrid" Margin="0">
                         <Label x:Name="label13" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
                         <TextBox x:Name="searchBox4" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>
@@ -969,7 +969,7 @@
                             <ComboBoxItem Content="Supplier"/>
                         </ComboBox>
                         <Button x:Name="manageCustomerAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,20,20,0" VerticalAlignment="Top" Width="85" Background="#FF0D9E0D" BorderBrush="#FF107C10" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13" Click="manageCustomerAddBtn_Click"/>
-                        <DataGrid x:Name="manageCustomerDataGrid" Margin="20,60,20,20" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionMode="Single" MinRowHeight="20"  MinColumnWidth="0" EnableColumnVirtualization="True" ItemsSource="{Binding AllCustomerSupplier}" SelectedItem="{Binding SelectedCustomerSupplier}">
+                        <DataGrid x:Name="manageCustomerDataGrid" Margin="20,60,20,20" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionMode="Single" MinRowHeight="20"  MinColumnWidth="0" EnableColumnVirtualization="True" ItemsSource="{Binding Suppliers}" SelectedItem="{Binding SelectedCustomerSupplier}">
                             <DataGrid.Columns >
                                 <DataGridTemplateColumn Width="200" CanUserResize="False" Header="Company Name" >
                                     <DataGridTemplateColumn.CellTemplate>
@@ -1143,7 +1143,7 @@
                     </Grid>
 
                 </Grid>
-                <Grid x:Name="manageEmployeeGrid" Margin="0,0,1,0" d:IsHidden="True">
+                <Grid x:Name="manageEmployeeGrid" Margin="0,0,1,0">
                     <Grid x:Name="manageEmployeeGridHome" Margin="0">
                         <Label x:Name="label8" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
                         <TextBox x:Name="searchBox1" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>
@@ -1179,11 +1179,11 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn  Width="115" CanUserResize="False" Header="Actions"  >
+                                <DataGridTemplateColumn CanUserResize="False" Header="Actions"  >
                                     <DataGridTemplateColumn.CellTemplate >
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <Button x:Name="viewRecordBtn" Foreground="White" Width="Auto" Height="25" Click="viewRecordBtn_Click" Margin="10,10,0,10" Background="{x:Null}" BorderBrush="Black" ToolTip="View Record">
+                                                <Button x:Name="viewRecordBtn" Foreground="White" Width="Auto" Height="25" Click="viewRecordBtn_Click" Margin="10,10,0,10" Background="{x:Null}" BorderBrush="Black" ToolTip="View Record" HorizontalAlignment="Left" VerticalAlignment="Top">
                                                     <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
                                                         <Canvas x:Name="Capa_1" Width="511.626" Height="511.626" Canvas.Left="0" Canvas.Top="0">
                                                             <Canvas.RenderTransform>
@@ -1216,7 +1216,7 @@
                                                         </Canvas>
                                                     </Viewbox>
                                                 </Button>
-                                                <Button x:Name="editRecordBtn" Width="Auto" Height="25" Click="editRecordBtn_Click" Background="{x:Null}" BorderBrush="Black" Margin="10,10,0,10" ToolTip="Edit Record" >
+                                                <Button x:Name="editRecordBtn" Width="Auto" Height="25" Click="editRecordBtn_Click" Background="{x:Null}" BorderBrush="Black" Margin="10,10,0,10" ToolTip="Edit Record" HorizontalAlignment="Left" VerticalAlignment="Top" >
                                                     <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
                                                         <Canvas x:Name="Capa_1b" Width="438.536" Height="438.536" Canvas.Left="0" Canvas.Top="0">
                                                             <Canvas.RenderTransform>
@@ -1257,7 +1257,7 @@
                                                         </Canvas>
                                                     </Viewbox>
                                                 </Button>
-                                                <Button x:Name="deleteRecordBtn"  Width="Auto" Height="25" Click="deleteRecordBtn_Click" BorderBrush="Black" Background="{x:Null}" Margin="10,10,0,10" ToolTip="Delete Record">
+                                                <Button x:Name="deleteRecordBtn"  Width="Auto" Height="25" Click="deleteRecordBtn_Click" BorderBrush="Black" Background="{x:Null}" Margin="10,10,0,10" ToolTip="Delete Record" HorizontalAlignment="Left" VerticalAlignment="Top">
                                                     <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
                                                         <Canvas x:Name="Capa_1c" Width="438.529" Height="438.529" Canvas.Left="0" Canvas.Top="0">
                                                             <Canvas.RenderTransform>
@@ -1307,7 +1307,7 @@
                                                         </Canvas>
                                                     </Viewbox>
                                                 </Button>
-                                                <Button x:Name="genContractBtn" Content="Generate Contract" Click="genContractBtn_Click" Margin="12">
+                                                <Button x:Name="genContractBtn" Content="Generate Contract" Click="genContractBtn_Click" Margin="12" Background="#FFE2D1D1" HorizontalAlignment="Left" VerticalAlignment="Top">
                                                     <Button.Style>
                                                         <Style TargetType="{x:Type Button}">
                                                             <Style.Triggers>
@@ -1668,13 +1668,13 @@
                         </DataGrid>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageLocationsGrid" Margin="0,0,1,0">
+                <Grid x:Name="manageLocationsGrid" Margin="0,0,1,0" d:IsHidden="True">
                     <Grid Margin="0">
                         <Label x:Name="label7" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
                         <TextBox x:Name="searchBox7" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>
                         <Button x:Name="button7" Content="Search" HorizontalAlignment="Left" Margin="398,20,0,0" VerticalAlignment="Top" Width="84" Height="26" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="13"/>
                         <Button x:Name="manageAddRegionBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,20,20,0" VerticalAlignment="Top" Width="85" Background="#FF0D9E0D" BorderBrush="#FF107C10" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13" Click="managemanageAddRegionBtn_Click"/>
-                        <DataGrid x:Name="regionListDg" Margin="20,60,20,20" ItemsSource="{Binding Regions}" CanUserAddRows="False" MinColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="False" SelectedItem="{Binding SelectedRegion}">
+                        <DataGrid x:Name="regionListDg" Margin="20,60,20,20" ItemsSource="{Binding Regions}" CanUserAddRows="False" MinColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="False" SelectedItem="{Binding SelectedRegion}" IsSynchronizedWithCurrentItem="True">
                             <DataGrid.Columns >
                                 <DataGridTextColumn Binding="{Binding RegionName}" ClipboardContentBinding="{x:Null}" Header="Region Name" Width="150" CanUserResize="False" />
                                 <DataGridTextColumn Binding="{Binding RatePrice}" ClipboardContentBinding="{x:Null}" Header="Rate Price" Width="200" CanUserResize="False"/>
@@ -1804,7 +1804,7 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Grid x:Name="formGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3">
+        <Grid x:Name="formGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3" d:IsHidden="True">
 
             <local:ucCustSuppCRUD x:Name="ucCustSupp" HorizontalAlignment="Center" Margin="167,0,166,0" Visibility="Collapsed" d:IsHidden="True"/>
             <local:ucProductsCRUD x:Name="ucProduct" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
@@ -1888,6 +1888,7 @@
             <uControlsMaintenance:ucUnit x:Name="ucUnit" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="402" d:IsHidden="True"/>
             <uControlsMaintenance:ucLocation x:Name="ucLocation" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="458" d:IsHidden="True"/>
             <uControlsMaintenance:ucSelectCustomer x:Name="ucSelectCustomer" Margin="0" d:IsHidden="True"/>
+            <uControlsMaintenance:ucAddItem x:Name="ucAddItem" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" d:IsHidden="True"/>
 
         </Grid>
 

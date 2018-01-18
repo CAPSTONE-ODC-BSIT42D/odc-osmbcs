@@ -7,10 +7,12 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="prototype2.ucSalesQuote"
              mc:Ignorable="d" 
              d:DesignHeight="655.5" d:DesignWidth="960" IsVisibleChanged="UserControl_IsVisibleChanged">
+    
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>
     <UserControl.Resources>
+        <local:ProductNameConverter x:Key="ProductNameConverter" />
         <Storyboard x:Key="sbShowRightMenu" >
             <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,-150,0" To="0,0,0,0" DecelerationRatio="1" Duration="0:0:0.5" />
         </Storyboard>
@@ -58,8 +60,14 @@
                             Height="26" Grid.Column="1"/>
                         <DataGrid x:Name="itemDg" Margin="30,163,30,0" ItemsSource="{Binding RequestedItems}" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="False" IsReadOnly="True" VerticalAlignment="Top" Height="312" Grid.ColumnSpan="2" SelectedItem="{Binding SelectedRequestedItem}"  >
                             <DataGrid.Columns >
-                                <DataGridTextColumn Binding="{Binding itemCode}" ClipboardContentBinding="{x:Null}" Header="Item Code" Width="100" CanUserResize="False" />
-                                <DataGridTextColumn Binding="{Binding itemName}" ClipboardContentBinding="{x:Null}" Header="Item Name" Width="100" CanUserResize="False" />
+                                <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Item Name" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding itemID, Converter={StaticResource ProductNameConverter}, NotifyOnTargetUpdated=True}" VerticalContentAlignment="Center"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                
                                 <DataGridTemplateColumn Width="200" CanUserResize="False" Header="Description" >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>

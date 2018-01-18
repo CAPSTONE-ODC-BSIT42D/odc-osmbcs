@@ -120,7 +120,7 @@ namespace prototype2
                         RegionName = dr[1].ToString(),
                         RatePrice = decimal.Parse(dr[2].ToString())
                     };
-                    query = "SELECT * FROM provinces_t WHERE regionID = " + dr[0].ToString() + ";";
+                    query = "SELECT * FROM provinces_t WHERE regionID = " + dr[0].ToString() + " AND isDeleted = 0;";
                     dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                     DataSet fromDb2 = new DataSet();
                     DataTable fromDbTable2 = new DataTable();
@@ -128,7 +128,7 @@ namespace prototype2
                     fromDbTable2 = fromDb2.Tables["t"];
                     foreach (DataRow dr2 in fromDbTable2.Rows)
                     {
-                        var province = new Province() { ProvinceID = int.Parse(dr[0].ToString()), ProvinceName = dr[1].ToString(), RegionID = obj.RegionID };
+                        var province = new Province() { ProvinceID = int.Parse(dr2[0].ToString()), ProvinceName = dr2[1].ToString(), RegionID = obj.RegionID };
                         obj.Provinces.Add(province);
                         MainVM.Provinces.Add(province);
                     }
@@ -321,8 +321,14 @@ namespace prototype2
                 {
                     int empType;
                     int.TryParse(dr["empType"].ToString(), out empType);
-                    MainVM.Contractor.Add(new Employee() { EmpID = int.Parse(dr["empID"].ToString()), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(),EmpAddress = dr["empAddress"].ToString() ,JobID = int.Parse(dr["jobID"].ToString()), EmpDateFrom = DateTime.Parse(dr["empDateFrom"].ToString()), EmpDateTo = DateTime.Parse(dr["empDateTo"].ToString()), EmpUserName = dr["empUserName"].ToString(), EmpType = empType, HasAccess = bool.Parse(dr["hasAccess"].ToString()) });
-                    MainVM.AllEmployeesContractor.Add(new Employee() { EmpID = int.Parse(dr["empID"].ToString()), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), JobID = int.Parse(dr["jobID"].ToString()), EmpDateFrom = DateTime.Parse(dr["empDateFrom"].ToString()), EmpDateTo = DateTime.Parse(dr["empDateTo"].ToString()), EmpUserName = dr["empUserName"].ToString(), EmpType = empType, HasAccess = bool.Parse(dr["hasAccess"].ToString()) });
+                    DateTime dateTo;
+                    DateTime.TryParse(dr["empDateTo"].ToString(), out dateTo);
+
+                    DateTime dateFrom;
+                    DateTime.TryParse(dr["empDateFrom"].ToString(), out dateFrom);
+
+                    MainVM.Contractor.Add(new Employee() { EmpID = int.Parse(dr["empID"].ToString()), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(),EmpAddress = dr["empAddress"].ToString() ,JobID = int.Parse(dr["jobID"].ToString()), EmpDateFrom = dateFrom, EmpDateTo = dateTo, EmpUserName = dr["empUserName"].ToString(), EmpType = empType, HasAccess = bool.Parse(dr["hasAccess"].ToString()) });
+                    MainVM.AllEmployeesContractor.Add(new Employee() { EmpID = int.Parse(dr["empID"].ToString()), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), JobID = int.Parse(dr["jobID"].ToString()), EmpDateFrom = dateFrom, EmpDateTo = dateTo, EmpUserName = dr["empUserName"].ToString(), EmpType = empType, HasAccess = bool.Parse(dr["hasAccess"].ToString()) });
                 }
                 dbCon.Close();
             }

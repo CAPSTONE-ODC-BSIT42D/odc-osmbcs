@@ -298,9 +298,7 @@ namespace prototype2.uControlsMaintenance
                         empUserNameTb.Text + "'," +
                         "md5('" +
                         empLastNameTb.Text +
-                        "'),'" +
-                        empDateStarted.SelectedDate + "','" +
-                        empDateEnded.SelectedDate + "','0'," +
+                        "'),null,null,'0'," +
                         hasAccessCb.IsChecked +
                         "); ";
                     }
@@ -315,8 +313,8 @@ namespace prototype2.uControlsMaintenance
                         empAddressTb.Text + "'," +
                         "null,'" +
                         empJobCb.SelectedValue + "','" +
-                        empDateStarted.SelectedDate + "','" +
-                        empDateEnded.SelectedDate + "','1'," +
+                        empDateStarted.SelectedDate.Value.ToString("yyyy-MM-dd") +"','" +
+                        empDateEnded.SelectedDate.Value.ToString("yyyy-MM-dd")+"','1'," +
                         hasAccessCb.IsChecked +
                         "); ";
                     }
@@ -328,7 +326,7 @@ namespace prototype2.uControlsMaintenance
                     }
                 }
             }
-            MainVM.Ldt.worker.RunWorkerAsync();
+            
         }
 
         void resetFieldsValue()
