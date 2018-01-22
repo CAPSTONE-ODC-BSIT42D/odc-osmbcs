@@ -41,6 +41,8 @@ namespace prototype2.uControlsMaintenance
         {
             if (IsLoaded)
             {
+
+                saveCancelGrid3.Visibility = Visibility.Collapsed;
                 for (int x = 1; x < forms.Children.Count; x++)
                 {
                     forms.Children[x].Visibility = Visibility.Hidden;
@@ -58,8 +60,10 @@ namespace prototype2.uControlsMaintenance
 
         private void serviceRbtn_Checked(object sender, RoutedEventArgs e)
         {
+            
             if (IsLoaded)
             {
+                saveCancelGrid3.Visibility = Visibility.Visible;
                 for (int x = 1; x < forms.Children.Count; x++)
                 {
                     forms.Children[x].Visibility = Visibility.Hidden;
@@ -176,7 +180,7 @@ namespace prototype2.uControlsMaintenance
             }
             if (linqResults == null)
             {
-                MainVM.RequestedItems.Add(new RequestedItem() { lineNo = MainVM.RequestedItems.Count + 1, itemID = MainVM.SelectedProduct.ID, itemType = 0, unitPrice = 0, qtyEditable = true });
+                MainVM.RequestedItems.Add(new RequestedItem() { lineNo = MainVM.RequestedItems.Count + 1, itemID = MainVM.SelectedProduct.ID, itemType = 0, qty = 1,unitPrice = 0, qtyEditable = true });
             }
             else
             {
@@ -186,13 +190,7 @@ namespace prototype2.uControlsMaintenance
         //---- Service Part
         private void addProductBtn_Click(object sender, RoutedEventArgs e)
         {
-
-            //Add Item In to List
-            if ((bool)productRbtn.IsChecked)
-            {
-                
-            }
-            else if ((bool)serviceRbtn.IsChecked)
+            if ((bool)serviceRbtn.IsChecked)
             {
                 foreach (var element in addNewServiceForm.Children)
                 {

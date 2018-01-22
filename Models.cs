@@ -692,6 +692,15 @@ namespace prototype2
             get { return _unitprice; }
             set { SetProperty(ref _unitprice, value); }
         }
+
+        private decimal _unitPriceMarkUp;
+        public decimal unitPriceMarkUp
+        {
+            get { return _unitPriceMarkUp; }
+            set { SetProperty(ref _unitPriceMarkUp, value); }
+        }
+        
+
         private decimal _totalAmount;
         public decimal totalAmount
         {

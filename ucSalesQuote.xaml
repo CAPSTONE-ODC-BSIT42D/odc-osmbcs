@@ -108,7 +108,7 @@
                                 <DataGridTemplateColumn Header="Qty" Width="60">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <xctk:IntegerUpDown x:Name="qtyTb" Value ="{Binding qty, UpdateSourceTrigger=PropertyChanged}" ValueChanged="qtyTb_ValueChanged" Minimum="1" Text="1" />
+                                            <xctk:IntegerUpDown x:Name="qtyTb" Value ="{Binding qty, UpdateSourceTrigger=PropertyChanged}" ValueChanged="qtyTb_ValueChanged" Minimum="1" Text="1" VerticalAlignment="Center" Margin="0" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                     <DataGridTemplateColumn.CellStyle>
@@ -121,14 +121,27 @@
                                         </Style>
                                     </DataGridTemplateColumn.CellStyle>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Unit Price" Width="60">
+                                <DataGridTemplateColumn Header="Unit Price" Width="100">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <xctk:DecimalUpDown x:Name="unitPriceTb" Value ="{Binding unitPrice, UpdateSourceTrigger=PropertyChanged}" ValueChanged="unitPriceTb_ValueChanged" Minimum="1" Text="1" />
+                                            <xctk:DecimalUpDown x:Name="unitPriceTb" Value ="{Binding unitPrice, UpdateSourceTrigger=PropertyChanged}"  Minimum="1" Text="1" VerticalAlignment="Center" DisplayDefaultValueOnEmptyText="True" ValueChanged="unitPriceTb_ValueChanged" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTextColumn Binding="{Binding totalAmount}" ClipboardContentBinding="{x:Null}" Header="Total Amount" Width="100"  />
+                                <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Unit Price + Markup" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding unitPriceMarkUp,  StringFormat=N2}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Total Amount" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding totalAmount,  StringFormat=N2}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                                 <DataGridTemplateColumn Header="Fees" Width="100">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>

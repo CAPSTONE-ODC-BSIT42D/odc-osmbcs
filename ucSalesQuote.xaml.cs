@@ -486,21 +486,20 @@ namespace prototype2
         {
             computePrice();
         }
-
+        
+        private void IntegerUpDown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            computePrice();
+        }
 
         private void unitPriceTb_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             computePrice();
         }
 
-        private void IntegerUpDown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            computePrice();
-        }
-
         private void computePrice()
         {
-            decimal totalFee = 0;
+            decimal unitPrice = 0;
             decimal totalPrice = 0;
 
             foreach (RequestedItem item in MainVM.RequestedItems)
@@ -508,9 +507,8 @@ namespace prototype2
                 if (item.itemType == 0)
                 {
                     MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ID == item.itemID).FirstOrDefault();
-                    item.unitPrice = item.unitPrice + (item.unitPrice / 100 * (decimal)MainVM.SelectedProduct.MarkUpPerc);
-                    item.totalAmount = (item.unitPrice * item.qty) - ((item.unitPrice * item.qty) / 100) * (decimal)discountPriceTb.Value;
-
+                    item.unitPriceMarkUp = item.unitPrice + (item.unitPrice / 100 * (decimal)MainVM.SelectedProduct.MarkUpPerc);
+                    item.totalAmount = (item.unitPriceMarkUp * item.qty) - ((item.unitPriceMarkUp * item.qty) / 100) * (decimal)discountPriceTb.Value;
                 }
                 else if (item.itemType == 1)
                 {
@@ -863,6 +861,7 @@ namespace prototype2
             
         }
 
+       
     }
     
 }
