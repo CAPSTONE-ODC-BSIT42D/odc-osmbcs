@@ -223,7 +223,7 @@ namespace prototype2
         protected string companyDesc;
         protected string companyAddress;
         protected string companyCity;
-        protected string companyProvinceID;
+        protected int companyProvinceID;
         protected string companyPostalCode;
         protected string companyEmail;
         protected string companyTelephone;
@@ -263,7 +263,7 @@ namespace prototype2
             get { return companyCity; }
             set { SetProperty(ref companyCity, value); }
         }
-        public string CompanyProvinceID
+        public int CompanyProvinceID
         {
             get { return companyProvinceID; }
             set { SetProperty(ref companyProvinceID, value); }
@@ -577,6 +577,13 @@ namespace prototype2
         {
             get { return provinceID; }
             set { SetProperty(ref provinceID, value); }
+        }
+
+        protected string address;
+        public string Address
+        {
+            get { return address; }
+            set { SetProperty(ref address, value); }
         }
 
 

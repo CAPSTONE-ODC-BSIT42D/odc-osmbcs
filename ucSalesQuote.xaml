@@ -13,6 +13,7 @@
     </UserControl.DataContext>
     <UserControl.Resources>
         <local:ProductNameConverter x:Key="ProductNameConverter" />
+        <local:ServiceNameConverter x:Key="ServiceNameConverter" />
         <Storyboard x:Key="sbShowRightMenu" >
             <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,-150,0" To="0,0,0,0" DecelerationRatio="1" Duration="0:0:0.5" />
         </Storyboard>
@@ -63,7 +64,21 @@
                                 <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Item Name" >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Label Content="{Binding itemID, Converter={StaticResource ProductNameConverter}, NotifyOnTargetUpdated=True}" VerticalContentAlignment="Center"/>
+                                            <Label>
+                                                <Label.Style>
+                                                    <Style TargetType="{x:Type Label}">
+                                                        <Setter Property="Content" Value="{Binding itemType}" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding itemType}" Value="0">
+                                                                <Setter Property="Content" Value="{Binding itemID, Converter={StaticResource ProductNameConverter}, NotifyOnTargetUpdated=True}" />
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding itemType}" Value="1">
+                                                                <Setter Property="Content" Value = "{Binding itemID, Converter={StaticResource ServiceNameConverter}, NotifyOnTargetUpdated=True}" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Label.Style>
+                                            </Label>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -316,7 +331,7 @@
                         <TextBox x:Name="otherFeenameTb" HorizontalAlignment="Left" Height="23" Margin="209,72,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Visibility="Hidden"/>
                         <xctk:DecimalUpDown x:Name="feeCostTb" HorizontalAlignment="Left" Margin="84,103,0,0" VerticalAlignment="Top" Width="120"/>
                         <Button x:Name="addSaveAdditionalFeesBtn" Content="Add" HorizontalAlignment="Left" Margin="222,103,0,0" VerticalAlignment="Top" Width="75" Click="addSaveAdditionalFeesBtn_Click"/>
-                        <DataGrid x:Name="additionalFeesDg" Margin="39,0,41,8" ItemsSource="{Binding SelectedAddedService.AdditionalFees}" AutoGenerateColumns="False" CanUserReorderColumns="False" MinColumnWidth="50" Height="202" VerticalAlignment="Bottom" SelectedItem="{Binding SelectedAdditionalFee}" CanUserAddRows="False">
+                        <DataGrid x:Name="additionalFeesDg" Margin="39,0,41,8" ItemsSource="{Binding SelectedAvailedServices.AdditionalFees}" AutoGenerateColumns="False" CanUserReorderColumns="False" MinColumnWidth="50" Height="202" VerticalAlignment="Bottom" SelectedItem="{Binding SelectedAdditionalFee}" CanUserAddRows="False">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Fee Name" >
                                     <DataGridTemplateColumn.CellTemplate>

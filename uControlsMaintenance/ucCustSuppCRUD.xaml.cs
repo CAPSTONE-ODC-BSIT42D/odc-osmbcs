@@ -47,142 +47,142 @@ namespace prototype2
                 handler(this, e);
         }
 
-        private void contactDetails_Checked(object sender, RoutedEventArgs e)
-        {
-            string propertyName = ((CheckBox)sender).Name;
+        //private void contactDetails_Checked(object sender, RoutedEventArgs e)
+        //{
+        //    string propertyName = ((CheckBox)sender).Name;
 
-            if (propertyName.Equals(companyTelCb.Name))
-            {
-                if ((bool)companyTelCb.IsChecked && (bool)companyMobCb.IsChecked && (bool)companyEmailCb.IsChecked)
-                {
-                    MessageBox.Show("Atleast one contact information is needed");
-                    companyTelCb.IsChecked = false;
-                }
-                else
-                {
-                    if (companyTelephoneTb.IsEnabled)
-                    {
-                        companyTelephoneTb.IsEnabled = false;
-                        companyTelephoneTb.Text = "";
-                    }
-                }
-            }
-            else if (propertyName.Equals(companyMobCb.Name))
-            {
-                if ((bool)companyTelCb.IsChecked && (bool)companyMobCb.IsChecked && (bool)companyEmailCb.IsChecked)
-                {
-                    MessageBox.Show("Atleast one contact information is needed");
-                    companyMobCb.IsChecked = false;
-                }
-                else
-                {
-                    if (companyMobileTb.IsEnabled)
-                    {
-                        companyMobileTb.IsEnabled = false;
-                        companyMobileTb.Text = "";
-                    }
-                }
-            }
-            else if (propertyName.Equals(companyEmailCb.Name))
-            {
-                if ((bool)companyTelCb.IsChecked && (bool)companyMobCb.IsChecked && (bool)companyEmailCb.IsChecked)
-                {
-                    MessageBox.Show("Atleast one contact information is needed");
-                    companyEmailCb.IsChecked = false;
-                }
-                else
-                {
-                    if (companyEmailTb.IsEnabled)
-                    {
-                        companyEmailTb.IsEnabled = false;
-                        companyEmailTb.Text = "";
-                    }
-                }
-            }
-            else if (propertyName.Equals(repTelCb.Name))
-            {
-                if ((bool)repTelCb.IsChecked && (bool)repMobCb.IsChecked && (bool)repEmailCb.IsChecked)
-                {
-                    MessageBox.Show("Atleast one contact information is needed");
-                    repTelCb.IsChecked = false;
-                }
-                else
-                {
-                    if (repTelephoneTb.IsEnabled)
-                    {
-                        repTelephoneTb.IsEnabled = false;
-                        repTelephoneTb.Text = "";
-                    }
-                }
-            }
-            else if (propertyName.Equals(repMobCb.Name))
-            {
-                if ((bool)repTelCb.IsChecked && (bool)repMobCb.IsChecked && (bool)repEmailCb.IsChecked)
-                {
-                    MessageBox.Show("Atleast one contact information is needed");
-                    repMobCb.IsChecked = false;
-                }
-                else
-                {
-                    if (repMobileTb.IsEnabled)
-                    {
-                        repMobileTb.IsEnabled = false;
-                        repMobileTb.Text = "";
-                    }
-                }
-            }
-            else if (propertyName.Equals(repEmailCb.Name))
-            {
-                if ((bool)repTelCb.IsChecked && (bool)repMobCb.IsChecked && (bool)repEmailCb.IsChecked)
-                {
-                    MessageBox.Show("Atleast one contact information is needed");
-                    repEmailCb.IsChecked = false;
-                }
-                else
-                {
-                    if (repEmailTb.IsEnabled)
-                    {
-                        repEmailTb.IsEnabled = false;
-                        repEmailTb.Text = "";
-                    }
-                }
-            }
-        }
+        //    if (propertyName.Equals(companyTelCb.Name))
+        //    {
+        //        if ((bool)companyTelCb.IsChecked && (bool)companyMobCb.IsChecked && (bool)companyEmailCb.IsChecked)
+        //        {
+        //            MessageBox.Show("Atleast one contact information is needed");
+        //            companyTelCb.IsChecked = false;
+        //        }
+        //        else
+        //        {
+        //            if (companyTelephoneTb.IsEnabled)
+        //            {
+        //                companyTelephoneTb.IsEnabled = false;
+        //                companyTelephoneTb.Text = "";
+        //            }
+        //        }
+        //    }
+        //    else if (propertyName.Equals(companyMobCb.Name))
+        //    {
+        //        if ((bool)companyTelCb.IsChecked && (bool)companyMobCb.IsChecked && (bool)companyEmailCb.IsChecked)
+        //        {
+        //            MessageBox.Show("Atleast one contact information is needed");
+        //            companyMobCb.IsChecked = false;
+        //        }
+        //        else
+        //        {
+        //            if (companyMobileTb.IsEnabled)
+        //            {
+        //                companyMobileTb.IsEnabled = false;
+        //                companyMobileTb.Text = "";
+        //            }
+        //        }
+        //    }
+        //    else if (propertyName.Equals(companyEmailCb.Name))
+        //    {
+        //        if ((bool)companyTelCb.IsChecked && (bool)companyMobCb.IsChecked && (bool)companyEmailCb.IsChecked)
+        //        {
+        //            MessageBox.Show("Atleast one contact information is needed");
+        //            companyEmailCb.IsChecked = false;
+        //        }
+        //        else
+        //        {
+        //            if (companyEmailTb.IsEnabled)
+        //            {
+        //                companyEmailTb.IsEnabled = false;
+        //                companyEmailTb.Text = "";
+        //            }
+        //        }
+        //    }
+        //    else if (propertyName.Equals(repTelCb.Name))
+        //    {
+        //        if ((bool)repTelCb.IsChecked && (bool)repMobCb.IsChecked && (bool)repEmailCb.IsChecked)
+        //        {
+        //            MessageBox.Show("Atleast one contact information is needed");
+        //            repTelCb.IsChecked = false;
+        //        }
+        //        else
+        //        {
+        //            if (repTelephoneTb.IsEnabled)
+        //            {
+        //                repTelephoneTb.IsEnabled = false;
+        //                repTelephoneTb.Text = "";
+        //            }
+        //        }
+        //    }
+        //    else if (propertyName.Equals(repMobCb.Name))
+        //    {
+        //        if ((bool)repTelCb.IsChecked && (bool)repMobCb.IsChecked && (bool)repEmailCb.IsChecked)
+        //        {
+        //            MessageBox.Show("Atleast one contact information is needed");
+        //            repMobCb.IsChecked = false;
+        //        }
+        //        else
+        //        {
+        //            if (repMobileTb.IsEnabled)
+        //            {
+        //                repMobileTb.IsEnabled = false;
+        //                repMobileTb.Text = "";
+        //            }
+        //        }
+        //    }
+        //    else if (propertyName.Equals(repEmailCb.Name))
+        //    {
+        //        if ((bool)repTelCb.IsChecked && (bool)repMobCb.IsChecked && (bool)repEmailCb.IsChecked)
+        //        {
+        //            MessageBox.Show("Atleast one contact information is needed");
+        //            repEmailCb.IsChecked = false;
+        //        }
+        //        else
+        //        {
+        //            if (repEmailTb.IsEnabled)
+        //            {
+        //                repEmailTb.IsEnabled = false;
+        //                repEmailTb.Text = "";
+        //            }
+        //        }
+        //    }
+        //}
 
-        private void contactDetail_Unchecked(object sender, RoutedEventArgs e)
-        {
-            string propertyName = ((CheckBox)sender).Name;
-            if (propertyName.Equals(companyTelCb.Name))
-            {
-                if (!companyTelephoneTb.IsEnabled)
-                    companyTelephoneTb.IsEnabled = true;
-            }
-            else if (propertyName.Equals(companyMobCb.Name))
-            {
-                if (!companyMobileTb.IsEnabled)
-                    companyMobileTb.IsEnabled = true;
-            }
-            else if (propertyName.Equals(companyEmailCb.Name))
-            {
-                if (!companyEmailTb.IsEnabled)
-                    companyEmailTb.IsEnabled = true;
-            }
-            else if (propertyName.Equals(repTelCb.Name))
-            {
-                if (!repTelephoneTb.IsEnabled)
-                    repTelephoneTb.IsEnabled = true;
-            }
-            else if (propertyName.Equals(repMobCb.Name))
-            {
-                if (!repMobileTb.IsEnabled)
-                    repMobileTb.IsEnabled = true;
-            }
-            else if (propertyName.Equals(repEmailCb.Name))
-            {
-                if (!repEmailTb.IsEnabled)
-                    repEmailTb.IsEnabled = true;
-            }
-        }
+        //private void contactDetail_Unchecked(object sender, RoutedEventArgs e)
+        //{
+        //    string propertyName = ((CheckBox)sender).Name;
+        //    if (propertyName.Equals(companyTelCb.Name))
+        //    {
+        //        if (!companyTelephoneTb.IsEnabled)
+        //            companyTelephoneTb.IsEnabled = true;
+        //    }
+        //    else if (propertyName.Equals(companyMobCb.Name))
+        //    {
+        //        if (!companyMobileTb.IsEnabled)
+        //            companyMobileTb.IsEnabled = true;
+        //    }
+        //    else if (propertyName.Equals(companyEmailCb.Name))
+        //    {
+        //        if (!companyEmailTb.IsEnabled)
+        //            companyEmailTb.IsEnabled = true;
+        //    }
+        //    else if (propertyName.Equals(repTelCb.Name))
+        //    {
+        //        if (!repTelephoneTb.IsEnabled)
+        //            repTelephoneTb.IsEnabled = true;
+        //    }
+        //    else if (propertyName.Equals(repMobCb.Name))
+        //    {
+        //        if (!repMobileTb.IsEnabled)
+        //            repMobileTb.IsEnabled = true;
+        //    }
+        //    else if (propertyName.Equals(repEmailCb.Name))
+        //    {
+        //        if (!repEmailTb.IsEnabled)
+        //            repEmailTb.IsEnabled = true;
+        //    }
+        //}
 
         private void editCompanyBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -210,9 +210,12 @@ namespace prototype2
 
         private void saveRecordBtn_Click(object sender, RoutedEventArgs e)
         {
+            bool hasCompContact = true;
+            bool hasRepContact = true;
             MessageBoxResult result = MessageBox.Show("Do you want to save?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Information);
             if (result == MessageBoxResult.OK)
             {
+
                 foreach (var element in companyDetailsFormGrid1.Children)
                 {
                     if (element is TextBox)
@@ -226,6 +229,7 @@ namespace prototype2
                                 if (Validation.GetHasError((TextBox)element))
                                     validationError = true;
                             }
+                            
                         }
                     }
                     if (element is ComboBox)
@@ -235,6 +239,67 @@ namespace prototype2
                         if (Validation.GetHasError((ComboBox)element))
                             validationError = true;
                     }
+                }
+                if (String.IsNullOrWhiteSpace(companyMobileTb.Text) && String.IsNullOrWhiteSpace(companyEmailTb.Text) && String.IsNullOrWhiteSpace(companyTelephoneTb.Text))
+                {
+                    BindingExpression bindingExpression = BindingOperations.GetBindingExpression(companyMobileTb, TextBox.TextProperty);
+
+                    BindingExpressionBase bindingExpressionBase = BindingOperations.GetBindingExpressionBase(companyMobileTb, TextBox.TextProperty);
+
+                    ValidationError validationErrorA = new ValidationError(new ExceptionValidationRule(), bindingExpression);
+                    validationErrorA.ErrorContent = "Atleast 1 Contact Details is needed";
+                    Validation.MarkInvalid(bindingExpressionBase, validationErrorA);
+
+
+                    BindingExpression bindingExpression1 = BindingOperations.GetBindingExpression(companyEmailTb, TextBox.TextProperty);
+
+                    BindingExpressionBase bindingExpressionBase1 = BindingOperations.GetBindingExpressionBase(companyEmailTb, TextBox.TextProperty);
+
+                    ValidationError validationErrorA1 = new ValidationError(new ExceptionValidationRule(), bindingExpression1);
+                    validationErrorA1.ErrorContent = "Atleast 1 Contact Details is needed";
+                    Validation.MarkInvalid(bindingExpressionBase1, validationErrorA1);
+
+
+                    BindingExpression bindingExpression2 = BindingOperations.GetBindingExpression(companyTelephoneTb, TextBox.TextProperty);
+
+                    BindingExpressionBase bindingExpressionBase2 = BindingOperations.GetBindingExpressionBase(companyTelephoneTb, TextBox.TextProperty);
+
+                    ValidationError validationErrorA2 = new ValidationError(new ExceptionValidationRule(), bindingExpression2);
+                    validationErrorA2.ErrorContent = "Atleast 1 Contact Details is needed";
+                    Validation.MarkInvalid(bindingExpressionBase2, validationErrorA2);
+
+                    validationError = true;
+                }
+
+                if (String.IsNullOrWhiteSpace(repMobileTb.Text) && String.IsNullOrWhiteSpace(repEmailTb.Text) && String.IsNullOrWhiteSpace(repTelephoneTb.Text))
+                {
+                    BindingExpression bindingExpression = BindingOperations.GetBindingExpression(repMobileTb, TextBox.TextProperty);
+
+                    BindingExpressionBase bindingExpressionBase = BindingOperations.GetBindingExpressionBase(repMobileTb, TextBox.TextProperty);
+
+                    ValidationError validationErrorA = new ValidationError(new ExceptionValidationRule(), bindingExpression);
+                    validationErrorA.ErrorContent = "Atleast 1 Contact Details is needed";
+                    Validation.MarkInvalid(bindingExpressionBase, validationErrorA);
+
+
+                    BindingExpression bindingExpression1 = BindingOperations.GetBindingExpression(repEmailTb, TextBox.TextProperty);
+
+                    BindingExpressionBase bindingExpressionBase1 = BindingOperations.GetBindingExpressionBase(repEmailTb, TextBox.TextProperty);
+
+                    ValidationError validationErrorA1 = new ValidationError(new ExceptionValidationRule(), bindingExpression1);
+                    validationErrorA1.ErrorContent = "Atleast 1 Contact Details is needed";
+                    Validation.MarkInvalid(bindingExpressionBase1, validationErrorA1);
+
+
+                    BindingExpression bindingExpression2 = BindingOperations.GetBindingExpression(repTelephoneTb, TextBox.TextProperty);
+
+                    BindingExpressionBase bindingExpressionBase2 = BindingOperations.GetBindingExpressionBase(repTelephoneTb, TextBox.TextProperty);
+
+                    ValidationError validationErrorA2 = new ValidationError(new ExceptionValidationRule(), bindingExpression2);
+                    validationErrorA2.ErrorContent = "Atleast 1 Contact Details is needed";
+                    Validation.MarkInvalid(bindingExpressionBase2, validationErrorA2);
+
+                    validationError = true;
                 }
                 if (!validationError)
                 {
@@ -388,22 +453,22 @@ namespace prototype2
             companyEmailTb.Text = MainVM.SelectedCustomerSupplier.CompanyEmail;
             companyTelephoneTb.Text = MainVM.SelectedCustomerSupplier.CompanyTelephone;
             companyMobileTb.Text = MainVM.SelectedCustomerSupplier.CompanyMobile;
-            if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyTelephone))
-            {
-                companyTelCb.IsChecked = false;
-                companyTelCb.IsChecked = true;
-            }
+            //if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyTelephone))
+            //{
+            //    companyTelCb.IsChecked = false;
+            //    companyTelCb.IsChecked = true;
+            //}
 
-            if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyMobile))
-            {
-                companyMobCb.IsChecked = false;
-                companyMobCb.IsChecked = true;
-            }
-            if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyEmail))
-            {
-                companyEmailCb.IsChecked = false;
-                companyEmailCb.IsChecked = true;
-            }
+            //if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyMobile))
+            //{
+            //    companyMobCb.IsChecked = false;
+            //    companyMobCb.IsChecked = true;
+            //}
+            //if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyEmail))
+            //{
+            //    companyEmailCb.IsChecked = false;
+            //    companyEmailCb.IsChecked = true;
+            //}
             representativeTitle.Text = MainVM.SelectedCustomerSupplier.RepTitle;
             repFirstNameTb.Text = MainVM.SelectedCustomerSupplier.RepFirstName;
             repMiddleInitialTb.Text = MainVM.SelectedCustomerSupplier.RepMiddleName;
@@ -411,21 +476,21 @@ namespace prototype2
             repEmailTb.Text = MainVM.SelectedCustomerSupplier.RepEmail;
             repTelephoneTb.Text = MainVM.SelectedCustomerSupplier.RepTelephone;
             repMobileTb.Text = MainVM.SelectedCustomerSupplier.RepMobile;
-            if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.RepTelephone))
-            {
-                repTelCb.IsChecked = false;
-                repTelCb.IsChecked = true;
-            }
-            if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.RepMobile))
-            {
-                repMobCb.IsChecked = false;
-                repMobCb.IsChecked = true;
-            }
-            if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.RepEmail))
-            {
-                repEmailCb.IsChecked = false;
-                repEmailCb.IsChecked = true;
-            }
+            //if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.RepTelephone))
+            //{
+            //    repTelCb.IsChecked = false;
+            //    repTelCb.IsChecked = true;
+            //}
+            //if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.RepMobile))
+            //{
+            //    repMobCb.IsChecked = false;
+            //    repMobCb.IsChecked = true;
+            //}
+            //if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.RepEmail))
+            //{
+            //    repEmailCb.IsChecked = false;
+            //    repEmailCb.IsChecked = true;
+            //}
         }
 
         private void resetFieldsValue()

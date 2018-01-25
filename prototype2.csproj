@@ -244,6 +244,9 @@
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="TextBoxValidation.cs" />
+    <Compile Include="uControlsMaintenance\ucInvoiceForm.xaml.cs">
+      <DependentUpon>ucInvoiceForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="uControlsMaintenance\ucAddItem.xaml.cs">
       <DependentUpon>ucAddItem.xaml</DependentUpon>
     </Compile>
@@ -253,11 +256,11 @@
     <Compile Include="ucDashboard.xaml.cs">
       <DependentUpon>ucDashboard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucInvoice.xaml.cs">
-      <DependentUpon>ucInvoice.xaml</DependentUpon>
-    </Compile>
     <Compile Include="uControlsMaintenance\ucEmployeeForm.xaml.cs">
       <DependentUpon>ucEmployeeForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="uControlsMaintenance\ucInvoicePaymentForm.xaml.cs">
+      <DependentUpon>ucInvoicePaymentForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="uControlsMaintenance\ucLocation.xaml.cs">
       <DependentUpon>ucLocation.xaml</DependentUpon>
@@ -336,6 +339,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="uControlsMaintenance\ucInvoiceForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="uControlsMaintenance\ucAddItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -348,11 +355,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucInvoice.xaml">
+    <Page Include="uControlsMaintenance\ucEmployeeForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="uControlsMaintenance\ucEmployeeForm.xaml">
+    <Page Include="uControlsMaintenance\ucInvoicePaymentForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
