@@ -1613,6 +1613,9 @@ namespace prototype2
             ucContract.Visibility = Visibility.Visible;
         }
 
-        
+        private void ucEmployee_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

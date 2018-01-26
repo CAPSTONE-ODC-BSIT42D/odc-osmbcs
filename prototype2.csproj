@@ -82,10 +82,7 @@
       <HintPath>packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.WebForms.DLL</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.ReportViewer.Runtime.WinForms.12.0.2402.15\lib\Microsoft.ReportViewer.WinForms.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
       <Private>True</Private>
@@ -228,11 +225,31 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="odc_DataSetService.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>odc_DataSetService.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="odc_DataSetPurchase.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>odc_DataSetPurchase.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DocumentViewer.xaml.cs">
       <DependentUpon>DocumentViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="InvoiceDocument.cs" />
     <Compile Include="LoadDataToUI.cs" />
+    <Compile Include="odc_dbDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>odc_dbDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="odc_dbDataSetSales.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>odc_dbDataSetSales.xsd</DependentUpon>
+    </Compile>
     <Compile Include="SalesQuoteDocument.cs" />
     <Compile Include="MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
@@ -437,6 +454,50 @@
     <None Include="DataSet1.xss">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </None>
+    <None Include="odc_DataSetService.xsc">
+      <DependentUpon>odc_DataSetService.xsd</DependentUpon>
+    </None>
+    <None Include="odc_DataSetService.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>odc_DataSetService.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="odc_DataSetService.xss">
+      <DependentUpon>odc_DataSetService.xsd</DependentUpon>
+    </None>
+    <None Include="odc_DataSetPurchase.xsc">
+      <DependentUpon>odc_DataSetPurchase.xsd</DependentUpon>
+    </None>
+    <None Include="odc_DataSetPurchase.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>odc_DataSetPurchase.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="odc_DataSetPurchase.xss">
+      <DependentUpon>odc_DataSetPurchase.xsd</DependentUpon>
+    </None>
+    <None Include="odc_dbDataSet.xsc">
+      <DependentUpon>odc_dbDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="odc_dbDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>odc_dbDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="odc_dbDataSet.xss">
+      <DependentUpon>odc_dbDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="odc_dbDataSetSales.xsc">
+      <DependentUpon>odc_dbDataSetSales.xsd</DependentUpon>
+    </None>
+    <None Include="odc_dbDataSetSales.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>odc_dbDataSetSales.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="odc_dbDataSetSales.xss">
+      <DependentUpon>odc_dbDataSetSales.xsd</DependentUpon>
+    </None>
     <None Include="prototype2_TemporaryKey.pfx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -485,8 +546,11 @@
     <EmbeddedResource Include="rdlcfiles\SalesReport.rdlc" />
     <EmbeddedResource Include="rdlcfiles\NoticeOfEmployment.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="rdlcfiles\OfficialReceipt.rdlc" />
+    <EmbeddedResource Include="rdlcfiles\OfficialReceipt.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="rdlcfiles\PurchaseOrder.rdlc" />
     <EmbeddedResource Include="Resources\odclogo.png" />
   </ItemGroup>
