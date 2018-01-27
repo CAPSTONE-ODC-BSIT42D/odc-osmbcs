@@ -103,7 +103,7 @@ namespace prototype2.uControlsMaintenance
                     {
                         if (((ComboBox)element).Name.Equals(serviceProvinceCb.Name))
                         {
-                            serviceProvinceCb.SelectedIndex = int.Parse(MainVM.SelectedCustomerSupplier.CompanyProvinceID) - 1;
+                            serviceProvinceCb.SelectedValue = MainVM.SelectedCustomerSupplier.CompanyProvinceID;
                             serviceProvinceCb.IsEnabled = false;
                         }
                     }
@@ -216,35 +216,14 @@ namespace prototype2.uControlsMaintenance
                 }
                 if (!validationError)
                 {
-                    MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(serviceTypeCb.SelectedValue.ToString())).First();
-                    MainVM.SelectedProvince = MainVM.Provinces.Where(x => x.ProvinceID == int.Parse(serviceProvinceCb.SelectedValue.ToString())).First();
+                    MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID == int.Parse(serviceTypeCb.SelectedValue.ToString())).First();
+                    
 
-                    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                    MainVM.SelectedRegion = MainVM.Regions.Where(x => x.Provinces.Contains(MainVM.SelectedProvince)).FirstOrDefault();
 
-                    var random = new Random();
-                    string serviceNoChar = "";
-                    for (int i = 0; i < 4; i++)
-                    {
-                        if (!(i > 3))
-                        {
-                            serviceNoChar += chars[random.Next(chars.Length)];
-                        }
-                    }
-                    serviceNoChar += MainVM.SalesQuotes.Count + 1;
-                    serviceNoChar += "-";
-                    if (MainVM.SelectedService.ServiceName.Length > 5)
-                    {
-                        serviceNoChar += MainVM.SelectedService.ServiceName.Trim().Substring(0, 5).ToUpper();
-                    }
-                    else
-                        serviceNoChar += MainVM.SelectedService.ServiceName.Trim().ToUpper();
-                    serviceNoChar += "-";
-                    serviceNoChar += DateTime.Now.ToString("yyyy-MM-dd");
-
-
-                    //MainVM.AddedServices.Add(new AddedService() { TableNoChar = serviceNoChar, ServiceID = MainVM.SelectedService.ServiceID, ProvinceID = MainVM.SelectedProvince.ProvinceID, Address = serviceAddressTb.Text, City = serviceCityTb.Text, TotalCost = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice });
-
-                    //MainVM.RequestedItems.Add(new RequestedItem() { lineNo = (MainVM.RequestedItems.Count + 1).ToString(), itemCode = serviceNoChar, itemName = MainVM.SelectedService.ServiceName, desc = serviceDescTb.Text, itemTypeName = "Service", itemType = 1, qty = 1, unitPrice = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, totalAmount = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, totalAmountMarkUp = MainVM.SelectedService.ServicePrice + MainVM.SelectedProvince.ProvincePrice, qtyEditable = false });
+                    var newService = (new AvailedService() {AvailedServiceID = MainVM.AvailedServices.Count+1, ServiceID = MainVM.SelectedService.ServiceID, ProvinceID = int.Parse(serviceProvinceCb.SelectedValue.ToString()), Address = serviceAddressTb.Text, City = serviceCityTb.Text, TotalCost = MainVM.SelectedService.ServicePrice +  MainVM.SelectedRegion.RatePrice});
+                    MainVM.AvailedServices.Add(newService);
+                    MainVM.RequestedItems.Add(new RequestedItem() { lineNo = newService.AvailedServiceID, itemID = MainVM.SelectedService.ServiceID, itemType = 1, qty = 1, unitPrice = newService.TotalCost, qtyEditable = false });
                 }
 
             }

@@ -189,21 +189,22 @@ namespace prototype2
             else if (viewQuotationGrid.IsVisible)
             {
                 transRequestNext.Content = "Next";
-                PdfDocumentRenderer renderer = new PdfDocumentRenderer(true);
-                renderer.Document = document;
-                renderer.RenderDocument();
-                string filename = @"d:\test\" + MainVM.SelectedSalesQuote.sqNoChar_ + ".pdf";
-
                 saveSalesQuoteToDb();
-                SaveFileDialog dlg = new SaveFileDialog();
-                dlg.FileName = "" + MainVM.SelectedSalesQuote.sqNoChar_;
-                dlg.DefaultExt = ".pdf";
-                dlg.Filter = "Text documents (.pdf)|*.pdf";
-                if (dlg.ShowDialog() == true)
-                {
-                    filename = dlg.FileName;
-                    renderer.PdfDocument.Save(filename);
-                }
+                //PdfDocumentRenderer renderer = new PdfDocumentRenderer(true);
+                //renderer.Document = document;
+                //renderer.RenderDocument();
+                //string filename = @"d:\test\" + MainVM.SelectedSalesQuote.sqNoChar_ + ".pdf";
+
+                //saveSalesQuoteToDb();
+                //SaveFileDialog dlg = new SaveFileDialog();
+                //dlg.FileName = "" + MainVM.SelectedSalesQuote.sqNoChar_;
+                //dlg.DefaultExt = ".pdf";
+                //dlg.Filter = "Text documents (.pdf)|*.pdf";
+                //if (dlg.ShowDialog() == true)
+                //{
+                //    filename = dlg.FileName;
+                //    renderer.PdfDocument.Save(filename);
+                //}
                 OnSaveCloseButtonClicked(e);
             }
         }
@@ -239,11 +240,9 @@ namespace prototype2
                         ((Grid)obj).Visibility = Visibility.Visible;
                     }
                 }
-
-
             }
-            //MainVM.SelectedAddedService = MainVM.AddedServices.Where(x => x.TableNoChar.Equals(MainVM.SelectedRequestedItem.itemCode)).FirstOrDefault();
-            //MainVM.AdditionalFees = MainVM.SelectedAddedService.AdditionalFees;
+            MainVM.SelectedAvailedServices = MainVM.AvailedServices.Where(x => x.AvailedServiceID.Equals(MainVM.SelectedRequestedItem.lineNo)).FirstOrDefault();
+            MainVM.AdditionalFees = MainVM.SelectedAvailedServices.AdditionalFees;
         }
 
         private void editFeeBtn_Click(object sender, RoutedEventArgs e)
@@ -273,7 +272,7 @@ namespace prototype2
 
         private void deleteFeeBtn_Click(object sender, RoutedEventArgs e)
         {
-            //MainVM.SelectedAddedService.AdditionalFees.Remove(MainVM.SelectedAdditionalFee);
+            MainVM.SelectedAvailedServices.AdditionalFees.Remove(MainVM.SelectedAdditionalFee);
         }
 
         private void addSaveAdditionalFeesBtn_Click(object sender, RoutedEventArgs e)
@@ -296,11 +295,11 @@ namespace prototype2
             {
                 if (feeTypeCb.SelectedIndex == feeTypeCb.Items.Count - 1)
                 {
-                   // MainVM.SelectedAddedService.AdditionalFees.Add(new AdditionalFee() { FeeName = otherFeenameTb.Text, FeePrice = (decimal)feeCostTb.Value });
+                   MainVM.SelectedAvailedServices.AdditionalFees.Add(new AdditionalFee() { FeeName = otherFeenameTb.Text, FeePrice = (decimal)feeCostTb.Value });
                 }
                 else
                 {
-                   // MainVM.SelectedAddedService.AdditionalFees.Add(new AdditionalFee() { FeeName = feeTypeCb.SelectedValue.ToString(), FeePrice = (decimal)feeCostTb.Value });
+                   MainVM.SelectedAvailedServices.AdditionalFees.Add(new AdditionalFee() { FeeName = feeTypeCb.SelectedValue.ToString(), FeePrice = (decimal)feeCostTb.Value });
                 }
 
 
@@ -391,8 +390,8 @@ namespace prototype2
 
         private void deleteRequestedItemBtn_Click(object sender, RoutedEventArgs e)
         {
-            //MainVM.AddedServices.Remove(MainVM.AddedServices.Where(x => x.TableNoChar.Equals(MainVM.SelectedRequestedItem.itemCode)).FirstOrDefault());
-            //MainVM.RequestedItems.Remove(MainVM.SelectedRequestedItem);
+            MainVM.AvailedServices.Remove(MainVM.AvailedServices.Where(x => x.AvailedServiceID.Equals(MainVM.SelectedRequestedItem.lineNo)).FirstOrDefault());
+            MainVM.RequestedItems.Remove(MainVM.SelectedRequestedItem);
         }
 
         private void paymentCustomRb_Checked(object sender, RoutedEventArgs e)
@@ -499,7 +498,7 @@ namespace prototype2
 
         private void computePrice()
         {
-            decimal unitPrice = 0;
+            decimal totalFee = 0;
             decimal totalPrice = 0;
 
             foreach (RequestedItem item in MainVM.RequestedItems)
@@ -512,17 +511,17 @@ namespace prototype2
                 }
                 else if (item.itemType == 1)
                 {
-                    //MainVM.SelectedAddedService = MainVM.AddedServices.Where(x => x.TableNoChar.Equals(item.itemCode)).FirstOrDefault();
-                    //foreach (AdditionalFee af in MainVM.SelectedAddedService.AdditionalFees)
-                    //{
-                    //    if (!(af.FeePrice == 0))
-                    //    {
-                    //        totalFee += af.FeePrice;
-                    //    }
-                    ////}
-                    //item.unitPriceMarkUp = (item.unitPrice + totalFee) + ((item.unitPrice + totalFee) / 100 * (decimal)markupPriceTb.Value);
-                    //item.totalAmountMarkUp = (item.unitPrice + totalFee + (((item.unitPrice + totalFee) / 100) * (decimal)markupPriceTb.Value)) - ((item.unitPrice + totalFee) / 100) * (decimal)discountPriceTb.Value;
-                    //item.totalAmount = item.unitPrice + totalFee;
+                    MainVM.SelectedAvailedServices = MainVM.AvailedServices.Where(x => x.ServiceID.Equals(item.itemID)).FirstOrDefault();
+                    foreach (AdditionalFee af in MainVM.SelectedAvailedServices.AdditionalFees)
+                    {
+                        if (!(af.FeePrice == 0))
+                        {
+                            totalFee += af.FeePrice;
+                        }
+                        
+                    }
+                    item.unitPriceMarkUp = item.unitPrice;
+                    item.totalAmount = (item.unitPrice + totalFee) - ((item.unitPrice + totalFee) / 100) * (decimal)discountPriceTb.Value;
                 }
                 totalPrice += item.totalAmount;
             }
@@ -552,6 +551,7 @@ namespace prototype2
             if ((bool)deliveryDefaultRd.IsChecked)
             {
                 estDel = 30;
+                //MainVM.AvailedServices.Add(new AvailedService() { ServiceID = MainVM.SelectedService.ServiceID, ProvinceID = MainVM.SelectedCustomerSupplier.CompanyProvinceID, Address = MainVM.SelectedCustomerSupplier.CompanyAddress, City = MainVM.SelectedCustomerSupplier.CompanyCity, TotalCost = MainVM.SelectedService.ServicePrice + MainVM.SelectedRegion.RatePrice });
             }
             else if ((bool)deliveryCustomRd.IsChecked)
                 estDel = int.Parse(deliveryDaysTb.Value.ToString());
@@ -673,39 +673,51 @@ namespace prototype2
                 {
                     if (dbCon.IsConnect())
                     {
-                        //foreach (RequestedItem item in MainVM.RequestedItems)
-                        //{
-                        //    if (item.itemType == 0)
-                        //    {
-                        //        MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ItemCode.Equals(item.itemCode)).FirstOrDefault();
-                        //        query = "INSERT INTO `odc_db`.`items_availed_t`(`sqNoChar`,`itemCode`,`itemQnty`,`totalCost`)" +
-                        //            " VALUES " +
-                        //            "('" + MainVM.SelectedSalesQuote.sqNoChar_ + "', '" + MainVM.SelectedProduct.ItemCode + "','" + item.qty + "', '" + item.totalAmount + "');";
-                        //        noError = dbCon.insertQuery(query, dbCon.Connection);
-                        //    }
-                        //    else if (item.itemType == 1)
-                        //    {
+                        foreach (RequestedItem item in MainVM.RequestedItems)
+                        {
+                            if (item.itemType == 0)
+                            {
+                                MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ID.Equals(item.itemID)).FirstOrDefault();
+                                query = "INSERT INTO `odc_db`.`items_availed_t`(`sqNoChar`,`itemID`,`itemQnty`,`totalCost`)" +
+                                    " VALUES " +
+                                    "('" + MainVM.SelectedSalesQuote.sqNoChar_ + "', '" + item.itemID + "','" + item.qty + "', '" + item.totalAmount + "');";
+                                noError = dbCon.insertQuery(query, dbCon.Connection);
+                            }
+                            else if (item.itemType == 1)
+                            {
 
-                        //        MainVM.SelectedAddedService = MainVM.AddedServices.Where(x => x.TableNoChar.Equals(item.itemCode)).FirstOrDefault();
-                        //        query = "INSERT INTO `odc_db`.`services_availed_t`(`tableNoChar`,`serviceID`,`provinceID`,`sqNoChar`,`city`,`address`,`totalCost`)" +
-                        //            " VALUES " +
-                        //            "('" + MainVM.SelectedAddedService.TableNoChar + "', '" +
-                        //            MainVM.SelectedAddedService.ServiceID + "', '" +
-                        //            MainVM.SelectedAddedService.ProvinceID + "', '" +
-                        //            MainVM.SelectedSalesQuote.sqNoChar_ + "', '" +
-                        //            MainVM.SelectedAddedService.City + "', '" +
-                        //            MainVM.SelectedAddedService.Address + "', '" +
-                        //            MainVM.SelectedAddedService.TotalCost + "');";
-                        //        noError = dbCon.insertQuery(query, dbCon.Connection);
-                        //        foreach (AdditionalFee af in MainVM.SelectedAddedService.AdditionalFees)
-                        //        {
-                        //            query = "INSERT INTO `odc_db`.`fees_per_transaction_t`(`serviceNoChar`,`feeName`,`feeValue`)" +
-                        //            " VALUES " +
-                        //            "('" + item.itemCode + "', '" + af.FeeName + "', '" + af.FeePrice + "');";
-                        //            noError = dbCon.insertQuery(query, dbCon.Connection);
-                        //        }
-                        //    }
-                        //}
+                                MainVM.SelectedAvailedServices = MainVM.AvailedServices.Where(x => x.AvailedServiceID.Equals(item.lineNo)).FirstOrDefault();
+                                query = "INSERT INTO `odc_db`.`services_availed_t`(`serviceID`,`provinceID`,`sqNoChar`,`city`,`address`,`totalCost`)" +
+                                    " VALUES " +
+                                    "('" + MainVM.SelectedAvailedServices.ServiceID + "', '" +
+                                    MainVM.SelectedAvailedServices.ProvinceID + "', '" +
+                                    MainVM.SelectedSalesQuote.sqNoChar_ + "', '" +
+                                    MainVM.SelectedAvailedServices.City + "', '" +
+                                    MainVM.SelectedAvailedServices.Address + "', '" +
+                                    MainVM.SelectedAvailedServices.TotalCost + "');";
+                                noError = dbCon.insertQuery(query, dbCon.Connection);
+                                if (dbCon.insertQuery(query, dbCon.Connection))
+                                {
+                                    query = "SELECT LAST_INSERT_ID();";
+                                    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                                    DataSet fromDb = new DataSet();
+                                    DataTable fromDbTable = new DataTable();
+                                    dataAdapter.Fill(fromDb, "t");
+                                    fromDbTable = fromDb.Tables["t"];
+                                    string aServiceId = "";
+                                    foreach (DataRow dr in fromDbTable.Rows)
+                                        aServiceId = dr[0].ToString();
+                                    foreach (AdditionalFee af in MainVM.SelectedAvailedServices.AdditionalFees)
+                                    {
+                                        query = "INSERT INTO `odc_db`.`fees_per_transaction_t`(`servicesAvailedID`,`feeName`,`feeValue`)" +
+                                        " VALUES " +
+                                        "('" + aServiceId + "', '" + af.FeeName + "', '" + af.FeePrice + "');";
+                                        noError = dbCon.insertQuery(query, dbCon.Connection);
+                                    }
+
+                                }
+                            }
+                        }
                         if (noError)
                         {
                             MessageBox.Show("Successfully added.");
@@ -773,29 +785,29 @@ namespace prototype2
         }
         private void generatePDFBtn_Click(object sender, RoutedEventArgs e)
         {
-            //foreach (var element in transQuoatationGridForm.Children)
-            //{
-            //    if (element is Grid)
-            //    {
-            //        if (!(((Grid)element).Name.Equals(viewQuotationGrid.Name)))
-            //        {
-            //            ((Grid)element).Visibility = Visibility.Collapsed;
-            //        }
-            //        else
-            //            ((Grid)element).Visibility = Visibility.Visible;
-            //    }
-            //}
-            //if (MainVM.RequestedItems.Count != 0)
-            //{
-            //    transRequestNext.Content = "Save";
-            //    salesQuoteToMemory();
-            //    SalesQuoteDocument df = new SalesQuoteDocument();
-            //    document = df.CreateDocument("SalesQuote", "asdsadsa");
-            //    string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
-            //    saleQuoteViewer.pagePreview.Ddl = ddl;
-            //}
-            //else
-            //    MessageBox.Show("No items on the list.");
+            foreach (var element in transQuoatationGridForm.Children)
+            {
+                if (element is Grid)
+                {
+                    if (!(((Grid)element).Name.Equals(viewQuotationGrid.Name)))
+                    {
+                        ((Grid)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((Grid)element).Visibility = Visibility.Visible;
+                }
+            }
+            if (MainVM.RequestedItems.Count != 0)
+            {
+                transRequestNext.Content = "Save";
+                salesQuoteToMemory();
+                SalesQuoteDocument df = new SalesQuoteDocument();
+                document = df.CreateDocument("SalesQuote", "asdsadsa");
+                string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
+                saleQuoteViewer.pagePreview.Ddl = ddl;
+            }
+            else
+                MessageBox.Show("No items on the list.");
         }
 
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)

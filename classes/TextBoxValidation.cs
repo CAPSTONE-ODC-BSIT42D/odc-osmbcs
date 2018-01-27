@@ -40,7 +40,7 @@ namespace prototype2
             {
                 if (String.IsNullOrWhiteSpace(tbValue))
                 {
-                    return new ValidationResult(false, "*This field must be filled.");
+                    return ValidationResult.ValidResult;
                 }
                 else if (!regex.IsValidMobileNumber(tbValue.ToString()))
                 {
@@ -52,7 +52,7 @@ namespace prototype2
             {
                 if (String.IsNullOrWhiteSpace(tbValue))
                 {
-                    return new ValidationResult(false, "*This field must be filled.");
+                    return ValidationResult.ValidResult;
                 }
                 else if (!regex.IsValidPhoneNumber(tbValue.ToString()))
                 {
@@ -66,7 +66,7 @@ namespace prototype2
             {
                 if (String.IsNullOrWhiteSpace(tbValue))
                 {
-                    return new ValidationResult(false, "*This field must be filled.");
+                    return ValidationResult.ValidResult;
                 }
                 else if (!regex.IsValidEmail(tbValue.ToString()))
                 {

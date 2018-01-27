@@ -87,9 +87,9 @@
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox>
-                            <ComboBox x:Name="serviceProvinceCb" Margin="252,316,0,0" VerticalAlignment="Top" Height="23" IsEditable="True" ItemsSource ="{Binding Provinces}" DisplayMemberPath = "ProvinceName" SelectedValuePath = "ProvinceID" Width="157" HorizontalAlignment="Left" FontWeight="Normal" SelectionChanged="serviceProvinceCb_SelectionChanged">
+                            <ComboBox x:Name="serviceProvinceCb" Margin="252,316,0,0" VerticalAlignment="Top" Height="23" IsEditable="True" ItemsSource ="{Binding Provinces}" DisplayMemberPath = "ProvinceName" SelectedValuePath = "ProvinceID" Width="157" HorizontalAlignment="Left" FontWeight="Normal" SelectionChanged="serviceProvinceCb_SelectionChanged" >
                                 <ComboBox.SelectedItem>
-                                    <Binding Path="cbItem" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                                    <Binding Path="SelectedProvince"  UpdateSourceTrigger="Explicit">
                                         <Binding.ValidationRules>
                                             <prototype2:TextBoxValidation TextBoxType="ComboBox"/>
                                         </Binding.ValidationRules>

@@ -137,24 +137,6 @@ namespace prototype2
                 dbCon.Close();
             }
 
-            //if (dbCon.IsConnect())
-            //{
-            //    string query = "SELECT * FROM provinces_t";
-            //    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-            //    DataSet fromDb = new DataSet();
-            //    DataTable fromDbTable = new DataTable();
-            //    dataAdapter.Fill(fromDb, "t");
-            //    fromDbTable = fromDb.Tables["t"];
-            //    foreach (DataRow dr in fromDbTable.Rows)
-            //    {
-            //        int regionID = 0;
-            //        if (!String.IsNullOrEmpty(dr[2].ToString()))
-            //            regionID = int.Parse(dr[2].ToString());
-            //        MainVM.Provinces.Add(new Province() { ProvinceID = int.Parse(dr[0].ToString()), ProvinceName = dr[1].ToString(), RegionID = regionID });
-            //    }
-            //    dbCon.Close();
-            //}
-
 
             if (dbCon.IsConnect())
             {
@@ -264,7 +246,7 @@ namespace prototype2
 
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    var customer = (new Customer() { CompanyID = int.Parse(dr["companyID"].ToString()), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString(), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString(), RepTitle = dr["repTitle"].ToString(), RepFirstName = dr["repFName"].ToString(), RepMiddleName = dr["repMInitial"].ToString(), RepLastName = dr["repLName"].ToString(), RepEmail = dr["repEmail"].ToString(), RepTelephone = dr["repTelephone"].ToString(), RepMobile = dr["repMobile"].ToString() });
+                    var customer = (new Customer() { CompanyID = int.Parse(dr["companyID"].ToString()), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceID = int.Parse(dr["companyProvinceID"].ToString()), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString(), RepTitle = dr["repTitle"].ToString(), RepFirstName = dr["repFName"].ToString(), RepMiddleName = dr["repMInitial"].ToString(), RepLastName = dr["repLName"].ToString(), RepEmail = dr["repEmail"].ToString(), RepTelephone = dr["repTelephone"].ToString(), RepMobile = dr["repMobile"].ToString() });
                     MainVM.Customers.Add(customer);
                 }
             }
@@ -283,7 +265,7 @@ namespace prototype2
 
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    var supplier = new Customer() { CompanyID = int.Parse(dr["companyID"].ToString()), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceID = dr["companyProvinceID"].ToString(), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString(), RepTitle = dr["repTitle"].ToString(), RepFirstName = dr["repFName"].ToString(), RepMiddleName = dr["repMInitial"].ToString(), RepLastName = dr["repLName"].ToString(), RepEmail = dr["repEmail"].ToString(), RepTelephone = dr["repTelephone"].ToString(), RepMobile = dr["repMobile"].ToString() };
+                    var supplier = new Customer() { CompanyID = int.Parse(dr["companyID"].ToString()), CompanyName = dr["companyName"].ToString(), CompanyDesc = dr["companyAddInfo"].ToString(), CompanyAddress = dr["companyAddress"].ToString(), CompanyCity = dr["companyCity"].ToString(), CompanyProvinceID = int.Parse(dr["companyProvinceID"].ToString()), CompanyEmail = dr["companyEmail"].ToString(), CompanyTelephone = dr["companyTelephone"].ToString(), CompanyMobile = dr["companyMobile"].ToString(), CompanyType = dr["companyType"].ToString(), CompanyPostalCode = dr["companyPostalCode"].ToString(), RepTitle = dr["repTitle"].ToString(), RepFirstName = dr["repFName"].ToString(), RepMiddleName = dr["repMInitial"].ToString(), RepLastName = dr["repLName"].ToString(), RepEmail = dr["repEmail"].ToString(), RepTelephone = dr["repTelephone"].ToString(), RepMobile = dr["repMobile"].ToString() };
                     MainVM.Suppliers.Add(supplier);
                 }
             }
@@ -383,7 +365,6 @@ namespace prototype2
                 DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
                 fromDbTable = fromDb.Tables["t"];
-                MainVM.SalesQuotes.Clear();
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
                     DateTime dateOfIssue = new DateTime();
@@ -411,7 +392,6 @@ namespace prototype2
                     {
                         paymentIsLanded = true;
                     }
-                    MainVM.SelectedCustomerSupplier = MainVM.Customers.Where(x => x.CompanyID.Equals(dr["custID"].ToString())).FirstOrDefault();
 
                     int custId;
                     int.TryParse(dr["custID"].ToString(), out custId);
@@ -443,35 +423,32 @@ namespace prototype2
                     decimal discountPerc;
                     decimal.TryParse(dr["discountPercent"].ToString(), out discountPerc);
 
-                    if (MainVM.SelectedCustomerSupplier != null)
+                    MainVM.SalesQuotes.Add(new SalesQuote()
                     {
-                        MainVM.SalesQuotes.Add(new SalesQuote()
-                        {
-                            sqNoChar_ = dr["sqNoChar"].ToString(),
-                            dateOfIssue_ = dateOfIssue,
-                            custID_ = custId,
-                            custName_ = MainVM.SelectedCustomerSupplier.CompanyName,
-                            quoteSubject_ = dr["quoteSubject"].ToString(),
-                            priceNote_ = dr["priceNote"].ToString(),
-                            deliveryDate_ = deliveryDate,
-                            estDelivery_ = estDelivery,
-                            validityDays_ = validityDays,
-                            validityDate_ = validityDate,
-                            otherTerms_ = dr["otherTerms"].ToString(),
-                            expiration_ = expiration,
-                            vat_ = vat,
-                            vatexcluded_ = vatIsExcluded,
-                            paymentIsLanded_ = paymentIsLanded,
-                            paymentCurrency_ = dr["paymentCurrency"].ToString(),
-                            status_ = dr["status"].ToString(),
-                            termsDays_ = termsDays,
-                            termsDP_ = termsDP,
-                            penaltyAmt_ = penaltyAmt,
-                            penaltyPercent_ = penaltyAmt,
-                            markUpPercent_ = markUpPerc,
-                            discountPercent_ = discountPerc
-                        });
-                    }
+                        sqNoChar_ = dr["sqNoChar"].ToString(),
+                        dateOfIssue_ = dateOfIssue,
+                        custID_ = custId,
+                        quoteSubject_ = dr["quoteSubject"].ToString(),
+                        priceNote_ = dr["priceNote"].ToString(),
+                        deliveryDate_ = deliveryDate,
+                        estDelivery_ = estDelivery,
+                        validityDays_ = validityDays,
+                        validityDate_ = validityDate,
+                        otherTerms_ = dr["otherTerms"].ToString(),
+                        expiration_ = expiration,
+                        vat_ = vat,
+                        vatexcluded_ = vatIsExcluded,
+                        paymentIsLanded_ = paymentIsLanded,
+                        paymentCurrency_ = dr["paymentCurrency"].ToString(),
+                        status_ = dr["status"].ToString(),
+                        termsDays_ = termsDays,
+                        termsDP_ = termsDP,
+                        penaltyAmt_ = penaltyAmt,
+                        penaltyPercent_ = penaltyAmt,
+                        markUpPercent_ = markUpPerc,
+                        discountPercent_ = discountPerc
+                        
+                    });
                 }
                 dbCon.Close();
             }
