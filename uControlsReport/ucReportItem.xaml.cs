@@ -30,9 +30,9 @@ namespace prototype2
         }
         private void DisplayReport()
         {
-            ReportItem.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetItem()));
-            ReportItem.LocalReport.ReportEmbeddedResource = "prototype2.Report1.rdlc";
-            ReportItem.RefreshReport();
+            //ReportItem.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetItem()));
+            //ReportItem.LocalReport.ReportEmbeddedResource = "prototype2.Report1.rdlc";
+            //ReportItem.RefreshReport();
         }
 
         private DataTable GetItem()

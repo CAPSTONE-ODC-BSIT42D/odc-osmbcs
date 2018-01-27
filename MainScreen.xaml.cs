@@ -1130,6 +1130,7 @@ namespace prototype2
             ucContract.Visibility = Visibility.Visible;
         }
 
-        
+        #endregion
+
     }
 }
