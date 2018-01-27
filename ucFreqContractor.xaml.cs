@@ -16,16 +16,13 @@ using System.Windows.Shapes;
 namespace prototype2
 {
     /// <summary>
-    /// Interaction logic for ucReports.xaml
+    /// Interaction logic for ucFreqContractor.xaml
     /// </summary>
-    public partial class ucReports : UserControl
+    public partial class ucFreqContractor : UserControl
     {
-        public ucReports()
+        public ucFreqContractor()
         {
             InitializeComponent();
         }
-
-        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
-        
     }
 }

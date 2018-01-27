@@ -1130,6 +1130,57 @@ namespace prototype2
             ucContract.Visibility = Visibility.Visible;
         }
 
-        
+        #endregion
+
+        #region Order Management - Invoice
+
+        private void newInvoiceBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.isNewTrans = true;
+            foreach (var obj in containerGrid.Children)
+            {
+                ((Grid)obj).Visibility = Visibility.Collapsed;
+            }
+            trasanctionGrid.Visibility = Visibility.Visible;
+            foreach (var obj in trasanctionGrid.Children)
+            {
+                if (obj is Grid)
+                    if (((Grid)obj).Equals(transInvoiceGrid))
+                        ((Grid)obj).Visibility = Visibility.Visible;
+                    else
+                        ((Grid)obj).Visibility = Visibility.Collapsed;
+            }
+            foreach (var obj in transInvoiceGrid.Children)
+            {
+                if (obj is UserControl)
+                {
+                    if (((UserControl)obj).Equals(ucInvoiceForm))
+                    {
+                        headerLbl.Content = "Order Management - Sales Invoice";
+                        ((UserControl)obj).Visibility = Visibility.Visible;
+                    }
+                }
+                else
+                    ((Grid)obj).Visibility = Visibility.Collapsed;
+            }
+            ucSalesQuote.viewSalesQuoteBtns.Visibility = Visibility.Collapsed;
+            ucSalesQuote.newSalesQuoteBtns.Visibility = Visibility.Visible;
+            resetValueofSelectedVariables();
+        }
+
+
+        private void viewInvoiceRecord_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.isEdit = true;
+        }
+
+        private void receivePaymentBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.isPaymentInvoice = true;
+        }
+
+
+        #endregion
+
     }
 }

@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="prototype2.ucFreqEmp"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:prototype2"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="596">
+    <Grid Background="#FFF7F6F6">
+        <Label Content="Frequently Assigned Employees" HorizontalAlignment="Left" Margin="0,0,0,369" FontWeight="Bold" FontSize="16" Width="251"/>
+        <DataGrid x:Name="FreqEmpDataGrid" HorizontalAlignment="Left" Height="319" Margin="10,71,0,0" VerticalAlignment="Top" Width="576">
+        <DataGrid.Columns>
+
+            <DataGridTextColumn Header="Name of Employee" Width="180"/>
+            <DataGridTextColumn Header="Position" Width="150"/>
+            <DataGridTextColumn Header="No. of Times Assigned" Width="130"/>
+                <DataGridTextColumn Header="Service Name" Width="130"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Sort by:" HorizontalAlignment="Left" Margin="407,34,0,0" VerticalAlignment="Top" FontSize="11"/>
+        <ComboBox x:Name="comboBoxFreqEmp" HorizontalAlignment="Left" Margin="458,35,0,0" VerticalAlignment="Top" Width="120" FontSize="11">
+            <ComboBoxItem Content="Daily"/>
+            <ComboBoxItem Content="Weekly"/>
+            <ComboBoxItem Content="Monthly"/>
+            <ComboBoxItem Content="Yearly"/>
+        </ComboBox>
+    </Grid>
+</UserControl>

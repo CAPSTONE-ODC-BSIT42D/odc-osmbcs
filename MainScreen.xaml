@@ -1223,7 +1223,7 @@
             <Grid x:Name="reportsGrid" d:IsHidden="True">
                 <local:ucReports Margin="0"/>
             </Grid>
-            <Grid x:Name="maintenanceGrid">
+            <Grid x:Name="maintenanceGrid" d:IsHidden="True">
                 <Grid x:Name="manageCustomerGrid" Margin="0,0,1,0" >
                     <Grid x:Name="manageCustomerHomeGrid" Margin="0">
                         <Label x:Name="label13" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
@@ -2075,86 +2075,12 @@
 
             <local:ucCustSuppCRUD x:Name="ucCustSupp" HorizontalAlignment="Center" Margin="167,0,166,0" Visibility="Collapsed" d:IsHidden="True"/>
             <local:ucProductsCRUD x:Name="ucProduct" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
-            <Grid x:Name="settingsFormGrid" Margin="0" d:IsHidden="True">
-                <ScrollViewer Margin="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Right">
-                    <Grid x:Name="settingsGrid" Background="White" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Right" Width="724">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel x:Name="settingsGridStackPanel" Margin="10,0" Orientation="Vertical">
-                            <Button x:Name="closeSideMenuBtn" HorizontalAlignment="Left" VerticalAlignment="Top" Width="25" Click="closeSideMenuBtn_Click" Margin="0,10,0,0" Background="{x:Null}" BorderBrush="Black" Foreground="{x:Null}">
-                                <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform" Height="23" Width="27" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Canvas x:Name="Capa_1d" Width="438.533" Height="438.533" Canvas.Left="0" Canvas.Top="0">
-                                        <Canvas.RenderTransform>
-                                            <TranslateTransform X="0" Y="0"/>
-                                        </Canvas.RenderTransform>
-                                        <!--Unknown tag: metadata-->
-
-                                        <!--Unknown tag: sodipodi:namedview-->
-                                        <Canvas x:Name="g4d">
-                                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2d" Fill="#000000">
-                                                <Path.Data>
-                                                    <PathGeometry Figures="M409.133 109.203c-19.608-33.592-46.205-60.189-79.798-79.796C295.736 9.801 259.058 0 219.273 0   c-39.781 0-76.47 9.801-110.063 29.407c-33.595 19.604-60.192 46.201-79.8 79.796C9.801 142.8 0 179.489 0 219.267   c0 39.78 9.804 76.463 29.407 110.062c19.607 33.592 46.204 60.189 79.799 79.798c33.597 19.605 70.283 29.407 110.063 29.407   s76.47-9.802 110.065-29.407c33.593-19.602 60.189-46.206 79.795-79.798c19.603-33.596 29.403-70.284 29.403-110.062   C438.533 179.485 428.732 142.795 409.133 109.203z M322.621 270.939c3.617 3.613 5.428 7.905 5.428 12.854   c0 5.133-1.811 9.514-5.428 13.127l-25.693 25.701c-3.614 3.613-7.994 5.42-13.135 5.42c-4.948 0-9.236-1.807-12.847-5.42   l-51.676-51.682l-51.678 51.682c-3.616 3.613-7.898 5.42-12.847 5.42c-5.14 0-9.517-1.807-13.134-5.42l-25.697-25.701   c-3.616-3.613-5.424-7.994-5.424-13.127c0-4.948 1.809-9.24 5.424-12.854l51.678-51.673l-51.678-51.678   c-3.616-3.612-5.424-7.898-5.424-12.847c0-5.14 1.809-9.517 5.424-13.134l25.697-25.693c3.617-3.616 7.994-5.424 13.134-5.424   c4.949 0 9.231 1.809 12.847 5.424l51.678 51.674l51.676-51.674c3.61-3.616 7.898-5.424 12.847-5.424   c5.141 0 9.521 1.809 13.135 5.424l25.693 25.693c3.617 3.617 5.428 7.994 5.428 13.134c0 4.948-1.811 9.235-5.428 12.847   l-51.675 51.678L322.621 270.939z" FillRule="NonZero"/>
-                                                </Path.Data>
-                                            </Path>
-                                        </Canvas>
-                                        <Canvas x:Name="g6d"/>
-                                        <Canvas x:Name="g8d"/>
-                                        <Canvas x:Name="g10d"/>
-                                        <Canvas x:Name="g12d"/>
-                                        <Canvas x:Name="g14d"/>
-                                        <Canvas x:Name="g16d"/>
-                                        <Canvas x:Name="g18d"/>
-                                        <Canvas x:Name="g20d"/>
-                                        <Canvas x:Name="g22d"/>
-                                        <Canvas x:Name="g24d"/>
-                                        <Canvas x:Name="g26d"/>
-                                        <Canvas x:Name="g28d"/>
-                                        <Canvas x:Name="g30d"/>
-                                        <Canvas x:Name="g32d"/>
-                                        <Canvas x:Name="g34d"/>
-                                    </Canvas>
-                                </Viewbox>
-                            </Button>
-                            <Grid x:Name="serviceSettings2" Margin="0,0,3,0" Height="119">
-                                <Label x:Name="label5_Copy6" Content="Province's Price" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-                                <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="0,33,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
-                                <ComboBox x:Name="provinceCb" Margin="40,66,0,0" VerticalAlignment="Top" Height="26" IsEditable="True" DisplayMemberPath = "ProvinceName" SelectedValuePath = "ProvinceID" ItemsSource ="{Binding Provinces}" Width="178" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontWeight="Normal" SelectionChanged="custProvinceCb1_SelectionChanged" FontSize="14">
-                                    <ComboBox.SelectedItem>
-                                        <Binding Path="locProvinceId" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <local:TextBoxValidation TextBoxType="ComboBox"/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </ComboBox.SelectedItem>
-                                </ComboBox>
-                                <Label x:Name="label30" Content="Select Province:" HorizontalAlignment="Left" Margin="24,40,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Normal" FontStyle="Normal"/>
-                                <xctk:DecimalUpDown x:Name="locationPrice" HorizontalAlignment="Left" Margin="234,66,0,0" VerticalAlignment="Top" Width="194" FontSize="14"/>
-                                <Label x:Name="label1_Copy8" Content="Price" HorizontalAlignment="Left" Margin="234,40,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Normal" FontStyle="Normal"/>
-                                <Button x:Name="setPriceBtn" Content="Set" HorizontalAlignment="Left" Margin="436,64,0,0" VerticalAlignment="Top" Width="76" FontWeight="Normal" FontStyle="Normal" FontSize="14" Height="26" Click="setPriceBtn_Click" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold"/>
-                            </Grid>
-                            <Grid x:Name="productSettings1" Margin="10">
-                                <Label x:Name="label5_Copy7" Content="Product Category" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-                                <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="0,34,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
-                                <Button x:Name="deleteCategoryBtn" Content="Delete" HorizontalAlignment="Right" Margin="0,154,200,0" Width="74" Click="deleteCategoryBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Background="#FFEC1717" BorderBrush="#FFBB0000" Foreground="#FFF9F5F5" Height="24" VerticalAlignment="Top"/>
-                                <Button x:Name="addCategoryBtn" Content="Add" Margin="0,71,200,0" Click="addCategoryBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" Height="24" VerticalAlignment="Top" HorizontalAlignment="Right" Width="74"/>
-                                <Button x:Name="editCategoryBtn" Content="Edit" HorizontalAlignment="Right" Margin="0,125,200,0" Width="74" Click="editCategoryBtn_Click" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF6D08C1" Foreground="#FFF9F9F9" Height="24" VerticalAlignment="Top"/>
-                                <ListBox x:Name="invProductsCategoryLb" HorizontalAlignment="Left" Margin="9,100,0,0" Width="366" FontSize="13" ItemsSource="{Binding ProductCategory}" SelectedItem="{Binding SelectedProductCategory}" DisplayMemberPath="TypeName" Height="127" VerticalAlignment="Top"/>
-                                <TextBox x:Name="invCategoryTb" HorizontalAlignment="Left" Margin="117,71,0,0" TextWrapping="Wrap" Width="262" FontSize="13" Height="23" VerticalAlignment="Top"/>
-                                <Label x:Name="label28" Content="Category Name:" HorizontalAlignment="Left" Margin="9,68,0,0" FontSize="13" Height="27" VerticalAlignment="Top"/>
-                            </Grid>
-                        </StackPanel>
-                    </Grid>
-
-                </ScrollViewer>
-
-            </Grid>
 
             <uControlsMaintenance:ucEmployeeForm x:Name="ucEmployee" Margin="0" HorizontalAlignment="Center" Loaded="ucEmployee_Loaded"/>
             <uControlsMaintenance:ucServices x:Name="ucServices" Margin="0" Height="272" Width="422" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
             <uControlsMaintenance:ucUnit x:Name="ucUnit" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="402" d:IsHidden="True"/>
             <uControlsMaintenance:ucLocation x:Name="ucLocation" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="458" d:IsHidden="True"/>
-            <uControlsMaintenance:ucSelectCustomer x:Name="ucSelectCustomer" Margin="0"/>
+            <uControlsMaintenance:ucSelectCustomer x:Name="ucSelectCustomer" Margin="0" Loaded="ucSelectCustomer_Loaded"/>
             <uControlsMaintenance:ucAddItem x:Name="ucAddItem" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" d:IsHidden="True"/>
 
         </Grid>
