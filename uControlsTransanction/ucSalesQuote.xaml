@@ -7,7 +7,7 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="prototype2.ucSalesQuote"
              mc:Ignorable="d" 
              d:DesignHeight="655.5" d:DesignWidth="960" IsVisibleChanged="UserControl_IsVisibleChanged">
-    
+
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>
@@ -82,7 +82,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                
+
                                 <DataGridTemplateColumn Width="200" CanUserResize="False" Header="Description" >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -242,8 +242,7 @@
                                 </Binding>
                             </xctk:DecimalUpDown.Value>
                         </xctk:DecimalUpDown>
-                        <xctk:DecimalUpDown x:Name="discountPriceTb" HorizontalAlignment="Left" Margin="237,535,0,0" VerticalAlignment="Top" Width="104"  VerticalContentAlignment="Center" Height="24" DefaultValue="0" Minimum="0" DisplayDefaultValueOnEmptyText="True" ParsingNumberStyle="Integer" FontWeight="Normal" FontStyle="Normal" Value="0" HorizontalContentAlignment="Center" ValueChanged="discountPriceTb_ValueChanged">
-                        </xctk:DecimalUpDown>
+                        <xctk:DecimalUpDown x:Name="discountPriceTb" HorizontalAlignment="Left" Margin="237,535,0,0" VerticalAlignment="Top" Width="104"  VerticalContentAlignment="Center" Height="24" DefaultValue="0" Minimum="0" DisplayDefaultValueOnEmptyText="True" ParsingNumberStyle="Integer" FontWeight="Normal" FontStyle="Normal" Value="0" HorizontalContentAlignment="Center" ValueChanged="discountPriceTb_ValueChanged"/>
                         <Label x:Name="label32_Copy3" Content="Total Price:" HorizontalAlignment="Left" Margin="10,501,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Segoe UI" Grid.Column="1" RenderTransformOrigin="0.955,0.481" FontWeight="Bold" FontSize="20" Height="37" Width="114"/>
                         <Label x:Name="totalPriceLbl" Content="Total Price:" Margin="129,504,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Segoe UI" FontWeight="Normal" Grid.Column="1" FontSize="18" Height="34" HorizontalAlignment="Left"/>
                     </Grid>
@@ -297,7 +296,7 @@
                 <local:DocumentViewer x:Name="saleQuoteViewer" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </Grid>
             <StackPanel Margin="0,0,10,0" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Right" FlowDirection="RightToLeft" Width="543">
-                <Grid x:Name="newSalesQuoteBtns" HorizontalAlignment="Left" Margin="10,0">
+                <Grid x:Name="newSalesQuoteBtns" HorizontalAlignment="Left" Margin="10,0" Visibility="Collapsed">
                     <Button x:Name="transRequestNext" Content="Next" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" Height="26" Click="transRequestNext_Click" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="0,0,104,0"/>
                     <Button x:Name="transRequestBack" Content="Back" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="84" Height="26" Click="transRequestBack_Click" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
                 </Grid>
@@ -493,13 +492,6 @@
                     </StackPanel>
 
                 </Grid>
-
-            </Grid>
-            <Grid x:Name="selectCustomerGrid" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <ScrollViewer Margin="0" VerticalAlignment="Center" Height="548" HorizontalAlignment="Center" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
 
             </Grid>
 

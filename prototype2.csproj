@@ -66,29 +66,21 @@
     <Reference Include="Google.Protobuf, Version=3.4.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>packages\Google.Protobuf.3.4.0\lib\net451\Google.Protobuf.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.ReportViewer.Runtime.Common.12.0.2402.15\lib\Microsoft.ReportViewer.Common.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Reporting.WinForms.v11.1.0.0.0\lib\Microsoft.ReportViewer.Common.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.ReportViewer.Runtime.Common.12.0.2402.15\lib\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.ReportViewer.Runtime.Common.12.0.2402.15\lib\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Reporting.WinForms.v11.1.0.0.0\lib\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.WebForms.DLL</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Reporting.WinForms.v11.1.0.0.0\lib\Microsoft.ReportViewer.WinForms.DLL</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.ReportViewer.Runtime.WinForms.12.0.2402.15\lib\Microsoft.ReportViewer.WinForms.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Reporting.WinForms.v11.1.0.0.0\lib\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
     <Reference Include="MigraDoc.DocumentObjectModel-wpf, Version=1.50.4619.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>packages\PDFsharp-MigraDoc-wpf.1.50.4619-beta4c\lib\net30\MigraDoc.DocumentObjectModel-wpf.dll</HintPath>
@@ -220,6 +212,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="classes\InvoiceDocument.cs" />
+    <Compile Include="classes\LoadDataToUI.cs" />
+    <Compile Include="classes\SalesQuoteDocument.cs" />
     <Compile Include="DataSet1.cs">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
@@ -228,24 +223,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="odc_DataSetPurchase.cs">
+      <DependentUpon>odc_DataSetPurchase.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="odc_DataSetService.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>odc_DataSetService.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="odc_DataSetPurchase.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>odc_DataSetPurchase.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DocumentViewer.xaml.cs">
       <DependentUpon>DocumentViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucFreqContractor.xaml.cs">
-      <DependentUpon>ucFreqContractor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ucFreqEmp.xaml.cs">
-      <DependentUpon>ucFreqEmp.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ucFreqItem.xaml.cs">
-      <DependentUpon>ucFreqItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ucFreqServices.xaml.cs">
-      <DependentUpon>ucFreqServices.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="InvoiceDocument.cs" />
-    <Compile Include="LoadDataToUI.cs" />
-    <Compile Include="SalesQuoteDocument.cs" />
     <Compile Include="MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
@@ -255,14 +248,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
-    <Compile Include="TextBoxValidation.cs" />
-    <Compile Include="ucMostSupplier.xaml.cs">
-      <DependentUpon>ucMostSupplier.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="uControlsMaintenance\ucInvoiceForm.xaml.cs">
+    <Compile Include="classes\TextBoxValidation.cs" />
+    <Compile Include="uControlsTransanction\ucInvoiceForm.xaml.cs">
       <DependentUpon>ucInvoiceForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="uControlsMaintenance\ucAddItem.xaml.cs">
+    <Compile Include="uControlsTransanction\ucAddItem.xaml.cs">
       <DependentUpon>ucAddItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="uControlsMaintenance\ucCustSuppCRUD.xaml.cs">
@@ -274,13 +264,13 @@
     <Compile Include="uControlsMaintenance\ucEmployeeForm.xaml.cs">
       <DependentUpon>ucEmployeeForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="uControlsMaintenance\ucInvoicePaymentForm.xaml.cs">
+    <Compile Include="uControlsTransanction\ucInvoicePaymentForm.xaml.cs">
       <DependentUpon>ucInvoicePaymentForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="uControlsMaintenance\ucLocation.xaml.cs">
       <DependentUpon>ucLocation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="uControlsMaintenance\ucSelectCustomer.xaml.cs">
+    <Compile Include="uControlsTransanction\ucSelectCustomer.xaml.cs">
       <DependentUpon>ucSelectCustomer.xaml</DependentUpon>
     </Compile>
     <Compile Include="uControlsMaintenance\ucServices.xaml.cs">
@@ -292,63 +282,44 @@
     <Compile Include="uControlsMaintenance\ucUnit.xaml.cs">
       <DependentUpon>ucUnit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucPurchaseOrder.xaml.cs">
+    <Compile Include="uControlsTransanction\ucPurchaseOrder.xaml.cs">
       <DependentUpon>ucPurchaseOrder.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucReports.xaml.cs">
+    <Compile Include="uControlsReport\ucReports.xaml.cs">
       <DependentUpon>ucReports.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucSalesQuote.xaml.cs">
+    <Compile Include="uControlsTransanction\ucSalesQuote.xaml.cs">
       <DependentUpon>ucSalesQuote.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucReportService.xaml.cs">
+    <Compile Include="uControlsReport\ucReportService.xaml.cs">
       <DependentUpon>ucReportService.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucReportItem.xaml.cs">
+    <Compile Include="uControlsReport\ucReportItem.xaml.cs">
       <DependentUpon>ucReportItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucReportSales.xaml.cs">
+    <Compile Include="uControlsReport\ucReportSales.xaml.cs">
       <DependentUpon>ucReportSales.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucServiceSchedule.xaml.cs">
+    <Compile Include="uControlsService\ucServiceSchedule.xaml.cs">
       <DependentUpon>ucServiceSchedule.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucNoticeOfEmployment.xaml.cs">
+    <Compile Include="uControlsMaintenance\ucNoticeOfEmployment.xaml.cs">
       <DependentUpon>ucNoticeOfEmployment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucOfficialReceipt.xaml.cs">
+    <Compile Include="uControlsTransanction\ucOfficialReceipt.xaml.cs">
       <DependentUpon>ucOfficialReceipt.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucPurchaseOrderViewer.xaml.cs">
+    <Compile Include="uControlsTransanction\ucPurchaseOrderViewer.xaml.cs">
       <DependentUpon>ucPurchaseOrderViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucLoyalCust.xaml.cs">
-      <DependentUpon>ucLoyalCust.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ValueConverter.cs" />
-    <Compile Include="ViewModelEntity.cs" />
-    <Compile Include="ViewModels.cs" />
+    <Compile Include="classes\ValueConverter.cs" />
+    <Compile Include="classes\ViewModelEntity.cs" />
+    <Compile Include="classes\ViewModels.cs" />
     <Page Include="contactDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DocumentViewer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ucFreqContractor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ucFreqEmp.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ucFreqItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ucFreqServices.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -359,12 +330,12 @@
     <Compile Include="contactDetails.xaml.cs">
       <DependentUpon>contactDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models.cs" />
+    <Compile Include="classes\Models.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DBConnection.cs" />
+    <Compile Include="classes\DBConnection.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -373,15 +344,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucMostSupplier.xaml">
+    <Page Include="uControlsTransanction\ucInvoiceForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="uControlsMaintenance\ucInvoiceForm.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="uControlsMaintenance\ucAddItem.xaml">
+    <Page Include="uControlsTransanction\ucAddItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -397,7 +364,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="uControlsMaintenance\ucInvoicePaymentForm.xaml">
+    <Page Include="uControlsTransanction\ucInvoicePaymentForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -405,7 +372,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="uControlsMaintenance\ucSelectCustomer.xaml">
+    <Page Include="uControlsTransanction\ucSelectCustomer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -421,47 +388,43 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucPurchaseOrder.xaml">
+    <Page Include="uControlsTransanction\ucPurchaseOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucReports.xaml">
+    <Page Include="uControlsReport\ucReports.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucSalesQuote.xaml">
+    <Page Include="uControlsTransanction\ucSalesQuote.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucReportService.xaml">
+    <Page Include="uControlsReport\ucReportService.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucReportItem.xaml">
+    <Page Include="uControlsReport\ucReportItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucReportSales.xaml">
+    <Page Include="uControlsReport\ucReportSales.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucServiceSchedule.xaml">
+    <Page Include="uControlsService\ucServiceSchedule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucNoticeOfEmployment.xaml">
+    <Page Include="uControlsMaintenance\ucNoticeOfEmployment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucOfficialReceipt.xaml">
+    <Page Include="uControlsTransanction\ucOfficialReceipt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucPurchaseOrderViewer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ucLoyalCust.xaml">
+    <Page Include="uControlsTransanction\ucPurchaseOrderViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -485,6 +448,50 @@
     </None>
     <None Include="DataSet1.xss">
       <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="odc_DataSetService.xsc">
+      <DependentUpon>odc_DataSetService.xsd</DependentUpon>
+    </None>
+    <None Include="odc_DataSetService.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>odc_DataSetService.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="odc_DataSetService.xss">
+      <DependentUpon>odc_DataSetService.xsd</DependentUpon>
+    </None>
+    <None Include="odc_DataSetPurchase.xsc">
+      <DependentUpon>odc_DataSetPurchase.xsd</DependentUpon>
+    </None>
+    <None Include="odc_DataSetPurchase.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>odc_DataSetPurchase.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="odc_DataSetPurchase.xss">
+      <DependentUpon>odc_DataSetPurchase.xsd</DependentUpon>
+    </None>
+    <None Include="odc_dbDataSet.xsc">
+      <DependentUpon>odc_dbDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="odc_dbDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>odc_dbDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="odc_dbDataSet.xss">
+      <DependentUpon>odc_dbDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="odc_dbDataSetSales.xsc">
+      <DependentUpon>odc_dbDataSetSales.xsd</DependentUpon>
+    </None>
+    <None Include="odc_dbDataSetSales.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>odc_dbDataSetSales.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="odc_dbDataSetSales.xss">
+      <DependentUpon>odc_dbDataSetSales.xsd</DependentUpon>
     </None>
     <None Include="prototype2_TemporaryKey.pfx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -534,8 +541,11 @@
     <EmbeddedResource Include="rdlcfiles\SalesReport.rdlc" />
     <EmbeddedResource Include="rdlcfiles\NoticeOfEmployment.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="rdlcfiles\OfficialReceipt.rdlc" />
+    <EmbeddedResource Include="rdlcfiles\OfficialReceipt.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="rdlcfiles\PurchaseOrder.rdlc" />
     <EmbeddedResource Include="Resources\odclogo.png" />
   </ItemGroup>

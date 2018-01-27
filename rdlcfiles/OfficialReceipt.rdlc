@@ -1048,44 +1048,6 @@
         <DataSourceName>DataSet1</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
-      <Fields>
-        <Field Name="companyName">
-          <DataField>companyName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="companyAddress">
-          <DataField>companyAddress</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="companyCity">
-          <DataField>companyCity</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="locProvince">
-          <DataField>locProvince</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="SIpaymentAmount">
-          <DataField>SIpaymentAmount</DataField>
-          <rd:TypeName>System.Single</rd:TypeName>
-        </Field>
-        <Field Name="invoiceNo">
-          <DataField>invoiceNo</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="busStyle">
-          <DataField>busStyle</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="SIpaymentMethod">
-          <DataField>SIpaymentMethod</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="SIcheckNo">
-          <DataField>SIcheckNo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DataSet1</rd:DataSetName>
         <rd:SchemaPath>C:\Users\Alexis\Source\Repos\odc-osmbcs\DataSet1.xsd</rd:SchemaPath>
