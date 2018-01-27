@@ -1920,14 +1920,14 @@
                                 <DataGridTemplateColumn Width="100"  >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button x:Name="btnEditUnit" Content="Edit" Click="btnEditUnit_Click" />
+                                            <Button x:Name="btnEditUnit" Content="Edit" Click="editRecordBtn_Click" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                                 <DataGridTemplateColumn Width="100"  >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button x:Name="btnDeleteUnit"  Content="Delete" Click="btnDeleteUnit_Click" />
+                                            <Button x:Name="btnDeleteUnit"  Content="Delete" Click="deleteRecordBtn_Click" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

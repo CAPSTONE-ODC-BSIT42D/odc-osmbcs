@@ -231,9 +231,9 @@
     <Compile Include="DocumentViewer.xaml.cs">
       <DependentUpon>DocumentViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="InvoiceDocument.cs" />
-    <Compile Include="LoadDataToUI.cs" />
-    <Compile Include="SalesQuoteDocument.cs" />
+    <Compile Include="classes\InvoiceDocument.cs" />
+    <Compile Include="classes\LoadDataToUI.cs" />
+    <Compile Include="classes\SalesQuoteDocument.cs" />
     <Compile Include="MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
@@ -243,11 +243,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
-    <Compile Include="TextBoxValidation.cs" />
-    <Compile Include="uControlsMaintenance\ucInvoiceForm.xaml.cs">
+    <Compile Include="classes\TextBoxValidation.cs" />
+    <Compile Include="uControlsTransanction\ucInvoiceForm.xaml.cs">
       <DependentUpon>ucInvoiceForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="uControlsMaintenance\ucAddItem.xaml.cs">
+    <Compile Include="uControlsTransanction\ucAddItem.xaml.cs">
       <DependentUpon>ucAddItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="uControlsMaintenance\ucCustSuppCRUD.xaml.cs">
@@ -259,13 +259,13 @@
     <Compile Include="uControlsMaintenance\ucEmployeeForm.xaml.cs">
       <DependentUpon>ucEmployeeForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="uControlsMaintenance\ucInvoicePaymentForm.xaml.cs">
+    <Compile Include="uControlsTransanction\ucInvoicePaymentForm.xaml.cs">
       <DependentUpon>ucInvoicePaymentForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="uControlsMaintenance\ucLocation.xaml.cs">
       <DependentUpon>ucLocation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="uControlsMaintenance\ucSelectCustomer.xaml.cs">
+    <Compile Include="uControlsTransanction\ucSelectCustomer.xaml.cs">
       <DependentUpon>ucSelectCustomer.xaml</DependentUpon>
     </Compile>
     <Compile Include="uControlsMaintenance\ucServices.xaml.cs">
@@ -277,39 +277,39 @@
     <Compile Include="uControlsMaintenance\ucUnit.xaml.cs">
       <DependentUpon>ucUnit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucPurchaseOrder.xaml.cs">
+    <Compile Include="uControlsTransanction\ucPurchaseOrder.xaml.cs">
       <DependentUpon>ucPurchaseOrder.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucReports.xaml.cs">
+    <Compile Include="uControlsReport\ucReports.xaml.cs">
       <DependentUpon>ucReports.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucSalesQuote.xaml.cs">
+    <Compile Include="uControlsTransanction\ucSalesQuote.xaml.cs">
       <DependentUpon>ucSalesQuote.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucReportService.xaml.cs">
+    <Compile Include="uControlsReport\ucReportService.xaml.cs">
       <DependentUpon>ucReportService.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucReportItem.xaml.cs">
+    <Compile Include="uControlsReport\ucReportItem.xaml.cs">
       <DependentUpon>ucReportItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucReportSales.xaml.cs">
+    <Compile Include="uControlsReport\ucReportSales.xaml.cs">
       <DependentUpon>ucReportSales.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucServiceSchedule.xaml.cs">
+    <Compile Include="uControlsService\ucServiceSchedule.xaml.cs">
       <DependentUpon>ucServiceSchedule.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucNoticeOfEmployment.xaml.cs">
+    <Compile Include="uControlsMaintenance\ucNoticeOfEmployment.xaml.cs">
       <DependentUpon>ucNoticeOfEmployment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucOfficialReceipt.xaml.cs">
+    <Compile Include="uControlsTransanction\ucOfficialReceipt.xaml.cs">
       <DependentUpon>ucOfficialReceipt.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucPurchaseOrderViewer.xaml.cs">
+    <Compile Include="uControlsTransanction\ucPurchaseOrderViewer.xaml.cs">
       <DependentUpon>ucPurchaseOrderViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ValueConverter.cs" />
-    <Compile Include="ViewModelEntity.cs" />
-    <Compile Include="ViewModels.cs" />
+    <Compile Include="classes\ValueConverter.cs" />
+    <Compile Include="classes\ViewModelEntity.cs" />
+    <Compile Include="classes\ViewModels.cs" />
     <Page Include="contactDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -325,12 +325,12 @@
     <Compile Include="contactDetails.xaml.cs">
       <DependentUpon>contactDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models.cs" />
+    <Compile Include="classes\Models.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DBConnection.cs" />
+    <Compile Include="classes\DBConnection.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -339,11 +339,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="uControlsMaintenance\ucInvoiceForm.xaml">
+    <Page Include="uControlsTransanction\ucInvoiceForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="uControlsMaintenance\ucAddItem.xaml">
+    <Page Include="uControlsTransanction\ucAddItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -359,7 +359,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="uControlsMaintenance\ucInvoicePaymentForm.xaml">
+    <Page Include="uControlsTransanction\ucInvoicePaymentForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -367,7 +367,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="uControlsMaintenance\ucSelectCustomer.xaml">
+    <Page Include="uControlsTransanction\ucSelectCustomer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -383,43 +383,43 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucPurchaseOrder.xaml">
+    <Page Include="uControlsTransanction\ucPurchaseOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucReports.xaml">
+    <Page Include="uControlsReport\ucReports.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucSalesQuote.xaml">
+    <Page Include="uControlsTransanction\ucSalesQuote.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucReportService.xaml">
+    <Page Include="uControlsReport\ucReportService.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucReportItem.xaml">
+    <Page Include="uControlsReport\ucReportItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucReportSales.xaml">
+    <Page Include="uControlsReport\ucReportSales.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucServiceSchedule.xaml">
+    <Page Include="uControlsService\ucServiceSchedule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucNoticeOfEmployment.xaml">
+    <Page Include="uControlsMaintenance\ucNoticeOfEmployment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucOfficialReceipt.xaml">
+    <Page Include="uControlsTransanction\ucOfficialReceipt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucPurchaseOrderViewer.xaml">
+    <Page Include="uControlsTransanction\ucPurchaseOrderViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

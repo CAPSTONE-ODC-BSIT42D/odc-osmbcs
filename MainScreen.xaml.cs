@@ -224,10 +224,6 @@ namespace prototype2
             this.Close();
         }
 
-        
-
-        
-
         #region Side Menu Buttons
 
         private void dashBoardBtn_Click(object sender, RoutedEventArgs e)
@@ -862,6 +858,29 @@ namespace prototype2
                     }
                 }
             }
+            else if (manageUnitsGrid.IsVisible)
+            {
+                Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+
+                foreach (var obj in formGridBg.Children)
+                {
+                    if (obj is UserControl)
+                    {
+                        if (!((UserControl)obj).Name.Equals("ucUnit"))
+                        {
+                            ((UserControl)obj).Visibility = Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            ((UserControl)obj).Visibility = Visibility.Visible;
+                            sb.Begin(((UserControl)obj));
+                        }
+                    }
+
+
+                }
+                formGridBg.Visibility = Visibility.Visible;
+            }
 
         }
 
@@ -951,6 +970,28 @@ namespace prototype2
                 else if (result == MessageBoxResult.Cancel)
                 {
                 }
+            }
+            else if (manageUnitsGrid.IsVisible)
+            {
+                var dbCon = DBConnection.Instance();
+                dbCon.DatabaseName = dbname;
+                if (serviceTypeDg.SelectedItems.Count > 0)
+                {
+                    MessageBoxResult result = MessageBox.Show("Do you wish to delete this record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                    if (result == MessageBoxResult.OK)
+                    {
+                        if (dbCon.IsConnect())
+                        {
+                            string query = "UPDATE `unit_t` SET `isDeleted`= 1 WHERE ID = '" + MainVM.SelectedUnit.ID + "';";
+                            if (dbCon.insertQuery(query, dbCon.Connection))
+                            {
+                                MessageBox.Show("Record successfully deleted!");
+                            }
+                        }
+                        dbCon.Close();
+                    }
+                }
+                MainVM.Ldt.worker.RunWorkerAsync();
             }
         }
 
