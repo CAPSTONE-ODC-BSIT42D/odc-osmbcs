@@ -231,6 +231,18 @@
     <Compile Include="DocumentViewer.xaml.cs">
       <DependentUpon>DocumentViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ucFreqContractor.xaml.cs">
+      <DependentUpon>ucFreqContractor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ucFreqEmp.xaml.cs">
+      <DependentUpon>ucFreqEmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ucFreqItem.xaml.cs">
+      <DependentUpon>ucFreqItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ucFreqServices.xaml.cs">
+      <DependentUpon>ucFreqServices.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InvoiceDocument.cs" />
     <Compile Include="LoadDataToUI.cs" />
     <Compile Include="SalesQuoteDocument.cs" />
@@ -244,6 +256,9 @@
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="TextBoxValidation.cs" />
+    <Compile Include="ucMostSupplier.xaml.cs">
+      <DependentUpon>ucMostSupplier.xaml</DependentUpon>
+    </Compile>
     <Compile Include="uControlsMaintenance\ucInvoiceForm.xaml.cs">
       <DependentUpon>ucInvoiceForm.xaml</DependentUpon>
     </Compile>
@@ -307,6 +322,9 @@
     <Compile Include="ucPurchaseOrderViewer.xaml.cs">
       <DependentUpon>ucPurchaseOrderViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ucLoyalCust.xaml.cs">
+      <DependentUpon>ucLoyalCust.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ValueConverter.cs" />
     <Compile Include="ViewModelEntity.cs" />
     <Compile Include="ViewModels.cs" />
@@ -315,6 +333,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DocumentViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ucFreqContractor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ucFreqEmp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ucFreqItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ucFreqServices.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -336,6 +370,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MainScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ucMostSupplier.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -420,6 +458,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ucPurchaseOrderViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ucLoyalCust.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="prototype2.ucMostSupplier"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:prototype2"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Width="596" Height="400">
+    <Grid Background="WhiteSmoke">
+        <Label Content="Most Reliable Suplier" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        <DataGrid x:Name="mostSupplierDataGrid" HorizontalAlignment="Left" Height="316" Margin="10,74,0,0" VerticalAlignment="Top" Width="576">
+        <DataGrid.Columns>
+
+            <DataGridTextColumn Header="Supplier Name" Width="220"/>
+            <DataGridTextColumn Header="Items" Width="200"/>
+                <DataGridTextColumn Header="No. of Times Availed" Width="170"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Sort by:" HorizontalAlignment="Left" Margin="407,34,0,0" VerticalAlignment="Top" FontSize="11"/>
+        <ComboBox x:Name="comboBoxMostSupplier" HorizontalAlignment="Left" Margin="458,35,0,0" VerticalAlignment="Top" Width="120" FontSize="11">
+            <ComboBoxItem Content="Daily"/>
+            <ComboBoxItem Content="Weekly"/>
+            <ComboBoxItem Content="Monthly"/>
+            <ComboBoxItem Content="Yearly"/>
+        </ComboBox>
+    </Grid>
+</UserControl>
