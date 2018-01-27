@@ -217,6 +217,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="classes\InvoiceDocument.cs" />
+    <Compile Include="classes\LoadDataToUI.cs" />
+    <Compile Include="classes\SalesQuoteDocument.cs" />
     <Compile Include="DataSet1.cs">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
@@ -244,8 +247,6 @@
     <Compile Include="DocumentViewer.xaml.cs">
       <DependentUpon>DocumentViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="InvoiceDocument.cs" />
-    <Compile Include="LoadDataToUI.cs" />
     <Compile Include="odc_dbDataSetSales.cs">
       <DependentUpon>odc_dbDataSetSales.xsd</DependentUpon>
     </Compile>
@@ -254,7 +255,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="SalesQuoteDocument.cs" />
     <Compile Include="MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
@@ -265,6 +265,24 @@
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="classes\TextBoxValidation.cs" />
+    <Compile Include="uControlsQuery\ucFreqContractor.xaml.cs">
+      <DependentUpon>ucFreqContractor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="uControlsQuery\ucFreqEmp.xaml.cs">
+      <DependentUpon>ucFreqEmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="uControlsQuery\ucFreqItem.xaml.cs">
+      <DependentUpon>ucFreqItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="uControlsQuery\ucFreqServices.xaml.cs">
+      <DependentUpon>ucFreqServices.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="uControlsQuery\ucLoyalCust.xaml.cs">
+      <DependentUpon>ucLoyalCust.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="uControlsQuery\ucMostSupplier.xaml.cs">
+      <DependentUpon>ucMostSupplier.xaml</DependentUpon>
+    </Compile>
     <Compile Include="uControlsTransanction\ucInvoiceForm.xaml.cs">
       <DependentUpon>ucInvoiceForm.xaml</DependentUpon>
     </Compile>
@@ -274,7 +292,7 @@
     <Compile Include="uControlsMaintenance\ucCustSuppCRUD.xaml.cs">
       <DependentUpon>ucCustSuppCRUD.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucDashboard.xaml.cs">
+    <Compile Include="uControlsDashboard\ucDashboard.xaml.cs">
       <DependentUpon>ucDashboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="uControlsMaintenance\ucEmployeeForm.xaml.cs">
@@ -331,10 +349,6 @@
     <Compile Include="classes\ValueConverter.cs" />
     <Compile Include="classes\ViewModelEntity.cs" />
     <Compile Include="classes\ViewModels.cs" />
-    <Page Include="contactDetails.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="DocumentViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -343,9 +357,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="contactDetails.xaml.cs">
-      <DependentUpon>contactDetails.xaml</DependentUpon>
-    </Compile>
     <Compile Include="classes\Models.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -360,6 +371,30 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="uControlsQuery\ucFreqContractor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="uControlsQuery\ucFreqEmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="uControlsQuery\ucFreqItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="uControlsQuery\ucFreqServices.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="uControlsQuery\ucLoyalCust.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="uControlsQuery\ucMostSupplier.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="uControlsTransanction\ucInvoiceForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -372,7 +407,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ucDashboard.xaml">
+    <Page Include="uControlsDashboard\ucDashboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -509,7 +544,6 @@
     <None Include="odc_dbDataSetSales.xss">
       <DependentUpon>odc_dbDataSetSales.xsd</DependentUpon>
     </None>
-    <None Include="prototype2_TemporaryKey.pfx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
