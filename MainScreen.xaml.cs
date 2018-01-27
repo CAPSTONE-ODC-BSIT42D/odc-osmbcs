@@ -1149,6 +1149,7 @@ namespace prototype2
                         ((Grid)obj).Visibility = Visibility.Visible;
                     else
                         ((Grid)obj).Visibility = Visibility.Collapsed;
+
             }
             foreach (var obj in transInvoiceGrid.Children)
             {
