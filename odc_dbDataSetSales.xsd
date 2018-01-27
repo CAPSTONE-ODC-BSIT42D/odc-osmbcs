@@ -7,34 +7,6 @@
           <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="odc_dbConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="odc_dbConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.prototype2.Properties.Settings.GlobalReference.Default.odc_dbConnectionString" Provider="MySql.Data.MySqlClient" />
         </Connections>
         <Tables>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="sales_invoice_tTableAdapter" GeneratorDataComponentClassName="sales_invoice_tTableAdapter" Name="sales_invoice_t" UserDataComponentName="sales_invoice_tTableAdapter">
-            <MainSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.sales_invoice_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT `invoiceNo`, `custID`, `sqNoChar`, `TIN`, `busStyle`, `dateOfIssue`, `termsDays`, `dueDate`, `purchaseOrderNumber`, `paymentStatus`, `vat`, `sc_pwd_discount`, `withholdingTax`, `notes` FROM `sales_invoice_t`</CommandText>
-                    <Parameters />
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-            </MainSource>
-            <Mappings />
-            <Sources />
-          </TableAdapter>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="services_availed_tTableAdapter" GeneratorDataComponentClassName="services_availed_tTableAdapter" Name="services_availed_t" UserDataComponentName="services_availed_tTableAdapter">
-            <MainSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.services_availed_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT `id`, `serviceID`, `provinceID`, `sqNoChar`, `city`, `totalCost` FROM `services_availed_t`</CommandText>
-                    <Parameters />
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-            </MainSource>
-            <Mappings />
-            <Sources />
-          </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="services_tTableAdapter" GeneratorDataComponentClassName="services_tTableAdapter" Name="services_t" UserDataComponentName="services_tTableAdapter">
             <MainSource>
               <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.services_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
@@ -143,23 +115,15 @@ WHERE        (YEAR(si.dateOfIssue) = @B)</CommandText>
   <xs:element name="odc_dbDataSetSales" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="odc_dbDataSetSales" msprop:Generator_UserDSName="odc_dbDataSetSales">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="sales_invoice_t" msprop:Generator_TableClassName="sales_invoice_tDataTable" msprop:Generator_TableVarName="tablesales_invoice_t" msprop:Generator_TablePropName="sales_invoice_t" msprop:Generator_RowDeletingName="sales_invoice_tRowDeleting" msprop:Generator_RowChangingName="sales_invoice_tRowChanging" msprop:Generator_RowEvHandlerName="sales_invoice_tRowChangeEventHandler" msprop:Generator_RowDeletedName="sales_invoice_tRowDeleted" msprop:Generator_UserTableName="sales_invoice_t" msprop:Generator_RowChangedName="sales_invoice_tRowChanged" msprop:Generator_RowEvArgName="sales_invoice_tRowChangeEvent" msprop:Generator_RowClassName="sales_invoice_tRow">
+        <xs:element name="services_t" msprop:Generator_TableClassName="services_tDataTable" msprop:Generator_TableVarName="tableservices_t" msprop:Generator_RowChangedName="services_tRowChanged" msprop:Generator_TablePropName="services_t" msprop:Generator_RowDeletingName="services_tRowDeleting" msprop:Generator_RowChangingName="services_tRowChanging" msprop:Generator_RowEvHandlerName="services_tRowChangeEventHandler" msprop:Generator_RowDeletedName="services_tRowDeleted" msprop:Generator_RowClassName="services_tRow" msprop:Generator_UserTableName="services_t" msprop:Generator_RowEvArgName="services_tRowChangeEvent">
           <xs:complexType>
           </xs:complexType>
         </xs:element>
-        <xs:element name="services_availed_t" msprop:Generator_TableClassName="services_availed_tDataTable" msprop:Generator_TableVarName="tableservices_availed_t" msprop:Generator_TablePropName="services_availed_t" msprop:Generator_RowDeletingName="services_availed_tRowDeleting" msprop:Generator_RowChangingName="services_availed_tRowChanging" msprop:Generator_RowEvHandlerName="services_availed_tRowChangeEventHandler" msprop:Generator_RowDeletedName="services_availed_tRowDeleted" msprop:Generator_UserTableName="services_availed_t" msprop:Generator_RowChangedName="services_availed_tRowChanged" msprop:Generator_RowEvArgName="services_availed_tRowChangeEvent" msprop:Generator_RowClassName="services_availed_tRow">
+        <xs:element name="si_payment_t" msprop:Generator_TableClassName="si_payment_tDataTable" msprop:Generator_TableVarName="tablesi_payment_t" msprop:Generator_RowChangedName="si_payment_tRowChanged" msprop:Generator_TablePropName="si_payment_t" msprop:Generator_RowDeletingName="si_payment_tRowDeleting" msprop:Generator_RowChangingName="si_payment_tRowChanging" msprop:Generator_RowEvHandlerName="si_payment_tRowChangeEventHandler" msprop:Generator_RowDeletedName="si_payment_tRowDeleted" msprop:Generator_RowClassName="si_payment_tRow" msprop:Generator_UserTableName="si_payment_t" msprop:Generator_RowEvArgName="si_payment_tRowChangeEvent">
           <xs:complexType>
           </xs:complexType>
         </xs:element>
-        <xs:element name="services_t" msprop:Generator_TableClassName="services_tDataTable" msprop:Generator_TableVarName="tableservices_t" msprop:Generator_TablePropName="services_t" msprop:Generator_RowDeletingName="services_tRowDeleting" msprop:Generator_RowChangingName="services_tRowChanging" msprop:Generator_RowEvHandlerName="services_tRowChangeEventHandler" msprop:Generator_RowDeletedName="services_tRowDeleted" msprop:Generator_UserTableName="services_t" msprop:Generator_RowChangedName="services_tRowChanged" msprop:Generator_RowEvArgName="services_tRowChangeEvent" msprop:Generator_RowClassName="services_tRow">
-          <xs:complexType>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="si_payment_t" msprop:Generator_TableClassName="si_payment_tDataTable" msprop:Generator_TableVarName="tablesi_payment_t" msprop:Generator_TablePropName="si_payment_t" msprop:Generator_RowDeletingName="si_payment_tRowDeleting" msprop:Generator_RowChangingName="si_payment_tRowChanging" msprop:Generator_RowEvHandlerName="si_payment_tRowChangeEventHandler" msprop:Generator_RowDeletedName="si_payment_tRowDeleted" msprop:Generator_UserTableName="si_payment_t" msprop:Generator_RowChangedName="si_payment_tRowChanged" msprop:Generator_RowEvArgName="si_payment_tRowChangeEvent" msprop:Generator_RowClassName="si_payment_tRow">
-          <xs:complexType>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="DataTable1" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent">
+        <xs:element name="DataTable1" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_RowClassName="DataTable1Row">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="itemName" msprop:Generator_ColumnVarNameInTable="columnitemName" msprop:Generator_ColumnPropNameInRow="itemName" msprop:Generator_ColumnPropNameInTable="itemNameColumn" msprop:Generator_UserColumnName="itemName">

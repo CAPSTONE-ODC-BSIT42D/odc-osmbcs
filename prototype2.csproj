@@ -245,6 +245,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>odc_dbDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="odc_dbDataSetSales.cs">
+      <DependentUpon>odc_dbDataSetSales.xsd</DependentUpon>
+    </Compile>
     <Compile Include="odc_dbDataSetSales.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
