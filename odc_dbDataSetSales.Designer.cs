@@ -1994,7 +1994,7 @@ namespace prototype2.odc_dbDataSetSalesTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[3];
+            this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[6];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = @"SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost) 
@@ -2019,14 +2019,8 @@ FROM            item_t i INNER JOIN
                          service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN
                          services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
                          services_t s ON sa.serviceID = s.serviceID
-WHERE        (MONTHNAME(si.dateOfIssue) = @A)";
+WHERE        (CURDATE() = si.dateOfIssue)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
-            global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@A";
-            param.Size = 1024;
-            param.IsNullable = true;
-            param.SourceColumn = "";
-            this._commandCollection[1].Parameters.Add(param);
             this._commandCollection[2] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[2].Connection = this.Connection;
             this._commandCollection[2].CommandText = @"SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost) 
@@ -2038,14 +2032,79 @@ FROM            item_t i INNER JOIN
                          service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN
                          services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
                          services_t s ON sa.serviceID = s.serviceID
-WHERE        (YEAR(si.dateOfIssue) = @B)";
+WHERE        (MONTHNAME(si.dateOfIssue) = @A)";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
+            param.ParameterName = "@A";
+            param.Size = 1024;
+            param.IsNullable = true;
+            param.SourceColumn = "";
+            this._commandCollection[2].Parameters.Add(param);
+            this._commandCollection[3] = new global::MySql.Data.MySqlClient.MySqlCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = @"SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost) 
+                         AS Expr5
+FROM            item_t i INNER JOIN
+                         items_availed_t ia ON i.ID = ia.itemID INNER JOIN
+                         cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN
+                         sales_invoice_t si ON cs.companyID = si.custID INNER JOIN
+                         service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN
+                         services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
+                         services_t s ON sa.serviceID = s.serviceID
+WHERE        (si.dateOfIssue BETWEEN @L AND @P)";
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
+            param = new global::MySql.Data.MySqlClient.MySqlParameter();
+            param.ParameterName = "@L";
+            param.DbType = global::System.Data.DbType.DateTime;
+            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Timestamp;
+            param.IsNullable = true;
+            param.SourceColumn = "dateOfIssue";
+            this._commandCollection[3].Parameters.Add(param);
+            param = new global::MySql.Data.MySqlClient.MySqlParameter();
+            param.ParameterName = "@P";
+            param.DbType = global::System.Data.DbType.DateTime;
+            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Timestamp;
+            param.IsNullable = true;
+            param.SourceColumn = "dateOfIssue";
+            this._commandCollection[3].Parameters.Add(param);
+            this._commandCollection[4] = new global::MySql.Data.MySqlClient.MySqlCommand();
+            this._commandCollection[4].Connection = this.Connection;
+            this._commandCollection[4].CommandText = @"SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost) 
+                         AS Expr5
+FROM            item_t i INNER JOIN
+                         items_availed_t ia ON i.ID = ia.itemID INNER JOIN
+                         cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN
+                         sales_invoice_t si ON cs.companyID = si.custID INNER JOIN
+                         service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN
+                         services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
+                         services_t s ON sa.serviceID = s.serviceID
+WHERE        (WEEK(si.dateOfIssue) = @N)";
+            this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
+            param = new global::MySql.Data.MySqlClient.MySqlParameter();
+            param.ParameterName = "@N";
+            param.DbType = global::System.Data.DbType.Decimal;
+            param.IsNullable = true;
+            param.SourceColumn = "";
+            this._commandCollection[4].Parameters.Add(param);
+            this._commandCollection[5] = new global::MySql.Data.MySqlClient.MySqlCommand();
+            this._commandCollection[5].Connection = this.Connection;
+            this._commandCollection[5].CommandText = @"SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost) 
+                         AS Expr5
+FROM            item_t i INNER JOIN
+                         items_availed_t ia ON i.ID = ia.itemID INNER JOIN
+                         cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN
+                         sales_invoice_t si ON cs.companyID = si.custID INNER JOIN
+                         service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN
+                         services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
+                         services_t s ON sa.serviceID = s.serviceID
+WHERE        (YEAR(si.dateOfIssue) = @B)";
+            this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@B";
             param.DbType = global::System.Data.DbType.Decimal;
             param.IsNullable = true;
             param.SourceColumn = "";
-            this._commandCollection[2].Parameters.Add(param);
+            this._commandCollection[5].Parameters.Add(param);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2076,8 +2135,32 @@ WHERE        (YEAR(si.dateOfIssue) = @B)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByMonthSales(odc_dbDataSetSales.DataTable1DataTable dataTable, string A) {
+        public virtual int FillByDaySales(odc_dbDataSetSales.DataTable1DataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual odc_dbDataSetSales.DataTable1DataTable GetDataByDaySales() {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            odc_dbDataSetSales.DataTable1DataTable dataTable = new odc_dbDataSetSales.DataTable1DataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByMonthSales(odc_dbDataSetSales.DataTable1DataTable dataTable, string A) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
             if ((A == null)) {
                 throw new global::System.ArgumentNullException("A");
             }
@@ -2096,7 +2179,7 @@ WHERE        (YEAR(si.dateOfIssue) = @B)";
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
         public virtual odc_dbDataSetSales.DataTable1DataTable GetDataByMonthSales(string A) {
-            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand = this.CommandCollection[2];
             if ((A == null)) {
                 throw new global::System.ArgumentNullException("A");
             }
@@ -2112,8 +2195,82 @@ WHERE        (YEAR(si.dateOfIssue) = @B)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByRangeSale(odc_dbDataSetSales.DataTable1DataTable dataTable, global::System.Nullable<global::System.DateTime> L, global::System.Nullable<global::System.DateTime> P) {
+            this.Adapter.SelectCommand = this.CommandCollection[3];
+            if ((L.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((System.DateTime)(L.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((P.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(P.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual odc_dbDataSetSales.DataTable1DataTable GetDataByRangeSale(global::System.Nullable<global::System.DateTime> L, global::System.Nullable<global::System.DateTime> P) {
+            this.Adapter.SelectCommand = this.CommandCollection[3];
+            if ((L.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((System.DateTime)(L.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((P.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(P.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            odc_dbDataSetSales.DataTable1DataTable dataTable = new odc_dbDataSetSales.DataTable1DataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByWeekSales(odc_dbDataSetSales.DataTable1DataTable dataTable, decimal N) {
+            this.Adapter.SelectCommand = this.CommandCollection[4];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(N));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual odc_dbDataSetSales.DataTable1DataTable GetDataByWeekSales(decimal N) {
+            this.Adapter.SelectCommand = this.CommandCollection[4];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(N));
+            odc_dbDataSetSales.DataTable1DataTable dataTable = new odc_dbDataSetSales.DataTable1DataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
         public virtual int FillByYearSales(odc_dbDataSetSales.DataTable1DataTable dataTable, decimal B) {
-            this.Adapter.SelectCommand = this.CommandCollection[2];
+            this.Adapter.SelectCommand = this.CommandCollection[5];
             this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(B));
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -2127,7 +2284,7 @@ WHERE        (YEAR(si.dateOfIssue) = @B)";
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
         public virtual odc_dbDataSetSales.DataTable1DataTable GetDataByYearSales(decimal B) {
-            this.Adapter.SelectCommand = this.CommandCollection[2];
+            this.Adapter.SelectCommand = this.CommandCollection[5];
             this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(B));
             odc_dbDataSetSales.DataTable1DataTable dataTable = new odc_dbDataSetSales.DataTable1DataTable();
             this.Adapter.Fill(dataTable);

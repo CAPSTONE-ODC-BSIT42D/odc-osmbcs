@@ -16,27 +16,29 @@ using Microsoft.Reporting.WinForms;
 using MySql.Data.MySqlClient;
 using System.Data;
 
-
 namespace prototype2
 {
     /// <summary>
-    /// Interaction logic for UserControl3.xaml
+    /// Interaction logic for UserControl2.xaml
     /// </summary>
-    public partial class ucReportSales : UserControl
+    public partial class ucReportItem : UserControl
     {
-        public ucReportSales()
+        public ucReportItem()
         {
             InitializeComponent();
             DisplayReport();
         }
         private void DisplayReport()
         {
-            ReportSales.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetSales()));
-            ReportSales.LocalReport.ReportEmbeddedResource = "prototype2.Report4.rdlc";
-            ReportSales.RefreshReport();
+            ReportItem.Reset();
+            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
+            ReportItem.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("odc_dbDataSetSales", GetItem()));
+            ReportItem.LoadReport(rNames);
+            ReportItem.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
+            ReportItem.RefreshReport();
         }
 
-        private DataTable GetSales()
+        private DataTable GetItem()
         {
             var dbCon = DBConnection.Instance();
             dbCon.IsConnect();
@@ -44,241 +46,265 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT  i.itemCode, i.itemName, i.itemUnit, i.salesPrice, po.orderDate, s.serviceID, s.serviceName, s.serviceDesc, CONCAT(sa.address, sa.city) AS Location, ss.dateStarted, ss.dateEnded, sa.totalCost FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar INNER JOIN sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON i.itemCode = ia.itemCode INNER JOIN  po_line_t p ON i.itemCode = p.itemNo INNER JOIN purchase_order_t po ON p.PONumChar = po.PONumChar";
+            cmd.CommandText = "SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost)  AS Expr5 FROM item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN   cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID INNER JOIN service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN services_t s ON sa.serviceID = s.serviceID";
 
-            DataSet1.salesReportDataTable dSSales = new DataSet1.salesReportDataTable();
-
-            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
-            mySqlDa.Fill(dSSales);
-
-            return dSSales;
-
-
-        }
-        private void DisplayReportSalesDay()
-        {
-            ReportSales.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetSalesDay()));
-            ReportSales.LocalReport.ReportEmbeddedResource = "prototype2.Report4.rdlc";
-            ReportSales.RefreshReport();
-        }
-
-        private DataTable GetSalesDay()
-        {
-            var dbCon = DBConnection.Instance();
-            dbCon.IsConnect();
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = dbCon.Connection;
-            cmd.CommandType = CommandType.Text;
-
-            cmd.CommandText = "SELECT        i.itemCode, i.itemName, i.itemUnit, i.salesPrice, po.orderDate, s.serviceID, s.serviceName, s.serviceDesc, CONCAT(sa.address, sa.city) AS Location, ss.dateStarted, ss.dateEnded, sa.totalCost FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar INNER JOIN sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON i.itemCode = ia.itemCode INNER JOIN po_line_t p ON i.itemCode = p.itemNo INNER JOIN purchase_order_t po ON p.PONumChar = po.PONumChar WHERE(i.isDeleted = 0) AND(s.isDeleted = 0) AND(Day(ss.dateStarted) = Day(CURDATE()))";
-
-            DataSet1.salesReportDataTable dSSales = new DataSet1.salesReportDataTable();
+            odc_dbDataSetSales.DataTable1DataTable dSItem = new odc_dbDataSetSales.DataTable1DataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
-            mySqlDa.Fill(dSSales);
+            mySqlDa.Fill(dSItem);
 
-            return dSSales;
-
-
-        }
-        private void DisplayReportSalesWeek()
-        {
-            ReportSales.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetSalesWeek()));
-            ReportSales.LocalReport.ReportEmbeddedResource = "prototype2.Report4.rdlc";
-            ReportSales.RefreshReport();
-        }
-
-        private DataTable GetSalesWeek()
-        {
-            var dbCon = DBConnection.Instance();
-            dbCon.IsConnect();
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = dbCon.Connection;
-            cmd.CommandType = CommandType.Text;
-
-            cmd.CommandText = "SELECT        i.itemCode, i.itemName, i.itemUnit, i.salesPrice, po.orderDate, s.serviceID, s.serviceName, s.serviceDesc, CONCAT(sa.address, sa.city) AS Location, ss.dateStarted, ss.dateEnded, sa.totalCost FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar INNER JOIN sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON i.itemCode = ia.itemCode INNER JOIN po_line_t p ON i.itemCode = p.itemNo INNER JOIN purchase_order_t po ON p.PONumChar = po.PONumChar WHERE(i.isDeleted = 0) AND(s.isDeleted = 0) AND(YEARWEEK(ss.dateStarted, 1) = YEARWEEK(CURDATE(), 1))";
-
-            DataSet1.salesReportDataTable dSSales = new DataSet1.salesReportDataTable();
-
-            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
-            mySqlDa.Fill(dSSales);
-
-            return dSSales;
-
+            return dSItem;
 
         }
-        private void DisplayReportSalesYear()
-        {
-            ReportSales.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetSalesYear()));
-            ReportSales.LocalReport.ReportEmbeddedResource = "prototype2.Report4.rdlc";
-            ReportSales.RefreshReport();
-        }
 
-        private DataTable GetSalesYear()
-        {
-            var dbCon = DBConnection.Instance();
-            dbCon.IsConnect();
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = dbCon.Connection;
-            cmd.CommandType = CommandType.Text;
-
-            cmd.CommandText = "SELECT        i.itemCode, i.itemName, i.itemUnit, i.salesPrice, po.orderDate, s.serviceID, s.serviceName, s.serviceDesc, CONCAT(sa.address, sa.city) AS Location, ss.dateStarted, ss.dateEnded, sa.totalCost FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar INNER JOIN sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON i.itemCode = ia.itemCode INNER JOIN po_line_t p ON i.itemCode = p.itemNo INNER JOIN purchase_order_t po ON p.PONumChar = po.PONumChar WHERE(i.isDeleted = 0) AND(s.isDeleted = 0) AND(YEAR(ss.dateStarted) ='" + ComboBoxYearSales.SelectedItem.ToString() + "')";
-
-            DataSet1.salesReportDataTable dSSales = new DataSet1.salesReportDataTable();
-
-            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
-            mySqlDa.Fill(dSSales);
-
-            return dSSales;
-
-
-        }
-        private void DisplayReportSalesMonth()
-        {
-            ReportSales.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetSalesMonth()));
-            ReportSales.LocalReport.ReportEmbeddedResource = "prototype2.Report4.rdlc";
-            ReportSales.RefreshReport();
-        }
-
-        private DataTable GetSalesMonth()
-        {
-            var dbCon = DBConnection.Instance();
-            dbCon.IsConnect();
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = dbCon.Connection;
-            cmd.CommandType = CommandType.Text;
-
-            cmd.CommandText = "SELECT        i.itemCode, i.itemName, i.itemUnit, i.salesPrice, po.orderDate, s.serviceID, s.serviceName, s.serviceDesc, CONCAT(sa.address, sa.city) AS Location, ss.dateStarted, ss.dateEnded, sa.totalCost FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar INNER JOIN sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON i.itemCode = ia.itemCode INNER JOIN po_line_t p ON i.itemCode = p.itemNo INNER JOIN purchase_order_t po ON p.PONumChar = po.PONumChar WHERE(i.isDeleted = 0) AND(s.isDeleted = 0) AND(YEAR(ss.dateStarted) = '"+ ComboBoxMonthSales.SelectedItem.ToString() + "')";
-
-            DataSet1.salesReportDataTable dSSales = new DataSet1.salesReportDataTable();
-
-            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
-            mySqlDa.Fill(dSSales);
-
-            return dSSales;
-
-
-        }
-        private void DisplayReportSalesRange()
-        {
-            ReportSales.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetSalesRange()));
-            ReportSales.LocalReport.ReportEmbeddedResource = "prototype2.Report4.rdlc";
-            ReportSales.RefreshReport();
-        }
-
-        private DataTable GetSalesRange()
-        {
-            var dbCon = DBConnection.Instance();
-            dbCon.IsConnect();
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = dbCon.Connection;
-            cmd.CommandType = CommandType.Text;
-
-            cmd.CommandText = "SELECT        i.itemCode, i.itemName, i.itemUnit, i.salesPrice, po.orderDate, s.serviceID, s.serviceName, s.serviceDesc, CONCAT(sa.address, sa.city) AS Location, ss.dateStarted, ss.dateEnded, sa.totalCost FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar INNER JOIN sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON i.itemCode = ia.itemCode INNER JOIN po_line_t p ON i.itemCode = p.itemNo INNER JOIN purchase_order_t po ON p.PONumChar = po.PONumChar WHERE(i.isDeleted = 0) AND(s.isDeleted = 0) AND(ss.dateStarted BETWEEN '" + DatePickerStartSales.SelectedDate.ToString() +"' AND '"+DatePickerEndSales.SelectedDate.ToString()+"')";
-
-            DataSet1.salesReportDataTable dSSales = new DataSet1.salesReportDataTable();
-
-            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
-            mySqlDa.Fill(dSSales);
-
-            return dSSales;
-
-
-        }
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            ReportSales.RefreshReport();
+            ReportItem.RefreshReport();
+        }
+        private void DisplayReportItemDay()
+        {
+            ReportItem.Reset();
+            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
+            ReportItem.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("odc_dbDataSetSales", GetItemDay()));
+            ReportItem.LoadReport(rNames);
+            ReportItem.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
+            ReportItem.RefreshReport();
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private DataTable GetItemDay()
         {
-            Object SELECTEDINDEX = ComboBoxSalesFilter.SelectedIndex;
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+
+            cmd.CommandText = "SELECT    i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost) AS Expr5 FROM item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID INNER JOIN service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN  services_t s ON sa.serviceID = s.serviceID WHERE(CURDATE() = si.dateOfIssue)";
+
+            odc_dbDataSetSales.DataTable1DataTable dSItem = new odc_dbDataSetSales.DataTable1DataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSItem);
+
+            return dSItem;
+
+        }
+        private void DisplayReportItemWeek()
+        {
+            ReportItem.Reset();
+            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
+            ReportItem.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("odc_dbDataSetSales", GetItemWeek()));
+            ReportItem.LoadReport(rNames);
+            ReportItem.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
+            ReportItem.RefreshReport();
+        }
+
+        private DataTable GetItemWeek()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+
+            cmd.CommandText = "SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost)  AS Expr5 FROM item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN  cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN  sales_invoice_t si ON cs.companyID = si.custID INNER JOIN service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN services_t s ON sa.serviceID = s.serviceID WHERE(WEEK(si.dateOfIssue) = '" + DatePickerItemWeek.SelectedDate.ToString() + "')";
+
+            odc_dbDataSetSales.DataTable1DataTable dSItem = new odc_dbDataSetSales.DataTable1DataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSItem);
+
+            return dSItem;
+
+        }
+
+        private void DisplayReportItemMonth()
+        {
+            ReportItem.Reset();
+            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
+            ReportItem.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("odc_dbDataSetSales", GetItemMonth()));
+            ReportItem.LoadReport(rNames);
+            ReportItem.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
+            ReportItem.RefreshReport();
+        }
+
+        private DataTable GetItemMonth()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+
+            cmd.CommandText = "SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost)  AS Expr5 FROM item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID INNER JOIN  service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN services_t s ON sa.serviceID = s.serviceID WHERE(MONTHNAME(si.dateOfIssue) = '"+ ComboBoxItemMonth.SelectedItem.ToString()+ "')";
+
+            odc_dbDataSetSales.DataTable1DataTable dSItem = new odc_dbDataSetSales.DataTable1DataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSItem);
+
+            return dSItem;
+
+        }
+        private void DisplayReportItemYear()
+        {
+
+            ReportItem.Reset();
+            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
+            ReportItem.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("odc_dbDataSetSales", GetItemYear()));
+            ReportItem.LoadReport(rNames);
+            ReportItem.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
+            ReportItem.RefreshReport();
+        }
+
+        private DataTable GetItemYear()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+
+            cmd.CommandText = "SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost)  AS Expr5 FROM item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN  sales_invoice_t si ON cs.companyID = si.custID INNER JOIN   service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN services_t s ON sa.serviceID = s.serviceID WHERE(YEAR(si.dateOfIssue)  = '"+ ComboBoxItemYear .SelectedItem.ToString()+ "')";
+
+            odc_dbDataSetSales.DataTable1DataTable dSItem = new odc_dbDataSetSales.DataTable1DataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSItem);
+
+            return dSItem;
+
+        }
+        private void DisplayReportItemRange()
+        {
+            ReportItem.Reset();
+            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
+            ReportItem.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("odc_dbDataSetSales", GetItemRange()));
+            ReportItem.LoadReport(rNames);
+            ReportItem.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
+            ReportItem.RefreshReport();
+        }
+
+        private DataTable GetItemRange()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+
+            cmd.CommandText = "SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost)  AS Expr5 FROM item_t i INNER JOIN  items_availed_t ia ON i.ID = ia.itemID INNER JOIN cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID INNER JOIN service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN  services_t s ON sa.serviceID = s.serviceID WHERE(si.dateOfIssue BETWEEN '"+DatePickerItemStart.SelectedDate.ToString()+"' AND '"+DatePickerItemEnd.SelectedDate.ToString()+"')";
+
+            odc_dbDataSetSales.DataTable1DataTable dSItem = new odc_dbDataSetSales.DataTable1DataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSItem);
+
+            return dSItem;
+
+        }
+        private void ComboBoxItemFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Object SELECTEDINDEX = ComboBoxItemFilter.SelectedIndex;
             if (SELECTEDINDEX.Equals(0))
             {
-                DisplayReportSalesDay();
-                ComboBoxYearSales.Visibility = Visibility.Hidden;
-                ComboBoxMonthSales.Visibility = Visibility.Hidden;
-                MonthSales.Visibility = Visibility.Hidden;
-                YearSales.Visibility = Visibility.Hidden;
-                DatePickerStartSales.Visibility = Visibility.Hidden;
-                DatePickerEndSales.Visibility = Visibility.Hidden;
-                startsales.Visibility = Visibility.Hidden;
-                EndSales.Visibility = Visibility.Hidden;
-
+                DisplayReportItemDay();
+                ItemWeek.Visibility = Visibility.Hidden;
+                ComboBoxItemYear.Visibility = Visibility.Hidden;
+                ComboBoxItemMonth.Visibility = Visibility.Hidden;
+                MonthItem.Visibility = Visibility.Hidden;
+                YearItem.Visibility = Visibility.Hidden;
+                DatePickerItemStart.Visibility = Visibility.Hidden;
+                DatePickerItemEnd.Visibility = Visibility.Hidden;
+                ItemStart.Visibility = Visibility.Hidden;
+                ItemEnd.Visibility = Visibility.Hidden;
+                DatePickerItemWeek.Visibility = Visibility.Hidden;
 
 
             }
             if (SELECTEDINDEX.Equals(1))
-
             {
-                DisplayReportSalesWeek();
-                ComboBoxYearSales.Visibility = Visibility.Hidden;
-                ComboBoxMonthSales.Visibility = Visibility.Hidden;
-                MonthSales.Visibility = Visibility.Hidden;
-                YearSales.Visibility = Visibility.Hidden;
-                DatePickerStartSales.Visibility = Visibility.Hidden;
-                DatePickerEndSales.Visibility = Visibility.Hidden;
-                startsales.Visibility = Visibility.Hidden;
-                EndSales.Visibility = Visibility.Hidden;
-
+                DisplayReportItemWeek();
+                ComboBoxItemYear.Visibility = Visibility.Hidden;
+                ComboBoxItemMonth.Visibility = Visibility.Hidden;
+                MonthItem.Visibility = Visibility.Hidden;
+                YearItem.Visibility = Visibility.Hidden;
+                DatePickerItemStart.Visibility = Visibility.Hidden;
+                DatePickerItemEnd.Visibility = Visibility.Hidden;
+                ItemStart.Visibility = Visibility.Hidden;
+                ItemEnd.Visibility = Visibility.Hidden;
+                DatePickerItemWeek.Visibility = Visibility.Visible;
+                ItemWeek.Visibility = Visibility.Visible;
 
             }
             if (SELECTEDINDEX.Equals(2))
             {
-
-                ComboBoxYearSales.Visibility = Visibility.Hidden;
-                ComboBoxMonthSales.Visibility = Visibility.Visible;
-                MonthSales.Visibility = Visibility.Visible;
-                YearSales.Visibility = Visibility.Hidden;
-                DatePickerStartSales.Visibility = Visibility.Hidden;
-                DatePickerEndSales.Visibility = Visibility.Hidden;
-                startsales.Visibility = Visibility.Hidden;
-                EndSales.Visibility = Visibility.Hidden;
+                ItemWeek.Visibility = Visibility.Hidden;
+                DatePickerItemWeek.Visibility = Visibility.Hidden;
+                ComboBoxItemYear.Visibility = Visibility.Hidden;
+                ComboBoxItemMonth.Visibility = Visibility.Visible;
+                MonthItem.Visibility = Visibility.Visible;
+                YearItem.Visibility = Visibility.Hidden;
+                DatePickerItemStart.Visibility = Visibility.Hidden;
+                DatePickerItemEnd.Visibility = Visibility.Hidden;
+                ItemStart.Visibility = Visibility.Hidden;
+                ItemEnd.Visibility = Visibility.Hidden;
 
             }
             if (SELECTEDINDEX.Equals(3))
             {
-                ComboBoxYearSales.Visibility = Visibility.Visible;
-                ComboBoxMonthSales.Visibility = Visibility.Hidden;
-                MonthSales.Visibility = Visibility.Hidden;
-                YearSales.Visibility = Visibility.Visible;
-                DatePickerStartSales.Visibility = Visibility.Hidden;
-                DatePickerEndSales.Visibility = Visibility.Hidden;
-                startsales.Visibility = Visibility.Hidden;
-                EndSales.Visibility = Visibility.Hidden;
+                ItemWeek.Visibility = Visibility.Hidden;
+                DatePickerItemWeek.Visibility = Visibility.Hidden;
+                ComboBoxItemYear.Visibility = Visibility.Visible;
+                ComboBoxItemMonth.Visibility = Visibility.Hidden;
+                MonthItem.Visibility = Visibility.Hidden;
+                YearItem.Visibility = Visibility.Visible;
+                DatePickerItemStart.Visibility = Visibility.Hidden;
+                DatePickerItemEnd.Visibility = Visibility.Hidden;
+                ItemStart.Visibility = Visibility.Hidden;
+                ItemEnd.Visibility = Visibility.Hidden;
 
 
             }
             if (SELECTEDINDEX.Equals(4))
             {
-                ComboBoxYearSales.Visibility = Visibility.Hidden;
-                ComboBoxMonthSales.Visibility = Visibility.Hidden;
-                MonthSales.Visibility = Visibility.Hidden;
-                YearSales.Visibility = Visibility.Hidden;
-                DatePickerStartSales.Visibility = Visibility.Visible;
-                DatePickerEndSales.Visibility = Visibility.Visible;
-                startsales.Visibility = Visibility.Visible;
-                EndSales.Visibility = Visibility.Visible;
+                ItemWeek.Visibility = Visibility.Hidden;
+                DatePickerItemWeek.Visibility = Visibility.Hidden;
+                ComboBoxItemYear.Visibility = Visibility.Hidden;
+                ComboBoxItemMonth.Visibility = Visibility.Hidden;
+                MonthItem.Visibility = Visibility.Hidden;
+                YearItem.Visibility = Visibility.Hidden;
+                DatePickerItemStart.Visibility = Visibility.Visible;
+                DatePickerItemEnd.Visibility = Visibility.Visible;
+                ItemStart.Visibility = Visibility.Visible;
+                ItemEnd.Visibility = Visibility.Visible;
 
             }
         }
 
-        private void ComboBoxMonthSales_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ComboBoxItemMonth_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DisplayReportSalesMonth();
+            DisplayReportItemMonth();
         }
 
-        private void ComboBoxYearSales_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ComboBoxItemYear_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DisplayReportSalesYear();
+            DisplayReportItemYear();
         }
-        private void DatePickerStartSales_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+
+        private void DatePickerItemStart_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            DisplayReportSalesRange();
+            DisplayReportItemRange();
         }
-        private void DatePickerEndSales_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+
+        private void DatePickerItemEnd_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            DisplayReportSalesRange();
+            DisplayReportItemRange();
+        }
+
+        private void DatePickerItemWeek_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DisplayReportItemWeek();
         }
     }
 }
