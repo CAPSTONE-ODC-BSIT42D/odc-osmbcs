@@ -1,33 +1,24 @@
-﻿<UserControl x:Class="prototype2.ucReportSales"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+              xmlns:RV="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"  
              xmlns:local="clr-namespace:prototype2"
-             xmlns:RV="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"  
-             mc:Ignorable="d" 
-             d:DesignHeight="350.752" IsVisibleChanged="UserControl_IsVisibleChanged" Background="#FF61E4D2" Width="815.435" Height="405.519">
-    <Grid Background="#FFECECEC" Height="406" VerticalAlignment="Bottom">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="77*"/>
-            <ColumnDefinition Width="130*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="128*"/>
-            <RowDefinition Height="223*"/>
-        </Grid.RowDefinitions>
-        <WindowsFormsHost x:Name="WinFormHost" Margin="0,70,0,-10" Grid.RowSpan="2" Grid.ColumnSpan="2">
-            <RV:ReportViewer x:Name="ReportSales" AutoSizeMode="GrowAndShrink" AutoSize="True" Dock="Fill"></RV:ReportViewer>
-        </WindowsFormsHost>
-        <ComboBox x:Name="ComboBoxSalesFilter" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Width="131" Height="31" SelectionChanged="ComboBox_SelectionChanged">
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="prototype2.ucReportItem"
+             mc:Ignorable="d" Width="815.435" Height="405.519" IsVisibleChanged="UserControl_IsVisibleChanged" Background="#FFEAEA50">
+    <Grid Margin="0,0,-27,-48" Background="#FFE6E1E1">
+       
+        <ComboBox x:Name="ComboBoxItemFilter" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" Width="131" Height="31" SelectionChanged="ComboBoxItemFilter_SelectionChanged">
             <ComboBoxItem Content="Day"/>
-            <ComboBoxItem Content="Weak"/>
+            <ComboBoxItem Content="Week"/>
             <ComboBoxItem Content="Month"/>
             <ComboBoxItem Content="Year"/>
             <ComboBoxItem Content="Range"/>
         </ComboBox>
-        <Label Content="Filter" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="ComboBoxMonthSales" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="188,34,0,0" VerticalAlignment="Top" Width="131" Height="31" Visibility="Hidden" SelectionChanged="ComboBoxMonthSales_SelectionChanged">
+        <Label Content="Filter:" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="MonthItem" Content="Month:" HorizontalAlignment="Left" Margin="203,4,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <ComboBox x:Name="ComboBoxItemMonth" HorizontalAlignment="Left" Margin="203,30,0,0" VerticalAlignment="Top" Width="131" Height="31" Visibility="Hidden" SelectionChanged="ComboBoxItemMonth_SelectionChanged">
             <ComboBoxItem Content="January"/>
             <ComboBoxItem Content="February"/>
             <ComboBoxItem Content="March"/>
@@ -41,14 +32,19 @@
             <ComboBoxItem Content="November"/>
             <ComboBoxItem Content="December"/>
         </ComboBox>
-        <ComboBox x:Name="ComboBoxYearSales" HorizontalAlignment="Left" Margin="188,35,0,0" VerticalAlignment="Top" Width="131" Height="31" Grid.ColumnSpan="2" IsEditable="True" SelectionChanged="ComboBoxYearSales_SelectionChanged" Visibility="Hidden">
+        <ComboBox x:Name="ComboBoxItemYear" HorizontalAlignment="Left" Margin="203,31,0,0" VerticalAlignment="Top" Width="131" Height="31" IsEditable="True" Visibility="Hidden" SelectionChanged="ComboBoxItemYear_SelectionChanged">
             <ComboBoxItem Content="2017"/>
         </ComboBox>
-        <Label x:Name="MonthSales" Content="Month:" HorizontalAlignment="Left" Margin="188,8,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
-        <Label x:Name="YearSales" Content="Year:" HorizontalAlignment="Left" Margin="188,8,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
-        <DatePicker x:Name="DatePickerStartSales" Grid.Column="1" HorizontalAlignment="Left" Margin="117,34,0,0" VerticalAlignment="Top" Width="131" Height="31" SelectedDateChanged="DatePickerStartSales_SelectedDateChanged" Visibility="Hidden"/>
-        <DatePicker x:Name="DatePickerEndSales" Grid.Column="1" HorizontalAlignment="Left" Margin="280,34,0,0" VerticalAlignment="Top" Width="131" Height="31" SelectedDateChanged="DatePickerEndSales_SelectedDateChanged" Visibility="Hidden"/>
-        <Label x:Name="startsales" Content="Start Date:" Grid.Column="1" HorizontalAlignment="Left" Margin="117,10,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
-        <Label x:Name="EndSales" Content="End Date:" Grid.Column="1" HorizontalAlignment="Left" Margin="280,10,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <Label x:Name="YearItem" Content="Year:" HorizontalAlignment="Left" Margin="203,4,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <DatePicker x:Name="DatePickerItemStart" HorizontalAlignment="Left" Margin="402,30,0,0" VerticalAlignment="Top" Width="131" Height="31" Visibility="Hidden" SelectedDateChanged="DatePickerItemStart_SelectedDateChanged"/>
+        <DatePicker x:Name="DatePickerItemWeek" HorizontalAlignment="Left" Margin="402,30,0,0" VerticalAlignment="Top" Width="131" Height="31" Visibility="Hidden" SelectedDateChanged="DatePickerItemWeek_SelectedDateChanged"/>
+        <DatePicker x:Name="DatePickerItemEnd" HorizontalAlignment="Left" Margin="610,30,0,0" VerticalAlignment="Top" Width="131" Height="31" Visibility="Hidden" SelectedDateChanged="DatePickerItemEnd_SelectedDateChanged"/>
+        <Label x:Name="ItemStart" Content="Start Date:" HorizontalAlignment="Left" Margin="402,4,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <Label x:Name="ItemWeek" Content="Week:" HorizontalAlignment="Left" Margin="402,4,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+
+        <Label x:Name="ItemEnd" Content="End Date:" HorizontalAlignment="Left" Margin="610,4,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+
+        <syncfusion:ReportViewer x:Name="ReportItem" Margin="0,67,0,0"/>
+      
     </Grid>
 </UserControl>

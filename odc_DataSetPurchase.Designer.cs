@@ -1052,14 +1052,8 @@ FROM            services_availed_t sa INNER JOIN
                          sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar, cust_supp_t cs INNER JOIN
                          purchase_order_t po ON cs.companyID = po.suppID, items_ordered_t io INNER JOIN
                          item_t i ON io.itemID = i.ID
-WHERE        (DAY(po.orderDate) = @D)";
+WHERE        (CURDATE() = po.orderDate)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
-            global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@D";
-            param.Size = 1024;
-            param.IsNullable = true;
-            param.SourceColumn = "";
-            this._commandCollection[1].Parameters.Add(param);
             this._commandCollection[2] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[2].Connection = this.Connection;
             this._commandCollection[2].CommandText = @"SELECT        po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost AS Expr1, SUM(io.totalCost) AS Expr2, SUM(sa.totalCost) AS Expr3, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
@@ -1070,7 +1064,7 @@ FROM            services_availed_t sa INNER JOIN
                          item_t i ON io.itemID = i.ID
 WHERE        (MONTHNAME(po.orderDate) = @A)";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
+            global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@A";
             param.Size = 1024;
             param.IsNullable = true;
@@ -1108,7 +1102,7 @@ FROM            services_availed_t sa INNER JOIN
                          sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar, cust_supp_t cs INNER JOIN
                          purchase_order_t po ON cs.companyID = po.suppID, items_ordered_t io INNER JOIN
                          item_t i ON io.itemID = i.ID
-WHERE        (WEEK(po.orderDate, 5) = @C)";
+WHERE        (WEEK(po.orderDate) = @C)";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@C";
@@ -1162,14 +1156,8 @@ WHERE        (YEAR(po.orderDate) = @B)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByDayPurchase(DataSet2.DataTable1DataTable dataTable, string D) {
+        public virtual int FillByDayPurchase(DataSet2.DataTable1DataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
-            if ((D == null)) {
-                throw new global::System.ArgumentNullException("D");
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(D));
-            }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }
@@ -1181,14 +1169,8 @@ WHERE        (YEAR(po.orderDate) = @B)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual DataSet2.DataTable1DataTable GetDataByDayPurchase(string D) {
+        public virtual DataSet2.DataTable1DataTable GetDataByDayPurchase() {
             this.Adapter.SelectCommand = this.CommandCollection[1];
-            if ((D == null)) {
-                throw new global::System.ArgumentNullException("D");
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(D));
-            }
             DataSet2.DataTable1DataTable dataTable = new DataSet2.DataTable1DataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;

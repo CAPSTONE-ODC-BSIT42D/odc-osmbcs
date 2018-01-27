@@ -1024,14 +1024,8 @@ FROM            services_t s INNER JOIN
                          services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN
                          service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN
                          provinces_t p ON sa.provinceID = p.id, service_scope_t sers, cust_supp_t cs
-WHERE        (day(ss.dateStarted) = @F)";
+WHERE        (CURDATE() = ss.dateStarted)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
-            global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@F";
-            param.Size = 1024;
-            param.IsNullable = true;
-            param.SourceColumn = "";
-            this._commandCollection[1].Parameters.Add(param);
             this._commandCollection[2] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[2].Connection = this.Connection;
             this._commandCollection[2].CommandText = @"SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2
@@ -1041,7 +1035,7 @@ FROM            services_t s INNER JOIN
                          provinces_t p ON sa.provinceID = p.id, service_scope_t sers, cust_supp_t cs
 WHERE        (MONTHNAME(ss.dateStarted) = @b)";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
+            global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@b";
             param.Size = 1024;
             param.IsNullable = true;
@@ -1077,7 +1071,7 @@ FROM            services_t s INNER JOIN
                          services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN
                          service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN
                          provinces_t p ON sa.provinceID = p.id, service_scope_t sers, cust_supp_t cs
-WHERE        (WEEK(ss.dateStarted, 5) = @e)";
+WHERE        (WEEK(ss.dateStarted) = @e)";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@e";
@@ -1130,14 +1124,8 @@ WHERE        (YEAR(ss.dateStarted) = @a)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByDayService(DataSet3.DataTable1DataTable dataTable, string F) {
+        public virtual int FillByDayService(DataSet3.DataTable1DataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
-            if ((F == null)) {
-                throw new global::System.ArgumentNullException("F");
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(F));
-            }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }
@@ -1149,14 +1137,8 @@ WHERE        (YEAR(ss.dateStarted) = @a)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual DataSet3.DataTable1DataTable GetDataByDayService(string F) {
+        public virtual DataSet3.DataTable1DataTable GetDataByDayService() {
             this.Adapter.SelectCommand = this.CommandCollection[1];
-            if ((F == null)) {
-                throw new global::System.ArgumentNullException("F");
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(F));
-            }
             DataSet3.DataTable1DataTable dataTable = new DataSet3.DataTable1DataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;

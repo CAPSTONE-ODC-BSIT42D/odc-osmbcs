@@ -28,10 +28,13 @@ namespace prototype2
             InitializeComponent();
             //DisplayReport();
         }
-        private void DisplayReport()
+        private void DisplayReportService()
         {
-            ReportService.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetService()));
-            ReportService.LocalReport.ReportEmbeddedResource = "prototype2.Report3.rdlc";
+            ReportService.Reset();
+            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
+            ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSet3", GetService()));
+            ReportService.LoadReport(rNames);
+            ReportService.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportService.RefreshReport();
         }
 
@@ -43,9 +46,9 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "select s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus From Services_t s JOIN services_availed_t sa ON s.serviceID = sa.serviceID JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar WHERE (s.isDeleted = 0) order by ss.serviceStatus";
+            cmd.CommandText = "SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2 FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN provinces_t p ON sa.provinceID = p.id, service_scope_t sers, cust_supp_t cs";
 
-            DataSet1.service_tDataTable dSServices = new DataSet1.service_tDataTable();
+            DataSet3.DataTable1DataTable dSServices = new DataSet3.DataTable1DataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSServices);
@@ -69,9 +72,9 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar WHERE(s.isDeleted = 0) AND(Day(ss.dateStarted) = Day(CURDATE())) ORDER BY ss.serviceStatus";
+            cmd.CommandText = "SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2 FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN provinces_t p ON sa.provinceID = p.id, service_scope_t sers, cust_supp_t cs WHERE(CURDATE() = ss.dateStarted)";
 
-            DataSet1.service_tDataTable dSServices = new DataSet1.service_tDataTable();
+            DataSet3.DataTable1DataTable dSServices = new DataSet3.DataTable1DataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSServices);
@@ -79,10 +82,13 @@ namespace prototype2
             return dSServices;
 
         }
-        private void DisplayReportDay()
+        private void DisplayReportDayService()
         {
-            ReportService.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetServiceDay()));
-            ReportService.LocalReport.ReportEmbeddedResource = "prototype2.Report3.rdlc";
+            ReportService.Reset();
+            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
+            ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSet3", GetServiceDay()));
+            ReportService.LoadReport(rNames);
+            ReportService.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportService.RefreshReport();
         }
         private DataTable GetServiceWeek()
@@ -93,9 +99,9 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar WHERE(s.isDeleted = 0) and YEARWEEK(ss.dateStarted, 1) = YEARWEEK(CURDATE(), 1) ORDER BY ss.serviceStatus";
+            cmd.CommandText = "SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2 FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN  provinces_t p ON sa.provinceID = p.id, service_scope_t sers, cust_supp_t cs WHERE(WEEK(ss.dateStarted) = '"+DatePickerWeekSer.SelectedDate.ToString()+"')  ORDER BY ss.serviceStatus";
 
-            DataSet1.service_tDataTable dSServices = new DataSet1.service_tDataTable();
+            DataSet3.DataTable1DataTable dSServices = new DataSet3.DataTable1DataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSServices);
@@ -103,10 +109,13 @@ namespace prototype2
             return dSServices;
 
         }
-        private void DisplayReportWeek()
+        private void DisplayReportWeekService()
         {
-            ReportService.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetServiceWeek()));
-            ReportService.LocalReport.ReportEmbeddedResource = "prototype2.Report3.rdlc";
+            ReportService.Reset();
+            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
+            ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSet3", GetServiceWeek()));
+            ReportService.LoadReport(rNames);
+            ReportService.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportService.RefreshReport();
         }
         private DataTable GetServiceMonth()
@@ -117,9 +126,9 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar WHERE(s.isDeleted = 0) AND(MONTH(ss.dateStarted) = '"+ ComboBoxSerMonth.SelectedItem.ToString()+ "') ORDER BY ss.serviceStatus";
+            cmd.CommandText = "SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2 FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN  provinces_t p ON sa.provinceID = p.id, service_scope_t sers, cust_supp_t cs WHERE(MONTHNAME(ss.dateStarted)  = '"+ ComboBoxSerMonth.SelectedItem.ToString()+ "') ORDER BY ss.serviceStatus";
 
-            DataSet1.service_tDataTable dSServices = new DataSet1.service_tDataTable();
+            DataSet3.DataTable1DataTable dSServices = new DataSet3.DataTable1DataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSServices);
@@ -127,10 +136,14 @@ namespace prototype2
             return dSServices;
 
         }
-        private void DisplayReportMonth()
+        private void DisplayReportMonthService()
         {
-            ReportService.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetServiceMonth()));
-            ReportService.LocalReport.ReportEmbeddedResource = "prototype2.Report3.rdlc";
+
+            ReportService.Reset();
+            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
+            ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSet3", GetServiceMonth()));
+            ReportService.LoadReport(rNames);
+            ReportService.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportService.RefreshReport();
         }
 
@@ -142,9 +155,9 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar WHERE(s.isDeleted = 0) AND(YEAR(ss.dateStarted) = '"+ComboBoxYear.SelectedItem.ToString()+"') ORDER BY ss.serviceStatus";
+            cmd.CommandText = "SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2 FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN  service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN provinces_t p ON sa.provinceID = p.id, service_scope_t sers, cust_supp_t cs WHERE(YEAR(ss.dateStarted) =  '"+ComboBoxYear.SelectedItem.ToString()+"') ORDER BY ss.serviceStatus";
 
-            DataSet1.service_tDataTable dSServices = new DataSet1.service_tDataTable();
+            DataSet3.DataTable1DataTable dSServices = new DataSet3.DataTable1DataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSServices);
@@ -152,10 +165,13 @@ namespace prototype2
             return dSServices;
 
         }
-        private void DisplayReportYear()
+        private void DisplayReportYearService()
         {
-            ReportService.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetServiceYear()));
-            ReportService.LocalReport.ReportEmbeddedResource = "prototype2.Report3.rdlc";
+            ReportService.Reset();
+            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
+            ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSet3", GetServiceYear()));
+            ReportService.LoadReport(rNames);
+            ReportService.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportService.RefreshReport();
         }
         private DataTable GetServiceRange()
@@ -166,9 +182,9 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT s.serviceID, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.tableNoChar = ss.serviceSchedNoChar WHERE(s.isDeleted = 0) AND(ss.dateStarted BETWEEN '" + DatePickerStartSer.SelectedDate.ToString()+ "' AND '" + DatePickerEndSer.SelectedDate.ToString() + "') ORDER BY ss.serviceStatus";
+            cmd.CommandText = "SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2 FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN provinces_t p ON sa.provinceID = p.id, service_scope_t sers, cust_supp_t cs WHERE(ss.dateStarted BETWEEN '" + DatePickerStartSer.SelectedDate.ToString()+ "' AND '" + DatePickerEndSer.SelectedDate.ToString() + "') ORDER BY ss.serviceStatus";
 
-            DataSet1.service_tDataTable dSServices = new DataSet1.service_tDataTable();
+            DataSet3.DataTable1DataTable dSServices = new DataSet3.DataTable1DataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSServices);
@@ -176,10 +192,13 @@ namespace prototype2
             return dSServices;
 
         }
-        private void DisplayReportRange()
+        private void DisplayReportRangeService()
         {
-            ReportService.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", GetServiceRange()));
-            ReportService.LocalReport.ReportEmbeddedResource = "prototype2.Report3.rdlc";
+            ReportService.Reset();
+            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
+            ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSet3", GetServiceRange()));
+            ReportService.LoadReport(rNames);
+            ReportService.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportService.RefreshReport();
         }
 
@@ -189,7 +208,8 @@ namespace prototype2
             if (SELECTEDINDEX.Equals(0))
             {
 
-                DisplayReportDay();
+                DisplayReportDayService();
+                WeekDate.Visibility = Visibility.Hidden;
                 ComboBoxYear.Visibility = Visibility.Hidden;
                 ComboBoxSerMonth.Visibility = Visibility.Hidden;
                 monthSer.Visibility = Visibility.Hidden;
@@ -198,13 +218,15 @@ namespace prototype2
                 DatePickerEndSer.Visibility = Visibility.Hidden;
                 StartDateSer.Visibility = Visibility.Hidden;
                 EndDateSer.Visibility = Visibility.Hidden;
+                DatePickerWeekSer.Visibility = Visibility.Hidden;
 
 
 
             }
             if (SELECTEDINDEX.Equals(1))
             {
-                DisplayReportWeek();
+
+                DisplayReportWeekService();
                 ComboBoxYear.Visibility = Visibility.Hidden;
                 ComboBoxSerMonth.Visibility = Visibility.Hidden;
                 monthSer.Visibility = Visibility.Hidden;
@@ -213,12 +235,14 @@ namespace prototype2
                 DatePickerEndSer.Visibility = Visibility.Hidden;
                 StartDateSer.Visibility = Visibility.Hidden;
                 EndDateSer.Visibility = Visibility.Hidden;
+                DatePickerWeekSer.Visibility = Visibility.Visible;
 
 
             }
             if (SELECTEDINDEX.Equals(2))
             {
-                
+                WeekDate.Visibility = Visibility.Hidden;
+                DatePickerWeekSer.Visibility = Visibility.Hidden;
                 ComboBoxYear.Visibility = Visibility.Hidden;
                 ComboBoxSerMonth.Visibility = Visibility.Visible;
                 monthSer.Visibility = Visibility.Visible;
@@ -231,6 +255,8 @@ namespace prototype2
             }
             if (SELECTEDINDEX.Equals(3))
             {
+                WeekDate.Visibility = Visibility.Hidden;
+                DatePickerWeekSer.Visibility = Visibility.Hidden;
                 ComboBoxYear.Visibility = Visibility.Visible;
                 ComboBoxSerMonth.Visibility = Visibility.Hidden;
                 monthSer.Visibility = Visibility.Hidden;
@@ -244,6 +270,8 @@ namespace prototype2
             }
             if (SELECTEDINDEX.Equals(4))
             {
+                WeekDate.Visibility = Visibility.Hidden;
+                DatePickerWeekSer.Visibility = Visibility.Hidden;
                 ComboBoxYear.Visibility = Visibility.Hidden;
                 ComboBoxSerMonth.Visibility = Visibility.Hidden;
                 monthSer.Visibility = Visibility.Hidden;
@@ -258,22 +286,27 @@ namespace prototype2
 
         private void ComboBoxSerMonth_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //DisplayReportMonth();
+            DisplayReportMonthService();
         }
 
         private void ComboBoxYear_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //DisplayReportYear();
+            DisplayReportYearService();
         }
 
         private void DatePickerStartSer_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            //DisplayReportRange();
+            DisplayReportRangeService();
         }
 
         private void DatePickerEndSer_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            //DisplayReportRange();
+            DisplayReportRangeService();
+        }
+
+        private void DatePickerWeekSer_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DisplayReportWeekService();
         }
     }
 }
