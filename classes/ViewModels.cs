@@ -404,22 +404,103 @@ namespace prototype2
             get { return selectedProductCategory; }
             set { SetProperty(ref selectedProductCategory, value); }
         }
-        //-----services
+        #region Service - Service Scheduling - Phases
+
         protected ObservableCollection<Service> servicesList = new ObservableCollection<Service>();
-
-        protected Service selectedservice = null;
-
         public ObservableCollection<Service> ServicesList
         {
             get { return servicesList; }
-            set { servicesList = value; }
+            set { SetProperty(ref servicesList, value); }
         }
 
+        protected Service selectedservice = null;
         public Service SelectedService
         {
             get { return selectedservice; }
             set { SetProperty(ref selectedservice, value); }
         }
+
+        protected ObservableCollection<AvailedService> availedServices = new ObservableCollection<AvailedService>();
+
+        protected AvailedService selectedAvailedServices = null;
+
+        public ObservableCollection<AvailedService> AvailedServices
+        {
+            get { return availedServices; }
+            set { availedServices = value; }
+        }
+
+        public AvailedService SelectedAvailedServices
+        {
+            get { return selectedAvailedServices; }
+            set { SetProperty(ref selectedAvailedServices, value); }
+        }
+
+
+        protected ObservableCollection<Phase> phases = new ObservableCollection<Phase>();
+        public ObservableCollection<Phase> Phases
+        {
+            get { return phases; }
+            set { SetProperty(ref phases, value); }
+        }
+
+
+        protected Phase selectedPhase = null;
+        public Phase SelectedPhase
+        {
+            get { return selectedPhase; }
+            set { SetProperty(ref selectedPhase, value); }
+        }
+
+        protected ObservableCollection<PhaseGroup> phasegroup = new ObservableCollection<PhaseGroup>();
+        public ObservableCollection<PhaseGroup> PhasesGroup
+        {
+            get { return phasegroup; }
+            set { SetProperty(ref phasegroup, value); }
+        }
+
+
+        protected PhaseGroup selectedPhaseGroup = null;
+        public PhaseGroup SelectedPhaseGroup
+        {
+            get { return selectedPhaseGroup; }
+            set { SetProperty(ref selectedPhaseGroup, value); }
+        }
+
+        protected ObservableCollection<ServiceSchedule> ServiceSchedules = new ObservableCollection<ServiceSchedule>();
+
+        protected ServiceSchedule SelectedServiceSchedule = null;
+
+        public ObservableCollection<ServiceSchedule> ServiceSchedules_
+        {
+            get { return ServiceSchedules; }
+            set { ServiceSchedules = value; }
+        }
+
+        public ServiceSchedule SelectedServiceSchedule_
+        {
+            get { return SelectedServiceSchedule; }
+            set { SetProperty(ref SelectedServiceSchedule, value); }
+        }
+        
+        protected ObservableCollection<Employee> AssignedEmployees = new ObservableCollection<Employee>();
+
+        public ObservableCollection<Employee> AssignedEmployees_
+        {
+            get { return AssignedEmployees; }
+            set { AssignedEmployees = value; }
+        }
+
+        protected ObservableCollection<Employee> AvailableEmployees =
+            new ObservableCollection<Employee>();
+
+        public ObservableCollection<Employee> AvailableEmployees_
+        {
+            get { return AvailableEmployees; }
+            set { AvailableEmployees = value; }
+        }
+
+        #endregion
 
         //----- Sales Quote
         protected ObservableCollection<SalesQuote> salesQuote = new ObservableCollection<SalesQuote>();
@@ -515,22 +596,7 @@ namespace prototype2
             set { SetProperty(ref selectedAvailedItem, value); }
         }
         //-----Added Services
-        protected ObservableCollection<AvailedService> availedServices = new ObservableCollection<AvailedService>();
-
-        protected AvailedService selectedAvailedServices = null;
-
-        public ObservableCollection<AvailedService> AvailedServices
-        {
-            get { return availedServices; }
-            set { availedServices = value; }
-        }
-
-        public AvailedService SelectedAvailedServices
-        {
-            get { return selectedAvailedServices; }
-            set { SetProperty(ref selectedAvailedServices, value); }
-        }
-
+        
         //----- Units
 
         protected ObservableCollection<Unit> units = new ObservableCollection<Unit>();
@@ -587,40 +653,7 @@ namespace prototype2
         }
 
 
-        //Schedule
-        protected ObservableCollection<ServiceSchedule> ServiceSchedules = new ObservableCollection<ServiceSchedule>();
-
-        protected ServiceSchedule SelectedServiceSchedule = null;
-
-        public ObservableCollection<ServiceSchedule> ServiceSchedules_
-        {
-            get { return ServiceSchedules; }
-            set { ServiceSchedules = value; }
-        }
-
-        public ServiceSchedule SelectedServiceSchedule_
-        {
-            get { return SelectedServiceSchedule; }
-            set { SetProperty(ref SelectedServiceSchedule, value); }
-        }
-
-        //Schedule - Assigned Employee
-        protected ObservableCollection<Employee> AssignedEmployees = new ObservableCollection<Employee>();
-
-        public ObservableCollection<Employee> AssignedEmployees_
-        {
-            get { return AssignedEmployees; }
-            set { AssignedEmployees = value; }
-        }
-        
-        protected ObservableCollection<Employee> AvailableEmployees =
-            new ObservableCollection<Employee>();
-
-        public ObservableCollection<Employee> AvailableEmployees_
-        {
-            get { return AvailableEmployees; }
-            set { AvailableEmployees = value; }
-        }
+       
         
 
         //Payments Hist

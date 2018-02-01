@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace prototype2
 {
-    //--Minor Tables--//
+    #region Minor Models
     public class EmpPosition : ViewModelEntity
     {
         public EmpPosition()
@@ -180,6 +180,137 @@ namespace prototype2
         }
     }
 
+    public class Phase : ViewModelEntity
+    {
+        public Phase()
+        {
+
+        }
+
+        protected int phaseID;
+
+        public int PhaseID
+        {
+            get { return phaseID; }
+            set { SetProperty(ref phaseID, value); }
+        }
+
+        protected string phaseName;
+
+        public string PhaseName
+        {
+            get { return phaseName; }
+            set { SetProperty(ref phaseName, value); }
+        }
+
+        protected string phaseDesc;
+        public string PhaseDesc
+        {
+
+            get { return phaseDesc; }
+            set { SetProperty(ref phaseDesc, value); }
+        }
+
+        protected int sequenceNo;
+        public int SequenceNo
+        {
+
+            get { return sequenceNo; }
+            set { SetProperty(ref sequenceNo, value); }
+        }
+
+        protected int phaseGroupID;
+        public int PhaseGroupID
+        {
+
+            get { return phaseGroupID; }
+            set { SetProperty(ref phaseGroupID, value); }
+        }
+    }
+
+
+    public class PhaseGroup : ViewModelEntity
+    {
+        public PhaseGroup()
+        {
+
+        }
+
+        protected int phaseGroupID;
+
+        public int PhaseGroupID
+        {
+            get { return phaseGroupID; }
+            set { SetProperty(ref phaseGroupID, value); }
+        }
+
+        protected string phaseGroupName;
+
+        public string PhaseGroupName
+        {
+            get { return phaseGroupName; }
+            set { SetProperty(ref phaseGroupName, value); }
+        }
+
+        protected int sequenceNo;
+        public int SequenceNo
+        {
+
+            get { return sequenceNo; }
+            set { SetProperty(ref sequenceNo, value); }
+        }
+
+        protected int serviceID;
+        public int ServiceID
+        {
+
+            get { return serviceID; }
+            set { SetProperty(ref serviceID, value); }
+        }
+
+    }
+
+    public class Phases_Per_Service : ViewModelEntity
+    {
+        public Phases_Per_Service()
+        {
+
+        }
+
+        protected int id;
+
+        public int ID
+        {
+            get { return id; }
+            set { SetProperty(ref id, value); }
+        }
+        
+        protected int phaseID;
+        public int PhaseID
+        {
+
+            get { return phaseID; }
+            set { SetProperty(ref phaseID, value); }
+        }
+
+        protected int serviceSchedID;
+        public int ServiceSchedID
+        {
+
+            get { return serviceSchedID; }
+            set { SetProperty(ref serviceSchedID, value); }
+        }
+
+        protected string status;
+        public string Status
+        {
+            get { return status; }
+            set { SetProperty(ref status, value); }
+        }
+
+    }
+
+
     public class Unit : ViewModelEntity
     {
         public Unit()
@@ -209,9 +340,8 @@ namespace prototype2
         }
     }
 
-
-
-    //---Major Tables---//
+    #endregion
+    #region Major Models
     public class Customer : ViewModelEntity
     {
         public Customer()
@@ -1258,4 +1388,5 @@ namespace prototype2
             set { allEmployeesContractor = value; }
         }
     }
+    #endregion
 }

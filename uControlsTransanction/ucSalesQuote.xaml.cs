@@ -496,6 +496,11 @@ namespace prototype2
             computePrice();
         }
 
+        private void uploadBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void computePrice()
         {
             decimal totalFee = 0;
@@ -734,6 +739,26 @@ namespace prototype2
         void loadSalesQuoteToUi()
         {
             MainVM.SelectedCustomerSupplier = MainVM.Customers.Where(x => x.CompanyID.Equals(MainVM.SelectedSalesQuote.custID_.ToString())).FirstOrDefault();
+            var availedItems = from item in MainVM.AvailedItems
+                             where item.SqNoChar == MainVM.SelectedSalesQuote.sqNoChar_
+                             select item;
+            //foreach (AvailedItem item in availedItems)
+            //{
+            //    MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ID.Equals(item.)).First();
+            //    MainVM.RequestedItems.Add(new RequestedItem()
+            //    {
+            //        lineNo = (MainVM.RequestedItems.Count + 1).ToString(),
+            //        itemCode = item.ItemCode,
+            //        desc = MainVM.SelectedProduct.ItemDesc,
+            //        itemName = MainVM.SelectedProduct.ItemName,
+            //        qty = item.ItemQty,
+            //        qtyEditable = true,
+            //        totalAmount = item.TotalCost,
+            //        itemType = 0,
+            //        unitPrice = MainVM.SelectedProduct.CostPrice
+
+            //    });
+            //}
             //foreach (AddedItem item in MainVM.SelectedSalesQuote.AddedItems)
             //{
             //    MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ItemCode.Equals(item.ItemCode)).First();
@@ -748,7 +773,7 @@ namespace prototype2
             //        totalAmount = item.TotalCost,
             //        itemType = 0,
             //        unitPrice = MainVM.SelectedProduct.CostPrice
-                    
+
             //    });
             //}
             //foreach (AddedService service in MainVM.SelectedSalesQuote.AddedServices)
@@ -873,7 +898,7 @@ namespace prototype2
             
         }
 
-       
+        
     }
     
 }
