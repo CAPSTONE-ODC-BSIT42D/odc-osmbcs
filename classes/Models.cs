@@ -252,6 +252,14 @@ namespace prototype2
             set { SetProperty(ref phaseGroupName, value); }
         }
 
+        protected string phaseDesc;
+        public string PhaseGroupDesc
+        {
+
+            get { return phaseDesc; }
+            set { SetProperty(ref phaseDesc, value); }
+        }
+
         protected int sequenceNo;
         public int SequenceNo
         {

@@ -2075,12 +2075,14 @@
 
             <local:ucCustSuppCRUD x:Name="ucCustSupp" HorizontalAlignment="Center" Margin="167,0,166,0" Visibility="Collapsed" d:IsHidden="True"/>
             <local:ucProductsCRUD x:Name="ucProduct" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
-            <uControlsMaintenance:ucEmployeeForm x:Name="ucEmployee" Margin="0" HorizontalAlignment="Center"/>
+            <uControlsMaintenance:ucEmployeeForm x:Name="ucEmployee" Margin="0" HorizontalAlignment="Center" d:IsHidden="True"/>
             <uControlsMaintenance:ucServices x:Name="ucServices" Margin="0" Height="272" Width="422" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
             <uControlsMaintenance:ucUnit x:Name="ucUnit" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="402" d:IsHidden="True"/>
             <uControlsMaintenance:ucLocation x:Name="ucLocation" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="458" d:IsHidden="True"/>
             <uControlsMaintenance:ucSelectCustomer x:Name="ucSelectCustomer" Margin="0" d:IsHidden="True"/>
             <uControlsMaintenance:ucAddItem x:Name="ucAddItem" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" d:IsHidden="True"/>
+            <uControlsMaintenance:ucAddPhase x:Name="ucAddPhase" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <uControlsMaintenance:ucAddPhaseItem x:Name="ucAddPhaseItem" HorizontalAlignment="Left" Margin="278,148,0,0" VerticalAlignment="Top"/>
 
         </Grid>
 

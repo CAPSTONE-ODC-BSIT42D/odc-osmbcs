@@ -53,7 +53,7 @@
                     <DataGridTemplateColumn Width="200" CanUserResize="False" Header="Description" >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text= "{Binding Phas}" ClipToBounds="True" TextWrapping="Wrap"/>
+                                <TextBlock Text= "{Binding PhaseGroupDesc}" ClipToBounds="True" TextWrapping="Wrap"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

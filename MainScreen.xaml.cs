@@ -57,6 +57,8 @@ namespace prototype2
             this.ucCustSupp.BackToSelectCustomerClicked += selectCustomer_BtnClicked;
 
             this.ucServices.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
+            
+
             this.ucUnit.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
             this.ucLocation.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
 

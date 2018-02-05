@@ -252,6 +252,12 @@
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="classes\TextBoxValidation.cs" />
+    <Compile Include="uControlsMaintenance\ucAddPhase.xaml.cs">
+      <DependentUpon>ucAddPhase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="uControlsMaintenance\ucAddPhaseItem.xaml.cs">
+      <DependentUpon>ucAddPhaseItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="uControlsQuery\ucFreqContractor.xaml.cs">
       <DependentUpon>ucFreqContractor.xaml</DependentUpon>
     </Compile>
@@ -358,6 +364,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MainScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="uControlsMaintenance\ucAddPhase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="uControlsMaintenance\ucAddPhaseItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
