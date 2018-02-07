@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -25,6 +26,14 @@ namespace prototype2.uControlsMaintenance
             InitializeComponent();
         }
 
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.ucAddPhase.SaveCloseButtonClicked += addPhaseSaveCloseBtn_SaveCloseButtonClicked;
+            this.ucAddPhase.AddPhaseItem += addPhaseItem_Clicked;
+            this.ucAddPhaseItem.SaveCloseButtonClicked += addPhaseItemSaveCloseBtn_SaveCloseButtonClicked;
+        }
+
+
         public event EventHandler SaveCloseButtonClicked;
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
@@ -35,6 +44,87 @@ namespace prototype2.uControlsMaintenance
 
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
         private bool validationError;
+
+        #region Custom EventArgs
+
+        private void addPhaseSaveCloseBtn_SaveCloseButtonClicked(object sender, EventArgs e)
+        {
+            //Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
+            modalsGrid.Visibility = Visibility.Collapsed;
+            foreach (var obj in modalsGrid.Children)
+            {
+                if (obj is UserControl)
+                {
+                    if (((UserControl)obj).Equals(ucAddPhase))
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Collapsed;
+                    }
+                }
+
+            }
+        }
+
+        private void addPhaseItemSaveCloseBtn_SaveCloseButtonClicked(object sender, EventArgs e)
+        {
+            foreach (var obj in modalsGrid.Children)
+            {
+                if (obj is UserControl)
+                {
+                    if (((UserControl)obj).Equals(ucAddPhaseItem))
+                    {
+                        Grid.SetZIndex(((UserControl)obj), 0);
+                        ((UserControl)obj).Visibility = Visibility.Collapsed;
+                    }
+                }
+
+            }
+        }
+
+        private void addPhaseItem_Clicked(object sender, EventArgs e)
+        {
+            //Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+            modalsGrid.Visibility = Visibility.Visible;
+            foreach (var obj in modalsGrid.Children)
+            {
+                if (obj is UserControl)
+                {
+                    if (!((UserControl)obj).Equals(ucAddPhaseItem))
+                    {
+                        Grid.SetZIndex(((UserControl)obj), 0);
+                    }
+                    else
+                    {
+                        Grid.SetZIndex(((UserControl)obj), 1);
+                        ((UserControl)obj).Visibility = Visibility.Visible;
+                        //sb.Begin(((UserControl)obj));
+                    }
+                }
+
+            }
+        }
+
+
+
+        #endregion
+
+        private void addPhaseButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.SelectedPhaseGroup = new PhaseGroup();
+            modalsGrid.Visibility = Visibility.Visible;
+            foreach (var obj in modalsGrid.Children)
+            {
+                if (obj is UserControl)
+                {
+                    if (((UserControl)obj).Equals(ucAddPhase))
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Visible;
+                    }
+                    else
+                        ((UserControl)obj).Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+
         private void saveServiceTypeBtn_Click(object sender, RoutedEventArgs e)
         {
             var dbCon = DBConnection.Instance();
@@ -120,10 +210,16 @@ namespace prototype2.uControlsMaintenance
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
+            MainVM.SelectedService = new Service();
             if(this.IsVisible && MainVM.isEdit)
             {
                 loadDataToUi();
             }
         }
+
+        
+
+
+
     }
 }

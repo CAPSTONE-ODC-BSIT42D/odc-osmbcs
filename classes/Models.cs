@@ -219,6 +219,20 @@ namespace prototype2
             set { SetProperty(ref sequenceNo, value); }
         }
 
+        protected bool firstItem;
+        public bool FirstItem
+        {
+            get { return firstItem; }
+            set { SetProperty(ref firstItem, value); }
+        }
+
+        protected bool lastItem;
+        public bool LastItem
+        {
+            get { return lastItem; }
+            set { SetProperty(ref lastItem, value); }
+        }
+
         protected int phaseGroupID;
         public int PhaseGroupID
         {
@@ -274,6 +288,13 @@ namespace prototype2
 
             get { return serviceID; }
             set { SetProperty(ref serviceID, value); }
+        }
+
+        protected ObservableCollection<Phase> phaseItems = new ObservableCollection<Phase>();
+        public ObservableCollection<Phase> PhaseItems
+        {
+            get { return phaseItems; }
+            set { SetProperty(ref phaseItems, value); }
         }
 
     }
@@ -687,6 +708,13 @@ namespace prototype2
         {
             get { return servicePrice; }
             set { SetProperty(ref servicePrice, value); }
+        }
+
+        protected ObservableCollection<PhaseGroup> phaseGroups = new ObservableCollection<PhaseGroup>();
+        public ObservableCollection<PhaseGroup> PhaseGroups
+        {
+            get { return phaseGroups; }
+            set { SetProperty(ref phaseGroups, value); }
         }
     }
 

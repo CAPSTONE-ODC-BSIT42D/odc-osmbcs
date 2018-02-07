@@ -57,7 +57,7 @@ namespace prototype2
             this.ucCustSupp.BackToSelectCustomerClicked += selectCustomer_BtnClicked;
 
             this.ucServices.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
-            
+           
 
             this.ucUnit.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
             this.ucLocation.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
@@ -95,7 +95,7 @@ namespace prototype2
         }
 
         #region Custom Events
-
+        
         private void addNewCustomer_BtnClicked(object sender, EventArgs e)
         {
             MainVM.isEdit = false;
@@ -156,8 +156,7 @@ namespace prototype2
 
         private void saveCloseBtn_SaveCloseButtonClicked(object sender, EventArgs e)
         {
-
-            closeModals();
+                closeModals();
             MainVM.StringTextBox = null;
             MainVM.DecimalTextBox = 0;
             MainVM.IntegerTextBox = 0;

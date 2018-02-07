@@ -171,6 +171,8 @@ namespace prototype2
 
         public bool isContractor { get; set; }
 
+        public int lastNumber { get; set; }
+
         public string Ddl;
         public string Ddl_
         {
@@ -259,7 +261,8 @@ namespace prototype2
 
 
         public String SearchQuery { get; set; }
-        //-----CUSTOMER/ Supplier
+
+        #region Customer/Supplier
         protected ObservableCollection<Customer> allCustomerSupplier =
             new ObservableCollection<Customer>();
 
@@ -295,9 +298,9 @@ namespace prototype2
             set { SetProperty(ref selectedCustomerSupplier, value); }
         }
 
+        #endregion
 
-
-        //-----Employee/contractor
+        #region Employee/Contractor
 
         protected ObservableCollection<Employee> allEmployeesContractor =
             new ObservableCollection<Employee>();
@@ -333,10 +336,7 @@ namespace prototype2
             get { return selectedEmployeeContractor; }
             set { SetProperty(ref selectedEmployeeContractor, value); }
         }
-        //-----End of Employee
-        
 
-        //----- Employee Position
         protected ObservableCollection<EmpPosition> empPosition = new ObservableCollection<EmpPosition>();
 
         protected EmpPosition selectedEmpPosition = null;
@@ -352,9 +352,6 @@ namespace prototype2
             get { return selectedEmpPosition; }
             set { SetProperty(ref selectedEmpPosition, value); }
         }
-        //----- End of Employee Position
-
-        //----- Contractor Job Title
         protected ObservableCollection<ContJobName> contJobTitle = new ObservableCollection<ContJobName>();
 
         protected ContJobName selectedJobTitle = null;
@@ -370,6 +367,11 @@ namespace prototype2
             get { return selectedJobTitle; }
             set { SetProperty(ref selectedJobTitle, value); }
         }
+
+        #endregion
+
+
+
         //----- End of Contractor Job Title
 
         //----- Product Lsit
@@ -445,6 +447,7 @@ namespace prototype2
         }
 
 
+
         protected Phase selectedPhase = null;
         public Phase SelectedPhase
         {
@@ -458,7 +461,7 @@ namespace prototype2
             get { return phasegroup; }
             set { SetProperty(ref phasegroup, value); }
         }
-
+        
 
         protected PhaseGroup selectedPhaseGroup = null;
         public PhaseGroup SelectedPhaseGroup

@@ -39,7 +39,30 @@ namespace prototype2.uControlsMaintenance
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (!MainVM.isEdit)
+            {
+                if (MainVM.SelectedPhaseGroup.PhaseItems.Count > 1)
+                {
+                    MainVM.SelectedPhaseGroup.PhaseItems[MainVM.SelectedPhaseGroup.PhaseItems.Count - 1].LastItem = false;
+                    MainVM.SelectedPhaseGroup.PhaseItems.Add(new Phase() { PhaseName = phaseItemNameTb.Text, PhaseDesc = phaseDescTb.Text, LastItem = true, FirstItem = false });
+                }
+                else if(MainVM.SelectedPhaseGroup.PhaseItems.Count == 0)
+                    MainVM.SelectedPhaseGroup.PhaseItems.Add(new Phase() { PhaseName = phaseItemNameTb.Text, PhaseDesc = phaseDescTb.Text, LastItem = true, FirstItem = true });
+                else if (MainVM.SelectedPhaseGroup.PhaseItems.Count == 1)
+                {
+                    MainVM.SelectedPhaseGroup.PhaseItems[MainVM.SelectedPhaseGroup.PhaseItems.Count - 1].FirstItem = true;
+                    MainVM.SelectedPhaseGroup.PhaseItems[MainVM.SelectedPhaseGroup.PhaseItems.Count - 1].LastItem = false;
+                    MainVM.SelectedPhaseGroup.PhaseItems.Add(new Phase() { PhaseName = phaseItemNameTb.Text, PhaseDesc = phaseDescTb.Text, LastItem = true, FirstItem = false });
+                }
+                    
+                
+            }
+            OnSaveCloseButtonClicked(e);
+        }
 
+        private void cancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OnSaveCloseButtonClicked(e);
         }
     }
 }

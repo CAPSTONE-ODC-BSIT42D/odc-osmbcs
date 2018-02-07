@@ -29,7 +29,7 @@
             </Grid>
             <Grid Margin="0">
                 <Button x:Name="saveBtn" Content="save" Margin="0,0,91,10" VerticalAlignment="Bottom" FontSize="12" FontWeight="Normal" FontStyle="Normal" Height="25" HorizontalAlignment="Right" Width="76" Click="saveBtn_Click"/>
-                <Button x:Name="cancelBtn" Content="cancel" FontSize="12" FontWeight="Normal" FontStyle="Normal" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="76" Margin="0,0,10,10"/>
+                <Button x:Name="cancelBtn" Content="cancel" FontSize="12" FontWeight="Normal" FontStyle="Normal" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="76" Margin="0,0,10,10" Click="cancelBtn_Click"/>
             </Grid>
         </StackPanel>
 

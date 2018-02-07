@@ -4,9 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:prototype2.uControlsMaintenance"
-             xmlns:prototype2="clr-namespace:prototype2" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="prototype2.uControlsMaintenance.ucAddPhase"
+             xmlns:prototype2="clr-namespace:prototype2" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase" x:Class="prototype2.uControlsMaintenance.ucAddPhase"
              mc:Ignorable="d" 
              d:DesignHeight="627" d:DesignWidth="613.5">
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="SortedPhaseItems" Source="{Binding SelectedPhaseGroup.PhaseItems}">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="SequenceNo"/>
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+    </UserControl.Resources>
+    
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>
@@ -31,7 +40,7 @@
                 <Label Content="Phases Items" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
                 <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,33,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
                 <Button x:Name="addPhaseItemBtn" Content="Add" HorizontalAlignment="Left" Margin="523,40,0,0" VerticalAlignment="Top" Width="75" Click="addPhaseItemBtn_Click"/>
-                <DataGrid x:Name="phaseItemDg" Height="307" Margin="20,65,16,0" VerticalAlignment="Top" ItemsSource="{Binding Phases}" AutoGenerateColumns="False">
+                <DataGrid x:Name="phaseItemDg" Height="307" Margin="20,65,16,0" VerticalAlignment="Top" ItemsSource="{Binding SelectedPhaseGroup.PhaseItems}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedPhase}" IsReadOnly="True" >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Phase Name" >
                             <DataGridTemplateColumn.CellTemplate>
@@ -40,7 +49,6 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-
                         <DataGridTemplateColumn Width="200" CanUserResize="False" Header="Description" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -52,7 +60,7 @@
                             <DataGridTemplateColumn.CellTemplate  >
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                        <Button x:Name="moveUpSeqNoBtn"  Width="Auto" Height="25" BorderBrush="Black" Background="{x:Null}" Margin="10,10,0,10" ToolTip="Delete Record" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Button x:Name="moveUpSeqNoBtn"  Width="Auto" Height="25" BorderBrush="Black" Background="{x:Null}" Margin="10,10,0,10" ToolTip="Delete Record" HorizontalAlignment="Center" VerticalAlignment="Center" Click="moveUpSeqNoBtn_Click">
                                             <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
                                                 <Canvas Name="Capa_1" Width="292.362" Height="292.361" Canvas.Left="0" Canvas.Top="0">
                                                     <Canvas.RenderTransform>
@@ -85,8 +93,17 @@
                                                     <Canvas Name="g34"/>
                                                 </Canvas>
                                             </Viewbox>
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding FirstItem}" Value="true">
+                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
                                         </Button>
-                                        <Button x:Name="moveDownSeqNoBtn"  Width="Auto" Height="25" BorderBrush="Black" Background="{x:Null}" Margin="10,10,0,10" ToolTip="Delete Record" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Button x:Name="moveDownSeqNoBtn"  Width="Auto" Height="25" BorderBrush="Black" Background="{x:Null}" Margin="10,10,0,10" ToolTip="Delete Record" VerticalAlignment="Center" HorizontalAlignment="Center" Click="moveDownSeqNoBtn_Click">
                                             <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
                                                 <Canvas Name="Capa_1a" Width="292.362" Height="292.362" Canvas.Left="0" Canvas.Top="0">
                                                     <Canvas.RenderTransform>
@@ -119,6 +136,15 @@
                                                     <Canvas Name="g34a"/>
                                                 </Canvas>
                                             </Viewbox>
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding LastItem}" Value="true">
+                                                            <Setter Property="IsEnabled" Value="False"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
                                         </Button>
                                     </StackPanel>
                                 </DataTemplate>
@@ -186,8 +212,8 @@
                 </DataGrid>
             </Grid>
             <Grid Margin="0">
-                <Button x:Name="saveBtn" Content="save" Margin="0,0,91,10" VerticalAlignment="Bottom" FontSize="12" FontWeight="Normal" FontStyle="Normal" Height="25" HorizontalAlignment="Right" Width="76"/>
-                <Button x:Name="cancelBtn" Content="cancel" FontSize="12" FontWeight="Normal" FontStyle="Normal" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="76" Margin="0,0,10,10"/>
+                <Button x:Name="saveBtn" Content="save" Margin="0,0,91,10" FontSize="12" FontWeight="Normal" FontStyle="Normal" HorizontalAlignment="Right" Width="76" Height="25" VerticalAlignment="Bottom" Click="saveBtn_Click"/>
+                <Button x:Name="cancelBtn" Content="cancel" FontSize="12" FontWeight="Normal" FontStyle="Normal" HorizontalAlignment="Right" Width="76" Margin="0,0,10,10" Click="cancelBtn_Click"/>
             </Grid>
         </StackPanel>
 
