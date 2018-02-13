@@ -571,6 +571,7 @@ namespace prototype2
         private void manageServiceAddBtn_Click(object sender, RoutedEventArgs e)
         {
             MainVM.isEdit = false;
+            MainVM.SelectedService = new Service();
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
 
             foreach (var obj in formGridBg.Children)

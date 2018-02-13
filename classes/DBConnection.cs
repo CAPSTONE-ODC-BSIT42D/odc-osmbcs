@@ -75,6 +75,32 @@ namespace prototype2
                 return false;
             
         }
+
+        public object selectScalar(string query, MySqlConnection con)
+        {
+            if (query.Length > 0)
+            {
+                
+                try
+                {
+                    con.Open();
+                    sqlCommand = new MySqlCommand();
+                    sqlCommand.Connection = con;
+                    sqlCommand.CommandText = query;
+                    var obj = sqlCommand.ExecuteScalar();
+                    con.Close();
+                    return obj;
+                }
+                catch (MySqlException ex)
+                {
+                    return null;
+                }
+            }
+            else
+                return null;
+
+        }
+
         public MySqlDataAdapter selectQuery(string query, MySqlConnection con)
         {
             if (query.Length > 0)

@@ -165,8 +165,25 @@ namespace prototype2.uControlsMaintenance
                         string query = "INSERT INTO services_t (serviceName,serviceDesc,servicePrice) VALUES ('" + serviceName.Text + "','" + serviceDesc.Text + "', '" + servicePrice.Value + "')";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
-                            MessageBox.Show("Service type successfully added!");
-
+                            query = "SELECT LAST_INSERT_ID();";
+                            string serviceID = dbCon.selectScalar(query, dbCon.Connection).ToString();
+                            foreach (PhaseGroup pg in MainVM.SelectedService.PhaseGroups)
+                            {
+                                query = "INSERT INTO phases_group_t (phaseGroupName,phaseGroupSequence,serviceID) VALUES ('" + pg.PhaseGroupName + "'," + pg.SequenceNo + ", " + serviceID + ")";
+                                if(dbCon.insertQuery(query, dbCon.Connection))
+                                {
+                                    query = "SELECT LAST_INSERT_ID();";
+                                    string phaseGroupID = dbCon.selectScalar(query, dbCon.Connection).ToString();
+                                    foreach (Phase pi in pg.PhaseItems)
+                                    {
+                                        query = "INSERT INTO phase_t (phaseName, phaseDesc, sequenceNo, phaseGroupID) VALUE ('" + pi.PhaseName + "', '" + pi.PhaseDesc + "','" + pi.SequenceNo + "','" + phaseGroupID + "')";
+                                        if (dbCon.insertQuery(query, dbCon.Connection))
+                                        {
+                                            MessageBox.Show("Service type successfully added!");
+                                        }
+                                    }
+                                }
+                            }
                             //clearing textboxes
                             serviceName.Clear();
                             serviceDesc.Clear();
@@ -180,10 +197,35 @@ namespace prototype2.uControlsMaintenance
                         string query = "UPDATE `services_T` SET serviceName = '" + serviceName.Text + "',serviceDesc = '" + serviceDesc.Text + "', servicePrice = '" + servicePrice.Value + "' WHERE serviceID = '" + MainVM.SelectedService.ServiceID + "'";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
-                            //MessageBox.Show("Sevice type sucessfully updated");
-                            MainVM.Ldt.worker.RunWorkerAsync();
-                            OnSaveCloseButtonClicked(e);
+                            var pgs = from pg in MainVM.SelectedService.PhaseGroups
+                                      where pg.IsModified = true
+                                      select pg;
+                            if(pgs != null)
+                            {
+                                foreach (PhaseGroup pg in pgs)
+                                {
+                                    query = "UPDATE `phases_group_t` SET phaseGroupName = '" + pg.PhaseGroupName + "',phaseGroupSequence = '" + pg.SequenceNo + "', serviceID = '" + pg.ServiceID + "' WHERE phaseGroupID = '" + pg.PhaseGroupID + "'";
+                                    dbCon.insertQuery(query, dbCon.Connection);
+                                    var pis = from pi in pg.PhaseItems
+                                              where pi.IsModified = true
+                                              select pi;
+                                    if (pis != null)
+                                    {
+                                        foreach(Phase pi in pis)
+                                        {
+                                            query = "UPDATE `phase_t` SET phaseName = '" + pi.PhaseName + "', phaseDesc = '" + pi.PhaseDesc + "', sequenceNo = '" + pi.SequenceNo + "' WHERE phaseID = '" + pi.PhaseID + "'";
+                                            dbCon.insertQuery(query, dbCon.Connection);
+                                        }
+                                    }
+                                    
+                                }
+
+                            }
+
                         }
+                        MessageBox.Show("Sevice type sucessfully updated");
+                        MainVM.Ldt.worker.RunWorkerAsync();
+                        OnSaveCloseButtonClicked(e);
                         MainVM.isEdit = false;
                     }
                 }

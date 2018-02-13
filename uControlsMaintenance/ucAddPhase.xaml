@@ -15,14 +15,14 @@
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
     </UserControl.Resources>
-    
+
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>
     <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
 
-        <StackPanel x:Name="serviceDetailsGrid" Background="White" VerticalAlignment="Top" Margin="0">
-            <Grid Margin="0">
+        <StackPanel Background="White" VerticalAlignment="Top" Margin="0">
+            <Grid x:Name="phaseDetailsForm" Margin="0">
                 <Label Content="Phase Details" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
                 <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,33,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
                 <Label Content="Phase Name:" HorizontalAlignment="Left" Margin="20,40,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="12"/>
@@ -61,38 +61,6 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                                         <Button x:Name="moveUpSeqNoBtn"  Width="Auto" Height="25" BorderBrush="Black" Background="{x:Null}" Margin="10,10,0,10" ToolTip="Delete Record" HorizontalAlignment="Center" VerticalAlignment="Center" Click="moveUpSeqNoBtn_Click">
-                                            <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
-                                                <Canvas Name="Capa_1" Width="292.362" Height="292.361" Canvas.Left="0" Canvas.Top="0">
-                                                    <Canvas.RenderTransform>
-                                                        <TranslateTransform X="0" Y="0"/>
-                                                    </Canvas.RenderTransform>
-                                                    <Canvas.Resources/>
-                                                    <!--Unknown tag: metadata-->
-                                                    <!--Unknown tag: sodipodi:namedview-->
-                                                    <Canvas Name="g4">
-                                                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path2" Fill="#000000">
-                                                            <Path.Data>
-                                                                <PathGeometry Figures="M286.935 197.287L159.028 69.381c-3.613-3.617-7.895-5.424-12.847-5.424s-9.233 1.807-12.85 5.424L5.424 197.287   C1.807 200.904 0 205.186 0 210.134s1.807 9.233 5.424 12.847c3.621 3.617 7.902 5.425 12.85 5.425h255.813   c4.949 0 9.233-1.808 12.848-5.425c3.613-3.613 5.427-7.898 5.427-12.847S290.548 200.904 286.935 197.287z" FillRule="NonZero"/>
-                                                            </Path.Data>
-                                                        </Path>
-                                                    </Canvas>
-                                                    <Canvas Name="g6"/>
-                                                    <Canvas Name="g8"/>
-                                                    <Canvas Name="g10"/>
-                                                    <Canvas Name="g12"/>
-                                                    <Canvas Name="g14"/>
-                                                    <Canvas Name="g16"/>
-                                                    <Canvas Name="g18"/>
-                                                    <Canvas Name="g20"/>
-                                                    <Canvas Name="g22"/>
-                                                    <Canvas Name="g24"/>
-                                                    <Canvas Name="g26"/>
-                                                    <Canvas Name="g28"/>
-                                                    <Canvas Name="g30"/>
-                                                    <Canvas Name="g32"/>
-                                                    <Canvas Name="g34"/>
-                                                </Canvas>
-                                            </Viewbox>
                                             <Button.Style>
                                                 <Style TargetType="{x:Type Button}">
                                                     <Style.Triggers>
@@ -102,40 +70,39 @@
                                                     </Style.Triggers>
                                                 </Style>
                                             </Button.Style>
-                                        </Button>
-                                        <Button x:Name="moveDownSeqNoBtn"  Width="Auto" Height="25" BorderBrush="Black" Background="{x:Null}" Margin="10,10,0,10" ToolTip="Delete Record" VerticalAlignment="Center" HorizontalAlignment="Center" Click="moveDownSeqNoBtn_Click">
                                             <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
-                                                <Canvas Name="Capa_1a" Width="292.362" Height="292.362" Canvas.Left="0" Canvas.Top="0">
+                                                <Canvas x:Name="Capa_1" Width="292.362" Height="292.361" Canvas.Left="0" Canvas.Top="0">
                                                     <Canvas.RenderTransform>
                                                         <TranslateTransform X="0" Y="0"/>
                                                     </Canvas.RenderTransform>
-                                                    <Canvas.Resources/>
                                                     <!--Unknown tag: metadata-->
                                                     <!--Unknown tag: sodipodi:namedview-->
-                                                    <Canvas Name="g4a">
-                                                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path2a" Fill="#000000">
+                                                    <Canvas x:Name="g4">
+                                                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2" Fill="#000000">
                                                             <Path.Data>
-                                                                <PathGeometry Figures="M286.935 69.377c-3.614-3.617-7.898-5.424-12.848-5.424H18.274c-4.952 0-9.233 1.807-12.85 5.424   C1.807 72.998 0 77.279 0 82.228c0 4.948 1.807 9.229 5.424 12.847l127.907 127.907c3.621 3.617 7.902 5.428 12.85 5.428   s9.233-1.811 12.847-5.428L286.935 95.074c3.613-3.617 5.427-7.898 5.427-12.847C292.362 77.279 290.548 72.998 286.935 69.377z" FillRule="NonZero"/>
+                                                                <PathGeometry Figures="M286.935 197.287L159.028 69.381c-3.613-3.617-7.895-5.424-12.847-5.424s-9.233 1.807-12.85 5.424L5.424 197.287   C1.807 200.904 0 205.186 0 210.134s1.807 9.233 5.424 12.847c3.621 3.617 7.902 5.425 12.85 5.425h255.813   c4.949 0 9.233-1.808 12.848-5.425c3.613-3.613 5.427-7.898 5.427-12.847S290.548 200.904 286.935 197.287z" FillRule="NonZero"/>
                                                             </Path.Data>
                                                         </Path>
                                                     </Canvas>
-                                                    <Canvas Name="g6a"/>
-                                                    <Canvas Name="g8a"/>
-                                                    <Canvas Name="g10a"/>
-                                                    <Canvas Name="g12a"/>
-                                                    <Canvas Name="g14a"/>
-                                                    <Canvas Name="g16a"/>
-                                                    <Canvas Name="g18a"/>
-                                                    <Canvas Name="g20a"/>
-                                                    <Canvas Name="g22a"/>
-                                                    <Canvas Name="g24a"/>
-                                                    <Canvas Name="g26a"/>
-                                                    <Canvas Name="g28a"/>
-                                                    <Canvas Name="g30a"/>
-                                                    <Canvas Name="g32a"/>
-                                                    <Canvas Name="g34a"/>
+                                                    <Canvas x:Name="g6"/>
+                                                    <Canvas x:Name="g8"/>
+                                                    <Canvas x:Name="g10"/>
+                                                    <Canvas x:Name="g12"/>
+                                                    <Canvas x:Name="g14"/>
+                                                    <Canvas x:Name="g16"/>
+                                                    <Canvas x:Name="g18"/>
+                                                    <Canvas x:Name="g20"/>
+                                                    <Canvas x:Name="g22"/>
+                                                    <Canvas x:Name="g24"/>
+                                                    <Canvas x:Name="g26"/>
+                                                    <Canvas x:Name="g28"/>
+                                                    <Canvas x:Name="g30"/>
+                                                    <Canvas x:Name="g32"/>
+                                                    <Canvas x:Name="g34"/>
                                                 </Canvas>
                                             </Viewbox>
+                                        </Button>
+                                        <Button x:Name="moveDownSeqNoBtn"  Width="Auto" Height="25" BorderBrush="Black" Background="{x:Null}" Margin="10,10,0,10" ToolTip="Delete Record" VerticalAlignment="Center" HorizontalAlignment="Center" Click="moveDownSeqNoBtn_Click">
                                             <Button.Style>
                                                 <Style TargetType="{x:Type Button}">
                                                     <Style.Triggers>
@@ -145,6 +112,37 @@
                                                     </Style.Triggers>
                                                 </Style>
                                             </Button.Style>
+                                            <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                                                <Canvas x:Name="Capa_1a" Width="292.362" Height="292.362" Canvas.Left="0" Canvas.Top="0">
+                                                    <Canvas.RenderTransform>
+                                                        <TranslateTransform X="0" Y="0"/>
+                                                    </Canvas.RenderTransform>
+                                                    <!--Unknown tag: metadata-->
+                                                    <!--Unknown tag: sodipodi:namedview-->
+                                                    <Canvas x:Name="g4a">
+                                                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2a" Fill="#000000">
+                                                            <Path.Data>
+                                                                <PathGeometry Figures="M286.935 69.377c-3.614-3.617-7.898-5.424-12.848-5.424H18.274c-4.952 0-9.233 1.807-12.85 5.424   C1.807 72.998 0 77.279 0 82.228c0 4.948 1.807 9.229 5.424 12.847l127.907 127.907c3.621 3.617 7.902 5.428 12.85 5.428   s9.233-1.811 12.847-5.428L286.935 95.074c3.613-3.617 5.427-7.898 5.427-12.847C292.362 77.279 290.548 72.998 286.935 69.377z" FillRule="NonZero"/>
+                                                            </Path.Data>
+                                                        </Path>
+                                                    </Canvas>
+                                                    <Canvas x:Name="g6a"/>
+                                                    <Canvas x:Name="g8a"/>
+                                                    <Canvas x:Name="g10a"/>
+                                                    <Canvas x:Name="g12a"/>
+                                                    <Canvas x:Name="g14a"/>
+                                                    <Canvas x:Name="g16a"/>
+                                                    <Canvas x:Name="g18a"/>
+                                                    <Canvas x:Name="g20a"/>
+                                                    <Canvas x:Name="g22a"/>
+                                                    <Canvas x:Name="g24a"/>
+                                                    <Canvas x:Name="g26a"/>
+                                                    <Canvas x:Name="g28a"/>
+                                                    <Canvas x:Name="g30a"/>
+                                                    <Canvas x:Name="g32a"/>
+                                                    <Canvas x:Name="g34a"/>
+                                                </Canvas>
+                                            </Viewbox>
                                         </Button>
                                     </StackPanel>
                                 </DataTemplate>

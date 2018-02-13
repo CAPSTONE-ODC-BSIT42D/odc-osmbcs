@@ -42,7 +42,7 @@ namespace prototype2.uControlsMaintenance
         }
 
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
-        private bool validationError;
+        private bool validationError = false;
 
         private void addPhaseItemBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -56,65 +56,39 @@ namespace prototype2.uControlsMaintenance
             MessageBoxResult result = MessageBox.Show("Do you want to save this service type?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
             if (result == MessageBoxResult.OK)
             {
-                //foreach (var element in serviceDetailsGrid.Children)
-                //{
-                //    if (element is TextBox)
-                //    {
-                //        BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-                //        if (expression != null)
-                //        {
-                //            if (((TextBox)element).IsEnabled)
-                //            {
-                //                expression.UpdateSource();
-                //                if (Validation.GetHasError((TextBox)element))
-                //                    validationError = true;
-                //            }
-                //        }
-                //    }
-                //    if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
-                //    {
-                //        BindingExpression expression = ((Xceed.Wpf.Toolkit.DecimalUpDown)element).GetBindingExpression(Xceed.Wpf.Toolkit.DecimalUpDown.TextProperty);
-                //        if (((Xceed.Wpf.Toolkit.DecimalUpDown)element).IsEnabled)
-                //        {
-                //            expression.UpdateSource();
-                //            if (Validation.GetHasError((Xceed.Wpf.Toolkit.DecimalUpDown)element))
-                //                validationError = true;
-                //        }
-                //    }
-                //}
-                //if (!validationError)
-                //{
-                //    if (!MainVM.isEdit)
-                //    {
-                //        string query = "INSERT INTO services_t (serviceName,serviceDesc,servicePrice) VALUES ('" + serviceName.Text + "','" + serviceDesc.Text + "', '" + servicePrice.Value + "')";
-                //        if (dbCon.insertQuery(query, dbCon.Connection))
-                //        {
-                //            MessageBox.Show("Service type successfully added!");
-
-                //            //clearing textboxes
-                //            serviceName.Clear();
-                //            serviceDesc.Clear();
-                //            servicePrice.Value = 0;
-                //            MainVM.Ldt.worker.RunWorkerAsync();
-                //        }
-                //        MainVM.isEdit = false;
-                //    }
-                //    else
-                //    {
-                //        string query = "UPDATE `services_T` SET serviceName = '" + serviceName.Text + "',serviceDesc = '" + serviceDesc.Text + "', servicePrice = '" + servicePrice.Value + "' WHERE serviceID = '" + MainVM.SelectedService.ServiceID + "'";
-                //        if (dbCon.insertQuery(query, dbCon.Connection))
-                //        {
-                //            //MessageBox.Show("Sevice type sucessfully updated");
-                //            MainVM.Ldt.worker.RunWorkerAsync();
-                //            OnSaveCloseButtonClicked(e);
-                //        }
-                //        MainVM.isEdit = false;
-                //    }
-                //}
-                //else
-                //    MessageBox.Show("Resolve the error first");
-                //validationError = false;
-                MainVM.SelectedService.PhaseGroups.Add(new PhaseGroup() { PhaseGroupName = phaseNameTb.Text, PhaseGroupDesc = phaseDescTb.Text, PhaseItems = MainVM.SelectedPhaseGroup.PhaseItems });
+                foreach (var element in phaseDetailsForm.Children)
+                {
+                    if (element is TextBox)
+                    {
+                        BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
+                        if (expression != null)
+                        {
+                            if (((TextBox)element).IsEnabled)
+                            {
+                                expression.UpdateSource();
+                                if (Validation.GetHasError((TextBox)element))
+                                    validationError = true;
+                            }
+                        }
+                    }
+                }
+                if (!validationError)
+                {
+                    if (MainVM.SelectedPhaseGroup.PhaseGroupName != null)
+                    {
+                        MainVM.SelectedPhaseGroup.PhaseGroupName = phaseNameTb.Text;
+                        MainVM.SelectedPhaseGroup.PhaseGroupDesc = phaseDescTb.Text;
+                        MainVM.SelectedPhaseGroup.IsModified = true;
+                    }
+                    else
+                    {
+                        MainVM.SelectedService.PhaseGroups.Add(new PhaseGroup() { PhaseGroupName = phaseNameTb.Text, PhaseGroupDesc = phaseDescTb.Text, PhaseItems = MainVM.SelectedPhaseGroup.PhaseItems });
+                    }
+                }
+                else
+                    MessageBox.Show("Resolve the error first");
+                validationError = false;
+                
             }
             else if (result == MessageBoxResult.Cancel)
             {
@@ -131,46 +105,47 @@ namespace prototype2.uControlsMaintenance
 
         private void moveUpSeqNoBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (MainVM.SelectedPhaseGroup.PhaseItems.Count > 2)
-            {
-                MainVM.SelectedPhase.FirstItem = false;
-                MainVM.SelectedPhaseGroup.PhaseItems.Move(MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase), MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase) + 1);
-            }
-            else if ((MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase) - 1) == MainVM.SelectedPhaseGroup.PhaseItems.Count - 2)
-            {
 
-                MainVM.SelectedPhase.LastItem = false;
-                MainVM.SelectedPhaseGroup.PhaseItems[MainVM.SelectedPhaseGroup.PhaseItems.Count - 2].FirstItem = false;
-                MainVM.SelectedPhaseGroup.PhaseItems.Move(MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase), MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase) - 1);
-            }
-            else if (MainVM.SelectedPhaseGroup.PhaseItems.Count == 2)
+            if (MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase) == 1)
             {
                 MainVM.SelectedPhase.FirstItem = true;
                 MainVM.SelectedPhase.LastItem = false;
-                MainVM.SelectedPhaseGroup.PhaseItems[MainVM.SelectedPhaseGroup.PhaseItems.Count - 2].FirstItem = false;
-                MainVM.SelectedPhaseGroup.PhaseItems.Move(MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase), MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase) - 2);
+                MainVM.SelectedPhaseGroup.PhaseItems[0].FirstItem = false;
+                if(MainVM.SelectedPhaseGroup.PhaseItems.Count == 2)
+                    MainVM.SelectedPhaseGroup.PhaseItems[0].LastItem = true;
+                MainVM.SelectedPhase.SequenceNo = MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase) - 1;
+                MainVM.SelectedPhaseGroup.PhaseItems.Move(MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase), MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase) - 1);
+
             }
-            
+            else
+            {
+                MainVM.SelectedPhase.LastItem = false;
+                if(MainVM.SelectedPhaseGroup.PhaseItems.Count - 1 == MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase))
+                    MainVM.SelectedPhaseGroup.PhaseItems[MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase) - 1].LastItem = true;
+                MainVM.SelectedPhase.SequenceNo = MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase) - 1;
+                MainVM.SelectedPhaseGroup.PhaseItems.Move(MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase), MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase) - 1);
+            }
         }
 
         private void moveDownSeqNoBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(MainVM.SelectedPhaseGroup.PhaseItems.Count > 2)
-            {
-                MainVM.SelectedPhase.FirstItem = false;
-                MainVM.SelectedPhaseGroup.PhaseItems.Move(MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase), MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase) + 1);
-            }
-            else if ((MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase)+1) == MainVM.SelectedPhaseGroup.PhaseItems.Count - 1)
-            {
-                MainVM.SelectedPhase.LastItem = true;
-                MainVM.SelectedPhaseGroup.PhaseItems[MainVM.SelectedPhaseGroup.PhaseItems.Count - 1].LastItem = false;
-                MainVM.SelectedPhaseGroup.PhaseItems.Move(MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase), MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase) + 1);
-            }
-            else if(MainVM.SelectedPhaseGroup.PhaseItems.Count == 2)
+            if (MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase) == MainVM.SelectedPhaseGroup.PhaseItems.Count - 2)
             {
                 MainVM.SelectedPhase.FirstItem = false;
                 MainVM.SelectedPhase.LastItem = true;
+                if (MainVM.SelectedPhaseGroup.PhaseItems.Count == 2)
+                    MainVM.SelectedPhaseGroup.PhaseItems[MainVM.SelectedPhaseGroup.PhaseItems.Count - 1].LastItem = false;
                 MainVM.SelectedPhaseGroup.PhaseItems[MainVM.SelectedPhaseGroup.PhaseItems.Count - 1].LastItem = false;
+                MainVM.SelectedPhase.SequenceNo = MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase) - 1;
+                MainVM.SelectedPhaseGroup.PhaseItems.Move(MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase), MainVM.SelectedPhaseGroup.PhaseItems.Count + 1);
+
+            }
+            else
+            {
+                MainVM.SelectedPhase.FirstItem = false;
+                if (MainVM.SelectedPhaseGroup.PhaseItems.Count - 1 == MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase))
+                    MainVM.SelectedPhaseGroup.PhaseItems[MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase) - 1].LastItem = false;
+                MainVM.SelectedPhase.SequenceNo = MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase) - 1;
                 MainVM.SelectedPhaseGroup.PhaseItems.Move(MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase), MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase) + 1);
             }
         }
