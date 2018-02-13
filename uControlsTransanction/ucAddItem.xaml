@@ -180,8 +180,8 @@
                                 </DataGrid.Columns>
                             </DataGrid>
                             <Label x:Name="label17" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="14,7,0,0"/>
-                            <TextBox x:Name="searchTb" HorizontalAlignment="Left" Height="25" Margin="70,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317" Text="{Binding SearchQuery}"/>
-                            <Button x:Name="searchBtn" Content="search" HorizontalAlignment="Left" Margin="410,10,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="searchBtn_Click"/>
+                            <TextBox x:Name="searchTb" HorizontalAlignment="Left" Height="25" Margin="70,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="248" Text="{Binding SearchQuery}"/>
+                            <Button x:Name="searchBtn" Content="Find" HorizontalAlignment="Right" Margin="0,9,434,0" VerticalAlignment="Top" Width="85" Height="26" Foreground="#FFFBFBFB" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="13" Click="searchBtn_Click"/>
                         </Grid>
                     </Border>
                 </Grid>
