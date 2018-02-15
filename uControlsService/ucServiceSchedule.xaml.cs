@@ -1,5 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using Syncfusion.UI.Xaml.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -93,12 +92,6 @@ namespace prototype2
         //            }
         //    }
         //}
-
-        private void serviceSched_ScheduleClick(object sender, ScheduleClickEventArgs e)
-        {
-
-        }
-
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)
         {
             Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
@@ -140,24 +133,24 @@ namespace prototype2
             formGridBg.Visibility = Visibility.Collapsed;
         }
 
-        private void serviceSched_AppointmentEditorOpening(object sender, AppointmentEditorOpeningEventArgs e)
-        {
-            e.Cancel = true;
-            if(e.Action == EditorAction.Add)
-            {
-                Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
-                sb.Begin(formGridBg);
-                formGridBg.Visibility = Visibility.Collapsed;
-                MainVM.SelectedServiceSchedule_ = new ServiceSchedule();
-            }
-            else if(e.Action == EditorAction.Edit){
+        //private void serviceSched_AppointmentEditorOpening(object sender, AppointmentEditorOpeningEventArgs e)
+        //{
+        //    e.Cancel = true;
+        //    if(e.Action == EditorAction.Add)
+        //    {
+        //        Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
+        //        sb.Begin(formGridBg);
+        //        formGridBg.Visibility = Visibility.Collapsed;
+        //        MainVM.SelectedServiceSchedule_ = new ServiceSchedule();
+        //    }
+        //    else if(e.Action == EditorAction.Edit){
 
-                Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
-                sb.Begin(formGridBg);
-                formGridBg.Visibility = Visibility.Collapsed;
-                loadDataToUi();
-            }
-        }
+        //        Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
+        //        sb.Begin(formGridBg);
+        //        formGridBg.Visibility = Visibility.Collapsed;
+        //        loadDataToUi();
+        //    }
+        //}
 
         void saveDataToDb()
         {
