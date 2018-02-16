@@ -883,7 +883,25 @@ namespace prototype2
                 }
                 formGridBg.Visibility = Visibility.Visible;
             }
-
+            else if (manageServicesGrid.IsVisible)
+            {
+                foreach (var obj in formGridBg.Children)
+                {
+                    if (obj is UserControl)
+                    {
+                        if (!((UserControl)obj).Equals(ucServices))
+                        {
+                            ((UserControl)obj).Visibility = Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            ((UserControl)obj).Visibility = Visibility.Visible;
+                        }
+                    }
+                    
+                }
+                formGridBg.Visibility = Visibility.Visible;
+            }
         }
 
         private void deleteRecordBtn_Click(object sender, RoutedEventArgs e)

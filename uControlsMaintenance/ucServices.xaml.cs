@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -110,6 +111,23 @@ namespace prototype2.uControlsMaintenance
         private void addPhaseButton_Click(object sender, RoutedEventArgs e)
         {
             MainVM.SelectedPhaseGroup = new PhaseGroup();
+            modalsGrid.Visibility = Visibility.Visible;
+            foreach (var obj in modalsGrid.Children)
+            {
+                if (obj is UserControl)
+                {
+                    if (((UserControl)obj).Equals(ucAddPhase))
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Visible;
+                    }
+                    else
+                        ((UserControl)obj).Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+
+        private void editRecordBtn_Click(object sender, RoutedEventArgs e)
+        {
             modalsGrid.Visibility = Visibility.Visible;
             foreach (var obj in modalsGrid.Children)
             {
@@ -247,21 +265,25 @@ namespace prototype2.uControlsMaintenance
             serviceName.Text = MainVM.SelectedService.ServiceName;
             serviceDesc.Text = MainVM.SelectedService.ServiceDesc;
             servicePrice.Value = MainVM.SelectedService.ServicePrice;
-
+            MainVM.SelectedService.PhaseGroups = new ObservableCollection<PhaseGroup>(from pg in MainVM.PhasesGroup
+                                                                                      where pg.ServiceID == MainVM.SelectedService.ServiceID
+                                                                                      select pg);
         }
+
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            MainVM.SelectedService = new Service();
+            
             if(this.IsVisible && MainVM.isEdit)
             {
                 loadDataToUi();
             }
+            else
+            {
+                MainVM.SelectedService = new Service();
+            }
         }
 
         
-
-
-
     }
 }

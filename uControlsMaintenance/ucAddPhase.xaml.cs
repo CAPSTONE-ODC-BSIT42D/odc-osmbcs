@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -148,6 +149,23 @@ namespace prototype2.uControlsMaintenance
                 MainVM.SelectedPhase.SequenceNo = MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase) - 1;
                 MainVM.SelectedPhaseGroup.PhaseItems.Move(MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase), MainVM.SelectedPhaseGroup.PhaseItems.IndexOf(MainVM.SelectedPhase) + 1);
             }
+        }
+
+        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (!String.IsNullOrWhiteSpace(MainVM.SelectedPhaseGroup.PhaseGroupName))
+            {
+                loadDataToUI();
+            }
+        }
+
+        private void loadDataToUI()
+        {
+            phaseNameTb.Text = MainVM.SelectedPhaseGroup.PhaseGroupName;
+            phaseDescTb.Text = MainVM.SelectedPhaseGroup.PhaseGroupDesc;
+            MainVM.SelectedPhaseGroup.PhaseItems = new ObservableCollection<Phase>(from pi in MainVM.Phases
+                                                                                      where pi.PhaseGroupID == MainVM.SelectedPhaseGroup.PhaseGroupID
+                                                                                      select pi);
         }
     }
 }

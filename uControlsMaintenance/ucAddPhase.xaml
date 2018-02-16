@@ -7,7 +7,7 @@
              xmlns:prototype2="clr-namespace:prototype2" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase" x:Class="prototype2.uControlsMaintenance.ucAddPhase"
              mc:Ignorable="d" 
-             d:DesignHeight="627" d:DesignWidth="613.5">
+             d:DesignHeight="627" d:DesignWidth="613.5" IsVisibleChanged="UserControl_IsVisibleChanged">
     <UserControl.Resources>
         <CollectionViewSource x:Key="SortedPhaseItems" Source="{Binding SelectedPhaseGroup.PhaseItems}">
             <CollectionViewSource.SortDescriptions>
@@ -40,7 +40,7 @@
                 <Label Content="Phases Items" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
                 <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,33,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
                 <Button x:Name="addPhaseItemBtn" Content="Add" HorizontalAlignment="Left" Margin="523,40,0,0" VerticalAlignment="Top" Width="75" Click="addPhaseItemBtn_Click"/>
-                <DataGrid x:Name="phaseItemDg" Height="307" Margin="20,65,16,0" VerticalAlignment="Top" ItemsSource="{Binding SelectedPhaseGroup.PhaseItems}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedPhase}" IsReadOnly="True" >
+                <DataGrid x:Name="phaseItemDg" Height="307" Margin="20,65,16,0" VerticalAlignment="Top" ItemsSource="{Binding Source={StaticResource SortedPhaseItems}}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedPhase}" IsReadOnly="True" >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Phase Name" >
                             <DataGridTemplateColumn.CellTemplate>

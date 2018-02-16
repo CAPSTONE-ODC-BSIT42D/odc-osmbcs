@@ -106,6 +106,51 @@ namespace prototype2
 
             if (dbCon.IsConnect())
             {
+                string query = "SELECT * FROM phases_group_t";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.PhasesGroup.Add(new PhaseGroup()
+                    {
+                        PhaseGroupID = int.Parse(dr[0].ToString()),
+                        PhaseGroupName = dr[1].ToString(),
+                        SequenceNo = int.Parse(dr[2].ToString()),
+                        ServiceID = int.Parse(dr[3].ToString())
+
+                    });
+                }
+                dbCon.Close();
+            }
+
+            if (dbCon.IsConnect())
+            {
+                string query = "SELECT * FROM phase_t";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.Phases.Add(new Phase()
+                    {
+                        PhaseID = int.Parse(dr[0].ToString()),
+                        PhaseName = dr[1].ToString(),
+                        PhaseDesc = dr[2].ToString(),
+                        SequenceNo = int.Parse(dr[3].ToString()),
+                        PhaseGroupID = int.Parse(dr[4].ToString())
+
+                    });
+                }
+                dbCon.Close();
+            }
+
+            if (dbCon.IsConnect())
+            {
                 string query = "SELECT * FROM regions_t";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
