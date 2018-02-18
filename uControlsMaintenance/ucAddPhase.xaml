@@ -148,11 +148,38 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn  Width="50" CanUserResize="False" Header="Action"  >
+                        <DataGridTemplateColumn  CanUserResize="False" Header="Action"  >
                             <DataGridTemplateColumn.CellTemplate  >
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button x:Name="deleteRequestedItemBtn"  Width="Auto" Height="25" BorderBrush="Black" Background="{x:Null}" Margin="10,10,0,10" ToolTip="Delete Record">
+                                        <Button x:Name="editRecordBtn" Width="Auto" Height="25" Click="editRecordBtn_Click" Background="{x:Null}" BorderBrush="Black" Margin="5,10" ToolTip="Edit Record" >
+                                            <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                                                <Canvas x:Name="Capa_1b" Width="438.536" Height="438.536" Canvas.Left="0" Canvas.Top="0">
+                                                    <Canvas.RenderTransform>
+                                                        <TranslateTransform X="0" Y="0"/>
+                                                    </Canvas.RenderTransform>
+                                                    <!--Unknown tag: metadata-->
+                                                    <!--Unknown tag: sodipodi:namedview-->
+                                                    <Canvas x:Name="g10b">
+                                                        <Canvas x:Name="g8b">
+                                                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2b" Fill="Black">
+                                                                <Path.Data>
+                                                                    <PathGeometry Figures="M414.41 24.123C398.333 8.042 378.963 0 356.315 0H82.228C59.58 0 40.21 8.042 24.126 24.123    C8.045 40.207 0.003 59.576 0.003 82.225v274.084c0 22.647 8.042 42.018 24.123 58.102c16.084 16.084 35.454 24.126 58.102 24.126    h274.084c22.648 0 42.018-8.042 58.095-24.126c16.084-16.084 24.126-35.454 24.126-58.102V82.225    C438.532 59.576 430.49 40.204 414.41 24.123z M155.316 365.445H73.089v-82.228l155.316-155.311l82.221 82.224L155.316 365.445z     M355.169 165.592l-26.262 26.269l-82.228-82.229l26.262-26.265c5.331-5.325 11.8-7.993 19.417-7.993    c7.611 0 14.086 2.664 19.41 7.993l43.4 43.398c5.324 5.327 7.994 11.798 7.994 19.414    C363.163 153.792 360.501 160.262 355.169 165.592z" FillRule="NonZero"/>
+                                                                </Path.Data>
+                                                            </Path>
+                                                            <Polygon xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="100.502,294.642 100.502,310.623 127.91,310.623 127.91,338.038 143.896,338.038 158.744,323.189 115.347,279.789" x:Name="polygon4" FillRule="NonZero" Fill="#000000"/>
+                                                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path6" Fill="#000000">
+                                                                <Path.Data>
+                                                                    <PathGeometry Figures="M141.901 252.385c-3.237 3.23-3.521 6.084-0.859 8.562c2.474 2.67 5.33 2.382 8.566-0.855l83.081-83.083    c3.237-3.23 3.519-6.086 0.855-8.561c-2.478-2.667-5.328-2.383-8.562 0.855L141.901 252.385z" FillRule="NonZero"/>
+                                                                </Path.Data>
+                                                            </Path>
+                                                        </Canvas>
+                                                    </Canvas>
+
+                                                </Canvas>
+                                            </Viewbox>
+                                        </Button>
+                                        <Button x:Name="deleteRecordBtn"  Width="Auto" Height="25" BorderBrush="Black" Background="{x:Null}" Margin="10,10,0,10" ToolTip="Delete Record" Click="deleteRecordBtn_Click">
                                             <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
                                                 <Canvas x:Name="Capa_1c" Width="438.529" Height="438.529" Canvas.Left="0" Canvas.Top="0">
                                                     <!--Unknown tag: metadata-->

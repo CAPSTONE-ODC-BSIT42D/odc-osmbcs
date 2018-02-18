@@ -39,7 +39,7 @@ namespace prototype2.uControlsMaintenance
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (!MainVM.isEdit)
+            if (MainVM.SelectedPhase == null)
             {
                 if (MainVM.SelectedPhaseGroup.PhaseItems.Count == 0)
                     MainVM.SelectedPhaseGroup.PhaseItems.Add(new Phase() { PhaseName = phaseItemNameTb.Text, PhaseDesc = phaseDescTb.Text, SequenceNo = MainVM.SelectedPhaseGroup.PhaseItems.Count, LastItem = true, FirstItem = true });
@@ -54,6 +54,7 @@ namespace prototype2.uControlsMaintenance
             {
                 MainVM.SelectedPhase.PhaseName = phaseItemNameTb.Text;
                 MainVM.SelectedPhase.PhaseDesc = phaseDescTb.Text;
+                MainVM.SelectedPhase.IsModified = true;
             }
             OnSaveCloseButtonClicked(e);
         }
@@ -61,6 +62,20 @@ namespace prototype2.uControlsMaintenance
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
         {
             OnSaveCloseButtonClicked(e);
+        }
+
+        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if(this.IsVisible && MainVM.SelectedPhase != null)
+            {
+                loadDataToUI();
+            }
+        }
+
+        private void loadDataToUI()
+        {
+            phaseItemNameTb.Text = MainVM.SelectedPhase.PhaseName;
+            phaseDescTb.Text = MainVM.SelectedPhase.PhaseDesc;
         }
     }
 }

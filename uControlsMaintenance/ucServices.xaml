@@ -96,7 +96,7 @@
                                                 </Canvas>
                                             </Viewbox>
                                         </Button>
-                                        <Button x:Name="deleteRequestedItemBtn"  Width="Auto" Height="25" BorderBrush="Black" Background="{x:Null}" Margin="5,10" ToolTip="Delete Record">
+                                        <Button x:Name="deleteRecordBtn"  Width="Auto" Height="25" BorderBrush="Black" Background="{x:Null}" Margin="5,10" ToolTip="Delete Record" Click="deleteRecordBtn_Click">
                                             <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
                                                 <Canvas x:Name="Capa_1c" Width="438.529" Height="438.529" Canvas.Left="0" Canvas.Top="0">
                                                     <!--Unknown tag: metadata-->

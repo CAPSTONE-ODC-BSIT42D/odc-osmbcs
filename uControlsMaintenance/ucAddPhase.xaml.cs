@@ -50,6 +50,39 @@ namespace prototype2.uControlsMaintenance
             OnAddPhaseItem(e);
         }
 
+        private void editRecordBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OnAddPhaseItem(e);
+        }
+
+        private void deleteRecordBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            var dbCon = DBConnection.Instance();
+            MessageBoxResult result = MessageBox.Show("Do you wish to delete this record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.OK)
+            {
+                if (MainVM.isEdit)
+                {
+                    if (dbCon.IsConnect())
+                    {
+                        string query = "UPDATE `phase_t` SET `isDeleted`= 1 WHERE phaseID = '" + MainVM.SelectedPhase.PhaseID;
+                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        {
+                            MessageBox.Show("Record successfully deleted!");
+                            MainVM.SelectedPhaseGroup.PhaseItems.Remove(MainVM.SelectedPhase);
+                        }
+                    }
+                }
+                else
+                    MainVM.SelectedPhaseGroup.PhaseItems.Remove(MainVM.SelectedPhase);
+
+            }
+            else if (result == MessageBoxResult.Cancel)
+            {
+            }
+        }
+
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
             var dbCon = DBConnection.Instance();
@@ -153,7 +186,7 @@ namespace prototype2.uControlsMaintenance
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (!String.IsNullOrWhiteSpace(MainVM.SelectedPhaseGroup.PhaseGroupName))
+            if (this.IsVisible && !String.IsNullOrWhiteSpace(MainVM.SelectedPhaseGroup.PhaseGroupName))
             {
                 loadDataToUI();
             }
@@ -163,9 +196,9 @@ namespace prototype2.uControlsMaintenance
         {
             phaseNameTb.Text = MainVM.SelectedPhaseGroup.PhaseGroupName;
             phaseDescTb.Text = MainVM.SelectedPhaseGroup.PhaseGroupDesc;
-            MainVM.SelectedPhaseGroup.PhaseItems = new ObservableCollection<Phase>(from pi in MainVM.Phases
-                                                                                      where pi.PhaseGroupID == MainVM.SelectedPhaseGroup.PhaseGroupID
-                                                                                      select pi);
+            MainVM.SelectedPhaseGroup.PhaseItems = new ObservableCollection<Phase>(from pi in MainVM.Phases where pi.PhaseGroupID == MainVM.SelectedPhaseGroup.PhaseGroupID select pi);
         }
+
+       
     }
 }

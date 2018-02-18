@@ -143,6 +143,33 @@ namespace prototype2.uControlsMaintenance
             }
         }
 
+        private void deleteRecordBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            MessageBoxResult result = MessageBox.Show("Do you wish to delete this record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.OK)
+            {
+                if (MainVM.isEdit)
+                {
+                    if (dbCon.IsConnect())
+                    {
+                        string query = "UPDATE `phase_group_t` SET `isDeleted`= 1 WHERE phaseGroupID = '" + MainVM.SelectedPhaseGroup.PhaseGroupID;
+                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        {
+                            MessageBox.Show("Record successfully deleted!");
+                            MainVM.SelectedService.PhaseGroups.Remove(MainVM.SelectedPhaseGroup);
+                        }
+                    }
+                }
+                else
+                    MainVM.SelectedService.PhaseGroups.Remove(MainVM.SelectedPhaseGroup);
+
+            }
+            else if (result == MessageBoxResult.Cancel)
+            {
+            }
+        }
+
         private void saveServiceTypeBtn_Click(object sender, RoutedEventArgs e)
         {
             var dbCon = DBConnection.Instance();

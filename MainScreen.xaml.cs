@@ -1038,8 +1038,8 @@ namespace prototype2
                     ((Grid)obj).Visibility = Visibility.Collapsed;
 
             }
-            if (!MainVM.isNewTrans)
-                MainVM.Ldt.worker.RunWorkerAsync();
+            //if (!MainVM.isNewTrans)
+                //MainVM.Ldt.worker.RunWorkerAsync();
 
         }
 

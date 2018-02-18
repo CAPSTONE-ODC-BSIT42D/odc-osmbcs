@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:prototype2.uControlsMaintenance"
              xmlns:prototype2="clr-namespace:prototype2" x:Class="prototype2.uControlsMaintenance.ucAddPhaseItem"
              mc:Ignorable="d" 
-             d:DesignHeight="214" d:DesignWidth="420">
+             d:DesignHeight="214" d:DesignWidth="420" IsVisibleChanged="UserControl_IsVisibleChanged">
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>
