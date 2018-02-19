@@ -1168,7 +1168,7 @@ namespace prototype2
             get { return discountPercent; }
             set { SetProperty(ref discountPercent, value); }
         }
-
+        
         protected ObservableCollection<AvailedService> availedServices = new ObservableCollection<AvailedService>();
 
         public ObservableCollection<AvailedService> AvailedServices

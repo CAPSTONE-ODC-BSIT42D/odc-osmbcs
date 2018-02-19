@@ -498,7 +498,23 @@ namespace prototype2
 
         private void uploadBtn_Click(object sender, RoutedEventArgs e)
         {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            // Set filter for file extension and default file extension 
+            dlg.DefaultExt = ".docx";
+            dlg.Filter = "Word Files (*.doc)|*.docx";
 
+
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dlg.ShowDialog();
+
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                // Open document 
+                string filename = dlg.FileName;
+                fileNameTb.Text = filename;
+            }
         }
 
         private void computePrice()
@@ -620,6 +636,8 @@ namespace prototype2
             stringChars += "-";
             stringChars += DateTime.Now.ToString("yyyy-MM-dd");
 
+            
+
             MainVM.SelectedSalesQuote = new SalesQuote()
             {
                 sqNoChar_ = stringChars,
@@ -650,9 +668,19 @@ namespace prototype2
         {
             var dbCon = DBConnection.Instance();
             bool noError = true;
+            string FileName = fileNameTb.Text;
+
+            byte[] DocData;
+            FileStream fs;
+            BinaryReader br;
+            fs = new FileStream(FileName, FileMode.Open, FileAccess.Read);
+            br = new BinaryReader(fs);
+            DocData = br.ReadBytes((int)fs.Length);
+            br.Close();
+            fs.Close();
             if (dbCon.IsConnect())
             {
-                string query = "INSERT INTO `odc_db`.`sales_quote_t` " + "(`sqNoChar`,`custID`,`quoteSubject`,`priceNote`,`deliveryDate`,`estDelivery`,`validityDays`,`validityDate`,`otherTerms`,`VAT`,`vatIsExcluded`,`paymentIsLanded`,`paymentCurrency`,`status`,`termsDays`,`termsDP`,`penaltyAmt`,`penaltyPerc`,`markUpPercent`,`discountPercent`)" +
+                string query = "INSERT INTO `odc_db`.`sales_quote_t` " + "(`sqNoChar`,`custID`,`quoteSubject`,`priceNote`,`deliveryDate`,`estDelivery`,`validityDays`,`validityDate`,`otherTerms`,`VAT`,`vatIsExcluded`,`paymentIsLanded`,`paymentCurrency`,`status`,`termsDays`,`termsDP`,`penaltyAmt`,`penaltyPerc`,`markUpPercent`,`discountPercent`,surveyReportDoc)" +
                     " VALUES " +
                     "('" + MainVM.SelectedSalesQuote.sqNoChar_ + "','" +
                     MainVM.SelectedSalesQuote.custID_ + "','" +
@@ -673,7 +701,9 @@ namespace prototype2
                     MainVM.SelectedSalesQuote.penaltyAmt_ + "','" +
                     MainVM.SelectedSalesQuote.penaltyPercent_ + "','" +
                     MainVM.SelectedSalesQuote.markUpPercent_ + "','" +
-                    MainVM.SelectedSalesQuote.discountPercent_ + "'); ";
+                    MainVM.SelectedSalesQuote.discountPercent_ + "','"+
+                    DocData + "'" +
+                    "); ";
                 if (dbCon.insertQuery(query, dbCon.Connection))
                 {
                     if (dbCon.IsConnect())
