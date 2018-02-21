@@ -27,10 +27,10 @@
             <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,0" To="0,-100,0,0" AccelerationRatio="1" Duration="0:0:0.5" />
         </Storyboard>
     </UserControl.Resources>
-    <Grid Margin="0">
+    <Grid Margin="0" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
         <Grid x:Name="transQuoatationGridForm" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
 
-            <Grid x:Name="newRequisitionGrid" VerticalAlignment="Top" d:IsHidden="True">
+            <Grid x:Name="newRequisitionGrid" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
@@ -248,7 +248,7 @@
                     </Grid>
                 </ScrollViewer>
             </Grid>
-            <Grid x:Name="termsAndConditionGrid" Margin="0,0,0,40">
+            <Grid x:Name="termsAndConditionGrid" Margin="0,0,0,40" d:IsHidden="True">
                 <ScrollViewer Margin="0" Padding="10" VerticalScrollBarVisibility="Auto">
                     <Grid x:Name="termsAndConditionGridForm">
                         <Label x:Name="label16_Copy2" Content="Terms and Conditions" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" FontFamily="Segoe UI"/>
