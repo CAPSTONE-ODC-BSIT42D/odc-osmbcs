@@ -401,7 +401,7 @@ namespace prototype2
         protected string companyEmail;
         protected string companyTelephone;
         protected string companyMobile;
-        protected string companyType;
+        protected int companyType;
         protected string title;
         protected string firstname;
         protected string middlename;
@@ -465,7 +465,7 @@ namespace prototype2
             set { SetProperty(ref companyMobile, value); }
         }
 
-        public string CompanyType
+        public int CompanyType
         {
             get { return companyType; }
             set { SetProperty(ref companyType, value); }

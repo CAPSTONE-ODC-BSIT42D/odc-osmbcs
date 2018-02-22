@@ -159,9 +159,10 @@ namespace prototype2
         public int Edit { get; set; }
 
         public bool isEdit { get; set; }
-
-        public bool isNewTrans_ = false;
+        
         public bool isNewTrans{ get; set; }
+
+        public bool isNewPurchaseOrder { get; set; }
 
         public bool isPaymentInvoice { get; set; }
 

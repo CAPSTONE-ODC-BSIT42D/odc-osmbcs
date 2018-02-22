@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:prototype2.uControlsMaintenance"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="826" Width="Auto">
+             d:DesignHeight="600" d:DesignWidth="826" Width="Auto" IsVisibleChanged="UserControl_IsVisibleChanged">
     <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Margin="0">
         <Button x:Name="closeModalBtn_Copy" HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Margin="13,10,10,10" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="closeModalBtn_Click">
             <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform" Height="23" Width="27" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -41,7 +41,7 @@
             </Viewbox>
         </Button>
 
-        <Label x:Name="label26" Content="Select a Customer" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Margin="26,38,0,0"/>
+        <Label x:Name="headerLbl" Content="Select a Customer" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Margin="26,38,0,0"/>
         <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="15,74,15,0" VerticalAlignment="Top"/>
         <TextBox x:Name="transSearchBoxSelectCustGridTb" HorizontalAlignment="Left" Height="23" Margin="79,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="248"/>
         <Label x:Name="label27" Content="Search:" HorizontalAlignment="Left" Margin="26,88,0,0" VerticalAlignment="Top"/>

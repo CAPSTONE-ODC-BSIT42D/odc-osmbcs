@@ -395,6 +395,9 @@
     <Compile Include="classes\ValueConverter.cs" />
     <Compile Include="classes\ViewModelEntity.cs" />
     <Compile Include="classes\ViewModels.cs" />
+    <Compile Include="uControlsTransanction\ucSelectSalesQuote.xaml.cs">
+      <DependentUpon>ucSelectSalesQuote.xaml</DependentUpon>
+    </Compile>
     <Page Include="DocumentViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -534,6 +537,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="uControlsTransanction\ucPurchaseOrderViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="uControlsTransanction\ucSelectSalesQuote.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

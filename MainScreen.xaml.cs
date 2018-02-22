@@ -278,7 +278,30 @@ namespace prototype2
 
         private void ordersSalesMenuBtn_Click(object sender, RoutedEventArgs e)
         {
+            foreach (var obj in containerGrid.Children)
+            {
+                ((Grid)obj).Visibility = Visibility.Collapsed;
+            }
+            trasanctionGrid.Visibility = Visibility.Visible;
+            foreach (var obj in trasanctionGrid.Children)
+            {
+                if (obj is Grid)
+                    if (((Grid)obj).Equals(transOrderGrid))
+                        ((Grid)obj).Visibility = Visibility.Visible;
+                    else
+                        ((Grid)obj).Visibility = Visibility.Collapsed;
+            }
+            foreach (var obj in transOrderGrid.Children)
+            {
+                if (obj is Grid)
+                {
+                    headerLbl.Content = "Order Management - Purchase Order";
+                    ((Grid)obj).Visibility = Visibility.Visible;
+                }
+                else
+                    ((UserControl)obj).Visibility = Visibility.Collapsed;
 
+            }
         }
 
         private void billsBtn_Click(object sender, RoutedEventArgs e)
@@ -1203,5 +1226,23 @@ namespace prototype2
 
         #endregion
 
+        #region Order Management - Purchase Order
+        private void newPurchaseOrder_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.isNewPurchaseOrder = true;
+            foreach (var element in transOrderGrid.Children)
+            {
+                if (element is UserControl)
+                {
+                    if (!(((UserControl)element).Equals(ucPurchaseOrder)))
+                    {
+                        ((UserControl)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((UserControl)element).Visibility = Visibility.Visible;
+                }
+            }
+        }
+        #endregion
     }
 }

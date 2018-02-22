@@ -130,12 +130,7 @@ namespace prototype2
             }
         }
 
-        private void findBtn_Click(object sender, RoutedEventArgs e)
-        {
-            var linqResults = MainVM.SalesQuotes.Where(x => x.sqNoChar_.ToLower().Contains(transSearchBoxSelectCustGridTb.Text.ToLower()) && !(x.status_.Equals("ACCEPTED")));
-            var observable = new ObservableCollection<SalesQuote>(linqResults);
-            selectSalesQuote.ItemsSource = observable;
-        }
+        
 
 
         void computeInvoice()

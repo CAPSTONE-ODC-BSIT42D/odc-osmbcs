@@ -21,17 +21,17 @@ namespace prototype2
     /// <summary>
     /// Interaction logic for UserControl6.xaml
     /// </summary>
-    public partial class UserControl6 : UserControl
+    public partial class ucPurchaseOrderViewer : UserControl
     {
-        public UserControl6()
+        public ucPurchaseOrderViewer()
         {
             InitializeComponent();
-            DisplayReport();
+            //DisplayReport();
         }
         private void DisplayReport()
         {
             ucReportViewer.Reset();
-            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.RDLC.PurchaseOrder.rdlc");
+            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseOrder.rdlc");
             ucReportViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSet1", GetPurchase()));
             ucReportViewer.LoadReport(rNames);
             ucReportViewer.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;

@@ -24,5 +24,21 @@ namespace prototype2
         {
             InitializeComponent();
         }
+
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
+
+        public event EventHandler SelectCustomer;
+        protected virtual void OnSelectCustomerClicked(RoutedEventArgs e)
+        {
+            MainVM.isNewPurchaseOrder = true;
+            var handler = SelectCustomer;
+            if (handler != null)
+                handler(this, e);
+        }
+
+        private void selectSupplierBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OnSelectCustomerClicked(e);
+        }
     }
 }

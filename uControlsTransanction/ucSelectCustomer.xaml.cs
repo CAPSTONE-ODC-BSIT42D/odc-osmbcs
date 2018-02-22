@@ -51,9 +51,17 @@ namespace prototype2.uControlsMaintenance
 
         private void findBtn_Click(object sender, RoutedEventArgs e)
         {
-            var linqResults = MainVM.Customers.Where(x => x.CompanyName.ToLower().Contains(transSearchBoxSelectCustGridTb.Text.ToLower()));
-            var observable = new ObservableCollection<Customer>(linqResults);
-            selectCustomerDg.ItemsSource = observable;
+            if (MainVM.isNewPurchaseOrder && this.IsVisible)
+            {
+                var observable = new ObservableCollection<Customer>(from supp in MainVM.Suppliers where supp.CompanyName.Contains(transSearchBoxSelectCustGridTb.Text) && supp.CompanyType == 1 select supp);
+                selectCustomerDg.ItemsSource = observable;
+            }
+            else
+            {
+                var observable = new ObservableCollection<Customer>(from cust in MainVM.Customers where cust.CompanyName.Contains(transSearchBoxSelectCustGridTb.Text) select cust);
+                selectCustomerDg.ItemsSource = observable;
+            }
+            
         }
 
         private void selectCustBtn_Click(object sender, RoutedEventArgs e)
@@ -63,6 +71,16 @@ namespace prototype2.uControlsMaintenance
         private void addNewCustomerBtn_Click(object sender, RoutedEventArgs e)
         {
             OnAddingNewCustomer(e);
+        }
+
+        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (MainVM.isNewPurchaseOrder && this.IsVisible)
+            {
+                var observable = new ObservableCollection<Customer>(from supp in MainVM.Suppliers select supp);
+                selectCustomerDg.ItemsSource = observable;
+                headerLbl.Content = "Select a Supplier";
+            }
         }
     }
 }
