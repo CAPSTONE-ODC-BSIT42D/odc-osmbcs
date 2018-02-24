@@ -40,5 +40,22 @@ namespace prototype2
         {
             OnSelectCustomerClicked(e);
         }
+
+        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (this.IsLoaded && this.IsVisible)
+            {
+                foreach (UIElement obj in containerGrid.Children)
+                {
+                    if (containerGrid.Children.IndexOf(obj) != 0)
+                    {
+                        obj.Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        obj.Visibility = Visibility.Visible;
+                }
+            }
+            
+        }
     }
 }

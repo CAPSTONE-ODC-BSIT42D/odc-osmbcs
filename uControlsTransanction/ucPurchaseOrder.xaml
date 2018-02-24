@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:prototype2"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="prototype2.ucPurchaseOrder"
              mc:Ignorable="d" 
-             d:DesignHeight="640.765" d:DesignWidth="913.662">
+             d:DesignHeight="640.765" d:DesignWidth="913.662" IsVisibleChanged="UserControl_IsVisibleChanged">
     <UserControl.Resources>
         <local:ProductNameConverter x:Key="ProductNameConverter"/>
         <local:ServiceNameConverter x:Key="ServiceNameConverter"/>
@@ -16,7 +16,7 @@
     </UserControl.DataContext>
     <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
         <StackPanel Orientation="Vertical">
-            <Grid Height="487">
+            <Grid x:Name="containerGrid" Height="487">
                 <StackPanel x:Name="puchaseOrderForm" >
                     <Grid Margin="5,0">
                         <Button x:Name="selectSupplierBtn" Content="Choose Supplier" HorizontalAlignment="Right" Margin="0,9,10,0" Width="105" Height="24" VerticalAlignment="Top" Click="selectSupplierBtn_Click"/>

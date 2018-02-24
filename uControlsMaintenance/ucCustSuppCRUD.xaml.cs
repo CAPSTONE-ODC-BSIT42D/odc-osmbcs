@@ -47,143 +47,6 @@ namespace prototype2
                 handler(this, e);
         }
 
-        //private void contactDetails_Checked(object sender, RoutedEventArgs e)
-        //{
-        //    string propertyName = ((CheckBox)sender).Name;
-
-        //    if (propertyName.Equals(companyTelCb.Name))
-        //    {
-        //        if ((bool)companyTelCb.IsChecked && (bool)companyMobCb.IsChecked && (bool)companyEmailCb.IsChecked)
-        //        {
-        //            MessageBox.Show("Atleast one contact information is needed");
-        //            companyTelCb.IsChecked = false;
-        //        }
-        //        else
-        //        {
-        //            if (companyTelephoneTb.IsEnabled)
-        //            {
-        //                companyTelephoneTb.IsEnabled = false;
-        //                companyTelephoneTb.Text = "";
-        //            }
-        //        }
-        //    }
-        //    else if (propertyName.Equals(companyMobCb.Name))
-        //    {
-        //        if ((bool)companyTelCb.IsChecked && (bool)companyMobCb.IsChecked && (bool)companyEmailCb.IsChecked)
-        //        {
-        //            MessageBox.Show("Atleast one contact information is needed");
-        //            companyMobCb.IsChecked = false;
-        //        }
-        //        else
-        //        {
-        //            if (companyMobileTb.IsEnabled)
-        //            {
-        //                companyMobileTb.IsEnabled = false;
-        //                companyMobileTb.Text = "";
-        //            }
-        //        }
-        //    }
-        //    else if (propertyName.Equals(companyEmailCb.Name))
-        //    {
-        //        if ((bool)companyTelCb.IsChecked && (bool)companyMobCb.IsChecked && (bool)companyEmailCb.IsChecked)
-        //        {
-        //            MessageBox.Show("Atleast one contact information is needed");
-        //            companyEmailCb.IsChecked = false;
-        //        }
-        //        else
-        //        {
-        //            if (companyEmailTb.IsEnabled)
-        //            {
-        //                companyEmailTb.IsEnabled = false;
-        //                companyEmailTb.Text = "";
-        //            }
-        //        }
-        //    }
-        //    else if (propertyName.Equals(repTelCb.Name))
-        //    {
-        //        if ((bool)repTelCb.IsChecked && (bool)repMobCb.IsChecked && (bool)repEmailCb.IsChecked)
-        //        {
-        //            MessageBox.Show("Atleast one contact information is needed");
-        //            repTelCb.IsChecked = false;
-        //        }
-        //        else
-        //        {
-        //            if (repTelephoneTb.IsEnabled)
-        //            {
-        //                repTelephoneTb.IsEnabled = false;
-        //                repTelephoneTb.Text = "";
-        //            }
-        //        }
-        //    }
-        //    else if (propertyName.Equals(repMobCb.Name))
-        //    {
-        //        if ((bool)repTelCb.IsChecked && (bool)repMobCb.IsChecked && (bool)repEmailCb.IsChecked)
-        //        {
-        //            MessageBox.Show("Atleast one contact information is needed");
-        //            repMobCb.IsChecked = false;
-        //        }
-        //        else
-        //        {
-        //            if (repMobileTb.IsEnabled)
-        //            {
-        //                repMobileTb.IsEnabled = false;
-        //                repMobileTb.Text = "";
-        //            }
-        //        }
-        //    }
-        //    else if (propertyName.Equals(repEmailCb.Name))
-        //    {
-        //        if ((bool)repTelCb.IsChecked && (bool)repMobCb.IsChecked && (bool)repEmailCb.IsChecked)
-        //        {
-        //            MessageBox.Show("Atleast one contact information is needed");
-        //            repEmailCb.IsChecked = false;
-        //        }
-        //        else
-        //        {
-        //            if (repEmailTb.IsEnabled)
-        //            {
-        //                repEmailTb.IsEnabled = false;
-        //                repEmailTb.Text = "";
-        //            }
-        //        }
-        //    }
-        //}
-
-        //private void contactDetail_Unchecked(object sender, RoutedEventArgs e)
-        //{
-        //    string propertyName = ((CheckBox)sender).Name;
-        //    if (propertyName.Equals(companyTelCb.Name))
-        //    {
-        //        if (!companyTelephoneTb.IsEnabled)
-        //            companyTelephoneTb.IsEnabled = true;
-        //    }
-        //    else if (propertyName.Equals(companyMobCb.Name))
-        //    {
-        //        if (!companyMobileTb.IsEnabled)
-        //            companyMobileTb.IsEnabled = true;
-        //    }
-        //    else if (propertyName.Equals(companyEmailCb.Name))
-        //    {
-        //        if (!companyEmailTb.IsEnabled)
-        //            companyEmailTb.IsEnabled = true;
-        //    }
-        //    else if (propertyName.Equals(repTelCb.Name))
-        //    {
-        //        if (!repTelephoneTb.IsEnabled)
-        //            repTelephoneTb.IsEnabled = true;
-        //    }
-        //    else if (propertyName.Equals(repMobCb.Name))
-        //    {
-        //        if (!repMobileTb.IsEnabled)
-        //            repMobileTb.IsEnabled = true;
-        //    }
-        //    else if (propertyName.Equals(repEmailCb.Name))
-        //    {
-        //        if (!repEmailTb.IsEnabled)
-        //            repEmailTb.IsEnabled = true;
-        //    }
-        //}
-
         private void editCompanyBtn_Click(object sender, RoutedEventArgs e)
         {
             foreach (var element in companyDetailsFormGrid1.Children)
@@ -418,6 +281,8 @@ namespace prototype2
 
                     if (MainVM.isNewTrans)
                         compType = "0";
+                    else if (MainVM.isNewPurchaseOrder)
+                        compType = "1";
 
                     cmd.Parameters.AddWithValue("@compType", compType);
                     cmd.Parameters["@compType"].Direction = ParameterDirection.Input;

@@ -72,6 +72,8 @@ namespace prototype2
             this.ucSalesQuote.SelectCustomer += selectCustomer_BtnClicked;
             this.ucSalesQuote.SelectItem += selectItem_BtnClicked;
 
+            this.ucPurchaseOrder.SelectCustomer += selectCustomer_BtnClicked;
+
             this.ucAddItem.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
 
             this.ucSelectCustomer.AddNewCustomer += addNewCustomer_BtnClicked;
@@ -100,7 +102,6 @@ namespace prototype2
         {
             MainVM.isEdit = false;
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
-            MainVM.isNewTrans = true;
             formGridBg.Visibility = Visibility.Visible;
             foreach (var obj in formGridBg.Children)
             {
@@ -156,7 +157,20 @@ namespace prototype2
 
         private void saveCloseBtn_SaveCloseButtonClicked(object sender, EventArgs e)
         {
-                closeModals();
+            Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
+            sb.Begin(formGridBg);
+            formGridBg.Visibility = Visibility.Collapsed;
+            foreach (var obj in formGridBg.Children)
+            {
+                if (obj is UserControl)
+                    ((UserControl)obj).Visibility = Visibility.Collapsed;
+                else if (obj is Grid)
+                    ((Grid)obj).Visibility = Visibility.Collapsed;
+
+            }
+
+            refreshData();
+
             MainVM.StringTextBox = null;
             MainVM.DecimalTextBox = 0;
             MainVM.IntegerTextBox = 0;
@@ -165,6 +179,7 @@ namespace prototype2
             MainVM.isViewHome = false;
             MainVM.isEdit = false;
             MainVM.isPaymentInvoice = false;
+            
         }
 
 
@@ -1040,15 +1055,6 @@ namespace prototype2
 
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)
         {
-            closeModals();
-        }
-        public bool isEdit = false;
-
-
-
-        public void closeModals()
-        {
-
             Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
             sb.Begin(formGridBg);
             formGridBg.Visibility = Visibility.Collapsed;
@@ -1061,9 +1067,14 @@ namespace prototype2
                     ((Grid)obj).Visibility = Visibility.Collapsed;
 
             }
-            //if (!MainVM.isNewTrans)
-                //MainVM.Ldt.worker.RunWorkerAsync();
+        }
+        public bool isEdit = false;
 
+
+
+        public void refreshData()
+        {
+            MainVM.Ldt.worker.RunWorkerAsync();
         }
 
         private void monitoringOfData()
