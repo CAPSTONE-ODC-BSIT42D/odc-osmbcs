@@ -167,11 +167,6 @@ namespace prototype2
                 if (!validationError)
                 {
                     saveDataToDb();
-                    if (MainVM.isNewTrans)
-                    {
-                        OnBackToSelectCustomerClicked(e);
-                    }
-                    else
                         OnSaveCloseButtonClicked(e);
                 }
                 else
@@ -194,12 +189,7 @@ namespace prototype2
             if (result == MessageBoxResult.Yes)
             {
                 resetFieldsValue();
-                if (MainVM.isNewTrans)
-                {
-                    OnBackToSelectCustomerClicked(e);
-                }
-                else
-                    OnSaveCloseButtonClicked(e);
+                OnSaveCloseButtonClicked(e);
             }
             else if (result == MessageBoxResult.No)
             {

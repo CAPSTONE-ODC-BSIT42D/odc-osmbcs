@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:prototype2.uControlsTransanction"
              mc:Ignorable="d" 
-             d:DesignHeight="876" d:DesignWidth="1275">
+             d:DesignHeight="876" d:DesignWidth="1275" IsVisibleChanged="UserControl_IsVisibleChanged">
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>

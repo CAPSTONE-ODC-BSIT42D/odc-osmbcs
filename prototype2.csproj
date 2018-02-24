@@ -94,59 +94,53 @@
     <Reference Include="ReachFramework">
       <Private>True</Private>
     </Reference>
-    <Reference Include="Syncfusion.Chart.Wpf, Version=15.3460.0.34, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.ReportPlatform.Base46.2.3.0.77\lib\net46\Syncfusion.Chart.Wpf.dll</HintPath>
+    <Reference Include="Syncfusion.Chart.Wpf, Version=16.1460.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Chart.WPF46.16.1.0.24\lib\net46\Syncfusion.Chart.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Compression.Base, Version=15.3460.0.34, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.ReportPlatform.Base46.2.3.0.77\lib\net46\Syncfusion.Compression.Base.dll</HintPath>
+    <Reference Include="Syncfusion.Compression.Base, Version=16.1460.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Compression.Base46.16.1.0.24\lib\net46\Syncfusion.Compression.Base.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.DocIO.Base, Version=15.3460.0.34, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.ReportPlatform.Base46.2.3.0.77\lib\net46\Syncfusion.DocIO.Base.dll</HintPath>
+    <Reference Include="Syncfusion.DocIO.Base, Version=16.1460.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.DocIO.Base46.16.1.0.24\lib\net46\Syncfusion.DocIO.Base.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Gauge.WPF, Version=15.3460.0.34, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.ReportPlatform.Base46.2.3.0.77\lib\net46\Syncfusion.Gauge.WPF.dll</HintPath>
+    <Reference Include="Syncfusion.Gauge.WPF, Version=16.1460.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Gauge.WPF46.16.1.0.24\lib\net46\Syncfusion.Gauge.WPF.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Grid.Wpf, Version=15.3460.0.34, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.ReportPlatform.Base46.2.3.0.77\lib\net46\Syncfusion.Grid.Wpf.dll</HintPath>
+    <Reference Include="Syncfusion.Grid.Wpf, Version=16.1460.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Grid.WPF46.16.1.0.24\lib\net46\Syncfusion.Grid.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.GridCommon.Wpf, Version=15.3460.0.34, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.ReportPlatform.Base46.2.3.0.77\lib\net46\Syncfusion.GridCommon.Wpf.dll</HintPath>
+    <Reference Include="Syncfusion.GridCommon.Wpf, Version=16.1460.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.GridCommon.WPF46.16.1.0.24\lib\net46\Syncfusion.GridCommon.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Linq.Base, Version=15.3460.0.34, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.ReportPlatform.Base46.2.3.0.77\lib\net46\Syncfusion.Linq.Base.dll</HintPath>
+    <Reference Include="Syncfusion.Linq.Base, Version=16.1460.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Linq.Base46.16.1.0.24\lib\net46\Syncfusion.Linq.Base.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.OfficeChart.Base, Version=15.3460.0.34, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.ReportPlatform.Base46.2.3.0.77\lib\net46\Syncfusion.OfficeChart.Base.dll</HintPath>
+    <Reference Include="Syncfusion.OfficeChart.Base, Version=16.1460.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.OfficeChart.Base46.16.1.0.24\lib\net46\Syncfusion.OfficeChart.Base.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Pdf.Base, Version=15.3460.0.34, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.ReportPlatform.Base46.2.3.0.77\lib\net46\Syncfusion.Pdf.Base.dll</HintPath>
+    <Reference Include="Syncfusion.Pdf.Base, Version=16.1460.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Pdf.Base46.16.1.0.24\lib\net46\Syncfusion.Pdf.Base.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Presentation.Base, Version=15.3460.0.34, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.ReportPlatform.Base46.2.3.0.77\lib\net46\Syncfusion.Presentation.Base.dll</HintPath>
+    <Reference Include="Syncfusion.ReportControls.Wpf, Version=16.1460.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.ReportControls.WPF46.16.1.0.24\lib\net46\Syncfusion.ReportControls.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.ReportControls.Wpf, Version=15.3460.0.34, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.ReportPlatform.WPF46.2.3.0.77\lib\net46\Syncfusion.ReportControls.Wpf.dll</HintPath>
+    <Reference Include="Syncfusion.ReportViewer.Wpf, Version=16.1460.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.ReportViewer.WPF46.16.1.0.24\lib\net46\Syncfusion.ReportViewer.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.ReportViewer.Wpf, Version=15.3460.0.34, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.ReportPlatform.WPF46.2.3.0.77\lib\net46\Syncfusion.ReportViewer.Wpf.dll</HintPath>
+    <Reference Include="Syncfusion.ReportWriter.Base, Version=16.1460.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.ReportWriter.Base46.16.1.0.24\lib\net46\Syncfusion.ReportWriter.Base.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.ReportWriter.Base, Version=15.3460.0.34, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.ReportPlatform.WPF46.2.3.0.77\lib\net46\Syncfusion.ReportWriter.Base.dll</HintPath>
+    <Reference Include="Syncfusion.RichTextBoxAdv.WPF, Version=16.1460.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.RichTextBoxAdv.WPF46.16.1.0.24\lib\net46\Syncfusion.RichTextBoxAdv.WPF.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.RichTextBoxAdv.WPF, Version=15.3460.0.34, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.ReportPlatform.Base46.2.3.0.77\lib\net46\Syncfusion.RichTextBoxAdv.WPF.dll</HintPath>
+    <Reference Include="Syncfusion.SfMaps.WPF, Version=16.1460.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.SfMaps.WPF46.16.1.0.24\lib\net46\Syncfusion.SfMaps.WPF.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.SfChart.WPF, Version=15.4460.0.20, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.SfChart.WPF46.15.4.0.20\lib\net46\Syncfusion.SfChart.WPF.dll</HintPath>
+    <Reference Include="Syncfusion.Shared.Wpf, Version=16.1460.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.Shared.WPF46.16.1.0.24\lib\net46\Syncfusion.Shared.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.SfMaps.WPF, Version=15.3460.0.34, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.ReportPlatform.Base46.2.3.0.77\lib\net46\Syncfusion.SfMaps.WPF.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Shared.Wpf, Version=15.3460.0.34, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.ReportPlatform.Base46.2.3.0.77\lib\net46\Syncfusion.Shared.Wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.XlsIO.Base, Version=15.3460.0.34, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>packages\Syncfusion.ReportPlatform.Base46.2.3.0.77\lib\net46\Syncfusion.XlsIO.Base.dll</HintPath>
+    <Reference Include="Syncfusion.XlsIO.Base, Version=16.1460.0.24, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>packages\Syncfusion.XlsIO.Base46.16.1.0.24\lib\net46\Syncfusion.XlsIO.Base.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Private>True</Private>

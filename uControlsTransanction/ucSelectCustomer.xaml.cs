@@ -28,7 +28,6 @@ namespace prototype2.uControlsMaintenance
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
 
         public event EventHandler AddNewCustomer;
-        public event EventHandler SaveCloseButtonClicked;
 
         protected virtual void OnAddingNewCustomer(RoutedEventArgs e)
         {
@@ -37,9 +36,10 @@ namespace prototype2.uControlsMaintenance
                 handler(this, e);
         }
 
+        public event EventHandler SaveCloseOtherButtonClicked;
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
-            var handler = SaveCloseButtonClicked;
+            var handler = SaveCloseOtherButtonClicked;
             if (handler != null)
                 handler(this, e);
         }
@@ -77,10 +77,11 @@ namespace prototype2.uControlsMaintenance
         {
             if (MainVM.isNewPurchaseOrder && this.IsVisible)
             {
-                var observable = new ObservableCollection<Customer>(from supp in MainVM.Suppliers select supp);
-                selectCustomerDg.ItemsSource = observable;
+                selectCustomerDg.Visibility = Visibility.Collapsed;
+                selectSupplierDg.Visibility = Visibility.Visible;
                 headerLbl.Content = "Select a Supplier";
             }
+
         }
     }
 }

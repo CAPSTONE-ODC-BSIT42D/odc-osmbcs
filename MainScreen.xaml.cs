@@ -54,7 +54,7 @@ namespace prototype2
             this.ucEmployee.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
 
             this.ucCustSupp.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
-            this.ucCustSupp.BackToSelectCustomerClicked += selectCustomer_BtnClicked;
+            //this.ucCustSupp.BackToSelectCustomerClicked += selectCustomer_BtnClicked;
 
             this.ucServices.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
            
@@ -74,10 +74,13 @@ namespace prototype2
 
             this.ucPurchaseOrder.SelectCustomer += selectCustomer_BtnClicked;
 
-            this.ucAddItem.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
+            this.ucAddItem.SaveCloseButtonClicked += saveCloseOther_BtnClicked;
 
             this.ucSelectCustomer.AddNewCustomer += addNewCustomer_BtnClicked;
-            this.ucSelectCustomer.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
+            this.ucSelectCustomer.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
+
+            this.ucPurchaseOrder.SelectSalesQuote += selectSalesQuote_BtnClicked;
+
             foreach (var obj in containerGrid.Children)
             {
                 ((Grid)obj).Visibility = Visibility.Collapsed;
@@ -91,6 +94,7 @@ namespace prototype2
             }
             dashboardGrid.Visibility = Visibility.Visible;
             formGridBg.Visibility = Visibility.Collapsed;
+            otherGridBg.Visibility = Visibility.Collapsed;
             MainVM.LoginEmployee_ = MainVM.Employees.Where(x => x.EmpID.Equals(empID)).FirstOrDefault();
             MainVM.Ldt.worker.RunWorkerAsync();
             int cout = MainVM.SalesQuotes.Count;
@@ -103,6 +107,7 @@ namespace prototype2
             MainVM.isEdit = false;
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
             formGridBg.Visibility = Visibility.Visible;
+            Grid.SetZIndex((formGridBg), 1);
             foreach (var obj in formGridBg.Children)
             {
                 if (obj is UserControl)
@@ -118,6 +123,25 @@ namespace prototype2
                     }
                 }
 
+            }
+        }
+
+        private void selectSalesQuote_BtnClicked(object sender, EventArgs e)
+        {
+            MainVM.isEdit = false;
+            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+            otherGridBg.Visibility = Visibility.Visible;
+            Grid.SetZIndex((otherGridBg), 1);
+            foreach (UIElement obj in otherGridBg.Children)
+            {
+                if (obj.Equals(ucSelectSalesQuote))
+                {
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    obj.Visibility = Visibility.Collapsed;
+                }
             }
         }
 
@@ -154,6 +178,30 @@ namespace prototype2
             }
         }
 
+        private void selectCustomer_BtnClicked(object sender, EventArgs e)
+        {
+            MainVM.isEdit = false;
+            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+
+            otherGridBg.Visibility = Visibility.Visible;
+            foreach (var obj in otherGridBg.Children)
+            {
+                if (obj is UserControl)
+                {
+                    if (!((UserControl)obj).Name.Equals("ucSelectCustomer"))
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        ((UserControl)obj).Visibility = Visibility.Visible;
+                        //sb.Begin(((UserControl)obj));
+                    }
+                }
+
+            }
+        }
+
 
         private void saveCloseBtn_SaveCloseButtonClicked(object sender, EventArgs e)
         {
@@ -179,32 +227,34 @@ namespace prototype2
             MainVM.isViewHome = false;
             MainVM.isEdit = false;
             MainVM.isPaymentInvoice = false;
-            
+
         }
 
 
 
-        private void selectCustomer_BtnClicked(object sender, EventArgs e)
+        private void saveCloseOther_BtnClicked(object sender, EventArgs e)
         {
             MainVM.isEdit = false;
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
-
-            formGridBg.Visibility = Visibility.Visible;
-            foreach (var obj in formGridBg.Children)
+            otherGridBg.Visibility = Visibility.Collapsed;
+            foreach (UIElement obj in otherGridBg.Children)
             {
-                if (obj is UserControl)
+                if (obj.Equals(ucSelectCustomer))
                 {
-                    if (!((UserControl)obj).Name.Equals("ucSelectCustomer"))
+                    obj.Visibility = Visibility.Collapsed;
+                }
+            }
+            if (MainVM.isPaymentInvoice)
+            {
+                foreach (UIElement obj in billingGrid.Children)
+                {
+                    if (billingGrid.Children.IndexOf(obj) == 1)
                     {
-                        ((UserControl)obj).Visibility = Visibility.Collapsed;
+                        obj.Visibility = Visibility.Visible;
                     }
                     else
-                    {
-                        ((UserControl)obj).Visibility = Visibility.Visible;
-                        //sb.Begin(((UserControl)obj));
-                    }
+                        obj.Visibility = Visibility.Collapsed;
                 }
-
             }
         }
 
@@ -213,8 +263,8 @@ namespace prototype2
             MainVM.isEdit = false;
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
 
-            formGridBg.Visibility = Visibility.Visible;
-            foreach (var obj in formGridBg.Children)
+            otherGridBg.Visibility = Visibility.Visible;
+            foreach (var obj in otherGridBg.Children)
             {
                 if (obj is UserControl)
                 {
@@ -321,10 +371,25 @@ namespace prototype2
 
         private void billsBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (salesBtnSubMenuGrid.IsVisible)
-                salesBtnSubMenuGrid.Visibility = Visibility.Collapsed;
-            else
-                salesBtnSubMenuGrid.Visibility = Visibility.Visible;
+            foreach (UIElement obj in containerGrid.Children)
+            {
+                if (containerGrid.Children.IndexOf(obj) == 2)
+                {
+                    headerLbl.Content = "Billing";
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+            foreach (UIElement obj in billingGrid.Children)
+            {
+                if (billingGrid.Children.IndexOf(obj) == 0)
+                {
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void serviceBtn_Click(object sender, RoutedEventArgs e)
@@ -354,38 +419,36 @@ namespace prototype2
                 manageSubMenugrid.Visibility = Visibility.Visible;
         }
 
+        //private void invoiceSalesMenuBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    foreach (var obj in containerGrid.Children)
+        //    {
+        //        ((Grid)obj).Visibility = Visibility.Collapsed;
+        //    }
+        //    trasanctionGrid.Visibility = Visibility.Visible;
+        //    foreach (var obj in trasanctionGrid.Children)
+        //    {
+        //        if (obj is Grid)
+        //            if (((Grid)obj).Equals(transInvoiceGrid))
+        //                ((Grid)obj).Visibility = Visibility.Visible;
+        //            else
+        //                ((Grid)obj).Visibility = Visibility.Collapsed;
+        //    }
+        //    foreach (var obj in transQuotationGrid.Children)
+        //    {
+        //        if (obj is Grid)
+        //        {
+        //            if (((Grid)obj).Equals(invoiceGridHome))
+        //            {
+        //                headerLbl.Content = "Order Management - Sales Invoice";
+        //                ((Grid)obj).Visibility = Visibility.Visible;
+        //            }
+        //        }
+        //        else
+        //            ((UserControl)obj).Visibility = Visibility.Collapsed;
 
-
-        private void invoiceSalesMenuBtn_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (var obj in containerGrid.Children)
-            {
-                ((Grid)obj).Visibility = Visibility.Collapsed;
-            }
-            trasanctionGrid.Visibility = Visibility.Visible;
-            foreach (var obj in trasanctionGrid.Children)
-            {
-                if (obj is Grid)
-                    if (((Grid)obj).Equals(transInvoiceGrid))
-                        ((Grid)obj).Visibility = Visibility.Visible;
-                    else
-                        ((Grid)obj).Visibility = Visibility.Collapsed;
-            }
-            foreach (var obj in transQuotationGrid.Children)
-            {
-                if (obj is Grid)
-                {
-                    if (((Grid)obj).Equals(invoiceGridHome))
-                    {
-                        headerLbl.Content = "Order Management - Sales Invoice";
-                        ((Grid)obj).Visibility = Visibility.Visible;
-                    }
-                }
-                else
-                    ((UserControl)obj).Visibility = Visibility.Collapsed;
-
-            }
-        }
+        //    }
+        //}
 
         private void empManageBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -1149,34 +1212,34 @@ namespace prototype2
 
         private void convertToInvoice_BtnClicked(object sender, EventArgs e)
         {
-            MainVM.isNewRecord = true;
-            foreach (var obj in containerGrid.Children)
-            {
-                ((Grid)obj).Visibility = Visibility.Collapsed;
-            }
-            trasanctionGrid.Visibility = Visibility.Visible;
-            foreach (var obj in trasanctionGrid.Children)
-            {
-                if (obj is Grid)
-                    if (((Grid)obj).Equals(transInvoiceGrid))
-                        ((Grid)obj).Visibility = Visibility.Visible;
-                    else
-                        ((Grid)obj).Visibility = Visibility.Collapsed;
-            }
-            foreach (var obj in transInvoiceGrid.Children)
-            {
-                if (obj is UserControl)
-                {
-                    if (((UserControl)obj).Equals(ucInvoiceForm))
-                    {
-                        headerLbl.Content = "Order Management - Sales Invoice";
-                        ((UserControl)obj).Visibility = Visibility.Visible;
-                    }
-                }
-                else
-                    ((Grid)obj).Visibility = Visibility.Collapsed;
+            //MainVM.isNewRecord = true;
+            //foreach (var obj in containerGrid.Children)
+            //{
+            //    ((Grid)obj).Visibility = Visibility.Collapsed;
+            //}
+            //trasanctionGrid.Visibility = Visibility.Visible;
+            //foreach (var obj in trasanctionGrid.Children)
+            //{
+            //    if (obj is Grid)
+            //        if (((Grid)obj).Equals(transInvoiceGrid))
+            //            ((Grid)obj).Visibility = Visibility.Visible;
+            //        else
+            //            ((Grid)obj).Visibility = Visibility.Collapsed;
+            //}
+            //foreach (var obj in transInvoiceGrid.Children)
+            //{
+            //    if (obj is UserControl)
+            //    {
+            //        if (((UserControl)obj).Equals(ucInvoiceForm))
+            //        {
+            //            headerLbl.Content = "Order Management - Sales Invoice";
+            //            ((UserControl)obj).Visibility = Visibility.Visible;
+            //        }
+            //    }
+            //    else
+            //        ((Grid)obj).Visibility = Visibility.Collapsed;
 
-            }
+            //}
         }
 
         private void genContractBtn_Click(object sender, RoutedEventArgs e)
@@ -1190,37 +1253,63 @@ namespace prototype2
 
         private void newInvoiceBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainVM.isNewTrans = true;
-            foreach (var obj in containerGrid.Children)
+            foreach (UIElement obj in containerGrid.Children)
             {
-                ((Grid)obj).Visibility = Visibility.Collapsed;
-            }
-            trasanctionGrid.Visibility = Visibility.Visible;
-            foreach (var obj in trasanctionGrid.Children)
-            {
-                if (obj is Grid)
-                    if (((Grid)obj).Equals(transInvoiceGrid))
-                        ((Grid)obj).Visibility = Visibility.Visible;
-                    else
-                        ((Grid)obj).Visibility = Visibility.Collapsed;
-
-            }
-            foreach (var obj in transInvoiceGrid.Children)
-            {
-                if (obj is UserControl)
+                if (containerGrid.Children.IndexOf(obj) == 2)
                 {
-                    if (((UserControl)obj).Equals(ucInvoiceForm))
-                    {
-                        headerLbl.Content = "Order Management - Sales Invoice";
-                        ((UserControl)obj).Visibility = Visibility.Visible;
-                    }
+                    headerLbl.Content = "Billing";
+                    obj.Visibility = Visibility.Visible;
                 }
                 else
-                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                    obj.Visibility = Visibility.Collapsed;
             }
-            ucSalesQuote.viewSalesQuoteBtns.Visibility = Visibility.Collapsed;
-            ucSalesQuote.newSalesQuoteBtns.Visibility = Visibility.Visible;
-            resetValueofSelectedVariables();
+            
+            MainVM.isPaymentInvoice = true;
+            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+            otherGridBg.Visibility = Visibility.Visible;
+            Grid.SetZIndex((otherGridBg), 1);
+            foreach (UIElement obj in otherGridBg.Children)
+            {
+                if (obj.Equals(ucSelectSalesQuote))
+                {
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    obj.Visibility = Visibility.Collapsed;
+                }
+            }
+            //MainVM.isNewTrans = true;
+            //foreach (var obj in containerGrid.Children)
+            //{
+            //    ((Grid)obj).Visibility = Visibility.Collapsed;
+            //}
+            //trasanctionGrid.Visibility = Visibility.Visible;
+            //foreach (var obj in trasanctionGrid.Children)
+            //{
+            //    if (obj is Grid)
+            //        if (((Grid)obj).Equals(transInvoiceGrid))
+            //            ((Grid)obj).Visibility = Visibility.Visible;
+            //        else
+            //            ((Grid)obj).Visibility = Visibility.Collapsed;
+
+            //}
+            //foreach (var obj in transInvoiceGrid.Children)
+            //{
+            //    if (obj is UserControl)
+            //    {
+            //        if (((UserControl)obj).Equals(ucInvoiceForm))
+            //        {
+            //            headerLbl.Content = "Order Management - Sales Invoice";
+            //            ((UserControl)obj).Visibility = Visibility.Visible;
+            //        }
+            //    }
+            //    else
+            //        ((Grid)obj).Visibility = Visibility.Collapsed;
+            //}
+            //ucSalesQuote.viewSalesQuoteBtns.Visibility = Visibility.Collapsed;
+            //ucSalesQuote.newSalesQuoteBtns.Visibility = Visibility.Visible;
+            //resetValueofSelectedVariables();
         }
 
 

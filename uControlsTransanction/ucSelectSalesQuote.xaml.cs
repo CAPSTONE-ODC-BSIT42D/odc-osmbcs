@@ -26,6 +26,15 @@ namespace prototype2.uControlsTransanction
             InitializeComponent();
         }
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
+
+        public event EventHandler SaveCloseOtherButtonClicked;
+        protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
+        {
+            var handler = SaveCloseOtherButtonClicked;
+            if (handler != null)
+                handler(this, e);
+        }
+
         private void findBtn_Click(object sender, RoutedEventArgs e)
         {
             var linqResults = MainVM.SalesQuotes.Where(x => x.sqNoChar_.ToLower().Contains(transSearchBoxSelectCustGridTb.Text.ToLower()) && !(x.status_.Equals("ACCEPTED")));
@@ -35,7 +44,27 @@ namespace prototype2.uControlsTransanction
 
         private void selectSalesQuoteBtn_Click(object sender, RoutedEventArgs e)
         {
+            OnSaveCloseButtonClicked(e);
+        }
 
+        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (this.IsVisible)
+            {
+                if (MainVM.isNewPurchaseOrder)
+                {
+                    var linqResults = MainVM.SalesQuotes.Where(x => x.sqNoChar_.ToLower().Contains(transSearchBoxSelectCustGridTb.Text.ToLower()) && !(x.status_.Equals("ACCEPTED")));
+                    var observable = new ObservableCollection<SalesQuote>(linqResults);
+                    selectSalesQuote.ItemsSource = observable;
+                }
+                else if (MainVM.isPaymentInvoice)
+                {
+                    var linqResults = MainVM.SalesQuotes.Where(x => x.sqNoChar_.ToLower().Contains(transSearchBoxSelectCustGridTb.Text.ToLower()) && !(x.status_.Equals("PENDING")));
+                    var observable = new ObservableCollection<SalesQuote>(linqResults);
+                    selectSalesQuote.ItemsSource = observable;
+                }
+                
+            }
         }
     }
 }

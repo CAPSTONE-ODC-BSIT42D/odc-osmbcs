@@ -41,15 +41,7 @@ namespace prototype2
         Document document;
         private void invoiceNext_Click(object sender, RoutedEventArgs e)
         {
-            if (selectSalesQuoteGrid.IsVisible)
-            {
-                MainVM.SelectedCustomerSupplier = MainVM.Customers.Where(x => x.CompanyID.Equals(MainVM.SelectedSalesQuote.custID_)).First();
-                newInvoiceForm.Visibility = Visibility.Visible;
-                documentViewer.Visibility = Visibility.Collapsed;
-                selectSalesQuoteGrid.Visibility = Visibility.Collapsed;
-                computeInvoice();
-            }
-            else if (newInvoiceForm.IsVisible)
+            if (newInvoiceForm.IsVisible)
             {
 
                 foreach (var element in newInvoiceFormGrid.Children)
@@ -69,7 +61,6 @@ namespace prototype2
                 if (!validationError /*&& MainVM.LoginEmployee_ != null*/)
                 {
                     salesInvoiceToMemory();
-                    selectSalesQuoteGrid.Visibility = Visibility.Collapsed;
                     newInvoiceForm.Visibility = Visibility.Collapsed;
                     documentViewer.Visibility = Visibility.Visible;
                     invoiceNext.Content = "Save";
@@ -109,24 +100,16 @@ namespace prototype2
         }
 
         private void invoiceBack_Click(object sender, RoutedEventArgs e)
-        {
-            if (selectSalesQuoteGrid.IsVisible)
+        {if (newInvoiceForm.IsVisible)
             {
                 newInvoiceForm.Visibility = Visibility.Collapsed;
                 documentViewer.Visibility = Visibility.Collapsed;
-                OnSaveCloseButtonClicked(e);
-            }
-            else if (newInvoiceForm.IsVisible)
-            {
-                newInvoiceForm.Visibility = Visibility.Collapsed;
-                documentViewer.Visibility = Visibility.Collapsed;
-                selectSalesQuoteGrid.Visibility = Visibility.Visible;
             }
             else if (documentViewer.IsVisible)
             {
                 newInvoiceForm.Visibility = Visibility.Visible;
                 documentViewer.Visibility = Visibility.Collapsed;
-                selectSalesQuoteGrid.Visibility = Visibility.Collapsed;
+               
             }
         }
 

@@ -36,9 +36,24 @@ namespace prototype2
                 handler(this, e);
         }
 
+        public event EventHandler SelectSalesQuote;
+        protected virtual void OnSelectSalesQuote(RoutedEventArgs e)
+        {
+            MainVM.isNewPurchaseOrder = true;
+            var handler = SelectSalesQuote;
+            if (handler != null)
+                handler(this, e);
+        }
+
         private void selectSupplierBtn_Click(object sender, RoutedEventArgs e)
         {
             OnSelectCustomerClicked(e);
+        }
+
+
+        private void selectItemsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OnSelectSalesQuote(e);
         }
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -57,5 +72,6 @@ namespace prototype2
             }
             
         }
+
     }
 }
