@@ -173,8 +173,13 @@ namespace prototype2
 
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
-                        MessageBox.Show("Record is Saved");
-
+                        query = "INSERT INTO markup_hist_t (markupPerc,dateEffective) VALUES ('" +
+                           markUpPriceTb.Value + "','" +
+                           dateEffective.SelectedDate.Value.ToString("yyyy-MM-dd") + "');";
+                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        {
+                            MessageBox.Show("Record is Saved");
+                        }
                     }
                 }
                 else
