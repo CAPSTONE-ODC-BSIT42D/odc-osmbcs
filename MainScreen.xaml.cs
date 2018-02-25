@@ -65,7 +65,7 @@ namespace prototype2
 
             this.ucProduct.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
 
-            //this..SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
+            this.ucSelectSalesQuote.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
 
             this.ucSalesQuote.SaveCloseButtonClicked += saveCloseSalesQuoteForm; ;
             this.ucSalesQuote.ConvertToInvoice += convertToInvoice_BtnClicked;
@@ -239,10 +239,7 @@ namespace prototype2
             otherGridBg.Visibility = Visibility.Collapsed;
             foreach (UIElement obj in otherGridBg.Children)
             {
-                if (obj.Equals(ucSelectCustomer))
-                {
-                    obj.Visibility = Visibility.Collapsed;
-                }
+                obj.Visibility = Visibility.Collapsed;
             }
             if (MainVM.isPaymentInvoice)
             {

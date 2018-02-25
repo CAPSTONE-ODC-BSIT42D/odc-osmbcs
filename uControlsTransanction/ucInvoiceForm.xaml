@@ -7,10 +7,17 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:uControlsTransanction="clr-namespace:prototype2.uControlsTransanction" x:Class="prototype2.ucInvoiceForm"
              mc:Ignorable="d" 
              d:DesignHeight="709.5" d:DesignWidth="1107" IsVisibleChanged="UserControl_IsVisibleChanged">
+    <UserControl.Resources>
+        <local:ProductNameConverter x:Key="ProductNameConverter" />
+        <local:ServiceNameConverter x:Key="ServiceNameConverter" />
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <StaticResource ResourceKey="MainVM"/>
+    </UserControl.DataContext>
     <Grid x:Name="transInvoiceGridForm" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Visibility="Visible">
 
         <local:DocumentViewer x:Name="documentViewer" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed"/>
-        <ScrollViewer x:Name="newInvoiceForm" Margin="0,0,0,40" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" d:IsHidden="True">
+        <ScrollViewer x:Name="newInvoiceForm" Margin="0,0,0,40" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top">
             <Grid x:Name="newInvoiceFormGrid">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -63,61 +70,6 @@
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox>
-                <DataGrid x:Name="itemDg1" Margin="40,241,40,0" ItemsSource="{Binding InvoiceItems}" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" VerticalAlignment="Top" Height="242">
-                    <DataGrid.Columns >
-                        <DataGridTextColumn Binding="{Binding itemCode}" ClipboardContentBinding="{x:Null}" Header="Item Code" Width="100" CanUserResize="False" />
-                        <DataGridTextColumn Binding="{Binding itemName}" ClipboardContentBinding="{x:Null}" Header="Item Name" Width="100" CanUserResize="False" />
-                        <DataGridTemplateColumn Width="200" CanUserResize="False" Header="Description" >
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text= "{Binding itemDesc}" ClipToBounds="True" TextWrapping="Wrap"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Item Type" Width="100">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Label>
-                                        <Label.Style>
-                                            <Style TargetType="{x:Type Label}">
-                                                <Setter Property="Content" Value="{Binding itemType}" />
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding itemType}" Value="0">
-                                                        <Setter Property="Content" Value="Product" />
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding itemType}" Value="1">
-                                                        <Setter Property="Content" Value = "Serivce" />
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Label.Style>
-                                    </Label>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Qty" Width="60">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text= "{Binding qty}" ClipToBounds="True" TextWrapping="Wrap"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Unit Price" Width="100">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Label Content="{Binding unitPrice}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Total Amount" Width="100">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Label Content="{Binding totalAmount}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
                 <StackPanel Margin="40,530,0,0" Orientation="Vertical" VerticalAlignment="Top" Height="182" HorizontalAlignment="Left">
                     <WrapPanel Margin="0" Orientation="Horizontal">
                         <Label x:Name="label19_Copy7" Content="Vatable Sales:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="100"/>
@@ -174,6 +126,81 @@
                         <Label x:Name="totalDue" Content="{Binding TotalSales}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
                     </WrapPanel>
                 </StackPanel>
+                <DataGrid x:Name="itemDg" Margin="30,241,30,0" ItemsSource="{Binding RequestedItems}" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="False" IsReadOnly="True" VerticalAlignment="Top" Height="241" SelectedItem="{Binding SelectedRequestedItem}"  >
+                    <DataGrid.Columns >
+                        <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Item Name" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label>
+                                        <Label.Style>
+                                            <Style TargetType="{x:Type Label}">
+                                                <Setter Property="Content" Value="{Binding itemType}" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding itemType}" Value="0">
+                                                        <Setter Property="Content" Value="{Binding itemID, Converter={StaticResource ProductNameConverter}, NotifyOnTargetUpdated=True}" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding itemType}" Value="1">
+                                                        <Setter Property="Content" Value = "{Binding itemID, Converter={StaticResource ServiceNameConverter}, NotifyOnTargetUpdated=True}" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Width="200" CanUserResize="False" Header="Description" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text= "{Binding itemDesc}" ClipToBounds="True" TextWrapping="Wrap"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Item Type" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label>
+                                        <Label.Style>
+                                            <Style TargetType="{x:Type Label}">
+                                                <Setter Property="Content" Value="{Binding itemType}" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding itemType}" Value="0">
+                                                        <Setter Property="Content" Value="Product" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding itemType}" Value="1">
+                                                        <Setter Property="Content" Value = "Serivce" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Qty" Width="60">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding qty}"></Label>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Unit Price" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding unitPrice, StringFormat=N2}"></Label>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Total Amount" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding totalAmount, StringFormat=N2}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
 
         </ScrollViewer>

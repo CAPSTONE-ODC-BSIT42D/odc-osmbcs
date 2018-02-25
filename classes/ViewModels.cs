@@ -600,7 +600,20 @@ namespace prototype2
             set { SetProperty(ref selectedAvailedItem, value); }
         }
         //-----Added Services
+
+        //----- Units
+
+        protected ObservableCollection<Markup_History> markupHist = new ObservableCollection<Markup_History>();
         
+
+        public ObservableCollection<Markup_History> MarkupHist
+        {
+            get { return markupHist; }
+            set { markupHist = value; }
+        }
+        
+
+
         //----- Units
 
         protected ObservableCollection<Unit> units = new ObservableCollection<Unit>();

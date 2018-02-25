@@ -53,14 +53,12 @@ namespace prototype2.uControlsTransanction
             {
                 if (MainVM.isNewPurchaseOrder)
                 {
-                    var linqResults = MainVM.SalesQuotes.Where(x => x.sqNoChar_.ToLower().Contains(transSearchBoxSelectCustGridTb.Text.ToLower()) && !(x.status_.Equals("ACCEPTED")));
-                    var observable = new ObservableCollection<SalesQuote>(linqResults);
+                    var observable = new ObservableCollection<SalesQuote>(from sq in MainVM.SalesQuotes where sq.status_.Equals("ACCEPTED") select sq);
                     selectSalesQuote.ItemsSource = observable;
                 }
                 else if (MainVM.isPaymentInvoice)
                 {
-                    var linqResults = MainVM.SalesQuotes.Where(x => x.sqNoChar_.ToLower().Contains(transSearchBoxSelectCustGridTb.Text.ToLower()) && !(x.status_.Equals("PENDING")));
-                    var observable = new ObservableCollection<SalesQuote>(linqResults);
+                    var observable = new ObservableCollection<SalesQuote>(from sq in MainVM.SalesQuotes where sq.status_.Equals("PENDING") select sq);
                     selectSalesQuote.ItemsSource = observable;
                 }
                 

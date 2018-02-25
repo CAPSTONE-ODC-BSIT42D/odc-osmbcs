@@ -179,20 +179,25 @@ namespace prototype2
                 }
                 else
                 {
-                    string query = "INSERT INTO item_t (itemName,itemDescr,markUpPerc,unitID,typeID,supplierID, dateEffective) VALUES ('" +
+                    string query = "INSERT INTO item_t (itemName,itemDescr,unitID,typeID,supplierID) VALUES ('" +
                     productNameTb.Text + "','" +
                     productDescTb.Text + "'," +
-                    markUpPriceTb.Value + "," +
                     unitID + "," +
                     typeID + "," +
-                    supplierID+ ",'" +
-                    dateEffective.SelectedDate.Value.ToString("yyyy-MM-dd") +
+                    supplierID +
                     "');";
 
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
-                        MessageBox.Show("Record is Saved");
-
+                        query = "SELECT LAST_INSERT_ID();";
+                        string serviceID = dbCon.selectScalar(query, dbCon.Connection).ToString();
+                        query = "INSERT INTO markup_hist_t (markupPerc,dateEffective) VALUES ('" +
+                            markUpPriceTb.Value + "','" +
+                            dateEffective.SelectedDate.Value.ToString("yyyy-MM-dd") + "');";
+                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        {
+                            MessageBox.Show("Record is Saved");
+                        }
                     }
                 }
                 

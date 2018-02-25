@@ -383,6 +383,42 @@ namespace prototype2
         }
     }
 
+    public class Markup_History : ViewModelEntity
+    {
+        public Markup_History()
+        {
+
+        }
+
+        protected int markupID;
+        public int MarkupID
+        {
+            get { return markupID; }
+            set { SetProperty(ref markupID, value); }
+        }
+
+        protected decimal markupPerc;
+        public decimal MarkupPerc
+        {
+            get { return markupPerc; }
+            set { SetProperty(ref markupPerc, value); }
+        }
+
+        protected DateTime dateEffective;
+        public DateTime DateEffective
+        {
+            get { return dateEffective; }
+            set { SetProperty(ref dateEffective, value); }
+        }
+
+        protected int itemID;
+        public int ItemID
+        {
+            get { return itemID; }
+            set { SetProperty(ref itemID, value); }
+        }
+    }
+
     #endregion
     #region Major Models
     public class Customer : ViewModelEntity

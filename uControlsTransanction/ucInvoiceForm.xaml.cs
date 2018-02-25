@@ -43,7 +43,6 @@ namespace prototype2
         {
             if (newInvoiceForm.IsVisible)
             {
-
                 foreach (var element in newInvoiceFormGrid.Children)
                 {
                     if (element is TextBox)
@@ -248,9 +247,23 @@ namespace prototype2
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (this.IsVisible && MainVM.isNewRecord)
+            if (this.IsVisible && MainVM.isPaymentInvoice)
             {
-                //computeInvoice();
+                var invoiceprod = from ai in MainVM.AvailedItems
+                                  where ai.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
+                                  select ai;
+                var invoiceserv = from aser in MainVM.AvailedServices
+                                  where aser.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
+                                  select aser;
+                foreach(AvailedItem ai in invoiceprod)
+                {
+                    var markupPrice = from itm in MainVM.MarkupHist
+                                      where itm.ItemID == ai.ItemID 
+                                      && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
+                                      select itm;
+                    decimal unitPric = ai.TotalCost - markupPrice.First().MarkupPerc;
+                    MainVM.RequestedItems.Add(new RequestedItem() { itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, totalAmount = ai.TotalCost, unitPrice = unitPric });
+                }
             }
         }
     }
