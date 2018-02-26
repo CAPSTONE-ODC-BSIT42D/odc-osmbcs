@@ -162,20 +162,19 @@ namespace prototype2
                 if (MainVM.isEdit)
                 {
                     string query = "UPDATE item_t SET " +
-                        "itemName = " + productNameTb.Text+", "+
-                        "itemDescr= " + productDescTb.Text + ", " +
-                        "markUpPerc = " + markUpPriceTb.Text + ", " +
+                        "itemName = '" + productNameTb.Text+"', "+
+                        "itemDescr= '" + productDescTb.Text + "', " +
                         "unitID = " + unitID+ ", " +
                         "typeID = " + typeID + ", " +
-                        "supplierID = " + supplierID + ", " +
-                        " dateEffective = '" + dateEffective.SelectedDate.Value.ToString("yyyy-MM-dd") + "', " +
-                        "WHERE id = " +MainVM.SelectedProduct.ID;
+                        "supplierID = " + supplierID +
+                        " WHERE id = " +MainVM.SelectedProduct.ID;
 
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
-                        query = "INSERT INTO markup_hist_t (markupPerc,dateEffective) VALUES ('" +
-                           markUpPriceTb.Value + "','" +
-                           dateEffective.SelectedDate.Value.ToString("yyyy-MM-dd") + "');";
+                        query = "INSERT INTO markup_hist_t (markupPerc,dateEffective,itemID) VALUES ('" +
+                            markUpPriceTb.Value + "','" +
+                            dateEffective.SelectedDate.Value.ToString("yyyy-MM-dd") + "','" +
+                            MainVM.SelectedProduct.ID + "');";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             MessageBox.Show("Record is Saved");
@@ -190,15 +189,16 @@ namespace prototype2
                     unitID + "," +
                     typeID + "," +
                     supplierID +
-                    "');";
+                    ");";
 
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
                         query = "SELECT LAST_INSERT_ID();";
-                        string serviceID = dbCon.selectScalar(query, dbCon.Connection).ToString();
-                        query = "INSERT INTO markup_hist_t (markupPerc,dateEffective) VALUES ('" +
+                        string itemID = dbCon.selectScalar(query, dbCon.Connection).ToString();
+                        query = "INSERT INTO markup_hist_t (markupPerc,dateEffective,itemID) VALUES ('" +
                             markUpPriceTb.Value + "','" +
-                            dateEffective.SelectedDate.Value.ToString("yyyy-MM-dd") + "');";
+                            dateEffective.SelectedDate.Value.ToString("yyyy-MM-dd") + "','" +
+                            itemID + "');";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             MessageBox.Show("Record is Saved");

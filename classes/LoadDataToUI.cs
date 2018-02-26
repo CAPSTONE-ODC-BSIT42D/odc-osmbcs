@@ -231,6 +231,23 @@ namespace prototype2
 
             if (dbCon.IsConnect())
             {
+                string query = "SELECT * FROM markup_hist_t;";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                
+
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.MarkupHist.Add(new Markup_History() { MarkupID = int.Parse(dr[0].ToString()), MarkupPerc = decimal.Parse(dr[1].ToString()), DateEffective = DateTime.Parse(dr[2].ToString()), ItemID = int.Parse(dr[3].ToString()) });
+                }
+
+            }
+
+            if (dbCon.IsConnect())
+            {
                 string query = "SELECT * FROM unit_t;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
@@ -272,7 +289,7 @@ namespace prototype2
                 {
                     int supplierID;
                     int.TryParse(dr["supplierID"].ToString(), out supplierID);
-                    MainVM.ProductList.Add(new Item() { ID = int.Parse(dr["id"].ToString()), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), MarkUpPerc = decimal.Parse(dr["markupPerc"].ToString()), TypeID = int.Parse(dr["typeID"].ToString()), UnitID = int.Parse(dr["unitID"].ToString()), SupplierID = supplierID, DateEffective = DateTime.Parse(dr["dateEffective"].ToString()) });
+                    MainVM.ProductList.Add(new Item() { ID = int.Parse(dr["id"].ToString()), ItemName = dr["itemName"].ToString(), ItemDesc = dr["itemDescr"].ToString(), TypeID = int.Parse(dr["typeID"].ToString()), UnitID = int.Parse(dr["unitID"].ToString()), SupplierID = supplierID });
                 }
                 dbCon.Close();
             }

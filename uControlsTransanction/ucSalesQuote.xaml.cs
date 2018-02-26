@@ -526,8 +526,12 @@ namespace prototype2
             {
                 if (item.itemType == 0)
                 {
+                    var markupPrice = from itm in MainVM.MarkupHist
+                                      where itm.ItemID == item.itemID
+                                      && itm.DateEffective <= DateTime.Now
+                                      select itm;
                     MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ID == item.itemID).FirstOrDefault();
-                    item.unitPriceMarkUp = item.unitPrice + (item.unitPrice / 100 * (decimal)MainVM.SelectedProduct.MarkUpPerc);
+                    item.unitPriceMarkUp = item.unitPrice + (item.unitPrice / 100 * (decimal)markupPrice.Last().MarkupPerc);
                     item.totalAmount = (item.unitPriceMarkUp * item.qty) - ((item.unitPriceMarkUp * item.qty) / 100) * (decimal)discountPriceTb.Value;
                 }
                 else if (item.itemType == 1)

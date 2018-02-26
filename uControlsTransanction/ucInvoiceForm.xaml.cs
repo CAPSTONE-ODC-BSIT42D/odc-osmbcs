@@ -261,7 +261,7 @@ namespace prototype2
                                       where itm.ItemID == ai.ItemID 
                                       && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
                                       select itm;
-                    decimal unitPric = ai.TotalCost - markupPrice.First().MarkupPerc;
+                    decimal unitPric = ai.TotalCost - markupPrice.Last().MarkupPerc;
                     MainVM.RequestedItems.Add(new RequestedItem() { itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, totalAmount = ai.TotalCost, unitPrice = unitPric });
                 }
             }
