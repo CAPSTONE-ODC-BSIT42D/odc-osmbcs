@@ -73,57 +73,57 @@
                 <StackPanel Margin="40,530,0,0" Orientation="Vertical" VerticalAlignment="Top" Height="182" HorizontalAlignment="Left">
                     <WrapPanel Margin="0" Orientation="Horizontal">
                         <Label x:Name="label19_Copy7" Content="Vatable Sales:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="100"/>
-                        <Label x:Name="vatableSalesLbl" Content="{Binding VatableSale}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                        <TextBlock x:Name="vatableSalesLbl" Text="{Binding VatableSale, ConverterCulture='fil-PH', StringFormat={}{0:C}}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
                     </WrapPanel>
                     <WrapPanel Margin="0" Orientation="Horizontal">
                         <Label x:Name="label19_Copy8" Content="VAT-Exempted Sales:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="148"/>
-                        <Label x:Name="vatExcemptedSalesLbl" Content="{Binding VatExemptedSales}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                        <TextBlock x:Name="vatExcemptedSalesLbl" Text="{Binding VatExemptedSales, ConverterCulture='fil-PH', StringFormat={}{0:C}}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
                     </WrapPanel>
                     <WrapPanel Margin="0" Orientation="Horizontal">
                         <Label x:Name="label19_Copy9" Content="Zero - Rated Sales:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="133"/>
-                        <Label x:Name="zeroRatedSalesLbl" Content="{Binding ZeroRatedSales}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                        <TextBlock x:Name="zeroRatedSalesLbl" Text="{Binding ZeroRatedSales, ConverterCulture='fil-PH', StringFormat={}{0:C}}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
                     </WrapPanel>
                     <WrapPanel Margin="0" Orientation="Horizontal">
                         <Label x:Name="label19_Copy10" Content="VAT Amount" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="93"/>
-                        <Label x:Name="vatAmountLbl" Content="{Binding VatAmount}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29" ContentStringFormat="{}{0:0.##}"/>
+                        <TextBlock x:Name="vatAmountLbl" Text="{Binding VatAmount, ConverterCulture='fil-PH', StringFormat={}{0:C}}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
                     </WrapPanel>
                     <WrapPanel Margin="0" Orientation="Horizontal">
                         <Label x:Name="label19_Copy11" Content="TOTAL SALES:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="100"/>
-                        <Label x:Name="totalSalesLbl" Content="{Binding TotalSales}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                        <TextBlock x:Name="totalSalesLbl" Text="{Binding TotalSales, ConverterCulture='fil-PH', StringFormat={}{0:C}}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
                     </WrapPanel>
                 </StackPanel>
                 <StackPanel Margin="473,530,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="246" Width="230">
                     <WrapPanel Margin="0">
                         <Label x:Name="label19_Copy12" Content="Total Sale VAT Inclusive:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="168"/>
-                        <Label x:Name="totalSalesVatIncluLbl" Content="{Binding TotalSales}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                        <TextBlock x:Name="totalSalesVatIncluLbl" Text="{Binding TotalSales, ConverterCulture='fil-PH', StringFormat={}{0:C}}" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="14"/>
                     </WrapPanel>
                     <WrapPanel Margin="0" Orientation="Horizontal">
                         <Label x:Name="label19_Copy13" Content="Less: VAT" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="70"/>
-                        <Label x:Name="vatAmountLbl1" Content="{Binding VatAmount}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                        <TextBlock x:Name="vatAmountLbl1" Text="{Binding VatAmount, ConverterCulture='fil-PH', StringFormat={}{0:C}}" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="14"/>
                     </WrapPanel>
                     <WrapPanel Margin="0" Orientation="Horizontal">
                         <Label x:Name="label19_Copy14" Content="TOTAL:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="56"/>
-                        <Label x:Name="totalSalesLbl1" Content="{Binding TotalSalesNoVat}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                        <TextBlock x:Name="totalSalesLbl1" Text="{Binding TotalSalesNoVat, ConverterCulture='fil-PH', StringFormat={}{0:C}}" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="14"/>
                     </WrapPanel>
                     <WrapPanel Margin="0" Orientation="Horizontal">
                         <Label x:Name="label19_Copy15" Content="Less: SC/PWD Discount:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="167"/>
-                        <Label x:Name="discountLbl" Content="{Binding DiscountAmount}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                        <TextBlock x:Name="discountLbl" Text="{Binding DiscountAmount, ConverterCulture='fil-PH', StringFormat={}{0:C}}"  HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="14"/>
                     </WrapPanel>
                     <WrapPanel Margin="0" Orientation="Horizontal">
                         <Label x:Name="label19_Copy16" Content="Total Due:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="76"/>
-                        <Label x:Name="totalDueLbl" Content="{Binding VatableSale}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                        <TextBlock x:Name="totalDueLbl" Text="{Binding VatableSale, ConverterCulture='fil-PH', StringFormat={}{0:C}}"  HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="14"/>
                     </WrapPanel>
                     <WrapPanel Margin="0" Orientation="Horizontal">
                         <Label x:Name="label19_Copy17" Content="Less: Withholding Tax:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="157"/>
-                        <Label x:Name="withHoldingTaxLbl" Content="{Binding WithHoldingTax}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                        <TextBlock x:Name="withHoldingTaxLbl" Text="{Binding WithHoldingTax, ConverterCulture='fil-PH', StringFormat={}{0:C}}"  HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="14"/>
                     </WrapPanel>
                     <WrapPanel Margin="0" Orientation="Horizontal">
                         <Label x:Name="label19_Copy18" Content="Add: VAT" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="71"/>
-                        <Label x:Name="vatAmountLbl2" Content="{Binding VatAmount}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                        <TextBlock x:Name="vatAmountLbl2" Text="{Binding VatAmount, ConverterCulture='fil-PH', StringFormat={}{0:C}}"  HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="14"/>
                     </WrapPanel>
                     <WrapPanel Orientation="Horizontal" Height="29">
                         <Label x:Name="label19_Copy19" Content="AMOUNT DUE:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="105"/>
-                        <Label x:Name="totalDue" Content="{Binding TotalSales}" ContentStringFormat="{}{0:0.##}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Height="29"/>
+                        <TextBlock x:Name="totalDue" Text="{Binding TotalSales, ConverterCulture='fil-PH', StringFormat={}{0:C}}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
                     </WrapPanel>
                 </StackPanel>
                 <DataGrid x:Name="itemDg" Margin="30,241,30,0" ItemsSource="{Binding RequestedItems}" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="False" IsReadOnly="True" VerticalAlignment="Top" Height="241" SelectedItem="{Binding SelectedRequestedItem}"  >
@@ -178,27 +178,9 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Qty" Width="60">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Label Content="{Binding qty}"></Label>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Unit Price" Width="100">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Label Content="{Binding unitPrice, StringFormat=N2}"></Label>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Total Amount" >
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Label Content="{Binding totalAmount, StringFormat=N2}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Qty" Binding="{Binding qty}" Width="Auto"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Unit Price" Binding="{Binding unitPrice, ConverterCulture='fil-PH', StringFormat={}{0:C}}" Width="Auto"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Total Amount" Binding="{Binding totalAmount, ConverterCulture='fil-PH', StringFormat={}{0:C}}" Width="Auto"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

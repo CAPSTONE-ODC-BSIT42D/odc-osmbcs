@@ -117,52 +117,46 @@ namespace prototype2
 
         void computeInvoice()
         {
-            MainVM.InvoiceItems.Clear();
             MainVM.VatableSale = 0;
             MainVM.TotalSalesWithOutDp = 0;
-            foreach (AvailedItem item in MainVM.SelectedSalesQuote.AvailedItems)
-            {
-                MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ID.Equals(item.ItemID)).First();
-                MainVM.InvoiceItems.Add(new InvoiceItem()
-                {
-                    lineNo = (MainVM.RequestedItems.Count + 1).ToString(),
-                    itemCode = item.ItemID.ToString(),
-                    desc = MainVM.SelectedProduct.ItemDesc,
-                    itemName = MainVM.SelectedProduct.ItemName,
-                    qty = item.ItemQty,
-                    unitPrice = Math.Round(item.TotalCost / item.ItemQty, 3),
-                    totalAmount = Math.Round(item.TotalCost, 3),
-                    itemType = 0
-                });
-                MainVM.VatableSale += Math.Round(item.TotalCost, 3);
 
-            }
-            foreach (AvailedService service in MainVM.SelectedSalesQuote.AvailedServices)
+            MainVM.SelectedCustomerSupplier = (from cust in MainVM.Customers
+                             where cust.CompanyID == MainVM.SelectedSalesQuote.custID_
+                             select cust).FirstOrDefault();
+
+            var invoiceprod = from ai in MainVM.AvailedItems
+                              where ai.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
+                              select ai;
+            var invoiceserv = from aser in MainVM.AvailedServices
+                              where aser.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
+                              select aser;
+            foreach (AvailedItem ai in invoiceprod)
             {
-                MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(service.ServiceID)).First();
-                //MainVM.SelectedRegion = MainVM.Provinces.Where(x => x.ProvinceID == service.ProvinceID).First();
-                MainVM.InvoiceItems.Add(new InvoiceItem()
-                {
-                    lineNo = (MainVM.RequestedItems.Count + 1).ToString(),
-                    itemCode = service.AvailedServiceID.ToString(),
-                    desc = MainVM.SelectedService.ServiceDesc,
-                    itemName = MainVM.SelectedService.ServiceName,
-                    qty = 1,
-                    unitPrice = Math.Round(service.TotalCost, 3),
-                    totalAmount = Math.Round(service.TotalCost, 3),
-                    itemType = 1,
-                    additionalFees = service.AdditionalFees
-                });
-                MainVM.VatableSale += Math.Round(service.TotalCost, 3);
+                var markupPrice = from itm in MainVM.MarkupHist
+                                  where itm.ItemID == ai.ItemID
+                                  && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
+                                  select itm;
+                decimal unitPric = ai.TotalCost - (ai.TotalCost / 100 * markupPrice.Last().MarkupPerc);
+                MainVM.RequestedItems.Add(new RequestedItem() { itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, totalAmount = ai.TotalCost, unitPrice = unitPric });
+                MainVM.VatableSale += Math.Round(ai.TotalCost, 2);
             }
 
-            MainVM.TotalSalesNoVat = Math.Round(MainVM.VatableSale, 3);
+            foreach (AvailedService aserv in invoiceserv)
+            {
+                var service = from serv in MainVM.ServicesList
+                                  where serv.ServiceID == aserv.ServiceID
+                                  select serv;
+                MainVM.RequestedItems.Add(new RequestedItem() { itemID = aserv.ServiceID, itemType = 0, qty = 0, totalAmount = aserv.TotalCost, unitPrice = service.Last().ServicePrice });
+                MainVM.VatableSale += Math.Round(aserv.TotalCost, 2);
+            }
+
+            MainVM.TotalSalesNoVat = Math.Round(MainVM.VatableSale, 2);
 
             MainVM.VatAmount = (MainVM.VatableSale * ((decimal)0.12));
-            MainVM.VatAmount = Math.Round(MainVM.VatAmount, 3);
+            MainVM.VatAmount = Math.Round(MainVM.VatAmount, 2);
 
             MainVM.TotalSales = MainVM.VatableSale + MainVM.VatAmount;
-            MainVM.TotalSales = Math.Round(MainVM.TotalSales, 3);
+            MainVM.TotalSales = Math.Round(MainVM.TotalSales, 2);
 
             dateOfIssue = DateTime.Now;
             dateToday.Content = dateOfIssue.ToShortDateString();
@@ -249,21 +243,9 @@ namespace prototype2
         {
             if (this.IsVisible && MainVM.isPaymentInvoice)
             {
-                var invoiceprod = from ai in MainVM.AvailedItems
-                                  where ai.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
-                                  select ai;
-                var invoiceserv = from aser in MainVM.AvailedServices
-                                  where aser.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
-                                  select aser;
-                foreach(AvailedItem ai in invoiceprod)
-                {
-                    var markupPrice = from itm in MainVM.MarkupHist
-                                      where itm.ItemID == ai.ItemID 
-                                      && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
-                                      select itm;
-                    decimal unitPric = ai.TotalCost - markupPrice.Last().MarkupPerc;
-                    MainVM.RequestedItems.Add(new RequestedItem() { itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, totalAmount = ai.TotalCost, unitPrice = unitPric });
-                }
+                
+
+                computeInvoice();
             }
         }
     }
