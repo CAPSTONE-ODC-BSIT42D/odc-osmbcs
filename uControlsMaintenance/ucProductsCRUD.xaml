@@ -16,7 +16,7 @@
             </Grid.ColumnDefinitions>
             <Label x:Name="label14" Content="Product Details" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
             <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,39,10,0" VerticalAlignment="Top"/>
-            <Label Content="Name:" HorizontalAlignment="Left" Margin="28,46,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Content="* Name:" HorizontalAlignment="Left" Margin="25,46,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
             <TextBox x:Name="productNameTb" HorizontalAlignment="Left" Height="23" Margin="136,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220">
                 <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                     <Binding.ValidationRules>
@@ -24,9 +24,9 @@
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox>
-            <Label Content="Description:" HorizontalAlignment="Left" Margin="28,83,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Content="Description:" HorizontalAlignment="Left" Margin="25,83,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
             <TextBox x:Name="productDescTb" HorizontalAlignment="Left" Height="54" Margin="136,83,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="442"/>
-            <Label Content="Category:" HorizontalAlignment="Left" Margin="28,150,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Content="* Category:" HorizontalAlignment="Left" Margin="25,150,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
             <ComboBox x:Name="categoryCb" HorizontalAlignment="Left" Margin="136,150,0,0" VerticalAlignment="Top" Width="220" ItemsSource="{Binding ProductCategory}" DisplayMemberPath="TypeName" SelectedValuePath="TypeID" IsSynchronizedWithCurrentItem ="True" SelectedItem="{Binding SelectedProductCategory}" >
 
             </ComboBox>
@@ -38,7 +38,7 @@
                 </Binding>
             </TextBox>
             <Button x:Name="addCategoryBtn" Content="+" HorizontalAlignment="Left" Margin="361,150,0,0" VerticalAlignment="Top" Width="26" Height="22" Click="addCategoryBtn_Click"/>
-            <Label Content="Unit:" HorizontalAlignment="Left" Margin="28,184,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Content="* Unit:" HorizontalAlignment="Left" Margin="25,184,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
             <ComboBox x:Name="unitCb" HorizontalAlignment="Left" Margin="136,187,0,0" VerticalAlignment="Top" Width="220" DisplayMemberPath="UnitName" SelectedValuePath="ID" IsSynchronizedWithCurrentItem ="True" SelectedItem="{Binding SelectedUnit}">
                 <ComboBox.Resources>
                     <CollectionViewSource x:Key="Items" Source="{Binding Units}" />
@@ -70,8 +70,8 @@
                     </CompositeCollection>
                 </ComboBox.ItemsSource>
             </ComboBox>
-            <Label Content="date Effective:" HorizontalAlignment="Left" Margin="28,246,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-            <Label Content="Markup Percent:" HorizontalAlignment="Left" Margin="28,215,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Content="* Date Effective:" HorizontalAlignment="Left" Margin="25,246,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Content="* Markup Percent:" HorizontalAlignment="Left" Margin="25,215,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
             <xctk:DecimalUpDown x:Name="markUpPriceTb" HorizontalAlignment="Left" Margin="136,220,0,0" VerticalAlignment="Top" Width="220">
                 <xctk:DecimalUpDown.Text>
                     <Binding Path="DecimalTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">

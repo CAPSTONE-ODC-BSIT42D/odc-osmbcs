@@ -12,24 +12,24 @@
     </UserControl.DataContext>
     <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Margin="0">
 
-        <StackPanel x:Name="serviceDetailsGrid" Background="White" VerticalAlignment="Top" Margin="0">
+        <StackPanel x:Name="serviceDetailsGrid" Background="White" VerticalAlignment="Top" Margin="0" Height="204">
             <Grid Margin="0">
                 <Label Content="Phase Item Details" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
                 <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,33,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
-                <Label Content="Phase Name:" HorizontalAlignment="Left" Margin="20,40,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="12"/>
-                <TextBox x:Name="phaseItemNameTb" HorizontalAlignment="Left" Height="22" Margin="130,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="252" FontWeight="Normal" FontStyle="Normal" FontSize="12">
+                <Label Content="* Phase Name:" HorizontalAlignment="Left" Margin="15,40,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="12"/>
+                <TextBox x:Name="phaseItemNameTb" HorizontalAlignment="Left" Height="22" Margin="145,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="252" FontWeight="Normal" FontStyle="Normal" FontSize="12">
                     <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                         <Binding.ValidationRules>
                             <prototype2:TextBoxValidation TextBoxType="IsEmpty"/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox>
-                <Label Content="Phase Description:" HorizontalAlignment="Left" Margin="20,82,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="12"/>
-                <TextBox x:Name="phaseDescTb" HorizontalAlignment="Left" Height="82" Margin="130,86,0,10" TextWrapping="Wrap" VerticalAlignment="Top" Width="252" FontWeight="Normal" FontStyle="Normal" FontSize="12"/>
+                <Label Content="* Phase Description:" HorizontalAlignment="Left" Margin="15,82,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="12"/>
+                <TextBox x:Name="phaseDescTb" HorizontalAlignment="Left" Height="82" Margin="145,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="252" FontWeight="Normal" FontStyle="Normal" FontSize="12"/>
             </Grid>
             <Grid Margin="0">
-                <Button x:Name="saveBtn" Content="save" Margin="0,0,91,10" VerticalAlignment="Bottom" FontSize="12" FontWeight="Normal" FontStyle="Normal" Height="25" HorizontalAlignment="Right" Width="76" Click="saveBtn_Click"/>
-                <Button x:Name="cancelBtn" Content="cancel" FontSize="12" FontWeight="Normal" FontStyle="Normal" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="76" Margin="0,0,10,10" Click="cancelBtn_Click"/>
+                <Button x:Name="saveBtn" Content="Save" Margin="253,0,91,-15" VerticalAlignment="Bottom" FontSize="12" FontWeight="Normal" FontStyle="Normal" Height="25" Click="saveBtn_Click"/>
+                <Button x:Name="cancelBtn" Content="Cancel" FontSize="12" FontWeight="Normal" FontStyle="Normal" Height="25" VerticalAlignment="Bottom" Margin="334,0,10,-15" Click="cancelBtn_Click"/>
             </Grid>
         </StackPanel>
 
