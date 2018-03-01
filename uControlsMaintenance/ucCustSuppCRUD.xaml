@@ -18,12 +18,12 @@
                 </Grid.ColumnDefinitions>
                 <Label x:Name="label5" Content="Company Details" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
                 <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,47,10,0" VerticalAlignment="Top"/>
-                <Label x:Name="label4_Copy" Content="Name:" HorizontalAlignment="Left" Margin="40,83,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label x:Name="label4_Copy" Content="* Name:" HorizontalAlignment="Left" Margin="40,83,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <Label x:Name="label4_Copy1" Content="Description:" HorizontalAlignment="Left" Margin="40,114,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label x:Name="label4_Copy2" Content="Address:" HorizontalAlignment="Left" Margin="40,243,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label x:Name="label4_Copy3" Content="City:" HorizontalAlignment="Left" Margin="40,272,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label x:Name="label4_Copy4" Content="Province" HorizontalAlignment="Left" Margin="40,297,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label x:Name="label4_Copy15" Content="Postal Code:" HorizontalAlignment="Left" Margin="40,327,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label x:Name="label4_Copy2" Content="* Address:" HorizontalAlignment="Left" Margin="40,243,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label x:Name="label4_Copy3" Content="* City:" HorizontalAlignment="Left" Margin="40,272,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label x:Name="label4_Copy4" Content="* Province" HorizontalAlignment="Left" Margin="40,297,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label x:Name="label4_Copy15" Content="* Postal Code:" HorizontalAlignment="Left" Margin="40,327,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <Label x:Name="label5_Copy" Content="Contact Details" HorizontalAlignment="Left" Margin="10,363,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
                 <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,392,10,0" VerticalAlignment="Top"/>
                 <Label x:Name="label4_Copy5" Content="Email Address:" HorizontalAlignment="Left" Margin="40,402,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -31,10 +31,10 @@
                 <Label x:Name="label4_Copy7" Content="Mobile Number:" HorizontalAlignment="Left" Margin="40,464,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <Label x:Name="label5_Copy1" Content="Company Representative" HorizontalAlignment="Left" Margin="10,494,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
                 <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,527,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
-                <Label x:Name="label4_Copy8" Content="Title:" HorizontalAlignment="Left" Margin="40,541,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label x:Name="label4_Copy9" Content="First Name:" HorizontalAlignment="Left" Margin="42,572,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label x:Name="label4_Copy8" Content="* Title:" HorizontalAlignment="Left" Margin="40,541,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label x:Name="label4_Copy9" Content="* First Name:" HorizontalAlignment="Left" Margin="42,572,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <Label x:Name="label4_Copy10" Content="Middle Initial" HorizontalAlignment="Left" Margin="42,603,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="93" VerticalContentAlignment="Center"/>
-                <Label x:Name="label4_Copy11" Content="Last Name:" HorizontalAlignment="Left" Margin="42,634,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label x:Name="label4_Copy11" Content="* Last Name:" HorizontalAlignment="Left" Margin="42,634,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <Label x:Name="label4_Copy12" Content="Email Address:" HorizontalAlignment="Left" Margin="40,700,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <Label x:Name="label4_Copy13" Content="Telephone Number:" HorizontalAlignment="Left" Margin="40,732,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <Label x:Name="label4_Copy14" Content="Mobile Number:" HorizontalAlignment="Left" Margin="40,766,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -129,7 +129,7 @@
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-                <TextBox x:Name="repMiddleInitialTb" HorizontalAlignment="Left" Height="24" Margin="160,605,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="124" BorderThickness="0,0,0,1" MaxLength="3">
+                <TextBox x:Name="repMiddleInitialTb" HorizontalAlignment="Left" Height="24" Margin="160,605,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="124" MaxLength="3">
                     <TextBox.Text>
                         <Binding Path="ReMName_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>

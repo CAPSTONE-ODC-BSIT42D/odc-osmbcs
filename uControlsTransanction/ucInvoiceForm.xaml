@@ -34,11 +34,11 @@
                     </Border.RenderTransform>
                 </Border>
                 <Label x:Name="label19_Copy1" Content="Sold To:" HorizontalAlignment="Left" Margin="40,53,-100,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="62"/>
-                <Label x:Name="label19_Copy2" Content="TIN #:" HorizontalAlignment="Left" Margin="41,87,-89,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="50"/>
+                <Label x:Name="label19_Copy2" Content="* TIN #:" HorizontalAlignment="Left" Margin="41,87,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="50"/>
                 <Label x:Name="label19_Copy3" Content="Address:" HorizontalAlignment="Left" Margin="40,121,-104,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="66"/>
-                <Label x:Name="label19_Copy4" Content="Business Style:" HorizontalAlignment="Left" Margin="40,155,-144,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="106"/>
+                <Label x:Name="label19_Copy4" Content="* Business Style:" HorizontalAlignment="Left" Margin="40,155,-144,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="106"/>
                 <Label x:Name="label19_Copy5" Content="Date:" HorizontalAlignment="Left" Margin="473,53,-515,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="44"/>
-                <Label x:Name="label19_Copy6" Content="Terms:" HorizontalAlignment="Left" Margin="473,87,-524,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="53"/>
+                <Label x:Name="label19_Copy6" Content="* Terms:" HorizontalAlignment="Left" Margin="464,87,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="53"/>
                 <Label x:Name="label12_Copy2" Content="Requested Items:" HorizontalAlignment="Left" Margin="11,198,-148,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31" Width="139"/>
                 <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,227,10,0" VerticalAlignment="Top"/>
                 <Label x:Name="label12_Copy3" Content="Other Details" HorizontalAlignment="Left" Margin="10,488,-117,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31" Width="109"/>
@@ -62,7 +62,7 @@
                 <Label x:Name="dateToday" Content="{Binding SelectedCustomerSupplier.CompanyAddress}" HorizontalAlignment="Left" Margin="531,53,-649,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="120"/>
                 <xctk:IntegerUpDown x:Name="dueDateTb" HorizontalAlignment="Left" Margin="531,91,-585,0" VerticalAlignment="Top" Width="56" Height="20" DefaultValue="15" DisplayDefaultValueOnEmptyText="True" Minimum="1"/>
                 <Label x:Name="label19_Copy23" Content="Days" HorizontalAlignment="Left" Margin="587,87,-625,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="40"/>
-                <Label x:Name="label19_Copy" Content="P.O. #:" HorizontalAlignment="Left" Margin="473,121,-522,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="51"/>
+                <Label x:Name="label19_Copy" Content="* P.O. #:" HorizontalAlignment="Left" Margin="463,121,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="63"/>
                 <TextBox x:Name="purchaseOrdNumTb" HorizontalAlignment="Left" Height="24" Margin="531,126,-689,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160">
                     <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                         <Binding.ValidationRules>
