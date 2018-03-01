@@ -95,24 +95,32 @@ namespace prototype2
             var dbCon = DBConnection.Instance();
             bool noError = true;
             string poNumChar = "TRANS" + DateTime.Now.ToString("yyyy-MM-dd");
+            int termsDay = 30;
+            decimal termsDp = 50;
+            if ((bool)paymentDefaultRd.IsChecked)
+            {
+                termsDay = 30;
+                termsDp = 50;
+            }
             if (dbCon.IsConnect())
             {
-                string query = "INSERT purchase_order_t (`PONumChar`,`suppID`,`shipTo`, `POdueDate`,`shipVia`, `requisitioner`, `incoterms`, `POstatus`, `currency`, `importantNotes`, `preparedBy`, `approveBy`, `refNo`, `termsDays`, `termsDP`) VALUES " +
+                string query = "INSERT purchase_order_t (`PONumChar`,`suppID`,`shipTo`, `POdueDate`,`asapDueDate`,`shipVia`, `requisitioner`, `incoterms`, `POstatus`, `currency`, `importantNotes`, `preparedBy`, `approveBy`, `refNo`, `termsDays`, `termsDP`) VALUES " +
                     "('" + poNumChar +"'," +
                     MainVM.SelectedCustomerSupplier.CompanyID + "," +
                     "'','" +
-                    selectedDateRequiredTb.SelectedDate.Value.ToString("yyyy-MM-dd") +"','" +
+                    selectedDateRequiredTb.SelectedDate.Value.ToString("yyyy-MM-dd") +"'," +
+                    (bool)asapCb.IsChecked + ",'" +
                     shipViaCb.SelectedValue.ToString() + "','" +
-                    "'," +
-                    "," +
-                    "," +
-                    "," +
-                    "," +
-                    "," +
-                    "," +
-                    "," +
-                    "," +
-                    "" +
+                    "','" + //requisitionaer
+                    "','" + //incoterms
+                    "PENDING" +"', '" +
+                    currencyCb.SelectedValue.ToString() + "','" +
+                    "','" + //importantNotes
+                    "','" + //preparedBy
+                    "','" + //approveBy
+                    "'," + //refNo
+                    termsDay + "," +
+                    termsDp +
                     ");";
                 if (dbCon.insertQuery(query, dbCon.Connection))
                 {

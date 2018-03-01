@@ -1336,6 +1336,20 @@ namespace prototype2
 
     }
 
+    public class PurchaseOrder : ViewModelEntity
+    {
+        public PurchaseOrder()
+        {
+
+        }
+        public string notes;
+        public string notes_
+        {
+            get { return notes; }
+            set { SetProperty(ref notes, value); }
+        }
+    }
+
     public class PaymentT : ViewModelEntity
     {
         public PaymentT()

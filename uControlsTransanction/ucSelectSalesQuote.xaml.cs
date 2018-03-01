@@ -44,6 +44,38 @@ namespace prototype2.uControlsTransanction
 
         private void selectSalesQuoteBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (MainVM.isNewPurchaseOrder)
+            {
+                MainVM.SelectedCustomerSupplier = (from cust in MainVM.Customers
+                                                   where cust.CompanyID == MainVM.SelectedSalesQuote.custID_
+                                                   select cust).FirstOrDefault();
+
+                var invoiceprod = from ai in MainVM.AvailedItems
+                                  where ai.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
+                                  select ai;
+                var invoiceserv = from aser in MainVM.AvailedServices
+                                  where aser.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
+                                  select aser;
+                foreach (AvailedItem ai in invoiceprod)
+                {
+                    var markupPrice = from itm in MainVM.MarkupHist
+                                      where itm.ItemID == ai.ItemID
+                                      && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
+                                      select itm;
+                    decimal unitPric = ai.TotalCost - (ai.TotalCost / 100 * markupPrice.Last().MarkupPerc);
+                    MainVM.RequestedItems.Add(new RequestedItem() { itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, totalAmount = ai.TotalCost, unitPrice = unitPric });
+                    MainVM.VatableSale += Math.Round(ai.TotalCost, 2);
+                }
+
+                foreach (AvailedService aserv in invoiceserv)
+                {
+                    var service = from serv in MainVM.ServicesList
+                                  where serv.ServiceID == aserv.ServiceID
+                                  select serv;
+                    MainVM.RequestedItems.Add(new RequestedItem() { itemID = aserv.ServiceID, itemType = 0, qty = 0, totalAmount = aserv.TotalCost, unitPrice = service.Last().ServicePrice });
+                    MainVM.VatableSale += Math.Round(aserv.TotalCost, 2);
+                }
+            }
             OnSaveCloseButtonClicked(e);
         }
 
