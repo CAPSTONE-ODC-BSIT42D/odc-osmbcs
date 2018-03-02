@@ -30,7 +30,7 @@
             <ComboBox x:Name="categoryCb" HorizontalAlignment="Left" Margin="136,150,0,0" VerticalAlignment="Top" Width="220" ItemsSource="{Binding ProductCategory}" DisplayMemberPath="TypeName" SelectedValuePath="TypeID" IsSynchronizedWithCurrentItem ="True" SelectedItem="{Binding SelectedProductCategory}" >
 
             </ComboBox>
-            <TextBox x:Name="categoryNameTb" HorizontalAlignment="Left" Height="23" Margin="132,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Visibility="Hidden">
+            <TextBox x:Name="categoryNameTb" HorizontalAlignment="Left" Height="23" Margin="136,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Visibility="Hidden">
                 <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                     <Binding.ValidationRules>
                         <local:TextBoxValidation TextBoxType="IsEmpty"/>
@@ -50,7 +50,7 @@
                     </CompositeCollection>
                 </ComboBox.ItemsSource>
             </ComboBox>
-            <TextBox x:Name="unitNameTb" HorizontalAlignment="Left" Height="20" Margin="132,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Visibility="Hidden">
+            <TextBox x:Name="unitNameTb" HorizontalAlignment="Left" Height="23" Margin="136,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="221" Visibility="Hidden">
                 <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                     <Binding.ValidationRules>
                         <local:TextBoxValidation TextBoxType="IsEmpty"/>
