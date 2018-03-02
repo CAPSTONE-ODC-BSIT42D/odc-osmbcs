@@ -274,12 +274,12 @@ namespace prototype2
                 string query = "INSERT INTO `odc_db`.`item_type_t` (`typeName`) VALUES('" + categoryNameTb.Text + "')";
                 if (dbCon.insertQuery(query, dbCon.Connection))
                 {
-                    {
+                        query = "SELECT LAST_INSERT_ID();";
+                        string result = dbCon.selectScalar(query, dbCon.Connection).ToString();
+                        MainVM.ProductCategory.Add(new ItemType() { TypeID = int.Parse(result), TypeName = categoryNameTb.Text });
                         MessageBox.Show("Item Category successfully added");
                         categoryNameTb.Clear();
-                        MainVM.Ldt.worker.RunWorkerAsync();
                         dbCon.Close();
-                    }
                 }
             }
             else
@@ -301,9 +301,11 @@ namespace prototype2
                 if (dbCon.insertQuery(query, dbCon.Connection))
                 {
                     {
+                        query = "SELECT LAST_INSERT_ID();";
+                        string result = dbCon.selectScalar(query, dbCon.Connection).ToString();
+                        MainVM.Units.Add(new Unit() { ID = int.Parse(result), UnitName = unitNameTb.Text });
                         MessageBox.Show("Unit successfully added");
                         unitNameTb.Clear();
-                        MainVM.Ldt.worker.RunWorkerAsync();
                     }
                 }
             }
