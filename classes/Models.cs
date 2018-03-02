@@ -888,6 +888,13 @@ namespace prototype2
             get { return _lineNo; }
             set { SetProperty(ref _lineNo, value); }
         }
+        protected int _availedItemID;
+        public int availedItemID
+        {
+            get { return _availedItemID; }
+            set { SetProperty(ref _availedItemID, value); }
+        }
+
         private int _itemID;
         public int itemID
         {

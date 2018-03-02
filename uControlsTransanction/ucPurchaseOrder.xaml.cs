@@ -126,6 +126,11 @@ namespace prototype2
                 {
                     if (dbCon.IsConnect())
                     {
+                        foreach(RequestedItem ri in MainVM.RequestedItems)
+                        {
+                            query = "UPDATE `items_availed_t` SET poNumChar = '" + poNumChar + "' WHERE sqNoChar = '" + MainVM.SelectedSalesQuote.sqNoChar_ + "' AND id = '"+ri.availedItemID+"'";
+                            dbCon.insertQuery(query, dbCon.Connection);
+                        }
                         MessageBox.Show("Successfully added.");
                     }
 

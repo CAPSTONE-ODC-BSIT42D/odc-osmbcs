@@ -63,7 +63,7 @@ namespace prototype2.uControlsTransanction
                                       && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
                                       select itm;
                     decimal unitPric = ai.TotalCost - (ai.TotalCost / 100 * markupPrice.Last().MarkupPerc);
-                    MainVM.RequestedItems.Add(new RequestedItem() { itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, totalAmount = ai.TotalCost, unitPrice = unitPric });
+                    MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID,itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, totalAmount = ai.TotalCost, unitPrice = unitPric });
                     MainVM.VatableSale += Math.Round(ai.TotalCost, 2);
                 }
 
@@ -95,6 +95,11 @@ namespace prototype2.uControlsTransanction
                 }
                 
             }
+        }
+
+        private void closeModalBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OnSaveCloseButtonClicked(e);
         }
     }
 }

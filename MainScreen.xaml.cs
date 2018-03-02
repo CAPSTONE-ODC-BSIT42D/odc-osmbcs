@@ -107,6 +107,7 @@ namespace prototype2
             MainVM.isEdit = false;
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
             formGridBg.Visibility = Visibility.Visible;
+            Grid.SetZIndex((otherGridBg), 0);
             Grid.SetZIndex((formGridBg), 1);
             foreach (var obj in formGridBg.Children)
             {
@@ -208,6 +209,8 @@ namespace prototype2
             Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
             sb.Begin(formGridBg);
             formGridBg.Visibility = Visibility.Collapsed;
+            Grid.SetZIndex((otherGridBg), 1);
+            Grid.SetZIndex((formGridBg), 0);
             foreach (var obj in formGridBg.Children)
             {
                 if (obj is UserControl)
@@ -240,6 +243,7 @@ namespace prototype2
             foreach (UIElement obj in otherGridBg.Children)
             {
                 obj.Visibility = Visibility.Collapsed;
+
             }
             if (MainVM.isPaymentInvoice)
             {

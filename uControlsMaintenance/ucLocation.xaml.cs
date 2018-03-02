@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -28,8 +29,6 @@ namespace prototype2.uControlsMaintenance
         }
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
 
-        Region region = new Region();
-
         public event EventHandler SaveCloseButtonClicked;
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
@@ -55,20 +54,19 @@ namespace prototype2.uControlsMaintenance
                             " WHERE id = " + MainVM.SelectedProvince.ProvinceID;
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
+                            MainVM.SelectedProvince.ProvinceName = provinceNameTb.Text;
                             MessageBox.Show("Record is Saved");
-                            MainVM.Ldt.worker.RunWorkerAsync();
-                            MainVM.Provinces = MainVM.SelectedRegion.Provinces;
                         }
                     }
                     else
                     {
-                        string query = "INSERT INTO `odc_db`.`provinces_t` (`provinceName`,`regionID`) VALUES('" + provinceNameTb.Text + "','" + region.RegionID + "')";
+                        string query = "INSERT INTO `odc_db`.`provinces_t` (`provinceName`,`regionID`) VALUES('" + provinceNameTb.Text + "','" + MainVM.SelectedRegion.RegionID + "')";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             MessageBox.Show("Record is Saved");
-                            MainVM.Ldt.worker.RunWorkerAsync();
-                            MainVM.SelectedRegion = MainVM.Regions.Where(x => x.RegionID == region.RegionID).FirstOrDefault();
-                            MainVM.Provinces = MainVM.SelectedRegion.Provinces;
+                            query = "SELECT LAST_INSERT_ID();";
+                            string result = dbCon.selectScalar(query, dbCon.Connection).ToString();
+                            MainVM.SelectedRegion.Provinces.Add(new Province() { ProvinceID = int.Parse(result), ProvinceName = provinceNameTb.Text });
                         }
                     }
                     addProvinceBtn.Content = "Add";
@@ -86,7 +84,7 @@ namespace prototype2.uControlsMaintenance
                 {
                     provinceNameTb.Visibility = Visibility.Collapsed;
                     provinceLbl.Visibility = Visibility.Collapsed;
-                    region.Provinces.Add(new Province() { ProvinceName = provinceNameTb.Text });
+                    MainVM.SelectedRegion.Provinces.Add(new Province() { ProvinceName = provinceNameTb.Text });
                     addProvinceBtn.Content = "Add";
                 }
                 else
@@ -118,11 +116,11 @@ namespace prototype2.uControlsMaintenance
                 if (dbCon.insertQuery(query, dbCon.Connection))
                 {
                     MessageBox.Show("Record is deleted");
-                    MainVM.Ldt.worker.RunWorkerAsync();
+                    MainVM.SelectedRegion.Provinces.Remove(MainVM.SelectedProvince);
                 }
             }
             else
-                region.Provinces.Remove(MainVM.SelectedProvince);
+                MainVM.SelectedRegion.Provinces.Remove(MainVM.SelectedProvince);
 
         }
 
@@ -174,6 +172,7 @@ namespace prototype2.uControlsMaintenance
                 {
                     saveDataToDb();
                     MainVM.isEdit = false;
+                    MainVM.Provinces.Clear();
                     OnSaveCloseButtonClicked(e);
                 }
                 else
@@ -195,6 +194,7 @@ namespace prototype2.uControlsMaintenance
             if (result == MessageBoxResult.Yes)
             {
                 resetFieldsValue();
+                MainVM.Provinces.Clear();
                 OnSaveCloseButtonClicked(e);
             }
             else if (result == MessageBoxResult.No)
@@ -213,7 +213,7 @@ namespace prototype2.uControlsMaintenance
                     string query = "UPDATE regions_t SET " +
                         "regionName = '" + regionNameTb.Text + "', " +
                         "ratePrice = '" + ratePriceTb.Value +
-                        "' WHERE id = " + region.RegionID;
+                        "' WHERE id = " + MainVM.SelectedRegion.RegionID;
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
                         MessageBox.Show("Record is Saved");
@@ -236,7 +236,7 @@ namespace prototype2.uControlsMaintenance
                         string regionID = "";
                         foreach (DataRow dr in fromDbTable.Rows)
                             regionID = dr[0].ToString();
-                        foreach (Province pr in region.Provinces)
+                        foreach (Province pr in MainVM.SelectedRegion.Provinces)
                         {
                             query = "INSERT INTO `odc_db`.`provinces_t` (`provinceName`,`regionID`) VALUES('" + pr.ProvinceName + "','"+ regionID + "')";
                             if (dbCon.insertQuery(query, dbCon.Connection))
@@ -290,6 +290,9 @@ namespace prototype2.uControlsMaintenance
             regionNameTb.Text = MainVM.SelectedRegion.RegionName;
             ratePriceTb.Value = MainVM.SelectedRegion.RatePrice;
             MainVM.Provinces = MainVM.SelectedRegion.Provinces;
+            MainVM.SelectedRegion.Provinces = new ObservableCollection<Province> (from prov in MainVM.Provinces
+                                              where prov.RegionID == MainVM.SelectedRegion.RegionID
+                                              select prov);
         }
 
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)
@@ -301,8 +304,12 @@ namespace prototype2.uControlsMaintenance
         {
             if (this.IsVisible && MainVM.isEdit)
             {
+
                 loadDataToUi();
-                region = MainVM.SelectedRegion;
+            }
+            else
+            {
+                MainVM.SelectedRegion = new Region();
             }
             
         }

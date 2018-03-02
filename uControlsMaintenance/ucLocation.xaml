@@ -43,7 +43,7 @@
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox>
-            <DataGrid x:Name="provinceList" Height="270" Margin="33,182,33,0" VerticalAlignment="Top" ItemsSource="{Binding Provinces}" SelectedItem="{Binding SelectedProvince}" AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGrid x:Name="provinceList" Height="270" Margin="33,182,33,0" VerticalAlignment="Top" ItemsSource="{Binding SelectedRegion.Provinces}" SelectedItem="{Binding SelectedProvince}" AutoGenerateColumns="False" CanUserAddRows="False">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Province Name" >
                         <DataGridTemplateColumn.CellTemplate>
