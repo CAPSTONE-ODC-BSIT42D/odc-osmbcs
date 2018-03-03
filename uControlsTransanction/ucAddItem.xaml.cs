@@ -181,6 +181,7 @@ namespace prototype2.uControlsMaintenance
             if (linqResults == null)
             {
                 MainVM.RequestedItems.Add(new RequestedItem() { lineNo = MainVM.RequestedItems.Count + 1, itemID = MainVM.SelectedProduct.ID, itemType = 0, qty = 1,unitPrice = 0, qtyEditable = true });
+                OnSaveCloseButtonClicked(e);
             }
             else
             {
@@ -224,6 +225,7 @@ namespace prototype2.uControlsMaintenance
                     var newService = (new AvailedService() {AvailedServiceID = MainVM.AvailedServices.Count+1, ServiceID = MainVM.SelectedService.ServiceID, ProvinceID = int.Parse(serviceProvinceCb.SelectedValue.ToString()), Address = serviceAddressTb.Text, City = serviceCityTb.Text, TotalCost = MainVM.SelectedService.ServicePrice +  MainVM.SelectedRegion.RatePrice});
                     MainVM.AvailedServices.Add(newService);
                     MainVM.RequestedItems.Add(new RequestedItem() { lineNo = newService.AvailedServiceID, itemID = MainVM.SelectedService.ServiceID, itemType = 1, qty = 1, unitPrice = newService.TotalCost, qtyEditable = false });
+                    OnSaveCloseButtonClicked(e);
                 }
 
             }

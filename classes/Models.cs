@@ -1341,6 +1341,12 @@ namespace prototype2
             set { SetProperty(ref notes, value); }
         }
 
+        protected ObservableCollection<PaymentT> PaymentHist = new ObservableCollection<PaymentT>();
+        public ObservableCollection<PaymentT> PaymentHist_
+        {
+            get { return PaymentHist; }
+            set { PaymentHist = value; }
+        }
     }
 
     public class PurchaseOrder : ViewModelEntity
