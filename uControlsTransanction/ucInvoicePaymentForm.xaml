@@ -17,7 +17,7 @@
                 <RadioButton x:Name="partialPaymentRb" Content="Partial Payment" HorizontalAlignment="Left" Margin="152,104,0,0" VerticalAlignment="Top" GroupName="paymentType" />
                 <RadioButton x:Name="fullPaymentRb" Content="Full Payment" HorizontalAlignment="Left" Margin="258,104,0,0" VerticalAlignment="Top" GroupName="paymentType" IsChecked="True"/>-->
             <Label Content="Amount:" HorizontalAlignment="Left" Margin="20,85,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" FontSize="14" HorizontalContentAlignment="Right" Width="127"/>
-            <syncfusion:DoubleTextBox x:Name="amountTb" Height="26" NumberGroupSeparator="," NumberDecimalDigits="2" NumberDecimalSeparator="." TextWrapping="Wrap" Text="DoubleTextBox" Value="0" Margin="152,87,562,0" VerticalAlignment="Top" />
+            <syncfusion:DoubleTextBox x:Name="amountTb" Height="26" NumberGroupSeparator="," NumberDecimalDigits="2" NumberDecimalSeparator="." TextWrapping="Wrap" Text="DoubleTextBox" Value="0" Margin="152,87,562,0" VerticalAlignment="Top" Width="174" />
             <Label Content="Payment Method:" HorizontalAlignment="Left" Margin="20,118,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" FontSize="14" HorizontalContentAlignment="Right"/>
             <ComboBox x:Name="paymentMethodCb" HorizontalAlignment="Left" Margin="152,121,0,0" VerticalAlignment="Top" Width="174" Height="26" SelectedValuePath="Content">
                 <ComboBoxItem Content="CASH" IsSelected="True"/>

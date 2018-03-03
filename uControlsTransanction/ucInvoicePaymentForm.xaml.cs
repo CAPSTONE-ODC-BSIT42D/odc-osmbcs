@@ -49,8 +49,7 @@ namespace prototype2.uControlsMaintenance
 
         private void savePrintBtn_Click(object sender, RoutedEventArgs e)
         {
-            
-            //receiptVeiwer.Visibility = Visibility.Visible;
+            saveDataToDb();
             OnSaveCloseButtonClicked(e);
         }
 
@@ -61,6 +60,7 @@ namespace prototype2.uControlsMaintenance
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
+            saveDataToDb();
             OnSaveCloseButtonClicked(e);
         }
 
@@ -71,12 +71,18 @@ namespace prototype2.uControlsMaintenance
             decimal total = (from ph in MainVM.SelectedSalesInvoice.PaymentHist_
                              select ph.SIpaymentAmount_).Sum();
 
-            if ((total + (decimal)amountTb.Value) < total)
+            decimal totalamount = (from ai in MainVM.AvailedItems
+                                  where ai.SqNoChar.Equals(MainVM.SelectedSalesInvoice.sqNoChar_)
+                                  select ai.TotalCost).Sum();
+            totalamount += (from aser in MainVM.AvailedServices
+                            where aser.SqNoChar.Equals(MainVM.SelectedSalesInvoice.sqNoChar_)
+                            select aser.TotalCost).Sum();
+            if ((total + (decimal)amountTb.Value) < totalamount)
             {
                 query = "UPDATE `sales_invoice_t` SET paymentStatus = '" + "PARTIALLY PAID" + "' WHERE invoiceNo = '" + MainVM.SelectedSalesInvoice.invoiceNo_ + "'";
                 dbCon.insertQuery(query, dbCon.Connection);
             }
-            else if ((total + (decimal)amountTb.Value) >= total)
+            else if ((total + (decimal)amountTb.Value) >= totalamount)
             {
                 query = "UPDATE `sales_invoice_t` SET paymentStatus = '" + "FULLY PAID" + "' WHERE invoiceNo = '" + MainVM.SelectedSalesInvoice.invoiceNo_ + "'";
                 dbCon.insertQuery(query, dbCon.Connection);
@@ -99,7 +105,7 @@ namespace prototype2.uControlsMaintenance
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
-                string query = "SELECT * FROM si_payment_t where inoviceNo = " + MainVM.SelectedSalesInvoice.invoiceNo_;
+                string query = "SELECT * FROM si_payment_t where invoiceNo = " + MainVM.SelectedSalesInvoice.invoiceNo_;
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
@@ -117,6 +123,12 @@ namespace prototype2.uControlsMaintenance
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
+            if(this.IsVisible && MainVM.SelectedSalesInvoice != null)
+            {
+                MainVM.SelectedCustomerSupplier = (from cust in MainVM.Customers
+                                                   where cust.CompanyID == MainVM.SelectedSalesInvoice.custID_
+                                                   select cust).FirstOrDefault();
+            }
         }
     }
 }

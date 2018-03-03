@@ -60,7 +60,7 @@ namespace prototype2.uControlsTransanction
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
-                string query = "SELECT * FROM si_payment_t where inoviceNo = " + MainVM.SelectedSalesInvoice.invoiceNo_;
+                string query = "SELECT * FROM si_payment_t where invoiceNo = " + MainVM.SelectedSalesInvoice.invoiceNo_;
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();

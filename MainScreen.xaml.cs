@@ -124,7 +124,7 @@ namespace prototype2
             MainVM.isEdit = false;
             foreach (UIElement obj in otherGridBg.Children)
             {
-                if (obj.Equals(ucSelectSalesQuote))
+                if (obj.Equals(ucInvoicePaymentForm))
                 {
                     Grid.SetZIndex((obj), 1);
                     obj.Visibility = Visibility.Visible;
