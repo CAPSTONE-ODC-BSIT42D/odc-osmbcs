@@ -214,14 +214,13 @@ namespace prototype2
             bool noError = true;
             if (dbCon.IsConnect())
             {
-                string query = "INSERT INTO `odc_db`.`sales_invoice_t`(`custID`,`sqNoChar`,`TIN`,`busStyle`,`dateOfIssue`,`termsDays`,`dueDate`,`purchaseOrderNumber`,`vat`,`sc_pwd_discount`,`withholdingTax`,`notes`)" +
+                string query = "INSERT INTO `odc_db`.`sales_invoice_t`(`custID`,`sqNoChar`,`TIN`,`busStyle`,`termsDays`,`dueDate`,`purchaseOrderNumber`,`vat`,`sc_pwd_discount`,`withholdingTax`,`notes`)" +
                     " VALUES " +
                     "('" +
                     MainVM.SelectedSalesInvoice.custID_ + "','" +
                     MainVM.SelectedSalesInvoice.sqNoChar_ + "','" +
                     MainVM.SelectedSalesInvoice.tin_ + "','" +
                     MainVM.SelectedSalesInvoice.busStyle_ + "','" +
-                    MainVM.SelectedSalesInvoice.dateOfIssue_.ToString("yyyy-MM-dd") + "','" +
                     MainVM.SelectedSalesInvoice.terms_ + "','" +
                     MainVM.SelectedSalesInvoice.dueDate_.ToString("yyyy-MM-dd") + "','" +
                     MainVM.SelectedSalesInvoice.purchaseOrderNumber_ + "','" +
@@ -243,8 +242,6 @@ namespace prototype2
         {
             if (this.IsVisible && MainVM.isPaymentInvoice)
             {
-                
-
                 computeInvoice();
             }
         }

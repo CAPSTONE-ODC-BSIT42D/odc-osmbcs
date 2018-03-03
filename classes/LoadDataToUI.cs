@@ -85,24 +85,8 @@ namespace prototype2
 
             MainVM.SalesQuotes.Clear();
             MainVM.SalesInvoice.Clear();
-            MainVM.PaymentList_.Clear();
 
-            if (dbCon.IsConnect())
-            {
-                string query = "SELECT * FROM si_payment_t";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    DateTime paymentDate = new DateTime();
-                    DateTime.TryParse(dr["SIpaymentDate"].ToString(), out paymentDate);
-                    MainVM.PaymentList_.Add(new PaymentT() { SIpaymentID_ = int.Parse(dr["SIpaymentID"].ToString()), SIpaymentDate_ = paymentDate, SIpaymentAmount_ = decimal.Parse(dr["SIpaymentAmount"].ToString()), invoiceNo_ = int.Parse(dr["invoiceNo"].ToString()), SIpaymentMethod_ = dr["SIpaymentMethod"].ToString(), SIcheckNo_ = dr["SIcheckNo"].ToString() });
-                }
-                dbCon.Close();
-            }
+            
 
             if (dbCon.IsConnect())
             {
@@ -525,12 +509,7 @@ namespace prototype2
                 fromDbTable = fromDb.Tables["t"];
                 MainVM.SalesInvoice.Clear();
 
-                //query = "SELECT * FROM payment_hist_t;";
-                //MySqlDataAdapter dataAdapter2 = dbCon.selectQuery(query, dbCon.Connection);
-                //DataSet fromDb2 = new DataSet();
-                //DataTable fromDbTable2 = new DataTable();
-                //dataAdapter2.Fill(fromDb2, "t");
-                //fromDbTable2 = fromDb2.Tables["t"];
+                
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
                     DateTime dateOfIssue = new DateTime();

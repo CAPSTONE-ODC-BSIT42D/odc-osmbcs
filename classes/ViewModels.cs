@@ -675,20 +675,14 @@ namespace prototype2
 
         //Payments Hist
 
-        protected ObservableCollection<PaymentT> PaymentList = new ObservableCollection<PaymentT>();
+        
 
-        protected PaymentT SelectedPaymentR = null;
+        protected PaymentT SelectedPaymentH = null;
 
-        public ObservableCollection<PaymentT> PaymentList_
+        public PaymentT SelectedPaymentH_
         {
-            get { return PaymentList; }
-            set { PaymentList = value; }
-        }
-
-        public PaymentT SelectedPaymentR_
-        {
-            get { return SelectedPaymentR; }
-            set { SetProperty(ref SelectedPaymentR, value); }
+            get { return SelectedPaymentH; }
+            set { SetProperty(ref SelectedPaymentH, value); }
         }
     }
 }
