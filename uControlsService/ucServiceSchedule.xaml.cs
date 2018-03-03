@@ -61,49 +61,11 @@ namespace prototype2
             formGridBg.Visibility = Visibility.Visible;
             MainVM.SelectedServiceSchedule_ = new ServiceSchedule();
         }
-        //private void Btn_ScheduleType_Click(object sender, RoutedEventArgs e)
-        //{
-        //    switch ((sender as RadioButton).Name)
-        //    {
-        //        case "Day":
-        //            {
-        //                serviceSched.ScheduleType = ScheduleType.Day;
-        //                break;
-        //            }
-        //        case "Week":
-        //            {
-        //                serviceSched.ScheduleType = ScheduleType.Week;
-        //                break;
-        //            }
-        //        case "WorkWeek":
-        //            {
-        //                serviceSched.ScheduleType = ScheduleType.WorkWeek;
-        //                break;
-        //            }
-        //        case "Month":
-        //            {
-        //                serviceSched.ScheduleType = ScheduleType.Month;
-        //                break;
-        //            }
-        //        case "TimeLine":
-        //            {
-        //                serviceSched.ScheduleType = ScheduleType.TimeLine;
-        //                break;
-        //            }
-        //    }
-        //}
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)
         {
             Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
             sb.Begin(formGridBg);
-            formGridBg.Visibility = Visibility.Collapsed;
-        }
-
-        private void saveSchedBtn_Click(object sender, RoutedEventArgs e)
-        {
-            //MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(MainVM.SelectedAddedService.SqNoChar)).First();
-            MainVM.SelectedSalesInvoice = MainVM.SalesInvoice.Where(x => x.sqNoChar_.Equals(MainVM.SelectedSalesQuote.sqNoChar_)).First();
-            if (assignedEmployees.Items.Count != 0 && MainVM.SelectedSalesInvoice!=null)
+            formGridBg. != 0 && MainVM.SelectedSalesInvoice!=null)
             {
                 //serviceSched.Appointments.Add(new ScheduleAppointment() { Subject = serviceNoCb.SelectedValue.ToString(), StartTime = (DateTime)startDate.SelectedDate, EndTime = (DateTime)endDate.SelectedDate });
                 
@@ -132,25 +94,6 @@ namespace prototype2
             sb.Begin(formGridBg);
             formGridBg.Visibility = Visibility.Collapsed;
         }
-
-        //private void serviceSched_AppointmentEditorOpening(object sender, AppointmentEditorOpeningEventArgs e)
-        //{
-        //    e.Cancel = true;
-        //    if(e.Action == EditorAction.Add)
-        //    {
-        //        Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
-        //        sb.Begin(formGridBg);
-        //        formGridBg.Visibility = Visibility.Collapsed;
-        //        MainVM.SelectedServiceSchedule_ = new ServiceSchedule();
-        //    }
-        //    else if(e.Action == EditorAction.Edit){
-
-        //        Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
-        //        sb.Begin(formGridBg);
-        //        formGridBg.Visibility = Visibility.Collapsed;
-        //        loadDataToUi();
-        //    }
-        //}
 
         void saveDataToDb()
         {

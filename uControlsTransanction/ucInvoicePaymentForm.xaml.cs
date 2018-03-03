@@ -77,6 +77,7 @@ namespace prototype2.uControlsMaintenance
             totalamount += (from aser in MainVM.AvailedServices
                             where aser.SqNoChar.Equals(MainVM.SelectedSalesInvoice.sqNoChar_)
                             select aser.TotalCost).Sum();
+
             if ((total + (decimal)amountTb.Value) < totalamount)
             {
                 query = "UPDATE `sales_invoice_t` SET paymentStatus = '" + "PARTIALLY PAID" + "' WHERE invoiceNo = '" + MainVM.SelectedSalesInvoice.invoiceNo_ + "'";

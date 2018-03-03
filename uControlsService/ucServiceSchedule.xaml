@@ -13,7 +13,6 @@
         <local:IdToNameConverter x:Key="IdToNameConverter" />
         <local:ServiceTypeConverter x:Key="ServiceTypeConverter" />
         <local:EmployeeTypeOfConverter x:Key="EmployeeTypeOfConverter" />
-        
         <Storyboard x:Key="sbShowRightMenu" >
             <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,-150,0" To="0,0,0,0" DecelerationRatio="1" Duration="0:0:0.5" />
         </Storyboard>

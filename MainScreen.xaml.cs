@@ -285,11 +285,9 @@ namespace prototype2
 
         }
 
-
-
         private void saveCloseOther_BtnClicked(object sender, EventArgs e)
         {
-            MainVM.isEdit = false;
+            MainVM.isEdit = false;  
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
             otherGridBg.Visibility = Visibility.Collapsed;
             foreach (UIElement obj in otherGridBg.Children)

@@ -307,20 +307,18 @@ namespace prototype2
                 {
                     MessageBox.Show("Please enter a Category");
                 }
-                else if (!String.IsNullOrEmpty(categoryNameTb.Text))
+                else if (!String.IsNullOrEmpty(unitNameTb.Text))
                 {
                     unitNameTb.Visibility = Visibility.Collapsed;
                     addUnitBtn.Content = "+";
                     string query = "INSERT INTO `odc_db`.`unit_t` (`unitName`) VALUES('" + unitNameTb.Text + "')";
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
-                        {
-                            query = "SELECT LAST_INSERT_ID();";
-                            string result = dbCon.selectScalar(query, dbCon.Connection).ToString();
-                            MainVM.Units.Add(new Unit() { ID = int.Parse(result), UnitName = unitNameTb.Text });
-                            MessageBox.Show("Unit successfully added");
-                            unitNameTb.Clear();
-                        }
+                        query = "SELECT LAST_INSERT_ID();";
+                        string result = dbCon.selectScalar(query, dbCon.Connection).ToString();
+                        MainVM.Units.Add(new Unit() { ID = int.Parse(result), UnitName = unitNameTb.Text });
+                        MessageBox.Show("Unit successfully added");
+                        unitNameTb.Clear();
                     }
                 }
             }
