@@ -269,19 +269,27 @@ namespace prototype2
             dbCon.DatabaseName = "odc_db";
             if (categoryNameTb.IsVisible)
             {
-                categoryNameTb.Visibility = Visibility.Collapsed;
-                addCategoryBtn.Content = "+";
-                string query = "INSERT INTO `odc_db`.`item_type_t` (`typeName`) VALUES('" + categoryNameTb.Text + "')";
-                if (dbCon.insertQuery(query, dbCon.Connection))
+                if (String.IsNullOrEmpty(categoryNameTb.Text))
                 {
+                    MessageBox.Show("Please enter a Category");
+                }
+                else if (!String.IsNullOrEmpty(categoryNameTb.Text))
+                {
+                    categoryNameTb.Visibility = Visibility.Collapsed;
+                    addCategoryBtn.Content = "+";
+                    string query = "INSERT INTO `odc_db`.`item_type_t` (`typeName`) VALUES('" + categoryNameTb.Text + "')";
+                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    {
                         query = "SELECT LAST_INSERT_ID();";
                         string result = dbCon.selectScalar(query, dbCon.Connection).ToString();
                         MainVM.ProductCategory.Add(new ItemType() { TypeID = int.Parse(result), TypeName = categoryNameTb.Text });
                         MessageBox.Show("Item Category successfully added");
                         categoryNameTb.Clear();
                         dbCon.Close();
+                    }
                 }
             }
+        
             else
             {
                 categoryNameTb.Visibility = Visibility.Visible;
@@ -295,17 +303,24 @@ namespace prototype2
             dbCon.DatabaseName = "odc_db";
             if (unitNameTb.IsVisible)
             {
-                unitNameTb.Visibility = Visibility.Collapsed;
-                addUnitBtn.Content = "+";
-                string query = "INSERT INTO `odc_db`.`unit_t` (`unitName`) VALUES('" + unitNameTb.Text + "')";
-                if (dbCon.insertQuery(query, dbCon.Connection))
+                if (String.IsNullOrEmpty(unitNameTb.Text))
                 {
+                    MessageBox.Show("Please enter a Category");
+                }
+                else if (!String.IsNullOrEmpty(categoryNameTb.Text))
+                {
+                    unitNameTb.Visibility = Visibility.Collapsed;
+                    addUnitBtn.Content = "+";
+                    string query = "INSERT INTO `odc_db`.`unit_t` (`unitName`) VALUES('" + unitNameTb.Text + "')";
+                    if (dbCon.insertQuery(query, dbCon.Connection))
                     {
-                        query = "SELECT LAST_INSERT_ID();";
-                        string result = dbCon.selectScalar(query, dbCon.Connection).ToString();
-                        MainVM.Units.Add(new Unit() { ID = int.Parse(result), UnitName = unitNameTb.Text });
-                        MessageBox.Show("Unit successfully added");
-                        unitNameTb.Clear();
+                        {
+                            query = "SELECT LAST_INSERT_ID();";
+                            string result = dbCon.selectScalar(query, dbCon.Connection).ToString();
+                            MainVM.Units.Add(new Unit() { ID = int.Parse(result), UnitName = unitNameTb.Text });
+                            MessageBox.Show("Unit successfully added");
+                            unitNameTb.Clear();
+                        }
                     }
                 }
             }

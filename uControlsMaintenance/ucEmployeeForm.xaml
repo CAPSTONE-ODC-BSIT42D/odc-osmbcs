@@ -38,7 +38,7 @@
             <StackPanel x:Name="perTypeField" Margin="40,146,0,5" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Width="537">
                 <Grid x:Name="employeeOnlyGrid" VerticalAlignment="Top" Height="227">
                     <Label Content="* Position" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0"/>
-                    <ComboBox x:Name="empPostionCb" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="154" ItemsSource = "{Binding EmpPosition}" Height="26" DisplayMemberPath="PositionName" SelectedValuePath="PositionID" FontWeight="Normal" >
+                    <ComboBox x:Name="empPostionCb" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="174" ItemsSource = "{Binding EmpPosition}" Height="26" DisplayMemberPath="PositionName" SelectedValuePath="PositionID" FontWeight="Normal" >
                         <ComboBox.SelectedItem>
                             <Binding Path="cbItem" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                 <Binding.ValidationRules>
@@ -47,11 +47,11 @@
                             </Binding>
                         </ComboBox.SelectedItem>
                     </ComboBox>
-                    <TextBox x:Name="newPosTb" TextWrapping="Wrap" Text="TextBox" Margin="10,36,373,165" Visibility="Collapsed"/>
-                    <Button x:Name="addPosBtn" Content="+" HorizontalAlignment="Left" Margin="169,36,0,0" VerticalAlignment="Top" Width="26" Height="26" Click="addPosBtn_Click"/>
+                    <TextBox x:Name="newPosTb" TextWrapping="Wrap" Margin="10,36,353,165" Visibility="Collapsed"/>
+                    <Button x:Name="addPosBtn" Content="+" HorizontalAlignment="Left" Margin="189,36,0,0" VerticalAlignment="Top" Width="41" Height="26" Click="addPosBtn_Click"/>
                     <Grid x:Name="accountCredentialsForm" Margin="10,105,256,10">
                         <Label x:Name="label_Copy5" Content="Account Credentials" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-                        <Label x:Name="label_Copy1" Content="* Username" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" FontWeight="Normal" Width="99"/>
+                        <Label x:Name="label_Copy1" Content="Username" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" FontWeight="Normal" Width="99"/>
                         <TextBox x:Name="empUserNameTb" HorizontalAlignment="Left" Height="25" Margin="30,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center">
                             <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                 <Binding.ValidationRules>
@@ -72,7 +72,7 @@
                         </Binding>
                     </TextBox>
                     <Label Content="* Job Title" HorizontalAlignment="Left" Margin="4,57,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="29"/>
-                    <ComboBox x:Name="empJobCb" HorizontalAlignment="Left" Margin="14,86,0,0" VerticalAlignment="Top" Width="162" Height="26"  ItemsSource="{Binding ContJobTitle}" DisplayMemberPath="JobName" SelectedValuePath="JobID" FontWeight="Normal">
+                    <ComboBox x:Name="empJobCb" HorizontalAlignment="Left" Margin="14,86,0,0" VerticalAlignment="Top" Width="172" Height="26"  ItemsSource="{Binding ContJobTitle}" DisplayMemberPath="JobName" SelectedValuePath="JobID" FontWeight="Normal">
                         <ComboBox.SelectedItem>
                             <Binding Path="cbItem" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                 <Binding.ValidationRules>
@@ -81,8 +81,8 @@
                             </Binding>
                         </ComboBox.SelectedItem>
                     </ComboBox>
-                    <TextBox x:Name="newJobTb" TextWrapping="Wrap" Text="`" Margin="14,86,362,0" Height="26" VerticalAlignment="Top" Visibility="Hidden"/>
-                    <Button x:Name="addJobBtn" Content="+" HorizontalAlignment="Left" Margin="181,86,0,0" VerticalAlignment="Top" Width="26" Height="26" Click="addJobBtn_Click"/>
+                    <TextBox x:Name="newJobTb" TextWrapping="Wrap" Margin="14,86,351,0" Height="26" VerticalAlignment="Top" Visibility="Collapsed"/>
+                    <Button x:Name="addJobBtn" Content="+" HorizontalAlignment="Left" Margin="191,86,0,0" VerticalAlignment="Top" Width="37" Height="26" Click="addJobBtn_Click"/>
                     <Label Content="Duration of Employment" HorizontalAlignment="Left" Margin="0,121,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                     <Label Content="* Start Date" HorizontalAlignment="Left" Margin="16,158,0,0" VerticalAlignment="Top" FontWeight="Normal"/>
                     <DatePicker x:Name="empDateStarted" HorizontalAlignment="Left" Margin="33,185,0,0" VerticalAlignment="Top" Width="157">

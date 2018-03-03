@@ -188,17 +188,27 @@ namespace prototype2.uControlsMaintenance
             dbCon.DatabaseName = "odc_db";
             if (newPosTb.IsVisible)
             {
-                newPosTb.Visibility = Visibility.Collapsed;
-                addPosBtn.Content = "+";
-                string query = "INSERT INTO `odc_db`.`position_t` (`positionName`) VALUES('" + newPosTb.Text + "')";
-                if (dbCon.insertQuery(query, dbCon.Connection))
+                if (String.IsNullOrEmpty(newPosTb.Text))
                 {
+                    MessageBox.Show("Kindly enter Employee Position");
+                }
+                else if (!String.IsNullOrEmpty(newPosTb.Text))
+                {
+                    newPosTb.Visibility = Visibility.Collapsed;
+                    addPosBtn.Content = "+";
+                    string query = "INSERT INTO `odc_db`.`position_t` (`positionName`) VALUES('" + newPosTb.Text + "')";
+                    if (dbCon.insertQuery(query, dbCon.Connection))
                     {
-                        MessageBox.Show("Employee Position successfully added");
-                        newPosTb.Clear();
-                        MainVM.Ldt.worker.RunWorkerAsync();
-                        dbCon.Close();
+                        {
+                            MessageBox.Show("Employee Position successfully added");
+                            newPosTb.Clear();
+                            MainVM.Ldt.worker.RunWorkerAsync();
+                            dbCon.Close();
+                        }
                     }
+                }
+                else
+                {
                 }
             }
             else
@@ -217,17 +227,28 @@ namespace prototype2.uControlsMaintenance
             dbCon.DatabaseName = "odc_db";
             if (newJobTb.IsVisible)
             {
-                newJobTb.Visibility = Visibility.Collapsed;
-                addJobBtn.Content = "+";
-                string query = "INSERT INTO `odc_db`.`job_title_t` (`jobName`) VALUES('" + newJobTb.Text + "')";
-                if (dbCon.insertQuery(query, dbCon.Connection))
+                if (String.IsNullOrEmpty(newJobTb.Text))
                 {
+                    MessageBox.Show("Kindly enter Job Title");
+                }
+                else if (!String.IsNullOrEmpty(newPosTb.Text))
+                {
+                    newJobTb.Visibility = Visibility.Collapsed;
+                    addJobBtn.Content = "+";
+                    string query = "INSERT INTO `odc_db`.`job_title_t` (`jobName`) VALUES('" + newJobTb.Text + "')";
+                    if (dbCon.insertQuery(query, dbCon.Connection))
                     {
-                        MessageBox.Show("Successfully added");
-                        newJobTb.Clear();
-                        MainVM.Ldt.worker.RunWorkerAsync();
-                        dbCon.Close();
+                        {
+                            MessageBox.Show("Job Successfully added");
+                            newJobTb.Clear();
+                            MainVM.Ldt.worker.RunWorkerAsync();
+                            dbCon.Close();
+                        }
                     }
+                }
+                else
+                {
+
                 }
             }
             else
