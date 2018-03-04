@@ -58,8 +58,6 @@ namespace prototype2
 
             this.ucServices.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
            
-
-            this.ucUnit.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
             this.ucLocation.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
 
 
@@ -884,19 +882,11 @@ namespace prototype2
                 }
                 ucProduct.saveCancelGrid2.Visibility = Visibility.Collapsed;
                 ucProduct.editCloseGrid2.Visibility = Visibility.Visible;
-                foreach (var element in ucProduct.productDetailsFormGrid1.Children)
+                foreach (UIElement obj in ucProduct.productDetailsFormGrid1.Children)
                 {
-                    if (element is TextBox)
+                    if (!(obj is Label))
                     {
-                        ((TextBox)element).IsEnabled = false;
-                    }
-                    if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
-                    {
-                        ((Xceed.Wpf.Toolkit.DecimalUpDown)element).IsEnabled = false;
-                    }
-                    if (element is ComboBox)
-                    {
-                        ((ComboBox)element).IsEnabled = false;
+                        obj.IsEnabled = false;
                     }
                 }
             }
@@ -984,11 +974,9 @@ namespace prototype2
                         else
                         {
                             ((UserControl)obj).Visibility = Visibility.Visible;
-                            sb.Begin(((UserControl)obj));
                         }
                     }
                 }
-                
                 ucProduct.saveCancelGrid2.Visibility = Visibility.Visible;
                 ucProduct.editCloseGrid2.Visibility = Visibility.Collapsed;
             }

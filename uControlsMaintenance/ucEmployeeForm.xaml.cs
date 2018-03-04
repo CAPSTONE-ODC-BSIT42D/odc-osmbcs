@@ -222,7 +222,6 @@ namespace prototype2.uControlsMaintenance
 
         private void addJobBtn_Click(object sender, RoutedEventArgs e)
         {
-
             var dbCon = DBConnection.Instance();
             dbCon.DatabaseName = "odc_db";
             if (newJobTb.IsVisible)
@@ -231,7 +230,7 @@ namespace prototype2.uControlsMaintenance
                 {
                     MessageBox.Show("Kindly enter Job Title");
                 }
-                else if (!String.IsNullOrEmpty(newPosTb.Text))
+                else if (!String.IsNullOrEmpty(newJobTb.Text))
                 {
                     newJobTb.Visibility = Visibility.Collapsed;
                     addJobBtn.Content = "+";
