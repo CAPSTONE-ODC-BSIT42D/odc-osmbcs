@@ -293,14 +293,16 @@ namespace prototype2
             }
             else
             {
-                if (feeTypeCb.SelectedIndex == feeTypeCb.Items.Count - 1)
-                {
-                   MainVM.SelectedAvailedServices.AdditionalFees.Add(new AdditionalFee() { FeeName = otherFeenameTb.Text, FeePrice = (decimal)feeCostTb.Value });
-                }
-                else
-                {
-                   MainVM.SelectedAvailedServices.AdditionalFees.Add(new AdditionalFee() { FeeName = feeTypeCb.SelectedValue.ToString(), FeePrice = (decimal)feeCostTb.Value });
-                }
+
+                    if (feeTypeCb.SelectedIndex == feeTypeCb.Items.Count - 1)
+                    {
+                        MainVM.SelectedAvailedServices.AdditionalFees.Add(new AdditionalFee() { FeeName = otherFeenameTb.Text, FeePrice = (decimal)feeCostTb.Value });
+                    }
+                    else
+                    {
+
+                        MainVM.SelectedAvailedServices.AdditionalFees.Add(new AdditionalFee() { FeeName = feeTypeCb.SelectedValue.ToString(), FeePrice = (decimal)feeCostTb.Value });
+                    }
 
 
             }
