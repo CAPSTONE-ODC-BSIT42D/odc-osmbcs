@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -44,24 +45,16 @@ namespace prototype2
 
         private void editProductBtn_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var element in productDetailsFormGrid1.Children)
+            MainVM.isEdit = true;
+            foreach (UIElement obj in productDetailsFormGrid1.Children)
             {
-                if (element is TextBox)
+                if (!(obj is Label))
                 {
-                    ((TextBox)element).IsEnabled = true;
-                }
-                if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
-                {
-                    ((Xceed.Wpf.Toolkit.DecimalUpDown)element).IsEnabled = true;
-                }
-                if (element is ComboBox)
-                {
-                    ((ComboBox)element).IsEnabled = true;
+                    obj.IsEnabled = true;
                 }
             }
             saveCancelGrid2.Visibility = Visibility.Visible;
             editCloseGrid2.Visibility = Visibility.Collapsed;
-            MainVM.isEdit = true;
         }
 
         private void saveRecordBtn_Click(object sender, RoutedEventArgs e)
@@ -126,7 +119,7 @@ namespace prototype2
             else if (result == MessageBoxResult.Cancel)
             {
             }
-
+            resetFieldsValue();
         }
 
         private void cancelRecordBtn_Click(object sender, RoutedEventArgs e)
@@ -142,6 +135,8 @@ namespace prototype2
             }
 
         }
+
+        decimal tempMarkupval = 0;
 
         private void saveDataToDb()
         {
@@ -171,14 +166,20 @@ namespace prototype2
 
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
-                        query = "INSERT INTO markup_hist_t (markupPerc,dateEffective,itemID) VALUES ('" +
-                            markUpPriceTb.Value + "','" +
+                        if(tempMarkupval != markupPercTb.Value) 
+                        {
+                            query = "INSERT INTO markup_hist_t (markupPerc,dateEffective,itemID) VALUES ('" +
+                            markupPercTb.Value + "','" +
                             dateEffective.SelectedDate.Value.ToString("yyyy-MM-dd") + "','" +
                             MainVM.SelectedProduct.ID + "');";
-                        if (dbCon.insertQuery(query, dbCon.Connection))
-                        {
-                            MessageBox.Show("Record is Saved");
+                            if (dbCon.insertQuery(query, dbCon.Connection))
+                            {
+                                MessageBox.Show("Record is Saved");
+                            }
                         }
+                        else
+                            MessageBox.Show("Record is Saved");
+
                     }
                 }
                 else
@@ -196,7 +197,7 @@ namespace prototype2
                         query = "SELECT LAST_INSERT_ID();";
                         string itemID = dbCon.selectScalar(query, dbCon.Connection).ToString();
                         query = "INSERT INTO markup_hist_t (markupPerc,dateEffective,itemID) VALUES ('" +
-                            markUpPriceTb.Value + "','" +
+                            markupPercTb.Value + "','" +
                             dateEffective.SelectedDate.Value.ToString("yyyy-MM-dd") + "','" +
                             itemID + "');";
                         if (dbCon.insertQuery(query, dbCon.Connection))
@@ -207,47 +208,42 @@ namespace prototype2
                 }
                 
             }
-            resetFieldsValue();
         }
 
         private void resetFieldsValue()
         {
-            foreach (var element in productDetailsFormGrid1.Children)
+            if(MainVM.SelectedProduct !=null)
+                MainVM.SelectedProduct.MarkupHist.Clear();
+            foreach (UIElement obj in productDetailsFormGrid1.Children)
             {
-                if (element is TextBox)
-                {
-                    BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
-                    if (expression != null)
-                        Validation.ClearInvalid(expression);
-                    ((TextBox)element).Text = string.Empty;
-                }
-                else if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
-                {
-                    BindingExpression expression = ((Xceed.Wpf.Toolkit.DecimalUpDown)element).GetBindingExpression(Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
-                    if (expression != null)
-                        Validation.ClearInvalid(expression);
-                    ((Xceed.Wpf.Toolkit.DecimalUpDown)element).Value = 0;
-                }
-                else if (element is ComboBox)
-                {
-                    BindingExpression expression = ((ComboBox)element).GetBindingExpression(ComboBox.SelectedItemProperty);
-                    if (expression != null)
-                        Validation.ClearInvalid(expression);
-                    ((ComboBox)element).SelectedIndex = -1;
-                }
+                if (obj is TextBox)
+                    ((TextBox)obj).Text = "";
+                else if (obj is ComboBox)
+                    ((ComboBox)obj).SelectedIndex = -1;
             }
             MainVM.isEdit = false;
         }
 
         private void loadDataToUi()
         {
+            
             productNameTb.Text = MainVM.SelectedProduct.ItemName;
             productDescTb.Text = MainVM.SelectedProduct.ItemDesc;
             categoryCb.SelectedValue = MainVM.SelectedProduct.TypeID;
-            markUpPriceTb.Value = MainVM.SelectedProduct.MarkUpPerc;
             unitCb.SelectedValue = MainVM.SelectedProduct.UnitID;
             supplierCb.SelectedValue = MainVM.SelectedProduct.SupplierID;
-            dateEffective.SelectedDate = MainVM.SelectedProduct.DateEffective;
+            MainVM.SelectedProduct.MarkupHist = new ObservableCollection<Markup_History>(from mh in MainVM.MarkupHist
+                                                                                           where mh.ItemID == MainVM.SelectedProduct.ID
+                                                                                           select mh);
+            dateEffective.SelectedDate = (from de in MainVM.SelectedProduct.MarkupHist
+                                          where de.DateEffective <= DateTime.Now
+                                          select de.DateEffective).LastOrDefault();
+            markupPercTb.Value = (from de in MainVM.SelectedProduct.MarkupHist
+                                   where de.DateEffective <= DateTime.Now
+                                   select de.MarkupPerc).LastOrDefault();
+            tempMarkupval = (from de in MainVM.SelectedProduct.MarkupHist
+                             where de.DateEffective <= DateTime.Now
+                             select de.MarkupPerc).LastOrDefault();
         }
 
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)

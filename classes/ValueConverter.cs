@@ -28,7 +28,6 @@ namespace prototype2
             return "no";
         }
     }
-
     public class EmployeeTypeOfConverter : IValueConverter
     {
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
@@ -138,6 +137,47 @@ namespace prototype2
         }
     }
 
+    public class ProductMarkUpPercent : IValueConverter
+    {
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
+        public object Convert(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            if (!value.Equals(0) && MainVM.MarkupHist.Count != 0)
+            {
+                var obj = MainVM.MarkupHist.Where(x => x.ItemID.Equals(value)).LastOrDefault();
+                return obj.MarkupPerc;
+            }
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            return "no";
+        }
+    }
+
+    public class CategoryNameConverter : IValueConverter
+    {
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
+        public object Convert(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            if (!value.Equals(0) && MainVM.ProductCategory.Count != 0)
+            {
+                var obj = MainVM.ProductCategory.Where(x => x.TypeID.Equals(value)).First();
+                return obj.TypeName;
+            }
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            return "no";
+        }
+    }
 
     public class ServiceNameConverter : IValueConverter
     {

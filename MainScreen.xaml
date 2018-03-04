@@ -10,12 +10,18 @@
         mc:Ignorable="d"
         Title="Olive Date Center" d:DesignWidth="1206.263" d:DesignHeight="793.863" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Maximized" Visibility="Visible"
        >
+    <Window.DataContext>
+        <StaticResource ResourceKey="MainVM"/>
+    </Window.DataContext>
     <Window.Resources>
         <local:IdToNameConverter x:Key="IdToNameConverter" />
         <local:ServiceTypeConverter x:Key="ServiceTypeConverter" />
         <local:EmployeeTypeOfConverter x:Key="EmployeeTypeOfConverter" />
         <local:EmployeePositionConverter x:Key="EmployeePositionConverter" />
         <local:ContractorJobConverter x:Key="ContractorJobConverter" />
+        <local:ProductMarkUpPercent x:Key="ProductMarkUpPercent" />
+        <local:CategoryNameConverter x:Key="CategoryNameConverter"/>
+        
         <Storyboard x:Key="sbShowRightMenu" >
             <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,-150,0" To="0,0,0,0" DecelerationRatio="1" Duration="0:0:0.5" />
         </Storyboard>
@@ -49,6 +55,25 @@
             </Setter>
         </Style>
         <Style TargetType="{x:Type xctk:DecimalUpDown}">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="true">
+                            <Border Background="OrangeRed" DockPanel.Dock="right" Margin="5,0,0,0" 
+                                Width="20" Height="20" CornerRadius="5"
+                                ToolTip="{Binding AdornedElement.(Validation.Errors)[0].ErrorContent, ElementName=customAdorner}">
+                                <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" 
+                                   FontWeight="Bold" Foreground="white" />
+                            </Border>
+                            <AdornedElementPlaceholder x:Name="customAdorner" VerticalAlignment="Center" >
+                                <Border BorderBrush="red" BorderThickness="1" />
+                            </AdornedElementPlaceholder>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type xctk:DateTimePicker}">
             <Setter Property="Validation.ErrorTemplate">
                 <Setter.Value>
                     <ControlTemplate>
@@ -141,9 +166,7 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Window.DataContext>
-        <StaticResource ResourceKey="MainVM"/>
-    </Window.DataContext>
+
     <Grid Background="#FFEFECCA">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="239"/>
@@ -665,8 +688,8 @@
                 </Grid>
             </Grid>
             <Grid x:Name="trasanctionGrid" d:IsHidden="True">
-                <Grid x:Name="transQuotationGrid" Margin="0,0,1,0" d:IsHidden="True" >
-                    <Grid x:Name="quotationsGridHome" Margin="10" d:IsHidden="True" >
+                <Grid x:Name="transQuotationGrid" Margin="0,0,1,0" >
+                    <Grid x:Name="quotationsGridHome" Margin="10" >
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                             <Label x:Name="label18" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
                             <TextBox x:Name="searchBox" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317" Text="{Binding SearchQuery}"/>
@@ -678,7 +701,7 @@
                             <DataGrid.Columns >
                                 <DataGridTextColumn Binding="{Binding sqNoChar_}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Sales Quote ID"  />
                                 <DataGridTextColumn Binding="{Binding dateOfIssue_}" ClipboardContentBinding="{x:Null}" Header="Date of Issue" Width="200" CanUserResize="False"  />
-                                <DataGridTextColumn Binding="{Binding custName_}" ClipboardContentBinding="{x:Null}" Header="Customer Name" Width="350"   />
+                                <DataGridTextColumn Binding="{Binding custID_, Converter={StaticResource IdToNameConverter}, NotifyOnTargetUpdated=True}" ClipboardContentBinding="{x:Null}" Header="Customer Name" Width="350"   />
                                 <DataGridTextColumn Binding="{Binding status_}" ClipboardContentBinding="{x:Null}" Header="Status" Width="200" CanUserResize="False"  />
                                 <DataGridTemplateColumn  Width="115" CanUserResize="False" Header="Actions"  >
                                     <DataGridTemplateColumn.CellTemplate  >
@@ -984,7 +1007,7 @@
 
                 </Grid>
             </Grid>
-            <Grid x:Name="billingGrid" Margin="10">
+            <Grid x:Name="billingGrid" Margin="10" d:IsHidden="True">
                 <Grid x:Name="invoiceGridHome" >
                     <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                         <Label x:Name="label22" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -1190,7 +1213,7 @@
             <Grid x:Name="reportsGrid" d:IsHidden="True">
                 <local:ucReports Margin="0"/>
             </Grid>
-            <Grid x:Name="maintenanceGrid" d:IsHidden="True">
+            <Grid x:Name="maintenanceGrid">
                 <Grid x:Name="manageCustomerGrid" Margin="0,0,1,0" d:IsHidden="True" >
                     <Grid x:Name="manageCustomerHomeGrid" Margin="0">
                         <Label x:Name="label13" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
@@ -1561,7 +1584,7 @@
                         <local:ucNoticeOfEmployment x:Name="ucContract" HorizontalAlignment="Left" Height="700" Margin="20,16,0,0" VerticalAlignment="Top" Width="1184" Visibility="Hidden"/>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageProductListGrid" Margin="0,0,1,0" d:IsHidden="True">
+                <Grid x:Name="manageProductListGrid" Margin="0,0,1,0">
                     <Grid Margin="0">
                         <Label x:Name="label11" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
                         <TextBox x:Name="searchBox2" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>
@@ -1571,13 +1594,7 @@
                         <Button x:Name="manageProductAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,20,20,0" VerticalAlignment="Top" Width="85" Background="#FF0D9E0D" BorderBrush="#FF107C10" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13" Click="manageProductAddBtn_Click"/>
                         <DataGrid x:Name="productListDg" Margin="20,60,20,20" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionMode="Single" MinRowHeight="20"  MinColumnWidth="0" ItemsSource="{Binding ProductList}" SelectedItem ="{Binding SelectedProduct}">
                             <DataGrid.Columns >
-                                <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Product Code" >
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Label Content="{Binding ItemCode}" VerticalContentAlignment="Center"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
+                                
                                 <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Product Name" >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -1585,35 +1602,17 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Description" >
+                                <DataGridTemplateColumn Width="250" CanUserResize="False" Header="Description" >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Label Content="{Binding ItemDesc}" VerticalContentAlignment="Center"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Cost Price" >
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Label Content="{Binding CostPrice}" VerticalContentAlignment="Center"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Category" >
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Label Content="{Binding TypeName}" VerticalContentAlignment="Center"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-
-                                <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Supplier" >
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Label Content="{Binding SupplierID, Converter={StaticResource IdToNameConverter}, NotifyOnTargetUpdated=True}" VerticalContentAlignment="Center"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Width="Auto" Header="Markup Percent" Binding="{Binding ID, Converter={StaticResource ProductMarkUpPercent}, NotifyOnTargetUpdated=True}">
+                                    
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Width="150" Header="Category" Binding="{Binding TypeID, Converter={StaticResource CategoryNameConverter}, NotifyOnTargetUpdated=True}"></DataGridTextColumn>
                                 <DataGridTemplateColumn  Width="115" CanUserResize="False" Header="Actions"  >
                                     <DataGridTemplateColumn.CellTemplate  >
                                         <DataTemplate>
@@ -1738,7 +1737,7 @@
                         </DataGrid>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageServicesGrid" Margin="0,0,1,0">
+                <Grid x:Name="manageServicesGrid" Margin="0,0,1,0" d:IsHidden="True">
                     <Grid Margin="0">
                         <Label x:Name="label5" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
                         <TextBox x:Name="searchBox3" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>
@@ -2038,13 +2037,12 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Grid x:Name="formGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3" Visibility="Collapsed" Panel.ZIndex="1" d:IsHidden="True">
+        <Grid x:Name="formGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3" Visibility="Visible" Panel.ZIndex="1">
 
-            <local:ucCustSuppCRUD x:Name="ucCustSupp" HorizontalAlignment="Center" Margin="167,0,166,0" Visibility="Collapsed" d:IsHidden="True"/>
+            <local:ucCustSuppCRUD x:Name="ucCustSupp" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="Auto" d:IsHidden="True"/>
             <local:ucProductsCRUD x:Name="ucProduct" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
-            <uControlsMaintenance:ucEmployeeForm x:Name="ucEmployee" Margin="0" HorizontalAlignment="Center" d:IsHidden="True"/>
+            <uControlsMaintenance:ucEmployeeForm x:Name="ucEmployee" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <uControlsMaintenance:ucServices x:Name="ucServices" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
-            <uControlsMaintenance:ucUnit x:Name="ucUnit" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="402" d:IsHidden="True"/>
             <uControlsMaintenance:ucLocation x:Name="ucLocation" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="458" d:IsHidden="True"/>
 
         </Grid>

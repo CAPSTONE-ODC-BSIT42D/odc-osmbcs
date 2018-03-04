@@ -205,28 +205,7 @@ namespace prototype2
 
         void searchForAvailableEmployees()
         {
-            MainVM.AvailableEmployees_.Clear();
-            if (MainVM.ServiceSchedules_.Count>0)
-            {
-                foreach (ServiceSchedule sched in MainVM.ServiceSchedules_)
-                {
-                    foreach (Employee ae in sched.assignedEmployees_)
-                    {
-                        MainVM.SelectedEmployeeContractor = MainVM.AllEmployeesContractor.Where(x => x.EmpID.Equals(ae.EmpID)).First();
-                        if (!(sched.dateStarted_ < startDate.SelectedDate && sched.dateEnded_ > startDate.SelectedDate))
-                        {
-                            MainVM.AvailableEmployees_.Add(MainVM.SelectedEmployeeContractor);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                foreach(Employee emp in MainVM.AllEmployeesContractor)
-                {
-                    MainVM.AvailableEmployees_.Add(emp);
-                }
-            }
+           
         }
 
         private void transferToLeftBtn_Click(object sender, RoutedEventArgs e)
