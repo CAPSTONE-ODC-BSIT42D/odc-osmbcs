@@ -24,7 +24,7 @@
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox>
-                <Label Content="* Phase Description:" HorizontalAlignment="Left" Margin="15,82,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="12"/>
+                <Label Content="Phase Description:" HorizontalAlignment="Left" Margin="15,82,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="12"/>
                 <TextBox x:Name="phaseDescTb" HorizontalAlignment="Left" Height="82" Margin="145,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="252" FontWeight="Normal" FontStyle="Normal" FontSize="12"/>
             </Grid>
             <Grid Margin="0">
