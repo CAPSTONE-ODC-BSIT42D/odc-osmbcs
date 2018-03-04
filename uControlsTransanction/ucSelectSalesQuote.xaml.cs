@@ -72,7 +72,7 @@ namespace prototype2.uControlsTransanction
                     var service = from serv in MainVM.ServicesList
                                   where serv.ServiceID == aserv.ServiceID
                                   select serv;
-                    MainVM.RequestedItems.Add(new RequestedItem() { itemID = aserv.ServiceID, itemType = 0, qty = 0, totalAmount = aserv.TotalCost, unitPrice = service.Last().ServicePrice });
+                    MainVM.RequestedItems.Add(new RequestedItem() { itemID = aserv.ServiceID, itemType = 1, qty = 0, totalAmount = aserv.TotalCost, unitPrice = service.Last().ServicePrice });
                     MainVM.VatableSale += Math.Round(aserv.TotalCost, 2);
                 }
             }
