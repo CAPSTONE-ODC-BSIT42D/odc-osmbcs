@@ -12,3 +12,10 @@
         }
     }
 }
+
+namespace prototype2.odc_dbDataSetSalesTableAdapters {
+    
+    
+    public partial class DataTable1TableAdapter {
+    }
+}

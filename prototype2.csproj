@@ -245,6 +245,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>odc_dbDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="odc_dbDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>odc_dbDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="odc_dbDataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>odc_dbDataSet2.xsd</DependentUpon>
+    </Compile>
     <Compile Include="odc_dbDataSetSales.cs">
       <DependentUpon>odc_dbDataSetSales.xsd</DependentUpon>
     </Compile>
@@ -565,6 +575,28 @@
     </None>
     <None Include="odc_dbDataSet.xss">
       <DependentUpon>odc_dbDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="odc_dbDataSet1.xsc">
+      <DependentUpon>odc_dbDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="odc_dbDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>odc_dbDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="odc_dbDataSet1.xss">
+      <DependentUpon>odc_dbDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="odc_dbDataSet2.xsc">
+      <DependentUpon>odc_dbDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="odc_dbDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>odc_dbDataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="odc_dbDataSet2.xss">
+      <DependentUpon>odc_dbDataSet2.xsd</DependentUpon>
     </None>
     <None Include="odc_dbDataSetSales.xsc">
       <DependentUpon>odc_dbDataSetSales.xsd</DependentUpon>

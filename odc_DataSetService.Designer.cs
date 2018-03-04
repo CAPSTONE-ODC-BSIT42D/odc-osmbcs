@@ -1015,7 +1015,9 @@ namespace prototype2.DataSet3TableAdapters {
 FROM            services_t s INNER JOIN
                          services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN
                          service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN
-                         provinces_t p ON sa.provinceID = p.id, service_scope_t sers, cust_supp_t cs";
+                         provinces_t p ON sa.provinceID = p.id, cust_supp_t cs
+WHERE        (s.isDeleted = 0)
+GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[1].Connection = this.Connection;
@@ -1023,8 +1025,9 @@ FROM            services_t s INNER JOIN
 FROM            services_t s INNER JOIN
                          services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN
                          service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN
-                         provinces_t p ON sa.provinceID = p.id, service_scope_t sers, cust_supp_t cs
-WHERE        (CURDATE() = ss.dateStarted)";
+                         provinces_t p ON sa.provinceID = p.id, cust_supp_t cs
+WHERE        (CURDATE() = ss.dateStarted) AND (s.isDeleted = 0)
+GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[2].Connection = this.Connection;
@@ -1032,8 +1035,9 @@ WHERE        (CURDATE() = ss.dateStarted)";
 FROM            services_t s INNER JOIN
                          services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN
                          service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN
-                         provinces_t p ON sa.provinceID = p.id, service_scope_t sers, cust_supp_t cs
-WHERE        (MONTHNAME(ss.dateStarted) = @b)";
+                         provinces_t p ON sa.provinceID = p.id, cust_supp_t cs
+WHERE        (MONTHNAME(ss.dateStarted) = @b) AND (s.isDeleted = 0)
+GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@b";
@@ -1047,8 +1051,9 @@ WHERE        (MONTHNAME(ss.dateStarted) = @b)";
 FROM            services_t s INNER JOIN
                          services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN
                          service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN
-                         provinces_t p ON sa.provinceID = p.id, service_scope_t sers, cust_supp_t cs
-WHERE        (ss.dateStarted BETWEEN @c AND @d)";
+                         provinces_t p ON sa.provinceID = p.id, cust_supp_t cs
+WHERE        (ss.dateStarted BETWEEN @c AND @d) AND (s.isDeleted = 0)
+GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@c";
@@ -1070,8 +1075,9 @@ WHERE        (ss.dateStarted BETWEEN @c AND @d)";
 FROM            services_t s INNER JOIN
                          services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN
                          service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN
-                         provinces_t p ON sa.provinceID = p.id, service_scope_t sers, cust_supp_t cs
-WHERE        (WEEK(ss.dateStarted) = @e)";
+                         provinces_t p ON sa.provinceID = p.id, cust_supp_t cs
+WHERE        (WEEK(ss.dateStarted) = @e) AND (s.isDeleted = 0)
+GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@e";
@@ -1085,8 +1091,9 @@ WHERE        (WEEK(ss.dateStarted) = @e)";
 FROM            services_t s INNER JOIN
                          services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN
                          service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN
-                         provinces_t p ON sa.provinceID = p.id, service_scope_t sers, cust_supp_t cs
-WHERE        (YEAR(ss.dateStarted) = @a)";
+                         provinces_t p ON sa.provinceID = p.id, cust_supp_t cs
+WHERE        (YEAR(ss.dateStarted) = @a) AND (s.isDeleted = 0)
+GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName";
             this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@a";

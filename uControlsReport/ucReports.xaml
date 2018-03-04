@@ -16,6 +16,6 @@
             <ComboBoxItem Content="Service Report"/>
 
         </ComboBox>
-        <local:ucReportItem HorizontalAlignment="Left" Height="320" Margin="0,64,0,0" VerticalAlignment="Top" Width="597"/>
+        <local:ucReportItem HorizontalAlignment="Left" Height="195" Margin="101,189,0,0" VerticalAlignment="Top" Width="403"/>
     </Grid>
 </UserControl>

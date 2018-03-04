@@ -1042,7 +1042,9 @@ FROM            services_availed_t sa INNER JOIN
                          services_t s ON sa.serviceID = s.serviceID INNER JOIN
                          sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar, cust_supp_t cs INNER JOIN
                          purchase_order_t po ON cs.companyID = po.suppID, items_ordered_t io INNER JOIN
-                         item_t i ON io.itemID = i.ID";
+                         item_t i ON io.itemID = i.ID
+WHERE        (i.isDeleted = 0)
+GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[1].Connection = this.Connection;
@@ -1052,7 +1054,8 @@ FROM            services_availed_t sa INNER JOIN
                          sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar, cust_supp_t cs INNER JOIN
                          purchase_order_t po ON cs.companyID = po.suppID, items_ordered_t io INNER JOIN
                          item_t i ON io.itemID = i.ID
-WHERE        (CURDATE() = po.orderDate)";
+WHERE        (CURDATE() = po.orderDate) AND (i.isDeleted = 0)
+GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[2].Connection = this.Connection;
@@ -1062,7 +1065,8 @@ FROM            services_availed_t sa INNER JOIN
                          sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar, cust_supp_t cs INNER JOIN
                          purchase_order_t po ON cs.companyID = po.suppID, items_ordered_t io INNER JOIN
                          item_t i ON io.itemID = i.ID
-WHERE        (MONTHNAME(po.orderDate) = @A)";
+WHERE        (MONTHNAME(po.orderDate) = @A) AND (i.isDeleted = 0)
+GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@A";
@@ -1078,7 +1082,8 @@ FROM            services_availed_t sa INNER JOIN
                          sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar, cust_supp_t cs INNER JOIN
                          purchase_order_t po ON cs.companyID = po.suppID, items_ordered_t io INNER JOIN
                          item_t i ON io.itemID = i.ID
-WHERE        (po.orderDate BETWEEN @R AND @T)";
+WHERE        (po.orderDate BETWEEN @R AND @T) AND (i.isDeleted = 0)
+GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@R";
@@ -1102,7 +1107,8 @@ FROM            services_availed_t sa INNER JOIN
                          sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar, cust_supp_t cs INNER JOIN
                          purchase_order_t po ON cs.companyID = po.suppID, items_ordered_t io INNER JOIN
                          item_t i ON io.itemID = i.ID
-WHERE        (WEEK(po.orderDate) = @C)";
+WHERE        (WEEK(po.orderDate) = @C) AND (i.isDeleted = 0)
+GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@C";
@@ -1118,7 +1124,8 @@ FROM            services_availed_t sa INNER JOIN
                          sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar, cust_supp_t cs INNER JOIN
                          purchase_order_t po ON cs.companyID = po.suppID, items_ordered_t io INNER JOIN
                          item_t i ON io.itemID = i.ID
-WHERE        (YEAR(po.orderDate) = @B)";
+WHERE        (YEAR(po.orderDate) = @B) AND (i.isDeleted = 0)
+GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
             this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@B";

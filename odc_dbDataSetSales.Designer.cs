@@ -1046,6 +1046,7 @@ namespace prototype2 {
                 this.columnserviceName.AllowDBNull = false;
                 this.columnserviceName.MaxLength = 50;
                 this.columnExpr1.AllowDBNull = false;
+                this.columndateOfIssue.AllowDBNull = false;
                 this.columnExpr3.MaxLength = 9;
             }
             
@@ -1270,12 +1271,7 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public System.DateTime dateOfIssue {
                 get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableDataTable1.dateOfIssueColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'dateOfIssue\' in table \'DataTable1\' is DBNull.", e);
-                    }
+                    return ((global::System.DateTime)(this[this.tableDataTable1.dateOfIssueColumn]));
                 }
                 set {
                     this[this.tableDataTable1.dateOfIssueColumn] = value;
@@ -1356,18 +1352,6 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SettotalCostNull() {
                 this[this.tableDataTable1.totalCostColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsdateOfIssueNull() {
-                return this.IsNull(this.tableDataTable1.dateOfIssueColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetdateOfIssueNull() {
-                this[this.tableDataTable1.dateOfIssueColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2006,7 +1990,8 @@ FROM            item_t i INNER JOIN
                          service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN
                          services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
                          services_t s ON sa.serviceID = s.serviceID
-";
+WHERE        (i.isDeleted = 0) AND (s.isDeleted = 0)
+GROUP BY i.itemName, s.serviceName, ia.totalCost, sa.totalCost, si.dateOfIssue";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[1].Connection = this.Connection;
@@ -2019,7 +2004,8 @@ FROM            item_t i INNER JOIN
                          service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN
                          services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
                          services_t s ON sa.serviceID = s.serviceID
-WHERE        (CURDATE() = si.dateOfIssue)";
+WHERE        (CURDATE() = si.dateOfIssue) AND (i.isDeleted = 0) AND (s.isDeleted = 0)
+GROUP BY i.itemName, s.serviceName, ia.totalCost, sa.totalCost, si.dateOfIssue";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[2].Connection = this.Connection;
@@ -2032,7 +2018,8 @@ FROM            item_t i INNER JOIN
                          service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN
                          services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
                          services_t s ON sa.serviceID = s.serviceID
-WHERE        (MONTHNAME(si.dateOfIssue) = @A)";
+WHERE        (MONTHNAME(si.dateOfIssue) = @A) AND (i.isDeleted = 0) AND (s.isDeleted = 0)
+GROUP BY i.itemName, s.serviceName, ia.totalCost, sa.totalCost, si.dateOfIssue";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@A";
@@ -2051,7 +2038,8 @@ FROM            item_t i INNER JOIN
                          service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN
                          services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
                          services_t s ON sa.serviceID = s.serviceID
-WHERE        (si.dateOfIssue BETWEEN @L AND @P)";
+WHERE        (si.dateOfIssue BETWEEN @L AND @P) AND (i.isDeleted = 0) AND (s.isDeleted = 0)
+GROUP BY i.itemName, s.serviceName, ia.totalCost, sa.totalCost, si.dateOfIssue";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@L";
@@ -2078,7 +2066,8 @@ FROM            item_t i INNER JOIN
                          service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN
                          services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
                          services_t s ON sa.serviceID = s.serviceID
-WHERE        (WEEK(si.dateOfIssue) = @N)";
+WHERE        (WEEK(si.dateOfIssue) = @N) AND (i.isDeleted = 0) AND (s.isDeleted = 0)
+GROUP BY i.itemName, s.serviceName, ia.totalCost, sa.totalCost, si.dateOfIssue";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@N";
@@ -2097,7 +2086,8 @@ FROM            item_t i INNER JOIN
                          service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN
                          services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
                          services_t s ON sa.serviceID = s.serviceID
-WHERE        (YEAR(si.dateOfIssue) = @B)";
+WHERE        (YEAR(si.dateOfIssue) = @B) AND (i.isDeleted = 0) AND (s.isDeleted = 0)
+GROUP BY i.itemName, s.serviceName, ia.totalCost, sa.totalCost, si.dateOfIssue";
             this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@B";
@@ -2195,20 +2185,10 @@ WHERE        (YEAR(si.dateOfIssue) = @B)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByRangeSale(odc_dbDataSetSales.DataTable1DataTable dataTable, global::System.Nullable<global::System.DateTime> L, global::System.Nullable<global::System.DateTime> P) {
+        public virtual int FillByRangeSale(odc_dbDataSetSales.DataTable1DataTable dataTable, System.DateTime L, System.DateTime P) {
             this.Adapter.SelectCommand = this.CommandCollection[3];
-            if ((L.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[0].Value = ((System.DateTime)(L.Value));
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((P.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(P.Value));
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.SelectCommand.Parameters[0].Value = ((System.DateTime)(L));
+            this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(P));
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }
@@ -2220,20 +2200,10 @@ WHERE        (YEAR(si.dateOfIssue) = @B)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual odc_dbDataSetSales.DataTable1DataTable GetDataByRangeSale(global::System.Nullable<global::System.DateTime> L, global::System.Nullable<global::System.DateTime> P) {
+        public virtual odc_dbDataSetSales.DataTable1DataTable GetDataByRangeSale(System.DateTime L, System.DateTime P) {
             this.Adapter.SelectCommand = this.CommandCollection[3];
-            if ((L.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[0].Value = ((System.DateTime)(L.Value));
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((P.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(P.Value));
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.SelectCommand.Parameters[0].Value = ((System.DateTime)(L));
+            this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(P));
             odc_dbDataSetSales.DataTable1DataTable dataTable = new odc_dbDataSetSales.DataTable1DataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
