@@ -26,7 +26,7 @@ namespace prototype2
         public ucReportItem()
         {
             InitializeComponent();
-            DisplayReport();
+           
         }
         private void DisplayReport()
         {

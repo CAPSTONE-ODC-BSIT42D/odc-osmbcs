@@ -46,7 +46,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2 FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN provinces_t p ON sa.provinceID = p.id, service_scope_t sers, cust_supp_t cs";
+            cmd.CommandText = "SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2 FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN provinces_t p ON sa.provinceID = p.id, cust_supp_t cs";
 
             DataSet3.DataTable1DataTable dSServices = new DataSet3.DataTable1DataTable();
 
@@ -72,7 +72,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2 FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN provinces_t p ON sa.provinceID = p.id, service_scope_t sers, cust_supp_t cs WHERE(CURDATE() = ss.dateStarted)";
+            cmd.CommandText = "SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2 FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN provinces_t p ON sa.provinceID = p.id,   cust_supp_t cs WHERE(CURDATE() = ss.dateStarted)";
 
             DataSet3.DataTable1DataTable dSServices = new DataSet3.DataTable1DataTable();
 
@@ -99,7 +99,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2 FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN  provinces_t p ON sa.provinceID = p.id, service_scope_t sers, cust_supp_t cs WHERE(WEEK(ss.dateStarted) = '"+DatePickerWeekSer.SelectedDate.ToString()+"')  ORDER BY ss.serviceStatus";
+            cmd.CommandText = "SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2 FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN  provinces_t p ON sa.provinceID = p.id,   cust_supp_t cs WHERE(WEEK(ss.dateStarted) = '"+DatePickerWeekSer.SelectedDate.ToString()+"')  ORDER BY ss.serviceStatus";
 
             DataSet3.DataTable1DataTable dSServices = new DataSet3.DataTable1DataTable();
 
@@ -126,7 +126,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2 FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN  provinces_t p ON sa.provinceID = p.id, service_scope_t sers, cust_supp_t cs WHERE(MONTHNAME(ss.dateStarted)  = '"+ ComboBoxSerMonth.SelectedItem.ToString()+ "') ORDER BY ss.serviceStatus";
+            cmd.CommandText = "SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2 FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN  provinces_t p ON sa.provinceID = p.id,   cust_supp_t cs WHERE(MONTHNAME(ss.dateStarted)  = '"+ ComboBoxSerMonth.SelectedItem.ToString()+ "') ORDER BY ss.serviceStatus";
 
             DataSet3.DataTable1DataTable dSServices = new DataSet3.DataTable1DataTable();
 
@@ -155,7 +155,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2 FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN  service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN provinces_t p ON sa.provinceID = p.id, service_scope_t sers, cust_supp_t cs WHERE(YEAR(ss.dateStarted) =  '"+ComboBoxYear.SelectedItem.ToString()+"') ORDER BY ss.serviceStatus";
+            cmd.CommandText = "SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2 FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN  service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN provinces_t p ON sa.provinceID = p.id,   cust_supp_t cs WHERE(YEAR(ss.dateStarted) =  '"+ComboBoxYear.SelectedItem.ToString()+"') ORDER BY ss.serviceStatus";
 
             DataSet3.DataTable1DataTable dSServices = new DataSet3.DataTable1DataTable();
 
@@ -182,7 +182,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2 FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN provinces_t p ON sa.provinceID = p.id, service_scope_t sers, cust_supp_t cs WHERE(ss.dateStarted BETWEEN '" + DatePickerStartSer.SelectedDate.ToString()+ "' AND '" + DatePickerEndSer.SelectedDate.ToString() + "') ORDER BY ss.serviceStatus";
+            cmd.CommandText = "SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2 FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN provinces_t p ON sa.provinceID = p.id,   cust_supp_t cs WHERE(ss.dateStarted BETWEEN '" + DatePickerStartSer.SelectedDate.ToString()+ "' AND '" + DatePickerEndSer.SelectedDate.ToString() + "') ORDER BY ss.serviceStatus";
 
             DataSet3.DataTable1DataTable dSServices = new DataSet3.DataTable1DataTable();
 
