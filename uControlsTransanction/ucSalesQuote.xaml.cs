@@ -441,19 +441,7 @@ namespace prototype2
             deliveryDaysCustomLbl.IsEnabled = false;
             deliveryDaysTb.IsEnabled = false;
         }
-
-        private void customPenaltyRd_Checked(object sender, RoutedEventArgs e)
-        {
-            customPenaltyTb.IsEnabled = true;
-            customPenaltyLbl.IsEnabled = true;
-        }
-
-        private void customPenaltyRd_Unchecked(object sender, RoutedEventArgs e)
-        {
-            customPenaltyTb.IsEnabled = false;
-            customPenaltyLbl.IsEnabled = false;
-        }
-
+        
         private void vatCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             if (vatInclusiveTb != null && vatInclusiveTb.IsEnabled == true)
@@ -596,9 +584,7 @@ namespace prototype2
             if (!(bool)paymentDefaultRd.IsChecked)
                 downP = int.Parse(downpaymentPercentTb.Value.ToString());
 
-            decimal penaltyP = 0.1M;
-            if (!(bool)penaltyDefaultRd.IsChecked)
-                penaltyP = (decimal)customPenaltyTb.Value;
+           
             int warr = 0;
             if ((bool)warrantyDefaultRd.IsChecked)
             {
@@ -658,7 +644,6 @@ namespace prototype2
                 validityDate_ = endDate,
                 status_ = "PENDING",
                 termsDP_ = downP,
-                penaltyPercent_ = penaltyP,
                 warrantyDays_ = warr,
                 additionalTerms_ = additionalTermsTb.Text,
                 markUpPercent_ = (decimal)markupPriceTb.Value,
@@ -684,7 +669,7 @@ namespace prototype2
             fs.Close();
             if (dbCon.IsConnect())
             {
-                string query = "INSERT INTO `odc_db`.`sales_quote_t` " + "(`sqNoChar`,`custID`,`quoteSubject`,`priceNote`,`deliveryDate`,`estDelivery`,`validityDays`,`validityDate`,`otherTerms`,`VAT`,`vatIsExcluded`,`paymentIsLanded`,`paymentCurrency`,`status`,`termsDays`,`termsDP`,`penaltyAmt`,`penaltyPerc`,`markUpPercent`,`discountPercent`,surveyReportDoc)" +
+                string query = "INSERT INTO `odc_db`.`sales_quote_t` " + "(`sqNoChar`,`custID`,`quoteSubject`,`priceNote`,`deliveryDate`,`estDelivery`,`validityDays`,`validityDate`,`otherTerms`,`VAT`,`vatIsExcluded`,`paymentIsLanded`,`paymentCurrency`,`status`,`termsDays`,`termsDP`,`markUpPercent`,`discountPercent`,surveyReportDoc)" +
                     " VALUES " +
                     "('" + MainVM.SelectedSalesQuote.sqNoChar_ + "','" +
                     MainVM.SelectedSalesQuote.custID_ + "','" +
@@ -702,8 +687,6 @@ namespace prototype2
                     MainVM.SelectedSalesQuote.status_ + "','" +
                     MainVM.SelectedSalesQuote.termsDays_ + "','" +
                     MainVM.SelectedSalesQuote.termsDP_ + "','" +
-                    MainVM.SelectedSalesQuote.penaltyAmt_ + "','" +
-                    MainVM.SelectedSalesQuote.penaltyPercent_ + "','" +
                     MainVM.SelectedSalesQuote.markUpPercent_ + "','" +
                     MainVM.SelectedSalesQuote.discountPercent_ + "','"+
                     DocData + "'" +
