@@ -27,11 +27,14 @@ namespace prototype2
         {
             InitializeComponent();
             DisplayReport();
+            
         }
         private void DisplayReport ()
         {
+            ReportItem.Reset();
+            ReportItem.ReportPath = "C:/Users/Alexis/Source/Repos/odc-osmbcs/rdlcfiles/SalesReport.rdlc";
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportItem.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("odc_dbDataSetSales", GetItem()));
+            ReportItem.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource(" odc_dbDataSetSales", GetItem()));
             ReportItem.LoadReport(rNames);
             ReportItem.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportItem.RefreshReport();
@@ -64,7 +67,7 @@ namespace prototype2
         {
             ReportItem.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportItem.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("odc_dbDataSetSales", GetItemDay()));
+            ReportItem.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource(" odc_dbDataSetSales", GetItemDay()));
             ReportItem.LoadReport(rNames);
             ReportItem.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportItem.RefreshReport();
