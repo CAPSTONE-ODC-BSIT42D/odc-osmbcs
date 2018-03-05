@@ -1210,10 +1210,10 @@
             <Grid x:Name="serviceGrid" d:IsHidden="True">
                 <local:ucServiceSchedule x:Name="ucService" Margin="0" Visibility="Collapsed"/>
             </Grid>
-            <Grid x:Name="reportsGrid">
+            <Grid x:Name="reportsGrid" d:IsHidden="True">
                 <local:ucReportSales Height="Auto" Width="Auto"/>
             </Grid>
-            <Grid x:Name="maintenanceGrid" d:IsHidden="True">
+            <Grid x:Name="maintenanceGrid">
                 <Grid x:Name="manageCustomerGrid" Margin="0,0,1,0" d:IsHidden="True" >
                     <Grid x:Name="manageCustomerHomeGrid" Margin="0">
                         <Label x:Name="label13" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
@@ -1584,7 +1584,7 @@
                         <local:ucNoticeOfEmployment x:Name="ucContract" HorizontalAlignment="Left" Height="700" Margin="20,16,0,0" VerticalAlignment="Top" Width="1184" Visibility="Hidden"/>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageProductListGrid" Margin="0,0,1,0">
+                <Grid x:Name="manageProductListGrid" Margin="0,0,1,0" d:IsHidden="True">
                     <Grid Margin="0">
                         <Label x:Name="label11" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
                         <TextBox x:Name="searchBox2" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>
@@ -1737,7 +1737,7 @@
                         </DataGrid>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageServicesGrid" Margin="0,0,1,0" d:IsHidden="True">
+                <Grid x:Name="manageServicesGrid" Margin="0,0,1,0">
                     <Grid Margin="0">
                         <Label x:Name="label5" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
                         <TextBox x:Name="searchBox3" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>

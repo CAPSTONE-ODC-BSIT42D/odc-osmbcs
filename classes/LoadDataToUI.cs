@@ -134,7 +134,7 @@ namespace prototype2
                 fromDbTable2 = fromDb2.Tables["t"];
                 foreach (DataRow dr2 in fromDbTable2.Rows)
                 {
-                    var province = new Province() { ProvinceID = int.Parse(dr2[0].ToString()), ProvinceName = dr2[1].ToString(), RegionID = int.Parse(dr2[3].ToString()) };
+                    var province = new Province() { ProvinceID = int.Parse(dr2[0].ToString()), ProvinceName = dr2[1].ToString(), RegionID = int.Parse(dr2[2].ToString()) };
                     MainVM.Provinces.Add(province);
                 }
                 dbCon.Close();
@@ -319,10 +319,7 @@ namespace prototype2
             if (dbCon.IsConnect())
             {
                 MainVM.Contractor.Clear();
-                string query = "SELECT * " +
-                    "FROM emp_cont_t a  " +
-                    "JOIN job_title_t d ON a.jobID = d.jobID " +
-                    "WHERE a.isDeleted = 0 AND a.empType = 1;";
+                string query = "SELECT * FROM emp_cont_t a JOIN job_title_t d ON a.jobID = d.jobID WHERE a.isDeleted = 0 AND empType = 1;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
@@ -333,8 +330,9 @@ namespace prototype2
                 {
                     int empType;
                     int.TryParse(dr["empType"].ToString(), out empType);
+
                     DateTime dateTo;
-                    DateTime.TryParse(dr["empDateTo"].ToString(), out dateTo);
+                    DateTime.TryParse(dr[11].ToString(), out dateTo);
 
                     DateTime dateFrom;
                     DateTime.TryParse(dr["empDateFrom"].ToString(), out dateFrom);

@@ -113,7 +113,7 @@
                 <Button x:Name="cancelEmployeeBtn" Content="Cancel" Click="cancelRecordBtn_Click" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="76"/>
             </Grid>
             <Grid x:Name="editCloseGrid1" Margin="13,10">
-                <Button x:Name="editEmployeeBtn" Content="Edit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="76" Margin="0,0,90,-5"/>
+                <Button x:Name="editEmployeeBtn" Content="Edit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="76" Margin="0,0,90,-5" Click="editEmployeeBtn_Click"/>
                 <Button x:Name="cancelEmployeeBtn1" Content="Cancel" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="76" Click="cancelRecordBtn_Click" Margin="81,0,-5,0"/>
             </Grid>
         </StackPanel>

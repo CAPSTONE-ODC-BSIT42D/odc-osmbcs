@@ -287,12 +287,17 @@ namespace prototype2.uControlsMaintenance
 
         private void loadDataToUi()
         {
+            
             regionNameTb.Text = MainVM.SelectedRegion.RegionName;
             ratePriceTb.Value = MainVM.SelectedRegion.RatePrice;
             MainVM.Provinces = MainVM.SelectedRegion.Provinces;
             MainVM.SelectedRegion.Provinces = new ObservableCollection<Province> (from prov in MainVM.Provinces
                                               where prov.RegionID == MainVM.SelectedRegion.RegionID
                                               select prov);
+            foreach (UIElement obj in form.Children)
+            {
+                obj.IsEnabled = false;
+            }
         }
 
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)
@@ -304,7 +309,6 @@ namespace prototype2.uControlsMaintenance
         {
             if (this.IsVisible && MainVM.isEdit)
             {
-
                 loadDataToUi();
             }
             else
@@ -314,6 +318,14 @@ namespace prototype2.uControlsMaintenance
             
         }
 
-        
+        private void editBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (UIElement obj in form.Children)
+            {
+                obj.IsEnabled = true;
+            }
+            saveCancelGrid2.Visibility = Visibility.Visible;
+            editCloseGrid2.Visibility = Visibility.Collapsed;
+        }
     }
 }

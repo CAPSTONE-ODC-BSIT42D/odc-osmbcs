@@ -269,7 +269,6 @@ namespace prototype2.uControlsMaintenance
 
                         }
                         MessageBox.Show("Sevice type sucessfully updated");
-                        MainVM.Ldt.worker.RunWorkerAsync();
                         OnSaveCloseButtonClicked(e);
                         MainVM.isEdit = false;
                     }
@@ -311,6 +310,14 @@ namespace prototype2.uControlsMaintenance
             }
         }
 
-        
+        private void editServiceTypeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (UIElement obj in serviceForm.Children)
+            {
+                obj.IsEnabled = true;
+            }
+            saveCloseButtonGrid.Visibility = Visibility.Visible;
+            editCloseButtonGrid.Visibility = Visibility.Collapsed;
+        }
     }
 }
