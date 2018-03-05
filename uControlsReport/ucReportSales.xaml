@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
               xmlns:RV="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"  
              xmlns:local="clr-namespace:prototype2"
-             xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="prototype2.ucReportSales"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="prototype2.ucReportItem"
              mc:Ignorable="d" Width="815.435" Height="405.519" IsVisibleChanged="UserControl_IsVisibleChanged" Background="#FFEAEA50">
     <Grid Margin="0,0,-27,-48" Background="#FFE6E1E1">
        
@@ -44,7 +44,7 @@
 
         <Label x:Name="ItemEnd" Content="End Date:" HorizontalAlignment="Left" Margin="610,4,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
 
-        <syncfusion:ReportViewer x:Name="ReportSales" Margin="0,67,0,0"/>
+        <syncfusion:ReportViewer x:Name="ReportItem" ReportPath="C:\Users\Alexis\Source\Repos\odc-osmbcs\rdlcfiles\SalesReport.rdlc" Margin="0,67,0,0"/>
 
     </Grid>
 </UserControl>
