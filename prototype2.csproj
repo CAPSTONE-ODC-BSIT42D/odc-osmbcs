@@ -378,9 +378,6 @@
     <Compile Include="uControlsTransanction\ucPurchaseOrder.xaml.cs">
       <DependentUpon>ucPurchaseOrder.xaml</DependentUpon>
     </Compile>
-    <Compile Include="uControlsReport\ucReports.xaml.cs">
-      <DependentUpon>ucReports.xaml</DependentUpon>
-    </Compile>
     <Compile Include="uControlsTransanction\ucSalesQuote.xaml.cs">
       <DependentUpon>ucSalesQuote.xaml</DependentUpon>
     </Compile>
@@ -518,10 +515,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="uControlsTransanction\ucPurchaseOrder.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="uControlsReport\ucReports.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

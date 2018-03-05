@@ -1210,10 +1210,10 @@
             <Grid x:Name="serviceGrid" d:IsHidden="True">
                 <local:ucServiceSchedule x:Name="ucService" Margin="0" Visibility="Collapsed"/>
             </Grid>
-            <Grid x:Name="reportsGrid" d:IsHidden="True">
-                <local:ucReports Margin="0"/>
+            <Grid x:Name="reportsGrid">
+                <local:ucReportSales Height="Auto" Width="Auto"/>
             </Grid>
-            <Grid x:Name="maintenanceGrid">
+            <Grid x:Name="maintenanceGrid" d:IsHidden="True">
                 <Grid x:Name="manageCustomerGrid" Margin="0,0,1,0" d:IsHidden="True" >
                     <Grid x:Name="manageCustomerHomeGrid" Margin="0">
                         <Label x:Name="label13" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
@@ -2037,7 +2037,7 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Grid x:Name="formGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3" Visibility="Visible" Panel.ZIndex="1">
+        <Grid x:Name="formGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3" Visibility="Visible" Panel.ZIndex="1" d:IsHidden="True">
 
             <local:ucCustSuppCRUD x:Name="ucCustSupp" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="Auto" d:IsHidden="True"/>
             <local:ucProductsCRUD x:Name="ucProduct" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
