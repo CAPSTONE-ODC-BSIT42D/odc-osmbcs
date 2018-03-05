@@ -152,6 +152,7 @@
       <Private>True</Private>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data">
       <Private>True</Private>
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -260,47 +261,31 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
-    <Compile Include="odc_DataSetPurchase.cs">
-      <DependentUpon>odc_DataSetPurchase.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="odc_DataSetService.cs">
-      <DependentUpon>odc_DataSetService.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="odc_DataSetService.Designer.cs">
+    <Compile Include="DataSetReport.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>odc_DataSetService.xsd</DependentUpon>
+      <DependentUpon>DataSetReport.xsd</DependentUpon>
     </Compile>
-    <Compile Include="odc_DataSetPurchase.Designer.cs">
+    <Compile Include="DataSetReportPurchase.cs">
+      <DependentUpon>DataSetReportPurchase.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetReportPurchase.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>odc_DataSetPurchase.xsd</DependentUpon>
+      <DependentUpon>DataSetReportPurchase.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DatasetReportSales.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatasetReportSales.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetReportService.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetReportService.xsd</DependentUpon>
     </Compile>
     <Compile Include="DocumentViewer.xaml.cs">
       <DependentUpon>DocumentViewer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="odc_dbDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>odc_dbDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="odc_dbDataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>odc_dbDataSet1.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="odc_dbDataSet2.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>odc_dbDataSet2.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="odc_dbDataSetSales.cs">
-      <DependentUpon>odc_dbDataSetSales.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="odc_dbDataSetSales.Designer.cs">
-      <DependentUpon>odc_dbDataSetSales.xsd</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
@@ -575,71 +560,49 @@
     <None Include="DataSet1.xss">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </None>
-    <None Include="odc_DataSetService.xsc">
-      <DependentUpon>odc_DataSetService.xsd</DependentUpon>
+    <None Include="DataSetReport.xsc">
+      <DependentUpon>DataSetReport.xsd</DependentUpon>
     </None>
-    <None Include="odc_DataSetService.xsd">
-      <SubType>Designer</SubType>
+    <None Include="DataSetReport.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>odc_DataSetService.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="odc_DataSetService.xss">
-      <DependentUpon>odc_DataSetService.xsd</DependentUpon>
-    </None>
-    <None Include="odc_DataSetPurchase.xsc">
-      <DependentUpon>odc_DataSetPurchase.xsd</DependentUpon>
-    </None>
-    <None Include="odc_DataSetPurchase.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>odc_DataSetPurchase.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="odc_DataSetPurchase.xss">
-      <DependentUpon>odc_DataSetPurchase.xsd</DependentUpon>
-    </None>
-    <None Include="odc_dbDataSet.xsc">
-      <DependentUpon>odc_dbDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="odc_dbDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>odc_dbDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>DataSetReport.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="odc_dbDataSet.xss">
-      <DependentUpon>odc_dbDataSet.xsd</DependentUpon>
+    <None Include="DataSetReport.xss">
+      <DependentUpon>DataSetReport.xsd</DependentUpon>
     </None>
-    <None Include="odc_dbDataSet1.xsc">
-      <DependentUpon>odc_dbDataSet1.xsd</DependentUpon>
+    <None Include="DataSetReportPurchase.xsc">
+      <DependentUpon>DataSetReportPurchase.xsd</DependentUpon>
     </None>
-    <None Include="odc_dbDataSet1.xsd">
+    <None Include="DataSetReportPurchase.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>odc_dbDataSet1.Designer.cs</LastGenOutput>
+      <LastGenOutput>DataSetReportPurchase.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="odc_dbDataSet1.xss">
-      <DependentUpon>odc_dbDataSet1.xsd</DependentUpon>
+    <None Include="DataSetReportPurchase.xss">
+      <DependentUpon>DataSetReportPurchase.xsd</DependentUpon>
     </None>
-    <None Include="odc_dbDataSet2.xsc">
-      <DependentUpon>odc_dbDataSet2.xsd</DependentUpon>
+    <None Include="DatasetReportSales.xsc">
+      <DependentUpon>DatasetReportSales.xsd</DependentUpon>
     </None>
-    <None Include="odc_dbDataSet2.xsd">
+    <None Include="DatasetReportSales.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>odc_dbDataSet2.Designer.cs</LastGenOutput>
+      <LastGenOutput>DatasetReportSales.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="odc_dbDataSet2.xss">
-      <DependentUpon>odc_dbDataSet2.xsd</DependentUpon>
+    <None Include="DatasetReportSales.xss">
+      <DependentUpon>DatasetReportSales.xsd</DependentUpon>
     </None>
-    <None Include="odc_dbDataSetSales.xsc">
-      <DependentUpon>odc_dbDataSetSales.xsd</DependentUpon>
+    <None Include="DataSetReportService.xsc">
+      <DependentUpon>DataSetReportService.xsd</DependentUpon>
     </None>
-    <None Include="odc_dbDataSetSales.xsd">
+    <None Include="DataSetReportService.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>odc_dbDataSetSales.Designer.cs</LastGenOutput>
+      <LastGenOutput>DataSetReportService.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="odc_dbDataSetSales.xss">
-      <DependentUpon>odc_dbDataSetSales.xsd</DependentUpon>
+    <None Include="DataSetReportService.xss">
+      <DependentUpon>DataSetReportService.xsd</DependentUpon>
     </None>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -33,7 +33,7 @@ namespace prototype2
         {
             ReportPurchase.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
-            ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSet2", GetPurchase()));
+            ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetReportPurchase", GetPurchase()));
             ReportPurchase.LoadReport(rNames);
             ReportPurchase.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportPurchase.RefreshReport();
@@ -49,7 +49,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost AS Expr1, SUM(io.totalCost) AS Expr2, SUM(sa.totalCost) AS Expr3, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM services_availed_t sa INNER JOIN services_t s ON sa.serviceID = s.serviceID INNER JOIN sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar, cust_supp_t cs INNER JOIN purchase_order_t po ON cs.companyID = po.suppID, items_ordered_t io INNER JOIN item_t i ON io.itemID = i.ID WHERE(i.isDeleted = 0) GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
 
-            DataSet2.DataTable1DataTable dSPurchase = new DataSet2.DataTable1DataTable();
+            DataSetReportPurchase.DataTable1DataTable dSPurchase = new DataSetReportPurchase.DataTable1DataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSPurchase);
@@ -62,7 +62,7 @@ namespace prototype2
         {
             ReportPurchase.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
-            ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSet2", GetPurchaseDay()));
+            ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetReportPurchase", GetPurchaseDay()));
             ReportPurchase.LoadReport(rNames);
             ReportPurchase.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportPurchase.RefreshReport();
@@ -78,7 +78,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost AS Expr1, SUM(io.totalCost) AS Expr2, SUM(sa.totalCost) AS Expr3, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM services_availed_t sa INNER JOIN services_t s ON sa.serviceID = s.serviceID INNER JOIN sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar, cust_supp_t cs INNER JOIN purchase_order_t po ON cs.companyID = po.suppID, items_ordered_t io INNER JOIN  item_t i ON io.itemID = i.ID WHERE(CURDATE() = po.orderDate) AND(i.isDeleted = 0) GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
 
-            DataSet2.DataTable1DataTable dSPurchase = new DataSet2.DataTable1DataTable();
+            DataSetReportPurchase.DataTable1DataTable dSPurchase = new DataSetReportPurchase.DataTable1DataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSPurchase);
@@ -91,7 +91,7 @@ namespace prototype2
         {
             ReportPurchase.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
-            ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSet2", GetPurchaseWeek()));
+            ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetReportPurchase", GetPurchaseWeek()));
             ReportPurchase.LoadReport(rNames);
             ReportPurchase.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportPurchase.RefreshReport();
@@ -107,7 +107,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost AS Expr1, SUM(io.totalCost) AS Expr2, SUM(sa.totalCost) AS Expr3, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM services_availed_t sa INNER JOIN services_t s ON sa.serviceID = s.serviceID INNER JOIN sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar, cust_supp_t cs INNER JOIN  purchase_order_t po ON cs.companyID = po.suppID, items_ordered_t io INNER JOIN   item_t i ON io.itemID = i.ID WHERE(WEEK(po.orderDate) = '" + DatePickerWeekSales.SelectedDate.ToString() +"') AND(i.isDeleted = 0) GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
 
-            DataSet2.DataTable1DataTable dSPurchase = new DataSet2.DataTable1DataTable();
+            DataSetReportPurchase.DataTable1DataTable dSPurchase = new DataSetReportPurchase.DataTable1DataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSPurchase);
@@ -120,7 +120,7 @@ namespace prototype2
         {
             ReportPurchase.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
-            ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSet2", GetPurchaseYear()));
+            ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetReportPurchase", GetPurchaseYear()));
             ReportPurchase.LoadReport(rNames);
             ReportPurchase.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportPurchase.RefreshReport();
@@ -136,7 +136,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost AS Expr1, SUM(io.totalCost) AS Expr2, SUM(sa.totalCost) AS Expr3, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM services_availed_t sa INNER JOIN services_t s ON sa.serviceID = s.serviceID INNER JOIN sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar, cust_supp_t cs INNER JOIN purchase_order_t po ON cs.companyID = po.suppID, items_ordered_t io INNER JOIN item_t i ON io.itemID = i.ID WHERE(YEAR(po.orderDate) = '" + ComboBoxYearSales.SelectedItem.ToString() + "') AND(i.isDeleted = 0) GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
 
-            DataSet2.DataTable1DataTable dSPurchase = new DataSet2.DataTable1DataTable();
+            DataSetReportPurchase.DataTable1DataTable dSPurchase = new DataSetReportPurchase.DataTable1DataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSPurchase);
@@ -149,7 +149,7 @@ namespace prototype2
         {
             ReportPurchase.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
-            ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSet2", GetPurchaseMonth()));
+            ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetReportPurchase", GetPurchaseMonth()));
             ReportPurchase.LoadReport(rNames);
             ReportPurchase.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportPurchase.RefreshReport();
@@ -165,7 +165,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost AS Expr1, SUM(io.totalCost) AS Expr2, SUM(sa.totalCost) AS Expr3, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM services_availed_t sa INNER JOIN services_t s ON sa.serviceID = s.serviceID INNER JOIN  sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar, cust_supp_t cs INNER JOIN purchase_order_t po ON cs.companyID = po.suppID, items_ordered_t io INNER JOIN item_t i ON io.itemID = i.ID WHERE(MONTHNAME(po.orderDate) = '"+ ComboBoxMonthSales.SelectedItem.ToString() + "') AND(i.isDeleted = 0) GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
 
-            DataSet2.DataTable1DataTable dSPurchase = new DataSet2.DataTable1DataTable();
+            DataSetReportPurchase.DataTable1DataTable dSPurchase = new DataSetReportPurchase.DataTable1DataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSPurchase);
@@ -178,7 +178,7 @@ namespace prototype2
         {
             ReportPurchase.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
-            ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSet2", GetPurchaseRange()));
+            ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetReportPurchase", GetPurchaseRange()));
             ReportPurchase.LoadReport(rNames);
             ReportPurchase.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportPurchase.RefreshReport();
@@ -194,7 +194,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost AS Expr1, SUM(io.totalCost) AS Expr2, SUM(sa.totalCost) AS Expr3, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM services_availed_t sa INNER JOIN services_t s ON sa.serviceID = s.serviceID INNER JOIN sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar, cust_supp_t cs INNER JOIN purchase_order_t po ON cs.companyID = po.suppID, items_ordered_t io INNER JOIN  item_t i ON io.itemID = i.ID WHERE(po.orderDate BETWEEN '" + DatePickerStartSales.SelectedDate.ToString() +"' AND '"+DatePickerEndSales.SelectedDate.ToString()+"')  AND(i.isDeleted = 0) GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost ";
 
-            DataSet2.DataTable1DataTable dSPurchase = new DataSet2.DataTable1DataTable();
+            DataSetReportPurchase.DataTable1DataTable dSPurchase = new DataSetReportPurchase.DataTable1DataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSPurchase);

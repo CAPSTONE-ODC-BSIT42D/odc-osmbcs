@@ -21,9 +21,9 @@ namespace prototype2
     /// <summary>
     /// Interaction logic for UserControl2.xaml
     /// </summary>
-    public partial class ucReportItem : UserControl
+    public partial class ucReportSales : UserControl
     {
-        public ucReportItem()
+        public ucReportSales()
         {
             InitializeComponent();
             DisplayReport();
@@ -31,12 +31,12 @@ namespace prototype2
         }
         private void DisplayReport ()
         {
-            ReportItem.Reset();
+            ReportSales.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportItem.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource(" odc_dbDataSetSales", GetItem()));
-            ReportItem.LoadReport(rNames);
-            ReportItem.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
-            ReportItem.RefreshReport();
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource(" DatasetReportSales", GetItem()));
+            ReportSales.LoadReport(rNames);
+            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
+            ReportSales.RefreshReport();
         }
 
         private DataTable GetItem()
@@ -49,7 +49,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost) AS Expr5 FROM item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID INNER JOIN service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN services_t s ON sa.serviceID = s.serviceID WHERE(i.isDeleted = 0) AND(s.isDeleted = 0) GROUP BY i.itemName, s.serviceName, ia.totalCost, sa.totalCost, si.dateOfIssue";
 
-            odc_dbDataSetSales.DataTable1DataTable dSItem = new odc_dbDataSetSales.DataTable1DataTable();
+           DatasetReportSales.DataTable1DataTable dSItem = new DatasetReportSales.DataTable1DataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
@@ -60,16 +60,16 @@ namespace prototype2
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            ReportItem.RefreshReport();
+            ReportSales.RefreshReport();
         }
-        private void DisplayReportItemDay()
+        private void DisplayReportSalesDay()
         {
-            ReportItem.Reset();
+            ReportSales.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportItem.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource(" odc_dbDataSetSales", GetItemDay()));
-            ReportItem.LoadReport(rNames);
-            ReportItem.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
-            ReportItem.RefreshReport();
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource(" DatasetReportSales", GetItemDay()));
+            ReportSales.LoadReport(rNames);
+            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
+            ReportSales.RefreshReport();
         }
 
         private DataTable GetItemDay()
@@ -82,7 +82,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost)  AS Expr5 FROM item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID INNER JOIN service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN services_t s ON sa.serviceID = s.serviceID WHERE(CURDATE() = si.dateOfIssue) AND(i.isDeleted = 0) AND(s.isDeleted = 0) GROUP BY i.itemName, s.serviceName, ia.totalCost, sa.totalCost, si.dateOfIssue";
 
-            odc_dbDataSetSales.DataTable1DataTable dSItem = new odc_dbDataSetSales.DataTable1DataTable();
+            DatasetReportSales.DataTable1DataTable dSItem = new DatasetReportSales.DataTable1DataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
@@ -90,14 +90,14 @@ namespace prototype2
             return dSItem;
 
         }
-        private void DisplayReportItemWeek()
+        private void DisplayReportSalesWeek()
         {
-            ReportItem.Reset();
+            ReportSales.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportItem.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("odc_dbDataSetSales", GetItemWeek()));
-            ReportItem.LoadReport(rNames);
-            ReportItem.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
-            ReportItem.RefreshReport();
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DatasetReportSales", GetItemWeek()));
+            ReportSales.LoadReport(rNames);
+            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
+            ReportSales.RefreshReport();
         }
 
         private DataTable GetItemWeek()
@@ -110,7 +110,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost)  AS Expr5 FROM item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN  cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN  sales_invoice_t si ON cs.companyID = si.custID INNER JOIN service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN services_t s ON sa.serviceID = s.serviceID WHERE(WEEK(si.dateOfIssue) = '" + DatePickerItemWeek.SelectedDate.ToString() + "')";
 
-            odc_dbDataSetSales.DataTable1DataTable dSItem = new odc_dbDataSetSales.DataTable1DataTable();
+            DatasetReportSales.DataTable1DataTable dSItem = new DatasetReportSales.DataTable1DataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
@@ -119,14 +119,14 @@ namespace prototype2
 
         }
 
-        private void DisplayReportItemMonth()
+        private void DisplayReportSalesMonth()
         {
-            ReportItem.Reset();
+            ReportSales.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportItem.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("odc_dbDataSetSales", GetItemMonth()));
-            ReportItem.LoadReport(rNames);
-            ReportItem.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
-            ReportItem.RefreshReport();
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DatasetReportSales", GetItemMonth()));
+            ReportSales.LoadReport(rNames);
+            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
+            ReportSales.RefreshReport();
         }
 
         private DataTable GetItemMonth()
@@ -138,7 +138,7 @@ namespace prototype2
             cmd.CommandType = CommandType.Text;
 
             cmd.CommandText = "SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost)   AS Expr5 FROM item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID INNER JOIN service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN services_t s ON sa.serviceID = s.serviceID WHERE(MONTHNAME(si.dateOfIssue) = '" + ComboBoxItemMonth.SelectedItem.ToString() + "') AND(i.isDeleted = 0) AND(s.isDeleted = 0) GROUP BY i.itemName, s.serviceName, ia.totalCost, sa.totalCost, si.dateOfIssue";
-            odc_dbDataSetSales.DataTable1DataTable dSItem = new odc_dbDataSetSales.DataTable1DataTable();
+            DatasetReportSales.DataTable1DataTable dSItem = new DatasetReportSales.DataTable1DataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
@@ -146,15 +146,15 @@ namespace prototype2
             return dSItem;
 
         }
-        private void DisplayReportItemYear()
+        private void DisplayReportSalesYear()
         {
 
-            ReportItem.Reset();
+            ReportSales.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportItem.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("odc_dbDataSetSales", GetItemYear()));
-            ReportItem.LoadReport(rNames);
-            ReportItem.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
-            ReportItem.RefreshReport();
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DatasetReportSales", GetItemYear()));
+            ReportSales.LoadReport(rNames);
+            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
+            ReportSales.RefreshReport();
         }
 
         private DataTable GetItemYear()
@@ -167,7 +167,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost)  AS Expr5 FROM item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID INNER JOIN service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN services_t s ON sa.serviceID = s.serviceID WHERE(YEAR(si.dateOfIssue) =  '"+ ComboBoxItemYear .SelectedItem.ToString()+ "') AND(i.isDeleted = 0) AND(s.isDeleted = 0) GROUP BY i.itemName, s.serviceName, ia.totalCost, sa.totalCost, si.dateOfIssue";
 
-            odc_dbDataSetSales.DataTable1DataTable dSItem = new odc_dbDataSetSales.DataTable1DataTable();
+            DatasetReportSales.DataTable1DataTable dSItem = new DatasetReportSales.DataTable1DataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
@@ -175,14 +175,14 @@ namespace prototype2
             return dSItem;
 
         }
-        private void DisplayReportItemRange()
+        private void DisplayReportSalesRange()
         {
-            ReportItem.Reset();
+            ReportSales.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportItem.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("odc_dbDataSetSales", GetItemRange()));
-            ReportItem.LoadReport(rNames);
-            ReportItem.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
-            ReportItem.RefreshReport();
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DatasetReportSales", GetItemRange()));
+            ReportSales.LoadReport(rNames);
+            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
+            ReportSales.RefreshReport();
         }
 
         private DataTable GetItemRange()
@@ -195,7 +195,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost)  AS Expr5 FROM item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN  cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID INNER JOIN service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN services_t s ON sa.serviceID = s.serviceID WHERE(si.dateOfIssue BETWEEN '"+DatePickerItemStart.SelectedDate.ToString()+"' AND '"+DatePickerItemEnd.SelectedDate.ToString()+"') AND (i.isDeleted = 0) AND(s.isDeleted = 0) GROUP BY i.itemName, s.serviceName, ia.totalCost, sa.totalCost, si.dateOfIssue";
 
-            odc_dbDataSetSales.DataTable1DataTable dSItem = new odc_dbDataSetSales.DataTable1DataTable();
+            DatasetReportSales.DataTable1DataTable dSItem = new DatasetReportSales.DataTable1DataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
@@ -208,7 +208,7 @@ namespace prototype2
             Object SELECTEDINDEX = ComboBoxItemFilter.SelectedIndex;
             if (SELECTEDINDEX.Equals(0))
             {
-                DisplayReportItemDay();
+                DisplayReportSalesDay();
                 ItemWeek.Visibility = Visibility.Hidden;
                 ComboBoxItemYear.Visibility = Visibility.Hidden;
                 ComboBoxItemMonth.Visibility = Visibility.Hidden;
@@ -224,7 +224,7 @@ namespace prototype2
             }
             if (SELECTEDINDEX.Equals(1))
             {
-                DisplayReportItemWeek();
+                DisplayReportSalesWeek();
                 ComboBoxItemYear.Visibility = Visibility.Hidden;
                 ComboBoxItemMonth.Visibility = Visibility.Hidden;
                 MonthItem.Visibility = Visibility.Hidden;
@@ -284,27 +284,27 @@ namespace prototype2
 
         private void ComboBoxItemMonth_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DisplayReportItemMonth();
+            DisplayReportSalesMonth();
         }
 
         private void ComboBoxItemYear_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DisplayReportItemYear();
+            DisplayReportSalesYear();
         }
 
         private void DatePickerItemStart_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            DisplayReportItemRange();
+            DisplayReportSalesRange();
         }
 
         private void DatePickerItemEnd_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            DisplayReportItemRange();
+            DisplayReportSalesRange();
         }
 
         private void DatePickerItemWeek_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            DisplayReportItemWeek();
+            DisplayReportSalesWeek();
         }
     }
 }

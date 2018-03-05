@@ -387,6 +387,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -862,26 +863,10 @@
     <Style />
   </Page>
   <AutoRefresh>0</AutoRefresh>
-  <DataSources>
-    <DataSource Name="DataSet1">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>74891514-6be2-4ccd-bd87-8504065f99b6</rd:DataSourceID>
-    </DataSource>
-    <DataSource Name="DataSet2">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>0902e34d-537a-4a5a-8d7c-49b10ef8d099</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
   <DataSets>
     <DataSet Name="DataSet1">
       <Query>
-        <DataSourceName>DataSet2</DataSourceName>
+        <DataSourceName>DataSet1</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -913,21 +898,21 @@
           <DataField>Expr3</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
-        <Field Name="Expr5">
-          <DataField>Expr5</DataField>
-          <rd:TypeName>System.Int64</rd:TypeName>
-        </Field>
         <Field Name="Expr4">
           <DataField>Expr4</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="Expr5">
+          <DataField>Expr5</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>DataSet2</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\Alexis\Source\Repos\odc-osmbcs\odc_DataSetPurchase.xsd</rd:SchemaPath>
+        <rd:DataSetName>DataSetReportPurchase</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\Alexis\Source\Repos\odc-osmbcs\DataSetReportPurchase.xsd</rd:SchemaPath>
         <rd:TableName>DataTable1</rd:TableName>
-        <rd:TableAdapterFillMethod>FillPurchase</rd:TableAdapterFillMethod>
-        <rd:TableAdapterGetDataMethod>GetDataPurchase</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterFillMethod>FillPurchaseAll</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetDataPurchaseAll</rd:TableAdapterGetDataMethod>
         <rd:TableAdapterName>DataTable1TableAdapter</rd:TableAdapterName>
       </rd:DataSetInfo>
     </DataSet>

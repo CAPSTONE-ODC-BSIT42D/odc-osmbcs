@@ -8,12 +8,12 @@
              d:DesignHeight="300" d:DesignWidth="300" Width="596" Height="400">
     <Grid Background="#FFFBFAFA">
         <Label Content="Frequently Availed Items" HorizontalAlignment="Left" Margin="3,2,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <DataGrid x:Name="FreqItemsDataGrid" HorizontalAlignment="Left" Height="312" Margin="10,78,0,0" VerticalAlignment="Top" Width="576">
+        <DataGrid x:Name="FreqItemsDataGrid" HorizontalAlignment="Left" Height="312" Margin="10,78,0,0" VerticalAlignment="Top" Width="576" AutoGenerateColumns="False"  ItemsSource="{Binding Path=LoadDataBinding}">
         <DataGrid.Columns>
 
-            <DataGridTextColumn Header="Item Name" Width="200"/>
-                <DataGridTextColumn Header="Item Description" Width="230"/>
-                <DataGridTextColumn Header="No. of Times Availed" Width="150"/>
+                <DataGridTextColumn Binding="{Binding Path=itemName}" Header="Item Name" Width="200" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Path=itemDescr}" Header="Item Description" Width="230 " IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Path=Notimes}" Header="No. of Times Availed" Width="150" IsReadOnly="True"/>
 
         </DataGrid.Columns>
         </DataGrid>

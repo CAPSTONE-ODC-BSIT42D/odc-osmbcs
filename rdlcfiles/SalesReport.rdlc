@@ -107,7 +107,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>item Name</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -368,7 +368,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>service Name</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -568,6 +568,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -678,7 +679,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -868,32 +868,18 @@
   </Page>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="odc_dbDataSet">
+    <DataSource Name="DatasetReportSales">
       <ConnectionProperties>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>d75d8d93-c286-43db-a970-415ca403c993</rd:DataSourceID>
-    </DataSource>
-    <DataSource Name="odc_dbDataSetSales">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>7afa54d9-ac7c-4a77-9460-abcbb1e57d5e</rd:DataSourceID>
-    </DataSource>
-    <DataSource Name="odc_dbDataSet2">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>9997f113-a195-4e53-84b9-420ea840d33a</rd:DataSourceID>
+      <rd:DataSourceID>4f3a6331-ad0e-4b76-824d-f828ab0bfd22</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="DataSet1">
       <Query>
-        <DataSourceName>odc_dbDataSetSales</DataSourceName>
+        <DataSourceName>DatasetReportSales</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -921,6 +907,10 @@
           <DataField>Expr2</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
+        <Field Name="Expr3">
+          <DataField>Expr3</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="Expr4">
           <DataField>Expr4</DataField>
           <rd:TypeName>System.Int64</rd:TypeName>
@@ -929,17 +919,13 @@
           <DataField>Expr5</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
-        <Field Name="Expr3">
-          <DataField>Expr3</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>odc_dbDataSetSales</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\Alexis\Source\Repos\odc-osmbcs\odc_dbDataSetSales.xsd</rd:SchemaPath>
+        <rd:DataSetName>DatasetReportSales</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\Alexis\Source\Repos\odc-osmbcs\DatasetReportSales.xsd</rd:SchemaPath>
         <rd:TableName>DataTable1</rd:TableName>
-        <rd:TableAdapterFillMethod>FillSales</rd:TableAdapterFillMethod>
-        <rd:TableAdapterGetDataMethod>GetDataSales</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterFillMethod>FillBySalesAll</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetDataSalesAll</rd:TableAdapterGetDataMethod>
         <rd:TableAdapterName>DataTable1TableAdapter</rd:TableAdapterName>
       </rd:DataSetInfo>
     </DataSet>

@@ -100,14 +100,14 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Expr3">
+                    <Textbox Name="Expr1">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Expr3.Value</Value>
+                              <Value>=Fields!Expr1.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                               </Style>
@@ -116,7 +116,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Expr3</rd:DefaultName>
+                      <rd:DefaultName>Expr1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -132,14 +132,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Expr4">
+                    <Textbox Name="Expr2">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Expr4.Value</Value>
+                              <Value>=Fields!Expr2.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                               </Style>
@@ -148,7 +148,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Expr4</rd:DefaultName>
+                      <rd:DefaultName>Expr2</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -427,6 +427,7 @@ STATUS</Value>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -606,25 +607,18 @@ STATUS</Value>
   </Page>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="DataSet1">
+    <DataSource Name="DataSetReportService">
       <ConnectionProperties>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>38a7d521-43bc-425a-ad5e-3dd8a0f359a1</rd:DataSourceID>
-    </DataSource>
-    <DataSource Name="DataSet3">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>87353fbe-45e9-4e5f-b11c-eb7a736dd4b6</rd:DataSourceID>
+      <rd:DataSourceID>9849012f-620c-46f7-a0be-1781e970fd3b</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="DataSet1">
       <Query>
-        <DataSourceName>DataSet3</DataSourceName>
+        <DataSourceName>DataSetReportService</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -662,11 +656,11 @@ STATUS</Value>
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>DataSet3</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\Alexis\Source\Repos\odc-osmbcs\odc_DataSetService.xsd</rd:SchemaPath>
+        <rd:DataSetName>DataSetReportService</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\Alexis\Source\Repos\odc-osmbcs\DataSetReportService.xsd</rd:SchemaPath>
         <rd:TableName>DataTable1</rd:TableName>
-        <rd:TableAdapterFillMethod>FillService</rd:TableAdapterFillMethod>
-        <rd:TableAdapterGetDataMethod>GetDataService</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterFillMethod>FillServiceAll</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetDataServiceAll</rd:TableAdapterGetDataMethod>
         <rd:TableAdapterName>DataTable1TableAdapter</rd:TableAdapterName>
       </rd:DataSetInfo>
     </DataSet>
