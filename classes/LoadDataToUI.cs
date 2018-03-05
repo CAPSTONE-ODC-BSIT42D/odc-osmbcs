@@ -58,38 +58,10 @@ namespace prototype2
         {
             MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
             var dbCon = DBConnection.Instance();
-            MainVM.Provinces.Clear();
-            MainVM.Regions.Clear();
-            MainVM.EmpPosition.Clear();
-            MainVM.ContJobTitle.Clear();
-            MainVM.ProductCategory.Clear();
-            MainVM.ServicesList.Clear();
-            MainVM.ProductList.Clear();
-
-
-
-            MainVM.AllCustomerSupplier.Clear();
-            MainVM.Customers.Clear();
-            MainVM.Suppliers.Clear();
-
-            MainVM.AllEmployeesContractor.Clear();
-            MainVM.Employees.Clear();
-            MainVM.Contractor.Clear();
-
-            MainVM.RequestedItems.Clear();
-            MainVM.AvailedItems.Clear();
-            MainVM.AvailedServices.Clear();
-            MainVM.AdditionalFees.Clear();
-
-            MainVM.Units.Clear();
-
-            MainVM.SalesQuotes.Clear();
-            MainVM.SalesInvoice.Clear();
-
-            
 
             if (dbCon.IsConnect())
             {
+                MainVM.PhasesGroup.Clear();
                 string query = "SELECT * FROM phases_group_t";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
@@ -135,6 +107,8 @@ namespace prototype2
 
             if (dbCon.IsConnect())
             {
+                MainVM.Regions.Clear();
+                MainVM.Provinces.Clear();
                 string query = "SELECT * FROM regions_t";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
@@ -149,19 +123,19 @@ namespace prototype2
                         RegionName = dr[1].ToString(),
                         RatePrice = decimal.Parse(dr[2].ToString())
                     };
-                    query = "SELECT * FROM provinces_t WHERE regionID = " + dr[0].ToString() + " AND isDeleted = 0;";
-                    dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                    DataSet fromDb2 = new DataSet();
-                    DataTable fromDbTable2 = new DataTable();
-                    dataAdapter.Fill(fromDb2, "t");
-                    fromDbTable2 = fromDb2.Tables["t"];
-                    foreach (DataRow dr2 in fromDbTable2.Rows)
-                    {
-                        var province = new Province() { ProvinceID = int.Parse(dr2[0].ToString()), ProvinceName = dr2[1].ToString(), RegionID = obj.RegionID };
-                        obj.Provinces.Add(province);
-                        MainVM.Provinces.Add(province);
-                    }
+                    
                     MainVM.Regions.Add(obj);
+                }
+                query = "SELECT * FROM provinces_t WHERE isDeleted = 0;";
+                dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb2 = new DataSet();
+                DataTable fromDbTable2 = new DataTable();
+                dataAdapter.Fill(fromDb2, "t");
+                fromDbTable2 = fromDb2.Tables["t"];
+                foreach (DataRow dr2 in fromDbTable2.Rows)
+                {
+                    var province = new Province() { ProvinceID = int.Parse(dr2[0].ToString()), ProvinceName = dr2[1].ToString(), RegionID = int.Parse(dr2[2].ToString()) };
+                    MainVM.Provinces.Add(province);
                 }
                 dbCon.Close();
             }
@@ -169,6 +143,7 @@ namespace prototype2
 
             if (dbCon.IsConnect())
             {
+                MainVM.EmpPosition.Clear();
                 string query = "SELECT * FROM POSITION_T;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
@@ -184,6 +159,7 @@ namespace prototype2
             }
             if (dbCon.IsConnect())
             {
+                MainVM.ContJobTitle.Clear();
                 string query = "SELECT * FROM JOB_TITLE_T;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
@@ -199,6 +175,7 @@ namespace prototype2
             }
             if (dbCon.IsConnect())
             {
+                MainVM.ProductCategory.Clear();
                 string query = "SELECT * FROM ITEM_TYPE_T;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
@@ -215,6 +192,7 @@ namespace prototype2
 
             if (dbCon.IsConnect())
             {
+                MainVM.MarkupHist.Clear();
                 string query = "SELECT * FROM markup_hist_t;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
@@ -232,6 +210,7 @@ namespace prototype2
 
             if (dbCon.IsConnect())
             {
+                MainVM.Units.Clear();
                 string query = "SELECT * FROM unit_t;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
@@ -247,6 +226,7 @@ namespace prototype2
             }
             if (dbCon.IsConnect())
             {
+                MainVM.ServicesList.Clear();
                 string query = "SELECT * FROM services_t where isDeleted = 0;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
@@ -262,6 +242,7 @@ namespace prototype2
             }
             if (dbCon.IsConnect())
             {
+                MainVM.ProductList.Clear();
                 string query = "SELECT * FROM ITEM_T WHERE isDeleted = 0;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
@@ -280,6 +261,7 @@ namespace prototype2
 
             if (dbCon.IsConnect())
             {
+                MainVM.Customers.Clear();
                 string query = "SELECT * " +
                     "FROM cust_supp_t cs  " +
                     "JOIN provinces_t p ON cs.companyProvinceID = p.id " +
@@ -299,6 +281,7 @@ namespace prototype2
 
             if (dbCon.IsConnect())
             {
+                MainVM.Suppliers.Clear();
                 string query = "SELECT * " +
                     "FROM cust_supp_t cs  " +
                     "JOIN provinces_t p ON cs.companyProvinceID = p.id " +
@@ -317,6 +300,7 @@ namespace prototype2
             }
             if (dbCon.IsConnect())
             {
+                MainVM.Employees.Clear();
                 string query = "SELECT * FROM emp_cont_t a JOIN position_t c ON a.positionID = c.positionid  WHERE isDeleted = 0 AND empType = 0;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
@@ -328,35 +312,32 @@ namespace prototype2
                     int empType;
                     int.TryParse(dr["empType"].ToString(), out empType);
                     MainVM.Employees.Add(new Employee() { EmpID = int.Parse(dr["empID"].ToString()), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), PositionID = int.Parse(dr["positionID"].ToString()), EmpUserName = dr["empUserName"].ToString(), EmpType = empType, HasAccess = bool.Parse(dr["hasAccess"].ToString()) });
-                    MainVM.AllEmployeesContractor.Add(new Employee() { EmpID = int.Parse(dr["empID"].ToString()), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), PositionID = int.Parse(dr["positionID"].ToString()), EmpUserName = dr["empUserName"].ToString(), EmpType = empType, HasAccess = bool.Parse(dr["hasAccess"].ToString()) });
                 }
                 dbCon.Close();
             }
             //MainVM.LoginEmployee_ = MainVM.Employees.Where(x => x.EmpID.Equals(empID)).FirstOrDefault();
             if (dbCon.IsConnect())
             {
-                string query = "SELECT * " +
-                    "FROM emp_cont_t a  " +
-                    "JOIN job_title_t d ON a.jobID = d.jobID " +
-                    "WHERE a.isDeleted = 0 AND a.empType = 1;";
+                MainVM.Contractor.Clear();
+                string query = "SELECT * FROM emp_cont_t a JOIN job_title_t d ON a.jobID = d.jobID WHERE a.isDeleted = 0 AND empType = 1;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
                 fromDbTable = fromDb.Tables["t"];
-                MainVM.Contractor.Clear();
+                
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
                     int empType;
                     int.TryParse(dr["empType"].ToString(), out empType);
+
                     DateTime dateTo;
-                    DateTime.TryParse(dr["empDateTo"].ToString(), out dateTo);
+                    DateTime.TryParse(dr[11].ToString(), out dateTo);
 
                     DateTime dateFrom;
                     DateTime.TryParse(dr["empDateFrom"].ToString(), out dateFrom);
 
                     MainVM.Contractor.Add(new Employee() { EmpID = int.Parse(dr["empID"].ToString()), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(),EmpAddress = dr["empAddress"].ToString() ,JobID = int.Parse(dr["jobID"].ToString()), EmpDateFrom = dateFrom, EmpDateTo = dateTo, EmpUserName = dr["empUserName"].ToString(), EmpType = empType, HasAccess = bool.Parse(dr["hasAccess"].ToString()) });
-                    MainVM.AllEmployeesContractor.Add(new Employee() { EmpID = int.Parse(dr["empID"].ToString()), EmpFname = dr["empFName"].ToString(), EmpLName = dr["empLname"].ToString(), EmpMiddleInitial = dr["empMI"].ToString(), JobID = int.Parse(dr["jobID"].ToString()), EmpDateFrom = dateFrom, EmpDateTo = dateTo, EmpUserName = dr["empUserName"].ToString(), EmpType = empType, HasAccess = bool.Parse(dr["hasAccess"].ToString()) });
                 }
                 dbCon.Close();
             }
@@ -596,8 +577,7 @@ namespace prototype2
                     {
                         foreach (DataRow dr2 in fromDbTable2.Rows)
                         {
-
-                            MainVM.SelectedEmployeeContractor = MainVM.AllEmployeesContractor.Where(x => x.EmpID.Equals(dr2["empID"].ToString())).FirstOrDefault();
+                            
                             MainVM.SelectedServiceSchedule_.assignedEmployees_.Add(MainVM.SelectedEmployeeContractor);
                         }
                     }

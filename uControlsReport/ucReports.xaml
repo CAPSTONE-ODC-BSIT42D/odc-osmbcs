@@ -5,7 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:prototype2"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="prototype2.ucReports"
-             mc:Ignorable="d" d:DesignWidth="607" d:DesignHeight="394">
+             mc:Ignorable="d" d:DesignWidth="607" d:DesignHeight="394" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <local:DataSet1 x:Key="dataSet1"/>
+        <CollectionViewSource x:Key="item_tViewSource" Source="{Binding item_t, Source={StaticResource dataSet1}}"/>
+    </UserControl.Resources>
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>
@@ -16,5 +20,6 @@
             <ComboBoxItem Content="Service Report"/>
 
         </ComboBox>
+        <local:ucReportItem HorizontalAlignment="Left" Height="136" Margin="233,215,0,0" VerticalAlignment="Top" Width="232"/>
     </Grid>
 </UserControl>

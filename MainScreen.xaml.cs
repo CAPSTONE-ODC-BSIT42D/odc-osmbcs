@@ -58,8 +58,6 @@ namespace prototype2
 
             this.ucServices.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
            
-
-            this.ucUnit.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
             this.ucLocation.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
 
 
@@ -672,7 +670,6 @@ namespace prototype2
 
         private void manageCustomerAddBtn_Click(object sender, RoutedEventArgs e)
         {
-
             MainVM.isEdit = false;
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
             sb.Begin(formGridBg);
@@ -884,20 +881,54 @@ namespace prototype2
                 }
                 ucProduct.saveCancelGrid2.Visibility = Visibility.Collapsed;
                 ucProduct.editCloseGrid2.Visibility = Visibility.Visible;
-                foreach (var element in ucProduct.productDetailsFormGrid1.Children)
+                foreach (UIElement obj in ucProduct.productDetailsFormGrid1.Children)
                 {
-                    if (element is TextBox)
+                    if (!(obj is Label))
                     {
-                        ((TextBox)element).IsEnabled = false;
+                        obj.IsEnabled = false;
                     }
-                    if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
+                }
+            }
+            else if (manageServicesGrid.IsVisible)
+            {
+                Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+                sb.Begin(formGridBg);
+                foreach (UIElement obj in formGridBg.Children)
+                {
+                    if (obj.Equals(ucServices))
                     {
-                        ((Xceed.Wpf.Toolkit.DecimalUpDown)element).IsEnabled = false;
+                        obj.Visibility = Visibility.Visible;
                     }
-                    if (element is ComboBox)
+                    else
+                        obj.Visibility = Visibility.Collapsed;
+
+                }
+                ucServices.saveCloseButtonGrid.Visibility = Visibility.Collapsed;
+                ucServices.editCloseButtonGrid.Visibility = Visibility.Visible;
+                foreach (UIElement obj in ucServices.serviceForm.Children)
+                {
+                    obj.IsEnabled = false;
+                }
+            }
+            else if (manageLocationsGrid.IsVisible)
+            {
+                Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+                sb.Begin(formGridBg);
+                foreach (UIElement obj in formGridBg.Children)
+                {
+                    if (obj.Equals(ucLocation))
                     {
-                        ((ComboBox)element).IsEnabled = false;
+                        obj.Visibility = Visibility.Visible;
                     }
+                    else
+                        obj.Visibility = Visibility.Collapsed;
+
+                }
+                ucLocation.saveCancelGrid2.Visibility = Visibility.Collapsed;
+                ucLocation.editCloseGrid2.Visibility = Visibility.Visible;
+                foreach (UIElement obj in ucServices.serviceForm.Children)
+                {
+                    obj.IsEnabled = false;
                 }
             }
             formGridBg.Visibility = Visibility.Visible;
@@ -984,11 +1015,9 @@ namespace prototype2
                         else
                         {
                             ((UserControl)obj).Visibility = Visibility.Visible;
-                            sb.Begin(((UserControl)obj));
                         }
                     }
                 }
-                
                 ucProduct.saveCancelGrid2.Visibility = Visibility.Visible;
                 ucProduct.editCloseGrid2.Visibility = Visibility.Collapsed;
             }

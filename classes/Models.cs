@@ -381,6 +381,7 @@ namespace prototype2
             get { return unitShorthand; }
             set { SetProperty(ref unitShorthand, value); }
         }
+
     }
 
     public class Markup_History : ViewModelEntity
@@ -642,7 +643,7 @@ namespace prototype2
         public DateTime EmpDateTo
         {
             get { return empDateTo; }
-            set { SetProperty(ref empDateFrom, value); }
+            set { SetProperty(ref empDateTo, value); }
         }
 
         public int EmpType
@@ -722,6 +723,12 @@ namespace prototype2
             set { SetProperty(ref dateEffective, value); }
         }
 
+        protected ObservableCollection<Markup_History> markupHist;
+        public ObservableCollection<Markup_History> MarkupHist
+        {
+            get { return markupHist; }
+            set { SetProperty(ref markupHist, value); }
+        }
     }
 
     public class Service : ViewModelEntity

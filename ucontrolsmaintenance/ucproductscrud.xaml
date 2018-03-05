@@ -4,11 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:prototype2"
-             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="prototype2.ucProductsCRUD"
-             mc:Ignorable="d" d:DesignWidth="696" IsVisibleChanged="UserControl_IsVisibleChanged">
-    <UserControl.DataContext>
-        <StaticResource ResourceKey="MainVM"/>
-    </UserControl.DataContext>
+            xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="prototype2.ucProductsCRUD"
+             mc:Ignorable="d" d:DesignWidth="696" IsVisibleChanged="UserControl_IsVisibleChanged" DataContext="{StaticResource MainVM}">
     <StackPanel Orientation="Vertical">
         <Grid x:Name="productDetailsFormGrid1" Background="White" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
@@ -27,8 +25,14 @@
             <Label Content="Description:" HorizontalAlignment="Left" Margin="25,83,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
             <TextBox x:Name="productDescTb" HorizontalAlignment="Left" Height="54" Margin="136,83,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="442"/>
             <Label Content="* Category:" HorizontalAlignment="Left" Margin="25,150,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-            <ComboBox x:Name="categoryCb" HorizontalAlignment="Left" Margin="136,150,0,0" VerticalAlignment="Top" Width="220" ItemsSource="{Binding ProductCategory}" DisplayMemberPath="TypeName" SelectedValuePath="TypeID" IsSynchronizedWithCurrentItem ="True" SelectedItem="{Binding SelectedProductCategory}" >
-
+            <ComboBox x:Name="categoryCb" HorizontalAlignment="Left" Margin="136,150,0,0" VerticalAlignment="Top" Width="220" ItemsSource="{Binding ProductCategory}" DisplayMemberPath="TypeName" SelectedValuePath="TypeID" IsSynchronizedWithCurrentItem ="True" >
+                <ComboBox.SelectedItem>
+                    <Binding Path="SelectedProductCategory" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <local:TextBoxValidation TextBoxType="ComboBox"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.SelectedItem>
             </ComboBox>
             <TextBox x:Name="categoryNameTb" HorizontalAlignment="Left" Height="23" Margin="136,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Visibility="Hidden">
                 <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
@@ -37,18 +41,16 @@
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox>
-            <Button x:Name="addCategoryBtn" Content="+" HorizontalAlignment="Left" Margin="361,150,0,0" VerticalAlignment="Top" Width="26" Height="22" Click="addCategoryBtn_Click"/>
+            <Button x:Name="addCategoryBtn" Content="+" HorizontalAlignment="Left" Margin="380,150,0,0" VerticalAlignment="Top" Width="Auto" Height="22" Click="addCategoryBtn_Click" Padding="5,0,5,0"/>
             <Label Content="* Unit:" HorizontalAlignment="Left" Margin="25,184,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-            <ComboBox x:Name="unitCb" HorizontalAlignment="Left" Margin="136,187,0,0" VerticalAlignment="Top" Width="220" DisplayMemberPath="UnitName" SelectedValuePath="ID" IsSynchronizedWithCurrentItem ="True" SelectedItem="{Binding SelectedUnit}">
-                <ComboBox.Resources>
-                    <CollectionViewSource x:Key="Items" Source="{Binding Units}" />
-                </ComboBox.Resources>
-                <ComboBox.ItemsSource>
-                    <CompositeCollection>
-                        <TextBlock />
-                        <CollectionContainer Collection="{Binding Source={StaticResource Items}}" />
-                    </CompositeCollection>
-                </ComboBox.ItemsSource>
+            <ComboBox x:Name="unitCb" HorizontalAlignment="Left" Margin="136,187,0,0" VerticalAlignment="Top" Width="220" DisplayMemberPath="UnitName" SelectedValuePath="ID" IsSynchronizedWithCurrentItem ="True" ItemsSource="{Binding Units}">
+                <ComboBox.SelectedItem>
+                    <Binding Path="SelectedUnit" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <local:TextBoxValidation TextBoxType="ComboBox"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.SelectedItem>
             </ComboBox>
             <TextBox x:Name="unitNameTb" HorizontalAlignment="Left" Height="23" Margin="136,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="221" Visibility="Hidden">
                 <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
@@ -57,7 +59,7 @@
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox>
-            <Button x:Name="addUnitBtn" Content="+" HorizontalAlignment="Left" Margin="361,187,0,0" VerticalAlignment="Top" Width="26" Height="23" Click="addUnitBtn_Click"/>
+            <Button x:Name="addUnitBtn" Content="+" HorizontalAlignment="Left" Margin="380,187,0,0" VerticalAlignment="Top" Width="Auto" Height="23" Click="addUnitBtn_Click" Padding="5,0,5,0"/>
             <Label Content="Supplier:" HorizontalAlignment="Left" Margin="28,215,0,0" VerticalAlignment="Top" FontWeight="Bold" Visibility="Hidden"/>
             <ComboBox x:Name="supplierCb" HorizontalAlignment="Left" Margin="132,219,0,0" VerticalAlignment="Top" Width="220" DisplayMemberPath="CompanyName" SelectedValuePath="CompanyID" Visibility="Hidden">
                 <ComboBox.Resources>
@@ -70,9 +72,8 @@
                     </CompositeCollection>
                 </ComboBox.ItemsSource>
             </ComboBox>
-            <Label Content="* Date Effective:" HorizontalAlignment="Left" Margin="25,246,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
             <Label Content="* Markup Percent:" HorizontalAlignment="Left" Margin="25,215,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-            <xctk:DecimalUpDown x:Name="markUpPriceTb" HorizontalAlignment="Left" Margin="136,220,0,0" VerticalAlignment="Top" Width="220">
+            <xctk:DecimalUpDown x:Name="markupPercTb" HorizontalAlignment="Left" Margin="136,219,0,0" VerticalAlignment="Top" Width="221" Maximum="100" Minimum="1" TextAlignment="Right" Value="1">
                 <xctk:DecimalUpDown.Text>
                     <Binding Path="DecimalTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                         <Binding.ValidationRules>
@@ -81,8 +82,24 @@
                     </Binding>
                 </xctk:DecimalUpDown.Text>
             </xctk:DecimalUpDown>
-            <DatePicker x:Name="dateEffective" HorizontalAlignment="Left" Margin="136,246,0,0" VerticalAlignment="Top" Width="220"/>
-            <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="28,277,0,0" Width="621" Height="100" VerticalAlignment="Top"/>
+            <Label Content="* Date Effective:" HorizontalAlignment="Left" Margin="25,246,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+            <DatePicker x:Name="dateEffective" DisplayDateStart="{x:Static sys:DateTime.Now}" HorizontalAlignment="Left" Margin="136,246,0,0" VerticalAlignment="Top" Width="220">
+                <DatePicker.SelectedDate>
+                    <Binding Path="DatePickerBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <local:TextBoxValidation TextBoxType="Date"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </DatePicker.SelectedDate>
+            </DatePicker>
+            <Label Content="Markup History" HorizontalAlignment="Left" Margin="10,273,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+            <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,302,10,0" VerticalAlignment="Top"/>
+            <DataGrid x:Name="markupHisDg" Margin="10,321,10,0                       " Height="100" VerticalAlignment="Top" ItemsSource="{Binding SelectedProduct.MarkupHist}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding MarkupPerc}" ClipboardContentBinding="{x:Null}" Header="Markup Percent" Width="200" CanUserResize="False"  />
+                    <DataGridTextColumn Binding="{Binding DateEffective}" ClipboardContentBinding="{x:Null}" Header="Date Effective" Width="200" CanUserResize="False"  />
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
         <Grid VerticalAlignment="Bottom" Background="White" MinWidth="600" Height="40">
             <StackPanel Orientation="Vertical" Width="190" HorizontalAlignment="Right" Margin="0">
@@ -91,12 +108,14 @@
                     <Button x:Name="cancelProductBtn" Content="Cancel" Click="cancelRecordBtn_Click" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="76"/>
                 </Grid>
                 <Grid x:Name="editCloseGrid2" Margin="13,10" Width="164">
-                    <Button x:Name="editProductBtn" Content="Edit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76"/>
+                    <Button x:Name="editProductBtn" Content="Edit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Click="editProductBtn_Click"/>
                     <Button x:Name="cancelProductBtn1" Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Click="cancelRecordBtn_Click" Margin="81,0,-5,0"/>
                 </Grid>
             </StackPanel>
 
         </Grid>
+
+
 
     </StackPanel>
 </UserControl>

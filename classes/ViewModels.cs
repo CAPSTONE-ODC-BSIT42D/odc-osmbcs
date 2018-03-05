@@ -32,8 +32,12 @@ namespace prototype2
         public int IntegerTextBox { get; set; }
         public string StringTextBox_;
         public string StringTextBox { get; set; }
-        public DateTime DatePickerBox_;
-        public DateTime DatePickerBox { get; set; }
+        public DateTime DatePickerBox_ = DateTime.Now;
+        public DateTime DatePickerBox
+        {
+            get { return DatePickerBox_; }
+            set { SetProperty(ref DatePickerBox_, value); }
+        }
         #region Customer/Supplier
         public object CompanyType;
         public object CompanyType_
@@ -302,16 +306,6 @@ namespace prototype2
         #endregion
 
         #region Employee/Contractor
-
-        protected ObservableCollection<Employee> allEmployeesContractor =
-            new ObservableCollection<Employee>();
-
-        public ObservableCollection<Employee> AllEmployeesContractor
-        {
-            get { return allEmployeesContractor; }
-            set { allEmployeesContractor = value; }
-        }
-
         protected ObservableCollection<Employee> employees =
             new ObservableCollection<Employee>();
 
