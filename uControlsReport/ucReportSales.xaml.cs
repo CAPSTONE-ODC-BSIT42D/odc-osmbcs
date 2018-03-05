@@ -21,22 +21,22 @@ namespace prototype2
     /// <summary>
     /// Interaction logic for UserControl2.xaml
     /// </summary>
-    public partial class ucReportSales : UserControl
+    public partial class ucReportItem : UserControl
     {
-        public ucReportSales()
+        public ucReportItem()
         {
             InitializeComponent();
-            //DisplayReport();
+            DisplayReport();
             
         }
         private void DisplayReport ()
         {
-            ReportSales.Reset();
+            ReportItem.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("odc_dbDataSetSales", GetItem()));
-            ReportSales.LoadReport(rNames);
-            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
-            ReportSales.RefreshReport();
+            ReportItem.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource(" odc_dbDataSetSales", GetItem()));
+            ReportItem.LoadReport(rNames);
+            ReportItem.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
+            ReportItem.RefreshReport();
         }
 
         private DataTable GetItem()
@@ -60,16 +60,16 @@ namespace prototype2
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            ReportSales.RefreshReport();
+            ReportItem.RefreshReport();
         }
         private void DisplayReportItemDay()
         {
-            ReportSales.Reset();
+            ReportItem.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("odc_dbDataSetSales", GetItemDay()));
-            ReportSales.LoadReport(rNames);
-            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
-            ReportSales.RefreshReport();
+            ReportItem.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource(" odc_dbDataSetSales", GetItemDay()));
+            ReportItem.LoadReport(rNames);
+            ReportItem.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
+            ReportItem.RefreshReport();
         }
 
         private DataTable GetItemDay()
@@ -92,12 +92,12 @@ namespace prototype2
         }
         private void DisplayReportItemWeek()
         {
-            ReportSales.Reset();
+            ReportItem.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("odc_dbDataSetSales", GetItemWeek()));
-            ReportSales.LoadReport(rNames);
-            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
-            ReportSales.RefreshReport();
+            ReportItem.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("odc_dbDataSetSales", GetItemWeek()));
+            ReportItem.LoadReport(rNames);
+            ReportItem.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
+            ReportItem.RefreshReport();
         }
 
         private DataTable GetItemWeek()
@@ -121,12 +121,12 @@ namespace prototype2
 
         private void DisplayReportItemMonth()
         {
-            ReportSales.Reset();
+            ReportItem.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("odc_dbDataSetSales", GetItemMonth()));
-            ReportSales.LoadReport(rNames);
-            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
-            ReportSales.RefreshReport();
+            ReportItem.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("odc_dbDataSetSales", GetItemMonth()));
+            ReportItem.LoadReport(rNames);
+            ReportItem.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
+            ReportItem.RefreshReport();
         }
 
         private DataTable GetItemMonth()
@@ -149,12 +149,12 @@ namespace prototype2
         private void DisplayReportItemYear()
         {
 
-            ReportSales.Reset();
+            ReportItem.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("odc_dbDataSetSales", GetItemYear()));
-            ReportSales.LoadReport(rNames);
-            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
-            ReportSales.RefreshReport();
+            ReportItem.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("odc_dbDataSetSales", GetItemYear()));
+            ReportItem.LoadReport(rNames);
+            ReportItem.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
+            ReportItem.RefreshReport();
         }
 
         private DataTable GetItemYear()
@@ -177,12 +177,12 @@ namespace prototype2
         }
         private void DisplayReportItemRange()
         {
-            ReportSales.Reset();
+            ReportItem.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("odc_dbDataSetSales", GetItemRange()));
-            ReportSales.LoadReport(rNames);
-            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
-            ReportSales.RefreshReport();
+            ReportItem.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("odc_dbDataSetSales", GetItemRange()));
+            ReportItem.LoadReport(rNames);
+            ReportItem.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
+            ReportItem.RefreshReport();
         }
 
         private DataTable GetItemRange()
@@ -193,7 +193,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost)  AS Expr5 FROM item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN  cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID INNER JOIN service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN services_t s ON sa.serviceID = s.serviceID WHERE(si.dateOfIssue BETWEEN '"+DatePickerItemStart.SelectedDate.Value.ToString("yyyy-MM-dd") +"' AND '"+DatePickerItemEnd.SelectedDate.Value.ToString("yyyy-MM-dd") +"') AND (i.isDeleted = 0) AND(s.isDeleted = 0) GROUP BY i.itemName, s.serviceName, ia.totalCost, sa.totalCost, si.dateOfIssue";
+            cmd.CommandText = "SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost)  AS Expr5 FROM item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN  cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID INNER JOIN service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN services_t s ON sa.serviceID = s.serviceID WHERE(si.dateOfIssue BETWEEN '"+DatePickerItemStart.SelectedDate.ToString()+"' AND '"+DatePickerItemEnd.SelectedDate.ToString()+"') AND (i.isDeleted = 0) AND(s.isDeleted = 0) GROUP BY i.itemName, s.serviceName, ia.totalCost, sa.totalCost, si.dateOfIssue";
 
             odc_dbDataSetSales.DataTable1DataTable dSItem = new odc_dbDataSetSales.DataTable1DataTable();
 
