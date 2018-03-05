@@ -1331,53 +1331,7 @@ namespace prototype2 {
             }
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            odc_dbDataSet1 ds = new odc_dbDataSet1();
-            global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-            global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-            global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
-            any.Namespace = ds.Namespace;
-            sequence.Items.Add(any);
-            type.Particle = sequence;
-            global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-            if (xs.Contains(dsSchema.TargetNamespace)) {
-                global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                try {
-                    global::System.Xml.Schema.XmlSchema schema = null;
-                    dsSchema.Write(s1);
-                    for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                        schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                        s2.SetLength(0);
-                        schema.Write(s2);
-                        if ((s1.Length == s2.Length)) {
-                            s1.Position = 0;
-                            s2.Position = 0;
-                            for (; ((s1.Position != s1.Length) 
-                                        && (s1.ReadByte() == s2.ReadByte())); ) {
-                                ;
-                            }
-                            if ((s1.Position == s1.Length)) {
-                                return type;
-                            }
-                        }
-                    }
-                }
-                finally {
-                    if ((s1 != null)) {
-                        s1.Close();
-                    }
-                    if ((s2 != null)) {
-                        s2.Close();
-                    }
-                }
-            }
-            xs.Add(dsSchema);
-            return type;
-        }
-        
+
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public delegate void assigned_employees_tRowChangeEventHandler(object sender, assigned_employees_tRowChangeEvent e);
         

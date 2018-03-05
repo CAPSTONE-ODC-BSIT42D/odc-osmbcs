@@ -32,7 +32,6 @@ namespace prototype2
         private void DisplayReport ()
         {
             ReportItem.Reset();
-            ReportItem.ReportPath = "C:/Users/Alexis/Source/Repos/odc-osmbcs/rdlcfiles/SalesReport.rdlc";
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
             ReportItem.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource(" odc_dbDataSetSales", GetItem()));
             ReportItem.LoadReport(rNames);

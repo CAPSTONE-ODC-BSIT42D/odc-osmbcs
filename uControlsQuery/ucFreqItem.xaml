@@ -18,7 +18,7 @@
         </DataGrid.Columns>
         </DataGrid>
         <Label Content="Sort by:" HorizontalAlignment="Left" Margin="407,34,0,0" VerticalAlignment="Top" FontSize="11"/>
-        <ComboBox x:Name="comboBoxFreqItems" HorizontalAlignment="Left" Margin="458,35,0,0" VerticalAlignment="Top" Width="120" FontSize="11">
+        <ComboBox x:Name="comboBoxFreqItems" HorizontalAlignment="Left" Margin="458,35,0,0" VerticalAlignment="Top" Width="120" FontSize="11" SelectionChanged="comboBoxFreqItems_SelectionChanged">
             <ComboBoxItem Content="Daily"/>
             <ComboBoxItem Content="Weekly"/>
             <ComboBoxItem Content="Monthly"/>
