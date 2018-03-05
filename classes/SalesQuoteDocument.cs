@@ -300,10 +300,6 @@ namespace prototype2
             tac.AddText(MainVM.SelectedSalesQuote.validityDays_ + " days (price increase will take effect after validity period)");
 
             tac.AddLineBreak();
-            tac.AddText("PENALTY: " + "\t\t\t" + " : " + "\t");
-            tac.AddText(MainVM.SelectedSalesQuote.penaltyPercent_ + "% of balance");
-
-            tac.AddLineBreak();
             tac.AddText("ADDITIONAL TERMS " + "\t" + " : ");
             tac.AddText(MainVM.SelectedSalesQuote.additionalTerms_);
 
