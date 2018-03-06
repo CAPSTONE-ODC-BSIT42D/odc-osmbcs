@@ -687,10 +687,6 @@
                     </Button>
                 </Grid>
             </Grid>
-            <Grid x:Name="reportsGrid">
-                <local:ucReportSales HorizontalAlignment="Left" Height="551" Margin="10,10,0,0" VerticalAlignment="Top" Width="888"/>
-
-            </Grid>
             <Grid x:Name="trasanctionGrid" d:IsHidden="True">
                 <Grid x:Name="transQuotationGrid" Margin="0,0,1,0" >
                     <Grid x:Name="quotationsGridHome" Margin="10" >

@@ -27,7 +27,7 @@ namespace prototype2
         {
             InitializeComponent();
             DisplayReport();
-
+            
         }
         private void DisplayReport()
         {

@@ -8,11 +8,11 @@
              d:DesignHeight="300" d:DesignWidth="300" Width="596" Height="400">
     <Grid Background="#FFF7F7F7">
         <Label Content="Frequently Availed Services" HorizontalAlignment="Left" Margin="6,3,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <DataGrid x:Name="FreqServicesDataGrid" HorizontalAlignment="Left" Height="318" Margin="10,72,0,0" VerticalAlignment="Top" Width="576">
+        <DataGrid x:Name="FreqServicesDataGrid" HorizontalAlignment="Left" Height="318" Margin="10,72,0,0" VerticalAlignment="Top" Width="576" AutoGenerateColumns="False"  ItemsSource="{Binding Path=LoadDataBinding}">
             <DataGrid.Columns>
 
-                <DataGridTextColumn Header="Service Name" Width="290"/>
-                <DataGridTextColumn Header="No. of Times Availed" Width="300"/>
+                <DataGridTextColumn Binding="{Binding Path=serviceName}" Header="Service Name" Width="290" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Path=NoTimesSer}" Header="No. of Times Availed" Width="300" IsReadOnly="True"/>
 
             </DataGrid.Columns>
         </DataGrid>

@@ -453,11 +453,14 @@ namespace prototype2
 
         private void reportsBtn_Click(object sender, RoutedEventArgs e)
         {
+  
             foreach (var obj in containerGrid.Children)
             {
                 ((Grid)obj).Visibility = Visibility.Collapsed;
             }
             reportsGrid.Visibility = Visibility.Visible;
+           
+            
         }
 
         private void manageBtn_Click(object sender, RoutedEventArgs e)
@@ -670,7 +673,6 @@ namespace prototype2
 
         private void manageCustomerAddBtn_Click(object sender, RoutedEventArgs e)
         {
-
             MainVM.isEdit = false;
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
             sb.Begin(formGridBg);
@@ -888,6 +890,48 @@ namespace prototype2
                     {
                         obj.IsEnabled = false;
                     }
+                }
+            }
+            else if (manageServicesGrid.IsVisible)
+            {
+                Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+                sb.Begin(formGridBg);
+                foreach (UIElement obj in formGridBg.Children)
+                {
+                    if (obj.Equals(ucServices))
+                    {
+                        obj.Visibility = Visibility.Visible;
+                    }
+                    else
+                        obj.Visibility = Visibility.Collapsed;
+
+                }
+                ucServices.saveCloseButtonGrid.Visibility = Visibility.Collapsed;
+                ucServices.editCloseButtonGrid.Visibility = Visibility.Visible;
+                foreach (UIElement obj in ucServices.serviceForm.Children)
+                {
+                    obj.IsEnabled = false;
+                }
+            }
+            else if (manageLocationsGrid.IsVisible)
+            {
+                Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+                sb.Begin(formGridBg);
+                foreach (UIElement obj in formGridBg.Children)
+                {
+                    if (obj.Equals(ucLocation))
+                    {
+                        obj.Visibility = Visibility.Visible;
+                    }
+                    else
+                        obj.Visibility = Visibility.Collapsed;
+
+                }
+                ucLocation.saveCancelGrid2.Visibility = Visibility.Collapsed;
+                ucLocation.editCloseGrid2.Visibility = Visibility.Visible;
+                foreach (UIElement obj in ucServices.serviceForm.Children)
+                {
+                    obj.IsEnabled = false;
                 }
             }
             formGridBg.Visibility = Visibility.Visible;

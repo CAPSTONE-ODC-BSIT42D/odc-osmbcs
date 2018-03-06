@@ -274,9 +274,8 @@ namespace prototype2.uControlsMaintenance
                         "`empMI` = '" + empMiddleInitialTb.Text + "'," +
                         "`positionID` = '" + empPostionCb.SelectedValue + "'," +
                         "`empUserName` = '" + empUserNameTb.Text + "'," +
-                        " `hasAccess` = " + (bool)hasAccessCb.IsChecked +
-                        ") " +
-                        " WHERE empID = " + MainVM.SelectedEmployeeContractor.EmpID +
+                        " `hasAccess` = '" + (bool)hasAccessCb.IsChecked +
+                        "' WHERE empID = " + MainVM.SelectedEmployeeContractor.EmpID +
                         ";";
                     }
                     else
@@ -289,8 +288,7 @@ namespace prototype2.uControlsMaintenance
                         "`empAddress` = '" + empAddressTb.Text + "'," +
                         "`empDateFrom` = '" + empDateStarted.SelectedDate + "'," +
                         "`empDateTo` = '" + empDateEnded.SelectedDate +
-                        "') " +
-                        " WHERE empID = " + MainVM.SelectedEmployeeContractor.EmpID +
+                        "' WHERE empID = " + MainVM.SelectedEmployeeContractor.EmpID +
                         ";";
                     }
 
@@ -355,6 +353,10 @@ namespace prototype2.uControlsMaintenance
 
         void loadDataToUi()
         {
+            foreach(UIElement obj in employeeForm.Children)
+            {
+                obj.IsEnabled = false;
+            }
             empFirstNameTb.Text = MainVM.SelectedEmployeeContractor.EmpFname;
             empLastNameTb.Text = MainVM.SelectedEmployeeContractor.EmpLName;
             empMiddleInitialTb.Text = MainVM.SelectedEmployeeContractor.EmpMiddleInitial;
@@ -374,8 +376,8 @@ namespace prototype2.uControlsMaintenance
                 formHeader.Content = "Employee Details";
                 empAddressTb.Text = MainVM.SelectedEmployeeContractor.EmpAddress;
                 empJobCb.SelectedValue = MainVM.SelectedEmployeeContractor.JobID;
-                empDateStarted.SelectedDate = MainVM.SelectedEmployeeContractor.EmpDateTo;
-                empDateEnded.SelectedDate = MainVM.SelectedEmployeeContractor.EmpDateFrom;
+                empDateStarted.SelectedDate = MainVM.SelectedEmployeeContractor.EmpDateFrom;
+                empDateEnded.SelectedDate = MainVM.SelectedEmployeeContractor.EmpDateTo;
             }
         }
 
@@ -392,14 +394,29 @@ namespace prototype2.uControlsMaintenance
                     contractorOnlyGrid.Visibility = Visibility.Collapsed;
                     employeeOnlyGrid.Visibility = Visibility.Visible;
                     formHeader.Content = "Employee Details";
+                    editCloseGrid1.Visibility = Visibility.Collapsed;
+                    saveCancelGrid1.Visibility = Visibility.Visible;
                 }
                 else
                 {
                     contractorOnlyGrid.Visibility = Visibility.Visible;
                     employeeOnlyGrid.Visibility = Visibility.Collapsed;
                     formHeader.Content = "Contractor Details";
+
+                    editCloseGrid1.Visibility = Visibility.Collapsed;
+                    saveCancelGrid1.Visibility = Visibility.Visible;
                 }
             }
+        }
+
+        private void editEmployeeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (UIElement obj in employeeForm.Children)
+            {
+                obj.IsEnabled = true;
+            }
+            editCloseGrid1.Visibility = Visibility.Collapsed;
+            saveCancelGrid1.Visibility = Visibility.Visible;
         }
     }
 }
