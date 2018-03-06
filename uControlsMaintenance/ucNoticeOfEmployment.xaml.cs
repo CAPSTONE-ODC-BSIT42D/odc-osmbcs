@@ -32,7 +32,7 @@ namespace prototype2
         {
             ucReportViewer.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.RDLC.NoticeOfEmployment.rdlc");
-            ucReportViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSet1", GetContract()));
+            ucReportViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("noticeOfemploymentDataTable", GetContract()));
             ucReportViewer.LoadReport(rNames);
             ucReportViewer.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ucReportViewer.RefreshReport();
@@ -46,9 +46,9 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "Select e.empfname, e.empmi,e.empLName, e.empAddress, e.empCity, e.empdatefrom, e.empDateTo, j.jobname from emp_cont_t e JOIN job_title_t j ON e.jobID = j.jobID where isDeleted = 0 and emptype = 1 and e.empID  = '"+ MainVM.SelectedEmployeeContractor.EmpID + "'";
+            cmd.CommandText = "                  SELECT        e.empFName, e.empMI, e.empLName, e.empAddress, e.empDateFrom, e.empDateTo, j.jobName FROM emp_cont_t e INNER JOIN job_title_t j ON e.jobID = j.jobID WHERE(e.isDeleted = 0) AND(e.empType = 1) AND(CONCAT(e.empFName, ' ', e.empMI, ' ', e.empLName) = '"+ MainVM.SelectedEmployeeContractor.EmpID + "'";
 
-            DataSet1.noticeOfEmploymentDataTable dSContract = new DataSet1.noticeOfEmploymentDataTable();
+            DataSet1.noticeOfemploymentDataTableDataTable dSContract = new DataSet1.noticeOfemploymentDataTableDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSContract);

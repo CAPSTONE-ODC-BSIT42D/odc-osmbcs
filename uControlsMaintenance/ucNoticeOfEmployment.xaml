@@ -11,6 +11,6 @@
             <RV:ReportViewer x:Name="Contract"></RV:ReportViewer>
             
         </WindowsFormsHost>-->
-        <syncfusion:ReportViewer x:Name="ucReportViewer" Margin="0" ProcessingMode="Local" />
+        <syncfusion:ReportViewer x:Name="ucReportViewer" Margin="0" ReportPath="C:\Users\Alexis\Source\Repos\odc-osmbcs\rdlcfiles\NoticeOfEmployment.rdlc" ProcessingMode="Local" />
     </Grid>
 </UserControl>

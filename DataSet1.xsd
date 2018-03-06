@@ -334,12 +334,12 @@ WHERE        (i.isDeleted = 0) AND (s.isDeleted = 0) AND (YEAR(ss.dateStarted) =
               </DbSource>
             </Sources>
           </TableAdapter>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="noticeOfEmploymentTableAdapter" GeneratorDataComponentClassName="noticeOfEmploymentTableAdapter" Name="noticeOfEmployment" UserDataComponentName="noticeOfEmploymentTableAdapter">
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="noticeOfemploymentDataTableTableAdapter" GeneratorDataComponentClassName="noticeOfemploymentDataTableTableAdapter" Name="noticeOfemploymentDataTable" UserDataComponentName="noticeOfemploymentDataTableTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByContract" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="FillByContract" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="FillByContract">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByContract" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataByContract" GeneratorSourceName="FillByContract" GetMethodModifier="Public" GetMethodName="GetDataByContract" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataByContract" UserSourceName="FillByContract">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        e.empFName, e.empMI, e.empLName, e.empAddress, e.empCity, e.empDateFrom, e.empDateTo, j.jobName
+                    <CommandText>SELECT        e.empFName, e.empMI, e.empLName, e.empAddress, e.empDateFrom, e.empDateTo, j.jobName
 FROM            emp_cont_t e INNER JOIN
                          job_title_t j ON e.jobID = j.jobID
 WHERE        (e.isDeleted = 0) AND (e.empType = 1) AND (CONCAT(e.empFName, ' ', e.empMI, ' ', e.empLName) = @A)</CommandText>
@@ -353,7 +353,6 @@ WHERE        (e.isDeleted = 0) AND (e.empType = 1) AND (CONCAT(e.empFName, ' ', 
             <Mappings>
               <Mapping SourceColumn="jobName" DataSetColumn="jobName" />
               <Mapping SourceColumn="empAddress" DataSetColumn="empAddress" />
-              <Mapping SourceColumn="empCity" DataSetColumn="empCity" />
               <Mapping SourceColumn="empFName" DataSetColumn="empFName" />
               <Mapping SourceColumn="empMI" DataSetColumn="empMI" />
               <Mapping SourceColumn="empLName" DataSetColumn="empLName" />
@@ -390,20 +389,24 @@ FROM            cust_supp_t c INNER JOIN
             </Mappings>
             <Sources />
           </TableAdapter>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="purchaseOrderTableAdapter" GeneratorDataComponentClassName="purchaseOrderTableAdapter" Name="purchaseOrder" UserDataComponentName="purchaseOrderTableAdapter">
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="PurchaseOrderDataTableTableAdapter" GeneratorDataComponentClassName="PurchaseOrderDataTableTableAdapter" Name="PurchaseOrderDataTable" UserDataComponentName="PurchaseOrderDataTableTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByPurchaseOrder" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="FillByPurchaseOrder" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="FillByPurchaseOrder">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByPurchaseOrder" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataByPurchaseOrder" GeneratorSourceName="FillByPurchaseOrder" GetMethodModifier="Public" GetMethodName="GetDataByPurchaseOrder" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataByPurchaseOrder" UserSourceName="FillByPurchaseOrder">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        po.PONumChar, cs.companyName, cs.companyType, cs.companyAddress, cs.companyCity, pr.locProvince, cs.repFName, cs.repMInitial, cs.repLName, cs.repEmail, cs.repTelephone, cs.repMobile, po.orderDate, 
-                         po.requisitioner, po.POdueDate, po.incoterms, po.termsDays, po.termsDP, po.currency, it.itemCode, ia.itemQnty, it.itemUnit, it.itemDescr, it.salesPrice, ia.totalCost, po.preparedBy, po.approvedBy, po.shipVia, 
+                    <CommandText>SELECT        po.PONumChar, cs.companyName, cs.companyType, cs.companyAddress, cs.companyCity, pr.provinceName, cs.repFName, cs.repMInitial, cs.repLName, cs.repEmail, cs.repTelephone, cs.repMobile, 
+                         po.orderDate, po.requisitioner, po.POdueDate, po.incoterms, po.termsDays, po.termsDP, po.currency, it.ID, ia.itemQnty, ui.unitName, it.itemDescr, ia.unitPrice, po.preparedBy, po.approvedBy, po.shipVia, 
                          po.shipTo
 FROM            purchase_order_t po INNER JOIN
                          cust_supp_t cs ON po.suppID = cs.companyID INNER JOIN
                          item_t it ON it.supplierID = cs.companyID INNER JOIN
-                         items_availed_t ia ON it.itemCode = ia.itemCode INNER JOIN
-                         provinces_t pr ON cs.companyProvinceID = pr.locProvinceID</CommandText>
-                    <Parameters />
+                         items_availed_t ia ON it.ID = ia.itemID INNER JOIN
+                         provinces_t pr ON cs.companyProvinceID = pr.id INNER JOIN
+                         unit_t ui ON it.unitID = ui.id
+WHERE        (ia.id = @B)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="B" ColumnName="id" DataSourceName="odc_db.items_availed_t" DataTypeServer="int(11)" DbType="Int32" Direction="Input" ParameterName="@B" Precision="0" ProviderType="Int32" Scale="0" Size="0" SourceColumn="id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
@@ -425,19 +428,18 @@ FROM            purchase_order_t po INNER JOIN
               <Mapping SourceColumn="termsDays" DataSetColumn="termsDays" />
               <Mapping SourceColumn="termsDP" DataSetColumn="termsDP" />
               <Mapping SourceColumn="currency" DataSetColumn="currency" />
-              <Mapping SourceColumn="itemCode" DataSetColumn="itemCode" />
               <Mapping SourceColumn="itemQnty" DataSetColumn="itemQnty" />
-              <Mapping SourceColumn="itemUnit" DataSetColumn="itemUnit" />
               <Mapping SourceColumn="itemDescr" DataSetColumn="itemDescr" />
-              <Mapping SourceColumn="salesPrice" DataSetColumn="salesPrice" />
-              <Mapping SourceColumn="totalCost" DataSetColumn="totalCost" />
               <Mapping SourceColumn="preparedBy" DataSetColumn="preparedBy" />
               <Mapping SourceColumn="approvedBy" DataSetColumn="approvedBy" />
               <Mapping SourceColumn="shipVia" DataSetColumn="shipVia" />
               <Mapping SourceColumn="shipTo" DataSetColumn="shipTo" />
               <Mapping SourceColumn="companyAddress" DataSetColumn="companyAddress" />
               <Mapping SourceColumn="companyCity" DataSetColumn="companyCity" />
-              <Mapping SourceColumn="locProvince" DataSetColumn="locProvince" />
+              <Mapping SourceColumn="provinceName" DataSetColumn="provinceName" />
+              <Mapping SourceColumn="ID" DataSetColumn="ID" />
+              <Mapping SourceColumn="unitName" DataSetColumn="unitName" />
+              <Mapping SourceColumn="unitPrice" DataSetColumn="unitPrice" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -562,7 +564,7 @@ FROM            purchase_order_t po INNER JOIN
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="noticeOfEmployment" msprop:Generator_TableClassName="noticeOfEmploymentDataTable" msprop:Generator_TableVarName="tablenoticeOfEmployment" msprop:Generator_TablePropName="noticeOfEmployment" msprop:Generator_RowDeletingName="noticeOfEmploymentRowDeleting" msprop:Generator_RowChangingName="noticeOfEmploymentRowChanging" msprop:Generator_RowEvHandlerName="noticeOfEmploymentRowChangeEventHandler" msprop:Generator_RowDeletedName="noticeOfEmploymentRowDeleted" msprop:Generator_UserTableName="noticeOfEmployment" msprop:Generator_RowChangedName="noticeOfEmploymentRowChanged" msprop:Generator_RowEvArgName="noticeOfEmploymentRowChangeEvent" msprop:Generator_RowClassName="noticeOfEmploymentRow">
+        <xs:element name="noticeOfemploymentDataTable" msprop:Generator_TableClassName="noticeOfemploymentDataTableDataTable" msprop:Generator_TableVarName="tablenoticeOfemploymentDataTable" msprop:Generator_TablePropName="noticeOfemploymentDataTable" msprop:Generator_RowDeletingName="noticeOfemploymentDataTableRowDeleting" msprop:Generator_RowChangingName="noticeOfemploymentDataTableRowChanging" msprop:Generator_RowEvHandlerName="noticeOfemploymentDataTableRowChangeEventHandler" msprop:Generator_RowDeletedName="noticeOfemploymentDataTableRowDeleted" msprop:Generator_UserTableName="noticeOfemploymentDataTable" msprop:Generator_RowChangedName="noticeOfemploymentDataTableRowChanged" msprop:Generator_RowEvArgName="noticeOfemploymentDataTableRowChangeEvent" msprop:Generator_RowClassName="noticeOfemploymentDataTableRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="jobName" msprop:Generator_ColumnVarNameInTable="columnjobName" msprop:Generator_ColumnPropNameInRow="jobName" msprop:Generator_ColumnPropNameInTable="jobNameColumn" msprop:Generator_UserColumnName="jobName" minOccurs="0">
@@ -576,13 +578,6 @@ FROM            purchase_order_t po INNER JOIN
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="21845" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="empCity" msprop:Generator_ColumnVarNameInTable="columnempCity" msprop:Generator_ColumnPropNameInRow="empCity" msprop:Generator_ColumnPropNameInTable="empCityColumn" msprop:Generator_UserColumnName="empCity" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="255" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
@@ -669,7 +664,7 @@ FROM            purchase_order_t po INNER JOIN
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="purchaseOrder" msprop:Generator_TableClassName="purchaseOrderDataTable" msprop:Generator_TableVarName="tablepurchaseOrder" msprop:Generator_TablePropName="purchaseOrder" msprop:Generator_RowDeletingName="purchaseOrderRowDeleting" msprop:Generator_RowChangingName="purchaseOrderRowChanging" msprop:Generator_RowEvHandlerName="purchaseOrderRowChangeEventHandler" msprop:Generator_RowDeletedName="purchaseOrderRowDeleted" msprop:Generator_UserTableName="purchaseOrder" msprop:Generator_RowChangedName="purchaseOrderRowChanged" msprop:Generator_RowEvArgName="purchaseOrderRowChangeEvent" msprop:Generator_RowClassName="purchaseOrderRow">
+        <xs:element name="PurchaseOrderDataTable" msprop:Generator_TableClassName="PurchaseOrderDataTableDataTable" msprop:Generator_TableVarName="tablePurchaseOrderDataTable" msprop:Generator_TablePropName="PurchaseOrderDataTable" msprop:Generator_RowDeletingName="PurchaseOrderDataTableRowDeleting" msprop:Generator_RowChangingName="PurchaseOrderDataTableRowChanging" msprop:Generator_RowEvHandlerName="PurchaseOrderDataTableRowChangeEventHandler" msprop:Generator_RowDeletedName="PurchaseOrderDataTableRowDeleted" msprop:Generator_UserTableName="PurchaseOrderDataTable" msprop:Generator_RowChangedName="PurchaseOrderDataTableRowChanged" msprop:Generator_RowEvArgName="PurchaseOrderDataTableRowChangeEvent" msprop:Generator_RowClassName="PurchaseOrderDataTableRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="PONumChar" msprop:Generator_ColumnVarNameInTable="columnPONumChar" msprop:Generator_ColumnPropNameInRow="PONumChar" msprop:Generator_ColumnPropNameInTable="PONumCharColumn" msprop:Generator_UserColumnName="PONumChar">
@@ -754,21 +749,7 @@ FROM            purchase_order_t po INNER JOIN
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="itemCode" msprop:Generator_ColumnVarNameInTable="columnitemCode" msprop:Generator_ColumnPropNameInRow="itemCode" msprop:Generator_ColumnPropNameInTable="itemCodeColumn" msprop:Generator_UserColumnName="itemCode">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="255" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
               <xs:element name="itemQnty" msprop:Generator_ColumnVarNameInTable="columnitemQnty" msprop:Generator_ColumnPropNameInRow="itemQnty" msprop:Generator_ColumnPropNameInTable="itemQntyColumn" msprop:Generator_UserColumnName="itemQnty" type="xs:int" minOccurs="0" />
-              <xs:element name="itemUnit" msprop:Generator_ColumnVarNameInTable="columnitemUnit" msprop:Generator_ColumnPropNameInRow="itemUnit" msprop:Generator_ColumnPropNameInTable="itemUnitColumn" msprop:Generator_UserColumnName="itemUnit" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="45" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
               <xs:element name="itemDescr" msprop:Generator_ColumnVarNameInTable="columnitemDescr" msprop:Generator_ColumnPropNameInRow="itemDescr" msprop:Generator_ColumnPropNameInTable="itemDescrColumn" msprop:Generator_UserColumnName="itemDescr" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -776,8 +757,6 @@ FROM            purchase_order_t po INNER JOIN
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="salesPrice" msprop:Generator_ColumnVarNameInTable="columnsalesPrice" msprop:Generator_ColumnPropNameInRow="salesPrice" msprop:Generator_ColumnPropNameInTable="salesPriceColumn" msprop:Generator_UserColumnName="salesPrice" type="xs:decimal" minOccurs="0" />
-              <xs:element name="totalCost" msprop:Generator_ColumnVarNameInTable="columntotalCost" msprop:Generator_ColumnPropNameInRow="totalCost" msprop:Generator_ColumnPropNameInTable="totalCostColumn" msprop:Generator_UserColumnName="totalCost" type="xs:decimal" minOccurs="0" />
               <xs:element name="preparedBy" msprop:Generator_ColumnVarNameInTable="columnpreparedBy" msprop:Generator_ColumnPropNameInRow="preparedBy" msprop:Generator_ColumnPropNameInTable="preparedByColumn" msprop:Generator_UserColumnName="preparedBy" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -820,13 +799,22 @@ FROM            purchase_order_t po INNER JOIN
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="locProvince" msprop:Generator_ColumnVarNameInTable="columnlocProvince" msprop:Generator_ColumnPropNameInRow="locProvince" msprop:Generator_ColumnPropNameInTable="locProvinceColumn" msprop:Generator_UserColumnName="locProvince" minOccurs="0">
+              <xs:element name="provinceName" msprop:Generator_ColumnVarNameInTable="columnprovinceName" msprop:Generator_ColumnPropNameInRow="provinceName" msprop:Generator_ColumnPropNameInTable="provinceNameColumn" msprop:Generator_UserColumnName="provinceName" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="25" />
+                    <xs:maxLength value="255" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
+              <xs:element name="unitName" msprop:Generator_ColumnVarNameInTable="columnunitName" msprop:Generator_ColumnPropNameInRow="unitName" msprop:Generator_ColumnPropNameInTable="unitNameColumn" msprop:Generator_UserColumnName="unitName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="unitPrice" msprop:Generator_ColumnVarNameInTable="columnunitPrice" msprop:Generator_ColumnPropNameInRow="unitPrice" msprop:Generator_ColumnPropNameInTable="unitPriceColumn" msprop:Generator_UserColumnName="unitPrice" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -849,10 +837,10 @@ FROM            purchase_order_t po INNER JOIN
       <xs:selector xpath=".//mstns:officialReceipt" />
       <xs:field xpath="mstns:invoiceNo" />
     </xs:unique>
-    <xs:unique name="purchaseOrder_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:purchaseOrder" />
+    <xs:unique name="PurchaseOrderDataTable_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:PurchaseOrderDataTable" />
       <xs:field xpath="mstns:PONumChar" />
-      <xs:field xpath="mstns:itemCode" />
+      <xs:field xpath="mstns:ID" />
     </xs:unique>
   </xs:element>
 </xs:schema>

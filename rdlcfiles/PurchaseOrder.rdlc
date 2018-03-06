@@ -1001,7 +1001,7 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>DataSet1</DataSetName>
+        <DataSetName>PurchaseOrderTable</DataSetName>
         <Top>3.68625in</Top>
         <Left>0.32292in</Left>
         <Height>0.5in</Height>
@@ -1280,21 +1280,21 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="itemCode">
+                    <Textbox Name="ID">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!itemCode.Value</Value>
+                              <Value>=Fields!ID.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>itemCode</rd:DefaultName>
+                      <rd:DefaultName>ID</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1370,21 +1370,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="itemUnit">
+                    <Textbox Name="unitName">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!itemUnit.Value</Value>
+                              <Value>=Fields!unitName.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>itemUnit</rd:DefaultName>
+                      <rd:DefaultName>unitName</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1430,21 +1430,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="salesPrice">
+                    <Textbox Name="unitPrice">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!salesPrice.Value</Value>
+                              <Value>=Fields!unitPrice.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>salesPrice</rd:DefaultName>
+                      <rd:DefaultName>unitPrice</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1460,21 +1460,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="totalCost">
+                    <Textbox Name="unitPrice1">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!totalCost.Value</Value>
+                              <Value>=Fields!unitPrice.Value*Fields!itemQnty.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>totalCost</rd:DefaultName>
+                      <rd:DefaultName>unitPrice1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1513,7 +1513,7 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>DataSet1</DataSetName>
+        <DataSetName>PurchaseOrderTable</DataSetName>
         <Top>4.56125in</Top>
         <Left>0.32292in</Left>
         <Height>0.5in</Height>
@@ -1780,7 +1780,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Today()</Value>
+                              <Value>=Today</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1885,7 +1885,7 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>DataSet1</DataSetName>
+        <DataSetName>PurchaseOrderTable</DataSetName>
         <Top>1.58208in</Top>
         <Left>0.81125in</Left>
         <Height>0.25in</Height>
@@ -1954,7 +1954,7 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>DataSet1</DataSetName>
+        <DataSetName>PurchaseOrderTable</DataSetName>
         <Top>2.37375in</Top>
         <Left>1.03in</Left>
         <Height>0.25in</Height>
@@ -2023,7 +2023,7 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>DataSet1</DataSetName>
+        <DataSetName>PurchaseOrderTable</DataSetName>
         <Top>2.67931in</Top>
         <Left>1.01264in</Left>
         <Height>0.25in</Height>
@@ -2092,7 +2092,7 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>DataSet1</DataSetName>
+        <DataSetName>PurchaseOrderTable</DataSetName>
         <Top>2.97098in</Top>
         <Left>0.99875in</Left>
         <Height>0.25in</Height>
@@ -2161,7 +2161,7 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>DataSet1</DataSetName>
+        <DataSetName>PurchaseOrderTable</DataSetName>
         <Top>3.3043in</Top>
         <Left>0.99875in</Left>
         <Height>0.25in</Height>
@@ -2266,7 +2266,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!totalCost.Value, "DataSet1")</Value>
+                              <Value>=Sum(Fields!unitPrice.Value*Fields!itemQnty.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -2285,6 +2285,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -2305,7 +2306,7 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>DataSet1</DataSetName>
+        <DataSetName>PurchaseOrderTable</DataSetName>
         <Top>5.06125in</Top>
         <Left>0.32292in</Left>
         <Height>0.51389in</Height>
@@ -2374,7 +2375,7 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>DataSet1</DataSetName>
+        <DataSetName>PurchaseOrderTable</DataSetName>
         <Top>1.20708in</Top>
         <Left>5.72917in</Left>
         <Height>0.25in</Height>
@@ -2619,7 +2620,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!companyAddress.Value &amp;", "&amp; FORMAT(Fields!companyCity.Value) &amp;", "&amp; FORMAT(Fields!locProvince.Value)</Value>
+                              <Value>=Fields!companyAddress.Value &amp;", "&amp; FORMAT(Fields!companyCity.Value) &amp;", "&amp; FORMAT(Fields!provinceName.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -2656,7 +2657,7 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>DataSet1</DataSetName>
+        <DataSetName>PurchaseOrderTable</DataSetName>
         <Top>1.90152in</Top>
         <Left>0.155in</Left>
         <Height>0.36111in</Height>
@@ -2691,18 +2692,132 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="DataSet1">
+    <DataSet Name="PurchaseOrderTable">
       <Query>
         <DataSourceName>DataSet1</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
+      <Fields>
+        <Field Name="PONumChar">
+          <DataField>PONumChar</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="companyName">
+          <DataField>companyName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="companyType">
+          <DataField>companyType</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="repFName">
+          <DataField>repFName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="repMInitial">
+          <DataField>repMInitial</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="repLName">
+          <DataField>repLName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="repEmail">
+          <DataField>repEmail</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="repTelephone">
+          <DataField>repTelephone</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="repMobile">
+          <DataField>repMobile</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="orderDate">
+          <DataField>orderDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="requisitioner">
+          <DataField>requisitioner</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="POdueDate">
+          <DataField>POdueDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="incoterms">
+          <DataField>incoterms</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="termsDays">
+          <DataField>termsDays</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="termsDP">
+          <DataField>termsDP</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="currency">
+          <DataField>currency</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="itemQnty">
+          <DataField>itemQnty</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="itemDescr">
+          <DataField>itemDescr</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="preparedBy">
+          <DataField>preparedBy</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="approvedBy">
+          <DataField>approvedBy</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="shipVia">
+          <DataField>shipVia</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="shipTo">
+          <DataField>shipTo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="companyAddress">
+          <DataField>companyAddress</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="companyCity">
+          <DataField>companyCity</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="provinceName">
+          <DataField>provinceName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ID">
+          <DataField>ID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="unitName">
+          <DataField>unitName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="unitPrice">
+          <DataField>unitPrice</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DataSet1</rd:DataSetName>
         <rd:SchemaPath>C:\Users\Alexis\Source\Repos\odc-osmbcs\DataSet1.xsd</rd:SchemaPath>
-        <rd:TableName>DataTable6</rd:TableName>
+        <rd:TableName>PurchaseOrderDataTable</rd:TableName>
         <rd:TableAdapterFillMethod>FillByPurchaseOrder</rd:TableAdapterFillMethod>
-        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>DataTable6TableAdapter</rd:TableAdapterName>
+        <rd:TableAdapterGetDataMethod>GetDataByPurchaseOrder</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>PurchaseOrderDataTableTableAdapter</rd:TableAdapterName>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>

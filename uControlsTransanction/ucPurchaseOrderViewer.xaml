@@ -9,6 +9,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="467.603" d:DesignWidth="363.971">
     <Grid Background="#FFEAE8E8">
-        <syncfusion:ReportViewer x:Name="ucReportViewer" Margin="0" ProcessingMode="Local" />
+        <syncfusion:ReportViewer x:Name="ucReportViewer" ReportPath="C:\Users\Alexis\Source\Repos\odc-osmbcs\rdlcfiles\PurchaseOrder.rdlc" Margin="0" ProcessingMode="Local" />
     </Grid>
 </UserControl>

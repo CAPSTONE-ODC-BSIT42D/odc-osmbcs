@@ -36,7 +36,14 @@ namespace prototype2.uControlsMaintenance
         }
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
         
-        private bool validationError = false;
+        private bool 
+            
+            
+            
+            
+            
+            
+            g2 = false;
         
         DateTime dateOfIssue = new DateTime();
         public event EventHandler SaveClosePaymentForm;

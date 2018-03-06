@@ -2,9 +2,8 @@
 {
 
 
-    partial class DatasetReportSales
+    partial class DataSetReportService
     {
     }
 }
-
 
