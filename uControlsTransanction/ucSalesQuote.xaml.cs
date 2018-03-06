@@ -254,7 +254,7 @@ namespace prototype2
 
         private void deleteFeeBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainVM.AvailedServicesList.AdditionalFees.Remove(MainVM.SelectedAdditionalFee);
+            MainVM.SelectedAvailedServices.AdditionalFees.Remove(MainVM.SelectedAdditionalFee);
         }
 
         private void addSaveAdditionalFeesBtn_Click(object sender, RoutedEventArgs e)
