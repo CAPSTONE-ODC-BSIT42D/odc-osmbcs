@@ -170,7 +170,7 @@ namespace prototype2
 
         public bool isPaymentInvoice { get; set; }
 
-        public bool isViewHome { get; set; }
+        public bool isView { get; set; }
 
         public bool isNewRecord { get; set; }
 
@@ -417,6 +417,14 @@ namespace prototype2
             set { SetProperty(ref selectedservice, value); }
         }
 
+        protected ObservableCollection<AvailedService> availedServicesList = new ObservableCollection<AvailedService>();
+
+        public ObservableCollection<AvailedService> AvailedServicesList
+        {
+            get { return availedServicesList; }
+            set { SetProperty(ref availedServicesList, value); }
+        }
+
         protected ObservableCollection<AvailedService> availedServices = new ObservableCollection<AvailedService>();
 
         protected AvailedService selectedAvailedServices = null;
@@ -424,7 +432,7 @@ namespace prototype2
         public ObservableCollection<AvailedService> AvailedServices
         {
             get { return availedServices; }
-            set { availedServices = value; }
+            set { SetProperty(ref availedServices, value); }
         }
 
         public AvailedService SelectedAvailedServices

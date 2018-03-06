@@ -850,7 +850,7 @@ namespace prototype2
         protected string sqNoChar;
         protected int itemID;
         protected int itemQty;
-        protected decimal totalCost;
+        protected decimal unitPrice;
 
         public int AvailedItemID
         {
@@ -876,10 +876,10 @@ namespace prototype2
             set { SetProperty(ref itemQty, value); }
         }
 
-        public decimal TotalCost
+        public decimal UnitPrice
         {
-            get { return totalCost; }
-            set { SetProperty(ref totalCost, value); }
+            get { return unitPrice; }
+            set { SetProperty(ref unitPrice, value); }
         }
     }
 
@@ -900,6 +900,13 @@ namespace prototype2
         {
             get { return _availedItemID; }
             set { SetProperty(ref _availedItemID, value); }
+        }
+
+        protected int _availedServiceID;
+        public int availedServiceID
+        {
+            get { return _availedServiceID; }
+            set { SetProperty(ref _availedServiceID, value); }
         }
 
         private int _itemID;

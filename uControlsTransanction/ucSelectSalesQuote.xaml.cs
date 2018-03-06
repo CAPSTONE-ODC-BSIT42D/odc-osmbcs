@@ -62,9 +62,10 @@ namespace prototype2.uControlsTransanction
                                       where itm.ItemID == ai.ItemID
                                       && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
                                       select itm;
-                    decimal unitPric = ai.TotalCost - (ai.TotalCost / 100 * markupPrice.Last().MarkupPerc);
-                    MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID,itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, totalAmount = ai.TotalCost, unitPrice = unitPric });
-                    MainVM.VatableSale += Math.Round(ai.TotalCost, 2);
+
+                    decimal totalPric = ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc);
+                    MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID,itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, totalAmount = totalPric, unitPrice = ai.UnitPrice });
+                    MainVM.VatableSale += Math.Round(totalPric, 2);
                 }
 
                 foreach (AvailedService aserv in invoiceserv)
