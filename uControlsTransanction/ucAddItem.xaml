@@ -70,7 +70,7 @@
                             </Binding>
                         </ComboBox.SelectedItem>
                     </ComboBox>
-                    <TextBox x:Name="serviceDescTb" Height="79" Margin="27,93,21,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" FontSize="12" FontFamily="Segoe UI" FontStyle="Normal" FontWeight="Normal"/>
+                    <TextBox x:Name="serviceDescTb" Height="79" Margin="27,93,21,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="12" FontFamily="Segoe UI" FontStyle="Normal" FontWeight="Normal"/>
                     <TextBox x:Name="serviceAddressTb" TextWrapping="Wrap" Margin="56,241,0,0" HorizontalAlignment="Left" Width="597" Height="23" VerticalAlignment="Top" Background="White">
                         <Binding Path="Address" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
