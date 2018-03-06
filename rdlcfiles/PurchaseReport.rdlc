@@ -322,12 +322,12 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>PurchaseTable</DataSetName>
-        <Top>2.50347in</Top>
-        <Left>0.27517in</Left>
-        <Height>0.88542in</Height>
-        <Width>8.10069in</Width>
-        <ZIndex>5</ZIndex>
+        <DataSetName>DataSet1</DataSetName>
+        <Top>2.80555in</Top>
+        <Left>0.24479in</Left>
+        <Height>0.98958in</Height>
+        <Width>8.92708in</Width>
+        <ZIndex>3</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -613,12 +613,12 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>PurchaseTable</DataSetName>
-        <Top>4.5868in</Top>
-        <Left>0.27517in</Left>
-        <Height>0.77083in</Height>
-        <Width>8.0868in</Width>
-        <ZIndex>8</ZIndex>
+        <DataSetName>DataSet1</DataSetName>
+        <Top>5.29861in</Top>
+        <Left>0.24479in</Left>
+        <Height>0.9375in</Height>
+        <Width>8.92708in</Width>
+        <ZIndex>4</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -675,6 +675,79 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="Textbox40">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Product</Value>
+                              <Style>
+                                <FontSize>20pt</FontSize>
+                                <Color>Red</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox38</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Details7" />
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <Top>2.3993in</Top>
+        <Left>0.24479in</Left>
+        <Height>0.40625in</Height>
+        <Width>8.92708in</Width>
+        <ZIndex>6</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Tablix>
+      <Tablix Name="Tablix4">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>1in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1in</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.25in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="Expr3">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -718,16 +791,16 @@
         <TablixRowHierarchy>
           <TablixMembers>
             <TablixMember>
-              <Group Name="Details3" />
+              <Group Name="Details4" />
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>PurchaseTable</DataSetName>
-        <Top>5.35763in</Top>
-        <Left>4.30468in</Left>
-        <Height>0.40625in</Height>
-        <Width>4.03645in</Width>
-        <ZIndex>10</ZIndex>
+        <DataSetName>DataSet1</DataSetName>
+        <Top>1.47396in</Top>
+        <Left>2.02604in</Left>
+        <Height>0.25in</Height>
+        <Width>2in</Width>
+        <ZIndex>7</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>

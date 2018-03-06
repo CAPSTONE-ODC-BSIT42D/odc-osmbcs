@@ -23,7 +23,7 @@
                 <ComboBoxItem Content="CASH" IsSelected="True"/>
             </ComboBox>
             <Label Content="Check #:" HorizontalAlignment="Left" Margin="20,154,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" FontSize="14" Width="127" HorizontalContentAlignment="Right"/>
-            <TextBox x:Name="checkNoTb" HorizontalAlignment="Left" Height="23" Margin="152,154,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="174"/>
+            <TextBox x:Name="checkNoTb" HorizontalAlignment="Left" Height="23" Margin="152,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174"/>
             <Button x:Name="savePrintBtn" Content="Save and Print Receipt" HorizontalAlignment="Right" Margin="0,0,198,0" Width="137" VerticalAlignment="Bottom" Height="30" IsDefault="True" RenderTransformOrigin="0.715,0.5" Background="#FF1AB00B" Foreground="White" BorderBrush="Black" Click="savePrintBtn_Click"/>
             <Button x:Name="saveBtn" Content="Save Only" HorizontalAlignment="Right" Margin="0,0,113,0" Width="80" VerticalAlignment="Bottom" Height="30" IsDefault="True" Click="saveBtn_Click"/>
             <Button x:Name="cancelBtn" Content="Cancel" HorizontalAlignment="Right" Margin="0,264,28,0" Width="80" VerticalAlignment="Bottom" Height="30" IsDefault="True" Click="cancelBtn_Click"/>
