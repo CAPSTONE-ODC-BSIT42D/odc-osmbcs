@@ -220,16 +220,15 @@ namespace prototype2.uControlsMaintenance
                 }
                 if (!validationError)
                 {
-                    MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID == int.Parse(serviceTypeCb.SelectedValue.ToString())).First();
 
 
                     MainVM.SelectedRegion = (from rg in MainVM.Regions
                                              where rg.RegionID == MainVM.SelectedProvince.RegionID
                                              select rg).FirstOrDefault();
-
-                    var newService = (new AvailedService() {AvailedServiceID = MainVM.AvailedServices.Count+1, ServiceID = MainVM.SelectedService.ServiceID, ProvinceID = int.Parse(serviceProvinceCb.SelectedValue.ToString()), Address = serviceAddressTb.Text, City = serviceCityTb.Text, TotalCost = MainVM.SelectedService.ServicePrice +  MainVM.SelectedRegion.RatePrice});
-                    MainVM.AvailedServices.Add(newService);
-                    MainVM.RequestedItems.Add(new RequestedItem() { lineNo = newService.AvailedServiceID, itemID = MainVM.SelectedService.ServiceID, itemType = 1, qty = 1, unitPrice = newService.TotalCost, qtyEditable = false });
+                    int servId = MainVM.AvailedServicesList.Count + 1;
+                    var newService = (new AvailedService() {AvailedServiceID = servId, ServiceID = MainVM.SelectedService.ServiceID, ProvinceID = int.Parse(serviceProvinceCb.SelectedValue.ToString()), Address = serviceAddressTb.Text, City = serviceCityTb.Text, TotalCost = MainVM.SelectedService.ServicePrice +  MainVM.SelectedRegion.RatePrice});
+                    MainVM.AvailedServicesList.Add(newService);
+                    MainVM.RequestedItems.Add(new RequestedItem() { lineNo = MainVM.RequestedItems.Count+1, availedServiceID = servId, itemID = MainVM.SelectedService.ServiceID, itemType = 1, qty = 1, unitPrice = newService.TotalCost, qtyEditable = false });
                     OnSaveCloseButtonClicked(e);
                 }
 

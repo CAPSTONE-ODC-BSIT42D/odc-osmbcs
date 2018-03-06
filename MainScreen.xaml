@@ -687,11 +687,11 @@
                     </Button>
                 </Grid>
             </Grid>
-            <Grid x:Name="reportsGrid">
-                <local:ucReportSales HorizontalAlignment="Left" Height="461" Margin="10,63,0,0" VerticalAlignment="Top" Width="878"/>
+            <Grid x:Name="reportsGrid" d:IsHidden="True">
+                
 
             </Grid>
-            <Grid x:Name="trasanctionGrid" d:IsHidden="True">
+            <Grid x:Name="trasanctionGrid">
                 <Grid x:Name="transQuotationGrid" Margin="0,0,1,0" >
                     <Grid x:Name="quotationsGridHome" Margin="10" >
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >

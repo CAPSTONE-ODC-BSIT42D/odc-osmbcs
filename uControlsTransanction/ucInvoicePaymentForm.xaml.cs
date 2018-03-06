@@ -70,10 +70,19 @@ namespace prototype2.uControlsMaintenance
             string query;
             decimal total = (from ph in MainVM.SelectedSalesInvoice.PaymentHist_
                              select ph.SIpaymentAmount_).Sum();
+            decimal totalamount = 0;
 
-            decimal totalamount = (from ai in MainVM.AvailedItems
-                                  where ai.SqNoChar.Equals(MainVM.SelectedSalesInvoice.sqNoChar_)
-                                  select ai.TotalCost).Sum();
+            foreach (AvailedItem ai in (from ai in MainVM.AvailedItems
+                     where ai.SqNoChar.Equals(MainVM.SelectedSalesInvoice.sqNoChar_)
+                     select ai))
+            {
+                var markupPrice = from itm in MainVM.MarkupHist
+                                  where itm.ItemID == ai.ItemID
+                                  && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
+                                  select itm;
+                 totalamount += ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc);
+            }
+
             totalamount += (from aser in MainVM.AvailedServices
                             where aser.SqNoChar.Equals(MainVM.SelectedSalesInvoice.sqNoChar_)
                             select aser.TotalCost).Sum();

@@ -353,7 +353,7 @@ namespace prototype2
 
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    var availedItems = new AvailedItem() { AvailedItemID = int.Parse(dr["id"].ToString()), SqNoChar = dr["sqNoChar"].ToString(), ItemID = int.Parse(dr["itemID"].ToString()), ItemQty = int.Parse(dr["itemQnty"].ToString()), TotalCost = decimal.Parse(dr["totalCost"].ToString()) };
+                    var availedItems = new AvailedItem() { AvailedItemID = int.Parse(dr["id"].ToString()), SqNoChar = dr["sqNoChar"].ToString(), ItemID = int.Parse(dr["itemID"].ToString()), ItemQty = int.Parse(dr["itemQnty"].ToString()), UnitPrice = decimal.Parse(dr["unitPrice"].ToString()) };
                     MainVM.AvailedItems.Add(availedItems);
                 }
             }
@@ -385,6 +385,7 @@ namespace prototype2
             }
             if (dbCon.IsConnect())
             {
+                MainVM.SalesQuotes.Clear();
                 string query = "SELECT * FROM sales_quote_t;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
@@ -436,9 +437,6 @@ namespace prototype2
 
                     int termsDP;
                     int.TryParse(dr["termsDP"].ToString(), out termsDP);
-                    
-                    decimal markUpPerc;
-                    decimal.TryParse(dr["markUpPercent"].ToString(), out markUpPerc);
 
                     decimal discountPerc;
                     decimal.TryParse(dr["discountPercent"].ToString(), out discountPerc);
@@ -463,7 +461,6 @@ namespace prototype2
                         status_ = dr["status"].ToString(),
                         termsDays_ = termsDays,
                         termsDP_ = termsDP,
-                        markUpPercent_ = markUpPerc,
                         discountPercent_ = discountPerc
                         
                     });
