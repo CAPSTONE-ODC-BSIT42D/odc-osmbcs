@@ -123,7 +123,6 @@ namespace prototype2
                         RegionName = dr[1].ToString(),
                         RatePrice = decimal.Parse(dr[2].ToString())
                     };
-                    
                     MainVM.Regions.Add(obj);
                 }
                 query = "SELECT * FROM provinces_t WHERE isDeleted = 0;";
@@ -437,13 +436,7 @@ namespace prototype2
 
                     int termsDP;
                     int.TryParse(dr["termsDP"].ToString(), out termsDP);
-
-                    decimal penaltyAmt;
-                    decimal.TryParse(dr["penaltyAmt"].ToString(), out penaltyAmt);
-
-                    int penaltyPerc;
-                    int.TryParse(dr["penaltyPerc"].ToString(), out penaltyPerc);
-
+                    
                     decimal markUpPerc;
                     decimal.TryParse(dr["markUpPercent"].ToString(), out markUpPerc);
 
@@ -470,8 +463,6 @@ namespace prototype2
                         status_ = dr["status"].ToString(),
                         termsDays_ = termsDays,
                         termsDP_ = termsDP,
-                        penaltyAmt_ = penaltyAmt,
-                        penaltyPercent_ = penaltyAmt,
                         markUpPercent_ = markUpPerc,
                         discountPercent_ = discountPerc
                         

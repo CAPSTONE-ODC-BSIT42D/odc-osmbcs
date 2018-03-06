@@ -30,7 +30,7 @@
     <Grid Margin="0" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
         <Grid x:Name="transQuoatationGridForm" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
 
-            <Grid x:Name="newRequisitionGrid" VerticalAlignment="Top" d:IsHidden="True">
+            <Grid x:Name="newRequisitionGrid" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
@@ -248,7 +248,7 @@
                     </Grid>
                 </ScrollViewer>
             </Grid>
-            <Grid x:Name="termsAndConditionGrid" Margin="0,0,0,40">
+            <Grid x:Name="termsAndConditionGrid" Margin="0,0,0,40" d:IsHidden="True">
                 <ScrollViewer Margin="0" Padding="10" VerticalScrollBarVisibility="Auto">
                     <Grid x:Name="termsAndConditionGridForm">
                         <Label x:Name="label16_Copy2" Content="Terms and Conditions" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" FontFamily="Segoe UI"/>
@@ -295,11 +295,11 @@
                 <local:DocumentViewer x:Name="saleQuoteViewer" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </Grid>
             <StackPanel Margin="0,0,10,0" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Right" FlowDirection="RightToLeft" Width="543">
-                <Grid x:Name="newSalesQuoteBtns" HorizontalAlignment="Left" Margin="10,0" Visibility="Collapsed">
+                <Grid x:Name="newSalesQuoteBtns" HorizontalAlignment="Left" Margin="10,0">
                     <Button x:Name="transRequestNext" Content="Next" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" Height="26" Click="transRequestNext_Click" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="0,0,104,0"/>
                     <Button x:Name="transRequestBack" Content="Back" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="84" Height="26" Click="transRequestBack_Click" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
                 </Grid>
-                <Grid x:Name="viewSalesQuoteBtns" Margin="0">
+                <Grid x:Name="viewSalesQuoteBtns" Margin="0" Visibility="Collapsed">
                     <Button x:Name="transRequestBack1" Content="Back" VerticalAlignment="Bottom" Height="26" Click="transRequestBack_Click" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="365,0,0,0" HorizontalAlignment="Left" Width="84"/>
                     <Button x:Name="convertToInvoiceBtn" Content="Convert To Invoice" VerticalAlignment="Bottom" Height="26" Click="convertToInvoiceBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="0" HorizontalAlignment="Left" Width="139"/>
                     <Button x:Name="editSalesQuoteBtn" Content="Edit" VerticalAlignment="Bottom" Height="26" Click="transRequestBack_Click" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="276,0,0,0" HorizontalAlignment="Left" Width="84"/>
