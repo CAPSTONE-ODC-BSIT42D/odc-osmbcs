@@ -21,7 +21,7 @@
         <local:ContractorJobConverter x:Key="ContractorJobConverter" />
         <local:ProductMarkUpPercent x:Key="ProductMarkUpPercent" />
         <local:CategoryNameConverter x:Key="CategoryNameConverter"/>
-        
+
         <Storyboard x:Key="sbShowRightMenu" >
             <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,-150,0" To="0,0,0,0" DecelerationRatio="1" Duration="0:0:0.5" />
         </Storyboard>
@@ -687,6 +687,10 @@
                     </Button>
                 </Grid>
             </Grid>
+            <Grid x:Name="reportsGrid">
+                <local:ucReportSales HorizontalAlignment="Left" Height="551" Margin="10,10,0,0" VerticalAlignment="Top" Width="888"/>
+
+            </Grid>
             <Grid x:Name="trasanctionGrid" d:IsHidden="True">
                 <Grid x:Name="transQuotationGrid" Margin="0,0,1,0" >
                     <Grid x:Name="quotationsGridHome" Margin="10" >
@@ -1210,9 +1214,7 @@
             <Grid x:Name="serviceGrid" d:IsHidden="True">
                 <local:ucServiceSchedule x:Name="ucService" Margin="0" Visibility="Collapsed"/>
             </Grid>
-            <Grid x:Name="reportsGrid">
-                <local:ucReportSales Height="Auto" Width="Auto"/>
-            </Grid>
+
             <Grid x:Name="maintenanceGrid" d:IsHidden="True">
                 <Grid x:Name="manageCustomerGrid" Margin="0,0,1,0" d:IsHidden="True" >
                     <Grid x:Name="manageCustomerHomeGrid" Margin="0">
@@ -1594,7 +1596,7 @@
                         <Button x:Name="manageProductAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,20,20,0" VerticalAlignment="Top" Width="85" Background="#FF0D9E0D" BorderBrush="#FF107C10" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13" Click="manageProductAddBtn_Click"/>
                         <DataGrid x:Name="productListDg" Margin="20,60,20,20" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionMode="Single" MinRowHeight="20"  MinColumnWidth="0" ItemsSource="{Binding ProductList}" SelectedItem ="{Binding SelectedProduct}">
                             <DataGrid.Columns >
-                                
+
                                 <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Product Name" >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -1610,7 +1612,7 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                                 <DataGridTextColumn Width="Auto" Header="Markup Percent" Binding="{Binding ID, Converter={StaticResource ProductMarkUpPercent}, NotifyOnTargetUpdated=True}">
-                                    
+
                                 </DataGridTextColumn>
                                 <DataGridTextColumn Width="150" Header="Category" Binding="{Binding TypeID, Converter={StaticResource CategoryNameConverter}, NotifyOnTargetUpdated=True}"></DataGridTextColumn>
                                 <DataGridTemplateColumn  Width="115" CanUserResize="False" Header="Actions"  >
@@ -2037,6 +2039,7 @@
                 </Grid>
             </Grid>
         </Grid>
+
         <Grid x:Name="formGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3" Visibility="Visible" Panel.ZIndex="1" d:IsHidden="True">
 
             <local:ucCustSuppCRUD x:Name="ucCustSupp" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="Auto" d:IsHidden="True"/>

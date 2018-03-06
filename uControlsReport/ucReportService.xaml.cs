@@ -32,7 +32,7 @@ namespace prototype2
         {
             ReportService.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
-            ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetReportService", GetService()));
+            ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("ServiceTable", GetService()));
             ReportService.LoadReport(rNames);
             ReportService.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportService.RefreshReport();
@@ -48,7 +48,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted), YEAR(ss.dateStarted) FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN  provinces_t p ON sa.provinceID = p.id, cust_supp_t cs WHERE(s.isDeleted = 0) GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName";
 
-            DataSetReportService.DataTable1DataTable dSServices = new DataSetReportService.DataTable1DataTable();
+            DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSServices);
@@ -74,7 +74,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2 FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN  provinces_t p ON sa.provinceID = p.id, cust_supp_t cs WHERE(CURDATE() = ss.dateStarted) AND(s.isDeleted = 0) GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName";
 
-            DataSetReportService.DataTable1DataTable dSServices = new DataSetReportService.DataTable1DataTable();
+            DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSServices);
@@ -86,7 +86,7 @@ namespace prototype2
         {
             ReportService.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
-            ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetReportService", GetServiceDay()));
+            ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("ServiceTable", GetServiceDay()));
             ReportService.LoadReport(rNames);
             ReportService.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportService.RefreshReport();
@@ -101,7 +101,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2 FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN provinces_t p ON sa.provinceID = p.id, cust_supp_t cs WHERE(WEEK(ss.dateStarted) ='"+DatePickerWeekSer.SelectedDate.ToString()+"') AND(s.isDeleted = 0) GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName ORDER BY ss.serviceStatus";
 
-            DataSetReportService.DataTable1DataTable dSServices = new DataSetReportService.DataTable1DataTable();
+            DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSServices);
@@ -113,7 +113,7 @@ namespace prototype2
         {
             ReportService.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
-            ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetReportService", GetServiceWeek()));
+            ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("ServiceTable", GetServiceWeek()));
             ReportService.LoadReport(rNames);
             ReportService.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportService.RefreshReport();
@@ -127,7 +127,7 @@ namespace prototype2
             cmd.CommandType = CommandType.Text; 
             cmd.CommandText = "SELECT s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2 FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN  service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN provinces_t p ON sa.provinceID = p.id, cust_supp_t cs WHERE(MONTHNAME(ss.dateStarted) = '" + ComboBoxSerMonth.SelectedItem.ToString() + "') AND(s.isDeleted = 0) GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName ORDER BY ss.serviceStatus";
 
-            DataSetReportService.DataTable1DataTable dSServices = new DataSetReportService.DataTable1DataTable();
+            DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSServices);
@@ -140,7 +140,7 @@ namespace prototype2
 
             ReportService.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
-            ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetReportService", GetServiceMonth()));
+            ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("ServiceTable", GetServiceMonth()));
             ReportService.LoadReport(rNames);
             ReportService.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportService.RefreshReport();
@@ -156,7 +156,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2 FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN  provinces_t p ON sa.provinceID = p.id, cust_supp_t cs WHERE(YEAR(ss.dateStarted) = '"+ComboBoxYear.SelectedItem.ToString()+"') AND(s.isDeleted = 0) GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName ORDER BY ss.serviceStatus ";
 
-            DataSetReportService.DataTable1DataTable dSServices = new DataSetReportService.DataTable1DataTable();
+            DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSServices);
@@ -168,7 +168,7 @@ namespace prototype2
         {
             ReportService.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
-            ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetReportService", GetServiceYear()));
+            ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("ServiceTable", GetServiceYear()));
             ReportService.LoadReport(rNames);
             ReportService.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportService.RefreshReport();
@@ -183,7 +183,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2 FROM services_t s INNER JOIN services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN  service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN provinces_t p ON sa.provinceID = p.id, cust_supp_t cs WHERE(ss.dateStarted BETWEEN '" + DatePickerStartSer.SelectedDate.ToString()+ "' AND '" + DatePickerEndSer.SelectedDate.ToString() + "') AND(s.isDeleted = 0) GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName ORDER BY ss.serviceStatus";
 
-            DataSetReportService.DataTable1DataTable dSServices = new DataSetReportService.DataTable1DataTable();
+            DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSServices);
@@ -195,7 +195,7 @@ namespace prototype2
         {
             ReportService.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
-            ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetReportService", GetServiceRange()));
+            ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("ServiceTable", GetServiceRange()));
             ReportService.LoadReport(rNames);
             ReportService.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportService.RefreshReport();

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSetItemQuery" targetNamespace="http://tempuri.org/DataSetItemQuery.xsd" xmlns:mstns="http://tempuri.org/DataSetItemQuery.xsd" xmlns="http://tempuri.org/DataSetItemQuery.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="odc_dbConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="odc_dbConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.prototype2.Properties.Settings.GlobalReference.Default.odc_dbConnectionString" Provider="MySql.Data.MySqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="item_tTableAdapter" GeneratorDataComponentClassName="item_tTableAdapter" Name="item_t" UserDataComponentName="item_tTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.item_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByItemQuery" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataByItemQuery" GeneratorSourceName="FillByItemQuery" GetMethodModifier="Public" GetMethodName="GetDataByItemQuery" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByItemQuery" UserSourceName="FillByItemQuery">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        itemName, itemDescr, COUNT(itemName) AS Notimes
+FROM            item_t
+GROUP BY itemName, itemDescr</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="itemName" DataSetColumn="itemName" />
+              <Mapping SourceColumn="itemDescr" DataSetColumn="itemDescr" />
+              <Mapping SourceColumn="Notimes" DataSetColumn="Notimes" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSetItemQuery" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DataSetItemQuery" msprop:Generator_UserDSName="DataSetItemQuery">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="item_t" msprop:Generator_TableClassName="item_tDataTable" msprop:Generator_TableVarName="tableitem_t" msprop:Generator_TablePropName="item_t" msprop:Generator_RowDeletingName="item_tRowDeleting" msprop:Generator_RowChangingName="item_tRowChanging" msprop:Generator_RowEvHandlerName="item_tRowChangeEventHandler" msprop:Generator_RowDeletedName="item_tRowDeleted" msprop:Generator_UserTableName="item_t" msprop:Generator_RowChangedName="item_tRowChanged" msprop:Generator_RowEvArgName="item_tRowChangeEvent" msprop:Generator_RowClassName="item_tRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="itemName" msprop:Generator_ColumnVarNameInTable="columnitemName" msprop:Generator_ColumnPropNameInRow="itemName" msprop:Generator_ColumnPropNameInTable="itemNameColumn" msprop:Generator_UserColumnName="itemName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="itemDescr" msprop:Generator_ColumnVarNameInTable="columnitemDescr" msprop:Generator_ColumnPropNameInRow="itemDescr" msprop:Generator_ColumnPropNameInTable="itemDescrColumn" msprop:Generator_UserColumnName="itemDescr" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="21845" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Notimes" msprop:Generator_ColumnVarNameInTable="columnNotimes" msprop:Generator_ColumnPropNameInRow="Notimes" msprop:Generator_ColumnPropNameInTable="NotimesColumn" msprop:Generator_UserColumnName="Notimes" type="xs:long" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

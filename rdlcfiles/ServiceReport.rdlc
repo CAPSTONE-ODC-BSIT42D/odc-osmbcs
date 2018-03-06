@@ -179,7 +179,7 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>DataSet1</DataSetName>
+        <DataSetName>ServiceTable</DataSetName>
         <Top>1.48374in</Top>
         <Left>1.91952in</Left>
         <Height>0.25in</Height>
@@ -427,7 +427,6 @@ STATUS</Value>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -581,7 +580,7 @@ STATUS</Value>
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>DataSet1</DataSetName>
+        <DataSetName>ServiceTable</DataSetName>
         <Top>2.67583in</Top>
         <Left>0.31125in</Left>
         <Height>0.76042in</Height>
@@ -594,10 +593,10 @@ STATUS</Value>
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>5.58208in</Height>
+    <Height>9.155in</Height>
     <Style />
   </Body>
-  <Width>9.75in</Width>
+  <Width>14.09375in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
@@ -616,7 +615,7 @@ STATUS</Value>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="DataSet1">
+    <DataSet Name="ServiceTable">
       <Query>
         <DataSourceName>DataSetReportService</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
@@ -657,11 +656,11 @@ STATUS</Value>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DataSetReportService</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\Alexis\Source\Repos\odc-osmbcs\DataSetReportService.xsd</rd:SchemaPath>
-        <rd:TableName>DataTable1</rd:TableName>
+        <rd:SchemaPath>C:\Users\Alexis\Source\odc-osmbcs\DataSetReportService.xsd</rd:SchemaPath>
+        <rd:TableName>ServiceTable</rd:TableName>
         <rd:TableAdapterFillMethod>FillServiceAll</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetDataServiceAll</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>DataTable1TableAdapter</rd:TableAdapterName>
+        <rd:TableAdapterName>ServiceTableTableAdapter</rd:TableAdapterName>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>

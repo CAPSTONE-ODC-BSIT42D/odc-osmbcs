@@ -24,7 +24,7 @@ namespace prototype2 {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class DataSetReportService : global::System.Data.DataSet {
         
-        private DataTable1DataTable tableDataTable1;
+        private ServiceTableDataTable tableServiceTable;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -54,8 +54,8 @@ namespace prototype2 {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["DataTable1"] != null)) {
-                    base.Tables.Add(new DataTable1DataTable(ds.Tables["DataTable1"]));
+                if ((ds.Tables["ServiceTable"] != null)) {
+                    base.Tables.Add(new ServiceTableDataTable(ds.Tables["ServiceTable"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -79,9 +79,9 @@ namespace prototype2 {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public DataTable1DataTable DataTable1 {
+        public ServiceTableDataTable ServiceTable {
             get {
-                return this.tableDataTable1;
+                return this.tableServiceTable;
             }
         }
         
@@ -152,8 +152,8 @@ namespace prototype2 {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["DataTable1"] != null)) {
-                    base.Tables.Add(new DataTable1DataTable(ds.Tables["DataTable1"]));
+                if ((ds.Tables["ServiceTable"] != null)) {
+                    base.Tables.Add(new ServiceTableDataTable(ds.Tables["ServiceTable"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -188,10 +188,10 @@ namespace prototype2 {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableDataTable1 = ((DataTable1DataTable)(base.Tables["DataTable1"]));
+            this.tableServiceTable = ((ServiceTableDataTable)(base.Tables["ServiceTable"]));
             if ((initTable == true)) {
-                if ((this.tableDataTable1 != null)) {
-                    this.tableDataTable1.InitVars();
+                if ((this.tableServiceTable != null)) {
+                    this.tableServiceTable.InitVars();
                 }
             }
         }
@@ -204,13 +204,13 @@ namespace prototype2 {
             this.Namespace = "http://tempuri.org/DataSetReportService.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableDataTable1 = new DataTable1DataTable();
-            base.Tables.Add(this.tableDataTable1);
+            this.tableServiceTable = new ServiceTableDataTable();
+            base.Tables.Add(this.tableServiceTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private bool ShouldSerializeDataTable1() {
+        private bool ShouldSerializeServiceTable() {
             return false;
         }
         
@@ -270,14 +270,14 @@ namespace prototype2 {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public delegate void DataTable1RowChangeEventHandler(object sender, DataTable1RowChangeEvent e);
+        public delegate void ServiceTableRowChangeEventHandler(object sender, ServiceTableRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class DataTable1DataTable : global::System.Data.TypedTableBase<DataTable1Row> {
+        public partial class ServiceTableDataTable : global::System.Data.TypedTableBase<ServiceTableRow> {
             
             private global::System.Data.DataColumn columnserviceName;
             
@@ -297,8 +297,8 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DataTable1DataTable() {
-                this.TableName = "DataTable1";
+            public ServiceTableDataTable() {
+                this.TableName = "ServiceTable";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -306,7 +306,7 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal DataTable1DataTable(global::System.Data.DataTable table) {
+            internal ServiceTableDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -323,7 +323,7 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected DataTable1DataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected ServiceTableDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -403,34 +403,34 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DataTable1Row this[int index] {
+            public ServiceTableRow this[int index] {
                 get {
-                    return ((DataTable1Row)(this.Rows[index]));
+                    return ((ServiceTableRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event DataTable1RowChangeEventHandler DataTable1RowChanging;
+            public event ServiceTableRowChangeEventHandler ServiceTableRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event DataTable1RowChangeEventHandler DataTable1RowChanged;
+            public event ServiceTableRowChangeEventHandler ServiceTableRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event DataTable1RowChangeEventHandler DataTable1RowDeleting;
+            public event ServiceTableRowChangeEventHandler ServiceTableRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event DataTable1RowChangeEventHandler DataTable1RowDeleted;
+            public event ServiceTableRowChangeEventHandler ServiceTableRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void AddDataTable1Row(DataTable1Row row) {
+            public void AddServiceTableRow(ServiceTableRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DataTable1Row AddDataTable1Row(string serviceName, string serviceDesc, System.DateTime dateStarted, System.DateTime dateEnded, string serviceStatus, string companyName, long Expr1, long Expr2) {
-                DataTable1Row rowDataTable1Row = ((DataTable1Row)(this.NewRow()));
+            public ServiceTableRow AddServiceTableRow(string serviceName, string serviceDesc, System.DateTime dateStarted, System.DateTime dateEnded, string serviceStatus, string companyName, long Expr1, long Expr2) {
+                ServiceTableRow rowServiceTableRow = ((ServiceTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         serviceName,
                         serviceDesc,
@@ -440,15 +440,15 @@ namespace prototype2 {
                         companyName,
                         Expr1,
                         Expr2};
-                rowDataTable1Row.ItemArray = columnValuesArray;
-                this.Rows.Add(rowDataTable1Row);
-                return rowDataTable1Row;
+                rowServiceTableRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowServiceTableRow);
+                return rowServiceTableRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                DataTable1DataTable cln = ((DataTable1DataTable)(base.Clone()));
+                ServiceTableDataTable cln = ((ServiceTableDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -456,7 +456,7 @@ namespace prototype2 {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new DataTable1DataTable();
+                return new ServiceTableDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -501,28 +501,28 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DataTable1Row NewDataTable1Row() {
-                return ((DataTable1Row)(this.NewRow()));
+            public ServiceTableRow NewServiceTableRow() {
+                return ((ServiceTableRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new DataTable1Row(builder);
+                return new ServiceTableRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(DataTable1Row);
+                return typeof(ServiceTableRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.DataTable1RowChanged != null)) {
-                    this.DataTable1RowChanged(this, new DataTable1RowChangeEvent(((DataTable1Row)(e.Row)), e.Action));
+                if ((this.ServiceTableRowChanged != null)) {
+                    this.ServiceTableRowChanged(this, new ServiceTableRowChangeEvent(((ServiceTableRow)(e.Row)), e.Action));
                 }
             }
             
@@ -530,8 +530,8 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.DataTable1RowChanging != null)) {
-                    this.DataTable1RowChanging(this, new DataTable1RowChangeEvent(((DataTable1Row)(e.Row)), e.Action));
+                if ((this.ServiceTableRowChanging != null)) {
+                    this.ServiceTableRowChanging(this, new ServiceTableRowChangeEvent(((ServiceTableRow)(e.Row)), e.Action));
                 }
             }
             
@@ -539,8 +539,8 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.DataTable1RowDeleted != null)) {
-                    this.DataTable1RowDeleted(this, new DataTable1RowChangeEvent(((DataTable1Row)(e.Row)), e.Action));
+                if ((this.ServiceTableRowDeleted != null)) {
+                    this.ServiceTableRowDeleted(this, new ServiceTableRowChangeEvent(((ServiceTableRow)(e.Row)), e.Action));
                 }
             }
             
@@ -548,14 +548,14 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.DataTable1RowDeleting != null)) {
-                    this.DataTable1RowDeleting(this, new DataTable1RowChangeEvent(((DataTable1Row)(e.Row)), e.Action));
+                if ((this.ServiceTableRowDeleting != null)) {
+                    this.ServiceTableRowDeleting(this, new ServiceTableRowChangeEvent(((ServiceTableRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void RemoveDataTable1Row(DataTable1Row row) {
+            public void RemoveServiceTableRow(ServiceTableRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -582,7 +582,7 @@ namespace prototype2 {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "DataTable1DataTable";
+                attribute2.FixedValue = "ServiceTableDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -626,25 +626,25 @@ namespace prototype2 {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class DataTable1Row : global::System.Data.DataRow {
+        public partial class ServiceTableRow : global::System.Data.DataRow {
             
-            private DataTable1DataTable tableDataTable1;
+            private ServiceTableDataTable tableServiceTable;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal DataTable1Row(global::System.Data.DataRowBuilder rb) : 
+            internal ServiceTableRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableDataTable1 = ((DataTable1DataTable)(this.Table));
+                this.tableServiceTable = ((ServiceTableDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string serviceName {
                 get {
-                    return ((string)(this[this.tableDataTable1.serviceNameColumn]));
+                    return ((string)(this[this.tableServiceTable.serviceNameColumn]));
                 }
                 set {
-                    this[this.tableDataTable1.serviceNameColumn] = value;
+                    this[this.tableServiceTable.serviceNameColumn] = value;
                 }
             }
             
@@ -653,14 +653,14 @@ namespace prototype2 {
             public string serviceDesc {
                 get {
                     try {
-                        return ((string)(this[this.tableDataTable1.serviceDescColumn]));
+                        return ((string)(this[this.tableServiceTable.serviceDescColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'serviceDesc\' in table \'DataTable1\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'serviceDesc\' in table \'ServiceTable\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataTable1.serviceDescColumn] = value;
+                    this[this.tableServiceTable.serviceDescColumn] = value;
                 }
             }
             
@@ -669,14 +669,14 @@ namespace prototype2 {
             public System.DateTime dateStarted {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableDataTable1.dateStartedColumn]));
+                        return ((global::System.DateTime)(this[this.tableServiceTable.dateStartedColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'dateStarted\' in table \'DataTable1\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'dateStarted\' in table \'ServiceTable\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataTable1.dateStartedColumn] = value;
+                    this[this.tableServiceTable.dateStartedColumn] = value;
                 }
             }
             
@@ -685,14 +685,14 @@ namespace prototype2 {
             public System.DateTime dateEnded {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableDataTable1.dateEndedColumn]));
+                        return ((global::System.DateTime)(this[this.tableServiceTable.dateEndedColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'dateEnded\' in table \'DataTable1\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'dateEnded\' in table \'ServiceTable\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataTable1.dateEndedColumn] = value;
+                    this[this.tableServiceTable.dateEndedColumn] = value;
                 }
             }
             
@@ -701,14 +701,14 @@ namespace prototype2 {
             public string serviceStatus {
                 get {
                     try {
-                        return ((string)(this[this.tableDataTable1.serviceStatusColumn]));
+                        return ((string)(this[this.tableServiceTable.serviceStatusColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'serviceStatus\' in table \'DataTable1\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'serviceStatus\' in table \'ServiceTable\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataTable1.serviceStatusColumn] = value;
+                    this[this.tableServiceTable.serviceStatusColumn] = value;
                 }
             }
             
@@ -716,10 +716,10 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string companyName {
                 get {
-                    return ((string)(this[this.tableDataTable1.companyNameColumn]));
+                    return ((string)(this[this.tableServiceTable.companyNameColumn]));
                 }
                 set {
-                    this[this.tableDataTable1.companyNameColumn] = value;
+                    this[this.tableServiceTable.companyNameColumn] = value;
                 }
             }
             
@@ -728,14 +728,14 @@ namespace prototype2 {
             public long Expr1 {
                 get {
                     try {
-                        return ((long)(this[this.tableDataTable1.Expr1Column]));
+                        return ((long)(this[this.tableServiceTable.Expr1Column]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Expr1\' in table \'DataTable1\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Expr1\' in table \'ServiceTable\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataTable1.Expr1Column] = value;
+                    this[this.tableServiceTable.Expr1Column] = value;
                 }
             }
             
@@ -744,87 +744,87 @@ namespace prototype2 {
             public long Expr2 {
                 get {
                     try {
-                        return ((long)(this[this.tableDataTable1.Expr2Column]));
+                        return ((long)(this[this.tableServiceTable.Expr2Column]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Expr2\' in table \'DataTable1\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Expr2\' in table \'ServiceTable\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataTable1.Expr2Column] = value;
+                    this[this.tableServiceTable.Expr2Column] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsserviceDescNull() {
-                return this.IsNull(this.tableDataTable1.serviceDescColumn);
+                return this.IsNull(this.tableServiceTable.serviceDescColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetserviceDescNull() {
-                this[this.tableDataTable1.serviceDescColumn] = global::System.Convert.DBNull;
+                this[this.tableServiceTable.serviceDescColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsdateStartedNull() {
-                return this.IsNull(this.tableDataTable1.dateStartedColumn);
+                return this.IsNull(this.tableServiceTable.dateStartedColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetdateStartedNull() {
-                this[this.tableDataTable1.dateStartedColumn] = global::System.Convert.DBNull;
+                this[this.tableServiceTable.dateStartedColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsdateEndedNull() {
-                return this.IsNull(this.tableDataTable1.dateEndedColumn);
+                return this.IsNull(this.tableServiceTable.dateEndedColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetdateEndedNull() {
-                this[this.tableDataTable1.dateEndedColumn] = global::System.Convert.DBNull;
+                this[this.tableServiceTable.dateEndedColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsserviceStatusNull() {
-                return this.IsNull(this.tableDataTable1.serviceStatusColumn);
+                return this.IsNull(this.tableServiceTable.serviceStatusColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetserviceStatusNull() {
-                this[this.tableDataTable1.serviceStatusColumn] = global::System.Convert.DBNull;
+                this[this.tableServiceTable.serviceStatusColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsExpr1Null() {
-                return this.IsNull(this.tableDataTable1.Expr1Column);
+                return this.IsNull(this.tableServiceTable.Expr1Column);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetExpr1Null() {
-                this[this.tableDataTable1.Expr1Column] = global::System.Convert.DBNull;
+                this[this.tableServiceTable.Expr1Column] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsExpr2Null() {
-                return this.IsNull(this.tableDataTable1.Expr2Column);
+                return this.IsNull(this.tableServiceTable.Expr2Column);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetExpr2Null() {
-                this[this.tableDataTable1.Expr2Column] = global::System.Convert.DBNull;
+                this[this.tableServiceTable.Expr2Column] = global::System.Convert.DBNull;
             }
         }
         
@@ -832,22 +832,22 @@ namespace prototype2 {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public class DataTable1RowChangeEvent : global::System.EventArgs {
+        public class ServiceTableRowChangeEvent : global::System.EventArgs {
             
-            private DataTable1Row eventRow;
+            private ServiceTableRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DataTable1RowChangeEvent(DataTable1Row row, global::System.Data.DataRowAction action) {
+            public ServiceTableRowChangeEvent(ServiceTableRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DataTable1Row Row {
+            public ServiceTableRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -875,7 +875,7 @@ namespace prototype2.DataSetReportServiceTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class DataTable1TableAdapter : global::System.ComponentModel.Component {
+    public partial class ServiceTableTableAdapter : global::System.ComponentModel.Component {
         
         private global::MySql.Data.MySqlClient.MySqlDataAdapter _adapter;
         
@@ -889,7 +889,7 @@ namespace prototype2.DataSetReportServiceTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public DataTable1TableAdapter() {
+        public ServiceTableTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
@@ -986,7 +986,7 @@ namespace prototype2.DataSetReportServiceTableAdapters {
             this._adapter = new global::MySql.Data.MySqlClient.MySqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "DataTable1";
+            tableMapping.DataSetTable = "ServiceTable";
             tableMapping.ColumnMappings.Add("serviceName", "serviceName");
             tableMapping.ColumnMappings.Add("serviceDesc", "serviceDesc");
             tableMapping.ColumnMappings.Add("dateStarted", "dateStarted");
@@ -1107,7 +1107,7 @@ GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceS
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int FillServiceAll(DataSetReportService.DataTable1DataTable dataTable) {
+        public virtual int FillServiceAll(DataSetReportService.ServiceTableDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1120,9 +1120,9 @@ GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceS
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DataSetReportService.DataTable1DataTable GetDataServiceAll() {
+        public virtual DataSetReportService.ServiceTableDataTable GetDataServiceAll() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DataSetReportService.DataTable1DataTable dataTable = new DataSetReportService.DataTable1DataTable();
+            DataSetReportService.ServiceTableDataTable dataTable = new DataSetReportService.ServiceTableDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1131,7 +1131,7 @@ GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceS
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByServiceDay(DataSetReportService.DataTable1DataTable dataTable) {
+        public virtual int FillByServiceDay(DataSetReportService.ServiceTableDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1144,9 +1144,9 @@ GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceS
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual DataSetReportService.DataTable1DataTable GetDataByServiceDay() {
+        public virtual DataSetReportService.ServiceTableDataTable GetDataByServiceDay() {
             this.Adapter.SelectCommand = this.CommandCollection[1];
-            DataSetReportService.DataTable1DataTable dataTable = new DataSetReportService.DataTable1DataTable();
+            DataSetReportService.ServiceTableDataTable dataTable = new DataSetReportService.ServiceTableDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1155,7 +1155,7 @@ GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceS
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByServiceMonth(DataSetReportService.DataTable1DataTable dataTable, string b) {
+        public virtual int FillByServiceMonth(DataSetReportService.ServiceTableDataTable dataTable, string b) {
             this.Adapter.SelectCommand = this.CommandCollection[2];
             if ((b == null)) {
                 throw new global::System.ArgumentNullException("b");
@@ -1174,7 +1174,7 @@ GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceS
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual DataSetReportService.DataTable1DataTable GetDataByServiceMonth(string b) {
+        public virtual DataSetReportService.ServiceTableDataTable GetDataByServiceMonth(string b) {
             this.Adapter.SelectCommand = this.CommandCollection[2];
             if ((b == null)) {
                 throw new global::System.ArgumentNullException("b");
@@ -1182,7 +1182,7 @@ GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceS
             else {
                 this.Adapter.SelectCommand.Parameters[0].Value = ((string)(b));
             }
-            DataSetReportService.DataTable1DataTable dataTable = new DataSetReportService.DataTable1DataTable();
+            DataSetReportService.ServiceTableDataTable dataTable = new DataSetReportService.ServiceTableDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1191,7 +1191,7 @@ GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceS
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByServiceRange(DataSetReportService.DataTable1DataTable dataTable, global::System.Nullable<global::System.DateTime> c, global::System.Nullable<global::System.DateTime> d) {
+        public virtual int FillByServiceRange(DataSetReportService.ServiceTableDataTable dataTable, global::System.Nullable<global::System.DateTime> c, global::System.Nullable<global::System.DateTime> d) {
             this.Adapter.SelectCommand = this.CommandCollection[3];
             if ((c.HasValue == true)) {
                 this.Adapter.SelectCommand.Parameters[0].Value = ((System.DateTime)(c.Value));
@@ -1216,7 +1216,7 @@ GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceS
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual DataSetReportService.DataTable1DataTable GetDataByServiceRange(global::System.Nullable<global::System.DateTime> c, global::System.Nullable<global::System.DateTime> d) {
+        public virtual DataSetReportService.ServiceTableDataTable GetDataByServiceRange(global::System.Nullable<global::System.DateTime> c, global::System.Nullable<global::System.DateTime> d) {
             this.Adapter.SelectCommand = this.CommandCollection[3];
             if ((c.HasValue == true)) {
                 this.Adapter.SelectCommand.Parameters[0].Value = ((System.DateTime)(c.Value));
@@ -1230,7 +1230,7 @@ GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceS
             else {
                 this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
-            DataSetReportService.DataTable1DataTable dataTable = new DataSetReportService.DataTable1DataTable();
+            DataSetReportService.ServiceTableDataTable dataTable = new DataSetReportService.ServiceTableDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1239,7 +1239,7 @@ GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceS
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByServiceWeek(DataSetReportService.DataTable1DataTable dataTable, decimal e) {
+        public virtual int FillByServiceWeek(DataSetReportService.ServiceTableDataTable dataTable, decimal e) {
             this.Adapter.SelectCommand = this.CommandCollection[4];
             this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(e));
             if ((this.ClearBeforeFill == true)) {
@@ -1253,10 +1253,10 @@ GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceS
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual DataSetReportService.DataTable1DataTable GetDataByServiceWeek(decimal e) {
+        public virtual DataSetReportService.ServiceTableDataTable GetDataByServiceWeek(decimal e) {
             this.Adapter.SelectCommand = this.CommandCollection[4];
             this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(e));
-            DataSetReportService.DataTable1DataTable dataTable = new DataSetReportService.DataTable1DataTable();
+            DataSetReportService.ServiceTableDataTable dataTable = new DataSetReportService.ServiceTableDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1265,7 +1265,7 @@ GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceS
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByServiceYear(DataSetReportService.DataTable1DataTable dataTable, decimal a) {
+        public virtual int FillByServiceYear(DataSetReportService.ServiceTableDataTable dataTable, decimal a) {
             this.Adapter.SelectCommand = this.CommandCollection[5];
             this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(a));
             if ((this.ClearBeforeFill == true)) {
@@ -1279,10 +1279,10 @@ GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceS
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual DataSetReportService.DataTable1DataTable GetDataByServiceYear(decimal a) {
+        public virtual DataSetReportService.ServiceTableDataTable GetDataByServiceYear(decimal a) {
             this.Adapter.SelectCommand = this.CommandCollection[5];
             this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(a));
-            DataSetReportService.DataTable1DataTable dataTable = new DataSetReportService.DataTable1DataTable();
+            DataSetReportService.ServiceTableDataTable dataTable = new DataSetReportService.ServiceTableDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }

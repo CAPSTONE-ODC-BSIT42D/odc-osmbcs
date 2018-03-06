@@ -45,7 +45,7 @@
             </ComboBox>
         </Grid>
 
-        <syncfusion:ReportViewer x:Name="ReportService" Margin="0,67,0,0"/>
+        <syncfusion:ReportViewer x:Name="ReportService" ReportPath="C:\Users\Alexis\Source\Repos\odc-osmbcs\rdlcfiles\ServiceReport.rdlc" Margin="0,67,0,0"/>
 
     </Grid>
 </UserControl>
