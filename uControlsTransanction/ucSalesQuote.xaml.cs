@@ -126,38 +126,41 @@ namespace prototype2
         {
             if (newRequisitionGrid.IsVisible)
             {
-                foreach (var element in newRequisitionGrid.Children)
+                if (MainVM.RequestedItems.Count != 0)
                 {
-                    if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
+                    foreach (var element in newRequisitionGrid.Children)
                     {
-                        BindingExpression expression = ((Xceed.Wpf.Toolkit.DecimalUpDown)element).GetBindingExpression(Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
-                        Validation.ClearInvalid(expression);
-                        if (((Xceed.Wpf.Toolkit.DecimalUpDown)element).IsEnabled)
+                        if (element is Xceed.Wpf.Toolkit.DecimalUpDown)
                         {
-
-                            expression.UpdateSource();
-                            validationError = Validation.GetHasError((Xceed.Wpf.Toolkit.DecimalUpDown)element);
-                        }
-                    }
-                }
-                if (!validationError)
-                {
-                    foreach (var element in transQuoatationGridForm.Children)
-                    {
-
-                        if (element is Grid)
-                        {
-                            if (!(((Grid)element).Name.Equals(termsAndConditionGrid.Name)))
+                            BindingExpression expression = ((Xceed.Wpf.Toolkit.DecimalUpDown)element).GetBindingExpression(Xceed.Wpf.Toolkit.DecimalUpDown.ValueProperty);
+                            Validation.ClearInvalid(expression);
+                            if (((Xceed.Wpf.Toolkit.DecimalUpDown)element).IsEnabled)
                             {
-                                ((Grid)element).Visibility = Visibility.Collapsed;
+
+                                expression.UpdateSource();
+                                validationError = Validation.GetHasError((Xceed.Wpf.Toolkit.DecimalUpDown)element);
                             }
-                            else
-                                ((Grid)element).Visibility = Visibility.Visible;
+                        }
+                    }
+                    if (!validationError)
+                    {
+                        foreach (var element in transQuoatationGridForm.Children)
+                        {
+
+                            if (element is Grid)
+                            {
+                                if (!(((Grid)element).Name.Equals(termsAndConditionGrid.Name)))
+                                {
+                                    ((Grid)element).Visibility = Visibility.Collapsed;
+                                }
+                                else
+                                    ((Grid)element).Visibility = Visibility.Visible;
+                            }
                         }
                     }
                 }
-                
-                
+                else
+                    MessageBox.Show("The requested items is empty.");
             }
 
             else if (termsAndConditionGrid.IsVisible)
@@ -219,7 +222,10 @@ namespace prototype2
         }
         private void transReqAddNewItem_Click(object sender, RoutedEventArgs e)
         {
-            OnSelectItemClicked(e);
+            if (MainVM.SelectedCustomerSupplier != null)
+                OnSelectItemClicked(e);
+            else
+                MessageBox.Show("Select Customer First.");
         }
 
         private void feesBtn_Click(object sender, RoutedEventArgs e)
@@ -293,14 +299,16 @@ namespace prototype2
             }
             else
             {
-                if (feeTypeCb.SelectedIndex == feeTypeCb.Items.Count - 1)
-                {
-                   MainVM.SelectedAvailedServices.AdditionalFees.Add(new AdditionalFee() { FeeName = otherFeenameTb.Text, FeePrice = (decimal)feeCostTb.Value });
-                }
-                else
-                {
-                   MainVM.SelectedAvailedServices.AdditionalFees.Add(new AdditionalFee() { FeeName = feeTypeCb.SelectedValue.ToString(), FeePrice = (decimal)feeCostTb.Value });
-                }
+
+                    if (feeTypeCb.SelectedIndex == feeTypeCb.Items.Count - 1)
+                    {
+                        MainVM.SelectedAvailedServices.AdditionalFees.Add(new AdditionalFee() { FeeName = otherFeenameTb.Text, FeePrice = (decimal)feeCostTb.Value });
+                    }
+                    else
+                    {
+
+                        MainVM.SelectedAvailedServices.AdditionalFees.Add(new AdditionalFee() { FeeName = feeTypeCb.SelectedValue.ToString(), FeePrice = (decimal)feeCostTb.Value });
+                    }
 
 
             }

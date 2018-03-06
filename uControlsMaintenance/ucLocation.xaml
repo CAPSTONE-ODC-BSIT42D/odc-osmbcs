@@ -162,7 +162,7 @@
                     <Button x:Name="cancelProductBtn" Content="Cancel" Click="cancelRecordBtn_Click" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="76"/>
                 </Grid>
                 <Grid x:Name="editCloseGrid2" Margin="13,10" Width="164">
-                    <Button x:Name="editProductBtn" Content="Edit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76"/>
+                    <Button x:Name="editBtn" Content="Edit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Click="editBtn_Click"/>
                     <Button x:Name="cancelProductBtn1" Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Click="cancelRecordBtn_Click" Margin="81,0,-5,0"/>
                 </Grid>
             </StackPanel>

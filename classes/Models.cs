@@ -643,7 +643,7 @@ namespace prototype2
         public DateTime EmpDateTo
         {
             get { return empDateTo; }
-            set { SetProperty(ref empDateFrom, value); }
+            set { SetProperty(ref empDateTo, value); }
         }
 
         public int EmpType

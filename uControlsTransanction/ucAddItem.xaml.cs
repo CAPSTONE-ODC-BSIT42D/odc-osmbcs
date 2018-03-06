@@ -37,20 +37,24 @@ namespace prototype2.uControlsMaintenance
                 handler(this, e);
         }
 
+        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            productRbtn.IsChecked = true;
+        }
+        
         private void productRbtn_Checked(object sender, RoutedEventArgs e)
         {
             if (IsLoaded)
             {
-
-                saveCancelGrid3.Visibility = Visibility.Collapsed;
-                for (int x = 1; x < forms.Children.Count; x++)
+                foreach (UIElement obj in productServiceGrid.Children)
                 {
-                    forms.Children[x].Visibility = Visibility.Hidden;
+                    if (productServiceGrid.Children.IndexOf(obj) == 1)
+                        obj.Visibility = Visibility.Visible;
+                    else
+                        obj.Visibility = Visibility.Collapsed;
                 }
-                product.Visibility = Visibility.Visible;
-                addNewServiceForm.Visibility = Visibility.Hidden;
             }
-
+            
         }
 
         private void productRbtn_Unchecked(object sender, RoutedEventArgs e)
@@ -60,16 +64,16 @@ namespace prototype2.uControlsMaintenance
 
         private void serviceRbtn_Checked(object sender, RoutedEventArgs e)
         {
-            
+
             if (IsLoaded)
             {
-                saveCancelGrid3.Visibility = Visibility.Visible;
-                for (int x = 1; x < forms.Children.Count; x++)
+                foreach (UIElement obj in productServiceGrid.Children)
                 {
-                    forms.Children[x].Visibility = Visibility.Hidden;
+                    if (productServiceGrid.Children.IndexOf(obj) == 0)
+                        obj.Visibility = Visibility.Visible;
+                    else
+                        obj.Visibility = Visibility.Collapsed;
                 }
-                product.Visibility = Visibility.Hidden;
-                addNewServiceForm.Visibility = Visibility.Visible;
             }
 
         }
@@ -83,7 +87,7 @@ namespace prototype2.uControlsMaintenance
         {
             if (MainVM.SelectedCustomerSupplier != null)
             {
-                foreach (var element in addNewServiceForm.Children)
+                foreach (var element in serviceGrid.Children)
                 {
                     if (element is TextBox)
                     {
@@ -118,7 +122,7 @@ namespace prototype2.uControlsMaintenance
 
         private void addressOfCustomerCb_Unchecked(object sender, RoutedEventArgs e)
         {
-            foreach (var element in addNewServiceForm.Children)
+            foreach (var element in serviceGrid.Children)
             {
                 if (element is TextBox)
                 {
@@ -147,7 +151,7 @@ namespace prototype2.uControlsMaintenance
 
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (addNewItemFormGrid.IsVisible)
+            if (productGrid.IsVisible)
             {
                 var linqResults = MainVM.ProductList.Where(x => x.ItemName.ToLower().Contains(searchTb.Text.ToLower()));
                 var observable = new ObservableCollection<Item>(linqResults);
@@ -175,8 +179,7 @@ namespace prototype2.uControlsMaintenance
             object linqResults = null;
             foreach (Item prd in MainVM.ProductList)
             {
-                linqResults = MainVM.RequestedItems.Where(x => x.itemID.Equals(prd.ID)).FirstOrDefault();
-               
+                linqResults = MainVM.RequestedItems.Where(x => x.itemID.Equals(prd.ID) && x.itemType == 0).FirstOrDefault();
             }
             if (linqResults == null)
             {
@@ -193,7 +196,7 @@ namespace prototype2.uControlsMaintenance
         {
             if ((bool)serviceRbtn.IsChecked)
             {
-                foreach (var element in addNewServiceForm.Children)
+                foreach (var element in serviceGrid.Children)
                 {
                     if (element is TextBox)
                     {
@@ -218,9 +221,11 @@ namespace prototype2.uControlsMaintenance
                 if (!validationError)
                 {
                     MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID == int.Parse(serviceTypeCb.SelectedValue.ToString())).First();
-                    
 
-                    MainVM.SelectedRegion = MainVM.Regions.Where(x => x.Provinces.Contains(MainVM.SelectedProvince)).FirstOrDefault();
+
+                    MainVM.SelectedRegion = (from rg in MainVM.Regions
+                                             where rg.RegionID == MainVM.SelectedProvince.RegionID
+                                             select rg).FirstOrDefault();
 
                     var newService = (new AvailedService() {AvailedServiceID = MainVM.AvailedServices.Count+1, ServiceID = MainVM.SelectedService.ServiceID, ProvinceID = int.Parse(serviceProvinceCb.SelectedValue.ToString()), Address = serviceAddressTb.Text, City = serviceCityTb.Text, TotalCost = MainVM.SelectedService.ServicePrice +  MainVM.SelectedRegion.RatePrice});
                     MainVM.AvailedServices.Add(newService);
@@ -243,7 +248,7 @@ namespace prototype2.uControlsMaintenance
 
         void resetFields()
         {
-            foreach (var element in addNewServiceForm.Children)
+            foreach (var element in serviceGrid.Children)
             {
                 if (element is TextBox)
                 {
@@ -265,6 +270,9 @@ namespace prototype2.uControlsMaintenance
                 }
             }
         }
+
         
+
+
     }
 }
