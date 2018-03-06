@@ -22,9 +22,9 @@ namespace prototype2
     /// <summary>
     /// Interaction logic for UserControl3.xaml
     /// </summary>
-    public partial class ucReportSales : UserControl
+    public partial class ucReportPurchase : UserControl
     {
-        public ucReportSales()
+        public ucReportPurchase()
         {
             InitializeComponent();
             //DisplayReport();

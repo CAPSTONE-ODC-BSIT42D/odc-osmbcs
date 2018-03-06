@@ -41,7 +41,7 @@ namespace prototype2
             try
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("select itemName, itemDescr, count(itemName) as Notimes from item_t  group by itemName,itemDescr", conn);
+                MySqlCommand cmd = new MySqlCommand("select itemName, itemDescr, count(itemid) as Notimes from item_t i, items_availed_t where i.id =itemid  group by itemName,itemDescr", conn);
                 MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 adp.Fill(ds, "LoadDataBinding");

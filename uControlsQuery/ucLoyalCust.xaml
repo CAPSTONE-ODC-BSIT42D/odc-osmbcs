@@ -11,12 +11,12 @@
     </UserControl.Resources>
     <Grid Background="#FFF7F6F6" Margin="4,0,0,0">
         <Label Content="Most Loyal Customers" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <DataGrid x:Name="LoyalCustDataGrid" HorizontalAlignment="Left" Height="315" Margin="10,75,0,0" VerticalAlignment="Top" Width="576">
+        <DataGrid x:Name="LoyalCustDataGrid" HorizontalAlignment="Left" Height="315" Margin="10,75,0,0" VerticalAlignment="Top" Width="576" AutoGenerateColumns="False"  ItemsSource="{Binding Path=LoadDataBinding}">
 
             <DataGrid.Columns>
 
-                <DataGridTextColumn Header="Company Name" Width="415"/>
-                <DataGridTextColumn Header="Total No. of Transactions" Width="170"/>
+                <DataGridTextColumn Binding="{Binding Path=c.companyName}" Header="Company Name" Width="415" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Path=NoTimesCust}" Header="Total No. of Transactions" Width="170" IsReadOnly="True"/>
 
             </DataGrid.Columns>
         </DataGrid>

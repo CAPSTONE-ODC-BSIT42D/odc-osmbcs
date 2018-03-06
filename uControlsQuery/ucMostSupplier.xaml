@@ -8,12 +8,12 @@
              d:DesignHeight="300" d:DesignWidth="300" Width="596" Height="400">
     <Grid Background="WhiteSmoke">
         <Label Content="Most Reliable Suplier" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <DataGrid x:Name="mostSupplierDataGrid" HorizontalAlignment="Left" Height="316" Margin="10,74,0,0" VerticalAlignment="Top" Width="576">
+        <DataGrid x:Name="mostSupplierDataGrid" HorizontalAlignment="Left" Height="316" Margin="10,74,0,0" VerticalAlignment="Top" Width="576" AutoGenerateColumns="False"  ItemsSource="{Binding Path=LoadDataBinding}">
         <DataGrid.Columns>
 
-            <DataGridTextColumn Header="Supplier Name" Width="220"/>
-            <DataGridTextColumn Header="Items" Width="200"/>
-                <DataGridTextColumn Header="No. of Times Availed" Width="170"/>
+                <DataGridTextColumn Binding="{Binding Path=c.companyName}" Header="Supplier Name" Width="220" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Path=i.itemName}" Header="Items" Width="200" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Path=NoTimesSupp}" Header="No. of Times Availed" Width="170" IsReadOnly="True"/>
 
             </DataGrid.Columns>
         </DataGrid>
