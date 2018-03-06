@@ -104,36 +104,43 @@ namespace prototype2
             }
             if (dbCon.IsConnect())
             {
-                string query = "INSERT purchase_order_t (`PONumChar`,`suppID`,`shipTo`, `POdueDate`,`asapDueDate`,`shipVia`, `requisitioner`, `incoterms`, `POstatus`, `currency`, `importantNotes`, `preparedBy`, `approveBy`, `refNo`, `termsDays`, `termsDP`) VALUES " +
-                    "('" + poNumChar +"'," +
-                    MainVM.SelectedCustomerSupplier.CompanyID + "," +
-                    "'','" +
-                    selectedDateRequiredTb.SelectedDate.Value.ToString("yyyy-MM-dd") +"'," +
-                    (bool)asapCb.IsChecked + ",'" +
-                    shipViaCb.SelectedValue.ToString() + "','" +
-                    "','" + //requisitionaer
-                    "','" + //incoterms
-                    "PENDING" +"', '" +
-                    currencyCb.SelectedValue.ToString() + "','" +
-                    "','" + //importantNotes
-                    "','" + //preparedBy
-                    "','" + //approveBy
-                    "'," + //refNo
-                    termsDay + "," +
-                    termsDp +
-                    ");";
-                if (dbCon.insertQuery(query, dbCon.Connection))
+                if (String.IsNullOrWhiteSpace(selectedDateRequiredTb.Text))
                 {
-                    if (dbCon.IsConnect())
+                    MessageBox.Show("Purchase order seems empty.");
+                }
+                else
+                {
+                    string query = "INSERT purchase_order_t (`PONumChar`,`suppID`,`shipTo`, `POdueDate`,`asapDueDate`,`shipVia`, `requisitioner`, `incoterms`, `POstatus`, `currency`, `importantNotes`, `preparedBy`, `approveBy`, `refNo`, `termsDays`, `termsDP`) VALUES " +
+                        "('" + poNumChar + "'," +
+                        MainVM.SelectedCustomerSupplier.CompanyID + "," +
+                        "'','" +
+                        selectedDateRequiredTb.SelectedDate.Value.ToString("yyyy-MM-dd") + "'," +
+                        (bool)asapCb.IsChecked + ",'" +
+                        shipViaCb.SelectedValue.ToString() + "','" +
+                        "','" + //requisitionaer
+                        "','" + //incoterms
+                        "PENDING" + "', '" +
+                        currencyCb.SelectedValue.ToString() + "','" +
+                        "','" + //importantNotes
+                        "','" + //preparedBy
+                        "','" + //approveBy
+                        "'," + //refNo
+                        termsDay + "," +
+                        termsDp +
+                        ");";
+                    if (dbCon.insertQuery(query, dbCon.Connection))
                     {
-                        foreach(RequestedItem ri in MainVM.RequestedItems)
+                        if (dbCon.IsConnect())
                         {
-                            query = "UPDATE `items_availed_t` SET poNumChar = '" + poNumChar + "' WHERE sqNoChar = '" + MainVM.SelectedSalesQuote.sqNoChar_ + "' AND id = '"+ri.availedItemID+"'";
-                            dbCon.insertQuery(query, dbCon.Connection);
+                            foreach (RequestedItem ri in MainVM.RequestedItems)
+                            {
+                                query = "UPDATE `items_availed_t` SET poNumChar = '" + poNumChar + "' WHERE sqNoChar = '" + MainVM.SelectedSalesQuote.sqNoChar_ + "' AND id = '" + ri.availedItemID + "'";
+                                dbCon.insertQuery(query, dbCon.Connection);
+                            }
+                            MessageBox.Show("Successfully added.");
                         }
-                        MessageBox.Show("Successfully added.");
-                    }
 
+                    }
                 }
             }
         }

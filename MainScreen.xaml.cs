@@ -277,7 +277,6 @@ namespace prototype2
             MainVM.IntegerTextBox = 0;
             MainVM.cbItem = null;
             MainVM.isNewRecord = false;
-            MainVM.isViewHome = false;
             MainVM.isEdit = false;
             MainVM.isPaymentInvoice = false;
 
@@ -1266,17 +1265,13 @@ namespace prototype2
 
         private void viewQuoteRecordBtn_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var element in transQuotationGrid.Children)
+            MainVM.isView = true;
+            foreach (UIElement element in transQuotationGrid.Children)
             {
-                if (element is UserControl)
-                {
-                    if (!(((UserControl)element).Name.Equals(ucSalesQuote.Name)))
-                    {
-                        ((UserControl)element).Visibility = Visibility.Collapsed;
-                    }
-                    else
-                        ((UserControl)element).Visibility = Visibility.Visible;
-                }
+                if (transQuotationGrid.Children.IndexOf(element) == 1)
+                    element.Visibility = Visibility.Visible;
+                else
+                    element.Visibility = Visibility.Collapsed;
             }
             ucSalesQuote.viewSalesQuoteBtns.Visibility = Visibility.Visible;
             ucSalesQuote.newSalesQuoteBtns.Visibility = Visibility.Collapsed;
@@ -1284,8 +1279,17 @@ namespace prototype2
 
         private void editQuoteRecordBtn_Click(object sender, RoutedEventArgs e)
         {
-            //viewSalesQuoteBtns.Visibility = Visibility.Collapsed;
-            //newSalesQuoteBtns.Visibility = Visibility.Visible;
+            MainVM.isEdit = true;
+            foreach (UIElement element in transQuotationGrid.Children)
+            {
+                if (transQuotationGrid.Children.IndexOf(element) == 1)
+                    element.Visibility = Visibility.Visible;
+                else
+                    element.Visibility = Visibility.Collapsed;
+            }
+            ucSalesQuote.viewSalesQuoteBtns.Visibility = Visibility.Collapsed;
+            ucSalesQuote.newSalesQuoteBtns.Visibility = Visibility.Visible;
+
         }
 
         private void deleteQuoteRecordBtn_Click(object sender, RoutedEventArgs e)
@@ -1295,34 +1299,7 @@ namespace prototype2
 
         private void convertToInvoice_BtnClicked(object sender, EventArgs e)
         {
-            //MainVM.isNewRecord = true;
-            //foreach (var obj in containerGrid.Children)
-            //{
-            //    ((Grid)obj).Visibility = Visibility.Collapsed;
-            //}
-            //trasanctionGrid.Visibility = Visibility.Visible;
-            //foreach (var obj in trasanctionGrid.Children)
-            //{
-            //    if (obj is Grid)
-            //        if (((Grid)obj).Equals(transInvoiceGrid))
-            //            ((Grid)obj).Visibility = Visibility.Visible;
-            //        else
-            //            ((Grid)obj).Visibility = Visibility.Collapsed;
-            //}
-            //foreach (var obj in transInvoiceGrid.Children)
-            //{
-            //    if (obj is UserControl)
-            //    {
-            //        if (((UserControl)obj).Equals(ucInvoiceForm))
-            //        {
-            //            headerLbl.Content = "Order Management - Sales Invoice";
-            //            ((UserControl)obj).Visibility = Visibility.Visible;
-            //        }
-            //    }
-            //    else
-            //        ((Grid)obj).Visibility = Visibility.Collapsed;
-
-            //}
+           
         }
 
         private void genContractBtn_Click(object sender, RoutedEventArgs e)

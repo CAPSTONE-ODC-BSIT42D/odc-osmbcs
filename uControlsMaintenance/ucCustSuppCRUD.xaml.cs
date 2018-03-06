@@ -110,7 +110,7 @@ namespace prototype2
                     BindingExpressionBase bindingExpressionBase = BindingOperations.GetBindingExpressionBase(companyMobileTb, TextBox.TextProperty);
 
                     ValidationError validationErrorA = new ValidationError(new ExceptionValidationRule(), bindingExpression);
-                    validationErrorA.ErrorContent = "Atleast 1 Contact Details is needed";
+                    validationErrorA.ErrorContent = "Atleast 1 Contact detail is needed";
                     Validation.MarkInvalid(bindingExpressionBase, validationErrorA);
 
 
@@ -119,7 +119,7 @@ namespace prototype2
                     BindingExpressionBase bindingExpressionBase1 = BindingOperations.GetBindingExpressionBase(companyEmailTb, TextBox.TextProperty);
 
                     ValidationError validationErrorA1 = new ValidationError(new ExceptionValidationRule(), bindingExpression1);
-                    validationErrorA1.ErrorContent = "Atleast 1 Contact Details is needed";
+                    validationErrorA1.ErrorContent = "Atleast 1 Contact detail is needed";
                     Validation.MarkInvalid(bindingExpressionBase1, validationErrorA1);
 
 
@@ -128,7 +128,7 @@ namespace prototype2
                     BindingExpressionBase bindingExpressionBase2 = BindingOperations.GetBindingExpressionBase(companyTelephoneTb, TextBox.TextProperty);
 
                     ValidationError validationErrorA2 = new ValidationError(new ExceptionValidationRule(), bindingExpression2);
-                    validationErrorA2.ErrorContent = "Atleast 1 Contact Details is needed";
+                    validationErrorA2.ErrorContent = "Atleast 1 Contact detail is needed";
                     Validation.MarkInvalid(bindingExpressionBase2, validationErrorA2);
 
                     validationError = true;
@@ -141,7 +141,7 @@ namespace prototype2
                     BindingExpressionBase bindingExpressionBase = BindingOperations.GetBindingExpressionBase(repMobileTb, TextBox.TextProperty);
 
                     ValidationError validationErrorA = new ValidationError(new ExceptionValidationRule(), bindingExpression);
-                    validationErrorA.ErrorContent = "Atleast 1 Contact Details is needed";
+                    validationErrorA.ErrorContent = "Atleast 1 Contact detail is needed";
                     Validation.MarkInvalid(bindingExpressionBase, validationErrorA);
 
 
@@ -150,7 +150,7 @@ namespace prototype2
                     BindingExpressionBase bindingExpressionBase1 = BindingOperations.GetBindingExpressionBase(repEmailTb, TextBox.TextProperty);
 
                     ValidationError validationErrorA1 = new ValidationError(new ExceptionValidationRule(), bindingExpression1);
-                    validationErrorA1.ErrorContent = "Atleast 1 Contact Details is needed";
+                    validationErrorA1.ErrorContent = "Atleast 1 Contact detail is needed";
                     Validation.MarkInvalid(bindingExpressionBase1, validationErrorA1);
 
 
@@ -159,7 +159,7 @@ namespace prototype2
                     BindingExpressionBase bindingExpressionBase2 = BindingOperations.GetBindingExpressionBase(repTelephoneTb, TextBox.TextProperty);
 
                     ValidationError validationErrorA2 = new ValidationError(new ExceptionValidationRule(), bindingExpression2);
-                    validationErrorA2.ErrorContent = "Atleast 1 Contact Details is needed";
+                    validationErrorA2.ErrorContent = "Atleast 1 Contact detail is needed";
                     Validation.MarkInvalid(bindingExpressionBase2, validationErrorA2);
 
                     validationError = true;
