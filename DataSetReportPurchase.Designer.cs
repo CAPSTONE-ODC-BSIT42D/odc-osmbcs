@@ -24,7 +24,7 @@ namespace prototype2 {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class DataSetReportPurchase : global::System.Data.DataSet {
         
-        private DataTable1DataTable tableDataTable1;
+        private PurchaseTableDataTable tablePurchaseTable;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -54,8 +54,8 @@ namespace prototype2 {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["DataTable1"] != null)) {
-                    base.Tables.Add(new DataTable1DataTable(ds.Tables["DataTable1"]));
+                if ((ds.Tables["PurchaseTable"] != null)) {
+                    base.Tables.Add(new PurchaseTableDataTable(ds.Tables["PurchaseTable"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -79,9 +79,9 @@ namespace prototype2 {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public DataTable1DataTable DataTable1 {
+        public PurchaseTableDataTable PurchaseTable {
             get {
-                return this.tableDataTable1;
+                return this.tablePurchaseTable;
             }
         }
         
@@ -152,8 +152,8 @@ namespace prototype2 {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["DataTable1"] != null)) {
-                    base.Tables.Add(new DataTable1DataTable(ds.Tables["DataTable1"]));
+                if ((ds.Tables["PurchaseTable"] != null)) {
+                    base.Tables.Add(new PurchaseTableDataTable(ds.Tables["PurchaseTable"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -188,10 +188,10 @@ namespace prototype2 {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableDataTable1 = ((DataTable1DataTable)(base.Tables["DataTable1"]));
+            this.tablePurchaseTable = ((PurchaseTableDataTable)(base.Tables["PurchaseTable"]));
             if ((initTable == true)) {
-                if ((this.tableDataTable1 != null)) {
-                    this.tableDataTable1.InitVars();
+                if ((this.tablePurchaseTable != null)) {
+                    this.tablePurchaseTable.InitVars();
                 }
             }
         }
@@ -204,13 +204,13 @@ namespace prototype2 {
             this.Namespace = "http://tempuri.org/DataSetReportPurchase.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableDataTable1 = new DataTable1DataTable();
-            base.Tables.Add(this.tableDataTable1);
+            this.tablePurchaseTable = new PurchaseTableDataTable();
+            base.Tables.Add(this.tablePurchaseTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private bool ShouldSerializeDataTable1() {
+        private bool ShouldSerializePurchaseTable() {
             return false;
         }
         
@@ -270,14 +270,14 @@ namespace prototype2 {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public delegate void DataTable1RowChangeEventHandler(object sender, DataTable1RowChangeEvent e);
+        public delegate void PurchaseTableRowChangeEventHandler(object sender, PurchaseTableRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class DataTable1DataTable : global::System.Data.TypedTableBase<DataTable1Row> {
+        public partial class PurchaseTableDataTable : global::System.Data.TypedTableBase<PurchaseTableRow> {
             
             private global::System.Data.DataColumn columnorderDate;
             
@@ -299,8 +299,8 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DataTable1DataTable() {
-                this.TableName = "DataTable1";
+            public PurchaseTableDataTable() {
+                this.TableName = "PurchaseTable";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -308,7 +308,7 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal DataTable1DataTable(global::System.Data.DataTable table) {
+            internal PurchaseTableDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -325,7 +325,7 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected DataTable1DataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected PurchaseTableDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -413,34 +413,34 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DataTable1Row this[int index] {
+            public PurchaseTableRow this[int index] {
                 get {
-                    return ((DataTable1Row)(this.Rows[index]));
+                    return ((PurchaseTableRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event DataTable1RowChangeEventHandler DataTable1RowChanging;
+            public event PurchaseTableRowChangeEventHandler PurchaseTableRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event DataTable1RowChangeEventHandler DataTable1RowChanged;
+            public event PurchaseTableRowChangeEventHandler PurchaseTableRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event DataTable1RowChangeEventHandler DataTable1RowDeleting;
+            public event PurchaseTableRowChangeEventHandler PurchaseTableRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event DataTable1RowChangeEventHandler DataTable1RowDeleted;
+            public event PurchaseTableRowChangeEventHandler PurchaseTableRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void AddDataTable1Row(DataTable1Row row) {
+            public void AddPurchaseTableRow(PurchaseTableRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DataTable1Row AddDataTable1Row(System.DateTime orderDate, string itemName, decimal totalCost, string serviceName, decimal Expr1, decimal Expr2, decimal Expr3, string Expr4, long Expr5) {
-                DataTable1Row rowDataTable1Row = ((DataTable1Row)(this.NewRow()));
+            public PurchaseTableRow AddPurchaseTableRow(System.DateTime orderDate, string itemName, decimal totalCost, string serviceName, decimal Expr1, decimal Expr2, decimal Expr3, string Expr4, long Expr5) {
+                PurchaseTableRow rowPurchaseTableRow = ((PurchaseTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         orderDate,
                         itemName,
@@ -451,15 +451,15 @@ namespace prototype2 {
                         Expr3,
                         Expr4,
                         Expr5};
-                rowDataTable1Row.ItemArray = columnValuesArray;
-                this.Rows.Add(rowDataTable1Row);
-                return rowDataTable1Row;
+                rowPurchaseTableRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowPurchaseTableRow);
+                return rowPurchaseTableRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                DataTable1DataTable cln = ((DataTable1DataTable)(base.Clone()));
+                PurchaseTableDataTable cln = ((PurchaseTableDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -467,7 +467,7 @@ namespace prototype2 {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new DataTable1DataTable();
+                return new PurchaseTableDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -515,28 +515,28 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DataTable1Row NewDataTable1Row() {
-                return ((DataTable1Row)(this.NewRow()));
+            public PurchaseTableRow NewPurchaseTableRow() {
+                return ((PurchaseTableRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new DataTable1Row(builder);
+                return new PurchaseTableRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(DataTable1Row);
+                return typeof(PurchaseTableRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.DataTable1RowChanged != null)) {
-                    this.DataTable1RowChanged(this, new DataTable1RowChangeEvent(((DataTable1Row)(e.Row)), e.Action));
+                if ((this.PurchaseTableRowChanged != null)) {
+                    this.PurchaseTableRowChanged(this, new PurchaseTableRowChangeEvent(((PurchaseTableRow)(e.Row)), e.Action));
                 }
             }
             
@@ -544,8 +544,8 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.DataTable1RowChanging != null)) {
-                    this.DataTable1RowChanging(this, new DataTable1RowChangeEvent(((DataTable1Row)(e.Row)), e.Action));
+                if ((this.PurchaseTableRowChanging != null)) {
+                    this.PurchaseTableRowChanging(this, new PurchaseTableRowChangeEvent(((PurchaseTableRow)(e.Row)), e.Action));
                 }
             }
             
@@ -553,8 +553,8 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.DataTable1RowDeleted != null)) {
-                    this.DataTable1RowDeleted(this, new DataTable1RowChangeEvent(((DataTable1Row)(e.Row)), e.Action));
+                if ((this.PurchaseTableRowDeleted != null)) {
+                    this.PurchaseTableRowDeleted(this, new PurchaseTableRowChangeEvent(((PurchaseTableRow)(e.Row)), e.Action));
                 }
             }
             
@@ -562,14 +562,14 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.DataTable1RowDeleting != null)) {
-                    this.DataTable1RowDeleting(this, new DataTable1RowChangeEvent(((DataTable1Row)(e.Row)), e.Action));
+                if ((this.PurchaseTableRowDeleting != null)) {
+                    this.PurchaseTableRowDeleting(this, new PurchaseTableRowChangeEvent(((PurchaseTableRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void RemoveDataTable1Row(DataTable1Row row) {
+            public void RemovePurchaseTableRow(PurchaseTableRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -596,7 +596,7 @@ namespace prototype2 {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "DataTable1DataTable";
+                attribute2.FixedValue = "PurchaseTableDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -640,15 +640,15 @@ namespace prototype2 {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class DataTable1Row : global::System.Data.DataRow {
+        public partial class PurchaseTableRow : global::System.Data.DataRow {
             
-            private DataTable1DataTable tableDataTable1;
+            private PurchaseTableDataTable tablePurchaseTable;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal DataTable1Row(global::System.Data.DataRowBuilder rb) : 
+            internal PurchaseTableRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableDataTable1 = ((DataTable1DataTable)(this.Table));
+                this.tablePurchaseTable = ((PurchaseTableDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -656,14 +656,14 @@ namespace prototype2 {
             public System.DateTime orderDate {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableDataTable1.orderDateColumn]));
+                        return ((global::System.DateTime)(this[this.tablePurchaseTable.orderDateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'orderDate\' in table \'DataTable1\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'orderDate\' in table \'PurchaseTable\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataTable1.orderDateColumn] = value;
+                    this[this.tablePurchaseTable.orderDateColumn] = value;
                 }
             }
             
@@ -671,10 +671,10 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string itemName {
                 get {
-                    return ((string)(this[this.tableDataTable1.itemNameColumn]));
+                    return ((string)(this[this.tablePurchaseTable.itemNameColumn]));
                 }
                 set {
-                    this[this.tableDataTable1.itemNameColumn] = value;
+                    this[this.tablePurchaseTable.itemNameColumn] = value;
                 }
             }
             
@@ -683,14 +683,14 @@ namespace prototype2 {
             public decimal totalCost {
                 get {
                     try {
-                        return ((decimal)(this[this.tableDataTable1.totalCostColumn]));
+                        return ((decimal)(this[this.tablePurchaseTable.totalCostColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'totalCost\' in table \'DataTable1\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'totalCost\' in table \'PurchaseTable\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataTable1.totalCostColumn] = value;
+                    this[this.tablePurchaseTable.totalCostColumn] = value;
                 }
             }
             
@@ -698,10 +698,10 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string serviceName {
                 get {
-                    return ((string)(this[this.tableDataTable1.serviceNameColumn]));
+                    return ((string)(this[this.tablePurchaseTable.serviceNameColumn]));
                 }
                 set {
-                    this[this.tableDataTable1.serviceNameColumn] = value;
+                    this[this.tablePurchaseTable.serviceNameColumn] = value;
                 }
             }
             
@@ -709,10 +709,10 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public decimal Expr1 {
                 get {
-                    return ((decimal)(this[this.tableDataTable1.Expr1Column]));
+                    return ((decimal)(this[this.tablePurchaseTable.Expr1Column]));
                 }
                 set {
-                    this[this.tableDataTable1.Expr1Column] = value;
+                    this[this.tablePurchaseTable.Expr1Column] = value;
                 }
             }
             
@@ -721,14 +721,14 @@ namespace prototype2 {
             public decimal Expr2 {
                 get {
                     try {
-                        return ((decimal)(this[this.tableDataTable1.Expr2Column]));
+                        return ((decimal)(this[this.tablePurchaseTable.Expr2Column]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Expr2\' in table \'DataTable1\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Expr2\' in table \'PurchaseTable\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataTable1.Expr2Column] = value;
+                    this[this.tablePurchaseTable.Expr2Column] = value;
                 }
             }
             
@@ -737,14 +737,14 @@ namespace prototype2 {
             public decimal Expr3 {
                 get {
                     try {
-                        return ((decimal)(this[this.tableDataTable1.Expr3Column]));
+                        return ((decimal)(this[this.tablePurchaseTable.Expr3Column]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Expr3\' in table \'DataTable1\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Expr3\' in table \'PurchaseTable\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataTable1.Expr3Column] = value;
+                    this[this.tablePurchaseTable.Expr3Column] = value;
                 }
             }
             
@@ -753,14 +753,14 @@ namespace prototype2 {
             public string Expr4 {
                 get {
                     try {
-                        return ((string)(this[this.tableDataTable1.Expr4Column]));
+                        return ((string)(this[this.tablePurchaseTable.Expr4Column]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Expr4\' in table \'DataTable1\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Expr4\' in table \'PurchaseTable\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataTable1.Expr4Column] = value;
+                    this[this.tablePurchaseTable.Expr4Column] = value;
                 }
             }
             
@@ -769,87 +769,87 @@ namespace prototype2 {
             public long Expr5 {
                 get {
                     try {
-                        return ((long)(this[this.tableDataTable1.Expr5Column]));
+                        return ((long)(this[this.tablePurchaseTable.Expr5Column]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Expr5\' in table \'DataTable1\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Expr5\' in table \'PurchaseTable\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataTable1.Expr5Column] = value;
+                    this[this.tablePurchaseTable.Expr5Column] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsorderDateNull() {
-                return this.IsNull(this.tableDataTable1.orderDateColumn);
+                return this.IsNull(this.tablePurchaseTable.orderDateColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetorderDateNull() {
-                this[this.tableDataTable1.orderDateColumn] = global::System.Convert.DBNull;
+                this[this.tablePurchaseTable.orderDateColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IstotalCostNull() {
-                return this.IsNull(this.tableDataTable1.totalCostColumn);
+                return this.IsNull(this.tablePurchaseTable.totalCostColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SettotalCostNull() {
-                this[this.tableDataTable1.totalCostColumn] = global::System.Convert.DBNull;
+                this[this.tablePurchaseTable.totalCostColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsExpr2Null() {
-                return this.IsNull(this.tableDataTable1.Expr2Column);
+                return this.IsNull(this.tablePurchaseTable.Expr2Column);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetExpr2Null() {
-                this[this.tableDataTable1.Expr2Column] = global::System.Convert.DBNull;
+                this[this.tablePurchaseTable.Expr2Column] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsExpr3Null() {
-                return this.IsNull(this.tableDataTable1.Expr3Column);
+                return this.IsNull(this.tablePurchaseTable.Expr3Column);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetExpr3Null() {
-                this[this.tableDataTable1.Expr3Column] = global::System.Convert.DBNull;
+                this[this.tablePurchaseTable.Expr3Column] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsExpr4Null() {
-                return this.IsNull(this.tableDataTable1.Expr4Column);
+                return this.IsNull(this.tablePurchaseTable.Expr4Column);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetExpr4Null() {
-                this[this.tableDataTable1.Expr4Column] = global::System.Convert.DBNull;
+                this[this.tablePurchaseTable.Expr4Column] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsExpr5Null() {
-                return this.IsNull(this.tableDataTable1.Expr5Column);
+                return this.IsNull(this.tablePurchaseTable.Expr5Column);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetExpr5Null() {
-                this[this.tableDataTable1.Expr5Column] = global::System.Convert.DBNull;
+                this[this.tablePurchaseTable.Expr5Column] = global::System.Convert.DBNull;
             }
         }
         
@@ -857,22 +857,22 @@ namespace prototype2 {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public class DataTable1RowChangeEvent : global::System.EventArgs {
+        public class PurchaseTableRowChangeEvent : global::System.EventArgs {
             
-            private DataTable1Row eventRow;
+            private PurchaseTableRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DataTable1RowChangeEvent(DataTable1Row row, global::System.Data.DataRowAction action) {
+            public PurchaseTableRowChangeEvent(PurchaseTableRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DataTable1Row Row {
+            public PurchaseTableRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -900,7 +900,7 @@ namespace prototype2.DataSetReportPurchaseTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class DataTable1TableAdapter : global::System.ComponentModel.Component {
+    public partial class PurchaseTableTableAdapter : global::System.ComponentModel.Component {
         
         private global::MySql.Data.MySqlClient.MySqlDataAdapter _adapter;
         
@@ -914,7 +914,7 @@ namespace prototype2.DataSetReportPurchaseTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public DataTable1TableAdapter() {
+        public PurchaseTableTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
@@ -1011,7 +1011,7 @@ namespace prototype2.DataSetReportPurchaseTableAdapters {
             this._adapter = new global::MySql.Data.MySqlClient.MySqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "DataTable1";
+            tableMapping.DataSetTable = "PurchaseTable";
             tableMapping.ColumnMappings.Add("orderDate", "orderDate");
             tableMapping.ColumnMappings.Add("itemName", "itemName");
             tableMapping.ColumnMappings.Add("totalCost", "totalCost");
@@ -1139,7 +1139,7 @@ GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int FillPurchaseAll(DataSetReportPurchase.DataTable1DataTable dataTable) {
+        public virtual int FillPurchaseAll(DataSetReportPurchase.PurchaseTableDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1152,9 +1152,9 @@ GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DataSetReportPurchase.DataTable1DataTable GetDataPurchaseAll() {
+        public virtual DataSetReportPurchase.PurchaseTableDataTable GetDataPurchaseAll() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DataSetReportPurchase.DataTable1DataTable dataTable = new DataSetReportPurchase.DataTable1DataTable();
+            DataSetReportPurchase.PurchaseTableDataTable dataTable = new DataSetReportPurchase.PurchaseTableDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1163,7 +1163,7 @@ GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByPurchaseDay(DataSetReportPurchase.DataTable1DataTable dataTable) {
+        public virtual int FillByPurchaseDay(DataSetReportPurchase.PurchaseTableDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1176,9 +1176,9 @@ GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual DataSetReportPurchase.DataTable1DataTable GetDataByPurchaseDay() {
+        public virtual DataSetReportPurchase.PurchaseTableDataTable GetDataByPurchaseDay() {
             this.Adapter.SelectCommand = this.CommandCollection[1];
-            DataSetReportPurchase.DataTable1DataTable dataTable = new DataSetReportPurchase.DataTable1DataTable();
+            DataSetReportPurchase.PurchaseTableDataTable dataTable = new DataSetReportPurchase.PurchaseTableDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1187,7 +1187,7 @@ GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByPurchaseMonth(DataSetReportPurchase.DataTable1DataTable dataTable, string A) {
+        public virtual int FillByPurchaseMonth(DataSetReportPurchase.PurchaseTableDataTable dataTable, string A) {
             this.Adapter.SelectCommand = this.CommandCollection[2];
             if ((A == null)) {
                 throw new global::System.ArgumentNullException("A");
@@ -1206,7 +1206,7 @@ GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual DataSetReportPurchase.DataTable1DataTable GetDataByPurchaseMonth(string A) {
+        public virtual DataSetReportPurchase.PurchaseTableDataTable GetDataByPurchaseMonth(string A) {
             this.Adapter.SelectCommand = this.CommandCollection[2];
             if ((A == null)) {
                 throw new global::System.ArgumentNullException("A");
@@ -1214,7 +1214,7 @@ GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
             else {
                 this.Adapter.SelectCommand.Parameters[0].Value = ((string)(A));
             }
-            DataSetReportPurchase.DataTable1DataTable dataTable = new DataSetReportPurchase.DataTable1DataTable();
+            DataSetReportPurchase.PurchaseTableDataTable dataTable = new DataSetReportPurchase.PurchaseTableDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1223,7 +1223,7 @@ GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByPurchaseRange(DataSetReportPurchase.DataTable1DataTable dataTable, global::System.Nullable<global::System.DateTime> R, global::System.Nullable<global::System.DateTime> T) {
+        public virtual int FillByPurchaseRange(DataSetReportPurchase.PurchaseTableDataTable dataTable, global::System.Nullable<global::System.DateTime> R, global::System.Nullable<global::System.DateTime> T) {
             this.Adapter.SelectCommand = this.CommandCollection[3];
             if ((R.HasValue == true)) {
                 this.Adapter.SelectCommand.Parameters[0].Value = ((System.DateTime)(R.Value));
@@ -1248,7 +1248,7 @@ GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual DataSetReportPurchase.DataTable1DataTable GetDataByPurchaseRange(global::System.Nullable<global::System.DateTime> R, global::System.Nullable<global::System.DateTime> T) {
+        public virtual DataSetReportPurchase.PurchaseTableDataTable GetDataByPurchaseRange(global::System.Nullable<global::System.DateTime> R, global::System.Nullable<global::System.DateTime> T) {
             this.Adapter.SelectCommand = this.CommandCollection[3];
             if ((R.HasValue == true)) {
                 this.Adapter.SelectCommand.Parameters[0].Value = ((System.DateTime)(R.Value));
@@ -1262,7 +1262,7 @@ GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
             else {
                 this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
-            DataSetReportPurchase.DataTable1DataTable dataTable = new DataSetReportPurchase.DataTable1DataTable();
+            DataSetReportPurchase.PurchaseTableDataTable dataTable = new DataSetReportPurchase.PurchaseTableDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1271,7 +1271,7 @@ GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByPurchaseWeek(DataSetReportPurchase.DataTable1DataTable dataTable, decimal C) {
+        public virtual int FillByPurchaseWeek(DataSetReportPurchase.PurchaseTableDataTable dataTable, decimal C) {
             this.Adapter.SelectCommand = this.CommandCollection[4];
             this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(C));
             if ((this.ClearBeforeFill == true)) {
@@ -1285,10 +1285,10 @@ GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual DataSetReportPurchase.DataTable1DataTable GetDataByPurchaseWeek(decimal C) {
+        public virtual DataSetReportPurchase.PurchaseTableDataTable GetDataByPurchaseWeek(decimal C) {
             this.Adapter.SelectCommand = this.CommandCollection[4];
             this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(C));
-            DataSetReportPurchase.DataTable1DataTable dataTable = new DataSetReportPurchase.DataTable1DataTable();
+            DataSetReportPurchase.PurchaseTableDataTable dataTable = new DataSetReportPurchase.PurchaseTableDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1297,7 +1297,7 @@ GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByPurchaseYear(DataSetReportPurchase.DataTable1DataTable dataTable, decimal B) {
+        public virtual int FillByPurchaseYear(DataSetReportPurchase.PurchaseTableDataTable dataTable, decimal B) {
             this.Adapter.SelectCommand = this.CommandCollection[5];
             this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(B));
             if ((this.ClearBeforeFill == true)) {
@@ -1311,10 +1311,10 @@ GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual DataSetReportPurchase.DataTable1DataTable GetDataByPurchaseYear(decimal B) {
+        public virtual DataSetReportPurchase.PurchaseTableDataTable GetDataByPurchaseYear(decimal B) {
             this.Adapter.SelectCommand = this.CommandCollection[5];
             this.Adapter.SelectCommand.Parameters[0].Value = ((decimal)(B));
-            DataSetReportPurchase.DataTable1DataTable dataTable = new DataSetReportPurchase.DataTable1DataTable();
+            DataSetReportPurchase.PurchaseTableDataTable dataTable = new DataSetReportPurchase.PurchaseTableDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }

@@ -453,11 +453,14 @@ namespace prototype2
 
         private void reportsBtn_Click(object sender, RoutedEventArgs e)
         {
+  
             foreach (var obj in containerGrid.Children)
             {
                 ((Grid)obj).Visibility = Visibility.Collapsed;
             }
             reportsGrid.Visibility = Visibility.Visible;
+           
+            
         }
 
         private void manageBtn_Click(object sender, RoutedEventArgs e)

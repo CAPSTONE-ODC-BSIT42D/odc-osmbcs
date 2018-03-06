@@ -51,6 +51,6 @@
         <Label x:Name="startsales" Content="Start Date:" Grid.Column="1" HorizontalAlignment="Left" Margin="117,10,-183,0" VerticalAlignment="Top" Visibility="Hidden" Height="26" Width="66"/>
         <Label x:Name="Weeksales" Content="Week:" Grid.Column="1" HorizontalAlignment="Left" Margin="117,10,-183,0" VerticalAlignment="Top" Visibility="Hidden" Height="26" Width="66"/>
         <Label x:Name="EndSales" Content="End Date:" Grid.Column="1" HorizontalAlignment="Left" Margin="280,10,-341,0" VerticalAlignment="Top" Visibility="Hidden" Height="26" Width="61"/>
-        <syncfusion:ReportViewer x:Name="ReportPurchase" Margin="0,67,0,0"/>
+        <syncfusion:ReportViewer x:Name="ReportPurchase" ReportPath="C:\Users\Alexis\Source\Repos\odc-osmbcs\rdlcfiles\PurchaseReport.rdlc" Margin="0,67,0,0"/>
     </Grid>
 </UserControl>

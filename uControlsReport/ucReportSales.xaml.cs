@@ -27,16 +27,17 @@ namespace prototype2
         {
             InitializeComponent();
             DisplayReport();
-            
+        
         }
-        private void DisplayReport ()
+        private void DisplayReport()
         {
             ReportSales.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource(" DatasetReportSales", GetItem()));
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesTable", GetItem()));
             ReportSales.LoadReport(rNames);
             ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportSales.RefreshReport();
+
         }
 
         private DataTable GetItem()
@@ -49,7 +50,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost) AS Expr5 FROM item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID INNER JOIN service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN services_t s ON sa.serviceID = s.serviceID WHERE(i.isDeleted = 0) AND(s.isDeleted = 0) GROUP BY i.itemName, s.serviceName, ia.totalCost, sa.totalCost, si.dateOfIssue";
 
-           DatasetReportSales.DataTable1DataTable dSItem = new DatasetReportSales.DataTable1DataTable();
+            DatasetReportSales.SalesTableDataTable dSItem = new DatasetReportSales.SalesTableDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
@@ -66,7 +67,7 @@ namespace prototype2
         {
             ReportSales.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource(" DatasetReportSales", GetItemDay()));
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesTable", GetItemDay()));
             ReportSales.LoadReport(rNames);
             ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportSales.RefreshReport();
@@ -82,7 +83,7 @@ namespace prototype2
 
             cmd.CommandText = "SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost)  AS Expr5 FROM item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID INNER JOIN service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN services_t s ON sa.serviceID = s.serviceID WHERE(CURDATE() = si.dateOfIssue) AND(i.isDeleted = 0) AND(s.isDeleted = 0) GROUP BY i.itemName, s.serviceName, ia.totalCost, sa.totalCost, si.dateOfIssue";
 
-            DatasetReportSales.DataTable1DataTable dSItem = new DatasetReportSales.DataTable1DataTable();
+            DatasetReportSales.SalesTableDataTable dSItem = new DatasetReportSales.SalesTableDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
@@ -94,7 +95,7 @@ namespace prototype2
         {
             ReportSales.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DatasetReportSales", GetItemWeek()));
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesTable", GetItemWeek()));
             ReportSales.LoadReport(rNames);
             ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportSales.RefreshReport();
@@ -108,9 +109,9 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost)  AS Expr5 FROM item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN  cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN  sales_invoice_t si ON cs.companyID = si.custID INNER JOIN service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN services_t s ON sa.serviceID = s.serviceID WHERE(WEEK(si.dateOfIssue) = '" + DatePickerItemWeek.SelectedDate.ToString() + "')";
+            cmd.CommandText = "SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost)  AS Expr5 FROM item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN  cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN  sales_invoice_t si ON cs.companyID = si.custID INNER JOIN service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN services_t s ON sa.serviceID = s.serviceID WHERE(WEEK(si.dateOfIssue) = '" + DatePickerItemWeek.SelectedDate.ToString() + "') and (i.isDeleted = 0) AND(s.isDeleted = 0) GROUP BY i.itemName, s.serviceName, ia.totalCost, sa.totalCost, si.dateOfIssue";
 
-            DatasetReportSales.DataTable1DataTable dSItem = new DatasetReportSales.DataTable1DataTable();
+            DatasetReportSales.SalesTableDataTable dSItem = new DatasetReportSales.SalesTableDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
@@ -123,7 +124,7 @@ namespace prototype2
         {
             ReportSales.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DatasetReportSales", GetItemMonth()));
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesTable", GetItemMonth()));
             ReportSales.LoadReport(rNames);
             ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportSales.RefreshReport();
@@ -138,7 +139,7 @@ namespace prototype2
             cmd.CommandType = CommandType.Text;
 
             cmd.CommandText = "SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost)   AS Expr5 FROM item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID INNER JOIN service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN services_t s ON sa.serviceID = s.serviceID WHERE(MONTHNAME(si.dateOfIssue) = '" + ComboBoxItemMonth.SelectedItem.ToString() + "') AND(i.isDeleted = 0) AND(s.isDeleted = 0) GROUP BY i.itemName, s.serviceName, ia.totalCost, sa.totalCost, si.dateOfIssue";
-            DatasetReportSales.DataTable1DataTable dSItem = new DatasetReportSales.DataTable1DataTable();
+            DatasetReportSales.SalesTableDataTable dSItem = new DatasetReportSales.SalesTableDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
@@ -151,7 +152,7 @@ namespace prototype2
 
             ReportSales.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DatasetReportSales", GetItemYear()));
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesTable", GetItemYear()));
             ReportSales.LoadReport(rNames);
             ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportSales.RefreshReport();
@@ -165,9 +166,9 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost)  AS Expr5 FROM item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID INNER JOIN service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN services_t s ON sa.serviceID = s.serviceID WHERE(YEAR(si.dateOfIssue) =  '"+ ComboBoxItemYear .SelectedItem.ToString()+ "') AND(i.isDeleted = 0) AND(s.isDeleted = 0) GROUP BY i.itemName, s.serviceName, ia.totalCost, sa.totalCost, si.dateOfIssue";
+            cmd.CommandText = "SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost)  AS Expr5 FROM item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID INNER JOIN service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN services_t s ON sa.serviceID = s.serviceID WHERE(YEAR(si.dateOfIssue) =  '" + ComboBoxItemYear.SelectedItem.ToString() + "') AND(i.isDeleted = 0) AND(s.isDeleted = 0) GROUP BY i.itemName, s.serviceName, ia.totalCost, sa.totalCost, si.dateOfIssue";
 
-            DatasetReportSales.DataTable1DataTable dSItem = new DatasetReportSales.DataTable1DataTable();
+            DatasetReportSales.SalesTableDataTable dSItem = new DatasetReportSales.SalesTableDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
@@ -179,7 +180,7 @@ namespace prototype2
         {
             ReportSales.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DatasetReportSales", GetItemRange()));
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesTable", GetItemRange()));
             ReportSales.LoadReport(rNames);
             ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportSales.RefreshReport();
@@ -193,9 +194,9 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost)  AS Expr5 FROM item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN  cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID INNER JOIN service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN services_t s ON sa.serviceID = s.serviceID WHERE(si.dateOfIssue BETWEEN '"+DatePickerItemStart.SelectedDate.ToString()+"' AND '"+DatePickerItemEnd.SelectedDate.ToString()+"') AND (i.isDeleted = 0) AND(s.isDeleted = 0) GROUP BY i.itemName, s.serviceName, ia.totalCost, sa.totalCost, si.dateOfIssue";
+            cmd.CommandText = "SELECT        i.itemName, s.serviceName, ia.totalCost, sa.totalCost AS Expr1, si.dateOfIssue, SUM(ia.totalCost) AS Expr2, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4, SUM(sa.totalCost)  AS Expr5 FROM item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN  cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID INNER JOIN service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN services_t s ON sa.serviceID = s.serviceID WHERE(si.dateOfIssue BETWEEN '" + DatePickerItemStart.SelectedDate.ToString() + "' AND '" + DatePickerItemEnd.SelectedDate.ToString() + "') AND (i.isDeleted = 0) AND(s.isDeleted = 0) GROUP BY i.itemName, s.serviceName, ia.totalCost, sa.totalCost, si.dateOfIssue";
 
-            DatasetReportSales.DataTable1DataTable dSItem = new DatasetReportSales.DataTable1DataTable();
+            DatasetReportSales.SalesTableDataTable dSItem = new DatasetReportSales.SalesTableDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
