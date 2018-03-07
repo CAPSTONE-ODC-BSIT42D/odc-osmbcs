@@ -271,14 +271,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="totalCost">
+                    <Textbox Name="markupPerc">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!totalCost.Value</Value>
+                              <Value>=((Fields!markupPerc.Value\100)*Fields!unitPrice.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -287,7 +287,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>totalCost</rd:DefaultName>
+                      <rd:DefaultName>markupPerc</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -423,14 +423,14 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="totalCost1">
+                    <Textbox Name="serviceName">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!totalCost.Value</Value>
+                              <Value>=Fields!serviceName.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -439,7 +439,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>totalCost1</rd:DefaultName>
+                      <rd:DefaultName>serviceName</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -456,14 +456,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Expr1">
+                    <Textbox Name="servicePrice">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Expr1.Value</Value>
+                              <Value>=Fields!servicePrice.Value+Fields!totalCost.Value+Fields!feeValue.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -472,7 +472,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Expr1</rd:DefaultName>
+                      <rd:DefaultName>servicePrice</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -579,7 +579,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Expr5.Value</Value>
+                              <Value>=Sum(Fields!servicePrice.Value+Fields!totalCost.Value+Fields!feeValue.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -644,14 +644,14 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Expr2">
+                    <Textbox Name="markupPerc1">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Expr2.Value</Value>
+                              <Value>=Sum(((Fields!markupPerc.Value\100)*Fields!unitPrice.Value))</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -660,7 +660,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Expr2</rd:DefaultName>
+                      <rd:DefaultName>markupPerc1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -756,36 +756,6 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Expr31">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!Expr3.Value</Value>
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Expr31</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
                     <Textbox Name="Expr4">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -801,6 +771,36 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Expr4</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Expr32">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!Expr3.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Expr32</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -884,21 +884,9 @@
           <DataField>serviceName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="totalCost">
-          <DataField>totalCost</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="Expr1">
-          <DataField>Expr1</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
         <Field Name="dateOfIssue">
           <DataField>dateOfIssue</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="Expr2">
-          <DataField>Expr2</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="Expr3">
           <DataField>Expr3</DataField>
@@ -908,14 +896,30 @@
           <DataField>Expr4</DataField>
           <rd:TypeName>System.Int64</rd:TypeName>
         </Field>
-        <Field Name="Expr5">
-          <DataField>Expr5</DataField>
+        <Field Name="markupPerc">
+          <DataField>markupPerc</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="servicePrice">
+          <DataField>servicePrice</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="unitPrice">
+          <DataField>unitPrice</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="totalCost">
+          <DataField>totalCost</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="feeValue">
+          <DataField>feeValue</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DatasetReportSales</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\Alexis\Source\odc-osmbcs\DatasetReportSales.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\Alexis\Source\Repos\odc-osmbcs\DatasetReportSales.xsd</rd:SchemaPath>
         <rd:TableName>SalesTable</rd:TableName>
         <rd:TableAdapterFillMethod>FillBySalesAll</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetDataSalesAll</rd:TableAdapterGetDataMethod>

@@ -17,7 +17,7 @@ namespace prototype2
         public UserControl1()
         {
             InitializeComponent();
-            binddatagrid();
+           // binddatagrid();
         }
         private void binddatagrid()
         {

@@ -267,6 +267,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DatasetAll.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatasetAll.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DataSetItemQuery.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -292,6 +297,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DatasetReportSales.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetReportService.cs">
+      <DependentUpon>DataSetReportService.xsd</DependentUpon>
     </Compile>
     <Compile Include="DataSetReportService.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -573,6 +581,17 @@
     </None>
     <None Include="DataSet1.xss">
       <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="DatasetAll.xsc">
+      <DependentUpon>DatasetAll.xsd</DependentUpon>
+    </None>
+    <None Include="DatasetAll.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatasetAll.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DatasetAll.xss">
+      <DependentUpon>DatasetAll.xsd</DependentUpon>
     </None>
     <None Include="DataSetItemQuery.xsc">
       <DependentUpon>DataSetItemQuery.xsd</DependentUpon>

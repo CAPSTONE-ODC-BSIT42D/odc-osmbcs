@@ -283,19 +283,13 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columnitemName;
             
-            private global::System.Data.DataColumn columntotalCost;
-            
-            private global::System.Data.DataColumn columnserviceName;
-            
-            private global::System.Data.DataColumn columnExpr1;
-            
             private global::System.Data.DataColumn columnExpr2;
-            
-            private global::System.Data.DataColumn columnExpr3;
             
             private global::System.Data.DataColumn columnExpr4;
             
             private global::System.Data.DataColumn columnExpr5;
+            
+            private global::System.Data.DataColumn columnunitPrice;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -348,41 +342,9 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn totalCostColumn {
-                get {
-                    return this.columntotalCost;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn serviceNameColumn {
-                get {
-                    return this.columnserviceName;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn Expr1Column {
-                get {
-                    return this.columnExpr1;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn Expr2Column {
                 get {
                     return this.columnExpr2;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn Expr3Column {
-                get {
-                    return this.columnExpr3;
                 }
             }
             
@@ -399,6 +361,14 @@ namespace prototype2 {
             public global::System.Data.DataColumn Expr5Column {
                 get {
                     return this.columnExpr5;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn unitPriceColumn {
+                get {
+                    return this.columnunitPrice;
                 }
             }
             
@@ -439,18 +409,15 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public PurchaseTableRow AddPurchaseTableRow(System.DateTime orderDate, string itemName, decimal totalCost, string serviceName, decimal Expr1, decimal Expr2, decimal Expr3, string Expr4, long Expr5) {
+            public PurchaseTableRow AddPurchaseTableRow(System.DateTime orderDate, string itemName, decimal Expr2, string Expr4, long Expr5, decimal unitPrice) {
                 PurchaseTableRow rowPurchaseTableRow = ((PurchaseTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         orderDate,
                         itemName,
-                        totalCost,
-                        serviceName,
-                        Expr1,
                         Expr2,
-                        Expr3,
                         Expr4,
-                        Expr5};
+                        Expr5,
+                        unitPrice};
                 rowPurchaseTableRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPurchaseTableRow);
                 return rowPurchaseTableRow;
@@ -475,13 +442,10 @@ namespace prototype2 {
             internal void InitVars() {
                 this.columnorderDate = base.Columns["orderDate"];
                 this.columnitemName = base.Columns["itemName"];
-                this.columntotalCost = base.Columns["totalCost"];
-                this.columnserviceName = base.Columns["serviceName"];
-                this.columnExpr1 = base.Columns["Expr1"];
                 this.columnExpr2 = base.Columns["Expr2"];
-                this.columnExpr3 = base.Columns["Expr3"];
                 this.columnExpr4 = base.Columns["Expr4"];
                 this.columnExpr5 = base.Columns["Expr5"];
+                this.columnunitPrice = base.Columns["unitPrice"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -491,25 +455,16 @@ namespace prototype2 {
                 base.Columns.Add(this.columnorderDate);
                 this.columnitemName = new global::System.Data.DataColumn("itemName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnitemName);
-                this.columntotalCost = new global::System.Data.DataColumn("totalCost", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columntotalCost);
-                this.columnserviceName = new global::System.Data.DataColumn("serviceName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnserviceName);
-                this.columnExpr1 = new global::System.Data.DataColumn("Expr1", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnExpr1);
                 this.columnExpr2 = new global::System.Data.DataColumn("Expr2", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnExpr2);
-                this.columnExpr3 = new global::System.Data.DataColumn("Expr3", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnExpr3);
                 this.columnExpr4 = new global::System.Data.DataColumn("Expr4", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnExpr4);
                 this.columnExpr5 = new global::System.Data.DataColumn("Expr5", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnExpr5);
+                this.columnunitPrice = new global::System.Data.DataColumn("unitPrice", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnunitPrice);
                 this.columnitemName.AllowDBNull = false;
                 this.columnitemName.MaxLength = 255;
-                this.columnserviceName.AllowDBNull = false;
-                this.columnserviceName.MaxLength = 50;
-                this.columnExpr1.AllowDBNull = false;
                 this.columnExpr4.MaxLength = 9;
             }
             
@@ -680,44 +635,6 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public decimal totalCost {
-                get {
-                    try {
-                        return ((decimal)(this[this.tablePurchaseTable.totalCostColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'totalCost\' in table \'PurchaseTable\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePurchaseTable.totalCostColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string serviceName {
-                get {
-                    return ((string)(this[this.tablePurchaseTable.serviceNameColumn]));
-                }
-                set {
-                    this[this.tablePurchaseTable.serviceNameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public decimal Expr1 {
-                get {
-                    return ((decimal)(this[this.tablePurchaseTable.Expr1Column]));
-                }
-                set {
-                    this[this.tablePurchaseTable.Expr1Column] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public decimal Expr2 {
                 get {
                     try {
@@ -729,22 +646,6 @@ namespace prototype2 {
                 }
                 set {
                     this[this.tablePurchaseTable.Expr2Column] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public decimal Expr3 {
-                get {
-                    try {
-                        return ((decimal)(this[this.tablePurchaseTable.Expr3Column]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Expr3\' in table \'PurchaseTable\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePurchaseTable.Expr3Column] = value;
                 }
             }
             
@@ -782,6 +683,22 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal unitPrice {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePurchaseTable.unitPriceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'unitPrice\' in table \'PurchaseTable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePurchaseTable.unitPriceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsorderDateNull() {
                 return this.IsNull(this.tablePurchaseTable.orderDateColumn);
             }
@@ -794,18 +711,6 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IstotalCostNull() {
-                return this.IsNull(this.tablePurchaseTable.totalCostColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SettotalCostNull() {
-                this[this.tablePurchaseTable.totalCostColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsExpr2Null() {
                 return this.IsNull(this.tablePurchaseTable.Expr2Column);
             }
@@ -814,18 +719,6 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetExpr2Null() {
                 this[this.tablePurchaseTable.Expr2Column] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsExpr3Null() {
-                return this.IsNull(this.tablePurchaseTable.Expr3Column);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetExpr3Null() {
-                this[this.tablePurchaseTable.Expr3Column] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -850,6 +743,18 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetExpr5Null() {
                 this[this.tablePurchaseTable.Expr5Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsunitPriceNull() {
+                return this.IsNull(this.tablePurchaseTable.unitPriceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetunitPriceNull() {
+                this[this.tablePurchaseTable.unitPriceColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1014,13 +919,10 @@ namespace prototype2.DataSetReportPurchaseTableAdapters {
             tableMapping.DataSetTable = "PurchaseTable";
             tableMapping.ColumnMappings.Add("orderDate", "orderDate");
             tableMapping.ColumnMappings.Add("itemName", "itemName");
-            tableMapping.ColumnMappings.Add("totalCost", "totalCost");
-            tableMapping.ColumnMappings.Add("serviceName", "serviceName");
-            tableMapping.ColumnMappings.Add("Expr1", "Expr1");
             tableMapping.ColumnMappings.Add("Expr2", "Expr2");
-            tableMapping.ColumnMappings.Add("Expr3", "Expr3");
             tableMapping.ColumnMappings.Add("Expr4", "Expr4");
             tableMapping.ColumnMappings.Add("Expr5", "Expr5");
+            tableMapping.ColumnMappings.Add("unitPrice", "unitPrice");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -1037,36 +939,30 @@ namespace prototype2.DataSetReportPurchaseTableAdapters {
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[6];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost AS Expr1, SUM(io.totalCost) AS Expr2, SUM(sa.totalCost) AS Expr3, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
-FROM            services_availed_t sa INNER JOIN
-                         services_t s ON sa.serviceID = s.serviceID INNER JOIN
-                         sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar, cust_supp_t cs INNER JOIN
-                         purchase_order_t po ON cs.companyID = po.suppID, items_availed_t io INNER JOIN
-                         item_t i ON io.itemID = i.ID
-WHERE        (i.isDeleted = 0)
-GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
+            this._commandCollection[0].CommandText = @"SELECT        po.orderDate, i.itemName, ia.unitPrice, SUM(ia.unitPrice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
+FROM            item_t i INNER JOIN
+                         items_availed_t ia ON i.ID = ia.itemID INNER JOIN
+                         purchase_order_t po ON po.PONumChar = ia.poNumChar
+WHERE        (CURDATE() = po.orderDate) AND (i.isDeleted = 0)
+GROUP BY po.orderDate, i.itemName, ia.unitPrice";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = @"SELECT        po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost AS Expr1, SUM(io.totalCost) AS Expr2, SUM(sa.totalCost) AS Expr3, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
-FROM            services_availed_t sa INNER JOIN
-                         services_t s ON sa.serviceID = s.serviceID INNER JOIN
-                         sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar, cust_supp_t cs INNER JOIN
-                         purchase_order_t po ON cs.companyID = po.suppID, items_availed_t io INNER JOIN
-                         item_t i ON io.itemID = i.ID
+            this._commandCollection[1].CommandText = @"SELECT        po.orderDate, i.itemName, ia.unitPrice, SUM(ia.unitPrice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
+FROM            item_t i INNER JOIN
+                         items_availed_t ia ON i.ID = ia.itemID INNER JOIN
+                         purchase_order_t po ON po.PONumChar = ia.poNumChar
 WHERE        (CURDATE() = po.orderDate) AND (i.isDeleted = 0)
-GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
+GROUP BY po.orderDate, i.itemName, ia.unitPrice";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = @"SELECT        po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost AS Expr1, SUM(io.totalCost) AS Expr2, SUM(sa.totalCost) AS Expr3, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
-FROM            services_availed_t sa INNER JOIN
-                         services_t s ON sa.serviceID = s.serviceID INNER JOIN
-                         sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar, cust_supp_t cs INNER JOIN
-                         purchase_order_t po ON cs.companyID = po.suppID, items_availed_t io INNER JOIN
-                         item_t i ON io.itemID = i.ID
+            this._commandCollection[2].CommandText = @"SELECT        po.orderDate, i.itemName, ia.unitPrice, SUM(ia.unitPrice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
+FROM            item_t i INNER JOIN
+                         items_availed_t ia ON i.ID = ia.itemID INNER JOIN
+                         purchase_order_t po ON po.PONumChar = ia.poNumChar
 WHERE        (MONTHNAME(po.orderDate) = @A) AND (i.isDeleted = 0)
-GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
+GROUP BY po.orderDate, i.itemName, ia.unitPrice";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@A";
@@ -1076,14 +972,12 @@ GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
             this._commandCollection[2].Parameters.Add(param);
             this._commandCollection[3] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = @"SELECT        po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost AS Expr1, SUM(io.totalCost) AS Expr2, SUM(sa.totalCost) AS Expr3, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
-FROM            services_availed_t sa INNER JOIN
-                         services_t s ON sa.serviceID = s.serviceID INNER JOIN
-                         sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar, cust_supp_t cs INNER JOIN
-                         purchase_order_t po ON cs.companyID = po.suppID, items_availed_t io INNER JOIN
-                         item_t i ON io.itemID = i.ID
+            this._commandCollection[3].CommandText = @"SELECT        po.orderDate, i.itemName, ia.unitPrice, SUM(ia.unitPrice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
+FROM            item_t i INNER JOIN
+                         items_availed_t ia ON i.ID = ia.itemID INNER JOIN
+                         purchase_order_t po ON po.PONumChar = ia.poNumChar
 WHERE        (po.orderDate BETWEEN @R AND @T) AND (i.isDeleted = 0)
-GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
+GROUP BY po.orderDate, i.itemName, ia.unitPrice";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@R";
@@ -1101,14 +995,12 @@ GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
             this._commandCollection[3].Parameters.Add(param);
             this._commandCollection[4] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[4].Connection = this.Connection;
-            this._commandCollection[4].CommandText = @"SELECT        po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost AS Expr1, SUM(io.totalCost) AS Expr2, SUM(sa.totalCost) AS Expr3, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
-FROM            services_availed_t sa INNER JOIN
-                         services_t s ON sa.serviceID = s.serviceID INNER JOIN
-                         sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar, cust_supp_t cs INNER JOIN
-                         purchase_order_t po ON cs.companyID = po.suppID, items_availed_t io INNER JOIN
-                         item_t i ON io.itemID = i.ID
+            this._commandCollection[4].CommandText = @"SELECT        po.orderDate, i.itemName, ia.unitPrice, SUM(ia.unitPrice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
+FROM            item_t i INNER JOIN
+                         items_availed_t ia ON i.ID = ia.itemID INNER JOIN
+                         purchase_order_t po ON po.PONumChar = ia.poNumChar
 WHERE        (WEEK(po.orderDate) = @C) AND (i.isDeleted = 0)
-GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
+GROUP BY po.orderDate, i.itemName, ia.unitPrice";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@C";
@@ -1118,14 +1010,12 @@ GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
             this._commandCollection[4].Parameters.Add(param);
             this._commandCollection[5] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[5].Connection = this.Connection;
-            this._commandCollection[5].CommandText = @"SELECT        po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost AS Expr1, SUM(io.totalCost) AS Expr2, SUM(sa.totalCost) AS Expr3, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
-FROM            services_availed_t sa INNER JOIN
-                         services_t s ON sa.serviceID = s.serviceID INNER JOIN
-                         sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar, cust_supp_t cs INNER JOIN
-                         purchase_order_t po ON cs.companyID = po.suppID, items_availed_t io INNER JOIN
-                         item_t i ON io.itemID = i.ID
+            this._commandCollection[5].CommandText = @"SELECT        po.orderDate, i.itemName, ia.unitPrice, SUM(ia.unitPrice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
+FROM            item_t i INNER JOIN
+                         items_availed_t ia ON i.ID = ia.itemID INNER JOIN
+                         purchase_order_t po ON po.PONumChar = ia.poNumChar
 WHERE        (YEAR(po.orderDate) = @B) AND (i.isDeleted = 0)
-GROUP BY po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost";
+GROUP BY po.orderDate, i.itemName, ia.unitPrice";
             this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@B";

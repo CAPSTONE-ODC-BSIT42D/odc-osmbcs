@@ -18,7 +18,7 @@ namespace prototype2
         public ucFreqEmp()
         {
             InitializeComponent();
-            binddatagrid();
+           // binddatagrid();
         }
         private void binddatagrid()
         {
