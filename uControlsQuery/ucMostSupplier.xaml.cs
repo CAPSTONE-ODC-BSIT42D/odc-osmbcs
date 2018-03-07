@@ -17,7 +17,7 @@ namespace prototype2
         public ucMostSupplier()
         {
             InitializeComponent();
-            binddatagrid();
+            //binddatagrid();
         }
         private void binddatagrid()
         {
