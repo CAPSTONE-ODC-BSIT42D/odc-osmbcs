@@ -227,6 +227,7 @@ namespace prototype2.uControlsMaintenance
                                              select rg).FirstOrDefault();
                     int servId = MainVM.AvailedServicesList.Count + 1;
                     var newService = (new AvailedService() {AvailedServiceID = servId, ServiceID = MainVM.SelectedService.ServiceID, ProvinceID = int.Parse(serviceProvinceCb.SelectedValue.ToString()), Address = serviceAddressTb.Text, City = serviceCityTb.Text, TotalCost = MainVM.SelectedService.ServicePrice +  MainVM.SelectedRegion.RatePrice});
+
                     MainVM.AvailedServicesList.Add(newService);
                     MainVM.RequestedItems.Add(new RequestedItem() { lineNo = MainVM.RequestedItems.Count+1, availedServiceID = servId, itemID = MainVM.SelectedService.ServiceID, itemType = 1, qty = 1, unitPrice = newService.TotalCost, qtyEditable = false });
                     OnSaveCloseButtonClicked(e);

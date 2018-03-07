@@ -509,6 +509,23 @@ namespace prototype2
         #endregion
 
         //----- Sales Quote
+        protected ObservableCollection<PurchaseOrder> PurchaseOrder_ = new ObservableCollection<PurchaseOrder>();
+
+        protected PurchaseOrder selectedPurchaseOrder = null;
+
+        public ObservableCollection<PurchaseOrder> PurchaseOrder
+        {
+            get { return PurchaseOrder_; }
+            set { PurchaseOrder_ = value; }
+        }
+
+        public PurchaseOrder SelectedPurchaseOrder
+        {
+            get { return selectedPurchaseOrder; }
+            set { SetProperty(ref selectedPurchaseOrder, value); }
+        }
+
+        //----- Sales Quote
         protected ObservableCollection<SalesQuote> salesQuote = new ObservableCollection<SalesQuote>();
 
         protected SalesQuote selectedSalesQuote = null;

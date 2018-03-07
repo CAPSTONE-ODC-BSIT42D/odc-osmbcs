@@ -34,10 +34,20 @@ namespace prototype2
         public event EventHandler SaveCloseButtonClicked;
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
+            resetElements();
             var handler = SaveCloseButtonClicked;
             if (handler != null)
                 handler(this, e);
         }
+
+        private void resetElements()
+        {
+            MainVM.RequestedItems.Clear();
+            MainVM.AvailedServicesList.Clear();
+            MainVM.isEdit = false;
+            MainVM.isView = false;
+        }
+
         Document document;
         private void invoiceNext_Click(object sender, RoutedEventArgs e)
         {
@@ -103,6 +113,7 @@ namespace prototype2
             {
                 newInvoiceForm.Visibility = Visibility.Collapsed;
                 documentViewer.Visibility = Visibility.Collapsed;
+                OnSaveCloseButtonClicked(e);
             }
             else if (documentViewer.IsVisible)
             {

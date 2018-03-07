@@ -45,9 +45,18 @@ namespace prototype2
 
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
+            resetElements();
             var handler = SaveCloseButtonClicked;
             if (handler != null)
                 handler(this, e);
+        }
+
+        private void resetElements()
+        {
+            MainVM.RequestedItems.Clear();
+            MainVM.AvailedServicesList.Clear();
+            MainVM.isEdit = false;
+            MainVM.isView = false;
         }
 
         protected virtual void OnConvertToInvoice(RoutedEventArgs e)
@@ -165,6 +174,7 @@ namespace prototype2
                 saveSalesQuoteToDb();
                 MainVM.isEdit = false;
                 MainVM.SelectedSalesQuote = null;
+                
                 //PdfDocumentRenderer renderer = new PdfDocumentRenderer(true);
                 //renderer.Document = document;
                 //renderer.RenderDocument();
@@ -508,7 +518,14 @@ namespace prototype2
                 }
                 else if (item.itemType == 1)
                 {
-                    MainVM.SelectedAvailedServices = MainVM.AvailedServices.Where(x => x.ServiceID.Equals(item.itemID)).FirstOrDefault();
+                    
+                    MainVM.SelectedAvailedServices = MainVM.AvailedServicesList.Where(x => x.AvailedServiceID.Equals(item.availedServiceID)).FirstOrDefault();
+                    MainVM.SelectedProvince = (from prov in MainVM.Provinces
+                                               where prov.ProvinceID == MainVM.SelectedAvailedServices.ProvinceID
+                                               select prov).FirstOrDefault();
+                    MainVM.SelectedRegion = (from rg in MainVM.Regions
+                                             where rg.RegionID == MainVM.SelectedProvince.RegionID
+                                             select rg).FirstOrDefault();
                     foreach (AdditionalFee af in MainVM.SelectedAvailedServices.AdditionalFees)
                     {
                         if (!(af.FeePrice == 0))
@@ -517,8 +534,8 @@ namespace prototype2
                         }
                         
                     }
-                    item.unitPriceMarkUp = item.unitPrice;
-                    item.totalAmount = (item.unitPrice + totalFee) - ((item.unitPrice + totalFee) / 100) * (decimal)discountPriceTb.Value;
+                    item.unitPriceMarkUp = item.unitPrice + MainVM.SelectedRegion.RatePrice;
+                    item.totalAmount = (item.unitPrice + MainVM.SelectedRegion.RatePrice + totalFee) - ((item.unitPrice + MainVM.SelectedRegion.RatePrice + totalFee) / 100) * (decimal)discountPriceTb.Value;
                 }
                 totalPrice += item.totalAmount;
             }
@@ -691,40 +708,6 @@ namespace prototype2
                                         "('" + MainVM.SelectedSalesQuote.sqNoChar_ + "', '" + item.itemID + "','" + item.qty + "', '" + item.unitPrice + "');";
                                     noError = dbCon.insertQuery(query, dbCon.Connection);
                                 }
-                                //else if (item.itemType == 1)
-                                //{
-
-                                //    MainVM.SelectedAvailedServices = MainVM.SelectedSalesQuote.AvailedServices.Where(x => x.AvailedServiceID.Equals(item.availedServiceID)).FirstOrDefault();
-                                //    query = "INSERT INTO `odc_db`.`services_availed_t`(`serviceID`,`provinceID`,`sqNoChar`,`city`,`address`,`totalCost`)" +
-                                //        " VALUES " +
-                                //        "('" + MainVM.SelectedAvailedServices.ServiceID + "', '" +
-                                //        MainVM.SelectedAvailedServices.ProvinceID + "', '" +
-                                //        MainVM.SelectedSalesQuote.sqNoChar_ + "', '" +
-                                //        MainVM.SelectedAvailedServices.City + "', '" +
-                                //        MainVM.SelectedAvailedServices.Address + "', '" +
-                                //        MainVM.SelectedAvailedServices.TotalCost + "');";
-                                //    noError = dbCon.insertQuery(query, dbCon.Connection);
-                                //    if (dbCon.insertQuery(query, dbCon.Connection))
-                                //    {
-                                //        query = "SELECT LAST_INSERT_ID();";
-                                //        MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                                //        DataSet fromDb = new DataSet();
-                                //        DataTable fromDbTable = new DataTable();
-                                //        dataAdapter.Fill(fromDb, "t");
-                                //        fromDbTable = fromDb.Tables["t"];
-                                //        string aServiceId = "";
-                                //        foreach (DataRow dr in fromDbTable.Rows)
-                                //            aServiceId = dr[0].ToString();
-                                //        foreach (AdditionalFee af in MainVM.SelectedAvailedServices.AdditionalFees)
-                                //        {
-                                //            query = "INSERT INTO `odc_db`.`fees_per_transaction_t`(`servicesAvailedID`,`feeName`,`feeValue`)" +
-                                //            " VALUES " +
-                                //            "('" + aServiceId + "', '" + af.FeeName + "', '" + af.FeePrice + "');";
-                                //            noError = dbCon.insertQuery(query, dbCon.Connection);
-                                //        }
-
-                                //    }
-                                //}
                             }
                             foreach (AvailedService aserv in MainVM.AvailedServicesList)
                             {
@@ -732,11 +715,10 @@ namespace prototype2
                                     " VALUES " +
                                     "('" + aserv.ServiceID + "', '" +
                                     aserv.ProvinceID + "', '" +
-                                    aserv.SqNoChar + "', '" +
+                                    MainVM.SelectedSalesQuote.sqNoChar_ + "', '" +
                                     aserv.City + "', '" +
                                     aserv.Address + "', '" +
                                     aserv.TotalCost + "');";
-                                noError = dbCon.insertQuery(query, dbCon.Connection);
                                 if (dbCon.insertQuery(query, dbCon.Connection))
                                 {
                                     query = "SELECT LAST_INSERT_ID();";
@@ -930,7 +912,7 @@ namespace prototype2
         {
             if (this.IsVisible)
             {
-                MainVM.RequestedItems.Clear();
+                resetElements();
                 if (MainVM.SelectedSalesQuote != null)
                 {
                     foreach (UIElement obj in transQuoatationGridForm.Children)

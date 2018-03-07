@@ -307,6 +307,8 @@ namespace prototype2.uControlsMaintenance
             else
             {
                 MainVM.SelectedService = new Service();
+                saveCloseButtonGrid.Visibility = Visibility.Visible;
+                editCloseButtonGrid.Visibility = Visibility.Collapsed;
             }
         }
 
