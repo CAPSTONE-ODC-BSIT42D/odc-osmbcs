@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:prototype2"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="prototype2.ucPurchaseOrder"
              mc:Ignorable="d" 
-             d:DesignHeight="778.765" d:DesignWidth="913.662" IsVisibleChanged="UserControl_IsVisibleChanged">
+             d:DesignHeight="742.223" d:DesignWidth="926.95" IsVisibleChanged="UserControl_IsVisibleChanged">
     <UserControl.Resources>
         <local:ProductNameConverter x:Key="ProductNameConverter"/>
         <local:ServiceNameConverter x:Key="ServiceNameConverter"/>
@@ -15,8 +15,8 @@
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>
     <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
-        <ScrollViewer>
-            <StackPanel Orientation="Vertical" Height="779" Width="914">
+        <ScrollViewer Margin="0,0,0,40">
+            <StackPanel Orientation="Vertical" Height="Auto" Width="Auto">
                 <Grid x:Name="containerGrid">
                     <StackPanel x:Name="puchaseOrderForm" >
                         <Grid Margin="5,0">
@@ -67,7 +67,7 @@
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
-                                    <DataGridTemplateColumn Header="Item Type" Width="100">
+                                    <!--<DataGridTemplateColumn Header="Item Type" Width="100">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <Label>
@@ -96,7 +96,7 @@
                                                 </Style.Triggers>
                                             </Style>
                                         </DataGridTemplateColumn.CellStyle>
-                                    </DataGridTemplateColumn>
+                                    </DataGridTemplateColumn>-->
                                     <DataGridTemplateColumn Header="Qty" Width="60">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
@@ -211,21 +211,22 @@
                     </StackPanel>
                     <local:ucPurchaseOrderViewer x:Name="puchaseOrderViewer" d:IsHidden="True"/>
                 </Grid>
-                <StackPanel Margin="0,10,0,0" VerticalAlignment="Bottom" FlowDirection="RightToLeft">
-                    <StackPanel x:Name="newPurchaseOrderGrid" HorizontalAlignment="Left" Margin="10,0" Orientation="Horizontal">
-                        <Button x:Name="nextBtn" Content="Next" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" Height="26" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="5,0" Click="nextBtn_Click"/>
-                        <Button x:Name="backBtn" Content="Back" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="84" Height="26" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="5,0" Click="backBtn_Click"/>
-                    </StackPanel>
-                    <StackPanel x:Name="viewPuchaseOrderGrid" Margin="10,10,10,0" Orientation="Horizontal">
-                        <Button x:Name="editSalesQuoteBtn" Content="Edit" VerticalAlignment="Bottom" Height="26" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="5,0" HorizontalAlignment="Left" Width="84"/>
-                        <Button x:Name="generatePDFBtn" Content="Generate PDF" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="127" Height="26" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="5,0"/>
-                        <Button x:Name="closeBtn" Content="Close" VerticalAlignment="Bottom" Height="26" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="5,0" HorizontalAlignment="Left" Width="84"/>
-                    </StackPanel>
-                </StackPanel>
 
             </StackPanel>
 
         </ScrollViewer>
+
+        <StackPanel Margin="0" VerticalAlignment="Bottom" FlowDirection="RightToLeft" Height="40">
+            <StackPanel x:Name="newPurchaseOrderGrid" HorizontalAlignment="Left" Margin="10,0" Orientation="Horizontal">
+                <Button x:Name="nextBtn" Content="Next" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" Height="26" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="5,0" Click="nextBtn_Click"/>
+                <Button x:Name="backBtn" Content="Back" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="84" Height="26" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="5,0" Click="backBtn_Click"/>
+            </StackPanel>
+            <StackPanel x:Name="viewPuchaseOrderGrid" Margin="10,10,10,0" Orientation="Horizontal">
+                <Button x:Name="editSalesQuoteBtn" Content="Edit" VerticalAlignment="Bottom" Height="26" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="5,0" HorizontalAlignment="Left" Width="84"/>
+                <Button x:Name="generatePDFBtn" Content="Generate PDF" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="127" Height="26" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="5,0"/>
+                <Button x:Name="closeBtn" Content="Close" VerticalAlignment="Bottom" Height="26" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="5,0" HorizontalAlignment="Left" Width="84"/>
+            </StackPanel>
+        </StackPanel>
 
     </Grid>
 </UserControl>
