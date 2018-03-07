@@ -472,7 +472,7 @@ namespace prototype2
             if (dbCon.IsConnect())
             {
                 MainVM.PurchaseOrder.Clear();
-                string query = "SELECT * FROM sales_quote_t;";
+                string query = "SELECT * FROM purchase_order_t;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
