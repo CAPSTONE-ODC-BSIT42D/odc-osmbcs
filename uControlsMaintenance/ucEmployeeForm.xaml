@@ -106,7 +106,7 @@
                     </DatePicker>
                 </Grid>
             </StackPanel>
-            <Label Content="Note: Required fields are marked with *" HorizontalAlignment="Left" VerticalAlignment="Top" FontStyle="Italic" Margin="170,54,0,0"/>
+            <Label Content="Note: Required fields are marked with *" HorizontalAlignment="Left" VerticalAlignment="Top" FontStyle="Italic" Margin="170,49,0,0"/>
         </Grid>
         <StackPanel Orientation="Vertical" Margin="0" Height="40">
             <Grid x:Name="saveCancelGrid1" Height="20" Margin="10">

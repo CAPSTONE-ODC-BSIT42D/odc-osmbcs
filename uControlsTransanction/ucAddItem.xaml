@@ -55,13 +55,13 @@
         <Border Margin="10,77,10,10" BorderThickness="1" BorderBrush="Black" Panel.ZIndex="-1">
             <Grid x:Name="productServiceGrid">
                 <Grid x:Name="serviceGrid">
-                    <Label Content="Service Type:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic"/>
-                    <Label Content="Description:" VerticalAlignment="Top" Height="26" Margin="0,59,0,0" HorizontalAlignment="Left" Width="80" FontSize="12" FontFamily="Segoe UI" FontStyle="Italic" FontWeight="Bold" RenderTransformOrigin="0.5,0.5"/>
-                    <Label Content="Location" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,186,0,0" FontWeight="Bold" FontStyle="Italic" Width="65"/>
-                    <Label Content="Address" VerticalAlignment="Top" Visibility="Visible" Margin="27,215,552,0" FontWeight="Normal"/>
-                    <Label Content="City" VerticalAlignment="Top" Visibility="Visible" Margin="28,285,551,0" FontWeight="Normal"/>
+                    <Label Content="Service Type:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Margin="0,28,0,0"/>
+                    <Label Content="Description:" VerticalAlignment="Top" Height="26" Margin="0,87,0,0" HorizontalAlignment="Left" Width="80" FontSize="12" FontFamily="Segoe UI" FontStyle="Italic" FontWeight="Bold" RenderTransformOrigin="0.5,0.5"/>
+                    <Label Content="Location" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,214,0,0" FontWeight="Bold" FontStyle="Italic" Width="65"/>
+                    <Label Content="Address" VerticalAlignment="Top" Visibility="Visible" Margin="27,243,552,0" FontWeight="Normal"/>
+                    <Label Content="City" VerticalAlignment="Top" Visibility="Visible" Margin="28,313,551,0" FontWeight="Normal"/>
                     <Label Content="Province" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="233,285,0,0" FontWeight="Normal"/>
-                    <ComboBox x:Name="serviceTypeCb" HorizontalAlignment="Left" Margin="27,31,0,0" VerticalAlignment="Top" Width="186" ItemsSource="{Binding ServicesList}" DisplayMemberPath="ServiceName" SelectedValuePath="ServiceID">
+                    <ComboBox x:Name="serviceTypeCb" HorizontalAlignment="Left" Margin="27,59,0,0" VerticalAlignment="Top" Width="186" ItemsSource="{Binding ServicesList}" DisplayMemberPath="ServiceName" SelectedValuePath="ServiceID">
                         <ComboBox.SelectedItem>
                             <Binding Path="SelectedService" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                 <Binding.ValidationRules>
@@ -70,22 +70,22 @@
                             </Binding>
                         </ComboBox.SelectedItem>
                     </ComboBox>
-                    <TextBox x:Name="serviceDescTb" Height="79" Margin="27,93,21,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="12" FontFamily="Segoe UI" FontStyle="Normal" FontWeight="Normal"/>
-                    <TextBox x:Name="serviceAddressTb" TextWrapping="Wrap" Margin="56,241,0,0" HorizontalAlignment="Left" Width="597" Height="23" VerticalAlignment="Top" Background="White">
+                    <TextBox x:Name="serviceDescTb" Height="79" Margin="27,121,21,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="12" FontFamily="Segoe UI" FontStyle="Normal" FontWeight="Normal"/>
+                    <TextBox x:Name="serviceAddressTb" TextWrapping="Wrap" Margin="56,269,0,0" HorizontalAlignment="Left" Width="597" Height="23" VerticalAlignment="Top" Background="White">
                         <Binding Path="Address" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
                                 <prototype2:TextBoxValidation TextBoxType="IsEmpty"/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox>
-                    <TextBox x:Name="serviceCityTb" TextWrapping="Wrap" Margin="56,316,0,0" HorizontalAlignment="Left" Width="158" Height="23" VerticalAlignment="Top">
+                    <TextBox x:Name="serviceCityTb" TextWrapping="Wrap" Margin="56,344,0,0" HorizontalAlignment="Left" Width="158" Height="23" VerticalAlignment="Top">
                         <Binding Path="City" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
                                 <prototype2:TextBoxValidation TextBoxType="IsEmpty"/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox>
-                    <ComboBox x:Name="serviceProvinceCb" Margin="252,316,0,0" VerticalAlignment="Top" Height="23" IsEditable="True" ItemsSource ="{Binding Provinces}" DisplayMemberPath = "ProvinceName" SelectedValuePath = "ProvinceID" Width="157" HorizontalAlignment="Left" FontWeight="Normal" SelectionChanged="serviceProvinceCb_SelectionChanged" >
+                    <ComboBox x:Name="serviceProvinceCb" Margin="252,344,0,0" VerticalAlignment="Top" Height="23" IsEditable="True" ItemsSource ="{Binding Provinces}" DisplayMemberPath = "ProvinceName" SelectedValuePath = "ProvinceID" Width="157" HorizontalAlignment="Left" FontWeight="Normal" SelectionChanged="serviceProvinceCb_SelectionChanged" >
                         <ComboBox.SelectedItem>
                             <Binding Path="SelectedProvince"  UpdateSourceTrigger="Explicit">
                                 <Binding.ValidationRules>
@@ -94,11 +94,12 @@
                             </Binding>
                         </ComboBox.SelectedItem>
                     </ComboBox>
-                    <CheckBox x:Name="addressOfCustomerCb" Content="Same as Customer's Address" HorizontalAlignment="Left" Margin="70,195,0,0" VerticalAlignment="Top" Checked="addressOfCustomerCb_Checked" Unchecked="addressOfCustomerCb_Unchecked"/>
+                    <CheckBox x:Name="addressOfCustomerCb" Content="Same as Customer's Address" HorizontalAlignment="Left" Margin="70,223,0,0" VerticalAlignment="Top" Checked="addressOfCustomerCb_Checked" Unchecked="addressOfCustomerCb_Unchecked"/>
                     <Grid x:Name="saveCancelGrid3" Margin="693,374,10,10">
                         <Button x:Name="addProductBtn" Content="Add" Margin="0,0,94,0" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="76" Click="addProductBtn_Click"/>
                         <Button x:Name="cancelAddProductBtn" Content="Cancel" HorizontalAlignment="Right" Width="76" Click="cancelAddProductBtn_Click" Height="20" VerticalAlignment="Bottom"/>
                     </Grid>
+                    <Label Content="Note: Required fields are marked with *" HorizontalAlignment="Left" Margin="334,0,0,0" VerticalAlignment="Top" FontStyle="Italic"/>
                 </Grid>
                 <Grid x:Name="productGrid" Margin="1,1,-1,-1" d:IsHidden="True">
                     <DataGrid x:Name="addGridProductListDg" Margin="10,41,10,28" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}" AutoGenerateColumns="False" IsReadOnly="True" Width="893" Height="346">
