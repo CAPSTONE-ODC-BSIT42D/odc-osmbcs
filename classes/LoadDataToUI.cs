@@ -84,6 +84,7 @@ namespace prototype2
 
             if (dbCon.IsConnect())
             {
+                MainVM.Phases.Clear();
                 string query = "SELECT * FROM phase_t";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
@@ -344,6 +345,7 @@ namespace prototype2
 
             if (dbCon.IsConnect())
             {
+                MainVM.AvailedItems.Clear();
                 string query = "SELECT * FROM items_availed_t;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();

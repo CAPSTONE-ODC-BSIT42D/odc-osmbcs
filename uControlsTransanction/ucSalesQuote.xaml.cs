@@ -45,7 +45,7 @@ namespace prototype2
 
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
-            resetElements();
+            
             var handler = SaveCloseButtonClicked;
             if (handler != null)
                 handler(this, e);
@@ -55,8 +55,6 @@ namespace prototype2
         {
             MainVM.RequestedItems.Clear();
             MainVM.AvailedServicesList.Clear();
-            MainVM.isEdit = false;
-            MainVM.isView = false;
         }
 
         protected virtual void OnConvertToInvoice(RoutedEventArgs e)
@@ -84,17 +82,7 @@ namespace prototype2
         {
             if (newRequisitionGrid.IsVisible)
             {
-                foreach (var obj in newRequisitionGridForm.Children)
-                {
-                    if (obj is TextBox)
-                        ((TextBox)obj).IsEnabled = true;
-                    else if (obj is Xceed.Wpf.Toolkit.DecimalUpDown)
-                        ((Xceed.Wpf.Toolkit.DecimalUpDown)obj).IsEnabled = true;
-                    else if (obj is Button)
-                        ((Button)obj).IsEnabled = true;
-                    else if (obj is DataGrid)
-                        ((DataGrid)obj).IsEnabled = true;
-                }
+                resetElements();
                 OnSaveCloseButtonClicked(e);
 
             }
@@ -172,8 +160,6 @@ namespace prototype2
             {
                 transRequestNext.Content = "Next";
                 saveSalesQuoteToDb();
-                MainVM.isEdit = false;
-                MainVM.SelectedSalesQuote = null;
                 
                 //PdfDocumentRenderer renderer = new PdfDocumentRenderer(true);
                 //renderer.Document = document;
@@ -206,7 +192,8 @@ namespace prototype2
         {
             if (MainVM.SelectedCustomerSupplier != null)
             {
-                MainVM.SelectedSalesQuote = new SalesQuote() { };
+                if(!MainVM.isEdit)
+                    MainVM.SelectedSalesQuote = new SalesQuote() { };
                 OnSelectItemClicked(e);
             }
                 
@@ -302,6 +289,7 @@ namespace prototype2
             otherFeenameTb.Text = "";
             feeCostTb.Value = 0;
             MainVM.isEdit = false;
+
         }
 
         private void saveAdditionalFees_Click(object sender, RoutedEventArgs e)
@@ -356,8 +344,6 @@ namespace prototype2
 
 
             }
-           
-            MainVM.isEdit = false;
         }
 
         private void cancelAddProductBtn_Click(object sender, RoutedEventArgs e)
@@ -609,25 +595,29 @@ namespace prototype2
             else
                 quoteName = MainVM.SelectedCustomerSupplier.CompanyName.Trim().ToUpper();
             string stringChars = "";
-            for (int i = 0; i < 4; i++)
-            {
-                if (!(i > 3))
-                {
-                    stringChars += chars[random.Next(chars.Length)];
-                }
-            }
-            stringChars += "SQ";
-            stringChars += MainVM.SalesQuotes.Count + 1;
-            stringChars += "-";
-            foreach (char c in quoteName)
-            {
-                stringChars += c;
-            }
-            stringChars += "-";
-            stringChars += DateTime.Now.ToString("yyyy-MM-dd");
+            
 
             if (MainVM.isEdit)
                 stringChars = MainVM.SelectedSalesQuote.sqNoChar_;
+            else
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    if (!(i > 3))
+                    {
+                        stringChars += chars[random.Next(chars.Length)];
+                    }
+                }
+                stringChars += "SQ";
+                stringChars += MainVM.SalesQuotes.Count + 1;
+                stringChars += "-";
+                foreach (char c in quoteName)
+                {
+                    stringChars += c;
+                }
+                stringChars += "-";
+                stringChars += DateTime.Now.ToString("yyyy-MM-dd");
+            }
 
             var obj = new SalesQuote()
             {
@@ -771,7 +761,7 @@ namespace prototype2
                         "`termsDP` = '" + MainVM.SelectedSalesQuote.termsDP_ + "'," +
                         "`discountPercent` = '" + MainVM.SelectedSalesQuote.discountPercent_ + "'," +
                         "`surveyReportDoc` = '" + DocData + "'," +
-                        " WHERE `sqNoCHar` = " + MainVM.SelectedSalesQuote.sqNoChar_;
+                        " WHERE `sqNoCHar` = '" + MainVM.SelectedSalesQuote.sqNoChar_ +"'";
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
                         query = "DELETE FROM `ITEMS_AVAILED_T` WHERE sqNoChar = " + MainVM.SelectedSalesQuote.sqNoChar_;
@@ -837,6 +827,8 @@ namespace prototype2
                 MainVM.SelectedCustomerSupplier = (from cust in MainVM.Customers
                                                    where cust.CompanyID == MainVM.SelectedSalesQuote.custID_
                                                    select cust).FirstOrDefault();
+                MainVM.RequestedItems.Clear();
+                MainVM.AvailedServicesList.Clear();
 
                 var invoiceprod = from ai in MainVM.AvailedItems
                                   where ai.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
@@ -851,7 +843,7 @@ namespace prototype2
                                       && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
                                       select itm;
                     decimal totalPric = ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc);
-                    MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, unitPrice = ai.UnitPrice, totalAmount = totalPric });
+                    MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, unitPrice = ai.UnitPrice, totalAmount = totalPric, qtyEditable = true });
                 }
 
                 foreach (AvailedService aserv in MainVM.AvailedServicesList)
@@ -913,7 +905,7 @@ namespace prototype2
             if (this.IsVisible)
             {
                 resetElements();
-                if (MainVM.SelectedSalesQuote != null)
+                if (MainVM.SelectedSalesQuote != null && MainVM.isEdit)
                 {
                     foreach (UIElement obj in transQuoatationGridForm.Children)
                     {

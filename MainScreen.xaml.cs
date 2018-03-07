@@ -178,19 +178,6 @@ namespace prototype2
         private void saveCloseSalesQuoteForm(object sender, EventArgs e)
         {
             MainVM.isNewTrans = true;
-            foreach (var obj in containerGrid.Children)
-            {
-                ((Grid)obj).Visibility = Visibility.Collapsed;
-            }
-            trasanctionGrid.Visibility = Visibility.Visible;
-            foreach (var obj in trasanctionGrid.Children)
-            {
-                if (obj is Grid)
-                    if (((Grid)obj).Equals(transQuotationGrid))
-                        ((Grid)obj).Visibility = Visibility.Visible;
-                    else
-                        ((Grid)obj).Visibility = Visibility.Collapsed;
-            }
             foreach (var obj in transQuotationGrid.Children)
             {
                 if (obj is Grid)
