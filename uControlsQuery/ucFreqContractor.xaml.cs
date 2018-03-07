@@ -19,7 +19,7 @@ namespace prototype2
         public ucFreqContractor()
         {
             InitializeComponent();
-            binddatagrid();
+            //binddatagrid();
         }
         private void binddatagrid()
         {
