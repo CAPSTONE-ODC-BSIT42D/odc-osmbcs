@@ -687,7 +687,7 @@
                     </Button>
                 </Grid>
             </Grid>
-            <Grid x:Name="trasanctionGrid">
+            <Grid x:Name="trasanctionGrid" d:IsHidden="True">
                 <Grid x:Name="transQuotationGrid" Margin="0,0,1,0" d:IsHidden="True" >
                     <Grid x:Name="quotationsGridHome" Margin="10" >
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
@@ -1213,8 +1213,8 @@
             <Grid x:Name="reportsGrid" d:IsHidden="True"/>
             <Grid x:Name="queriesGrid" d:IsHidden="True"/>
 
-            <Grid x:Name="maintenanceGrid" d:IsHidden="True">
-                <Grid x:Name="manageCustomerGrid" Margin="0,0,1,0" d:IsHidden="True" >
+            <Grid x:Name="maintenanceGrid">
+                <Grid x:Name="manageCustomerGrid" Margin="0,0,1,0" >
                     <Grid x:Name="manageCustomerHomeGrid" Margin="0">
                         <Label x:Name="label13" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
                         <TextBox x:Name="searchBox4" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>
@@ -1400,12 +1400,12 @@
                     </Grid>
 
                 </Grid>
-                <Grid x:Name="manageEmployeeGrid" Margin="0,0,1,0" d:IsHidden="True">
+                <Grid x:Name="manageEmployeeGrid" Margin="0,0,1,0">
                     <Grid x:Name="manageEmployeeGridHome" Margin="0">
                         <Label x:Name="label8" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
                         <TextBox x:Name="searchBox1" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>
                         <Button x:Name="button1" Content="Search" HorizontalAlignment="Left" Margin="398,20,0,0" VerticalAlignment="Top" Width="84" Height="26" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="13"/>
-                        <Button x:Name="manageEmployeeAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,20,20,0" VerticalAlignment="Top" Width="85" Background="#FF0D9E0D" BorderBrush="#FF107C10" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13" Click="manageEmployeeAddBtn_Click"/>
+                        <Button x:Name="manageEmployeeAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,20,20,0" VerticalAlignment="Top" Width="85" Background="#FF0D9E0D" BorderBrush="#FF107C10" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13" Click="manageEmployeeAddBtn_Click" d:IsHidden="True"/>
                         <DataGrid x:Name="manageEmployeeDataGrid" Margin="20,60,20,20" CanUserAddRows="False" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionMode="Single" MinRowHeight="20"  MinColumnWidth="0" ItemsSource="{Binding AllEmployeesContractor}" SelectedItem ="{Binding SelectedEmployeeContractor}">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Width="150" CanUserResize="False" Header="First Name" >
@@ -1584,15 +1584,15 @@
                         <local:ucNoticeOfEmployment x:Name="ucContract" HorizontalAlignment="Left" Height="700" Margin="20,16,0,0" VerticalAlignment="Top" Width="1184" Visibility="Hidden"/>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageProductListGrid" Margin="0,0,1,0">
-                    <Grid Margin="0">
-                        <Label x:Name="label11" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
+                <Grid x:Name="manageProductListGrid" Margin="0,0,1,0" d:IsHidden="True">
+                    <Grid Margin="0" d:IsHidden="True">
+                        <Label x:Name="label11" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,17,0,0"/>
                         <TextBox x:Name="searchBox2" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>
-                        <Button x:Name="button2" Content="Search" HorizontalAlignment="Left" Margin="398,20,0,0" VerticalAlignment="Top" Width="84" Height="26" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="13"/>
+                        <Button x:Name="button2" Content="Search" HorizontalAlignment="Left" Margin="422,21,0,0" VerticalAlignment="Top" Width="84" Height="26" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="13"/>
                         <Label x:Name="label12" Content="Type:" HorizontalAlignment="Left" Margin="557,20,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                         <ComboBox x:Name="empType1" HorizontalAlignment="Left" Margin="613,20,0,0" VerticalAlignment="Top" Width="120"/>
-                        <Button x:Name="manageProductAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,20,20,0" VerticalAlignment="Top" Width="85" Background="#FF0D9E0D" BorderBrush="#FF107C10" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13" Click="manageProductAddBtn_Click"/>
-                        <DataGrid x:Name="productListDg" Margin="20,60,20,20" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionMode="Single" MinRowHeight="20"  MinColumnWidth="0" ItemsSource="{Binding ProductList}" SelectedItem ="{Binding SelectedProduct}">
+                        <Button x:Name="manageProductAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,21,20,0" VerticalAlignment="Top" Width="85" Background="#FF0D9E0D" BorderBrush="#FF107C10" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13" Click="manageProductAddBtn_Click"/>
+                        <DataGrid x:Name="productListDg" Margin="12,55,10,0" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionMode="Single" MinRowHeight="20"  MinColumnWidth="0" ItemsSource="{Binding ProductList}" SelectedItem ="{Binding SelectedProduct}">
                             <DataGrid.Columns >
 
                                 <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Product Name" >
@@ -2040,20 +2040,20 @@
 
         <Grid x:Name="formGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3" Visibility="Visible" Panel.ZIndex="1" d:IsHidden="True">
 
-            <local:ucCustSuppCRUD x:Name="ucCustSupp" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="Auto" d:IsHidden="True"/>
+            <local:ucCustSuppCRUD x:Name="ucCustSupp" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="Auto"/>
             <local:ucProductsCRUD x:Name="ucProduct" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
-            <uControlsMaintenance:ucEmployeeForm x:Name="ucEmployee" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <uControlsMaintenance:ucEmployeeForm x:Name="ucEmployee" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
             <uControlsMaintenance:ucServices x:Name="ucServices" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
             <uControlsMaintenance:ucLocation x:Name="ucLocation" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="458" d:IsHidden="True"/>
 
         </Grid>
         <Grid x:Name="otherGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3" d:IsHidden="True">
-            <uControlsMaintenance:ucSelectCustomer x:Name="ucSelectCustomer" Margin="0" d:IsHidden="True" Visibility="Collapsed"/>
+            <uControlsMaintenance:ucSelectCustomer x:Name="ucSelectCustomer" Margin="0" Visibility="Collapsed" d:IsHidden="True"/>
             <uControlsMaintenance:ucAddItem x:Name="ucAddItem" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" d:IsHidden="True" Visibility="Collapsed"/>
 
             <uControlsTransanction:ucSelectSalesQuote x:Name="ucSelectSalesQuote" Margin="0" HorizontalAlignment="Left" Visibility="Collapsed" d:IsHidden="True"/>
             <uControlsTransanction:ucInvoicePaymentHist x:Name="ucInvoicePaymentHist" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
-            <uControlsMaintenance:ucInvoicePaymentForm x:Name="ucInvoicePaymentForm" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <uControlsMaintenance:ucInvoicePaymentForm x:Name="ucInvoicePaymentForm" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
 
         </Grid>
 

@@ -51,7 +51,7 @@
         <Button x:Name="findBtn" Content="Find" HorizontalAlignment="Left" Margin="356,91,0,0" VerticalAlignment="Top" Width="85" Height="26" Click="findBtn_Click" Foreground="#FFFBFBFB" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="13"/>
         <DataGrid x:Name="selectCustomerDg" Margin="25,130,25,15" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomerSupplier}" AutoGenerateColumns="False" CanUserResizeRows="False" CanUserAddRows="False" IsReadOnly="True" FontSize="14">
             <DataGrid.Columns >
-                <DataGridTemplateColumn Width="200" CanUserResize="False" Header="Company Name" d:IsHidden="True" >
+                <DataGridTemplateColumn Width="200" CanUserResize="False" Header="Company Name">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Label Content="{Binding CompanyName}" VerticalContentAlignment="Center"/>

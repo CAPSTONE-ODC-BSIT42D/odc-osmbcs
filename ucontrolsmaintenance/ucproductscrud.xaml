@@ -41,7 +41,7 @@
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox>
-            <Button x:Name="addCategoryBtn" Content="+" HorizontalAlignment="Left" Margin="380,163,0,0" VerticalAlignment="Top" Width="Auto" Height="22" Click="addCategoryBtn_Click" Padding="5,0,5,0"/>
+            <Button x:Name="addCategoryBtn" Content="+" HorizontalAlignment="Left" Margin="380,163,0,0" VerticalAlignment="Top" Width="30" Height="22" Click="addCategoryBtn_Click" Padding="5,0,5,0"/>
             <Label Content="* Unit:" HorizontalAlignment="Left" Margin="25,197,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
             <ComboBox x:Name="unitCb" HorizontalAlignment="Left" Margin="136,200,0,0" VerticalAlignment="Top" Width="220" DisplayMemberPath="UnitName" SelectedValuePath="ID" IsSynchronizedWithCurrentItem ="True" ItemsSource="{Binding Units}">
                 <ComboBox.SelectedItem>
@@ -59,7 +59,7 @@
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox>
-            <Button x:Name="addUnitBtn" Content="+" HorizontalAlignment="Left" Margin="380,200,0,0" VerticalAlignment="Top" Width="Auto" Height="23" Click="addUnitBtn_Click" Padding="5,0,5,0"/>
+            <Button x:Name="addUnitBtn" Content="+" HorizontalAlignment="Left" Margin="380,200,0,0" VerticalAlignment="Top" Width="30" Height="23" Click="addUnitBtn_Click" Padding="5,0,5,0"/>
             <Label Content="Supplier:" HorizontalAlignment="Left" Margin="28,215,0,0" VerticalAlignment="Top" FontWeight="Bold" Visibility="Hidden"/>
             <ComboBox x:Name="supplierCb" HorizontalAlignment="Left" Margin="132,219,0,0" VerticalAlignment="Top" Width="220" DisplayMemberPath="CompanyName" SelectedValuePath="CompanyID" Visibility="Hidden">
                 <ComboBox.Resources>
