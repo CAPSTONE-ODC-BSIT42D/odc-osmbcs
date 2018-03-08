@@ -190,7 +190,7 @@ namespace prototype2
                     }
                 }
                 else
-                    MessageBox.Show("The requested items is empty.");
+                    MessageBox.Show("The requested item is empty.");
             }
 
             else if (termsAndConditionGrid.IsVisible)
@@ -821,7 +821,7 @@ namespace prototype2
                             }
 
                             else
-                                MessageBox.Show("Theres an error occured in saving the record");
+                                MessageBox.Show("There is an error occured in saving the record");
                         }
                     }
                 }
