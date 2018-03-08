@@ -54,6 +54,7 @@ namespace prototype2.uControlsTransanction
                 refreshDataGrid();
                 computeInvoice();
 
+                
             }
         }
         void refreshDataGrid()
@@ -149,6 +150,10 @@ namespace prototype2.uControlsTransanction
                                     select ph.SIpaymentAmount_).Sum();
 
                 MainVM.Balance -= (Math.Round(totalRec, 2));
+                if (MainVM.Balance == 0)
+                    receivePaymentBtn.IsEnabled = false;
+                else
+                    receivePaymentBtn.IsEnabled = true;
             }
 
         }

@@ -135,21 +135,21 @@
                             <DataGridTemplateColumn Header="Unit Price" Width="100">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <xctk:DecimalUpDown x:Name="unitPriceTb" Value ="{Binding unitPrice, UpdateSourceTrigger=PropertyChanged}"  Minimum="1" Text="1" VerticalAlignment="Center" DisplayDefaultValueOnEmptyText="True" ValueChanged="unitPriceTb_ValueChanged" />
+                                        <xctk:DecimalUpDown x:Name="unitPriceTb" Value ="{Binding unitPrice, UpdateSourceTrigger=PropertyChanged}"  Minimum="1" VerticalAlignment="Center" DisplayDefaultValueOnEmptyText="True" ValueChanged="unitPriceTb_ValueChanged" CultureInfo="fil-PH" FormatString="C2" Text="0" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Unit Price + Markup" >
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Label Content="{Binding unitPriceMarkUp, StringFormat=N2}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+                                        <TextBlock x:Name="vatableSalesLbl" Text="{Binding unitPriceMarkUp, ConverterCulture=fil-PH, StringFormat=\{0:C\}}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Total Amount" >
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Label Content="{Binding totalAmount, StringFormat=N2}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+                                        <TextBlock x:Name="vatableSalesLbl" Text="{Binding totalAmount, ConverterCulture=fil-PH, StringFormat=\{0:C\}}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -231,7 +231,8 @@
                     </DataGrid>
                     <xctk:DecimalUpDown x:Name="discountPriceTb" HorizontalAlignment="Left" Margin="181,493,0,0" VerticalAlignment="Top" Width="104"  VerticalContentAlignment="Center" Height="24" DefaultValue="0" Minimum="0" DisplayDefaultValueOnEmptyText="True" ParsingNumberStyle="Integer" FontWeight="Normal" FontStyle="Normal" Value="0" HorizontalContentAlignment="Center" ValueChanged="discountPriceTb_ValueChanged"/>
                     <Label x:Name="label32_Copy3" Content="Total Price:" HorizontalAlignment="Left" Margin="10,487,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Segoe UI" Grid.Column="1" RenderTransformOrigin="0.955,0.481" FontWeight="Bold" FontSize="20" Height="37" Width="115"/>
-                    <Label x:Name="totalPriceLbl" Content="Total Price:" Margin="129,490,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Segoe UI" FontWeight="Normal" Grid.Column="1" FontSize="18" Height="34" HorizontalAlignment="Left"/>
+
+                    <TextBlock x:Name="totalPriceLbl" Margin="130,492,0,0" VerticalAlignment="Top" FontFamily="Segoe UI" FontWeight="Normal" Grid.Column="1" FontSize="20" Height="25" HorizontalAlignment="Left"  Text="{Binding TotalSales, ConverterCulture=fil-PH, StringFormat=\{0:C\}}"/>
                 </Grid>
             </ScrollViewer>
             <ScrollViewer x:Name="termsAndConditionGrid" Margin="0,0,0,45" Padding="10" VerticalScrollBarVisibility="Auto" d:IsHidden="True">

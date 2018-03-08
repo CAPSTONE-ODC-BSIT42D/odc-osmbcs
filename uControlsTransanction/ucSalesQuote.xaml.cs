@@ -614,10 +614,7 @@ namespace prototype2
                 }
                 totalPrice += item.totalAmount;
             }
-            if (totalPriceLbl != null)
-            {
-                totalPriceLbl.Content = "" + totalPrice;
-            }
+            MainVM.TotalSales = totalPrice;
         }
 
         void salesQuoteToMemory()

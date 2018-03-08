@@ -1345,7 +1345,26 @@ namespace prototype2
 
         private void viewInvoiceRecord_Click(object sender, RoutedEventArgs e)
         {
-            MainVM.isEdit = true;
+            MainVM.isView = true;
+            MainVM.isPaymentInvoice = true;
+            foreach (UIElement obj in containerGrid.Children)
+            {
+                if (containerGrid.Children.IndexOf(obj) == 2)
+                {
+                    headerLbl.Content = "Billing";
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+            foreach(UIElement obj in billingGrid.Children)
+            {
+                if(billingGrid.Children.IndexOf(obj) == 1)
+                    obj.Visibility = Visibility.Visible;
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+            
         }
 
         private void receivePaymentBtn_Click(object sender, RoutedEventArgs e)

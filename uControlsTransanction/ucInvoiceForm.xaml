@@ -61,7 +61,7 @@
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox>
-                    <Label x:Name="dateToday" Content="{Binding SelectedCustomerSupplier.CompanyAddress}" HorizontalAlignment="Left" Margin="531,53,-649,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="120"/>
+                    <Label x:Name="dateToday" Content="" HorizontalAlignment="Left" Margin="531,53,-649,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="120"/>
                     <xctk:IntegerUpDown x:Name="dueDateTb" HorizontalAlignment="Left" Margin="531,91,-585,0" VerticalAlignment="Top" Width="56" Height="20" DefaultValue="15" DisplayDefaultValueOnEmptyText="True" Minimum="1"/>
                     <Label x:Name="label19_Copy23" Content="Days" HorizontalAlignment="Left" Margin="587,87,-625,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="40"/>
                     <Label x:Name="label19_Copy" Content="* P.O. #:" HorizontalAlignment="Left" Margin="463,121,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29" Width="63"/>

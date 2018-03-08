@@ -7,6 +7,9 @@
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf" xmlns:prototype2="clr-namespace:prototype2" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="prototype2.uControlsMaintenance.ucInvoicePaymentForm"
              mc:Ignorable="d" 
              d:DesignHeight="344" d:DesignWidth="746" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" IsVisibleChanged="UserControl_IsVisibleChanged">
+    <UserControl.DataContext>
+        <StaticResource ResourceKey="MainVM"/>
+    </UserControl.DataContext>
     <Grid>
         <Grid x:Name="paymentDetails">
             <Label x:Name="label12_Copy1" Content="Payment Details" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31"/>
@@ -28,7 +31,7 @@
                 <TextBox x:Name="checkNoTb" HorizontalAlignment="Left" Height="23" Margin="132,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174"/>
             </Grid>
             <Label Content="Total Amount:" HorizontalAlignment="Left" Margin="43,219,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31"/>
-            <Label Content="{Binding Balance}" HorizontalAlignment="Left" Margin="152,219,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31"/>
+            <TextBlock Text="{Binding Balance, ConverterCulture=fil-PH, StringFormat=\{0:C\}}" HorizontalAlignment="Left" Margin="152,224,0,0" VerticalAlignment="Top" FontSize="14"  FontStyle="Normal" FontFamily="Segoe UI" Height="19"/>
             <Label Content="Downpayment:" HorizontalAlignment="Left" Margin="38,250,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31" d:IsHidden="True" Visibility="Hidden"/>
             <Label Content="{Binding Balance}" HorizontalAlignment="Left" Margin="152,250,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31" d:IsHidden="True" Visibility="Hidden"/>
             <Label Content="Current Balance:" HorizontalAlignment="Left" Margin="29,281,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31" HorizontalContentAlignment="Right" d:IsHidden="True" Visibility="Hidden"/>
