@@ -53,9 +53,6 @@ namespace prototype2.uControlsTransanction
                 var invoiceprod = from ai in MainVM.AvailedItems
                                   where ai.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
                                   select ai;
-                var invoiceserv = from aser in MainVM.AvailedServices
-                                  where aser.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
-                                  select aser;
                 foreach (AvailedItem ai in invoiceprod)
                 {
                     var markupPrice = from itm in MainVM.MarkupHist

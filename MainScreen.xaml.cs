@@ -65,19 +65,19 @@ namespace prototype2
 
             this.ucSelectSalesQuote.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
 
-            this.ucSalesQuote.SaveCloseButtonClicked += saveCloseSalesQuoteForm; ;
+            this.ucSalesQuote.SaveCloseButtonClicked += saveCloseSalesQuoteForm; 
             this.ucSalesQuote.ConvertToInvoice += convertToInvoice_BtnClicked;
             this.ucSalesQuote.SelectCustomer += selectCustomer_BtnClicked;
             this.ucSalesQuote.SelectItem += selectItem_BtnClicked;
 
             this.ucPurchaseOrder.SelectCustomer += selectCustomer_BtnClicked;
 
+            this.ucPurchaseOrder.SelectSalesQuote += selectSalesQuote_BtnClicked;
+            this.ucPurchaseOrder.SaveCloseButtonClicked += saveClosePurchaseOrderForm;
             this.ucAddItem.SaveCloseButtonClicked += saveCloseOther_BtnClicked;
 
             this.ucSelectCustomer.AddNewCustomer += addNewCustomer_BtnClicked;
             this.ucSelectCustomer.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
-
-            this.ucPurchaseOrder.SelectSalesQuote += selectSalesQuote_BtnClicked;
 
             this.ucInvoiceForm.SaveCloseButtonClicked += saveCloseInvoiceForm;
             this.ucInvoicePaymentHist.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
@@ -105,6 +105,8 @@ namespace prototype2
 
         #region Custom Events
         
+       
+
         private void saveClosePaymentForm_BtnClicked(object sender, EventArgs e)
         {
             foreach (UIElement obj in otherGridBg.Children)
@@ -177,7 +179,7 @@ namespace prototype2
 
         private void saveCloseSalesQuoteForm(object sender, EventArgs e)
         {
-            MainVM.isNewTrans = true;
+            MainVM.isNewTrans = false;
             foreach (var obj in transQuotationGrid.Children)
             {
                 if (obj is Grid)
@@ -198,7 +200,7 @@ namespace prototype2
         private void saveCloseInvoiceForm(object sender, EventArgs e)
         {
             headerLbl.Content = "Billing";
-            MainVM.isNewTrans = true;
+            MainVM.isNewTrans = false;
             foreach (var obj in containerGrid.Children)
             {
                 ((Grid)obj).Visibility = Visibility.Collapsed;
@@ -212,6 +214,26 @@ namespace prototype2
                 }
                 else
                     obj.Visibility = Visibility.Collapsed;
+            }
+            refreshData();
+        }
+
+        private void saveClosePurchaseOrderForm(object sender, EventArgs e)
+        {
+            MainVM.isNewTrans = true;
+            foreach (UIElement obj in transOrderGrid.Children)
+            {
+                if (obj is Grid)
+                {
+                    if (transOrderGrid.Children.IndexOf(obj) == 1)
+                    {
+                        headerLbl.Content = "Trasanction - Purchase Order";
+                        ((Grid)obj).Visibility = Visibility.Visible;
+                    }
+                }
+                else
+                    ((UserControl)obj).Visibility = Visibility.Collapsed;
+
             }
             refreshData();
         }
