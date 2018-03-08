@@ -688,7 +688,8 @@
                 </Grid>
             </Grid>
             <Grid x:Name="reportsGrid">
-           
+                <local:ucPurchaseOrderViewer HorizontalAlignment="Left" Height="100" Margin="324,271,0,0" VerticalAlignment="Top" Width="100"/>
+
 
 
             </Grid>

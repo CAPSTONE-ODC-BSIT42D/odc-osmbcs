@@ -26,8 +26,9 @@ namespace prototype2
         public ucPurchaseOrderViewer()
         {
             InitializeComponent();
-           DisplayReport();
+         DisplayReport();
         }
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
         private void DisplayReport()
         {
           
@@ -50,7 +51,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        po.PONumChar, cs.companyName, cs.companyType, cs.companyAddress, cs.companyCity, pr.provinceName, cs.repFName, cs.repMInitial, cs.repLName, cs.repEmail, cs.repTelephone, cs.repMobile,   po.orderDate, po.requisitioner, po.POdueDate, po.incoterms, po.termsDays, po.termsDP, po.currency, it.ID, ia.itemQnty, ui.unitName, it.itemDescr, ia.unitPrice, po.preparedBy, po.approvedBy, po.shipVia,    po.shipTo FROM            purchase_order_t po INNER JOIN cust_supp_t cs ON po.suppID = cs.companyID INNER JOIN item_t it ON it.supplierID = cs.companyID INNER JOIN  items_availed_t ia ON it.ID = ia.itemID INNER JOIN provinces_t pr ON cs.companyProvinceID = pr.id INNER JOIN  unit_t ui ON it.unitID = ui.id /*where  ia.id=@B*/";
+            cmd.CommandText = "SELECT        po.PONumChar, cs.companyName, cs.companyType, cs.companyAddress, cs.companyCity, pr.provinceName, cs.repFName, cs.repMInitial, cs.repLName, cs.repEmail, cs.repTelephone, cs.repMobile,   po.orderDate, po.requisitioner, po.POdueDate, po.incoterms, po.termsDays, po.termsDP, po.currency, it.ID, ia.itemQnty, ui.unitName, it.itemDescr, ia.unitPrice, po.preparedBy, po.approvedBy, po.shipVia,    po.shipTo FROM            purchase_order_t po INNER JOIN cust_supp_t cs ON po.suppID = cs.companyID INNER JOIN item_t it ON it.supplierID = cs.companyID INNER JOIN  items_availed_t ia ON it.ID = ia.itemID INNER JOIN provinces_t pr ON cs.companyProvinceID = pr.id INNER JOIN  unit_t ui ON it.unitID = ui.id where  ia.id="+ MainVM.SelectedAvailedItem.AvailedItemID + "";
 
             DataSet1.PODataTableDataTable dSItem = new DataSet1.PODataTableDataTable();
 
