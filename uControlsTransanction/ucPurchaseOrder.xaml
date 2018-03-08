@@ -105,9 +105,9 @@
                                     <DataGridTemplateColumn.CellStyle>
                                         <Style TargetType="{x:Type DataGridCell}">
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding qtyEditable}" Value="false">
+                                                <Trigger  Property="IsReadOnly" Value="false">
                                                     <Setter Property="IsEnabled" Value="false"/>
-                                                </DataTrigger>
+                                                </Trigger>
                                             </Style.Triggers>
                                         </Style>
                                     </DataGridTemplateColumn.CellStyle>
@@ -115,7 +115,7 @@
                                 <DataGridTemplateColumn Header="Unit Price" Width="100">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <xctk:DecimalUpDown x:Name="unitPriceTb" Value ="{Binding unitPrice, UpdateSourceTrigger=PropertyChanged}"  Minimum="1" VerticalAlignment="Center" DisplayDefaultValueOnEmptyText="True" CultureInfo="fil-PH" FormatString="C2" Text="0" />
+                                            <xctk:DecimalUpDown x:Name="unitPriceTb" Value ="{Binding unitPrice, UpdateSourceTrigger=PropertyChanged}"  Minimum="1" VerticalAlignment="Center" DisplayDefaultValueOnEmptyText="True" CultureInfo="fil-PH" FormatString="C2" Text="0" ValueChanged="unitPriceTb_ValueChanged" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -191,7 +191,7 @@
                         <Label Content="Purchase Order Details" HorizontalAlignment="Left" Margin="5,9,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31"/>
                         <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="0,38,0,0" VerticalAlignment="Top"/>
                         <Label Content="Ship Via:" HorizontalAlignment="Left" Margin="75,54,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29"/>
-                        <ComboBox x:Name="shipViaCb" HorizontalAlignment="Left" Margin="152,54,0,0" VerticalAlignment="Top" Width="131" SelectedValuePath="Content" ItemsSource="{Binding ShipVia}">
+                        <ComboBox x:Name="shipViaCb" HorizontalAlignment="Left" Margin="152,54,0,0" VerticalAlignment="Top" Width="131" SelectedValuePath="ShipViaID" ItemsSource="{Binding ShipVia}" DisplayMemberPath="Name">
                             <ComboBox.SelectedItem>
                                 <Binding Path="SelectedShipVia" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                     <Binding.ValidationRules>
@@ -203,7 +203,7 @@
                         <TextBox x:Name="newShipViaTb" HorizontalAlignment="Left" Height="23" Margin="153,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130" Visibility="Collapsed"/>
                         <Button x:Name="addNewShipBtn" Content="+" HorizontalAlignment="Left" Margin="312,54,0,0" VerticalAlignment="Top" Width="37" Height="23" Click="addNewShipBtn_Click"/>
                         <Label Content="Date Required:" HorizontalAlignment="Left" Margin="34,90,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29"/>
-                        <DatePicker x:Name="selectedDateRequiredTb" HorizontalAlignment="Left" Margin="152,93,0,0" VerticalAlignment="Top">
+                        <DatePicker x:Name="selectedDateRequiredTb" HorizontalAlignment="Left" Margin="152,93,0,0" VerticalAlignment="Top" Width="131">
                             <DatePicker.SelectedDate>
                                 <Binding Path="DatePickerBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                     <Binding.ValidationRules>
@@ -212,7 +212,7 @@
                                 </Binding>
                             </DatePicker.SelectedDate>
                         </DatePicker>
-                        <CheckBox x:Name="asapCb" Content="As soon as posible" HorizontalAlignment="Left" Margin="259,102,0,0" VerticalAlignment="Top"/>
+                        <CheckBox x:Name="asapCb" Content="As soon as posible" HorizontalAlignment="Left" Margin="312,98,0,0" VerticalAlignment="Top" Checked="asapCb_Checked" Unchecked="asapCb_Unchecked"/>
                         <Label Content="Payment Terms:" HorizontalAlignment="Left" Margin="28,128,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" FontFamily="Segoe UI"/>
                         <RadioButton x:Name="paymentDefaultRd" Content="50% Down payment , 50% Balance (30 Days)" HorizontalAlignment="Left" Margin="153,128,0,0" VerticalAlignment="Top" IsChecked="True" GroupName="Payment" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
                         <RadioButton x:Name="paymentCustomRb" Content="Custom" HorizontalAlignment="Left" Margin="153,151,0,0" VerticalAlignment="Top" GroupName="Payment" Checked="paymentCustomRb_Checked" Unchecked="paymentCustomRb_Unchecked" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
@@ -232,19 +232,16 @@
 
                     </Grid>
                 </StackPanel>
-                <local:ucPurchaseOrderViewer x:Name="purchaseOrderViewer" d:IsHidden="True"/>
             </Grid>
         </ScrollViewer>
 
         <StackPanel Margin="0" VerticalAlignment="Bottom" FlowDirection="RightToLeft" Height="40">
             <StackPanel x:Name="newPurchaseOrderGrid" HorizontalAlignment="Left" Margin="10,0" Orientation="Horizontal">
-                <Button x:Name="nextBtn" Content="Next" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" Height="26" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="5,0" Click="nextBtn_Click"/>
-                <Button x:Name="backBtn" Content="Back" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="84" Height="26" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="5,0" Click="backBtn_Click"/>
+                <Button x:Name="nextBtn" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" Height="26" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="5,0" Click="nextBtn_Click"/>
             </StackPanel>
             <StackPanel x:Name="viewPuchaseOrderGrid" Margin="10,10,10,0" Orientation="Horizontal">
-                <Button x:Name="editSalesQuoteBtn" Content="Edit" VerticalAlignment="Bottom" Height="26" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="5,0" HorizontalAlignment="Left" Width="84"/>
-                <Button x:Name="generatePDFBtn" Content="Generate PDF" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="127" Height="26" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="5,0"/>
-                <Button x:Name="closeBtn" Content="Close" VerticalAlignment="Bottom" Height="26" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="5,0" HorizontalAlignment="Left" Width="84"/>
+                <Button x:Name="editSalesQuoteBtn" Content="Edit" VerticalAlignment="Bottom" Height="26" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="5,0" HorizontalAlignment="Left" Width="84" Click="editSalesQuoteBtn_Click"/>
+                <Button x:Name="closeBtn" Content="Close" VerticalAlignment="Bottom" Height="26" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="5,0" HorizontalAlignment="Left" Width="84" Click="closeBtn_Click"/>
             </StackPanel>
         </StackPanel>
 

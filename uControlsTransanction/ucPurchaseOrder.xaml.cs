@@ -55,10 +55,30 @@ namespace prototype2
                 handler(this, e);
         }
 
+        public event EventHandler PrintPurchaseOrder;
+        protected virtual void OnPrintPurchaseOrderClicked(RoutedEventArgs e)
+        {
+            var handler = PrintPurchaseOrder;
+            if (handler != null)
+                handler(this, e);
+        }
+
+        private void resetElements()
+        {
+            MainVM.RequestedItems.Clear();
+            MainVM.AvailedServicesList.Clear();
+            MainVM.SelectedSalesQuote = null;
+            MainVM.isEdit = false;
+            MainVM.isView = false;
+            MainVM.isNewPurchaseOrder = false;
+            MainVM.TotalSales = 0;
+        }
+
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (this.IsLoaded && this.IsVisible)
             {
+                MainVM.SelectedCustomerSupplier = null;
                 foreach (UIElement obj in containerGrid.Children)
                 {
                     if (containerGrid.Children.IndexOf(obj) != 0)
@@ -70,12 +90,26 @@ namespace prototype2
                 }
                 if (MainVM.isEdit && MainVM.SelectedPurchaseOrder != null)
                 {
-
                     refreshDataGrid();
                     loadPurchaseOrdertoUI();
+                    newPurchaseOrderGrid.Visibility = Visibility.Visible;
+                    viewPuchaseOrderGrid.Visibility = Visibility.Collapsed;
                 }
                     
-                if (MainVM.isView) ;
+                if (MainVM.isView && MainVM.SelectedPurchaseOrder != null)
+                {
+                    refreshDataGrid();
+                    loadPurchaseOrdertoUI();
+                    itemDg.IsReadOnly = true;
+                    foreach (UIElement obj in purchaseOrderForm.Children)
+                    {
+                        if(purchaseOrderForm.Children.IndexOf(obj) != 1)
+                            obj.IsEnabled = false;
+                    }
+                    newPurchaseOrderGrid.Visibility = Visibility.Collapsed;
+                    viewPuchaseOrderGrid.Visibility = Visibility.Visible;
+                }
+                    
             }
 
         }
@@ -85,11 +119,26 @@ namespace prototype2
             MainVM.SelectedCustomerSupplier = (from supp in MainVM.Suppliers
                                                where supp.CompanyID == MainVM.SelectedPurchaseOrder.suppID
                                                select supp).FirstOrDefault();
-            
+            MainVM.RequestedItems.Clear();
             foreach (POAvailedItem ai in MainVM.SelectedPurchaseOrder.AvailedItems)
             {
                 MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, totalAmount = ai.ItemQty * ai.UnitPrice, unitPrice = ai.UnitPrice });
             }
+
+            shipViaCb.SelectedValue = MainVM.SelectedPurchaseOrder.shipVia;
+            if (!MainVM.SelectedPurchaseOrder.asapDueDate)
+            {
+                selectedDateRequiredTb.SelectedDate = MainVM.SelectedPurchaseOrder.POdueDate;
+                asapCb.IsChecked = false;
+            }
+            else
+            {
+                asapCb.IsChecked = MainVM.SelectedPurchaseOrder.asapDueDate;
+            }
+            if (MainVM.SelectedPurchaseOrder.termsDp == 50)
+                paymentDefaultRd.IsChecked = true;
+            else
+                paymentCustomRb.IsChecked = true;
 
         }
 
@@ -98,8 +147,8 @@ namespace prototype2
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
-                MainVM.SelectedSalesInvoice.PaymentHist_.Clear();
-                string query = "SELECT * FROM po_item_availed_t where poNumCHar = " + MainVM.SelectedPurchaseOrder.PONumChar;
+                MainVM.SelectedPurchaseOrder.AvailedItems.Clear();
+                string query = "SELECT * FROM po_items_availed_t where poNumCHar = '" + MainVM.SelectedPurchaseOrder.PONumChar + "'";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
@@ -137,11 +186,6 @@ namespace prototype2
             if (purchaseOrderForm.IsVisible)
             {
 
-                nextBtn.Content = "Save";
-
-            }
-            else if (purchaseOrderViewer.IsVisible)
-            {
                 MessageBoxResult result = MessageBox.Show("Do you want to save?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Information);
                 if (result == MessageBoxResult.OK)
                 {
@@ -185,7 +229,7 @@ namespace prototype2
                             }
 
                         }
-                        else if(element is DatePicker)
+                        else if (element is DatePicker)
                         {
                             BindingExpression expression = ((DatePicker)element).GetBindingExpression(DatePicker.SelectedDateProperty);
                             if (expression != null)
@@ -199,8 +243,9 @@ namespace prototype2
                     if (!validationError)
                     {
                         saveDataToDb();
-                        MainVM.isEdit = false;
+                        resetElements();
                         OnSaveCloseButtonClicked(e);
+                        OnPrintPurchaseOrderClicked(e);
                     }
                     else
                     {
@@ -212,6 +257,7 @@ namespace prototype2
                 else if (result == MessageBoxResult.Cancel)
                 {
                 }
+
             }
         }
 
@@ -246,8 +292,8 @@ namespace prototype2
                             "`POstatus` = 'PENDING" + "', " +
                             "`currency` = '" + currencyCb.SelectedValue.ToString() + "'," +
                             "`importantNotes` = " + "'," + //importantNotes
-                            "`prepareBy` = " + "'," + //preparedBy
-                            "`approveBy` = " + "'," + //approveBy
+                            "`preparedBy` = " + "'," + //preparedBy
+                            "`approvedBy` = " + "'," + //approveBy
                             "`refNo` = " + "'," + //refNo
                             "`termsDays` = " + termsDay + "," +
                             "`termsDp` = " + termsDp +
@@ -277,7 +323,7 @@ namespace prototype2
             {
                 if (dbCon.IsConnect())
                 {
-                    string query = "INSERT purchase_order_t (`PONumChar`,`suppID`,`shipTo`, `POdueDate`,`asapDueDate`,`shipVia`, `requisitioner`, `incoterms`, `POstatus`, `currency`, `importantNotes`, `preparedBy`, `approveBy`, `refNo`, `termsDays`, `termsDP`) VALUES " +
+                    string query = "INSERT purchase_order_t (`PONumChar`,`suppID`,`shipTo`, `POdueDate`,`asapDueDate`,`shipVia`, `requisitioner`, `incoterms`, `POstatus`, `currency`, `importantNotes`, `preparedBy`, `approvedBy`, `refNo`, `termsDays`, `termsDP`) VALUES " +
                             "('" + poNumChar + "'," +
                             MainVM.SelectedCustomerSupplier.CompanyID + "," +
                             "'','" +
@@ -341,6 +387,16 @@ namespace prototype2
             downpaymentPercentTb.IsEnabled = false;
         }
 
+        private void asapCb_Checked(object sender, RoutedEventArgs e)
+        {
+            selectedDateRequiredTb.IsEnabled = false;
+        }
+
+        private void asapCb_Unchecked(object sender, RoutedEventArgs e)
+        {
+            selectedDateRequiredTb.IsEnabled = true;
+        }
+
         private void addNewShipBtn_Click(object sender, RoutedEventArgs e)
         {
             if (newShipViaTb.IsVisible)
@@ -374,6 +430,37 @@ namespace prototype2
 
                 addNewShipBtn.Content = "Save";
                 newShipViaTb.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void editSalesQuoteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            itemDg.IsReadOnly = true;
+            foreach (UIElement obj in purchaseOrderForm.Children)
+            {
+                obj.IsEnabled = true;
+            }
+        }
+
+        private void closeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OnSaveCloseButtonClicked(e);
+        }
+
+        private void unitPriceTb_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            computePrice();
+        }
+
+        private void computePrice()
+        {
+            foreach (RequestedItem item in MainVM.RequestedItems)
+            {
+                if (item.itemType == 0)
+                {
+                    item.totalAmount = (item.unitPrice * item.qty);
+                }
+                
             }
         }
     }

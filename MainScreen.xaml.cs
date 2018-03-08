@@ -74,6 +74,8 @@ namespace prototype2
 
             this.ucPurchaseOrder.SelectSalesQuote += selectSalesQuote_BtnClicked;
             this.ucPurchaseOrder.SaveCloseButtonClicked += saveClosePurchaseOrderForm;
+            this.ucPurchaseOrder.PrintPurchaseOrder += printPurchaseOrder_BtnClicked;
+
             this.ucAddItem.SaveCloseButtonClicked += saveCloseOther_BtnClicked;
 
             this.ucSelectCustomer.AddNewCustomer += addNewCustomer_BtnClicked;
@@ -87,6 +89,7 @@ namespace prototype2
             this.ucInvoicePaymentForm.PrintReceipt += printReceipt_BtnCliked;
 
             this.ucOfficialReceipt.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
+            this.ucPurchaseOrderViewer.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
             foreach (var obj in containerGrid.Children)
             {
                 ((Grid)obj).Visibility = Visibility.Collapsed;
@@ -108,6 +111,18 @@ namespace prototype2
 
         #region Custom Events
         
+        private void printPurchaseOrder_BtnClicked(object sender, EventArgs e)
+        {
+            otherGridBg.Visibility = Visibility.Visible;
+            foreach (UIElement obj in otherGridBg.Children)
+            {
+                if (obj.Equals(ucPurchaseOrderViewer))
+                {
+                    obj.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
        private void printReceipt_BtnCliked(object sender, EventArgs e)
         {
             otherGridBg.Visibility = Visibility.Visible;
@@ -1459,6 +1474,77 @@ namespace prototype2
                 }
             }
         }
+
+        private void viewPurchaseOrderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.isView = true;
+            foreach (var element in transOrderGrid.Children)
+            {
+                if (element is UserControl)
+                {
+                    if (!(((UserControl)element).Equals(ucPurchaseOrder)))
+                    {
+                        ((UserControl)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((UserControl)element).Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+        private void editPurchaseOrderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.isEdit = true;
+            foreach (var element in transOrderGrid.Children)
+            {
+                if (element is UserControl)
+                {
+                    if (!(((UserControl)element).Equals(ucPurchaseOrder)))
+                    {
+                        ((UserControl)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((UserControl)element).Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+        private void deletePurchaseOrderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            MessageBoxResult result = MessageBox.Show("Do you wish to delete this record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.OK)
+            {
+                if (dbCon.IsConnect())
+                {
+                    string query = "UPDATE `purchase_order_t` SET `isDeleted`= 1 WHERE PONumChar = '" + MainVM.SelectedPurchaseOrder.PONumChar + "';";
+                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    {
+                        MessageBox.Show("Record successfully deleted!");
+                        MainVM.Ldt.worker.RunWorkerAsync();
+                    }
+                }
+
+            }
+            else if (result == MessageBoxResult.Cancel)
+            {
+            }
+        }
+
+        private void printPurchaseOrderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            otherGridBg.Visibility = Visibility.Visible;
+            foreach (UIElement obj in otherGridBg.Children)
+            {
+                if (obj.Equals(ucPurchaseOrderViewer))
+                {
+                    obj.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
         #endregion
+
+
     }
 }

@@ -192,6 +192,23 @@ namespace prototype2
 
             if (dbCon.IsConnect())
             {
+                MainVM.ShipVia.Clear();
+                string query = "SELECT * FROM ship_via_t;";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.ShipVia.Add(new ShipVia() { ShipViaID = int.Parse(dr[0].ToString()), Name = dr[1].ToString() });
+                }
+
+            }
+
+            if (dbCon.IsConnect())
+            {
                 MainVM.MarkupHist.Clear();
                 string query = "SELECT * FROM markup_hist_t;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
