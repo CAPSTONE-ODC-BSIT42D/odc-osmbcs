@@ -167,7 +167,9 @@ namespace prototype2
                 if (!validationError)
                 {
                     saveDataToDb();
-                        OnSaveCloseButtonClicked(e);
+                    MainVM.isNewSupplier = false;
+                    OnSaveCloseButtonClicked(e);
+
                 }
                 else
                 {
@@ -386,7 +388,7 @@ namespace prototype2
             }
             if (MainVM.isNewSupplier)
                 label5.Content = "Supplier Details";
-            else
+            else if(MainVM.isNewTrans)
                 label5.Content = "Custoemr Details";
         }
     }

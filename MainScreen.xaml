@@ -1584,7 +1584,7 @@
                         <local:ucNoticeOfEmployment x:Name="ucContract" HorizontalAlignment="Left" Height="700" Margin="20,16,0,0" VerticalAlignment="Top" Width="1184" Visibility="Hidden"/>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageProductListGrid" Margin="0,0,1,0">
+                <Grid x:Name="manageProductListGrid" Margin="0,0,1,0" d:IsHidden="True">
                     <Grid Margin="0">
                         <Label x:Name="label11" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
                         <TextBox x:Name="searchBox2" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>
