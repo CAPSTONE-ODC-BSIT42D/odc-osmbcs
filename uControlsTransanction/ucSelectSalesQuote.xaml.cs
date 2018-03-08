@@ -46,6 +46,7 @@ namespace prototype2.uControlsTransanction
         {
             if (MainVM.isNewPurchaseOrder)
             {
+                MainVM.RequestedItems.Clear();
                 MainVM.SelectedCustomerSupplier = (from cust in MainVM.Customers
                                                    where cust.CompanyID == MainVM.SelectedSalesQuote.custID_
                                                    select cust).FirstOrDefault();

@@ -84,6 +84,9 @@ namespace prototype2
             this.ucInvoicePaymentHist.ReceivePaymentButtonClicked += receive_BtnClicked;
 
             this.ucInvoicePaymentForm.SaveClosePaymentForm += saveClosePaymentForm_BtnClicked;
+            this.ucInvoicePaymentForm.PrintReceipt += printReceipt_BtnCliked;
+
+            this.ucOfficialReceipt.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
             foreach (var obj in containerGrid.Children)
             {
                 ((Grid)obj).Visibility = Visibility.Collapsed;
@@ -105,7 +108,17 @@ namespace prototype2
 
         #region Custom Events
         
-       
+       private void printReceipt_BtnCliked(object sender, EventArgs e)
+        {
+            otherGridBg.Visibility = Visibility.Visible;
+            foreach (UIElement obj in otherGridBg.Children)
+            {
+                if (obj.Equals(ucOfficialReceipt))
+                {
+                    obj.Visibility = Visibility.Visible;
+                }
+            }
+        }
 
         private void saveClosePaymentForm_BtnClicked(object sender, EventArgs e)
         {
@@ -1317,7 +1330,24 @@ namespace prototype2
 
         private void deleteQuoteRecordBtn_Click(object sender, RoutedEventArgs e)
         {
+            var dbCon = DBConnection.Instance();
+            MessageBoxResult result = MessageBox.Show("Do you wish to delete this record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.OK)
+            {
+                if (dbCon.IsConnect())
+                {
+                    string query = "UPDATE `sales_quote_t` SET `isDeleted`= 1 WHERE sqNoChar = '" + MainVM.SelectedSalesQuote.sqNoChar_ + "';";
+                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    {
+                        MessageBox.Show("Record successfully deleted!");
+                        MainVM.Ldt.worker.RunWorkerAsync();
+                    }
+                }
 
+            }
+            else if (result == MessageBoxResult.Cancel)
+            {
+            }
         }
 
         private void convertToInvoice_BtnClicked(object sender, EventArgs e)

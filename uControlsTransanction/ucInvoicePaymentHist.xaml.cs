@@ -158,5 +158,9 @@ namespace prototype2.uControlsTransanction
 
         }
 
+        private void printReceiptBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OnReceivePaymentButtonCliked(e);
+        }
     }
 }

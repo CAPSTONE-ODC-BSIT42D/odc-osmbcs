@@ -125,20 +125,21 @@ namespace prototype2
 
         void computeInvoice()
         {
+            
             MainVM.VatableSale = 0;
             MainVM.TotalSalesWithOutDp = 0;
 
             MainVM.SelectedCustomerSupplier = (from cust in MainVM.Customers
-                                               where cust.CompanyID == MainVM.SelectedSalesInvoice.custID_
+                                               where cust.CompanyID == MainVM.SelectedSalesQuote.custID_
                                                select cust).FirstOrDefault();
 
-            MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(MainVM.SelectedSalesInvoice.sqNoChar_)).FirstOrDefault();
+            
 
             var invoiceprod = from ai in MainVM.AvailedItems
-                              where ai.SqNoChar.Equals(MainVM.SelectedSalesInvoice.sqNoChar_)
+                              where ai.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
                               select ai;
             var invoiceserv = from aser in MainVM.AvailedServices
-                              where aser.SqNoChar.Equals(MainVM.SelectedSalesInvoice.sqNoChar_)
+                              where aser.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
                               select aser;
             
             foreach (AvailedItem ai in invoiceprod)
@@ -263,23 +264,29 @@ namespace prototype2
         {
             if (this.IsVisible)
             {
-                foreach(UIElement obj in newInvoiceFormGrid1.Children)
+                MainVM.RequestedItems.Clear();
+                
+                foreach (UIElement obj in newInvoiceFormGrid1.Children)
                 {
                     if (obj.Equals(newInvoiceForm))
                         obj.Visibility = Visibility.Visible;
                     else
                         obj.Visibility = Visibility.Collapsed;
                 }
-                computeInvoice();
+                
                 if (MainVM.isView)
                 {
-                    foreach(UIElement obj in newInvoiceFormGrid.Children)
+                    MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(MainVM.SelectedSalesInvoice.sqNoChar_)).FirstOrDefault();
+                    foreach (UIElement obj in newInvoiceFormGrid.Children)
                     {
                         if (obj is TextBox || obj is Xceed.Wpf.Toolkit.IntegerUpDown)
                             obj.IsEnabled = false;
                     }
                     loadDataToUI();
+
                 }
+                if (MainVM.SelectedSalesQuote != null)
+                    computeInvoice();
             }
         }
 

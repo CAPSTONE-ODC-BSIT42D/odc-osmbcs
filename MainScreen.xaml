@@ -687,8 +687,8 @@
                     </Button>
                 </Grid>
             </Grid>
-            <Grid x:Name="trasanctionGrid" d:IsHidden="True">
-                <Grid x:Name="transQuotationGrid" Margin="0,0,1,0" d:IsHidden="True" >
+            <Grid x:Name="trasanctionGrid">
+                <Grid x:Name="transQuotationGrid" Margin="0,0,1,0" >
                     <Grid x:Name="quotationsGridHome" Margin="10" >
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                             <Label x:Name="label18" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -741,6 +741,15 @@
                                                     </Viewbox>
                                                 </Button>
                                                 <Button x:Name="editQuoteRecordBtn" Width="Auto" Height="25" Background="{x:Null}" BorderBrush="Black" Margin="10,10,0,10" ToolTip="Edit Record" Click="editQuoteRecordBtn_Click" >
+                                                    <Button.Style>
+                                                        <Style TargetType="{x:Type Button}">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding status_}" Value="ACCEPTED">
+                                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Button.Style>
                                                     <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
                                                         <Canvas x:Name="Capa_1b" Width="438.536" Height="438.536" Canvas.Left="0" Canvas.Top="0">
                                                             <Canvas.RenderTransform>
@@ -846,7 +855,7 @@
                     <local:ucSalesQuote x:Name="ucSalesQuote" Margin="0" Visibility="Collapsed" d:IsHidden="True"/>
 
                 </Grid>
-                <Grid x:Name="transOrderGrid" Margin="0,0,1,0" >
+                <Grid x:Name="transOrderGrid" Margin="0,0,1,0" d:IsHidden="True" >
                     <Grid Margin="10" >
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                             <Label x:Name="label4" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -1007,7 +1016,7 @@
 
                 </Grid>
             </Grid>
-            <Grid x:Name="billingGrid" Margin="10">
+            <Grid x:Name="billingGrid" Margin="10" d:IsHidden="True">
                 <Grid x:Name="invoiceGridHome" >
                     <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                         <Label x:Name="label22" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -1175,7 +1184,7 @@
             <Grid x:Name="reportsGrid" d:IsHidden="True"/>
             <Grid x:Name="queriesGrid" d:IsHidden="True"/>
 
-            <Grid x:Name="maintenanceGrid">
+            <Grid x:Name="maintenanceGrid" d:IsHidden="True">
                 <Grid x:Name="manageCustomerGrid" Margin="0,0,1,0" >
                     <Grid x:Name="manageCustomerHomeGrid" Margin="0">
                         <Label x:Name="label13" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
@@ -2015,7 +2024,8 @@
 
             <uControlsTransanction:ucSelectSalesQuote x:Name="ucSelectSalesQuote" Margin="0" HorizontalAlignment="Left" Visibility="Collapsed" d:IsHidden="True"/>
             <uControlsTransanction:ucInvoicePaymentHist x:Name="ucInvoicePaymentHist" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
-            <uControlsMaintenance:ucInvoicePaymentForm x:Name="ucInvoicePaymentForm" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <uControlsMaintenance:ucInvoicePaymentForm x:Name="ucInvoicePaymentForm" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
+            <local:ucOfficialReceipt x:Name="ucOfficialReceipt"/>
 
         </Grid>
 
