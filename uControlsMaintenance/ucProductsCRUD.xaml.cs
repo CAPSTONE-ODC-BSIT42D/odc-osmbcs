@@ -102,6 +102,16 @@ namespace prototype2
                         }
 
                     }
+                    else if(element is DatePicker)
+                    {
+                        BindingExpression expression = ((DatePicker)element).GetBindingExpression(DatePicker.SelectedDateProperty);
+                        if (expression != null)
+                        {
+                            expression.UpdateSource();
+                            if (Validation.GetHasError((DatePicker)element))
+                                validationError = true;
+                        }
+                    }
                 }
                 if (!validationError)
                 {

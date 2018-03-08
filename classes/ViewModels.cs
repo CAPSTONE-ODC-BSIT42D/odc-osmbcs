@@ -693,7 +693,7 @@ namespace prototype2
         public ObservableCollection<Region> Regions
         {
             get { return regions; }
-            set { regions = value; }
+            set { SetProperty(ref regions, value); }
         }
 
         public Region SelectedRegion
@@ -702,13 +702,22 @@ namespace prototype2
             set { SetProperty(ref selectedRegion, value); }
         }
 
+        protected ObservableCollection<ShipVia> shipVia = new ObservableCollection<ShipVia>();
+        public ObservableCollection<ShipVia> ShipVia
+        {
+            get { return shipVia; }
+            set { SetProperty(ref shipVia, value); }
+        }
 
-       
-        
-
+        protected ShipVia selectedShipVia = null;
+        public ShipVia SelectedShipVia
+        {
+            get { return selectedShipVia; }
+            set { SetProperty(ref selectedShipVia, value); }
+        }
         //Payments Hist
 
-        
+
 
         protected PaymentT SelectedPaymentH = null;
 

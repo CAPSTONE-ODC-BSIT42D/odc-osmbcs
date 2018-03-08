@@ -8,6 +8,30 @@ using System.Threading.Tasks;
 namespace prototype2
 {
     #region Minor Models
+
+    public class ShipVia : ViewModelEntity
+    {
+        public ShipVia()
+        {
+
+        }
+
+        protected int shipViaID;
+        protected string name;
+
+        public int ShipViaID
+        {
+            get { return shipViaID; }
+            set { SetProperty(ref shipViaID, value); }
+        }
+
+        public string Name
+        {
+            get { return name; }
+            set { SetProperty(ref name, value); }
+        }
+    }
+
     public class EmpPosition : ViewModelEntity
     {
         public EmpPosition()
@@ -883,6 +907,49 @@ namespace prototype2
         }
     }
 
+    public class POAvailedItem : ViewModelEntity
+    {
+        public POAvailedItem()
+        {
+
+        }
+        protected int availedItemID;
+        protected string pONumChar;
+        protected int itemID;
+        protected int itemQty;
+        protected decimal unitPrice;
+
+        public int AvailedItemID
+        {
+            get { return availedItemID; }
+            set { SetProperty(ref availedItemID, value); }
+        }
+
+        public string PONumChar
+        {
+            get { return pONumChar; }
+            set { SetProperty(ref pONumChar, value); }
+        }
+
+        public int ItemID
+        {
+            get { return itemID; }
+            set { SetProperty(ref itemID, value); }
+        }
+
+        public int ItemQty
+        {
+            get { return itemQty; }
+            set { SetProperty(ref itemQty, value); }
+        }
+
+        public decimal UnitPrice
+        {
+            get { return unitPrice; }
+            set { SetProperty(ref unitPrice, value); }
+        }
+    }
+
     public class RequestedItem : ViewModelEntity
     {
         public RequestedItem()
@@ -1370,123 +1437,130 @@ namespace prototype2
 
         }
 
-        public string PONumChar_;
+        protected string PONumChar_;
         public string PONumChar
         {
             get { return PONumChar_; }
             set { SetProperty(ref PONumChar_, value); }
         }
 
-        public int suppID_;
+        protected int suppID_;
         public int suppID
         {
             get { return suppID_; }
             set { SetProperty(ref suppID_, value); }
         }
 
-        public string shipTo_;
+        protected string shipTo_;
         public string shipTo
         {
             get { return shipTo_; }
             set { SetProperty(ref shipTo_, value); }
         }
 
-        public DateTime orderdate_;
+        protected DateTime orderdate_;
         public DateTime orderdate
         {
             get { return orderdate_; }
             set { SetProperty(ref orderdate_, value); }
         }
 
-        public DateTime POdueDate_;
+        protected DateTime POdueDate_;
         public DateTime POdueDate
         {
             get { return POdueDate_; }
             set { SetProperty(ref POdueDate_, value); }
         }
 
-        public bool asapDueDate_;
+        protected bool asapDueDate_;
         public bool asapDueDate
         {
             get { return asapDueDate_; }
             set { SetProperty(ref asapDueDate_, value); }
         }
 
-        public string shipVia_;
+        protected string shipVia_;
         public string shipVia
         {
             get { return shipVia_; }
             set { SetProperty(ref shipVia_, value); }
         }
 
-        public string requisitioner_;
+        protected string requisitioner_;
         public string requisitioner
         {
             get { return requisitioner_; }
             set { SetProperty(ref requisitioner_, value); }
         }
 
-        public string incoterms_;
+        protected string incoterms_;
         public string incoterms
         {
             get { return incoterms_; }
             set { SetProperty(ref incoterms_, value); }
         }
 
-        public string POstatus_;
+        protected string POstatus_;
         public string POstatus
         {
             get { return POstatus_; }
             set { SetProperty(ref POstatus_, value); }
         }
 
-        public string currency_;
+        protected string currency_;
         public string currency
         {
             get { return currency_; }
             set { SetProperty(ref currency_, value); }
         }
 
-        public string importantNotes_;
+        protected string importantNotes_;
         public string importantNotes
         {
             get { return importantNotes_; }
             set { SetProperty(ref importantNotes_, value); }
         }
 
-        public string preparedBy_;
+        protected string preparedBy_;
         public string preparedBy
         {
             get { return preparedBy_; }
             set { SetProperty(ref preparedBy_, value); }
         }
 
-        public string approveBy_;
+        protected string approveBy_;
         public string approveBy
         {
             get { return approveBy_; }
             set { SetProperty(ref approveBy_, value); }
         }
 
-        public string refNo_;
+        protected string refNo_;
         public string refNo
         {
             get { return refNo_; }
             set { SetProperty(ref refNo_, value); }
         }
 
-        public int termsDays_;
+        protected int termsDays_;
         public int termsDays
         {
             get { return termsDays_; }
             set { SetProperty(ref termsDays_, value); }
         }
 
-        public int termsDp_;
+        protected int termsDp_;
         public int termsDp
         {
             get { return termsDp_; }
             set { SetProperty(ref termsDp_, value); }
+        }
+
+        protected ObservableCollection<POAvailedItem> AvailedItems_ = new ObservableCollection<POAvailedItem>();
+        public ObservableCollection<POAvailedItem> AvailedItems
+        {
+            get { return AvailedItems_; }
+            set { SetProperty(ref AvailedItems_, value); }
         }
     }
 
