@@ -168,6 +168,8 @@ namespace prototype2
 
         public bool isNewPurchaseOrder { get; set; }
 
+        public bool isNewSupplier { get; set; }
+
         public bool isPaymentInvoice { get; set; }
 
         public bool isView { get; set; }
@@ -262,8 +264,20 @@ namespace prototype2
             get { return WithHoldingTax_; }
             set { SetProperty(ref WithHoldingTax_, value); }
         }
-        
 
+        public decimal balance_;
+        public decimal Balance
+        {
+            get { return balance_; }
+            set { SetProperty(ref balance_, value); }
+        }
+
+        public decimal downpayment_;
+        public decimal Downpayment
+        {
+            get { return downpayment_; }
+            set { SetProperty(ref downpayment_, value); }
+        }
 
         public String SearchQuery { get; set; }
 
@@ -507,6 +521,23 @@ namespace prototype2
         }
 
         #endregion
+
+        //----- Sales Quote
+        protected ObservableCollection<PurchaseOrder> PurchaseOrder_ = new ObservableCollection<PurchaseOrder>();
+
+        protected PurchaseOrder selectedPurchaseOrder = null;
+
+        public ObservableCollection<PurchaseOrder> PurchaseOrder
+        {
+            get { return PurchaseOrder_; }
+            set { PurchaseOrder_ = value; }
+        }
+
+        public PurchaseOrder SelectedPurchaseOrder
+        {
+            get { return selectedPurchaseOrder; }
+            set { SetProperty(ref selectedPurchaseOrder, value); }
+        }
 
         //----- Sales Quote
         protected ObservableCollection<SalesQuote> salesQuote = new ObservableCollection<SalesQuote>();

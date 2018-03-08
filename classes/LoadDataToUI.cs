@@ -84,6 +84,7 @@ namespace prototype2
 
             if (dbCon.IsConnect())
             {
+                MainVM.Phases.Clear();
                 string query = "SELECT * FROM phase_t";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
@@ -344,6 +345,7 @@ namespace prototype2
 
             if (dbCon.IsConnect())
             {
+                MainVM.AvailedItems.Clear();
                 string query = "SELECT * FROM items_availed_t;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
@@ -360,6 +362,7 @@ namespace prototype2
 
             if (dbCon.IsConnect())
             {
+                MainVM.AvailedServices.Clear();
                 string query = "SELECT * FROM services_availed_t;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
@@ -470,6 +473,65 @@ namespace prototype2
 
             if (dbCon.IsConnect())
             {
+                MainVM.PurchaseOrder.Clear();
+                string query = "SELECT * FROM purchase_order_t;";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    int suppID;
+                    int.TryParse(dr[1].ToString(), out suppID);
+
+                    DateTime orderDate = new DateTime();
+                    DateTime.TryParse(dr[3].ToString(), out orderDate);
+
+                    DateTime poDueDate = new DateTime();
+                    DateTime.TryParse(dr[4].ToString(), out poDueDate);
+
+                    bool asapDueDate = false;
+                    if (dr[5].ToString().Equals("1"))
+                    {
+                        asapDueDate = true;
+                    }
+                    
+
+                    int termsDays;
+                    int.TryParse(dr["termsDays"].ToString(), out termsDays);
+
+                    int termsDP;
+                    int.TryParse(dr["termsDP"].ToString(), out termsDP);
+
+                    MainVM.PurchaseOrder.Add(new PurchaseOrder()
+                    {
+                        PONumChar = dr[0].ToString(),
+                        suppID = suppID,
+                        shipTo = dr[2].ToString(),
+                        orderdate = orderDate,
+                        POdueDate = poDueDate,
+                        asapDueDate = asapDueDate,
+                        shipVia = dr[6].ToString(),
+                        requisitioner = dr[7].ToString(),
+                        incoterms = dr[8].ToString(),
+                        POstatus = dr[9].ToString(),
+                        currency = dr[10].ToString(),
+                        importantNotes = dr[11].ToString(),
+                        preparedBy = dr[12].ToString(),
+                        approveBy = dr[13].ToString(),
+                        refNo = dr[14].ToString(),
+                        termsDays = termsDays,
+                        termsDp = termsDP
+
+                    });
+                }
+                dbCon.Close();
+            }
+
+            if (dbCon.IsConnect())
+            {
+                MainVM.SalesInvoice.Clear();
                 string query = "SELECT * FROM sales_invoice_t;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();

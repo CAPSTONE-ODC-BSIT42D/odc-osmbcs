@@ -25,16 +25,17 @@
             <Grid x:Name="phaseDetailsForm" Margin="0">
                 <Label Content="Phase Details" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
                 <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,33,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
-                <Label Content="* Phase Name:" HorizontalAlignment="Left" Margin="17,40,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="12"/>
-                <TextBox x:Name="phaseNameTb" HorizontalAlignment="Left" Height="22" Margin="145,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="252" FontWeight="Normal" FontStyle="Normal" FontSize="12">
+                <Label Content="* Phase Name:" HorizontalAlignment="Left" Margin="18,50,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="12"/>
+                <TextBox x:Name="phaseNameTb" HorizontalAlignment="Left" Height="22" Margin="146,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="252" FontWeight="Normal" FontStyle="Normal" FontSize="12">
                     <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                         <Binding.ValidationRules>
                             <prototype2:TextBoxValidation TextBoxType="IsEmpty"/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox>
-                <Label Content="Phase Description:" HorizontalAlignment="Left" Margin="17,82,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="12"/>
-                <TextBox x:Name="phaseDescTb" HorizontalAlignment="Left" Height="82" Margin="145,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="252" FontWeight="Normal" FontStyle="Normal" FontSize="12"/>
+                <Label Content="Phase Description:" HorizontalAlignment="Left" Margin="18,92,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="12"/>
+                <TextBox x:Name="phaseDescTb" HorizontalAlignment="Left" Height="82" Margin="146,96,0,-10" TextWrapping="Wrap" VerticalAlignment="Top" Width="252" FontWeight="Normal" FontStyle="Normal" FontSize="12"/>
+                <Label Content="Note: Required fields are marked with *" HorizontalAlignment="Left" Margin="166,28,0,0" VerticalAlignment="Top" FontStyle="Italic"/>
             </Grid>
             <Grid Margin="0">
                 <Label Content="Phases Items" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>

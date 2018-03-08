@@ -4,29 +4,41 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:prototype2.uControlsMaintenance"
-             xmlns:syncfusion="http://schemas.syncfusion.com/wpf" xmlns:prototype2="clr-namespace:prototype2" x:Class="prototype2.uControlsMaintenance.ucInvoicePaymentForm"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf" xmlns:prototype2="clr-namespace:prototype2" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="prototype2.uControlsMaintenance.ucInvoicePaymentForm"
              mc:Ignorable="d" 
-             d:DesignHeight="322" d:DesignWidth="888" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" IsVisibleChanged="UserControl_IsVisibleChanged">
+             d:DesignHeight="344" d:DesignWidth="746" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" IsVisibleChanged="UserControl_IsVisibleChanged">
+    <UserControl.DataContext>
+        <StaticResource ResourceKey="MainVM"/>
+    </UserControl.DataContext>
     <Grid>
-        <Grid x:Name="paymentDetails" Margin="0,0,0,18">
+        <Grid x:Name="paymentDetails">
             <Label x:Name="label12_Copy1" Content="Payment Details" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31"/>
             <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="9,51,28,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
-            <Label Content="Receive from:" HorizontalAlignment="Left" Margin="20,60,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" FontSize="14" HorizontalContentAlignment="Right" Width="127"/>
-            <Label x:Name="companyName" Content="{Binding SelectedCustomerSupplier.CompanyName}" HorizontalAlignment="Left" Margin="152,62,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI"/>
+            <Label Content="Receive from:" HorizontalAlignment="Left" Margin="20,58,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" FontSize="14" HorizontalContentAlignment="Right" Width="127"/>
+            <Label x:Name="companyName" Content="{Binding SelectedCustomerSupplier.CompanyName}" HorizontalAlignment="Left" Margin="152,60,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="27"/>
             <!--<Label x:Name="label12_Copy5" Content="Type:" HorizontalAlignment="Left" Margin="20,96,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" FontSize="14" HorizontalContentAlignment="Right" Width="127"/>
                 <RadioButton x:Name="partialPaymentRb" Content="Partial Payment" HorizontalAlignment="Left" Margin="152,104,0,0" VerticalAlignment="Top" GroupName="paymentType" />
                 <RadioButton x:Name="fullPaymentRb" Content="Full Payment" HorizontalAlignment="Left" Margin="258,104,0,0" VerticalAlignment="Top" GroupName="paymentType" IsChecked="True"/>-->
-            <Label Content="Amount:" HorizontalAlignment="Left" Margin="20,85,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" FontSize="14" HorizontalContentAlignment="Right" Width="127"/>
-            <syncfusion:DoubleTextBox x:Name="amountTb" Height="26" NumberGroupSeparator="," NumberDecimalDigits="2" NumberDecimalSeparator="." TextWrapping="Wrap" Text="DoubleTextBox" Value="0" Margin="152,87,562,0" VerticalAlignment="Top" Width="174" />
-            <Label Content="Payment Method:" HorizontalAlignment="Left" Margin="20,118,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" FontSize="14" HorizontalContentAlignment="Right"/>
-            <ComboBox x:Name="paymentMethodCb" HorizontalAlignment="Left" Margin="152,121,0,0" VerticalAlignment="Top" Width="174" Height="26" SelectedValuePath="Content">
+            <Label Content="Amount:" HorizontalAlignment="Left" Margin="20,92,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" FontSize="14" HorizontalContentAlignment="Right" Width="127"/>
+            <xctk:DecimalUpDown x:Name="amountTb" HorizontalAlignment="Left" Margin="152,97,0,0" VerticalAlignment="Top" Width="174" CultureInfo="fil-PH" FormatString="C2" Text="0"/>
+            <Label Content="Payment Method:" HorizontalAlignment="Left" Margin="20,126,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" FontSize="14" HorizontalContentAlignment="Right"/>
+            <ComboBox x:Name="paymentMethodCb" HorizontalAlignment="Left" Margin="152,129,0,0" VerticalAlignment="Top" Width="174" Height="26" SelectedValuePath="Content" SelectionChanged="paymentMethodCb_SelectionChanged">
                 <ComboBoxItem Content="CASH" IsSelected="True"/>
+                <ComboBoxItem Content="CHECK" IsSelected="True"/>
             </ComboBox>
-            <Label Content="Check #:" HorizontalAlignment="Left" Margin="20,154,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" FontSize="14" Width="127" HorizontalContentAlignment="Right"/>
-            <TextBox x:Name="checkNoTb" HorizontalAlignment="Left" Height="23" Margin="152,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174"/>
-            <Button x:Name="savePrintBtn" Content="Save and Print Receipt" HorizontalAlignment="Right" Margin="0,0,198,0" Width="137" VerticalAlignment="Bottom" Height="30" IsDefault="True" RenderTransformOrigin="0.715,0.5" Background="#FF1AB00B" Foreground="White" BorderBrush="Black" Click="savePrintBtn_Click"/>
-            <Button x:Name="saveBtn" Content="Save Only" HorizontalAlignment="Right" Margin="0,0,113,0" Width="80" VerticalAlignment="Bottom" Height="30" IsDefault="True" Click="saveBtn_Click"/>
-            <Button x:Name="cancelBtn" Content="Cancel" HorizontalAlignment="Right" Margin="0,264,28,0" Width="80" VerticalAlignment="Bottom" Height="30" IsDefault="True" Click="cancelBtn_Click"/>
+            <Grid x:Name="checkTb" Margin="20,160,0,153" HorizontalAlignment="Left" Width="318">
+                <Label Content="Check #:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" FontSize="14" Width="127" HorizontalContentAlignment="Right"/>
+                <TextBox x:Name="checkNoTb" HorizontalAlignment="Left" Height="23" Margin="132,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174"/>
+            </Grid>
+            <Label Content="Total Amount:" HorizontalAlignment="Left" Margin="43,219,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31"/>
+            <TextBlock Text="{Binding Balance, ConverterCulture=fil-PH, StringFormat=\{0:C\}}" HorizontalAlignment="Left" Margin="152,224,0,0" VerticalAlignment="Top" FontSize="14"  FontStyle="Normal" FontFamily="Segoe UI" Height="19"/>
+            <Label Content="Downpayment:" HorizontalAlignment="Left" Margin="38,250,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31" d:IsHidden="True" Visibility="Hidden"/>
+            <Label Content="{Binding Balance}" HorizontalAlignment="Left" Margin="152,250,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31" d:IsHidden="True" Visibility="Hidden"/>
+            <Label Content="Current Balance:" HorizontalAlignment="Left" Margin="29,281,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31" HorizontalContentAlignment="Right" d:IsHidden="True" Visibility="Hidden"/>
+            <Label Content="{Binding Balance}" HorizontalAlignment="Left" Margin="152,273,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31" d:IsHidden="True" Visibility="Hidden"/>
+            <Button x:Name="savePrintBtn" Content="Save and Print Receipt" HorizontalAlignment="Right" Margin="0,0,180,10" Width="137" VerticalAlignment="Bottom" Height="30" IsDefault="True" RenderTransformOrigin="0.715,0.5" Background="#FF1AB00B" Foreground="White" BorderBrush="Black" Click="savePrintBtn_Click"/>
+            <Button x:Name="saveBtn" Content="Save Only" HorizontalAlignment="Right" Margin="0,0,95,10" Width="80" VerticalAlignment="Bottom" Height="30" IsDefault="True" Click="saveBtn_Click"/>
+            <Button x:Name="cancelBtn" Content="Cancel" HorizontalAlignment="Right" Margin="0,0,10,10" Width="80" VerticalAlignment="Bottom" Height="30" IsDefault="True" Click="cancelBtn_Click"/>
         </Grid>
     </Grid>
 </UserControl>

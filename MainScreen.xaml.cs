@@ -178,19 +178,6 @@ namespace prototype2
         private void saveCloseSalesQuoteForm(object sender, EventArgs e)
         {
             MainVM.isNewTrans = true;
-            foreach (var obj in containerGrid.Children)
-            {
-                ((Grid)obj).Visibility = Visibility.Collapsed;
-            }
-            trasanctionGrid.Visibility = Visibility.Visible;
-            foreach (var obj in trasanctionGrid.Children)
-            {
-                if (obj is Grid)
-                    if (((Grid)obj).Equals(transQuotationGrid))
-                        ((Grid)obj).Visibility = Visibility.Visible;
-                    else
-                        ((Grid)obj).Visibility = Visibility.Collapsed;
-            }
             foreach (var obj in transQuotationGrid.Children)
             {
                 if (obj is Grid)
@@ -284,15 +271,9 @@ namespace prototype2
 
         private void saveCloseOther_BtnClicked(object sender, EventArgs e)
         {
-            MainVM.isEdit = false;  
+           
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
-            otherGridBg.Visibility = Visibility.Collapsed;
-            foreach (UIElement obj in otherGridBg.Children)
-            {
-                obj.Visibility = Visibility.Collapsed;
-
-            }
-            if (MainVM.isPaymentInvoice)
+            if (ucSelectSalesQuote.IsVisible)
             {
                 foreach (UIElement obj in billingGrid.Children)
                 {
@@ -304,6 +285,25 @@ namespace prototype2
                         obj.Visibility = Visibility.Collapsed;
                 }
             }
+            else if (ucInvoicePaymentHist.IsVisible)
+            {
+                foreach (UIElement obj in billingGrid.Children)
+                {
+                    if (billingGrid.Children.IndexOf(obj) == 0)
+                    {
+                        obj.Visibility = Visibility.Visible;
+                    }
+                    else
+                        obj.Visibility = Visibility.Collapsed;
+                }
+            }
+            otherGridBg.Visibility = Visibility.Collapsed;
+            foreach (UIElement obj in otherGridBg.Children)
+            {
+                obj.Visibility = Visibility.Collapsed;
+
+            }
+            
         }
 
         private void selectItem_BtnClicked(object sender, EventArgs e)
@@ -673,6 +673,7 @@ namespace prototype2
         private void manageCustomerAddBtn_Click(object sender, RoutedEventArgs e)
         {
             MainVM.isEdit = false;
+            MainVM.isNewSupplier = true;
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
             sb.Begin(formGridBg);
             foreach (var obj in formGridBg.Children)
@@ -1325,7 +1326,7 @@ namespace prototype2
             }
             
             MainVM.isPaymentInvoice = true;
-            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+
             otherGridBg.Visibility = Visibility.Visible;
             Grid.SetZIndex((otherGridBg), 1);
             foreach (UIElement obj in otherGridBg.Children)
@@ -1344,7 +1345,26 @@ namespace prototype2
 
         private void viewInvoiceRecord_Click(object sender, RoutedEventArgs e)
         {
-            MainVM.isEdit = true;
+            MainVM.isView = true;
+            MainVM.isPaymentInvoice = true;
+            foreach (UIElement obj in containerGrid.Children)
+            {
+                if (containerGrid.Children.IndexOf(obj) == 2)
+                {
+                    headerLbl.Content = "Billing";
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+            foreach(UIElement obj in billingGrid.Children)
+            {
+                if(billingGrid.Children.IndexOf(obj) == 1)
+                    obj.Visibility = Visibility.Visible;
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+            
         }
 
         private void receivePaymentBtn_Click(object sender, RoutedEventArgs e)
