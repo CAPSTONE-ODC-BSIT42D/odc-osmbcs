@@ -104,12 +104,6 @@ namespace prototype2
             }
             if (dbCon.IsConnect())
             {
-                if (String.IsNullOrWhiteSpace(selectedDateRequiredTb.Text))
-                {
-                    MessageBox.Show("Purchase order seems empty.");
-                }
-                else
-                {
                     string query = "INSERT purchase_order_t (`PONumChar`,`suppID`,`shipTo`, `POdueDate`,`asapDueDate`,`shipVia`, `requisitioner`, `incoterms`, `POstatus`, `currency`, `importantNotes`, `preparedBy`, `approveBy`, `refNo`, `termsDays`, `termsDP`) VALUES " +
                         "('" + poNumChar + "'," +
                         MainVM.SelectedCustomerSupplier.CompanyID + "," +
@@ -141,7 +135,6 @@ namespace prototype2
                         }
 
                     }
-                }
             }
         }
 

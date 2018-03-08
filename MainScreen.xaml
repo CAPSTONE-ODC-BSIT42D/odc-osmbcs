@@ -854,7 +854,7 @@
                             <Button x:Name="button4" Content="Search" HorizontalAlignment="Left" Margin="402,3,-11,0" VerticalAlignment="Top" Width="85" Height="29" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
                         </Grid>
                         <Label x:Name="label8_Copy2" Content="Sort:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="525,9,0,0"/>
-                        <Button x:Name="newPurchaseOrder" Content="Add" HorizontalAlignment="Right" Height="29" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" Click="newPurchaseOrder_Click" />
+                        <Button x:Name="newPurchaseOrder" Content="Add" HorizontalAlignment="Right" Height="29" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" Click="newPurchaseOrder_Click"  />
                         <DataGrid x:Name="purchaseOrderDg" Margin="0,44,0,-3" ItemsSource="{Binding PurchaseOrder}" SelectedItem="{Binding SelectedPurchaseOrder}" CanUserAddRows="False" AutoGenerateColumns="false" EnableColumnVirtualization="True" IsReadOnly="True">
                             <DataGrid.Columns >
                                 <DataGridTextColumn Binding="{Binding PONumChar}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Purchase Order ID"  />
@@ -1007,8 +1007,8 @@
 
                 </Grid>
             </Grid>
-            <Grid x:Name="billingGrid" Margin="10">
-                <Grid x:Name="invoiceGridHome" >
+            <Grid x:Name="billingGrid" Margin="10" d:IsHidden="True">
+                <Grid x:Name="invoiceGridHome" d:IsHidden="True" >
                     <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                         <Label x:Name="label22" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
                         <TextBox x:Name="searchBox8" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317" Text="{Binding SearchQuery}"/>
@@ -1175,7 +1175,7 @@
             <Grid x:Name="reportsGrid" d:IsHidden="True"/>
             <Grid x:Name="queriesGrid" d:IsHidden="True"/>
 
-            <Grid x:Name="maintenanceGrid">
+            <Grid x:Name="maintenanceGrid" d:IsHidden="True">
                 <Grid x:Name="manageCustomerGrid" Margin="0,0,1,0" >
                     <Grid x:Name="manageCustomerHomeGrid" Margin="0">
                         <Label x:Name="label13" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
@@ -2010,12 +2010,12 @@
 
         </Grid>
         <Grid x:Name="otherGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3" d:IsHidden="True">
-            <uControlsMaintenance:ucSelectCustomer x:Name="ucSelectCustomer" Margin="0" d:IsHidden="True" Visibility="Collapsed"/>
-            <uControlsMaintenance:ucAddItem x:Name="ucAddItem" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" d:IsHidden="True" Visibility="Collapsed"/>
+            <uControlsMaintenance:ucSelectCustomer x:Name="ucSelectCustomer" Margin="0" Visibility="Collapsed" d:IsHidden="True"/>
+            <uControlsMaintenance:ucAddItem x:Name="ucAddItem" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Visibility="Collapsed" d:IsHidden="True"/>
 
             <uControlsTransanction:ucSelectSalesQuote x:Name="ucSelectSalesQuote" Margin="0" HorizontalAlignment="Left" Visibility="Collapsed" d:IsHidden="True"/>
             <uControlsTransanction:ucInvoicePaymentHist x:Name="ucInvoicePaymentHist" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
-            <uControlsMaintenance:ucInvoicePaymentForm x:Name="ucInvoicePaymentForm" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <uControlsMaintenance:ucInvoicePaymentForm x:Name="ucInvoicePaymentForm" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
 
         </Grid>
 
