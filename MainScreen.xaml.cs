@@ -271,15 +271,9 @@ namespace prototype2
 
         private void saveCloseOther_BtnClicked(object sender, EventArgs e)
         {
-            MainVM.isEdit = false;  
+           
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
-            otherGridBg.Visibility = Visibility.Collapsed;
-            foreach (UIElement obj in otherGridBg.Children)
-            {
-                obj.Visibility = Visibility.Collapsed;
-
-            }
-            if (MainVM.isPaymentInvoice)
+            if (ucSelectSalesQuote.IsVisible)
             {
                 foreach (UIElement obj in billingGrid.Children)
                 {
@@ -291,6 +285,25 @@ namespace prototype2
                         obj.Visibility = Visibility.Collapsed;
                 }
             }
+            else if (ucInvoicePaymentHist.IsVisible)
+            {
+                foreach (UIElement obj in billingGrid.Children)
+                {
+                    if (billingGrid.Children.IndexOf(obj) == 0)
+                    {
+                        obj.Visibility = Visibility.Visible;
+                    }
+                    else
+                        obj.Visibility = Visibility.Collapsed;
+                }
+            }
+            otherGridBg.Visibility = Visibility.Collapsed;
+            foreach (UIElement obj in otherGridBg.Children)
+            {
+                obj.Visibility = Visibility.Collapsed;
+
+            }
+            
         }
 
         private void selectItem_BtnClicked(object sender, EventArgs e)
@@ -660,6 +673,7 @@ namespace prototype2
         private void manageCustomerAddBtn_Click(object sender, RoutedEventArgs e)
         {
             MainVM.isEdit = false;
+            MainVM.isNewSupplier = true;
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
             sb.Begin(formGridBg);
             foreach (var obj in formGridBg.Children)
@@ -1312,7 +1326,7 @@ namespace prototype2
             }
             
             MainVM.isPaymentInvoice = true;
-            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+
             otherGridBg.Visibility = Visibility.Visible;
             Grid.SetZIndex((otherGridBg), 1);
             foreach (UIElement obj in otherGridBg.Children)

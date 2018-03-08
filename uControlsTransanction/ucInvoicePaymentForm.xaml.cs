@@ -36,15 +36,6 @@ namespace prototype2.uControlsMaintenance
         }
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
         
-        private bool 
-            
-            
-            
-            
-            
-            
-            g2 = false;
-        
         DateTime dateOfIssue = new DateTime();
         public event EventHandler SaveClosePaymentForm;
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
@@ -71,35 +62,30 @@ namespace prototype2.uControlsMaintenance
             OnSaveCloseButtonClicked(e);
         }
 
+        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (this.IsVisible && MainVM.SelectedSalesInvoice != null)
+            {
+                MainVM.SelectedCustomerSupplier = (from cust in MainVM.Customers
+                                                   where cust.CompanyID == MainVM.SelectedSalesInvoice.custID_
+                                                   select cust).FirstOrDefault();
+                computeInvoice();
+            }
+        }
+
         void saveDataToDb()
         {
             var dbCon = DBConnection.Instance();
             string query;
-            decimal total = (from ph in MainVM.SelectedSalesInvoice.PaymentHist_
-                             select ph.SIpaymentAmount_).Sum();
-            decimal totalamount = 0;
-
-            foreach (AvailedItem ai in (from ai in MainVM.AvailedItems
-                     where ai.SqNoChar.Equals(MainVM.SelectedSalesInvoice.sqNoChar_)
-                     select ai))
-            {
-                var markupPrice = from itm in MainVM.MarkupHist
-                                  where itm.ItemID == ai.ItemID
-                                  && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
-                                  select itm;
-                 totalamount += ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc);
-            }
-
-            totalamount += (from aser in MainVM.AvailedServices
-                            where aser.SqNoChar.Equals(MainVM.SelectedSalesInvoice.sqNoChar_)
-                            select aser.TotalCost).Sum();
-
-            if ((total + (decimal)amountTb.Value) < totalamount)
+            decimal totalRec = (from ph in MainVM.SelectedSalesInvoice.PaymentHist_
+                                select ph.SIpaymentAmount_).Sum();
+            
+            if (totalRec +amountTb.Value < MainVM.TotalSales)
             {
                 query = "UPDATE `sales_invoice_t` SET paymentStatus = '" + "PARTIALLY PAID" + "' WHERE invoiceNo = '" + MainVM.SelectedSalesInvoice.invoiceNo_ + "'";
                 dbCon.insertQuery(query, dbCon.Connection);
             }
-            else if ((total + (decimal)amountTb.Value) >= totalamount)
+            else if (totalRec + amountTb.Value >= MainVM.TotalSales)
             {
                 query = "UPDATE `sales_invoice_t` SET paymentStatus = '" + "FULLY PAID" + "' WHERE invoiceNo = '" + MainVM.SelectedSalesInvoice.invoiceNo_ + "'";
                 dbCon.insertQuery(query, dbCon.Connection);
@@ -122,6 +108,7 @@ namespace prototype2.uControlsMaintenance
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
+                MainVM.SelectedSalesInvoice.PaymentHist_.Clear();
                 string query = "SELECT * FROM si_payment_t where invoiceNo = " + MainVM.SelectedSalesInvoice.invoiceNo_;
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
@@ -138,13 +125,91 @@ namespace prototype2.uControlsMaintenance
             }
         }
 
-        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        void computeInvoice()
         {
-            if(this.IsVisible && MainVM.SelectedSalesInvoice != null)
+            if (MainVM.SelectedSalesInvoice != null)
             {
+                MainVM.VatableSale = 0;
+                MainVM.TotalSalesWithOutDp = 0;
+
                 MainVM.SelectedCustomerSupplier = (from cust in MainVM.Customers
                                                    where cust.CompanyID == MainVM.SelectedSalesInvoice.custID_
                                                    select cust).FirstOrDefault();
+                MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(MainVM.SelectedSalesInvoice.sqNoChar_)).FirstOrDefault();
+                var invoiceprod = from ai in MainVM.AvailedItems
+                                  where ai.SqNoChar.Equals(MainVM.SelectedSalesInvoice.sqNoChar_)
+                                  select ai;
+                var invoiceserv = from aser in MainVM.AvailedServices
+                                  where aser.SqNoChar.Equals(MainVM.SelectedSalesInvoice.sqNoChar_)
+                                  select aser;
+                foreach (AvailedItem ai in invoiceprod)
+                {
+                    var markupPrice = from itm in MainVM.MarkupHist
+                                      where itm.ItemID == ai.ItemID
+                                      && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
+                                      select itm;
+                    decimal totalPric = ai.ItemQty * (ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc));
+                    MainVM.VatableSale += Math.Round(totalPric, 2);
+                }
+
+                foreach (AvailedService aserv in invoiceserv)
+                {
+                    MainVM.SelectedProvince = (from prov in MainVM.Provinces
+                                               where prov.ProvinceID == aserv.ProvinceID
+                                               select prov).FirstOrDefault();
+                    MainVM.SelectedRegion = (from rg in MainVM.Regions
+                                             where rg.RegionID == MainVM.SelectedProvince.RegionID
+                                             select rg).FirstOrDefault();
+
+                    var service = from serv in MainVM.ServicesList
+                                  where serv.ServiceID == aserv.ServiceID
+                                  select serv;
+
+                    decimal totalFee = (from af in aserv.AdditionalFees
+                                        select af.FeePrice).Sum();
+                    decimal totalAmount = aserv.TotalCost + totalFee;
+                    
+                    MainVM.VatableSale += Math.Round(totalAmount, 2);
+                }
+
+                MainVM.TotalSalesNoVat = Math.Round(MainVM.VatableSale, 2);
+
+                MainVM.VatAmount = (MainVM.VatableSale * ((decimal)0.12));
+                MainVM.VatAmount = Math.Round(MainVM.VatAmount, 2);
+
+                MainVM.TotalSales = Math.Round(MainVM.VatableSale + MainVM.VatAmount, 2);
+                MainVM.Balance = MainVM.TotalSales;
+
+
+
+                decimal totalRec = (from ph in MainVM.SelectedSalesInvoice.PaymentHist_
+                                 select ph.SIpaymentAmount_).Sum();
+
+                MainVM.Balance -= (Math.Round(totalRec, 2));
+
+                int dpPerc = (from sq in MainVM.SalesQuotes
+                                             where MainVM.SelectedSalesInvoice.sqNoChar_.Equals(sq.sqNoChar_)
+                                             select sq.termsDP_).FirstOrDefault();
+                if (MainVM.Balance == MainVM.TotalSales)
+                    amountTb.Value = MainVM.TotalSales - (MainVM.TotalSales / 100 * dpPerc);
+
+                else
+                    amountTb.Value = MainVM.Balance;
+            }
+
+        }
+        
+        private void paymentMethodCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (IsLoaded)
+            {
+
+                if (paymentMethodCb.SelectedIndex == 1)
+                {
+                    checkTb.Visibility = Visibility.Visible;
+                }
+                else
+                    checkTb.Visibility = Visibility.Collapsed;
             }
         }
     }

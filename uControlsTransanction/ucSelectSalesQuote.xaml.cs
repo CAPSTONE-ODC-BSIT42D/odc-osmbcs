@@ -67,15 +67,7 @@ namespace prototype2.uControlsTransanction
                     MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID,itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, totalAmount = totalPric, unitPrice = ai.UnitPrice });
                     MainVM.VatableSale += Math.Round(totalPric, 2);
                 }
-
-                foreach (AvailedService aserv in invoiceserv)
-                {
-                    var service = from serv in MainVM.ServicesList
-                                  where serv.ServiceID == aserv.ServiceID
-                                  select serv;
-                    MainVM.RequestedItems.Add(new RequestedItem() { itemID = aserv.ServiceID, itemType = 1, qty = 0, totalAmount = aserv.TotalCost, unitPrice = service.Last().ServicePrice });
-                    MainVM.VatableSale += Math.Round(aserv.TotalCost, 2);
-                }
+                
             }
             OnSaveCloseButtonClicked(e);
         }

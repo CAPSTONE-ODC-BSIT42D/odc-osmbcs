@@ -309,6 +309,7 @@ namespace prototype2.uControlsMaintenance
             }
             else
             {
+                Grid.SetZIndex(disableGrid, 0);
                 MainVM.SelectedRegion = new Region();
             }
             

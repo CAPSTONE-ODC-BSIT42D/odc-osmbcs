@@ -168,6 +168,8 @@ namespace prototype2
 
         public bool isNewPurchaseOrder { get; set; }
 
+        public bool isNewSupplier { get; set; }
+
         public bool isPaymentInvoice { get; set; }
 
         public bool isView { get; set; }
@@ -262,8 +264,20 @@ namespace prototype2
             get { return WithHoldingTax_; }
             set { SetProperty(ref WithHoldingTax_, value); }
         }
-        
 
+        public decimal balance_;
+        public decimal Balance
+        {
+            get { return balance_; }
+            set { SetProperty(ref balance_, value); }
+        }
+
+        public decimal downpayment_;
+        public decimal Downpayment
+        {
+            get { return downpayment_; }
+            set { SetProperty(ref downpayment_, value); }
+        }
 
         public String SearchQuery { get; set; }
 

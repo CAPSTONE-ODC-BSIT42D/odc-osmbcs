@@ -45,17 +45,11 @@ namespace prototype2
 
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
-            
             var handler = SaveCloseButtonClicked;
             if (handler != null)
                 handler(this, e);
         }
 
-        private void resetElements()
-        {
-            MainVM.RequestedItems.Clear();
-            MainVM.AvailedServicesList.Clear();
-        }
 
         protected virtual void OnConvertToInvoice(RoutedEventArgs e)
         {
@@ -77,6 +71,72 @@ namespace prototype2
             if (handler != null)
                 handler(this, e);
         }
+
+
+        private void resetElements()
+        {
+            MainVM.RequestedItems.Clear();
+            MainVM.AvailedServicesList.Clear();
+            MainVM.SelectedSalesQuote = null;
+        }
+
+        private void closeModals()
+        {
+            Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
+            sb.Begin(formGridBg);
+            formGridBg.Visibility = Visibility.Collapsed;
+            foreach (var obj in formGridBg.Children)
+            {
+                if (obj is Grid)
+                {
+                    ((Grid)obj).Visibility = Visibility.Collapsed;
+                }
+
+
+            }
+        }
+
+
+        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (this.IsVisible)
+            {
+                if (MainVM.SelectedSalesQuote != null && MainVM.isEdit || MainVM.isView)
+                {
+                    foreach (UIElement obj in transQuoatationGridForm.Children)
+                    {
+                        if (transQuoatationGridForm.Children.IndexOf(obj) == 0)
+                        {
+                            obj.Visibility = Visibility.Visible;
+                        }
+                        else
+                            obj.Visibility = Visibility.Collapsed;
+                    }
+                    loadSalesQuoteToUi();
+                    computePrice();
+                }
+                else
+                {
+
+                    foreach (UIElement obj in transQuoatationGridForm.Children)
+                    {
+                        obj.IsEnabled = true;
+
+                        if (transQuoatationGridForm.Children.IndexOf(obj) == 0)
+                        {
+                            obj.Visibility = Visibility.Visible;
+                        }
+                        else
+                            obj.Visibility = Visibility.Collapsed;
+                    }
+
+                }
+                closeModals();
+
+            }
+
+        }
+
 
         private void transRequestBack_Click(object sender, RoutedEventArgs e)
         {
@@ -144,23 +204,18 @@ namespace prototype2
                     else
                         obj.Visibility = Visibility.Collapsed;
                 }
-                if (MainVM.RequestedItems.Count != 0)
-                {
                     transRequestNext.Content = "Save";
                     salesQuoteToMemory();
                     SalesQuoteDocument df = new SalesQuoteDocument();
                     document = df.CreateDocument("SalesQuote", "asdsadsa");
                     string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
                     saleQuoteViewer.pagePreview.Ddl = ddl;
-                }
-                else
-                    MessageBox.Show("No items on the list.");
             }
             else if (saleQuoteViewer.IsVisible)
             {
                 transRequestNext.Content = "Next";
                 saveSalesQuoteToDb();
-                
+
                 //PdfDocumentRenderer renderer = new PdfDocumentRenderer(true);
                 //renderer.Document = document;
                 //renderer.RenderDocument();
@@ -176,6 +231,7 @@ namespace prototype2
                 //    filename = dlg.FileName;
                 //    renderer.PdfDocument.Save(filename);
                 //}
+                resetElements();
                 OnSaveCloseButtonClicked(e);
             }
         }
@@ -330,22 +386,7 @@ namespace prototype2
             }
         }
 
-        private void closeModals()
-        {
-            Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
-            sb.Begin(formGridBg);
-            formGridBg.Visibility = Visibility.Collapsed;
-            foreach (var obj in formGridBg.Children)
-            {
-                if (obj is Grid)
-                {
-                    ((Grid)obj).Visibility = Visibility.Collapsed;
-                }
-
-
-            }
-        }
-
+        
         private void cancelAddProductBtn_Click(object sender, RoutedEventArgs e)
         {
             Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
@@ -485,6 +526,54 @@ namespace prototype2
             }
         }
 
+        private void generatePDFBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (UIElement obj in transQuoatationGridForm.Children)
+            {
+                if (transQuoatationGridForm.Children.IndexOf(obj) == 2)
+                {
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+            if (MainVM.RequestedItems.Count != 0)
+            {
+                transRequestNext.Content = "Save";
+                salesQuoteToMemory();
+                SalesQuoteDocument df = new SalesQuoteDocument();
+                document = df.CreateDocument("SalesQuote", "asdsadsa");
+                string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
+                saleQuoteViewer.pagePreview.Ddl = ddl;
+            }
+            else
+                MessageBox.Show("No items on the list.");
+        }
+
+        private void closeModalBtn_Click(object sender, RoutedEventArgs e)
+        {
+            closeModals();
+        }
+
+        private void convertToInvoiceBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OnConvertToInvoice(e);
+        }
+
+
+
+        private void editSalesQuoteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (UIElement obj in transQuoatationGridForm.Children)
+            {
+                if (transQuoatationGridForm.Children.IndexOf(obj) <= 1)
+                    obj.IsEnabled = true;
+            }
+            viewSalesQuoteBtns.Visibility = Visibility.Collapsed;
+            newSalesQuoteBtns.Visibility = Visibility.Visible;
+
+        }
+
         private void computePrice()
         {
             decimal totalFee = 0;
@@ -530,8 +619,6 @@ namespace prototype2
                 totalPriceLbl.Content = "" + totalPrice;
             }
         }
-
-
 
         void salesQuoteToMemory()
         {
@@ -760,11 +847,11 @@ namespace prototype2
                         "`termsDays` = '" + MainVM.SelectedSalesQuote.termsDays_ + "'," +
                         "`termsDP` = '" + MainVM.SelectedSalesQuote.termsDP_ + "'," +
                         "`discountPercent` = '" + MainVM.SelectedSalesQuote.discountPercent_ + "'," +
-                        "`surveyReportDoc` = '" + DocData + "'," +
+                        "`surveyReportDoc` = '" + DocData + "'" +
                         " WHERE `sqNoCHar` = '" + MainVM.SelectedSalesQuote.sqNoChar_ +"'";
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
-                        query = "DELETE FROM `ITEMS_AVAILED_T` WHERE sqNoChar = " + MainVM.SelectedSalesQuote.sqNoChar_;
+                        query = "DELETE FROM `ITEMS_AVAILED_T` WHERE sqNoChar = '" + MainVM.SelectedSalesQuote.sqNoChar_+"'";
                         dbCon.insertQuery(query, dbCon.Connection);
                         
                         foreach (RequestedItem item in MainVM.RequestedItems)
@@ -784,7 +871,10 @@ namespace prototype2
                         {
                             query = "DELETE FROM `FEES_PER_TRANSACTION_T` WHERE servicesAvailedID = " + aserv.AvailedServiceID;
                             dbCon.insertQuery(query, dbCon.Connection);
-                            
+
+                            query = "DELETE FROM `services_availed_t` WHERE id = " + aserv.AvailedServiceID;
+                            dbCon.insertQuery(query, dbCon.Connection);
+
                             query = "INSERT INTO `odc_db`.`services_availed_t`(`serviceID`,`provinceID`,`sqNoChar`,`city`,`address`,`totalCost`)" +
                                 " VALUES " +
                                 "('" + aserv.ServiceID + "', '" +
@@ -793,7 +883,6 @@ namespace prototype2
                                 aserv.City + "', '" +
                                 aserv.Address + "', '" +
                                 aserv.TotalCost + "');";
-                            noError = dbCon.insertQuery(query, dbCon.Connection);
                             if (dbCon.insertQuery(query, dbCon.Connection))
                             {
                                 query = "SELECT LAST_INSERT_ID();";
@@ -822,135 +911,48 @@ namespace prototype2
 
         void loadSalesQuoteToUi()
         {
-            if (MainVM.SelectedSalesQuote != null)
+            MainVM.SelectedCustomerSupplier = (from cust in MainVM.Customers
+                                               where cust.CompanyID == MainVM.SelectedSalesQuote.custID_
+                                               select cust).FirstOrDefault();
+            MainVM.RequestedItems.Clear();
+            MainVM.AvailedServicesList.Clear();
+
+            var invoiceprod = from ai in MainVM.AvailedItems
+                              where ai.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
+                              select ai;
+            MainVM.AvailedServicesList = new ObservableCollection<AvailedService>(from aser in MainVM.AvailedServices
+                                                                                  where aser.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
+                                                                                  select aser);
+            foreach (AvailedItem ai in invoiceprod)
             {
-                MainVM.SelectedCustomerSupplier = (from cust in MainVM.Customers
-                                                   where cust.CompanyID == MainVM.SelectedSalesQuote.custID_
-                                                   select cust).FirstOrDefault();
-                MainVM.RequestedItems.Clear();
-                MainVM.AvailedServicesList.Clear();
-
-                var invoiceprod = from ai in MainVM.AvailedItems
-                                  where ai.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
-                                  select ai;
-                MainVM.AvailedServicesList = new ObservableCollection<AvailedService>(from aser in MainVM.AvailedServices
-                                  where aser.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
-                                  select aser);
-                foreach (AvailedItem ai in invoiceprod)
-                {
-                    var markupPrice = from itm in MainVM.MarkupHist
-                                      where itm.ItemID == ai.ItemID
-                                      && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
-                                      select itm;
-                    decimal totalPric = ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc);
-                    MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, unitPrice = ai.UnitPrice, totalAmount = totalPric, qtyEditable = true });
-                }
-
-                foreach (AvailedService aserv in MainVM.AvailedServicesList)
-                {
-                    var service = from serv in MainVM.ServicesList
-                                  where serv.ServiceID == aserv.ServiceID
-                                  select serv;
-                    MainVM.RequestedItems.Add(new RequestedItem() { availedServiceID = aserv.AvailedServiceID, itemID = aserv.ServiceID, itemType = 1, qty = 0, totalAmount = aserv.TotalCost, unitPrice = service.Last().ServicePrice, additionalFees = aserv.AdditionalFees });
-                }
-
-                if (MainVM.isView)
-                {
-                    foreach (UIElement obj in transQuoatationGridForm.Children)
-                    {
-                        if (transQuoatationGridForm.Children.IndexOf(obj) <= 1)
-                            obj.IsEnabled = false;
-                    }
-                }
-                computePrice();
+                var markupPrice = from itm in MainVM.MarkupHist
+                                  where itm.ItemID == ai.ItemID
+                                  && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
+                                  select itm;
+                decimal totalPric = ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc);
+                MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, unitPrice = ai.UnitPrice, totalAmount = totalPric, qtyEditable = true });
             }
-            
-        }
-        private void generatePDFBtn_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (UIElement obj in transQuoatationGridForm.Children)
+
+            foreach (AvailedService aserv in MainVM.AvailedServicesList)
             {
-                if (transQuoatationGridForm.Children.IndexOf(obj) == 2)
-                {
-                    obj.Visibility = Visibility.Visible;
-                }
-                else
-                    obj.Visibility = Visibility.Collapsed;
+                var service = from serv in MainVM.ServicesList
+                              where serv.ServiceID == aserv.ServiceID
+                              select serv;
+                MainVM.RequestedItems.Add(new RequestedItem() { availedServiceID = aserv.AvailedServiceID, itemID = aserv.ServiceID, itemType = 1, qty = 0, totalAmount = aserv.TotalCost, unitPrice = service.Last().ServicePrice, additionalFees = aserv.AdditionalFees });
             }
-            if (MainVM.RequestedItems.Count != 0)
+
+            if (MainVM.isView)
             {
-                transRequestNext.Content = "Save";
-                salesQuoteToMemory();
-                SalesQuoteDocument df = new SalesQuoteDocument();
-                document = df.CreateDocument("SalesQuote", "asdsadsa");
-                string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
-                saleQuoteViewer.pagePreview.Ddl = ddl;
-            }
-            else
-                MessageBox.Show("No items on the list.");
-        }
-
-        private void closeModalBtn_Click(object sender, RoutedEventArgs e)
-        {
-            closeModals();
-        }
-
-        private void convertToInvoiceBtn_Click(object sender, RoutedEventArgs e)
-        {
-            OnConvertToInvoice(e);
-        }
-
-        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (this.IsVisible)
-            {
-                resetElements();
-                if (MainVM.SelectedSalesQuote != null && MainVM.isEdit)
+                foreach (UIElement obj in transQuoatationGridForm.Children)
                 {
-                    foreach (UIElement obj in transQuoatationGridForm.Children)
-                    {
-                        if (transQuoatationGridForm.Children.IndexOf(obj) == 0)
-                        {
-                            obj.Visibility = Visibility.Visible;
-                        }
-                        else
-                            obj.Visibility = Visibility.Collapsed;
-                    }
-                    loadSalesQuoteToUi();
+                    if (transQuoatationGridForm.Children.IndexOf(obj) <= 1)
+                        obj.IsEnabled = false;
                 }
-                else
-                {
-                    
-                    foreach (UIElement obj in transQuoatationGridForm.Children)
-                    {
-                        obj.IsEnabled = true;
-                            
-                        if (transQuoatationGridForm.Children.IndexOf(obj) == 0)
-                        {
-                            obj.Visibility = Visibility.Visible;
-                        }
-                        else
-                            obj.Visibility = Visibility.Collapsed;
-                    }
-
-                }
-                closeModals();
-
             }
-            
+
+
         }
 
-        private void editSalesQuoteBtn_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (UIElement obj in transQuoatationGridForm.Children)
-            {
-                if (transQuoatationGridForm.Children.IndexOf(obj) <= 1)
-                    obj.IsEnabled = true;
-            }
-            viewSalesQuoteBtns.Visibility = Visibility.Collapsed;
-            newSalesQuoteBtns.Visibility = Visibility.Visible;
-
-        }
     }
     
 }
