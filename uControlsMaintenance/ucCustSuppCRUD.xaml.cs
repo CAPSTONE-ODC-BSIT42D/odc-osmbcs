@@ -380,10 +380,14 @@ namespace prototype2
 
         private void UserControl_IsVisibleChanged_1(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (MainVM.isEdit && this.IsVisible)
+            if (MainVM.isEdit && this.IsVisible && MainVM.SelectedCustomerSupplier != null)
             {
                 loadDataToUi();
             }
+            if (MainVM.isNewSupplier)
+                label5.Content = "Supplier Details";
+            else
+                label5.Content = "Custoemr Details";
         }
     }
 }

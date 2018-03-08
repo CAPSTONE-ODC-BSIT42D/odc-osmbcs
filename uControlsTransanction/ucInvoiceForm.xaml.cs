@@ -123,9 +123,6 @@ namespace prototype2
             }
         }
 
-        
-
-
         void computeInvoice()
         {
             if(MainVM.SelectedSalesQuote != null)
@@ -149,23 +146,35 @@ namespace prototype2
                                       where itm.ItemID == ai.ItemID
                                       && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
                                       select itm;
-                    decimal totalPric = ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc);
+                    decimal totalPric = ai.ItemQty * ( ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc));
                     MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, unitPrice = ai.UnitPrice, totalAmount = totalPric });
                     MainVM.VatableSale += Math.Round(totalPric, 2);
                 }
 
                 foreach (AvailedService aserv in invoiceserv)
                 {
+                    MainVM.SelectedProvince = (from prov in MainVM.Provinces
+                                               where prov.ProvinceID == aserv.ProvinceID
+                                               select prov).FirstOrDefault();
+                    MainVM.SelectedRegion = (from rg in MainVM.Regions
+                                             where rg.RegionID == MainVM.SelectedProvince.RegionID
+                                             select rg).FirstOrDefault();
+
                     var service = from serv in MainVM.ServicesList
                                   where serv.ServiceID == aserv.ServiceID
                                   select serv;
-                    MainVM.RequestedItems.Add(new RequestedItem() { itemID = aserv.ServiceID, itemType = 1, qty = 0, totalAmount = aserv.TotalCost, unitPrice = service.Last().ServicePrice });
-                    MainVM.VatableSale += Math.Round(aserv.TotalCost, 2);
+
+                    decimal totalFee = (from af in aserv.AdditionalFees
+                                        select af.FeePrice).Sum();
+                    decimal totalAmount = aserv.TotalCost + totalFee;
+
+                    MainVM.RequestedItems.Add(new RequestedItem() { itemID = aserv.ServiceID, itemType = 1, qty = 0, totalAmount = totalAmount, unitPrice = service.Last().ServicePrice });
+                    MainVM.VatableSale += Math.Round(totalAmount, 2);
                 }
 
                 MainVM.TotalSalesNoVat = Math.Round(MainVM.VatableSale, 2);
 
-                MainVM.VatAmount = (MainVM.VatableSale * ((decimal)0.12));
+                MainVM.VatAmount = (MainVM.TotalSalesNoVat * ((decimal)0.12));
                 MainVM.VatAmount = Math.Round(MainVM.VatAmount, 2);
 
                 MainVM.TotalSales = MainVM.VatableSale + MainVM.VatAmount;
@@ -211,9 +220,6 @@ namespace prototype2
             stringChars += "-";
             stringChars += DateTime.Now.ToString("yyyy-MM-dd");
 
-
-
-
             DateTime dueDate = new DateTime();
             dueDate = dateOfIssue.AddDays(int.Parse(dueDateTb.Value.ToString()));
 
@@ -257,6 +263,13 @@ namespace prototype2
         {
             if (this.IsVisible && MainVM.isPaymentInvoice)
             {
+                foreach(UIElement obj in newInvoiceFormGrid1.Children)
+                {
+                    if (obj.Equals(newInvoiceForm))
+                        obj.Visibility = Visibility.Visible;
+                    else
+                        obj.Visibility = Visibility.Collapsed;
+                }
                 computeInvoice();
             }
         }

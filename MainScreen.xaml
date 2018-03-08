@@ -2047,12 +2047,12 @@
             <uControlsMaintenance:ucLocation x:Name="ucLocation" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="458" d:IsHidden="True"/>
 
         </Grid>
-        <Grid x:Name="otherGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3" d:IsHidden="True">
+        <Grid x:Name="otherGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3">
             <uControlsMaintenance:ucSelectCustomer x:Name="ucSelectCustomer" Margin="0" d:IsHidden="True" Visibility="Collapsed"/>
             <uControlsMaintenance:ucAddItem x:Name="ucAddItem" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" d:IsHidden="True" Visibility="Collapsed"/>
 
             <uControlsTransanction:ucSelectSalesQuote x:Name="ucSelectSalesQuote" Margin="0" HorizontalAlignment="Left" Visibility="Collapsed" d:IsHidden="True"/>
-            <uControlsTransanction:ucInvoicePaymentHist x:Name="ucInvoicePaymentHist" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
+            <uControlsTransanction:ucInvoicePaymentHist x:Name="ucInvoicePaymentHist" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <uControlsMaintenance:ucInvoicePaymentForm x:Name="ucInvoicePaymentForm" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         </Grid>
