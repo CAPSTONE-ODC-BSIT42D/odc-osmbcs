@@ -26,7 +26,7 @@ namespace prototype2
         public ucPurchaseOrderViewer()
         {
             InitializeComponent();
-         DisplayReport();
+       //  DisplayReport();
         }
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
         private void DisplayReport()
