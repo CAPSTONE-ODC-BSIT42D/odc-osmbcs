@@ -48,44 +48,6 @@ namespace prototype2
             MainVM.isView = false;
         }
 
-        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (this.IsVisible)
-            {
-                MainVM.RequestedItems.Clear();
-                
-                foreach (UIElement obj in newInvoiceFormGrid1.Children)
-                {
-                    if (obj.Equals(newInvoiceForm))
-                        obj.Visibility = Visibility.Visible;
-                    else
-                        obj.Visibility = Visibility.Collapsed;
-                }
-
-                if (MainVM.isView)
-                {
-                    MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(MainVM.SelectedSalesInvoice.sqNoChar_)).FirstOrDefault();
-                    foreach (UIElement obj in newInvoiceFormGrid.Children)
-                    {
-                        if (obj is TextBox || obj is Xceed.Wpf.Toolkit.IntegerUpDown)
-                            obj.IsEnabled = false;
-                    }
-                    loadDataToUI();
-
-                }
-                else if (MainVM.isPaymentInvoice)
-                {
-                    foreach (UIElement obj in newInvoiceFormGrid.Children)
-                    {
-                        if (obj is TextBox || obj is Xceed.Wpf.Toolkit.IntegerUpDown)
-                            obj.IsEnabled = true;
-                    }
-                }
-                if (MainVM.SelectedSalesQuote != null)
-                    computeInvoice();
-            }
-        }
-
         Document document;
         private void invoiceNext_Click(object sender, RoutedEventArgs e)
         {
@@ -163,123 +125,65 @@ namespace prototype2
 
         void computeInvoice()
         {
-
-            //MainVM.VatableSale = 0;
-            //MainVM.TotalSalesWithOutDp = 0;
-            //MainVM.TotalSales = 0;
-
-            //MainVM.SelectedCustomerSupplier = (from cust in MainVM.Customers
-            //                                   where cust.CompanyID == MainVM.SelectedSalesQuote.custID_
-            //                                   select cust).FirstOrDefault();
-
-
-
-            //var invoiceprod = from ai in MainVM.AvailedItems
-            //                  where ai.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
-            //                  select ai;
-            //var invoiceserv = from aser in MainVM.AvailedServices
-            //                  where aser.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
-            //                  select aser;
-
-            //foreach (AvailedItem ai in invoiceprod)
-            //{
-            //    var markupPrice = from itm in MainVM.MarkupHist
-            //                      where itm.ItemID == ai.ItemID
-            //                      && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
-            //                      select itm;
-            //    decimal totalPric = ai.ItemQty * (ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc));
-            //    MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, unitPrice = ai.UnitPrice, totalAmount = totalPric });
-            //    MainVM.VatableSale += totalPric;
-            //}
-
-            //foreach (AvailedService aserv in invoiceserv)
-            //{
-            //    MainVM.SelectedProvince = (from prov in MainVM.Provinces
-            //                               where prov.ProvinceID == aserv.ProvinceID
-            //                               select prov).FirstOrDefault();
-            //    MainVM.SelectedRegion = (from rg in MainVM.Regions
-            //                             where rg.RegionID == MainVM.SelectedProvince.RegionID
-            //                             select rg).FirstOrDefault();
-
-            //    var service = from serv in MainVM.ServicesList
-            //                  where serv.ServiceID == aserv.ServiceID
-            //                  select serv;
-
-            //    decimal totalFee = (from af in aserv.AdditionalFees
-            //                        select af.FeePrice).Sum();
-            //    decimal totalAmount = aserv.TotalCost + totalFee;
-
-            //    MainVM.RequestedItems.Add(new RequestedItem() { itemID = aserv.ServiceID, itemType = 1, qty = 0, totalAmount = totalAmount, unitPrice = aserv.TotalCost });
-            //    MainVM.VatableSale += totalAmount;
-            //}
-
-            ////MainVM.TotalSalesNoVat = Math.Round(MainVM.VatableSale, 2);
-
-            //MainVM.VatAmount = (MainVM.VatableSale * ((decimal)0.12));
-            //decimal totalt = (MainVM.VatableSale + MainVM.VatAmount);
-            //MainVM.TotalSales = totalt;
-
-            //dateOfIssue = DateTime.Now;
-            //dateToday.Content = dateOfIssue.ToShortDateString();
-
-            MainVM.VatableSale = 0;
-            MainVM.TotalSalesWithOutDp = 0;
-
-            MainVM.SelectedCustomerSupplier = (from cust in MainVM.Customers
-                                               where cust.CompanyID == MainVM.SelectedSalesQuote.custID_
-                                               select cust).FirstOrDefault();
-
-
-
-            var invoiceprod = from ai in MainVM.AvailedItems
-                              where ai.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
-                              select ai;
-            var invoiceserv = from aser in MainVM.AvailedServices
-                              where aser.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
-                              select aser;
-
-            foreach (AvailedItem ai in invoiceprod)
+            if(MainVM.SelectedSalesQuote != null)
             {
-                var markupPrice = from itm in MainVM.MarkupHist
-                                  where itm.ItemID == ai.ItemID
-                                  && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
-                                  select itm;
-                decimal totalPric = ai.ItemQty * (ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc));
-                MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, unitPrice = ai.UnitPrice, totalAmount = totalPric });
-                MainVM.VatableSale += Math.Round(totalPric, 2);
+                MainVM.VatableSale = 0;
+                MainVM.TotalSalesWithOutDp = 0;
+
+                MainVM.SelectedCustomerSupplier = (from cust in MainVM.Customers
+                                                   where cust.CompanyID == MainVM.SelectedSalesQuote.custID_
+                                                   select cust).FirstOrDefault();
+
+                var invoiceprod = from ai in MainVM.AvailedItems
+                                  where ai.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
+                                  select ai;
+                var invoiceserv = from aser in MainVM.AvailedServices
+                                  where aser.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
+                                  select aser;
+                foreach (AvailedItem ai in invoiceprod)
+                {
+                    var markupPrice = from itm in MainVM.MarkupHist
+                                      where itm.ItemID == ai.ItemID
+                                      && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
+                                      select itm;
+                    decimal totalPric = ai.ItemQty * ( ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc));
+                    MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, unitPrice = ai.UnitPrice, totalAmount = totalPric });
+                    MainVM.VatableSale += Math.Round(totalPric, 2);
+                }
+
+                foreach (AvailedService aserv in invoiceserv)
+                {
+                    MainVM.SelectedProvince = (from prov in MainVM.Provinces
+                                               where prov.ProvinceID == aserv.ProvinceID
+                                               select prov).FirstOrDefault();
+                    MainVM.SelectedRegion = (from rg in MainVM.Regions
+                                             where rg.RegionID == MainVM.SelectedProvince.RegionID
+                                             select rg).FirstOrDefault();
+
+                    var service = from serv in MainVM.ServicesList
+                                  where serv.ServiceID == aserv.ServiceID
+                                  select serv;
+
+                    decimal totalFee = (from af in aserv.AdditionalFees
+                                        select af.FeePrice).Sum();
+                    decimal totalAmount = aserv.TotalCost + totalFee;
+
+                    MainVM.RequestedItems.Add(new RequestedItem() { itemID = aserv.ServiceID, itemType = 1, qty = 0, totalAmount = totalAmount, unitPrice = service.Last().ServicePrice });
+                    MainVM.VatableSale += Math.Round(totalAmount, 2);
+                }
+
+                MainVM.TotalSalesNoVat = Math.Round(MainVM.VatableSale, 2);
+
+                MainVM.VatAmount = (MainVM.TotalSalesNoVat * ((decimal)0.12));
+                MainVM.VatAmount = Math.Round(MainVM.VatAmount, 2);
+
+                MainVM.TotalSales = MainVM.VatableSale + MainVM.VatAmount;
+                MainVM.TotalSales = Math.Round(MainVM.TotalSales, 2);
+
+                dateOfIssue = DateTime.Now;
+                dateToday.Content = dateOfIssue.ToShortDateString();
             }
-
-            foreach (AvailedService aserv in invoiceserv)
-            {
-                MainVM.SelectedProvince = (from prov in MainVM.Provinces
-                                           where prov.ProvinceID == aserv.ProvinceID
-                                           select prov).FirstOrDefault();
-                MainVM.SelectedRegion = (from rg in MainVM.Regions
-                                         where rg.RegionID == MainVM.SelectedProvince.RegionID
-                                         select rg).FirstOrDefault();
-
-                var service = from serv in MainVM.ServicesList
-                              where serv.ServiceID == aserv.ServiceID
-                              select serv;
-
-                decimal totalFee = (from af in aserv.AdditionalFees
-                                    select af.FeePrice).Sum();
-                decimal totalAmount = aserv.TotalCost + totalFee;
-
-                MainVM.RequestedItems.Add(new RequestedItem() { itemID = aserv.ServiceID, itemType = 1, qty = 0, totalAmount = totalAmount, unitPrice = aserv.TotalCost });
-                MainVM.VatableSale += Math.Round(totalAmount, 2);
-            }
-
-            MainVM.TotalSalesNoVat = Math.Round(MainVM.VatableSale, 2);
-
-            MainVM.VatAmount = (MainVM.TotalSalesNoVat * ((decimal)0.12));
-            MainVM.VatAmount = Math.Round(MainVM.VatAmount, 2);
-
-            MainVM.TotalSales = MainVM.VatableSale + MainVM.VatAmount;
-            MainVM.TotalSales = Math.Round(MainVM.TotalSales, 2);
-
-            dateOfIssue = DateTime.Now;
-            dateToday.Content = dateOfIssue.ToShortDateString();
+            
         }
 
         void salesInvoiceToMemory()
@@ -348,36 +252,26 @@ namespace prototype2
                     "'); ";
                 if (dbCon.insertQuery(query, dbCon.Connection))
                 {
-                    query = "SELECT LAST_INSERT_ID();";
-                    string id = dbCon.selectScalar(query, dbCon.Connection).ToString();
-                    decimal amount1 = MainVM.TotalSales - (MainVM.TotalSales / 100 * MainVM.SelectedSalesQuote.termsDP_);
-                    decimal amount2 = MainVM.TotalSales - amount1;
-                    query = "INSERT INTO `odc_db`.`si_payment_t` " +
-                        "(`SIpaymentAmount`,`invoiceNo`) " +
-                        "VALUES ('" + amount1 + "','" + id + "')";
-                    dbCon.insertQuery(query, dbCon.Connection);
-                    query = "INSERT INTO `odc_db`.`si_payment_t` " +
-                        "(`SIpaymentAmount`,`invoiceNo`) " +
-                        "VALUES ('" + amount2 + "','" + id + "')";
-                    dbCon.insertQuery(query, dbCon.Connection);
-
                     query = "UPDATE `sales_quote_t` SET status = '" + "ACCEPTED" + "' WHERE sqNoChar = '" + MainVM.SelectedSalesInvoice.sqNoChar_ + "'";
                     dbCon.insertQuery(query, dbCon.Connection);
-
                     MessageBox.Show("Invoice is Saved");
                 }
             }
         }
 
-        
-
-        private void loadDataToUI()
+        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            tinNumTb.Text = MainVM.SelectedSalesInvoice.tin_;
-            busStyleTb.Text = MainVM.SelectedSalesInvoice.busStyle_;
-            purchaseOrdNumTb.Text = MainVM.SelectedSalesInvoice.purchaseOrderNumber_;
-            dateToday.Content = MainVM.SelectedSalesInvoice.dateOfIssue_.ToShortDateString();
-            dueDateTb.Value = MainVM.SelectedSalesInvoice.terms_;
+            if (this.IsVisible && MainVM.isPaymentInvoice)
+            {
+                foreach(UIElement obj in newInvoiceFormGrid1.Children)
+                {
+                    if (obj.Equals(newInvoiceForm))
+                        obj.Visibility = Visibility.Visible;
+                    else
+                        obj.Visibility = Visibility.Collapsed;
+                }
+                computeInvoice();
+            }
         }
     }
 
