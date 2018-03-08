@@ -1442,6 +1442,7 @@ namespace prototype2
         #endregion
 
         #region Order Management - Purchase Order
+        
         private void newPurchaseOrder_Click(object sender, RoutedEventArgs e)
         {
             MainVM.isNewPurchaseOrder = true;
