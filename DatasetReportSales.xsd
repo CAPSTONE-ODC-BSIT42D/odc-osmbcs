@@ -17,8 +17,8 @@ FROM            item_t i INNER JOIN
                          markup_hist_t mh ON i.ID = mh.itemID INNER JOIN
                          cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN
                          sales_invoice_t si ON cs.companyID = si.custID INNER JOIN
-                         service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN
-                         services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = si.sqNoChar INNER JOIN
+                         services_availed_t sa ON sa.sqNoChar = sq.sqNoChar INNER JOIN
                          services_t s ON sa.serviceID = s.serviceID INNER JOIN
                          items_availed_t ia ON i.ID = ia.itemID INNER JOIN
                          fees_per_transaction_t f ON f.servicesAvailedID = sa.id
@@ -50,8 +50,8 @@ FROM            item_t i INNER JOIN
                          markup_hist_t mh ON i.ID = mh.itemID INNER JOIN
                          cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN
                          sales_invoice_t si ON cs.companyID = si.custID INNER JOIN
-                         service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN
-                         services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = si.sqNoChar INNER JOIN
+                         services_availed_t sa ON sa.sqNoChar = sq.sqNoChar INNER JOIN
                          services_t s ON sa.serviceID = s.serviceID INNER JOIN
                          items_availed_t ia ON i.ID = ia.itemID INNER JOIN
                          fees_per_transaction_t f ON f.servicesAvailedID = sa.id
@@ -64,16 +64,8 @@ GROUP BY ia.unitPrice, i.itemName, s.serviceName, mh.markupPerc, s.servicePrice,
               <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBySalesMonth" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByMonth" GeneratorSourceName="FillBySalesMonth" GetMethodModifier="Public" GetMethodName="GetDataByMonth" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByMonth" UserSourceName="FillBySalesMonth">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        sa.totalCost, f.feeValue, ia.unitPrice, i.itemName, s.serviceName, mh.markupPerc, s.servicePrice, si.dateOfIssue, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4
-FROM            item_t i INNER JOIN
-                         markup_hist_t mh ON i.ID = mh.itemID INNER JOIN
-                         cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN
-                         sales_invoice_t si ON cs.companyID = si.custID INNER JOIN
-                         service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN
-                         services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
-                         services_t s ON sa.serviceID = s.serviceID INNER JOIN
-                         items_availed_t ia ON i.ID = ia.itemID INNER JOIN
-                         fees_per_transaction_t f ON f.servicesAvailedID = sa.id
+                    <CommandText>SELECT        sa.totalCost, f.feeValue, ia.unitPrice, i.itemName, s.serviceName, mh.markupPerc, s.servicePrice, si.dateOfIssue, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4 FROM            item_t i INNER JOIN  markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID  inner join sales_quote_t sq on sq.sqnochar = si.sqnochar inner join services_Availed_t sa on sa.sqnochar =sq.sqnochar INNER JOIN  services_t s ON sa.serviceID = s.serviceID inner join items_availed_t ia on i.id = ia.itemid inner join fees_per_transaction_t f on f.servicesavailedid = sa.id
+
 WHERE        (MONTHNAME(si.dateOfIssue) = @A) AND (i.isDeleted = 0) AND (s.isDeleted = 0)
 GROUP BY i.itemName, s.serviceName, mh.markupPerc, s.servicePrice, si.dateOfIssue</CommandText>
                     <Parameters>
@@ -90,8 +82,8 @@ FROM            item_t i INNER JOIN
                          markup_hist_t mh ON i.ID = mh.itemID INNER JOIN
                          cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN
                          sales_invoice_t si ON cs.companyID = si.custID INNER JOIN
-                         service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN
-                         services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = si.sqNoChar INNER JOIN
+                         services_availed_t sa ON sa.sqNoChar = sq.sqNoChar INNER JOIN
                          services_t s ON sa.serviceID = s.serviceID INNER JOIN
                          items_availed_t ia ON i.ID = ia.itemID INNER JOIN
                          fees_per_transaction_t f ON f.servicesAvailedID = sa.id
@@ -112,8 +104,8 @@ FROM            item_t i INNER JOIN
                          markup_hist_t mh ON i.ID = mh.itemID INNER JOIN
                          cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN
                          sales_invoice_t si ON cs.companyID = si.custID INNER JOIN
-                         service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN
-                         services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = si.sqNoChar INNER JOIN
+                         services_availed_t sa ON sa.sqNoChar = sq.sqNoChar INNER JOIN
                          services_t s ON sa.serviceID = s.serviceID INNER JOIN
                          items_availed_t ia ON i.ID = ia.itemID INNER JOIN
                          fees_per_transaction_t f ON f.servicesAvailedID = sa.id
@@ -133,8 +125,8 @@ FROM            item_t i INNER JOIN
                          markup_hist_t mh ON i.ID = mh.itemID INNER JOIN
                          cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN
                          sales_invoice_t si ON cs.companyID = si.custID INNER JOIN
-                         service_sched_t ss ON si.invoiceNo = ss.invoiceNo INNER JOIN
-                         services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = si.sqNoChar INNER JOIN
+                         services_availed_t sa ON sa.sqNoChar = sq.sqNoChar INNER JOIN
                          services_t s ON sa.serviceID = s.serviceID INNER JOIN
                          items_availed_t ia ON i.ID = ia.itemID INNER JOIN
                          fees_per_transaction_t f ON f.servicesAvailedID = sa.id
@@ -156,7 +148,7 @@ GROUP BY i.itemName, s.serviceName, mh.markupPerc, s.servicePrice, si.dateOfIssu
   <xs:element name="DatasetReportSales" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DatasetReportSales" msprop:Generator_UserDSName="DatasetReportSales">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="SalesTable" msprop:Generator_TableClassName="SalesTableDataTable" msprop:Generator_TableVarName="tableSalesTable" msprop:Generator_TablePropName="SalesTable" msprop:Generator_RowDeletingName="SalesTableRowDeleting" msprop:Generator_RowChangingName="SalesTableRowChanging" msprop:Generator_RowEvHandlerName="SalesTableRowChangeEventHandler" msprop:Generator_RowDeletedName="SalesTableRowDeleted" msprop:Generator_UserTableName="SalesTable" msprop:Generator_RowChangedName="SalesTableRowChanged" msprop:Generator_RowEvArgName="SalesTableRowChangeEvent" msprop:Generator_RowClassName="SalesTableRow">
+        <xs:element name="SalesTable" msprop:Generator_TableClassName="SalesTableDataTable" msprop:Generator_TableVarName="tableSalesTable" msprop:Generator_RowChangedName="SalesTableRowChanged" msprop:Generator_TablePropName="SalesTable" msprop:Generator_RowDeletingName="SalesTableRowDeleting" msprop:Generator_RowChangingName="SalesTableRowChanging" msprop:Generator_RowEvHandlerName="SalesTableRowChangeEventHandler" msprop:Generator_RowDeletedName="SalesTableRowDeleted" msprop:Generator_RowClassName="SalesTableRow" msprop:Generator_UserTableName="SalesTable" msprop:Generator_RowEvArgName="SalesTableRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="itemName" msprop:Generator_ColumnVarNameInTable="columnitemName" msprop:Generator_ColumnPropNameInRow="itemName" msprop:Generator_ColumnPropNameInTable="itemNameColumn" msprop:Generator_UserColumnName="itemName">

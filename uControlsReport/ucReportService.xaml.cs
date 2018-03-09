@@ -59,7 +59,14 @@ namespace prototype2
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            ReportService.RefreshReport();
+            if (this.IsVisible)
+            {
+                DisplayReport();
+            }
+            else
+            {
+                ReportService.Reset();
+            }
         }
 
     

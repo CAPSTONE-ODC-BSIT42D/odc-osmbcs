@@ -1375,7 +1375,7 @@
             <Grid x:Name="reportsGrid">
                 <local:ucReportPurchase x:Name="ucReportPurchase" Height="Auto" Margin="0" Width="Auto" d:IsHidden="True"/>
                 <local:ucReportService Height="Auto" Margin="0" Width="Auto"/>
-                <!--<local:ucReportSales/>-->
+                <local:ucReportSales Margin="10,10,41,154"/>
             </Grid>
             <Grid x:Name="queriesGrid" d:IsHidden="True"/>
 
