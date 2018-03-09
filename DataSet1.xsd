@@ -4,8 +4,8 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="odc_dbConnectionString" IsAppSettingsProperty="true" Modifier="Assembly" Name="odc_dbConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.prototype2.Properties.Settings.GlobalReference.Default.odc_dbConnectionString" Provider="MySql.Data.MySqlClient" />
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="odc_dbConnectionString1" IsAppSettingsProperty="true" Modifier="Assembly" Name="odc_dbConnectionString1 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.prototype2.Properties.Settings.GlobalReference.Default.odc_dbConnectionString1" Provider="MySql.Data.MySqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="odc_dbConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="odc_dbConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.prototype2.Properties.Settings.GlobalReference.Default.odc_dbConnectionString" Provider="MySql.Data.MySqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="odc_dbConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="odc_dbConnectionString1 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.prototype2.Properties.Settings.GlobalReference.Default.odc_dbConnectionString1" Provider="MySql.Data.MySqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="service_tTableAdapter" GeneratorDataComponentClassName="service_tTableAdapter" Name="service_t" UserDataComponentName="service_tTableAdapter">
@@ -339,7 +339,7 @@ WHERE        (i.isDeleted = 0) AND (s.isDeleted = 0) AND (YEAR(ss.dateStarted) =
               <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByContract" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataByContract" GeneratorSourceName="FillByContract" GetMethodModifier="Public" GetMethodName="GetDataByContract" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataByContract" UserSourceName="FillByContract">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        e.empFName, e.empMI, e.empLName, e.empAddress, e.empDateFrom, e.empDateTo, j.jobName
+                    <CommandText>SELECT        e.empFName, e.empMI, e.empLName, e.empAddress, e.empDateFrom, e.empDateTo, j.jobName, CURDATE() AS DateToday
 FROM            emp_cont_t e INNER JOIN
                          job_title_t j ON e.jobID = j.jobID
 WHERE        (e.isDeleted = 0) AND (e.empType = 1) AND (e.empID = @a)</CommandText>
@@ -358,6 +358,7 @@ WHERE        (e.isDeleted = 0) AND (e.empType = 1) AND (e.empID = @a)</CommandTe
               <Mapping SourceColumn="empLName" DataSetColumn="empLName" />
               <Mapping SourceColumn="empDateFrom" DataSetColumn="empDateFrom" />
               <Mapping SourceColumn="empDateTo" DataSetColumn="empDateTo" />
+              <Mapping SourceColumn="DateToday" DataSetColumn="DateToday" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -451,7 +452,7 @@ WHERE        (ia.id = @B)</CommandText>
   <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet1" msprop:Generator_UserDSName="DataSet1">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="service_t" msprop:Generator_TableClassName="service_tDataTable" msprop:Generator_TableVarName="tableservice_t" msprop:Generator_RowChangedName="service_tRowChanged" msprop:Generator_TablePropName="service_t" msprop:Generator_RowDeletingName="service_tRowDeleting" msprop:Generator_RowChangingName="service_tRowChanging" msprop:Generator_RowEvHandlerName="service_tRowChangeEventHandler" msprop:Generator_RowDeletedName="service_tRowDeleted" msprop:Generator_RowClassName="service_tRow" msprop:Generator_UserTableName="service_t" msprop:Generator_RowEvArgName="service_tRowChangeEvent">
+        <xs:element name="service_t" msprop:Generator_TableClassName="service_tDataTable" msprop:Generator_TableVarName="tableservice_t" msprop:Generator_TablePropName="service_t" msprop:Generator_RowDeletingName="service_tRowDeleting" msprop:Generator_RowChangingName="service_tRowChanging" msprop:Generator_RowEvHandlerName="service_tRowChangeEventHandler" msprop:Generator_RowDeletedName="service_tRowDeleted" msprop:Generator_UserTableName="service_t" msprop:Generator_RowChangedName="service_tRowChanged" msprop:Generator_RowEvArgName="service_tRowChangeEvent" msprop:Generator_RowClassName="service_tRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="serviceID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnserviceID" msprop:Generator_ColumnPropNameInRow="serviceID" msprop:Generator_ColumnPropNameInTable="serviceIDColumn" msprop:Generator_UserColumnName="serviceID" type="xs:int" />
@@ -481,7 +482,7 @@ WHERE        (ia.id = @B)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="item_t" msprop:Generator_TableClassName="item_tDataTable" msprop:Generator_TableVarName="tableitem_t" msprop:Generator_RowChangedName="item_tRowChanged" msprop:Generator_TablePropName="item_t" msprop:Generator_RowDeletingName="item_tRowDeleting" msprop:Generator_RowChangingName="item_tRowChanging" msprop:Generator_RowEvHandlerName="item_tRowChangeEventHandler" msprop:Generator_RowDeletedName="item_tRowDeleted" msprop:Generator_RowClassName="item_tRow" msprop:Generator_UserTableName="item_t" msprop:Generator_RowEvArgName="item_tRowChangeEvent">
+        <xs:element name="item_t" msprop:Generator_TableClassName="item_tDataTable" msprop:Generator_TableVarName="tableitem_t" msprop:Generator_TablePropName="item_t" msprop:Generator_RowDeletingName="item_tRowDeleting" msprop:Generator_RowChangingName="item_tRowChanging" msprop:Generator_RowEvHandlerName="item_tRowChangeEventHandler" msprop:Generator_RowDeletedName="item_tRowDeleted" msprop:Generator_UserTableName="item_t" msprop:Generator_RowChangedName="item_tRowChanged" msprop:Generator_RowEvArgName="item_tRowChangeEvent" msprop:Generator_RowClassName="item_tRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="itemCode" msprop:Generator_ColumnVarNameInTable="columnitemCode" msprop:Generator_ColumnPropNameInRow="itemCode" msprop:Generator_ColumnPropNameInTable="itemCodeColumn" msprop:Generator_UserColumnName="itemCode">
@@ -510,7 +511,7 @@ WHERE        (ia.id = @B)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="salesReport" msprop:Generator_TableClassName="salesReportDataTable" msprop:Generator_TableVarName="tablesalesReport" msprop:Generator_TablePropName="salesReport" msprop:Generator_RowDeletingName="salesReportRowDeleting" msprop:Generator_RowChangingName="salesReportRowChanging" msprop:Generator_RowEvHandlerName="salesReportRowChangeEventHandler" msprop:Generator_RowDeletedName="salesReportRowDeleted" msprop:Generator_UserTableName="salesReport" msprop:Generator_RowChangedName="salesReportRowChanged" msprop:Generator_RowEvArgName="salesReportRowChangeEvent" msprop:Generator_RowClassName="salesReportRow">
+        <xs:element name="salesReport" msprop:Generator_TableClassName="salesReportDataTable" msprop:Generator_TableVarName="tablesalesReport" msprop:Generator_RowChangedName="salesReportRowChanged" msprop:Generator_TablePropName="salesReport" msprop:Generator_RowDeletingName="salesReportRowDeleting" msprop:Generator_RowChangingName="salesReportRowChanging" msprop:Generator_RowEvHandlerName="salesReportRowChangeEventHandler" msprop:Generator_RowDeletedName="salesReportRowDeleted" msprop:Generator_RowClassName="salesReportRow" msprop:Generator_UserTableName="salesReport" msprop:Generator_RowEvArgName="salesReportRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="itemCode" msprop:Generator_ColumnVarNameInTable="columnitemCode" msprop:Generator_ColumnPropNameInRow="itemCode" msprop:Generator_ColumnPropNameInTable="itemCodeColumn" msprop:Generator_UserColumnName="itemCode">
@@ -564,7 +565,7 @@ WHERE        (ia.id = @B)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="noticeOfemploymentDataTable" msprop:Generator_TableClassName="noticeOfemploymentDataTableDataTable" msprop:Generator_TableVarName="tablenoticeOfemploymentDataTable" msprop:Generator_TablePropName="noticeOfemploymentDataTable" msprop:Generator_RowDeletingName="noticeOfemploymentDataTableRowDeleting" msprop:Generator_RowChangingName="noticeOfemploymentDataTableRowChanging" msprop:Generator_RowEvHandlerName="noticeOfemploymentDataTableRowChangeEventHandler" msprop:Generator_RowDeletedName="noticeOfemploymentDataTableRowDeleted" msprop:Generator_UserTableName="noticeOfemploymentDataTable" msprop:Generator_RowChangedName="noticeOfemploymentDataTableRowChanged" msprop:Generator_RowEvArgName="noticeOfemploymentDataTableRowChangeEvent" msprop:Generator_RowClassName="noticeOfemploymentDataTableRow">
+        <xs:element name="noticeOfemploymentDataTable" msprop:Generator_TableClassName="noticeOfemploymentDataTableDataTable" msprop:Generator_TableVarName="tablenoticeOfemploymentDataTable" msprop:Generator_RowChangedName="noticeOfemploymentDataTableRowChanged" msprop:Generator_TablePropName="noticeOfemploymentDataTable" msprop:Generator_RowDeletingName="noticeOfemploymentDataTableRowDeleting" msprop:Generator_RowChangingName="noticeOfemploymentDataTableRowChanging" msprop:Generator_RowEvHandlerName="noticeOfemploymentDataTableRowChangeEventHandler" msprop:Generator_RowDeletedName="noticeOfemploymentDataTableRowDeleted" msprop:Generator_RowClassName="noticeOfemploymentDataTableRow" msprop:Generator_UserTableName="noticeOfemploymentDataTable" msprop:Generator_RowEvArgName="noticeOfemploymentDataTableRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="jobName" msprop:Generator_ColumnVarNameInTable="columnjobName" msprop:Generator_ColumnPropNameInRow="jobName" msprop:Generator_ColumnPropNameInTable="jobNameColumn" msprop:Generator_UserColumnName="jobName" minOccurs="0">
@@ -604,10 +605,11 @@ WHERE        (ia.id = @B)</CommandText>
               </xs:element>
               <xs:element name="empDateFrom" msprop:Generator_ColumnVarNameInTable="columnempDateFrom" msprop:Generator_ColumnPropNameInRow="empDateFrom" msprop:Generator_ColumnPropNameInTable="empDateFromColumn" msprop:Generator_UserColumnName="empDateFrom" type="xs:dateTime" minOccurs="0" />
               <xs:element name="empDateTo" msprop:Generator_ColumnVarNameInTable="columnempDateTo" msprop:Generator_ColumnPropNameInRow="empDateTo" msprop:Generator_ColumnPropNameInTable="empDateToColumn" msprop:Generator_UserColumnName="empDateTo" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DateToday" msprop:Generator_ColumnVarNameInTable="columnDateToday" msprop:Generator_ColumnPropNameInRow="DateToday" msprop:Generator_ColumnPropNameInTable="DateTodayColumn" msprop:Generator_UserColumnName="DateToday" type="xs:dateTime" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="officialReceipt" msprop:Generator_TableClassName="officialReceiptDataTable" msprop:Generator_TableVarName="tableofficialReceipt" msprop:Generator_RowChangedName="officialReceiptRowChanged" msprop:Generator_TablePropName="officialReceipt" msprop:Generator_RowDeletingName="officialReceiptRowDeleting" msprop:Generator_RowChangingName="officialReceiptRowChanging" msprop:Generator_RowEvHandlerName="officialReceiptRowChangeEventHandler" msprop:Generator_RowDeletedName="officialReceiptRowDeleted" msprop:Generator_RowClassName="officialReceiptRow" msprop:Generator_UserTableName="officialReceipt" msprop:Generator_RowEvArgName="officialReceiptRowChangeEvent">
+        <xs:element name="officialReceipt" msprop:Generator_TableClassName="officialReceiptDataTable" msprop:Generator_TableVarName="tableofficialReceipt" msprop:Generator_TablePropName="officialReceipt" msprop:Generator_RowDeletingName="officialReceiptRowDeleting" msprop:Generator_RowChangingName="officialReceiptRowChanging" msprop:Generator_RowEvHandlerName="officialReceiptRowChangeEventHandler" msprop:Generator_RowDeletedName="officialReceiptRowDeleted" msprop:Generator_UserTableName="officialReceipt" msprop:Generator_RowChangedName="officialReceiptRowChanged" msprop:Generator_RowEvArgName="officialReceiptRowChangeEvent" msprop:Generator_RowClassName="officialReceiptRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="companyName" msprop:Generator_ColumnVarNameInTable="columncompanyName" msprop:Generator_ColumnPropNameInRow="companyName" msprop:Generator_ColumnPropNameInTable="companyNameColumn" msprop:Generator_UserColumnName="companyName">
@@ -664,7 +666,7 @@ WHERE        (ia.id = @B)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="PODataTable" msprop:Generator_TableClassName="PODataTableDataTable" msprop:Generator_TableVarName="tablePODataTable" msprop:Generator_TablePropName="PODataTable" msprop:Generator_RowDeletingName="PODataTableRowDeleting" msprop:Generator_RowChangingName="PODataTableRowChanging" msprop:Generator_RowEvHandlerName="PODataTableRowChangeEventHandler" msprop:Generator_RowDeletedName="PODataTableRowDeleted" msprop:Generator_UserTableName="PODataTable" msprop:Generator_RowChangedName="PODataTableRowChanged" msprop:Generator_RowEvArgName="PODataTableRowChangeEvent" msprop:Generator_RowClassName="PODataTableRow">
+        <xs:element name="PODataTable" msprop:Generator_TableClassName="PODataTableDataTable" msprop:Generator_TableVarName="tablePODataTable" msprop:Generator_RowChangedName="PODataTableRowChanged" msprop:Generator_TablePropName="PODataTable" msprop:Generator_RowDeletingName="PODataTableRowDeleting" msprop:Generator_RowChangingName="PODataTableRowChanging" msprop:Generator_RowEvHandlerName="PODataTableRowChangeEventHandler" msprop:Generator_RowDeletedName="PODataTableRowDeleted" msprop:Generator_RowClassName="PODataTableRow" msprop:Generator_UserTableName="PODataTable" msprop:Generator_RowEvArgName="PODataTableRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="PONumChar" msprop:Generator_ColumnVarNameInTable="columnPONumChar" msprop:Generator_ColumnPropNameInRow="PONumChar" msprop:Generator_ColumnPropNameInTable="PONumCharColumn" msprop:Generator_UserColumnName="PONumChar">

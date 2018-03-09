@@ -1372,7 +1372,9 @@
                 </Grid>
                 <local:ucServiceSchedule x:Name="ucService" Margin="0" Visibility="Collapsed" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="reportsGrid" d:IsHidden="True"/>
+            <Grid x:Name="reportsGrid" d:IsHidden="True">
+                
+            </Grid>
             <Grid x:Name="queriesGrid" d:IsHidden="True"/>
 
             <Grid x:Name="maintenanceGrid">

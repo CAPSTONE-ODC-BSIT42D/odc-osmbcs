@@ -1547,6 +1547,8 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columnempDateTo;
             
+            private global::System.Data.DataColumn columnDateToday;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public noticeOfemploymentDataTableDataTable() {
@@ -1638,6 +1640,14 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DateTodayColumn {
+                get {
+                    return this.columnDateToday;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1673,7 +1683,7 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public noticeOfemploymentDataTableRow AddnoticeOfemploymentDataTableRow(string jobName, string empAddress, string empFName, string empMI, string empLName, System.DateTime empDateFrom, System.DateTime empDateTo) {
+            public noticeOfemploymentDataTableRow AddnoticeOfemploymentDataTableRow(string jobName, string empAddress, string empFName, string empMI, string empLName, System.DateTime empDateFrom, System.DateTime empDateTo, System.DateTime DateToday) {
                 noticeOfemploymentDataTableRow rownoticeOfemploymentDataTableRow = ((noticeOfemploymentDataTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         jobName,
@@ -1682,7 +1692,8 @@ namespace prototype2 {
                         empMI,
                         empLName,
                         empDateFrom,
-                        empDateTo};
+                        empDateTo,
+                        DateToday};
                 rownoticeOfemploymentDataTableRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rownoticeOfemploymentDataTableRow);
                 return rownoticeOfemploymentDataTableRow;
@@ -1712,6 +1723,7 @@ namespace prototype2 {
                 this.columnempLName = base.Columns["empLName"];
                 this.columnempDateFrom = base.Columns["empDateFrom"];
                 this.columnempDateTo = base.Columns["empDateTo"];
+                this.columnDateToday = base.Columns["DateToday"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1731,6 +1743,8 @@ namespace prototype2 {
                 base.Columns.Add(this.columnempDateFrom);
                 this.columnempDateTo = new global::System.Data.DataColumn("empDateTo", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnempDateTo);
+                this.columnDateToday = new global::System.Data.DataColumn("DateToday", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDateToday);
                 this.columnjobName.MaxLength = 20;
                 this.columnempAddress.MaxLength = 21845;
                 this.columnempFName.AllowDBNull = false;
@@ -1738,6 +1752,7 @@ namespace prototype2 {
                 this.columnempMI.MaxLength = 3;
                 this.columnempLName.AllowDBNull = false;
                 this.columnempLName.MaxLength = 50;
+                this.columnDateToday.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3592,6 +3607,17 @@ namespace prototype2 {
                 }
                 set {
                     this[this.tablenoticeOfemploymentDataTable.empDateToColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime DateToday {
+                get {
+                    return ((global::System.DateTime)(this[this.tablenoticeOfemploymentDataTable.DateTodayColumn]));
+                }
+                set {
+                    this[this.tablenoticeOfemploymentDataTable.DateTodayColumn] = value;
                 }
             }
             
@@ -6135,6 +6161,7 @@ WHERE        (i.isDeleted = 0) AND (s.isDeleted = 0) AND (YEAR(ss.dateStarted) =
             tableMapping.ColumnMappings.Add("empLName", "empLName");
             tableMapping.ColumnMappings.Add("empDateFrom", "empDateFrom");
             tableMapping.ColumnMappings.Add("empDateTo", "empDateTo");
+            tableMapping.ColumnMappings.Add("DateToday", "DateToday");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -6151,7 +6178,7 @@ WHERE        (i.isDeleted = 0) AND (s.isDeleted = 0) AND (YEAR(ss.dateStarted) =
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[1];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        e.empFName, e.empMI, e.empLName, e.empAddress, e.empDateFrom, e.empDateTo, j.jobName
+            this._commandCollection[0].CommandText = @"SELECT        e.empFName, e.empMI, e.empLName, e.empAddress, e.empDateFrom, e.empDateTo, j.jobName, CURDATE() AS DateToday
 FROM            emp_cont_t e INNER JOIN
                          job_title_t j ON e.jobID = j.jobID
 WHERE        (e.isDeleted = 0) AND (e.empType = 1) AND (e.empID = @a)";
