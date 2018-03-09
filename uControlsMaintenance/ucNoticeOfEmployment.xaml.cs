@@ -47,7 +47,7 @@ namespace prototype2
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "                  SELECT        e.empFName, e.empMI, e.empLName, e.empAddress, e.empDateFrom, e.empDateTo, j.jobName FROM emp_cont_t e INNER JOIN job_title_t j ON e.jobID = j.jobID WHERE(e.isDeleted = 0) AND(e.empType = 1)  and e.empid ="+ MainVM.SelectedEmployeeContractor.EmpID + "";
+            cmd.CommandText = "                  SELECT        e.empFName, e.empMI, e.empLName, e.empAddress, e.empDateFrom, e.empDateTo, j.jobName, CURDATE() as DateToday FROM emp_cont_t e INNER JOIN job_title_t j ON e.jobID = j.jobID WHERE(e.isDeleted = 0) AND(e.empType = 1)  and e.empid =" + MainVM.SelectedEmployeeContractor.EmpID + "";
 
             DataSet1.noticeOfemploymentDataTableDataTable dSContract = new DataSet1.noticeOfemploymentDataTableDataTable();
 

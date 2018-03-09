@@ -7,6 +7,7 @@
         <Value>oliveLogo</Value>
         <Sizing>FitProportional</Sizing>
         <Top>0.14583in</Top>
+        <Left>0.51042in</Left>
         <Height>0.48958in</Height>
         <Width>2.09375in</Width>
         <Style>
@@ -38,7 +39,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox68</rd:DefaultName>
         <Top>0.63541in</Top>
-        <Left>2.24181in</Left>
+        <Left>2.75223in</Left>
         <Height>0.25in</Height>
         <Width>2.35417in</Width>
         <ZIndex>1</ZIndex>
@@ -54,7 +55,7 @@
       </Textbox>
       <Line Name="Line2">
         <Top>8.23833in</Top>
-        <Left>0.28222in</Left>
+        <Left>0.79264in</Left>
         <Height>0in</Height>
         <Width>2.29986in</Width>
         <ZIndex>2</ZIndex>
@@ -82,7 +83,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox18</rd:DefaultName>
         <Top>1.06125in</Top>
-        <Left>0.01958in</Left>
+        <Left>0.53in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>3</ZIndex>
@@ -114,7 +115,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox19</rd:DefaultName>
         <Top>1.36333in</Top>
-        <Left>0.01958in</Left>
+        <Left>0.53in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>4</ZIndex>
@@ -146,7 +147,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox20</rd:DefaultName>
         <Top>1.66889in</Top>
-        <Left>0.01958in</Left>
+        <Left>0.53in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>5</ZIndex>
@@ -182,8 +183,8 @@
         </Paragraphs>
         <rd:DefaultName>Textbox23</rd:DefaultName>
         <Top>1.94667in</Top>
-        <Left>0.01958in</Left>
-        <Height>0.45833in</Height>
+        <Left>0.53in</Left>
+        <Height>0.35416in</Height>
         <Width>6.8125in</Width>
         <ZIndex>6</ZIndex>
         <Style>
@@ -253,9 +254,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox24</rd:DefaultName>
-        <Top>2.47444in</Top>
-        <Left>0.01958in</Left>
-        <Height>0.42708in</Height>
+        <Top>2.32861in</Top>
+        <Left>0.53001in</Left>
+        <Height>0.36458in</Height>
         <Width>6.8125in</Width>
         <ZIndex>7</ZIndex>
         <Style>
@@ -283,8 +284,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox26</rd:DefaultName>
-        <Top>2.95708in</Top>
-        <Left>1.73139in</Left>
+        <Top>2.70708in</Top>
+        <Left>2.05431in</Left>
         <Height>0.20833in</Height>
         <Width>0.34597in</Width>
         <ZIndex>8</ZIndex>
@@ -319,8 +320,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox27</rd:DefaultName>
-        <Top>2.97097in</Top>
-        <Left>3.26138in</Left>
+        <Top>2.72097in</Top>
+        <Left>3.5843in</Left>
         <Height>0.22917in</Height>
         <Width>3.375in</Width>
         <ZIndex>9</ZIndex>
@@ -341,7 +342,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>if the Employer in its absolute discretion deems it appropriate.</Value>
+                <Value>              if the Employer in its absolute discretion deems it appropriate.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Calibri</FontFamily>
@@ -356,7 +357,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value xml:space="preserve"> </Value>
+                <Value>              During your probationary period, this Notice can be terminated by either party giving to the other not less one      day’s written notice.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Calibri</FontFamily>
@@ -366,16 +367,12 @@
                 </Style>
               </TextRun>
             </TextRuns>
-            <LeftIndent>0.5in</LeftIndent>
-            <Style>
-              <TextAlign>Left</TextAlign>
-              <LineHeight>12pt</LineHeight>
-            </Style>
+            <Style />
           </Paragraph>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>During your probationary period, this Notice can be terminated by either party giving to the other not less one day’s written notice.</Value>
+                <Value>              Subject always to the statutory minimum notice requirements, following  the end of your probationary  period,</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Calibri</FontFamily>
@@ -385,34 +382,12 @@
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style>
-              <TextAlign>Left</TextAlign>
-              <LineHeight>12pt</LineHeight>
-            </Style>
+            <Style />
           </Paragraph>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value />
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <FontFamily>Calibri</FontFamily>
-                  <FontWeight>Normal</FontWeight>
-                  <TextDecoration>None</TextDecoration>
-                  <Color>#000000</Color>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <LeftIndent>0.5in</LeftIndent>
-            <Style>
-              <TextAlign>Left</TextAlign>
-              <LineHeight>12pt</LineHeight>
-            </Style>
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Subject always to the statutory minimum notice requirements, following  the end of your probationary  period,</Value>
+                <Value>  this notice can be terminated by either party giving to the other not less than one week’s written notice.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Calibri</FontFamily>
@@ -430,44 +405,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>this notice can be terminated by either party giving to the other not less than one week’s written notice.</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <FontFamily>Calibri</FontFamily>
-                  <FontWeight>Normal</FontWeight>
-                  <TextDecoration>None</TextDecoration>
-                  <Color>#000000</Color>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Left</TextAlign>
-              <LineHeight>12pt</LineHeight>
-            </Style>
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value />
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <FontFamily>Calibri</FontFamily>
-                  <FontWeight>Normal</FontWeight>
-                  <TextDecoration>None</TextDecoration>
-                  <Color>#000000</Color>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <LeftIndent>0.5in</LeftIndent>
-            <Style>
-              <TextAlign>Left</TextAlign>
-              <LineHeight>12pt</LineHeight>
-            </Style>
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>The employer reserves the right  to terminate  your employment  without  notice or  salary in lieu  of  notice in appropriate  circumstances.  Appropriate  circumstances  include,  but are not  limited to  situation  of  gross misconduct, gross incompetence and/or gross negligence.</Value>
+                <Value>           The employer reserves the right  to terminate  your employment  without  notice or  salary in lieu  of  notice in          appropriate  circumstances.  Appropriate  circumstances  include,  but are not  limited to  situation  of  gross                    misconduct, gross incompetence and/or gross negligence.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Calibri</FontFamily>
@@ -484,19 +422,19 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox28</rd:DefaultName>
-        <Top>3.25569in</Top>
-        <Left>0.28222in</Left>
-        <Height>1.9375in</Height>
-        <Width>6.54987in</Width>
+        <Top>2.94319in</Top>
+        <Left>0.53001in</Left>
+        <Height>1.3125in</Height>
+        <Width>6.81249in</Width>
         <ZIndex>10</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
+          <PaddingLeft>1pt</PaddingLeft>
+          <PaddingRight>1pt</PaddingRight>
+          <PaddingTop>1pt</PaddingTop>
+          <PaddingBottom>1pt</PaddingBottom>
         </Style>
       </Textbox>
       <Textbox Name="Textbox29">
@@ -556,8 +494,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>5.31125in</Top>
-        <Left>0.17882in</Left>
+        <Top>4.41542in</Top>
+        <Left>0.53001in</Left>
         <Height>0.38542in</Height>
         <Width>1.625in</Width>
         <ZIndex>11</ZIndex>
@@ -578,7 +516,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>You  are   expected  to  perform  all  duties  which  may  be  required  of  you  in  this  role. You must comply with all  reasonable  directions  given  to  you  and  observe all the  policies,  procedures and  rules  of  the Employer as maybe introduced and/or amended from time to time.</Value>
+                <Value>             You  are   expected  to  perform  all  duties  which  may  be  required  of  you  in  this  role. You must comply   with all  reasonable  directions  given  to  you  and  observe all the  policies,  procedures and  rules  of  the              Employer as maybe introduced and/or amended from time to time.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Calibri</FontFamily>
@@ -593,26 +531,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value />
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <FontFamily>Calibri</FontFamily>
-                  <FontWeight>Normal</FontWeight>
-                  <TextDecoration>None</TextDecoration>
-                  <Color>#000000</Color>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <LeftIndent>0.5in</LeftIndent>
-            <Style>
-              <TextAlign>Left</TextAlign>
-              <LineHeight>12pt</LineHeight>
-            </Style>
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>The Employer operates a policy of job flexibility and the Employer may, at its discretion, require you to perform additional or other duties, whether skilled or unskilled, not within the scope of your normal duties.</Value>
+                <Value>          The Employer operates a policy of job flexibility and the Employer may, at its discretion, require you to             perform additional or other duties, whether skilled or unskilled, not within the scope of your normal duties.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Calibri</FontFamily>
@@ -689,7 +608,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>During your normal working hours and at such others times as may reasonably be required of you, you shall devote  the  whole  of  your  time,  attention,  skill  and  abilities to the performance  of your duties under this Employment and shall act in the best interests of the Employer. You shall not undertake any work or employment, other than for Employer, during your hours of work.</Value>
+                <Value>           During your normal working hours and at such others times as may reasonably be required of you, you            shall devote  the  whole  of  your  time,  attention,  skill  and  abilities to the performance  of your duties under        this Employment and shall act in the best interests of the Employer. You shall not undertake any work or                   employment, other than for Employer, during your hours of work.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Calibri</FontFamily>
@@ -706,10 +625,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox30</rd:DefaultName>
-        <Top>5.76611in</Top>
-        <Left>0.28222in</Left>
-        <Height>2.07292in</Height>
-        <Width>6.54987in</Width>
+        <Top>4.92584in</Top>
+        <Left>0.53001in</Left>
+        <Height>1.79167in</Height>
+        <Width>6.81249in</Width>
         <ZIndex>12</ZIndex>
         <Style>
           <Border>
@@ -723,7 +642,7 @@
       </Textbox>
       <Line Name="Line1">
         <Top>8.25917in</Top>
-        <Left>4.83208in</Left>
+        <Left>5.3425in</Left>
         <Height>0in</Height>
         <Width>2in</Width>
         <ZIndex>13</ZIndex>
@@ -782,7 +701,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>8.31472in</Top>
-        <Left>5.04042in</Left>
+        <Left>5.55084in</Left>
         <Height>0.47917in</Height>
         <Width>1.59596in</Width>
         <ZIndex>14</ZIndex>
@@ -796,73 +715,6 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Tablix Name="Tablix3">
-        <TablixBody>
-          <TablixColumns>
-            <TablixColumn>
-              <Width>1.36458in</Width>
-            </TablixColumn>
-          </TablixColumns>
-          <TablixRows>
-            <TablixRow>
-              <Height>0.25in</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox3">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Today</Value>
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox3</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>None</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
-          </TablixRows>
-        </TablixBody>
-        <TablixColumnHierarchy>
-          <TablixMembers>
-            <TablixMember />
-          </TablixMembers>
-        </TablixColumnHierarchy>
-        <TablixRowHierarchy>
-          <TablixMembers>
-            <TablixMember>
-              <Group Name="Details6" />
-            </TablixMember>
-          </TablixMembers>
-        </TablixRowHierarchy>
-        <Top>1.68625in</Top>
-        <Left>1.09375in</Left>
-        <Height>0.25in</Height>
-        <Width>1.36458in</Width>
-        <ZIndex>15</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Tablix>
       <Tablix Name="Tablix5">
         <TablixBody>
           <TablixColumns>
@@ -922,10 +774,10 @@
         </TablixRowHierarchy>
         <DataSetName>noticeOfemploymentDataTable</DataSetName>
         <Top>1.06125in</Top>
-        <Left>1.03347in</Left>
+        <Left>1.54389in</Left>
         <Height>0.25in</Height>
         <Width>2.30208in</Width>
-        <ZIndex>16</ZIndex>
+        <ZIndex>15</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -991,10 +843,10 @@
         </TablixRowHierarchy>
         <DataSetName>noticeOfemploymentDataTable</DataSetName>
         <Top>1.38069in</Top>
-        <Left>1.01958in</Left>
+        <Left>1.53in</Left>
         <Height>0.25in</Height>
         <Width>2.31597in</Width>
-        <ZIndex>17</ZIndex>
+        <ZIndex>16</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1059,11 +911,11 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>noticeOfemploymentDataTable</DataSetName>
-        <Top>2.95013in</Top>
-        <Left>0.63417in</Left>
+        <Top>2.70013in</Top>
+        <Left>0.95709in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
-        <ZIndex>18</ZIndex>
+        <ZIndex>17</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1128,11 +980,11 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>noticeOfemploymentDataTable</DataSetName>
-        <Top>2.97096in</Top>
-        <Left>2.19194in</Left>
+        <Top>2.72096in</Top>
+        <Left>2.51486in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
-        <ZIndex>19</ZIndex>
+        <ZIndex>18</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1143,7 +995,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.94792in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1197,11 +1049,11 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>noticeOfemploymentDataTable</DataSetName>
-        <Top>5.47444in</Top>
-        <Left>1.84549in</Left>
+        <Top>4.55084in</Top>
+        <Left>2.22445in</Left>
         <Height>0.25in</Height>
-        <Width>1in</Width>
-        <ZIndex>20</ZIndex>
+        <Width>1.94792in</Width>
+        <ZIndex>19</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1267,9 +1119,78 @@
         </TablixRowHierarchy>
         <DataSetName>noticeOfemploymentDataTable</DataSetName>
         <Top>8.29389in</Top>
-        <Left>0.44667in</Left>
+        <Left>0.95709in</Left>
         <Height>0.25in</Height>
         <Width>2.01166in</Width>
+        <ZIndex>20</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Tablix>
+      <Tablix Name="Tablix1">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>2.26041in</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.25in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="DateToday">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!DateToday.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>DateToday</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Details6" />
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>noticeOfemploymentDataTable</DataSetName>
+        <Top>1.67236in</Top>
+        <Left>1.58556in</Left>
+        <Height>0.25in</Height>
+        <Width>2.26041in</Width>
         <ZIndex>21</ZIndex>
         <Style>
           <Border>
@@ -1336,6 +1257,10 @@
         </Field>
         <Field Name="empDateTo">
           <DataField>empDateTo</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="DateToday">
+          <DataField>DateToday</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
       </Fields>
