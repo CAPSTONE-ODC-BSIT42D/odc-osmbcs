@@ -42,6 +42,6 @@
                 </Canvas>
             </Viewbox>
         </Button>
-        <syncfusion:ReportViewer x:Name="ucReportViewer"  ViewMode="Print" ShowExportControls="True" ShowPdfExportButton="True"/>
+        <syncfusion:ReportViewer x:Name="ucReportViewer"  ReportPath="C:\Users\Alexis\Source\Repos\odc-osmbcs\rdlcfiles\PurchaseOrder.rdlc" ProcessingMode="Local" ViewMode="Print" ShowExportControls="True" ShowPdfExportButton="True"/>
     </Grid>
 </UserControl>

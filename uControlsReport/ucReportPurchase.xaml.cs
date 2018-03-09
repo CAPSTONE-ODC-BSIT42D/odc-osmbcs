@@ -205,7 +205,14 @@ namespace prototype2
         }
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            ReportPurchase.RefreshReport();
+            if (this.IsVisible)
+            {
+                DisplayReport();
+            }
+            else
+            {
+                ReportPurchase.Reset();
+            }
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
