@@ -26,8 +26,7 @@ namespace prototype2
         public ucReportSales()
         {
             InitializeComponent();
-            DisplayReport();
-
+            
         }
         private void DisplayReport()
         {
@@ -61,7 +60,10 @@ namespace prototype2
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            ReportSales.RefreshReport();
+            if (this.IsVisible)
+            {
+                DisplayReport();
+            }
         }
         private void DisplayReportSalesDay()
         {

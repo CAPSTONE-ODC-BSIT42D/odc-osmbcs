@@ -574,14 +574,11 @@ namespace prototype2
 
         private void reportsBtn_Click(object sender, RoutedEventArgs e)
         {
-  
-            foreach (var obj in containerGrid.Children)
-            {
-                ((Grid)obj).Visibility = Visibility.Collapsed;
-            }
-            reportsGrid.Visibility = Visibility.Visible;
-           
-            
+            if (reportsSubMenuGrid.IsVisible)
+                reportsSubMenuGrid.Visibility = Visibility.Collapsed;
+            else
+                reportsSubMenuGrid.Visibility = Visibility.Visible;
+
         }
 
         private void manageBtn_Click(object sender, RoutedEventArgs e)
@@ -1642,5 +1639,30 @@ namespace prototype2
         }
 
         #endregion
+
+        private void selectedReportBtnClicked(object sender, RoutedEventArgs e)
+        {
+
+            //foreach (var obj in containerGrid.Children)
+            //{
+            //    ((Grid)obj).Visibility = Visibility.Collapsed;
+            //}
+            //reportsGrid.Visibility = Visibility.Visible;
+            //foreach (var obj in reportsGrid.Children)
+            //{
+                
+            //}
+            //foreach (var obj in transOrderGrid.Children)
+            //{
+            //    if (obj is Grid)
+            //    {
+                    
+            //        ((Grid)obj).Visibility = Visibility.Visible;
+            //    }
+            //    else
+            //        ((UserControl)obj).Visibility = Visibility.Collapsed;
+
+            //}
+        }
     }
 }

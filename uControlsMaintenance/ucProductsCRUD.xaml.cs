@@ -128,9 +128,9 @@ namespace prototype2
                         {
                             if (((DatePicker)element).SelectedDate > DateTime.Now)
                             {
-                                BindingExpression bindingExpression = BindingOperations.GetBindingExpression(((DatePicker)element), TextBox.TextProperty);
+                                BindingExpression bindingExpression = BindingOperations.GetBindingExpression(((DatePicker)element), DatePicker.SelectedDateProperty);
 
-                                BindingExpressionBase bindingExpressionBase = BindingOperations.GetBindingExpressionBase(((DatePicker)element), TextBox.TextProperty);
+                                BindingExpressionBase bindingExpressionBase = BindingOperations.GetBindingExpressionBase(((DatePicker)element), DatePicker.SelectedDateProperty);
 
                                 ValidationError validationErrorA = new ValidationError(new ExceptionValidationRule(), bindingExpression);
                                 validationErrorA.ErrorContent = "Selected Date is Invalid. Please select date today.";

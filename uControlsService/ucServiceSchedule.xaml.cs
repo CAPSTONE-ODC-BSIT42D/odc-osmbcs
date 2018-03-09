@@ -212,8 +212,7 @@ namespace prototype2
                         {
                             query = "INSERT INTO `odc_db`.`assigned_employees_t`(`serviceSchedID`,`empID`)" +
                          " VALUES" +
-                         "('"
-                         + schedID + "','" +
+                         "('" + schedID + "','" +
                            emp.EmpID +
                          "');";
                             dbCon.insertQuery(query, dbCon.Connection);

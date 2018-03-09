@@ -286,7 +286,7 @@
             </Grid>
             <Grid x:Name="viewSalesQuoteBtns" Margin="10" HorizontalAlignment="Left">
                 <Button x:Name="transRequestBack1" Content="Back" VerticalAlignment="Bottom" Height="26" Click="transRequestBack_Click" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="233,0,0,0" HorizontalAlignment="Left" Width="84"/>
-                <Button x:Name="convertToInvoiceBtn" Content="Convert To Invoice" VerticalAlignment="Bottom" Height="26" Click="convertToInvoiceBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="0" HorizontalAlignment="Left" Width="139"/>
+                <Button x:Name="convertToInvoiceBtn" Content="Continue as Order" VerticalAlignment="Bottom" Height="26" Click="convertToInvoiceBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="0" HorizontalAlignment="Left" Width="139"/>
                 <Button x:Name="editSalesQuoteBtn" Content="Edit" VerticalAlignment="Bottom" Height="26" Click="editSalesQuoteBtn_Click" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="144,0,0,0" HorizontalAlignment="Left" Width="84"/>
             </Grid>
         </StackPanel>

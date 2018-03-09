@@ -631,10 +631,7 @@ namespace prototype2
                     DateTime dateEnded = new DateTime();
                     DateTime.TryParse(dr["dateEnded"].ToString(), out dateEnded);
 
-                    int invoiceNo;
-                    int.TryParse(dr["invoiceNo"].ToString(), out invoiceNo);
-
-                    MainVM.SelectedServiceSchedule_ = (new ServiceSchedule() { ServiceSchedID = int.Parse(dr[0].ToString()), invoiceNo_ = invoiceNo, serviceStatus_ = dr["serviceStatus"].ToString(), dateStarted_ = dateStarted, dateEnded_ = dateEnded, schedNotes_ = dr["schedNotes"].ToString() });
+                    MainVM.SelectedServiceSchedule_ = (new ServiceSchedule() { ServiceSchedID = int.Parse(dr[0].ToString()), serviceStatus_ = dr["serviceStatus"].ToString(), dateStarted_ = dateStarted, dateEnded_ = dateEnded, schedNotes_ = dr["schedNotes"].ToString() });
 
                     query = "SELECT * FROM assigned_employees_t where serviceSchedId = '"+ int.Parse(dr[0].ToString()) + "';";
                     MySqlDataAdapter dataAdapter2 = dbCon.selectQuery(query, dbCon.Connection);
@@ -648,19 +645,16 @@ namespace prototype2
                     {
                         foreach (DataRow dr2 in fromDbTable2.Rows)
                         {
-                            MainVM.SelectedEmployeeContractor = MainVM.Employees.Where(x => x.EmpID == int.Parse(dr[1].ToString())).First();
+                            MainVM.SelectedEmployeeContractor = MainVM.Employees.Where(x => x.EmpID == int.Parse(dr2[2].ToString())).First();
                             if (MainVM.SelectedEmployeeContractor == null)
-                                MainVM.SelectedEmployeeContractor = MainVM.Contractor.Where(x => x.EmpID == int.Parse(dr[1].ToString())).First();
+                                MainVM.SelectedEmployeeContractor = MainVM.Contractor.Where(x => x.EmpID == int.Parse(dr2[2].ToString())).First();
 
                             MainVM.SelectedServiceSchedule_.assignedEmployees_.Add(MainVM.SelectedEmployeeContractor);
                         }
                     }
-
+                    MainVM.ServiceSchedules_.Add(MainVM.SelectedServiceSchedule_);
                 }
-
-
-
-                MainVM.ServiceSchedules_.Clear();
+                
                 dbCon.Close();
             }
         }
