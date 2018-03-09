@@ -63,7 +63,7 @@
                     <CheckBox x:Name="hasAccessCb" Content="Has System Access" HorizontalAlignment="Left" Margin="0,83,0,0" VerticalAlignment="Top" Width="127" Height="17" Checked="hasAccessCb_Checked" Unchecked="hasAccessCb_Unchecked"/>
                 </Grid>
                 <Grid x:Name="contractorOnlyGrid" VerticalAlignment="Top">
-                    <Label x:Name="label4_Copy" Content="Address" HorizontalAlignment="Left" Margin="4,6,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label x:Name="label4_Copy" Content="* Address" HorizontalAlignment="Left" Margin="4,6,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                     <TextBox x:Name="empAddressTb" HorizontalAlignment="Left" Height="23" Margin="16,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="345" FontWeight="Normal">
                         <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
