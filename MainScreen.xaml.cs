@@ -110,7 +110,29 @@ namespace prototype2
         }
 
         #region Custom Events
-        
+
+        private void convertToInvoice_BtnClicked(object sender, EventArgs e)
+        {
+            MainVM.isPaymentInvoice = true;
+            foreach (UIElement obj in containerGrid.Children)
+            {
+                if (containerGrid.Children.IndexOf(obj) == 2)
+                {
+                    headerLbl.Content = "Billing";
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+            foreach (UIElement obj in billingGrid.Children)
+            {
+                if (billingGrid.Children.IndexOf(obj) == 1)
+                    obj.Visibility = Visibility.Visible;
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+        }
+
         private void printPurchaseOrder_BtnClicked(object sender, EventArgs e)
         {
             otherGridBg.Visibility = Visibility.Visible;
@@ -492,12 +514,25 @@ namespace prototype2
 
         private void serviceBtn_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var obj in containerGrid.Children)
+            foreach (UIElement obj in containerGrid.Children)
             {
-                ((Grid)obj).Visibility = Visibility.Collapsed;
+                if (containerGrid.Children.IndexOf(obj) == 3)
+                {
+                    headerLbl.Content = "Service Management";
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
             }
-            serviceGrid.Visibility = Visibility.Visible;
-            ucService.Visibility = Visibility.Visible;
+            foreach (UIElement obj in serviceGrid.Children)
+            {
+                if (billingGrid.Children.IndexOf(obj) == 0)
+                {
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void reportsBtn_Click(object sender, RoutedEventArgs e)
@@ -1365,10 +1400,7 @@ namespace prototype2
             }
         }
 
-        private void convertToInvoice_BtnClicked(object sender, EventArgs e)
-        {
-           
-        }
+       
 
         private void genContractBtn_Click(object sender, RoutedEventArgs e)
         {

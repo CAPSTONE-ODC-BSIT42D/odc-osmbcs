@@ -1657,6 +1657,13 @@ namespace prototype2
             set { SetProperty(ref dateEnded, value); }
         }
 
+        protected DateTime officialEndDate;
+        public DateTime officialEndDate_
+        {
+            get { return officialEndDate; }
+            set { SetProperty(ref officialEndDate, value); }
+        }
+
         protected string schedNotes;
         public string schedNotes_
         {

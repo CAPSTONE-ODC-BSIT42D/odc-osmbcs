@@ -111,6 +111,34 @@ namespace prototype2
                             if (Validation.GetHasError((DatePicker)element))
                                 validationError = true;
                         }
+                        if (MainVM.isEdit)
+                        {
+                            if (((DatePicker)element).SelectedDate > DateTime.Now && MainVM.SelectedProduct.MarkupHist.Count == 0)
+                            {
+                                BindingExpression bindingExpression = BindingOperations.GetBindingExpression(((DatePicker)element), TextBox.TextProperty);
+
+                                BindingExpressionBase bindingExpressionBase = BindingOperations.GetBindingExpressionBase(((DatePicker)element), TextBox.TextProperty);
+
+                                ValidationError validationErrorA = new ValidationError(new ExceptionValidationRule(), bindingExpression);
+                                validationErrorA.ErrorContent = "Selected Date is Invalid. No existing or future advance date effective.";
+                                Validation.MarkInvalid(bindingExpressionBase, validationErrorA);
+                            }
+                        }
+                        else
+                        {
+                            if (((DatePicker)element).SelectedDate > DateTime.Now)
+                            {
+                                BindingExpression bindingExpression = BindingOperations.GetBindingExpression(((DatePicker)element), TextBox.TextProperty);
+
+                                BindingExpressionBase bindingExpressionBase = BindingOperations.GetBindingExpressionBase(((DatePicker)element), TextBox.TextProperty);
+
+                                ValidationError validationErrorA = new ValidationError(new ExceptionValidationRule(), bindingExpression);
+                                validationErrorA.ErrorContent = "Selected Date is Invalid. Please select date today.";
+                                Validation.MarkInvalid(bindingExpressionBase, validationErrorA);
+                            }
+                        }
+
+                        
                     }
                 }
                 if (!validationError)
@@ -263,6 +291,13 @@ namespace prototype2
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
+            foreach (UIElement obj in productDetailsFormGrid1.Children)
+            {
+                if (!(obj is Label))
+                {
+                    obj.IsEnabled = true;
+                }
+            }
             if (MainVM.isEdit && this.IsVisible)
             {
                 loadDataToUi();

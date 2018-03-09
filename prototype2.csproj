@@ -343,6 +343,9 @@
     <Compile Include="uControlsQuery\ucMostSupplier.xaml.cs">
       <DependentUpon>ucMostSupplier.xaml</DependentUpon>
     </Compile>
+    <Compile Include="uControlsService\ucSelecService.xaml.cs">
+      <DependentUpon>ucSelecService.xaml</DependentUpon>
+    </Compile>
     <Compile Include="uControlsTransanction\ucFeesForm.xaml.cs">
       <DependentUpon>ucFeesForm.xaml</DependentUpon>
     </Compile>
@@ -468,6 +471,10 @@
     <Page Include="uControlsQuery\ucMostSupplier.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="uControlsService\ucSelecService.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="uControlsTransanction\ucFeesForm.xaml">
       <SubType>Designer</SubType>
