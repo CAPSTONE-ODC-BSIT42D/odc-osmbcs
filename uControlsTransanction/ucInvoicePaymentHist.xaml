@@ -44,17 +44,17 @@
             </Viewbox>
         </Button>
         <Grid Margin="9,10,28,16">
-            <Label Content="Payment History" HorizontalAlignment="Left" Margin="1,0,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31"/>
+            <Label Content="Receivables" HorizontalAlignment="Left" Margin="1,0,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31"/>
             <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="0,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
             <Label Content="Invoice No.:" HorizontalAlignment="Left" Margin="11,50,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31"/>
             <Label Content="{Binding SelectedSalesInvoice.invoiceNo_}" HorizontalAlignment="Left" Margin="115,50,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31"/>
             <Label Content="Balance:" HorizontalAlignment="Left" Margin="11,81,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31"/>
             <TextBlock Text="{Binding Balance, ConverterCulture=fil-PH, StringFormat=\{0:C\}}" HorizontalAlignment="Left" Margin="115,86,0,0" VerticalAlignment="Top" FontSize="16" FontStyle="Normal" FontFamily="Segoe UI" Height="26"/>
-            <Button x:Name="receivePaymentBtn" Content="Receive Payment" Margin="488,48,10,0" VerticalAlignment="Top" Click="receivePaymentBtn_Click" Height="24"/>
+            <Button x:Name="receivePaymentBtn" Content="Receive Payment" Margin="488,48,10,0" VerticalAlignment="Top" Click="receivePaymentBtn_Click" Height="24" Visibility="Collapsed"/>
             <DataGrid x:Name="paymentHistoryDg" Margin="11,122,0,0" SelectedItem="{Binding SelectedPaymentH_}" ItemsSource="{Binding SelectedSalesInvoice.PaymentHist_}" EnableColumnVirtualization="True" IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False" Height="200">
                 <DataGrid.Columns >
                     <DataGridTextColumn Binding="{Binding SIpaymentAmount_, ConverterCulture=fil-PH, StringFormat=\{0:C\}}" ClipboardContentBinding="{x:Null}" Header="Amount" CanUserResize="False" />
-                    <DataGridTextColumn Binding="{Binding SIpaymentMethod_}" ClipboardContentBinding="{x:Null}" Header="Payment Method"  CanUserResize="False" />
+                    <DataGridTextColumn Binding="{Binding SIstatus}" ClipboardContentBinding="{x:Null}" Header="Status"  CanUserResize="False" />
                     <DataGridTemplateColumn CanUserResize="False" Header="Actions"  >
                         <DataGridTemplateColumn.CellTemplate  >
                             <DataTemplate>
@@ -93,7 +93,19 @@
                                             </Canvas>
                                         </Viewbox>
                                     </Button>
-                                    
+                                    <Button x:Name="receivePaymentBtn" Content="Receive Payment" Margin="488,48,10,0" VerticalAlignment="Top" Click="receivePaymentBtn_Click" Height="24"/>
+                                    <Button x:Name="clearCheckBtn" Width="Auto" Height="25" Background="{x:Null}" BorderBrush="Black" Margin="10,10,10,10" ToolTip="Clear Check" Click="clearCheckBtn_Click" >
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding SIpaymentMethod_}" Value="CHECK">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

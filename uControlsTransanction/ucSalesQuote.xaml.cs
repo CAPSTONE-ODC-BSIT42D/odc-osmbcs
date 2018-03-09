@@ -104,7 +104,7 @@ namespace prototype2
         {
             if (this.IsVisible)
             {
-                if (MainVM.SelectedSalesQuote != null && MainVM.isEdit || MainVM.isView)
+                if (MainVM.SelectedSalesQuote != null)
                 {
                     foreach (UIElement obj in transQuoatationGridForm.Children)
                     {
@@ -601,7 +601,7 @@ namespace prototype2
                 {
                     MainVM.SelectedAvailedServices = MainVM.AvailedServicesList.Where(x => x.AvailedServiceID.Equals(item.availedServiceID)).FirstOrDefault();
                     decimal totalFee = 0;
-                    if (MainVM.SelectedAvailedServices.AdditionalFees.Count != 0)
+                    if (MainVM.SelectedAvailedServices != null)
                         totalFee = (from fees in MainVM.SelectedAvailedServices.AdditionalFees
                                             select fees.FeePrice).Sum();
                     //MainVM.SelectedProvince = (from prov in MainVM.Provinces
@@ -682,7 +682,7 @@ namespace prototype2
 
             string stringChars = "";
 
-            if (!MainVM.isEdit)
+            if (MainVM.isNewTrans)
             {
                 for (int i = 0; i < 4; i++)
                 {

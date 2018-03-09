@@ -19,7 +19,7 @@
         <local:ProductMarkUpPercent x:Key="ProductMarkUpPercent" />
         <local:CategoryNameConverter x:Key="CategoryNameConverter"/>
         <local:SaleQuoteDetailsConverter x:Key="SaleQuoteDetailsConverter"/>
-
+        <local:InvoicePriceConverter x:Key="InvoicePriceConverter"/>
         <Storyboard x:Key="sbShowRightMenu" >
             <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,-150,0" To="0,0,0,0" DecelerationRatio="1" Duration="0:0:0.5" />
         </Storyboard>
@@ -34,6 +34,25 @@
         </Storyboard>
 
         <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="true">
+                            <Border Background="OrangeRed" DockPanel.Dock="right" Margin="5,0,0,0" 
+                                Width="20" Height="20" CornerRadius="5"
+                                ToolTip="{Binding AdornedElement.(Validation.Errors)[0].ErrorContent, ElementName=customAdorner}">
+                                <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" 
+                                   FontWeight="Bold" Foreground="white" />
+                            </Border>
+                            <AdornedElementPlaceholder x:Name="customAdorner" VerticalAlignment="Center" >
+                                <Border BorderBrush="red" BorderThickness="1" />
+                            </AdornedElementPlaceholder>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type DatePicker}">
             <Setter Property="Validation.ErrorTemplate">
                 <Setter.Value>
                     <ControlTemplate>
@@ -1051,7 +1070,7 @@
 
                 </Grid>
             </Grid>
-            <Grid x:Name="billingGrid" Margin="10" d:IsHidden="True">
+            <Grid x:Name="billingGrid" Margin="10">
                 <Grid x:Name="invoiceGridHome" >
                     <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                         <Label x:Name="label22" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -1059,20 +1078,20 @@
                         <Button x:Name="button8" Content="Search" HorizontalAlignment="Left" Margin="402,3,-11,0" VerticalAlignment="Top" Width="85" Height="29" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
                     </Grid>
                     <Label x:Name="label8_Copy1" Content="Sort:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="525,9,0,0"/>
-                    <Button x:Name="newInvoiceBtn" Content="Add" HorizontalAlignment="Right" Height="29" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" Click="newInvoiceBtn_Click" />
-                    <DataGrid x:Name="invoiceDataGrid" Margin="0,44,0,-3" ItemsSource="{Binding SalesInvoice}" SelectedItem="{Binding SelectedSalesInvoice}" CanUserAddRows="False" AutoGenerateColumns="false" EnableColumnVirtualization="True" IsReadOnly="True">
+                    <Button x:Name="newInvoiceBtn" Content="Add" HorizontalAlignment="Right" Height="29" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" Click="newInvoiceBtn_Click" Visibility="Collapsed" />
+                    <DataGrid x:Name="invoiceDataGrid" Margin="0,44,0,-3" ItemsSource="{Binding SalesInvoice}" SelectedItem="{Binding SelectedSalesInvoice}" CanUserAddRows="False" AutoGenerateColumns="false" EnableColumnVirtualization="True" IsReadOnly="True" CanUserResizeColumns="False">
                         <DataGrid.Columns >
-                            <DataGridTextColumn Binding="{Binding invoiceNo_}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Sales Invoice ID"  />
-                            <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Customer Name" >
+                            <DataGridTextColumn Binding="{Binding sqNoChar_}" ClipboardContentBinding="{x:Null}" Width="150" CanUserResize="False" Visibility="Visible" Header="Sales Order ID"  />
+                            <DataGridTemplateColumn Width="175" CanUserResize="False" Header="Customer Name" >
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Label Content="{Binding custID_, Converter={StaticResource IdToNameConverter}, NotifyOnTargetUpdated=True}" VerticalContentAlignment="Center"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn Binding="{Binding dateOfIssue_}" ClipboardContentBinding="{x:Null}" Header="Date of Issue" Width="350"   />
-                            <DataGridTextColumn Binding="{Binding paymentStatus_}" ClipboardContentBinding="{x:Null}" Header="Status" Width="200" CanUserResize="False"  />
-                            <DataGridTemplateColumn  Width="Auto" CanUserResize="False" Header="Actions"  >
+                            <DataGridTextColumn Binding="{Binding dateOfIssue_, StringFormat=f}" ClipboardContentBinding="{x:Null}" Header="Date of Issue" Width="100"   />
+                            <DataGridTextColumn Binding="{Binding sqNoChar_,  Converter={StaticResource InvoicePriceConverter}, ConverterCulture=fil-PH, StringFormat=\{0:C\}, NotifyOnTargetUpdated=True}" ClipboardContentBinding="{x:Null}" Header="Amount" Width="150" CanUserResize="False"  />
+                            <DataGridTemplateColumn  Width="175" CanUserResize="False" Header="Actions"  >
                                 <DataGridTemplateColumn.CellTemplate  >
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
@@ -1108,7 +1127,7 @@
                                                 </Viewbox>
                                             </Button>
 
-                                            <Button x:Name="deleteTransancRecordBtn"  Width="Auto" Height="25" BorderBrush="Black" Background="{x:Null}" Margin="10,10,0,10" ToolTip="Delete Record">
+                                            <!--<Button x:Name="deleteTransancRecordBtn"  Width="Auto" Height="25" BorderBrush="Black" Background="{x:Null}" Margin="10,10,0,10" ToolTip="Delete Record">
 
                                                 <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
                                                     <Canvas x:Name="Capa_1c" Width="438.529" Height="438.529" Canvas.Left="0" Canvas.Top="0">
@@ -1156,7 +1175,7 @@
                                                         <Canvas x:Name="g42"/>
                                                     </Canvas>
                                                 </Viewbox>
-                                            </Button>
+                                            </Button>-->
                                             <Button x:Name="receivePaymentBtn"  Width="Auto" Height="25" BorderBrush="Black" Background="{x:Null}" Margin="5,0,10,0" ToolTip="View and Receive Payment" Click="receivePaymentBtn_Click">
                                                 <!--<Button.Style>
                                                     <Style TargetType="{x:Type Button}">
@@ -1227,24 +1246,18 @@
                         <ComboBoxItem Content="PENDING"/>
                         <ComboBoxItem Content="APPROVED"/>
                     </ComboBox>
-                    <DataGrid x:Name="scheduledServiceDg" ItemsSource="{Binding ServiceSchedules_}" SelectedItem="{Binding SelectedServiceSchedule_}" CanUserAddRows="False" AutoGenerateColumns="false" EnableColumnVirtualization="True" IsReadOnly="True" Margin="10,62,-10,10">
+                    <DataGrid x:Name="scheduledServiceDg" ItemsSource="{Binding ServiceSchedules_}" SelectedItem="{Binding SelectedServiceSchedule_}" CanUserAddRows="False" AutoGenerateColumns="false" EnableColumnVirtualization="True" IsReadOnly="True" Margin="10,62,-10,10" FrozenColumnCount="1">
                         <DataGrid.Columns >
-                            <DataGridTextColumn Binding="{Binding ServiceSchedID}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Job ID"  />
-                            <!--<DataGridTemplateColumn Width="150" CanUserResize="False" Header="Customer Name" >
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Label Content="{Binding custID_, Converter={StaticResource IdToNameConverter}, NotifyOnTargetUpdated=True}" VerticalContentAlignment="Center"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>-->
-                            <DataGridTextColumn Binding="{Binding serviceStatus_}" ClipboardContentBinding="{x:Null}" Header="Service Status" Width="350"   />
-                            <DataGridTextColumn Binding="{Binding dateStarted_}" ClipboardContentBinding="{x:Null}" Header="Date Started" Width="200" CanUserResize="False"  />
-                            <DataGridTextColumn Binding="{Binding dateEnded_}" ClipboardContentBinding="{x:Null}" Header="Date Ended" Width="200" CanUserResize="False"  />
+                            <DataGridTextColumn Binding="{Binding ServiceSchedID}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Sales Order ID"/>
+                            <DataGridTextColumn Binding="{Binding ServiceSchedID}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Service Name"/>
+                            <DataGridTextColumn Binding="{Binding serviceStatus_}" ClipboardContentBinding="{x:Null}" Header="Service Status" Width="350"/>
+                            <DataGridTextColumn Binding="{Binding dateStarted_, StringFormat=D}" ClipboardContentBinding="{x:Null}" Header="Date Started" Width="200" CanUserResize="False"  />
+                            <DataGridTextColumn Binding="{Binding dateEnded_, StringFormat=D}" ClipboardContentBinding="{x:Null}" Header="Date Ended" Width="200" CanUserResize="False"  />
                             <DataGridTemplateColumn  Width="Auto" CanUserResize="False" Header="Actions"  >
                                 <DataGridTemplateColumn.CellTemplate  >
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <Button x:Name="viewRecordBtn" Foreground="White" Width="Auto" Height="25"  Margin="10,10,0,10" Background="{x:Null}" BorderBrush="Black" ToolTip="View Record">
+                                            <Button x:Name="viewSchedBtn" Foreground="White" Width="Auto" Height="25"  Margin="10,10,0,10" Background="{x:Null}" BorderBrush="Black" ToolTip="View Record" Click="viewSchedBtn_Click">
                                                 <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
                                                     <Canvas x:Name="Capa_1" Width="511.626" Height="511.626" Canvas.Left="0" Canvas.Top="0">
                                                         <Canvas.RenderTransform>
@@ -1275,7 +1288,7 @@
                                                     </Canvas>
                                                 </Viewbox>
                                             </Button>
-                                            <Button x:Name="editRecordBtn" Width="Auto" Height="25" Background="{x:Null}" BorderBrush="Black" Margin="10,10,0,10" ToolTip="Edit Record" >
+                                            <Button x:Name="editSchedBtn" Width="Auto" Height="25" Background="{x:Null}" BorderBrush="Black" Margin="10,10,0,10" ToolTip="Edit Record" >
                                                 <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
                                                     <Canvas x:Name="Capa_1b" Width="438.536" Height="438.536" Canvas.Left="0" Canvas.Top="0">
                                                         <Canvas.RenderTransform>
@@ -1314,7 +1327,7 @@
                                                     </Canvas>
                                                 </Viewbox>
                                             </Button>
-                                            <Button x:Name="deleteRecordBtn"  Width="Auto" Height="25" BorderBrush="Black" Background="{x:Null}" Margin="10,10,0,10" ToolTip="Delete Record">
+                                            <Button x:Name="deleteSchedBtn"  Width="Auto" Height="25" BorderBrush="Black" Background="{x:Null}" Margin="10,10,0,10" ToolTip="Delete Record">
 
                                                 <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
                                                     <Canvas x:Name="Capa_1c" Width="438.529" Height="438.529" Canvas.Left="0" Canvas.Top="0">
@@ -1372,7 +1385,7 @@
                 </Grid>
                 <local:ucServiceSchedule x:Name="ucService" Margin="0" Visibility="Collapsed" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="reportsGrid">
+            <Grid x:Name="reportsGrid" d:IsHidden="True">
                 <local:ucReportPurchase x:Name="ucReportPurchase" Height="Auto" Margin="0" Width="Auto" d:IsHidden="True"/>
                 <local:ucReportService Height="Auto" Margin="0" Width="Auto"/>
                 <!--<local:ucReportSales/>-->

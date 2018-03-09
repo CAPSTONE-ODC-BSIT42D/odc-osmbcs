@@ -162,5 +162,10 @@ namespace prototype2.uControlsTransanction
         {
             OnReceivePaymentButtonCliked(e);
         }
+
+        private void clearCheckBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
