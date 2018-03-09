@@ -54,19 +54,99 @@ namespace prototype2
         {
             if (this.IsVisible)
             {
-
+                if (MainVM.SelectedAvailedServices != null)
+                {
+                    loadDataToUi();
+                    
+                }
+                    
             }
+        }
+
+        void loadDataToUi()
+        {
+            if (MainVM.isEdit)
+            {
+                var dbCon = DBConnection.Instance();
+                string query = "SELECT * FROM phases_per_services where serviceSchedID = " + MainVM.SelectedServiceSchedule_.ServiceSchedID;
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                foreach (DataRow dr in fromDbTable.Rows)
+                {
+                    MainVM.SelectedServiceSchedule_.PhasesPerService.Add(new PhasesPerService() { ID = int.Parse(dr[0].ToString()), ServiceSchedID = int.Parse(dr[1].ToString()), PhaseID = int.Parse(dr[2].ToString()), Status = dr[3].ToString()});
+                }
+                startDate.SelectedDate = MainVM.SelectedServiceSchedule_.dateStarted_;
+                endDate.SelectedDate = MainVM.SelectedServiceSchedule_.dateEnded_;
+                notesTb.Text = MainVM.SelectedServiceSchedule_.schedNotes_;
+            }
+            else
+            {
+                MainVM.SelectedServiceSchedule_ = new ServiceSchedule();
+                var obj = from ph in MainVM.Phases
+                          join pg in MainVM.PhasesGroup on ph.PhaseGroupID equals pg.PhaseGroupID
+                          where pg.ServiceID == MainVM.SelectedAvailedServices.ServiceID
+                          select ph;
+                foreach(Phase ph in obj)
+                {
+                    MainVM.SelectedServiceSchedule_.PhasesPerService.Add(new PhasesPerService() { PhaseID = ph.PhaseID, Status = "PENDING" });
+                }
+            }
+
+            
+        }
+
+        void searchForAvailableEmployees()
+        {
+            foreach(ServiceSchedule ss in MainVM.ServiceSchedules_)
+            {
+                if(ss.dateEnded_ < startDate.SelectedDate)
+                {
+                    var emp = (from e in MainVM.Employees
+                               where !(ss.assignedEmployees_.Contains(e))
+                               select e);
+                    var cont = (from e in MainVM.Contractor
+                                where !(ss.assignedEmployees_.Contains(e))
+                                select e);
+
+                    foreach (Employee ee in emp)
+                    {
+                        MainVM.AvailableEmployees_.Add(ee);
+                    }
+                    foreach (Employee ee in cont)
+                    {
+                        MainVM.AvailableEmployees_.Add(ee);
+                    }
+                }
+                
+            }
+            if(MainVM.ServiceSchedules_.Count ==0)
+            {
+
+                foreach (Employee ee in MainVM.Employees)
+                {
+                    MainVM.AvailableEmployees_.Add(ee);
+                }
+                foreach (Employee ee in MainVM.Contractor)
+                {
+                    MainVM.AvailableEmployees_.Add(ee);
+                }
+            }
+
+            
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            //foreach(ServiceSchedule ss in MainVM.ServiceSchedules_)
-            //serviceSched.Appointments.Add(new ScheduleAppointment() { Subject = ss.serviceSchedNoChar_, StartTime = (DateTime)ss.dateStarted_, EndTime = (DateTime)ss.dateEnded_ });
         }
 
         private void selectServiceBtn_Click(object sender, RoutedEventArgs e)
         {
             OnSelectServiceButtonClicked(e);
+            loadDataToUi();
+            searchForAvailableEmployees();
         }
 
         private void scheduleServiceBtn_Click(object sender, RoutedEventArgs e)
@@ -78,6 +158,7 @@ namespace prototype2
 
         private void saveSchedBtn_Click(object sender, RoutedEventArgs e)
         {
+            saveDataToDb();
             ////MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(MainVM.SelectedAddedService.SqNoChar)).First();
             //MainVM.SelectedSalesInvoice = MainVM.SalesInvoice.Where(x => x.sqNoChar_.Equals(MainVM.SelectedSalesQuote.sqNoChar_)).First();
             //if (assignedEmployees.Items.Count != 0 && MainVM.SelectedSalesInvoice!=null)
@@ -105,6 +186,7 @@ namespace prototype2
 
         private void cancelschedBtn_Click(object sender, RoutedEventArgs e)
         {
+            OnSaveCloseButtonClicked(e);
         }
 
         void saveDataToDb()
@@ -114,27 +196,37 @@ namespace prototype2
             {
                 if (!MainVM.isEdit)
                 {
-                    string query = "INSERT INTO `odc_db`.`service_sched_t`(`serviceSchedNoChar`,`invoiceNo`,`dateStarted`,`dateEnded`,`schedNotes`)" +
+                    string query = "INSERT INTO `odc_db`.`service_sched_t`(`serviceAvailedID`,`serviceStatus`,`dateStarted`,`dateEnded`,`schedNotes`)" +
                         " VALUES" +
-                        "('"
-                        + MainVM.SelectedServiceSchedule_.serviceSchedNoChar_ + "','" +
-                          MainVM.SelectedServiceSchedule_.invoiceNo_ + "','" +
-                          MainVM.SelectedServiceSchedule_.dateStarted_.ToString("yyyy-MM-dd") + "','" +
-                          MainVM.SelectedServiceSchedule_.dateEnded_.ToString("yyyy-MM-dd") + "','" +
-                          MainVM.SelectedServiceSchedule_.schedNotes_ +
+                        "('"+
+                          MainVM.SelectedAvailedServices.AvailedServiceID + "','PENDING','" +
+                          startDate.SelectedDate.Value.ToString("yyyy-MM-dd") + "','" +
+                          endDate.SelectedDate.Value.ToString("yyyy-MM-dd") + "','" +
+                          notesTb.Text +
                         "');";
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
+                        query = "SELECT LAST_INSERT_ID();";
+                        string schedID = dbCon.selectScalar(query, dbCon.Connection).ToString();
                         foreach (Employee emp in MainVM.AssignedEmployees_)
                         {
-                            query = "INSERT INTO `odc_db`.`assigned_employees_t`(`serviceSqNoChar`,`empID`)" +
+                            query = "INSERT INTO `odc_db`.`assigned_employees_t`(`serviceSchedID`,`empID`)" +
                          " VALUES" +
                          "('"
-                         + MainVM.SelectedServiceSchedule_.serviceSchedNoChar_ + "','" +
+                         + schedID + "','" +
                            emp.EmpID +
                          "');";
                             dbCon.insertQuery(query, dbCon.Connection);
                         }
+
+                        foreach(PhasesPerService pps in MainVM.SelectedServiceSchedule_.PhasesPerService)
+                        {
+                            query = "INSERT INTO `odc_db`.`phases_per_services_t`(`phaseID`,`serviceSchedID`, `status`)" +
+                         " VALUES" +
+                         "('"+ pps.PhaseID + "','" +
+                            schedID + "','PENDING');";
+                        }
+
                         MessageBox.Show("Succesfully added a schedule");
                     }
                 }
@@ -142,26 +234,24 @@ namespace prototype2
                 {
                     string query = "UPDATE `odc_db`.`service_sched_t` " +
                         "SET" +
-                        " `serviceSchedNoChar` = '" + MainVM.SelectedServiceSchedule_.serviceSchedNoChar_ + "','" +
-                        " `invoiceNo` = '" + MainVM.SelectedServiceSchedule_.invoiceNo_ + "','" +
-                        " `dateStarted` = '" + MainVM.SelectedServiceSchedule_.dateStarted_.ToString("yyyy-MM-dd") + "','" +
-                        " `dateEnded` = '" + MainVM.SelectedServiceSchedule_.dateEnded_.ToString("yyyy-MM-dd") + "','" +
-                        " `schedNotes` =  '" + MainVM.SelectedServiceSchedule_.schedNotes_ + "','" +
-                        " WHERE `serviceSchedNoChar` = " + MainVM.SelectedServiceSchedule_.serviceSchedNoChar_ +
+                        " `dateStarted` = '" + startDate.SelectedDate.Value.ToString("yyyy-MM-dd") + "','" +
+                        " `dateEnded` = '" + endDate.SelectedDate.Value.ToString("yyyy-MM-dd") + "','" +
+                        " `schedNotes` =  '" + notesTb.Text + "','" +
+                        " WHERE `serviceSchedID` = " + MainVM.SelectedServiceSchedule_.ServiceSchedID +
                         ";";
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
                         query = "DELETE FROM `odc_db`.`assigned_employees_t` " +
-                                "WHERE `serviceSqNoChar` = '" + MainVM.SelectedServiceSchedule_.serviceSchedNoChar_ + "';";
+                                "WHERE `serviceSchedID` = '" + MainVM.SelectedServiceSchedule_.ServiceSchedID + "';";
                         dbCon.insertQuery(query, dbCon.Connection);
                         foreach (Employee emp in MainVM.SelectedServiceSchedule_.assignedEmployees_)
                         {
-                            query = "INSERT INTO `odc_db`.`assigned_employees_t`(`serviceSqNoChar`,`empID`)" +
-                             " VALUES" +
-                             "('"
-                             + MainVM.SelectedServiceSchedule_.serviceSchedNoChar_ + "','" +
-                               emp.EmpID +
-                             "');";
+                            query = "INSERT INTO `odc_db`.`assigned_employees_t`(`serviceSchedID`,`empID`)" +
+                         " VALUES" +
+                         "('"
+                         + MainVM.SelectedServiceSchedule_.ServiceSchedID + "','" +
+                           emp.EmpID +
+                         "');";
                             dbCon.insertQuery(query, dbCon.Connection);
                         }
                         MessageBox.Show("Succesfully updated the schedule");
@@ -171,34 +261,27 @@ namespace prototype2
             }
         }
 
-        void loadDataToUi()
-        {
-            MainVM.isEdit = true;
-            //MainVM.SelectedServiceSchedule_ = MainVM.ServiceSchedules_.Where(x => x.serviceSchedNoChar_.Equals(serviceSched.SelectedAppointment.Subject)).First();
-        }
+        
 
-        void searchForAvailableEmployees()
-        {
-
-        }
+        
 
         private void transferToLeftBtn_Click(object sender, RoutedEventArgs e)
         {
-
-            MainVM.AssignedEmployees_.Add(MainVM.SelectedEmployeeContractor);
-            MainVM.AvailableEmployees_.Remove(MainVM.SelectedEmployeeContractor);
+            MainVM.AvailableEmployees_.Add(MainVM.SelectedEmployeeContractor);
+            MainVM.SelectedServiceSchedule_.assignedEmployees_.Remove(MainVM.SelectedEmployeeContractor);
+            
         }
 
         private void transferToRightBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainVM.AvailableEmployees_.Add(MainVM.SelectedEmployeeContractor);
-            MainVM.AssignedEmployees_.Remove(MainVM.SelectedEmployeeContractor);
+            MainVM.SelectedServiceSchedule_.assignedEmployees_.Add(MainVM.SelectedEmployeeContractor);
+            MainVM.AvailableEmployees_.Remove(MainVM.SelectedEmployeeContractor);
         }
 
         private void startDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             endDate.DisplayDateStart = startDate.SelectedDate;
-            workerAtServiceSched.RunWorkerAsync();
+            searchForAvailableEmployees();
         }
 
         private void endDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -206,21 +289,8 @@ namespace prototype2
 
         }
 
-        private void serviceNoCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void markAsDoneBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (this.IsVisible)
-            {
-                //MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(MainVM.SelectedAddedService.SqNoChar)).FirstOrDefault();
-                MainVM.SelectedSalesInvoice = MainVM.SalesInvoice.Where(x => x.sqNoChar_.Equals(MainVM.SelectedSalesQuote.sqNoChar_)).FirstOrDefault();
-                if (MainVM.SelectedSalesInvoice != null)
-                {
-                    // MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(MainVM.SelectedAddedService.ServiceID)).FirstOrDefault();
-                }
-                else
-                {
-                    MessageBox.Show("This service have no invoice");
-                }
-            }
 
         }
     }

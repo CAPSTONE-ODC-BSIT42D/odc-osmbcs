@@ -391,6 +391,21 @@ namespace prototype2
                         obj.Visibility = Visibility.Collapsed;
                 }
             }
+            else if (ucSelectService.IsVisible)
+            {
+                foreach (var element in serviceGrid.Children)
+                {
+                    if (element is UserControl)
+                    {
+                        if (!(((UserControl)element).Equals(ucService)))
+                        {
+                            ((UserControl)element).Visibility = Visibility.Collapsed;
+                        }
+                        else
+                            ((UserControl)element).Visibility = Visibility.Visible;
+                    }
+                }
+            }
             otherGridBg.Visibility = Visibility.Collapsed;
             foreach (UIElement obj in otherGridBg.Children)
             {
@@ -1609,16 +1624,19 @@ namespace prototype2
         #region Service Management
         private void newServiceSchedBtn_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var element in serviceGrid.Children)
+            MainVM.isEdit = false;
+            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+            otherGridBg.Visibility = Visibility.Visible;
+            Grid.SetZIndex((otherGridBg), 1);
+            foreach (UIElement obj in otherGridBg.Children)
             {
-                if (element is UserControl)
+                if (obj.Equals(ucSelectService))
                 {
-                    if (!(((UserControl)element).Equals(ucService)))
-                    {
-                        ((UserControl)element).Visibility = Visibility.Collapsed;
-                    }
-                    else
-                        ((UserControl)element).Visibility = Visibility.Visible;
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    obj.Visibility = Visibility.Collapsed;
                 }
             }
         }

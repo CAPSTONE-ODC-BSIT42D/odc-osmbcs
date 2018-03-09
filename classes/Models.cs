@@ -337,46 +337,6 @@ namespace prototype2
 
     }
 
-    public class Phases_Per_Service : ViewModelEntity
-    {
-        public Phases_Per_Service()
-        {
-
-        }
-
-        protected int id;
-
-        public int ID
-        {
-            get { return id; }
-            set { SetProperty(ref id, value); }
-        }
-        
-        protected int phaseID;
-        public int PhaseID
-        {
-
-            get { return phaseID; }
-            set { SetProperty(ref phaseID, value); }
-        }
-
-        protected int serviceSchedID;
-        public int ServiceSchedID
-        {
-
-            get { return serviceSchedID; }
-            set { SetProperty(ref serviceSchedID, value); }
-        }
-
-        protected string status;
-        public string Status
-        {
-            get { return status; }
-            set { SetProperty(ref status, value); }
-        }
-
-    }
-
 
     public class Unit : ViewModelEntity
     {
@@ -824,6 +784,13 @@ namespace prototype2
         {
             get { return provinceID; }
             set { SetProperty(ref provinceID, value); }
+        }
+
+        protected string desc;
+        public string Desc
+        {
+            get { return desc; }
+            set { SetProperty(ref desc, value); }
         }
 
         protected string address;
@@ -1621,11 +1588,11 @@ namespace prototype2
 
         }
 
-        protected string serviceSchedNoChar;
-        public string serviceSchedNoChar_
+        protected int serviceSchedID;
+        public int ServiceSchedID
         {
-            get { return serviceSchedNoChar; }
-            set { SetProperty(ref serviceSchedNoChar, value); }
+            get { return serviceSchedID; }
+            set { SetProperty(ref serviceSchedID, value); }
         }
 
         protected int invoiceNo;
@@ -1677,6 +1644,13 @@ namespace prototype2
             get { return assignedEmployees; }
             set { SetProperty(ref assignedEmployees, value); }
         }
+
+        protected ObservableCollection<PhasesPerService> phasesPerService = new ObservableCollection<PhasesPerService>();
+        public ObservableCollection<PhasesPerService> PhasesPerService
+        {
+            get { return phasesPerService; }
+            set { SetProperty(ref phasesPerService, value); }
+        }
     }
 
     public class AssignedEmployee : ViewModelEntity
@@ -1708,6 +1682,43 @@ namespace prototype2
             get { return allEmployeesContractor; }
             set { allEmployeesContractor = value; }
         }
+    }
+
+    public class PhasesPerService : ViewModelEntity
+    {
+        public PhasesPerService()
+        {
+
+        }
+
+        protected int id;
+        public int ID
+        {
+            get { return id; }
+            set { SetProperty(ref id, value); }
+        }
+
+        protected int phaseID;
+        public int PhaseID
+        {
+            get { return phaseID; }
+            set { SetProperty(ref phaseID, value); }
+        }
+
+        protected int serviceSchedID;
+        public int ServiceSchedID
+        {
+            get { return serviceSchedID; }
+            set { SetProperty(ref serviceSchedID, value); }
+        }
+
+        protected string status;
+        public string Status
+        {
+            get { return status; }
+            set { SetProperty(ref status, value); }
+        }
+        
     }
     #endregion
 }

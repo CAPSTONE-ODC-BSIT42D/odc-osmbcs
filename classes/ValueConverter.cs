@@ -202,13 +202,57 @@ namespace prototype2
         }
     }
 
+    public class PhaseItemConverter : IValueConverter
+    {
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
+        public object Convert(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            if (!value.Equals(0))
+            {
+                MainVM.SelectedPhase = MainVM.Phases.Where(x => x.PhaseID == int.Parse(value.ToString())).First();
+                return MainVM.SelectedPhase.PhaseName;
+            }
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            return "no";
+        }
+    }
+
+    public class PhaseGroupConverter : IValueConverter
+    {
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
+        public object Convert(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            if (!value.Equals(0))
+            {
+                MainVM.SelectedPhase = MainVM.Phases.Where(x => x.PhaseID == int.Parse(value.ToString())).First();
+                MainVM.SelectedPhaseGroup = MainVM.PhasesGroup.Where(x => x.PhaseGroupID == MainVM.SelectedPhase.PhaseGroupID).First();
+                return MainVM.SelectedPhaseGroup.PhaseGroupName;
+            }
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            return "no";
+        }
+    }
+
+
     public class SaleQuoteDetailsConverter : IValueConverter
     {
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
         public object Convert(object value, Type targetType, object parameter,
                 System.Globalization.CultureInfo culture)
         {
-            if (!value.Equals(0) && MainVM.ServicesList.Count != 0)
+            if (!value.Equals(0))
             {
                 MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(value)).First();
                 MainVM.SelectedCustomerSupplier = MainVM.Customers.Where(x => x.CompanyID.Equals(MainVM.SelectedSalesQuote.custID_)).First();
@@ -223,4 +267,5 @@ namespace prototype2
             return "no";
         }
     }
+
 }
