@@ -47,7 +47,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        po.orderDate, i.itemName,ia.unitprice , SUM(ia.unitprice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN purchase_order_t po ON po.PONumChar = ia.poNumChar WHERE         (i.isDeleted = 0) GROUP BY po.orderDate, i.itemName, ia.unitprice";
+            cmd.CommandText = "SELECT        po.orderDate, i.itemName,pi.unitprice , SUM(pi.unitprice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar WHERE         (i.isDeleted = 0) GROUP BY po.orderDate, i.itemName, pi.unitprice";
 
             DataSetReportPurchase.PurchaseTableDataTable dSPurchase = new DataSetReportPurchase.PurchaseTableDataTable();
 
@@ -76,7 +76,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        po.orderDate, i.itemName,ia.unitprice , SUM(ia.unitprice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN purchase_order_t po ON po.PONumChar = ia.poNumChar WHERE(CURDATE() = po.orderDate) AND(i.isDeleted = 0) SELECT        po.orderDate, i.itemName,ia.unitprice , SUM(ia.unitprice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN purchase_order_t po ON po.PONumChar = ia.poNumChar";
+            cmd.CommandText = "SELECT        po.orderDate, i.itemName,pi.unitprice , SUM(pi.unitprice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar WHERE(CURDATE() = po.orderDate) AND(i.isDeleted = 0) GROUP BY po.orderDate, i.itemName, pi.unitprice";
 
             DataSetReportPurchase.PurchaseTableDataTable dSPurchase = new DataSetReportPurchase.PurchaseTableDataTable();
 
@@ -105,7 +105,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        po.orderDate, i.itemName,ia.unitprice , SUM(ia.unitprice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN purchase_order_t po ON po.PONumChar = ia.poNumChar WHERE(WEEK(po.orderDate) = '" + DatePickerWeekSales.SelectedDate.ToString() +"') AND(i.isDeleted = 0) SELECT        po.orderDate, i.itemName,ia.unitprice , SUM(ia.unitprice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN purchase_order_t po ON po.PONumChar = ia.poNumChar";
+            cmd.CommandText = "SELECT        po.orderDate, i.itemName,pi.unitprice , SUM(pi.unitprice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar WHERE(WEEK(po.orderDate) = '" + DatePickerWeekSales.SelectedDate.ToString() + "') AND(i.isDeleted = 0) GROUP BY po.orderDate, i.itemName, pi.unitprice";
 
             DataSetReportPurchase.PurchaseTableDataTable dSPurchase = new DataSetReportPurchase.PurchaseTableDataTable();
 
@@ -134,7 +134,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        po.orderDate, i.itemName,ia.unitprice , SUM(ia.unitprice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN purchase_order_t po ON po.PONumChar = ia.poNumChar WHERE(YEAR(po.orderDate) = '" + ComboBoxYearSales.SelectedItem.ToString() + "') AND(i.isDeleted = 0) SELECT        po.orderDate, i.itemName,ia.unitprice , SUM(ia.unitprice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN purchase_order_t po ON po.PONumChar = ia.poNumChar";
+            cmd.CommandText = "SELECT        po.orderDate, i.itemName,pi.unitprice , SUM(pi.unitprice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar WHERE(YEAR(po.orderDate) = '" + ComboBoxYearSales.SelectedItem.ToString() + "') AND(i.isDeleted = 0)  GROUP BY po.orderDate, i.itemName, pi.unitprice";
 
             DataSetReportPurchase.PurchaseTableDataTable dSPurchase = new DataSetReportPurchase.PurchaseTableDataTable();
 
@@ -163,7 +163,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        po.orderDate, i.itemName,ia.unitprice , SUM(ia.unitprice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN purchase_order_t po ON po.PONumChar = ia.poNumChar WHERE(MONTHNAME(po.orderDate) = '"+ ComboBoxMonthSales.SelectedItem.ToString() + "') AND(i.isDeleted = 0) SELECT        po.orderDate, i.itemName,ia.unitprice , SUM(ia.unitprice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN purchase_order_t po ON po.PONumChar = ia.poNumChar";
+            cmd.CommandText = "SELECT        po.orderDate, i.itemName,pi.unitprice , SUM(pi.unitprice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar WHERE(MONTHNAME(po.orderDate) = '" + ComboBoxMonthSales.SelectedItem.ToString() + "') AND(i.isDeleted = 0)  GROUP BY po.orderDate, i.itemName, pi.unitprice";
 
             DataSetReportPurchase.PurchaseTableDataTable dSPurchase = new DataSetReportPurchase.PurchaseTableDataTable();
 
@@ -192,7 +192,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        po.orderDate, i.itemName, io.totalCost, s.serviceName, sa.totalCost AS Expr1, SUM(io.totalCost) AS Expr2, SUM(sa.totalCost) AS Expr3, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM            services_availed_t sa INNER JOIN services_t s ON sa.serviceID = s.serviceID INNER JOIN  sales_quote_t sq ON sa.sqNoChar = sq.sqNoChar, cust_supp_t cs INNER JOIN purchase_order_t po ON cs.companyID = po.suppID, items_availed_t io INNER JOIN item_t i ON io.itemID = i.ID WHERE(po.orderDate BETWEEN '" + DatePickerStartSales.SelectedDate.ToString() +"' AND '"+DatePickerEndSales.SelectedDate.ToString()+"')  AND(i.isDeleted = 0) SELECT        po.orderDate, i.itemName,ia.unitprice , SUM(ia.unitprice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN items_availed_t ia ON i.ID = ia.itemID INNER JOIN purchase_order_t po ON po.PONumChar = ia.poNumChar ";
+            cmd.CommandText = "SELECT        po.orderDate, i.itemName,pi.unitprice , SUM(pi.unitprice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar WHERE(po.orderDate BETWEEN '" + DatePickerStartSales.SelectedDate.ToString() +"' AND '"+DatePickerEndSales.SelectedDate.ToString()+ "')  AND(i.isDeleted = 0) GROUP BY po.orderDate, i.itemName, pi.unitprice";
 
             DataSetReportPurchase.PurchaseTableDataTable dSPurchase = new DataSetReportPurchase.PurchaseTableDataTable();
 

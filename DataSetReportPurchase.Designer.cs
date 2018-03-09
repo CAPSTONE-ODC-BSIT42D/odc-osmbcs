@@ -939,30 +939,29 @@ namespace prototype2.DataSetReportPurchaseTableAdapters {
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[6];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        po.orderDate, i.itemName, ia.unitPrice, SUM(ia.unitPrice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
+            this._commandCollection[0].CommandText = @"SELECT        po.orderDate, i.itemName, pi.unitPrice, SUM(pi.unitPrice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
 FROM            item_t i INNER JOIN
-                         items_availed_t ia ON i.ID = ia.itemID INNER JOIN
-                         purchase_order_t po ON po.PONumChar = ia.poNumChar
-WHERE        (CURDATE() = po.orderDate) AND (i.isDeleted = 0)
-GROUP BY po.orderDate, i.itemName, ia.unitPrice";
+                         po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
+                         purchase_order_t po ON po.PONumChar = pi.poNumChar
+GROUP BY po.orderDate, i.itemName, pi.unitPrice";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = @"SELECT        po.orderDate, i.itemName, ia.unitPrice, SUM(ia.unitPrice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
+            this._commandCollection[1].CommandText = @"SELECT        po.orderDate, i.itemName, pi.unitPrice, SUM(pi.unitPrice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
 FROM            item_t i INNER JOIN
-                         items_availed_t ia ON i.ID = ia.itemID INNER JOIN
-                         purchase_order_t po ON po.PONumChar = ia.poNumChar
+                         po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
+                         purchase_order_t po ON po.PONumChar = pi.poNumChar
 WHERE        (CURDATE() = po.orderDate) AND (i.isDeleted = 0)
-GROUP BY po.orderDate, i.itemName, ia.unitPrice";
+GROUP BY po.orderDate, i.itemName, pi.unitPrice";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = @"SELECT        po.orderDate, i.itemName, ia.unitPrice, SUM(ia.unitPrice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
+            this._commandCollection[2].CommandText = @"SELECT        po.orderDate, i.itemName, pi.unitPrice, SUM(pi.unitPrice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
 FROM            item_t i INNER JOIN
-                         items_availed_t ia ON i.ID = ia.itemID INNER JOIN
-                         purchase_order_t po ON po.PONumChar = ia.poNumChar
+                         po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
+                         purchase_order_t po ON po.PONumChar = pi.poNumChar
 WHERE        (MONTHNAME(po.orderDate) = @A) AND (i.isDeleted = 0)
-GROUP BY po.orderDate, i.itemName, ia.unitPrice";
+GROUP BY po.orderDate, i.itemName, pi.unitPrice";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@A";
@@ -972,12 +971,9 @@ GROUP BY po.orderDate, i.itemName, ia.unitPrice";
             this._commandCollection[2].Parameters.Add(param);
             this._commandCollection[3] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = @"SELECT        po.orderDate, i.itemName, ia.unitPrice, SUM(ia.unitPrice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
-FROM            item_t i INNER JOIN
-                         items_availed_t ia ON i.ID = ia.itemID INNER JOIN
-                         purchase_order_t po ON po.PONumChar = ia.poNumChar
+            this._commandCollection[3].CommandText = @"SELECT        po.orderDate, i.itemName,pi.unitprice , SUM(pi.unitprice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar
 WHERE        (po.orderDate BETWEEN @R AND @T) AND (i.isDeleted = 0)
-GROUP BY po.orderDate, i.itemName, ia.unitPrice";
+GROUP BY po.orderDate, i.itemName, pi.unitPrice";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@R";
@@ -995,12 +991,12 @@ GROUP BY po.orderDate, i.itemName, ia.unitPrice";
             this._commandCollection[3].Parameters.Add(param);
             this._commandCollection[4] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[4].Connection = this.Connection;
-            this._commandCollection[4].CommandText = @"SELECT        po.orderDate, i.itemName, ia.unitPrice, SUM(ia.unitPrice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
+            this._commandCollection[4].CommandText = @"SELECT        po.orderDate, i.itemName, pi.unitPrice, SUM(pi.unitPrice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
 FROM            item_t i INNER JOIN
-                         items_availed_t ia ON i.ID = ia.itemID INNER JOIN
-                         purchase_order_t po ON po.PONumChar = ia.poNumChar
+                         po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
+                         purchase_order_t po ON po.PONumChar = pi.poNumChar
 WHERE        (WEEK(po.orderDate) = @C) AND (i.isDeleted = 0)
-GROUP BY po.orderDate, i.itemName, ia.unitPrice";
+GROUP BY po.orderDate, i.itemName, pi.unitPrice";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@C";
@@ -1010,12 +1006,12 @@ GROUP BY po.orderDate, i.itemName, ia.unitPrice";
             this._commandCollection[4].Parameters.Add(param);
             this._commandCollection[5] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[5].Connection = this.Connection;
-            this._commandCollection[5].CommandText = @"SELECT        po.orderDate, i.itemName, ia.unitPrice, SUM(ia.unitPrice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
+            this._commandCollection[5].CommandText = @"SELECT        po.orderDate, i.itemName, pi.unitPrice, SUM(pi.unitPrice) AS Expr2, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
 FROM            item_t i INNER JOIN
-                         items_availed_t ia ON i.ID = ia.itemID INNER JOIN
-                         purchase_order_t po ON po.PONumChar = ia.poNumChar
+                         po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
+                         purchase_order_t po ON po.PONumChar = pi.poNumChar
 WHERE        (YEAR(po.orderDate) = @B) AND (i.isDeleted = 0)
-GROUP BY po.orderDate, i.itemName, ia.unitPrice";
+GROUP BY po.orderDate, i.itemName, pi.unitPrice";
             this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@B";
