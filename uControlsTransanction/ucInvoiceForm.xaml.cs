@@ -148,7 +148,7 @@ namespace prototype2
                                       select itm;
                     decimal totalPric = ai.ItemQty * ( ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc));
                     MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, unitPrice = ai.UnitPrice, totalAmount = totalPric });
-                    MainVM.VatableSale += Math.Round(totalPric, 2);
+                    MainVM.VatableSale += totalPric;
                 }
 
                 foreach (AvailedService aserv in invoiceserv)
@@ -168,17 +168,13 @@ namespace prototype2
                                         select af.FeePrice).Sum();
                     decimal totalAmount = aserv.TotalCost + totalFee;
 
-                    MainVM.RequestedItems.Add(new RequestedItem() { itemID = aserv.ServiceID, itemType = 1, qty = 0, totalAmount = totalAmount, unitPrice = service.Last().ServicePrice });
-                    MainVM.VatableSale += Math.Round(totalAmount, 2);
+                    MainVM.RequestedItems.Add(new RequestedItem() { itemID = aserv.ServiceID, itemType = 1, qty = 0, totalAmount = totalAmount, unitPrice = aserv.TotalCost });
+                    MainVM.VatableSale += totalAmount;
                 }
 
-                MainVM.TotalSalesNoVat = Math.Round(MainVM.VatableSale, 2);
-
-                MainVM.VatAmount = (MainVM.TotalSalesNoVat * ((decimal)0.12));
-                MainVM.VatAmount = Math.Round(MainVM.VatAmount, 2);
+                MainVM.VatAmount = (MainVM.VatableSale * ((decimal)0.12));
 
                 MainVM.TotalSales = MainVM.VatableSale + MainVM.VatAmount;
-                MainVM.TotalSales = Math.Round(MainVM.TotalSales, 2);
 
                 dateOfIssue = DateTime.Now;
                 dateToday.Content = dateOfIssue.ToShortDateString();
@@ -223,9 +219,7 @@ namespace prototype2
             DateTime dueDate = new DateTime();
             dueDate = dateOfIssue.AddDays(int.Parse(dueDateTb.Value.ToString()));
 
-            MainVM.SelectedSalesInvoice = (new SalesInvoice() { sqNoChar_ = MainVM.SelectedSalesQuote.sqNoChar_, busStyle_ = busStyleTb.Text, tin_ = tinNumTb.Text, custID_ = MainVM.SelectedSalesQuote.custID_, dueDate_ = dueDate, vat_ = MainVM.VatAmount_, withholdingTax_ = MainVM.WithHoldingTax_, purchaseOrderNumber_ = purchaseOrdNumTb.Text, terms_ = (int)dueDateTb.Value });
-
-
+            MainVM.SelectedSalesInvoice = (new SalesInvoice() { sqNoChar_ = MainVM.SelectedSalesQuote.sqNoChar_, busStyle_ = busStyleTb.Text, tin_ = tinNumTb.Text, custID_ = MainVM.SelectedSalesQuote.custID_, dueDate_ = dueDate, vat_ = MainVM.VatAmount, withholdingTax_ = MainVM.WithHoldingTax, purchaseOrderNumber_ = purchaseOrdNumTb.Text, terms_ = (int)dueDateTb.Value });
         }
 
 
@@ -252,6 +246,29 @@ namespace prototype2
                     "'); ";
                 if (dbCon.insertQuery(query, dbCon.Connection))
                 {
+
+
+                    query = "SELECT LAST_INSERT_ID();";
+                    string serviceID = dbCon.selectScalar(query, dbCon.Connection).ToString();
+
+                    decimal amount1 = MainVM.TotalSales - (MainVM.TotalSales / 100 * MainVM.SelectedSalesQuote.termsDP_);
+
+                    query = "INSERT INTO `odc_db`.`si_payment_t` " +
+               "(`SIpaymentAmount`,`invoiceNo`) " +
+               "VALUES " +
+               "('" + amount1 + "','" +
+               serviceID + "')";
+                    dbCon.insertQuery(query, dbCon.Connection);
+
+                    decimal amount2 = MainVM.TotalSales - amount1;
+
+                    query = "INSERT INTO `odc_db`.`si_payment_t` " +
+               "(`SIpaymentAmount`,`invoiceNo`) " +
+               "VALUES " +
+               "('" + amount2 + "','" +
+               serviceID + "')";
+                    dbCon.insertQuery(query, dbCon.Connection);
+
                     query = "UPDATE `sales_quote_t` SET status = '" + "ACCEPTED" + "' WHERE sqNoChar = '" + MainVM.SelectedSalesInvoice.sqNoChar_ + "'";
                     dbCon.insertQuery(query, dbCon.Connection);
                     MessageBox.Show("Invoice is Saved");
@@ -263,14 +280,16 @@ namespace prototype2
         {
             if (this.IsVisible && MainVM.isPaymentInvoice)
             {
-                foreach(UIElement obj in newInvoiceFormGrid1.Children)
+                MainVM.RequestedItems.Clear();
+                computeInvoice();
+                foreach (UIElement obj in newInvoiceFormGrid1.Children)
                 {
                     if (obj.Equals(newInvoiceForm))
                         obj.Visibility = Visibility.Visible;
                     else
                         obj.Visibility = Visibility.Collapsed;
                 }
-                computeInvoice();
+                
             }
         }
     }

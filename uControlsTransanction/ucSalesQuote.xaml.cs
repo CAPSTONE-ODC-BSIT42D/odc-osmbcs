@@ -100,43 +100,47 @@ namespace prototype2
         }
 
 
-        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void ucSalesQuote1_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (this.IsVisible)
+            if (IsLoaded)
             {
-                if (MainVM.SelectedSalesQuote != null)
+                if (this.IsVisible)
                 {
-                    foreach (UIElement obj in transQuoatationGridForm.Children)
+                    if (MainVM.SelectedSalesQuote != null)
                     {
-                        if (transQuoatationGridForm.Children.IndexOf(obj) == 0)
+                        foreach (UIElement obj in transQuoatationGridForm.Children)
                         {
-                            obj.Visibility = Visibility.Visible;
+                            if (transQuoatationGridForm.Children.IndexOf(obj) == 0)
+                            {
+                                obj.Visibility = Visibility.Visible;
+                            }
+                            else
+                                obj.Visibility = Visibility.Collapsed;
                         }
-                        else
-                            obj.Visibility = Visibility.Collapsed;
+                        loadSalesQuoteToUi();
+                        computePrice();
                     }
-                    loadSalesQuoteToUi();
-                    computePrice();
-                }
-                else
-                {
-
-                    foreach (UIElement obj in transQuoatationGridForm.Children)
+                    else
                     {
-                        obj.IsEnabled = true;
 
-                        if (transQuoatationGridForm.Children.IndexOf(obj) == 0)
+                        foreach (UIElement obj in transQuoatationGridForm.Children)
                         {
-                            obj.Visibility = Visibility.Visible;
+                            obj.IsEnabled = true;
+
+                            if (transQuoatationGridForm.Children.IndexOf(obj) == 0)
+                            {
+                                obj.Visibility = Visibility.Visible;
+                            }
+                            else
+                                obj.Visibility = Visibility.Collapsed;
                         }
-                        else
-                            obj.Visibility = Visibility.Collapsed;
+
                     }
+                    closeModals();
 
                 }
-                closeModals();
-
             }
+           
 
         }
 
@@ -488,27 +492,32 @@ namespace prototype2
 
         private void markupPriceTb_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            computePrice();
+            if (IsLoaded && IsVisible)
+                computePrice();
         }
 
         private void discountPriceTb_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            computePrice();
+            if (IsLoaded && IsVisible)
+                computePrice();
         }
 
         private void qtyTb_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            computePrice();
+            if (IsLoaded && IsVisible)
+                computePrice();
         }
         
         private void IntegerUpDown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            computePrice();
+            if (IsLoaded && IsVisible)
+                computePrice();
         }
 
         private void unitPriceTb_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            computePrice();
+            if (IsLoaded && IsVisible)
+                computePrice();
         }
 
         private void uploadBtn_Click(object sender, RoutedEventArgs e)
@@ -580,7 +589,7 @@ namespace prototype2
 
         }
 
-        private void computePrice()
+        void computePrice()
         {
             
             decimal totalPrice = 0;
