@@ -46,6 +46,7 @@ namespace prototype2.uControlsTransanction
         {
             if (MainVM.isNewPurchaseOrder)
             {
+                MainVM.RequestedItems.Clear();
                 MainVM.SelectedCustomerSupplier = (from cust in MainVM.Customers
                                                    where cust.CompanyID == MainVM.SelectedSalesQuote.custID_
                                                    select cust).FirstOrDefault();
@@ -53,9 +54,6 @@ namespace prototype2.uControlsTransanction
                 var invoiceprod = from ai in MainVM.AvailedItems
                                   where ai.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
                                   select ai;
-                var invoiceserv = from aser in MainVM.AvailedServices
-                                  where aser.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
-                                  select aser;
                 foreach (AvailedItem ai in invoiceprod)
                 {
                     var markupPrice = from itm in MainVM.MarkupHist

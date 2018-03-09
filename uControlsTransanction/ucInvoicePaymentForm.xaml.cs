@@ -45,10 +45,19 @@ namespace prototype2.uControlsMaintenance
                 handler(this, e);
         }
 
+        public event EventHandler PrintReceipt;
+        protected virtual void OnPrintReceipt(RoutedEventArgs e)
+        {
+            var handler = PrintReceipt;
+            if (handler != null)
+                handler(this, e);
+        }
+
         private void savePrintBtn_Click(object sender, RoutedEventArgs e)
         {
             saveDataToDb();
             OnSaveCloseButtonClicked(e);
+            OnPrintReceipt(e);
         }
 
         private void cancelBtn_Click(object sender, RoutedEventArgs e)

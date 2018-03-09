@@ -65,25 +65,31 @@ namespace prototype2
 
             this.ucSelectSalesQuote.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
 
-            this.ucSalesQuote.SaveCloseButtonClicked += saveCloseSalesQuoteForm; ;
+            this.ucSalesQuote.SaveCloseButtonClicked += saveCloseSalesQuoteForm; 
             this.ucSalesQuote.ConvertToInvoice += convertToInvoice_BtnClicked;
             this.ucSalesQuote.SelectCustomer += selectCustomer_BtnClicked;
             this.ucSalesQuote.SelectItem += selectItem_BtnClicked;
 
             this.ucPurchaseOrder.SelectCustomer += selectCustomer_BtnClicked;
 
+            this.ucPurchaseOrder.SelectSalesQuote += selectSalesQuote_BtnClicked;
+            this.ucPurchaseOrder.SaveCloseButtonClicked += saveClosePurchaseOrderForm;
+            this.ucPurchaseOrder.PrintPurchaseOrder += printPurchaseOrder_BtnClicked;
+
             this.ucAddItem.SaveCloseButtonClicked += saveCloseOther_BtnClicked;
 
             this.ucSelectCustomer.AddNewCustomer += addNewCustomer_BtnClicked;
             this.ucSelectCustomer.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
-
-            this.ucPurchaseOrder.SelectSalesQuote += selectSalesQuote_BtnClicked;
 
             this.ucInvoiceForm.SaveCloseButtonClicked += saveCloseInvoiceForm;
             this.ucInvoicePaymentHist.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
             this.ucInvoicePaymentHist.ReceivePaymentButtonClicked += receive_BtnClicked;
 
             this.ucInvoicePaymentForm.SaveClosePaymentForm += saveClosePaymentForm_BtnClicked;
+            this.ucInvoicePaymentForm.PrintReceipt += printReceipt_BtnCliked;
+
+            this.ucOfficialReceipt.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
+            this.ucPurchaseOrderViewer.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
             foreach (var obj in containerGrid.Children)
             {
                 ((Grid)obj).Visibility = Visibility.Collapsed;
@@ -105,6 +111,30 @@ namespace prototype2
 
         #region Custom Events
         
+        private void printPurchaseOrder_BtnClicked(object sender, EventArgs e)
+        {
+            otherGridBg.Visibility = Visibility.Visible;
+            foreach (UIElement obj in otherGridBg.Children)
+            {
+                if (obj.Equals(ucPurchaseOrderViewer))
+                {
+                    obj.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+       private void printReceipt_BtnCliked(object sender, EventArgs e)
+        {
+            otherGridBg.Visibility = Visibility.Visible;
+            foreach (UIElement obj in otherGridBg.Children)
+            {
+                if (obj.Equals(ucOfficialReceipt))
+                {
+                    obj.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
         private void saveClosePaymentForm_BtnClicked(object sender, EventArgs e)
         {
             foreach (UIElement obj in otherGridBg.Children)
@@ -177,7 +207,7 @@ namespace prototype2
 
         private void saveCloseSalesQuoteForm(object sender, EventArgs e)
         {
-            MainVM.isNewTrans = true;
+            MainVM.isNewTrans = false;
             foreach (var obj in transQuotationGrid.Children)
             {
                 if (obj is Grid)
@@ -198,7 +228,7 @@ namespace prototype2
         private void saveCloseInvoiceForm(object sender, EventArgs e)
         {
             headerLbl.Content = "Billing";
-            MainVM.isNewTrans = true;
+            MainVM.isNewTrans = false;
             foreach (var obj in containerGrid.Children)
             {
                 ((Grid)obj).Visibility = Visibility.Collapsed;
@@ -212,6 +242,26 @@ namespace prototype2
                 }
                 else
                     obj.Visibility = Visibility.Collapsed;
+            }
+            refreshData();
+        }
+
+        private void saveClosePurchaseOrderForm(object sender, EventArgs e)
+        {
+            MainVM.isNewTrans = true;
+            foreach (UIElement obj in transOrderGrid.Children)
+            {
+                if (obj is Grid)
+                {
+                    if (transOrderGrid.Children.IndexOf(obj) == 1)
+                    {
+                        headerLbl.Content = "Trasanction - Purchase Order";
+                        ((Grid)obj).Visibility = Visibility.Visible;
+                    }
+                }
+                else
+                    ((UserControl)obj).Visibility = Visibility.Collapsed;
+
             }
             refreshData();
         }
@@ -1295,7 +1345,24 @@ namespace prototype2
 
         private void deleteQuoteRecordBtn_Click(object sender, RoutedEventArgs e)
         {
+            var dbCon = DBConnection.Instance();
+            MessageBoxResult result = MessageBox.Show("Do you wish to delete this record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.OK)
+            {
+                if (dbCon.IsConnect())
+                {
+                    string query = "UPDATE `sales_quote_t` SET `isDeleted`= 1 WHERE sqNoChar = '" + MainVM.SelectedSalesQuote.sqNoChar_ + "';";
+                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    {
+                        MessageBox.Show("Record successfully deleted!");
+                        MainVM.Ldt.worker.RunWorkerAsync();
+                    }
+                }
 
+            }
+            else if (result == MessageBoxResult.Cancel)
+            {
+            }
         }
 
         private void convertToInvoice_BtnClicked(object sender, EventArgs e)
@@ -1390,6 +1457,7 @@ namespace prototype2
         #endregion
 
         #region Order Management - Purchase Order
+        
         private void newPurchaseOrder_Click(object sender, RoutedEventArgs e)
         {
             MainVM.isNewPurchaseOrder = true;
@@ -1406,6 +1474,77 @@ namespace prototype2
                 }
             }
         }
+
+        private void viewPurchaseOrderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.isView = true;
+            foreach (var element in transOrderGrid.Children)
+            {
+                if (element is UserControl)
+                {
+                    if (!(((UserControl)element).Equals(ucPurchaseOrder)))
+                    {
+                        ((UserControl)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((UserControl)element).Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+        private void editPurchaseOrderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.isEdit = true;
+            foreach (var element in transOrderGrid.Children)
+            {
+                if (element is UserControl)
+                {
+                    if (!(((UserControl)element).Equals(ucPurchaseOrder)))
+                    {
+                        ((UserControl)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((UserControl)element).Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+        private void deletePurchaseOrderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var dbCon = DBConnection.Instance();
+            MessageBoxResult result = MessageBox.Show("Do you wish to delete this record?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.OK)
+            {
+                if (dbCon.IsConnect())
+                {
+                    string query = "UPDATE `purchase_order_t` SET `isDeleted`= 1 WHERE PONumChar = '" + MainVM.SelectedPurchaseOrder.PONumChar + "';";
+                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    {
+                        MessageBox.Show("Record successfully deleted!");
+                        MainVM.Ldt.worker.RunWorkerAsync();
+                    }
+                }
+
+            }
+            else if (result == MessageBoxResult.Cancel)
+            {
+            }
+        }
+
+        private void printPurchaseOrderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            otherGridBg.Visibility = Visibility.Visible;
+            foreach (UIElement obj in otherGridBg.Children)
+            {
+                if (obj.Equals(ucPurchaseOrderViewer))
+                {
+                    obj.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
         #endregion
+
+
     }
 }

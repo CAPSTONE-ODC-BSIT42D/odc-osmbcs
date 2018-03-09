@@ -377,6 +377,8 @@ namespace prototype2
                 }
             }
             MainVM.isEdit = false;
+            MainVM.isNewSupplier = false;
+
         }
 
 
@@ -389,7 +391,7 @@ namespace prototype2
             if (MainVM.isNewSupplier)
                 label5.Content = "Supplier Details";
             else if(MainVM.isNewTrans)
-                label5.Content = "Custoemr Details";
+                label5.Content = "Customer Details";
         }
     }
 }

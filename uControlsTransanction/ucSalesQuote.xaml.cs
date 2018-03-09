@@ -78,6 +78,9 @@ namespace prototype2
             MainVM.RequestedItems.Clear();
             MainVM.AvailedServicesList.Clear();
             MainVM.SelectedSalesQuote = null;
+            MainVM.isEdit = false;
+            MainVM.isView = false;
+            MainVM.TotalSales = 0;
         }
 
         private void closeModals()
