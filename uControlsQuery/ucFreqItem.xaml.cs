@@ -12,7 +12,6 @@ namespace prototype2
     /// </summary>
     public partial class ucFreqItem : UserControl
     {
-        #region MySqlConnection Connection
         MySqlConnection conn = new
             MySqlConnection(ConfigurationManager.ConnectionStrings["prototype2.Properties.Settings.odc_dbConnectionString"].ConnectionString);
         public ucFreqItem()
@@ -57,7 +56,7 @@ namespace prototype2
             }
         
 
-        #endregion
+      
 
 
     }

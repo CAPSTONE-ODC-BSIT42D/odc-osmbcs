@@ -267,11 +267,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
-    <Compile Include="DatasetAll.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DatasetAll.xsd</DependentUpon>
-    </Compile>
     <Compile Include="DataSetItemQuery.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -305,6 +300,14 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSetReportService.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DatasetSales_Quote.cs">
+      <DependentUpon>DatasetSales_Quote.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DatasetSales_Quote.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatasetSales_Quote.xsd</DependentUpon>
     </Compile>
     <Compile Include="DocumentViewer.xaml.cs">
       <DependentUpon>DocumentViewer.xaml</DependentUpon>
@@ -414,6 +417,9 @@
     <Compile Include="classes\ViewModels.cs" />
     <Compile Include="uControlsTransanction\ucSelectSalesQuote.xaml.cs">
       <DependentUpon>ucSelectSalesQuote.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="uControlsTransanction\ucSalesQuoteViewer.xaml.cs">
+      <DependentUpon>ucSalesQuoteViewer.xaml</DependentUpon>
     </Compile>
     <Page Include="DocumentViewer.xaml">
       <SubType>Designer</SubType>
@@ -561,6 +567,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="uControlsTransanction\ucSalesQuoteViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -581,17 +591,6 @@
     </None>
     <None Include="DataSet1.xss">
       <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="DatasetAll.xsc">
-      <DependentUpon>DatasetAll.xsd</DependentUpon>
-    </None>
-    <None Include="DatasetAll.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DatasetAll.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="DatasetAll.xss">
-      <DependentUpon>DatasetAll.xsd</DependentUpon>
     </None>
     <None Include="DataSetItemQuery.xsc">
       <DependentUpon>DataSetItemQuery.xsd</DependentUpon>
@@ -652,6 +651,17 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="DatasetSales_Quote.xsc">
+      <DependentUpon>DatasetSales_Quote.xsd</DependentUpon>
+    </None>
+    <None Include="DatasetSales_Quote.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatasetSales_Quote.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DatasetSales_Quote.xss">
+      <DependentUpon>DatasetSales_Quote.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
@@ -687,6 +697,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="rdlcfiles\PurchaseReport.rdlc" />
+    <EmbeddedResource Include="rdlcfiles\SalesQuote.rdlc" />
     <EmbeddedResource Include="rdlcfiles\ServiceReport.rdlc" />
     <EmbeddedResource Include="rdlcfiles\SalesReport.rdlc" />
     <EmbeddedResource Include="rdlcfiles\NoticeOfEmployment.rdlc">
