@@ -276,51 +276,52 @@ namespace prototype2
         {
             if (!value.Equals(0))
             {
-                var invoiceprod = from ai in MainVM.AvailedItems
-                                  where ai.SqNoChar.Equals(value.ToString())
-                                  select ai;
-                var invoiceserv = from aser in MainVM.AvailedServices
-                                  where aser.SqNoChar.Equals(value.ToString())
-                                  select aser;
-                MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(value.ToString())).FirstOrDefault();
-                foreach (AvailedItem ai in invoiceprod)
-                {
-                    var markupPrice = from itm in MainVM.MarkupHist
-                                      where itm.ItemID == ai.ItemID
-                                      && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
-                                      select itm;
-                    decimal totalPric = ai.ItemQty * (ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc));
-                    MainVM.VatableSale += Math.Round(totalPric, 2);
-                }
+                //var invoiceprod = from ai in MainVM.AvailedItems
+                //                  where ai.SqNoChar.Equals(value.ToString())
+                //                  select ai;
+                //var invoiceserv = from aser in MainVM.AvailedServices
+                //                  where aser.SqNoChar.Equals(value.ToString())
+                //                  select aser;
+                //MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(value.ToString())).FirstOrDefault();
+                //foreach (AvailedItem ai in invoiceprod)
+                //{
+                //    var markupPrice = from itm in MainVM.MarkupHist
+                //                      where itm.ItemID == ai.ItemID
+                //                      && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
+                //                      select itm;
+                //    decimal totalPric = ai.ItemQty * (ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc));
+                //    MainVM.VatableSale += Math.Round(totalPric, 2);
+                //}
 
-                foreach (AvailedService aserv in invoiceserv)
-                {
-                    MainVM.SelectedProvince = (from prov in MainVM.Provinces
-                                               where prov.ProvinceID == aserv.ProvinceID
-                                               select prov).FirstOrDefault();
-                    MainVM.SelectedRegion = (from rg in MainVM.Regions
-                                             where rg.RegionID == MainVM.SelectedProvince.RegionID
-                                             select rg).FirstOrDefault();
+                //foreach (AvailedService aserv in invoiceserv)
+                //{
+                //    MainVM.SelectedProvince = (from prov in MainVM.Provinces
+                //                               where prov.ProvinceID == aserv.ProvinceID
+                //                               select prov).FirstOrDefault();
+                //    MainVM.SelectedRegion = (from rg in MainVM.Regions
+                //                             where rg.RegionID == MainVM.SelectedProvince.RegionID
+                //                             select rg).FirstOrDefault();
 
-                    var service = from serv in MainVM.ServicesList
-                                  where serv.ServiceID == aserv.ServiceID
-                                  select serv;
+                //    var service = from serv in MainVM.ServicesList
+                //                  where serv.ServiceID == aserv.ServiceID
+                //                  select serv;
 
-                    decimal totalFee = (from af in aserv.AdditionalFees
-                                        select af.FeePrice).Sum();
-                    decimal totalAmount = aserv.TotalCost + totalFee;
+                //    decimal totalFee = (from af in aserv.AdditionalFees
+                //                        select af.FeePrice).Sum();
+                //    decimal totalAmount = aserv.TotalCost + totalFee;
 
-                    MainVM.VatableSale += Math.Round(totalAmount, 2);
-                }
+                //    MainVM.VatableSale += Math.Round(totalAmount, 2);
+                //}
 
-                MainVM.TotalSalesNoVat = Math.Round(MainVM.VatableSale, 2);
+                //MainVM.TotalSalesNoVat = Math.Round(MainVM.VatableSale, 2);
 
-                MainVM.VatAmount = (MainVM.VatableSale * ((decimal)0.12));
-                MainVM.VatAmount = Math.Round(MainVM.VatAmount, 2);
+                //MainVM.VatAmount = (MainVM.VatableSale * ((decimal)0.12));
+                //MainVM.VatAmount = Math.Round(MainVM.VatAmount, 2);
 
-                MainVM.TotalSales = Math.Round(MainVM.VatableSale + MainVM.VatAmount, 2);
-                MainVM.Balance = MainVM.TotalSales;
-                return MainVM.Balance;
+                //MainVM.TotalSales = Math.Round(MainVM.VatableSale + MainVM.VatAmount, 2);
+                //MainVM.Balance = MainVM.TotalSales;
+                //return MainVM.Balance;
+                return null;
             }
             return null;
         }

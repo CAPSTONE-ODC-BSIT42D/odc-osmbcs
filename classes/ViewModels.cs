@@ -228,6 +228,7 @@ namespace prototype2
         }
 
         public decimal TotalSales_;
+
         public decimal TotalSales {
             get { return TotalSales_; }
             set { SetProperty(ref TotalSales_, value); }
