@@ -29,12 +29,11 @@ namespace prototype2
         public ucServiceSchedule()
         {
             InitializeComponent();
-            workerAtServiceSched.DoWork += workerAtServiceSched_DoWork;
-            workerAtServiceSched.RunWorkerCompleted += workerAtServiceSched_RunWorkerCompleted;
         }
 
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
         public static readonly BackgroundWorker workerAtServiceSched = new BackgroundWorker();
+
         public event EventHandler SaveCloseButtonClicked;
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
@@ -43,15 +42,31 @@ namespace prototype2
                 handler(this, e);
         }
 
-        private void workerAtServiceSched_DoWork(object sender, DoWorkEventArgs e)
+        public event EventHandler SelectServiceButtonClicked;
+        protected virtual void OnSelectServiceButtonClicked(RoutedEventArgs e)
         {
-            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => { searchForAvailableEmployees(); }));
+            var handler = SelectServiceButtonClicked;
+            if (handler != null)
+                handler(this, e);
         }
 
-        private void workerAtServiceSched_RunWorkerCompleted(object sender,
-                                               RunWorkerCompletedEventArgs e)
+        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
+            if (this.IsVisible)
+            {
 
+            }
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            //foreach(ServiceSchedule ss in MainVM.ServiceSchedules_)
+            //serviceSched.Appointments.Add(new ScheduleAppointment() { Subject = ss.serviceSchedNoChar_, StartTime = (DateTime)ss.dateStarted_, EndTime = (DateTime)ss.dateEnded_ });
+        }
+
+        private void selectServiceBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OnSelectServiceButtonClicked(e);
         }
 
         private void scheduleServiceBtn_Click(object sender, RoutedEventArgs e)
@@ -68,7 +83,7 @@ namespace prototype2
             //if (assignedEmployees.Items.Count != 0 && MainVM.SelectedSalesInvoice!=null)
             //{
             //    //serviceSched.Appointments.Add(new ScheduleAppointment() { Subject = serviceNoCb.SelectedValue.ToString(), StartTime = (DateTime)startDate.SelectedDate, EndTime = (DateTime)endDate.SelectedDate });
-                
+
 
             //    MainVM.SelectedServiceSchedule_.serviceSchedNoChar_ = serviceNoCb.SelectedValue.ToString();
             //    MainVM.SelectedServiceSchedule_.invoiceNo_ = int.Parse(MainVM.SelectedSalesInvoice.invoiceNo_);
@@ -85,7 +100,7 @@ namespace prototype2
             //{
             //    MessageBox.Show("No Assigned Employees");
             //}
-            
+
         }
 
         private void cancelschedBtn_Click(object sender, RoutedEventArgs e)
@@ -112,12 +127,12 @@ namespace prototype2
                     {
                         foreach (Employee emp in MainVM.AssignedEmployees_)
                         {
-                           query = "INSERT INTO `odc_db`.`assigned_employees_t`(`serviceSqNoChar`,`empID`)" +
-                        " VALUES" +
-                        "('"
-                        + MainVM.SelectedServiceSchedule_.serviceSchedNoChar_ + "','" +
-                          emp.EmpID +
-                        "');";
+                            query = "INSERT INTO `odc_db`.`assigned_employees_t`(`serviceSqNoChar`,`empID`)" +
+                         " VALUES" +
+                         "('"
+                         + MainVM.SelectedServiceSchedule_.serviceSchedNoChar_ + "','" +
+                           emp.EmpID +
+                         "');";
                             dbCon.insertQuery(query, dbCon.Connection);
                         }
                         MessageBox.Show("Succesfully added a schedule");
@@ -164,12 +179,12 @@ namespace prototype2
 
         void searchForAvailableEmployees()
         {
-           
+
         }
 
         private void transferToLeftBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+
             MainVM.AssignedEmployees_.Add(MainVM.SelectedEmployeeContractor);
             MainVM.AvailableEmployees_.Remove(MainVM.SelectedEmployeeContractor);
         }
@@ -188,7 +203,7 @@ namespace prototype2
 
         private void endDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
         }
 
         private void serviceNoCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -199,28 +214,14 @@ namespace prototype2
                 MainVM.SelectedSalesInvoice = MainVM.SalesInvoice.Where(x => x.sqNoChar_.Equals(MainVM.SelectedSalesQuote.sqNoChar_)).FirstOrDefault();
                 if (MainVM.SelectedSalesInvoice != null)
                 {
-                   // MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(MainVM.SelectedAddedService.ServiceID)).FirstOrDefault();
+                    // MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(MainVM.SelectedAddedService.ServiceID)).FirstOrDefault();
                 }
                 else
                 {
                     MessageBox.Show("This service have no invoice");
                 }
             }
-            
-        }
 
-        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (this.IsVisible)
-            {
-
-            }
-        }
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            //foreach(ServiceSchedule ss in MainVM.ServiceSchedules_)
-            //serviceSched.Appointments.Add(new ScheduleAppointment() { Subject = ss.serviceSchedNoChar_, StartTime = (DateTime)ss.dateStarted_, EndTime = (DateTime)ss.dateEnded_ });
         }
     }
 }

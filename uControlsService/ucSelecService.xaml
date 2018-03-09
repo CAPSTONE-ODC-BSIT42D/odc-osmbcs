@@ -3,21 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:prototype2.uControlsService"
+             
+             xmlns:local="clr-namespace:prototype2"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="1020">
+             d:DesignHeight="600" d:DesignWidth="1020" IsVisibleChanged="UserControl_IsVisibleChanged">
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <local:SaleQuoteDetailsConverter x:Key="SaleQuoteDetailsConverter"/>
+        <local:ServiceNameConverter x:Key="ServiceNameConverter"/>
+    </UserControl.Resources>
     <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Margin="0">
         <Label x:Name="label26" Content="Select a Service" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Margin="26,38,0,0"/>
         <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="15,74,15,0" VerticalAlignment="Top"/>
         <TextBox x:Name="transSearchBoxSelectCustGridTb" HorizontalAlignment="Left" Height="23" Margin="79,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="248"/>
         <Label x:Name="label27" Content="Search:" HorizontalAlignment="Left" Margin="26,88,0,0" VerticalAlignment="Top"/>
         <Button x:Name="findBtn" Content="Find" HorizontalAlignment="Left" Margin="356,91,0,0" VerticalAlignment="Top" Width="85" Height="26" Click="findBtn_Click" Foreground="#FFFBFBFB" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="13"/>
-        <DataGrid x:Name="selectServices" Margin="25,130,25,59" ItemsSource="{Binding AvailedServices}" SelectedItem="{Binding SelectedAvailedServices}" AutoGenerateColumns="False" CanUserResizeRows="False" CanUserAddRows="False" IsReadOnly="True" FontSize="14">
+        <DataGrid x:Name="selectServices" Margin="25,130,25,59" SelectedItem="{Binding SelectedAvailedServices}" AutoGenerateColumns="False" CanUserResizeRows="False" CanUserAddRows="False" IsReadOnly="True" FontSize="14">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding SqNoChar}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Sales Quote ID"  />
+                <DataGridTextColumn Binding="{Binding ServiceID, Converter={StaticResource ServiceNameConverter}, NotifyOnTargetUpdated=True}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Service Availed"  />
                 <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Customer Name" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -25,7 +31,6 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Binding="{Binding status_}" ClipboardContentBinding="{x:Null}" Header="Status" Width="200" CanUserResize="False"  />
                 <DataGridTemplateColumn  Width="115" CanUserResize="False" Header="Actions"  >
                     <DataGridTemplateColumn.CellTemplate  >
                         <DataTemplate>

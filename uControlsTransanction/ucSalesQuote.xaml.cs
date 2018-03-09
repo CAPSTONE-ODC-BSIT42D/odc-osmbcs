@@ -579,7 +579,7 @@ namespace prototype2
 
         private void computePrice()
         {
-            decimal totalFee = 0;
+            
             decimal totalPrice = 0;
 
             foreach (RequestedItem item in MainVM.RequestedItems)
@@ -598,22 +598,16 @@ namespace prototype2
                 {
                     
                     MainVM.SelectedAvailedServices = MainVM.AvailedServicesList.Where(x => x.AvailedServiceID.Equals(item.availedServiceID)).FirstOrDefault();
-                    MainVM.SelectedProvince = (from prov in MainVM.Provinces
-                                               where prov.ProvinceID == MainVM.SelectedAvailedServices.ProvinceID
-                                               select prov).FirstOrDefault();
-                    MainVM.SelectedRegion = (from rg in MainVM.Regions
-                                             where rg.RegionID == MainVM.SelectedProvince.RegionID
-                                             select rg).FirstOrDefault();
-                    foreach (AdditionalFee af in MainVM.SelectedAvailedServices.AdditionalFees)
-                    {
-                        if (!(af.FeePrice == 0))
-                        {
-                            totalFee += af.FeePrice;
-                        }
-                        
-                    }
-                    item.unitPriceMarkUp = item.unitPrice + MainVM.SelectedRegion.RatePrice;
-                    item.totalAmount = (item.unitPrice + MainVM.SelectedRegion.RatePrice + totalFee) - ((item.unitPrice + MainVM.SelectedRegion.RatePrice + totalFee) / 100) * (decimal)discountPriceTb.Value;
+                    decimal totalFee = (from fees in MainVM.SelectedAvailedServices.AdditionalFees
+                                        select fees.FeePrice).Sum() ;
+                    //MainVM.SelectedProvince = (from prov in MainVM.Provinces
+                    //                           where prov.ProvinceID == MainVM.SelectedAvailedServices.ProvinceID
+                    //                           select prov).FirstOrDefault();
+                    //MainVM.SelectedRegion = (from rg in MainVM.Regions
+                    //                         where rg.RegionID == MainVM.SelectedProvince.RegionID
+                    //                         select rg).FirstOrDefault();
+                    item.unitPriceMarkUp = item.unitPrice;
+                    item.totalAmount = (item.unitPrice  + totalFee) - ((item.unitPrice + totalFee) / 100) * (decimal)discountPriceTb.Value;
                 }
                 totalPrice += item.totalAmount;
             }
@@ -938,7 +932,7 @@ namespace prototype2
                 var service = from serv in MainVM.ServicesList
                               where serv.ServiceID == aserv.ServiceID
                               select serv;
-                MainVM.RequestedItems.Add(new RequestedItem() { availedServiceID = aserv.AvailedServiceID, itemID = aserv.ServiceID, itemType = 1, qty = 0, totalAmount = aserv.TotalCost, unitPrice = service.Last().ServicePrice, additionalFees = aserv.AdditionalFees });
+                MainVM.RequestedItems.Add(new RequestedItem() { availedServiceID = aserv.AvailedServiceID, itemID = aserv.ServiceID, itemType = 1, qty = 0, totalAmount = aserv.TotalCost, unitPrice = aserv.TotalCost });
             }
 
             if (MainVM.isView)

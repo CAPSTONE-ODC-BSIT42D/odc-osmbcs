@@ -9,41 +9,7 @@
              d:DesignHeight="762.5" d:DesignWidth="1206" IsVisibleChanged="UserControl_IsVisibleChanged" Loaded="UserControl_Loaded"
             DataContext="{StaticResource MainVM}"
     >
-    <UserControl.Resources>
-        <Style TargetType="{x:Type RadioButton}" x:Key="RadioButtonStyle">
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type RadioButton}">
-                        <Grid>
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CheckStates">
-                                    <VisualState x:Name="Checked">
-                                        <Storyboard>
-                                            <ColorAnimation Duration="0" To="#303131" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border"/>
-                                            <ColorAnimation Duration="0" To="White" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="text"/>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Unchecked">
-                                        <Storyboard>
-                                            <ColorAnimation Duration="0" To="{TemplateBinding Background}" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border"/>
-                                            <ColorAnimation Duration="0" To="{TemplateBinding Foreground}" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="text"/>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Indeterminate" />
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <Border x:Name="border" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
-                                        Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                                <TextBlock x:Name="text" Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"/>
-                            </Border>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </UserControl.Resources>
+   
     <Grid Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -108,7 +74,7 @@
 
                 <Button x:Name="transferToRightBtn" Content="&gt;" HorizontalAlignment="Left" Margin="342,422,0,0" VerticalAlignment="Top" Width="36" Click="transferToRightBtn_Click" ToolTip="Unassign selected employee"/>
                 <Label x:Name="label21_Copy6" Content="Available Employees:" HorizontalAlignment="Left" Margin="38,289,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Button x:Name="selectServiceBtn" Content="Select Service" HorizontalAlignment="Right" Margin="0,70,40,0" Width="105" Height="24" VerticalAlignment="Top" />
+                <Button x:Name="selectServiceBtn" Content="Select Service" HorizontalAlignment="Right" Margin="0,70,40,0" Width="105" Height="24" VerticalAlignment="Top" Click="selectServiceBtn_Click" />
                 <Label x:Name="label21_Copy7" Content="Phases" HorizontalAlignment="Left" Margin="38,524,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
             </Grid>
 

@@ -19,6 +19,7 @@
         <local:ProductMarkUpPercent x:Key="ProductMarkUpPercent" />
         <local:CategoryNameConverter x:Key="CategoryNameConverter"/>
         <local:SaleQuoteDetailsConverter x:Key="SaleQuoteDetailsConverter"/>
+
         <Storyboard x:Key="sbShowRightMenu" >
             <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,-150,0" To="0,0,0,0" DecelerationRatio="1" Duration="0:0:0.5" />
         </Storyboard>
@@ -1220,7 +1221,7 @@
                         <Button x:Name="button9" Content="Search" HorizontalAlignment="Left" Margin="402,3,-11,0" VerticalAlignment="Top" Width="85" Height="29" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
                     </Grid>
                     <Label x:Name="label8_Copy3" Content="Sort:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="525,9,0,0"/>
-                    <Button x:Name="newServiceSchedBtn" Content="Add" HorizontalAlignment="Right" Height="29" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" />
+                    <Button x:Name="newServiceSchedBtn" Content="Add" HorizontalAlignment="Right" Height="29" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" Click="newServiceSchedBtn_Click" />
                     <ComboBox x:Name="sortQuoteCb3" HorizontalAlignment="Left" Margin="567,9,0,0" VerticalAlignment="Top" Width="120" Height="26">
                         <ComboBoxItem Content="[NONE]"/>
                         <ComboBoxItem Content="PENDING"/>
@@ -1376,7 +1377,7 @@
             </Grid>
             <Grid x:Name="queriesGrid" d:IsHidden="True"/>
 
-            <Grid x:Name="maintenanceGrid" d:IsHidden="True">
+            <Grid x:Name="maintenanceGrid">
                 <Grid x:Name="manageCustomerGrid" Margin="0,0,1,0" >
                     <Grid x:Name="manageCustomerHomeGrid" Margin="0">
                         <Label x:Name="label13" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
@@ -2208,7 +2209,7 @@
             <uControlsMaintenance:ucLocation x:Name="ucLocation" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="458" d:IsHidden="True"/>
 
         </Grid>
-        <Grid x:Name="otherGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3">
+        <Grid x:Name="otherGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3" d:IsHidden="True">
             <uControlsMaintenance:ucSelectCustomer x:Name="ucSelectCustomer" Margin="0" Visibility="Collapsed" d:IsHidden="True"/>
             <uControlsMaintenance:ucAddItem x:Name="ucAddItem" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Visibility="Collapsed" d:IsHidden="True"/>
 
@@ -2217,7 +2218,8 @@
             <uControlsMaintenance:ucInvoicePaymentForm x:Name="ucInvoicePaymentForm" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
             <local:ucOfficialReceipt x:Name="ucOfficialReceipt" d:IsHidden="True"/>
             <local:ucPurchaseOrderViewer x:Name="ucPurchaseOrderViewer" d:IsHidden="True"/>
-            <uControlsService:ucSelecService Margin="0"/>
+            <uControlsService:ucSelecService x:Name="ucSelectService" Margin="0" d:IsHidden="True"/>
+            <local:ucNoticeOfEmployment x:Name="ucNoticeOfEmployment" Height="Auto" Margin="0" Width="Auto"/>
         </Grid>
 
     </Grid>

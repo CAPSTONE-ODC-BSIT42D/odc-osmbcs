@@ -210,8 +210,9 @@ namespace prototype2
         {
             if (!value.Equals(0) && MainVM.ServicesList.Count != 0)
             {
-                MainVM.SelectedService = MainVM.ServicesList.Where(x => x.ServiceID.Equals(value)).First();
-                return MainVM.SelectedService.ServiceName;
+                MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(value)).First();
+                MainVM.SelectedCustomerSupplier = MainVM.Customers.Where(x => x.CompanyID.Equals(MainVM.SelectedSalesQuote.custID_)).First();
+                return MainVM.SelectedCustomerSupplier.CompanyName;
             }
             return null;
         }
