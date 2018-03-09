@@ -24,6 +24,8 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding SqNoChar}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Sales Quote ID"  />
                 <DataGridTextColumn Binding="{Binding ServiceID, Converter={StaticResource ServiceNameConverter}, NotifyOnTargetUpdated=True}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Service Availed"  />
+                <DataGridTextColumn Binding="{Binding Address}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Address"  />
+                <DataGridTextColumn Binding="{Binding City}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="City"  />
                 <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Customer Name" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
