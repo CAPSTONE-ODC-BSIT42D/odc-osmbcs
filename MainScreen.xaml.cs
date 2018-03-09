@@ -90,6 +90,9 @@ namespace prototype2
 
             this.ucOfficialReceipt.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
             this.ucPurchaseOrderViewer.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
+
+            this.ucService.SelectServiceButtonClicked += selectService_BtnClicked;
+            this.ucSelectService.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
             foreach (var obj in containerGrid.Children)
             {
                 ((Grid)obj).Visibility = Visibility.Collapsed;
@@ -110,6 +113,25 @@ namespace prototype2
         }
 
         #region Custom Events
+
+        private void selectService_BtnClicked(object sender, EventArgs e)
+        {
+            MainVM.isEdit = false;
+            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+            otherGridBg.Visibility = Visibility.Visible;
+            Grid.SetZIndex((otherGridBg), 1);
+            foreach (UIElement obj in otherGridBg.Children)
+            {
+                if (obj.Equals(ucSelectService))
+                {
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    obj.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
 
         private void convertToInvoice_BtnClicked(object sender, EventArgs e)
         {
@@ -526,7 +548,7 @@ namespace prototype2
             }
             foreach (UIElement obj in serviceGrid.Children)
             {
-                if (billingGrid.Children.IndexOf(obj) == 0)
+                if (serviceGrid.Children.IndexOf(obj) == 0)
                 {
                     obj.Visibility = Visibility.Visible;
                 }
@@ -1404,7 +1426,14 @@ namespace prototype2
 
         private void genContractBtn_Click(object sender, RoutedEventArgs e)
         {
-            ucContract.Visibility = Visibility.Visible;
+           otherGridBg.Visibility = Visibility.Visible;
+            foreach (UIElement obj in otherGridBg.Children)
+            {
+                if (obj.Equals(ucNoticeOfEmployment))
+                {
+                    obj.Visibility = Visibility.Visible;
+                }
+            }
         }
 
         #endregion
@@ -1575,8 +1604,25 @@ namespace prototype2
             }
         }
 
+
         #endregion
+        #region Service Management
+        private void newServiceSchedBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var element in serviceGrid.Children)
+            {
+                if (element is UserControl)
+                {
+                    if (!(((UserControl)element).Equals(ucService)))
+                    {
+                        ((UserControl)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((UserControl)element).Visibility = Visibility.Visible;
+                }
+            }
+        }
 
-
+        #endregion
     }
 }

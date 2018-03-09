@@ -2,13 +2,16 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:prototype2.uControlsTransanction"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:prototype2"
              mc:Ignorable="d" 
              d:DesignHeight="876" d:DesignWidth="1275" IsVisibleChanged="UserControl_IsVisibleChanged">
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <local:IdToNameConverter x:Key="IdToNameConverter"/>
+    </UserControl.Resources>
     <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Margin="0">
         <Label x:Name="label26" Content="Select a Sales Quote" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Margin="26,38,0,0"/>
         <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="15,74,15,0" VerticalAlignment="Top"/>
