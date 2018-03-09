@@ -754,6 +754,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -873,7 +874,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=FORMAT(Fields!empDateFrom.Value, "dd/MM/yyyy")</Value>
+                              <Value>=format(Fields!empDateFrom.Value, "dd/MM/yyyy")</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -942,7 +943,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=FORMAT(Fields!empDateTo.Value, "dd/MM/yyyy")</Value>
+                              <Value>=Format(Fields!empDateTo.Value, "dd/MM/yyyy")</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1080,7 +1081,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!empFName.Value &amp;"  " &amp; FORMAT(Fields!empMI.Value) &amp;"." &amp; FORMAT(Fields!empLName.Value)</Value>
+                              <Value>=Fields!empFName.Value &amp;"  " &amp; FORMAT(Fields!empMI.Value) &amp;". " &amp; FORMAT(Fields!empLName.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1149,7 +1150,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!DateToday.Value</Value>
+                              <Value>=Format(Fields!DateToday.Value, "dd/MM/yyyy")</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
