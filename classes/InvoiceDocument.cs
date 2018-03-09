@@ -167,13 +167,13 @@ namespace prototype2
             addressFrame.Format.Font.Name = "Calibri";
             addressFrame.Format.Font.Size = 11;
 
-            date.AddText("DATE ISSSUED: ");
-            date.Format.Font.Name = "Calibri";
-            date.Format.Font.Size = 11;
-            date.AddText(MainVM.SelectedSalesInvoice.dateOfIssue_.ToShortDateString());
-            date.Format.Font.Name = "Calibri";
-            date.Format.Font.Size = 11;
-            date.Format.Font.Bold = true;
+            //date.AddText("DATE ISSSUED: ");
+            //date.Format.Font.Name = "Calibri";
+            //date.Format.Font.Size = 11;
+            //date.AddText(MainVM.SelectedSalesInvoice.dateOfIssue_.ToShortDateString());
+            //date.Format.Font.Name = "Calibri";
+            //date.Format.Font.Size = 11;
+            //date.Format.Font.Bold = true;
 
             tinNumber.AddText("TIN: ");
             tinNumber.Format.Font.Name = "Calibri";

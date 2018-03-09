@@ -278,7 +278,7 @@ namespace prototype2
             tac.AddText(MainVM.SelectedSalesQuote.priceNote_);
             tac.AddLineBreak();
             tac.AddText("PAYMENT" + "\t\t\t" + " : " + "\t");
-            tac.AddText(MainVM.SelectedSalesQuote.termsDP_ + "% DP upon release of order and " + (MainVM.SelectedSalesQuote.termsDP_ - 100) + "% Balance upon delivery");
+            tac.AddText(MainVM.SelectedSalesQuote.termsDP_ + "% DP upon release of order and " + (MainVM.SelectedSalesQuote.termsDP_ - 100) + "% Balance upon" + "\t\t\t\t\t\t\t" + " delivery");
             tac.AddLineBreak();
             tac.AddText("DELIVERY" + "\t\t\t" + " : " + "\t");
             if (MainVM.SelectedSalesQuote.estDelivery_ != 0)
@@ -301,6 +301,7 @@ namespace prototype2
 
             tac.AddLineBreak();
             tac.AddText("ADDITIONAL TERMS " + "\t" + " : ");
+            tac.AddLineBreak();
             tac.AddText(MainVM.SelectedSalesQuote.additionalTerms_);
 
             //terms and conditions font design

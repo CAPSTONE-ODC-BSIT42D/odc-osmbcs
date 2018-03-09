@@ -391,6 +391,21 @@ namespace prototype2
                         obj.Visibility = Visibility.Collapsed;
                 }
             }
+            else if (ucSelectService.IsVisible)
+            {
+                foreach (var element in serviceGrid.Children)
+                {
+                    if (element is UserControl)
+                    {
+                        if (!(((UserControl)element).Equals(ucService)))
+                        {
+                            ((UserControl)element).Visibility = Visibility.Collapsed;
+                        }
+                        else
+                            ((UserControl)element).Visibility = Visibility.Visible;
+                    }
+                }
+            }
             otherGridBg.Visibility = Visibility.Collapsed;
             foreach (UIElement obj in otherGridBg.Children)
             {
@@ -559,14 +574,11 @@ namespace prototype2
 
         private void reportsBtn_Click(object sender, RoutedEventArgs e)
         {
-  
-            foreach (var obj in containerGrid.Children)
-            {
-                ((Grid)obj).Visibility = Visibility.Collapsed;
-            }
-            reportsGrid.Visibility = Visibility.Visible;
-           
-            
+            if (reportsSubMenuGrid.IsVisible)
+                reportsSubMenuGrid.Visibility = Visibility.Collapsed;
+            else
+                reportsSubMenuGrid.Visibility = Visibility.Visible;
+
         }
 
         private void manageBtn_Click(object sender, RoutedEventArgs e)
@@ -1609,20 +1621,48 @@ namespace prototype2
         #region Service Management
         private void newServiceSchedBtn_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var element in serviceGrid.Children)
+            MainVM.isEdit = false;
+            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
+            otherGridBg.Visibility = Visibility.Visible;
+            Grid.SetZIndex((otherGridBg), 1);
+            foreach (UIElement obj in otherGridBg.Children)
             {
-                if (element is UserControl)
+                if (obj.Equals(ucSelectService))
                 {
-                    if (!(((UserControl)element).Equals(ucService)))
-                    {
-                        ((UserControl)element).Visibility = Visibility.Collapsed;
-                    }
-                    else
-                        ((UserControl)element).Visibility = Visibility.Visible;
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    obj.Visibility = Visibility.Collapsed;
                 }
             }
         }
 
         #endregion
+
+        private void selectedReportBtnClicked(object sender, RoutedEventArgs e)
+        {
+
+            //foreach (var obj in containerGrid.Children)
+            //{
+            //    ((Grid)obj).Visibility = Visibility.Collapsed;
+            //}
+            //reportsGrid.Visibility = Visibility.Visible;
+            //foreach (var obj in reportsGrid.Children)
+            //{
+                
+            //}
+            //foreach (var obj in transOrderGrid.Children)
+            //{
+            //    if (obj is Grid)
+            //    {
+                    
+            //        ((Grid)obj).Visibility = Visibility.Visible;
+            //    }
+            //    else
+            //        ((UserControl)obj).Visibility = Visibility.Collapsed;
+
+            //}
+        }
     }
 }

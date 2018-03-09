@@ -389,7 +389,8 @@ namespace prototype2
 
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    var availedservices = new AvailedService() { AvailedServiceID = int.Parse(dr["ID"].ToString()), SqNoChar = dr["sqNoChar"].ToString(), ServiceID = int.Parse(dr["serviceID"].ToString()), ProvinceID = int.Parse(dr["provinceID"].ToString()), City = dr["city"].ToString(), TotalCost = decimal.Parse(dr["totalCost"].ToString()) };
+                    var availedservices = new AvailedService() { AvailedServiceID = int.Parse(dr["ID"].ToString()), SqNoChar = dr["sqNoChar"].ToString(), ServiceID = int.Parse(dr["serviceID"].ToString()), ProvinceID = int.Parse(dr["provinceID"].ToString()), Desc = dr["desc"].ToString() ,Address = dr["address"].ToString(), City = dr["city"].ToString(), TotalCost = decimal.Parse(dr["totalCost"].ToString()) };
+
                     query = "SELECT * FROM fees_per_transaction_t WHERE servicesAvailedID = " + dr["ID"].ToString() + ";";
                     dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                     DataSet fromDb2 = new DataSet();
@@ -620,13 +621,7 @@ namespace prototype2
                 dataAdapter.Fill(fromDb, "t");
                 fromDbTable = fromDb.Tables["t"];
 
-                query = "SELECT * FROM assigned_employees_t;";
-                MySqlDataAdapter dataAdapter2 = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb2 = new DataSet();
-                DataTable fromDbTable2 = new DataTable();
-                dataAdapter2.Fill(fromDb2, "t");
-                fromDbTable2 = fromDb2.Tables["t"];
-
+                
                 MainVM.ServiceSchedules_.Clear();
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
@@ -636,24 +631,30 @@ namespace prototype2
                     DateTime dateEnded = new DateTime();
                     DateTime.TryParse(dr["dateEnded"].ToString(), out dateEnded);
 
-                    int invoiceNo;
-                    int.TryParse(dr["invoiceNo"].ToString(), out invoiceNo);
+                    MainVM.SelectedServiceSchedule_ = (new ServiceSchedule() { ServiceSchedID = int.Parse(dr[0].ToString()), serviceStatus_ = dr["serviceStatus"].ToString(), dateStarted_ = dateStarted, dateEnded_ = dateEnded, schedNotes_ = dr["schedNotes"].ToString() });
 
-                    MainVM.SelectedServiceSchedule_ = (new ServiceSchedule() { serviceSchedNoChar_ = dr["serviceSchedNoChar"].ToString(), invoiceNo_ = invoiceNo, serviceStatus_ = dr["serviceStatus"].ToString(), dateStarted_ = dateStarted, dateEnded_ = dateEnded, schedNotes_ = dr["schedNotes"].ToString() });
+                    query = "SELECT * FROM assigned_employees_t where serviceSchedId = '"+ int.Parse(dr[0].ToString()) + "';";
+                    MySqlDataAdapter dataAdapter2 = dbCon.selectQuery(query, dbCon.Connection);
+                    DataSet fromDb2 = new DataSet();
+                    DataTable fromDbTable2 = new DataTable();
+                    dataAdapter2.Fill(fromDb2, "t");
+                    fromDbTable2 = fromDb2.Tables["t"];
+
+
                     if (fromDbTable2.Rows.Count > 0)
                     {
                         foreach (DataRow dr2 in fromDbTable2.Rows)
                         {
-                            
+                            MainVM.SelectedEmployeeContractor = MainVM.Employees.Where(x => x.EmpID == int.Parse(dr2[2].ToString())).First();
+                            if (MainVM.SelectedEmployeeContractor == null)
+                                MainVM.SelectedEmployeeContractor = MainVM.Contractor.Where(x => x.EmpID == int.Parse(dr2[2].ToString())).First();
+
                             MainVM.SelectedServiceSchedule_.assignedEmployees_.Add(MainVM.SelectedEmployeeContractor);
                         }
                     }
-
+                    MainVM.ServiceSchedules_.Add(MainVM.SelectedServiceSchedule_);
                 }
-
-
-
-                MainVM.ServiceSchedules_.Clear();
+                
                 dbCon.Close();
             }
         }

@@ -6,8 +6,8 @@
              xmlns:RV="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"  
              xmlns:local="clr-namespace:prototype2"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="prototype2.ucReportService"
-             mc:Ignorable="d" IsVisibleChanged="UserControl_IsVisibleChanged" Width="815.435" Height="405.519" Background="#FFDE2E2E">
-    <Grid Background="#FFF0ECEC" Height="426" VerticalAlignment="Top" Margin="0,-12,0,-8">
+             mc:Ignorable="d" IsVisibleChanged="UserControl_IsVisibleChanged" Background="#FFDE2E2E" d:DesignHeight="478.665">
+    <Grid Background="#FFF0ECEC" Margin="0">
 
         <Grid HorizontalAlignment="Left" Height="408" VerticalAlignment="Bottom" Width="815">
             <DatePicker x:Name="DatePickerStartSer" HorizontalAlignment="Left" Margin="380,22,0,0" VerticalAlignment="Top" Width="131" Height="31" Visibility="Hidden" SelectedDateChanged="DatePickerStartSer_SelectedDateChanged"/>
@@ -45,7 +45,7 @@
             </ComboBox>
         </Grid>
 
-        <syncfusion:ReportViewer x:Name="ReportService" ReportPath="C:\Users\Alexis\Source\Repos\odc-osmbcs\rdlcfiles\ServiceReport.rdlc" Margin="0,67,0,0"/>
+        <syncfusion:ReportViewer x:Name="ReportService" ReportPath="C:\Users\Alexis\Source\Repos\odc-osmbcs\rdlcfiles\ServiceReport.rdlc" Margin="0"/>
 
     </Grid>
 </UserControl>

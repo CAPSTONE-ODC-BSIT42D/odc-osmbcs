@@ -485,7 +485,7 @@
                             <Canvas x:Name="g32gh1"/>
                             <Canvas x:Name="g34gh1"/>
                         </Canvas>
-                        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="15,0,0,0" Padding="0" VerticalAlignment="Center" Height="18" Text="Billing"/>
+                        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="15,0,0,0" Padding="0" VerticalAlignment="Center" Height="18" Text="Billing and Collection"/>
                     </StackPanel>
                 </Button>
                 <Button x:Name="reportsBtn" Margin="0,5,0,0" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" Height="45" VerticalAlignment="Top" Click="reportsBtn_Click">
@@ -1229,7 +1229,7 @@
                     </ComboBox>
                     <DataGrid x:Name="scheduledServiceDg" ItemsSource="{Binding ServiceSchedules_}" SelectedItem="{Binding SelectedServiceSchedule_}" CanUserAddRows="False" AutoGenerateColumns="false" EnableColumnVirtualization="True" IsReadOnly="True" Margin="10,62,-10,10">
                         <DataGrid.Columns >
-                            <DataGridTextColumn Binding="{Binding serviceSchedNoChar_}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Job ID"  />
+                            <DataGridTextColumn Binding="{Binding ServiceSchedID}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Job ID"  />
                             <!--<DataGridTemplateColumn Width="150" CanUserResize="False" Header="Customer Name" >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -1238,8 +1238,8 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>-->
                             <DataGridTextColumn Binding="{Binding serviceStatus_}" ClipboardContentBinding="{x:Null}" Header="Service Status" Width="350"   />
-                            <DataGridTextColumn Binding="{Binding dateStarted_}" ClipboardContentBinding="{x:Null}" Header="Status" Width="200" CanUserResize="False"  />
-                            <DataGridTextColumn Binding="{Binding dateEnded_}" ClipboardContentBinding="{x:Null}" Header="Status" Width="200" CanUserResize="False"  />
+                            <DataGridTextColumn Binding="{Binding dateStarted_}" ClipboardContentBinding="{x:Null}" Header="Date Started" Width="200" CanUserResize="False"  />
+                            <DataGridTextColumn Binding="{Binding dateEnded_}" ClipboardContentBinding="{x:Null}" Header="Date Ended" Width="200" CanUserResize="False"  />
                             <DataGridTemplateColumn  Width="Auto" CanUserResize="False" Header="Actions"  >
                                 <DataGridTemplateColumn.CellTemplate  >
                                     <DataTemplate>
@@ -1373,8 +1373,9 @@
                 <local:ucServiceSchedule x:Name="ucService" Margin="0" Visibility="Collapsed" d:IsHidden="True"/>
             </Grid>
             <Grid x:Name="reportsGrid">
-                <local:ucReportSales HorizontalAlignment="Left" Height="478" Margin="10,35,0,0" VerticalAlignment="Top" Width="878"/>
-
+                <local:ucReportPurchase x:Name="ucReportPurchase" Height="Auto" Margin="0" Width="Auto" d:IsHidden="True"/>
+                <local:ucReportService Height="Auto" Margin="0" Width="Auto"/>
+                <!--<local:ucReportSales/>-->
             </Grid>
             <Grid x:Name="queriesGrid" d:IsHidden="True"/>
 

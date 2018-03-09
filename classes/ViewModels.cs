@@ -726,5 +726,12 @@ namespace prototype2
             get { return SelectedPaymentH; }
             set { SetProperty(ref SelectedPaymentH, value); }
         }
+
+        protected PhasesPerService selectedPhasesPerService = null;
+        public PhasesPerService SelectedPhasesPerService
+        {
+            get { return selectedPhasesPerService; }
+            set { SetProperty(ref selectedPhasesPerService, value); }
+        }
     }
 }

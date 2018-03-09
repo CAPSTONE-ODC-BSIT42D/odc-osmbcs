@@ -76,7 +76,7 @@ namespace prototype2.uControlsTransanction
             {
                 if (MainVM.isNewPurchaseOrder)
                 {
-                    var observable = new ObservableCollection<SalesQuote>(from sq in MainVM.SalesQuotes where sq.status_.Equals("ACCEPTED") select sq);
+                    var observable = new ObservableCollection<SalesQuote>(from sq in MainVM.SalesQuotes where sq.status_.Equals("ACCEPTED")  select sq);
                     selectSalesQuote.ItemsSource = observable;
                 }
                 else if (MainVM.isPaymentInvoice)

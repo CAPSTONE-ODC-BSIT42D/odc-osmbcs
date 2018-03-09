@@ -788,11 +788,12 @@ namespace prototype2
                             }
                             foreach (AvailedService aserv in MainVM.AvailedServicesList)
                             {
-                                query = "INSERT INTO `odc_db`.`services_availed_t`(`serviceID`,`provinceID`,`sqNoChar`,`city`,`address`,`totalCost`)" +
+                                query = "INSERT INTO `odc_db`.`services_availed_t`(`serviceID`,`provinceID`,`sqNoChar`,`desc`,`city`,`address`,`totalCost`)" +
                                     " VALUES " +
                                     "('" + aserv.ServiceID + "', '" +
                                     aserv.ProvinceID + "', '" +
                                     MainVM.SelectedSalesQuote.sqNoChar_ + "', '" +
+                                    aserv.Desc + "', '" +
                                     aserv.City + "', '" +
                                     aserv.Address + "', '" +
                                     aserv.TotalCost + "');";

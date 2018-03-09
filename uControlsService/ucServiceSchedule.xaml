@@ -9,7 +9,12 @@
              d:DesignHeight="762.5" d:DesignWidth="1206" IsVisibleChanged="UserControl_IsVisibleChanged" Loaded="UserControl_Loaded"
             DataContext="{StaticResource MainVM}"
     >
-   
+    <UserControl.Resources>
+        <local:ServiceNameConverter x:Key="ServiceNameConverter" />
+        <local:PhaseItemConverter x:Key="PhaseItemConverter" />
+        <local:PhaseGroupConverter x:Key="PhaseGroupConverter" />
+    </UserControl.Resources>
+
     <Grid Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -20,62 +25,85 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Button x:Name="closeModalBtn" HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Margin="5,10,10,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="closeModalBtn_Click">
-                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform" Height="23" Width="27" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Canvas x:Name="Capa_1d2" Width="438.533" Height="438.533" Canvas.Left="0" Canvas.Top="0">
-                            <Canvas.RenderTransform>
-                                <TranslateTransform X="0" Y="0"/>
-                            </Canvas.RenderTransform>
-                            <!--Unknown tag: metadata-->
-                            <!--Unknown tag: sodipodi:namedview-->
-                            <Canvas x:Name="g4d1">
-                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2d1" Fill="#000000">
-                                    <Path.Data>
-                                        <PathGeometry Figures="M409.133 109.203c-19.608-33.592-46.205-60.189-79.798-79.796C295.736 9.801 259.058 0 219.273 0   c-39.781 0-76.47 9.801-110.063 29.407c-33.595 19.604-60.192 46.201-79.8 79.796C9.801 142.8 0 179.489 0 219.267   c0 39.78 9.804 76.463 29.407 110.062c19.607 33.592 46.204 60.189 79.799 79.798c33.597 19.605 70.283 29.407 110.063 29.407   s76.47-9.802 110.065-29.407c33.593-19.602 60.189-46.206 79.795-79.798c19.603-33.596 29.403-70.284 29.403-110.062   C438.533 179.485 428.732 142.795 409.133 109.203z M322.621 270.939c3.617 3.613 5.428 7.905 5.428 12.854   c0 5.133-1.811 9.514-5.428 13.127l-25.693 25.701c-3.614 3.613-7.994 5.42-13.135 5.42c-4.948 0-9.236-1.807-12.847-5.42   l-51.676-51.682l-51.678 51.682c-3.616 3.613-7.898 5.42-12.847 5.42c-5.14 0-9.517-1.807-13.134-5.42l-25.697-25.701   c-3.616-3.613-5.424-7.994-5.424-13.127c0-4.948 1.809-9.24 5.424-12.854l51.678-51.673l-51.678-51.678   c-3.616-3.612-5.424-7.898-5.424-12.847c0-5.14 1.809-9.517 5.424-13.134l25.697-25.693c3.617-3.616 7.994-5.424 13.134-5.424   c4.949 0 9.231 1.809 12.847 5.424l51.678 51.674l51.676-51.674c3.61-3.616 7.898-5.424 12.847-5.424   c5.141 0 9.521 1.809 13.135 5.424l25.693 25.693c3.617 3.617 5.428 7.994 5.428 13.134c0 4.948-1.811 9.235-5.428 12.847   l-51.675 51.678L322.621 270.939z" FillRule="NonZero"/>
-                                    </Path.Data>
-                                </Path>
-                            </Canvas>
-                            <Canvas x:Name="g6d1"/>
-                            <Canvas x:Name="g8d1"/>
-                            <Canvas x:Name="g10d1"/>
-                            <Canvas x:Name="g12d1"/>
-                            <Canvas x:Name="g14d2"/>
-                            <Canvas x:Name="g16d2"/>
-                            <Canvas x:Name="g18d2"/>
-                            <Canvas x:Name="g20d2"/>
-                            <Canvas x:Name="g22d2"/>
-                            <Canvas x:Name="g24d2"/>
-                            <Canvas x:Name="g26d2"/>
-                            <Canvas x:Name="g28d2"/>
-                            <Canvas x:Name="g30d2"/>
-                            <Canvas x:Name="g32d2"/>
-                            <Canvas x:Name="g34d2"/>
-                        </Canvas>
-                    </Viewbox>
-                </Button>
-
                 <Label x:Name="label20" Content="Schedule Details" HorizontalAlignment="Left" Margin="10,32,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
                 <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="28,61,28,0" VerticalAlignment="Top"/>
                 <Label x:Name="label21_Copy" Content="Service Name:" HorizontalAlignment="Left" Margin="38,68,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label Content="{Binding SelectedService.ServiceName}" HorizontalAlignment="Left" Margin="137,68,0,0" VerticalAlignment="Top"/>
+                <Label Content="{Binding SelectedAvailedServices.ServiceID, Converter={StaticResource ServiceNameConverter}, NotifyOnTargetUpdated=True}" HorizontalAlignment="Left" Margin="137,68,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="label21_Copy1" Content="Description:" HorizontalAlignment="Left" Margin="38,99,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label Content="{Binding SelectedService.ServiceDesc}" HorizontalAlignment="Left" Margin="137,99,0,0" VerticalAlignment="Top"/>
+                <Label Content="{Binding SelectedAvailedServices.Desc}" HorizontalAlignment="Left" Margin="137,99,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="label21_Copy2" Content="Start Date:" HorizontalAlignment="Left" Margin="38,130,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <Label x:Name="label21_Copy3" Content="End Date:" HorizontalAlignment="Left" Margin="38,161,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <Label x:Name="label21_Copy4" Content="Assigned Employees:" HorizontalAlignment="Left" Margin="367,289,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <DatePicker x:Name="startDate" HorizontalAlignment="Left" Margin="137,131,0,0" VerticalAlignment="Top" Height="26" Width="124" SelectedDateChanged="startDate_SelectedDateChanged"/>
                 <DatePicker x:Name="endDate" HorizontalAlignment="Left" Margin="137,162,0,0" VerticalAlignment="Top" Height="26" Width="124" SelectedDateChanged="endDate_SelectedDateChanged"/>
 
-                <Button x:Name="transferToLeftBtn" Content="&lt;" HorizontalAlignment="Left" Margin="342,397,0,0" VerticalAlignment="Top" Width="36" Click="transferToLeftBtn_Click" ToolTip="Assign selected employee"/>
+                <Button x:Name="transferToLeftBtn" Content="&lt;" HorizontalAlignment="Left" Margin="342,397,0,0" VerticalAlignment="Top" Width="36" Click="transferToLeftBtn_Click" ToolTip="Unassign selected employee"/>
                 <Label x:Name="label21_Copy5" Content="Additional Notes:" HorizontalAlignment="Left" Margin="38,193,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <TextBox x:Name="notesTb" HorizontalAlignment="Left" Height="65" Margin="55,219,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="395"/>
-                <ListBox x:Name="assignedEmployees" HorizontalAlignment="Left" Height="199" Margin="383,320,0,0" VerticalAlignment="Top" Width="282" ItemsSource="{Binding AssignedEmployees_}" SelectedItem="{Binding SelectedEmployeeContractor}"  DisplayMemberPath="EmpLName"/>
-                <ListBox x:Name="availableEmployees" ItemsSource="{Binding AvailableEmployees_}" SelectedItem="{Binding SelectedEmployeeContractor}" Margin="0,0,869,203"  HorizontalAlignment="Right" Width="282" Height="199" VerticalAlignment="Bottom" DisplayMemberPath="EmpLName"/>
+                <ListBox x:Name="assignedEmployees" HorizontalAlignment="Left" Height="199" Margin="383,320,0,0" VerticalAlignment="Top" Width="282" ItemsSource="{Binding SelectedServiceSchedule_.assignedEmployees_}" SelectedItem="{Binding SelectedEmployeeContractor}"  DisplayMemberPath="EmpLName"/>
+                <ListBox x:Name="availableEmployees" ItemsSource="{Binding AvailableEmployees_}" SelectedItem="{Binding SelectedEmployeeContractor}" Margin="55,320,0,0" DisplayMemberPath="EmpLName" Height="199" VerticalAlignment="Top" HorizontalAlignment="Left" Width="282"/>
 
-                <Button x:Name="transferToRightBtn" Content="&gt;" HorizontalAlignment="Left" Margin="342,422,0,0" VerticalAlignment="Top" Width="36" Click="transferToRightBtn_Click" ToolTip="Unassign selected employee"/>
+                <Button x:Name="transferToRightBtn" Content="&gt;" HorizontalAlignment="Left" Margin="342,422,0,0" VerticalAlignment="Top" Width="36" Click="transferToRightBtn_Click" ToolTip="Assign selected employee"/>
                 <Label x:Name="label21_Copy6" Content="Available Employees:" HorizontalAlignment="Left" Margin="38,289,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Button x:Name="selectServiceBtn" Content="Select Service" HorizontalAlignment="Right" Margin="0,70,40,0" Width="105" Height="24" VerticalAlignment="Top" Click="selectServiceBtn_Click" />
+                <Button x:Name="selectServiceBtn" Content="Select Service" HorizontalAlignment="Right" Margin="0,70,40,0" Width="105" Height="24" VerticalAlignment="Top" Click="selectServiceBtn_Click" Visibility="Hidden" />
                 <Label x:Name="label21_Copy7" Content="Phases" HorizontalAlignment="Left" Margin="38,524,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <DataGrid x:Name="phaseDg" SelectedItem="{Binding SelectedPhasesPerService}" ItemsSource="{Binding SelectedServiceSchedule_.PhasesPerService}" HorizontalAlignment="Left" Height="133" Margin="55,550,0,0" VerticalAlignment="Top" Width="610" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding PhaseID, Converter={StaticResource PhaseItemConverter}, NotifyOnTargetUpdated=True}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Phase Name"  />
+                        <DataGridTextColumn Binding="{Binding PhaseID, Converter={StaticResource PhaseGroupConverter}, NotifyOnTargetUpdated=True}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Phase Group"  />
+                        <DataGridTextColumn Binding="{Binding Status}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Status"  />
+                        <DataGridTemplateColumn  Width="115" CanUserResize="False" Header="Actions"  >
+                            <DataGridTemplateColumn.CellTemplate  >
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button x:Name="markAsDoneBtn" Foreground="White" Width="Auto" Height="25" Click="markAsDoneBtn_Click" Margin="10,10,0,10" Background="{x:Null}" BorderBrush="Black" ToolTip="View Record">
+                                            <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                                                <Canvas Name="Capa_1" Width="474.8" Height="474.801" Canvas.Left="0" Canvas.Top="0">
+                                                    <Canvas.RenderTransform>
+                                                        <TranslateTransform X="0" Y="0"/>
+                                                    </Canvas.RenderTransform>
+                                                    <Canvas.Resources/>
+                                                    <!--Unknown tag: metadata-->
+                                                    <!--Unknown tag: sodipodi:namedview-->
+                                                    <Canvas Name="g8">
+                                                        <Canvas Name="g6">
+                                                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path2" Fill="#000000">
+                                                                <Path.Data>
+                                                                    <PathGeometry Figures="M396.283 257.097c-1.14-0.575-2.282-0.862-3.433-0.862c-2.478 0-4.661 0.951-6.563 2.857l-18.274 18.271    c-1.708 1.715-2.566 3.806-2.566 6.283v72.513c0 12.565-4.463 23.314-13.415 32.264c-8.945 8.945-19.701 13.418-32.264 13.418    H82.226c-12.564 0-23.319-4.473-32.264-13.418c-8.947-8.949-13.418-19.698-13.418-32.264V118.622    c0-12.562 4.471-23.316 13.418-32.264c8.945-8.946 19.7-13.418 32.264-13.418H319.77c4.188 0 8.47 0.571 12.847 1.714    c1.143 0.378 1.999 0.571 2.563 0.571c2.478 0 4.668-0.949 6.57-2.852l13.99-13.99c2.282-2.281 3.142-5.043 2.566-8.276    c-0.571-3.046-2.286-5.236-5.141-6.567c-10.272-4.752-21.412-7.139-33.403-7.139H82.226c-22.65 0-42.018 8.042-58.102 24.126    C8.042 76.613 0 95.978 0 118.629v237.543c0 22.647 8.042 42.014 24.125 58.098c16.084 16.088 35.452 24.13 58.102 24.13h237.541    c22.647 0 42.017-8.042 58.101-24.13c16.085-16.084 24.134-35.45 24.134-58.098v-90.797    C402.001 261.381 400.088 258.623 396.283 257.097z" FillRule="NonZero"/>
+                                                                </Path.Data>
+                                                            </Path>
+                                                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path4" Fill="#000000">
+                                                                <Path.Data>
+                                                                    <PathGeometry Figures="M467.95 93.216l-31.409-31.409c-4.568-4.567-9.996-6.851-16.279-6.851c-6.275 0-11.707 2.284-16.271 6.851    L219.265 246.532l-75.084-75.089c-4.569-4.57-9.995-6.851-16.274-6.851c-6.28 0-11.704 2.281-16.274 6.851l-31.405 31.405    c-4.568 4.568-6.854 9.994-6.854 16.277c0 6.28 2.286 11.704 6.854 16.274l122.767 122.767c4.569 4.571 9.995 6.851 16.274 6.851    c6.279 0 11.704-2.279 16.274-6.851l232.404-232.403c4.565-4.567 6.854-9.994 6.854-16.274S472.518 97.783 467.95 93.216z" FillRule="NonZero"/>
+                                                                </Path.Data>
+                                                            </Path>
+                                                        </Canvas>
+                                                    </Canvas>
+                                                    <Canvas Name="g10"/>
+                                                    <Canvas Name="g12"/>
+                                                    <Canvas Name="g14"/>
+                                                    <Canvas Name="g16"/>
+                                                    <Canvas Name="g18"/>
+                                                    <Canvas Name="g20"/>
+                                                    <Canvas Name="g22"/>
+                                                    <Canvas Name="g24"/>
+                                                    <Canvas Name="g26"/>
+                                                    <Canvas Name="g28"/>
+                                                    <Canvas Name="g30"/>
+                                                    <Canvas Name="g32"/>
+                                                    <Canvas Name="g34"/>
+                                                    <Canvas Name="g36"/>
+                                                    <Canvas Name="g38"/>
+                                                </Canvas>
+                                            </Viewbox>
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                    
+                </DataGrid>
             </Grid>
 
         </ScrollViewer>
