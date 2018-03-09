@@ -40,12 +40,12 @@ namespace prototype2
         private void DisplayReport()
         {
 
-            ucSalesInvoiceViewer.Reset();
+            SalesInvoiceViewer.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesInvoice.rdlc");
-            ucSalesInvoiceViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetSalesInvoice", GetSales()));
-            ucSalesInvoiceViewer.LoadReport(rNames);
-            ucSalesInvoiceViewer.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
-            ucSalesInvoiceViewer.RefreshReport();
+            SalesInvoiceViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetSalesInvoice", GetSales()));
+            SalesInvoiceViewer.LoadReport(rNames);
+            SalesInvoiceViewer.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
+            SalesInvoiceViewer.RefreshReport();
         }
 
         private DataTable GetSales()
@@ -81,7 +81,7 @@ namespace prototype2
             }
             else
             {
-                ucSalesInvoiceViewer.Reset();
+                SalesInvoiceViewer.Reset();
             }
         }
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)
