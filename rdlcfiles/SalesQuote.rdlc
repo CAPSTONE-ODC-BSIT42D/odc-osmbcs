@@ -167,7 +167,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>We are pleased to submit our price for your Extreme Hauling requirement as follows:</Value>
+                <Value>We are pleased to submit our price proposal for your your </Value>
                 <Style>
                   <FontSize>9pt</FontSize>
                   <FontWeight>Bold</FontWeight>
@@ -181,7 +181,7 @@
         <Top>4.05209in</Top>
         <Left>0.66319in</Left>
         <Height>0.23958in</Height>
-        <Width>5.25222in</Width>
+        <Width>3.49084in</Width>
         <ZIndex>5</ZIndex>
         <Style>
           <Border>
@@ -1963,7 +1963,7 @@
         <DataSetName>DataSetSales_Quote</DataSetName>
         <Top>4.38417in</Top>
         <Left>0.64708in</Left>
-        <Height>1.42708in</Height>
+        <Height>1.42709in</Height>
         <Width>6.625in</Width>
         <ZIndex>30</ZIndex>
         <Style>
@@ -2223,6 +2223,105 @@
           </Border>
         </Style>
       </Tablix>
+      <Tablix Name="Tablix14">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>1.45486in</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.25in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="quoteSubject2">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!quoteSubject.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>quoteSubject</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Details11" />
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>DataSetSales_Quote</DataSetName>
+        <Top>4.04167in</Top>
+        <Left>4.19569in</Left>
+        <Height>0.25in</Height>
+        <Width>1.45486in</Width>
+        <ZIndex>35</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Tablix>
+      <Textbox Name="Textbox9">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>requirements as follows:</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox9</rd:DefaultName>
+        <Top>4.04167in</Top>
+        <Left>5.65055in</Left>
+        <Height>0.25in</Height>
+        <Width>1.62153in</Width>
+        <ZIndex>36</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
     <Height>12.47917in</Height>
     <Style>
