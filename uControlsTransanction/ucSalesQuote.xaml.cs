@@ -251,8 +251,8 @@ namespace prototype2
         {
             if (MainVM.SelectedCustomerSupplier != null)
             {
-                if(!MainVM.isEdit)
-                    MainVM.SelectedSalesQuote = new SalesQuote() { };
+                //if(!MainVM.isEdit)
+                //    MainVM.SelectedSalesQuote = new SalesQuote() { };
                 OnSelectItemClicked(e);
             }
                 
@@ -347,7 +347,10 @@ namespace prototype2
             feeTypeCb.SelectedIndex = -1;
             otherFeenameTb.Text = "";
             feeCostTb.Value = 0;
-            MainVM.isEdit = false;
+            if (MainVM.SelectedSalesQuote != null)
+                MainVM.isEdit = true;
+            else
+                MainVM.isEdit = false;
 
         }
 
@@ -390,26 +393,26 @@ namespace prototype2
         }
 
         
-        private void cancelAddProductBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
-            sb.Begin(formGridBg);
-            formGridBg.Visibility = Visibility.Collapsed;
-            foreach (var obj in formGridBg.Children)
-            {
+        //private void cancelAddProductBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
+        //    sb.Begin(formGridBg);
+        //    formGridBg.Visibility = Visibility.Collapsed;
+        //    foreach (var obj in formGridBg.Children)
+        //    {
 
-                if (!((Grid)obj).Name.Equals("addNewItemFormGrid"))
-                {
-                    ((Grid)obj).Visibility = Visibility.Collapsed;
-                }
-                else
-                {
-                    ((Grid)obj).Visibility = Visibility.Visible;
-                }
+        //        if (!((Grid)obj).Name.Equals("addNewItemFormGrid"))
+        //        {
+        //            ((Grid)obj).Visibility = Visibility.Collapsed;
+        //        }
+        //        else
+        //        {
+        //            ((Grid)obj).Visibility = Visibility.Visible;
+        //        }
 
-            }
-            computePrice();
-        }
+        //    }
+        //    computePrice();
+        //}
         
 
         private void deleteRequestedItemBtn_Click(object sender, RoutedEventArgs e)
@@ -594,12 +597,13 @@ namespace prototype2
                     item.unitPriceMarkUp = item.unitPrice + (item.unitPrice / 100 * (decimal)markupPrice.Last().MarkupPerc);
                     item.totalAmount = (item.unitPriceMarkUp * item.qty) - ((item.unitPriceMarkUp * item.qty) / 100) * (decimal)discountPriceTb.Value;
                 }
-                else if (item.itemType == 1)
+                else if (item.itemType == 1 && MainVM.AvailedServicesList.Count != 0)
                 {
-                    
                     MainVM.SelectedAvailedServices = MainVM.AvailedServicesList.Where(x => x.AvailedServiceID.Equals(item.availedServiceID)).FirstOrDefault();
-                    decimal totalFee = (from fees in MainVM.SelectedAvailedServices.AdditionalFees
-                                        select fees.FeePrice).Sum() ;
+                    decimal totalFee = 0;
+                    if (MainVM.SelectedAvailedServices.AdditionalFees.Count != 0)
+                        totalFee = (from fees in MainVM.SelectedAvailedServices.AdditionalFees
+                                            select fees.FeePrice).Sum();
                     //MainVM.SelectedProvince = (from prov in MainVM.Provinces
                     //                           where prov.ProvinceID == MainVM.SelectedAvailedServices.ProvinceID
                     //                           select prov).FirstOrDefault();
@@ -675,12 +679,10 @@ namespace prototype2
             }
             else
                 quoteName = MainVM.SelectedCustomerSupplier.CompanyName.Trim().ToUpper();
-            string stringChars = "";
-            
 
-            if (MainVM.isEdit)
-                stringChars = MainVM.SelectedSalesQuote.sqNoChar_;
-            else
+            string stringChars = "";
+
+            if (!MainVM.isEdit)
             {
                 for (int i = 0; i < 4; i++)
                 {
@@ -698,9 +700,12 @@ namespace prototype2
                 }
                 stringChars += "-";
                 stringChars += DateTime.Now.ToString("yyyy-MM-dd");
+                
             }
+            else
+                stringChars = MainVM.SelectedSalesQuote.sqNoChar_;
 
-            var obj = new SalesQuote()
+            MainVM.SelectedSalesQuote = new SalesQuote()
             {
                 sqNoChar_ = stringChars,
                 custID_ = MainVM.SelectedCustomerSupplier.CompanyID,
@@ -720,7 +725,7 @@ namespace prototype2
                 additionalTerms_ = additionalTermsTb.Text,
                 discountPercent_ = (decimal)discountPriceTb.Value
             };
-            MainVM.SelectedSalesQuote = obj;
+           
 
         }
 
@@ -743,7 +748,7 @@ namespace prototype2
             {
                 if (!MainVM.isEdit)
                 {
-                    string query = "INSERT INTO `odc_db`.`sales_quote_t` " + "(`sqNoChar`,`custID`,`quoteSubject`,`priceNote`,`deliveryDate`,`estDelivery`,`validityDays`,`validityDate`,`otherTerms`,`VAT`,`vatIsExcluded`,`paymentIsLanded`,`paymentCurrency`,`status`,`termsDays`,`termsDP`,`discountPercent`,surveyReportDoc)" +
+                    string query = "INSERT INTO `odc_db`.`sales_quote_t` " + "(`sqNoChar`,`custID`,`quoteSubject`,`priceNote`,`deliveryDate`,`estDelivery`,`validityDays`,`validityDate`,`otherTerms`,`VAT`,`vatIsExcluded`,`paymentIsLanded`,`paymentCurrency`,`status`,`termsDays`,`termsDP`,`discountPercent`,surveyReportDoc, additionalNote)" +
                     " VALUES " +
                     "('" + MainVM.SelectedSalesQuote.sqNoChar_ + "','" +
                     MainVM.SelectedSalesQuote.custID_ + "','" +
@@ -762,7 +767,8 @@ namespace prototype2
                     MainVM.SelectedSalesQuote.termsDays_ + "','" +
                     MainVM.SelectedSalesQuote.termsDP_ + "','" +
                     MainVM.SelectedSalesQuote.discountPercent_ + "','" +
-                    DocData + "'" +
+                    DocData + "','" +
+                    MainVM.SelectedSalesQuote.additionalTerms_ + "'" +
                     "); ";
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
@@ -841,7 +847,8 @@ namespace prototype2
                         "`termsDays` = '" + MainVM.SelectedSalesQuote.termsDays_ + "'," +
                         "`termsDP` = '" + MainVM.SelectedSalesQuote.termsDP_ + "'," +
                         "`discountPercent` = '" + MainVM.SelectedSalesQuote.discountPercent_ + "'," +
-                        "`surveyReportDoc` = '" + DocData + "'" +
+                        "`surveyReportDoc` = '" + DocData + "'," +
+                        "`additionalNote` = '" + MainVM.SelectedSalesQuote.additionalTerms_ + "'" +
                         " WHERE `sqNoCHar` = '" + MainVM.SelectedSalesQuote.sqNoChar_ +"'";
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {

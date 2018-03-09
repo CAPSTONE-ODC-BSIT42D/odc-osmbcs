@@ -52,14 +52,17 @@ namespace prototype2
         {
             var dbCon = DBConnection.Instance();
             dbCon.IsConnect();
-            string query = "SELECT LAST_INSERT_ID();";
-            string result = dbCon.selectScalar(query, dbCon.Connection).ToString();
+           
             dbCon.IsConnect();
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
             if(MainVM.SelectedPaymentH_ == null)
+            {
+                string query = "SELECT LAST_INSERT_ID();";
+                string result = dbCon.selectScalar(query, dbCon.Connection).ToString();
                 cmd.CommandText = "SELECT c.companyName, c.companyAddress, c.companyCity, pv.id, si.invoiceNo, sp.SIpaymentAmount, si.busStyle, sp.SIpaymentMethod, sp.SIcheckNo FROM cust_supp_t c INNER JOIN sales_invoice_t si ON c.companyID = si.custID INNER JOIN si_payment_t sp ON si.invoiceNo = sp.invoiceNo INNER JOIN  provinces_t pv ON pv.id = c.companyProvinceID WHERE sp.SIpaymentID = '" + result + "';";
+            }
             else
                 cmd.CommandText = "SELECT c.companyName, c.companyAddress, c.companyCity, pv.id, si.invoiceNo, sp.SIpaymentAmount, si.busStyle, sp.SIpaymentMethod, sp.SIcheckNo FROM cust_supp_t c INNER JOIN sales_invoice_t si ON c.companyID = si.custID INNER JOIN si_payment_t sp ON si.invoiceNo = sp.invoiceNo INNER JOIN  provinces_t pv ON pv.id = c.companyProvinceID WHERE sp.SIpaymentID = '" + MainVM.SelectedPaymentH_.SIpaymentID_ + "';";
 

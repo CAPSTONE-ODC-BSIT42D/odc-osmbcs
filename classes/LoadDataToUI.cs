@@ -406,7 +406,7 @@ namespace prototype2
             if (dbCon.IsConnect())
             {
                 MainVM.SalesQuotes.Clear();
-                string query = "SELECT * FROM sales_quote_t;";
+                string query = "SELECT * FROM sales_quote_t where isDeleted = 0;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
@@ -481,8 +481,8 @@ namespace prototype2
                         status_ = dr["status"].ToString(),
                         termsDays_ = termsDays,
                         termsDP_ = termsDP,
-                        discountPercent_ = discountPerc
-                        
+                        discountPercent_ = discountPerc,
+                         additionalTerms_ = dr["additionalNote"].ToString()
                     });
                 }
                 dbCon.Close();

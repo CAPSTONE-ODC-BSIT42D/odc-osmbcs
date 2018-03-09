@@ -49,10 +49,11 @@ namespace prototype2.uControlsService
         {
             if (this.IsVisible)
             {
-                selectServices.ItemsSource = new ObservableCollection<AvailedService>(from aserv in MainVM.AvailedServices
-                                                                    join sq in MainVM.SalesQuotes on aserv.SqNoChar equals sq.sqNoChar_
-                                                                    where sq.status_.Equals("ACCEPTED")
-                                                                    select aserv);
+                var obj = new ObservableCollection<AvailedService>(from aserv in MainVM.AvailedServices
+                                                                   join sq in MainVM.SalesQuotes on aserv.SqNoChar equals sq.sqNoChar_
+                                                                   where sq.status_.Equals("ACCEPTED")
+                                                                   select aserv);
+                selectServices.ItemsSource = obj;
             }
         }
 
