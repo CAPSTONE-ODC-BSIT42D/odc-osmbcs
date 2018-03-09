@@ -1213,7 +1213,7 @@
                 </Grid>
                 <local:ucInvoiceForm x:Name="ucInvoiceForm" Margin="0" Visibility="Collapsed" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="serviceGrid">
+            <Grid x:Name="serviceGrid" d:IsHidden="True">
                 <Grid x:Name="serviceGridHome" Margin="0,0,20,20" >
                     <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                         <Label x:Name="label9" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -1372,12 +1372,13 @@
                 </Grid>
                 <local:ucServiceSchedule x:Name="ucService" Margin="0" Visibility="Collapsed" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="reportsGrid" d:IsHidden="True">
-                
+            <Grid x:Name="reportsGrid">
+                <local:ucReportSales HorizontalAlignment="Left" Height="478" Margin="10,35,0,0" VerticalAlignment="Top" Width="878"/>
+
             </Grid>
             <Grid x:Name="queriesGrid" d:IsHidden="True"/>
 
-            <Grid x:Name="maintenanceGrid">
+            <Grid x:Name="maintenanceGrid" d:IsHidden="True">
                 <Grid x:Name="manageCustomerGrid" Margin="0,0,1,0" >
                     <Grid x:Name="manageCustomerHomeGrid" Margin="0">
                         <Label x:Name="label13" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
