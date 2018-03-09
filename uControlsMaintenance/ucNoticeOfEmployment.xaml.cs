@@ -33,7 +33,7 @@ namespace prototype2
         private void DisplayReport()
         {
             ucReportViewer.Reset();
-            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.RDLC.NoticeOfEmployment.rdlc");
+            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.NoticeOfEmployment.rdlc");
             ucReportViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("noticeOfemploymentDataTable", GetContract()));
             ucReportViewer.LoadReport(rNames);
             ucReportViewer.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
