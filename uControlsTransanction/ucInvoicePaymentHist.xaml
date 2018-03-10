@@ -50,7 +50,7 @@
             <Label Content="{Binding SelectedSalesInvoice.invoiceNo_}" HorizontalAlignment="Left" Margin="115,50,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31"/>
             <Label Content="Balance:" HorizontalAlignment="Left" Margin="11,81,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31"/>
             <TextBlock Text="{Binding Balance, ConverterCulture=fil-PH, StringFormat=\{0:C\}}" HorizontalAlignment="Left" Margin="115,86,0,0" VerticalAlignment="Top" FontSize="16" FontStyle="Normal" FontFamily="Segoe UI" Height="26"/>
-            <Button x:Name="receivePaymentBtn" Content="Receive Payment" Margin="488,48,10,0" VerticalAlignment="Top" Click="receivePaymentBtn_Click" Height="24" Visibility="Collapsed"/>
+            <Button x:Name="receivePaymentBtn" Content="Receive Payment" Margin="488,48,10,0" VerticalAlignment="Top" Click="receivePaymentBtn_Click" Height="24"/>
             <DataGrid x:Name="paymentHistoryDg" Margin="11,122,0,0" SelectedItem="{Binding SelectedPaymentH_}" ItemsSource="{Binding SelectedSalesInvoice.PaymentHist_}" EnableColumnVirtualization="True" IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False" Height="200">
                 <DataGrid.Columns >
                     <DataGridTextColumn Binding="{Binding SIpaymentAmount_, ConverterCulture=fil-PH, StringFormat=\{0:C\}}" ClipboardContentBinding="{x:Null}" Header="Amount" CanUserResize="False" />
@@ -93,7 +93,7 @@
                                             </Canvas>
                                         </Viewbox>
                                     </Button>
-                                    <Button x:Name="receivePaymentBtn" Content="Receive Payment" Margin="488,48,10,0" VerticalAlignment="Top" Click="receivePaymentBtn_Click" Height="24"/>
+                                    <!--<Button x:Name="receivePaymentBtn" Content="Receive Payment" Margin="488,48,10,0" VerticalAlignment="Top" Click="receivePaymentBtn_Click" Height="24"/>
                                     <Button x:Name="clearCheckBtn" Width="Auto" Height="25" Background="{x:Null}" BorderBrush="Black" Margin="10,10,10,10" ToolTip="Clear Check" Click="clearCheckBtn_Click" >
                                         <Button.Style>
                                             <Style TargetType="{x:Type Button}">
@@ -104,7 +104,7 @@
                                                 </Style.Triggers>
                                             </Style>
                                         </Button.Style>
-                                    </Button>
+                                    </Button>-->
 
                                 </StackPanel>
                             </DataTemplate>

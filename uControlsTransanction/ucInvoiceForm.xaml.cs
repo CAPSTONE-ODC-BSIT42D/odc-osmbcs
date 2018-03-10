@@ -40,6 +40,15 @@ namespace prototype2
                 handler(this, e);
         }
 
+        public event EventHandler PrintSalesInvoice;
+        protected virtual void OnPrintSalesInvoiceClicked(RoutedEventArgs e)
+        {
+            var handler = PrintSalesInvoice;
+            if (handler != null)
+                handler(this, e);
+        }
+
+
         private void resetElements()
         {
             MainVM.RequestedItems.Clear();
@@ -103,7 +112,7 @@ namespace prototype2
                     renderer.PdfDocument.Save(filename);
                 }
                 OnSaveCloseButtonClicked(e);
-
+                OnPrintSalesInvoiceClicked(e);
             }
 
         }
@@ -248,26 +257,26 @@ namespace prototype2
                 {
 
 
-                    query = "SELECT LAST_INSERT_ID();";
-                    string serviceID = dbCon.selectScalar(query, dbCon.Connection).ToString();
+               //     query = "SELECT LAST_INSERT_ID();";
+               //     string serviceID = dbCon.selectScalar(query, dbCon.Connection).ToString();
 
-                    decimal amount1 = MainVM.TotalSales - (MainVM.TotalSales / 100 * MainVM.SelectedSalesQuote.termsDP_);
+               //     decimal amount1 = MainVM.TotalSales - (MainVM.TotalSales / 100 * MainVM.SelectedSalesQuote.termsDP_);
 
-                    query = "INSERT INTO `odc_db`.`si_payment_t` " +
-               "(`SIpaymentAmount`,`invoiceNo`) " +
-               "VALUES " +
-               "('" + amount1 + "','" +
-               serviceID + "')";
-                    dbCon.insertQuery(query, dbCon.Connection);
+               //     query = "INSERT INTO `odc_db`.`si_payment_t` " +
+               //"(`SIpaymentAmount`,`invoiceNo`) " +
+               //"VALUES " +
+               //"('" + amount1 + "','" +
+               //serviceID + "')";
+               //     dbCon.insertQuery(query, dbCon.Connection);
 
-                    decimal amount2 = MainVM.TotalSales - amount1;
+               //     decimal amount2 = MainVM.TotalSales - amount1;
 
-                    query = "INSERT INTO `odc_db`.`si_payment_t` " +
-               "(`SIpaymentAmount`,`invoiceNo`) " +
-               "VALUES " +
-               "('" + amount2 + "','" +
-               serviceID + "')";
-                    dbCon.insertQuery(query, dbCon.Connection);
+               //     query = "INSERT INTO `odc_db`.`si_payment_t` " +
+               //"(`SIpaymentAmount`,`invoiceNo`) " +
+               //"VALUES " +
+               //"('" + amount2 + "','" +
+               //serviceID + "')";
+               //     dbCon.insertQuery(query, dbCon.Connection);
 
                     query = "UPDATE `sales_quote_t` SET status = '" + "ACCEPTED" + "' WHERE sqNoChar = '" + MainVM.SelectedSalesInvoice.sqNoChar_ + "'";
                     dbCon.insertQuery(query, dbCon.Connection);

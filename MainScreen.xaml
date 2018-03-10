@@ -545,9 +545,9 @@
                     </StackPanel>
                 </Button>
                 <StackPanel x:Name="reportsSubMenuGrid" Margin="0" Orientation="Vertical">
-                    <Button x:Name="salesReportBtn" Content="Sales Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0,0,0,5"/>
-                    <Button x:Name="purchaseReportBtn" Content="Purchase Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5"/>
-                    <Button x:Name="serviceReportBtn" Content="Service Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5"/>
+                    <Button x:Name="salesReportBtn" Content="Sales Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0,0,0,5" Click="salesReportBtn_Click"/>
+                    <Button x:Name="purchaseReportBtn" Content="Purchase Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="purchaseReportBtn_Click"/>
+                    <Button x:Name="serviceReportBtn" Content="Service Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="serviceReportBtn_Click"/>
                 </StackPanel>
                 <Button x:Name="manageBtn" Margin="0,5,0,0" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" Height="45" VerticalAlignment="Top" Click="manageBtn_Click" HorizontalContentAlignment="Center">
                     <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
@@ -1070,7 +1070,7 @@
 
                 </Grid>
             </Grid>
-            <Grid x:Name="billingGrid" Margin="10">
+            <Grid x:Name="billingGrid" Margin="10" d:IsHidden="True">
                 <Grid x:Name="invoiceGridHome" >
                     <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                         <Label x:Name="label22" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -1385,10 +1385,10 @@
                 </Grid>
                 <local:ucServiceSchedule x:Name="ucService" Margin="0" Visibility="Collapsed" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="reportsGrid" d:IsHidden="True">
+            <Grid x:Name="reportsGrid">
                 <local:ucReportPurchase x:Name="ucReportPurchase" Height="Auto" Margin="0" Width="Auto" d:IsHidden="True"/>
-                <local:ucReportService Height="Auto" Margin="0" Width="Auto"/>
-                <local:ucReportSales Margin="10,10,41,154"/>
+                <local:ucReportService Height="Auto" Margin="0" Width="Auto" d:IsHidden="True"/>
+                <local:ucReportSales HorizontalAlignment="Stretch"/>
             </Grid>
             <Grid x:Name="queriesGrid" d:IsHidden="True"/>
 
@@ -2224,7 +2224,7 @@
             <uControlsMaintenance:ucLocation x:Name="ucLocation" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="458" d:IsHidden="True"/>
 
         </Grid>
-        <Grid x:Name="otherGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3" d:IsHidden="True">
+        <Grid x:Name="otherGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3">
             <uControlsMaintenance:ucSelectCustomer x:Name="ucSelectCustomer" Margin="0" Visibility="Collapsed" d:IsHidden="True"/>
             <uControlsMaintenance:ucAddItem x:Name="ucAddItem" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Visibility="Collapsed" d:IsHidden="True"/>
 
@@ -2234,7 +2234,8 @@
             <local:ucOfficialReceipt x:Name="ucOfficialReceipt" d:IsHidden="True"/>
             <local:ucPurchaseOrderViewer x:Name="ucPurchaseOrderViewer" d:IsHidden="True"/>
             <uControlsService:ucSelecService x:Name="ucSelectService" Margin="0" d:IsHidden="True"/>
-            <local:ucNoticeOfEmployment x:Name="ucNoticeOfEmployment" Height="Auto" Margin="0" Width="Auto"/>
+            <local:ucNoticeOfEmployment x:Name="ucNoticeOfEmployment" Height="Auto" Margin="0" Width="Auto" d:IsHidden="True"/>
+            <local:ucSalesInvoiceViewer x:Name="ucSaleInvoiceViewer" Margin="0"/>
         </Grid>
 
     </Grid>
