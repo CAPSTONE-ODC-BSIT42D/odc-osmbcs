@@ -141,7 +141,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>item Name</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -320,7 +320,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Expr2.Value</Value>
+                              <Value>=Sum(Fields!unitPrice.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -568,7 +568,7 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DataSetReportPurchase</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\Alexis\Source\Repos\odc-osmbcs\DataSetReportPurchase.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\Lewis\Source\Repos\odc-osmbcs\DataSetReportPurchase.xsd</rd:SchemaPath>
         <rd:TableName>PurchaseTable</rd:TableName>
         <rd:TableAdapterFillMethod>FillPurchaseAll</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetDataPurchaseAll</rd:TableAdapterGetDataMethod>

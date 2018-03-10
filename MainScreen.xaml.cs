@@ -91,6 +91,8 @@ namespace prototype2
             this.ucOfficialReceipt.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
             this.ucPurchaseOrderViewer.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
 
+            this.ucSaleInvoiceViewer.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
+
             this.ucService.SelectServiceButtonClicked += selectService_BtnClicked;
             this.ucSelectService.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
             foreach (var obj in containerGrid.Children)
@@ -593,6 +595,78 @@ namespace prototype2
             else
                 reportsSubMenuGrid.Visibility = Visibility.Visible;
 
+        }
+
+        private void salesReportBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (UIElement obj in containerGrid.Children)
+            {
+                if (containerGrid.Children.IndexOf(obj) == 4)
+                {
+                    
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+            foreach (UIElement obj in reportsGrid.Children)
+            {
+                if (reportsGrid.Children.IndexOf(obj) == 0)
+                {
+                    headerLbl.Content = "Reports - Sales";
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void purchaseReportBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (UIElement obj in containerGrid.Children)
+            {
+                if (containerGrid.Children.IndexOf(obj) == 4)
+                {
+
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+            foreach (UIElement obj in reportsGrid.Children)
+            {
+                if (reportsGrid.Children.IndexOf(obj) == 1)
+                {
+                    headerLbl.Content = "Reports - Sales";
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void serviceReportBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (UIElement obj in containerGrid.Children)
+            {
+                if (containerGrid.Children.IndexOf(obj) == 4)
+                {
+
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+            foreach (UIElement obj in reportsGrid.Children)
+            {
+                if (reportsGrid.Children.IndexOf(obj) == 2)
+                {
+                    headerLbl.Content = "Reports - Sales";
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void manageBtn_Click(object sender, RoutedEventArgs e)
