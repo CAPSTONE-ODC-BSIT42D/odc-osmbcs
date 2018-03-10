@@ -301,6 +301,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSetReportService.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DataSetSalesInvoice.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetSalesInvoice.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DatasetSales_Quote.cs">
       <DependentUpon>DatasetSales_Quote.xsd</DependentUpon>
     </Compile>
@@ -423,6 +428,9 @@
     </Compile>
     <Compile Include="uControlsTransanction\ucSalesQuoteViewer.xaml.cs">
       <DependentUpon>ucSalesQuoteViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="uControlsTransanction\ucSalesInvoiceViewer.xaml.cs">
+      <DependentUpon>ucSalesInvoiceViewer.xaml</DependentUpon>
     </Compile>
     <Page Include="DocumentViewer.xaml">
       <SubType>Designer</SubType>
@@ -578,6 +586,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="uControlsTransanction\ucSalesInvoiceViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -658,6 +670,17 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="DataSetSalesInvoice.xsc">
+      <DependentUpon>DataSetSalesInvoice.xsd</DependentUpon>
+    </None>
+    <None Include="DataSetSalesInvoice.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetSalesInvoice.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataSetSalesInvoice.xss">
+      <DependentUpon>DataSetSalesInvoice.xsd</DependentUpon>
+    </None>
     <None Include="DatasetSales_Quote.xsc">
       <DependentUpon>DatasetSales_Quote.xsd</DependentUpon>
     </None>
@@ -704,6 +727,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="rdlcfiles\PurchaseReport.rdlc" />
+    <EmbeddedResource Include="rdlcfiles\SalesInvoice.rdlc" />
     <EmbeddedResource Include="rdlcfiles\SalesQuote.rdlc" />
     <EmbeddedResource Include="rdlcfiles\ServiceReport.rdlc" />
     <EmbeddedResource Include="rdlcfiles\SalesReport.rdlc" />
@@ -719,6 +743,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\DataSources\" />
+    <Folder Include="uControlsBilling\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SqlServerTypes\readme.htm" />

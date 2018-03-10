@@ -195,74 +195,75 @@ namespace prototype2
         }
 
         //Invoice Variables
-        private decimal VatableSales_;
+        public decimal vatableSales_;
         public decimal VatableSale {
-            get { return VatableSales_; }
-            set { SetProperty(ref VatableSales_, value); }
+            get { return vatableSales_; }
+            set { SetProperty(ref vatableSales_, value); }
         }
 
-        public decimal VatExemptedSales_;
+        public decimal vatExemptedSales_;
         public decimal VatExemptedSales
         {
-            get { return VatExemptedSales_; }
-            set { SetProperty(ref VatExemptedSales_, value); }
+            get { return vatExemptedSales_; }
+            set { SetProperty(ref vatExemptedSales_, value); }
         }
 
-        public decimal TotalSalesWithOutDp_;
+        public decimal totalSalesWithOutDp_;
         public decimal TotalSalesWithOutDp
         {
-            get { return TotalSalesWithOutDp_; }
-            set { SetProperty(ref TotalSalesWithOutDp_, value); }
+            get { return totalSalesWithOutDp_; }
+            set { SetProperty(ref totalSalesWithOutDp_, value); }
         }
 
-        public decimal ZeroRatedSales_;
+        public decimal zeroRatedSales_;
         public decimal ZeroRatedSales {
-            get { return ZeroRatedSales_; }
-            set { SetProperty(ref ZeroRatedSales_, value); }
+            get { return zeroRatedSales_; }
+            set { SetProperty(ref zeroRatedSales_, value); }
         }
 
-        public decimal VatAmount_;
+        public decimal vatAmount_;
         public decimal VatAmount {
-            get { return VatAmount_; }
-            set { SetProperty(ref VatAmount_, value); }
+            get { return vatAmount_; }
+            set { SetProperty(ref vatAmount_, value); }
         }
 
-        public decimal TotalSales_;
+        public decimal totalSales_;
+
         public decimal TotalSales {
-            get { return TotalSales_; }
-            set { SetProperty(ref TotalSales_, value); }
+            get { return totalSales_; }
+            set { SetProperty(ref totalSales_, value); }
         }
 
-        public decimal TotalSalesNoVat_;
+        public decimal totalSalesNoVat_;
         public decimal TotalSalesNoVat
         {
-            get { return TotalSalesNoVat_; }
-            set { SetProperty(ref TotalSalesNoVat_, value); }
+            get { return totalSalesNoVat_; }
+            set { SetProperty(ref totalSalesNoVat_, value); }
         }
 
-        public decimal TotalDue_;
+        public decimal totalDue_;
         public decimal TotalDue {
-            get { return TotalDue_; }
-            set { SetProperty(ref TotalDue_, value); }
+            get { return totalDue_; }
+            set { SetProperty(ref totalDue_, value); }
         }
 
-        public decimal TotalDueNoVat_;
+        public decimal totalDueNoVat_;
         public decimal TotalDueNoVat
         {
-            get { return TotalDueNoVat_; }
-            set { SetProperty(ref TotalDueNoVat_, value); }
+            get { return totalDueNoVat_; }
+            set { SetProperty(ref totalDueNoVat_, value); }
         }
 
-        public decimal DiscountAmount_;
+        public decimal discountAmount_;
         public decimal DiscountAmount {
-            get { return DiscountAmount_; }
-            set { SetProperty(ref DiscountAmount_, value); }
+            get { return discountAmount_; }
+            set { SetProperty(ref discountAmount_, value); }
         }
 
-        public decimal WithHoldingTax_;
+        public decimal withHoldingTax_;
         public decimal WithHoldingTax {
-            get { return WithHoldingTax_; }
-            set { SetProperty(ref WithHoldingTax_, value); }
+            get { return withHoldingTax_; }
+            set { SetProperty(ref withHoldingTax_, value); }
         }
 
         public decimal balance_;

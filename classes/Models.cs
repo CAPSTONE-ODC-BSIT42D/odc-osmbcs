@@ -1595,6 +1595,13 @@ namespace prototype2
             set { SetProperty(ref serviceSchedID, value); }
         }
 
+        protected int serviceAvailedID;
+        public int ServiceAvailedID
+        {
+            get { return serviceAvailedID; }
+            set { SetProperty(ref serviceAvailedID, value); }
+        }
+
         protected int invoiceNo;
         public int invoiceNo_
         {

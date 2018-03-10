@@ -327,13 +327,13 @@ namespace prototype2
             inv.AddLineBreak();
 
             inv.AddText("Total Sale VAT Inclusive" + "\t\t" + " : " + "\t");
-            inv.AddText(MainVM.TotalSales_.ToString());
+            inv.AddText(MainVM.TotalSales.ToString());
             inv.AddLineBreak();
             inv.AddText("Less Vat" + "\t\t\t\t" + " : " + "\t");
-            inv.AddText(MainVM.VatAmount_.ToString());
+            inv.AddText(MainVM.VatAmount.ToString());
             inv.AddLineBreak();
             inv.AddText("Total" + "\t\t\t\t\t" + " : " + "\t");
-            inv.AddText(MainVM.TotalSalesNoVat_.ToString());
+            inv.AddText(MainVM.TotalSalesNoVat.ToString());
             inv.AddLineBreak();
             inv.AddText("Vatable Sales" + "\t\t\t\t" + " : " + "\t");
             inv.AddText(MainVM.VatableSale.ToString());

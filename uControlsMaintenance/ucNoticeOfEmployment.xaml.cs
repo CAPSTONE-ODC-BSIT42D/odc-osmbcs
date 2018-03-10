@@ -30,6 +30,13 @@ namespace prototype2
 
         }
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
+        public event EventHandler SaveCloseOtherButtonClicked;
+        protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
+        {
+            var handler = SaveCloseOtherButtonClicked;
+            if (handler != null)
+                handler(this, e);
+        }
         private void DisplayReport()
         {
             ucReportViewer.Reset();
@@ -68,6 +75,10 @@ namespace prototype2
             }
             ucReportViewer.RefreshReport();
         }
-        
+
+        private void closeModalBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OnSaveCloseButtonClicked(e);
+        }
     }
 }

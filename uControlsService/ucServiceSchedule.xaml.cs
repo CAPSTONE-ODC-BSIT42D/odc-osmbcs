@@ -54,12 +54,7 @@ namespace prototype2
         {
             if (this.IsVisible)
             {
-                if (MainVM.SelectedAvailedServices != null)
-                {
-                    loadDataToUi();
-                    
-                }
-                    
+                loadDataToUi();
             }
         }
 
@@ -67,6 +62,7 @@ namespace prototype2
         {
             if (MainVM.isEdit)
             {
+                MainVM.SelectedAvailedServices = MainVM.AvailedServices.Where(x => x.AvailedServiceID == MainVM.SelectedServiceSchedule_.ServiceAvailedID).FirstOrDefault();
                 var dbCon = DBConnection.Instance();
                 string query = "SELECT * FROM phases_per_services where serviceSchedID = " + MainVM.SelectedServiceSchedule_.ServiceSchedID;
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);

@@ -735,7 +735,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!empFName.Value &amp;"  " &amp; FORMAT(Fields!empMI.Value) &amp;"" &amp; FORMAT(Fields!empLName.Value)</Value>
+                              <Value>=Fields!empFName.Value &amp;"  " &amp; FORMAT(Fields!empMI.Value) &amp;" " &amp; FORMAT(Fields!empLName.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1080,7 +1080,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!empFName.Value &amp;"  " &amp; FORMAT(Fields!empMI.Value) &amp;"" &amp; FORMAT(Fields!empLName.Value)</Value>
+                              <Value>=Fields!empFName.Value &amp;"  " &amp; FORMAT(Fields!empMI.Value) &amp;" " &amp; FORMAT(Fields!empLName.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
