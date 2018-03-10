@@ -141,7 +141,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>item Name</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -313,14 +313,14 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Expr2">
+                    <Textbox Name="unitPrice1">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Expr2.Value</Value>
+                              <Value>=Sum(Fields!unitPrice.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -329,7 +329,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Expr2</rd:DefaultName>
+                      <rd:DefaultName>unitPrice1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -548,10 +548,6 @@
         <Field Name="itemName">
           <DataField>itemName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Expr2">
-          <DataField>Expr2</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="Expr4">
           <DataField>Expr4</DataField>

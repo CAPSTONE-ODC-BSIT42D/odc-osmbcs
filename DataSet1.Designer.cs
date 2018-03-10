@@ -2279,8 +2279,6 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columncompanyCity;
             
-            private global::System.Data.DataColumn columnprovinceName;
-            
             private global::System.Data.DataColumn columnrepFName;
             
             private global::System.Data.DataColumn columnrepMInitial;
@@ -2309,13 +2307,9 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columnID;
             
-            private global::System.Data.DataColumn columnitemQnty;
-            
             private global::System.Data.DataColumn columnunitName;
             
             private global::System.Data.DataColumn columnitemDescr;
-            
-            private global::System.Data.DataColumn columnunitPrice;
             
             private global::System.Data.DataColumn columnpreparedBy;
             
@@ -2324,6 +2318,8 @@ namespace prototype2 {
             private global::System.Data.DataColumn columnshipVia;
             
             private global::System.Data.DataColumn columnshipTo;
+            
+            private global::System.Data.DataColumn columnshipVia1;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -2395,14 +2391,6 @@ namespace prototype2 {
             public global::System.Data.DataColumn companyCityColumn {
                 get {
                     return this.columncompanyCity;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn provinceNameColumn {
-                get {
-                    return this.columnprovinceName;
                 }
             }
             
@@ -2520,14 +2508,6 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn itemQntyColumn {
-                get {
-                    return this.columnitemQnty;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn unitNameColumn {
                 get {
                     return this.columnunitName;
@@ -2539,14 +2519,6 @@ namespace prototype2 {
             public global::System.Data.DataColumn itemDescrColumn {
                 get {
                     return this.columnitemDescr;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn unitPriceColumn {
-                get {
-                    return this.columnunitPrice;
                 }
             }
             
@@ -2579,6 +2551,14 @@ namespace prototype2 {
             public global::System.Data.DataColumn shipToColumn {
                 get {
                     return this.columnshipTo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn shipVia1Column {
+                get {
+                    return this.columnshipVia1;
                 }
             }
             
@@ -2625,7 +2605,6 @@ namespace prototype2 {
                         int companyType, 
                         string companyAddress, 
                         string companyCity, 
-                        string provinceName, 
                         string repFName, 
                         string repMInitial, 
                         string repLName, 
@@ -2639,14 +2618,13 @@ namespace prototype2 {
                         int termsDays, 
                         int termsDP, 
                         string currency, 
-                        int itemQnty, 
                         string unitName, 
                         string itemDescr, 
-                        decimal unitPrice, 
                         string preparedBy, 
                         string approvedBy, 
                         string shipVia, 
-                        string shipTo) {
+                        string shipTo, 
+                        int shipVia1) {
                 PODataTableRow rowPODataTableRow = ((PODataTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         PONumChar,
@@ -2654,7 +2632,6 @@ namespace prototype2 {
                         companyType,
                         companyAddress,
                         companyCity,
-                        provinceName,
                         repFName,
                         repMInitial,
                         repLName,
@@ -2669,14 +2646,13 @@ namespace prototype2 {
                         termsDP,
                         currency,
                         null,
-                        itemQnty,
                         unitName,
                         itemDescr,
-                        unitPrice,
                         preparedBy,
                         approvedBy,
                         shipVia,
-                        shipTo};
+                        shipTo,
+                        shipVia1};
                 rowPODataTableRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPODataTableRow);
                 return rowPODataTableRow;
@@ -2712,7 +2688,6 @@ namespace prototype2 {
                 this.columncompanyType = base.Columns["companyType"];
                 this.columncompanyAddress = base.Columns["companyAddress"];
                 this.columncompanyCity = base.Columns["companyCity"];
-                this.columnprovinceName = base.Columns["provinceName"];
                 this.columnrepFName = base.Columns["repFName"];
                 this.columnrepMInitial = base.Columns["repMInitial"];
                 this.columnrepLName = base.Columns["repLName"];
@@ -2727,14 +2702,13 @@ namespace prototype2 {
                 this.columntermsDP = base.Columns["termsDP"];
                 this.columncurrency = base.Columns["currency"];
                 this.columnID = base.Columns["ID"];
-                this.columnitemQnty = base.Columns["itemQnty"];
                 this.columnunitName = base.Columns["unitName"];
                 this.columnitemDescr = base.Columns["itemDescr"];
-                this.columnunitPrice = base.Columns["unitPrice"];
                 this.columnpreparedBy = base.Columns["preparedBy"];
                 this.columnapprovedBy = base.Columns["approvedBy"];
                 this.columnshipVia = base.Columns["shipVia"];
                 this.columnshipTo = base.Columns["shipTo"];
+                this.columnshipVia1 = base.Columns["shipVia1"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2750,8 +2724,6 @@ namespace prototype2 {
                 base.Columns.Add(this.columncompanyAddress);
                 this.columncompanyCity = new global::System.Data.DataColumn("companyCity", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncompanyCity);
-                this.columnprovinceName = new global::System.Data.DataColumn("provinceName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnprovinceName);
                 this.columnrepFName = new global::System.Data.DataColumn("repFName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnrepFName);
                 this.columnrepMInitial = new global::System.Data.DataColumn("repMInitial", typeof(string), null, global::System.Data.MappingType.Element);
@@ -2780,14 +2752,10 @@ namespace prototype2 {
                 base.Columns.Add(this.columncurrency);
                 this.columnID = new global::System.Data.DataColumn("ID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnID);
-                this.columnitemQnty = new global::System.Data.DataColumn("itemQnty", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnitemQnty);
                 this.columnunitName = new global::System.Data.DataColumn("unitName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnunitName);
                 this.columnitemDescr = new global::System.Data.DataColumn("itemDescr", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnitemDescr);
-                this.columnunitPrice = new global::System.Data.DataColumn("unitPrice", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnunitPrice);
                 this.columnpreparedBy = new global::System.Data.DataColumn("preparedBy", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnpreparedBy);
                 this.columnapprovedBy = new global::System.Data.DataColumn("approvedBy", typeof(string), null, global::System.Data.MappingType.Element);
@@ -2796,6 +2764,8 @@ namespace prototype2 {
                 base.Columns.Add(this.columnshipVia);
                 this.columnshipTo = new global::System.Data.DataColumn("shipTo", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnshipTo);
+                this.columnshipVia1 = new global::System.Data.DataColumn("shipVia1", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnshipVia1);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnPONumChar,
                                 this.columnID}, true));
@@ -2808,7 +2778,6 @@ namespace prototype2 {
                 this.columncompanyAddress.MaxLength = 21845;
                 this.columncompanyCity.AllowDBNull = false;
                 this.columncompanyCity.MaxLength = 255;
-                this.columnprovinceName.MaxLength = 255;
                 this.columnrepFName.MaxLength = 255;
                 this.columnrepMInitial.MaxLength = 3;
                 this.columnrepLName.MaxLength = 255;
@@ -2829,6 +2798,7 @@ namespace prototype2 {
                 this.columnapprovedBy.MaxLength = 45;
                 this.columnshipVia.MaxLength = 20;
                 this.columnshipTo.MaxLength = 21845;
+                this.columnshipVia1.Caption = "shipVia";
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3952,22 +3922,6 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string provinceName {
-                get {
-                    try {
-                        return ((string)(this[this.tablePODataTable.provinceNameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'provinceName\' in table \'PODataTable\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePODataTable.provinceNameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string repFName {
                 get {
                     try {
@@ -4187,22 +4141,6 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int itemQnty {
-                get {
-                    try {
-                        return ((int)(this[this.tablePODataTable.itemQntyColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'itemQnty\' in table \'PODataTable\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePODataTable.itemQntyColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string unitName {
                 get {
                     return ((string)(this[this.tablePODataTable.unitNameColumn]));
@@ -4225,22 +4163,6 @@ namespace prototype2 {
                 }
                 set {
                     this[this.tablePODataTable.itemDescrColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public decimal unitPrice {
-                get {
-                    try {
-                        return ((decimal)(this[this.tablePODataTable.unitPriceColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'unitPrice\' in table \'PODataTable\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePODataTable.unitPriceColumn] = value;
                 }
             }
             
@@ -4310,14 +4232,18 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsprovinceNameNull() {
-                return this.IsNull(this.tablePODataTable.provinceNameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetprovinceNameNull() {
-                this[this.tablePODataTable.provinceNameColumn] = global::System.Convert.DBNull;
+            public int shipVia1 {
+                get {
+                    try {
+                        return ((int)(this[this.tablePODataTable.shipVia1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'shipVia1\' in table \'PODataTable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePODataTable.shipVia1Column] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4478,18 +4404,6 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsitemQntyNull() {
-                return this.IsNull(this.tablePODataTable.itemQntyColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetitemQntyNull() {
-                this[this.tablePODataTable.itemQntyColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsitemDescrNull() {
                 return this.IsNull(this.tablePODataTable.itemDescrColumn);
             }
@@ -4498,18 +4412,6 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetitemDescrNull() {
                 this[this.tablePODataTable.itemDescrColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsunitPriceNull() {
-                return this.IsNull(this.tablePODataTable.unitPriceColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetunitPriceNull() {
-                this[this.tablePODataTable.unitPriceColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4558,6 +4460,18 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetshipToNull() {
                 this[this.tablePODataTable.shipToColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsshipVia1Null() {
+                return this.IsNull(this.tablePODataTable.shipVia1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetshipVia1Null() {
+                this[this.tablePODataTable.shipVia1Column] = global::System.Convert.DBNull;
             }
         }
         
@@ -6524,7 +6438,6 @@ FROM            cust_supp_t c INNER JOIN
             tableMapping.ColumnMappings.Add("companyType", "companyType");
             tableMapping.ColumnMappings.Add("companyAddress", "companyAddress");
             tableMapping.ColumnMappings.Add("companyCity", "companyCity");
-            tableMapping.ColumnMappings.Add("provinceName", "provinceName");
             tableMapping.ColumnMappings.Add("repFName", "repFName");
             tableMapping.ColumnMappings.Add("repMInitial", "repMInitial");
             tableMapping.ColumnMappings.Add("repLName", "repLName");
@@ -6539,14 +6452,12 @@ FROM            cust_supp_t c INNER JOIN
             tableMapping.ColumnMappings.Add("termsDP", "termsDP");
             tableMapping.ColumnMappings.Add("currency", "currency");
             tableMapping.ColumnMappings.Add("ID", "ID");
-            tableMapping.ColumnMappings.Add("itemQnty", "itemQnty");
             tableMapping.ColumnMappings.Add("unitName", "unitName");
             tableMapping.ColumnMappings.Add("itemDescr", "itemDescr");
-            tableMapping.ColumnMappings.Add("unitPrice", "unitPrice");
             tableMapping.ColumnMappings.Add("preparedBy", "preparedBy");
             tableMapping.ColumnMappings.Add("approvedBy", "approvedBy");
-            tableMapping.ColumnMappings.Add("shipVia", "shipVia");
             tableMapping.ColumnMappings.Add("shipTo", "shipTo");
+            tableMapping.ColumnMappings.Add("shipVia", "shipVia1");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -6563,16 +6474,14 @@ FROM            cust_supp_t c INNER JOIN
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[1];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        po.PONumChar, cs.companyName, cs.companyType, cs.companyAddress, cs.companyCity, pr.provinceName, cs.repFName, cs.repMInitial, cs.repLName, cs.repEmail, cs.repTelephone, cs.repMobile, 
-                         po.orderDate, po.requisitioner, po.POdueDate, po.incoterms, po.termsDays, po.termsDP, po.currency, it.ID, ia.itemQnty, ui.unitName, it.itemDescr, ia.unitPrice, po.preparedBy, po.approvedBy, po.shipVia, 
-                         po.shipTo
+            this._commandCollection[0].CommandText = @"SELECT        po.PONumChar, cs.companyName, cs.companyType, cs.companyAddress, cs.companyCity, cs.repFName, cs.repMInitial, cs.repLName, cs.repEmail, cs.repTelephone, cs.repMobile, po.orderDate, 
+                         po.requisitioner, po.POdueDate, po.incoterms, po.termsDays, po.termsDP, po.currency, it.ID, ui.unitName, it.itemDescr, po.preparedBy, po.approvedBy, po.shipVia, po.shipTo
 FROM            purchase_order_t po INNER JOIN
                          cust_supp_t cs ON po.suppID = cs.companyID INNER JOIN
-                         item_t it ON it.supplierID = cs.companyID INNER JOIN
-                         items_availed_t ia ON it.ID = ia.itemID INNER JOIN
-                         provinces_t pr ON cs.companyProvinceID = pr.id INNER JOIN
+                         po_items_availed_t pi ON pi.poNumChar = po.PONumChar INNER JOIN
+                         item_t it ON it.ID = pi.itemID INNER JOIN
                          unit_t ui ON it.unitID = ui.id
-WHERE        (ia.id = @B)";
+WHERE        (pi.id = @B)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@B";
