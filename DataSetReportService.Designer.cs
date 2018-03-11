@@ -1011,49 +1011,48 @@ namespace prototype2.DataSetReportServiceTableAdapters {
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[6];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2
-FROM            services_t s INNER JOIN
-                         services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN
-                         service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN
-                         provinces_t p ON sa.provinceID = p.id, cust_supp_t cs
-WHERE        (s.isDeleted = 0)
-GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName";
+            this._commandCollection[0].CommandText = @"SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus
+FROM            service_sched_t ss INNER JOIN
+                         services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
+                         services_t s ON s.serviceID = sa.serviceID INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
+                         sales_invoice_t si ON sq.sqNoChar = si.sqNoChar";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = @"SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2
-FROM            services_t s INNER JOIN
-                         services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN
-                         service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN
-                         provinces_t p ON sa.provinceID = p.id, cust_supp_t cs
-WHERE        (CURDATE() = ss.dateStarted) AND (s.isDeleted = 0)
-GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName";
+            this._commandCollection[1].CommandText = @"SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus
+FROM            service_sched_t ss INNER JOIN
+                         services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
+                         services_t s ON s.serviceID = sa.serviceID INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
+                         sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
+WHERE        (DATE_FORMAT(sq.dateOfIssue, '%Y-%m-%d') = CURDATE())";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = @"SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2
-FROM            services_t s INNER JOIN
-                         services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN
-                         service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN
-                         provinces_t p ON sa.provinceID = p.id, cust_supp_t cs
-WHERE        (MONTHNAME(ss.dateStarted) = @b) AND (s.isDeleted = 0)
-GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName";
+            this._commandCollection[2].CommandText = @"SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus
+FROM            service_sched_t ss INNER JOIN
+                         services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
+                         services_t s ON s.serviceID = sa.serviceID INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
+                         sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
+WHERE        (MONTHNAME(sq.dateOfIssue) = @a) AND (YEAR(sq.dateOfIssue) = YEAR(CURDATE()))";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@b";
+            param.ParameterName = "@a";
             param.Size = 1024;
             param.IsNullable = true;
             param.SourceColumn = "";
             this._commandCollection[2].Parameters.Add(param);
             this._commandCollection[3] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = @"SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2
-FROM            services_t s INNER JOIN
-                         services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN
-                         service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN
-                         provinces_t p ON sa.provinceID = p.id, cust_supp_t cs
-WHERE        (ss.dateStarted BETWEEN @c AND @d) AND (s.isDeleted = 0)
-GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName";
+            this._commandCollection[3].CommandText = @"SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus
+FROM            service_sched_t ss INNER JOIN
+                         services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
+                         services_t s ON s.serviceID = sa.serviceID INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
+                         sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
+WHERE        (ss.dateStarted BETWEEN @c AND @d) AND (s.isDeleted = 0)";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@c";
@@ -1071,13 +1070,13 @@ GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceS
             this._commandCollection[3].Parameters.Add(param);
             this._commandCollection[4] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[4].Connection = this.Connection;
-            this._commandCollection[4].CommandText = @"SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2
-FROM            services_t s INNER JOIN
-                         services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN
-                         service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN
-                         provinces_t p ON sa.provinceID = p.id, cust_supp_t cs
-WHERE        (WEEK(ss.dateStarted) = @e) AND (s.isDeleted = 0)
-GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName";
+            this._commandCollection[4].CommandText = @"SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus
+FROM            service_sched_t ss INNER JOIN
+                         services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
+                         services_t s ON s.serviceID = sa.serviceID INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
+                         sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
+WHERE        (WEEK(ss.dateStarted) = @e) AND (s.isDeleted = 0)";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@e";
@@ -1087,13 +1086,13 @@ GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceS
             this._commandCollection[4].Parameters.Add(param);
             this._commandCollection[5] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[5].Connection = this.Connection;
-            this._commandCollection[5].CommandText = @"SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2
-FROM            services_t s INNER JOIN
-                         services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN
-                         service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN
-                         provinces_t p ON sa.provinceID = p.id, cust_supp_t cs
-WHERE        (YEAR(ss.dateStarted) = @a) AND (s.isDeleted = 0)
-GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName";
+            this._commandCollection[5].CommandText = @"SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus
+FROM            service_sched_t ss INNER JOIN
+                         services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
+                         services_t s ON s.serviceID = sa.serviceID INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
+                         sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
+WHERE        (YEAR(ss.dateStarted) = @a) AND (s.isDeleted = 0)";
             this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@a";
@@ -1155,13 +1154,13 @@ GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceS
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByServiceMonth(DataSetReportService.ServiceTableDataTable dataTable, string b) {
+        public virtual int FillByServiceMonth(DataSetReportService.ServiceTableDataTable dataTable, string a) {
             this.Adapter.SelectCommand = this.CommandCollection[2];
-            if ((b == null)) {
-                throw new global::System.ArgumentNullException("b");
+            if ((a == null)) {
+                throw new global::System.ArgumentNullException("a");
             }
             else {
-                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(b));
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(a));
             }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1174,13 +1173,13 @@ GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceS
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual DataSetReportService.ServiceTableDataTable GetDataByServiceMonth(string b) {
+        public virtual DataSetReportService.ServiceTableDataTable GetDataByServiceMonth(string a) {
             this.Adapter.SelectCommand = this.CommandCollection[2];
-            if ((b == null)) {
-                throw new global::System.ArgumentNullException("b");
+            if ((a == null)) {
+                throw new global::System.ArgumentNullException("a");
             }
             else {
-                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(b));
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(a));
             }
             DataSetReportService.ServiceTableDataTable dataTable = new DataSetReportService.ServiceTableDataTable();
             this.Adapter.Fill(dataTable);

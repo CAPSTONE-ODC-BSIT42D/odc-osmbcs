@@ -12,13 +12,12 @@
               <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillServiceAll" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataServiceAll" GeneratorSourceName="FillServiceAll" GetMethodModifier="Public" GetMethodName="GetDataServiceAll" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataServiceAll" UserSourceName="FillServiceAll">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2
-FROM            services_t s INNER JOIN
-                         services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN
-                         service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN
-                         provinces_t p ON sa.provinceID = p.id, cust_supp_t cs
-WHERE        (s.isDeleted = 0)
-GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName</CommandText>
+                    <CommandText>SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus
+FROM            service_sched_t ss INNER JOIN
+                         services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
+                         services_t s ON s.serviceID = sa.serviceID INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
+                         sales_invoice_t si ON sq.sqNoChar = si.sqNoChar</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -38,13 +37,13 @@ GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceS
               <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByServiceDay" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByServiceDay" GeneratorSourceName="FillByServiceDay" GetMethodModifier="Public" GetMethodName="GetDataByServiceDay" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByServiceDay" UserSourceName="FillByServiceDay">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2
-FROM            services_t s INNER JOIN
-                         services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN
-                         service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN
-                         provinces_t p ON sa.provinceID = p.id, cust_supp_t cs
-WHERE        (CURDATE() = ss.dateStarted) AND (s.isDeleted = 0)
-GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName</CommandText>
+                    <CommandText>SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus
+FROM            service_sched_t ss INNER JOIN
+                         services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
+                         services_t s ON s.serviceID = sa.serviceID INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
+                         sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
+WHERE        (DATE_FORMAT(sq.dateOfIssue, '%Y-%m-%d') = CURDATE())</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -52,15 +51,15 @@ GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceS
               <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByServiceMonth" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByServiceMonth" GeneratorSourceName="FillByServiceMonth" GetMethodModifier="Public" GetMethodName="GetDataByServiceMonth" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByServiceMonth" UserSourceName="FillByServiceMonth">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2
-FROM            services_t s INNER JOIN
-                         services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN
-                         service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN
-                         provinces_t p ON sa.provinceID = p.id, cust_supp_t cs
-WHERE        (MONTHNAME(ss.dateStarted) = @b) AND (s.isDeleted = 0)
-GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName</CommandText>
+                    <CommandText>SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus
+FROM            service_sched_t ss INNER JOIN
+                         services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
+                         services_t s ON s.serviceID = sa.serviceID INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
+                         sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
+WHERE        (MONTHNAME(sq.dateOfIssue) = @a) AND (YEAR(sq.dateOfIssue) = YEAR(CURDATE()))</CommandText>
                     <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="b" ColumnName="" DataSourceName="" DataTypeServer="unknown" DbType="AnsiString" Direction="Input" ParameterName="@b" Precision="0" Scale="0" Size="1024" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="a" ColumnName="" DataSourceName="" DataTypeServer="unknown" DbType="AnsiString" Direction="Input" ParameterName="@a" Precision="0" Scale="0" Size="1024" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </SelectCommand>
@@ -68,13 +67,13 @@ GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceS
               <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByServiceRange" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByServiceRange" GeneratorSourceName="FillByServiceRange" GetMethodModifier="Public" GetMethodName="GetDataByServiceRange" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByServiceRange" UserSourceName="FillByServiceRange">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2
-FROM            services_t s INNER JOIN
-                         services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN
-                         service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN
-                         provinces_t p ON sa.provinceID = p.id, cust_supp_t cs
-WHERE        (ss.dateStarted BETWEEN @c AND @d) AND (s.isDeleted = 0)
-GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName</CommandText>
+                    <CommandText>SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus
+FROM            service_sched_t ss INNER JOIN
+                         services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
+                         services_t s ON s.serviceID = sa.serviceID INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
+                         sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
+WHERE        (ss.dateStarted BETWEEN @c AND @d) AND (s.isDeleted = 0)</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="true" AutogeneratedName="c" ColumnName="dateStarted" DataSourceName="odc_db.service_sched_t" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@c" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="dateStarted" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="d" ColumnName="dateStarted" DataSourceName="odc_db.service_sched_t" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@d" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="dateStarted" SourceColumnNullMapping="false" SourceVersion="Current" />
@@ -85,13 +84,13 @@ GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceS
               <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByServiceWeek" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByServiceWeek" GeneratorSourceName="FillByServiceWeek" GetMethodModifier="Public" GetMethodName="GetDataByServiceWeek" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByServiceWeek" UserSourceName="FillByServiceWeek">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2
-FROM            services_t s INNER JOIN
-                         services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN
-                         service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN
-                         provinces_t p ON sa.provinceID = p.id, cust_supp_t cs
-WHERE        (WEEK(ss.dateStarted) = @e) AND (s.isDeleted = 0)
-GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName</CommandText>
+                    <CommandText>SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus
+FROM            service_sched_t ss INNER JOIN
+                         services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
+                         services_t s ON s.serviceID = sa.serviceID INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
+                         sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
+WHERE        (WEEK(ss.dateStarted) = @e) AND (s.isDeleted = 0)</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="e" ColumnName="" DataSourceName="" DataTypeServer="unknown" DbType="Decimal" Direction="Input" ParameterName="@e" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
@@ -101,13 +100,13 @@ GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceS
               <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByServiceYear" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByServiceYear" GeneratorSourceName="FillByServiceYear" GetMethodModifier="Public" GetMethodName="GetDataByServiceYear" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByServiceYear" UserSourceName="FillByServiceYear">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2
-FROM            services_t s INNER JOIN
-                         services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN
-                         service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN
-                         provinces_t p ON sa.provinceID = p.id, cust_supp_t cs
-WHERE        (YEAR(ss.dateStarted) = @a) AND (s.isDeleted = 0)
-GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName</CommandText>
+                    <CommandText>SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus
+FROM            service_sched_t ss INNER JOIN
+                         services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
+                         services_t s ON s.serviceID = sa.serviceID INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
+                         sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
+WHERE        (YEAR(ss.dateStarted) = @a) AND (s.isDeleted = 0)</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="a" ColumnName="" DataSourceName="" DataTypeServer="unknown" DbType="Decimal" Direction="Input" ParameterName="@a" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>

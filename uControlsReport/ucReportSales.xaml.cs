@@ -32,7 +32,8 @@ namespace prototype2
         {
             ReportSales.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesTable", GetItem()));
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItem()));
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesServiceTable", GetSalesSer()));
             ReportSales.LoadReport(rNames);
             ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportSales.RefreshReport();
@@ -47,9 +48,9 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        sa.totalCost, f.feeValue, ia.unitPrice, i.itemName, s.serviceName, mh.markupPerc, s.servicePrice, si.dateOfIssue, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4 FROM            item_t i INNER JOIN  markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID  inner join sales_quote_t sq on sq.sqnochar = si.sqnochar inner join services_Availed_t sa on sa.sqnochar =sq.sqnochar INNER JOIN  services_t s ON sa.serviceID = s.serviceID inner join items_availed_t ia on i.id = ia.itemid inner join fees_per_transaction_t f on f.servicesavailedid = sa.id  WHERE        (i.isDeleted = 0) AND (s.isDeleted = 0) GROUP BY ia.unitprice, i.itemName, s.serviceName, mh.markupperc, s.serviceprice, si.dateOfIssue";
-
-            DatasetReportSales.SalesTableDataTable dSItem = new DatasetReportSales.SalesTableDataTable();
+            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN  item_t i ON ia.itemID = i.ID INNER JOIN  markup_hist_t mh ON i.ID = mh.itemID INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar";
+           
+            DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
@@ -57,7 +58,25 @@ namespace prototype2
             return dSItem;
 
         }
+        private DataTable GetSalesSer()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
 
+  
+            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN  fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN   services_t s ON sa.serviceID = s.serviceID INNER JOIN  sales_invoice_t si ON si.sqNoChar = sq.sqNoChar";
+
+            DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSItem);
+
+            return dSItem;
+
+        }
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (this.IsVisible)
@@ -73,7 +92,8 @@ namespace prototype2
         {
             ReportSales.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesTable", GetItemDay()));
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItemDay()));
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesServiceTable", GetSerDay()));
             ReportSales.LoadReport(rNames);
             ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportSales.RefreshReport();
@@ -87,9 +107,27 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        sa.totalCost, f.feeValue, ia.unitPrice, i.itemName, s.serviceName, mh.markupPerc, s.servicePrice, si.dateOfIssue, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4 FROM            item_t i INNER JOIN  markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID  inner join sales_quote_t sq on sq.sqnochar = si.sqnochar inner join services_Availed_t sa on sa.sqnochar =sq.sqnochar INNER JOIN  services_t s ON sa.serviceID = s.serviceID inner join items_availed_t ia on i.id = ia.itemid inner join fees_per_transaction_t f on f.servicesavailedid = sa.id WHERE(CURDATE() = si.dateOfIssue) AND(i.isDeleted = 0) AND(s.isDeleted = 0) GROUP BY ia.unitprice, i.itemName, s.serviceName, mh.markupperc, s.serviceprice, si.dateOfIssue";
+            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN   items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN  item_t i ON ia.itemID = i.ID INNER JOIN   markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE()) AND(i.isDeleted = 0)";
 
-            DatasetReportSales.SalesTableDataTable dSItem = new DatasetReportSales.SalesTableDataTable();
+            DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSItem);
+
+            return dSItem;
+
+        }
+        private DataTable GetSerDay()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+
+            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN  services_t s ON sa.serviceID = s.serviceID INNER JOIN sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE()) AND(s.isDeleted = 0)";
+
+            DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
@@ -101,7 +139,8 @@ namespace prototype2
         {
             ReportSales.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesTable", GetItemWeek()));
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItemWeek()));
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesServiceTable", GetSerWeek()));
             ReportSales.LoadReport(rNames);
             ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportSales.RefreshReport();
@@ -115,9 +154,28 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        sa.totalCost, f.feeValue, ia.unitPrice, i.itemName, s.serviceName, mh.markupPerc, s.servicePrice, si.dateOfIssue, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4 FROM            item_t i INNER JOIN  markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID  inner join sales_quote_t sq on sq.sqnochar = si.sqnochar inner join services_Availed_t sa on sa.sqnochar =sq.sqnochar INNER JOIN  services_t s ON sa.serviceID = s.serviceID inner join items_availed_t ia on i.id = ia.itemid inner join fees_per_transaction_t f on f.servicesavailedid = sa.id WHERE(WEEK(si.dateOfIssue) = '" + DatePickerItemWeek.SelectedDate.ToString() + "') and (i.isDeleted = 0) AND(s.isDeleted = 0) GROUP BY ia.unitprice, i.itemName, s.serviceName, mh.markupperc, s.serviceprice, si.dateOfIssue";
+            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN  items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN   item_t i ON ia.itemID = i.ID INNER JOIN  markup_hist_t mh ON i.ID = mh.itemID INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(WEEK(si.dateOfIssue) = '" + DatePickerItemWeek.SelectedDate.ToString() + "') AND(i.isDeleted = 0)";
 
-            DatasetReportSales.SalesTableDataTable dSItem = new DatasetReportSales.SalesTableDataTable();
+            DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSItem);
+
+            return dSItem;
+
+        }
+
+        private DataTable GetSerWeek()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+
+            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN  services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN  services_t s ON sa.serviceID = s.serviceID INNER JOIN  sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(WEEK(si.dateOfIssue) = '" + DatePickerItemWeek.SelectedDate.ToString() + "') AND(s.isDeleted = 0)";
+
+            DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
@@ -130,7 +188,8 @@ namespace prototype2
         {
             ReportSales.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesTable", GetItemMonth()));
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItemMonth()));
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesServiceTable", GetSerMonth()));
             ReportSales.LoadReport(rNames);
             ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportSales.RefreshReport();
@@ -144,8 +203,26 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        sa.totalCost, f.feeValue, ia.unitPrice, i.itemName, s.serviceName, mh.markupPerc, s.servicePrice, si.dateOfIssue, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4 FROM            item_t i INNER JOIN  markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID  inner join sales_quote_t sq on sq.sqnochar = si.sqnochar inner join services_Availed_t sa on sa.sqnochar =sq.sqnochar INNER JOIN  services_t s ON sa.serviceID = s.serviceID inner join items_availed_t ia on i.id = ia.itemid inner join fees_per_transaction_t f on f.servicesavailedid = sa.id WHERE(MONTHNAME(si.dateOfIssue) = '" + ComboBoxItemMonth.SelectedItem.ToString() + "') AND(i.isDeleted = 0) AND(s.isDeleted = 0) GROUP BY ia.unitprice, i.itemName, s.serviceName, mh.markupperc, s.serviceprice, si.dateOfIssue";
-            DatasetReportSales.SalesTableDataTable dSItem = new DatasetReportSales.SalesTableDataTable();
+            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON ia.itemID = i.ID INNER JOIN  markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(MONTHNAME(si.dateOfIssue) = '" + ComboBoxItemMonth.SelectedItem.ToString() + "') AND(i.isDeleted = 0)";
+            DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSItem);
+
+            return dSItem;
+
+        }
+
+        private DataTable GetSerMonth()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+
+            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN  services_t s ON sa.serviceID = s.serviceID INNER JOIN sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(MONTHNAME(si.dateOfIssue) = '" + ComboBoxItemMonth.SelectedItem.ToString() + "') AND(s.isDeleted = 0) ";
+            DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
@@ -158,7 +235,8 @@ namespace prototype2
 
             ReportSales.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesTable", GetItemYear()));
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItemYear()));
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesServiceTable", GetSerYear()));
             ReportSales.LoadReport(rNames);
             ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportSales.RefreshReport();
@@ -172,9 +250,28 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        sa.totalCost, f.feeValue, ia.unitPrice, i.itemName, s.serviceName, mh.markupPerc, s.servicePrice, si.dateOfIssue, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4 FROM            item_t i INNER JOIN  markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID  inner join sales_quote_t sq on sq.sqnochar = si.sqnochar inner join services_Availed_t sa on sa.sqnochar =sq.sqnochar INNER JOIN  services_t s ON sa.serviceID = s.serviceID inner join items_availed_t ia on i.id = ia.itemid inner join fees_per_transaction_t f on f.servicesavailedid = sa.id WHERE(YEAR(si.dateOfIssue) =  '" + ComboBoxItemYear.SelectedItem.ToString() + "') AND(i.isDeleted = 0) AND(s.isDeleted = 0) GROUP BY ia.unitprice, i.itemName, s.serviceName, mh.markupperc, s.serviceprice, si.dateOfIssue";
+            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN  item_t i ON ia.itemID = i.ID INNER JOIN markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(YEAR(si.dateOfIssue) = '" + ComboBoxItemYear.SelectedItem.ToString() + "') AND(i.isDeleted = 0) ";
 
-            DatasetReportSales.SalesTableDataTable dSItem = new DatasetReportSales.SalesTableDataTable();
+            DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSItem);
+
+            return dSItem;
+
+        }
+
+        private DataTable GetSerYear()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+
+            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN  services_t s ON sa.serviceID = s.serviceID INNER JOIN  sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(YEAR(si.dateOfIssue) = '" + ComboBoxItemYear.SelectedItem.ToString() + "') AND(s.isDeleted = 0) ";
+
+            DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
@@ -186,7 +283,8 @@ namespace prototype2
         {
             ReportSales.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesTable", GetItemRange()));
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItemRange()));
+            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesServiceTable", GetSerRange()));
             ReportSales.LoadReport(rNames);
             ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportSales.RefreshReport();
@@ -200,9 +298,28 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "       SELECT        sa.totalCost, f.feeValue, ia.unitPrice, i.itemName, s.serviceName, mh.markupPerc, s.servicePrice, si.dateOfIssue, MONTHNAME(si.dateOfIssue) AS Expr3, YEAR(si.dateOfIssue) AS Expr4 FROM            item_t i INNER JOIN  markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  cust_supp_t cs ON i.supplierID = cs.companyID INNER JOIN sales_invoice_t si ON cs.companyID = si.custID  inner join sales_quote_t sq on sq.sqnochar = si.sqnochar inner join services_Availed_t sa on sa.sqnochar =sq.sqnochar INNER JOIN  services_t s ON sa.serviceID = s.serviceID inner join items_availed_t ia on i.id = ia.itemid inner join fees_per_transaction_t f on f.servicesavailedid = sa.id WHERE(si.dateOfIssue BETWEEN '" + DatePickerItemStart.SelectedDate.ToString() + "' AND '" + DatePickerItemEnd.SelectedDate.ToString() + "') AND (i.isDeleted = 0) AND(s.isDeleted = 0) GROUP BY ia.unitprice, i.itemName, s.serviceName, mh.markupperc, s.serviceprice, si.dateOfIssue";
+            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON ia.itemID = i.ID INNER JOIN markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(si.dateOfIssue BETWEEN '" + DatePickerItemStart.SelectedDate.ToString() + "' AND '" + DatePickerItemEnd.SelectedDate.ToString() + "') AND(i.isDeleted = 0)";
 
-            DatasetReportSales.SalesTableDataTable dSItem = new DatasetReportSales.SalesTableDataTable();
+            DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSItem);
+
+            return dSItem;
+
+        }
+
+        private DataTable GetSerRange()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+
+            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN  fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN services_t s ON sa.serviceID = s.serviceID INNER JOIN sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(si.dateOfIssue BETWEEN  '" + DatePickerItemStart.SelectedDate.ToString() + "' AND '" + DatePickerItemEnd.SelectedDate.ToString() + "') AND(s.isDeleted = 0) ";
+
+            DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);

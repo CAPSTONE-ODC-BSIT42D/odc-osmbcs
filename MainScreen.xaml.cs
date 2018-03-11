@@ -611,7 +611,7 @@ namespace prototype2
             }
             foreach (UIElement obj in reportsGrid.Children)
             {
-                if (reportsGrid.Children.IndexOf(obj) == 0)
+                if (reportsGrid.Children.IndexOf(obj) == 1)
                 {
                     headerLbl.Content = "Reports - Sales";
                     obj.Visibility = Visibility.Visible;
@@ -635,7 +635,7 @@ namespace prototype2
             }
             foreach (UIElement obj in reportsGrid.Children)
             {
-                if (reportsGrid.Children.IndexOf(obj) == 1)
+                if (reportsGrid.Children.IndexOf(obj) == 0)
                 {
                     headerLbl.Content = "Reports - Sales";
                     obj.Visibility = Visibility.Visible;
