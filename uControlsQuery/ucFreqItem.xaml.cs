@@ -25,16 +25,7 @@ namespace prototype2
         private void binddatagrid()
         {
 
-            string MyConString ="SERVER=myserver;" + "DATABASE=myDb;" + "UID=username;" +  "PASSWORD=pass;Convert Zero Datetime=True";
 
-            string sql = "select * from jos_categories";
-
-            var connection = new MySqlConnection(MyConString);
-            var cmdSel = new MySqlCommand(sql, connection);
-            var dt = new DataTable();
-            var da = new MySqlDataAdapter(cmdSel);
-            da.Fill(dt);
-            dataGrid1.DataContext = dt;
 
 
 
