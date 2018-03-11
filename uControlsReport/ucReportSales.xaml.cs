@@ -107,7 +107,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN   items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN  item_t i ON ia.itemID = i.ID INNER JOIN   markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE()) AND(i.isDeleted = 0)";
+            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN   items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN  item_t i ON ia.itemID = i.ID INNER JOIN   markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE())  ";
 
             DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
 
@@ -125,7 +125,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN  services_t s ON sa.serviceID = s.serviceID INNER JOIN sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE()) AND(s.isDeleted = 0)";
+            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN  services_t s ON sa.serviceID = s.serviceID INNER JOIN sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE()) ";
 
             DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
 
@@ -154,7 +154,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN  items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN   item_t i ON ia.itemID = i.ID INNER JOIN  markup_hist_t mh ON i.ID = mh.itemID INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(WEEK(si.dateOfIssue) = '" + DatePickerItemWeek.SelectedDate.ToString() + "') AND(i.isDeleted = 0)";
+            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN  items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN   item_t i ON ia.itemID = i.ID INNER JOIN  markup_hist_t mh ON i.ID = mh.itemID INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(WEEK(si.dateOfIssue) = '" + DatePickerItemWeek.SelectedDate.ToString() + "')  ";
 
             DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
 
@@ -173,7 +173,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN  services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN  services_t s ON sa.serviceID = s.serviceID INNER JOIN  sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(WEEK(si.dateOfIssue) = '" + DatePickerItemWeek.SelectedDate.ToString() + "') AND(s.isDeleted = 0)";
+            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN  services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN  services_t s ON sa.serviceID = s.serviceID INNER JOIN  sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(WEEK(si.dateOfIssue) = '" + DatePickerItemWeek.SelectedDate.ToString() + "') ";
 
             DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
 
@@ -203,7 +203,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON ia.itemID = i.ID INNER JOIN  markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(MONTHNAME(si.dateOfIssue) = '" + ComboBoxItemMonth.SelectedItem.ToString() + "') AND(i.isDeleted = 0)";
+            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON ia.itemID = i.ID INNER JOIN  markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(MONTHNAME(si.dateOfIssue) = '" + ComboBoxItemMonth.SelectedItem.ToString() + "')  ";
             DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
@@ -221,7 +221,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN  services_t s ON sa.serviceID = s.serviceID INNER JOIN sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(MONTHNAME(si.dateOfIssue) = '" + ComboBoxItemMonth.SelectedItem.ToString() + "') AND(s.isDeleted = 0) ";
+            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN  services_t s ON sa.serviceID = s.serviceID INNER JOIN sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(MONTHNAME(si.dateOfIssue) = '" + ComboBoxItemMonth.SelectedItem.ToString() + "')  ";
             DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
@@ -250,7 +250,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN  item_t i ON ia.itemID = i.ID INNER JOIN markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(YEAR(si.dateOfIssue) = '" + ComboBoxItemYear.SelectedItem.ToString() + "') AND(i.isDeleted = 0) ";
+            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN  item_t i ON ia.itemID = i.ID INNER JOIN markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(YEAR(si.dateOfIssue) = '" + ComboBoxItemYear.SelectedItem.ToString() + "')   ";
 
             DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
 
@@ -269,7 +269,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN  services_t s ON sa.serviceID = s.serviceID INNER JOIN  sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(YEAR(si.dateOfIssue) = '" + ComboBoxItemYear.SelectedItem.ToString() + "') AND(s.isDeleted = 0) ";
+            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN  services_t s ON sa.serviceID = s.serviceID INNER JOIN  sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(YEAR(si.dateOfIssue) = '" + ComboBoxItemYear.SelectedItem.ToString() + "')  ";
 
             DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
 
@@ -298,7 +298,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON ia.itemID = i.ID INNER JOIN markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(si.dateOfIssue BETWEEN '" + DatePickerItemStart.SelectedDate.ToString() + "' AND '" + DatePickerItemEnd.SelectedDate.ToString() + "') AND(i.isDeleted = 0)";
+            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON ia.itemID = i.ID INNER JOIN markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(si.dateOfIssue BETWEEN '" + DatePickerItemStart.SelectedDate.ToString() + "' AND '" + DatePickerItemEnd.SelectedDate.ToString() + "')  ";
 
             DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
 
@@ -317,7 +317,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN  fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN services_t s ON sa.serviceID = s.serviceID INNER JOIN sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(si.dateOfIssue BETWEEN  '" + DatePickerItemStart.SelectedDate.ToString() + "' AND '" + DatePickerItemEnd.SelectedDate.ToString() + "') AND(s.isDeleted = 0) ";
+            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN  fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN services_t s ON sa.serviceID = s.serviceID INNER JOIN sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(si.dateOfIssue BETWEEN  '" + DatePickerItemStart.SelectedDate.ToString() + "' AND '" + DatePickerItemEnd.SelectedDate.ToString() + "')  ";
 
             DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
 
@@ -409,26 +409,31 @@ namespace prototype2
         private void ComboBoxItemMonth_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DisplayReportSalesMonth();
+            ReportSales.RefreshReport();
         }
 
         private void ComboBoxItemYear_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DisplayReportSalesYear();
+          
         }
 
         private void DatePickerItemStart_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             DisplayReportSalesRange();
+         
         }
 
         private void DatePickerItemEnd_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             DisplayReportSalesRange();
+         
         }
 
         private void DatePickerItemWeek_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             DisplayReportSalesWeek();
+           
         }
     }
 }

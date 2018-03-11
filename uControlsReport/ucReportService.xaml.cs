@@ -106,7 +106,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN  services_t s ON s.serviceID = sa.serviceID INNER JOIN  sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(WEEK(ss.dateStarted) = '"+DatePickerWeekSer.SelectedDate.ToString()+"') AND(s.isDeleted = 0)";
+            cmd.CommandText = "SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN  services_t s ON s.serviceID = sa.serviceID INNER JOIN  sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(WEEK(ss.dateStarted) = '"+DatePickerWeekSer.SelectedDate.ToString()+"') ";
 
             DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
 
@@ -161,7 +161,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN  services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN  services_t s ON s.serviceID = sa.serviceID INNER JOIn sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(YEAR(ss.dateStarted) = '"+ComboBoxYear.SelectedItem.ToString()+"') AND(s.isDeleted = 0) ";
+            cmd.CommandText = "SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN  services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN  services_t s ON s.serviceID = sa.serviceID INNER JOIn sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(YEAR(ss.dateStarted) = '"+ComboBoxYear.SelectedItem.ToString()+"')  ";
 
             DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
 
@@ -188,7 +188,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN    services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN  services_t s ON s.serviceID = sa.serviceID INNER JOIN sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN    sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(ss.dateStarted BETWEEN '" + DatePickerStartSer.SelectedDate.ToString() + "' AND '" + DatePickerEndSer.SelectedDate.ToString() + "') AND(s.isDeleted = 0)";
+            cmd.CommandText = "SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN    services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN  services_t s ON s.serviceID = sa.serviceID INNER JOIN sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN    sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(ss.dateStarted BETWEEN '" + DatePickerStartSer.SelectedDate.ToString() + "' AND '" + DatePickerEndSer.SelectedDate.ToString() + "') ";
 
             DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
 
@@ -293,26 +293,30 @@ namespace prototype2
         private void ComboBoxSerMonth_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DisplayReportMonthService();
+          
         }
 
         private void ComboBoxYear_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DisplayReportYearService();
+   
         }
 
         private void DatePickerStartSer_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             DisplayReportRangeService();
+      
         }
 
         private void DatePickerEndSer_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             DisplayReportRangeService();
+           
         }
 
         private void DatePickerWeekSer_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            DisplayReportWeekService();
+            DisplayReportWeekService(); 
         }
     }
 }

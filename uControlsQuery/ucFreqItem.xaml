@@ -5,15 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:prototype2"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Width="596" Height="400">
+             d:DesignHeight="300" d:DesignWidth="300" Width="596" Height="400" IsVisibleChanged="UserControl_IsVisibleChanged">
     <Grid Background="#FFFBFAFA">
         <Label Content="Frequently Availed Items" HorizontalAlignment="Left" Margin="3,2,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
         <DataGrid x:Name="FreqItemsDataGrid" HorizontalAlignment="Left" Height="312" Margin="10,78,0,0" VerticalAlignment="Top" Width="576" AutoGenerateColumns="False"  ItemsSource="{Binding Path=LoadDataBinding}">
         <DataGrid.Columns>
 
-                <DataGridTextColumn Binding="{Binding Path=itemName}" Header="Item Name" Width="200" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Path=i.itemName}" Header="Item Name" Width="200" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Path=itemDescr}" Header="Item Description" Width="230 " IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Path=Notimes}" Header="No. of Times Availed" Width="150" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Path=_count}" Header="No. of Times Availed" Width="150" IsReadOnly="True"/>
 
         </DataGrid.Columns>
         </DataGrid>

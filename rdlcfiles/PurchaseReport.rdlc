@@ -237,14 +237,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="unitPrice">
+                    <Textbox Name="Total">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!unitPrice.Value</Value>
+                              <Value>=Fields!Total.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -253,7 +253,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>unitPrice</rd:DefaultName>
+                      <rd:DefaultName>Total</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -315,7 +315,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!unitPrice.Value)</Value>
+                              <Value>=Sum(Fields!Total.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -374,14 +374,11 @@
           </Border>
         </Style>
       </Tablix>
-      <Tablix Name="Tablix3">
+      <Tablix Name="Tablix1">
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1in</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.28125in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -390,21 +387,21 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Expr4">
+                    <Textbox Name="orderDate">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Expr4.Value</Value>
+                              <Value>=MonthName(Fields!orderDate.Value)&amp;", " &amp; Year(Fields!itemName.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Expr4</rd:DefaultName>
+                      <rd:DefaultName>orderDate</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -416,36 +413,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Expr5">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!Expr5.Value</Value>
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Expr5</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -454,7 +422,6 @@
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
-            <TablixMember />
             <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
@@ -467,9 +434,9 @@
         </TablixRowHierarchy>
         <DataSetName>PurchaseTable</DataSetName>
         <Top>1.47396in</Top>
-        <Left>2.05381in</Left>
+        <Left>2.17708in</Left>
         <Height>0.25in</Height>
-        <Width>2in</Width>
+        <Width>1.28125in</Width>
         <ZIndex>5</ZIndex>
         <Style>
           <Border>
@@ -522,14 +489,14 @@
           <DataField>Expr5</DataField>
           <rd:TypeName>System.Int64</rd:TypeName>
         </Field>
-        <Field Name="unitPrice">
-          <DataField>unitPrice</DataField>
+        <Field Name="Total">
+          <DataField>Total</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DataSetReportPurchase</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\Lewis\Source\Repos\odc-osmbcs\DataSetReportPurchase.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\Alexis\Source\Repos\odc-osmbcs\DataSetReportPurchase.xsd</rd:SchemaPath>
         <rd:TableName>PurchaseTable</rd:TableName>
         <rd:TableAdapterFillMethod>FillPurchaseAll</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetDataPurchaseAll</rd:TableAdapterGetDataMethod>
