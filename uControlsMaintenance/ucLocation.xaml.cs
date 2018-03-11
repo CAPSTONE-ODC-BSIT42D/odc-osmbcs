@@ -32,6 +32,7 @@ namespace prototype2.uControlsMaintenance
         public event EventHandler SaveCloseButtonClicked;
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
+            MainVM.resetValueofVariables();
             var handler = SaveCloseButtonClicked;
             if (handler != null)
                 handler(this, e);

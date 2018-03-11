@@ -45,6 +45,7 @@ namespace prototype2
 
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
+            MainVM.resetValueofVariables();
             var handler = SaveCloseButtonClicked;
             if (handler != null)
                 handler(this, e);
@@ -53,6 +54,7 @@ namespace prototype2
 
         protected virtual void OnConvertToInvoice(RoutedEventArgs e)
         {
+
             var handler = ConvertToInvoice;
             if (handler != null)
                 handler(this, e);
@@ -71,18 +73,6 @@ namespace prototype2
             if (handler != null)
                 handler(this, e);
         }
-
-
-        private void resetElements()
-        {
-            MainVM.RequestedItems.Clear();
-            MainVM.AvailedServicesList.Clear();
-            MainVM.SelectedSalesQuote = null;
-            MainVM.isEdit = false;
-            MainVM.isView = false;
-            MainVM.TotalSales = 0;
-        }
-
         private void closeModals()
         {
             Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
@@ -149,7 +139,6 @@ namespace prototype2
         {
             if (newRequisitionGrid.IsVisible)
             {
-                resetElements();
                 OnSaveCloseButtonClicked(e);
 
             }
@@ -238,7 +227,6 @@ namespace prototype2
                 //    filename = dlg.FileName;
                 //    renderer.PdfDocument.Save(filename);
                 //}
-                resetElements();
                 OnSaveCloseButtonClicked(e);
             }
         }
@@ -603,8 +591,9 @@ namespace prototype2
                                       && itm.DateEffective <= DateTime.Now
                                       select itm;
                     MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ID == item.itemID).FirstOrDefault();
-                    item.unitPriceMarkUp = item.unitPrice + (item.unitPrice / 100 * (decimal)markupPrice.Last().MarkupPerc);
-                    item.totalAmount = (item.unitPriceMarkUp * item.qty) - ((item.unitPriceMarkUp * item.qty) / 100) * (decimal)discountPriceTb.Value;
+                    item.unitPriceMarkUp = item.unitPrice + (item.unitPrice / 100 * markupPrice.Last().MarkupPerc);
+                    item.totalAmount = (item.unitPriceMarkUp * item.qty);
+                    item.totalAmount -= (item.totalAmount / 100 * (decimal)discountPriceTb.Value);
                 }
                 else if (item.itemType == 1 && MainVM.AvailedServicesList.Count != 0)
                 {

@@ -24,6 +24,61 @@ namespace prototype2
             get { return ldt; }
         }
 
+        public void resetValueofVariables()
+        {
+            SelectedAdditionalFee = null;
+            SelectedAvailedItem = null;
+            SelectedAvailedServices = null;
+            SelectedCustomerSupplier = null;
+            SelectedEmployeeContractor = null;
+            SelectedEmpPosition = null;
+            SelectedJobTitle = null;
+            SelectedPaymentH_ = null;
+            SelectedPhase = null;
+            SelectedPhaseGroup = null;
+            SelectedPhasesPerService = null;
+            SelectedProduct = null;
+            SelectedProductCategory = null;
+            SelectedProvince = null;
+            SelectedPurchaseOrder = null;
+            SelectedRegion = null;
+            SelectedRequestedItem = null;
+            SelectedSalesInvoice = null;
+            SelectedSalesQuote = null;
+            SelectedService = null;
+            SelectedServiceSchedule_ = null;
+            SelectedShipVia = null;
+            SelectedUnit = null;
+
+            isContractor = false;
+            isEdit = false;
+            isNewPurchaseOrder = false;
+            isNewRecord = false;
+            isNewSupplier = false;
+            isNewTrans = false;
+            isPaymentInvoice = false;
+            isView = false;
+
+            VatableSale = 0;
+            VatExemptedSales = 0;
+            TotalSalesWithOutDp = 0;
+            ZeroRatedSales = 0;
+            VatAmount = 0;
+            TotalSales = 0;
+            TotalSalesNoVat = 0;
+            TotalDue = 0;
+            TotalDueNoVat = 0;
+            DiscountAmount = 0;
+            WithHoldingTax = 0;
+            Balance = 0;
+            Downpayment = 0;
+
+            DecimalTextBox = 0;
+            IntegerTextBox = 0;
+            StringTextBox = "";
+            DatePickerBox = DateTime.Now;
+        }
+
         public object cbItem { get; set; }
 
         public decimal DecimalTextBox_;

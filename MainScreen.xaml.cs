@@ -274,7 +274,7 @@ namespace prototype2
                 {
                     if (((Grid)obj).Equals(quotationsGridHome))
                     {
-                        headerLbl.Content = "Trasanction - Sales Quote";
+                        headerLbl.Content = "Trasanction - Sales Order";
                         ((Grid)obj).Visibility = Visibility.Visible;
                     }
                 }
@@ -287,7 +287,7 @@ namespace prototype2
 
         private void saveCloseInvoiceForm(object sender, EventArgs e)
         {
-            headerLbl.Content = "Billing";
+            headerLbl.Content = "Billing and Collection";
             MainVM.isNewTrans = false;
             foreach (var obj in containerGrid.Children)
             {
@@ -611,9 +611,9 @@ namespace prototype2
             }
             foreach (UIElement obj in reportsGrid.Children)
             {
-                if (reportsGrid.Children.IndexOf(obj) == 1)
+                if (reportsGrid.Children.IndexOf(obj) == 0)
                 {
-                    headerLbl.Content = "Reports - Sales";
+                    headerLbl.Content = "Reports - Sales Report";
                     obj.Visibility = Visibility.Visible;
                 }
                 else
@@ -635,9 +635,9 @@ namespace prototype2
             }
             foreach (UIElement obj in reportsGrid.Children)
             {
-                if (reportsGrid.Children.IndexOf(obj) == 0)
+                if (reportsGrid.Children.IndexOf(obj) == 1)
                 {
-                    headerLbl.Content = "Reports - Sales";
+                    headerLbl.Content = "Reports - Purchase Report";
                     obj.Visibility = Visibility.Visible;
                 }
                 else
@@ -661,7 +661,7 @@ namespace prototype2
             {
                 if (reportsGrid.Children.IndexOf(obj) == 2)
                 {
-                    headerLbl.Content = "Reports - Sales";
+                    headerLbl.Content = "Reports - Service Report";
                     obj.Visibility = Visibility.Visible;
                 }
                 else
@@ -676,37 +676,6 @@ namespace prototype2
             else
                 manageSubMenugrid.Visibility = Visibility.Visible;
         }
-
-        //private void invoiceSalesMenuBtn_Click(object sender, RoutedEventArgs e)
-        //{
-        //    foreach (var obj in containerGrid.Children)
-        //    {
-        //        ((Grid)obj).Visibility = Visibility.Collapsed;
-        //    }
-        //    trasanctionGrid.Visibility = Visibility.Visible;
-        //    foreach (var obj in trasanctionGrid.Children)
-        //    {
-        //        if (obj is Grid)
-        //            if (((Grid)obj).Equals(transInvoiceGrid))
-        //                ((Grid)obj).Visibility = Visibility.Visible;
-        //            else
-        //                ((Grid)obj).Visibility = Visibility.Collapsed;
-        //    }
-        //    foreach (var obj in transQuotationGrid.Children)
-        //    {
-        //        if (obj is Grid)
-        //        {
-        //            if (((Grid)obj).Equals(invoiceGridHome))
-        //            {
-        //                headerLbl.Content = "Order Management - Sales Invoice";
-        //                ((Grid)obj).Visibility = Visibility.Visible;
-        //            }
-        //        }
-        //        else
-        //            ((UserControl)obj).Visibility = Visibility.Collapsed;
-
-        //    }
-        //}
 
         private void empManageBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -1437,41 +1406,7 @@ namespace prototype2
 
 
 
-        private void resetValueofVariables()
-        {
-            MainVM.SelectedAdditionalFee = null;
-            MainVM.SelectedAvailedItem = null;
-            MainVM.SelectedAvailedServices = null;
-            MainVM.SelectedCustomerSupplier = null;
-            MainVM.SelectedEmployeeContractor = null;
-            MainVM.SelectedEmpPosition = null;
-            MainVM.SelectedJobTitle = null;
-            MainVM.SelectedPaymentH_ = null;
-            MainVM.SelectedPhase = null;
-            MainVM.SelectedPhaseGroup = null;
-            MainVM.SelectedPhasesPerService = null;
-            MainVM.SelectedProduct = null;
-            MainVM.SelectedProductCategory = null;
-            MainVM.SelectedProvince = null;
-            MainVM.SelectedPurchaseOrder = null;
-            MainVM.SelectedRegion = null;
-            MainVM.SelectedRequestedItem = null;
-            MainVM.SelectedSalesInvoice = null;
-            MainVM.SelectedSalesQuote = null;
-            MainVM.SelectedService = null;
-            MainVM.SelectedServiceSchedule_ = null;
-            MainVM.SelectedShipVia = null;
-            MainVM.SelectedUnit = null;
-
-            MainVM.isContractor = false;
-            MainVM.isEdit = false;
-            MainVM.isNewPurchaseOrder = false;
-            MainVM.isNewRecord = false;
-            MainVM.isNewSupplier = false;
-            MainVM.isNewTrans = false;
-            MainVM.isPaymentInvoice = false;
-            MainVM.isView = false;
-        }
+        
 
         #endregion
 
@@ -1479,7 +1414,7 @@ namespace prototype2
 
         private void transQuotationAddBtn_Click(object sender, RoutedEventArgs e)
         {
-            resetValueofVariables();
+            
             MainVM.isNewTrans = true;
             foreach (var element in transQuotationGrid.Children)
             {
@@ -1573,7 +1508,6 @@ namespace prototype2
 
         private void newInvoiceBtn_Click(object sender, RoutedEventArgs e)
         {
-            resetValueofVariables();
             foreach (UIElement obj in containerGrid.Children)
             {
                 if (containerGrid.Children.IndexOf(obj) == 2)
@@ -1654,7 +1588,6 @@ namespace prototype2
         
         private void newPurchaseOrder_Click(object sender, RoutedEventArgs e)
         {
-            resetValueofVariables();
             MainVM.isNewPurchaseOrder = true;
             foreach (var element in transOrderGrid.Children)
             {
@@ -1745,7 +1678,6 @@ namespace prototype2
         #region Service Management
         private void newServiceSchedBtn_Click(object sender, RoutedEventArgs e)
         {
-            resetValueofVariables();
             MainVM.isEdit = false;
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
             otherGridBg.Visibility = Visibility.Visible;
@@ -1765,7 +1697,6 @@ namespace prototype2
 
         private void viewSchedBtn_Click(object sender, RoutedEventArgs e)
         {
-            resetValueofVariables();
             MainVM.isEdit = true;
             foreach (var element in serviceGrid.Children)
             {
