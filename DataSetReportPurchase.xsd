@@ -108,10 +108,10 @@ GROUP BY po.orderDate, i.itemName, pi.unitPrice</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="POTotalTableAdapter" GeneratorDataComponentClassName="POTotalTableAdapter" Name="POTotal" UserDataComponentName="POTotalTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByPurchaseTotal" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataByPurchaseTotal" GeneratorSourceName="FillByPurchaseTotal" GetMethodModifier="Public" GetMethodName="GetDataByPurchaseTotal" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataByPurchaseTotal" UserSourceName="FillByPurchaseTotal">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.purchase_order_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByPurchaseTotal" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataByPurchaseTotal" GeneratorSourceName="FillByPurchaseTotal" GetMethodModifier="Public" GetMethodName="GetDataByPurchaseTotal" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataByPurchaseTotal" UserSourceName="FillByPurchaseTotal">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        SUM(pi.unitPrice) AS Expr1
+                    <CommandText>SELECT        po.PONumChar, SUM(pi.unitPrice) AS Expr1
 FROM            item_t i INNER JOIN
                          po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
                          purchase_order_t po ON po.PONumChar = pi.poNumChar
@@ -121,7 +121,10 @@ GROUP BY po.PONumChar</CommandText>
                 </SelectCommand>
               </DbSource>
             </MainSource>
-            <Mappings />
+            <Mappings>
+              <Mapping SourceColumn="PONumChar" DataSetColumn="PONumChar" />
+              <Mapping SourceColumn="Expr1" DataSetColumn="Expr1" />
+            </Mappings>
             <Sources />
           </TableAdapter>
         </Tables>
@@ -132,7 +135,7 @@ GROUP BY po.PONumChar</CommandText>
   <xs:element name="DataSetReportPurchase" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DataSetReportPurchase" msprop:Generator_UserDSName="DataSetReportPurchase">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="PurchaseTable" msprop:Generator_TableClassName="PurchaseTableDataTable" msprop:Generator_TableVarName="tablePurchaseTable" msprop:Generator_RowChangedName="PurchaseTableRowChanged" msprop:Generator_TablePropName="PurchaseTable" msprop:Generator_RowDeletingName="PurchaseTableRowDeleting" msprop:Generator_RowChangingName="PurchaseTableRowChanging" msprop:Generator_RowEvHandlerName="PurchaseTableRowChangeEventHandler" msprop:Generator_RowDeletedName="PurchaseTableRowDeleted" msprop:Generator_RowClassName="PurchaseTableRow" msprop:Generator_UserTableName="PurchaseTable" msprop:Generator_RowEvArgName="PurchaseTableRowChangeEvent">
+        <xs:element name="PurchaseTable" msprop:Generator_TableClassName="PurchaseTableDataTable" msprop:Generator_TableVarName="tablePurchaseTable" msprop:Generator_TablePropName="PurchaseTable" msprop:Generator_RowDeletingName="PurchaseTableRowDeleting" msprop:Generator_RowChangingName="PurchaseTableRowChanging" msprop:Generator_RowEvHandlerName="PurchaseTableRowChangeEventHandler" msprop:Generator_RowDeletedName="PurchaseTableRowDeleted" msprop:Generator_UserTableName="PurchaseTable" msprop:Generator_RowChangedName="PurchaseTableRowChanged" msprop:Generator_RowEvArgName="PurchaseTableRowChangeEvent" msprop:Generator_RowClassName="PurchaseTableRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="orderDate" msprop:Generator_ColumnVarNameInTable="columnorderDate" msprop:Generator_ColumnPropNameInRow="orderDate" msprop:Generator_ColumnPropNameInTable="orderDateColumn" msprop:Generator_UserColumnName="orderDate" type="xs:dateTime" minOccurs="0" />
@@ -155,11 +158,25 @@ GROUP BY po.PONumChar</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="POTotal" msprop:Generator_TableClassName="POTotalDataTable" msprop:Generator_TableVarName="tablePOTotal" msprop:Generator_RowChangedName="POTotalRowChanged" msprop:Generator_TablePropName="POTotal" msprop:Generator_RowDeletingName="POTotalRowDeleting" msprop:Generator_RowChangingName="POTotalRowChanging" msprop:Generator_RowEvHandlerName="POTotalRowChangeEventHandler" msprop:Generator_RowDeletedName="POTotalRowDeleted" msprop:Generator_RowClassName="POTotalRow" msprop:Generator_UserTableName="POTotal" msprop:Generator_RowEvArgName="POTotalRowChangeEvent">
+        <xs:element name="POTotal" msprop:Generator_TableClassName="POTotalDataTable" msprop:Generator_TableVarName="tablePOTotal" msprop:Generator_TablePropName="POTotal" msprop:Generator_RowDeletingName="POTotalRowDeleting" msprop:Generator_RowChangingName="POTotalRowChanging" msprop:Generator_RowEvHandlerName="POTotalRowChangeEventHandler" msprop:Generator_RowDeletedName="POTotalRowDeleted" msprop:Generator_UserTableName="POTotal" msprop:Generator_RowChangedName="POTotalRowChanged" msprop:Generator_RowEvArgName="POTotalRowChangeEvent" msprop:Generator_RowClassName="POTotalRow">
           <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PONumChar" msprop:Generator_ColumnVarNameInTable="columnPONumChar" msprop:Generator_ColumnPropNameInRow="PONumChar" msprop:Generator_ColumnPropNameInTable="PONumCharColumn" msprop:Generator_UserColumnName="PONumChar">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Expr1" msprop:Generator_ColumnVarNameInTable="columnExpr1" msprop:Generator_ColumnPropNameInRow="Expr1" msprop:Generator_ColumnPropNameInTable="Expr1Column" msprop:Generator_UserColumnName="Expr1" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
           </xs:complexType>
         </xs:element>
       </xs:choice>
     </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:POTotal" />
+      <xs:field xpath="mstns:PONumChar" />
+    </xs:unique>
   </xs:element>
 </xs:schema>
