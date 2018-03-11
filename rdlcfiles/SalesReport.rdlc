@@ -175,7 +175,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>item Name</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -305,7 +305,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.51042in</Height>
+              <Height>0.44792in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -316,11 +316,8 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Total</Value>
-                              <Style>
-                                <FontSize>12pt</FontSize>
-                                <Color>Red</Color>
-                              </Style>
+                              <Value>Total:</Value>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -345,7 +342,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox3">
+                    <Textbox Name="TOTAL_ITEM1">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -361,7 +358,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox3</rd:DefaultName>
+                      <rd:DefaultName>TOTAL_ITEM1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -395,15 +392,17 @@
               <Group Name="Details" />
               <TablixMembers>
                 <TablixMember />
-                <TablixMember />
               </TablixMembers>
+            </TablixMember>
+            <TablixMember>
+              <KeepWithGroup>Before</KeepWithGroup>
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>SalesItemTable</DataSetName>
         <Top>2.56125in</Top>
         <Left>0.41542in</Left>
-        <Height>1.32292in</Height>
+        <Height>1.26042in</Height>
         <Width>8.0868in</Width>
         <ZIndex>5</ZIndex>
         <Style>
@@ -432,7 +431,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!dateOfIssue.Value</Value>
+                              <Value>=First(MonthName(Fields!dateOfIssue.Value)&amp;", "&amp;Year(Fields!dateOfIssue.Value))</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -629,32 +628,26 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox16">
+                    <Textbox Name="Textbox7">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Total</Value>
-                              <Style>
-                                <FontSize>12pt</FontSize>
-                                <Color>Red</Color>
-                              </Style>
+                              <Value>Total:</Value>
+                              <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
+                          <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox16</rd:DefaultName>
+                      <rd:DefaultName>Textbox7</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -665,7 +658,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox17">
+                    <Textbox Name="Textbox9">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -679,7 +672,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox17</rd:DefaultName>
+                      <rd:DefaultName>Textbox9</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -712,8 +705,10 @@
               <Group Name="Details1" />
               <TablixMembers>
                 <TablixMember />
-                <TablixMember />
               </TablixMembers>
+            </TablixMember>
+            <TablixMember>
+              <KeepWithGroup>Before</KeepWithGroup>
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>

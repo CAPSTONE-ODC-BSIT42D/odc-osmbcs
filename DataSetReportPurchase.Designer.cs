@@ -287,7 +287,7 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columnExpr5;
             
-            private global::System.Data.DataColumn columnunitPrice;
+            private global::System.Data.DataColumn columnTotal;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -356,9 +356,9 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn unitPriceColumn {
+            public global::System.Data.DataColumn TotalColumn {
                 get {
-                    return this.columnunitPrice;
+                    return this.columnTotal;
                 }
             }
             
@@ -399,14 +399,14 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public PurchaseTableRow AddPurchaseTableRow(System.DateTime orderDate, string itemName, string Expr4, long Expr5, decimal unitPrice) {
+            public PurchaseTableRow AddPurchaseTableRow(System.DateTime orderDate, string itemName, string Expr4, long Expr5, decimal Total) {
                 PurchaseTableRow rowPurchaseTableRow = ((PurchaseTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         orderDate,
                         itemName,
                         Expr4,
                         Expr5,
-                        unitPrice};
+                        Total};
                 rowPurchaseTableRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPurchaseTableRow);
                 return rowPurchaseTableRow;
@@ -433,7 +433,7 @@ namespace prototype2 {
                 this.columnitemName = base.Columns["itemName"];
                 this.columnExpr4 = base.Columns["Expr4"];
                 this.columnExpr5 = base.Columns["Expr5"];
-                this.columnunitPrice = base.Columns["unitPrice"];
+                this.columnTotal = base.Columns["Total"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -447,8 +447,8 @@ namespace prototype2 {
                 base.Columns.Add(this.columnExpr4);
                 this.columnExpr5 = new global::System.Data.DataColumn("Expr5", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnExpr5);
-                this.columnunitPrice = new global::System.Data.DataColumn("unitPrice", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnunitPrice);
+                this.columnTotal = new global::System.Data.DataColumn("Total", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotal);
                 this.columnitemName.AllowDBNull = false;
                 this.columnitemName.MaxLength = 255;
                 this.columnExpr4.MaxLength = 9;
@@ -653,17 +653,17 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public decimal unitPrice {
+            public decimal Total {
                 get {
                     try {
-                        return ((decimal)(this[this.tablePurchaseTable.unitPriceColumn]));
+                        return ((decimal)(this[this.tablePurchaseTable.TotalColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'unitPrice\' in table \'PurchaseTable\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Total\' in table \'PurchaseTable\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePurchaseTable.unitPriceColumn] = value;
+                    this[this.tablePurchaseTable.TotalColumn] = value;
                 }
             }
             
@@ -705,14 +705,14 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsunitPriceNull() {
-                return this.IsNull(this.tablePurchaseTable.unitPriceColumn);
+            public bool IsTotalNull() {
+                return this.IsNull(this.tablePurchaseTable.TotalColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetunitPriceNull() {
-                this[this.tablePurchaseTable.unitPriceColumn] = global::System.Convert.DBNull;
+            public void SetTotalNull() {
+                this[this.tablePurchaseTable.TotalColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -879,7 +879,7 @@ namespace prototype2.DataSetReportPurchaseTableAdapters {
             tableMapping.ColumnMappings.Add("itemName", "itemName");
             tableMapping.ColumnMappings.Add("Expr4", "Expr4");
             tableMapping.ColumnMappings.Add("Expr5", "Expr5");
-            tableMapping.ColumnMappings.Add("unitPrice", "unitPrice");
+            tableMapping.ColumnMappings.Add("Total", "Total");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -896,14 +896,15 @@ namespace prototype2.DataSetReportPurchaseTableAdapters {
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[6];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        po.orderDate, i.itemName, pi.unitPrice, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
-FROM            item_t i INNER JOIN
+            this._commandCollection[0].CommandText = @"    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
+ FROM            item_t i INNER JOIN
                          po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
                          purchase_order_t po ON po.PONumChar = pi.poNumChar";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = @"SELECT        po.orderDate, i.itemName, pi.unitPrice, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
+            this._commandCollection[1].CommandText = @"    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
+ 
 FROM            item_t i INNER JOIN
                          po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
                          purchase_order_t po ON po.PONumChar = pi.poNumChar
@@ -911,7 +912,8 @@ WHERE        (DATE_FORMAT(po.orderDate, '%Y-%m-%d') = CURDATE()) AND (i.isDelete
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = @"SELECT        po.orderDate, i.itemName, pi.unitPrice, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
+            this._commandCollection[2].CommandText = @"    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
+ 
 FROM            item_t i INNER JOIN
                          po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
                          purchase_order_t po ON po.PONumChar = pi.poNumChar
@@ -925,7 +927,8 @@ WHERE        (MONTHNAME(po.orderDate) = @A) AND (YEAR(po.orderDate) = YEAR(CURDA
             this._commandCollection[2].Parameters.Add(param);
             this._commandCollection[3] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = @"SELECT        po.orderDate, i.itemName, pi.unitPrice, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
+            this._commandCollection[3].CommandText = @"    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
+ 
 FROM            item_t i INNER JOIN
                          po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
                          purchase_order_t po ON po.PONumChar = pi.poNumChar
@@ -948,7 +951,8 @@ WHERE        (po.orderDate BETWEEN @R AND @T) AND (i.isDeleted = 0)
             this._commandCollection[3].Parameters.Add(param);
             this._commandCollection[4] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[4].Connection = this.Connection;
-            this._commandCollection[4].CommandText = @"SELECT        po.orderDate, i.itemName, pi.unitPrice, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
+            this._commandCollection[4].CommandText = @"    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
+ 
 FROM            item_t i INNER JOIN
                          po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
                          purchase_order_t po ON po.PONumChar = pi.poNumChar
@@ -963,7 +967,8 @@ WHERE        (WEEK(po.orderDate) = @C) AND (i.isDeleted = 0)
             this._commandCollection[4].Parameters.Add(param);
             this._commandCollection[5] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[5].Connection = this.Connection;
-            this._commandCollection[5].CommandText = @"SELECT        po.orderDate, i.itemName, pi.unitPrice, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
+            this._commandCollection[5].CommandText = @"    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
+ 
 FROM            item_t i INNER JOIN
                          po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
                          purchase_order_t po ON po.PONumChar = pi.poNumChar
