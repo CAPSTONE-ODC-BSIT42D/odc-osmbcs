@@ -12,13 +12,12 @@
               <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillServiceAll" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataServiceAll" GeneratorSourceName="FillServiceAll" GetMethodModifier="Public" GetMethodName="GetDataServiceAll" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataServiceAll" UserSourceName="FillServiceAll">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2
-FROM            services_t s INNER JOIN
-                         services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN
-                         service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN
-                         provinces_t p ON sa.provinceID = p.id, cust_supp_t cs
-WHERE        (s.isDeleted = 0)
-GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName</CommandText>
+                    <CommandText>SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus
+FROM            service_sched_t ss INNER JOIN
+                         services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
+                         services_t s ON s.serviceID = sa.serviceID INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
+                         sales_invoice_t si ON sq.sqNoChar = si.sqNoChar</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>

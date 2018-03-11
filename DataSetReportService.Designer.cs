@@ -1011,13 +1011,12 @@ namespace prototype2.DataSetReportServiceTableAdapters {
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[6];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName, MONTH(ss.dateStarted) AS Expr1, YEAR(ss.dateStarted) AS Expr2
-FROM            services_t s INNER JOIN
-                         services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN
-                         service_sched_t ss ON sa.id = ss.serviceAvailedID INNER JOIN
-                         provinces_t p ON sa.provinceID = p.id, cust_supp_t cs
-WHERE        (s.isDeleted = 0)
-GROUP BY s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus, cs.companyName";
+            this._commandCollection[0].CommandText = @"SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus
+FROM            service_sched_t ss INNER JOIN
+                         services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
+                         services_t s ON s.serviceID = sa.serviceID INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
+                         sales_invoice_t si ON sq.sqNoChar = si.sqNoChar";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[1].Connection = this.Connection;

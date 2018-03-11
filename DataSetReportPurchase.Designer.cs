@@ -1295,8 +1295,7 @@ namespace prototype2.DataSetReportPurchaseTableAdapters {
             this._commandCollection[0].CommandText = @"SELECT        po.orderDate, i.itemName, pi.unitPrice, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
 FROM            item_t i INNER JOIN
                          po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
-                         purchase_order_t po ON po.PONumChar = pi.poNumChar
-GROUP BY po.orderDate, i.itemName, pi.unitPrice";
+                         purchase_order_t po ON po.PONumChar = pi.poNumChar";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[1].Connection = this.Connection;
@@ -1305,7 +1304,7 @@ FROM            item_t i INNER JOIN
                          po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
                          purchase_order_t po ON po.PONumChar = pi.poNumChar
 WHERE        (CURDATE() = po.orderDate) AND (i.isDeleted = 0)
-GROUP BY po.orderDate, i.itemName, pi.unitPrice";
+";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[2].Connection = this.Connection;
@@ -1313,8 +1312,7 @@ GROUP BY po.orderDate, i.itemName, pi.unitPrice";
 FROM            item_t i INNER JOIN
                          po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
                          purchase_order_t po ON po.PONumChar = pi.poNumChar
-WHERE        (MONTHNAME(po.orderDate) = @A) AND (i.isDeleted = 0)
-GROUP BY po.orderDate, i.itemName, pi.unitPrice";
+WHERE        (MONTHNAME(po.orderDate) = @A) AND (i.isDeleted = 0)";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@A";
@@ -1329,19 +1327,19 @@ FROM            item_t i INNER JOIN
                          po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
                          purchase_order_t po ON po.PONumChar = pi.poNumChar
 WHERE        (po.orderDate BETWEEN @R AND @T) AND (i.isDeleted = 0)
-GROUP BY po.orderDate, i.itemName, pi.unitPrice";
+";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@R";
-            param.DbType = global::System.Data.DbType.Object;
-            param.Size = 1024;
+            param.DbType = global::System.Data.DbType.DateTime;
+            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Timestamp;
             param.IsNullable = true;
             param.SourceColumn = "orderDate";
             this._commandCollection[3].Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@T";
-            param.DbType = global::System.Data.DbType.Object;
-            param.Size = 1024;
+            param.DbType = global::System.Data.DbType.DateTime;
+            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Timestamp;
             param.IsNullable = true;
             param.SourceColumn = "orderDate";
             this._commandCollection[3].Parameters.Add(param);
@@ -1352,7 +1350,7 @@ FROM            item_t i INNER JOIN
                          po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
                          purchase_order_t po ON po.PONumChar = pi.poNumChar
 WHERE        (WEEK(po.orderDate) = @C) AND (i.isDeleted = 0)
-GROUP BY po.orderDate, i.itemName, pi.unitPrice";
+";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@C";
@@ -1367,7 +1365,7 @@ FROM            item_t i INNER JOIN
                          po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
                          purchase_order_t po ON po.PONumChar = pi.poNumChar
 WHERE        (YEAR(po.orderDate) = @B) AND (i.isDeleted = 0)
-GROUP BY po.orderDate, i.itemName, pi.unitPrice";
+";
             this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@B";
@@ -1465,19 +1463,19 @@ GROUP BY po.orderDate, i.itemName, pi.unitPrice";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByPurchaseRange(DataSetReportPurchase.PurchaseTableDataTable dataTable, object R, object T) {
+        public virtual int FillByPurchaseRange(DataSetReportPurchase.PurchaseTableDataTable dataTable, global::System.Nullable<global::System.DateTime> R, global::System.Nullable<global::System.DateTime> T) {
             this.Adapter.SelectCommand = this.CommandCollection[3];
-            if ((R == null)) {
-                throw new global::System.ArgumentNullException("R");
+            if ((R.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((System.DateTime)(R.Value));
             }
             else {
-                this.Adapter.SelectCommand.Parameters[0].Value = ((object)(R));
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
-            if ((T == null)) {
-                throw new global::System.ArgumentNullException("T");
+            if ((T.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(T.Value));
             }
             else {
-                this.Adapter.SelectCommand.Parameters[1].Value = ((object)(T));
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1490,19 +1488,19 @@ GROUP BY po.orderDate, i.itemName, pi.unitPrice";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual DataSetReportPurchase.PurchaseTableDataTable GetDataByPurchaseRange(object R, object T) {
+        public virtual DataSetReportPurchase.PurchaseTableDataTable GetDataByPurchaseRange(global::System.Nullable<global::System.DateTime> R, global::System.Nullable<global::System.DateTime> T) {
             this.Adapter.SelectCommand = this.CommandCollection[3];
-            if ((R == null)) {
-                throw new global::System.ArgumentNullException("R");
+            if ((R.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((System.DateTime)(R.Value));
             }
             else {
-                this.Adapter.SelectCommand.Parameters[0].Value = ((object)(R));
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
-            if ((T == null)) {
-                throw new global::System.ArgumentNullException("T");
+            if ((T.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(T.Value));
             }
             else {
-                this.Adapter.SelectCommand.Parameters[1].Value = ((object)(T));
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             DataSetReportPurchase.PurchaseTableDataTable dataTable = new DataSetReportPurchase.PurchaseTableDataTable();
             this.Adapter.Fill(dataTable);
