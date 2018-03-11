@@ -1387,8 +1387,9 @@
             </Grid>
             <Grid x:Name="reportsGrid">
                 <local:ucReportPurchase x:Name="ucReportPurchase" Height="Auto" Margin="0" Width="Auto" d:IsHidden="True"/>
-                <local:ucReportService Height="Auto" Margin="0" Width="Auto" d:IsHidden="True"/>
-                <local:ucReportSales HorizontalAlignment="Stretch"/>
+                <local:ucReportSales x:Name="ucReportSales"  Height="Auto" Margin="0" Width="Auto" d:IsHidden="True"/>
+                <local:ucReportService HorizontalAlignment="Left" Height="703" VerticalAlignment="Top" Width="888"/>
+
             </Grid>
             <Grid x:Name="queriesGrid" d:IsHidden="True"/>
 
@@ -2224,7 +2225,7 @@
             <uControlsMaintenance:ucLocation x:Name="ucLocation" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="458" d:IsHidden="True"/>
 
         </Grid>
-        <Grid x:Name="otherGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3">
+        <Grid x:Name="otherGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3" d:IsHidden="True">
             <uControlsMaintenance:ucSelectCustomer x:Name="ucSelectCustomer" Margin="0" Visibility="Collapsed" d:IsHidden="True"/>
             <uControlsMaintenance:ucAddItem x:Name="ucAddItem" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Visibility="Collapsed" d:IsHidden="True"/>
 
