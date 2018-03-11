@@ -1193,7 +1193,7 @@ FROM            sales_quote_t sq INNER JOIN
                          fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN
                          services_t s ON sa.serviceID = s.serviceID INNER JOIN
                          sales_invoice_t si ON si.sqNoChar = sq.sqNoChar
-WHERE        (DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE()) AND (s.isDeleted = 0)";
+WHERE        (DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE()) ";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[2].Connection = this.Connection;
@@ -1203,7 +1203,7 @@ FROM            sales_quote_t sq INNER JOIN
                          fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN
                          services_t s ON sa.serviceID = s.serviceID INNER JOIN
                          sales_invoice_t si ON si.sqNoChar = sq.sqNoChar
-WHERE        (MONTHNAME(si.dateOfIssue) = @A) AND (s.isDeleted = 0)";
+WHERE        (MONTHNAME(si.dateOfIssue) = @A) ";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@A";
@@ -1219,7 +1219,7 @@ FROM            sales_quote_t sq INNER JOIN
                          fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN
                          services_t s ON sa.serviceID = s.serviceID INNER JOIN
                          sales_invoice_t si ON si.sqNoChar = sq.sqNoChar
-WHERE        (si.dateOfIssue BETWEEN @R AND @T) AND (s.isDeleted = 0)";
+WHERE        (si.dateOfIssue BETWEEN @R AND @T) ";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@R";
@@ -1243,7 +1243,7 @@ FROM            sales_quote_t sq INNER JOIN
                          fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN
                          services_t s ON sa.serviceID = s.serviceID INNER JOIN
                          sales_invoice_t si ON si.sqNoChar = sq.sqNoChar
-WHERE        (WEEK(si.dateOfIssue) = @N) AND (s.isDeleted = 0)";
+WHERE        (WEEK(si.dateOfIssue) = @N) ";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@N";
@@ -1259,7 +1259,7 @@ FROM            sales_quote_t sq INNER JOIN
                          fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN
                          services_t s ON sa.serviceID = s.serviceID INNER JOIN
                          sales_invoice_t si ON si.sqNoChar = sq.sqNoChar
-WHERE        (YEAR(si.dateOfIssue) = @B) AND (s.isDeleted = 0)";
+WHERE        (YEAR(si.dateOfIssue) = @B)";
             this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@B";
@@ -1590,7 +1590,7 @@ FROM            sales_quote_t sq INNER JOIN
                          markup_hist_t mh ON i.ID = mh.itemID INNER JOIN
                          sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
 
-WHERE        (MONTHNAME(si.dateOfIssue) = @A) AND (i.isDeleted = 0)
+WHERE        (MONTHNAME(si.dateOfIssue) = @A)
 ";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
@@ -1607,7 +1607,7 @@ FROM            sales_quote_t sq INNER JOIN
                          item_t i ON ia.itemID = i.ID INNER JOIN
                          markup_hist_t mh ON i.ID = mh.itemID INNER JOIN
                          sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
-WHERE        (si.dateOfIssue BETWEEN @R AND @T) AND (i.isDeleted = 0)";
+WHERE        (si.dateOfIssue BETWEEN @R AND @T)";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@R";
@@ -1631,7 +1631,7 @@ FROM            sales_quote_t sq INNER JOIN
                          item_t i ON ia.itemID = i.ID INNER JOIN
                          markup_hist_t mh ON i.ID = mh.itemID INNER JOIN
                          sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
-WHERE        (DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE()) AND (i.isDeleted = 0)";
+WHERE        (DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE())";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[4] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[4].Connection = this.Connection;
@@ -1641,7 +1641,7 @@ FROM            sales_quote_t sq INNER JOIN
                          item_t i ON ia.itemID = i.ID INNER JOIN
                          markup_hist_t mh ON i.ID = mh.itemID INNER JOIN
                          sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
-WHERE        (WEEK(si.dateOfIssue) = @e) AND (i.isDeleted = 0)";
+WHERE        (WEEK(si.dateOfIssue) = @e)";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@e";
