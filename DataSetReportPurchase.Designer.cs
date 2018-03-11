@@ -620,6 +620,10 @@ namespace prototype2 {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class POTotalDataTable : global::System.Data.TypedTableBase<POTotalRow> {
             
+            private global::System.Data.DataColumn columnPONumChar;
+            
+            private global::System.Data.DataColumn columnExpr1;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public POTotalDataTable() {
@@ -651,6 +655,22 @@ namespace prototype2 {
             protected POTotalDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn PONumCharColumn {
+                get {
+                    return this.columnPONumChar;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Expr1Column {
+                get {
+                    return this.columnExpr1;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -690,12 +710,21 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public POTotalRow AddPOTotalRow() {
+            public POTotalRow AddPOTotalRow(string PONumChar, decimal Expr1) {
                 POTotalRow rowPOTotalRow = ((POTotalRow)(this.NewRow()));
-                object[] columnValuesArray = new object[0];
+                object[] columnValuesArray = new object[] {
+                        PONumChar,
+                        Expr1};
                 rowPOTotalRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPOTotalRow);
                 return rowPOTotalRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public POTotalRow FindByPONumChar(string PONumChar) {
+                return ((POTotalRow)(this.Rows.Find(new object[] {
+                            PONumChar})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -715,11 +744,22 @@ namespace prototype2 {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             internal void InitVars() {
+                this.columnPONumChar = base.Columns["PONumChar"];
+                this.columnExpr1 = base.Columns["Expr1"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             private void InitClass() {
+                this.columnPONumChar = new global::System.Data.DataColumn("PONumChar", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPONumChar);
+                this.columnExpr1 = new global::System.Data.DataColumn("Expr1", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnExpr1);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnPONumChar}, true));
+                this.columnPONumChar.AllowDBNull = false;
+                this.columnPONumChar.Unique = true;
+                this.columnPONumChar.MaxLength = 255;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -996,6 +1036,45 @@ namespace prototype2 {
             internal POTotalRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
                 this.tablePOTotal = ((POTotalDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string PONumChar {
+                get {
+                    return ((string)(this[this.tablePOTotal.PONumCharColumn]));
+                }
+                set {
+                    this[this.tablePOTotal.PONumCharColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Expr1 {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePOTotal.Expr1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Expr1\' in table \'POTotal\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePOTotal.Expr1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsExpr1Null() {
+                return this.IsNull(this.tablePOTotal.Expr1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetExpr1Null() {
+                this[this.tablePOTotal.Expr1Column] = global::System.Convert.DBNull;
             }
         }
         
@@ -1599,6 +1678,12 @@ WHERE        (YEAR(po.orderDate) = @B) AND (i.isDeleted = 0)
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitAdapter() {
             this._adapter = new global::MySql.Data.MySqlClient.MySqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "POTotal";
+            tableMapping.ColumnMappings.Add("PONumChar", "PONumChar");
+            tableMapping.ColumnMappings.Add("Expr1", "Expr1");
+            this._adapter.TableMappings.Add(tableMapping);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
