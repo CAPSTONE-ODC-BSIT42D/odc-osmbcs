@@ -406,7 +406,7 @@ STATUS</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Count(Fields!companyName.Value) &amp;"."&amp; (Fields!companyName.Value)</Value>
+                              <Value>=Fields!companyName.Value</Value>
                               <Style>
                                 <FontSize>12pt</FontSize>
                               </Style>
