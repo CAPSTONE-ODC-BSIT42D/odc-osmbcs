@@ -505,7 +505,7 @@ STATUS</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!dateStarted.Value) &amp;", "&amp; Year(Fields!dateStarted.Value</Value>
+                              <Value>=(Fields!dateStarted.Value) &amp;", "&amp; Year(Fields!dateStarted.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
