@@ -34,7 +34,7 @@
                     </Binding>
                 </ComboBox.SelectedItem>
             </ComboBox>
-            <TextBox x:Name="categoryNameTb" HorizontalAlignment="Left" Height="23" Margin="136,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Visibility="Hidden">
+            <TextBox x:Name="categoryNameTb" HorizontalAlignment="Left" Height="23" Margin="136,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Visibility="Collapsed" TextChanged="categoryNameTb_TextChanged">
                 <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                     <Binding.ValidationRules>
                         <local:TextBoxValidation TextBoxType="IsEmpty"/>
@@ -52,7 +52,7 @@
                     </Binding>
                 </ComboBox.SelectedItem>
             </ComboBox>
-            <TextBox x:Name="unitNameTb" HorizontalAlignment="Left" Height="23" Margin="136,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="221" Visibility="Hidden">
+            <TextBox x:Name="unitNameTb" HorizontalAlignment="Left" Height="23" Margin="136,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="221" Visibility="Collapsed" TextChanged="unitNameTb_TextChanged">
                 <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                     <Binding.ValidationRules>
                         <local:TextBoxValidation TextBoxType="IsEmpty"/>

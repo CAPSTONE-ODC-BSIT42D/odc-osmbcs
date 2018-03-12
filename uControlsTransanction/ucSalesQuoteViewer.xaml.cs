@@ -57,20 +57,34 @@ namespace prototype2
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
+            if(MainVM.SelectedSalesQuote != null)
+            {
+                cmd.CommandText = "select sq.dateofissue, sq.sqnochar, c.companyName, c.companyaddress, c.companycity, sq.quotesubject, repTitle,repFName,repLName, repminitial, i.id,s.serviceid,i.itemname, s.servicename, i.itemdescr, s.servicedesc, ia.itemqnty, ia.unitprice, mh.markupperc, s.serviceprice, sa.totalcost, f.feevalue, sq.paymentislanded, sq.termsdp, sq.TERMSDAYs, sq.estDelivery from sales_quote_t sq inner join cust_supp_t c on sq.custid = c.companyid inner join items_availed_t ia on ia.sqnochar = sq.sqnochar inner join item_t i on i.id = ia.itemid inner join markup_hist_t mh on i.id= mh.itemid inner join services_availed_t sa on sq.sqnochar =sa.sqnochar inner join services_t s on sa.serviceid =s.serviceid inner join fees_per_transaction_t f on sa.id = f.servicesavailedid  where sq.sqnochar = '" + MainVM.SelectedSalesQuote.sqNoChar_ + "'";
+                DatasetSales_Quote.Sales_QuoteDataTable dSItem = new DatasetSales_Quote.Sales_QuoteDataTable();
 
-            cmd.CommandText = "select sq.dateofissue, sq.sqnochar, c.companyName, c.companyaddress, c.companycity, sq.quotesubject, repTitle,repFName,repLName, repminitial, i.id,s.serviceid,i.itemname, s.servicename, i.itemdescr, s.servicedesc, ia.itemqnty, ia.unitprice, mh.markupperc, s.serviceprice, sa.totalcost, f.feevalue, sq.paymentislanded, sq.termsdp, sq.TERMSDAYs, sq.estDelivery from sales_quote_t sq inner join cust_supp_t c on sq.custid = c.companyid inner join items_availed_t ia on ia.sqnochar = sq.sqnochar inner join item_t i on i.id = ia.itemid inner join markup_hist_t mh on i.id= mh.itemid inner join services_availed_t sa on sq.sqnochar =sa.sqnochar inner join services_t s on sa.serviceid =s.serviceid inner join fees_per_transaction_t f on sa.id = f.servicesavailedid  where sq.sqnochar = " + MainVM.SelectedSalesQuote.sqNoChar_ + "";
+                MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+                mySqlDa.Fill(dSItem);
 
-             DatasetSales_Quote.Sales_QuoteDataTable dSItem = new DatasetSales_Quote.Sales_QuoteDataTable();
+                return dSItem;
+            }
 
-            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
-            mySqlDa.Fill(dSItem);
 
-            return dSItem;
+            return null;
         }
 
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)
         {
             OnSaveCloseButtonClicked(e);
+        }
+
+        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (this.IsVisible)
+            {
+                DisplayReport();
+            }
+            else
+                ucReportViewerSalesQuote.Reset();
         }
     }
 }
