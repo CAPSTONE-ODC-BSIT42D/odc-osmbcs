@@ -168,8 +168,6 @@ namespace prototype2
                 if (!validationError)
                 {
                     saveDataToDb();
-                    MainVM.isNewSupplier = false;
-                    MainVM.resetValueofVariables();
                     OnSaveCloseButtonClicked(e);
 
                 }
@@ -192,7 +190,6 @@ namespace prototype2
             MessageBoxResult result = MessageBox.Show("Do you want to cancel?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
-                MainVM.resetValueofVariables();
                 OnSaveCloseButtonClicked(e);
             }
             else if (result == MessageBoxResult.No)

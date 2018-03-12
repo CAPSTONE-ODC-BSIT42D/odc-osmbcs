@@ -201,19 +201,12 @@ namespace prototype2
 
             else if (termsAndConditionGrid.IsVisible)
             {
-                foreach (UIElement obj in transQuoatationGridForm.Children)
-                {
-                    if (transQuoatationGridForm.Children.IndexOf(obj) == 2)
-                    {
-                        obj.Visibility = Visibility.Visible;
-                    }
-                    else
-                        obj.Visibility = Visibility.Collapsed;
-                }
                 salesQuoteToMemory();
+
                 saveSalesQuoteToDb();
                 
                 OnPrintSalesQuoteClicked(e);
+
                 OnSaveCloseButtonClicked(e);
             }
         }
