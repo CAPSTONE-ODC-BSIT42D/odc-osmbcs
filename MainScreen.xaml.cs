@@ -98,7 +98,7 @@ namespace prototype2
             this.ucService.SelectServiceButtonClicked += selectService_BtnClicked;
             this.ucSelectService.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
 
-            this.ucSalesQuoteViewer.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
+          //  this.ucSalesQuoteViewer.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
 
             this.ucSaleInvoiceViewer.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
             foreach (var obj in containerGrid.Children)

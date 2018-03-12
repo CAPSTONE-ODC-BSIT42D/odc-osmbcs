@@ -33,20 +33,21 @@ namespace prototype2
         {
             if (this.IsVisible)
             {
-                ReportSales.Reset();
-                var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-                ReportSales.LoadReport(rNames);
-                ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
                 DisplayReport();
             }
         }
         private void DisplayReport()
         {
 
-            ReportSales.DataSources.Clear();
+            ReportSales.Reset();
+
+
+            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
+
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItem()));
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesServiceTable", GetSalesSer()));
-            
+            ReportSales.LoadReport(rNames);
+            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportSales.RefreshReport();
 
         }
@@ -55,6 +56,7 @@ namespace prototype2
 
         private DataTable GetItem()
         {
+           
             var dbCon = DBConnection.Instance();
             dbCon.IsConnect();
             MySqlCommand cmd = new MySqlCommand();
@@ -93,9 +95,15 @@ namespace prototype2
     
         private void DisplayReportSalesDay()
         {
-            ReportSales.DataSources.Clear();
+            ReportSales.Reset();
+
+
+            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
+
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItemDay()));
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesServiceTable", GetSerDay()));
+            ReportSales.LoadReport(rNames);
+            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportSales.RefreshReport();
         }
 
@@ -137,9 +145,15 @@ namespace prototype2
         }
         private void DisplayReportSalesWeek()
         {
-            ReportSales.DataSources.Clear();
+            ReportSales.Reset();
+
+
+            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
+
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItemWeek()));
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesServiceTable", GetSerWeek()));
+            ReportSales.LoadReport(rNames);
+            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportSales.RefreshReport();
         }
 
@@ -151,7 +165,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN  items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN   item_t i ON ia.itemID = i.ID INNER JOIN  markup_hist_t mh ON i.ID = mh.itemID INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(WEEK(si.dateOfIssue) = '" + DatePickerItemWeek.Text  + "')  ";
+            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN  items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN   item_t i ON ia.itemID = i.ID INNER JOIN  markup_hist_t mh ON i.ID = mh.itemID INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(WEEK(si.dateOfIssue) = '" + DatePickerItemWeek.SelectedDate.Value.Date.ToShortDateString() + "')  ";
 
             DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
 
@@ -170,7 +184,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN  services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN  services_t s ON sa.serviceID = s.serviceID INNER JOIN  sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(WEEK(si.dateOfIssue) = '" + DatePickerItemWeek.Text  + "') ";
+            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN  services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN  services_t s ON sa.serviceID = s.serviceID INNER JOIN  sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(WEEK(si.dateOfIssue) = '" + DatePickerItemWeek.SelectedDate.Value.Date.ToShortDateString() + "') ";
 
             DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
 
@@ -183,9 +197,15 @@ namespace prototype2
 
         private void DisplayReportSalesMonth()
         {
-            ReportSales.DataSources.Clear();
+            ReportSales.Reset();
+
+
+            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
+
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItemMonth()));
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesServiceTable", GetSerMonth()));
+            ReportSales.LoadReport(rNames);
+            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportSales.RefreshReport();
         }
 
@@ -197,7 +217,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON ia.itemID = i.ID INNER JOIN  markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(MONTHNAME(si.dateOfIssue) = '" + ComboBoxItemMonth.Text  + "')  ";
+            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON ia.itemID = i.ID INNER JOIN  markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(MONTHNAME(si.dateOfIssue) = '" + ((ComboBoxItem)ComboBoxItemMonth.SelectedItem).Content.ToString() + "')  ";
             DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
@@ -215,7 +235,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN  services_t s ON sa.serviceID = s.serviceID INNER JOIN sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(MONTHNAME(si.dateOfIssue) = '" + ComboBoxItemMonth.Text  + "')  ";
+            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN  services_t s ON sa.serviceID = s.serviceID INNER JOIN sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(MONTHNAME(si.dateOfIssue) = '" + ((ComboBoxItem)ComboBoxItemMonth.SelectedItem).Content.ToString() + "')  ";
             DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
@@ -226,9 +246,15 @@ namespace prototype2
         }
         private void DisplayReportSalesYear()
         {
-            ReportSales.DataSources.Clear();
+            ReportSales.Reset();
+
+
+            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
+
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItemYear()));
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesServiceTable", GetSerYear()));
+            ReportSales.LoadReport(rNames);
+            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportSales.RefreshReport();
         }
 
@@ -240,7 +266,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN  item_t i ON ia.itemID = i.ID INNER JOIN markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(YEAR(si.dateOfIssue) = '" + ComboBoxItemYear.Text  + "')   ";
+            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN  item_t i ON ia.itemID = i.ID INNER JOIN markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(YEAR(si.dateOfIssue) = '" + ((ComboBoxItem)ComboBoxItemYear.SelectedItem).Content.ToString() + "')   ";
 
             DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
 
@@ -259,7 +285,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN  services_t s ON sa.serviceID = s.serviceID INNER JOIN  sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(YEAR(si.dateOfIssue) = '" + ComboBoxItemYear.Text  + "')  ";
+            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN  services_t s ON sa.serviceID = s.serviceID INNER JOIN  sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(YEAR(si.dateOfIssue) = '" + ((ComboBoxItem)ComboBoxItemYear.SelectedItem).Content.ToString() + "')  ";
 
             DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
 
@@ -271,9 +297,15 @@ namespace prototype2
         }
         private void DisplayReportSalesRange()
         {
-            ReportSales.DataSources.Clear();
+            ReportSales.Reset();
+
+
+            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
+
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItemRange()));
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesServiceTable", GetSerRange()));
+            ReportSales.LoadReport(rNames);
+            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportSales.RefreshReport();
         }
 
@@ -285,7 +317,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON ia.itemID = i.ID INNER JOIN markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(si.dateOfIssue BETWEEN '" + DatePickerItemStart.Text  + "' AND '" + DatePickerItemEnd.Text  + "')  ";
+            cmd.CommandText = "SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON ia.itemID = i.ID INNER JOIN markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(si.dateOfIssue BETWEEN '" + DatePickerItemStart.Text  + "' AND '" + DatePickerItemEnd.SelectedDate.Value.Date.ToShortDateString() + "')  ";
 
             DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
 
@@ -304,7 +336,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN  fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN services_t s ON sa.serviceID = s.serviceID INNER JOIN sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(si.dateOfIssue BETWEEN  '" + DatePickerItemStart.Text  + "' AND '" + DatePickerItemEnd.Text  + "')  ";
+            cmd.CommandText = "SELECT        s.serviceName, sa.totalCost + ft.feeValue AS TOTAL_SERVICE FROM sales_quote_t sq INNER JOIN services_availed_t sa ON sq.sqNoChar = sa.sqNoChar LEFT OUTER JOIN  fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN services_t s ON sa.serviceID = s.serviceID INNER JOIN sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(si.dateOfIssue BETWEEN  '" + DatePickerItemStart.SelectedDate.Value.Date.ToShortDateString() + "' AND '" + DatePickerItemEnd.SelectedDate.Value.Date.ToShortDateString() + "')  ";
 
             DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
 

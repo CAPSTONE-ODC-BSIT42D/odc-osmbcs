@@ -131,7 +131,7 @@ namespace prototype2
                     ValidationError validationErrorA2 = new ValidationError(new ExceptionValidationRule(), bindingExpression2);
                     validationErrorA2.ErrorContent = "Atleast 1 Contact detail is needed";
                     Validation.MarkInvalid(bindingExpressionBase2, validationErrorA2);
-
+                    
                     validationError = true;
                 }
 
