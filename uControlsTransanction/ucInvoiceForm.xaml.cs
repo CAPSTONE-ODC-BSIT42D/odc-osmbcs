@@ -223,7 +223,7 @@ namespace prototype2
             DateTime dueDate = new DateTime();
             dueDate = dateOfIssue.AddDays(int.Parse(dueDateTb.Value.ToString()));
 
-            MainVM.SelectedSalesInvoice = (new SalesInvoice() { sqNoChar_ = MainVM.SelectedSalesQuote.sqNoChar_, busStyle_ = busStyleTb.Text, tin_ = tinNumTb.Text, custID_ = MainVM.SelectedSalesQuote.custID_, dueDate_ = dueDate, vat_ = MainVM.VatAmount, withholdingTax_ = MainVM.WithHoldingTax, purchaseOrderNumber_ = purchaseOrdNumTb.Text, terms_ = (int)dueDateTb.Value });
+            MainVM.SelectedSalesInvoice = (new SalesInvoice() { sqNoChar_ = MainVM.SelectedSalesQuote.sqNoChar_, custID_ = MainVM.SelectedSalesQuote.custID_, dueDate_ = dueDate, vat_ = MainVM.VatAmount, withholdingTax_ = MainVM.WithHoldingTax, terms_ = (int)dueDateTb.Value });
         }
 
 
@@ -233,16 +233,13 @@ namespace prototype2
             bool noError = true;
             if (dbCon.IsConnect())
             {
-                string query = "INSERT INTO `odc_db`.`sales_invoice_t`(`custID`,`sqNoChar`,`TIN`,`busStyle`,`termsDays`,`dueDate`,`purchaseOrderNumber`,`vat`,`sc_pwd_discount`,`withholdingTax`,`notes`)" +
+                string query = "INSERT INTO `odc_db`.`sales_invoice_t`(`custID`,`sqNoChar`,`termsDays`,`dueDate`,`vat`,`sc_pwd_discount`,`withholdingTax`,`notes`)" +
                     " VALUES " +
                     "('" +
                     MainVM.SelectedSalesInvoice.custID_ + "','" +
                     MainVM.SelectedSalesInvoice.sqNoChar_ + "','" +
-                    MainVM.SelectedSalesInvoice.tin_ + "','" +
-                    MainVM.SelectedSalesInvoice.busStyle_ + "','" +
                     MainVM.SelectedSalesInvoice.terms_ + "','" +
                     MainVM.SelectedSalesInvoice.dueDate_.ToString("yyyy-MM-dd") + "','" +
-                    MainVM.SelectedSalesInvoice.purchaseOrderNumber_ + "','" +
                     MainVM.SelectedSalesInvoice.vat_ + "','" +
                     MainVM.SelectedSalesInvoice.sc_pwd_discount_ + "','" +
                     MainVM.SelectedSalesInvoice.withholdingTax_ + "','" +
