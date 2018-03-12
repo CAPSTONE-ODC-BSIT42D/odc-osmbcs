@@ -1073,7 +1073,7 @@
 
                 </Grid>
             </Grid>
-            <Grid x:Name="billingGrid" Margin="10">
+            <Grid x:Name="billingGrid" Margin="10" d:IsHidden="True">
                 <Grid x:Name="invoiceGridHome" >
                     <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                         <Label x:Name="label22" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -1391,10 +1391,10 @@
                 </Grid>
                 <local:ucServiceSchedule x:Name="ucService" Margin="0" Visibility="Collapsed" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="reportsGrid" d:IsHidden="True">
+            <Grid x:Name="reportsGrid">
                 <local:ucReportSales x:Name="ucReportSales"  Height="Auto" Margin="0" Width="Auto" d:IsHidden="True"/>
                 <local:ucReportPurchase x:Name="ucReportPurchase" Height="Auto" Margin="0" Width="Auto" d:IsHidden="True"/>
-                <local:ucReportService x:Name="ucReportService" HorizontalAlignment="Left" Height="703" VerticalAlignment="Top" Width="888"/>
+                <local:ucReportService x:Name="ucReportService" HorizontalAlignment="Left" Height="703" VerticalAlignment="Top" Width="888" d:IsHidden="True"/>
 
             </Grid>
             <Grid x:Name="queriesGrid" d:IsHidden="True"/>

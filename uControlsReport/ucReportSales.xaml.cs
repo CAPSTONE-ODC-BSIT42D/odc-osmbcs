@@ -409,7 +409,7 @@ namespace prototype2
         private void ComboBoxItemMonth_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DisplayReportSalesMonth();
-            ReportSales.RefreshReport();
+          
         }
 
         private void ComboBoxItemYear_SelectionChanged(object sender, SelectionChangedEventArgs e)

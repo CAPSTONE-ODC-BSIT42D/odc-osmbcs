@@ -232,7 +232,7 @@ namespace prototype2
             if (SELECTEDINDEX.Equals(1))
             {
 
-                DisplayReportWeekService();
+              DisplayReportWeekService(); 
                 ComboBoxYear.Visibility = Visibility.Hidden;
                 ComboBoxSerMonth.Visibility = Visibility.Hidden;
                 monthSer.Visibility = Visibility.Hidden;
@@ -293,6 +293,7 @@ namespace prototype2
         private void ComboBoxSerMonth_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DisplayReportMonthService();
+
           
         }
 
