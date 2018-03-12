@@ -116,7 +116,7 @@ namespace prototype2
             formGridBg.Visibility = Visibility.Collapsed;
             otherGridBg.Visibility = Visibility.Collapsed;
             MainVM.LoginEmployee_ = MainVM.Employees.Where(x => x.EmpID.Equals(empID)).FirstOrDefault();
-            MainVM.Ldt.worker.RunWorkerAsync();
+            
             int cout = MainVM.SalesQuotes.Count;
         }
 
@@ -387,6 +387,7 @@ namespace prototype2
 
         private void saveCloseBtn_SaveCloseButtonClicked(object sender, EventArgs e)
         {
+            MainVM.Ldt.worker.RunWorkerAsync();
             Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
             sb.Begin(formGridBg);
             formGridBg.Visibility = Visibility.Collapsed;
