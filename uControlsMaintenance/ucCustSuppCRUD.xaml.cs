@@ -226,6 +226,12 @@ namespace prototype2
                     cmd.Parameters.AddWithValue("@companyName", companyNameTb.Text);
                     cmd.Parameters["@companyName"].Direction = ParameterDirection.Input;
 
+                    cmd.Parameters.AddWithValue("@busStyle", businessStyleTb.Text);
+                    cmd.Parameters["@busStyle"].Direction = ParameterDirection.Input;
+
+                    cmd.Parameters.AddWithValue("@taxNumber", tinNumberTb.Text);
+                    cmd.Parameters["@taxNumber"].Direction = ParameterDirection.Input;
+
                     cmd.Parameters.AddWithValue("@addInfo", companyDescriptionTb.Text);
                     cmd.Parameters["@addInfo"].Direction = ParameterDirection.Input;
 
@@ -304,6 +310,8 @@ namespace prototype2
         private void loadDataToUi()
         {
             companyNameTb.Text = MainVM.SelectedCustomerSupplier.CompanyName;
+            businessStyleTb.Text = MainVM.SelectedCustomerSupplier.BusStyle;
+            tinNumberTb.Text = MainVM.SelectedCustomerSupplier.TaxNumber;
             companyDescriptionTb.Text = MainVM.SelectedCustomerSupplier.CompanyDesc;
             companyAddressTb.Text = MainVM.SelectedCustomerSupplier.CompanyAddress;
             companyCityTb.Text = MainVM.SelectedCustomerSupplier.CompanyCity;
@@ -312,22 +320,6 @@ namespace prototype2
             companyEmailTb.Text = MainVM.SelectedCustomerSupplier.CompanyEmail;
             companyTelephoneTb.Text = MainVM.SelectedCustomerSupplier.CompanyTelephone;
             companyMobileTb.Text = MainVM.SelectedCustomerSupplier.CompanyMobile;
-            //if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyTelephone))
-            //{
-            //    companyTelCb.IsChecked = false;
-            //    companyTelCb.IsChecked = true;
-            //}
-
-            //if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyMobile))
-            //{
-            //    companyMobCb.IsChecked = false;
-            //    companyMobCb.IsChecked = true;
-            //}
-            //if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.CompanyEmail))
-            //{
-            //    companyEmailCb.IsChecked = false;
-            //    companyEmailCb.IsChecked = true;
-            //}
             representativeTitle.Text = MainVM.SelectedCustomerSupplier.RepTitle;
             repFirstNameTb.Text = MainVM.SelectedCustomerSupplier.RepFirstName;
             repMiddleInitialTb.Text = MainVM.SelectedCustomerSupplier.RepMiddleName;
@@ -335,21 +327,6 @@ namespace prototype2
             repEmailTb.Text = MainVM.SelectedCustomerSupplier.RepEmail;
             repTelephoneTb.Text = MainVM.SelectedCustomerSupplier.RepTelephone;
             repMobileTb.Text = MainVM.SelectedCustomerSupplier.RepMobile;
-            //if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.RepTelephone))
-            //{
-            //    repTelCb.IsChecked = false;
-            //    repTelCb.IsChecked = true;
-            //}
-            //if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.RepMobile))
-            //{
-            //    repMobCb.IsChecked = false;
-            //    repMobCb.IsChecked = true;
-            //}
-            //if (String.IsNullOrWhiteSpace(MainVM.SelectedCustomerSupplier.RepEmail))
-            //{
-            //    repEmailCb.IsChecked = false;
-            //    repEmailCb.IsChecked = true;
-            //}
         }
 
         private void resetFieldsValue()

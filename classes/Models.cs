@@ -414,6 +414,8 @@ namespace prototype2
         }
         protected int companyID;
         protected string companyName;
+        protected string busStyle;
+        protected string taxNumber;
         protected string companyDesc;
         protected string companyAddress;
         protected string companyCity;
@@ -441,6 +443,16 @@ namespace prototype2
         {
             get { return companyName; }
             set { SetProperty(ref companyName, value); }
+        }
+        public string BusStyle
+        {
+            get { return busStyle; }
+            set { SetProperty(ref busStyle, value); }
+        }
+        public string TaxNumber
+        {
+            get { return taxNumber; }
+            set { SetProperty(ref taxNumber, value); }
         }
         public string CompanyDesc
         {
