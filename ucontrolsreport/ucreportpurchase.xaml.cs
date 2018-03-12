@@ -31,8 +31,11 @@ namespace prototype2
         }
         private void DisplayReport()
         {
+         
             ReportPurchase.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
+ 
+          
             ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("PurchaseTable", GetPurchase()));
             ReportPurchase.LoadReport(rNames);
             ReportPurchase.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
@@ -60,6 +63,7 @@ namespace prototype2
         }
         private void DisplayReportSalesDay()
         {
+
             ReportPurchase.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
             ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("PurchaseTable", GetPurchaseDay()));
@@ -89,6 +93,8 @@ namespace prototype2
         }
         private void DisplayReportPurchaseWeek()
         {
+
+     
             ReportPurchase.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
             ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("PurchaseTable", GetPurchaseWeek()));
@@ -148,7 +154,7 @@ namespace prototype2
         private void DisplayReportPurchaseMonth()
         {
             ReportPurchase.Reset();
-            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
+             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
             ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("PurchaseTable", GetPurchaseMonth()));
             ReportPurchase.LoadReport(rNames);
             ReportPurchase.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
@@ -207,7 +213,8 @@ namespace prototype2
         {
             if (this.IsVisible)
             {
-                DisplayReport();
+                ReportPurchase.Refresh();
+
             }
             else
             {
@@ -236,7 +243,6 @@ namespace prototype2
             if (SELECTEDINDEX.Equals(1))
 
             {
-                DisplayReportPurchaseWeek();
                 ComboBoxYearSales.Visibility = Visibility.Hidden;
                 ComboBoxMonthSales.Visibility = Visibility.Hidden;
                 MonthSales.Visibility = Visibility.Hidden;
@@ -296,7 +302,9 @@ namespace prototype2
 
         private void ComboBoxMonthSales_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+           
             DisplayReportPurchaseMonth();
+
         }
 
         private void ComboBoxYearSales_SelectionChanged(object sender, SelectionChangedEventArgs e)
