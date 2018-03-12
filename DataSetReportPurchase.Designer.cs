@@ -908,7 +908,7 @@ namespace prototype2.DataSetReportPurchaseTableAdapters {
 FROM            item_t i INNER JOIN
                          po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
                          purchase_order_t po ON po.PONumChar = pi.poNumChar
-WHERE        (DATE_FORMAT(po.orderDate, '%Y-%m-%d') = CURDATE()) AND (i.isDeleted = 0)";
+WHERE        (DATE_FORMAT(po.orderDate, '%Y-%m-%d') = CURDATE()) ";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[2].Connection = this.Connection;
@@ -917,7 +917,7 @@ WHERE        (DATE_FORMAT(po.orderDate, '%Y-%m-%d') = CURDATE()) AND (i.isDelete
 FROM            item_t i INNER JOIN
                          po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
                          purchase_order_t po ON po.PONumChar = pi.poNumChar
-WHERE        (MONTHNAME(po.orderDate) = @A) AND (YEAR(po.orderDate) = YEAR(CURDATE())) AND (i.isDeleted = 0)";
+WHERE        (MONTHNAME(po.orderDate) = @A) AND (YEAR(po.orderDate) = YEAR(CURDATE()))";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@A";
@@ -932,7 +932,7 @@ WHERE        (MONTHNAME(po.orderDate) = @A) AND (YEAR(po.orderDate) = YEAR(CURDA
 FROM            item_t i INNER JOIN
                          po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
                          purchase_order_t po ON po.PONumChar = pi.poNumChar
-WHERE        (po.orderDate BETWEEN @R AND @T) AND (i.isDeleted = 0)
+WHERE        (po.orderDate BETWEEN @R AND @T)
 ";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
@@ -956,7 +956,7 @@ WHERE        (po.orderDate BETWEEN @R AND @T) AND (i.isDeleted = 0)
 FROM            item_t i INNER JOIN
                          po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
                          purchase_order_t po ON po.PONumChar = pi.poNumChar
-WHERE        (WEEK(po.orderDate) = @C) AND (i.isDeleted = 0)
+WHERE        (WEEK(po.orderDate) = @C) 
 ";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
@@ -972,8 +972,7 @@ WHERE        (WEEK(po.orderDate) = @C) AND (i.isDeleted = 0)
 FROM            item_t i INNER JOIN
                          po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
                          purchase_order_t po ON po.PONumChar = pi.poNumChar
-WHERE        (YEAR(po.orderDate) = @B) AND (i.isDeleted = 0)
-";
+WHERE        (YEAR(po.orderDate) = @B) ";
             this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@B";

@@ -1052,7 +1052,7 @@ FROM            service_sched_t ss INNER JOIN
                          services_t s ON s.serviceID = sa.serviceID INNER JOIN
                          sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
                          sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
-WHERE        (ss.dateStarted BETWEEN @c AND @d) AND (s.isDeleted = 0)";
+WHERE        (ss.dateStarted BETWEEN @c AND @d) ";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@c";
@@ -1076,7 +1076,7 @@ FROM            service_sched_t ss INNER JOIN
                          services_t s ON s.serviceID = sa.serviceID INNER JOIN
                          sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
                          sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
-WHERE        (WEEK(ss.dateStarted) = @e) AND (s.isDeleted = 0)";
+WHERE        (WEEK(ss.dateStarted) = @e) ";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@e";
@@ -1092,7 +1092,7 @@ FROM            service_sched_t ss INNER JOIN
                          services_t s ON s.serviceID = sa.serviceID INNER JOIN
                          sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
                          sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
-WHERE        (YEAR(ss.dateStarted) = @a) AND (s.isDeleted = 0)";
+WHERE        (YEAR(ss.dateStarted) = @a)";
             this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@a";

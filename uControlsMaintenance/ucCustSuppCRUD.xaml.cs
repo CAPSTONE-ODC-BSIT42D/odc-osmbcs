@@ -35,6 +35,7 @@ namespace prototype2
 
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
+            
             var handler = SaveCloseButtonClicked;
             if (handler != null)
                 handler(this, e);
@@ -130,7 +131,7 @@ namespace prototype2
                     ValidationError validationErrorA2 = new ValidationError(new ExceptionValidationRule(), bindingExpression2);
                     validationErrorA2.ErrorContent = "Atleast 1 Contact detail is needed";
                     Validation.MarkInvalid(bindingExpressionBase2, validationErrorA2);
-
+                    
                     validationError = true;
                 }
 
@@ -168,6 +169,7 @@ namespace prototype2
                 {
                     saveDataToDb();
                     MainVM.isNewSupplier = false;
+                    MainVM.resetValueofVariables();
                     OnSaveCloseButtonClicked(e);
 
                 }
@@ -190,7 +192,7 @@ namespace prototype2
             MessageBoxResult result = MessageBox.Show("Do you want to cancel?", "Confirmation", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
-                resetFieldsValue();
+                MainVM.resetValueofVariables();
                 OnSaveCloseButtonClicked(e);
             }
             else if (result == MessageBoxResult.No)

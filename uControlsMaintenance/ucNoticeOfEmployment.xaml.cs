@@ -33,6 +33,7 @@ namespace prototype2
         public event EventHandler SaveCloseOtherButtonClicked;
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
+
             var handler = SaveCloseOtherButtonClicked;
             if (handler != null)
                 handler(this, e);

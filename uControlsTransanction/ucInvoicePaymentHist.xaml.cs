@@ -113,7 +113,7 @@ namespace prototype2.uControlsTransanction
                                       && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
                                       select itm;
                     decimal totalPric = ai.ItemQty * (ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc));
-                    MainVM.VatableSale += Math.Round(totalPric, 2);
+                    MainVM.VatableSale += totalPric;
                 }
 
                 foreach (AvailedService aserv in invoiceserv)
@@ -133,15 +133,14 @@ namespace prototype2.uControlsTransanction
                                         select af.FeePrice).Sum();
                     decimal totalAmount = aserv.TotalCost + totalFee;
 
-                    MainVM.VatableSale += Math.Round(totalAmount, 2);
+                    MainVM.VatableSale += totalAmount;
                 }
 
                 MainVM.TotalSalesNoVat = Math.Round(MainVM.VatableSale, 2);
 
                 MainVM.VatAmount = (MainVM.VatableSale * ((decimal)0.12));
-                MainVM.VatAmount = Math.Round(MainVM.VatAmount, 2);
 
-                MainVM.TotalSales = Math.Round(MainVM.VatableSale + MainVM.VatAmount, 2);
+                MainVM.TotalSales = MainVM.VatableSale + MainVM.VatAmount;
                 MainVM.Balance = MainVM.TotalSales;
 
 

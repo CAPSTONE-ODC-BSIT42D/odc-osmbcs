@@ -505,7 +505,7 @@ STATUS</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=First(MonthName(Fields!dateStarted.Value) &amp;", "&amp; Year(Fields!dateStarted.Value))</Value>
+                              <Value>=(Fields!dateStarted.Value) &amp;", "&amp; Year(Fields!dateStarted.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -524,6 +524,7 @@ STATUS</Value>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
