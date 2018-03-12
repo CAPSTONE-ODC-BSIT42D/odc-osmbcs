@@ -28,17 +28,30 @@ namespace prototype2
             InitializeComponent();
             
         }
+
+        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (this.IsVisible)
+            {
+                ReportSales.Reset();
+                var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
+                ReportSales.LoadReport(rNames);
+                ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
+                DisplayReport();
+            }
+        }
         private void DisplayReport()
         {
-            ReportSales.Reset();
-            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
+
+            ReportSales.DataSources.Clear();
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItem()));
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesServiceTable", GetSalesSer()));
-            ReportSales.LoadReport(rNames);
-            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
+            
             ReportSales.RefreshReport();
 
         }
+
+
 
         private DataTable GetItem()
         {
@@ -77,25 +90,12 @@ namespace prototype2
             return dSItem;
 
         }
-        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (this.IsVisible)
-            {
-                DisplayReport();
-            }
-            else
-            {
-                ReportSales.Reset();
-            }
-        }
+    
         private void DisplayReportSalesDay()
         {
-            ReportSales.Reset();
-            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
+            ReportSales.DataSources.Clear();
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItemDay()));
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesServiceTable", GetSerDay()));
-            ReportSales.LoadReport(rNames);
-            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportSales.RefreshReport();
         }
 
@@ -137,12 +137,9 @@ namespace prototype2
         }
         private void DisplayReportSalesWeek()
         {
-            ReportSales.Reset();
-            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
+            ReportSales.DataSources.Clear();
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItemWeek()));
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesServiceTable", GetSerWeek()));
-            ReportSales.LoadReport(rNames);
-            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportSales.RefreshReport();
         }
 
@@ -186,12 +183,9 @@ namespace prototype2
 
         private void DisplayReportSalesMonth()
         {
-            ReportSales.Reset();
-            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
+            ReportSales.DataSources.Clear();
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItemMonth()));
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesServiceTable", GetSerMonth()));
-            ReportSales.LoadReport(rNames);
-            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportSales.RefreshReport();
         }
 
@@ -232,13 +226,9 @@ namespace prototype2
         }
         private void DisplayReportSalesYear()
         {
-
-            ReportSales.Reset();
-            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
+            ReportSales.DataSources.Clear();
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItemYear()));
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesServiceTable", GetSerYear()));
-            ReportSales.LoadReport(rNames);
-            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportSales.RefreshReport();
         }
 
@@ -281,12 +271,9 @@ namespace prototype2
         }
         private void DisplayReportSalesRange()
         {
-            ReportSales.Reset();
-            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
+            ReportSales.DataSources.Clear();
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItemRange()));
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesServiceTable", GetSerRange()));
-            ReportSales.LoadReport(rNames);
-            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportSales.RefreshReport();
         }
 
@@ -329,8 +316,7 @@ namespace prototype2
         }
         private void ComboBoxItemFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Object SELECTEDINDEX = ComboBoxItemFilter.SelectedIndex;
-            if (SELECTEDINDEX.Equals(0))
+            if (ComboBoxItemFilter.SelectedIndex == 0)
             {
                 DisplayReportSalesDay();
                 ItemWeek.Visibility = Visibility.Hidden;
@@ -346,7 +332,7 @@ namespace prototype2
 
 
             }
-            if (SELECTEDINDEX.Equals(1))
+            if (ComboBoxItemFilter.SelectedIndex == 1)
             {
                 DisplayReportSalesWeek();
                 ComboBoxItemYear.Visibility = Visibility.Hidden;
@@ -361,7 +347,7 @@ namespace prototype2
                 ItemWeek.Visibility = Visibility.Visible;
 
             }
-            if (SELECTEDINDEX.Equals(2))
+            if (ComboBoxItemFilter.SelectedIndex == 2)
             {
                 ItemWeek.Visibility = Visibility.Hidden;
                 DatePickerItemWeek.Visibility = Visibility.Hidden;
@@ -375,7 +361,7 @@ namespace prototype2
                 ItemEnd.Visibility = Visibility.Hidden;
 
             }
-            if (SELECTEDINDEX.Equals(3))
+            if (ComboBoxItemFilter.SelectedIndex == 3)
             {
                 ItemWeek.Visibility = Visibility.Hidden;
                 DatePickerItemWeek.Visibility = Visibility.Hidden;
@@ -390,7 +376,7 @@ namespace prototype2
 
 
             }
-            if (SELECTEDINDEX.Equals(4))
+            if (ComboBoxItemFilter.SelectedIndex == 4)
             {
                 ItemWeek.Visibility = Visibility.Hidden;
                 DatePickerItemWeek.Visibility = Visibility.Hidden;
