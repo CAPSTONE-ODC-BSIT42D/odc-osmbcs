@@ -106,7 +106,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN  services_t s ON s.serviceID = sa.serviceID INNER JOIN  sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(WEEK(ss.dateStarted) = '"+DatePickerWeekSer.Text.ToString() + "') ";
+            cmd.CommandText = "SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN  services_t s ON s.serviceID = sa.serviceID INNER JOIN  sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(WEEK(ss.dateStarted) = '"+DatePickerWeekSer.Text  + "') ";
 
             DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
 
@@ -132,7 +132,7 @@ namespace prototype2
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text; 
-            cmd.CommandText = "SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN  services_t s ON s.serviceID = sa.serviceID INNER JOIN sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(MONTHNAME(sq.dateOfIssue) = '" + ComboBoxSerMonth.Text.ToString() + "') AND(YEAR(sq.dateOfIssue) = YEAR(CURDATE())) ";
+            cmd.CommandText = "SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN  services_t s ON s.serviceID = sa.serviceID INNER JOIN sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(MONTHNAME(sq.dateOfIssue) = '" + ComboBoxSerMonth.Text  + "') AND(YEAR(sq.dateOfIssue) = YEAR(CURDATE())) ";
 
             DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
 
@@ -161,7 +161,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN  services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN  services_t s ON s.serviceID = sa.serviceID INNER JOIn sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(YEAR(ss.dateStarted) = '"+ComboBoxYear.Text.ToString() + "')  ";
+            cmd.CommandText = "SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN  services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN  services_t s ON s.serviceID = sa.serviceID INNER JOIn sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(YEAR(ss.dateStarted) = '"+ComboBoxYear.Text  + "')  ";
 
             DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
 
@@ -188,7 +188,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN    services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN  services_t s ON s.serviceID = sa.serviceID INNER JOIN sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN    sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(ss.dateStarted BETWEEN '" + DatePickerStartSer.Text.ToString() + "' AND '" + DatePickerEndSer.Text.ToString() + "') ";
+            cmd.CommandText = "SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN    services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN  services_t s ON s.serviceID = sa.serviceID INNER JOIN sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN    sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(ss.dateStarted BETWEEN '" + DatePickerStartSer.Text  + "' AND '" + DatePickerEndSer.Text  + "') ";
 
             DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
 

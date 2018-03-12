@@ -105,7 +105,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS  Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar WHERE(WEEK(po.orderDate) = '" + SalesWeek.SelectedDate.ToString() + "')   ";
+            cmd.CommandText = "    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS  Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar WHERE(WEEK(po.orderDate) = '" + SalesWeek.Text  + "')   ";
 
             DataSetReportPurchase.PurchaseTableDataTable dSPurchase = new DataSetReportPurchase.PurchaseTableDataTable();
 
@@ -134,7 +134,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS  Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar  WHERE(YEAR(po.orderDate) = '" + ComboBoxYearSales.SelectedItem.ToString() + "')    ";
+            cmd.CommandText = "    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS  Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar  WHERE(YEAR(po.orderDate) = '" + ComboBoxYearSales.Text  + "')    ";
 
             DataSetReportPurchase.PurchaseTableDataTable dSPurchase = new DataSetReportPurchase.PurchaseTableDataTable();
 
@@ -163,7 +163,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS  Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar  WHERE(MONTHNAME(po.orderDate) = '" + ComboBoxMonthSales.SelectedItem.ToString() + "')    ";
+            cmd.CommandText = "    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS  Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar  WHERE(MONTHNAME(po.orderDate) = '" + ComboBoxMonthSales.Text  + "')    ";
 
             DataSetReportPurchase.PurchaseTableDataTable dSPurchase = new DataSetReportPurchase.PurchaseTableDataTable();
 
@@ -192,7 +192,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS  Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar WHERE(po.orderDate BETWEEN '" + SalesDateStart.SelectedDate.ToString() +"' AND '"+SalesDateEnd.SelectedDate.ToString()+ "')    ";
+            cmd.CommandText = "    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS  Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar WHERE(po.orderDate BETWEEN '" + SalesDateStart.Text  + "' AND '"+SalesDateEnd.Text  + "')    ";
 
             DataSetReportPurchase.PurchaseTableDataTable dSPurchase = new DataSetReportPurchase.PurchaseTableDataTable();
 
