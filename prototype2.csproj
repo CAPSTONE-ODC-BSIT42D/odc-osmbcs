@@ -351,6 +351,9 @@
     <Compile Include="uControlsQuery\ucMostSupplier.xaml.cs">
       <DependentUpon>ucMostSupplier.xaml</DependentUpon>
     </Compile>
+    <Compile Include="uControlsReport\ucReportPurchase.xaml.cs">
+      <DependentUpon>ucReportPurchase.xaml</DependentUpon>
+    </Compile>
     <Compile Include="uControlsService\ucSelecService.xaml.cs">
       <DependentUpon>ucSelecService.xaml</DependentUpon>
     </Compile>
@@ -404,9 +407,6 @@
     </Compile>
     <Compile Include="uControlsReport\ucReportSales.xaml.cs">
       <DependentUpon>ucReportSales.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="uControlsReport\ucReportPurchase.xaml.cs">
-      <DependentUpon>ucReportPurchase.xaml</DependentUpon>
     </Compile>
     <Compile Include="uControlsService\ucServiceSchedule.xaml.cs">
       <DependentUpon>ucServiceSchedule.xaml</DependentUpon>
@@ -486,6 +486,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="uControlsReport\ucReportPurchase.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="uControlsService\ucSelecService.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -555,10 +559,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="uControlsReport\ucReportSales.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="uControlsReport\ucReportPurchase.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
