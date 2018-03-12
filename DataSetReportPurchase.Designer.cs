@@ -932,7 +932,7 @@ WHERE        (MONTHNAME(po.orderDate) = @A) AND (YEAR(po.orderDate) = YEAR(CURDA
 FROM            item_t i INNER JOIN
                          po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
                          purchase_order_t po ON po.PONumChar = pi.poNumChar
-WHERE        (po.orderDate BETWEEN @R AND @T) AND (i.isDeleted = 0)
+WHERE        (po.orderDate BETWEEN @R AND @T)
 ";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();

@@ -1657,7 +1657,7 @@ FROM            sales_quote_t sq INNER JOIN
                          item_t i ON ia.itemID = i.ID INNER JOIN
                          markup_hist_t mh ON i.ID = mh.itemID INNER JOIN
                          sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
-WHERE        (YEAR(si.dateOfIssue) = @B) AND (i.isDeleted = 0)";
+WHERE        (YEAR(si.dateOfIssue) = @B) ";
             this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@B";

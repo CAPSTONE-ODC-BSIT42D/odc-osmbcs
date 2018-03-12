@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.ColumnSpan="2" Margin="10,8,0,0" VerticalAlignment="Top">
 
-            <ComboBox x:Name="ComboBoxSalesFilter" HorizontalAlignment="Left" Margin="0,26,0,0" VerticalAlignment="Top" Width="131" Height="31" SelectionChanged="ComboBox_SelectionChanged">
+            <ComboBox x:Name="ComboBoxSalesFilter" HorizontalAlignment="Left" Margin="0,26,0,0" Width="131" SelectionChanged="ComboBox_SelectionChanged" Height="31" VerticalAlignment="Top">
                 <ComboBoxItem Content="Day"/>
                 <ComboBoxItem Content="Week"/>
                 <ComboBoxItem Content="Month"/>
