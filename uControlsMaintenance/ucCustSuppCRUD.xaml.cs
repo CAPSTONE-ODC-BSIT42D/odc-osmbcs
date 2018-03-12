@@ -35,6 +35,7 @@ namespace prototype2
 
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
+            
             var handler = SaveCloseButtonClicked;
             if (handler != null)
                 handler(this, e);

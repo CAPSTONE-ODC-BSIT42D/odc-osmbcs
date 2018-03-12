@@ -73,6 +73,15 @@ namespace prototype2
             if (handler != null)
                 handler(this, e);
         }
+
+        public event EventHandler PrintSalesQuote;
+        protected virtual void OnPrintSalesQuoteClicked(RoutedEventArgs e)
+        {
+            var handler = PrintSalesQuote;
+            if (handler != null)
+                handler(this, e);
+        }
+
         private void closeModals()
         {
             Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
@@ -184,6 +193,7 @@ namespace prototype2
                         else
                             obj.Visibility = Visibility.Collapsed;
                     }
+                    transRequestNext.Content = "Save";
                 }
                 else
                     MessageBox.Show("The requested item is empty.");
@@ -200,33 +210,10 @@ namespace prototype2
                     else
                         obj.Visibility = Visibility.Collapsed;
                 }
-                    transRequestNext.Content = "Save";
-                    salesQuoteToMemory();
-                    SalesQuoteDocument df = new SalesQuoteDocument();
-                    document = df.CreateDocument("SalesQuote", "asdsadsa");
-                    string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
-                    saleQuoteViewer.pagePreview.Ddl = ddl;
-            }
-            else if (saleQuoteViewer.IsVisible)
-            {
-                transRequestNext.Content = "Next";
+                salesQuoteToMemory();
                 saveSalesQuoteToDb();
-
-                //PdfDocumentRenderer renderer = new PdfDocumentRenderer(true);
-                //renderer.Document = document;
-                //renderer.RenderDocument();
-                //string filename = @"d:\test\" + MainVM.SelectedSalesQuote.sqNoChar_ + ".pdf";
-
-                //saveSalesQuoteToDb();
-                //SaveFileDialog dlg = new SaveFileDialog();
-                //dlg.FileName = "" + MainVM.SelectedSalesQuote.sqNoChar_;
-                //dlg.DefaultExt = ".pdf";
-                //dlg.Filter = "Text documents (.pdf)|*.pdf";
-                //if (dlg.ShowDialog() == true)
-                //{
-                //    filename = dlg.FileName;
-                //    renderer.PdfDocument.Save(filename);
-                //}
+                
+                OnPrintSalesQuoteClicked(e);
                 OnSaveCloseButtonClicked(e);
             }
         }
@@ -798,14 +785,7 @@ namespace prototype2
                                 if (dbCon.insertQuery(query, dbCon.Connection))
                                 {
                                     query = "SELECT LAST_INSERT_ID();";
-                                    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                                    DataSet fromDb = new DataSet();
-                                    DataTable fromDbTable = new DataTable();
-                                    dataAdapter.Fill(fromDb, "t");
-                                    fromDbTable = fromDb.Tables["t"];
-                                    string aServiceId = "";
-                                    foreach (DataRow dr in fromDbTable.Rows)
-                                        aServiceId = dr[0].ToString();
+                                    string aServiceId = dbCon.selectScalar(query, dbCon.Connection).ToString();
                                     foreach (AdditionalFee af in MainVM.SelectedAvailedServices.AdditionalFees)
                                     {
                                         query = "INSERT INTO `odc_db`.`fees_per_transaction_t`(`servicesAvailedID`,`feeName`,`feeValue`)" +

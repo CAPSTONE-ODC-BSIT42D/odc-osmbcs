@@ -34,7 +34,7 @@ namespace prototype2
         public event EventHandler SaveCloseButtonClicked;
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
-            resetElements();
+            MainVM.resetValueofVariables();
             var handler = SaveCloseButtonClicked;
             if (handler != null)
                 handler(this, e);
@@ -47,15 +47,7 @@ namespace prototype2
             if (handler != null)
                 handler(this, e);
         }
-
-
-        private void resetElements()
-        {
-            MainVM.RequestedItems.Clear();
-            MainVM.AvailedServicesList.Clear();
-            MainVM.isEdit = false;
-            MainVM.isView = false;
-        }
+        
 
         Document document;
         private void invoiceNext_Click(object sender, RoutedEventArgs e)
@@ -79,13 +71,16 @@ namespace prototype2
                 if (!validationError /*&& MainVM.LoginEmployee_ != null*/)
                 {
                     salesInvoiceToMemory();
-                    newInvoiceForm.Visibility = Visibility.Collapsed;
-                    documentViewer.Visibility = Visibility.Visible;
-                    invoiceNext.Content = "Save";
-                    InvoiceDocument df = new InvoiceDocument();
-                    document = df.CreateDocument(sqNo: MainVM.SelectedSalesInvoice.sqNoChar_, author: "admin");
-                    string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
-                    documentViewer.pagePreview.Ddl = ddl;
+                    saveDataToDb();
+                    OnPrintSalesInvoiceClicked(e);
+                    OnSaveCloseButtonClicked(e);
+                    //newInvoiceForm.Visibility = Visibility.Collapsed;
+                    //documentViewer.Visibility = Visibility.Visible;
+                    //invoiceNext.Content = "Save";
+                    //InvoiceDocument df = new InvoiceDocument();
+                    //document = df.CreateDocument(sqNo: MainVM.SelectedSalesInvoice.sqNoChar_, author: "admin");
+                    //string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
+                    //documentViewer.pagePreview.Ddl = ddl;
                     validationError = false;
                 }
                 else
@@ -94,31 +89,31 @@ namespace prototype2
                     validationError = false;
                 }
             }
-            else if (documentViewer.IsVisible)
-            {
-                invoiceNext.Content = "Next";
-                PdfDocumentRenderer renderer = new PdfDocumentRenderer(true);
-                renderer.Document = document;
-                renderer.RenderDocument();
-                string filename = @"d:\test\" + MainVM.SelectedSalesInvoice.sqNoChar_ + "-INVOICE.pdf";
-                saveDataToDb();
-                SaveFileDialog dlg = new SaveFileDialog();
-                dlg.FileName = "" + MainVM.SelectedSalesInvoice.sqNoChar_ + "-INVOICE";
-                dlg.DefaultExt = ".pdf";
-                dlg.Filter = "PDF documents (.pdf)|*.pdf";
-                if (dlg.ShowDialog() == true)
-                {
-                    filename = dlg.FileName;
-                    renderer.PdfDocument.Save(filename);
-                }
-                OnSaveCloseButtonClicked(e);
-                OnPrintSalesInvoiceClicked(e);
-            }
+            //else if (documentViewer.IsVisible)
+            //{
+            //    invoiceNext.Content = "Next";
+            //    PdfDocumentRenderer renderer = new PdfDocumentRenderer(true);
+            //    renderer.Document = document;
+            //    renderer.RenderDocument();
+            //    string filename = @"d:\test\" + MainVM.SelectedSalesInvoice.sqNoChar_ + "-INVOICE.pdf";
+                
+            //    SaveFileDialog dlg = new SaveFileDialog();
+            //    dlg.FileName = "" + MainVM.SelectedSalesInvoice.sqNoChar_ + "-INVOICE";
+            //    dlg.DefaultExt = ".pdf";
+            //    dlg.Filter = "PDF documents (.pdf)|*.pdf";
+            //    if (dlg.ShowDialog() == true)
+            //    {
+            //        filename = dlg.FileName;
+            //        renderer.PdfDocument.Save(filename);
+            //    }
+                
+            //}
 
         }
 
         private void invoiceBack_Click(object sender, RoutedEventArgs e)
-        {if (newInvoiceForm.IsVisible)
+        {
+            if (newInvoiceForm.IsVisible)
             {
                 newInvoiceForm.Visibility = Visibility.Collapsed;
                 documentViewer.Visibility = Visibility.Collapsed;
@@ -289,7 +284,6 @@ namespace prototype2
         {
             if (this.IsVisible && MainVM.isPaymentInvoice)
             {
-                MainVM.RequestedItems.Clear();
                 computeInvoice();
                 foreach (UIElement obj in newInvoiceFormGrid1.Children)
                 {
@@ -298,9 +292,19 @@ namespace prototype2
                     else
                         obj.Visibility = Visibility.Collapsed;
                 }
-                
+                if (MainVM.isView)
+                {
+                    foreach(UIElement obj in newInvoiceFormGrid.Children)
+                    {
+                        if (obj is TextBox)
+                            obj.IsEnabled = false;
+                        else if (obj is Xceed.Wpf.Toolkit.IntegerUpDown)
+                            obj.IsEnabled = false;
+                    }
+                }
             }
         }
+        
     }
 
 

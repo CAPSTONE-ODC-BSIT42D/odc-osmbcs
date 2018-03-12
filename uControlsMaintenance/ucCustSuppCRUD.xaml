@@ -18,55 +18,51 @@
                 </Grid.ColumnDefinitions>
                 <Label x:Name="label5" Content="Company Details" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
                 <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,47,10,0" VerticalAlignment="Top"/>
-                <Label x:Name="label4_Copy" Content="* Name:" HorizontalAlignment="Left" Margin="51,83,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label x:Name="label4_Copy1" Content="Description:" HorizontalAlignment="Left" Margin="51,114,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label x:Name="label4_Copy2" Content="* Address:" HorizontalAlignment="Left" Margin="51,243,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label x:Name="label4_Copy3" Content="* City:" HorizontalAlignment="Left" Margin="51,272,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label x:Name="label4_Copy4" Content="* Province" HorizontalAlignment="Left" Margin="51,297,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label x:Name="label4_Copy15" Content="* Postal Code:" HorizontalAlignment="Left" Margin="51,327,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label x:Name="label5_Copy" Content="Contact Details" HorizontalAlignment="Left" Margin="10,363,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-                <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,392,10,0" VerticalAlignment="Top"/>
-                <Label x:Name="label4_Copy5" Content="Email Address:" HorizontalAlignment="Left" Margin="40,402,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label x:Name="label4_Copy6" Content="Telephone Number:" HorizontalAlignment="Left" Margin="40,433,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label x:Name="label4_Copy7" Content="Mobile Number:" HorizontalAlignment="Left" Margin="40,464,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label x:Name="label5_Copy1" Content="Company Representative" HorizontalAlignment="Left" Margin="10,494,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-                <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="10,527,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
-                <Label x:Name="label4_Copy8" Content="* Title:" HorizontalAlignment="Left" Margin="40,541,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label x:Name="label4_Copy9" Content="* First Name:" HorizontalAlignment="Left" Margin="42,572,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label x:Name="label4_Copy10" Content="Middle Initial" HorizontalAlignment="Left" Margin="42,603,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="93" VerticalContentAlignment="Center"/>
-                <Label x:Name="label4_Copy11" Content="* Last Name:" HorizontalAlignment="Left" Margin="42,634,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label x:Name="label4_Copy12" Content="Email Address:" HorizontalAlignment="Left" Margin="40,700,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label x:Name="label4_Copy13" Content="Telephone Number:" HorizontalAlignment="Left" Margin="40,732,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label x:Name="label4_Copy14" Content="Mobile Number:" HorizontalAlignment="Left" Margin="40,766,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label Content="Note: Required fields are marked with *" HorizontalAlignment="Left" Margin="222,47,0,0" VerticalAlignment="Top" FontStyle="Italic"/>
+                <Label Content="* Name:" HorizontalAlignment="Left" Margin="51,83,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <TextBox x:Name="companyNameTb" HorizontalAlignment="Left" Height="23" Margin="160,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350">
-                    <TextBox.Text>
-                        <Binding Path="CompanyName_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                            <Binding.ValidationRules>
-                                <local:TextBoxValidation TextBoxType="IsEmpty"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
+                    <Binding Path="CompanyName_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                        </Binding.ValidationRules>
+                    </Binding>
                 </TextBox>
-                <TextBox x:Name="companyDescriptionTb" HorizontalAlignment="Left" Height="115" Margin="160,118,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="350" Text=""/>
-                <TextBox x:Name="companyAddressTb" HorizontalAlignment="Left" Height="23" Margin="160,247,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="350">
-                    <TextBox.Text>
-                        <Binding Path="CompanyAddress_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                            <Binding.ValidationRules>
-                                <local:TextBoxValidation TextBoxType="IsEmpty"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
+                <Label Content="* Name:" HorizontalAlignment="Left" Margin="53,115,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <TextBox x:Name="businessStyleTb" HorizontalAlignment="Left" Height="23" Margin="162,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350">
+                    <Binding Path="CompanyName_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                        </Binding.ValidationRules>
+                    </Binding>
                 </TextBox>
-                <TextBox x:Name="companyCityTb" HorizontalAlignment="Left" Height="23" Margin="160,275,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200">
-                    <TextBox.Text>
-                        <Binding Path="CompanyCity_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                            <Binding.ValidationRules>
-                                <local:TextBoxValidation TextBoxType="IsEmpty"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
+                <Label Content="* Name:" HorizontalAlignment="Left" Margin="53,145,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <TextBox x:Name="tinNumberTb" HorizontalAlignment="Left" Height="23" Margin="162,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350">
+                    <Binding Path="CompanyName_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                        </Binding.ValidationRules>
+                    </Binding>
                 </TextBox>
-                <ComboBox x:Name="companyProvinceCb" HorizontalAlignment="Left" Margin="160,303,0,0" VerticalAlignment="Top" Width="200" ItemsSource="{Binding Provinces}" DisplayMemberPath="ProvinceName" SelectedValuePath="ProvinceID">
+                <Label Content="Description:" HorizontalAlignment="Left" Margin="53,176,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <TextBox x:Name="companyDescriptionTb" HorizontalAlignment="Left" Height="115" Margin="162,180,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="350" Text=""/>
+                <Label Content="* Address:" HorizontalAlignment="Left" Margin="53,305,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <TextBox x:Name="companyAddressTb" HorizontalAlignment="Left" Height="23" Margin="162,309,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="350">
+                    <Binding Path="CompanyAddress_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+                <Label Content="* City:" HorizontalAlignment="Left" Margin="53,334,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <TextBox x:Name="companyCityTb" HorizontalAlignment="Left" Height="23" Margin="162,337,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200">
+                    <Binding Path="CompanyCity_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+                <Label Content="* Province" HorizontalAlignment="Left" Margin="53,359,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <ComboBox x:Name="companyProvinceCb" HorizontalAlignment="Left" Margin="162,365,0,0" VerticalAlignment="Top" Width="200" ItemsSource="{Binding Provinces}" DisplayMemberPath="ProvinceName" SelectedValuePath="ProvinceID">
                     <ComboBox.SelectedItem>
                         <Binding Path="CompanyProvince_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
@@ -75,97 +71,96 @@
                         </Binding>
                     </ComboBox.SelectedItem>
                 </ComboBox>
-                <TextBox x:Name="companyPostalCode" HorizontalAlignment="Left" Height="23" Margin="160,330,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200">
-                    <TextBox.Text>
-                        <Binding Path="CompanyPostalCode_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                            <Binding.ValidationRules>
-                                <local:TextBoxValidation TextBoxType="IsEmpty"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
+                <Label Content="* Postal Code:" HorizontalAlignment="Left" Margin="53,389,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <TextBox x:Name="companyPostalCode" HorizontalAlignment="Left" Height="23" Margin="162,392,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200">
+                    <Binding Path="CompanyPostalCode_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                        </Binding.ValidationRules>
+                    </Binding>
                 </TextBox>
-                <TextBox x:Name="companyEmailTb" HorizontalAlignment="Left" Height="24" Margin="160,401,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="250">
-                    <TextBox.Text>
-                        <Binding Path="CompanyEmail_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                            <Binding.ValidationRules>
-                                <local:TextBoxValidation TextBoxType="Email"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
+                <Label Content="Contact Details" HorizontalAlignment="Left" Margin="12,425,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+                <Label Content="Note: Kindly provide at least one Contact Detail" HorizontalAlignment="Left" Margin="224,429,0,0" VerticalAlignment="Top" FontStyle="Italic"/>
+                <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="12,454,8,0" VerticalAlignment="Top"/>
+                <Label Content="Email Address:" HorizontalAlignment="Left" Margin="42,464,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <TextBox x:Name="companyEmailTb" HorizontalAlignment="Left" Height="24" Margin="162,463,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="250">
+                    <Binding Path="CompanyEmail_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <local:TextBoxValidation TextBoxType="Email"/>
+                        </Binding.ValidationRules>
+                    </Binding>
                 </TextBox>
-                <TextBox x:Name="companyTelephoneTb" HorizontalAlignment="Left" Height="24" Margin="160,435,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="250">
-                    <TextBox.Text>
-                        <Binding Path="CompanyTelephone_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                            <Binding.ValidationRules>
-                                <local:TextBoxValidation TextBoxType="Phone"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
+                <Label Content="Telephone Number:" HorizontalAlignment="Left" Margin="42,495,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <TextBox x:Name="companyTelephoneTb" HorizontalAlignment="Left" Height="24" Margin="162,497,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="250">
+                    <Binding Path="CompanyTelephone_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <local:TextBoxValidation TextBoxType="Phone"/>
+                        </Binding.ValidationRules>
+                    </Binding>
                 </TextBox>
-                <TextBox x:Name="companyMobileTb" HorizontalAlignment="Left" Height="22" Margin="160,467,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="250">
-                    <TextBox.Text>
-                        <Binding Path="CompanyMobile_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                            <Binding.ValidationRules>
-                                <local:TextBoxValidation TextBoxType="Mobile"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
+                <Label Content="Mobile Number:" HorizontalAlignment="Left" Margin="42,526,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <TextBox x:Name="companyMobileTb" HorizontalAlignment="Left" Height="22" Margin="162,529,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="250">
+                    <Binding Path="CompanyMobile_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <local:TextBoxValidation TextBoxType="Mobile"/>
+                        </Binding.ValidationRules>
+                    </Binding>
                 </TextBox>
-                <TextBox x:Name="representativeTitle" HorizontalAlignment="Left" Height="22" Margin="160,545,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="191">
-                    <TextBox.Text>
-                        <Binding Path="RepTitle_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                            <Binding.ValidationRules>
-                                <local:TextBoxValidation TextBoxType="IsEmpty"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
+                <Label Content="Company Representative" HorizontalAlignment="Left" Margin="12,556,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+                <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="12,589,8,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
+                <Label Content="* Title:" HorizontalAlignment="Left" Margin="42,603,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <TextBox x:Name="representativeTitle" HorizontalAlignment="Left" Height="22" Margin="162,607,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="191">
+                    <Binding Path="RepTitle_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                        </Binding.ValidationRules>
+                    </Binding>
                 </TextBox>
-                <TextBox x:Name="repFirstNameTb" HorizontalAlignment="Left" Height="24" Margin="160,576,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="191">
-                    <TextBox.Text>
-                        <Binding Path="RepFName_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                            <Binding.ValidationRules>
-                                <local:TextBoxValidation TextBoxType="IsEmpty"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
+                <Label Content="* First Name:" HorizontalAlignment="Left" Margin="44,634,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <TextBox x:Name="repFirstNameTb" HorizontalAlignment="Left" Height="24" Margin="162,638,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="191">
+                    <Binding Path="RepFName_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                        </Binding.ValidationRules>
+                    </Binding>
                 </TextBox>
-                <TextBox x:Name="repMiddleInitialTb" HorizontalAlignment="Left" Height="24" Margin="160,605,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="124" MaxLength="3">
-                    <TextBox.Text>
-                        <Binding Path="ReMName_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                            <Binding.ValidationRules>
-                                <local:TextBoxValidation TextBoxType="IsEmpty"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
+                <Label Content="Middle Initial" HorizontalAlignment="Left" Margin="44,665,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="93" VerticalContentAlignment="Center"/>
+                <TextBox x:Name="repMiddleInitialTb" HorizontalAlignment="Left" Height="24" Margin="162,667,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="124" MaxLength="3">
+                    <Binding Path="ReMName_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                        </Binding.ValidationRules>
+                    </Binding>
                 </TextBox>
-                <TextBox x:Name="repLastNameTb" HorizontalAlignment="Left" Height="24" Margin="160,636,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="191">
-                    <TextBox.Text>
-                        <Binding Path="RepLName_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                            <Binding.ValidationRules>
-                                <local:TextBoxValidation TextBoxType="IsEmpty"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
+                <Label Content="* Last Name:" HorizontalAlignment="Left" Margin="44,696,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <TextBox x:Name="repLastNameTb" HorizontalAlignment="Left" Height="24" Margin="162,698,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="191">
+                    <Binding Path="RepLName_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <local:TextBoxValidation TextBoxType="IsEmpty"/>
+                        </Binding.ValidationRules>
+                    </Binding>
                 </TextBox>
-                <TextBox x:Name="repEmailTb" HorizontalAlignment="Left" Height="22" Margin="160,704,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="250">
-                    <TextBox.Text>
-                        <Binding Path="RepEmail_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                            <Binding.ValidationRules>
-                                <local:TextBoxValidation TextBoxType="Email"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
+                <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="44,757,182,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
+                <Label Content="Note: Kindly provide at least one Contact Detail" HorizontalAlignment="Left" Margin="224,731,0,0" VerticalAlignment="Top" FontStyle="Italic"/>
+                <Label x:Name="label4_Copy16" Content="Contact Details" HorizontalAlignment="Left" Margin="45,733,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label Content="Email Address:" HorizontalAlignment="Left" Margin="42,762,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <TextBox x:Name="repEmailTb" HorizontalAlignment="Left" Height="22" Margin="162,766,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="250">
+                    <Binding Path="RepEmail_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <local:TextBoxValidation TextBoxType="Email"/>
+                        </Binding.ValidationRules>
+                    </Binding>
                 </TextBox>
-                <TextBox x:Name="repTelephoneTb" HorizontalAlignment="Left" Height="22" Margin="160,736,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="250">
-                    <TextBox.Text>
-                        <Binding Path="RepTelephone_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                            <Binding.ValidationRules>
-                                <local:TextBoxValidation TextBoxType="Phone"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
+                <Label Content="Telephone Number:" HorizontalAlignment="Left" Margin="42,794,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <TextBox x:Name="repTelephoneTb" HorizontalAlignment="Left" Height="22" Margin="162,798,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="250">
+                    <Binding Path="RepTelephone_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <local:TextBoxValidation TextBoxType="Phone"/>
+                        </Binding.ValidationRules>
+                    </Binding>
                 </TextBox>
-                <TextBox x:Name="repMobileTb" HorizontalAlignment="Left" Height="24" Margin="160,766,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="250">
+                <Label Content="Mobile Number:" HorizontalAlignment="Left" Margin="42,828,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <TextBox x:Name="repMobileTb" HorizontalAlignment="Left" Height="24" Margin="162,828,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="250">
                     <TextBox.Text>
                         <Binding Path="RepMobile_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
@@ -174,11 +169,6 @@
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-                <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="42,695,184,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
-                <Label x:Name="label4_Copy16" Content="Contact Details" HorizontalAlignment="Left" Margin="43,671,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label Content="Note: Required fields are marked with *" HorizontalAlignment="Left" Margin="222,47,0,0" VerticalAlignment="Top" FontStyle="Italic"/>
-                <Label Content="Note: Kindly provide at least one Contact Detail" HorizontalAlignment="Left" Margin="222,367,0,0" VerticalAlignment="Top" FontStyle="Italic"/>
-                <Label Content="Note: Kindly provide at least one Contact Detail" HorizontalAlignment="Left" Margin="222,669,0,0" VerticalAlignment="Top" FontStyle="Italic"/>
             </Grid>
 
         </ScrollViewer>

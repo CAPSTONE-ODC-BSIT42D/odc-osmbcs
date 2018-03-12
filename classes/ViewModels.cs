@@ -77,6 +77,8 @@ namespace prototype2
             IntegerTextBox = 0;
             StringTextBox = "";
             DatePickerBox = DateTime.Now;
+
+            RequestedItems.Clear();
         }
 
         public object cbItem { get; set; }
