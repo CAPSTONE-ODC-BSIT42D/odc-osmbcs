@@ -31,9 +31,11 @@ namespace prototype2
         }
         private void DisplayReport()
         {
-            Syncfusion.Windows.Reports.Viewer.ReportViewer ReportPurchase = new Syncfusion.Windows.Reports.Viewer.ReportViewer();
-            ReportPurchase.DataSources.Clear();
+         
+            ReportPurchase.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
+ 
+          
             ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("PurchaseTable", GetPurchase()));
             ReportPurchase.LoadReport(rNames);
             ReportPurchase.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
@@ -61,7 +63,8 @@ namespace prototype2
         }
         private void DisplayReportSalesDay()
         {
-            
+
+            ReportPurchase.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
             ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("PurchaseTable", GetPurchaseDay()));
             ReportPurchase.LoadReport(rNames);
@@ -90,7 +93,9 @@ namespace prototype2
         }
         private void DisplayReportPurchaseWeek()
         {
-          
+
+     
+            ReportPurchase.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
             ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("PurchaseTable", GetPurchaseWeek()));
             ReportPurchase.LoadReport(rNames);
@@ -119,7 +124,7 @@ namespace prototype2
         }
         private void DisplayReportPurchaseYear()
         {
-          
+            ReportPurchase.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
             ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("PurchaseTable", GetPurchaseYear()));
             ReportPurchase.LoadReport(rNames);
@@ -148,8 +153,8 @@ namespace prototype2
         }
         private void DisplayReportPurchaseMonth()
         {
-           
-            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
+            ReportPurchase.Reset();
+             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
             ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("PurchaseTable", GetPurchaseMonth()));
             ReportPurchase.LoadReport(rNames);
             ReportPurchase.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
@@ -177,6 +182,7 @@ namespace prototype2
         }
         private void DisplayReportPurchaseRange()
         {
+            ReportPurchase.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
             ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("PurchaseTable", GetPurchaseRange()));
             ReportPurchase.LoadReport(rNames);
@@ -207,7 +213,8 @@ namespace prototype2
         {
             if (this.IsVisible)
             {
-                DisplayReport();
+                ReportPurchase.Refresh();
+
             }
             else
             {
@@ -295,40 +302,27 @@ namespace prototype2
 
         private void ComboBoxMonthSales_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
-       
-                DisplayReportPurchaseMonth();
            
-           
+            DisplayReportPurchaseMonth();
+
         }
 
         private void ComboBoxYearSales_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-          
-         
-                DisplayReportPurchaseYear();
-          
-         
+            DisplayReportPurchaseYear();
         }
         private void DatePickerStartSales_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-     
-                DisplayReportPurchaseRange();
-        
+            DisplayReportPurchaseRange();
         }
         private void DatePickerEndSales_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            
-      
-                DisplayReportPurchaseRange();
-            
+            DisplayReportPurchaseRange();
         }
 
         private void DatePickerWeekSales_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-       
-                DisplayReportPurchaseWeek();
-         
+            DisplayReportPurchaseWeek();
         }
     }
 }
