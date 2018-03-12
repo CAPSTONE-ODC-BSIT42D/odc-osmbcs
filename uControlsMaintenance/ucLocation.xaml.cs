@@ -37,14 +37,22 @@ namespace prototype2.uControlsMaintenance
             if (handler != null)
                 handler(this, e);
         }
-        
+
+        private void provinceNameTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (String.IsNullOrEmpty(provinceNameTb.Text))
+                addProvinceBtn.Content = "X";
+            else
+                addProvinceBtn.Content = "Save";
+        }
+
         private void addProvinceBtn_Click(object sender, RoutedEventArgs e)
         {
             var dbCon = DBConnection.Instance();
             dbCon.DatabaseName = "odc_db";
             if (MainVM.isEdit)
             {
-                if (provinceNameTb.IsVisible)
+                if (provinceNameTb.IsVisible && !String.IsNullOrEmpty(provinceNameTb.Text))
                 {
                     provinceNameTb.Visibility = Visibility.Collapsed;
                     provinceLbl.Visibility = Visibility.Collapsed;
@@ -71,28 +79,30 @@ namespace prototype2.uControlsMaintenance
                         }
                     }
                     addProvinceBtn.Content = "Add";
+                    provinceNameTb.Clear();
                 }
                 else
                 {
                     provinceNameTb.Visibility = Visibility.Visible;
                     provinceLbl.Visibility = Visibility.Visible;
-                    addProvinceBtn.Content = "Save";
+                    addProvinceBtn.Content = "X";
                 }
             }
             else
             {
-                if (provinceNameTb.IsVisible)
+                if (provinceNameTb.IsVisible && !String.IsNullOrEmpty(provinceNameTb.Text))
                 {
                     provinceNameTb.Visibility = Visibility.Collapsed;
                     provinceLbl.Visibility = Visibility.Collapsed;
                     MainVM.SelectedRegion.Provinces.Add(new Province() { ProvinceName = provinceNameTb.Text });
                     addProvinceBtn.Content = "Add";
+                    provinceNameTb.Clear();
                 }
                 else
                 {
                     provinceNameTb.Visibility = Visibility.Visible;
                     provinceLbl.Visibility = Visibility.Visible;
-                    addProvinceBtn.Content = "Save";
+                    addProvinceBtn.Content = "X";
                 }
             }
         }
@@ -322,5 +332,7 @@ namespace prototype2.uControlsMaintenance
             saveCancelGrid2.Visibility = Visibility.Visible;
             editCloseGrid2.Visibility = Visibility.Collapsed;
         }
+
+        
     }
 }

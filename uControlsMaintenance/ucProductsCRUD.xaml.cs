@@ -307,6 +307,15 @@ namespace prototype2
             }
         }
 
+        private void categoryNameTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!String.IsNullOrEmpty(categoryNameTb.Text))
+                addCategoryBtn.Content = "Save";
+            else
+                addCategoryBtn.Content = "X";
+            
+        }
+
         private void addCategoryBtn_Click(object sender, RoutedEventArgs e)
         {
             var dbCon = DBConnection.Instance();
@@ -315,12 +324,12 @@ namespace prototype2
             {
                 if (String.IsNullOrEmpty(categoryNameTb.Text))
                 {
-                    MessageBox.Show("Please enter a Category");
-                }
-                else if (!String.IsNullOrEmpty(categoryNameTb.Text))
-                {
                     categoryNameTb.Visibility = Visibility.Collapsed;
                     addCategoryBtn.Content = "+";
+                }
+                else
+                {
+                    
                     string query = "INSERT INTO `odc_db`.`item_type_t` (`typeName`) VALUES('" + categoryNameTb.Text + "')";
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
@@ -329,6 +338,8 @@ namespace prototype2
                         MainVM.ProductCategory.Add(new ItemType() { TypeID = int.Parse(result), TypeName = categoryNameTb.Text });
                         MessageBox.Show("Item Category successfully added");
                         categoryNameTb.Clear();
+                        categoryNameTb.Visibility = Visibility.Collapsed;
+                        addCategoryBtn.Content = "+";
                         dbCon.Close();
                     }
                 }
@@ -337,9 +348,16 @@ namespace prototype2
             else
             {
                 categoryNameTb.Visibility = Visibility.Visible;
-                addCategoryBtn.Content = "Save";
+                addCategoryBtn.Content = "X";
             }
 
+        }
+        private void unitNameTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!String.IsNullOrEmpty(unitNameTb.Text))
+                addUnitBtn.Content = "Save";
+            else
+                addUnitBtn.Content = "X";
         }
         private void addUnitBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -349,12 +367,12 @@ namespace prototype2
             {
                 if (String.IsNullOrEmpty(unitNameTb.Text))
                 {
-                    MessageBox.Show("Please enter a Category");
-                }
-                else if (!String.IsNullOrEmpty(unitNameTb.Text))
-                {
                     unitNameTb.Visibility = Visibility.Collapsed;
                     addUnitBtn.Content = "+";
+                }
+                else
+                {
+                    
                     string query = "INSERT INTO `odc_db`.`unit_t` (`unitName`) VALUES('" + unitNameTb.Text + "')";
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
@@ -363,16 +381,21 @@ namespace prototype2
                         MainVM.Units.Add(new Unit() { ID = int.Parse(result), UnitName = unitNameTb.Text });
                         MessageBox.Show("Unit successfully added");
                         unitNameTb.Clear();
+                        unitNameTb.Visibility = Visibility.Collapsed;
+                        addUnitBtn.Content = "+";
                     }
                 }
             }
             else
             {
                 unitNameTb.Visibility = Visibility.Visible;
-                addUnitBtn.Content = "Save";
+                addUnitBtn.Content = "X";
             }
 
         }
+
         
+
+       
     }
 }
