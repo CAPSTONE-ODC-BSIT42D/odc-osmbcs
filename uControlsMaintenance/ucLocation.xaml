@@ -39,11 +39,11 @@
                 <Button x:Name="addProvinceBtn" Content="Add" HorizontalAlignment="Right" Margin="0,154,37,0" VerticalAlignment="Top" Width="76" Height="23" Click="addProvinceBtn_Click"/>
                 <Label x:Name="provinceLbl" VerticalAlignment="Top" Margin="38,151,0,0" HorizontalAlignment="Left" FontWeight="Bold" Content="Province Name:" Visibility="Hidden"/>
                 <TextBox x:Name="provinceNameTb" Height="23" Margin="142,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="196" Visibility="Hidden" TextChanged="provinceNameTb_TextChanged">
-                    <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                    <!--<Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                         <Binding.ValidationRules>
                             <prototype2:TextBoxValidation TextBoxType="IsEmpty"/>
                         </Binding.ValidationRules>
-                    </Binding>
+                    </Binding>-->
                 </TextBox>
                 <DataGrid x:Name="provinceList" Height="270" Margin="33,182,33,0" VerticalAlignment="Top" ItemsSource="{Binding SelectedRegion.Provinces}" SelectedItem="{Binding SelectedProvince}" AutoGenerateColumns="False" CanUserAddRows="False">
                     <DataGrid.Columns>
