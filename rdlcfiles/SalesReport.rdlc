@@ -450,7 +450,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -504,7 +503,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>service Name</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -666,7 +665,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!TOTAL_SERVICE.Value)</Value>
+                              <Value>=Sum(Fields!serviceName.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -761,10 +760,6 @@
         <Field Name="itemName">
           <DataField>itemName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="dateOfIssue">
-          <DataField>dateOfIssue</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
         <Field Name="TOTAL_ITEM">
           <DataField>TOTAL_ITEM</DataField>
