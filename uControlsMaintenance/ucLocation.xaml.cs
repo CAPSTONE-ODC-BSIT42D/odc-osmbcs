@@ -52,34 +52,46 @@ namespace prototype2.uControlsMaintenance
             dbCon.DatabaseName = "odc_db";
             if (MainVM.isEdit)
             {
-                if (provinceNameTb.IsVisible && !String.IsNullOrEmpty(provinceNameTb.Text))
+                if (provinceNameTb.IsVisible)
                 {
-                    provinceNameTb.Visibility = Visibility.Collapsed;
-                    provinceLbl.Visibility = Visibility.Collapsed;
-                    if (MainVM.SelectedProvince != null)
+                    if (!String.IsNullOrEmpty(provinceNameTb.Text))
                     {
-                        string query = "UPDATE provinces_t SET " +
-                            "provinceName = " + provinceNameTb.Text +
-                            " WHERE id = " + MainVM.SelectedProvince.ProvinceID;
-                        if (dbCon.insertQuery(query, dbCon.Connection))
+                        provinceNameTb.Visibility = Visibility.Collapsed;
+                        provinceLbl.Visibility = Visibility.Collapsed;
+                        if (MainVM.SelectedProvince != null)
                         {
-                            MainVM.SelectedProvince.ProvinceName = provinceNameTb.Text;
-                            MessageBox.Show("Record is Saved");
+                            string query = "UPDATE provinces_t SET " +
+                                "provinceName = " + provinceNameTb.Text +
+                                " WHERE id = " + MainVM.SelectedProvince.ProvinceID;
+                            if (dbCon.insertQuery(query, dbCon.Connection))
+                            {
+                                MainVM.SelectedProvince.ProvinceName = provinceNameTb.Text;
+                                MessageBox.Show("Record is Saved");
+                            }
                         }
+                        else
+                        {
+                            string query = "INSERT INTO `odc_db`.`provinces_t` (`provinceName`,`regionID`) VALUES('" + provinceNameTb.Text + "','" + MainVM.SelectedRegion.RegionID + "')";
+                            if (dbCon.insertQuery(query, dbCon.Connection))
+                            {
+                                MessageBox.Show("Record is Saved");
+                                query = "SELECT LAST_INSERT_ID();";
+                                string result = dbCon.selectScalar(query, dbCon.Connection).ToString();
+                                MainVM.SelectedRegion.Provinces.Add(new Province() { ProvinceID = int.Parse(result), ProvinceName = provinceNameTb.Text });
+                            }
+                        }
+                        
+                        provinceNameTb.Clear();
+                        addProvinceBtn.Content = "Add";
                     }
                     else
                     {
-                        string query = "INSERT INTO `odc_db`.`provinces_t` (`provinceName`,`regionID`) VALUES('" + provinceNameTb.Text + "','" + MainVM.SelectedRegion.RegionID + "')";
-                        if (dbCon.insertQuery(query, dbCon.Connection))
-                        {
-                            MessageBox.Show("Record is Saved");
-                            query = "SELECT LAST_INSERT_ID();";
-                            string result = dbCon.selectScalar(query, dbCon.Connection).ToString();
-                            MainVM.SelectedRegion.Provinces.Add(new Province() { ProvinceID = int.Parse(result), ProvinceName = provinceNameTb.Text });
-                        }
+                        provinceNameTb.Visibility = Visibility.Collapsed;
+                        provinceLbl.Visibility = Visibility.Collapsed;
+                        
+                        provinceNameTb.Clear();
+                        addProvinceBtn.Content = "Add";
                     }
-                    addProvinceBtn.Content = "Add";
-                    provinceNameTb.Clear();
                 }
                 else
                 {
@@ -90,13 +102,26 @@ namespace prototype2.uControlsMaintenance
             }
             else
             {
-                if (provinceNameTb.IsVisible && !String.IsNullOrEmpty(provinceNameTb.Text))
+                if (provinceNameTb.IsVisible)
                 {
-                    provinceNameTb.Visibility = Visibility.Collapsed;
-                    provinceLbl.Visibility = Visibility.Collapsed;
-                    MainVM.SelectedRegion.Provinces.Add(new Province() { ProvinceName = provinceNameTb.Text });
-                    addProvinceBtn.Content = "Add";
-                    provinceNameTb.Clear();
+                    if (!String.IsNullOrEmpty(provinceNameTb.Text))
+                    {
+                        provinceNameTb.Visibility = Visibility.Collapsed;
+                        provinceLbl.Visibility = Visibility.Collapsed;
+                        MainVM.SelectedRegion.Provinces.Add(new Province() { ProvinceName = provinceNameTb.Text });
+                        
+                        provinceNameTb.Clear();
+                        addProvinceBtn.Content = "Add";
+                    }
+                    else
+                    {
+                        provinceNameTb.Visibility = Visibility.Collapsed;
+                        provinceLbl.Visibility = Visibility.Collapsed;
+                        
+                        provinceNameTb.Clear();
+                        addProvinceBtn.Content = "Add";
+                    }
+                    
                 }
                 else
                 {
