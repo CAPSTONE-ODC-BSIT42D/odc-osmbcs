@@ -31,8 +31,8 @@ namespace prototype2
         }
         private void DisplayReport()
         {
-         
-           
+            ReportPurchase.Reset();
+
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
  
           
@@ -40,6 +40,7 @@ namespace prototype2
             ReportPurchase.LoadReport(rNames);
             ReportPurchase.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportPurchase.RefreshReport();
+          
         }
 
         private DataTable GetPurchase()
@@ -95,7 +96,7 @@ namespace prototype2
         private void DisplayReportPurchaseWeek()
         {
 
-     
+            ReportPurchase.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
             ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("PurchaseTable", GetPurchaseWeek()));
             ReportPurchase.LoadReport(rNames);
@@ -124,7 +125,7 @@ namespace prototype2
         }
         private void DisplayReportPurchaseYear()
         {
-            
+            ReportPurchase.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
             ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("PurchaseTable", GetPurchaseYear()));
             ReportPurchase.LoadReport(rNames);
@@ -140,7 +141,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
             string year = ((ComboBoxItem)ComboBoxYearSales.SelectedItem).Content.ToString();//same problem
-            MessageBox.Show(year);
+        
             cmd.CommandText = "    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS  Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar  WHERE(YEAR(po.orderDate) = '" + year + "')    ";
 
             DataSetReportPurchase.PurchaseTableDataTable dSPurchase = new DataSetReportPurchase.PurchaseTableDataTable();
@@ -154,14 +155,15 @@ namespace prototype2
         }
         private void DisplayReportPurchaseMonth()
         {
-           
-             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
+            ReportPurchase.Reset();
+
+            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
             ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("PurchaseTable", GetPurchaseMonth()));
             ReportPurchase.LoadReport(rNames);
             ReportPurchase.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportPurchase.RefreshReport();
-       
 
+            ReportPurchase.Visibility =Visibility;
         }
 
         private DataTable GetPurchaseMonth()
@@ -173,7 +175,7 @@ namespace prototype2
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
-            string str;
+       
       
             cmd.CommandText = "    SELECT po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar WHERE (MONTHNAME(po.orderDate) = '"+month +"') AND (YEAR(po.orderDate) = YEAR(CURDATE()))";
 
