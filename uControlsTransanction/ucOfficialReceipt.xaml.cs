@@ -61,10 +61,10 @@ namespace prototype2
             {
                 string query = "SELECT LAST_INSERT_ID();";
                 string result = dbCon.selectScalar(query, dbCon.Connection).ToString();
-                cmd.CommandText = "SELECT c.companyName, c.companyAddress, c.companyCity, pv.id, si.invoiceNo, sp.SIpaymentAmount, si.busStyle, sp.SIpaymentMethod, sp.SIcheckNo FROM cust_supp_t c INNER JOIN sales_invoice_t si ON c.companyID = si.custID INNER JOIN si_payment_t sp ON si.invoiceNo = sp.invoiceNo INNER JOIN  provinces_t pv ON pv.id = c.companyProvinceID WHERE sp.SIpaymentID = '" + result + "';";
+                cmd.CommandText = "SELECT c.companyName, c.companyAddress, c.companyCity, pv.id, si.invoiceNo, sp.SIpaymentAmount, c.busStyle, sp.SIpaymentMethod, sp.SIcheckNo FROM cust_supp_t c INNER JOIN sales_invoice_t si ON c.companyID = si.custID INNER JOIN si_payment_t sp ON si.invoiceNo = sp.invoiceNo INNER JOIN  provinces_t pv ON pv.id = c.companyProvinceID WHERE sp.SIpaymentID = '" + result + "';";
             }
             else
-                cmd.CommandText = "SELECT c.companyName, c.companyAddress, c.companyCity, pv.id, si.invoiceNo, sp.SIpaymentAmount, si.busStyle, sp.SIpaymentMethod, sp.SIcheckNo FROM cust_supp_t c INNER JOIN sales_invoice_t si ON c.companyID = si.custID INNER JOIN si_payment_t sp ON si.invoiceNo = sp.invoiceNo INNER JOIN  provinces_t pv ON pv.id = c.companyProvinceID WHERE sp.SIpaymentID = '" + MainVM.SelectedPaymentH_.SIpaymentID_ + "';";
+                cmd.CommandText = "SELECT c.companyName, c.companyAddress, c.companyCity, pv.id, si.invoiceNo, sp.SIpaymentAmount, c.busStyle, sp.SIpaymentMethod, sp.SIcheckNo FROM cust_supp_t c INNER JOIN sales_invoice_t si ON c.companyID = si.custID INNER JOIN si_payment_t sp ON si.invoiceNo = sp.invoiceNo INNER JOIN  provinces_t pv ON pv.id = c.companyProvinceID WHERE sp.SIpaymentID = '" + MainVM.SelectedPaymentH_.SIpaymentID_ + "';";
 
             DataSet1.officialReceiptDataTable dSReceipt = new DataSet1.officialReceiptDataTable();
 
