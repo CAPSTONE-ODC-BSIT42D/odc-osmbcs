@@ -110,6 +110,20 @@ namespace prototype2
             set { SetProperty(ref CompanyName, value); }
         }
 
+        public string BusStyle;
+        public string BusStyle_
+        {
+            get { return BusStyle; }
+            set { SetProperty(ref BusStyle, value); }
+        }
+
+        public string TaxNumber;
+        public string TaxNumber_
+        { 
+            get { return TaxNumber; }
+            set { SetProperty(ref TaxNumber, value); }
+        }
+
         public string CompanyAddress;
         public string CompanyAddress_
         {

@@ -29,7 +29,7 @@
                 </TextBox>
                 <Label Content="* Business Style:" HorizontalAlignment="Left" Margin="53,115,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <TextBox x:Name="businessStyleTb" HorizontalAlignment="Left" Height="23" Margin="162,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350">
-                    <Binding Path="CompanyName_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                    <Binding Path="BusStyle_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                         <Binding.ValidationRules>
                             <local:TextBoxValidation TextBoxType="IsEmpty"/>
                         </Binding.ValidationRules>
@@ -37,7 +37,7 @@
                 </TextBox>
                 <Label Content="* TIN:" HorizontalAlignment="Left" Margin="53,145,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <TextBox x:Name="tinNumberTb" HorizontalAlignment="Left" Height="23" Margin="162,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350">
-                    <Binding Path="CompanyName_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                    <Binding Path="TaxNumber_" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                         <Binding.ValidationRules>
                             <local:TextBoxValidation TextBoxType="IsEmpty"/>
                         </Binding.ValidationRules>
