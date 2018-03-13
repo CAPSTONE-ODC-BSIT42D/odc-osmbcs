@@ -9,11 +9,11 @@ namespace prototype2
     /// <summary>
     /// Interaction logic for FreqServices.xaml
     /// </summary>
-    public partial class FreqServices : UserControl
+    public partial class ucFreqServices : UserControl
     {
         
-        MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["prototype2.Properties.Settings.odc_dbConnectionString"].ConnectionString);
-        public FreqServices()
+      
+        public ucFreqServices()
         {
             InitializeComponent();
         }
