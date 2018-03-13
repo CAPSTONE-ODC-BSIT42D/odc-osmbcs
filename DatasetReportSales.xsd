@@ -129,10 +129,10 @@ GROUP BY i.itemName</CommandText>
               <Mapping SourceColumn="dateOfIssue" DataSetColumn="dateOfIssue" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBySalesMonthReport" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySalesMonthReport" GeneratorSourceName="FillBySalesMonthReport" GetMethodModifier="Public" GetMethodName="GetDataBySalesMonthReport" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySalesMonthReport" UserSourceName="FillBySalesMonthReport">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.item_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBySalesMonthReport" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySalesMonthReport" GeneratorSourceName="FillBySalesMonthReport" GetMethodModifier="Public" GetMethodName="GetDataBySalesMonthReport" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySalesMonthReport" UserSourceName="FillBySalesMonthReport">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        i.itemName,si.dateOfIssue, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) 
+                    <CommandText>SELECT        i.itemName, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) 
                          + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) * (IFNULL(si.sc_pwd_discount, 0) / 100)) AS TOTAL_ITEM
 FROM            sales_quote_t sq INNER JOIN
                          items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN
@@ -147,10 +147,10 @@ GROUP BY i.itemName</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBySalesRange" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySalesRange" GeneratorSourceName="FillBySalesRange" GetMethodModifier="Public" GetMethodName="GetDataBySalesRange" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySalesRange" UserSourceName="FillBySalesRange">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.item_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBySalesRange" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySalesRange" GeneratorSourceName="FillBySalesRange" GetMethodModifier="Public" GetMethodName="GetDataBySalesRange" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySalesRange" UserSourceName="FillBySalesRange">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        i.itemName,si.dateOfIssue, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) 
+                    <CommandText>SELECT        i.itemName, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) 
                          + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) * (IFNULL(si.sc_pwd_discount, 0) / 100)) AS TOTAL_ITEM
 FROM            sales_quote_t sq INNER JOIN
                          items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN
@@ -166,10 +166,10 @@ GROUP BY i.itemName</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBySalesReportDay" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBySalesReportDay" GeneratorSourceName="FillBySalesReportDay" GetMethodModifier="Public" GetMethodName="GetDataByBySalesReportDay" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBySalesReportDay" UserSourceName="FillBySalesReportDay">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.item_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBySalesReportDay" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBySalesReportDay" GeneratorSourceName="FillBySalesReportDay" GetMethodModifier="Public" GetMethodName="GetDataByBySalesReportDay" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBySalesReportDay" UserSourceName="FillBySalesReportDay">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        i.itemName, si.dateOfIssue, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) 
+                    <CommandText>SELECT        i.itemName, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) 
                          + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) * (IFNULL(si.sc_pwd_discount, 0) / 100)) AS TOTAL_ITEM
 FROM            sales_quote_t sq INNER JOIN
                          items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN
@@ -182,10 +182,10 @@ GROUP BY i.itemName</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBySalesWeek" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBySalesWeek" GeneratorSourceName="FillBySalesWeek" GetMethodModifier="Public" GetMethodName="GetDataByBySalesWeek" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBySalesWeek" UserSourceName="FillBySalesWeek">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.item_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBySalesWeek" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBySalesWeek" GeneratorSourceName="FillBySalesWeek" GetMethodModifier="Public" GetMethodName="GetDataByBySalesWeek" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBySalesWeek" UserSourceName="FillBySalesWeek">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        i.itemName, si.dateOfIssue, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) 
+                    <CommandText>SELECT        i.itemName, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) 
                          + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) * (IFNULL(si.sc_pwd_discount, 0) / 100)) AS TOTAL_ITEM
 FROM            sales_quote_t sq INNER JOIN
                          items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN
@@ -200,10 +200,10 @@ GROUP BY i.itemName</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBySalesyear" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySalesyear" GeneratorSourceName="FillBySalesyear" GetMethodModifier="Public" GetMethodName="GetDataBySalesyear" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySalesyear" UserSourceName="FillBySalesyear">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.item_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBySalesyear" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySalesyear" GeneratorSourceName="FillBySalesyear" GetMethodModifier="Public" GetMethodName="GetDataBySalesyear" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySalesyear" UserSourceName="FillBySalesyear">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        i.itemName, si.dateOfIssue, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) 
+                    <CommandText>SELECT        i.itemName, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) 
                          + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) * (IFNULL(si.sc_pwd_discount, 0) / 100)) AS TOTAL_ITEM
 FROM            sales_quote_t sq INNER JOIN
                          items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN

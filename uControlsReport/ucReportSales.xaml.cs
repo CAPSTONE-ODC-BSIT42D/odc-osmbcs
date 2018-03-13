@@ -63,7 +63,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        i.itemName,si.dateofissue, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0)  + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) *(IFNULL(si.sc_pwd_discount, 0) / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER join items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN  item_t i ON ia.itemID = i.ID INNER JOIN markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar GROUP BY i.itemName";
+            cmd.CommandText = "SELECT        i.itemName, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0)  + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) *(IFNULL(si.sc_pwd_discount, 0) / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER join items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN  item_t i ON ia.itemID = i.ID INNER JOIN markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar GROUP BY i.itemName";
            
             DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
 
@@ -113,7 +113,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        i.itemName,,si.dateofissue, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0)  + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) *(IFNULL(si.sc_pwd_discount, 0) / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER join items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN  item_t i ON ia.itemID = i.ID INNER JOIN markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE()) GROUP BY i.itemName  ";
+            cmd.CommandText = "SELECT        i.itemName, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0)  + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) *(IFNULL(si.sc_pwd_discount, 0) / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER join items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN  item_t i ON ia.itemID = i.ID INNER JOIN markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE()) GROUP BY i.itemName  ";
 
             DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
 
@@ -162,7 +162,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        i.itemName,,si.dateofissue, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0)  + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) *(IFNULL(si.sc_pwd_discount, 0) / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER join items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN  item_t i ON ia.itemID = i.ID INNER JOIN markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(WEEK(si.dateOfIssue) = '" + DatePickerItemWeek.SelectedDate.Value.Date.ToShortDateString() + "')  GROUP BY i.itemName  ";
+            cmd.CommandText = "SELECT        i.itemName, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0)  + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) *(IFNULL(si.sc_pwd_discount, 0) / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER join items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN  item_t i ON ia.itemID = i.ID INNER JOIN markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(WEEK(si.dateOfIssue) = '" + DatePickerItemWeek.SelectedDate.Value.Date.ToShortDateString() + "')  GROUP BY i.itemName  ";
 
             DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
 
@@ -213,7 +213,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        i.itemName,,si.dateofissue, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0)  + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) *(IFNULL(si.sc_pwd_discount, 0) / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER join items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN  item_t i ON ia.itemID = i.ID INNER JOIN markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(MONTHNAME(si.dateOfIssue) = '" + ((ComboBoxItem)ComboBoxItemMonth.SelectedItem).Content.ToString() + "') GROUP BY i.itemName  ";
+            cmd.CommandText = "SELECT        i.itemName, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0)  + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) *(IFNULL(si.sc_pwd_discount, 0) / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER join items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN  item_t i ON ia.itemID = i.ID INNER JOIN markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(MONTHNAME(si.dateOfIssue) = '" + ((ComboBoxItem)ComboBoxItemMonth.SelectedItem).Content.ToString() + "') GROUP BY i.itemName  ";
             DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
@@ -261,7 +261,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        i.itemName,,si.dateofissue, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0)  + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) *(IFNULL(si.sc_pwd_discount, 0) / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER join items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN  item_t i ON ia.itemID = i.ID INNER JOIN markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(YEAR(si.dateOfIssue) = '" + ((ComboBoxItem)ComboBoxItemYear.SelectedItem).Content.ToString() + "')  GROUP BY i.itemName  ";
+            cmd.CommandText = "SELECT        i.itemName, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0)  + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) *(IFNULL(si.sc_pwd_discount, 0) / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER join items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN  item_t i ON ia.itemID = i.ID INNER JOIN markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(YEAR(si.dateOfIssue) = '" + ((ComboBoxItem)ComboBoxItemYear.SelectedItem).Content.ToString() + "')  GROUP BY i.itemName  ";
 
             DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
 
@@ -310,7 +310,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        i.itemName,,si.dateofissue, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0)  + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) *(IFNULL(si.sc_pwd_discount, 0) / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER join items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN  item_t i ON ia.itemID = i.ID INNER JOIN markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(si.dateOfIssue BETWEEN '" + DatePickerItemStart.Text  + "' AND '" + DatePickerItemEnd.SelectedDate.Value.Date.ToShortDateString() + "') GROUP BY i.itemName  ";
+            cmd.CommandText = "SELECT        i.itemName, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0)  + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) *(IFNULL(si.sc_pwd_discount, 0) / 100)) AS TOTAL_ITEM FROM sales_quote_t sq INNER join items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN  item_t i ON ia.itemID = i.ID INNER JOIN markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(si.dateOfIssue BETWEEN '" + DatePickerItemStart.Text  + "' AND '" + DatePickerItemEnd.SelectedDate.Value.Date.ToShortDateString() + "') GROUP BY i.itemName  ";
 
             DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
 
