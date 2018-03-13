@@ -12,8 +12,7 @@ namespace prototype2
     /// </summary>
     public partial class ucMostSupplier : UserControl
     {
-        #region MySqlConnection Connection
-        MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["prototype2.Properties.Settings.odc_dbConnectionString"].ConnectionString);
+       
         public ucMostSupplier()
         {
             InitializeComponent();
@@ -36,28 +35,21 @@ namespace prototype2
             //MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             //mySqlDa.Fill(dSItem);
             //FreqItemsDataGrid.ItemsSource = dSItem.DefaultView;
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand("select c.companyName, i.itemName, count(ia.itemid) as NoTimesSupp from cust_supp_t c, item_t i, items_availed_t ia, purchase_order_t po where c.companyid = po.suppid and po.ponumchar = ia.ponumchar and i.id = ia.itemid group by c.companyName, i.itemName", conn);
-                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                adp.Fill(ds, "LoadDataBinding");
-                mostSupplierDataGrid.DataContext = ds;
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            finally
-            {
-                conn.Close();
-            }
+         
 
 
-            #endregion
+        }
 
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
 
+            // Do not load your data at design time.
+            // if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            // {
+            // 	//Load your data here and assign the result to the CollectionViewSource.
+            // 	System.Windows.Data.CollectionViewSource myCollectionViewSource = (System.Windows.Data.CollectionViewSource)this.Resources["Resource Key for CollectionViewSource"];
+            // 	myCollectionViewSource.Source = your data
+            // }
         }
     }
 }

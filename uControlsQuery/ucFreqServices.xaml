@@ -5,17 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:prototype2"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Width="596" Height="400">
-    <Grid Background="#FFF7F7F7">
+             d:DesignHeight="300" d:DesignWidth="300" Width="596" Height="400" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <local:QueriesDataSet x:Key="queriesDataSet"/>
+        <CollectionViewSource x:Key="services_tViewSource" Source="{Binding services_t, Source={StaticResource queriesDataSet}}"/>
+    </UserControl.Resources>
+    <Grid Background="#FFF7F7F7" DataContext="{StaticResource services_tViewSource}">
         <Label Content="Frequently Availed Services" HorizontalAlignment="Left" Margin="6,3,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <DataGrid x:Name="FreqServicesDataGrid" HorizontalAlignment="Left" Height="318" Margin="10,72,0,0" VerticalAlignment="Top" Width="576" AutoGenerateColumns="False"  ItemsSource="{Binding Path=LoadDataBinding}">
-            <DataGrid.Columns>
-
-                <DataGridTextColumn Binding="{Binding Path=serviceName}" Header="Service Name" Width="290" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Path=NoTimesSer}" Header="No. of Times Availed" Width="300" IsReadOnly="True"/>
-
-            </DataGrid.Columns>
-        </DataGrid>
         <Label Content="Sort by:" HorizontalAlignment="Left" Margin="415,42,0,0" VerticalAlignment="Top" FontSize="11"/>
         <ComboBox x:Name="comboBoxServices" HorizontalAlignment="Left" Margin="466,43,0,0" VerticalAlignment="Top" Width="120" FontSize="11">
             <ComboBoxItem Content="Daily"/>
@@ -23,5 +19,11 @@
             <ComboBoxItem Content="Monthly"/>
             <ComboBoxItem Content="Yearly"/>
         </ComboBox>
+        <DataGrid x:Name="services_tDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,72,22,40" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn  Binding="{Binding serviceName}" Header="service Name" Width="400"/>
+                <DataGridTextColumn  Binding="{Binding NoOfTimes}" Header="No Of Times" Width="200"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

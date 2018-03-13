@@ -31,6 +31,118 @@ ORDER BY NoOfTimes DESC</CommandText>
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EmployeeTableAdapter" GeneratorDataComponentClassName="EmployeeTableAdapter" Name="Employee" UserDataComponentName="EmployeeTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.position_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByEmployee" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataByEmployee" GeneratorSourceName="FillByEmployee" GetMethodModifier="Public" GetMethodName="GetDataByEmployee" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataByEmployee" UserSourceName="FillByEmployee">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        e.empFName + e.empLName AS NAME, p.positionName, COUNT(ae.assignEmployeeID) AS NoOfTimes
+FROM            assigned_employees_t ae INNER JOIN
+                         emp_cont_t e ON e.empID = ae.empID INNER JOIN
+                         position_t p ON p.positionid = e.positionID INNER JOIN
+                         service_sched_t ss ON ss.serviceSchedID = ae.serviceSchedID
+GROUP BY ae.empID, ae.serviceSchedID
+ORDER BY NoOfTimes DESC</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="NAME" DataSetColumn="NAME" />
+              <Mapping SourceColumn="positionName" DataSetColumn="positionName" />
+              <Mapping SourceColumn="NoOfTimes" DataSetColumn="NoOfTimes" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="item_tTableAdapter" GeneratorDataComponentClassName="item_tTableAdapter" Name="item_t" UserDataComponentName="item_tTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.item_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByItem" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataByItem" GeneratorSourceName="FillByItem" GetMethodModifier="Public" GetMethodName="GetDataByItem" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataByItem" UserSourceName="FillByItem">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        i.itemName, COUNT(ia.id) AS NoOfTimes
+FROM            item_t i INNER JOIN
+                         items_availed_t ia ON i.ID = ia.itemID INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = ia.sqNoChar
+WHERE        (sq.status = 'ACCEPTED')
+GROUP BY ia.itemID
+ORDER BY NoOfTimes DESC</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="itemName" DataSetColumn="itemName" />
+              <Mapping SourceColumn="NoOfTimes" DataSetColumn="NoOfTimes" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="services_tTableAdapter" GeneratorDataComponentClassName="services_tTableAdapter" Name="services_t" UserDataComponentName="services_tTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.services_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByService" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataByService" GeneratorSourceName="FillByService" GetMethodModifier="Public" GetMethodName="GetDataByService" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByService" UserSourceName="FillByService">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        s.serviceName, COUNT(sa.id) AS NoOfTimes
+FROM            services_t s INNER JOIN
+                         services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar
+WHERE        (sq.status = 'ACCEPTED')
+GROUP BY sa.serviceID
+ORDER BY NoOfTimes DESC</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="serviceName" DataSetColumn="serviceName" />
+              <Mapping SourceColumn="NoOfTimes" DataSetColumn="NoOfTimes" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="cust_supp_tTableAdapter" GeneratorDataComponentClassName="cust_supp_tTableAdapter" Name="cust_supp_t" UserDataComponentName="cust_supp_tTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.cust_supp_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByCust" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataByCust" GeneratorSourceName="FillByCust" GetMethodModifier="Public" GetMethodName="GetDataByCust" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByCust" UserSourceName="FillByCust">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        cs.companyName, COUNT(si.invoiceNo) AS NoOfTransaction
+FROM            cust_supp_t cs INNER JOIN
+                         sales_invoice_t si ON cs.companyID = si.custID
+GROUP BY si.custID
+ORDER BY NoOfTransaction DESC</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="companyName" DataSetColumn="companyName" />
+              <Mapping SourceColumn="NoOfTransaction" DataSetColumn="NoOfTransaction" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="supplierTableAdapter" GeneratorDataComponentClassName="supplierTableAdapter" Name="supplier" UserDataComponentName="supplierTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.cust_supp_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBySupplier" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataBySupplier" GeneratorSourceName="FillBySupplier" GetMethodModifier="Public" GetMethodName="GetDataBySupplier" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySupplier" UserSourceName="FillBySupplier">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        cs.companyName, COUNT(po.PONumChar) AS NoOfTransaction
+FROM            cust_supp_t cs INNER JOIN
+                         purchase_order_t po ON po.suppID = cs.companyID
+GROUP BY po.suppID
+ORDER BY NoOfTransaction DESC</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="companyName" DataSetColumn="companyName" />
+              <Mapping SourceColumn="NoOfTransaction" DataSetColumn="NoOfTransaction" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -39,7 +151,7 @@ ORDER BY NoOfTimes DESC</CommandText>
   <xs:element name="QueriesDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="QueriesDataSet" msprop:Generator_UserDSName="QueriesDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="job_title_t" msprop:Generator_TableClassName="job_title_tDataTable" msprop:Generator_TableVarName="tablejob_title_t" msprop:Generator_TablePropName="job_title_t" msprop:Generator_RowDeletingName="job_title_tRowDeleting" msprop:Generator_RowChangingName="job_title_tRowChanging" msprop:Generator_RowEvHandlerName="job_title_tRowChangeEventHandler" msprop:Generator_RowDeletedName="job_title_tRowDeleted" msprop:Generator_UserTableName="job_title_t" msprop:Generator_RowChangedName="job_title_tRowChanged" msprop:Generator_RowEvArgName="job_title_tRowChangeEvent" msprop:Generator_RowClassName="job_title_tRow">
+        <xs:element name="job_title_t" msprop:Generator_TableClassName="job_title_tDataTable" msprop:Generator_TableVarName="tablejob_title_t" msprop:Generator_RowChangedName="job_title_tRowChanged" msprop:Generator_TablePropName="job_title_t" msprop:Generator_RowDeletingName="job_title_tRowDeleting" msprop:Generator_RowChangingName="job_title_tRowChanging" msprop:Generator_RowEvHandlerName="job_title_tRowChangeEventHandler" msprop:Generator_RowDeletedName="job_title_tRowDeleted" msprop:Generator_RowClassName="job_title_tRow" msprop:Generator_UserTableName="job_title_t" msprop:Generator_RowEvArgName="job_title_tRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="NAME" msprop:Generator_ColumnVarNameInTable="columnNAME" msprop:Generator_ColumnPropNameInRow="NAME" msprop:Generator_ColumnPropNameInTable="NAMEColumn" msprop:Generator_UserColumnName="NAME" type="xs:double" />
@@ -51,6 +163,77 @@ ORDER BY NoOfTimes DESC</CommandText>
                 </xs:simpleType>
               </xs:element>
               <xs:element name="NoOfTimes" msprop:Generator_ColumnVarNameInTable="columnNoOfTimes" msprop:Generator_ColumnPropNameInRow="NoOfTimes" msprop:Generator_ColumnPropNameInTable="NoOfTimesColumn" msprop:Generator_UserColumnName="NoOfTimes" type="xs:long" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Employee" msprop:Generator_TableClassName="EmployeeDataTable" msprop:Generator_TableVarName="tableEmployee" msprop:Generator_RowChangedName="EmployeeRowChanged" msprop:Generator_TablePropName="Employee" msprop:Generator_RowDeletingName="EmployeeRowDeleting" msprop:Generator_RowChangingName="EmployeeRowChanging" msprop:Generator_RowEvHandlerName="EmployeeRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeeRowDeleted" msprop:Generator_RowClassName="EmployeeRow" msprop:Generator_UserTableName="Employee" msprop:Generator_RowEvArgName="EmployeeRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NAME" msprop:Generator_ColumnVarNameInTable="columnNAME" msprop:Generator_ColumnPropNameInRow="NAME" msprop:Generator_ColumnPropNameInTable="NAMEColumn" msprop:Generator_UserColumnName="NAME" type="xs:double" />
+              <xs:element name="positionName" msprop:Generator_ColumnVarNameInTable="columnpositionName" msprop:Generator_ColumnPropNameInRow="positionName" msprop:Generator_ColumnPropNameInTable="positionNameColumn" msprop:Generator_UserColumnName="positionName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NoOfTimes" msprop:Generator_ColumnVarNameInTable="columnNoOfTimes" msprop:Generator_ColumnPropNameInRow="NoOfTimes" msprop:Generator_ColumnPropNameInTable="NoOfTimesColumn" msprop:Generator_UserColumnName="NoOfTimes" type="xs:long" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="item_t" msprop:Generator_TableClassName="item_tDataTable" msprop:Generator_TableVarName="tableitem_t" msprop:Generator_TablePropName="item_t" msprop:Generator_RowDeletingName="item_tRowDeleting" msprop:Generator_RowChangingName="item_tRowChanging" msprop:Generator_RowEvHandlerName="item_tRowChangeEventHandler" msprop:Generator_RowDeletedName="item_tRowDeleted" msprop:Generator_UserTableName="item_t" msprop:Generator_RowChangedName="item_tRowChanged" msprop:Generator_RowEvArgName="item_tRowChangeEvent" msprop:Generator_RowClassName="item_tRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="itemName" msprop:Generator_ColumnVarNameInTable="columnitemName" msprop:Generator_ColumnPropNameInRow="itemName" msprop:Generator_ColumnPropNameInTable="itemNameColumn" msprop:Generator_UserColumnName="itemName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NoOfTimes" msprop:Generator_ColumnVarNameInTable="columnNoOfTimes" msprop:Generator_ColumnPropNameInRow="NoOfTimes" msprop:Generator_ColumnPropNameInTable="NoOfTimesColumn" msprop:Generator_UserColumnName="NoOfTimes" type="xs:long" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="services_t" msprop:Generator_TableClassName="services_tDataTable" msprop:Generator_TableVarName="tableservices_t" msprop:Generator_TablePropName="services_t" msprop:Generator_RowDeletingName="services_tRowDeleting" msprop:Generator_RowChangingName="services_tRowChanging" msprop:Generator_RowEvHandlerName="services_tRowChangeEventHandler" msprop:Generator_RowDeletedName="services_tRowDeleted" msprop:Generator_UserTableName="services_t" msprop:Generator_RowChangedName="services_tRowChanged" msprop:Generator_RowEvArgName="services_tRowChangeEvent" msprop:Generator_RowClassName="services_tRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="serviceName" msprop:Generator_ColumnVarNameInTable="columnserviceName" msprop:Generator_ColumnPropNameInRow="serviceName" msprop:Generator_ColumnPropNameInTable="serviceNameColumn" msprop:Generator_UserColumnName="serviceName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NoOfTimes" msprop:Generator_ColumnVarNameInTable="columnNoOfTimes" msprop:Generator_ColumnPropNameInRow="NoOfTimes" msprop:Generator_ColumnPropNameInTable="NoOfTimesColumn" msprop:Generator_UserColumnName="NoOfTimes" type="xs:long" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="cust_supp_t" msprop:Generator_TableClassName="cust_supp_tDataTable" msprop:Generator_TableVarName="tablecust_supp_t" msprop:Generator_TablePropName="cust_supp_t" msprop:Generator_RowDeletingName="cust_supp_tRowDeleting" msprop:Generator_RowChangingName="cust_supp_tRowChanging" msprop:Generator_RowEvHandlerName="cust_supp_tRowChangeEventHandler" msprop:Generator_RowDeletedName="cust_supp_tRowDeleted" msprop:Generator_UserTableName="cust_supp_t" msprop:Generator_RowChangedName="cust_supp_tRowChanged" msprop:Generator_RowEvArgName="cust_supp_tRowChangeEvent" msprop:Generator_RowClassName="cust_supp_tRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="companyName" msprop:Generator_ColumnVarNameInTable="columncompanyName" msprop:Generator_ColumnPropNameInRow="companyName" msprop:Generator_ColumnPropNameInTable="companyNameColumn" msprop:Generator_UserColumnName="companyName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NoOfTransaction" msprop:Generator_ColumnVarNameInTable="columnNoOfTransaction" msprop:Generator_ColumnPropNameInRow="NoOfTransaction" msprop:Generator_ColumnPropNameInTable="NoOfTransactionColumn" msprop:Generator_UserColumnName="NoOfTransaction" type="xs:long" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="supplier" msprop:Generator_TableClassName="supplierDataTable" msprop:Generator_TableVarName="tablesupplier" msprop:Generator_TablePropName="supplier" msprop:Generator_RowDeletingName="supplierRowDeleting" msprop:Generator_RowChangingName="supplierRowChanging" msprop:Generator_RowEvHandlerName="supplierRowChangeEventHandler" msprop:Generator_RowDeletedName="supplierRowDeleted" msprop:Generator_UserTableName="supplier" msprop:Generator_RowChangedName="supplierRowChanged" msprop:Generator_RowEvArgName="supplierRowChangeEvent" msprop:Generator_RowClassName="supplierRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="companyName" msprop:Generator_ColumnVarNameInTable="columncompanyName" msprop:Generator_ColumnPropNameInRow="companyName" msprop:Generator_ColumnPropNameInTable="companyNameColumn" msprop:Generator_UserColumnName="companyName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NoOfTransaction" msprop:Generator_ColumnVarNameInTable="columnNoOfTransaction" msprop:Generator_ColumnPropNameInRow="NoOfTransaction" msprop:Generator_ColumnPropNameInTable="NoOfTransactionColumn" msprop:Generator_UserColumnName="NoOfTransaction" type="xs:long" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

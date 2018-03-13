@@ -8,18 +8,11 @@
              d:DesignHeight="292.962" d:DesignWidth="420.528" Width="600" Height="400">
     <UserControl.Resources>
         <local:IdToNameConverter x:Key="IdToNameConverter" />
+        <local:QueriesDataSet x:Key="queriesDataSet"/>
+        <CollectionViewSource x:Key="cust_supp_tViewSource" Source="{Binding cust_supp_t, Source={StaticResource queriesDataSet}}"/>
     </UserControl.Resources>
-    <Grid Background="#FFF7F6F6" Margin="4,0,0,0">
+    <Grid Background="#FFF7F6F6" Margin="4,0,0,0" DataContext="{StaticResource cust_supp_tViewSource}">
         <Label Content="Most Loyal Customers" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <DataGrid x:Name="LoyalCustDataGrid" HorizontalAlignment="Left" Height="315" Margin="10,75,0,0" VerticalAlignment="Top" Width="576" AutoGenerateColumns="False"  ItemsSource="{Binding Path=LoadDataBinding}">
-
-            <DataGrid.Columns>
-
-                <DataGridTextColumn Binding="{Binding Path=c.companyName}" Header="Company Name" Width="415" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Path=NoTimesCust}" Header="Total No. of Transactions" Width="170" IsReadOnly="True"/>
-
-            </DataGrid.Columns>
-        </DataGrid>
         <Label Content="Sort by:" HorizontalAlignment="Left" Margin="407,34,0,0" VerticalAlignment="Top" FontSize="11"/>
         <ComboBox x:Name="comboBoxLoyal" HorizontalAlignment="Left" Margin="458,35,0,0" VerticalAlignment="Top" Width="120" FontSize="11">
             <ComboBoxItem Content="Daily"/>
@@ -27,5 +20,11 @@
             <ComboBoxItem Content="Monthly"/>
             <ComboBoxItem Content="Yearly"/>
         </ComboBox>
+        <DataGrid x:Name="cust_supp_tDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,84,18,10" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn  Binding="{Binding companyName}" Header="company Name" Width="400"/>
+                <DataGridTextColumn  Binding="{Binding NoOfTransaction}" Header="No Of Transaction" Width="200"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>
