@@ -131,6 +131,7 @@ namespace prototype2
         {
             if(MainVM.SelectedSalesQuote != null)
             {
+                MainVM.RequestedItems.Clear();
                 MainVM.VatableSale = 0;
                 MainVM.TotalSalesWithOutDp = 0;
 
@@ -151,7 +152,8 @@ namespace prototype2
                                       && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
                                       select itm;
                     decimal totalPric = ai.ItemQty * ( ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc));
-                    MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, unitPrice = ai.UnitPrice, totalAmount = totalPric });
+                    decimal unitPric = (ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc));
+                    MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, unitPrice = unitPric, totalAmount = totalPric });
                     MainVM.VatableSale += totalPric;
                 }
 

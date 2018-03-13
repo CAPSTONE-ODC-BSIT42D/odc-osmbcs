@@ -32,11 +32,11 @@ namespace prototype2
         }
 
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
-        public static readonly BackgroundWorker workerAtServiceSched = new BackgroundWorker();
 
         public event EventHandler SaveCloseButtonClicked;
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
+            MainVM.resetValueofVariables();
             var handler = SaveCloseButtonClicked;
             if (handler != null)
                 handler(this, e);
@@ -60,7 +60,7 @@ namespace prototype2
 
         void loadDataToUi()
         {
-            if (MainVM.isEdit)
+            if (!MainVM.isNewSched)
             {
                 MainVM.SelectedAvailedServices = MainVM.AvailedServices.Where(x => x.AvailedServiceID == MainVM.SelectedServiceSchedule_.ServiceAvailedID).FirstOrDefault();
                 var dbCon = DBConnection.Instance();
@@ -78,7 +78,7 @@ namespace prototype2
                 endDate.SelectedDate = MainVM.SelectedServiceSchedule_.dateEnded_;
                 notesTb.Text = MainVM.SelectedServiceSchedule_.schedNotes_;
             }
-            else
+            else if(MainVM.SelectedAvailedServices !=null)
             {
                 MainVM.SelectedServiceSchedule_ = new ServiceSchedule();
                 var obj = from ph in MainVM.Phases
