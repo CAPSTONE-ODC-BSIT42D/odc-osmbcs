@@ -1824,6 +1824,76 @@ namespace prototype2
             //}
         }
 
-        
+        private void QueiresConBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.resetValueofVariables();
+            foreach (UIElement obj in containerGrid.Children)
+            {
+                if (containerGrid.Children.IndexOf(obj) == 5)
+                {
+
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+            foreach (UIElement obj in queriesGrid.Children)
+            {
+                if (queriesGrid.Children.IndexOf(obj) == 1)
+                {
+                    headerLbl.Content = "Queires - Frequent Contractor";
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+            closeAllOtherGridForm();
+        }
+
+        private void QueiresEmpBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.resetValueofVariables();
+            foreach (UIElement obj in containerGrid.Children)
+            {
+                if (containerGrid.Children.IndexOf(obj) == 5)
+                {
+
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+            foreach (UIElement obj in queriesGrid.Children)
+            {
+                if (queriesGrid.Children.IndexOf(obj) == 2)
+                {
+                    headerLbl.Content = "Queires - Frequent Employee";
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+            closeAllOtherGridForm();
+        }
+
+        private void QueiresItems_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void QueiresService_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void QueiresCustomer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void QueiresSupplier_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

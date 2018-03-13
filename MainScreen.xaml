@@ -585,17 +585,17 @@
                             <Canvas x:Name="g44d2"/>
                             <Canvas x:Name="g46d2"/>
                         </Canvas>
-                        <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Reports" Margin="15,0,0,0" Padding="0" VerticalAlignment="Center" Width="50"/>
+                        <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Queries" Margin="15,0,0,0" Padding="0" VerticalAlignment="Center" Width="50"/>
                     </StackPanel>
                 </Button>
                 <StackPanel x:Name="queriesSubMenuBtn" Margin="0" Orientation="Vertical">
-                    <Button x:Name="availedItemBtn" Content="Sales Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0,0,0,5" Click="salesReportBtn_Click"/>
-                    <Button x:Name="purchasedItemBtn" Content="Purchase Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="purchaseReportBtn_Click"/>
-                    <Button x:Name="availedServiceBtn" Content="Service Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="serviceReportBtn_Click"/>
-                    <Button x:Name="topSuppliersBtn" Content="Service Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="serviceReportBtn_Click"/>
-                    <Button x:Name="quotedItemsBtn" Content="Service Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="serviceReportBtn_Click"/>
-                    <Button x:Name="quotedServiceBtn" Content="Service Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="serviceReportBtn_Click"/>
-                    <Button x:Name="loyalCustomerBtn" Content="Service Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="serviceReportBtn_Click"/>
+                    <Button x:Name="contractorBtn" Content="FREQUENTLY ASSIGNED CONTRACTORS " VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="242" Margin="0,0,0,5" Click= "QueiresConBtn_Click"/>
+                    <Button x:Name="employeeBtn" Content="FREQUENT ASSIGNED EMPLOYEES" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="QueiresEmpBtn_Click"/>
+                    <Button x:Name="itemsBtn" Content="MOST AVAILED ITEMS" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="QueiresItems_Click"/>
+
+                    <Button x:Name="ServiceBtn" Content="MOST AVAILED SERVICE" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="QueiresService_Click"/>
+                    <Button x:Name="customerBtn" Content="MOST LOYAL CUSTOMERS" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="QueiresCustomer_Click"/>
+                    <Button x:Name="SupplierBtn" Content="TOP SUPPLIERS" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="QueiresSupplier_Click"/>
                 </StackPanel>
                 <Button x:Name="manageBtn" Margin="0,5,0,0" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" Height="45" VerticalAlignment="Top" Click="manageBtn_Click" HorizontalContentAlignment="Center">
                     <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
@@ -1453,13 +1453,16 @@
                 </Grid>
                 <local:ucServiceSchedule x:Name="ucService" Margin="0" Visibility="Collapsed" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="reportsGrid">
+            <Grid x:Name="reportsGrid" d:IsHidden="True">
                 <local:ucReportSales x:Name="ucReportSales"  Height="Auto" Margin="0" Width="Auto" d:IsHidden="True"/>
                 <local:ucReportPurchase x:Name="ucReportPurchase" Height="Auto" Margin="0" Width="Auto" d:IsHidden="True"/>
                 <local:ucReportService x:Name="ucReportService" HorizontalAlignment="Left" Height="703" VerticalAlignment="Top" Width="888" d:IsHidden="True"/>
 
             </Grid>
-            <Grid x:Name="queriesGrid" d:IsHidden="True"/>
+            <Grid x:Name="queriesGrid">
+                <local:ucFreqEmp HorizontalAlignment="Left" Height="498" VerticalAlignment="Top" Width="898"/>
+
+            </Grid>
 
             <Grid x:Name="maintenanceGrid" d:IsHidden="True">
                 <Grid x:Name="manageCustomerGrid" Margin="0,0,1,0" >
