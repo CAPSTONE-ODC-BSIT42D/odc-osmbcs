@@ -326,6 +326,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="classes\TextBoxValidation.cs" />
+    <Compile Include="QueriesDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QueriesDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="uControlsMaintenance\ucAddPhase.xaml.cs">
       <DependentUpon>ucAddPhase.xaml</DependentUpon>
@@ -698,6 +703,17 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="QueriesDataSet.xsc">
+      <DependentUpon>QueriesDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="QueriesDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>QueriesDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="QueriesDataSet.xss">
+      <DependentUpon>QueriesDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

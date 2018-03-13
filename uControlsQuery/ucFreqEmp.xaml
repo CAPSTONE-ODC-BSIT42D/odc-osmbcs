@@ -5,19 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:prototype2"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="596">
-    <Grid Background="#FFF7F6F6">
+             d:DesignHeight="400" d:DesignWidth="596" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <local:QueriesDataSet x:Key="queriesDataSet"/>
+        <CollectionViewSource x:Key="job_title_tViewSource" Source="{Binding job_title_t, Source={StaticResource queriesDataSet}}"/>
+        <CollectionViewSource x:Key="employeeViewSource" Source="{Binding Employee, Source={StaticResource queriesDataSet}}"/>
+    </UserControl.Resources>
+    <Grid Background="#FFF7F6F6" DataContext="{StaticResource job_title_tViewSource}">
         <Label Content="Frequently Assigned Employees" HorizontalAlignment="Left" Margin="0,0,0,369" FontWeight="Bold" FontSize="16" Width="251"/>
-        <DataGrid x:Name="FreqEmpDataGrid" HorizontalAlignment="Left" Height="319" Margin="10,71,0,0" VerticalAlignment="Top" Width="576" AutoGenerateColumns="False"  ItemsSource="{Binding Path=LoadDataBinding}">
-        <DataGrid.Columns>
-
-                <DataGridTextColumn Binding="{Binding Path=EmpName}" Header="Name of Employee" Width="180" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Path=p.positionName}" Header="Position" Width="150" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Path=NoTimesEmp}" Header="No. of Times Assigned" Width="130" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Path=ServiceName}" Header="Service Name" Width="130" IsReadOnly="True"/>
-
-            </DataGrid.Columns>
-        </DataGrid>
         <Label Content="Sort by:" HorizontalAlignment="Left" Margin="407,34,0,0" VerticalAlignment="Top" FontSize="11"/>
         <ComboBox x:Name="comboBoxFreqEmp" HorizontalAlignment="Left" Margin="458,35,0,0" VerticalAlignment="Top" Width="120" FontSize="11">
             <ComboBoxItem Content="Daily"/>
@@ -25,5 +20,12 @@
             <ComboBoxItem Content="Monthly"/>
             <ComboBoxItem Content="Yearly"/>
         </ComboBox>
+        <DataGrid x:Name="employeeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource employeeViewSource}}" Margin="10,81,10,6" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn  Binding="{Binding NAME}" Header="NAME" Width="200"/>
+                <DataGridTextColumn  Binding="{Binding positionName}" Header="position Name" Width="200"/>
+                <DataGridTextColumn  Binding="{Binding NoOfTimes}" Header="No Of Times assigned" Width="200"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

@@ -5,18 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:prototype2"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Width="596" Height="400">
-    <Grid Background="WhiteSmoke">
+             d:DesignHeight="300" d:DesignWidth="300" Width="596" Height="400" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <local:QueriesDataSet x:Key="queriesDataSet"/>
+        <CollectionViewSource x:Key="supplierViewSource" Source="{Binding supplier, Source={StaticResource queriesDataSet}}"/>
+    </UserControl.Resources>
+    <Grid Background="WhiteSmoke" DataContext="{StaticResource supplierViewSource}">
         <Label Content="Most Reliable Suplier" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <DataGrid x:Name="mostSupplierDataGrid" HorizontalAlignment="Left" Height="316" Margin="10,74,0,0" VerticalAlignment="Top" Width="576" AutoGenerateColumns="False"  ItemsSource="{Binding Path=LoadDataBinding}">
-        <DataGrid.Columns>
-
-                <DataGridTextColumn Binding="{Binding Path=c.companyName}" Header="Supplier Name" Width="220" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Path=i.itemName}" Header="Items" Width="200" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Path=NoTimesSupp}" Header="No. of Times Availed" Width="170" IsReadOnly="True"/>
-
-            </DataGrid.Columns>
-        </DataGrid>
         <Label Content="Sort by:" HorizontalAlignment="Left" Margin="407,34,0,0" VerticalAlignment="Top" FontSize="11"/>
         <ComboBox x:Name="comboBoxMostSupplier" HorizontalAlignment="Left" Margin="458,35,0,0" VerticalAlignment="Top" Width="120" FontSize="11">
             <ComboBoxItem Content="Daily"/>
@@ -24,5 +19,11 @@
             <ComboBoxItem Content="Monthly"/>
             <ComboBoxItem Content="Yearly"/>
         </ComboBox>
+        <DataGrid x:Name="supplierDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,86,10,28" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn  Binding="{Binding companyName}" Header="company Name" Width="400"/>
+                <DataGridTextColumn  Binding="{Binding NoOfTransaction}" Header="No Of Transaction" Width="200"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>
