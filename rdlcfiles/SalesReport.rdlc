@@ -662,10 +662,6 @@
           <DataField>TOTAL_ITEM</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
-        <Field Name="dateOfIssue">
-          <DataField>dateOfIssue</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DatasetReportSales</rd:DataSetName>

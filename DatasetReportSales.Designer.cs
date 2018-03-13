@@ -582,8 +582,6 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columnTOTAL_ITEM;
             
-            private global::System.Data.DataColumn columndateOfIssue;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public SalesItemDataTable() {
@@ -635,14 +633,6 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn dateOfIssueColumn {
-                get {
-                    return this.columndateOfIssue;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -678,12 +668,11 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public SalesItemRow AddSalesItemRow(string itemName, decimal TOTAL_ITEM, System.DateTime dateOfIssue) {
+            public SalesItemRow AddSalesItemRow(string itemName, decimal TOTAL_ITEM) {
                 SalesItemRow rowSalesItemRow = ((SalesItemRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         itemName,
-                        TOTAL_ITEM,
-                        dateOfIssue};
+                        TOTAL_ITEM};
                 rowSalesItemRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSalesItemRow);
                 return rowSalesItemRow;
@@ -708,7 +697,6 @@ namespace prototype2 {
             internal void InitVars() {
                 this.columnitemName = base.Columns["itemName"];
                 this.columnTOTAL_ITEM = base.Columns["TOTAL_ITEM"];
-                this.columndateOfIssue = base.Columns["dateOfIssue"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -718,11 +706,8 @@ namespace prototype2 {
                 base.Columns.Add(this.columnitemName);
                 this.columnTOTAL_ITEM = new global::System.Data.DataColumn("TOTAL_ITEM", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTOTAL_ITEM);
-                this.columndateOfIssue = new global::System.Data.DataColumn("dateOfIssue", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndateOfIssue);
                 this.columnitemName.AllowDBNull = false;
                 this.columnitemName.MaxLength = 255;
-                this.columndateOfIssue.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -924,17 +909,6 @@ namespace prototype2 {
                 }
                 set {
                     this[this.tableSalesItem.TOTAL_ITEMColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public System.DateTime dateOfIssue {
-                get {
-                    return ((global::System.DateTime)(this[this.tableSalesItem.dateOfIssueColumn]));
-                }
-                set {
-                    this[this.tableSalesItem.dateOfIssueColumn] = value;
                 }
             }
             
@@ -1537,7 +1511,6 @@ WHERE        (YEAR(si.dateOfIssue) = @B)";
             tableMapping.DataSetTable = "SalesItem";
             tableMapping.ColumnMappings.Add("itemName", "itemName");
             tableMapping.ColumnMappings.Add("TOTAL_ITEM", "TOTAL_ITEM");
-            tableMapping.ColumnMappings.Add("dateOfIssue", "dateOfIssue");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -1554,7 +1527,7 @@ WHERE        (YEAR(si.dateOfIssue) = @B)";
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[6];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        i.itemName, si.dateOfIssue, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) 
+            this._commandCollection[0].CommandText = @"SELECT        i.itemName, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) 
                          + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) * (IFNULL(si.sc_pwd_discount, 0) / 100)) AS TOTAL_ITEM
 FROM            sales_quote_t sq INNER JOIN
                          items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN

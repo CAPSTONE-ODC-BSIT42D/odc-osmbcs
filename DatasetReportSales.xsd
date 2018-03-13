@@ -107,10 +107,10 @@ WHERE        (YEAR(si.dateOfIssue) = @B)</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SalesItemTableAdapter" GeneratorDataComponentClassName="SalesItemTableAdapter" Name="SalesItem" UserDataComponentName="SalesItemTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBySalesReport" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataBySalesReport" GeneratorSourceName="FillBySalesReport" GetMethodModifier="Public" GetMethodName="GetDataBySalesReport" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataBySalesReport" UserSourceName="FillBySalesReport">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.item_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBySalesReport" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataBySalesReport" GeneratorSourceName="FillBySalesReport" GetMethodModifier="Public" GetMethodName="GetDataBySalesReport" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataBySalesReport" UserSourceName="FillBySalesReport">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        i.itemName, si.dateOfIssue, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) 
+                    <CommandText>SELECT        i.itemName, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) 
                          + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) * (IFNULL(si.sc_pwd_discount, 0) / 100)) AS TOTAL_ITEM
 FROM            sales_quote_t sq INNER JOIN
                          items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN
@@ -126,7 +126,6 @@ GROUP BY i.itemName</CommandText>
             <Mappings>
               <Mapping SourceColumn="itemName" DataSetColumn="itemName" />
               <Mapping SourceColumn="TOTAL_ITEM" DataSetColumn="TOTAL_ITEM" />
-              <Mapping SourceColumn="dateOfIssue" DataSetColumn="dateOfIssue" />
             </Mappings>
             <Sources>
               <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.item_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBySalesMonthReport" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySalesMonthReport" GeneratorSourceName="FillBySalesMonthReport" GetMethodModifier="Public" GetMethodName="GetDataBySalesMonthReport" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySalesMonthReport" UserSourceName="FillBySalesMonthReport">
@@ -253,7 +252,6 @@ GROUP BY i.itemName</CommandText>
                 </xs:simpleType>
               </xs:element>
               <xs:element name="TOTAL_ITEM" msprop:Generator_ColumnVarNameInTable="columnTOTAL_ITEM" msprop:Generator_ColumnPropNameInRow="TOTAL_ITEM" msprop:Generator_ColumnPropNameInTable="TOTAL_ITEMColumn" msprop:Generator_UserColumnName="TOTAL_ITEM" type="xs:decimal" minOccurs="0" />
-              <xs:element name="dateOfIssue" msprop:Generator_ColumnVarNameInTable="columndateOfIssue" msprop:Generator_ColumnPropNameInRow="dateOfIssue" msprop:Generator_ColumnPropNameInTable="dateOfIssueColumn" msprop:Generator_UserColumnName="dateOfIssue" type="xs:dateTime" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
