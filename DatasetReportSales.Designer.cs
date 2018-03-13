@@ -1582,13 +1582,15 @@ GROUP BY i.itemName";
             this._commandCollection[2].Parameters.Add(param);
             this._commandCollection[3] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = @"SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM
+            this._commandCollection[3].CommandText = @"SELECT        i.itemName, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) 
+                         + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) * (IFNULL(si.sc_pwd_discount, 0) / 100)) AS TOTAL_ITEM
 FROM            sales_quote_t sq INNER JOIN
                          items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN
                          item_t i ON ia.itemID = i.ID INNER JOIN
                          markup_hist_t mh ON i.ID = mh.itemID INNER JOIN
                          sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
-WHERE        (DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE())";
+WHERE        (DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE())
+GROUP BY i.itemName";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[4] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[4].Connection = this.Connection;

@@ -165,16 +165,18 @@ GROUP BY i.itemName</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBySalesReportDay" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBySalesReportDay" GeneratorSourceName="FillBySalesReportDay" GetMethodModifier="Public" GetMethodName="GetDataByBySalesReportDay" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBySalesReportDay" UserSourceName="FillBySalesReportDay">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.item_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBySalesReportDay" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBySalesReportDay" GeneratorSourceName="FillBySalesReportDay" GetMethodModifier="Public" GetMethodName="GetDataByBySalesReportDay" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBySalesReportDay" UserSourceName="FillBySalesReportDay">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        i.itemName, si.dateOfIssue, ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) AS TOTAL_ITEM
+                    <CommandText>SELECT        i.itemName, SUM((IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(si.withholdingTax, 0) + IFNULL(si.vat, 0) 
+                         + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) * (IFNULL(si.sc_pwd_discount, 0) / 100)) AS TOTAL_ITEM
 FROM            sales_quote_t sq INNER JOIN
                          items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN
                          item_t i ON ia.itemID = i.ID INNER JOIN
                          markup_hist_t mh ON i.ID = mh.itemID INNER JOIN
                          sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
-WHERE        (DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE())</CommandText>
+WHERE        (DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE())
+GROUP BY i.itemName</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -225,7 +227,7 @@ GROUP BY i.itemName</CommandText>
   <xs:element name="DatasetReportSales" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DatasetReportSales" msprop:Generator_UserDSName="DatasetReportSales">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="services_t" msprop:Generator_TableClassName="services_tDataTable" msprop:Generator_TableVarName="tableservices_t" msprop:Generator_TablePropName="services_t" msprop:Generator_RowDeletingName="services_tRowDeleting" msprop:Generator_RowChangingName="services_tRowChanging" msprop:Generator_RowEvHandlerName="services_tRowChangeEventHandler" msprop:Generator_RowDeletedName="services_tRowDeleted" msprop:Generator_UserTableName="services_t" msprop:Generator_RowChangedName="services_tRowChanged" msprop:Generator_RowEvArgName="services_tRowChangeEvent" msprop:Generator_RowClassName="services_tRow">
+        <xs:element name="services_t" msprop:Generator_TableClassName="services_tDataTable" msprop:Generator_TableVarName="tableservices_t" msprop:Generator_RowChangedName="services_tRowChanged" msprop:Generator_TablePropName="services_t" msprop:Generator_RowDeletingName="services_tRowDeleting" msprop:Generator_RowChangingName="services_tRowChanging" msprop:Generator_RowEvHandlerName="services_tRowChangeEventHandler" msprop:Generator_RowDeletedName="services_tRowDeleted" msprop:Generator_RowClassName="services_tRow" msprop:Generator_UserTableName="services_t" msprop:Generator_RowEvArgName="services_tRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="serviceName" msprop:Generator_ColumnVarNameInTable="columnserviceName" msprop:Generator_ColumnPropNameInRow="serviceName" msprop:Generator_ColumnPropNameInTable="serviceNameColumn" msprop:Generator_UserColumnName="serviceName">
@@ -239,7 +241,7 @@ GROUP BY i.itemName</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="SalesItem" msprop:Generator_TableClassName="SalesItemDataTable" msprop:Generator_TableVarName="tableSalesItem" msprop:Generator_TablePropName="SalesItem" msprop:Generator_RowDeletingName="SalesItemRowDeleting" msprop:Generator_RowChangingName="SalesItemRowChanging" msprop:Generator_RowEvHandlerName="SalesItemRowChangeEventHandler" msprop:Generator_RowDeletedName="SalesItemRowDeleted" msprop:Generator_UserTableName="SalesItem" msprop:Generator_RowChangedName="SalesItemRowChanged" msprop:Generator_RowEvArgName="SalesItemRowChangeEvent" msprop:Generator_RowClassName="SalesItemRow">
+        <xs:element name="SalesItem" msprop:Generator_TableClassName="SalesItemDataTable" msprop:Generator_TableVarName="tableSalesItem" msprop:Generator_RowChangedName="SalesItemRowChanged" msprop:Generator_TablePropName="SalesItem" msprop:Generator_RowDeletingName="SalesItemRowDeleting" msprop:Generator_RowChangingName="SalesItemRowChanging" msprop:Generator_RowEvHandlerName="SalesItemRowChangeEventHandler" msprop:Generator_RowDeletedName="SalesItemRowDeleted" msprop:Generator_RowClassName="SalesItemRow" msprop:Generator_UserTableName="SalesItem" msprop:Generator_RowEvArgName="SalesItemRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="itemName" msprop:Generator_ColumnVarNameInTable="columnitemName" msprop:Generator_ColumnPropNameInRow="itemName" msprop:Generator_ColumnPropNameInTable="itemNameColumn" msprop:Generator_UserColumnName="itemName">
