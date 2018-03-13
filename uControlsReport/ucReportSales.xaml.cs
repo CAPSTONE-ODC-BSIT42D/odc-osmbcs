@@ -95,9 +95,7 @@ namespace prototype2
     
         private void DisplayReportSalesDay()
         {
-            ReportSales.Reset();
-
-
+          
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
 
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItemDay()));
@@ -145,8 +143,7 @@ namespace prototype2
         }
         private void DisplayReportSalesWeek()
         {
-            ReportSales.Reset();
-
+       
 
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
 
@@ -197,8 +194,7 @@ namespace prototype2
 
         private void DisplayReportSalesMonth()
         {
-            ReportSales.Reset();
-
+           
 
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
 
@@ -246,8 +242,7 @@ namespace prototype2
         }
         private void DisplayReportSalesYear()
         {
-            ReportSales.Reset();
-
+       
 
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
 
@@ -297,9 +292,7 @@ namespace prototype2
         }
         private void DisplayReportSalesRange()
         {
-            ReportSales.Reset();
-
-
+       
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
 
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItemRange()));
@@ -350,7 +343,7 @@ namespace prototype2
         {
             if (ComboBoxItemFilter.SelectedIndex == 0)
             {
-                DisplayReportSalesDay();
+                ReportSales.Reset();
                 ItemWeek.Visibility = Visibility.Hidden;
                 ComboBoxItemYear.Visibility = Visibility.Hidden;
                 ComboBoxItemMonth.Visibility = Visibility.Hidden;
@@ -366,7 +359,7 @@ namespace prototype2
             }
             if (ComboBoxItemFilter.SelectedIndex == 1)
             {
-                
+                ReportSales.Reset();
                 ComboBoxItemYear.Visibility = Visibility.Hidden;
                 ComboBoxItemMonth.Visibility = Visibility.Hidden;
                 MonthItem.Visibility = Visibility.Hidden;
@@ -381,6 +374,7 @@ namespace prototype2
             }
             if (ComboBoxItemFilter.SelectedIndex == 2)
             {
+                ReportSales.Reset();
                 ItemWeek.Visibility = Visibility.Hidden;
                 DatePickerItemWeek.Visibility = Visibility.Hidden;
                 ComboBoxItemYear.Visibility = Visibility.Hidden;
@@ -395,6 +389,7 @@ namespace prototype2
             }
             if (ComboBoxItemFilter.SelectedIndex == 3)
             {
+                ReportSales.Reset();
                 ItemWeek.Visibility = Visibility.Hidden;
                 DatePickerItemWeek.Visibility = Visibility.Hidden;
                 ComboBoxItemYear.Visibility = Visibility.Visible;

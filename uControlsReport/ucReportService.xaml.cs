@@ -91,7 +91,7 @@ namespace prototype2
         } 
         private void DisplayReportDayService()
         {
-            ReportService.Reset();
+           
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
             ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("ServiceTable", GetServiceDay()));
             ReportService.LoadReport(rNames);
@@ -118,7 +118,7 @@ namespace prototype2
         }
         private void DisplayReportWeekService()
         {
-            ReportService.Reset();
+          
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
             ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("ServiceTable", GetServiceWeek()));
             ReportService.LoadReport(rNames);
@@ -145,7 +145,7 @@ namespace prototype2
         private void DisplayReportMonthService()
         {
 
-            ReportService.Reset();
+           
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
             ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("ServiceTable", GetServiceMonth()));
             ReportService.LoadReport(rNames);
@@ -173,7 +173,7 @@ namespace prototype2
         }
         private void DisplayReportYearService()
         {
-            ReportService.Reset();
+           
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
             ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("ServiceTable", GetServiceYear()));
             ReportService.LoadReport(rNames);
@@ -200,7 +200,7 @@ namespace prototype2
         }
         private void DisplayReportRangeService()
         {
-            ReportService.Reset();
+          
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
             ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("ServiceTable", GetServiceRange()));
             ReportService.LoadReport(rNames);
@@ -214,7 +214,7 @@ namespace prototype2
             if (SELECTEDINDEX.Equals(0))
             {
 
-                DisplayReportDayService();
+                ReportService.Reset();
                 WeekDate.Visibility = Visibility.Hidden;
                 ComboBoxYear.Visibility = Visibility.Hidden;
                 ComboBoxSerMonth.Visibility = Visibility.Hidden;
@@ -232,7 +232,7 @@ namespace prototype2
             if (SELECTEDINDEX.Equals(1))
             {
 
-              DisplayReportWeekService(); 
+                ReportService.Reset();
                 ComboBoxYear.Visibility = Visibility.Hidden;
                 ComboBoxSerMonth.Visibility = Visibility.Hidden;
                 monthSer.Visibility = Visibility.Hidden;
@@ -247,6 +247,7 @@ namespace prototype2
             }
             if (SELECTEDINDEX.Equals(2))
             {
+                ReportService.Reset();
                 WeekDate.Visibility = Visibility.Hidden;
                 DatePickerWeekSer.Visibility = Visibility.Hidden;
                 ComboBoxYear.Visibility = Visibility.Hidden;
@@ -261,6 +262,7 @@ namespace prototype2
             }
             if (SELECTEDINDEX.Equals(3))
             {
+                ReportService.Reset();
                 WeekDate.Visibility = Visibility.Hidden;
                 DatePickerWeekSer.Visibility = Visibility.Hidden;
                 ComboBoxYear.Visibility = Visibility.Visible;
@@ -276,6 +278,7 @@ namespace prototype2
             }
             if (SELECTEDINDEX.Equals(4))
             {
+                ReportService.Reset();
                 WeekDate.Visibility = Visibility.Hidden;
                 DatePickerWeekSer.Visibility = Visibility.Hidden;
                 ComboBoxYear.Visibility = Visibility.Hidden;
