@@ -27,6 +27,7 @@ namespace prototype2
         public ucReportPurchase()
         {
             InitializeComponent();
+            
             //DisplayReport();
         }
         private void DisplayReport()
@@ -66,7 +67,7 @@ namespace prototype2
         private void DisplayReportSalesDay()
         {
 
-            ReportPurchase.Reset();
+            
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
             ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("PurchaseTable", GetPurchaseDay()));
             ReportPurchase.LoadReport(rNames);
@@ -92,11 +93,11 @@ namespace prototype2
             return dSPurchase;
 
 
+
         }
         private void DisplayReportPurchaseWeek()
         {
-
-            ReportPurchase.Reset();
+            
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
             ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("PurchaseTable", GetPurchaseWeek()));
             ReportPurchase.LoadReport(rNames);
@@ -125,7 +126,7 @@ namespace prototype2
         }
         private void DisplayReportPurchaseYear()
         {
-            ReportPurchase.Reset();
+   
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
             ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("PurchaseTable", GetPurchaseYear()));
             ReportPurchase.LoadReport(rNames);
@@ -155,6 +156,7 @@ namespace prototype2
         }
         private void DisplayReportPurchaseMonth()
         {
+
             ReportPurchase.Reset();
 
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
@@ -163,7 +165,7 @@ namespace prototype2
             ReportPurchase.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ReportPurchase.RefreshReport();
 
-            ReportPurchase.Visibility =Visibility;
+        
         }
 
         private DataTable GetPurchaseMonth()
@@ -190,7 +192,7 @@ namespace prototype2
         }
         private void DisplayReportPurchaseRange()
         {
-            ReportPurchase.Reset();
+    
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
             ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("PurchaseTable", GetPurchaseRange()));
             ReportPurchase.LoadReport(rNames);
@@ -230,27 +232,21 @@ namespace prototype2
             }
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ComboBoxSalesFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+            
         {
+           
             Object SELECTEDINDEX = ComboBoxSalesFilter.SelectedIndex;
             if (SELECTEDINDEX.Equals(0))
             {
-                DisplayReportSalesDay();
-                ComboBoxYearSales.Visibility = Visibility.Hidden;
-                ComboBoxMonthSales.Visibility = Visibility.Hidden;
-                MonthSales.Visibility = Visibility.Hidden;
-                YearSales.Visibility = Visibility.Hidden;
-                SalesDateStart.Visibility = Visibility.Hidden;
-                SalesDateEnd.Visibility = Visibility.Hidden;
-                labelstart.Visibility = Visibility.Hidden;
-                labelend.Visibility = Visibility.Hidden;
-                SalesWeek.Visibility = Visibility.Hidden;
-                labelweek.Visibility = Visibility.Hidden;
+                ReportPurchase.Reset();
+
 
             }
             if (SELECTEDINDEX.Equals(1))
 
             {
+                ReportPurchase.Reset();
                 ComboBoxYearSales.Visibility = Visibility.Hidden;
                 ComboBoxMonthSales.Visibility = Visibility.Hidden;
                 MonthSales.Visibility = Visibility.Hidden;
@@ -265,7 +261,7 @@ namespace prototype2
             }
             if (SELECTEDINDEX.Equals(2))
             {
-
+                ReportPurchase.Reset();
                 ComboBoxYearSales.Visibility = Visibility.Hidden;
                 ComboBoxMonthSales.Visibility = Visibility.Visible;
                 MonthSales.Visibility = Visibility.Visible;
@@ -279,6 +275,7 @@ namespace prototype2
             }
             if (SELECTEDINDEX.Equals(3))
             {
+                ReportPurchase.Reset();
                 ComboBoxYearSales.Visibility = Visibility.Visible;
                 ComboBoxMonthSales.Visibility = Visibility.Hidden;
                 MonthSales.Visibility = Visibility.Hidden;
@@ -293,6 +290,7 @@ namespace prototype2
             }
             if (SELECTEDINDEX.Equals(4))
             {
+                ReportPurchase.Reset();
                 ComboBoxYearSales.Visibility = Visibility.Hidden;
                 ComboBoxMonthSales.Visibility = Visibility.Hidden;
                 MonthSales.Visibility = Visibility.Hidden;
@@ -310,10 +308,9 @@ namespace prototype2
 
         private void ComboBoxMonthSales_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+    
 
-            DisplayReportPurchaseMonth();
         }
-
         private void ComboBoxYearSales_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DisplayReportPurchaseYear();
@@ -330,6 +327,94 @@ namespace prototype2
         private void DatePickerWeekSales_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             DisplayReportPurchaseWeek();
+        }
+
+        private void ComboBoxMonthSales_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
+            DisplayReportPurchaseMonth();
+
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Object SELECTEDINDEX = ComboBoxSalesFilter.SelectedIndex;
+            if (SELECTEDINDEX.Equals(0))
+            {
+                ReportPurchase.Reset();
+                ComboBoxYearSales.Visibility = Visibility.Hidden;
+                ComboBoxMonthSales.Visibility = Visibility.Hidden;
+                MonthSales.Visibility = Visibility.Hidden;
+                YearSales.Visibility = Visibility.Hidden;
+                SalesDateStart.Visibility = Visibility.Hidden;
+                SalesDateEnd.Visibility = Visibility.Hidden;
+                labelstart.Visibility = Visibility.Hidden;
+                labelend.Visibility = Visibility.Hidden;
+                SalesWeek.Visibility = Visibility.Hidden;
+                labelweek.Visibility = Visibility.Hidden;
+
+            }
+            if (SELECTEDINDEX.Equals(1))
+
+            {
+                ReportPurchase.Reset();
+                ComboBoxYearSales.Visibility = Visibility.Hidden;
+                ComboBoxMonthSales.Visibility = Visibility.Hidden;
+                MonthSales.Visibility = Visibility.Hidden;
+                YearSales.Visibility = Visibility.Hidden;
+                SalesDateStart.Visibility = Visibility.Hidden;
+                SalesDateEnd.Visibility = Visibility.Hidden;
+                labelstart.Visibility = Visibility.Hidden;
+                labelend.Visibility = Visibility.Hidden;
+                SalesWeek.Visibility = Visibility.Visible;
+                labelweek.Visibility = Visibility.Visible;
+
+            }
+            if (SELECTEDINDEX.Equals(2))
+            {
+                ReportPurchase.Reset();
+                ComboBoxYearSales.Visibility = Visibility.Hidden;
+                ComboBoxMonthSales.Visibility = Visibility.Visible;
+                MonthSales.Visibility = Visibility.Visible;
+                YearSales.Visibility = Visibility.Hidden;
+                SalesDateStart.Visibility = Visibility.Hidden;
+                SalesDateEnd.Visibility = Visibility.Hidden;
+                labelstart.Visibility = Visibility.Hidden;
+                labelend.Visibility = Visibility.Hidden;
+                SalesWeek.Visibility = Visibility.Hidden;
+                labelweek.Visibility = Visibility.Hidden;
+            }
+            if (SELECTEDINDEX.Equals(3))
+            {
+                ReportPurchase.Reset();
+                ComboBoxYearSales.Visibility = Visibility.Visible;
+                ComboBoxMonthSales.Visibility = Visibility.Hidden;
+                MonthSales.Visibility = Visibility.Hidden;
+                YearSales.Visibility = Visibility.Visible;
+                SalesDateStart.Visibility = Visibility.Hidden;
+                SalesDateEnd.Visibility = Visibility.Hidden;
+                labelstart.Visibility = Visibility.Hidden;
+                labelend.Visibility = Visibility.Hidden;
+                SalesWeek.Visibility = Visibility.Hidden;
+                labelweek.Visibility = Visibility.Hidden;
+
+            }
+            if (SELECTEDINDEX.Equals(4))
+            {
+                ReportPurchase.Reset();
+                ComboBoxYearSales.Visibility = Visibility.Hidden;
+                ComboBoxMonthSales.Visibility = Visibility.Hidden;
+                MonthSales.Visibility = Visibility.Hidden;
+                YearSales.Visibility = Visibility.Hidden;
+
+                SalesDateStart.Visibility = Visibility.Visible;
+                SalesDateEnd.Visibility = Visibility.Visible;
+                labelstart.Visibility = Visibility.Visible;
+                labelend.Visibility = Visibility.Visible;
+                SalesWeek.Visibility = Visibility.Hidden;
+                labelweek.Visibility = Visibility.Hidden;
+
+            }
         }
     }
 }
