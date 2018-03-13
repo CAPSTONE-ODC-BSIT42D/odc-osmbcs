@@ -50,7 +50,7 @@ namespace prototype2
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            MainVM.Ldt.worker.RunWorkerAsync();
             this.ucEmployee.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
 
             this.ucCustSupp.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
@@ -98,8 +98,9 @@ namespace prototype2
             this.ucService.SelectServiceButtonClicked += selectService_BtnClicked;
             this.ucSelectService.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
 
-            //  this.ucSalesQuoteViewer.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
-            MainVM.Ldt.worker.RunWorkerAsync();
+            this.ucSalesQuoteViewer.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
+
+            
             this.ucSaleInvoiceViewer.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
             foreach (var obj in containerGrid.Children)
             {
@@ -645,6 +646,11 @@ namespace prototype2
                 reportsSubMenuGrid.Visibility = Visibility.Collapsed;
             else
                 reportsSubMenuGrid.Visibility = Visibility.Visible;
+
+        }
+
+        private void queriesBtn_Click(object sender, RoutedEventArgs e)
+        {
 
         }
 

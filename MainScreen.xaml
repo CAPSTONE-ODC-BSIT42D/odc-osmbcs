@@ -551,6 +551,52 @@
                     <Button x:Name="purchaseReportBtn" Content="Purchase Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="purchaseReportBtn_Click"/>
                     <Button x:Name="serviceReportBtn" Content="Service Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="serviceReportBtn_Click"/>
                 </StackPanel>
+                <Button x:Name="queriesBtn" Margin="0,5,0,0" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" Height="45" VerticalAlignment="Top" Click="queriesBtn_Click">
+                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                        <Canvas x:Name="Capa_1d2" Width="27.646" Height="27.647" Canvas.Left="0" Canvas.Top="0">
+                            <Canvas.RenderTransform>
+                                <TranslateTransform X="0" Y="0"/>
+                            </Canvas.RenderTransform>
+                            <!--Unknown tag: metadata-->
+                            <!--Unknown tag: sodipodi:namedview-->
+                            <Canvas x:Name="g16d2">
+                                <Canvas x:Name="g14d2">
+                                    <Polygon xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="2.17,25.847 6.069,25.847 6.069,14.02 2.17,16.157" x:Name="polygon2" FillRule="NonZero" Fill="White"/>
+                                    <Polygon xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="7.258,13.37 7.258,25.847 11.156,25.847 11.156,18.424 8.127,12.893" x:Name="polygon4" FillRule="NonZero" Fill="White"/>
+                                    <Polygon xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="12.344,25.847 16.244,25.847 16.244,17.188 12.344,20.593" x:Name="polygon6" FillRule="NonZero" Fill="White"/>
+                                    <Polygon xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="17.432,25.847 21.331,25.847 21.331,12.745 17.432,16.151" x:Name="polygon8" FillRule="NonZero" Fill="White"/>
+                                    <Polygon xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="22.518,11.708 22.518,25.847 26.418,25.847 26.418,13.212 23.799,10.591" x:Name="polygon10" FillRule="NonZero" Fill="White"/>
+                                    <Polygon xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="12.927,17.938 23.869,8.297 25.719,10.147 27.646,1.799 19.299,3.725 21.023,5.452 13.972,11.665 10.299,5.216 0,10.859 1.928,14.381 8.765,10.635" x:Name="polygon12" FillRule="NonZero" Fill="White"/>
+                                </Canvas>
+                            </Canvas>
+                            <Canvas x:Name="g18d2"/>
+                            <Canvas x:Name="g20d2"/>
+                            <Canvas x:Name="g22d2"/>
+                            <Canvas x:Name="g24d2"/>
+                            <Canvas x:Name="g26d2"/>
+                            <Canvas x:Name="g28d2"/>
+                            <Canvas x:Name="g30d2"/>
+                            <Canvas x:Name="g32d2"/>
+                            <Canvas x:Name="g34d2"/>
+                            <Canvas x:Name="g36d2"/>
+                            <Canvas x:Name="g38d2"/>
+                            <Canvas x:Name="g40d2"/>
+                            <Canvas x:Name="g42d2"/>
+                            <Canvas x:Name="g44d2"/>
+                            <Canvas x:Name="g46d2"/>
+                        </Canvas>
+                        <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Reports" Margin="15,0,0,0" Padding="0" VerticalAlignment="Center" Width="50"/>
+                    </StackPanel>
+                </Button>
+                <StackPanel x:Name="queriesSubMenuBtn" Margin="0" Orientation="Vertical">
+                    <Button x:Name="availedItemBtn" Content="Sales Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0,0,0,5" Click="salesReportBtn_Click"/>
+                    <Button x:Name="purchasedItemBtn" Content="Purchase Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="purchaseReportBtn_Click"/>
+                    <Button x:Name="availedServiceBtn" Content="Service Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="serviceReportBtn_Click"/>
+                    <Button x:Name="topSuppliersBtn" Content="Service Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="serviceReportBtn_Click"/>
+                    <Button x:Name="quotedItemsBtn" Content="Service Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="serviceReportBtn_Click"/>
+                    <Button x:Name="quotedServiceBtn" Content="Service Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="serviceReportBtn_Click"/>
+                    <Button x:Name="loyalCustomerBtn" Content="Service Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="serviceReportBtn_Click"/>
+                </StackPanel>
                 <Button x:Name="manageBtn" Margin="0,5,0,0" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" Height="45" VerticalAlignment="Top" Click="manageBtn_Click" HorizontalContentAlignment="Center">
                     <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
                         <Canvas x:Name="Capa_1g" Width="30" Height="30">
@@ -931,7 +977,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                
+
                                 <DataGridTextColumn Binding="{Binding POStatus}" ClipboardContentBinding="{x:Null}" Header="Status" Width="125" CanUserResize="False"  />
                                 <DataGridTemplateColumn  Width="Auto" CanUserResize="False" Header="Actions"  >
                                     <DataGridTemplateColumn.CellTemplate  >
@@ -1126,7 +1172,7 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            
+
                             <DataGridTextColumn Binding="{Binding sqNoChar_,  Converter={StaticResource InvoicePriceConverter}, ConverterCulture=fil-PH, StringFormat=\{0:C\}}" ClipboardContentBinding="{x:Null}" Header="Amount" Width="150" CanUserResize="False"  />
                             <DataGridTemplateColumn  Width="AUto" CanUserResize="False" Header="Actions"  >
                                 <DataGridTemplateColumn.CellTemplate  >
@@ -1270,7 +1316,7 @@
                         <DataGrid.Columns >
                             <DataGridTextColumn Binding="{Binding ServiceAvailedID, Converter={StaticResource ServiceSalesOrderIDConverter}, NotifyOnTargetUpdated=True}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Sales Order ID"/>
                             <DataGridTextColumn Binding="{Binding ServiceAvailedID, Converter={StaticResource ServiceNameConverter2}, NotifyOnTargetUpdated=True}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Service Name"/>
-                            
+
                             <DataGridTextColumn Binding="{Binding dateStarted_, StringFormat=D}" ClipboardContentBinding="{x:Null}" Header="Date Started" Width="200" CanUserResize="False"  />
                             <DataGridTextColumn Binding="{Binding dateEnded_, StringFormat=D}" ClipboardContentBinding="{x:Null}" Header="Date Ended" Width="200" CanUserResize="False"  />
 
