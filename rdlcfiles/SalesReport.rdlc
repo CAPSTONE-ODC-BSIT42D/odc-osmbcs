@@ -431,7 +431,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=MonthName(Fields!dateOfIssue.Value)&amp;", "&amp;Year(Fields!dateOfIssue.Value)</Value>
+                              <Value>=MonthName(Fields!dateOfIssue.Value) &amp;", "&amp;Year(Fields!dateOfIssue.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -450,6 +450,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -764,6 +765,10 @@
         <Field Name="TOTAL_ITEM">
           <DataField>TOTAL_ITEM</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="dateOfIssue">
+          <DataField>dateOfIssue</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
