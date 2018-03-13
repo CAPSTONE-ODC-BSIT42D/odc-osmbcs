@@ -131,6 +131,15 @@
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
                                                 <Button x:Name="deleteRequestedItemBtn"  Width="Auto" Height="25" BorderBrush="Black" Background="{x:Null}" Margin="10,10,0,10" ToolTip="Delete Record">
+                                                    <Button.Style>
+                                                        <Style TargetType="{x:Type Button}">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding qtyEditable}" Value="false">
+                                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Button.Style>
                                                     <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
                                                         <Canvas x:Name="Capa_1c" Width="438.529" Height="438.529" Canvas.Left="0" Canvas.Top="0">
                                                             <!--Unknown tag: metadata-->
@@ -180,6 +189,17 @@
                                                         </Canvas>
                                                     </Viewbox>
                                                 </Button>
+                                                <Button x:Name="receiveItemBtn" Width="Auto" Content="Receive Item">
+                                                    <Button.Style>
+                                                    <Style TargetType="{x:Type Button}">
+                                                        <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding qtyEditable}" Value="true">
+                                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Button.Style>
+                                                </Button>
                                             </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
@@ -200,7 +220,7 @@
                                 </Binding>
                             </ComboBox.SelectedItem>
                         </ComboBox>
-                        <TextBox x:Name="newShipViaTb" HorizontalAlignment="Left" Height="23" Margin="153,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130"/>
+                        <TextBox x:Name="newShipViaTb" HorizontalAlignment="Left" Height="23" Margin="153,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130" Visibility="Hidden"/>
                         <Button x:Name="addNewShipBtn" Content="+" HorizontalAlignment="Left" Margin="312,54,0,0" VerticalAlignment="Top" Width="37" Height="23" Click="addNewShipBtn_Click"/>
                         <Label Content="Date Required:" HorizontalAlignment="Left" Margin="34,90,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="29"/>
                         <DatePicker x:Name="selectedDateRequiredTb" HorizontalAlignment="Left" Margin="152,93,0,0" VerticalAlignment="Top" Width="131">

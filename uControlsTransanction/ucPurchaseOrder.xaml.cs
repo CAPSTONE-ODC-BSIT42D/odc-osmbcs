@@ -122,7 +122,10 @@ namespace prototype2
             MainVM.RequestedItems.Clear();
             foreach (POAvailedItem ai in MainVM.SelectedPurchaseOrder.AvailedItems)
             {
-                MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, totalAmount = ai.ItemQty * ai.UnitPrice, unitPrice = ai.UnitPrice });
+                if (MainVM.isView)
+                    MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, totalAmount = ai.ItemQty * ai.UnitPrice, unitPrice = ai.UnitPrice, qtyEditable = true });
+                else
+                    MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, totalAmount = ai.ItemQty * ai.UnitPrice, unitPrice = ai.UnitPrice, qtyEditable = false });
             }
 
             shipViaCb.SelectedValue = MainVM.SelectedPurchaseOrder.shipVia;
