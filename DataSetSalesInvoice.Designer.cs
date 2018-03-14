@@ -392,6 +392,10 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columnAMOUNT;
             
+            private global::System.Data.DataColumn columnitemDescr;
+            
+            private global::System.Data.DataColumn columnunitPrice;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public SalesInvoiceDataTable() {
@@ -739,6 +743,22 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn itemDescrColumn {
+                get {
+                    return this.columnitemDescr;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn unitPriceColumn {
+                get {
+                    return this.columnunitPrice;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -810,7 +830,9 @@ namespace prototype2 {
                         bool isDeleted, 
                         string provinceName, 
                         decimal Expr2, 
-                        decimal AMOUNT) {
+                        decimal AMOUNT, 
+                        string itemDescr, 
+                        decimal unitPrice) {
                 SalesInvoiceRow rowSalesInvoiceRow = ((SalesInvoiceRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         companyName,
@@ -851,7 +873,9 @@ namespace prototype2 {
                         null,
                         provinceName,
                         Expr2,
-                        AMOUNT};
+                        AMOUNT,
+                        itemDescr,
+                        unitPrice};
                 rowSalesInvoiceRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSalesInvoiceRow);
                 return rowSalesInvoiceRow;
@@ -920,6 +944,8 @@ namespace prototype2 {
                 this.columnprovinceName = base.Columns["provinceName"];
                 this.columnExpr2 = base.Columns["Expr2"];
                 this.columnAMOUNT = base.Columns["AMOUNT"];
+                this.columnitemDescr = base.Columns["itemDescr"];
+                this.columnunitPrice = base.Columns["unitPrice"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1003,6 +1029,10 @@ namespace prototype2 {
                 base.Columns.Add(this.columnExpr2);
                 this.columnAMOUNT = new global::System.Data.DataColumn("AMOUNT", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAMOUNT);
+                this.columnitemDescr = new global::System.Data.DataColumn("itemDescr", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnitemDescr);
+                this.columnunitPrice = new global::System.Data.DataColumn("unitPrice", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnunitPrice);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columninvoiceNo}, true));
                 this.columncompanyName.AllowDBNull = false;
@@ -1053,6 +1083,7 @@ namespace prototype2 {
                 this.columnID.AutoIncrementStep = -1;
                 this.columnID.AllowDBNull = false;
                 this.columnprovinceName.MaxLength = 255;
+                this.columnitemDescr.MaxLength = 21845;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1259,6 +1290,8 @@ namespace prototype2 {
             private global::System.Data.DataColumn columnprovinceName;
             
             private global::System.Data.DataColumn columnAMOUNT;
+            
+            private global::System.Data.DataColumn columnserviceDesc;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -1591,6 +1624,14 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn serviceDescColumn {
+                get {
+                    return this.columnserviceDesc;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1660,7 +1701,8 @@ namespace prototype2 {
                         bool isDeleted, 
                         string serviceName, 
                         string provinceName, 
-                        decimal AMOUNT) {
+                        decimal AMOUNT, 
+                        string serviceDesc) {
                 SalesInvoiceSerRow rowSalesInvoiceSerRow = ((SalesInvoiceSerRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1699,7 +1741,8 @@ namespace prototype2 {
                         null,
                         serviceName,
                         provinceName,
-                        AMOUNT};
+                        AMOUNT,
+                        serviceDesc};
                 rowSalesInvoiceSerRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSalesInvoiceSerRow);
                 return rowSalesInvoiceSerRow;
@@ -1769,6 +1812,7 @@ namespace prototype2 {
                 this.columnserviceName = base.Columns["serviceName"];
                 this.columnprovinceName = base.Columns["provinceName"];
                 this.columnAMOUNT = base.Columns["AMOUNT"];
+                this.columnserviceDesc = base.Columns["serviceDesc"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1848,6 +1892,8 @@ namespace prototype2 {
                 base.Columns.Add(this.columnprovinceName);
                 this.columnAMOUNT = new global::System.Data.DataColumn("AMOUNT", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAMOUNT);
+                this.columnserviceDesc = new global::System.Data.DataColumn("serviceDesc", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnserviceDesc);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columninvoiceNo,
                                 this.columnExpr1,
@@ -1901,6 +1947,7 @@ namespace prototype2 {
                 this.columnserviceName.MaxLength = 50;
                 this.columnprovinceName.MaxLength = 255;
                 this.columnAMOUNT.AllowDBNull = false;
+                this.columnserviceDesc.MaxLength = 21845;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2592,6 +2639,38 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string itemDescr {
+                get {
+                    try {
+                        return ((string)(this[this.tableSalesInvoice.itemDescrColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'itemDescr\' in table \'SalesInvoice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSalesInvoice.itemDescrColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal unitPrice {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableSalesInvoice.unitPriceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'unitPrice\' in table \'SalesInvoice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSalesInvoice.unitPriceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IstermsDaysNull() {
                 return this.IsNull(this.tableSalesInvoice.termsDaysColumn);
             }
@@ -2876,6 +2955,30 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetAMOUNTNull() {
                 this[this.tableSalesInvoice.AMOUNTColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsitemDescrNull() {
+                return this.IsNull(this.tableSalesInvoice.itemDescrColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetitemDescrNull() {
+                this[this.tableSalesInvoice.itemDescrColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsunitPriceNull() {
+                return this.IsNull(this.tableSalesInvoice.unitPriceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetunitPriceNull() {
+                this[this.tableSalesInvoice.unitPriceColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3407,6 +3510,22 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string serviceDesc {
+                get {
+                    try {
+                        return ((string)(this[this.tableSalesInvoiceSer.serviceDescColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'serviceDesc\' in table \'SalesInvoiceSer\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSalesInvoiceSer.serviceDescColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IstermsDaysNull() {
                 return this.IsNull(this.tableSalesInvoiceSer.termsDaysColumn);
             }
@@ -3656,6 +3775,18 @@ namespace prototype2 {
             public void SetprovinceNameNull() {
                 this[this.tableSalesInvoiceSer.provinceNameColumn] = global::System.Convert.DBNull;
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsserviceDescNull() {
+                return this.IsNull(this.tableSalesInvoiceSer.serviceDescColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetserviceDescNull() {
+                this[this.tableSalesInvoiceSer.serviceDescColumn] = global::System.Convert.DBNull;
+            }
         }
         
         /// <summary>
@@ -3890,6 +4021,8 @@ namespace prototype2.DataSetSalesInvoiceTableAdapters {
             tableMapping.ColumnMappings.Add("provinceName", "provinceName");
             tableMapping.ColumnMappings.Add("Expr2", "Expr2");
             tableMapping.ColumnMappings.Add("AMOUNT", "AMOUNT");
+            tableMapping.ColumnMappings.Add("itemDescr", "itemDescr");
+            tableMapping.ColumnMappings.Add("unitPrice", "unitPrice");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -3906,8 +4039,8 @@ namespace prototype2.DataSetSalesInvoiceTableAdapters {
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[1];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        si.invoiceNo, si.custID, si.sqNoChar, si.dateOfIssue, si.termsDays, si.dueDate, si.paymentStatus, si.vat, si.sc_pwd_discount, si.withholdingTax, si.notes, sq.sqNoChar AS Expr1, cs.companyID, 
-                         cs.companyName, cs.busStyle, cs.taxNumber, cs.companyAddInfo, cs.companyAddress, cs.companyCity, cs.companyProvinceID, cs.companyPostalCode, cs.companyEmail, cs.companyTelephone, 
+            this._commandCollection[0].CommandText = @"SELECT        si.invoiceNo, si.custID, si.sqNoChar, si.dateOfIssue, si.termsDays, si.dueDate, si.paymentStatus, si.vat, i.itemDescr, si.sc_pwd_discount, si.withholdingTax, si.notes, sq.sqNoChar AS Expr1, cs.companyID, 
+                         ia.unitPrice, cs.companyName, cs.busStyle, cs.taxNumber, cs.companyAddInfo, cs.companyAddress, cs.companyCity, cs.companyProvinceID, cs.companyPostalCode, cs.companyEmail, cs.companyTelephone, 
                          cs.companyMobile, cs.repTitle, cs.repLName, cs.repFName, cs.repMInitial, cs.repEmail, cs.repTelephone, cs.repMobile, cs.companyType, cs.isDeleted, i.ID, i.itemName, p.provinceName, 
                          ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100) AS Expr2, ia.itemQnty, (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) * ia.itemQnty AS AMOUNT
 FROM            sales_invoice_t si INNER JOIN
@@ -4113,6 +4246,7 @@ WHERE        (si.invoiceNo = @a)";
             tableMapping.ColumnMappings.Add("serviceName", "serviceName");
             tableMapping.ColumnMappings.Add("provinceName", "provinceName");
             tableMapping.ColumnMappings.Add("AMOUNT", "AMOUNT");
+            tableMapping.ColumnMappings.Add("serviceDesc", "serviceDesc");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -4129,7 +4263,7 @@ WHERE        (si.invoiceNo = @a)";
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[1];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        si.invoiceNo, si.custID, si.sqNoChar, si.dateOfIssue, si.termsDays, si.dueDate, si.paymentStatus, si.vat, si.sc_pwd_discount, si.withholdingTax, si.notes, sq.sqNoChar AS Expr1, cs.companyID, 
+            this._commandCollection[0].CommandText = @"SELECT        si.invoiceNo, si.custID, si.sqNoChar, si.dateOfIssue, si.termsDays, si.dueDate, si.paymentStatus, si.vat, s.serviceDesc, si.sc_pwd_discount, si.withholdingTax, si.notes, sq.sqNoChar AS Expr1, cs.companyID, 
                          cs.companyName, cs.busStyle, cs.taxNumber, cs.companyAddInfo, cs.companyAddress, cs.companyCity, cs.companyProvinceID, cs.companyPostalCode, cs.companyEmail, cs.companyTelephone, 
                          cs.companyMobile, cs.repTitle, cs.repLName, cs.repFName, cs.repMInitial, cs.repEmail, cs.repTelephone, cs.repMobile, cs.companyType, cs.isDeleted, s.serviceID, s.serviceName, p.provinceName, 
                          sa.totalCost + ft.feeValue AS AMOUNT

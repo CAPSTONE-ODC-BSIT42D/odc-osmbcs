@@ -445,6 +445,10 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columnitemDescr;
             
+            private global::System.Data.DataColumn columnExpr3;
+            
+            private global::System.Data.DataColumn columnitemQnty;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public Sales_QuoteDataTable() {
@@ -864,6 +868,22 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Expr3Column {
+                get {
+                    return this.columnExpr3;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn itemQntyColumn {
+                get {
+                    return this.columnitemQnty;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -945,7 +965,9 @@ namespace prototype2 {
                         string provinceName, 
                         decimal Expr2, 
                         decimal AMOUNT, 
-                        string itemDescr) {
+                        string itemDescr, 
+                        decimal Expr3, 
+                        int itemQnty) {
                 Sales_QuoteRow rowSales_QuoteRow = ((Sales_QuoteRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         dateOfIssue,
@@ -995,7 +1017,9 @@ namespace prototype2 {
                         provinceName,
                         Expr2,
                         AMOUNT,
-                        itemDescr};
+                        itemDescr,
+                        Expr3,
+                        itemQnty};
                 rowSales_QuoteRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSales_QuoteRow);
                 return rowSales_QuoteRow;
@@ -1075,6 +1099,8 @@ namespace prototype2 {
                 this.columnExpr2 = base.Columns["Expr2"];
                 this.columnAMOUNT = base.Columns["AMOUNT"];
                 this.columnitemDescr = base.Columns["itemDescr"];
+                this.columnExpr3 = base.Columns["Expr3"];
+                this.columnitemQnty = base.Columns["itemQnty"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1176,6 +1202,10 @@ namespace prototype2 {
                 base.Columns.Add(this.columnAMOUNT);
                 this.columnitemDescr = new global::System.Data.DataColumn("itemDescr", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnitemDescr);
+                this.columnExpr3 = new global::System.Data.DataColumn("Expr3", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnExpr3);
+                this.columnitemQnty = new global::System.Data.DataColumn("itemQnty", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnitemQnty);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnsqNoChar,
                                 this.columncompanyID,
@@ -3340,6 +3370,38 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Expr3 {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableSales_Quote.Expr3Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Expr3\' in table \'Sales_Quote\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSales_Quote.Expr3Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int itemQnty {
+                get {
+                    try {
+                        return ((int)(this[this.tableSales_Quote.itemQntyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'itemQnty\' in table \'Sales_Quote\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSales_Quote.itemQntyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsquoteSubjectNull() {
                 return this.IsNull(this.tableSales_Quote.quoteSubjectColumn);
             }
@@ -3756,6 +3818,30 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetitemDescrNull() {
                 this[this.tableSales_Quote.itemDescrColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsExpr3Null() {
+                return this.IsNull(this.tableSales_Quote.Expr3Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetExpr3Null() {
+                this[this.tableSales_Quote.Expr3Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsitemQntyNull() {
+                return this.IsNull(this.tableSales_Quote.itemQntyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetitemQntyNull() {
+                this[this.tableSales_Quote.itemQntyColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -5164,6 +5250,8 @@ namespace prototype2.DatasetSales_QuoteTableAdapters {
             tableMapping.ColumnMappings.Add("Expr2", "Expr2");
             tableMapping.ColumnMappings.Add("AMOUNT", "AMOUNT");
             tableMapping.ColumnMappings.Add("itemDescr", "itemDescr");
+            tableMapping.ColumnMappings.Add("Expr3", "Expr3");
+            tableMapping.ColumnMappings.Add("itemQnty", "itemQnty");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -5191,16 +5279,14 @@ namespace prototype2.DatasetSales_QuoteTableAdapters {
                 "Name,\r\n                          cs.repFName, cs.repMInitial, cs.repEmail, cs.re" +
                 "pTelephone, cs.repMobile, cs.companyType, cs.isDeleted AS Expr1, i.ID, i.itemNam" +
                 "e, p.provinceName, ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100) AS Expr2," +
-                " \r\n                         (IFNULL(sq.VAT, 0) + ia.itemQnty * (ia.unitPrice + i" +
-                "a.unitPrice * (mh.markupPerc / 100))) - (IFNULL(sq.VAT, 0) + ia.itemQnty * (ia.u" +
-                "nitPrice + ia.unitPrice * (mh.markupPerc / 100))) * (IFNULL(sq.discountPercent, " +
-                "0) \r\n                         / 100) AS AMOUNT\r\nFROM            sales_quote_t sq" +
-                " INNER JOIN\r\n                         cust_supp_t cs ON cs.companyID = sq.custID" +
-                " INNER JOIN\r\n                         items_availed_t ia ON ia.sqNoChar = ia.sqN" +
-                "oChar INNER JOIN\r\n                         item_t i ON i.ID = ia.itemID INNER JO" +
-                "IN\r\n                         markup_hist_t mh ON mh.itemID = i.ID INNER JOIN\r\n  " +
-                "                       provinces_t p ON p.id = cs.companyProvinceID\r\nWHERE      " +
-                "  (sq.sqNoChar = @a)";
+                " \r\n                         ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100) " +
+                "AS Expr3, ia.itemQnty, (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) * i" +
+                "a.itemQnty AS AMOUNT\r\nFROM            sales_quote_t sq INNER JOIN\r\n             " +
+                "            cust_supp_t cs ON cs.companyID = sq.custID INNER JOIN\r\n             " +
+                "            items_availed_t ia ON ia.sqNoChar = ia.sqNoChar INNER JOIN\r\n        " +
+                "                 item_t i ON i.ID = ia.itemID INNER JOIN\r\n                      " +
+                "   markup_hist_t mh ON mh.itemID = i.ID INNER JOIN\r\n                         pro" +
+                "vinces_t p ON p.id = cs.companyProvinceID\r\nWHERE        (sq.sqNoChar = @a)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@a";
