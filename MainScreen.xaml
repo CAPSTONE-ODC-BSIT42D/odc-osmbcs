@@ -1298,7 +1298,7 @@
                 </Grid>
                 <local:ucInvoiceForm x:Name="ucInvoiceForm" Margin="0" Visibility="Collapsed" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="serviceGrid" d:IsHidden="True">
+            <Grid x:Name="serviceGrid">
                 <Grid x:Name="serviceGridHome" Margin="0,0,20,20" >
                     <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                         <Label x:Name="label9" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -1454,12 +1454,12 @@
                 <local:ucServiceSchedule x:Name="ucService" Margin="0" Visibility="Collapsed" d:IsHidden="True"/>
             </Grid>
             <Grid x:Name="reportsGrid" d:IsHidden="True">
-                <local:ucReportSales x:Name="ucReportSales"  Height="Auto" Margin="0" Width="Auto" d:IsHidden="True"/>
-                <local:ucReportPurchase x:Name="ucReportPurchase" Height="Auto" Margin="0" Width="Auto" d:IsHidden="True"/>
-                <local:ucReportService x:Name="ucReportService" HorizontalAlignment="Left" Height="703" VerticalAlignment="Top" Width="888" d:IsHidden="True"/>
+                <local:ucReportSales x:Name="ucReportSales"  Height="Auto" Margin="0" Width="Auto" d:IsHidden="True" Visibility="Collapsed"/>
+                <local:ucReportPurchase x:Name="ucReportPurchase" Height="Auto" Margin="0" Width="Auto" d:IsHidden="True" Visibility="Collapsed"/>
+                <local:ucReportService x:Name="ucReportService" HorizontalAlignment="Left" Height="703" VerticalAlignment="Top" Width="888" d:IsHidden="True" Visibility="Collapsed"/>
 
             </Grid>
-            <Grid x:Name="queriesGrid">
+            <Grid x:Name="queriesGrid" d:IsHidden="True">
                 <local:ucFreqContractor HorizontalAlignment="Left" Height="703" VerticalAlignment="Top" Width="898"/>
                 <local:ucFreqEmp HorizontalAlignment="Left" Height="703" VerticalAlignment="Top" Width="888"/>
                 <local:ucFreqItem HorizontalAlignment="Left" Height="703" VerticalAlignment="Top" Width="888"/>

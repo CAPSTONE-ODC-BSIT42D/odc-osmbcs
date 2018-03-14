@@ -615,7 +615,7 @@ namespace prototype2
                                       select itm;
                     MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ID == item.itemID).FirstOrDefault();
                     item.unitPriceMarkUp = item.unitPrice + (item.unitPrice / 100 * markupPrice.Last().MarkupPerc);
-                    item.totalAmount =(item.unitPriceMarkUp * item.qty)+(((item.unitPriceMarkUp * item.qty) / 100 ) * (decimal)discountPriceTb.Value);
+                    item.totalAmount =(item.unitPriceMarkUp * item.qty)-(((item.unitPriceMarkUp * item.qty) / 100 ) * (decimal)discountPriceTb.Value);
                 }
                 else if (item.itemType == 1 && MainVM.AvailedServicesList.Count != 0)
                 {

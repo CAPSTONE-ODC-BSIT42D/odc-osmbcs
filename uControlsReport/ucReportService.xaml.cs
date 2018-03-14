@@ -30,7 +30,7 @@ namespace prototype2
         }
         private void DisplayReport()
         {
-            ReportService.Reset();
+            ReportService.DataSources.Clear();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
             ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("ServiceTable", GetService()));
             ReportService.LoadReport(rNames);
@@ -46,12 +46,19 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN   services_t s ON s.serviceID = sa.serviceID INNER JOIN  sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN     sales_invoice_t si ON sq.sqNoChar = si.sqNoChar";
+            cmd.CommandText = "SELECT     sq.sqNoChar,   si.invoiceNo, s.serviceName, sa.desc ,ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN   services_t s ON s.serviceID = sa.serviceID INNER JOIN  sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar INNER JOIN cust_supp_t cs ON cs.CompanyID = sq.custId";
 
             DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
 
-            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
-            mySqlDa.Fill(dSServices);
+            try
+            {
+                MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+                mySqlDa.Fill(dSServices);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
        
             return dSServices;
 
@@ -79,7 +86,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN  services_t s ON s.serviceID = sa.serviceID INNER JOIN   sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(DATE_FORMAT(sq.dateOfIssue, '%Y-%m-%d') = CURDATE())";
+            cmd.CommandText = "SELECT     sq.sqNoChar,   si.invoiceNo, s.serviceName, sa.desc ,ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN   services_t s ON s.serviceID = sa.serviceID INNER JOIN  sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar INNER JOIN cust_supp_t cs ON cs.CompanyID = sq.custId WHERE(DATE_FORMAT(sq.dateOfIssue, '%Y-%m-%d') = CURDATE())";
 
             DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
 
@@ -91,7 +98,7 @@ namespace prototype2
         } 
         private void DisplayReportDayService()
         {
-           
+            ReportService.DataSources.Clear();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
             ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("ServiceTable", GetServiceDay()));
             ReportService.LoadReport(rNames);
@@ -106,7 +113,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN  services_t s ON s.serviceID = sa.serviceID INNER JOIN  sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(WEEK(ss.dateStarted) = '"+DatePickerWeekSer.SelectedDate.Value.Date.ToShortDateString() + "') ";
+            cmd.CommandText = "SELECT     sq.sqNoChar,   si.invoiceNo, s.serviceName, sa.desc ,ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN   services_t s ON s.serviceID = sa.serviceID INNER JOIN  sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar INNER JOIN cust_supp_t cs ON cs.CompanyID = sq.custId WHERE(WEEK(ss.dateStarted) = '" + DatePickerWeekSer.SelectedDate.Value.Date.ToShortDateString() + "') ";
 
             DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
 
@@ -118,7 +125,7 @@ namespace prototype2
         }
         private void DisplayReportWeekService()
         {
-          
+            ReportService.DataSources.Clear();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
             ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("ServiceTable", GetServiceWeek()));
             ReportService.LoadReport(rNames);
@@ -132,7 +139,7 @@ namespace prototype2
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text; 
-            cmd.CommandText = "SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN  services_t s ON s.serviceID = sa.serviceID INNER JOIN sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(MONTHNAME(sq.dateOfIssue) = '" + ((ComboBoxItem)ComboBoxSerMonth.SelectedItem).Content.ToString() + "') AND(YEAR(sq.dateOfIssue) = YEAR(CURDATE())) ";
+            cmd.CommandText = "SELECT     sq.sqNoChar,   si.invoiceNo, s.serviceName, sa.desc ,ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN   services_t s ON s.serviceID = sa.serviceID INNER JOIN  sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar INNER JOIN cust_supp_t cs ON cs.CompanyID = sq.custId WHERE(MONTHNAME(sq.dateOfIssue) = '" + ((ComboBoxItem)ComboBoxSerMonth.SelectedItem).Content.ToString() + "') AND(YEAR(sq.dateOfIssue) = YEAR(CURDATE())) ";
 
             DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
 
@@ -144,8 +151,8 @@ namespace prototype2
         }
         private void DisplayReportMonthService()
         {
+            ReportService.DataSources.Clear();
 
-           
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
             ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("ServiceTable", GetServiceMonth()));
             ReportService.LoadReport(rNames);
@@ -161,7 +168,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN  services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN  services_t s ON s.serviceID = sa.serviceID INNER JOIn sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(YEAR(ss.dateStarted) = '"+ ((ComboBoxItem)ComboBoxYear.SelectedItem).Content.ToString() + "')  ";
+            cmd.CommandText = "SELECT     sq.sqNoChar,   si.invoiceNo, s.serviceName, sa.desc ,ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN   services_t s ON s.serviceID = sa.serviceID INNER JOIN  sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar INNER JOIN cust_supp_t cs ON cs.CompanyID = sq.custId WHERE(YEAR(ss.dateStarted) = '" + ((ComboBoxItem)ComboBoxYear.SelectedItem).Content.ToString() + "')  ";
 
             DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
 
@@ -173,7 +180,7 @@ namespace prototype2
         }
         private void DisplayReportYearService()
         {
-           
+            ReportService.DataSources.Clear();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
             ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("ServiceTable", GetServiceYear()));
             ReportService.LoadReport(rNames);
@@ -188,7 +195,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN    services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN  services_t s ON s.serviceID = sa.serviceID INNER JOIN sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN    sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(ss.dateStarted BETWEEN '" + DatePickerStartSer.SelectedDate.Value.Date.ToShortDateString() + "' AND '" + DatePickerEndSer.SelectedDate.Value.Date.ToShortDateString() + "') ";
+            cmd.CommandText = "SELECT     sq.sqNoChar,   si.invoiceNo, s.serviceName, sa.desc ,ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN   services_t s ON s.serviceID = sa.serviceID INNER JOIN  sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar INNER JOIN cust_supp_t cs ON cs.CompanyID = sq.custId WHERE(ss.dateStarted BETWEEN '" + DatePickerStartSer.SelectedDate.Value.Date.ToShortDateString() + "' AND '" + DatePickerEndSer.SelectedDate.Value.Date.ToShortDateString() + "') ";
 
             DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
 
@@ -200,7 +207,7 @@ namespace prototype2
         }
         private void DisplayReportRangeService()
         {
-          
+            ReportService.DataSources.Clear();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
             ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("ServiceTable", GetServiceRange()));
             ReportService.LoadReport(rNames);

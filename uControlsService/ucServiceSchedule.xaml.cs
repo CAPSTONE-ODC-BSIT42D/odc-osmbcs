@@ -55,7 +55,6 @@ namespace prototype2
             if (this.IsVisible)
             {
                 loadDataToUi();
-                searchForAvailableEmployees();
             }
         }
 
@@ -98,6 +97,7 @@ namespace prototype2
 
         void searchForAvailableEmployees()
         {
+            MainVM.AvailableEmployees_.Clear();
             foreach(ServiceSchedule ss in MainVM.ServiceSchedules_)
             {
                 if(ss.dateEnded_ < startDate.SelectedDate)
@@ -125,11 +125,13 @@ namespace prototype2
 
                 foreach (Employee ee in MainVM.Employees)
                 {
-                    MainVM.AvailableEmployees_.Add(ee);
+                    if(!MainVM.SelectedServiceSchedule_.assignedEmployees_.Contains(ee))
+                        MainVM.AvailableEmployees_.Add(ee);
                 }
                 foreach (Employee ee in MainVM.Contractor)
                 {
-                    MainVM.AvailableEmployees_.Add(ee);
+                    if (!MainVM.SelectedServiceSchedule_.assignedEmployees_.Contains(ee))
+                        MainVM.AvailableEmployees_.Add(ee);
                 }
             }
 
