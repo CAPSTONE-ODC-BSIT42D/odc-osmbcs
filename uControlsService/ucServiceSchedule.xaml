@@ -41,12 +41,12 @@
                 <Button x:Name="transferToLeftBtn" Content="&lt;" HorizontalAlignment="Left" Margin="342,397,0,0" VerticalAlignment="Top" Width="36" Click="transferToLeftBtn_Click" ToolTip="Unassign selected employee"/>
                 <Label x:Name="label21_Copy5" Content="Additional Notes:" HorizontalAlignment="Left" Margin="38,193,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <TextBox x:Name="notesTb" HorizontalAlignment="Left" Height="65" Margin="55,219,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="395"/>
-                <DataGrid x:Name="assignedEmployees" HorizontalAlignment="Left" Height="199" Margin="383,320,0,0" VerticalAlignment="Top" Width="282" ItemsSource="{Binding SelectedServiceSchedule_.assignedEmployees_}" SelectedItem="{Binding SelectedEmployeeContractor}" IsReadOnly="True">
+                <DataGrid x:Name="assignedEmployees" HorizontalAlignment="Left" Height="199" Margin="383,320,0,0" VerticalAlignment="Top" Width="282" ItemsSource="{Binding SelectedServiceSchedule_.assignedEmployees_}" SelectedItem="{Binding SelectedEmployeeContractor}" IsReadOnly="True" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding EmpID, Converter={StaticResource PhaseItemConverter}, NotifyOnTargetUpdated=True}" />
                     </DataGrid.Columns>
                 </DataGrid>
-                <DataGrid x:Name="availableEmployees" ItemsSource="{Binding AvailableEmployees_}" SelectedItem="{Binding SelectedEmployeeContractor}" Margin="55,320,0,0" Height="199" VerticalAlignment="Top" HorizontalAlignment="Left" Width="282" IsReadOnly="True">
+                <DataGrid x:Name="availableEmployees" ItemsSource="{Binding AvailableEmployees_}" SelectedItem="{Binding SelectedEmployeeContractor}" Margin="55,320,0,0" Height="199" VerticalAlignment="Top" HorizontalAlignment="Left" Width="282" IsReadOnly="True" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding EmpID, Converter={StaticResource PhaseItemConverter}, NotifyOnTargetUpdated=True}" />
                     </DataGrid.Columns>

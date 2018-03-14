@@ -452,7 +452,8 @@ namespace prototype2
 
         private void unitPriceTb_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            computePrice();
+            if(this.IsVisible)
+                computePrice();
         }
 
         private void computePrice()

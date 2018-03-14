@@ -163,8 +163,8 @@ namespace prototype2
                                   where itm.ItemID == ai.ItemID
                                   && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
                                   select itm;
-                decimal totalPric = ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc);
-                MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, unitPrice = ai.UnitPrice, totalAmount = totalPric, qtyEditable = true });
+                //decimal totalPric = (ai.UnitPrice + ((ai.UnitPrice / 100) * markupPrice.Last().MarkupPerc) * ai.ItemQty);
+                MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, unitPrice = ai.UnitPrice, qtyEditable = true });
             }
 
             foreach (AvailedService aserv in MainVM.AvailedServicesList)
@@ -615,8 +615,7 @@ namespace prototype2
                                       select itm;
                     MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ID == item.itemID).FirstOrDefault();
                     item.unitPriceMarkUp = item.unitPrice + (item.unitPrice / 100 * markupPrice.Last().MarkupPerc);
-                    item.totalAmount = (item.unitPriceMarkUp * item.qty);
-                    item.totalAmount -= (item.totalAmount / 100 * (decimal)discountPriceTb.Value);
+                    item.totalAmount =(item.unitPriceMarkUp * item.qty)+(((item.unitPriceMarkUp * item.qty) / 100 ) * (decimal)discountPriceTb.Value);
                 }
                 else if (item.itemType == 1 && MainVM.AvailedServicesList.Count != 0)
                 {

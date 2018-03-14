@@ -130,6 +130,7 @@ namespace prototype2
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
             otherGridBg.Visibility = Visibility.Visible;
             Grid.SetZIndex((otherGridBg), 1);
+            ucService.Visibility = Visibility.Collapsed;
             foreach (UIElement obj in otherGridBg.Children)
             {
                 if (obj.Equals(ucSelectService))
