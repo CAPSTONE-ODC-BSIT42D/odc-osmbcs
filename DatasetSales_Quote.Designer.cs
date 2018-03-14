@@ -334,8 +334,6 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columnitemName;
             
-            private global::System.Data.DataColumn columnitemQnty;
-            
             private global::System.Data.DataColumn columnpaymentIsLanded;
             
             private global::System.Data.DataColumn columntermsDP;
@@ -522,14 +520,6 @@ namespace prototype2 {
             public global::System.Data.DataColumn itemNameColumn {
                 get {
                     return this.columnitemName;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn itemQntyColumn {
-                get {
-                    return this.columnitemQnty;
                 }
             }
             
@@ -884,7 +874,6 @@ namespace prototype2 {
                         string repFName, 
                         string repLName, 
                         string itemName, 
-                        int itemQnty, 
                         bool paymentIsLanded, 
                         int termsDP, 
                         int termsDays, 
@@ -934,7 +923,6 @@ namespace prototype2 {
                         repLName,
                         null,
                         itemName,
-                        itemQnty,
                         paymentIsLanded,
                         termsDP,
                         termsDays,
@@ -1014,7 +1002,6 @@ namespace prototype2 {
                 this.columnrepLName = base.Columns["repLName"];
                 this.columnID = base.Columns["ID"];
                 this.columnitemName = base.Columns["itemName"];
-                this.columnitemQnty = base.Columns["itemQnty"];
                 this.columnpaymentIsLanded = base.Columns["paymentIsLanded"];
                 this.columntermsDP = base.Columns["termsDP"];
                 this.columntermsDays = base.Columns["termsDays"];
@@ -1078,8 +1065,6 @@ namespace prototype2 {
                 base.Columns.Add(this.columnID);
                 this.columnitemName = new global::System.Data.DataColumn("itemName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnitemName);
-                this.columnitemQnty = new global::System.Data.DataColumn("itemQnty", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnitemQnty);
                 this.columnpaymentIsLanded = new global::System.Data.DataColumn("paymentIsLanded", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnpaymentIsLanded);
                 this.columntermsDP = new global::System.Data.DataColumn("termsDP", typeof(int), null, global::System.Data.MappingType.Element);
@@ -2474,22 +2459,6 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int itemQnty {
-                get {
-                    try {
-                        return ((int)(this[this.tableSales_Quote.itemQntyColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'itemQnty\' in table \'Sales_Quote\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableSales_Quote.itemQntyColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool paymentIsLanded {
                 get {
                     try {
@@ -3107,18 +3076,6 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetrepLNameNull() {
                 this[this.tableSales_Quote.repLNameColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsitemQntyNull() {
-                return this.IsNull(this.tableSales_Quote.itemQntyColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetitemQntyNull() {
-                this[this.tableSales_Quote.itemQntyColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4773,7 +4730,6 @@ namespace prototype2.DatasetSales_QuoteTableAdapters {
             tableMapping.ColumnMappings.Add("repLName", "repLName");
             tableMapping.ColumnMappings.Add("ID", "ID");
             tableMapping.ColumnMappings.Add("itemName", "itemName");
-            tableMapping.ColumnMappings.Add("itemQnty", "itemQnty");
             tableMapping.ColumnMappings.Add("paymentIsLanded", "paymentIsLanded");
             tableMapping.ColumnMappings.Add("termsDP", "termsDP");
             tableMapping.ColumnMappings.Add("termsDays", "termsDays");
@@ -4828,18 +4784,26 @@ namespace prototype2.DatasetSales_QuoteTableAdapters {
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[1];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        sq.sqNoChar, sq.dateOfIssue, i.itemDescr, sq.custID, sq.quoteSubject, sq.priceNote, sq.deliveryDate, sq.estDelivery, sq.validityDays, sq.validityDate, sq.otherTerms, sq.VAT, sq.vatIsExcluded, 
-                         sq.paymentIsLanded, sq.paymentCurrency, sq.status, sq.termsDays, sq.termsDP, sq.discountPercent, sq.surveyReportDoc, sq.additionalNote, sq.isDeleted, cs.companyID, cs.companyName, cs.busStyle, 
-                         cs.taxNumber, cs.companyAddInfo, cs.companyAddress, cs.companyCity, cs.companyProvinceID, cs.companyPostalCode, cs.companyEmail, cs.companyTelephone, cs.companyMobile, cs.repTitle, cs.repLName,
-                          cs.repFName, cs.repMInitial, cs.repEmail, cs.repTelephone, cs.repMobile, cs.companyType, cs.isDeleted AS Expr1, i.ID, i.itemName, p.provinceName, ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100) AS Expr2, 
-                         ia.itemQnty, (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) * ia.itemQnty AS AMOUNT
-FROM            sales_quote_t sq INNER JOIN
-                         cust_supp_t cs ON cs.companyID = sq.custID INNER JOIN
-                         items_availed_t ia ON ia.sqNoChar = ia.sqNoChar INNER JOIN
-                         item_t i ON i.ID = ia.itemID INNER JOIN
-                         markup_hist_t mh ON mh.itemID = i.ID INNER JOIN
-                         provinces_t p ON p.id = cs.companyProvinceID
-WHERE        (sq.sqNoChar = @a)";
+            this._commandCollection[0].CommandText = "SELECT        sq.sqNoChar, sq.dateOfIssue, i.itemDescr, sq.custID, sq.quoteSubjec" +
+                "t, sq.priceNote, sq.deliveryDate, sq.estDelivery, sq.validityDays, sq.validityDa" +
+                "te, sq.otherTerms, sq.VAT, sq.vatIsExcluded, \r\n                         sq.payme" +
+                "ntIsLanded, sq.paymentCurrency, sq.status, sq.termsDays, sq.termsDP, sq.discount" +
+                "Percent, sq.surveyReportDoc, sq.additionalNote, sq.isDeleted, cs.companyID, cs.c" +
+                "ompanyName, cs.busStyle, \r\n                         cs.taxNumber, cs.companyAddI" +
+                "nfo, cs.companyAddress, cs.companyCity, cs.companyProvinceID, cs.companyPostalCo" +
+                "de, cs.companyEmail, cs.companyTelephone, cs.companyMobile, cs.repTitle, cs.repL" +
+                "Name,\r\n                          cs.repFName, cs.repMInitial, cs.repEmail, cs.re" +
+                "pTelephone, cs.repMobile, cs.companyType, cs.isDeleted AS Expr1, i.ID, i.itemNam" +
+                "e, p.provinceName, ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100) AS Expr2," +
+                " \r\n                         (IFNULL(sq.VAT,0)+ia.itemQnty * (ia.unitPrice + ia.u" +
+                "nitPrice * (mh.markupPerc / 100)) - \r\n (IFNULL(sq.VAT,0)+ia.itemQnty * (ia.unitP" +
+                "rice + ia.unitPrice * (mh.markupPerc / 100)))*\r\n (IFNULL(sq.discountPercent,0)/1" +
+                "00)) AS AMOUNT\r\nFROM            sales_quote_t sq INNER JOIN\r\n                   " +
+                "      cust_supp_t cs ON cs.companyID = sq.custID INNER JOIN\r\n                   " +
+                "      items_availed_t ia ON ia.sqNoChar = ia.sqNoChar INNER JOIN\r\n              " +
+                "           item_t i ON i.ID = ia.itemID INNER JOIN\r\n                         mar" +
+                "kup_hist_t mh ON mh.itemID = i.ID INNER JOIN\r\n                         provinces" +
+                "_t p ON p.id = cs.companyProvinceID\r\nWHERE        (sq.sqNoChar = @a)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@a";
