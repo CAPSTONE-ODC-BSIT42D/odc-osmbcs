@@ -55,6 +55,7 @@ namespace prototype2
             if (this.IsVisible)
             {
                 loadDataToUi();
+
             }
         }
 
@@ -64,7 +65,7 @@ namespace prototype2
             {
                 MainVM.SelectedAvailedServices = MainVM.AvailedServices.Where(x => x.AvailedServiceID == MainVM.SelectedServiceSchedule_.ServiceAvailedID).FirstOrDefault();
                 var dbCon = DBConnection.Instance();
-                string query = "SELECT * FROM phases_per_services where serviceSchedID = " + MainVM.SelectedServiceSchedule_.ServiceSchedID;
+                string query = "SELECT * FROM phases_per_services_t where serviceSchedID = " + MainVM.SelectedServiceSchedule_.ServiceSchedID;
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
@@ -72,7 +73,7 @@ namespace prototype2
                 fromDbTable = fromDb.Tables["t"];
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    MainVM.SelectedServiceSchedule_.PhasesPerService.Add(new PhasesPerService() { ID = int.Parse(dr[0].ToString()), ServiceSchedID = int.Parse(dr[1].ToString()), PhaseID = int.Parse(dr[2].ToString()), Status = dr[3].ToString()});
+                    MainVM.SelectedServiceSchedule_.PhasesPerService.Add(new PhasesPerService() { ID = int.Parse(dr[0].ToString()), ServiceSchedID = int.Parse(dr[2].ToString()), PhaseID = int.Parse(dr[1].ToString()), Status = dr[3].ToString()});
                 }
                 startDate.SelectedDate = MainVM.SelectedServiceSchedule_.dateStarted_;
                 endDate.SelectedDate = MainVM.SelectedServiceSchedule_.dateEnded_;
@@ -207,7 +208,7 @@ namespace prototype2
                     {
                         query = "SELECT LAST_INSERT_ID();";
                         string schedID = dbCon.selectScalar(query, dbCon.Connection).ToString();
-                        foreach (Employee emp in MainVM.AssignedEmployees_)
+                        foreach (Employee emp in MainVM.SelectedServiceSchedule_.assignedEmployees_)
                         {
                             query = "INSERT INTO `odc_db`.`assigned_employees_t`(`serviceSchedID`,`empID`)" +
                          " VALUES" +
@@ -223,6 +224,7 @@ namespace prototype2
                          " VALUES" +
                          "('"+ pps.PhaseID + "','" +
                             schedID + "','PENDING');";
+                            dbCon.insertQuery(query, dbCon.Connection);
                         }
 
                         MessageBox.Show("Succesfully added a schedule");
@@ -295,22 +297,22 @@ namespace prototype2
                 string query = "UPDATE `odc_db`.`phases_per_services_t` SET `status` = 'DONE' WHERE id = '" + MainVM.SelectedPhasesPerService.ID + "'";
                 dbCon.insertQuery(query, dbCon.Connection);
 
-                query = "SELECT * FROM PHASES_PER_SERVICES_T WHERE serviceSchedID = '"+ MainVM.SelectedServiceSchedule_.ServiceSchedID+ "' AND status = 'DONE'";
+                query = "SELECT * FROM PHASES_PER_SERVICES_T WHERE serviceSchedID = '"+ MainVM.SelectedServiceSchedule_.ServiceSchedID+ "' AND status = 'ON QUEUE'";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
                 fromDbTable = fromDb.Tables["t"];
-                if(fromDbTable == null)
+                if(fromDbTable.Rows.Count == 0 )
                 {
-
+                    query = "UPDATE `odc_db`.`service_sched_t` SET `dateEnded` = '" + DateTime.Now.ToString("yyyy-MM-dd") + "', serviceStatus = 'DONE' WHERE `serviceSchedID` = " + MainVM.SelectedServiceSchedule_.ServiceSchedID + ";";
+                    if (dbCon.insertQuery(query, dbCon.Connection))
+                    {
+                        MessageBox.Show("Succesfully updated the schedule");
+                    }
                 }
 
-                query = "UPDATE `odc_db`.`service_sched_t` SET `dateEnded` = '" + DateTime.Now.ToString("yyyy-MM-dd") + "' WHERE `serviceSchedID` = " + MainVM.SelectedServiceSchedule_.ServiceSchedID + ";";
-                if (dbCon.insertQuery(query, dbCon.Connection))
-                {
-                    MessageBox.Show("Succesfully updated the schedule");
-                }
+                
             }
         }
     }

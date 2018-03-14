@@ -631,7 +631,7 @@ namespace prototype2
                     DateTime dateEnded = new DateTime();
                     DateTime.TryParse(dr["dateEnded"].ToString(), out dateEnded);
 
-                    MainVM.SelectedServiceSchedule_ = (new ServiceSchedule() { ServiceSchedID = int.Parse(dr[0].ToString()), serviceStatus_ = dr["serviceStatus"].ToString(), dateStarted_ = dateStarted, dateEnded_ = dateEnded, schedNotes_ = dr["schedNotes"].ToString() });
+                    MainVM.SelectedServiceSchedule_ = (new ServiceSchedule() { ServiceSchedID = int.Parse(dr[0].ToString()),ServiceAvailedID = int.Parse(dr[1].ToString()), serviceStatus_ = dr["serviceStatus"].ToString(), dateStarted_ = dateStarted, dateEnded_ = dateEnded, schedNotes_ = dr["schedNotes"].ToString() });
 
                     query = "SELECT * FROM assigned_employees_t where serviceSchedId = '"+ int.Parse(dr[0].ToString()) + "';";
                     MySqlDataAdapter dataAdapter2 = dbCon.selectQuery(query, dbCon.Connection);
