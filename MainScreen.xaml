@@ -1464,12 +1464,12 @@
 
             </Grid>
             <Grid x:Name="queriesGrid" d:IsHidden="True">
-                <local:ucFreqContractor HorizontalAlignment="Left" Height="703" VerticalAlignment="Top" Width="898"/>
-                <local:ucFreqEmp HorizontalAlignment="Left" Height="703" VerticalAlignment="Top" Width="888"/>
-                <local:ucFreqItem HorizontalAlignment="Left" Height="703" VerticalAlignment="Top" Width="888"/>
-                <local:ucMostSupplier HorizontalAlignment="Left" Height="703" VerticalAlignment="Top" Width="888"/>
-                <local:ucLoyalcust HorizontalAlignment="Left" Height="693" Margin="10,10,0,0" VerticalAlignment="Top" Width="878"/>
-                <local:ucFreqServices HorizontalAlignment="Left" Height="693" Margin="0,10,0,0" VerticalAlignment="Top" Width="898"/>
+                <local:ucFreqContractor HorizontalAlignment="Left" Height="703" VerticalAlignment="Top" Width="898" Visibility="Collapsed"/>
+                <local:ucFreqEmp HorizontalAlignment="Left" Height="703" VerticalAlignment="Top" Width="888" Visibility="Collapsed"/>
+                <local:ucFreqItem HorizontalAlignment="Left" Height="703" VerticalAlignment="Top" Width="888" Visibility="Collapsed"/>
+                <local:ucMostSupplier HorizontalAlignment="Left" Height="703" VerticalAlignment="Top" Width="888" Visibility="Collapsed"/>
+                <local:ucLoyalcust HorizontalAlignment="Left" Height="693" Margin="10,10,0,0" VerticalAlignment="Top" Width="878" Visibility="Collapsed"/>
+                <local:ucFreqServices HorizontalAlignment="Left" Height="693" Margin="0,10,0,0" VerticalAlignment="Top" Width="898" Visibility="Collapsed"/>
             </Grid>
 
             <Grid x:Name="maintenanceGrid" d:IsHidden="True">

@@ -151,7 +151,7 @@ namespace prototype2
                                       where itm.ItemID == ai.ItemID
                                       && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
                                       select itm;
-                    decimal totalPric = ai.ItemQty * (( ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc))/100 * MainVM.SelectedSalesQuote.discountPercent_);
+                    decimal totalPric = ai.ItemQty * ((ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc)) - (( ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc))/100 * MainVM.SelectedSalesQuote.discountPercent_));
                     decimal unitPric = (ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc));
                     MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, unitPrice = unitPric, totalAmount = totalPric });
                     MainVM.VatableSale += totalPric;
@@ -283,6 +283,7 @@ namespace prototype2
         {
             if (this.IsVisible && MainVM.isPaymentInvoice)
             {
+                MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(MainVM.SelectedSalesInvoice.sqNoChar_)).FirstOrDefault();
                 computeInvoice();
                 foreach (UIElement obj in newInvoiceFormGrid1.Children)
                 {
