@@ -1935,9 +1935,9 @@ namespace prototype2
             }
             foreach (UIElement obj in queriesGrid.Children)
             {
-                if (queriesGrid.Children.IndexOf(obj) == 3)
+                if (queriesGrid.Children.IndexOf(obj) == 5)
                 {
-                    headerLbl.Content = "Queires - Most Items Availed";
+                    headerLbl.Content = "Queires - Most Sevice Availed";
                     obj.Visibility = Visibility.Visible;
                 }
                 else
@@ -1963,7 +1963,7 @@ namespace prototype2
             {
                 if (queriesGrid.Children.IndexOf(obj) == 4)
                 {
-                    headerLbl.Content = "Queires - Most Items Availed";
+                    headerLbl.Content = "Queires - Most Loyal Customer";
                     obj.Visibility = Visibility.Visible;
                 }
                 else
@@ -1987,9 +1987,9 @@ namespace prototype2
             }
             foreach (UIElement obj in queriesGrid.Children)
             {
-                if (queriesGrid.Children.IndexOf(obj) == 5)
+                if (queriesGrid.Children.IndexOf(obj) ==3)
                 {
-                    headerLbl.Content = "Queires - Most Items Availed";
+                    headerLbl.Content = "Queires - Top Supplier";
                     obj.Visibility = Visibility.Visible;
                 }
                 else

@@ -13,7 +13,7 @@
     <Grid Background="#FFFBFAFA" DataContext="{StaticResource item_tViewSource}">
         <Label Content="Frequently Availed Items" HorizontalAlignment="Left" Margin="3,2,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
         <Label Content="Sort by:" HorizontalAlignment="Left" Margin="407,34,0,0" VerticalAlignment="Top" FontSize="11"/>
-        <ComboBox x:Name="comboBoxFreqItems" HorizontalAlignment="Left" Margin="458,35,0,0" VerticalAlignment="Top" Width="120" FontSize="11" SelectionChanged="comboBoxFreqItems_SelectionChanged">
+        <ComboBox x:Name="comboBoxFreqItems" HorizontalAlignment="Left" Margin="458,35,0,0" VerticalAlignment="Top" Width="120" FontSize="11" >
             <ComboBoxItem Content="Daily"/>
             <ComboBoxItem Content="Weekly"/>
             <ComboBoxItem Content="Monthly"/>
