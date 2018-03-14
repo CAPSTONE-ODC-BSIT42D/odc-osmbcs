@@ -12,12 +12,13 @@
               <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.services_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByServiceSales" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataByServiceSales" GeneratorSourceName="FillByServiceSales" GetMethodModifier="Public" GetMethodName="GetDataByServiceSales" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataByServiceSales" UserSourceName="FillByServiceSales">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        s.serviceName, sa.totalCost + IFNULL(ft.feeValue, 0) AS TOTAL_SERVICE
-FROM            sales_quote_t sq INNER JOIN
-                         services_availed_t sa ON sq.sqNoChar = sa.sqNoChar INNER JOIN
-                         fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN
-                         services_t s ON sa.serviceID = s.serviceID INNER JOIN
-                         sales_invoice_t si ON si.sqNoChar = sq.sqNoChar</CommandText>
+                    <CommandText>SELECT        s.serviceName, SUM(sa.totalCost + IFNULL(ft.feeValue, 0)) AS TOTAL_SERVICE
+FROM            services_t s INNER JOIN
+                         services_availed_t sa ON s.serviceID = sa.serviceID LEFT OUTER JOIN
+                         fees_per_transaction_t ft ON ft.servicesAvailedID = sa.id INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
+                         sales_invoice_t si ON si.sqNoChar = sq.sqNoChar
+GROUP BY s.serviceName</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -31,13 +32,14 @@ FROM            sales_quote_t sq INNER JOIN
               <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.services_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBySalesServiceDay" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySalesServiceDay" GeneratorSourceName="FillBySalesServiceDay" GetMethodModifier="Public" GetMethodName="GetDataBySalesServiceDay" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySalesServiceDay" UserSourceName="FillBySalesServiceDay">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        s.serviceName, sa.totalCost + IFNULL(ft.feeValue, 0) AS TOTAL_SERVICE
-FROM            sales_quote_t sq INNER JOIN
-                         services_availed_t sa ON sq.sqNoChar = sa.sqNoChar INNER JOIN
-                         fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN
-                         services_t s ON sa.serviceID = s.serviceID INNER JOIN
+                    <CommandText>SELECT        s.serviceName, SUM(sa.totalCost + IFNULL(ft.feeValue, 0)) AS TOTAL_SERVICE
+FROM            services_t s INNER JOIN
+                         services_availed_t sa ON s.serviceID = sa.serviceID LEFT OUTER JOIN
+                         fees_per_transaction_t ft ON ft.servicesAvailedID = sa.id INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
                          sales_invoice_t si ON si.sqNoChar = sq.sqNoChar
-WHERE        (DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE())</CommandText>
+WHERE        (DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE())
+GROUP BY s.serviceName</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -45,11 +47,14 @@ WHERE        (DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE())</CommandText>
               <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.services_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBySalesServiceMonth" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySalesServiceMonth" GeneratorSourceName="FillBySalesServiceMonth" GetMethodModifier="Public" GetMethodName="GetDataBySalesServiceMonth" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySalesServiceMonth" UserSourceName="FillBySalesServiceMonth">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        s.serviceName, sa.totalCost+IFNULL(ft.feeValue,0) AS TOTAL_SERVICE 
-			FROM sales_quote_t sq INNER JOIN  services_availed_t sa ON sq.sqNoChar = sa.sqNoChar 
-			JOIN fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID 
-			INNER JOIN  services_t s ON sa.serviceID = s.serviceID 
-			INNER JOIN  sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE (MONTHNAME(si.dateOfIssue) = @A)</CommandText>
+                    <CommandText>SELECT        s.serviceName, SUM(sa.totalCost + IFNULL(ft.feeValue, 0)) AS TOTAL_SERVICE
+FROM            services_t s INNER JOIN
+                         services_availed_t sa ON s.serviceID = sa.serviceID LEFT OUTER JOIN
+                         fees_per_transaction_t ft ON ft.servicesAvailedID = sa.id INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
+                         sales_invoice_t si ON si.sqNoChar = sq.sqNoChar
+WHERE        (MONTHNAME(si.dateOfIssue) = @A)
+GROUP BY s.serviceName</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="A" ColumnName="" DataSourceName="" DataTypeServer="unknown" DbType="AnsiString" Direction="Input" ParameterName="@A" Precision="0" Scale="0" Size="1024" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
@@ -59,11 +64,14 @@ WHERE        (DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE())</CommandText>
               <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.services_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBySalesServiceRange" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySalesServiceRange" GeneratorSourceName="FillBySalesServiceRange" GetMethodModifier="Public" GetMethodName="GetDataBySalesServiceRange" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySalesServiceRange" UserSourceName="FillBySalesServiceRange">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        s.serviceName, sa.totalCost+IFNULL(ft.feeValue,0) AS TOTAL_SERVICE 
-			FROM sales_quote_t sq INNER JOIN  services_availed_t sa ON sq.sqNoChar = sa.sqNoChar 
-			JOIN fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID 
-			INNER JOIN  services_t s ON sa.serviceID = s.serviceID 
-			INNER JOIN  sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE (si.dateOfIssue BETWEEN @R AND @T)</CommandText>
+                    <CommandText>SELECT        s.serviceName, SUM(sa.totalCost + IFNULL(ft.feeValue, 0)) AS TOTAL_SERVICE
+FROM            services_t s INNER JOIN
+                         services_availed_t sa ON s.serviceID = sa.serviceID LEFT OUTER JOIN
+                         fees_per_transaction_t ft ON ft.servicesAvailedID = sa.id INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
+                         sales_invoice_t si ON si.sqNoChar = sq.sqNoChar
+WHERE        (si.dateOfIssue BETWEEN @R AND @T)
+GROUP BY s.serviceName</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="R" ColumnName="dateOfIssue" DataSourceName="odc_db.sales_invoice_t" DataTypeServer="timestamp" DbType="DateTime" Direction="Input" ParameterName="@R" Precision="0" ProviderType="Timestamp" Scale="0" Size="0" SourceColumn="dateOfIssue" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="T" ColumnName="dateOfIssue" DataSourceName="odc_db.sales_invoice_t" DataTypeServer="timestamp" DbType="DateTime" Direction="Input" ParameterName="@T" Precision="0" ProviderType="Timestamp" Scale="0" Size="0" SourceColumn="dateOfIssue" SourceColumnNullMapping="false" SourceVersion="Current" />
@@ -74,13 +82,14 @@ WHERE        (DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE())</CommandText>
               <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.services_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBySalesServiceWeek" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySalesServiceWeek" GeneratorSourceName="FillBySalesServiceWeek" GetMethodModifier="Public" GetMethodName="GetDataBySalesServiceWeek" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySalesServiceWeek" UserSourceName="FillBySalesServiceWeek">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        s.serviceName, sa.totalCost + IFNULL(ft.feeValue, 0) AS TOTAL_SERVICE
-FROM            sales_quote_t sq INNER JOIN
-                         services_availed_t sa ON sq.sqNoChar = sa.sqNoChar INNER JOIN
-                         fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN
-                         services_t s ON sa.serviceID = s.serviceID INNER JOIN
+                    <CommandText>SELECT        s.serviceName, SUM(sa.totalCost + IFNULL(ft.feeValue, 0)) AS TOTAL_SERVICE
+FROM            services_t s INNER JOIN
+                         services_availed_t sa ON s.serviceID = sa.serviceID LEFT OUTER JOIN
+                         fees_per_transaction_t ft ON ft.servicesAvailedID = sa.id INNER JOIN
+                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
                          sales_invoice_t si ON si.sqNoChar = sq.sqNoChar
-WHERE        (WEEK(si.dateOfIssue) = @N)</CommandText>
+WHERE        (WEEK(si.dateOfIssue) = @N)
+GROUP BY s.serviceName</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="N" ColumnName="" DataSourceName="" DataTypeServer="unknown" DbType="Decimal" Direction="Input" ParameterName="@N" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
@@ -90,13 +99,7 @@ WHERE        (WEEK(si.dateOfIssue) = @N)</CommandText>
               <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.services_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBySalesServiceYear" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBySalesServiceYear" GeneratorSourceName="FillBySalesServiceYear" GetMethodModifier="Public" GetMethodName="GetDataBySalesServiceYear" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBySalesServiceYear" UserSourceName="FillBySalesServiceYear">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        s.serviceName, sa.totalCost + IFNULL(ft.feeValue, 0) AS TOTAL_SERVICE
-FROM            sales_quote_t sq INNER JOIN
-                         services_availed_t sa ON sq.sqNoChar = sa.sqNoChar INNER JOIN
-                         fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN
-                         services_t s ON sa.serviceID = s.serviceID INNER JOIN
-                         sales_invoice_t si ON si.sqNoChar = sq.sqNoChar
-WHERE        (YEAR(si.dateOfIssue) = @B)</CommandText>
+                    <CommandText>SELECT s.serviceName FROM sales_quote_t sq INNER JOIN services_availed_t sa ON sq.sqNoChar = sa.sqNoChar INNER JOIN fees_per_transaction_t ft ON sa.id = ft.servicesAvailedID INNER JOIN services_t s ON sa.serviceID = s.serviceID INNER JOIN sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE (YEAR(si.dateOfIssue) = @B)</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="B" ColumnName="" DataSourceName="" DataTypeServer="unknown" DbType="Decimal" Direction="Input" ParameterName="@B" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
@@ -227,7 +230,7 @@ GROUP BY i.itemName</CommandText>
   <xs:element name="DatasetReportSales" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DatasetReportSales" msprop:Generator_UserDSName="DatasetReportSales">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="services_t" msprop:Generator_TableClassName="services_tDataTable" msprop:Generator_TableVarName="tableservices_t" msprop:Generator_RowChangedName="services_tRowChanged" msprop:Generator_TablePropName="services_t" msprop:Generator_RowDeletingName="services_tRowDeleting" msprop:Generator_RowChangingName="services_tRowChanging" msprop:Generator_RowEvHandlerName="services_tRowChangeEventHandler" msprop:Generator_RowDeletedName="services_tRowDeleted" msprop:Generator_RowClassName="services_tRow" msprop:Generator_UserTableName="services_t" msprop:Generator_RowEvArgName="services_tRowChangeEvent">
+        <xs:element name="services_t" msprop:Generator_TableClassName="services_tDataTable" msprop:Generator_TableVarName="tableservices_t" msprop:Generator_TablePropName="services_t" msprop:Generator_RowDeletingName="services_tRowDeleting" msprop:Generator_RowChangingName="services_tRowChanging" msprop:Generator_RowEvHandlerName="services_tRowChangeEventHandler" msprop:Generator_RowDeletedName="services_tRowDeleted" msprop:Generator_UserTableName="services_t" msprop:Generator_RowChangedName="services_tRowChanged" msprop:Generator_RowEvArgName="services_tRowChangeEvent" msprop:Generator_RowClassName="services_tRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="serviceName" msprop:Generator_ColumnVarNameInTable="columnserviceName" msprop:Generator_ColumnPropNameInRow="serviceName" msprop:Generator_ColumnPropNameInTable="serviceNameColumn" msprop:Generator_UserColumnName="serviceName">
@@ -237,11 +240,11 @@ GROUP BY i.itemName</CommandText>
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="TOTAL_SERVICE" msprop:Generator_ColumnVarNameInTable="columnTOTAL_SERVICE" msprop:Generator_ColumnPropNameInRow="TOTAL_SERVICE" msprop:Generator_ColumnPropNameInTable="TOTAL_SERVICEColumn" msprop:Generator_UserColumnName="TOTAL_SERVICE" type="xs:decimal" />
+              <xs:element name="TOTAL_SERVICE" msprop:Generator_ColumnVarNameInTable="columnTOTAL_SERVICE" msprop:Generator_ColumnPropNameInRow="TOTAL_SERVICE" msprop:Generator_ColumnPropNameInTable="TOTAL_SERVICEColumn" msprop:Generator_UserColumnName="TOTAL_SERVICE" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="SalesItem" msprop:Generator_TableClassName="SalesItemDataTable" msprop:Generator_TableVarName="tableSalesItem" msprop:Generator_RowChangedName="SalesItemRowChanged" msprop:Generator_TablePropName="SalesItem" msprop:Generator_RowDeletingName="SalesItemRowDeleting" msprop:Generator_RowChangingName="SalesItemRowChanging" msprop:Generator_RowEvHandlerName="SalesItemRowChangeEventHandler" msprop:Generator_RowDeletedName="SalesItemRowDeleted" msprop:Generator_RowClassName="SalesItemRow" msprop:Generator_UserTableName="SalesItem" msprop:Generator_RowEvArgName="SalesItemRowChangeEvent">
+        <xs:element name="SalesItem" msprop:Generator_TableClassName="SalesItemDataTable" msprop:Generator_TableVarName="tableSalesItem" msprop:Generator_TablePropName="SalesItem" msprop:Generator_RowDeletingName="SalesItemRowDeleting" msprop:Generator_RowChangingName="SalesItemRowChanging" msprop:Generator_RowEvHandlerName="SalesItemRowChangeEventHandler" msprop:Generator_RowDeletedName="SalesItemRowDeleted" msprop:Generator_UserTableName="SalesItem" msprop:Generator_RowChangedName="SalesItemRowChanged" msprop:Generator_RowEvArgName="SalesItemRowChangeEvent" msprop:Generator_RowClassName="SalesItemRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="itemName" msprop:Generator_ColumnVarNameInTable="columnitemName" msprop:Generator_ColumnPropNameInRow="itemName" msprop:Generator_ColumnPropNameInTable="itemNameColumn" msprop:Generator_UserColumnName="itemName">
