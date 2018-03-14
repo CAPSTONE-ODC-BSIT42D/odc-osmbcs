@@ -2321,6 +2321,12 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columnshipVia1;
             
+            private global::System.Data.DataColumn columnitemQnty;
+            
+            private global::System.Data.DataColumn columnunitPrice;
+            
+            private global::System.Data.DataColumn columnamount;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public PODataTableDataTable() {
@@ -2564,6 +2570,30 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn itemQntyColumn {
+                get {
+                    return this.columnitemQnty;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn unitPriceColumn {
+                get {
+                    return this.columnunitPrice;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn amountColumn {
+                get {
+                    return this.columnamount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2624,7 +2654,10 @@ namespace prototype2 {
                         string approvedBy, 
                         string shipVia, 
                         string shipTo, 
-                        int shipVia1) {
+                        int shipVia1, 
+                        int itemQnty, 
+                        decimal unitPrice, 
+                        decimal amount) {
                 PODataTableRow rowPODataTableRow = ((PODataTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         PONumChar,
@@ -2652,7 +2685,10 @@ namespace prototype2 {
                         approvedBy,
                         shipVia,
                         shipTo,
-                        shipVia1};
+                        shipVia1,
+                        itemQnty,
+                        unitPrice,
+                        amount};
                 rowPODataTableRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPODataTableRow);
                 return rowPODataTableRow;
@@ -2709,6 +2745,9 @@ namespace prototype2 {
                 this.columnshipVia = base.Columns["shipVia"];
                 this.columnshipTo = base.Columns["shipTo"];
                 this.columnshipVia1 = base.Columns["shipVia1"];
+                this.columnitemQnty = base.Columns["itemQnty"];
+                this.columnunitPrice = base.Columns["unitPrice"];
+                this.columnamount = base.Columns["amount"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2766,6 +2805,12 @@ namespace prototype2 {
                 base.Columns.Add(this.columnshipTo);
                 this.columnshipVia1 = new global::System.Data.DataColumn("shipVia1", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnshipVia1);
+                this.columnitemQnty = new global::System.Data.DataColumn("itemQnty", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnitemQnty);
+                this.columnunitPrice = new global::System.Data.DataColumn("unitPrice", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnunitPrice);
+                this.columnamount = new global::System.Data.DataColumn("amount", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnamount);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnPONumChar,
                                 this.columnID}, true));
@@ -2799,6 +2844,9 @@ namespace prototype2 {
                 this.columnshipVia.MaxLength = 20;
                 this.columnshipTo.MaxLength = 21845;
                 this.columnshipVia1.Caption = "shipVia";
+                this.columnitemQnty.AllowDBNull = false;
+                this.columnunitPrice.AllowDBNull = false;
+                this.columnamount.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4243,6 +4291,39 @@ namespace prototype2 {
                 }
                 set {
                     this[this.tablePODataTable.shipVia1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int itemQnty {
+                get {
+                    return ((int)(this[this.tablePODataTable.itemQntyColumn]));
+                }
+                set {
+                    this[this.tablePODataTable.itemQntyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal unitPrice {
+                get {
+                    return ((decimal)(this[this.tablePODataTable.unitPriceColumn]));
+                }
+                set {
+                    this[this.tablePODataTable.unitPriceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal amount {
+                get {
+                    return ((decimal)(this[this.tablePODataTable.amountColumn]));
+                }
+                set {
+                    this[this.tablePODataTable.amountColumn] = value;
                 }
             }
             
@@ -6458,6 +6539,9 @@ FROM            cust_supp_t c INNER JOIN
             tableMapping.ColumnMappings.Add("approvedBy", "approvedBy");
             tableMapping.ColumnMappings.Add("shipTo", "shipTo");
             tableMapping.ColumnMappings.Add("shipVia", "shipVia1");
+            tableMapping.ColumnMappings.Add("itemQnty", "itemQnty");
+            tableMapping.ColumnMappings.Add("unitPrice", "unitPrice");
+            tableMapping.ColumnMappings.Add("amount", "amount");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -6474,21 +6558,23 @@ FROM            cust_supp_t c INNER JOIN
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[1];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        po.PONumChar, cs.companyName, cs.companyType, cs.companyAddress, cs.companyCity, cs.repFName, cs.repMInitial, cs.repLName, cs.repEmail, cs.repTelephone, cs.repMobile, po.orderDate, 
-                         po.requisitioner, po.POdueDate, po.incoterms, po.termsDays, po.termsDP, po.currency, it.ID, ui.unitName, it.itemDescr, po.preparedBy, po.approvedBy, po.shipVia, po.shipTo
+            this._commandCollection[0].CommandText = @"SELECT        po.PONumChar, cs.companyName, cs.companyType, cs.companyAddress, cs.companyCity, pi.unitPrice * pi.itemQnty AS amount, pi.unitPrice, pi.itemQnty, cs.repFName, cs.repMInitial, cs.repLName, cs.repEmail, 
+                         cs.repTelephone, cs.repMobile, po.orderDate, po.requisitioner, po.POdueDate, po.incoterms, po.termsDays, po.termsDP, po.currency, it.ID, ui.unitName, it.itemDescr, po.preparedBy, po.approvedBy, po.shipVia, 
+                         po.shipTo
 FROM            purchase_order_t po INNER JOIN
                          cust_supp_t cs ON po.suppID = cs.companyID INNER JOIN
                          po_items_availed_t pi ON pi.poNumChar = po.PONumChar INNER JOIN
                          item_t it ON it.ID = pi.itemID INNER JOIN
                          unit_t ui ON it.unitID = ui.id
-WHERE        (pi.id = @B)";
+WHERE        (po.ponumchar = @B)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@B";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
+            param.DbType = global::System.Data.DbType.String;
+            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.VarChar;
+            param.Size = 255;
             param.IsNullable = true;
-            param.SourceColumn = "id";
+            param.SourceColumn = "PONumChar";
             this._commandCollection[0].Parameters.Add(param);
         }
         
@@ -6496,9 +6582,14 @@ WHERE        (pi.id = @B)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int FillByPurchaseOrder(DataSet1.PODataTableDataTable dataTable, int B) {
+        public virtual int FillByPurchaseOrder(DataSet1.PODataTableDataTable dataTable, string B) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(B));
+            if ((B == null)) {
+                throw new global::System.ArgumentNullException("B");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(B));
+            }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }
@@ -6510,9 +6601,14 @@ WHERE        (pi.id = @B)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DataSet1.PODataTableDataTable GetDataByPurchaseOrder(int B) {
+        public virtual DataSet1.PODataTableDataTable GetDataByPurchaseOrder(string B) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(B));
+            if ((B == null)) {
+                throw new global::System.ArgumentNullException("B");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(B));
+            }
             DataSet1.PODataTableDataTable dataTable = new DataSet1.PODataTableDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
