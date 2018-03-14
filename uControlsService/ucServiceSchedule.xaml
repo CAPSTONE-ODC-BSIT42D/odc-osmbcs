@@ -48,7 +48,7 @@
                 </DataGrid>
                 <DataGrid x:Name="availableEmployees" ItemsSource="{Binding AvailableEmployees_}" SelectedItem="{Binding SelectedEmployeeContractor}" Margin="55,320,0,0" Height="199" VerticalAlignment="Top" HorizontalAlignment="Left" Width="282" IsReadOnly="True" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding EmpID, Converter={StaticResource PhaseItemConverter}, NotifyOnTargetUpdated=True}" />
+                        <DataGridTextColumn Binding="{Binding EmpID, Converter={StaticResource EmployeeNameConcatenator}, NotifyOnTargetUpdated=True}" />
                     </DataGrid.Columns>
                 </DataGrid>
 

@@ -978,7 +978,7 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTextColumn Binding="{Binding POStatus}" ClipboardContentBinding="{x:Null}" Header="Status" Width="125" CanUserResize="False"  />
+                                <DataGridTextColumn Binding="{Binding POstatus}" ClipboardContentBinding="{x:Null}" Header="Status" Width="125" CanUserResize="False"  />
                                 <DataGridTemplateColumn  Width="Auto" CanUserResize="False" Header="Actions"  >
                                     <DataGridTemplateColumn.CellTemplate  >
                                         <DataTemplate>
