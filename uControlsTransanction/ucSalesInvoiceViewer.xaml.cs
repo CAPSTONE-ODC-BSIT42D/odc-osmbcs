@@ -43,11 +43,60 @@ namespace prototype2
             SalesInvoiceViewer.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesInvoice.rdlc");
             SalesInvoiceViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetSalesInvoice", GetSales()));
+            SalesInvoiceViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetSalesInvoiceSer", GetSalesSer()));
+            SalesInvoiceViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetSalesSIAmount", GetSalesAmount()));
             SalesInvoiceViewer.LoadReport(rNames);
             SalesInvoiceViewer.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             SalesInvoiceViewer.RefreshReport();
         }
+        private DataTable GetSalesAmount()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            string query = "SELECT LAST_INSERT_ID();";
+            string result = dbCon.selectScalar(query, dbCon.Connection).ToString();
 
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+            if (MainVM.SelectedSalesInvoice == null)
+                cmd.CommandText = "SELECT        sq.sqNoChar, (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) * ia.itemQnty + sa.totalCost AS AMOUNT FROM sales_quote_t sq INNER JOIN  cust_supp_t cs ON cs.companyID = sq.custID INNER JOIN    items_availed_t ia ON ia.sqNoChar = ia.sqNoChar INNER JOIN   item_t i ON i.ID = ia.itemID INNER JOIN   markup_hist_t mh ON mh.itemID = i.ID INNER JOIN  provinces_t p ON p.id = cs.companyProvinceID INNER JOIN  services_availed_t sa ON sa.sqNoChar = sq.sqNoChar INNER JOIN  services_t s ON s.serviceID = sa.serviceID INNER JOIN    sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(si.invoiceNo = '" + result + "') GROUP BY sq.sqNoChar";
+            else
+                cmd.CommandText = "SELECT        sq.sqNoChar, (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) * ia.itemQnty + sa.totalCost AS AMOUNT FROM sales_quote_t sq INNER JOIN  cust_supp_t cs ON cs.companyID = sq.custID INNER JOIN    items_availed_t ia ON ia.sqNoChar = ia.sqNoChar INNER JOIN   item_t i ON i.ID = ia.itemID INNER JOIN   markup_hist_t mh ON mh.itemID = i.ID INNER JOIN  provinces_t p ON p.id = cs.companyProvinceID INNER JOIN  services_availed_t sa ON sa.sqNoChar = sq.sqNoChar INNER JOIN  services_t s ON s.serviceID = sa.serviceID INNER JOIN    sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(si.invoiceNo = '" + MainVM.SelectedSalesInvoice.invoiceNo_ + "')";
+
+
+            DataSetSalesInvoice.SalesInvoiceDataTable dSItem = new DataSetSalesInvoice.SalesInvoiceDataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSItem);
+
+            return dSItem;
+        }
+        private DataTable GetSalesSer()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            string query = "SELECT LAST_INSERT_ID();";
+            string result = dbCon.selectScalar(query, dbCon.Connection).ToString();
+
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+            if (MainVM.SelectedSalesInvoice == null)
+                cmd.CommandText = "SELECT        si.invoiceNo, si.custID, si.sqNoChar, si.dateOfIssue, si.termsDays, si.dueDate, si.paymentStatus, si.vat, s.serviceDesc, si.sc_pwd_discount, si.withholdingTax, si.notes, sq.sqNoChar AS Expr1, cs.companyID,    cs.companyName, cs.busStyle, cs.taxNumber, cs.companyAddInfo, cs.companyAddress, cs.companyCity, cs.companyProvinceID, cs.companyPostalCode, cs.companyEmail, cs.companyTelephone,     cs.companyMobile, cs.repTitle, cs.repLName, cs.repFName, cs.repMInitial, cs.repEmail, cs.repTelephone, cs.repMobile, cs.companyType, cs.isDeleted, s.serviceID, s.serviceName, p.provinceName,   sa.totalCost + ft.feeValue AS AMOUNT FROM sales_invoice_t si INNER JOIN  sales_quote_t sq ON si.sqNoChar = sq.sqNoChar INNER JOIN  cust_supp_t cs ON cs.companyID = sq.custID INNER JOIN  services_availed_t sa ON sa.sqNoChar = sq.sqNoChar INNER JOIN   services_t s ON s.serviceID = sa.serviceID INNER JOIN  fees_per_transaction_t ft ON ft.servicesAvailedID = sa.id INNER JOIN   provinces_t p ON p.id = cs.companyProvinceID WHERE(si.invoiceNo = '" + result + "')";
+            else
+                cmd.CommandText = "SELECT        si.invoiceNo, si.custID, si.sqNoChar, si.dateOfIssue, si.termsDays, si.dueDate, si.paymentStatus, si.vat, s.serviceDesc, si.sc_pwd_discount, si.withholdingTax, si.notes, sq.sqNoChar AS Expr1, cs.companyID,    cs.companyName, cs.busStyle, cs.taxNumber, cs.companyAddInfo, cs.companyAddress, cs.companyCity, cs.companyProvinceID, cs.companyPostalCode, cs.companyEmail, cs.companyTelephone,     cs.companyMobile, cs.repTitle, cs.repLName, cs.repFName, cs.repMInitial, cs.repEmail, cs.repTelephone, cs.repMobile, cs.companyType, cs.isDeleted, s.serviceID, s.serviceName, p.provinceName,   sa.totalCost + ft.feeValue AS AMOUNT FROM sales_invoice_t si INNER JOIN  sales_quote_t sq ON si.sqNoChar = sq.sqNoChar INNER JOIN  cust_supp_t cs ON cs.companyID = sq.custID INNER JOIN  services_availed_t sa ON sa.sqNoChar = sq.sqNoChar INNER JOIN   services_t s ON s.serviceID = sa.serviceID INNER JOIN  fees_per_transaction_t ft ON ft.servicesAvailedID = sa.id INNER JOIN   provinces_t p ON p.id = cs.companyProvinceID WHERE(si.invoiceNo = '" + MainVM.SelectedSalesInvoice.invoiceNo_ + "')";
+
+
+            DataSetSalesInvoice.SalesInvoiceDataTable dSItem = new DataSetSalesInvoice.SalesInvoiceDataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSItem);
+
+            return dSItem;
+        }
         private DataTable GetSales()
         {
             var dbCon = DBConnection.Instance();

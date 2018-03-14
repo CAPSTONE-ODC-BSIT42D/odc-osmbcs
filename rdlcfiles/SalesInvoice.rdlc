@@ -1173,7 +1173,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=(Fields!vat.Value/100)*(Sum((((Fields!markupPerc.Value\100)*Fields!unitPrice.Value)+Fields!unitPrice.Value))+Sum(Fields!servicePrice.Value+Fields!totalCost.Value+Fields!feeValue.Value))</Value>
+                              <Value>=Fields!vat.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1222,76 +1222,6 @@
           </Border>
         </Style>
       </Tablix>
-      <Tablix Name="Tablix6">
-        <TablixBody>
-          <TablixColumns>
-            <TablixColumn>
-              <Width>1.14347in</Width>
-            </TablixColumn>
-          </TablixColumns>
-          <TablixRows>
-            <TablixRow>
-              <Height>0.25in</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="markupPerc1">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=((Fields!vat.Value/100)*(Sum((((Fields!markupPerc.Value\100)*Fields!unitPrice.Value)+Fields!unitPrice.Value)+Sum(Fields!servicePrice.Value+Fields!totalCost.Value+Fields!feeValue.Value)))+Sum((((Fields!markupPerc.Value\100)*Fields!unitPrice.Value)+Fields!unitPrice.Value))+Sum(Fields!servicePrice.Value+Fields!totalCost.Value+Fields!feeValue.Value))</Value>
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>markupPerc1</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                    <rd:Selected>true</rd:Selected>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
-          </TablixRows>
-        </TablixBody>
-        <TablixColumnHierarchy>
-          <TablixMembers>
-            <TablixMember />
-          </TablixMembers>
-        </TablixColumnHierarchy>
-        <TablixRowHierarchy>
-          <TablixMembers>
-            <TablixMember>
-              <Group Name="Details4" />
-            </TablixMember>
-          </TablixMembers>
-        </TablixRowHierarchy>
-        <DataSetName>DataSetSalesInvoice</DataSetName>
-        <Top>4.46403in</Top>
-        <Left>6.6782in</Left>
-        <Height>0.25in</Height>
-        <Width>1.14347in</Width>
-        <ZIndex>25</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Tablix>
       <Tablix Name="Tablix7">
         <TablixBody>
           <TablixColumns>
@@ -1305,21 +1235,21 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="markupPerc2">
+                    <Textbox Name="AMOUNT4">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum((((Fields!markupPerc.Value\100)*Fields!unitPrice.Value)+Fields!unitPrice.Value))+Sum(Fields!servicePrice.Value+Fields!totalCost.Value+Fields!feeValue.Value)</Value>
+                              <Value>=Fields!AMOUNT.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>markupPerc2</rd:DefaultName>
+                      <rd:DefaultName>AMOUNT4</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1354,7 +1284,7 @@
         <Left>6.6782in</Left>
         <Height>0.25in</Height>
         <Width>1.14347in</Width>
-        <ZIndex>26</ZIndex>
+        <ZIndex>25</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1423,7 +1353,7 @@
         <Left>6.6782in</Left>
         <Height>0.25in</Height>
         <Width>1.14347in</Width>
-        <ZIndex>27</ZIndex>
+        <ZIndex>26</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1450,7 +1380,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=(Fields!vat.Value/100)*(Sum((((Fields!markupPerc.Value\100)*Fields!unitPrice.Value)+Fields!unitPrice.Value))+Sum(Fields!servicePrice.Value+Fields!totalCost.Value+Fields!feeValue.Value))</Value>
+                              <Value>=Fields!vat.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1492,7 +1422,7 @@
         <Left>6.6782in</Left>
         <Height>0.25in</Height>
         <Width>1.14347in</Width>
-        <ZIndex>28</ZIndex>
+        <ZIndex>27</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1512,21 +1442,21 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="markupPerc3">
+                    <Textbox Name="AMOUNT6">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum((((Fields!markupPerc.Value\100)*Fields!unitPrice.Value)+Fields!unitPrice.Value))+Sum(Fields!servicePrice.Value+Fields!totalCost.Value+Fields!feeValue.Value)</Value>
+                              <Value>=Fields!AMOUNT.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>markupPerc3</rd:DefaultName>
+                      <rd:DefaultName>AMOUNT6</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1561,7 +1491,7 @@
         <Left>1.91542in</Left>
         <Height>0.25in</Height>
         <Width>1.21875in</Width>
-        <ZIndex>29</ZIndex>
+        <ZIndex>28</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1588,7 +1518,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=(Fields!vat.Value/100)*(Sum((((Fields!markupPerc.Value\100)*Fields!unitPrice.Value)+Fields!unitPrice.Value))+Sum(Fields!servicePrice.Value+Fields!totalCost.Value+Fields!feeValue.Value))</Value>
+                              <Value>=Fields!vat.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1630,7 +1560,7 @@
         <Left>1.91542in</Left>
         <Height>0.25in</Height>
         <Width>1.21875in</Width>
-        <ZIndex>30</ZIndex>
+        <ZIndex>29</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1650,21 +1580,21 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox102">
+                    <Textbox Name="AMOUNT5">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=((Fields!vat.Value/100)*(Sum((((Fields!markupPerc.Value\100)*Fields!unitPrice.Value)+Fields!unitPrice.Value)+Sum(Fields!servicePrice.Value+Fields!totalCost.Value+Fields!feeValue.Value)))+Sum((((Fields!markupPerc.Value\100)*Fields!unitPrice.Value)+Fields!unitPrice.Value))+Sum(Fields!servicePrice.Value+Fields!totalCost.Value+Fields!feeValue.Value))</Value>
+                              <Value>=Fields!AMOUNT.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox102</rd:DefaultName>
+                      <rd:DefaultName>AMOUNT5</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1694,11 +1624,12 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <DataSetName>DataSetSIAmount</DataSetName>
         <Top>5.81125in</Top>
         <Left>1.94319in</Left>
         <Height>0.25in</Height>
         <Width>1.19098in</Width>
-        <ZIndex>31</ZIndex>
+        <ZIndex>30</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1725,7 +1656,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=((Fields!vat.Value/100)*(Sum((((Fields!markupPerc.Value\100)*Fields!unitPrice.Value)+Fields!unitPrice.Value)+Sum(Fields!servicePrice.Value+Fields!totalCost.Value+Fields!feeValue.Value)))+Sum((((Fields!markupPerc.Value\100)*Fields!unitPrice.Value)+Fields!unitPrice.Value))+Sum(Fields!servicePrice.Value+Fields!totalCost.Value+Fields!feeValue.Value))</Value>
+                              <Value>=Fields!AMOUNT.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1767,7 +1698,7 @@
         <Left>6.66431in</Left>
         <Height>0.25in</Height>
         <Width>1.15736in</Width>
-        <ZIndex>32</ZIndex>
+        <ZIndex>31</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1836,7 +1767,7 @@
         <Left>1.14806in</Left>
         <Height>0.25in</Height>
         <Width>1.76736in</Width>
-        <ZIndex>33</ZIndex>
+        <ZIndex>32</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1905,7 +1836,7 @@
         <Left>1.16889in</Left>
         <Height>0.25in</Height>
         <Width>1.74653in</Width>
-        <ZIndex>34</ZIndex>
+        <ZIndex>33</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1974,7 +1905,7 @@
         <Left>1.16889in</Left>
         <Height>0.25in</Height>
         <Width>1.74653in</Width>
-        <ZIndex>35</ZIndex>
+        <ZIndex>34</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2043,7 +1974,7 @@
         <Left>6.82167in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
-        <ZIndex>36</ZIndex>
+        <ZIndex>35</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2112,7 +2043,7 @@
         <Left>6.82167in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
-        <ZIndex>37</ZIndex>
+        <ZIndex>36</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2181,7 +2112,7 @@
         <Left>6.82167in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
-        <ZIndex>38</ZIndex>
+        <ZIndex>37</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2420,6 +2351,75 @@
         <Left>0.36333in</Left>
         <Height>0.33333in</Height>
         <Width>6.35417in</Width>
+        <ZIndex>38</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Tablix>
+      <Tablix Name="Tablix3">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>1.14347in</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.25in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="AMOUNT3">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!AMOUNT.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>AMOUNT3</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Details13" />
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>DataSetSIAmount</DataSetName>
+        <Top>4.45014in</Top>
+        <Left>6.6782in</Left>
+        <Height>0.25in</Height>
+        <Width>1.14347in</Width>
         <ZIndex>39</ZIndex>
         <Style>
           <Border>
@@ -2431,7 +2431,7 @@
     <Height>6.55083in</Height>
     <Style />
   </Body>
-  <Width>11.26958in</Width>
+  <Width>11.76958in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
@@ -2796,6 +2796,30 @@
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
         <rd:TableAdapterName>SISErTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="DataSetSIAmount">
+      <Query>
+        <DataSourceName>DataSetSalesInvoice</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="sqNoChar">
+          <DataField>sqNoChar</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="AMOUNT">
+          <DataField>AMOUNT</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>DataSetSalesInvoice</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\Alexis\Source\Repos\odc-osmbcs\DataSetSalesInvoice.xsd</rd:SchemaPath>
+        <rd:TableName>sales_Invoice_t</rd:TableName>
+        <rd:TableAdapterFillMethod>FillSiAmount</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetDataSiAmount</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>sales_Invoice_tTableAdapter</rd:TableAdapterName>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>

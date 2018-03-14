@@ -62,7 +62,7 @@ namespace prototype2
             if (MainVM.SelectedSalesQuote != null)
             {
                 cmd.CommandText = "SELECT        sq.sqNoChar, (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) * ia.itemQnty + sa.totalCost AS AMOUNT FROM sales_quote_t sq INNER JOIN   cust_supp_t cs ON cs.companyID = sq.custID INNER JOIN   items_availed_t ia ON ia.sqNoChar = ia.sqNoChar INNER JOIN   item_t i ON i.ID = ia.itemID INNER JOIN    markup_hist_t mh ON mh.itemID = i.ID INNER JOIN  provinces_t p ON p.id = cs.companyProvinceID INNER JOIN  services_availed_t sa ON sa.sqNoChar = sq.sqNoChar INNER JOIN   services_t s ON s.serviceID = sa.serviceID WHERE(sq.sqNoChar = '" + MainVM.SelectedSalesQuote.sqNoChar_ + "') GROUP BY sq.sqNoChar ";
-                DatasetSales_Quote.SQServiceDataTable dSItem = new DatasetSales_Quote.SQServiceDataTable();
+                DatasetSales_Quote.sales_quote_tDataTable dSItem = new DatasetSales_Quote.sales_quote_tDataTable();
 
                 MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
                 mySqlDa.Fill(dSItem);
