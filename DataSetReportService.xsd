@@ -25,11 +25,10 @@ FROM            service_sched_t ss INNER JOIN
             </MainSource>
             <Mappings>
               <Mapping SourceColumn="serviceName" DataSetColumn="serviceName" />
-              <Mapping SourceColumn="serviceDesc" DataSetColumn="serviceDesc" />
+              <Mapping SourceColumn="serviceDesc" DataSetColumn="desc" />
               <Mapping SourceColumn="dateStarted" DataSetColumn="dateStarted" />
               <Mapping SourceColumn="dateEnded" DataSetColumn="dateEnded" />
               <Mapping SourceColumn="serviceStatus" DataSetColumn="serviceStatus" />
-              <Mapping SourceColumn="companyName" DataSetColumn="companyName" />
               <Mapping SourceColumn="Expr1" DataSetColumn="Expr1" />
               <Mapping SourceColumn="Expr2" DataSetColumn="Expr2" />
               <Mapping SourceColumn="sqNoChar" DataSetColumn="sqNoChar" />
@@ -134,7 +133,7 @@ WHERE        (YEAR(ss.dateStarted) = @a)</CommandText>
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="serviceDesc" msprop:Generator_ColumnVarNameInTable="columnserviceDesc" msprop:Generator_ColumnPropNameInRow="serviceDesc" msprop:Generator_ColumnPropNameInTable="serviceDescColumn" msprop:Generator_UserColumnName="serviceDesc" minOccurs="0">
+              <xs:element name="desc" msprop:Generator_ColumnVarNameInTable="columndesc" msprop:Generator_ColumnPropNameInRow="desc" msprop:Generator_ColumnPropNameInTable="descColumn" msprop:Generator_UserColumnName="desc" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="21845" />
@@ -147,13 +146,6 @@ WHERE        (YEAR(ss.dateStarted) = @a)</CommandText>
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="255" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="companyName" msprop:Generator_ColumnVarNameInTable="columncompanyName" msprop:Generator_ColumnPropNameInRow="companyName" msprop:Generator_ColumnPropNameInTable="companyNameColumn" msprop:Generator_UserColumnName="companyName">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>

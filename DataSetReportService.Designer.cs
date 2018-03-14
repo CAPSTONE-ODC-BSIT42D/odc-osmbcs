@@ -281,15 +281,13 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columnserviceName;
             
-            private global::System.Data.DataColumn columnserviceDesc;
+            private global::System.Data.DataColumn columndesc;
             
             private global::System.Data.DataColumn columndateStarted;
             
             private global::System.Data.DataColumn columndateEnded;
             
             private global::System.Data.DataColumn columnserviceStatus;
-            
-            private global::System.Data.DataColumn columncompanyName;
             
             private global::System.Data.DataColumn columnExpr1;
             
@@ -340,9 +338,9 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn serviceDescColumn {
+            public global::System.Data.DataColumn descColumn {
                 get {
-                    return this.columnserviceDesc;
+                    return this.columndesc;
                 }
             }
             
@@ -367,14 +365,6 @@ namespace prototype2 {
             public global::System.Data.DataColumn serviceStatusColumn {
                 get {
                     return this.columnserviceStatus;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn companyNameColumn {
-                get {
-                    return this.columncompanyName;
                 }
             }
             
@@ -439,15 +429,14 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public ServiceTableRow AddServiceTableRow(string serviceName, string serviceDesc, System.DateTime dateStarted, System.DateTime dateEnded, string serviceStatus, string companyName, long Expr1, long Expr2, string sqNoChar) {
+            public ServiceTableRow AddServiceTableRow(string serviceName, string desc, System.DateTime dateStarted, System.DateTime dateEnded, string serviceStatus, long Expr1, long Expr2, string sqNoChar) {
                 ServiceTableRow rowServiceTableRow = ((ServiceTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         serviceName,
-                        serviceDesc,
+                        desc,
                         dateStarted,
                         dateEnded,
                         serviceStatus,
-                        companyName,
                         Expr1,
                         Expr2,
                         sqNoChar};
@@ -481,11 +470,10 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             internal void InitVars() {
                 this.columnserviceName = base.Columns["serviceName"];
-                this.columnserviceDesc = base.Columns["serviceDesc"];
+                this.columndesc = base.Columns["desc"];
                 this.columndateStarted = base.Columns["dateStarted"];
                 this.columndateEnded = base.Columns["dateEnded"];
                 this.columnserviceStatus = base.Columns["serviceStatus"];
-                this.columncompanyName = base.Columns["companyName"];
                 this.columnExpr1 = base.Columns["Expr1"];
                 this.columnExpr2 = base.Columns["Expr2"];
                 this.columnsqNoChar = base.Columns["sqNoChar"];
@@ -496,16 +484,14 @@ namespace prototype2 {
             private void InitClass() {
                 this.columnserviceName = new global::System.Data.DataColumn("serviceName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnserviceName);
-                this.columnserviceDesc = new global::System.Data.DataColumn("serviceDesc", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnserviceDesc);
+                this.columndesc = new global::System.Data.DataColumn("desc", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndesc);
                 this.columndateStarted = new global::System.Data.DataColumn("dateStarted", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndateStarted);
                 this.columndateEnded = new global::System.Data.DataColumn("dateEnded", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndateEnded);
                 this.columnserviceStatus = new global::System.Data.DataColumn("serviceStatus", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnserviceStatus);
-                this.columncompanyName = new global::System.Data.DataColumn("companyName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncompanyName);
                 this.columnExpr1 = new global::System.Data.DataColumn("Expr1", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnExpr1);
                 this.columnExpr2 = new global::System.Data.DataColumn("Expr2", typeof(long), null, global::System.Data.MappingType.Element);
@@ -516,10 +502,8 @@ namespace prototype2 {
                                 this.columnsqNoChar}, true));
                 this.columnserviceName.AllowDBNull = false;
                 this.columnserviceName.MaxLength = 50;
-                this.columnserviceDesc.MaxLength = 21845;
+                this.columndesc.MaxLength = 21845;
                 this.columnserviceStatus.MaxLength = 255;
-                this.columncompanyName.AllowDBNull = false;
-                this.columncompanyName.MaxLength = 50;
                 this.columnsqNoChar.AllowDBNull = false;
                 this.columnsqNoChar.Unique = true;
                 this.columnsqNoChar.MaxLength = 255;
@@ -676,17 +660,17 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string serviceDesc {
+            public string desc {
                 get {
                     try {
-                        return ((string)(this[this.tableServiceTable.serviceDescColumn]));
+                        return ((string)(this[this.tableServiceTable.descColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'serviceDesc\' in table \'ServiceTable\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'desc\' in table \'ServiceTable\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableServiceTable.serviceDescColumn] = value;
+                    this[this.tableServiceTable.descColumn] = value;
                 }
             }
             
@@ -740,17 +724,6 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string companyName {
-                get {
-                    return ((string)(this[this.tableServiceTable.companyNameColumn]));
-                }
-                set {
-                    this[this.tableServiceTable.companyNameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public long Expr1 {
                 get {
                     try {
@@ -794,14 +767,14 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsserviceDescNull() {
-                return this.IsNull(this.tableServiceTable.serviceDescColumn);
+            public bool IsdescNull() {
+                return this.IsNull(this.tableServiceTable.descColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetserviceDescNull() {
-                this[this.tableServiceTable.serviceDescColumn] = global::System.Convert.DBNull;
+            public void SetdescNull() {
+                this[this.tableServiceTable.descColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1025,11 +998,10 @@ namespace prototype2.DataSetReportServiceTableAdapters {
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "ServiceTable";
             tableMapping.ColumnMappings.Add("serviceName", "serviceName");
-            tableMapping.ColumnMappings.Add("serviceDesc", "serviceDesc");
+            tableMapping.ColumnMappings.Add("serviceDesc", "desc");
             tableMapping.ColumnMappings.Add("dateStarted", "dateStarted");
             tableMapping.ColumnMappings.Add("dateEnded", "dateEnded");
             tableMapping.ColumnMappings.Add("serviceStatus", "serviceStatus");
-            tableMapping.ColumnMappings.Add("companyName", "companyName");
             tableMapping.ColumnMappings.Add("Expr1", "Expr1");
             tableMapping.ColumnMappings.Add("Expr2", "Expr2");
             tableMapping.ColumnMappings.Add("sqNoChar", "sqNoChar");
