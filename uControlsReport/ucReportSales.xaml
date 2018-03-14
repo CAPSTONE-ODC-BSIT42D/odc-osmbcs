@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+
               xmlns:RV="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"  
              xmlns:local="clr-namespace:prototype2"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="prototype2.ucReportSales"
@@ -36,8 +37,8 @@
             <ComboBoxItem Content="2017"/>
         </ComboBox>
         <Label x:Name="YearItem" Content="Year:" HorizontalAlignment="Left" Margin="272,4,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
-        <DatePicker x:Name="DatePickerItemStart" HorizontalAlignment="Left" Margin="402,30,0,0" VerticalAlignment="Top" Width="131" Height="31" Visibility="Hidden" SelectedDateChanged="DatePickerItemStart_SelectedDateChanged"/>
-        <DatePicker x:Name="DatePickerItemWeek" HorizontalAlignment="Left" Margin="402,30,0,0" VerticalAlignment="Top" Width="131" Height="31" Visibility="Hidden" SelectedDateChanged="DatePickerItemWeek_SelectedDateChanged"/>
+        <DatePicker x:Name="DatePickerItemStart" HorizontalAlignment="Left" Margin="402,30,0,0" VerticalAlignment="Top" Width="131" Height="31" Visibility="Hidden" SelectedDateChanged="DatePickerItemStart_SelectedDateChanged" />
+        <DatePicker x:Name="DatePickerItemWeek" HorizontalAlignment="Left" Margin="402,30,0,0" VerticalAlignment="Top" Width="131" Height="31" Visibility="Hidden" SelectedDateChanged="DatePickerItemWeek_SelectedDateChanged" />
         <DatePicker x:Name="DatePickerItemEnd" HorizontalAlignment="Left" Margin="610,30,0,0" VerticalAlignment="Top" Width="131" Height="31" Visibility="Hidden" SelectedDateChanged="DatePickerItemEnd_SelectedDateChanged"/>
         <Label x:Name="ItemStart" Content="Start Date:" HorizontalAlignment="Left" Margin="402,4,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
         <Label x:Name="ItemWeek" Content="Week:" HorizontalAlignment="Left" Margin="402,4,0,0" VerticalAlignment="Top" Visibility="Hidden"/>

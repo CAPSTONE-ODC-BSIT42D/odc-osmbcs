@@ -1857,7 +1857,7 @@ namespace prototype2
             }
             foreach (UIElement obj in queriesGrid.Children)
             {
-                if (queriesGrid.Children.IndexOf(obj) == 1)
+                if (queriesGrid.Children.IndexOf(obj) ==0)
                 {
                     headerLbl.Content = "Queires - Frequent Contractor";
                     obj.Visibility = Visibility.Visible;
@@ -1883,7 +1883,7 @@ namespace prototype2
             }
             foreach (UIElement obj in queriesGrid.Children)
             {
-                if (queriesGrid.Children.IndexOf(obj) == 2)
+                if (queriesGrid.Children.IndexOf(obj) == 1)
                 {
                     headerLbl.Content = "Queires - Frequent Employee";
                     obj.Visibility = Visibility.Visible;
@@ -1896,22 +1896,106 @@ namespace prototype2
 
         private void QueiresItems_Click(object sender, RoutedEventArgs e)
         {
+            MainVM.resetValueofVariables();
+            foreach (UIElement obj in containerGrid.Children)
+            {
+                if (containerGrid.Children.IndexOf(obj) == 5)
+                {
 
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+            foreach (UIElement obj in queriesGrid.Children)
+            {
+                if (queriesGrid.Children.IndexOf(obj) == 2)
+                {
+                    headerLbl.Content = "Queires - Most Items Availed";
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+            closeAllOtherGridForm();
         }
 
         private void QueiresService_Click(object sender, RoutedEventArgs e)
         {
+            MainVM.resetValueofVariables();
+            foreach (UIElement obj in containerGrid.Children)
+            {
+                if (containerGrid.Children.IndexOf(obj) == 5)
+                {
 
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+            foreach (UIElement obj in queriesGrid.Children)
+            {
+                if (queriesGrid.Children.IndexOf(obj) == 3)
+                {
+                    headerLbl.Content = "Queires - Most Items Availed";
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+            closeAllOtherGridForm();
         }
 
         private void QueiresCustomer_Click(object sender, RoutedEventArgs e)
         {
+            MainVM.resetValueofVariables();
+            foreach (UIElement obj in containerGrid.Children)
+            {
+                if (containerGrid.Children.IndexOf(obj) == 5)
+                {
 
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+            foreach (UIElement obj in queriesGrid.Children)
+            {
+                if (queriesGrid.Children.IndexOf(obj) == 4)
+                {
+                    headerLbl.Content = "Queires - Most Items Availed";
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+            closeAllOtherGridForm();
         }
 
         private void QueiresSupplier_Click(object sender, RoutedEventArgs e)
         {
+            MainVM.resetValueofVariables();
+            foreach (UIElement obj in containerGrid.Children)
+            {
+                if (containerGrid.Children.IndexOf(obj) == 5)
+                {
 
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+            foreach (UIElement obj in queriesGrid.Children)
+            {
+                if (queriesGrid.Children.IndexOf(obj) == 5)
+                {
+                    headerLbl.Content = "Queires - Most Items Availed";
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                    obj.Visibility = Visibility.Collapsed;
+            }
+            closeAllOtherGridForm();
         }
     }
 }
