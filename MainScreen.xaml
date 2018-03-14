@@ -1156,7 +1156,7 @@
 
                 </Grid>
             </Grid>
-            <Grid x:Name="billingGrid" Margin="10" d:IsHidden="True">
+            <Grid x:Name="billingGrid" Margin="10">
                 <Grid x:Name="invoiceGridHome" >
                     <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                         <Label x:Name="label22" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -1255,7 +1255,7 @@
                                                     </Canvas>
                                                 </Viewbox>
                                             </Button>
-                                            <Button x:Name="printSalesInvoiceBtn" Width="Auto" Height="25" Background="{x:Null}" BorderBrush="Black" Margin="10,10,10,10" ToolTip="Print Sales Quote" Click="printSalesInvoiceBtn_Click" >
+                                            <Button x:Name="printSalesInvoiceBtn" Width="Auto" Height="25" Background="{x:Null}" BorderBrush="Black" Margin="10,10,10,10" ToolTip="Print Sales Invoice" Click="printSalesInvoiceBtn_Click" >
                                                 <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
                                                     <Canvas x:Name="Capa_1g" Width="475.078" Height="475.077" Canvas.Left="0" Canvas.Top="0">
                                                         <Canvas.RenderTransform>
@@ -1302,7 +1302,7 @@
                 </Grid>
                 <local:ucInvoiceForm x:Name="ucInvoiceForm" Margin="0" Visibility="Collapsed" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="serviceGrid">
+            <Grid x:Name="serviceGrid" d:IsHidden="True">
                 <Grid x:Name="serviceGridHome" Margin="0,0,20,20" >
                     <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                         <Label x:Name="label9" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -2317,7 +2317,7 @@
             <uControlsService:ucSelecService x:Name="ucSelectService" Margin="0" d:IsHidden="True"/>
             <local:ucNoticeOfEmployment x:Name="ucNoticeOfEmployment" Height="Auto" Margin="0" Width="Auto" d:IsHidden="True"/>
             <local:ucSalesInvoiceViewer x:Name="ucSaleInvoiceViewer" Margin="0" d:IsHidden="True"/>
-            <local:ucSalesQuoteViewer x:Name="ucSalesQuoteViewer" Margin="0" d:IsHidden="True"/>
+            <local:ucSalesQuoteViewer x:Name="ucSalesQuoteViewer" Margin="0" d:IsHidden="True" Visibility="Collapsed"/>
         </Grid>
 
     </Grid>

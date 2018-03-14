@@ -283,7 +283,8 @@ namespace prototype2
         {
             if (this.IsVisible && MainVM.isPaymentInvoice)
             {
-                MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(MainVM.SelectedSalesInvoice.sqNoChar_)).FirstOrDefault();
+                if(MainVM.SelectedSalesInvoice != null)
+                    MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(MainVM.SelectedSalesInvoice.sqNoChar_)).FirstOrDefault();
                 computeInvoice();
                 foreach (UIElement obj in newInvoiceFormGrid1.Children)
                 {

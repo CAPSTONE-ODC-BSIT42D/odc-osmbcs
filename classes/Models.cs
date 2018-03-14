@@ -9,6 +9,29 @@ namespace prototype2
 {
     #region Minor Models
 
+    public class FreqItem : ViewModelEntity
+    {
+        public FreqItem()
+        {
+
+        }
+
+        protected int itemID;
+        protected int qty;
+
+        public int ItemID
+        {
+            get { return itemID; }
+            set { SetProperty(ref itemID, value); }
+        }
+
+        public int Qty
+        {
+            get { return qty; }
+            set { SetProperty(ref qty, value); }
+        }
+    }
+
     public class ShipVia : ViewModelEntity
     {
         public ShipVia()

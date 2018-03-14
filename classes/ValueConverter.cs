@@ -403,4 +403,24 @@ namespace prototype2
         }
     }
 
+    public class ProductIDToNameConverter : IValueConverter
+    {
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
+        public object Convert(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            if (!value.Equals(0))
+            {
+                MainVM.SelectedProduct = MainVM.ProductList.Where(x => x.ID == int.Parse(value.ToString())).FirstOrDefault();
+                return MainVM.SelectedProduct.ItemName;
+            }
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            return "no";
+        }
+    }
 }

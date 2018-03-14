@@ -281,8 +281,6 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columnserviceName;
             
-            private global::System.Data.DataColumn columndesc;
-            
             private global::System.Data.DataColumn columndateStarted;
             
             private global::System.Data.DataColumn columndateEnded;
@@ -294,6 +292,8 @@ namespace prototype2 {
             private global::System.Data.DataColumn columnExpr2;
             
             private global::System.Data.DataColumn columnsqNoChar;
+            
+            private global::System.Data.DataColumn columnserviceDesc;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -333,14 +333,6 @@ namespace prototype2 {
             public global::System.Data.DataColumn serviceNameColumn {
                 get {
                     return this.columnserviceName;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn descColumn {
-                get {
-                    return this.columndesc;
                 }
             }
             
@@ -394,6 +386,14 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn serviceDescColumn {
+                get {
+                    return this.columnserviceDesc;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -429,17 +429,17 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public ServiceTableRow AddServiceTableRow(string serviceName, string desc, System.DateTime dateStarted, System.DateTime dateEnded, string serviceStatus, long Expr1, long Expr2, string sqNoChar) {
+            public ServiceTableRow AddServiceTableRow(string serviceName, System.DateTime dateStarted, System.DateTime dateEnded, string serviceStatus, long Expr1, long Expr2, string sqNoChar, string serviceDesc) {
                 ServiceTableRow rowServiceTableRow = ((ServiceTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         serviceName,
-                        desc,
                         dateStarted,
                         dateEnded,
                         serviceStatus,
                         Expr1,
                         Expr2,
-                        sqNoChar};
+                        sqNoChar,
+                        serviceDesc};
                 rowServiceTableRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowServiceTableRow);
                 return rowServiceTableRow;
@@ -470,13 +470,13 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             internal void InitVars() {
                 this.columnserviceName = base.Columns["serviceName"];
-                this.columndesc = base.Columns["desc"];
                 this.columndateStarted = base.Columns["dateStarted"];
                 this.columndateEnded = base.Columns["dateEnded"];
                 this.columnserviceStatus = base.Columns["serviceStatus"];
                 this.columnExpr1 = base.Columns["Expr1"];
                 this.columnExpr2 = base.Columns["Expr2"];
                 this.columnsqNoChar = base.Columns["sqNoChar"];
+                this.columnserviceDesc = base.Columns["serviceDesc"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -484,8 +484,6 @@ namespace prototype2 {
             private void InitClass() {
                 this.columnserviceName = new global::System.Data.DataColumn("serviceName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnserviceName);
-                this.columndesc = new global::System.Data.DataColumn("desc", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndesc);
                 this.columndateStarted = new global::System.Data.DataColumn("dateStarted", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndateStarted);
                 this.columndateEnded = new global::System.Data.DataColumn("dateEnded", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
@@ -498,15 +496,17 @@ namespace prototype2 {
                 base.Columns.Add(this.columnExpr2);
                 this.columnsqNoChar = new global::System.Data.DataColumn("sqNoChar", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsqNoChar);
+                this.columnserviceDesc = new global::System.Data.DataColumn("serviceDesc", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnserviceDesc);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnsqNoChar}, true));
                 this.columnserviceName.AllowDBNull = false;
                 this.columnserviceName.MaxLength = 50;
-                this.columndesc.MaxLength = 21845;
                 this.columnserviceStatus.MaxLength = 255;
                 this.columnsqNoChar.AllowDBNull = false;
                 this.columnsqNoChar.Unique = true;
                 this.columnsqNoChar.MaxLength = 255;
+                this.columnserviceDesc.MaxLength = 21845;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -660,22 +660,6 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string desc {
-                get {
-                    try {
-                        return ((string)(this[this.tableServiceTable.descColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'desc\' in table \'ServiceTable\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableServiceTable.descColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public System.DateTime dateStarted {
                 get {
                     try {
@@ -767,14 +751,18 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsdescNull() {
-                return this.IsNull(this.tableServiceTable.descColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetdescNull() {
-                this[this.tableServiceTable.descColumn] = global::System.Convert.DBNull;
+            public string serviceDesc {
+                get {
+                    try {
+                        return ((string)(this[this.tableServiceTable.serviceDescColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'serviceDesc\' in table \'ServiceTable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableServiceTable.serviceDescColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -835,6 +823,18 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetExpr2Null() {
                 this[this.tableServiceTable.Expr2Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsserviceDescNull() {
+                return this.IsNull(this.tableServiceTable.serviceDescColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetserviceDescNull() {
+                this[this.tableServiceTable.serviceDescColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -998,13 +998,13 @@ namespace prototype2.DataSetReportServiceTableAdapters {
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "ServiceTable";
             tableMapping.ColumnMappings.Add("serviceName", "serviceName");
-            tableMapping.ColumnMappings.Add("serviceDesc", "desc");
             tableMapping.ColumnMappings.Add("dateStarted", "dateStarted");
             tableMapping.ColumnMappings.Add("dateEnded", "dateEnded");
             tableMapping.ColumnMappings.Add("serviceStatus", "serviceStatus");
             tableMapping.ColumnMappings.Add("Expr1", "Expr1");
             tableMapping.ColumnMappings.Add("Expr2", "Expr2");
             tableMapping.ColumnMappings.Add("sqNoChar", "sqNoChar");
+            tableMapping.ColumnMappings.Add("serviceDesc", "serviceDesc");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -1021,7 +1021,7 @@ namespace prototype2.DataSetReportServiceTableAdapters {
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[6];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        sq.sqNoChar, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus
+            this._commandCollection[0].CommandText = @"SELECT        sq.sqNoChar, s.serviceDesc, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus
 FROM            service_sched_t ss INNER JOIN
                          services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
                          services_t s ON s.serviceID = sa.serviceID INNER JOIN
@@ -1030,7 +1030,7 @@ FROM            service_sched_t ss INNER JOIN
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = @"SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus
+            this._commandCollection[1].CommandText = @"SELECT        si.invoiceNo, s.serviceDesc, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus
 FROM            service_sched_t ss INNER JOIN
                          services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
                          services_t s ON s.serviceID = sa.serviceID INNER JOIN
@@ -1040,7 +1040,7 @@ WHERE        (DATE_FORMAT(sq.dateOfIssue, '%Y-%m-%d') = CURDATE())";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = @"SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus
+            this._commandCollection[2].CommandText = @"SELECT        si.invoiceNo, s.serviceDesc, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus
 FROM            service_sched_t ss INNER JOIN
                          services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
                          services_t s ON s.serviceID = sa.serviceID INNER JOIN
@@ -1096,7 +1096,7 @@ WHERE        (WEEK(ss.dateStarted) = @e) ";
             this._commandCollection[4].Parameters.Add(param);
             this._commandCollection[5] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[5].Connection = this.Connection;
-            this._commandCollection[5].CommandText = @"SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus
+            this._commandCollection[5].CommandText = @"SELECT        si.invoiceNo, s.serviceName, s.serviceDesc, ss.dateStarted, ss.dateEnded, ss.serviceStatus
 FROM            service_sched_t ss INNER JOIN
                          services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
                          services_t s ON s.serviceID = sa.serviceID INNER JOIN

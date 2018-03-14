@@ -99,42 +99,56 @@ namespace prototype2
         void searchForAvailableEmployees()
         {
             MainVM.AvailableEmployees_.Clear();
-            foreach(ServiceSchedule ss in MainVM.ServiceSchedules_)
+            IEnumerable<Employee> availEmp;
+            IEnumerable<Employee> availCont;
+            ObservableCollection<Employee> notAvail = new ObservableCollection<Employee>();
+            foreach (ServiceSchedule ss in MainVM.ServiceSchedules_)
             {
-                if(ss.dateEnded_ < startDate.SelectedDate)
+                if (ss.dateEnded_ > startDate.SelectedDate)
                 {
-                    var emp = (from e in MainVM.Employees
-                               where !(ss.assignedEmployees_.Contains(e))
-                               select e);
-                    var cont = (from e in MainVM.Contractor
-                                where !(ss.assignedEmployees_.Contains(e))
-                                select e);
-
-                    foreach (Employee ee in emp)
+                    var empx = from emp in MainVM.Employees
+                               join ssx in ss.assignedEmployees_ on emp.EmpID equals ssx.EmpID
+                               select emp;
+                    var contx = from cont in MainVM.Contractor
+                                join ssx in ss.assignedEmployees_ on cont.EmpID equals ssx.EmpID
+                                select cont;
+                    foreach(Employee emp in empx)
                     {
-                        MainVM.AvailableEmployees_.Add(ee);
+                        notAvail.Add(emp);
                     }
-                    foreach (Employee ee in cont)
+                    foreach (Employee cont in contx)
                     {
-                        MainVM.AvailableEmployees_.Add(ee);
+                        notAvail.Add(cont);
                     }
                 }
-                
+                    
             }
-            if(MainVM.ServiceSchedules_.Count ==0)
+
+            foreach (Employee ee in MainVM.Employees)
             {
-
-                foreach (Employee ee in MainVM.Employees)
-                {
-                    if(!MainVM.SelectedServiceSchedule_.assignedEmployees_.Contains(ee))
-                        MainVM.AvailableEmployees_.Add(ee);
-                }
-                foreach (Employee ee in MainVM.Contractor)
-                {
-                    if (!MainVM.SelectedServiceSchedule_.assignedEmployees_.Contains(ee))
-                        MainVM.AvailableEmployees_.Add(ee);
-                }
+                if (!notAvail.Contains(ee))
+                    MainVM.AvailableEmployees_.Add(ee);
             }
+            foreach (Employee ee in MainVM.Contractor)
+            {
+                if (!notAvail.Contains(ee))
+                    MainVM.AvailableEmployees_.Add(ee);
+            }
+
+            //if (MainVM.ServiceSchedules_.Count ==0)
+            //{
+
+            //    foreach (Employee ee in MainVM.Employees)
+            //    {
+            //        if(!MainVM.SelectedServiceSchedule_.assignedEmployees_.Contains(ee))
+            //            MainVM.AvailableEmployees_.Add(ee);
+            //    }
+            //    foreach (Employee ee in MainVM.Contractor)
+            //    {
+            //        if (!MainVM.SelectedServiceSchedule_.assignedEmployees_.Contains(ee))
+            //            MainVM.AvailableEmployees_.Add(ee);
+            //    }
+            //}
 
             
         }

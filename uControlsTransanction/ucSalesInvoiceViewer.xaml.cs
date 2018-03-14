@@ -40,7 +40,7 @@ namespace prototype2
         private void DisplayReport()
         {
 
-            SalesInvoiceViewer.Reset();
+           
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesInvoice.rdlc");
             SalesInvoiceViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetSalesInvoice", GetSales()));
             SalesInvoiceViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetSalesInvoiceSer", GetSalesSer()));
@@ -109,9 +109,9 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
             if (MainVM.SelectedSalesInvoice == null)
-                cmd.CommandText = "select c.companyname, si.tin, c.companyaddress, c.companycity, si.busstyle, curdate() as datetoday, si.termsdays, i.itemname, s.servicename,s.serviceprice, i.itemdescr, s.servicedesc, u.unitName, ia.itemqnty, ia.unitprice, mh.markupPerc, sa.totalCost, f.feeValue, si.invoiceno, si.vat, si.withholdingtax, si.notes FROM sales_invoice_t si inner join cust_supp_t c on si.custid = c.companyid inner join sales_quote_t sq on sq.sqnochar = si.sqnochar inner join items_availed_t ia on ia.sqnochar =sq.sqnochar inner join item_t i on i.id =ia.itemid inner join unit_t u on u.id = i.unitid inner join markup_hist_t mh on i.id =mh.itemid inner join services_availed_t sa on sa.sqnochar = sq.sqnochar inner join services_t s on s.serviceid=sa.serviceid inner join fees_per_transaction_t f on f.servicesavailedid = sa.id where si.invoiceno='" + result + "'";
+                cmd.CommandText = "select c.companyname, c.taxNumber, c.companyaddress, c.companycity, c.busstyle, curdate() as datetoday, si.termsdays, i.itemname, s.servicename,s.serviceprice, i.itemdescr, s.servicedesc, u.unitName, ia.itemqnty, ia.unitprice, mh.markupPerc, sa.totalCost, f.feeValue, si.invoiceno, si.vat, si.withholdingtax, si.notes FROM sales_invoice_t si inner join cust_supp_t c on si.custid = c.companyid inner join sales_quote_t sq on sq.sqnochar = si.sqnochar inner join items_availed_t ia on ia.sqnochar =sq.sqnochar inner join item_t i on i.id =ia.itemid inner join unit_t u on u.id = i.unitid inner join markup_hist_t mh on i.id =mh.itemid inner join services_availed_t sa on sa.sqnochar = sq.sqnochar inner join services_t s on s.serviceid=sa.serviceid inner join fees_per_transaction_t f on f.servicesavailedid = sa.id where si.invoiceno='" + result + "'";
             else
-                cmd.CommandText = "select c.companyname, si.tin, c.companyaddress, c.companycity, si.busstyle, curdate() as datetoday, si.termsdays, i.itemname, s.servicename,s.serviceprice, i.itemdescr, s.servicedesc, u.unitName, ia.itemqnty, ia.unitprice, mh.markupPerc, sa.totalCost, f.feeValue, si.invoiceno, si.vat, si.withholdingtax, si.notes FROM sales_invoice_t si inner join cust_supp_t c on si.custid = c.companyid inner join sales_quote_t sq on sq.sqnochar = si.sqnochar inner join items_availed_t ia on ia.sqnochar =sq.sqnochar inner join item_t i on i.id =ia.itemid inner join unit_t u on u.id = i.unitid inner join markup_hist_t mh on i.id =mh.itemid inner join services_availed_t sa on sa.sqnochar = sq.sqnochar inner join services_t s on s.serviceid=sa.serviceid inner join fees_per_transaction_t f on f.servicesavailedid = sa.id where si.invoiceno='" + MainVM.SelectedSalesInvoice.invoiceNo_ + "'";
+                cmd.CommandText = "select c.companyname, c.taxNumber, c.companyaddress, c.companycity, c.busstyle, curdate() as datetoday, si.termsdays, i.itemname, s.servicename,s.serviceprice, i.itemdescr, s.servicedesc, u.unitName, ia.itemqnty, ia.unitprice, mh.markupPerc, sa.totalCost, f.feeValue, si.invoiceno, si.vat, si.withholdingtax, si.notes FROM sales_invoice_t si inner join cust_supp_t c on si.custid = c.companyid inner join sales_quote_t sq on sq.sqnochar = si.sqnochar inner join items_availed_t ia on ia.sqnochar =sq.sqnochar inner join item_t i on i.id =ia.itemid inner join unit_t u on u.id = i.unitid inner join markup_hist_t mh on i.id =mh.itemid inner join services_availed_t sa on sa.sqnochar = sq.sqnochar inner join services_t s on s.serviceid=sa.serviceid inner join fees_per_transaction_t f on f.servicesavailedid = sa.id where si.invoiceno='" + MainVM.SelectedSalesInvoice.invoiceNo_ + "'";
 
 
             DataSetSalesInvoice.SalesInvoiceDataTable dSItem = new DataSetSalesInvoice.SalesInvoiceDataTable();
@@ -130,7 +130,7 @@ namespace prototype2
             }
             else
             {
-                SalesInvoiceViewer.Reset();
+
             }
         }
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)

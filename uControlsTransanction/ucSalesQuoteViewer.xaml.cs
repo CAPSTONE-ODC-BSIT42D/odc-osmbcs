@@ -43,8 +43,8 @@ namespace prototype2
             ucReportViewerSalesQuote.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesQuote.rdlc");
             ucReportViewerSalesQuote.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetSales_Quote", GetSalesQuote()));
-            //ucReportViewerSalesQuote.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetAmount", GetSalesQuoteAmount()));
-           // ucReportViewerSalesQuote.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetServiceSQ", GetSalesQuoteSer()));
+            ucReportViewerSalesQuote.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetAmount", GetSalesQuoteAmount()));
+            ucReportViewerSalesQuote.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetServiceSQ", GetSalesQuoteSer()));
             ucReportViewerSalesQuote.LoadReport(rNames);
             ucReportViewerSalesQuote.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ucReportViewerSalesQuote.RefreshReport();

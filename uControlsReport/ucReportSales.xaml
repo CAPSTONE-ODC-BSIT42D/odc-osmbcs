@@ -33,8 +33,9 @@
             <ComboBoxItem Content="November"/>
             <ComboBoxItem Content="December"/>
         </ComboBox>
-        <ComboBox x:Name="ComboBoxItemYear" HorizontalAlignment="Left" Margin="272,31,0,0" VerticalAlignment="Top" Width="131" Height="31" IsEditable="True" Visibility="Hidden" SelectionChanged="ComboBoxItemYear_SelectionChanged">
+        <ComboBox x:Name="ComboBoxItemYear" HorizontalAlignment="Left" Margin="272,31,0,0" VerticalAlignment="Top" Width="131" Height="31" IsEditable="False" Visibility="Hidden" SelectionChanged="ComboBoxItemYear_SelectionChanged">
             <ComboBoxItem Content="2017"/>
+            <ComboBoxItem Content="2018"/>
         </ComboBox>
         <Label x:Name="YearItem" Content="Year:" HorizontalAlignment="Left" Margin="272,4,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
         <DatePicker x:Name="DatePickerItemStart" HorizontalAlignment="Left" Margin="402,30,0,0" VerticalAlignment="Top" Width="131" Height="31" Visibility="Hidden" SelectedDateChanged="DatePickerItemStart_SelectedDateChanged" />

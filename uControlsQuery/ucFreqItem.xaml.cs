@@ -21,7 +21,7 @@ using System.Windows.Shapes;
 using System.Data;
 using MySql.Data.MySqlClient;
 using System.Configuration;
-
+using System.Collections.ObjectModel;
 
 namespace prototype2
 {
@@ -32,6 +32,7 @@ namespace prototype2
     {
         MySqlConnection conn = new
 MySqlConnection(ConfigurationManager.ConnectionStrings["prototype2.Properties.Settings.odc_dbConnectionString"].ConnectionString);
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
         public ucFreqItem()
         {
             InitializeComponent();
@@ -52,28 +53,21 @@ MySqlConnection(ConfigurationManager.ConnectionStrings["prototype2.Properties.Se
         }
         private void binddatagrid()
         {
-
-
-
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT        i.itemName, COUNT(ia.id) AS NoOfTimes FROM            item_t i INNER JOIN  items_availed_t ia ON i.ID = ia.itemID INNER JOIN  sales_quote_t sq ON sq.sqNoChar = ia.sqNoChar WHERE(sq.status = 'ACCEPTED') GROUP BY ia.itemID ORDER BY NoOfTimes DESC", conn);
-                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-               QueriesDataSet ds = new QueriesDataSet();
-                adp.Fill(ds);
-                item_tDataGrid.DataContext = ds;
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            finally
-            {
-                conn.Close();
-            }
+            MainVM.FrequentItems = new ObservableCollection<FreqItem>(from item in MainVM.AvailedItems
+                                group item by item.ItemID into freqitem
+                                select new FreqItem() { ItemID = freqitem.Key, Qty = (from x in freqitem select x.SqNoChar).Distinct().Count() });
+            
         }
 
+        void dailyFilter()
+        {
+            MainVM.FrequentItems.Clear();
+            MainVM.FrequentItems = new ObservableCollection<FreqItem>(from item in MainVM.AvailedItems
+                                                                      join sq in MainVM.SalesQuotes on item.SqNoChar equals sq.sqNoChar_
+                                                                      where (sq.dateOfIssue_.ToShortDateString() == dailyDatePicker.SelectedDate.Value.ToShortDateString()) && (sq.validityDate_ > DateTime.Now)
+                                                                      group item by item.ItemID into freqitem
+                                                                      select new FreqItem() { ItemID = freqitem.Key, Qty = (from x in freqitem select x.ItemID).Distinct().Count() });
+        }
 
 
 
@@ -87,6 +81,19 @@ MySqlConnection(ConfigurationManager.ConnectionStrings["prototype2.Properties.Se
             // 	System.Windows.Data.CollectionViewSource myCollectionViewSource = (System.Windows.Data.CollectionViewSource)this.Resources["Resource Key for CollectionViewSource"];
             // 	myCollectionViewSource.Source = your data
             // }
+        }
+
+        private void comboBoxFreqItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(comboBoxFreqItems.SelectedIndex == 0)
+            {
+                dailyDatePicker.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void dailyDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dailyFilter();
         }
     }
 }

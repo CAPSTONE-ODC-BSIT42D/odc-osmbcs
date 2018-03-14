@@ -290,14 +290,14 @@ STATUS</Value>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="desc">
+                    <Textbox Name="serviceDesc">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!desc.Value</Value>
+                              <Value>=Fields!serviceDesc.Value</Value>
                               <Style>
                                 <FontSize>12pt</FontSize>
                               </Style>
@@ -306,7 +306,7 @@ STATUS</Value>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>desc</rd:DefaultName>
+                      <rd:DefaultName>serviceDesc</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -318,6 +318,7 @@ STATUS</Value>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -484,10 +485,6 @@ STATUS</Value>
           <DataField>serviceName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="desc">
-          <DataField>serviceDesc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="dateStarted">
           <DataField>dateStarted</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
@@ -510,6 +507,10 @@ STATUS</Value>
         </Field>
         <Field Name="sqNoChar">
           <DataField>sqNoChar</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="serviceDesc">
+          <DataField>serviceDesc</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>

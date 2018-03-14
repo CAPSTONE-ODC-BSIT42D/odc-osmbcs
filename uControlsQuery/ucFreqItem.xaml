@@ -9,21 +9,26 @@
     <UserControl.Resources>
         <local:QueriesDataSet x:Key="queriesDataSet"/>
         <CollectionViewSource x:Key="item_tViewSource" Source="{Binding item_t, Source={StaticResource queriesDataSet}}"/>
+        <local:ProductIDToNameConverter x:Key="ProductIDToNameConverter"/>
     </UserControl.Resources>
-    <Grid Background="#FFFBFAFA" DataContext="{StaticResource item_tViewSource}">
+    <UserControl.DataContext>
+        <StaticResource ResourceKey="MainVM"/>
+    </UserControl.DataContext>
+    <Grid Background="#FFFBFAFA" >
         <Label Content="Frequently Availed Items" HorizontalAlignment="Left" Margin="3,2,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <Label Content="Sort by:" HorizontalAlignment="Left" Margin="407,34,0,0" VerticalAlignment="Top" FontSize="11"/>
-        <ComboBox x:Name="comboBoxFreqItems" HorizontalAlignment="Left" Margin="458,35,0,0" VerticalAlignment="Top" Width="120" FontSize="11" >
+        <Label Content="Sort by:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top" FontSize="11"/>
+        <ComboBox x:Name="comboBoxFreqItems" HorizontalAlignment="Left" Margin="62,43,0,0" VerticalAlignment="Top" Width="120" FontSize="11" SelectionChanged="comboBoxFreqItems_SelectionChanged" >
             <ComboBoxItem Content="Daily"/>
             <ComboBoxItem Content="Weekly"/>
             <ComboBoxItem Content="Monthly"/>
             <ComboBoxItem Content="Yearly"/>
         </ComboBox>
-        <DataGrid x:Name="item_tDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="3,92,10,10" RowDetailsVisibilityMode="VisibleWhenSelected">
+        <DataGrid x:Name="item_tDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding FrequentItems}" Margin="10,92,10,10" RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
-                <DataGridTextColumn  Binding="{Binding itemName}" Header="item Name" Width="400"/>
-                <DataGridTextColumn  Binding="{Binding NoOfTimes}" Header="No Of Times availed" Width="200"/>
+                <DataGridTextColumn  Binding="{Binding ItemID, Converter={StaticResource ProductIDToNameConverter}, NotifyOnTargetUpdated=True}" Header="item Name" Width="400"/>
+                <DataGridTextColumn  Binding="{Binding Qty}" Header="No Of Times availed" Width="200"/>
             </DataGrid.Columns>
         </DataGrid>
+        <DatePicker x:Name="dailyDatePicker" HorizontalAlignment="Left" Margin="204,40,0,0" VerticalAlignment="Top" Visibility="Collapsed" SelectedDateChanged="dailyDatePicker_SelectedDateChanged"/>
     </Grid>
 </UserControl>

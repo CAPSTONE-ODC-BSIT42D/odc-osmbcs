@@ -808,5 +808,12 @@ namespace prototype2
             get { return selectedPhasesPerService; }
             set { SetProperty(ref selectedPhasesPerService, value); }
         }
+
+        protected ObservableCollection<FreqItem> FrequentItems_ = new ObservableCollection<FreqItem>();
+        public ObservableCollection<FreqItem> FrequentItems
+        {
+            get { return FrequentItems_; }
+            set { SetProperty(ref FrequentItems_, value); }
+        }
     }
 }

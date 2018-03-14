@@ -276,7 +276,7 @@
                     <TextBox x:Name="fileNameTb" HorizontalAlignment="Left" Height="23" Margin="38,868,0,0" TextWrapping="Wrap" Text="&lt;FileName&gt;" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
                 </Grid>
             </ScrollViewer>
-            <local:DocumentViewer x:Name="saleQuoteViewer" HorizontalAlignment="Left" VerticalAlignment="Top" d:IsHidden="True" Margin="0,0,0,45"/>
+            <local:DocumentViewer x:Name="saleQuoteViewer" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,45" d:IsHidden="True"/>
 
         </Grid>
         <StackPanel Margin="0" Height="45" FlowDirection="RightToLeft" VerticalAlignment="Bottom">

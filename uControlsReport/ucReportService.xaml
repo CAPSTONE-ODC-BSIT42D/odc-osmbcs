@@ -66,8 +66,9 @@
                 <ComboBoxItem Content="November"/>
                 <ComboBoxItem Content="December"/>
             </ComboBox>
-            <ComboBox x:Name="ComboBoxYear" Margin="0,21,224,0" VerticalAlignment="Top" Height="31" IsEditable="True" Visibility="Hidden" SelectionChanged="ComboBoxYear_SelectionChanged" Grid.RowSpan="6" HorizontalAlignment="Right" Width="131" Grid.Column="1" Grid.ColumnSpan="3">
+            <ComboBox x:Name="ComboBoxYear" Margin="0,21,224,0" VerticalAlignment="Top" Height="31" IsEditable="False" Visibility="Visible" SelectionChanged="ComboBoxYear_SelectionChanged" Grid.RowSpan="6" HorizontalAlignment="Right" Width="131" Grid.Column="1" Grid.ColumnSpan="3">
                 <ComboBoxItem Content="2017"/>
+                <ComboBoxItem Content="2018"/>
             </ComboBox>
         </Grid>
 

@@ -1662,7 +1662,14 @@ namespace prototype2
 
         private void printSalesInvoiceBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            otherGridBg.Visibility = Visibility.Visible;
+            foreach (UIElement obj in otherGridBg.Children)
+            {
+                if (obj.Equals(ucSaleInvoiceViewer))
+                {
+                    obj.Visibility = Visibility.Visible;
+                }
+            }
         }
 
         private void receivePaymentBtn_Click(object sender, RoutedEventArgs e)
