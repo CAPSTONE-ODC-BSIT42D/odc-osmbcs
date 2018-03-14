@@ -1736,7 +1736,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -1818,79 +1817,6 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Tablix Name="Tablix16">
-        <TablixBody>
-          <TablixColumns>
-            <TablixColumn>
-              <Width>0.98958in</Width>
-            </TablixColumn>
-          </TablixColumns>
-          <TablixRows>
-            <TablixRow>
-              <Height>0.35417in</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="unitPrice2">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Sum((((Fields!markupPerc.Value\100)*Fields!unitPrice.Value)+Fields!unitPrice.Value))+Sum(Fields!servicePrice.Value+Fields!totalCost.Value+Fields!feeValue.Value)</Value>
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>unitPrice2</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>Aqua</BackgroundColor>
-                        <VerticalAlign>Middle</VerticalAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
-          </TablixRows>
-        </TablixBody>
-        <TablixColumnHierarchy>
-          <TablixMembers>
-            <TablixMember />
-          </TablixMembers>
-        </TablixColumnHierarchy>
-        <TablixRowHierarchy>
-          <TablixMembers>
-            <TablixMember>
-              <Group Name="Details8" />
-            </TablixMember>
-          </TablixMembers>
-        </TablixRowHierarchy>
-        <DataSetName>DataSetSales_Quote</DataSetName>
-        <Top>5.81125in</Top>
-        <Left>6.2825in</Left>
-        <Height>0.35417in</Height>
-        <Width>0.98958in</Width>
-        <ZIndex>32</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Tablix>
       <Tablix Name="Tablix19">
         <TablixBody>
           <TablixColumns>
@@ -1953,7 +1879,7 @@
         <Left>2.12625in</Left>
         <Height>0.25in</Height>
         <Width>0.57541in</Width>
-        <ZIndex>33</ZIndex>
+        <ZIndex>32</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2022,7 +1948,7 @@
         <Left>2.095in</Left>
         <Height>0.25in</Height>
         <Width>0.46875in</Width>
-        <ZIndex>34</ZIndex>
+        <ZIndex>33</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2091,7 +2017,7 @@
         <Left>4.19569in</Left>
         <Height>0.25in</Height>
         <Width>1.45486in</Width>
-        <ZIndex>35</ZIndex>
+        <ZIndex>34</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2117,7 +2043,7 @@
         <Left>5.65055in</Left>
         <Height>0.25in</Height>
         <Width>1.62153in</Width>
-        <ZIndex>36</ZIndex>
+        <ZIndex>35</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2360,7 +2286,7 @@
         <Left>0.64708in</Left>
         <Height>0.32292in</Height>
         <Width>6.63543in</Width>
-        <ZIndex>37</ZIndex>
+        <ZIndex>36</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2429,6 +2355,75 @@
         <Left>2.095in</Left>
         <Height>0.25in</Height>
         <Width>0.38098in</Width>
+        <ZIndex>37</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Tablix>
+      <Tablix Name="Tablix5">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>0.94791in</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.35417in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="AMOUNT1">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!AMOUNT.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>AMOUNT1</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Details8" />
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>DataSetAmount</DataSetName>
+        <Top>5.81125in</Top>
+        <Left>6.2825in</Left>
+        <Height>0.35417in</Height>
+        <Width>0.94791in</Width>
         <ZIndex>38</ZIndex>
         <Style>
           <Border>
@@ -2445,7 +2440,7 @@
       </Border>
     </Style>
   </Body>
-  <Width>8.11712in</Width>
+  <Width>9.81125in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
@@ -2874,6 +2869,30 @@
         <rd:TableAdapterFillMethod>FillBySQSer</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetDataBySQSer</rd:TableAdapterGetDataMethod>
         <rd:TableAdapterName>SQServiceTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="DataSetAmount">
+      <Query>
+        <DataSourceName>DatasetSales_Quote</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="sqNoChar">
+          <DataField>sqNoChar</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="AMOUNT">
+          <DataField>AMOUNT</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>DatasetSales_Quote</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\Alexis\Source\Repos\odc-osmbcs\DatasetSales_Quote.xsd</rd:SchemaPath>
+        <rd:TableName>sales_quote_t</rd:TableName>
+        <rd:TableAdapterFillMethod>FillAmountAll</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetDataAmountAll</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>sales_quote_tTableAdapter</rd:TableAdapterName>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
