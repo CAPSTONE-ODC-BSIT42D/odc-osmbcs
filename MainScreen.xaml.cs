@@ -97,6 +97,7 @@ namespace prototype2
 
             this.ucService.SelectServiceButtonClicked += selectService_BtnClicked;
             this.ucSelectService.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
+            this.ucService.SaveCloseButtonClicked += saveCloseServiceForm;
 
             this.ucSalesQuoteViewer.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
 
@@ -299,6 +300,24 @@ namespace prototype2
             }
         }
 
+        private void saveCloseServiceForm(object sender, EventArgs e)
+        {
+            foreach (var obj in serviceGrid.Children)
+            {
+                if (obj is Grid)
+                {
+                    if (((Grid)obj).Equals(serviceGridHome))
+                    {
+                        headerLbl.Content = "Service Management";
+                        ((Grid)obj).Visibility = Visibility.Visible;
+                    }
+                }
+                else
+                    ((UserControl)obj).Visibility = Visibility.Collapsed;
+
+            }
+            refreshData();
+        }
 
         private void saveCloseSalesQuoteForm(object sender, EventArgs e)
         {
@@ -1522,7 +1541,6 @@ namespace prototype2
 
         private void editQuoteRecordBtn_Click(object sender, RoutedEventArgs e)
         {
-
             MainVM.isEdit = true;
             foreach (UIElement element in transQuotationGrid.Children)
             {
@@ -1763,7 +1781,7 @@ namespace prototype2
         #region Service Management
         private void newServiceSchedBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainVM.isEdit = false;
+            MainVM.isNewSched = true;
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
             otherGridBg.Visibility = Visibility.Visible;
             Grid.SetZIndex((otherGridBg), 1);
@@ -1782,7 +1800,6 @@ namespace prototype2
 
         private void viewSchedBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainVM.isEdit = true;
             foreach (var element in serviceGrid.Children)
             {
                 if (element is UserControl)

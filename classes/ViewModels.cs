@@ -57,6 +57,7 @@ namespace prototype2
             isNewSupplier = false;
             isNewTrans = false;
             isPaymentInvoice = false;
+            isNewSched = false;
             isView = false;
 
             VatableSale = 0;
@@ -248,6 +249,8 @@ namespace prototype2
         public bool isNewRecord { get; set; }
 
         public bool isContractor { get; set; }
+
+        public bool isNewSched { get; set; }
 
         public int lastNumber { get; set; }
 

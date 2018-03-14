@@ -13,6 +13,7 @@
         <local:ServiceNameConverter x:Key="ServiceNameConverter" />
         <local:PhaseItemConverter x:Key="PhaseItemConverter" />
         <local:PhaseGroupConverter x:Key="PhaseGroupConverter" />
+        <local:EmployeeNameConcatenator x:Key="EmployeeNameConcatenator"/>
     </UserControl.Resources>
 
     <Grid Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
@@ -40,14 +41,22 @@
                 <Button x:Name="transferToLeftBtn" Content="&lt;" HorizontalAlignment="Left" Margin="342,397,0,0" VerticalAlignment="Top" Width="36" Click="transferToLeftBtn_Click" ToolTip="Unassign selected employee"/>
                 <Label x:Name="label21_Copy5" Content="Additional Notes:" HorizontalAlignment="Left" Margin="38,193,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <TextBox x:Name="notesTb" HorizontalAlignment="Left" Height="65" Margin="55,219,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="395"/>
-                <ListBox x:Name="assignedEmployees" HorizontalAlignment="Left" Height="199" Margin="383,320,0,0" VerticalAlignment="Top" Width="282" ItemsSource="{Binding SelectedServiceSchedule_.assignedEmployees_}" SelectedItem="{Binding SelectedEmployeeContractor}"  DisplayMemberPath="EmpLName"/>
-                <ListBox x:Name="availableEmployees" ItemsSource="{Binding AvailableEmployees_}" SelectedItem="{Binding SelectedEmployeeContractor}" Margin="55,320,0,0" DisplayMemberPath="EmpLName" Height="199" VerticalAlignment="Top" HorizontalAlignment="Left" Width="282"/>
+                <DataGrid x:Name="assignedEmployees" HorizontalAlignment="Left" Height="199" Margin="383,320,0,0" VerticalAlignment="Top" Width="282" ItemsSource="{Binding SelectedServiceSchedule_.assignedEmployees_}" SelectedItem="{Binding SelectedEmployeeContractor}" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding EmpID, Converter={StaticResource PhaseItemConverter}, NotifyOnTargetUpdated=True}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <DataGrid x:Name="availableEmployees" ItemsSource="{Binding AvailableEmployees_}" SelectedItem="{Binding SelectedEmployeeContractor}" Margin="55,320,0,0" Height="199" VerticalAlignment="Top" HorizontalAlignment="Left" Width="282" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding EmpID, Converter={StaticResource PhaseItemConverter}, NotifyOnTargetUpdated=True}" />
+                    </DataGrid.Columns>
+                </DataGrid>
 
                 <Button x:Name="transferToRightBtn" Content="&gt;" HorizontalAlignment="Left" Margin="342,422,0,0" VerticalAlignment="Top" Width="36" Click="transferToRightBtn_Click" ToolTip="Assign selected employee"/>
                 <Label x:Name="label21_Copy6" Content="Available Employees:" HorizontalAlignment="Left" Margin="38,289,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <Button x:Name="selectServiceBtn" Content="Select Service" HorizontalAlignment="Right" Margin="0,70,40,0" Width="105" Height="24" VerticalAlignment="Top" Click="selectServiceBtn_Click" Visibility="Hidden" />
                 <Label x:Name="label21_Copy7" Content="Phases" HorizontalAlignment="Left" Margin="38,524,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <DataGrid x:Name="phaseDg" SelectedItem="{Binding SelectedPhasesPerService}" ItemsSource="{Binding SelectedServiceSchedule_.PhasesPerService}" HorizontalAlignment="Left" Height="133" Margin="55,550,0,0" VerticalAlignment="Top" Width="610" AutoGenerateColumns="False" CanUserAddRows="False">
+                <DataGrid x:Name="phaseDg" SelectedItem="{Binding SelectedPhasesPerService}" ItemsSource="{Binding SelectedServiceSchedule_.PhasesPerService}" Height="271" Margin="55,550,0,0" VerticalAlignment="Top" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Width="740">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding PhaseID, Converter={StaticResource PhaseItemConverter}, NotifyOnTargetUpdated=True}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Phase Name"  />
                         <DataGridTextColumn Binding="{Binding PhaseID, Converter={StaticResource PhaseGroupConverter}, NotifyOnTargetUpdated=True}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Phase Group"  />
@@ -102,7 +111,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
-                    
+
                 </DataGrid>
             </Grid>
 

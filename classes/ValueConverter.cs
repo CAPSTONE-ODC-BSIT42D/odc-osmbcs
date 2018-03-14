@@ -30,6 +30,33 @@ namespace prototype2
             return "no";
         }
     }
+
+
+    public class EmployeeNameConcatenator : IValueConverter
+    {
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
+        public object Convert(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            if (!value.Equals(0))
+            {
+                MainVM.SelectedEmployeeContractor = MainVM.Employees.Where(x => x.EmpID.ToString().Equals(value.ToString())).FirstOrDefault();
+                if(MainVM.SelectedEmployeeContractor == null)
+                    MainVM.SelectedEmployeeContractor = MainVM.Contractor.Where(x => x.EmpID.ToString().Equals(value.ToString())).FirstOrDefault();
+                return MainVM.SelectedEmployeeContractor.EmpFname + " " + MainVM.SelectedEmployeeContractor.EmpMiddleInitial + " " + MainVM.SelectedEmployeeContractor.EmpLName;
+            }
+            return "";
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            return "no";
+        }
+    }
+
+
     public class EmployeeTypeOfConverter : IValueConverter
     {
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;

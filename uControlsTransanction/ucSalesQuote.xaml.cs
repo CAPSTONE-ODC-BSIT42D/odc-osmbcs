@@ -143,6 +143,49 @@ namespace prototype2
 
         }
 
+        void loadSalesQuoteToUi()
+        {
+            MainVM.SelectedCustomerSupplier = (from cust in MainVM.Customers
+                                               where cust.CompanyID == MainVM.SelectedSalesQuote.custID_
+                                               select cust).FirstOrDefault();
+            MainVM.RequestedItems.Clear();
+            MainVM.AvailedServicesList.Clear();
+
+            var invoiceprod = from ai in MainVM.AvailedItems
+                              where ai.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
+                              select ai;
+            MainVM.AvailedServicesList = new ObservableCollection<AvailedService>(from aser in MainVM.AvailedServices
+                                                                                  where aser.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
+                                                                                  select aser);
+            foreach (AvailedItem ai in invoiceprod)
+            {
+                var markupPrice = from itm in MainVM.MarkupHist
+                                  where itm.ItemID == ai.ItemID
+                                  && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
+                                  select itm;
+                decimal totalPric = ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc);
+                MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, unitPrice = ai.UnitPrice, totalAmount = totalPric, qtyEditable = true });
+            }
+
+            foreach (AvailedService aserv in MainVM.AvailedServicesList)
+            {
+                var service = from serv in MainVM.ServicesList
+                              where serv.ServiceID == aserv.ServiceID
+                              select serv;
+                MainVM.RequestedItems.Add(new RequestedItem() { availedServiceID = aserv.AvailedServiceID, itemID = aserv.ServiceID, itemType = 1, qty = 0, totalAmount = aserv.TotalCost, unitPrice = aserv.TotalCost });
+            }
+
+            if (MainVM.isView)
+            {
+                foreach (UIElement obj in transQuoatationGridForm.Children)
+                {
+                    if (transQuoatationGridForm.Children.IndexOf(obj) <= 1)
+                        obj.IsEnabled = false;
+                }
+            }
+
+
+        }
 
         private void transRequestBack_Click(object sender, RoutedEventArgs e)
         {
@@ -724,7 +767,7 @@ namespace prototype2
 
             if (dbCon.IsConnect())
             {
-                if (!MainVM.isEdit)
+                if (MainVM.isNewTrans)
                 {
                     string query = "INSERT INTO `odc_db`.`sales_quote_t` " + "(`sqNoChar`,`custID`,`quoteSubject`,`priceNote`,`deliveryDate`,`estDelivery`,`validityDays`,`validityDate`,`otherTerms`,`VAT`,`vatIsExcluded`,`paymentIsLanded`,`paymentCurrency`,`status`,`termsDays`,`termsDP`,`discountPercent`,surveyReportDoc, additionalNote)" +
                     " VALUES " +
@@ -824,8 +867,11 @@ namespace prototype2
                         " WHERE `sqNoCHar` = '" + MainVM.SelectedSalesQuote.sqNoChar_ +"'";
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
-                        query = "DELETE FROM `ITEMS_AVAILED_T` WHERE sqNoChar = '" + MainVM.SelectedSalesQuote.sqNoChar_+"'";
-                        dbCon.insertQuery(query, dbCon.Connection);
+                        if (!MainVM.isNewTrans)
+                        {
+                            query = "DELETE FROM `ITEMS_AVAILED_T` WHERE sqNoChar = '" + MainVM.SelectedSalesQuote.sqNoChar_ + "'";
+                            dbCon.insertQuery(query, dbCon.Connection);
+                        }
                         
                         foreach (RequestedItem item in MainVM.RequestedItems)
                         {
@@ -845,14 +891,11 @@ namespace prototype2
                             query = "DELETE FROM `FEES_PER_TRANSACTION_T` WHERE servicesAvailedID = " + aserv.AvailedServiceID;
                             dbCon.insertQuery(query, dbCon.Connection);
 
-                            query = "DELETE FROM `services_availed_t` WHERE id = " + aserv.AvailedServiceID;
-                            dbCon.insertQuery(query, dbCon.Connection);
-
                             query = "INSERT INTO `odc_db`.`services_availed_t`(`serviceID`,`provinceID`,`sqNoChar`,`city`,`address`,`totalCost`)" +
                                 " VALUES " +
                                 "('" + aserv.ServiceID + "', '" +
                                 aserv.ProvinceID + "', '" +
-                                aserv.SqNoChar + "', '" +
+                                MainVM.SelectedSalesQuote.sqNoChar_ + "', '" +
                                 aserv.City + "', '" +
                                 aserv.Address + "', '" +
                                 aserv.TotalCost + "');";
@@ -882,49 +925,7 @@ namespace prototype2
             }
         }
 
-        void loadSalesQuoteToUi()
-        {
-            MainVM.SelectedCustomerSupplier = (from cust in MainVM.Customers
-                                               where cust.CompanyID == MainVM.SelectedSalesQuote.custID_
-                                               select cust).FirstOrDefault();
-            MainVM.RequestedItems.Clear();
-            MainVM.AvailedServicesList.Clear();
-
-            var invoiceprod = from ai in MainVM.AvailedItems
-                              where ai.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
-                              select ai;
-            MainVM.AvailedServicesList = new ObservableCollection<AvailedService>(from aser in MainVM.AvailedServices
-                                                                                  where aser.SqNoChar.Equals(MainVM.SelectedSalesQuote.sqNoChar_)
-                                                                                  select aser);
-            foreach (AvailedItem ai in invoiceprod)
-            {
-                var markupPrice = from itm in MainVM.MarkupHist
-                                  where itm.ItemID == ai.ItemID
-                                  && itm.DateEffective <= MainVM.SelectedSalesQuote.dateOfIssue_
-                                  select itm;
-                decimal totalPric = ai.UnitPrice + (ai.UnitPrice / 100 * markupPrice.Last().MarkupPerc);
-                MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, unitPrice = ai.UnitPrice, totalAmount = totalPric, qtyEditable = true });
-            }
-
-            foreach (AvailedService aserv in MainVM.AvailedServicesList)
-            {
-                var service = from serv in MainVM.ServicesList
-                              where serv.ServiceID == aserv.ServiceID
-                              select serv;
-                MainVM.RequestedItems.Add(new RequestedItem() { availedServiceID = aserv.AvailedServiceID, itemID = aserv.ServiceID, itemType = 1, qty = 0, totalAmount = aserv.TotalCost, unitPrice = aserv.TotalCost });
-            }
-
-            if (MainVM.isView)
-            {
-                foreach (UIElement obj in transQuoatationGridForm.Children)
-                {
-                    if (transQuoatationGridForm.Children.IndexOf(obj) <= 1)
-                        obj.IsEnabled = false;
-                }
-            }
-
-
-        }
+        
 
     }
     
