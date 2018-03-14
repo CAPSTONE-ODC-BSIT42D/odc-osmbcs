@@ -16,9 +16,8 @@
                          sq.paymentIsLanded, sq.paymentCurrency, sq.status, sq.termsDays, sq.termsDP, sq.discountPercent, sq.surveyReportDoc, sq.additionalNote, sq.isDeleted, cs.companyID, cs.companyName, cs.busStyle, 
                          cs.taxNumber, cs.companyAddInfo, cs.companyAddress, cs.companyCity, cs.companyProvinceID, cs.companyPostalCode, cs.companyEmail, cs.companyTelephone, cs.companyMobile, cs.repTitle, cs.repLName,
                           cs.repFName, cs.repMInitial, cs.repEmail, cs.repTelephone, cs.repMobile, cs.companyType, cs.isDeleted AS Expr1, i.ID, i.itemName, p.provinceName, ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100) AS Expr2, 
-                         (IFNULL(sq.VAT,0)+ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) - 
- (IFNULL(sq.VAT,0)+ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)))*
- (IFNULL(sq.discountPercent,0)/100)) AS AMOUNT
+                         (IFNULL(sq.VAT, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) - (IFNULL(sq.VAT, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) * (IFNULL(sq.discountPercent, 0) 
+                         / 100) AS AMOUNT
 FROM            sales_quote_t sq INNER JOIN
                          cust_supp_t cs ON cs.companyID = sq.custID INNER JOIN
                          items_availed_t ia ON ia.sqNoChar = ia.sqNoChar INNER JOIN

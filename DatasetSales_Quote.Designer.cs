@@ -4795,15 +4795,16 @@ namespace prototype2.DatasetSales_QuoteTableAdapters {
                 "Name,\r\n                          cs.repFName, cs.repMInitial, cs.repEmail, cs.re" +
                 "pTelephone, cs.repMobile, cs.companyType, cs.isDeleted AS Expr1, i.ID, i.itemNam" +
                 "e, p.provinceName, ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100) AS Expr2," +
-                " \r\n                         (IFNULL(sq.VAT,0)+ia.itemQnty * (ia.unitPrice + ia.u" +
-                "nitPrice * (mh.markupPerc / 100)) - \r\n (IFNULL(sq.VAT,0)+ia.itemQnty * (ia.unitP" +
-                "rice + ia.unitPrice * (mh.markupPerc / 100)))*\r\n (IFNULL(sq.discountPercent,0)/1" +
-                "00)) AS AMOUNT\r\nFROM            sales_quote_t sq INNER JOIN\r\n                   " +
-                "      cust_supp_t cs ON cs.companyID = sq.custID INNER JOIN\r\n                   " +
-                "      items_availed_t ia ON ia.sqNoChar = ia.sqNoChar INNER JOIN\r\n              " +
-                "           item_t i ON i.ID = ia.itemID INNER JOIN\r\n                         mar" +
-                "kup_hist_t mh ON mh.itemID = i.ID INNER JOIN\r\n                         provinces" +
-                "_t p ON p.id = cs.companyProvinceID\r\nWHERE        (sq.sqNoChar = @a)";
+                " \r\n                         (IFNULL(sq.VAT, 0) + ia.itemQnty * (ia.unitPrice + i" +
+                "a.unitPrice * (mh.markupPerc / 100))) - (IFNULL(sq.VAT, 0) + ia.itemQnty * (ia.u" +
+                "nitPrice + ia.unitPrice * (mh.markupPerc / 100))) * (IFNULL(sq.discountPercent, " +
+                "0) \r\n                         / 100) AS AMOUNT\r\nFROM            sales_quote_t sq" +
+                " INNER JOIN\r\n                         cust_supp_t cs ON cs.companyID = sq.custID" +
+                " INNER JOIN\r\n                         items_availed_t ia ON ia.sqNoChar = ia.sqN" +
+                "oChar INNER JOIN\r\n                         item_t i ON i.ID = ia.itemID INNER JO" +
+                "IN\r\n                         markup_hist_t mh ON mh.itemID = i.ID INNER JOIN\r\n  " +
+                "                       provinces_t p ON p.id = cs.companyProvinceID\r\nWHERE      " +
+                "  (sq.sqNoChar = @a)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@a";
