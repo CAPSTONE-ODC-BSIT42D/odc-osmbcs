@@ -43,6 +43,7 @@ namespace prototype2
             ucReportViewer.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseOrder.rdlc");
             ucReportViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("PurchaseOrderTableTable", GetPurchase()));
+           
             ucReportViewer.LoadReport(rNames);
             ucReportViewer.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ucReportViewer.RefreshReport();
@@ -60,9 +61,9 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
             if (MainVM.SelectedPurchaseOrder == null)
-                cmd.CommandText = "SELECT po.PONumChar, cs.companyName, cs.companyType, cs.companyAddress, cs.companyCity, cs.repFName, cs.repMInitial, cs.repLName, cs.repEmail, cs.repTelephone, cs.repMobile,   po.orderDate, po.requisitioner, po.POdueDate, po.incoterms, po.termsDays, po.termsDP, po.currency, it.ID, ui.unitName, it.itemDescr, po.preparedBy, po.approvedBy, po.shipVia,    po.shipTo FROM            purchase_order_t po INNER JOIN cust_supp_t cs ON po.suppID = cs.companyID inner join po_items_availed_t pi on pi.ponumchar = po.ponumchar INNER JOIN item_t it ON it.id = pi.itemid INNER JOIN  unit_t ui ON it.unitID = ui.id  where po.ponumchar='" + result + "'";
+                cmd.CommandText = "SELECT        po.PONumChar, cs.companyName, cs.companyType, cs.companyAddress, cs.companyCity, pi.unitPrice * pi.itemQnty AS amount, pi.unitPrice, pi.itemQnty, cs.repFName, cs.repMInitial, cs.repLName, cs.repEmail,   cs.repTelephone, cs.repMobile, po.orderDate, po.requisitioner, po.POdueDate, po.incoterms, po.termsDays, po.termsDP, po.currency, it.ID, ui.unitName, it.itemDescr, po.preparedBy, po.approvedBy, po.shipVia,    po.shipTo FROM            purchase_order_t po INNER JOIN    cust_supp_t cs ON po.suppID = cs.companyID INNER JOIN  po_items_availed_t pi ON pi.poNumChar = po.PONumChar INNER JOIN  item_t it ON it.ID = pi.itemID INNER JOIN  unit_t ui ON it.unitID = ui.id WHERE(po.ponumchar= '" + result + "')";
             else
-                cmd.CommandText = "SELECT po.PONumChar, cs.companyName, cs.companyType, cs.companyAddress, cs.companyCity, cs.repFName, cs.repMInitial, cs.repLName, cs.repEmail, cs.repTelephone, cs.repMobile,   po.orderDate, po.requisitioner, po.POdueDate, po.incoterms, po.termsDays, po.termsDP, po.currency, it.ID, ui.unitName, it.itemDescr, po.preparedBy, po.approvedBy, po.shipVia,    po.shipTo FROM            purchase_order_t po INNER JOIN cust_supp_t cs ON po.suppID = cs.companyID inner join po_items_availed_t pi on pi.ponumchar = po.ponumchar INNER JOIN item_t it ON it.id = pi.itemid INNER JOIN  unit_t ui ON it.unitID = ui.id  where po.ponumchar='" + MainVM.SelectedPurchaseOrder.PONumChar + "'";
+                cmd.CommandText = "SELECT        po.PONumChar, cs.companyName, cs.companyType, cs.companyAddress, cs.companyCity, pi.unitPrice * pi.itemQnty AS amount, pi.unitPrice, pi.itemQnty, cs.repFName, cs.repMInitial, cs.repLName, cs.repEmail,   cs.repTelephone, cs.repMobile, po.orderDate, po.requisitioner, po.POdueDate, po.incoterms, po.termsDays, po.termsDP, po.currency, it.ID, ui.unitName, it.itemDescr, po.preparedBy, po.approvedBy, po.shipVia,    po.shipTo FROM            purchase_order_t po INNER JOIN    cust_supp_t cs ON po.suppID = cs.companyID INNER JOIN  po_items_availed_t pi ON pi.poNumChar = po.PONumChar INNER JOIN  item_t it ON it.ID = pi.itemID INNER JOIN  unit_t ui ON it.unitID = ui.id WHERE (po.ponumchar= '" + MainVM.SelectedPurchaseOrder.PONumChar + "')";
             
 
             DataSet1.PODataTableDataTable dSItem = new DataSet1.PODataTableDataTable();

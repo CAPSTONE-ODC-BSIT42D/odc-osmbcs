@@ -301,6 +301,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSetReportService.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DataSetSalesInvoice.cs">
+      <DependentUpon>DataSetSalesInvoice.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DataSetSalesInvoice.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

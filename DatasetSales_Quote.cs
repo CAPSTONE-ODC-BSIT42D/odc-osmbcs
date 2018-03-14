@@ -7,3 +7,10 @@
     }
 }
 
+
+namespace prototype2.DatasetSales_QuoteTableAdapters {
+    
+    
+    public partial class SQServiceTableAdapter {
+    }
+}

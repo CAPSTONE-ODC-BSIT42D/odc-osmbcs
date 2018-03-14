@@ -43,9 +43,58 @@ namespace prototype2
             ucReportViewerSalesQuote.Reset();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesQuote.rdlc");
             ucReportViewerSalesQuote.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetSales_Quote", GetSalesQuote()));
+            ucReportViewerSalesQuote.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetAmount", GetSalesQuoteAmount()));
+            ucReportViewerSalesQuote.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetServiceSQ", GetSalesQuoteSer()));
             ucReportViewerSalesQuote.LoadReport(rNames);
             ucReportViewerSalesQuote.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ucReportViewerSalesQuote.RefreshReport();
+        }
+
+        private DataTable GetSalesQuoteAmount()
+        {
+
+
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+            if (MainVM.SelectedSalesQuote != null)
+            {
+                cmd.CommandText = "SELECT        sq.sqNoChar, (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) * ia.itemQnty + sa.totalCost AS AMOUNT FROM sales_quote_t sq INNER JOIN   cust_supp_t cs ON cs.companyID = sq.custID INNER JOIN   items_availed_t ia ON ia.sqNoChar = ia.sqNoChar INNER JOIN   item_t i ON i.ID = ia.itemID INNER JOIN    markup_hist_t mh ON mh.itemID = i.ID INNER JOIN  provinces_t p ON p.id = cs.companyProvinceID INNER JOIN  services_availed_t sa ON sa.sqNoChar = sq.sqNoChar INNER JOIN   services_t s ON s.serviceID = sa.serviceID WHERE(sq.sqNoChar = '" + MainVM.SelectedSalesQuote.sqNoChar_ + "') GROUP BY sq.sqNoChar ";
+                DatasetSales_Quote.SQServiceDataTable dSItem = new DatasetSales_Quote.SQServiceDataTable();
+
+                MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+                mySqlDa.Fill(dSItem);
+
+                return dSItem;
+            }
+
+
+            return null;
+        }
+        private DataTable GetSalesQuoteSer()
+        {
+
+
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+            if (MainVM.SelectedSalesQuote != null)
+            {
+                cmd.CommandText = "SELECT        sq.sqNoChar, sq.dateOfIssue, sq.custID, sq.quoteSubject, sq.priceNote, sq.deliveryDate, sq.estDelivery, sq.validityDays, sq.validityDate, sq.otherTerms, sq.VAT, sq.vatIsExcluded, sq.paymentIsLanded,   sq.paymentCurrency, sq.status, sq.termsDays, sq.termsDP, sq.discountPercent, sq.surveyReportDoc, sq.additionalNote, sq.isDeleted, cs.companyID, cs.companyName, cs.busStyle, cs.taxNumber,    cs.companyAddInfo, cs.companyAddress, cs.companyCity, cs.companyProvinceID, cs.companyPostalCode, cs.companyEmail, cs.companyTelephone, cs.companyMobile, cs.repTitle, cs.repLName, cs.repFName,   cs.repMInitial, cs.repEmail, cs.repTelephone, cs.repMobile, cs.companyType, cs.isDeleted AS Expr1, s.serviceID, s.serviceName, p.provinceName, sa.totalCost + ft.feeValue AS Expr2, sa.totalCost FROM            sales_quote_t sq INNER JOIN  cust_supp_t cs ON cs.companyID = sq.custID INNER JOIN   services_availed_t sa ON sa.sqNoChar = sq.sqNoChar INNER JOIN  services_t s ON s.serviceID = sa.serviceID INNER JOIN  fees_per_transaction_t ft ON ft.servicesAvailedID = sa.id INNER JOIN   provinces_t p ON p.id = cs.companyProvinceID WHERE        (sq.sqNoChar = '" + MainVM.SelectedSalesQuote.sqNoChar_ + "') ";
+                DatasetSales_Quote.SQServiceDataTable dSItem = new DatasetSales_Quote.SQServiceDataTable();
+
+                MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+                mySqlDa.Fill(dSItem);
+
+                return dSItem;
+            }
+
+
+            return null;
         }
 
         private DataTable GetSalesQuote()
@@ -59,7 +108,7 @@ namespace prototype2
             cmd.CommandType = CommandType.Text;
             if(MainVM.SelectedSalesQuote != null)
             {
-                cmd.CommandText = "select sq.dateofissue, sq.sqnochar, c.companyName, c.companyaddress, c.companycity, sq.quotesubject, repTitle,repFName,repLName, repminitial, i.id,s.serviceid,i.itemname, s.servicename, i.itemdescr, s.servicedesc, ia.itemqnty, ia.unitprice, mh.markupperc, s.serviceprice, sa.totalcost, f.feevalue, sq.paymentislanded, sq.termsdp, sq.TERMSDAYs, sq.estDelivery from sales_quote_t sq inner join cust_supp_t c on sq.custid = c.companyid inner join items_availed_t ia on ia.sqnochar = sq.sqnochar inner join item_t i on i.id = ia.itemid inner join markup_hist_t mh on i.id= mh.itemid inner join services_availed_t sa on sq.sqnochar =sa.sqnochar inner join services_t s on sa.serviceid =s.serviceid inner join fees_per_transaction_t f on sa.id = f.servicesavailedid  where sq.sqnochar = '" + MainVM.SelectedSalesQuote.sqNoChar_ + "'";
+                cmd.CommandText = "SELECT        sq.sqNoChar, sq.dateOfIssue, i.itemDescr, sq.custID, sq.quoteSubject, sq.priceNote, sq.deliveryDate, sq.estDelivery, sq.validityDays, sq.validityDate, sq.otherTerms, sq.VAT, sq.vatIsExcluded,   sq.paymentIsLanded, sq.paymentCurrency, sq.status, sq.termsDays, sq.termsDP, sq.discountPercent, sq.surveyReportDoc, sq.additionalNote, sq.isDeleted, cs.companyID, cs.companyName, cs.busStyle,   cs.taxNumber, cs.companyAddInfo, cs.companyAddress, cs.companyCity, cs.companyProvinceID, cs.companyPostalCode, cs.companyEmail, cs.companyTelephone, cs.companyMobile, cs.repTitle, cs.repLName,  cs.repFName, cs.repMInitial, cs.repEmail, cs.repTelephone, cs.repMobile, cs.companyType, cs.isDeleted AS Expr1, i.ID, i.itemName, p.provinceName, ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100) AS Expr2,  (IFNULL(sq.VAT, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) - (IFNULL(sq.VAT, 0) + ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))) * (IFNULL(sq.discountPercent, 0) / 100)) AS AMOUNT FROM sales_quote_t sq INNER JOIN cust_supp_t cs ON cs.companyID = sq.custID INNER JOIN   items_availed_t ia ON ia.sqNoChar = ia.sqNoChar INNER JOIN item_t i ON i.ID = ia.itemID INNER JOIN  markup_hist_t mh ON mh.itemID = i.ID INNER JOIN   provinces_t p ON p.id = cs.companyProvinceID WHERE(sq.sqNoChar = '" + MainVM.SelectedSalesQuote.sqNoChar_ + "') ";
                 DatasetSales_Quote.Sales_QuoteDataTable dSItem = new DatasetSales_Quote.Sales_QuoteDataTable();
 
                 MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
