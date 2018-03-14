@@ -295,6 +295,8 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columnExpr2;
             
+            private global::System.Data.DataColumn columnsqNoChar;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public ServiceTableDataTable() {
@@ -394,6 +396,14 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn sqNoCharColumn {
+                get {
+                    return this.columnsqNoChar;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -429,7 +439,7 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public ServiceTableRow AddServiceTableRow(string serviceName, string serviceDesc, System.DateTime dateStarted, System.DateTime dateEnded, string serviceStatus, string companyName, long Expr1, long Expr2) {
+            public ServiceTableRow AddServiceTableRow(string serviceName, string serviceDesc, System.DateTime dateStarted, System.DateTime dateEnded, string serviceStatus, string companyName, long Expr1, long Expr2, string sqNoChar) {
                 ServiceTableRow rowServiceTableRow = ((ServiceTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         serviceName,
@@ -439,10 +449,18 @@ namespace prototype2 {
                         serviceStatus,
                         companyName,
                         Expr1,
-                        Expr2};
+                        Expr2,
+                        sqNoChar};
                 rowServiceTableRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowServiceTableRow);
                 return rowServiceTableRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public ServiceTableRow FindBysqNoChar(string sqNoChar) {
+                return ((ServiceTableRow)(this.Rows.Find(new object[] {
+                            sqNoChar})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -470,6 +488,7 @@ namespace prototype2 {
                 this.columncompanyName = base.Columns["companyName"];
                 this.columnExpr1 = base.Columns["Expr1"];
                 this.columnExpr2 = base.Columns["Expr2"];
+                this.columnsqNoChar = base.Columns["sqNoChar"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -491,12 +510,19 @@ namespace prototype2 {
                 base.Columns.Add(this.columnExpr1);
                 this.columnExpr2 = new global::System.Data.DataColumn("Expr2", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnExpr2);
+                this.columnsqNoChar = new global::System.Data.DataColumn("sqNoChar", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsqNoChar);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnsqNoChar}, true));
                 this.columnserviceName.AllowDBNull = false;
                 this.columnserviceName.MaxLength = 50;
                 this.columnserviceDesc.MaxLength = 21845;
                 this.columnserviceStatus.MaxLength = 255;
                 this.columncompanyName.AllowDBNull = false;
                 this.columncompanyName.MaxLength = 50;
+                this.columnsqNoChar.AllowDBNull = false;
+                this.columnsqNoChar.Unique = true;
+                this.columnsqNoChar.MaxLength = 255;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -757,6 +783,17 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string sqNoChar {
+                get {
+                    return ((string)(this[this.tableServiceTable.sqNoCharColumn]));
+                }
+                set {
+                    this[this.tableServiceTable.sqNoCharColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsserviceDescNull() {
                 return this.IsNull(this.tableServiceTable.serviceDescColumn);
             }
@@ -995,6 +1032,7 @@ namespace prototype2.DataSetReportServiceTableAdapters {
             tableMapping.ColumnMappings.Add("companyName", "companyName");
             tableMapping.ColumnMappings.Add("Expr1", "Expr1");
             tableMapping.ColumnMappings.Add("Expr2", "Expr2");
+            tableMapping.ColumnMappings.Add("sqNoChar", "sqNoChar");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -1011,7 +1049,7 @@ namespace prototype2.DataSetReportServiceTableAdapters {
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[6];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        si.invoiceNo, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus
+            this._commandCollection[0].CommandText = @"SELECT        sq.sqNoChar, s.serviceName, ss.dateStarted, ss.dateEnded, ss.serviceStatus
 FROM            service_sched_t ss INNER JOIN
                          services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN
                          services_t s ON s.serviceID = sa.serviceID INNER JOIN

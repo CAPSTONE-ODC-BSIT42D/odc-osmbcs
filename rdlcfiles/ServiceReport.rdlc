@@ -82,7 +82,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>HOP NAME</Value>
+                              <Value>SALES ORDER ID</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -258,14 +258,14 @@ STATUS</Value>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="companyName">
+                    <Textbox Name="sqNoChar">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!companyName.Value</Value>
+                              <Value>=Fields!sqNoChar.Value</Value>
                               <Style>
                                 <FontSize>12pt</FontSize>
                               </Style>
@@ -274,7 +274,7 @@ STATUS</Value>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>companyName</rd:DefaultName>
+                      <rd:DefaultName>sqNoChar</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -512,10 +512,14 @@ STATUS</Value>
           <DataField>Expr2</DataField>
           <rd:TypeName>System.Int64</rd:TypeName>
         </Field>
+        <Field Name="sqNoChar">
+          <DataField>sqNoChar</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DataSetReportService</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\Alexis\Source\odc-osmbcs\DataSetReportService.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\Lewis\Source\Repos\odc-osmbcs\DataSetReportService.xsd</rd:SchemaPath>
         <rd:TableName>ServiceTable</rd:TableName>
         <rd:TableAdapterFillMethod>FillServiceAll</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetDataServiceAll</rd:TableAdapterGetDataMethod>

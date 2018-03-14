@@ -90,12 +90,14 @@ namespace prototype2
                     MainVM.SelectedServiceSchedule_.PhasesPerService.Add(new PhasesPerService() { PhaseID = ph.PhaseID, Status = "PENDING" });
                 }
             }
-
             
+
+
         }
 
         void searchForAvailableEmployees()
         {
+            MainVM.AvailableEmployees_.Clear();
             foreach(ServiceSchedule ss in MainVM.ServiceSchedules_)
             {
                 if(ss.dateEnded_ < startDate.SelectedDate)
@@ -123,11 +125,13 @@ namespace prototype2
 
                 foreach (Employee ee in MainVM.Employees)
                 {
-                    MainVM.AvailableEmployees_.Add(ee);
+                    if(!MainVM.SelectedServiceSchedule_.assignedEmployees_.Contains(ee))
+                        MainVM.AvailableEmployees_.Add(ee);
                 }
                 foreach (Employee ee in MainVM.Contractor)
                 {
-                    MainVM.AvailableEmployees_.Add(ee);
+                    if (!MainVM.SelectedServiceSchedule_.assignedEmployees_.Contains(ee))
+                        MainVM.AvailableEmployees_.Add(ee);
                 }
             }
 
@@ -141,8 +145,7 @@ namespace prototype2
         private void selectServiceBtn_Click(object sender, RoutedEventArgs e)
         {
             OnSelectServiceButtonClicked(e);
-            loadDataToUi();
-            searchForAvailableEmployees();
+            
         }
 
         private void scheduleServiceBtn_Click(object sender, RoutedEventArgs e)
@@ -286,7 +289,29 @@ namespace prototype2
 
         private void markAsDoneBtn_Click(object sender, RoutedEventArgs e)
         {
+            var dbCon = DBConnection.Instance();
+            using (MySqlConnection conn = dbCon.Connection)
+            {
+                string query = "UPDATE `odc_db`.`phases_per_services_t` SET `status` = 'DONE' WHERE id = '" + MainVM.SelectedPhasesPerService.ID + "'";
+                dbCon.insertQuery(query, dbCon.Connection);
 
+                query = "SELECT * FROM PHASES_PER_SERVICES_T WHERE serviceSchedID = '"+ MainVM.SelectedServiceSchedule_.ServiceSchedID+ "' AND status = 'DONE'";
+                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                DataSet fromDb = new DataSet();
+                DataTable fromDbTable = new DataTable();
+                dataAdapter.Fill(fromDb, "t");
+                fromDbTable = fromDb.Tables["t"];
+                if(fromDbTable == null)
+                {
+
+                }
+
+                query = "UPDATE `odc_db`.`service_sched_t` SET `dateEnded` = '" + DateTime.Now.ToString("yyyy-MM-dd") + "' WHERE `serviceSchedID` = " + MainVM.SelectedServiceSchedule_.ServiceSchedID + ";";
+                if (dbCon.insertQuery(query, dbCon.Connection))
+                {
+                    MessageBox.Show("Succesfully updated the schedule");
+                }
+            }
         }
     }
 }

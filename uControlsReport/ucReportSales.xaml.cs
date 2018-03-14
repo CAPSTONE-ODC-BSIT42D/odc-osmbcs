@@ -41,7 +41,7 @@ namespace prototype2
         private void DisplayReport()
         {
 
-            ReportSales.Reset();
+            ReportSales.DataSources.Clear();
 
 
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
@@ -97,7 +97,8 @@ namespace prototype2
     
         private void DisplayReportSalesDay()
         {
-          
+            ReportSales.DataSources.Clear();
+
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
 
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItemDay()));
@@ -145,8 +146,8 @@ namespace prototype2
         }
         private void DisplayReportSalesWeek()
         {
-       
 
+            ReportSales.DataSources.Clear();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
 
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItemWeek()));
@@ -196,8 +197,8 @@ namespace prototype2
 
         private void DisplayReportSalesMonth()
         {
-           
 
+            ReportSales.DataSources.Clear();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
 
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItemMonth()));
@@ -244,7 +245,7 @@ namespace prototype2
         }
         private void DisplayReportSalesYear()
         {
-       
+            ReportSales.DataSources.Clear();
 
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
 
@@ -294,7 +295,7 @@ namespace prototype2
         }
         private void DisplayReportSalesRange()
         {
-       
+            ReportSales.DataSources.Clear();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
 
             ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItemRange()));
