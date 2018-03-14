@@ -27,7 +27,8 @@ namespace prototype2
         public ucReportPurchase()
         {
             InitializeComponent();
-            
+          
+
             //DisplayReport();
         }
         private void DisplayReport()
@@ -317,7 +318,7 @@ namespace prototype2
         }
         private void DatePickerStartSales_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            DisplayReportPurchaseRange();
+     
         }
         private void DatePickerEndSales_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
