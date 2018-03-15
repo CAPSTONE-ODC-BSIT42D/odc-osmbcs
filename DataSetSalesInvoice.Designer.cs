@@ -404,6 +404,8 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columnservicePrice;
             
+            private global::System.Data.DataColumn columnExpr2;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public SalesInvoiceDataTable() {
@@ -799,6 +801,14 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Expr2Column {
+                get {
+                    return this.columnExpr2;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -877,7 +887,8 @@ namespace prototype2 {
                         int termsDP, 
                         string serviceDesc, 
                         string itemDescr, 
-                        decimal servicePrice) {
+                        decimal servicePrice, 
+                        string Expr2) {
                 SalesInvoiceRow rowSalesInvoiceRow = ((SalesInvoiceRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         companyName,
@@ -924,7 +935,8 @@ namespace prototype2 {
                         termsDP,
                         serviceDesc,
                         itemDescr,
-                        servicePrice};
+                        servicePrice,
+                        Expr2};
                 rowSalesInvoiceRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSalesInvoiceRow);
                 return rowSalesInvoiceRow;
@@ -999,6 +1011,7 @@ namespace prototype2 {
                 this.columnserviceDesc = base.Columns["serviceDesc"];
                 this.columnitemDescr = base.Columns["itemDescr"];
                 this.columnservicePrice = base.Columns["servicePrice"];
+                this.columnExpr2 = base.Columns["Expr2"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1094,6 +1107,8 @@ namespace prototype2 {
                 base.Columns.Add(this.columnitemDescr);
                 this.columnservicePrice = new global::System.Data.DataColumn("servicePrice", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnservicePrice);
+                this.columnExpr2 = new global::System.Data.DataColumn("Expr2", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnExpr2);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columninvoiceNo}, true));
                 this.columncompanyName.AllowDBNull = false;
@@ -1143,6 +1158,8 @@ namespace prototype2 {
                 this.columntotal_service.AllowDBNull = false;
                 this.columnserviceDesc.MaxLength = 21845;
                 this.columnitemDescr.MaxLength = 21845;
+                this.columnExpr2.AllowDBNull = false;
+                this.columnExpr2.MaxLength = 255;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2234,6 +2251,17 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Expr2 {
+                get {
+                    return ((string)(this[this.tableSalesInvoice.Expr2Column]));
+                }
+                set {
+                    this[this.tableSalesInvoice.Expr2Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IstermsDaysNull() {
                 return this.IsNull(this.tableSalesInvoice.termsDaysColumn);
             }
@@ -2970,6 +2998,7 @@ namespace prototype2.DataSetSalesInvoiceTableAdapters {
             tableMapping.ColumnMappings.Add("serviceDesc", "serviceDesc");
             tableMapping.ColumnMappings.Add("itemDescr", "itemDescr");
             tableMapping.ColumnMappings.Add("servicePrice", "servicePrice");
+            tableMapping.ColumnMappings.Add("Expr2", "Expr2");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -2986,32 +3015,32 @@ namespace prototype2.DataSetSalesInvoiceTableAdapters {
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[1];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT        si.invoiceNo, si.custID, si.sqNoChar, si.dateOfIssue, si.termsDays," +
-                " si.dueDate, si.paymentStatus, si.vat, si.sc_pwd_discount, si.withholdingTax, si" +
-                ".notes, sq.sqNoChar AS Expr1, cs.companyID, sq.termsDP, \r\n                      " +
-                "   s.servicePrice, s.serviceDesc, i.itemDescr, cs.companyName, cs.busStyle, cs.t" +
-                "axNumber, cs.companyAddInfo, cs.companyAddress, cs.companyCity, cs.companyProvin" +
-                "ceID, cs.companyPostalCode, \r\n                         cs.companyEmail, cs.compa" +
-                "nyTelephone, cs.companyMobile, cs.repTitle, cs.repLName, cs.repFName, cs.repMIni" +
-                "tial, cs.repEmail, cs.repTelephone, cs.repMobile, cs.companyType, cs.isDeleted, " +
-                "i.itemName, \r\n                         s.serviceName, TRUNCATE(IFNULL(sq.discoun" +
-                "tPercent, 0) / 100, 2) AS LESS_DISCOUNT, TRUNCATE(IFNULL(sq.VAT, 0), 2) AS IF_VA" +
-                "T_INCLUSIVE, TRUNCATE(IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) \r\n      " +
-                "                   * (IFNULL(mh.markupPerc, 0) / 100), 2) AS UNIT_PRICE, ia.item" +
-                "Qnty, TRUNCATE(IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.ma" +
-                "rkupPerc, 0) / 100), 2) * IFNULL(ia.itemQnty, 0) AS total_item, \r\n              " +
-                "           TRUNCATE(IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) AS tota" +
-                "l_service\r\nFROM            sales_quote_t sq LEFT OUTER JOIN\r\n                   " +
-                "      items_availed_t ia ON sq.sqNoChar = ia.sqNoChar LEFT OUTER JOIN\r\n         " +
-                "                item_t i ON i.ID = ia.itemID LEFT OUTER JOIN\r\n                  " +
-                "       markup_hist_t mh ON mh.itemID = ia.itemID INNER JOIN\r\n                   " +
-                "      cust_supp_t cs ON cs.companyID = sq.custID INNER JOIN\r\n                   " +
-                "      provinces_t p ON p.id = cs.companyProvinceID LEFT OUTER JOIN\r\n            " +
-                "             services_availed_t sa ON sa.sqNoChar = sq.sqNoChar LEFT OUTER JOIN\r" +
-                "\n                         services_t s ON s.serviceID = sa.serviceID LEFT OUTER " +
-                "JOIN\r\n                         fees_per_transaction_t ft ON ft.servicesAvailedID" +
-                " = sa.id INNER JOIN\r\n                         sales_invoice_t si ON si.sqNoChar " +
-                "= sq.sqNoChar\r\nWHERE        (si.invoiceNo = @a)";
+            this._commandCollection[0].CommandText = "SELECT        cs.taxNumber, si.invoiceNo, si.custID, si.sqNoChar, si.dateOfIssue," +
+                " si.termsDays, si.dueDate, si.paymentStatus, si.vat, si.sc_pwd_discount, si.with" +
+                "holdingTax, si.notes, sq.sqNoChar AS Expr1, cs.companyID, \r\n                    " +
+                "     sq.termsDP, s.servicePrice, s.serviceDesc, i.itemDescr, cs.companyName, cs." +
+                "busStyle, cs.taxNumber AS Expr2, cs.companyAddInfo, cs.companyAddress, cs.compan" +
+                "yCity, cs.companyProvinceID, \r\n                         cs.companyPostalCode, cs" +
+                ".companyEmail, cs.companyTelephone, cs.companyMobile, cs.repTitle, cs.repLName, " +
+                "cs.repFName, cs.repMInitial, cs.repEmail, cs.repTelephone, cs.repMobile, cs.comp" +
+                "anyType, \r\n                         cs.isDeleted, i.itemName, s.serviceName, TRU" +
+                "NCATE(IFNULL(sq.discountPercent, 0) / 100, 2) AS LESS_DISCOUNT, TRUNCATE(IFNULL(" +
+                "sq.VAT, 0), 2) AS IF_VAT_INCLUSIVE, TRUNCATE(IFNULL(ia.unitPrice, 0) \r\n         " +
+                "                + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) / 100), 2)" +
+                " AS UNIT_PRICE, ia.itemQnty, TRUNCATE(IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPr" +
+                "ice, 0) * (IFNULL(mh.markupPerc, 0) / 100), 2) \r\n                         * IFNU" +
+                "LL(ia.itemQnty, 0) AS total_item, TRUNCATE(IFNULL(sa.totalCost, 0) + IFNULL(ft.f" +
+                "eeValue, 0), 2) AS total_service\r\nFROM            sales_quote_t sq LEFT OUTER JO" +
+                "IN\r\n                         items_availed_t ia ON sq.sqNoChar = ia.sqNoChar LEF" +
+                "T OUTER JOIN\r\n                         item_t i ON i.ID = ia.itemID LEFT OUTER J" +
+                "OIN\r\n                         markup_hist_t mh ON mh.itemID = ia.itemID INNER JO" +
+                "IN\r\n                         cust_supp_t cs ON cs.companyID = sq.custID INNER JO" +
+                "IN\r\n                         provinces_t p ON p.id = cs.companyProvinceID LEFT O" +
+                "UTER JOIN\r\n                         services_availed_t sa ON sa.sqNoChar = sq.sq" +
+                "NoChar LEFT OUTER JOIN\r\n                         services_t s ON s.serviceID = s" +
+                "a.serviceID LEFT OUTER JOIN\r\n                         fees_per_transaction_t ft " +
+                "ON ft.servicesAvailedID = sa.id INNER JOIN\r\n                         sales_invoi" +
+                "ce_t si ON si.sqNoChar = sq.sqNoChar\r\nWHERE        (si.invoiceNo = @a)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@a";
