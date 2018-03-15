@@ -27,7 +27,7 @@
                 <ColumnDefinition Width="70*"/>
                 <ColumnDefinition Width="227*"/>
             </Grid.ColumnDefinitions>
-            <DatePicker x:Name="DatePickerStartSer" HorizontalAlignment="Left" Margin="110.58,22,0,0" VerticalAlignment="Top" Width="131" Height="31" Visibility="Hidden" SelectedDateChanged="DatePickerStartSer_SelectedDateChanged" Grid.ColumnSpan="2" Grid.RowSpan="6" Grid.Column="3"  />
+            <DatePicker x:Name="DatePickerStartSer" HorizontalAlignment="Left" Margin="266,21,0,0" VerticalAlignment="Top" Width="131" Height="31" Visibility="Hidden" SelectedDateChanged="DatePickerStartSer_SelectedDateChanged" Grid.ColumnSpan="2" Grid.RowSpan="6" Grid.Column="3"  />
             <DatePicker x:Name="DatePickerWeekSer" HorizontalAlignment="Left" Margin="111,22,0,0" VerticalAlignment="Top" Width="131" Height="31" Visibility="Hidden" SelectedDateChanged="DatePickerWeekSer_SelectedDateChanged" Grid.ColumnSpan="2" Grid.RowSpan="6" Grid.Column="3" />
             <DatePicker x:Name="DatePickerEndSer" Margin="0,21,126,0" Visibility="Hidden" SelectedDateChanged="DatePickerEndSer_SelectedDateChanged" Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="6" HorizontalAlignment="Right" Width="131" Height="31" VerticalAlignment="Top"  />
             <Label Content="Filter: use reset when choosing a filter again" HorizontalAlignment="Left" Margin="32,-3,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Width="249">
@@ -46,7 +46,7 @@
             <Label x:Name="WeekDate" Content="Week:" HorizontalAlignment="Left" Margin="110.58,-4,0,0" VerticalAlignment="Top" Visibility="Hidden" Grid.Column="3"/>
             <Label x:Name="EndDateSer" Content="End Date:" HorizontalAlignment="Left" Margin="40,-3,0,0" VerticalAlignment="Top" Visibility="Hidden" Grid.Column="4" Grid.ColumnSpan="2"/>
             <ComboBox x:Name="ComboBoxSerFilter" Margin="28,21,0,0" SelectionChanged="ComboBoxSerFilter_SelectionChanged" Grid.RowSpan="6" HorizontalAlignment="Left" Width="131" Grid.ColumnSpan="2" Height="31" VerticalAlignment="Top" >
-                <ComboBoxItem Content="Reset"/>
+                <ComboBoxItem Content="Today"/>
                 <ComboBoxItem Content="Week"/>
                 <ComboBoxItem Content="Month"/>
                 <ComboBoxItem Content="Year"/>
@@ -66,10 +66,11 @@
                 <ComboBoxItem Content="November"/>
                 <ComboBoxItem Content="December"/>
             </ComboBox>
-            <ComboBox x:Name="ComboBoxYear" Margin="0,21,224,0" VerticalAlignment="Top" Height="31" IsEditable="False" Visibility="Visible" SelectionChanged="ComboBoxYear_SelectionChanged" Grid.RowSpan="6" HorizontalAlignment="Right" Width="131" Grid.Column="1" Grid.ColumnSpan="3">
+            <ComboBox x:Name="ComboBoxYear" Margin="0,21,224,0" VerticalAlignment="Top" Height="31" IsEditable="False" Visibility="Hidden" SelectionChanged="ComboBoxYear_SelectionChanged" Grid.RowSpan="6" HorizontalAlignment="Right" Width="131" Grid.Column="1" Grid.ColumnSpan="3">
                 <ComboBoxItem Content="2017"/>
                 <ComboBoxItem Content="2018"/>
             </ComboBox>
+            <Button x:Name="GoButtonService" Content="Go" Grid.Column="5" HorizontalAlignment="Left" Margin="190,21,0,0" VerticalAlignment="Top" Width="52" Visibility="Hidden" Height="31" Grid.RowSpan="6" Click="GoButtonService_Click"/>
         </Grid>
 
         <syncfusion:ReportViewer x:Name="ReportService" ReportPath="C:\Users\Alexis\Source\Repos\odc-osmbcs\rdlcfiles\ServiceReport.rdlc" Margin="10,71,0,10" HorizontalAlignment="Left" Width="985"/>

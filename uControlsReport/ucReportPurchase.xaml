@@ -22,7 +22,7 @@
         <Grid Grid.ColumnSpan="2" Margin="10,8,0,0" VerticalAlignment="Top">
 
             <ComboBox x:Name="ComboBoxSalesFilter" HorizontalAlignment="Left" Margin="0,26,0,0" Width="131" SelectionChanged="ComboBox_SelectionChanged" Height="31" VerticalAlignment="Top">
-                <ComboBoxItem Content="Reset"/>
+                <ComboBoxItem Content="Today"/>
                 <ComboBoxItem Content="Week"/>
                 <ComboBoxItem Content="Month"/>
                 <ComboBoxItem Content="Year"/>
@@ -51,14 +51,15 @@
             <Label x:Name="YearSales" Content="Year:" HorizontalAlignment="Left" Margin="256,2,0,0" VerticalAlignment="Top" Visibility="Hidden" Height="26" Width="36"/>
 
 
-            <DatePicker x:Name="SalesDateStart" HorizontalAlignment="Left" Margin="542,28,0,0" VerticalAlignment="Top" SelectedDateChanged="DatePickerStartSales_SelectedDateChanged" Visibility="Hidden" />
-            <DatePicker x:Name="SalesDateEnd" HorizontalAlignment="Left" Margin="677,28,0,0" VerticalAlignment="Top" SelectedDateChanged="DatePickerEndSales_SelectedDateChanged" Visibility="Hidden" />
+            <DatePicker x:Name="SalesDateStart" HorizontalAlignment="Left" Margin="628,21,0,0" VerticalAlignment="Top" SelectedDateChanged="DatePickerStartSales_SelectedDateChanged" Visibility="Hidden" Height="31" Width="110" DisplayDate="2018-03-15" />
+            <DatePicker x:Name="SalesDateEnd" HorizontalAlignment="Left" Margin="779,22,0,0" VerticalAlignment="Top" SelectedDateChanged="DatePickerEndSales_SelectedDateChanged" Visibility="Hidden" Height="28" Width="114" />
             <DatePicker x:Name="SalesWeek" HorizontalAlignment="Left" Margin="414,26,0,0" VerticalAlignment="Top" SelectedDateChanged="DatePickerWeekSales_SelectedDateChanged" Visibility="Hidden"/>
-            <Label x:Name="labelstart" Content="Start Date:"  HorizontalAlignment="Left" Margin="542,0,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
-            <Label x:Name="labelend" Content="End Date:"  HorizontalAlignment="Left" Margin="677,0,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+            <Label x:Name="labelstart" Content="Start Date:"  HorizontalAlignment="Left" Margin="628,0,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+            <Label x:Name="labelend" Content="End Date:"  HorizontalAlignment="Left" Margin="779,-9,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
             <Label x:Name="labelweek" Content="Week Date:"  HorizontalAlignment="Left" Margin="414,0,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+            <Button x:Name="GoButtonPurchase" Content="Go" HorizontalAlignment="Left" Visibility="Hidden" Margin="934,18,0,9" Width="61" Click="GoButtonPurchase_Click"/>
         </Grid>
         <syncfusion:ReportViewer x:Name="ReportPurchase" ReportPath="C:\Users\Alexis\Source\Repos\odc-osmbcs\rdlcfiles\PurchaseReport.rdlc" ProcessingMode="Local" Margin="0,81,0,0"/>
-      
+
     </Grid>
 </UserControl>

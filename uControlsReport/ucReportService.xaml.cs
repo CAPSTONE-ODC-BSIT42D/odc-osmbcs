@@ -113,7 +113,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT     sq.sqNoChar,   si.invoiceNo, s.serviceName,  s.servicedesc ,ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN   services_t s ON s.serviceID = sa.serviceID INNER JOIN  sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar INNER JOIN cust_supp_t cs ON cs.CompanyID = sq.custId WHERE(WEEK(ss.dateStarted) = '" + DatePickerWeekSer.SelectedDate.Value.Date.ToShortDateString() + "') ";
+            cmd.CommandText = "SELECT     sq.sqNoChar,   si.invoiceNo, s.serviceName,  s.servicedesc ,ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN   services_t s ON s.serviceID = sa.serviceID INNER JOIN  sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar INNER JOIN cust_supp_t cs ON cs.CompanyID = sq.custId WHERE(WEEK(ss.dateStarted) = '" + DatePickerWeekSer.SelectedDate.Value.ToString("yyyy-MM-dd") + "') ";
 
             DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
 
@@ -195,7 +195,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT     sq.sqNoChar,   si.invoiceNo, s.serviceName,  s.servicedesc ,ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN   services_t s ON s.serviceID = sa.serviceID INNER JOIN  sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar INNER JOIN cust_supp_t cs ON cs.CompanyID = sq.custId WHERE(ss.dateStarted BETWEEN '" + DatePickerStartSer.SelectedDate.Value.Date.ToShortDateString() + "' AND '" + DatePickerEndSer.SelectedDate.Value.Date.ToShortDateString() + "') ";
+            cmd.CommandText = "SELECT     sq.sqNoChar,   si.invoiceNo, s.serviceName,  s.servicedesc ,ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN   services_t s ON s.serviceID = sa.serviceID INNER JOIN  sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar INNER JOIN cust_supp_t cs ON cs.CompanyID = sq.custId WHERE(ss.dateStarted BETWEEN '" + DatePickerStartSer.SelectedDate.Value.ToString("yyyy-MM-dd") + "' AND '" + DatePickerEndSer.SelectedDate.Value.ToString("yyyy-MM-dd") + "') ";
 
             DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
 
@@ -221,7 +221,7 @@ namespace prototype2
             if (SELECTEDINDEX.Equals(0))
             {
 
-                ReportService.Reset();
+                DisplayReportDayService();
                 WeekDate.Visibility = Visibility.Hidden;
                 ComboBoxYear.Visibility = Visibility.Hidden;
                 ComboBoxSerMonth.Visibility = Visibility.Hidden;
@@ -232,6 +232,7 @@ namespace prototype2
                 StartDateSer.Visibility = Visibility.Hidden;
                 EndDateSer.Visibility = Visibility.Hidden;
                 DatePickerWeekSer.Visibility = Visibility.Hidden;
+                GoButtonService.Visibility = Visibility.Hidden;
 
 
 
@@ -249,6 +250,7 @@ namespace prototype2
                 StartDateSer.Visibility = Visibility.Hidden;
                 EndDateSer.Visibility = Visibility.Hidden;
                 DatePickerWeekSer.Visibility = Visibility.Visible;
+                GoButtonService.Visibility = Visibility.Hidden;
 
 
             }
@@ -265,6 +267,7 @@ namespace prototype2
                 DatePickerEndSer.Visibility = Visibility.Hidden;
                 StartDateSer.Visibility = Visibility.Hidden;
                 EndDateSer.Visibility = Visibility.Hidden;
+                GoButtonService.Visibility = Visibility.Hidden;
 
             }
             if (SELECTEDINDEX.Equals(3))
@@ -280,6 +283,7 @@ namespace prototype2
                 DatePickerEndSer.Visibility = Visibility.Hidden;
                 StartDateSer.Visibility = Visibility.Hidden;
                 EndDateSer.Visibility = Visibility.Hidden;
+                GoButtonService.Visibility = Visibility.Hidden;
 
 
             }
@@ -296,7 +300,7 @@ namespace prototype2
                 DatePickerEndSer.Visibility = Visibility.Visible;
                 StartDateSer.Visibility = Visibility.Visible;
                 EndDateSer.Visibility = Visibility.Visible;
-
+                GoButtonService.Visibility = Visibility.Visible;
             }
         }
 
@@ -315,19 +319,24 @@ namespace prototype2
 
         private void DatePickerStartSer_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            DisplayReportRangeService();
+          
       
         }
 
         private void DatePickerEndSer_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            DisplayReportRangeService();
+         
            
         }
 
         private void DatePickerWeekSer_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             DisplayReportWeekService(); 
+        }
+
+        private void GoButtonService_Click(object sender, RoutedEventArgs e)
+        {
+            DisplayReportRangeService();
         }
     }
 }
