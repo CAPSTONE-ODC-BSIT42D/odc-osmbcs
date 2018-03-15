@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:prototype2"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Name="ucSalesQuote1" x:Class="prototype2.ucSalesQuote"
              mc:Ignorable="d" 
-             d:DesignHeight="733.5" d:DesignWidth="884" IsVisibleChanged="ucSalesQuote1_IsVisibleChanged">
+             d:DesignHeight="992.5" d:DesignWidth="884" IsVisibleChanged="ucSalesQuote1_IsVisibleChanged">
 
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
@@ -30,7 +30,7 @@
     <Grid Margin="0" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
         <Grid x:Name="transQuoatationGridForm" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Margin="0,0,0,0">
 
-            <ScrollViewer x:Name="newRequisitionGrid" Margin="0,0,0,45" VerticalScrollBarVisibility="Auto" Padding="10">
+            <ScrollViewer x:Name="newRequisitionGrid" Margin="0,0,0,45" VerticalScrollBarVisibility="Auto" Padding="10" d:IsHidden="True">
                 <Grid x:Name="newRequisitionGridForm">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="591*"/>
@@ -235,45 +235,45 @@
                     <TextBlock x:Name="totalPriceLbl" Margin="130,492,0,0" VerticalAlignment="Top" FontFamily="Segoe UI" FontWeight="Normal" Grid.Column="1" FontSize="20" Height="25" HorizontalAlignment="Left"  Text="{Binding TotalSales, ConverterCulture=fil-PH, StringFormat=\{0:C\}}"/>
                 </Grid>
             </ScrollViewer>
-            <ScrollViewer x:Name="termsAndConditionGrid" Margin="0,0,0,45" Padding="10" VerticalScrollBarVisibility="Auto" d:IsHidden="True">
+            <ScrollViewer x:Name="termsAndConditionGrid" Margin="0,0,0,45" Padding="10" VerticalScrollBarVisibility="Auto">
                 <Grid x:Name="termsAndConditionGridForm">
-                    <Label x:Name="label16_Copy2" Content="Terms and Conditions" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" FontFamily="Segoe UI"/>
-                    <Border BorderBrush="Black" BorderThickness="1" Height="2" VerticalAlignment="Top" Margin="20,46,20,0"/>
-                    <Label x:Name="label16_Copy3" Content="Currency:" HorizontalAlignment="Left" Margin="36,70,0,0" VerticalAlignment="Top" FontWeight="Normal" FontSize="14" FontFamily="Segoe UI Semibold"/>
-                    <ComboBox x:Name="moneyType" HorizontalAlignment="Left" Margin="140,74,0,0" VerticalAlignment="Top" Width="154" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" SelectedValuePath="Content" SelectedItem="{Binding SelectedSalesQuote.paymentCurrency_}">
+                    <Label Content="Survey Report" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" FontFamily="Segoe UI"/>
+                    <Border BorderBrush="Black" BorderThickness="1" Height="2" VerticalAlignment="Top" Margin="20,34,20,0"/>
+                    <Button x:Name="uploadBtn" Content="Upload" HorizontalAlignment="Left" Margin="38,41,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="uploadBtn_Click"/>
+                    <Button x:Name="downloadBtn" Content="Download" HorizontalAlignment="Left" Margin="119,41,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="downloadBtn_Clicked"/>
+                    <Label x:Name="label16_Copy2" Content="Terms and Conditions" HorizontalAlignment="Left" Margin="20,94,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" FontFamily="Segoe UI"/>
+                    <Border BorderBrush="Black" BorderThickness="1" Height="2" VerticalAlignment="Top" Margin="20,130,20,0"/>
+                    <Label x:Name="label16_Copy3" Content="Currency:" HorizontalAlignment="Left" Margin="36,154,0,0" VerticalAlignment="Top" FontWeight="Normal" FontSize="14" FontFamily="Segoe UI Semibold"/>
+                    <ComboBox x:Name="moneyType" HorizontalAlignment="Left" Margin="140,158,0,0" VerticalAlignment="Top" Width="154" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" SelectedValuePath="Content" SelectedValue="{Binding SelectedSalesQuote.paymentCurrency_}">
                         <ComboBoxItem Content="Philippine Peso" IsSelected="True"/>
                     </ComboBox>
-                    <CheckBox x:Name="landedCheckBox" Content="Landed Price" HorizontalAlignment="Left" Margin="140,113,0,0" VerticalAlignment="Top" IsChecked="True" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
-                    <CheckBox x:Name="vatCheckBox" Content="VAT Exclusive" HorizontalAlignment="Left" Margin="299,113,0,0" VerticalAlignment="Top" IsChecked="True" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Unchecked="vatCheckBox_Unchecked" Checked="vatCheckBox_Checked"/>
-                    <xctk:DecimalUpDown x:Name="vatInclusiveTb" HorizontalAlignment="Left" Margin="412,113,0,0" VerticalAlignment="Top" Width="54" Height="18"/>
-                    <Label x:Name="label16_Copy4" Content="Payment :" HorizontalAlignment="Left" Margin="36,182,0,0" VerticalAlignment="Top" FontWeight="Normal" FontSize="14" FontFamily="Segoe UI Semibold"/>
-                    <RadioButton x:Name="paymentDefaultRd" Content="50% Downpayment (Upon Release of Order), 50% Balance Upon Delivery" HorizontalAlignment="Left" Margin="140,189,0,0" VerticalAlignment="Top" IsChecked="True" GroupName="Payment" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
-                    <RadioButton x:Name="paymentCustomRb" Content="Custom" HorizontalAlignment="Left" Margin="140,222,0,0" VerticalAlignment="Top" GroupName="Payment" Checked="paymentCustomRb_Checked" Unchecked="paymentCustomRb_Unchecked" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
-                    <xctk:IntegerUpDown x:Name="downpaymentPercentTb" HorizontalAlignment="Left" Margin="239,219,0,0" VerticalAlignment="Top" Width="55" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Height="20"/>
-                    <Label x:Name="paymentDpLbl" Content="Downpayment (Upon Release of Order)" HorizontalAlignment="Left" Margin="294,216,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Height="32"/>
-                    <Label x:Name="warrantyLbl" Content="Warranty:" HorizontalAlignment="Left" Margin="36,316,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="14" FontFamily="Segoe UI Semibold"/>
-                    <RadioButton x:Name="warrantyDefaultRd" Content="One (1) Year" HorizontalAlignment="Left" Margin="140,323,0,0" VerticalAlignment="Top" GroupName="warranty" IsChecked="True" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
-                    <RadioButton x:Name="warrantycustomRd" Content="Custom" HorizontalAlignment="Left" Margin="140,349,0,0" VerticalAlignment="Top" GroupName="warranty" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Checked="warrantycustomRd_Checked" Unchecked="warrantycustomRd_Unchecked"/>
-                    <RadioButton x:Name="warrantyNoneRd" Content="None" HorizontalAlignment="Left" Margin="140,373,0,0" VerticalAlignment="Top" GroupName="warranty" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
-                    <xctk:IntegerUpDown x:Name="warrantyDaysCustom" HorizontalAlignment="Left" Margin="240,348,0,0" VerticalAlignment="Top" Width="55" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Height="20"/>
-                    <Label x:Name="warrantyDaysCustomLbl" Content="Year/Day" HorizontalAlignment="Left" Margin="298,346,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Height="28"/>
-                    <Label x:Name="deliveryLbl" Content="Delivery:" HorizontalAlignment="Left" Margin="36,456,0,0" VerticalAlignment="Top" FontWeight="Normal"  FontSize="14" FontFamily="Segoe UI Semibold"/>
-                    <RadioButton x:Name="deliveryDefaultRd" Content="Thirty (30) days upon receipt of DP" HorizontalAlignment="Left" Margin="141,463,0,0" VerticalAlignment="Top" GroupName="Delivery" IsChecked="True" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
-                    <RadioButton x:Name="deliveryCustomRd" Content="Custom" HorizontalAlignment="Left" Margin="141,496,0,0" VerticalAlignment="Top" GroupName="Delivery" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Checked="deliveryCustomRd_Checked" Unchecked="deliveryCustomRd_Unchecked"/>
-                    <RadioButton x:Name="deliveryNoneRd" Content="None" HorizontalAlignment="Left" Margin="141,524,0,0" VerticalAlignment="Top" GroupName="Delivery" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
-                    <xctk:IntegerUpDown x:Name="deliveryDaysTb" HorizontalAlignment="Left" Margin="239,494,0,0" VerticalAlignment="Top" Width="55" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Height="20"/>
-                    <Label x:Name="deliveryDaysCustomLbl" Content="days" HorizontalAlignment="Left" Margin="298,490,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
-                    <Label x:Name="validityLbl" Content="Validity:" HorizontalAlignment="Left" Margin="36,596,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="14" FontFamily="Segoe UI Semibold"/>
-                    <RadioButton x:Name="validityDefaultRd" Content="Thirty (30) days" HorizontalAlignment="Left" Margin="141,603,0,0" VerticalAlignment="Top" GroupName="validity" IsChecked="True" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
-                    <RadioButton x:Name="validtycustomRd" Content="Custom" HorizontalAlignment="Left" Margin="141,629,0,0" VerticalAlignment="Top" GroupName="validity" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Checked="validtycustomRd_Checked" Unchecked="validtycustomRd_Unchecked"/>
-                    <xctk:IntegerUpDown x:Name="validityTb" HorizontalAlignment="Left" Margin="239,628,0,0" VerticalAlignment="Top" Width="56" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Height="20"/>
-                    <Label x:Name="validtycustomlbl" Content="days" HorizontalAlignment="Left" Margin="295,626,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
-                    <Label x:Name="validityLbl_Copy" Content="Additional Terms and Conditions:" HorizontalAlignment="Left" Margin="36,683,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="14" FontFamily="Segoe UI Semibold"/>
-                    <TextBox x:Name="additionalTermsTb" HorizontalAlignment="Left" Height="86" Margin="38,715,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="451" FontWeight="Normal" FontSize="14"/>
-                    <Label Content="Survey Report" HorizontalAlignment="Left" Margin="20,816,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" FontFamily="Segoe UI"/>
-                    <Border BorderBrush="Black" BorderThickness="1" Height="2" VerticalAlignment="Top" Margin="20,852,20,0"/>
-                    <Button x:Name="uploadBtn" Content="Browse" HorizontalAlignment="Left" Margin="163,868,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="uploadBtn_Click"/>
-                    <TextBox x:Name="fileNameTb" HorizontalAlignment="Left" Height="23" Margin="38,868,0,0" TextWrapping="Wrap" Text="&lt;FileName&gt;" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+                    <CheckBox x:Name="landedCheckBox" Content="Landed Price" HorizontalAlignment="Left" Margin="140,197,0,0" VerticalAlignment="Top" IsChecked="true" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
+                    <CheckBox x:Name="vatCheckBox" Content="VAT Exclusive" HorizontalAlignment="Left" Margin="299,197,0,0" VerticalAlignment="Top" IsChecked="True" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Unchecked="vatCheckBox_Unchecked" Checked="vatCheckBox_Checked"/>
+                    <xctk:DecimalUpDown x:Name="vatInclusiveTb" HorizontalAlignment="Left" Margin="412,197,0,0" VerticalAlignment="Top" Width="77" Height="18" Maximum="100" Minimum="0" DefaultValue="0" FormatString="P" Text="12" UpdateValueOnEnterKey="True" IsEnabled="False"/>
+                    <Label x:Name="label16_Copy4" Content="Payment :" HorizontalAlignment="Left" Margin="36,266,0,0" VerticalAlignment="Top" FontWeight="Normal" FontSize="14" FontFamily="Segoe UI Semibold"/>
+                    <RadioButton x:Name="paymentDefaultRd" Content="50% Downpayment (Upon Release of Order), 50% Balance Upon Delivery" HorizontalAlignment="Left" Margin="140,273,0,0" VerticalAlignment="Top" IsChecked="True" GroupName="Payment" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
+                    <RadioButton x:Name="paymentCustomRb" Content="Custom" HorizontalAlignment="Left" Margin="140,306,0,0" VerticalAlignment="Top" GroupName="Payment" Checked="paymentCustomRb_Checked" Unchecked="paymentCustomRb_Unchecked" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
+                    <xctk:IntegerUpDown x:Name="downpaymentPercentTb" HorizontalAlignment="Left" Margin="239,303,0,0" VerticalAlignment="Top" Width="55" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Height="20"/>
+                    <Label x:Name="paymentDpLbl" Content="Downpayment (Upon Release of Order)" HorizontalAlignment="Left" Margin="294,300,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Height="32"/>
+                    <Label x:Name="warrantyLbl" Content="Warranty:" HorizontalAlignment="Left" Margin="36,400,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="14" FontFamily="Segoe UI Semibold"/>
+                    <RadioButton x:Name="warrantyDefaultRd" Content="One (1) Year" HorizontalAlignment="Left" Margin="140,407,0,0" VerticalAlignment="Top" GroupName="warranty" IsChecked="True" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
+                    <RadioButton x:Name="warrantycustomRd" Content="Custom" HorizontalAlignment="Left" Margin="140,433,0,0" VerticalAlignment="Top" GroupName="warranty" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Checked="warrantycustomRd_Checked" Unchecked="warrantycustomRd_Unchecked"/>
+                    <RadioButton x:Name="warrantyNoneRd" Content="None" HorizontalAlignment="Left" Margin="140,457,0,0" VerticalAlignment="Top" GroupName="warranty" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
+                    <xctk:IntegerUpDown x:Name="warrantyDaysCustom" HorizontalAlignment="Left" Margin="240,432,0,0" VerticalAlignment="Top" Width="55" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Height="20"/>
+                    <Label x:Name="warrantyDaysCustomLbl" Content="Year" HorizontalAlignment="Left" Margin="298,430,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Height="28"/>
+                    <Label x:Name="deliveryLbl" Content="Delivery:" HorizontalAlignment="Left" Margin="36,540,0,0" VerticalAlignment="Top" FontWeight="Normal"  FontSize="14" FontFamily="Segoe UI Semibold"/>
+                    <RadioButton x:Name="deliveryDefaultRd" Content="Thirty (30) days upon receipt of DP" HorizontalAlignment="Left" Margin="141,547,0,0" VerticalAlignment="Top" GroupName="Delivery" IsChecked="True" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
+                    <RadioButton x:Name="deliveryCustomRd" Content="Custom" HorizontalAlignment="Left" Margin="141,580,0,0" VerticalAlignment="Top" GroupName="Delivery" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Checked="deliveryCustomRd_Checked" Unchecked="deliveryCustomRd_Unchecked"/>
+                    <RadioButton x:Name="deliveryNoneRd" Content="None" HorizontalAlignment="Left" Margin="141,608,0,0" VerticalAlignment="Top" GroupName="Delivery" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
+                    <xctk:IntegerUpDown x:Name="deliveryDaysTb" HorizontalAlignment="Left" Margin="239,578,0,0" VerticalAlignment="Top" Width="55" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Height="20"/>
+                    <Label x:Name="deliveryDaysCustomLbl" Content="days" HorizontalAlignment="Left" Margin="298,574,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
+                    <Label x:Name="validityLbl" Content="Validity:" HorizontalAlignment="Left" Margin="36,680,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="14" FontFamily="Segoe UI Semibold"/>
+                    <RadioButton x:Name="validityDefaultRd" Content="Thirty (30) days" HorizontalAlignment="Left" Margin="141,687,0,0" VerticalAlignment="Top" GroupName="validity" IsChecked="True" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
+                    <RadioButton x:Name="validtycustomRd" Content="Custom" HorizontalAlignment="Left" Margin="141,713,0,0" VerticalAlignment="Top" GroupName="validity" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Checked="validtycustomRd_Checked" Unchecked="validtycustomRd_Unchecked"/>
+                    <xctk:IntegerUpDown x:Name="validityTb" HorizontalAlignment="Left" Margin="239,712,0,0" VerticalAlignment="Top" Width="56" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Height="20"/>
+                    <Label x:Name="validtycustomlbl" Content="days" HorizontalAlignment="Left" Margin="295,710,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
+                    <Label x:Name="validityLbl_Copy" Content="Additional Terms and Conditions:" HorizontalAlignment="Left" Margin="36,767,0,0" VerticalAlignment="Top" FontWeight="Normal" FontStyle="Italic" FontSize="14" FontFamily="Segoe UI Semibold"/>
+                    <TextBox x:Name="additionalTermsTb" HorizontalAlignment="Left" Height="86" Margin="38,799,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="451" FontWeight="Normal" FontSize="14"/>
                 </Grid>
             </ScrollViewer>
             <local:DocumentViewer x:Name="saleQuoteViewer" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,45" d:IsHidden="True"/>

@@ -278,7 +278,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=MonthName(Month(Fields!dateOfIssue.Value),False)&amp;" "&amp; Day(Fields!dateOfIssue.Value)</Value>
+                              <Value>=FormatDateTime(Fields!dateOfIssue.Value, DateFormat.LongDate)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -288,8 +288,7 @@
                       <rd:DefaultName>dateOfIssue</rd:DefaultName>
                       <Style>
                         <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -297,6 +296,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
