@@ -1458,6 +1458,8 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columnTOTAL_AMOUNT;
             
+            private global::System.Data.DataColumn columndiscountPercent;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public sales_quote_tDataTable() {
@@ -1525,6 +1527,14 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn discountPercentColumn {
+                get {
+                    return this.columndiscountPercent;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1560,13 +1570,14 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public sales_quote_tRow Addsales_quote_tRow(string sqNoChar, decimal LESS_DISCOUNT, decimal ADD_VAT_IF_INCLUSIVE, decimal TOTAL_AMOUNT) {
+            public sales_quote_tRow Addsales_quote_tRow(string sqNoChar, decimal LESS_DISCOUNT, decimal ADD_VAT_IF_INCLUSIVE, decimal TOTAL_AMOUNT, decimal discountPercent) {
                 sales_quote_tRow rowsales_quote_tRow = ((sales_quote_tRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         sqNoChar,
                         LESS_DISCOUNT,
                         ADD_VAT_IF_INCLUSIVE,
-                        TOTAL_AMOUNT};
+                        TOTAL_AMOUNT,
+                        discountPercent};
                 rowsales_quote_tRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowsales_quote_tRow);
                 return rowsales_quote_tRow;
@@ -1600,6 +1611,7 @@ namespace prototype2 {
                 this.columnLESS_DISCOUNT = base.Columns["LESS_DISCOUNT"];
                 this.columnADD_VAT_IF_INCLUSIVE = base.Columns["ADD_VAT_IF_INCLUSIVE"];
                 this.columnTOTAL_AMOUNT = base.Columns["TOTAL_AMOUNT"];
+                this.columndiscountPercent = base.Columns["discountPercent"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1613,6 +1625,8 @@ namespace prototype2 {
                 base.Columns.Add(this.columnADD_VAT_IF_INCLUSIVE);
                 this.columnTOTAL_AMOUNT = new global::System.Data.DataColumn("TOTAL_AMOUNT", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTOTAL_AMOUNT);
+                this.columndiscountPercent = new global::System.Data.DataColumn("discountPercent", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndiscountPercent);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnsqNoChar}, true));
                 this.columnsqNoChar.AllowDBNull = false;
@@ -3160,6 +3174,22 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal discountPercent {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablesales_quote_t.discountPercentColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'discountPercent\' in table \'sales_quote_t\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablesales_quote_t.discountPercentColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsADD_VAT_IF_INCLUSIVENull() {
                 return this.IsNull(this.tablesales_quote_t.ADD_VAT_IF_INCLUSIVEColumn);
             }
@@ -3180,6 +3210,18 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetTOTAL_AMOUNTNull() {
                 this[this.tablesales_quote_t.TOTAL_AMOUNTColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsdiscountPercentNull() {
+                return this.IsNull(this.tablesales_quote_t.discountPercentColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetdiscountPercentNull() {
+                this[this.tablesales_quote_t.discountPercentColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3649,6 +3691,7 @@ namespace prototype2.DatasetSales_QuoteTableAdapters {
             tableMapping.ColumnMappings.Add("LESS_DISCOUNT", "LESS_DISCOUNT");
             tableMapping.ColumnMappings.Add("ADD_VAT_IF_INCLUSIVE", "ADD_VAT_IF_INCLUSIVE");
             tableMapping.ColumnMappings.Add("TOTAL_AMOUNT", "TOTAL_AMOUNT");
+            tableMapping.ColumnMappings.Add("discountPercent", "discountPercent");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -3665,30 +3708,30 @@ namespace prototype2.DatasetSales_QuoteTableAdapters {
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[1];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT        sq.sqNoChar, TRUNCATE(IFNULL(sq.discountPercent, 0), 2) AS LESS_DIS" +
-                "COUNT, TRUNCATE(TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (I" +
-                "FNULL(mh.markupPerc, 0) / 100)) * IFNULL(ia.itemQnty,\r\n                         " +
-                " 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) * TRUNCATE(IFNULL(sq." +
-                "VAT, 0) / 100, 2), 2) AS ADD_VAT_IF_INCLUSIVE, TRUNCATE((IFNULL(ia.unitPrice, 0)" +
-                " + IFNULL(ia.unitPrice, 0) \r\n                         * (IFNULL(mh.markupPerc, 0" +
-                ") / 100)) * IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValu" +
-                "e, 0), 2) - TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (IFNUL" +
-                "L(mh.markupPerc, 0) / 100)) \r\n                         * IFNULL(ia.itemQnty, 0) " +
-                "+ IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) * TRUNCATE(IFNULL(sq.disc" +
-                "ountPercent, 0) / 100, 2) + TRUNCATE(TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(" +
-                "ia.unitPrice, 0) \r\n                         * (IFNULL(mh.markupPerc, 0) / 100)) " +
-                "* IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) " +
-                "* TRUNCATE(IFNULL(sq.VAT, 0) / 100, 2), 2) AS TOTAL_AMOUNT\r\nFROM            sale" +
-                "s_quote_t sq LEFT OUTER JOIN\r\n                         items_availed_t ia ON sq." +
-                "sqNoChar = ia.sqNoChar LEFT OUTER JOIN\r\n                         item_t i ON i.I" +
-                "D = ia.itemID LEFT OUTER JOIN\r\n                         markup_hist_t mh ON mh.i" +
-                "temID = ia.itemID INNER JOIN\r\n                         cust_supp_t cs ON cs.comp" +
-                "anyID = sq.custID INNER JOIN\r\n                         provinces_t p ON p.id = c" +
-                "s.companyProvinceID LEFT OUTER JOIN\r\n                         services_availed_t" +
-                " sa ON sa.sqNoChar = sq.sqNoChar LEFT OUTER JOIN\r\n                         servi" +
-                "ces_t s ON s.serviceID = sa.serviceID LEFT OUTER JOIN\r\n                         " +
-                "fees_per_transaction_t ft ON ft.servicesAvailedID = sa.id\r\nWHERE        (sq.sqNo" +
-                "Char = @A)";
+            this._commandCollection[0].CommandText = "SELECT        sq.sqNoChar, sq.discountPercent, TRUNCATE(IFNULL(sq.discountPercent" +
+                ", 0), 2) AS LESS_DISCOUNT, TRUNCATE(TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(i" +
+                "a.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) / 100)) \r\n                         *" +
+                " IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) *" +
+                " TRUNCATE(IFNULL(sq.VAT, 0) / 100, 2), 2) AS ADD_VAT_IF_INCLUSIVE, TRUNCATE((IFN" +
+                "ULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) \r\n                         * (IFN" +
+                "ULL(mh.markupPerc, 0) / 100)) * IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0)" +
+                " + IFNULL(ft.feeValue, 0), 2) - TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.un" +
+                "itPrice, 0) * (IFNULL(mh.markupPerc, 0) / 100)) \r\n                         * IFN" +
+                "ULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) * TRU" +
+                "NCATE(IFNULL(sq.discountPercent, 0) / 100, 2) + TRUNCATE(TRUNCATE((IFNULL(ia.uni" +
+                "tPrice, 0) + IFNULL(ia.unitPrice, 0) \r\n                         * (IFNULL(mh.mar" +
+                "kupPerc, 0) / 100)) * IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0) + IFNULL(" +
+                "ft.feeValue, 0), 2) * TRUNCATE(IFNULL(sq.VAT, 0) / 100, 2), 2) AS TOTAL_AMOUNT\r\n" +
+                "FROM            sales_quote_t sq LEFT OUTER JOIN\r\n                         items" +
+                "_availed_t ia ON sq.sqNoChar = ia.sqNoChar LEFT OUTER JOIN\r\n                    " +
+                "     item_t i ON i.ID = ia.itemID LEFT OUTER JOIN\r\n                         mark" +
+                "up_hist_t mh ON mh.itemID = ia.itemID INNER JOIN\r\n                         cust_" +
+                "supp_t cs ON cs.companyID = sq.custID INNER JOIN\r\n                         provi" +
+                "nces_t p ON p.id = cs.companyProvinceID LEFT OUTER JOIN\r\n                       " +
+                "  services_availed_t sa ON sa.sqNoChar = sq.sqNoChar LEFT OUTER JOIN\r\n          " +
+                "               services_t s ON s.serviceID = sa.serviceID LEFT OUTER JOIN\r\n     " +
+                "                    fees_per_transaction_t ft ON ft.servicesAvailedID = sa.id\r\nW" +
+                "HERE        (sq.sqNoChar = @A)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@A";

@@ -43,6 +43,6 @@
                 </Canvas>
             </Viewbox>
         </Button>
-        <syncfusion:ReportViewer x:Name="SalesInvoiceViewer"  ReportPath="C:\Users\Alexis\Source\Repos\odc-osmbcs\rdlcfiles\SalesInvoice.rdlc" ProcessingMode="Local" ViewMode="Print" ShowExportControls="True" ShowPdfExportButton="True"/>
+        <syncfusion:ReportViewer x:Name="SalesInvoiceViewer" ProcessingMode="Local"/>
     </Grid>
 </UserControl>

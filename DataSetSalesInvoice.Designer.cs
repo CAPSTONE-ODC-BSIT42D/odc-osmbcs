@@ -1282,6 +1282,10 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columnTOTAL_AMOUNT;
             
+            private global::System.Data.DataColumn columnwithholdingTax;
+            
+            private global::System.Data.DataColumn columnsc_pwd_discount;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public sales_Invoice_tDataTable() {
@@ -1341,6 +1345,22 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn withholdingTaxColumn {
+                get {
+                    return this.columnwithholdingTax;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn sc_pwd_discountColumn {
+                get {
+                    return this.columnsc_pwd_discount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1376,12 +1396,14 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public sales_Invoice_tRow Addsales_Invoice_tRow(decimal LESS_DISCOUNT, decimal ADD_VAT_IF_INCLUSIVE, decimal TOTAL_AMOUNT) {
+            public sales_Invoice_tRow Addsales_Invoice_tRow(decimal LESS_DISCOUNT, decimal ADD_VAT_IF_INCLUSIVE, decimal TOTAL_AMOUNT, decimal withholdingTax, decimal sc_pwd_discount) {
                 sales_Invoice_tRow rowsales_Invoice_tRow = ((sales_Invoice_tRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         LESS_DISCOUNT,
                         ADD_VAT_IF_INCLUSIVE,
-                        TOTAL_AMOUNT};
+                        TOTAL_AMOUNT,
+                        withholdingTax,
+                        sc_pwd_discount};
                 rowsales_Invoice_tRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowsales_Invoice_tRow);
                 return rowsales_Invoice_tRow;
@@ -1407,6 +1429,8 @@ namespace prototype2 {
                 this.columnLESS_DISCOUNT = base.Columns["LESS_DISCOUNT"];
                 this.columnADD_VAT_IF_INCLUSIVE = base.Columns["ADD_VAT_IF_INCLUSIVE"];
                 this.columnTOTAL_AMOUNT = base.Columns["TOTAL_AMOUNT"];
+                this.columnwithholdingTax = base.Columns["withholdingTax"];
+                this.columnsc_pwd_discount = base.Columns["sc_pwd_discount"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1418,6 +1442,10 @@ namespace prototype2 {
                 base.Columns.Add(this.columnADD_VAT_IF_INCLUSIVE);
                 this.columnTOTAL_AMOUNT = new global::System.Data.DataColumn("TOTAL_AMOUNT", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTOTAL_AMOUNT);
+                this.columnwithholdingTax = new global::System.Data.DataColumn("withholdingTax", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnwithholdingTax);
+                this.columnsc_pwd_discount = new global::System.Data.DataColumn("sc_pwd_discount", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsc_pwd_discount);
                 this.columnLESS_DISCOUNT.AllowDBNull = false;
             }
             
@@ -2625,6 +2653,38 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal withholdingTax {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablesales_Invoice_t.withholdingTaxColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'withholdingTax\' in table \'sales_Invoice_t\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablesales_Invoice_t.withholdingTaxColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal sc_pwd_discount {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablesales_Invoice_t.sc_pwd_discountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'sc_pwd_discount\' in table \'sales_Invoice_t\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablesales_Invoice_t.sc_pwd_discountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsADD_VAT_IF_INCLUSIVENull() {
                 return this.IsNull(this.tablesales_Invoice_t.ADD_VAT_IF_INCLUSIVEColumn);
             }
@@ -2645,6 +2705,30 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetTOTAL_AMOUNTNull() {
                 this[this.tablesales_Invoice_t.TOTAL_AMOUNTColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IswithholdingTaxNull() {
+                return this.IsNull(this.tablesales_Invoice_t.withholdingTaxColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetwithholdingTaxNull() {
+                this[this.tablesales_Invoice_t.withholdingTaxColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Issc_pwd_discountNull() {
+                return this.IsNull(this.tablesales_Invoice_t.sc_pwd_discountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setsc_pwd_discountNull() {
+                this[this.tablesales_Invoice_t.sc_pwd_discountColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3089,6 +3173,8 @@ namespace prototype2.DataSetSalesInvoiceTableAdapters {
             tableMapping.ColumnMappings.Add("LESS_DISCOUNT", "LESS_DISCOUNT");
             tableMapping.ColumnMappings.Add("ADD_VAT_IF_INCLUSIVE", "ADD_VAT_IF_INCLUSIVE");
             tableMapping.ColumnMappings.Add("TOTAL_AMOUNT", "TOTAL_AMOUNT");
+            tableMapping.ColumnMappings.Add("withholdingTax", "withholdingTax");
+            tableMapping.ColumnMappings.Add("sc_pwd_discount", "sc_pwd_discount");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -3105,30 +3191,31 @@ namespace prototype2.DataSetSalesInvoiceTableAdapters {
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[1];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT        TRUNCATE(IFNULL(sq.discountPercent, 0), 2) AS LESS_DISCOUNT, TRUNCA" +
-                "TE(TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.mark" +
-                "upPerc, 0) / 100)) * IFNULL(ia.itemQnty, 0) \r\n                         + IFNULL(" +
-                "sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) * TRUNCATE(IFNULL(sq.VAT, 0) / 100" +
-                ", 2), 2) AS ADD_VAT_IF_INCLUSIVE, TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia." +
-                "unitPrice, 0) * (IFNULL(mh.markupPerc,\r\n                          0) / 100)) * I" +
-                "FNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) - T" +
-                "RUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPe" +
-                "rc, 0) / 100)) * IFNULL(ia.itemQnty, 0) \r\n                         + IFNULL(sa.t" +
-                "otalCost, 0), 2) * TRUNCATE(IFNULL(sq.discountPercent, 0) / 100, 2) + TRUNCATE(T" +
-                "RUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPe" +
-                "rc, 0) / 100)) \r\n                         * IFNULL(ia.itemQnty, 0) + IFNULL(sa.t" +
-                "otalCost, 0) + IFNULL(ft.feeValue, 0), 2) * TRUNCATE(IFNULL(sq.VAT, 0) / 100, 2)" +
-                ", 2) AS TOTAL_AMOUNT\r\nFROM            sales_quote_t sq LEFT OUTER JOIN\r\n        " +
-                "                 items_availed_t ia ON sq.sqNoChar = ia.sqNoChar LEFT OUTER JOIN" +
-                "\r\n                         item_t i ON i.ID = ia.itemID LEFT OUTER JOIN\r\n       " +
-                "                  markup_hist_t mh ON mh.itemID = ia.itemID INNER JOIN\r\n        " +
-                "                 cust_supp_t cs ON cs.companyID = sq.custID INNER JOIN\r\n        " +
-                "                 provinces_t p ON p.id = cs.companyProvinceID LEFT OUTER JOIN\r\n " +
-                "                        services_availed_t sa ON sa.sqNoChar = sq.sqNoChar LEFT " +
-                "OUTER JOIN\r\n                         services_t s ON s.serviceID = sa.serviceID " +
-                "LEFT OUTER JOIN\r\n                         fees_per_transaction_t ft ON ft.servic" +
-                "esAvailedID = sa.id INNER JOIN\r\n                         sales_invoice_t si ON s" +
-                "i.sqNoChar = sq.sqNoChar\r\nWHERE        (si.invoiceNo = @a)";
+            this._commandCollection[0].CommandText = "SELECT        si.withholdingTax, si.sc_pwd_discount, TRUNCATE(IFNULL(sq.discountP" +
+                "ercent, 0), 2) AS LESS_DISCOUNT, TRUNCATE(TRUNCATE((IFNULL(ia.unitPrice, 0) + IF" +
+                "NULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) \r\n                         / 1" +
+                "00)) * IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0)" +
+                ", 2) * TRUNCATE(IFNULL(sq.VAT, 0) / 100, 2), 2) AS ADD_VAT_IF_INCLUSIVE, TRUNCAT" +
+                "E((IFNULL(ia.unitPrice, 0) \r\n                         + IFNULL(ia.unitPrice, 0) " +
+                "* (IFNULL(mh.markupPerc, 0) / 100)) * IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCo" +
+                "st, 0) + IFNULL(ft.feeValue, 0), 2) - TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL" +
+                "(ia.unitPrice, 0) \r\n                         * (IFNULL(mh.markupPerc, 0) / 100))" +
+                " * IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0), 2) * TRUNCATE(IFNULL(sq.dis" +
+                "countPercent, 0) / 100, 2) + TRUNCATE(TRUNCATE((IFNULL(ia.unitPrice, 0) \r\n      " +
+                "                   + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) / 100))" +
+                " * IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2)" +
+                " * TRUNCATE(IFNULL(sq.VAT, 0) / 100, 2), 2) AS TOTAL_AMOUNT\r\nFROM            sal" +
+                "es_quote_t sq LEFT OUTER JOIN\r\n                         items_availed_t ia ON sq" +
+                ".sqNoChar = ia.sqNoChar LEFT OUTER JOIN\r\n                         item_t i ON i." +
+                "ID = ia.itemID LEFT OUTER JOIN\r\n                         markup_hist_t mh ON mh." +
+                "itemID = ia.itemID INNER JOIN\r\n                         cust_supp_t cs ON cs.com" +
+                "panyID = sq.custID INNER JOIN\r\n                         provinces_t p ON p.id = " +
+                "cs.companyProvinceID LEFT OUTER JOIN\r\n                         services_availed_" +
+                "t sa ON sa.sqNoChar = sq.sqNoChar LEFT OUTER JOIN\r\n                         serv" +
+                "ices_t s ON s.serviceID = sa.serviceID LEFT OUTER JOIN\r\n                        " +
+                " fees_per_transaction_t ft ON ft.servicesAvailedID = sa.id INNER JOIN\r\n         " +
+                "                sales_invoice_t si ON si.sqNoChar = sq.sqNoChar\r\nWHERE        (s" +
+                "i.invoiceNo = @a)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@a";

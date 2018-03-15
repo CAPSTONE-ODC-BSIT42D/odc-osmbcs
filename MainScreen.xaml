@@ -2310,13 +2310,13 @@
             <uControlsMaintenance:ucAddItem x:Name="ucAddItem" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Visibility="Collapsed" d:IsHidden="True"/>
 
             <uControlsTransanction:ucSelectSalesQuote x:Name="ucSelectSalesQuote" Margin="0" HorizontalAlignment="Left" Visibility="Collapsed" d:IsHidden="True"/>
-            <uControlsTransanction:ucInvoicePaymentHist x:Name="ucInvoicePaymentHist" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
-            <uControlsMaintenance:ucInvoicePaymentForm x:Name="ucInvoicePaymentForm" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
-            <local:ucOfficialReceipt x:Name="ucOfficialReceipt" d:IsHidden="True"/>
-            <local:ucPurchaseOrderViewer x:Name="ucPurchaseOrderViewer" d:IsHidden="True"/>
-            <uControlsService:ucSelecService x:Name="ucSelectService" Margin="0" d:IsHidden="True"/>
-            <local:ucNoticeOfEmployment x:Name="ucNoticeOfEmployment" Height="Auto" Margin="0" Width="Auto" d:IsHidden="True"/>
-            <local:ucSalesInvoiceViewer x:Name="ucSaleInvoiceViewer" Margin="0" d:IsHidden="True"/>
+            <uControlsTransanction:ucInvoicePaymentHist x:Name="ucInvoicePaymentHist" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True" Visibility="Collapsed"/>
+            <uControlsMaintenance:ucInvoicePaymentForm x:Name="ucInvoicePaymentForm" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True" Visibility="Collapsed"/>
+            <local:ucOfficialReceipt x:Name="ucOfficialReceipt" d:IsHidden="True" Visibility="Collapsed"/>
+            <local:ucPurchaseOrderViewer x:Name="ucPurchaseOrderViewer" d:IsHidden="True" Visibility="Collapsed"/>
+            <uControlsService:ucSelecService x:Name="ucSelectService" Margin="0" d:IsHidden="True" Visibility="Collapsed"/>
+            <local:ucNoticeOfEmployment x:Name="ucNoticeOfEmployment" Height="Auto" Margin="0" Width="Auto" d:IsHidden="True" Visibility="Collapsed"/>
+            <local:ucSalesInvoiceViewer x:Name="ucSaleInvoiceViewer" Margin="0" d:IsHidden="True" Visibility="Collapsed"/>
             <local:ucSalesQuoteViewer x:Name="ucSalesQuoteViewer" Margin="0" d:IsHidden="True" Visibility="Collapsed"/>
         </Grid>
 
