@@ -107,6 +107,7 @@ namespace prototype2
                 {
                     if (MainVM.SelectedSalesQuote != null)
                     {
+                        downloadBtn.IsEnabled = true;
                         foreach (UIElement obj in transQuoatationGridForm.Children)
                         {
                             if (transQuoatationGridForm.Children.IndexOf(obj) == 0)
@@ -121,7 +122,7 @@ namespace prototype2
                     }
                     else
                     {
-
+                        downloadBtn.IsEnabled = false;
                         foreach (UIElement obj in transQuoatationGridForm.Children)
                         {
                             obj.IsEnabled = true;
@@ -184,6 +185,49 @@ namespace prototype2
                 }
             }
 
+            discountPriceTb.Value = MainVM.SelectedSalesQuote.discountPercent_;
+            landedCheckBox.IsChecked = MainVM.SelectedSalesQuote.paymentIsLanded_;
+            vatCheckBox.IsChecked = MainVM.SelectedSalesQuote.vatexcluded_;
+            vatInclusiveTb.Value = MainVM.SelectedSalesQuote.vat_;
+            if (MainVM.SelectedSalesQuote.termsDP_ == 50)
+            {
+                paymentDefaultRd.IsChecked = true;
+            }
+            else
+            {
+                paymentCustomRb.IsChecked = true;
+                downpaymentPercentTb.Value = MainVM.SelectedSalesQuote.termsDP_;
+            }
+
+            if (MainVM.SelectedSalesQuote.warrantyDays_ == 0)
+                warrantyNoneRd.IsChecked = true;
+            else if (MainVM.SelectedSalesQuote.warrantyDays_ > 1)
+            {
+                warrantycustomRd.IsChecked = true;
+                warrantyDaysCustom.Value = MainVM.SelectedSalesQuote.warrantyDays_;
+            }
+            else
+                warrantyDefaultRd.IsChecked = true;
+
+            if (MainVM.SelectedSalesQuote.estDelivery_ == 0)
+                deliveryNoneRd.IsChecked = true;
+            else if (MainVM.SelectedSalesQuote.estDelivery_ > 30)
+            {
+                deliveryCustomRd.IsChecked = true;
+                deliveryDaysTb.Value = MainVM.SelectedSalesQuote.estDelivery_;
+            }
+            else
+                deliveryDefaultRd.IsChecked = true;
+
+            if (MainVM.SelectedSalesQuote.validityDays_ > 30)
+            {
+                validityTb.Value = MainVM.SelectedSalesQuote.validityDays_;
+                validtycustomRd.IsChecked = true;
+            }
+            else
+                validityDefaultRd.IsChecked = true;
+
+            additionalTermsTb.Text = MainVM.SelectedSalesQuote.additionalTerms_;
 
         }
 
@@ -191,6 +235,7 @@ namespace prototype2
         {
             if (newRequisitionGrid.IsVisible)
             {
+                MainVM.resetValueofVariables();
                 OnSaveCloseButtonClicked(e);
 
             }
@@ -530,9 +575,11 @@ namespace prototype2
             if (IsLoaded && IsVisible)
                 computePrice();
         }
-
+        string filename;
+        byte[] data = null;
         private void uploadBtn_Click(object sender, RoutedEventArgs e)
         {
+
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             // Set filter for file extension and default file extension 
             dlg.DefaultExt = ".docx";
@@ -547,10 +594,79 @@ namespace prototype2
             if (result == true)
             {
                 // Open document 
-                string filename = dlg.FileName;
-                fileNameTb.Text = filename;
+                filename = dlg.FileName;
+            }
+
+            
+
+            //Use FileInfo object to get file size.
+            FileInfo fInfo = new FileInfo(filename);
+            long numBytes = fInfo.Length;
+
+            //Open FileStream to read file
+            FileStream fStream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+
+            //Use BinaryReader to read file stream into byte array.
+            BinaryReader br = new BinaryReader(fStream);
+
+            //When you use BinaryReader, you need to supply number of bytes to read from file.
+            //In this case we want to read entire file. So supplying total number of bytes.
+            data = br.ReadBytes((int)numBytes);
+
+
+        }
+
+        private void downloadBtn_Clicked(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.InitialDirectory = Convert.ToString(Environment.SpecialFolder.MyDocuments);
+            saveFileDialog1.DefaultExt = ".docx";
+            saveFileDialog1.Filter = "Word Files(*.docx)| *.docx|Word Files 2 (*.doc)|*.doc";
+            saveFileDialog1.FilterIndex = 1;
+            
+            Nullable<bool> result = saveFileDialog1.ShowDialog();
+
+            
+
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                var dbCon = DBConnection.Instance();
+                dbCon.IsConnect();
+                using (MySqlConnection conn  = dbCon.Connection)
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.Connection = conn;
+                    cmd.CommandType = CommandType.Text;
+
+                    cmd.CommandText = "SELECT surveyReportDoc from sales_quote_t where sqNoChar = @sqNoChar";
+                    cmd.Parameters.AddWithValue("@sqNoChar", MainVM.SelectedSalesQuote.sqNoChar_);
+                    using (MySqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            int size = 1024 * 1024;
+                            byte[] buffer = new byte[size];
+                            int readBytes = 0;
+                            int index = 0;
+
+                            using (FileStream fs = new FileStream(saveFileDialog1.FileName, FileMode.Create, FileAccess.Write, FileShare.None))
+                            {
+                                while ((readBytes = (int)dr.GetBytes(0, index, buffer, 0, size)) > 0)
+                                {
+                                    fs.Write(buffer, 0, readBytes);
+                                    index += readBytes;
+                                }
+                            }
+                        }
+                    }
+                }
+                    
             }
         }
+
 
         private void generatePDFBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -641,7 +757,7 @@ namespace prototype2
         void salesQuoteToMemory()
         {
             string landed = "";
-            decimal vat = 0;
+            decimal vat = 12;
             string vatExc = "VAT Exclusive";
             int estDel = 0;
             int valid = 30;
@@ -653,6 +769,8 @@ namespace prototype2
             {
                 vat = (decimal)vatInclusiveTb.Value;
             }
+            else
+                vat = 12;
             if ((bool)deliveryDefaultRd.IsChecked)
             {
                 estDel = 30;
@@ -753,7 +871,7 @@ namespace prototype2
         {
             var dbCon = DBConnection.Instance();
             bool noError = true;
-            string FileName = fileNameTb.Text;
+            string FileName = filename;
 
             byte[] DocData;
             FileStream fs;
@@ -787,7 +905,7 @@ namespace prototype2
                     MainVM.SelectedSalesQuote.termsDays_ + "','" +
                     MainVM.SelectedSalesQuote.termsDP_ + "','" +
                     MainVM.SelectedSalesQuote.discountPercent_ + "','" +
-                    DocData + "','" +
+                    data + "','" +
                     MainVM.SelectedSalesQuote.additionalTerms_ + "'" +
                     "); ";
                     if (dbCon.insertQuery(query, dbCon.Connection))
@@ -821,13 +939,17 @@ namespace prototype2
                                 {
                                     query = "SELECT LAST_INSERT_ID();";
                                     string aServiceId = dbCon.selectScalar(query, dbCon.Connection).ToString();
-                                    foreach (AdditionalFee af in MainVM.SelectedAvailedServices.AdditionalFees)
+                                    if (MainVM.SelectedAvailedServices.AdditionalFees != null)
                                     {
-                                        query = "INSERT INTO `odc_db`.`fees_per_transaction_t`(`servicesAvailedID`,`feeName`,`feeValue`)" +
-                                        " VALUES " +
-                                        "('" + aServiceId + "', '" + af.FeeName + "', '" + af.FeePrice + "');";
-                                        noError = dbCon.insertQuery(query, dbCon.Connection);
+                                        foreach (AdditionalFee af in MainVM.SelectedAvailedServices.AdditionalFees)
+                                        {
+                                            query = "INSERT INTO `odc_db`.`fees_per_transaction_t`(`servicesAvailedID`,`feeName`,`feeValue`)" +
+                                            " VALUES " +
+                                            "('" + aServiceId + "', '" + af.FeeName + "', '" + af.FeePrice + "');";
+                                            noError = dbCon.insertQuery(query, dbCon.Connection);
+                                        }
                                     }
+                                    
 
                                 }
                             }

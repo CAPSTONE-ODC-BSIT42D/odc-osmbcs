@@ -32,7 +32,7 @@ namespace prototype2
         }
 
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
-
+        ObservableCollection<Employee> notAvail = new ObservableCollection<Employee>();
         public event EventHandler SaveCloseButtonClicked;
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
@@ -101,7 +101,7 @@ namespace prototype2
             MainVM.AvailableEmployees_.Clear();
             IEnumerable<Employee> availEmp;
             IEnumerable<Employee> availCont;
-            ObservableCollection<Employee> notAvail = new ObservableCollection<Employee>();
+            
             foreach (ServiceSchedule ss in MainVM.ServiceSchedules_)
             {
                 if (ss.dateEnded_ > startDate.SelectedDate)
@@ -173,29 +173,6 @@ namespace prototype2
         private void saveSchedBtn_Click(object sender, RoutedEventArgs e)
         {
             saveDataToDb();
-            ////MainVM.SelectedSalesQuote = MainVM.SalesQuotes.Where(x => x.sqNoChar_.Equals(MainVM.SelectedAddedService.SqNoChar)).First();
-            //MainVM.SelectedSalesInvoice = MainVM.SalesInvoice.Where(x => x.sqNoChar_.Equals(MainVM.SelectedSalesQuote.sqNoChar_)).First();
-            //if (assignedEmployees.Items.Count != 0 && MainVM.SelectedSalesInvoice!=null)
-            //{
-            //    //serviceSched.Appointments.Add(new ScheduleAppointment() { Subject = serviceNoCb.SelectedValue.ToString(), StartTime = (DateTime)startDate.SelectedDate, EndTime = (DateTime)endDate.SelectedDate });
-
-
-            //    MainVM.SelectedServiceSchedule_.serviceSchedNoChar_ = serviceNoCb.SelectedValue.ToString();
-            //    MainVM.SelectedServiceSchedule_.invoiceNo_ = int.Parse(MainVM.SelectedSalesInvoice.invoiceNo_);
-            //    MainVM.SelectedServiceSchedule_.dateStarted_ = (DateTime)startDate.SelectedDate;
-            //    MainVM.SelectedServiceSchedule_.dateEnded_ = (DateTime)endDate.SelectedDate;
-            //    MainVM.SelectedServiceSchedule_.schedNotes_ = notesTb.Text;
-            //    saveDataToDb();
-            //    Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
-            //    sb.Begin(formGridBg);
-            //    formGridBg.Visibility = Visibility.Collapsed;
-            //    MainVM.AssignedEmployees_.Clear();
-            //}
-            //else
-            //{
-            //    MessageBox.Show("No Assigned Employees");
-            //}
-
         }
 
         private void cancelschedBtn_Click(object sender, RoutedEventArgs e)
@@ -288,6 +265,10 @@ namespace prototype2
 
         private void transferToRightBtn_Click(object sender, RoutedEventArgs e)
         {
+            if(notAvail.Contains(MainVM.SelectedEmployeeContractor) && MainVM.Employees.Contains(MainVM.SelectedEmployeeContractor))
+            {
+                MessageBoxResult result = MessageBox.Show("This employee already assigned to other service, do you want to assign this ", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+            }
             MainVM.SelectedServiceSchedule_.assignedEmployees_.Add(MainVM.SelectedEmployeeContractor);
             MainVM.AvailableEmployees_.Remove(MainVM.SelectedEmployeeContractor);
         }
