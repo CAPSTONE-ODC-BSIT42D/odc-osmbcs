@@ -2269,15 +2269,14 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>12.47917in</Height>
+    <Height>11.47917in</Height>
     <Style>
       <Border>
-        <Style>Solid</Style>
-        <Width>1.75pt</Width>
+        <Style>None</Style>
       </Border>
     </Style>
   </Body>
-  <Width>10.4675in</Width>
+  <Width>8.5in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>

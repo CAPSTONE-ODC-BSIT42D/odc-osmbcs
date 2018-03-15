@@ -41,10 +41,9 @@ namespace prototype2
         private void DisplayReport()
         {
 
-           
+            SalesInvoiceViewer.DataSources.Clear();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesInvoice.rdlc");
             SalesInvoiceViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetSalesInvoice", GetSales()));
-
             SalesInvoiceViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetSIAmount", GetSalesAmount()));
             SalesInvoiceViewer.LoadReport(rNames);
             SalesInvoiceViewer.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
