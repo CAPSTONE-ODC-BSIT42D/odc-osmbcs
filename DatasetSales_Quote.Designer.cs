@@ -402,8 +402,6 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columnExpr1;
             
-            private global::System.Data.DataColumn columnExpr2;
-            
             private global::System.Data.DataColumn columnitemQnty;
             
             private global::System.Data.DataColumn columnserviceName;
@@ -414,9 +412,17 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columnserviceID;
             
-            private global::System.Data.DataColumn columnExpr3;
-            
             private global::System.Data.DataColumn columnserviceDesc;
+            
+            private global::System.Data.DataColumn columnservicePrice;
+            
+            private global::System.Data.DataColumn columnExpr2;
+            
+            private global::System.Data.DataColumn columnLESS_DISCOUNT;
+            
+            private global::System.Data.DataColumn columnIF_VAT_INCLUSIVE;
+            
+            private global::System.Data.DataColumn columnUNIT_PRICE;
             
             private global::System.Data.DataColumn columnitemDescr;
             
@@ -807,14 +813,6 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn Expr2Column {
-                get {
-                    return this.columnExpr2;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn itemQntyColumn {
                 get {
                     return this.columnitemQnty;
@@ -855,17 +853,49 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn Expr3Column {
+            public global::System.Data.DataColumn serviceDescColumn {
                 get {
-                    return this.columnExpr3;
+                    return this.columnserviceDesc;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn serviceDescColumn {
+            public global::System.Data.DataColumn servicePriceColumn {
                 get {
-                    return this.columnserviceDesc;
+                    return this.columnservicePrice;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Expr2Column {
+                get {
+                    return this.columnExpr2;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn LESS_DISCOUNTColumn {
+                get {
+                    return this.columnLESS_DISCOUNT;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IF_VAT_INCLUSIVEColumn {
+                get {
+                    return this.columnIF_VAT_INCLUSIVE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn UNIT_PRICEColumn {
+                get {
+                    return this.columnUNIT_PRICE;
                 }
             }
             
@@ -957,12 +987,15 @@ namespace prototype2 {
                         string repMobile, 
                         int companyType, 
                         bool Expr1, 
-                        decimal Expr2, 
                         int itemQnty, 
                         string serviceName, 
                         decimal total_item, 
                         decimal total_service, 
                         string serviceDesc, 
+                        decimal servicePrice, 
+                        decimal LESS_DISCOUNT, 
+                        decimal IF_VAT_INCLUSIVE, 
+                        decimal UNIT_PRICE, 
                         string itemDescr) {
                 Sales_QuoteRow rowSales_QuoteRow = ((Sales_QuoteRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
@@ -1010,14 +1043,17 @@ namespace prototype2 {
                         repMobile,
                         companyType,
                         Expr1,
-                        Expr2,
                         itemQnty,
                         serviceName,
                         total_item,
                         total_service,
                         null,
-                        null,
                         serviceDesc,
+                        servicePrice,
+                        null,
+                        LESS_DISCOUNT,
+                        IF_VAT_INCLUSIVE,
+                        UNIT_PRICE,
                         itemDescr};
                 rowSales_QuoteRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSales_QuoteRow);
@@ -1094,14 +1130,17 @@ namespace prototype2 {
                 this.columnrepMobile = base.Columns["repMobile"];
                 this.columncompanyType = base.Columns["companyType"];
                 this.columnExpr1 = base.Columns["Expr1"];
-                this.columnExpr2 = base.Columns["Expr2"];
                 this.columnitemQnty = base.Columns["itemQnty"];
                 this.columnserviceName = base.Columns["serviceName"];
                 this.columntotal_item = base.Columns["total_item"];
                 this.columntotal_service = base.Columns["total_service"];
                 this.columnserviceID = base.Columns["serviceID"];
-                this.columnExpr3 = base.Columns["Expr3"];
                 this.columnserviceDesc = base.Columns["serviceDesc"];
+                this.columnservicePrice = base.Columns["servicePrice"];
+                this.columnExpr2 = base.Columns["Expr2"];
+                this.columnLESS_DISCOUNT = base.Columns["LESS_DISCOUNT"];
+                this.columnIF_VAT_INCLUSIVE = base.Columns["IF_VAT_INCLUSIVE"];
+                this.columnUNIT_PRICE = base.Columns["UNIT_PRICE"];
                 this.columnitemDescr = base.Columns["itemDescr"];
             }
             
@@ -1196,8 +1235,6 @@ namespace prototype2 {
                 base.Columns.Add(this.columncompanyType);
                 this.columnExpr1 = new global::System.Data.DataColumn("Expr1", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnExpr1);
-                this.columnExpr2 = new global::System.Data.DataColumn("Expr2", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnExpr2);
                 this.columnitemQnty = new global::System.Data.DataColumn("itemQnty", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnitemQnty);
                 this.columnserviceName = new global::System.Data.DataColumn("serviceName", typeof(string), null, global::System.Data.MappingType.Element);
@@ -1208,10 +1245,18 @@ namespace prototype2 {
                 base.Columns.Add(this.columntotal_service);
                 this.columnserviceID = new global::System.Data.DataColumn("serviceID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnserviceID);
-                this.columnExpr3 = new global::System.Data.DataColumn("Expr3", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnExpr3);
                 this.columnserviceDesc = new global::System.Data.DataColumn("serviceDesc", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnserviceDesc);
+                this.columnservicePrice = new global::System.Data.DataColumn("servicePrice", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnservicePrice);
+                this.columnExpr2 = new global::System.Data.DataColumn("Expr2", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnExpr2);
+                this.columnLESS_DISCOUNT = new global::System.Data.DataColumn("LESS_DISCOUNT", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLESS_DISCOUNT);
+                this.columnIF_VAT_INCLUSIVE = new global::System.Data.DataColumn("IF_VAT_INCLUSIVE", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIF_VAT_INCLUSIVE);
+                this.columnUNIT_PRICE = new global::System.Data.DataColumn("UNIT_PRICE", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUNIT_PRICE);
                 this.columnitemDescr = new global::System.Data.DataColumn("itemDescr", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnitemDescr);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
@@ -1233,7 +1278,6 @@ namespace prototype2 {
                 this.columnID.AutoIncrementSeed = -1;
                 this.columnID.AutoIncrementStep = -1;
                 this.columnID.AllowDBNull = false;
-                this.columnitemName.AllowDBNull = false;
                 this.columnitemName.MaxLength = 255;
                 this.columnrepMInitial.MaxLength = 3;
                 this.columncustID.AllowDBNull = false;
@@ -1263,14 +1307,15 @@ namespace prototype2 {
                 this.columnrepMobile.MaxLength = 255;
                 this.columncompanyType.AllowDBNull = false;
                 this.columnserviceName.MaxLength = 50;
+                this.columntotal_service.AllowDBNull = false;
                 this.columnserviceID.AutoIncrement = true;
                 this.columnserviceID.AutoIncrementSeed = -1;
                 this.columnserviceID.AutoIncrementStep = -1;
-                this.columnExpr3.AutoIncrement = true;
-                this.columnExpr3.AutoIncrementSeed = -1;
-                this.columnExpr3.AutoIncrementStep = -1;
-                this.columnExpr3.AllowDBNull = false;
                 this.columnserviceDesc.MaxLength = 21845;
+                this.columnExpr2.AutoIncrement = true;
+                this.columnExpr2.AutoIncrementSeed = -1;
+                this.columnExpr2.AutoIncrementStep = -1;
+                this.columnIF_VAT_INCLUSIVE.AllowDBNull = false;
                 this.columnitemDescr.MaxLength = 21845;
             }
             
@@ -1808,7 +1853,12 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string itemName {
                 get {
-                    return ((string)(this[this.tableSales_Quote.itemNameColumn]));
+                    try {
+                        return ((string)(this[this.tableSales_Quote.itemNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'itemName\' in table \'Sales_Quote\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableSales_Quote.itemNameColumn] = value;
@@ -2326,22 +2376,6 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public decimal Expr2 {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableSales_Quote.Expr2Column]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Expr2\' in table \'Sales_Quote\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableSales_Quote.Expr2Column] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public int itemQnty {
                 get {
                     try {
@@ -2392,12 +2426,7 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public decimal total_service {
                 get {
-                    try {
-                        return ((decimal)(this[this.tableSales_Quote.total_serviceColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'total_service\' in table \'Sales_Quote\' is DBNull.", e);
-                    }
+                    return ((decimal)(this[this.tableSales_Quote.total_serviceColumn]));
                 }
                 set {
                     this[this.tableSales_Quote.total_serviceColumn] = value;
@@ -2422,17 +2451,6 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int Expr3 {
-                get {
-                    return ((int)(this[this.tableSales_Quote.Expr3Column]));
-                }
-                set {
-                    this[this.tableSales_Quote.Expr3Column] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string serviceDesc {
                 get {
                     try {
@@ -2444,6 +2462,81 @@ namespace prototype2 {
                 }
                 set {
                     this[this.tableSales_Quote.serviceDescColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal servicePrice {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableSales_Quote.servicePriceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'servicePrice\' in table \'Sales_Quote\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSales_Quote.servicePriceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int Expr2 {
+                get {
+                    try {
+                        return ((int)(this[this.tableSales_Quote.Expr2Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Expr2\' in table \'Sales_Quote\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSales_Quote.Expr2Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal LESS_DISCOUNT {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableSales_Quote.LESS_DISCOUNTColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'LESS_DISCOUNT\' in table \'Sales_Quote\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSales_Quote.LESS_DISCOUNTColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal IF_VAT_INCLUSIVE {
+                get {
+                    return ((decimal)(this[this.tableSales_Quote.IF_VAT_INCLUSIVEColumn]));
+                }
+                set {
+                    this[this.tableSales_Quote.IF_VAT_INCLUSIVEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal UNIT_PRICE {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableSales_Quote.UNIT_PRICEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'UNIT_PRICE\' in table \'Sales_Quote\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSales_Quote.UNIT_PRICEColumn] = value;
                 }
             }
             
@@ -2509,6 +2602,18 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetrepLNameNull() {
                 this[this.tableSales_Quote.repLNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsitemNameNull() {
+                return this.IsNull(this.tableSales_Quote.itemNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetitemNameNull() {
+                this[this.tableSales_Quote.itemNameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2837,18 +2942,6 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsExpr2Null() {
-                return this.IsNull(this.tableSales_Quote.Expr2Column);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetExpr2Null() {
-                this[this.tableSales_Quote.Expr2Column] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsitemQntyNull() {
                 return this.IsNull(this.tableSales_Quote.itemQntyColumn);
             }
@@ -2885,18 +2978,6 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool Istotal_serviceNull() {
-                return this.IsNull(this.tableSales_Quote.total_serviceColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void Settotal_serviceNull() {
-                this[this.tableSales_Quote.total_serviceColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsserviceIDNull() {
                 return this.IsNull(this.tableSales_Quote.serviceIDColumn);
             }
@@ -2917,6 +2998,54 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetserviceDescNull() {
                 this[this.tableSales_Quote.serviceDescColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsservicePriceNull() {
+                return this.IsNull(this.tableSales_Quote.servicePriceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetservicePriceNull() {
+                this[this.tableSales_Quote.servicePriceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsExpr2Null() {
+                return this.IsNull(this.tableSales_Quote.Expr2Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetExpr2Null() {
+                this[this.tableSales_Quote.Expr2Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsLESS_DISCOUNTNull() {
+                return this.IsNull(this.tableSales_Quote.LESS_DISCOUNTColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetLESS_DISCOUNTNull() {
+                this[this.tableSales_Quote.LESS_DISCOUNTColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsUNIT_PRICENull() {
+                return this.IsNull(this.tableSales_Quote.UNIT_PRICEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetUNIT_PRICENull() {
+                this[this.tableSales_Quote.UNIT_PRICEColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3223,14 +3352,17 @@ namespace prototype2.DatasetSales_QuoteTableAdapters {
             tableMapping.ColumnMappings.Add("repMobile", "repMobile");
             tableMapping.ColumnMappings.Add("companyType", "companyType");
             tableMapping.ColumnMappings.Add("Expr1", "Expr1");
-            tableMapping.ColumnMappings.Add("Expr2", "Expr2");
             tableMapping.ColumnMappings.Add("itemQnty", "itemQnty");
             tableMapping.ColumnMappings.Add("serviceName", "serviceName");
             tableMapping.ColumnMappings.Add("total_item", "total_item");
             tableMapping.ColumnMappings.Add("total_service", "total_service");
             tableMapping.ColumnMappings.Add("serviceID", "serviceID");
-            tableMapping.ColumnMappings.Add("Expr3", "Expr3");
             tableMapping.ColumnMappings.Add("serviceDesc", "serviceDesc");
+            tableMapping.ColumnMappings.Add("servicePrice", "servicePrice");
+            tableMapping.ColumnMappings.Add("Expr2", "Expr2");
+            tableMapping.ColumnMappings.Add("LESS_DISCOUNT", "LESS_DISCOUNT");
+            tableMapping.ColumnMappings.Add("IF_VAT_INCLUSIVE", "IF_VAT_INCLUSIVE");
+            tableMapping.ColumnMappings.Add("UNIT_PRICE", "UNIT_PRICE");
             tableMapping.ColumnMappings.Add("itemDescr", "itemDescr");
             this._adapter.TableMappings.Add(tableMapping);
         }
@@ -3249,27 +3381,33 @@ namespace prototype2.DatasetSales_QuoteTableAdapters {
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT        sq.sqNoChar, sq.dateOfIssue, sq.custID, sq.quoteSubject, sq.priceNo" +
-                "te, sq.deliveryDate, s.serviceID, s.serviceDesc, i.itemDescr, i.ID, sq.estDelive" +
-                "ry, sq.validityDays, sq.validityDate, sq.otherTerms, sq.VAT, sq.vatIsExcluded, \r" +
-                "\n                         sq.paymentIsLanded, sq.paymentCurrency, sq.status, sq." +
-                "termsDays, sq.termsDP, sq.discountPercent, sq.surveyReportDoc, sq.additionalNote" +
-                ", sq.isDeleted, cs.companyID, cs.companyName, cs.busStyle, cs.taxNumber, \r\n     " +
-                "                    cs.companyAddInfo, cs.companyAddress, cs.companyCity, cs.com" +
-                "panyProvinceID, cs.companyPostalCode, cs.companyEmail, cs.companyTelephone, cs.c" +
-                "ompanyMobile, cs.repTitle, cs.repLName, cs.repFName, cs.repMInitial, \r\n         " +
-                "                cs.repEmail, cs.repTelephone, cs.repMobile, cs.companyType, cs.i" +
-                "sDeleted AS Expr1, i.ID AS Expr3, i.itemName, s.serviceName, ia.unitPrice + ia.u" +
-                "nitPrice * (mh.markupPerc / 100) AS Expr2, ia.itemQnty, \r\n                      " +
-                "   (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) * ia.itemQnty AS total_" +
-                "item, sa.totalCost AS total_service\r\nFROM            sales_quote_t sq INNER JOIN" +
-                "\r\n                         items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER" +
-                " JOIN\r\n                         item_t i ON i.ID = ia.itemID INNER JOIN\r\n       " +
-                "                  markup_hist_t mh ON mh.itemID = ia.itemID INNER JOIN\r\n        " +
-                "                 cust_supp_t cs ON cs.companyID = sq.custID INNER JOIN\r\n        " +
-                "                 provinces_t p ON p.id = cs.companyProvinceID LEFT OUTER JOIN\r\n " +
-                "                        services_availed_t sa ON sa.sqNoChar = sq.sqNoChar LEFT " +
-                "OUTER JOIN\r\n                         services_t s ON s.serviceID = sa.serviceID\r" +
-                "\nWHERE        (sq.sqNoChar = @a)";
+                "te, sq.deliveryDate, i.itemDescr, sq.estDelivery, sq.validityDays, sq.validityDa" +
+                "te, sq.otherTerms, sq.VAT, sq.vatIsExcluded, \r\n                         sq.payme" +
+                "ntIsLanded, sq.paymentCurrency, sq.status, sq.termsDays, sq.termsDP, sq.discount" +
+                "Percent, sq.surveyReportDoc, sq.additionalNote, sq.isDeleted, cs.companyID, cs.c" +
+                "ompanyName, cs.busStyle, \r\n                         cs.taxNumber, cs.companyAddI" +
+                "nfo, cs.companyAddress, cs.companyCity, cs.companyProvinceID, cs.companyPostalCo" +
+                "de, cs.companyEmail, cs.companyTelephone, cs.companyMobile, cs.repTitle, cs.repL" +
+                "Name,\r\n                          cs.repFName, cs.repMInitial, cs.repEmail, cs.re" +
+                "pTelephone, cs.repMobile, cs.companyType, cs.isDeleted AS Expr1, i.ID, i.itemNam" +
+                "e, s.serviceName, s.servicePrice, s.serviceDesc, i.ID AS Expr2, s.serviceID, \r\n " +
+                "                        TRUNCATE(IFNULL(sq.discountPercent, 0) / 100, 2) AS LESS" +
+                "_DISCOUNT, TRUNCATE(IFNULL(sq.VAT, 0), 2) AS IF_VAT_INCLUSIVE, TRUNCATE(IFNULL(i" +
+                "a.unitPrice, 0) + IFNULL(ia.unitPrice, 0) \r\n                         * (IFNULL(m" +
+                "h.markupPerc, 0) / 100), 2) AS UNIT_PRICE, ia.itemQnty, TRUNCATE(IFNULL(ia.unitP" +
+                "rice, 0) + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) / 100), 2) * IFNU" +
+                "LL(ia.itemQnty, 0) AS total_item, \r\n                         TRUNCATE(IFNULL(sa." +
+                "totalCost, 0) + IFNULL(ft.feeValue, 0), 2) AS total_service\r\nFROM            sal" +
+                "es_quote_t sq LEFT OUTER JOIN\r\n                         items_availed_t ia ON sq" +
+                ".sqNoChar = ia.sqNoChar LEFT OUTER JOIN\r\n                         item_t i ON i." +
+                "ID = ia.itemID LEFT OUTER JOIN\r\n                         markup_hist_t mh ON mh." +
+                "itemID = ia.itemID INNER JOIN\r\n                         cust_supp_t cs ON cs.com" +
+                "panyID = sq.custID INNER JOIN\r\n                         provinces_t p ON p.id = " +
+                "cs.companyProvinceID LEFT OUTER JOIN\r\n                         services_availed_" +
+                "t sa ON sa.sqNoChar = sq.sqNoChar LEFT OUTER JOIN\r\n                         serv" +
+                "ices_t s ON s.serviceID = sa.serviceID LEFT OUTER JOIN\r\n                        " +
+                " fees_per_transaction_t ft ON ft.servicesAvailedID = sa.id\r\nWHERE        (sq.sqN" +
+                "oChar = @a)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@a";
