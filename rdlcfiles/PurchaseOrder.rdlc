@@ -998,7 +998,7 @@
         <DataSetName>PurchaseOrderTableTable</DataSetName>
         <Top>3.47098in</Top>
         <Height>0.61458in</Height>
-        <Width>6.43172in</Width>
+        <Width>6.43174in</Width>
         <ZIndex>15</ZIndex>
         <Style>
           <Border>
@@ -1363,21 +1363,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="unitName">
+                    <Textbox Name="unitShorthand">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!unitName.Value</Value>
+                              <Value>=Fields!unitShorthand.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>unitName</rd:DefaultName>
+                      <rd:DefaultName>unitShorthand</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1389,6 +1389,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1419,7 +1420,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1741,7 +1741,7 @@
         <DataSetName>PurchaseOrderTableTable</DataSetName>
         <Top>4.04737in</Top>
         <Height>0.83333in</Height>
-        <Width>6.43172in</Width>
+        <Width>6.43174in</Width>
         <ZIndex>16</ZIndex>
         <Style>
           <Border>
@@ -2990,6 +2990,10 @@
         </Field>
         <Field Name="itemDescr">
           <DataField>itemDescr</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="unitShorthand">
+          <DataField>unitShorthand</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
