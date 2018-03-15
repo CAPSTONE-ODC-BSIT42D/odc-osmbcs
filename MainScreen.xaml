@@ -1156,7 +1156,7 @@
 
                 </Grid>
             </Grid>
-            <Grid x:Name="billingGrid" Margin="10">
+            <Grid x:Name="billingGrid" Margin="10" d:IsHidden="True">
                 <Grid x:Name="invoiceGridHome" >
                     <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                         <Label x:Name="label22" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
@@ -1302,7 +1302,7 @@
                 </Grid>
                 <local:ucInvoiceForm x:Name="ucInvoiceForm" Margin="0" Visibility="Collapsed" d:IsHidden="True"/>
             </Grid>
-            <Grid x:Name="serviceGrid" d:IsHidden="True">
+            <Grid x:Name="serviceGrid">
                 <Grid x:Name="serviceGridHome" Margin="0,0,20,20" >
                     <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                         <Label x:Name="label9" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>

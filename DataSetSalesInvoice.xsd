@@ -12,12 +12,12 @@
               <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBySalesInvoice" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataBySalesInvoice" GeneratorSourceName="FillBySalesInvoice" GetMethodModifier="Public" GetMethodName="GetDataBySalesInvoice" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataBySalesInvoice" UserSourceName="FillBySalesInvoice">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        si.invoiceNo, si.custID, si.sqNoChar, si.dateOfIssue, si.termsDays, si.dueDate, si.paymentStatus, si.vat, si.sc_pwd_discount, si.withholdingTax, si.notes, sq.sqNoChar AS Expr1, cs.companyID, sq.termsDP, 
-                         s.servicePrice, s.serviceDesc, i.itemDescr, cs.companyName, cs.busStyle, cs.taxNumber, cs.companyAddInfo, cs.companyAddress, cs.companyCity, cs.companyProvinceID, cs.companyPostalCode, 
-                         cs.companyEmail, cs.companyTelephone, cs.companyMobile, cs.repTitle, cs.repLName, cs.repFName, cs.repMInitial, cs.repEmail, cs.repTelephone, cs.repMobile, cs.companyType, cs.isDeleted, i.itemName, 
-                         s.serviceName, TRUNCATE(IFNULL(sq.discountPercent, 0) / 100, 2) AS LESS_DISCOUNT, TRUNCATE(IFNULL(sq.VAT, 0), 2) AS IF_VAT_INCLUSIVE, TRUNCATE(IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) 
-                         * (IFNULL(mh.markupPerc, 0) / 100), 2) AS UNIT_PRICE, ia.itemQnty, TRUNCATE(IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) / 100), 2) * IFNULL(ia.itemQnty, 0) AS total_item, 
-                         TRUNCATE(IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) AS total_service
+                    <CommandText>SELECT        cs.taxNumber, si.invoiceNo, si.custID, si.sqNoChar, si.dateOfIssue, si.termsDays, si.dueDate, si.paymentStatus, si.vat, si.sc_pwd_discount, si.withholdingTax, si.notes, sq.sqNoChar AS Expr1, cs.companyID, 
+                         sq.termsDP, s.servicePrice, s.serviceDesc, i.itemDescr, cs.companyName, cs.busStyle, cs.taxNumber AS Expr2, cs.companyAddInfo, cs.companyAddress, cs.companyCity, cs.companyProvinceID, 
+                         cs.companyPostalCode, cs.companyEmail, cs.companyTelephone, cs.companyMobile, cs.repTitle, cs.repLName, cs.repFName, cs.repMInitial, cs.repEmail, cs.repTelephone, cs.repMobile, cs.companyType, 
+                         cs.isDeleted, i.itemName, s.serviceName, TRUNCATE(IFNULL(sq.discountPercent, 0) / 100, 2) AS LESS_DISCOUNT, TRUNCATE(IFNULL(sq.VAT, 0), 2) AS IF_VAT_INCLUSIVE, TRUNCATE(IFNULL(ia.unitPrice, 0) 
+                         + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) / 100), 2) AS UNIT_PRICE, ia.itemQnty, TRUNCATE(IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) / 100), 2) 
+                         * IFNULL(ia.itemQnty, 0) AS total_item, TRUNCATE(IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) AS total_service
 FROM            sales_quote_t sq LEFT OUTER JOIN
                          items_availed_t ia ON sq.sqNoChar = ia.sqNoChar LEFT OUTER JOIN
                          item_t i ON i.ID = ia.itemID LEFT OUTER JOIN
@@ -82,6 +82,7 @@ WHERE        (si.invoiceNo = @a)</CommandText>
               <Mapping SourceColumn="serviceDesc" DataSetColumn="serviceDesc" />
               <Mapping SourceColumn="itemDescr" DataSetColumn="itemDescr" />
               <Mapping SourceColumn="servicePrice" DataSetColumn="servicePrice" />
+              <Mapping SourceColumn="Expr2" DataSetColumn="Expr2" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -328,6 +329,13 @@ WHERE        (si.invoiceNo = @a)</CommandText>
                 </xs:simpleType>
               </xs:element>
               <xs:element name="servicePrice" msprop:Generator_ColumnVarNameInTable="columnservicePrice" msprop:Generator_ColumnPropNameInRow="servicePrice" msprop:Generator_ColumnPropNameInTable="servicePriceColumn" msprop:Generator_UserColumnName="servicePrice" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Expr2" msprop:Generator_ColumnVarNameInTable="columnExpr2" msprop:Generator_ColumnPropNameInRow="Expr2" msprop:Generator_ColumnPropNameInTable="Expr2Column" msprop:Generator_UserColumnName="Expr2">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>

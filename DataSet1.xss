@@ -11,7 +11,7 @@
     <Shape ID="DesignTable:salesReport" ZOrder="5" X="712" Y="77" Height="381" Width="249" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
     <Shape ID="DesignTable:noticeOfemploymentDataTable" ZOrder="1" X="675" Y="483" Height="210" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="159" />
     <Shape ID="DesignTable:officialReceipt" ZOrder="4" X="1296" Y="69" Height="267" Width="210" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="216" />
-    <Shape ID="DesignTable:PODataTable" ZOrder="2" X="296" Y="491" Height="305" Width="299" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
+    <Shape ID="DesignTable:PODataTable" ZOrder="2" X="296" Y="491" Height="305" Width="298" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

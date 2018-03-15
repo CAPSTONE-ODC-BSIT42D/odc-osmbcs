@@ -52,6 +52,7 @@ namespace prototype2.uControlsService
                 var obj = new ObservableCollection<AvailedService>(from aserv in MainVM.AvailedServices
                                                                    join sq in MainVM.SalesQuotes on aserv.SqNoChar equals sq.sqNoChar_
                                                                    where sq.status_.Equals("ACCEPTED")
+                                                                    && (from ss in MainVM.ServiceSchedules_ select ss.ServiceAvailedID).FirstOrDefault() != aserv.AvailedServiceID
                                                                    select aserv);
                 selectServices.ItemsSource = obj;
             }
