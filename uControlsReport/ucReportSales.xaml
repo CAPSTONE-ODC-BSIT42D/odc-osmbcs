@@ -11,7 +11,7 @@
     <Grid Margin="0,0,-27,-48" Background="#FFE6E1E1">
 
         <ComboBox x:Name="ComboBoxItemFilter" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" Width="131" Height="31" SelectionChanged="ComboBoxItemFilter_SelectionChanged">
-            <ComboBoxItem Content="Reset"/>
+            <ComboBoxItem Content="Today"/>
             <ComboBoxItem Content="Week"/>
             <ComboBoxItem Content="Month"/>
             <ComboBoxItem Content="Year"/>
@@ -47,6 +47,7 @@
         <Label x:Name="ItemEnd" Content="End Date:" HorizontalAlignment="Left" Margin="610,4,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
 
         <syncfusion:ReportViewer x:Name="ReportSales" ReportPath="C:\Users\Alexis\Source\Repos\odc-osmbcs\rdlcfiles\SalesReport.rdlc" Margin="0,67,0,0"/>
+        <Button x:Name="Go_ButtonSales" Content="Go" HorizontalAlignment="Left" Margin="757,31,0,0" VerticalAlignment="Top" Visibility="Hidden" Width="48" Height="30" Click="Go_ButtonSales_Click"/>
 
     </Grid>
 </UserControl>

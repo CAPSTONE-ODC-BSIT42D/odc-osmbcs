@@ -114,7 +114,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
         
-            cmd.CommandText = "    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS  Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar WHERE(WEEK(po.orderDate) = '" + SalesWeek.SelectedDate.Value.Date.ToShortDateString() + "')   ";
+            cmd.CommandText = "    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS  Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar WHERE(WEEK(po.orderDate) = '" + SalesWeek.SelectedDate.Value.ToString("yyyy-MM-dd") + "')   ";
 
             DataSetReportPurchase.PurchaseTableDataTable dSPurchase = new DataSetReportPurchase.PurchaseTableDataTable();
 
@@ -209,7 +209,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS  Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar WHERE(po.orderDate BETWEEN '" + SalesDateStart.SelectedDate.Value.Date.ToShortDateString() + "' AND '"+ SalesDateEnd.SelectedDate.Value.Date.ToShortDateString() + "')    ";
+            cmd.CommandText = "    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS  Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar WHERE(po.orderDate BETWEEN '" + SalesDateStart.SelectedDate.Value.ToString("yyyy-MM-dd") + "' AND '"+ SalesDateEnd.SelectedDate.Value.ToString("yyyy-MM-dd") + "')    ";
 
             DataSetReportPurchase.PurchaseTableDataTable dSPurchase = new DataSetReportPurchase.PurchaseTableDataTable();
 
@@ -247,7 +247,7 @@ namespace prototype2
             if (SELECTEDINDEX.Equals(1))
 
             {
-                ReportPurchase.Reset();
+               ;
                 ComboBoxYearSales.Visibility = Visibility.Hidden;
                 ComboBoxMonthSales.Visibility = Visibility.Hidden;
                 MonthSales.Visibility = Visibility.Hidden;
@@ -322,7 +322,7 @@ namespace prototype2
         }
         private void DatePickerEndSales_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            DisplayReportPurchaseRange();
+      
         }
 
         private void DatePickerWeekSales_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -342,7 +342,7 @@ namespace prototype2
             Object SELECTEDINDEX = ComboBoxSalesFilter.SelectedIndex;
             if (SELECTEDINDEX.Equals(0))
             {
-                ReportPurchase.Reset();
+                DisplayReportSalesDay();
                 ComboBoxYearSales.Visibility = Visibility.Hidden;
                 ComboBoxMonthSales.Visibility = Visibility.Hidden;
                 MonthSales.Visibility = Visibility.Hidden;
@@ -352,6 +352,7 @@ namespace prototype2
                 labelstart.Visibility = Visibility.Hidden;
                 labelend.Visibility = Visibility.Hidden;
                 SalesWeek.Visibility = Visibility.Hidden;
+                GoButtonPurchase.Visibility = Visibility.Hidden;
                 labelweek.Visibility = Visibility.Hidden;
 
             }
@@ -384,6 +385,7 @@ namespace prototype2
                 labelend.Visibility = Visibility.Hidden;
                 SalesWeek.Visibility = Visibility.Hidden;
                 labelweek.Visibility = Visibility.Hidden;
+                GoButtonPurchase.Visibility = Visibility.Hidden;
             }
             if (SELECTEDINDEX.Equals(3))
             {
@@ -398,7 +400,7 @@ namespace prototype2
                 labelend.Visibility = Visibility.Hidden;
                 SalesWeek.Visibility = Visibility.Hidden;
                 labelweek.Visibility = Visibility.Hidden;
-
+                GoButtonPurchase.Visibility = Visibility.Hidden;
             }
             if (SELECTEDINDEX.Equals(4))
             {
@@ -414,8 +416,14 @@ namespace prototype2
                 labelend.Visibility = Visibility.Visible;
                 SalesWeek.Visibility = Visibility.Hidden;
                 labelweek.Visibility = Visibility.Hidden;
+                GoButtonPurchase.Visibility = Visibility.Visible;
 
             }
+        }
+
+        private void GoButtonPurchase_Click(object sender, RoutedEventArgs e)
+        {
+            DisplayReportPurchaseRange();
         }
     }
 }
