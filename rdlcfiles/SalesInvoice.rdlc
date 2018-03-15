@@ -929,7 +929,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox38</rd:DefaultName>
-        <Top>4.71403in</Top>
+        <Top>5.08903in</Top>
         <Left>0.36333in</Left>
         <Height>0.25in</Height>
         <Width>1.28125in</Width>
@@ -1002,7 +1002,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSetSalesInvoice</DataSetName>
-        <Top>4.04042in</Top>
+        <Top>4.41542in</Top>
         <Left>1.14806in</Left>
         <Height>0.25in</Height>
         <Width>2.63542in</Width>
@@ -1028,7 +1028,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox38</rd:DefaultName>
-        <Top>4.04042in</Top>
+        <Top>4.41542in</Top>
         <Left>0.36333in</Left>
         <Height>0.25in</Height>
         <Width>0.72917in</Width>
@@ -1058,7 +1058,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox38</rd:DefaultName>
-        <Top>4.96403in</Top>
+        <Top>5.33903in</Top>
         <Left>0.36333in</Left>
         <Height>0.25in</Height>
         <Width>1.51042in</Width>
@@ -1088,7 +1088,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox38</rd:DefaultName>
-        <Top>5.21403in</Top>
+        <Top>5.58903in</Top>
         <Left>0.36333in</Left>
         <Height>0.25in</Height>
         <Width>1.51042in</Width>
@@ -1118,7 +1118,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox38</rd:DefaultName>
-        <Top>5.49181in</Top>
+        <Top>5.86681in</Top>
         <Left>0.36333in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
@@ -1148,7 +1148,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox38</rd:DefaultName>
-        <Top>5.79736in</Top>
+        <Top>6.17236in</Top>
         <Left>0.36333in</Left>
         <Height>0.25in</Height>
         <Width>1.51042in</Width>
@@ -1178,7 +1178,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox38</rd:DefaultName>
-        <Top>4.47792in</Top>
+        <Top>4.85292in</Top>
         <Left>4.46292in</Left>
         <Height>0.25in</Height>
         <Width>2.14584in</Width>
@@ -1208,7 +1208,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox38</rd:DefaultName>
-        <Top>4.72792in</Top>
+        <Top>5.10292in</Top>
         <Left>5.09833in</Left>
         <Height>0.25in</Height>
         <Width>1.51042in</Width>
@@ -1238,7 +1238,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox38</rd:DefaultName>
-        <Top>4.97792in</Top>
+        <Top>5.35292in</Top>
         <Left>5.09833in</Left>
         <Height>0.25in</Height>
         <Width>1.51042in</Width>
@@ -1268,7 +1268,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox38</rd:DefaultName>
-        <Top>5.83903in</Top>
+        <Top>6.21403in</Top>
         <Left>4.43168in</Left>
         <Height>0.25in</Height>
         <Width>2.14584in</Width>
@@ -1298,7 +1298,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox38</rd:DefaultName>
-        <Top>6.10292in</Top>
+        <Top>6.47792in</Top>
         <Left>5.06709in</Left>
         <Height>0.25in</Height>
         <Width>1.51042in</Width>
@@ -1328,7 +1328,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox38</rd:DefaultName>
-        <Top>6.42237in</Top>
+        <Top>6.79737in</Top>
         <Left>4.47681in</Left>
         <Height>0.25in</Height>
         <Width>2.14584in</Width>
@@ -1884,7 +1884,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSetSIAmount</DataSetName>
-        <Top>4.47792in</Top>
+        <Top>4.85292in</Top>
         <Left>6.6782in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
@@ -1953,7 +1953,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSetSIAmount</DataSetName>
-        <Top>4.7557in</Top>
+        <Top>5.1307in</Top>
         <Left>6.65042in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
@@ -2022,7 +2022,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSetSIAmount</DataSetName>
-        <Top>5.03348in</Top>
+        <Top>5.40848in</Top>
         <Left>6.6782in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
@@ -2091,7 +2091,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSetSIAmount</DataSetName>
-        <Top>4.70014in</Top>
+        <Top>5.07514in</Top>
         <Left>1.81305in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
@@ -2160,7 +2160,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSetSIAmount</DataSetName>
-        <Top>5.51958in</Top>
+        <Top>5.89458in</Top>
         <Left>1.81305in</Left>
         <Height>0.25in</Height>
         <Width>1.5132in</Width>
@@ -2186,7 +2186,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox38</rd:DefaultName>
-        <Top>5.28348in</Top>
+        <Top>5.65848in</Top>
         <Left>4.46291in</Left>
         <Height>0.25in</Height>
         <Width>2.14584in</Width>
@@ -2216,7 +2216,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox38</rd:DefaultName>
-        <Top>5.56125in</Top>
+        <Top>5.93625in</Top>
         <Left>4.46292in</Left>
         <Height>0.25in</Height>
         <Width>2.14584in</Width>
@@ -2289,7 +2289,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSetSIAmount</DataSetName>
-        <Top>5.29736in</Top>
+        <Top>5.67236in</Top>
         <Left>6.6782in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
@@ -2358,7 +2358,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSetSIAmount</DataSetName>
-        <Top>5.58903in</Top>
+        <Top>5.96403in</Top>
         <Left>6.6782in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
@@ -2427,7 +2427,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSetSIAmount</DataSetName>
-        <Top>5.86681in</Top>
+        <Top>6.24181in</Top>
         <Left>6.6782in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
@@ -2496,7 +2496,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSetSIAmount</DataSetName>
-        <Top>6.11681in</Top>
+        <Top>6.49181in</Top>
         <Left>6.6782in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
@@ -2527,7 +2527,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!TOTAL_AMOUNT.Value - Fields!LESS_DISCOUNT.Value</Value>
+                              <Value>=Fields!TOTAL_AMOUNT.Value - Fields!LESS_DISCOUNT.Value -Fields!withholdingTax.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -2565,7 +2565,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSetSIAmount</DataSetName>
-        <Top>6.40848in</Top>
+        <Top>6.78348in</Top>
         <Left>6.6782in</Left>
         <Height>0.26389in</Height>
         <Width>1.38306in</Width>
@@ -2596,7 +2596,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!TOTAL_AMOUNT.Value - Fields!LESS_DISCOUNT.Value</Value>
+                              <Value>=Fields!TOTAL_AMOUNT.Value - Fields!LESS_DISCOUNT.Value - Fields!withholdingTax.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -2634,7 +2634,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSetSIAmount</DataSetName>
-        <Top>5.81125in</Top>
+        <Top>6.18625in</Top>
         <Left>1.94319in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
@@ -2646,7 +2646,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>6.93278in</Height>
+    <Height>7.04737in</Height>
     <Style />
   </Body>
   <Width>15.03in</Width>
@@ -2880,6 +2880,10 @@
         </Field>
         <Field Name="TOTAL_AMOUNT">
           <DataField>TOTAL_AMOUNT</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="withholdingTax">
+          <DataField>withholdingTax</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>
