@@ -758,7 +758,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.25in</Height>
+              <Height>0.5625in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -919,7 +919,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!termsDP.Value &amp;"%"</Value>
+                              <Value>=Fields!termsDP.Value &amp;"% DP upon date release"</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -997,7 +997,7 @@
         </TablixRowHierarchy>
         <DataSetName>PurchaseOrderTableTable</DataSetName>
         <Top>3.47098in</Top>
-        <Height>0.61458in</Height>
+        <Height>0.92708in</Height>
         <Width>6.43174in</Width>
         <ZIndex>15</ZIndex>
         <Style>
@@ -1389,7 +1389,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1739,7 +1738,8 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>PurchaseOrderTableTable</DataSetName>
-        <Top>4.04737in</Top>
+        <Top>4.43626in</Top>
+        <Left>0.01412in</Left>
         <Height>0.83333in</Height>
         <Width>6.43174in</Width>
         <ZIndex>16</ZIndex>
@@ -1839,7 +1839,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox131</rd:DefaultName>
-        <Top>5.33904in</Top>
+        <Top>5.71404in</Top>
         <Height>1.02083in</Height>
         <Width>6.43172in</Width>
         <ZIndex>17</ZIndex>
@@ -1871,7 +1871,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox132</rd:DefaultName>
-        <Top>6.49876in</Top>
+        <Top>6.71875in</Top>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>18</ZIndex>
@@ -1902,7 +1902,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox133</rd:DefaultName>
-        <Top>6.94667in</Top>
+        <Top>7.16666in</Top>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>19</ZIndex>
@@ -1934,7 +1934,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox134</rd:DefaultName>
-        <Top>6.49876in</Top>
+        <Top>6.71875in</Top>
         <Left>5.14781in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
@@ -1966,7 +1966,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox135</rd:DefaultName>
-        <Top>6.94667in</Top>
+        <Top>7.16666in</Top>
         <Left>5.14781in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
@@ -2761,7 +2761,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox9</rd:DefaultName>
-        <Top>4.95015in</Top>
+        <Top>5.32515in</Top>
         <Height>0.36707in</Height>
         <Width>6.42247in</Width>
         <ZIndex>36</ZIndex>
