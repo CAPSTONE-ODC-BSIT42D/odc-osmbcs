@@ -6,8 +6,8 @@
         <Source>Embedded</Source>
         <Value>oliveLogo1</Value>
         <Sizing>FitProportional</Sizing>
-        <Top>0.14458in</Top>
-        <Left>3.81293in</Left>
+        <Top>0.1307in</Top>
+        <Left>2.06293in</Left>
         <Height>0.47917in</Height>
         <Width>1.88542in</Width>
         <Style>
@@ -34,8 +34,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox49</rd:DefaultName>
-        <Top>0.69319in</Top>
-        <Left>3.93793in</Left>
+        <Top>0.67931in</Top>
+        <Left>2.18793in</Left>
         <Height>0.25in</Height>
         <Width>1.63542in</Width>
         <ZIndex>1</ZIndex>
@@ -67,8 +67,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox50</rd:DefaultName>
-        <Top>1.20708in</Top>
-        <Left>1.08149in</Left>
+        <Top>1.20709in</Top>
         <Height>0.25in</Height>
         <Width>0.38542in</Width>
         <ZIndex>2</ZIndex>
@@ -100,8 +99,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox51</rd:DefaultName>
-        <Top>1.45708in</Top>
-        <Left>1.08149in</Left>
+        <Top>1.45709in</Top>
         <Height>0.25in</Height>
         <Width>0.36458in</Width>
         <ZIndex>3</ZIndex>
@@ -145,8 +143,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox52</rd:DefaultName>
-        <Top>2.40151in</Top>
-        <Left>1.08415in</Left>
+        <Top>2.40152in</Top>
         <Height>0.25in</Height>
         <Width>0.84375in</Width>
         <ZIndex>4</ZIndex>
@@ -178,8 +175,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox53</rd:DefaultName>
-        <Top>2.65151in</Top>
-        <Left>1.09803in</Left>
+        <Top>2.65152in</Top>
         <Height>0.25in</Height>
         <Width>0.84375in</Width>
         <ZIndex>5</ZIndex>
@@ -211,8 +207,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox54</rd:DefaultName>
-        <Top>2.90151in</Top>
-        <Left>1.09803in</Left>
+        <Top>2.90152in</Top>
         <Height>0.25in</Height>
         <Width>0.84375in</Width>
         <ZIndex>6</ZIndex>
@@ -244,8 +239,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox55</rd:DefaultName>
-        <Top>3.15153in</Top>
-        <Left>1.10232in</Left>
+        <Top>3.15154in</Top>
         <Height>0.25in</Height>
         <Width>0.84375in</Width>
         <ZIndex>7</ZIndex>
@@ -277,8 +271,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox56</rd:DefaultName>
-        <Top>1.2661in</Top>
-        <Left>5.73899in</Left>
+        <Top>1.16889in</Top>
+        <Left>3.66178in</Left>
         <Height>0.25in</Height>
         <Width>0.3125in</Width>
         <ZIndex>8</ZIndex>
@@ -309,8 +303,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox57</rd:DefaultName>
-        <Top>0.69319in</Top>
-        <Left>7.08967in</Left>
+        <Top>0.60987in</Top>
+        <Left>4.85028in</Left>
         <Height>0.48958in</Height>
         <Width>1.42708in</Width>
         <ZIndex>9</ZIndex>
@@ -342,8 +336,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox58</rd:DefaultName>
-        <Top>1.5161in</Top>
-        <Left>5.73899in</Left>
+        <Top>1.41889in</Top>
+        <Left>3.66178in</Left>
         <Height>0.25in</Height>
         <Width>0.59375in</Width>
         <ZIndex>10</ZIndex>
@@ -387,8 +381,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox52</rd:DefaultName>
-        <Top>2.31819in</Top>
-        <Left>5.75288in</Left>
+        <Top>2.22098in</Top>
+        <Left>3.67567in</Left>
         <Height>0.25in</Height>
         <Width>0.84375in</Width>
         <ZIndex>11</ZIndex>
@@ -420,8 +414,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox53</rd:DefaultName>
-        <Top>2.58208in</Top>
-        <Left>5.74718in</Left>
+        <Top>2.48487in</Top>
+        <Left>3.66997in</Left>
         <Height>0.25in</Height>
         <Width>0.84375in</Width>
         <ZIndex>12</ZIndex>
@@ -453,8 +447,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox54</rd:DefaultName>
-        <Top>2.85986in</Top>
-        <Left>5.74718in</Left>
+        <Top>2.76265in</Top>
+        <Left>3.66997in</Left>
         <Height>0.25in</Height>
         <Width>0.84375in</Width>
         <ZIndex>13</ZIndex>
@@ -486,8 +480,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox55</rd:DefaultName>
-        <Top>3.16541in</Top>
-        <Left>5.74718in</Left>
+        <Top>3.0682in</Top>
+        <Left>3.66997in</Left>
         <Height>0.25in</Height>
         <Width>0.84375in</Width>
         <ZIndex>14</ZIndex>
@@ -505,30 +499,30 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.84739in</Width>
+              <Width>0.73281in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.06614in</Width>
+              <Width>0.95156in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.84739in</Width>
+              <Width>0.76406in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.30447in</Width>
+              <Width>1.18989in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.18072in</Width>
+              <Width>0.93072in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.24447in</Width>
+              <Width>0.93891in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.84739in</Width>
+              <Width>0.92379in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.25in</Height>
+              <Height>0.36458in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -805,7 +799,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!orderDate.Value</Value>
+                              <Value>=FormatDateTime(Fields!orderDate.Value,DateFormat.ShortDate)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -835,7 +829,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!POdueDate.Value</Value>
+                              <Value>=FormatDateTime(Fields!POdueDate.Value,DateFormat.ShortDate)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -918,21 +912,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="termsDays">
+                    <Textbox Name="termsDP">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!termsDays.Value</Value>
+                              <Value>=Fields!termsDP.Value &amp;"%"</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>termsDays</rd:DefaultName>
+                      <rd:DefaultName>termsDP</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1002,10 +996,9 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>PurchaseOrderTableTable</DataSetName>
-        <Top>3.48486in</Top>
-        <Left>1.07578in</Left>
-        <Height>0.5in</Height>
-        <Width>7.33797in</Width>
+        <Top>3.47098in</Top>
+        <Height>0.61458in</Height>
+        <Width>6.43172in</Width>
         <ZIndex>15</ZIndex>
         <Style>
           <Border>
@@ -1017,25 +1010,25 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.84871in</Width>
+              <Width>0.71925in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.84871in</Width>
+              <Width>0.71925in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.84871in</Width>
+              <Width>0.71925in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.84871in</Width>
+              <Width>0.71925in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.96329in</Width>
+              <Width>1.69204in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.00496in</Width>
+              <Width>0.8755in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98413in</Width>
+              <Width>0.9872in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1400,21 +1393,52 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="itemDescr">
+                    <Textbox Name="itemName">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!itemDescr.Value</Value>
+                              <Value>=Fields!itemName.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>itemDescr</rd:DefaultName>
+                      <rd:DefaultName>itemName</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                    <rd:Selected>true</rd:Selected>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="UNIT_PRICE">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!UNIT_PRICE.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>UNIT_PRICE</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1430,56 +1454,29 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="unitPrice">
+                    <Textbox Name="total_item">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!unitPrice.Value</Value>
+                              <Value>=Fields!total_item.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>unitPrice</rd:DefaultName>
+                      <rd:DefaultName>total_item</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="amount">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!amount.Value</Value>
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>amount</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1491,7 +1488,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.39683in</Height>
+              <Height>0.33333in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1515,6 +1512,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>CornflowerBlue</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1545,6 +1543,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>CornflowerBlue</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1575,6 +1574,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>CornflowerBlue</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1605,6 +1605,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>CornflowerBlue</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1635,6 +1636,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>CornflowerBlue</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1665,6 +1667,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>CornflowerBlue</BackgroundColor>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1675,26 +1678,30 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="amount1">
+                    <Textbox Name="total_item1">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!amount.Value)</Value>
+                              <Value>="PHP "&amp;Sum(Fields!total_item.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>amount1</rd:DefaultName>
+                      <rd:DefaultName>total_item1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>CornflowerBlue</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1732,10 +1739,9 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>PurchaseOrderTableTable</DataSetName>
-        <Top>4.06125in</Top>
-        <Left>1.06653in</Left>
-        <Height>0.89683in</Height>
-        <Width>7.34722in</Width>
+        <Top>4.04737in</Top>
+        <Height>0.83333in</Height>
+        <Width>6.43172in</Width>
         <ZIndex>16</ZIndex>
         <Style>
           <Border>
@@ -1833,10 +1839,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox131</rd:DefaultName>
-        <Top>5.33903in</Top>
-        <Left>1.06653in</Left>
+        <Top>5.33904in</Top>
         <Height>1.02083in</Height>
-        <Width>7.34722in</Width>
+        <Width>6.43172in</Width>
         <ZIndex>17</ZIndex>
         <Style>
           <Border>
@@ -1866,8 +1871,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox132</rd:DefaultName>
-        <Top>6.38764in</Top>
-        <Left>1.36745in</Left>
+        <Top>6.49876in</Top>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>18</ZIndex>
@@ -1898,8 +1902,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox133</rd:DefaultName>
-        <Top>6.83555in</Top>
-        <Left>1.36745in</Left>
+        <Top>6.94667in</Top>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>19</ZIndex>
@@ -1931,8 +1934,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox134</rd:DefaultName>
-        <Top>6.38764in</Top>
-        <Left>6.66037in</Left>
+        <Top>6.49876in</Top>
+        <Left>5.14781in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>20</ZIndex>
@@ -1963,8 +1966,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox135</rd:DefaultName>
-        <Top>6.83555in</Top>
-        <Left>6.66037in</Left>
+        <Top>6.94667in</Top>
+        <Left>5.14781in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>21</ZIndex>
@@ -1982,7 +1985,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.51167in</Width>
+              <Width>1.62186in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -2036,10 +2039,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>PurchaseOrderTableTable</DataSetName>
-        <Top>1.20708in</Top>
-        <Left>1.75857in</Left>
+        <Top>1.20709in</Top>
+        <Left>0.49245in</Left>
         <Height>0.25in</Height>
-        <Width>1.51167in</Width>
+        <Width>1.62186in</Width>
         <ZIndex>22</ZIndex>
         <Style>
           <Border>
@@ -2051,7 +2054,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.96875in</Width>
+              <Width>1.64269in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -2105,10 +2108,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>PurchaseOrderTableTable</DataSetName>
-        <Top>1.45708in</Top>
-        <Left>1.73774in</Left>
+        <Top>1.45709in</Top>
+        <Left>0.47162in</Left>
         <Height>0.25in</Height>
-        <Width>1.96875in</Width>
+        <Width>1.64269in</Width>
         <ZIndex>23</ZIndex>
         <Style>
           <Border>
@@ -2120,7 +2123,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.75in</Width>
+              <Width>1.42128in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -2174,10 +2177,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>PurchaseOrderTableTable</DataSetName>
-        <Top>2.40151in</Top>
-        <Left>1.95915in</Left>
+        <Top>2.40152in</Top>
+        <Left>0.69303in</Left>
         <Height>0.25in</Height>
-        <Width>1.75in</Width>
+        <Width>1.42128in</Width>
         <ZIndex>24</ZIndex>
         <Style>
           <Border>
@@ -2189,7 +2192,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.75347in</Width>
+              <Width>1.42476in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -2243,10 +2246,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>PurchaseOrderTableTable</DataSetName>
-        <Top>2.65151in</Top>
-        <Left>1.95567in</Left>
+        <Top>2.65152in</Top>
+        <Left>0.68955in</Left>
         <Height>0.25in</Height>
-        <Width>1.75347in</Width>
+        <Width>1.42476in</Width>
         <ZIndex>25</ZIndex>
         <Style>
           <Border>
@@ -2258,12 +2261,12 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.78125in</Width>
+              <Width>1.43865in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.25in</Height>
+              <Height>0.22224in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2312,10 +2315,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>PurchaseOrderTableTable</DataSetName>
-        <Top>2.88763in</Top>
-        <Left>1.94178in</Left>
-        <Height>0.25in</Height>
-        <Width>1.78125in</Width>
+        <Top>2.91541in</Top>
+        <Left>0.67566in</Left>
+        <Height>0.22224in</Height>
+        <Width>1.43865in</Width>
         <ZIndex>26</ZIndex>
         <Style>
           <Border>
@@ -2327,7 +2330,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.78125in</Width>
+              <Width>1.43436in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -2381,10 +2384,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>PurchaseOrderTableTable</DataSetName>
-        <Top>3.15152in</Top>
-        <Left>1.94607in</Left>
+        <Top>3.16542in</Top>
+        <Left>0.67995in</Left>
         <Height>0.25in</Height>
-        <Width>1.78125in</Width>
+        <Width>1.43436in</Width>
         <ZIndex>27</ZIndex>
         <Style>
           <Border>
@@ -2396,7 +2399,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.375in</Width>
+              <Width>2.17808in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -2450,10 +2453,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>PurchaseOrderTableTable</DataSetName>
-        <Top>1.2661in</Top>
-        <Left>6.17649in</Left>
+        <Top>1.16889in</Top>
+        <Left>4.09928in</Left>
         <Height>0.25in</Height>
-        <Width>1.375in</Width>
+        <Width>2.17808in</Width>
         <ZIndex>28</ZIndex>
         <Style>
           <Border>
@@ -2476,10 +2479,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox78</rd:DefaultName>
-        <Top>1.5161in</Top>
-        <Left>6.40218in</Left>
+        <Top>1.41889in</Top>
+        <Left>4.32497in</Left>
         <Height>0.25in</Height>
-        <Width>2.11457in</Width>
+        <Width>1.93652in</Width>
         <ZIndex>29</ZIndex>
         <Style>
           <Border>
@@ -2527,10 +2530,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox82</rd:DefaultName>
-        <Top>1.7661in</Top>
-        <Left>5.73899in</Left>
+        <Top>1.66889in</Top>
+        <Left>3.66178in</Left>
         <Height>0.5382in</Height>
-        <Width>2.77776in</Width>
+        <Width>2.59971in</Width>
         <ZIndex>30</ZIndex>
         <Style>
           <Border>
@@ -2557,10 +2560,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox83</rd:DefaultName>
-        <Top>2.30431in</Top>
-        <Left>6.62441in</Left>
+        <Top>2.2071in</Top>
+        <Left>4.5472in</Left>
         <Height>0.25in</Height>
-        <Width>1.63667in</Width>
+        <Width>1.71429in</Width>
         <ZIndex>31</ZIndex>
         <Style>
           <Border>
@@ -2593,10 +2596,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox84</rd:DefaultName>
-        <Top>2.56819in</Top>
-        <Left>6.61177in</Left>
+        <Top>2.47098in</Top>
+        <Left>4.53456in</Left>
         <Height>0.25in</Height>
-        <Width>1.74651in</Width>
+        <Width>1.72693in</Width>
         <ZIndex>32</ZIndex>
         <Style>
           <Border>
@@ -2629,10 +2632,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox85</rd:DefaultName>
-        <Top>2.87375in</Top>
-        <Left>6.66037in</Left>
+        <Top>2.77654in</Top>
+        <Left>4.58316in</Left>
         <Height>0.25in</Height>
-        <Width>1.7061in</Width>
+        <Width>1.67833in</Width>
         <ZIndex>33</ZIndex>
         <Style>
           <Border>
@@ -2659,8 +2662,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox86</rd:DefaultName>
-        <Top>3.15153in</Top>
-        <Left>6.6326in</Left>
+        <Top>3.05432in</Top>
+        <Left>4.55539in</Left>
         <Height>0.25in</Height>
         <Width>1.7061in</Width>
         <ZIndex>34</ZIndex>
@@ -2678,7 +2681,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.61111in</Width>
+              <Width>2.29894in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -2732,10 +2735,9 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>PurchaseOrderTableTable</DataSetName>
-        <Top>1.7661in</Top>
-        <Left>1.08149in</Left>
+        <Top>1.76611in</Top>
         <Height>0.5382in</Height>
-        <Width>2.61111in</Width>
+        <Width>2.29894in</Width>
         <ZIndex>35</ZIndex>
         <Style>
           <Border>
@@ -2743,36 +2745,6 @@
           </Border>
         </Style>
       </Tablix>
-      <Textbox Name="Textbox8">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value />
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox8</rd:DefaultName>
-        <Top>2.9675in</Top>
-        <Left>1.03in</Left>
-        <Height>0.25in</Height>
-        <Width>1in</Width>
-        <ZIndex>36</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
       <Textbox Name="Textbox9">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -2789,11 +2761,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox9</rd:DefaultName>
-        <Top>4.97196in</Top>
-        <Left>1.03in</Left>
+        <Top>4.95015in</Top>
         <Height>0.36707in</Height>
-        <Width>7.38375in</Width>
-        <ZIndex>37</ZIndex>
+        <Width>6.42247in</Width>
+        <ZIndex>36</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2808,7 +2779,7 @@
     <Height>7.41666in</Height>
     <Style />
   </Body>
-  <Width>9.02024in</Width>
+  <Width>6.60052in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
@@ -2833,10 +2804,6 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="PONumChar">
-          <DataField>PONumChar</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="companyName">
           <DataField>companyName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -2877,22 +2844,6 @@
           <DataField>repMobile</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="orderDate">
-          <DataField>orderDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="requisitioner">
-          <DataField>requisitioner</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="POdueDate">
-          <DataField>POdueDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="incoterms">
-          <DataField>incoterms</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="termsDays">
           <DataField>termsDays</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
@@ -2901,20 +2852,124 @@
           <DataField>termsDP</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="currency">
-          <DataField>currency</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="ID">
           <DataField>ID</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="unitName">
-          <DataField>unitName</DataField>
+        <Field Name="shipVia">
+          <DataField>shipVia</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="itemDescr">
-          <DataField>itemDescr</DataField>
+        <Field Name="itemQnty">
+          <DataField>itemQnty</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="isDeleted">
+          <DataField>isDeleted</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="companyID">
+          <DataField>companyID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="busStyle">
+          <DataField>busStyle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="taxNumber">
+          <DataField>taxNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="companyAddInfo">
+          <DataField>companyAddInfo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="companyProvinceID">
+          <DataField>companyProvinceID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="companyPostalCode">
+          <DataField>companyPostalCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="companyEmail">
+          <DataField>companyEmail</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="companyTelephone">
+          <DataField>companyTelephone</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="companyMobile">
+          <DataField>companyMobile</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="repTitle">
+          <DataField>repTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Expr1">
+          <DataField>Expr1</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="itemName">
+          <DataField>itemName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="UNIT_PRICE">
+          <DataField>UNIT_PRICE</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="total_item">
+          <DataField>total_item</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="PONumChar">
+          <DataField>PONumChar</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="suppID">
+          <DataField>suppID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="shipTo">
+          <DataField>shipTo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="orderDate">
+          <DataField>orderDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="POdueDate">
+          <DataField>POdueDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="asapDueDate">
+          <DataField>asapDueDate</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="shipVia1">
+          <DataField>shipVia</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="requisitioner">
+          <DataField>requisitioner</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="incoterms">
+          <DataField>incoterms</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="POstatus">
+          <DataField>POstatus</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="currency">
+          <DataField>currency</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="importantNotes">
+          <DataField>importantNotes</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="preparedBy">
@@ -2925,29 +2980,17 @@
           <DataField>approvedBy</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="shipVia">
-          <DataField>shipVia</DataField>
+        <Field Name="refNo">
+          <DataField>refNo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="shipTo">
-          <DataField>shipTo</DataField>
+        <Field Name="unitName">
+          <DataField>unitName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="shipVia1">
-          <DataField>shipVia</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="itemQnty">
-          <DataField>itemQnty</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="unitPrice">
-          <DataField>unitPrice</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="amount">
-          <DataField>amount</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+        <Field Name="itemDescr">
+          <DataField>itemDescr</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>

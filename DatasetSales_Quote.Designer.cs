@@ -1452,7 +1452,11 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columnsqNoChar;
             
-            private global::System.Data.DataColumn columnAMOUNT;
+            private global::System.Data.DataColumn columnLESS_DISCOUNT;
+            
+            private global::System.Data.DataColumn columnADD_VAT_IF_INCLUSIVE;
+            
+            private global::System.Data.DataColumn columnTOTAL_AMOUNT;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -1497,9 +1501,25 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn AMOUNTColumn {
+            public global::System.Data.DataColumn LESS_DISCOUNTColumn {
                 get {
-                    return this.columnAMOUNT;
+                    return this.columnLESS_DISCOUNT;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn ADD_VAT_IF_INCLUSIVEColumn {
+                get {
+                    return this.columnADD_VAT_IF_INCLUSIVE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn TOTAL_AMOUNTColumn {
+                get {
+                    return this.columnTOTAL_AMOUNT;
                 }
             }
             
@@ -1540,11 +1560,13 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public sales_quote_tRow Addsales_quote_tRow(string sqNoChar, decimal AMOUNT) {
+            public sales_quote_tRow Addsales_quote_tRow(string sqNoChar, decimal LESS_DISCOUNT, decimal ADD_VAT_IF_INCLUSIVE, decimal TOTAL_AMOUNT) {
                 sales_quote_tRow rowsales_quote_tRow = ((sales_quote_tRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         sqNoChar,
-                        AMOUNT};
+                        LESS_DISCOUNT,
+                        ADD_VAT_IF_INCLUSIVE,
+                        TOTAL_AMOUNT};
                 rowsales_quote_tRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowsales_quote_tRow);
                 return rowsales_quote_tRow;
@@ -1575,7 +1597,9 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             internal void InitVars() {
                 this.columnsqNoChar = base.Columns["sqNoChar"];
-                this.columnAMOUNT = base.Columns["AMOUNT"];
+                this.columnLESS_DISCOUNT = base.Columns["LESS_DISCOUNT"];
+                this.columnADD_VAT_IF_INCLUSIVE = base.Columns["ADD_VAT_IF_INCLUSIVE"];
+                this.columnTOTAL_AMOUNT = base.Columns["TOTAL_AMOUNT"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1583,13 +1607,18 @@ namespace prototype2 {
             private void InitClass() {
                 this.columnsqNoChar = new global::System.Data.DataColumn("sqNoChar", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsqNoChar);
-                this.columnAMOUNT = new global::System.Data.DataColumn("AMOUNT", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnAMOUNT);
+                this.columnLESS_DISCOUNT = new global::System.Data.DataColumn("LESS_DISCOUNT", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLESS_DISCOUNT);
+                this.columnADD_VAT_IF_INCLUSIVE = new global::System.Data.DataColumn("ADD_VAT_IF_INCLUSIVE", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnADD_VAT_IF_INCLUSIVE);
+                this.columnTOTAL_AMOUNT = new global::System.Data.DataColumn("TOTAL_AMOUNT", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTOTAL_AMOUNT);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnsqNoChar}, true));
                 this.columnsqNoChar.AllowDBNull = false;
                 this.columnsqNoChar.Unique = true;
                 this.columnsqNoChar.MaxLength = 255;
+                this.columnLESS_DISCOUNT.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3088,30 +3117,69 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public decimal AMOUNT {
+            public decimal LESS_DISCOUNT {
+                get {
+                    return ((decimal)(this[this.tablesales_quote_t.LESS_DISCOUNTColumn]));
+                }
+                set {
+                    this[this.tablesales_quote_t.LESS_DISCOUNTColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal ADD_VAT_IF_INCLUSIVE {
                 get {
                     try {
-                        return ((decimal)(this[this.tablesales_quote_t.AMOUNTColumn]));
+                        return ((decimal)(this[this.tablesales_quote_t.ADD_VAT_IF_INCLUSIVEColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'AMOUNT\' in table \'sales_quote_t\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ADD_VAT_IF_INCLUSIVE\' in table \'sales_quote_t\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablesales_quote_t.AMOUNTColumn] = value;
+                    this[this.tablesales_quote_t.ADD_VAT_IF_INCLUSIVEColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsAMOUNTNull() {
-                return this.IsNull(this.tablesales_quote_t.AMOUNTColumn);
+            public decimal TOTAL_AMOUNT {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablesales_quote_t.TOTAL_AMOUNTColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TOTAL_AMOUNT\' in table \'sales_quote_t\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablesales_quote_t.TOTAL_AMOUNTColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetAMOUNTNull() {
-                this[this.tablesales_quote_t.AMOUNTColumn] = global::System.Convert.DBNull;
+            public bool IsADD_VAT_IF_INCLUSIVENull() {
+                return this.IsNull(this.tablesales_quote_t.ADD_VAT_IF_INCLUSIVEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetADD_VAT_IF_INCLUSIVENull() {
+                this[this.tablesales_quote_t.ADD_VAT_IF_INCLUSIVEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsTOTAL_AMOUNTNull() {
+                return this.IsNull(this.tablesales_quote_t.TOTAL_AMOUNTColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetTOTAL_AMOUNTNull() {
+                this[this.tablesales_quote_t.TOTAL_AMOUNTColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3578,39 +3646,10 @@ namespace prototype2.DatasetSales_QuoteTableAdapters {
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "sales_quote_t";
             tableMapping.ColumnMappings.Add("sqNoChar", "sqNoChar");
-            tableMapping.ColumnMappings.Add("AMOUNT", "AMOUNT");
+            tableMapping.ColumnMappings.Add("LESS_DISCOUNT", "LESS_DISCOUNT");
+            tableMapping.ColumnMappings.Add("ADD_VAT_IF_INCLUSIVE", "ADD_VAT_IF_INCLUSIVE");
+            tableMapping.ColumnMappings.Add("TOTAL_AMOUNT", "TOTAL_AMOUNT");
             this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::MySql.Data.MySqlClient.MySqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM `sales_quote_t` WHERE ((`sqNoChar` = @p1))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p1";
-            param.DbType = global::System.Data.DbType.String;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.VarChar;
-            param.IsNullable = true;
-            param.SourceColumn = "sqNoChar";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            this._adapter.UpdateCommand = new global::MySql.Data.MySqlClient.MySqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE `sales_quote_t` SET `sqNoChar` = @p1 WHERE ((`sqNoChar` = @p2))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p1";
-            param.DbType = global::System.Data.DbType.String;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.VarChar;
-            param.IsNullable = true;
-            param.SourceColumn = "sqNoChar";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p2";
-            param.DbType = global::System.Data.DbType.String;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.VarChar;
-            param.IsNullable = true;
-            param.SourceColumn = "sqNoChar";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3626,20 +3665,33 @@ namespace prototype2.DatasetSales_QuoteTableAdapters {
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[1];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        sq.sqNoChar, (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100)) * ia.itemQnty + sa.totalCost AS AMOUNT
-FROM            sales_quote_t sq INNER JOIN
-                         cust_supp_t cs ON cs.companyID = sq.custID INNER JOIN
-                         items_availed_t ia ON ia.sqNoChar = ia.sqNoChar INNER JOIN
-                         item_t i ON i.ID = ia.itemID INNER JOIN
-                         markup_hist_t mh ON mh.itemID = i.ID INNER JOIN
-                         provinces_t p ON p.id = cs.companyProvinceID INNER JOIN
-                         services_availed_t sa ON sa.sqNoChar = sq.sqNoChar INNER JOIN
-                         services_t s ON s.serviceID = sa.serviceID
-WHERE        (sq.sqNoChar = @a)
-GROUP BY sq.sqNoChar";
+            this._commandCollection[0].CommandText = "SELECT        sq.sqNoChar, TRUNCATE(IFNULL(sq.discountPercent, 0), 2) AS LESS_DIS" +
+                "COUNT, TRUNCATE(TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (I" +
+                "FNULL(mh.markupPerc, 0) / 100)) * IFNULL(ia.itemQnty,\r\n                         " +
+                " 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) * TRUNCATE(IFNULL(sq." +
+                "VAT, 0) / 100, 2), 2) AS ADD_VAT_IF_INCLUSIVE, TRUNCATE((IFNULL(ia.unitPrice, 0)" +
+                " + IFNULL(ia.unitPrice, 0) \r\n                         * (IFNULL(mh.markupPerc, 0" +
+                ") / 100)) * IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValu" +
+                "e, 0), 2) - TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (IFNUL" +
+                "L(mh.markupPerc, 0) / 100)) \r\n                         * IFNULL(ia.itemQnty, 0) " +
+                "+ IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) * TRUNCATE(IFNULL(sq.disc" +
+                "ountPercent, 0) / 100, 2) + TRUNCATE(TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(" +
+                "ia.unitPrice, 0) \r\n                         * (IFNULL(mh.markupPerc, 0) / 100)) " +
+                "* IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) " +
+                "* TRUNCATE(IFNULL(sq.VAT, 0) / 100, 2), 2) AS TOTAL_AMOUNT\r\nFROM            sale" +
+                "s_quote_t sq LEFT OUTER JOIN\r\n                         items_availed_t ia ON sq." +
+                "sqNoChar = ia.sqNoChar LEFT OUTER JOIN\r\n                         item_t i ON i.I" +
+                "D = ia.itemID LEFT OUTER JOIN\r\n                         markup_hist_t mh ON mh.i" +
+                "temID = ia.itemID INNER JOIN\r\n                         cust_supp_t cs ON cs.comp" +
+                "anyID = sq.custID INNER JOIN\r\n                         provinces_t p ON p.id = c" +
+                "s.companyProvinceID LEFT OUTER JOIN\r\n                         services_availed_t" +
+                " sa ON sa.sqNoChar = sq.sqNoChar LEFT OUTER JOIN\r\n                         servi" +
+                "ces_t s ON s.serviceID = sa.serviceID LEFT OUTER JOIN\r\n                         " +
+                "fees_per_transaction_t ft ON ft.servicesAvailedID = sa.id\r\nWHERE        (sq.sqNo" +
+                "Char = @A)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@a";
+            param.ParameterName = "@A";
             param.DbType = global::System.Data.DbType.String;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.VarChar;
             param.Size = 255;
@@ -3652,13 +3704,13 @@ GROUP BY sq.sqNoChar";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int FillAmountAll(DatasetSales_Quote.sales_quote_tDataTable dataTable, string a) {
+        public virtual int FillAmountAll(DatasetSales_Quote.sales_quote_tDataTable dataTable, string A) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((a == null)) {
-                throw new global::System.ArgumentNullException("a");
+            if ((A == null)) {
+                throw new global::System.ArgumentNullException("A");
             }
             else {
-                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(a));
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(A));
             }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -3671,114 +3723,17 @@ GROUP BY sq.sqNoChar";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatasetSales_Quote.sales_quote_tDataTable GetDataAmountAll(string a) {
+        public virtual DatasetSales_Quote.sales_quote_tDataTable GetDataAmountAll(string A) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((a == null)) {
-                throw new global::System.ArgumentNullException("a");
+            if ((A == null)) {
+                throw new global::System.ArgumentNullException("A");
             }
             else {
-                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(a));
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(A));
             }
             DatasetSales_Quote.sales_quote_tDataTable dataTable = new DatasetSales_Quote.sales_quote_tDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatasetSales_Quote.sales_quote_tDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatasetSales_Quote dataSet) {
-            return this.Adapter.Update(dataSet, "sales_quote_t");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(string p1) {
-            if ((p1 == null)) {
-                throw new global::System.ArgumentNullException("p1");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[0].Value = ((string)(p1));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string p1, string p2) {
-            if ((p1 == null)) {
-                throw new global::System.ArgumentNullException("p1");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(p1));
-            }
-            if ((p2 == null)) {
-                throw new global::System.ArgumentNullException("p2");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(p2));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string p2) {
-            return this.Update(p2, p2);
         }
     }
     
@@ -3794,8 +3749,6 @@ GROUP BY sq.sqNoChar";
         
         private UpdateOrderOption _updateOrder;
         
-        private sales_quote_tTableAdapter _sales_quote_tTableAdapter;
-        
         private bool _backupDataSetBeforeUpdate;
         
         private global::System.Data.IDbConnection _connection;
@@ -3808,20 +3761,6 @@ GROUP BY sq.sqNoChar";
             }
             set {
                 this._updateOrder = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
-            "a", "System.Drawing.Design.UITypeEditor")]
-        public sales_quote_tTableAdapter sales_quote_tTableAdapter {
-            get {
-                return this._sales_quote_tTableAdapter;
-            }
-            set {
-                this._sales_quote_tTableAdapter = value;
             }
         }
         
@@ -3844,10 +3783,6 @@ GROUP BY sq.sqNoChar";
                 if ((this._connection != null)) {
                     return this._connection;
                 }
-                if (((this._sales_quote_tTableAdapter != null) 
-                            && (this._sales_quote_tTableAdapter.Connection != null))) {
-                    return this._sales_quote_tTableAdapter.Connection;
-                }
                 return null;
             }
             set {
@@ -3861,9 +3796,6 @@ GROUP BY sq.sqNoChar";
         public int TableAdapterInstanceCount {
             get {
                 int count = 0;
-                if ((this._sales_quote_tTableAdapter != null)) {
-                    count = (count + 1);
-                }
                 return count;
             }
         }
@@ -3875,15 +3807,6 @@ GROUP BY sq.sqNoChar";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private int UpdateUpdatedRows(DatasetSales_Quote dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._sales_quote_tTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.sales_quote_t.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._sales_quote_tTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             return result;
         }
         
@@ -3894,14 +3817,6 @@ GROUP BY sq.sqNoChar";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private int UpdateInsertedRows(DatasetSales_Quote dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._sales_quote_tTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.sales_quote_t.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._sales_quote_tTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             return result;
         }
         
@@ -3912,14 +3827,6 @@ GROUP BY sq.sqNoChar";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private int UpdateDeletedRows(DatasetSales_Quote dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._sales_quote_tTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.sales_quote_t.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._sales_quote_tTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             return result;
         }
         
@@ -3959,11 +3866,6 @@ GROUP BY sq.sqNoChar";
             if ((dataSet.HasChanges() == false)) {
                 return 0;
             }
-            if (((this._sales_quote_tTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._sales_quote_tTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
             global::System.Data.IDbConnection workConnection = this.Connection;
             if ((workConnection == null)) {
                 throw new global::System.ApplicationException("TableAdapterManager contains no connection information. Set each TableAdapterMana" +
@@ -3996,15 +3898,6 @@ GROUP BY sq.sqNoChar";
             try {
                 // ---- Prepare for update -----------
                 //
-                if ((this._sales_quote_tTableAdapter != null)) {
-                    revertConnections.Add(this._sales_quote_tTableAdapter, this._sales_quote_tTableAdapter.Connection);
-                    this._sales_quote_tTableAdapter.Connection = ((global::MySql.Data.MySqlClient.MySqlConnection)(workConnection));
-                    this._sales_quote_tTableAdapter.Transaction = ((global::MySql.Data.MySqlClient.MySqlTransaction)(workTransaction));
-                    if (this._sales_quote_tTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._sales_quote_tTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._sales_quote_tTableAdapter.Adapter);
-                    }
-                }
                 // 
                 //---- Perform updates -----------
                 //
@@ -4062,10 +3955,6 @@ GROUP BY sq.sqNoChar";
             finally {
                 if (workConnOpened) {
                     workConnection.Close();
-                }
-                if ((this._sales_quote_tTableAdapter != null)) {
-                    this._sales_quote_tTableAdapter.Connection = ((global::MySql.Data.MySqlClient.MySqlConnection)(revertConnections[this._sales_quote_tTableAdapter]));
-                    this._sales_quote_tTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];
