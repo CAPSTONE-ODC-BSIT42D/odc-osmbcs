@@ -1871,7 +1871,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox132</rd:DefaultName>
-        <Top>6.71875in</Top>
+        <Top>6.84375in</Top>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>18</ZIndex>
@@ -1902,7 +1902,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox133</rd:DefaultName>
-        <Top>7.16666in</Top>
+        <Top>7.29166in</Top>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>19</ZIndex>
@@ -1934,7 +1934,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox134</rd:DefaultName>
-        <Top>6.71875in</Top>
+        <Top>6.84375in</Top>
         <Left>5.14781in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
@@ -1966,7 +1966,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox135</rd:DefaultName>
-        <Top>7.16666in</Top>
+        <Top>7.29166in</Top>
         <Left>5.14781in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
@@ -1985,7 +1985,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.62186in</Width>
+              <Width>0.89073in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -2001,7 +2001,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!orderDate.Value</Value>
+                              <Value>=MonthName(Month(Fields!orderDate.Value),false)&amp;" "&amp;Day(Fields!orderDate.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -2020,6 +2020,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -2042,7 +2043,7 @@
         <Top>1.20709in</Top>
         <Left>0.49245in</Left>
         <Height>0.25in</Height>
-        <Width>1.62186in</Width>
+        <Width>0.89073in</Width>
         <ZIndex>22</ZIndex>
         <Style>
           <Border>
@@ -2775,8 +2776,77 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Tablix Name="Tablix9">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>0.84632in</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.25in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="orderDate2">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Year(Fields!orderDate.Value)</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>orderDate2</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Details8" />
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>PurchaseOrderTableTable</DataSetName>
+        <Top>1.20709in</Top>
+        <Left>1.38318in</Left>
+        <Height>0.25in</Height>
+        <Width>0.84632in</Width>
+        <ZIndex>37</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Tablix>
     </ReportItems>
-    <Height>7.41666in</Height>
+    <Height>7.54166in</Height>
     <Style />
   </Body>
   <Width>6.60052in</Width>
