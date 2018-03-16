@@ -1253,36 +1253,6 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="Textbox48">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>LESS WITHHOLDING TAX</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox38</rd:DefaultName>
-        <Top>6.21403in</Top>
-        <Left>4.43168in</Left>
-        <Height>0.25in</Height>
-        <Width>2.14584in</Width>
-        <ZIndex>21</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
       <Textbox Name="Textbox49">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -1298,11 +1268,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox38</rd:DefaultName>
-        <Top>6.47792in</Top>
+        <Top>6.22792in</Top>
         <Left>5.06709in</Left>
         <Height>0.25in</Height>
         <Width>1.51042in</Width>
-        <ZIndex>22</ZIndex>
+        <ZIndex>21</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1328,11 +1298,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox38</rd:DefaultName>
-        <Top>6.79737in</Top>
+        <Top>6.54737in</Top>
         <Left>4.47681in</Left>
         <Height>0.25in</Height>
         <Width>2.14584in</Width>
-        <ZIndex>23</ZIndex>
+        <ZIndex>22</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1405,7 +1375,7 @@
         <Left>1.14806in</Left>
         <Height>0.25in</Height>
         <Width>1.76736in</Width>
-        <ZIndex>24</ZIndex>
+        <ZIndex>23</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1474,7 +1444,7 @@
         <Left>1.16889in</Left>
         <Height>0.25in</Height>
         <Width>1.74653in</Width>
-        <ZIndex>25</ZIndex>
+        <ZIndex>24</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1543,7 +1513,7 @@
         <Left>1.16889in</Left>
         <Height>0.25in</Height>
         <Width>1.74653in</Width>
-        <ZIndex>26</ZIndex>
+        <ZIndex>25</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1612,7 +1582,7 @@
         <Left>6.82167in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
-        <ZIndex>27</ZIndex>
+        <ZIndex>26</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1681,7 +1651,7 @@
         <Left>6.80778in</Left>
         <Height>0.25in</Height>
         <Width>0.76041in</Width>
-        <ZIndex>28</ZIndex>
+        <ZIndex>27</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1727,7 +1697,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -1751,7 +1720,7 @@
         <Left>6.82167in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
-        <ZIndex>29</ZIndex>
+        <ZIndex>28</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1820,7 +1789,7 @@
         <Left>7.60986in</Left>
         <Height>0.25in</Height>
         <Width>0.8125in</Width>
-        <ZIndex>30</ZIndex>
+        <ZIndex>29</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1847,7 +1816,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!TOTAL_AMOUNT.Value</Value>
+                              <Value>="12"/"100"*Fields!TOTAL_AMOUNT.Value+Fields!TOTAL_AMOUNT.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1889,7 +1858,7 @@
         <Left>6.6782in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
-        <ZIndex>31</ZIndex>
+        <ZIndex>30</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1909,21 +1878,21 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="ADD_VAT_IF_INCLUSIVE">
+                    <Textbox Name="vat">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!ADD_VAT_IF_INCLUSIVE.Value</Value>
+                              <Value>="12"/"100"*Fields!TOTAL_AMOUNT.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>ADD_VAT_IF_INCLUSIVE</rd:DefaultName>
+                      <rd:DefaultName>vat</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1958,7 +1927,7 @@
         <Left>6.65042in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
-        <ZIndex>32</ZIndex>
+        <ZIndex>31</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1985,7 +1954,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!TOTAL_AMOUNT.Value - Fields!ADD_VAT_IF_INCLUSIVE.Value</Value>
+                              <Value>="12"/"100"*Fields!TOTAL_AMOUNT.Value+Fields!TOTAL_AMOUNT.Value - "12"/"100"*Fields!TOTAL_AMOUNT.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -2027,7 +1996,7 @@
         <Left>6.6782in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
-        <ZIndex>33</ZIndex>
+        <ZIndex>32</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2054,7 +2023,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!TOTAL_AMOUNT.Value - Fields!ADD_VAT_IF_INCLUSIVE.Value</Value>
+                              <Value>="12"/"100"*Fields!TOTAL_AMOUNT.Value+Fields!TOTAL_AMOUNT.Value - "12"/"100"*Fields!TOTAL_AMOUNT.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -2096,7 +2065,7 @@
         <Left>1.81305in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
-        <ZIndex>34</ZIndex>
+        <ZIndex>33</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2123,7 +2092,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!ADD_VAT_IF_INCLUSIVE.Value</Value>
+                              <Value>="12"/"100"*Fields!TOTAL_AMOUNT.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -2165,7 +2134,7 @@
         <Left>1.81305in</Left>
         <Height>0.25in</Height>
         <Width>1.5132in</Width>
-        <ZIndex>35</ZIndex>
+        <ZIndex>34</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2191,7 +2160,7 @@
         <Left>4.46291in</Left>
         <Height>0.25in</Height>
         <Width>2.14584in</Width>
-        <ZIndex>36</ZIndex>
+        <ZIndex>35</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2221,7 +2190,7 @@
         <Left>4.46292in</Left>
         <Height>0.25in</Height>
         <Width>2.14584in</Width>
-        <ZIndex>37</ZIndex>
+        <ZIndex>36</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2252,7 +2221,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!LESS_DISCOUNT.Value</Value>
+                              <Value>=Fields!LESS_DISCOUNT.Value/"100"* Fields!TOTAL_AMOUNT.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -2294,7 +2263,7 @@
         <Left>6.6782in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
-        <ZIndex>38</ZIndex>
+        <ZIndex>37</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2321,7 +2290,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!TOTAL_AMOUNT.Value - Fields!ADD_VAT_IF_INCLUSIVE.Value -Fields!LESS_DISCOUNT.Value</Value>
+                              <Value>="12"/"100"*Fields!TOTAL_AMOUNT.Value+Fields!TOTAL_AMOUNT.Value - "12"/"100"*Fields!TOTAL_AMOUNT.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -2363,76 +2332,7 @@
         <Left>6.6782in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
-        <ZIndex>39</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Tablix>
-      <Tablix Name="Tablix20">
-        <TablixBody>
-          <TablixColumns>
-            <TablixColumn>
-              <Width>1.38306in</Width>
-            </TablixColumn>
-          </TablixColumns>
-          <TablixRows>
-            <TablixRow>
-              <Height>0.25in</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="TOTAL_AMOUNT4">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!TOTAL_AMOUNT.Value - Fields!ADD_VAT_IF_INCLUSIVE.Value - Fields!LESS_DISCOUNT.Value -Fields!withholdingTax.Value</Value>
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>TOTAL_AMOUNT1</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
-          </TablixRows>
-        </TablixBody>
-        <TablixColumnHierarchy>
-          <TablixMembers>
-            <TablixMember />
-          </TablixMembers>
-        </TablixColumnHierarchy>
-        <TablixRowHierarchy>
-          <TablixMembers>
-            <TablixMember>
-              <Group Name="Details9" />
-            </TablixMember>
-          </TablixMembers>
-        </TablixRowHierarchy>
-        <DataSetName>DataSetSIAmount</DataSetName>
-        <Top>6.24181in</Top>
-        <Left>6.6782in</Left>
-        <Height>0.25in</Height>
-        <Width>1.38306in</Width>
-        <ZIndex>40</ZIndex>
+        <ZIndex>38</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2459,7 +2359,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!ADD_VAT_IF_INCLUSIVE.Value</Value>
+                              <Value>= "12"/"100"*Fields!TOTAL_AMOUNT.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -2497,11 +2397,11 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSetSIAmount</DataSetName>
-        <Top>6.49181in</Top>
+        <Top>6.24181in</Top>
         <Left>6.6782in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
-        <ZIndex>41</ZIndex>
+        <ZIndex>39</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2528,7 +2428,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!TOTAL_AMOUNT.Value - Fields!LESS_DISCOUNT.Value -Fields!withholdingTax.Value</Value>
+                              <Value>="12"/"100"*Fields!TOTAL_AMOUNT.Value+Fields!TOTAL_AMOUNT.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -2566,11 +2466,11 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSetSIAmount</DataSetName>
-        <Top>6.78348in</Top>
+        <Top>6.53348in</Top>
         <Left>6.6782in</Left>
         <Height>0.26389in</Height>
         <Width>1.38306in</Width>
-        <ZIndex>42</ZIndex>
+        <ZIndex>40</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2597,7 +2497,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!TOTAL_AMOUNT.Value - Fields!LESS_DISCOUNT.Value - Fields!withholdingTax.Value</Value>
+                              <Value>="12"/"100"*Fields!TOTAL_AMOUNT.Value+Fields!TOTAL_AMOUNT.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -2639,7 +2539,7 @@
         <Left>1.94319in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
-        <ZIndex>43</ZIndex>
+        <ZIndex>41</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2708,7 +2608,7 @@
         <Left>1.16889in</Left>
         <Height>0.25in</Height>
         <Width>1.74653in</Width>
-        <ZIndex>44</ZIndex>
+        <ZIndex>42</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2958,6 +2858,14 @@
         </Field>
         <Field Name="withholdingTax">
           <DataField>withholdingTax</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="sc_pwd_discount">
+          <DataField>sc_pwd_discount</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="vat">
+          <DataField>vat</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>

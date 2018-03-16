@@ -91,11 +91,12 @@ WHERE        (si.invoiceNo = @a)</CommandText>
               <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.sales_invoice_t" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillSiAmount" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataSiAmount" GeneratorSourceName="FillSiAmount" GetMethodModifier="Public" GetMethodName="GetDataSiAmount" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataSiAmount" UserSourceName="FillSiAmount">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        si.withholdingTax, si.sc_pwd_discount, TRUNCATE(IFNULL(sq.discountPercent, 0), 2) AS LESS_DISCOUNT, TRUNCATE(TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) 
-                         / 100)) * IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) * TRUNCATE(IFNULL(sq.VAT, 0) / 100, 2), 2) AS ADD_VAT_IF_INCLUSIVE, TRUNCATE((IFNULL(ia.unitPrice, 0) 
-                         + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) / 100)) * IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) - TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) 
-                         * (IFNULL(mh.markupPerc, 0) / 100)) * IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0), 2) * TRUNCATE(IFNULL(sq.discountPercent, 0) / 100, 2) + TRUNCATE(TRUNCATE((IFNULL(ia.unitPrice, 0) 
-                         + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) / 100)) * IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) * TRUNCATE(IFNULL(sq.VAT, 0) / 100, 2), 2) AS TOTAL_AMOUNT
+                    <CommandText>SELECT        si.vat, si.withholdingTax, si.sc_pwd_discount, TRUNCATE(IFNULL(sq.discountPercent, 0), 2) AS LESS_DISCOUNT, TRUNCATE(TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) 
+                         * (IFNULL(mh.markupPerc, 0) / 100)) * IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) * TRUNCATE(IFNULL(sq.VAT, 0) / 100, 2), 2) AS ADD_VAT_IF_INCLUSIVE, 
+                         TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) / 100)) * IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) - TRUNCATE((IFNULL(ia.unitPrice, 0) 
+                         + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) / 100)) * IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0), 2) * TRUNCATE(IFNULL(sq.discountPercent, 0) / 100, 2) 
+                         + TRUNCATE(TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) / 100)) * IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) 
+                         * TRUNCATE(IFNULL(sq.VAT, 0) / 100, 2), 2) AS TOTAL_AMOUNT
 FROM            sales_quote_t sq LEFT OUTER JOIN
                          items_availed_t ia ON sq.sqNoChar = ia.sqNoChar LEFT OUTER JOIN
                          item_t i ON i.ID = ia.itemID LEFT OUTER JOIN
@@ -120,6 +121,7 @@ WHERE        (si.invoiceNo = @a)</CommandText>
               <Mapping SourceColumn="TOTAL_AMOUNT" DataSetColumn="TOTAL_AMOUNT" />
               <Mapping SourceColumn="withholdingTax" DataSetColumn="withholdingTax" />
               <Mapping SourceColumn="sc_pwd_discount" DataSetColumn="sc_pwd_discount" />
+              <Mapping SourceColumn="vat" DataSetColumn="vat" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -347,6 +349,7 @@ WHERE        (si.invoiceNo = @a)</CommandText>
               <xs:element name="TOTAL_AMOUNT" msprop:Generator_ColumnVarNameInTable="columnTOTAL_AMOUNT" msprop:Generator_ColumnPropNameInRow="TOTAL_AMOUNT" msprop:Generator_ColumnPropNameInTable="TOTAL_AMOUNTColumn" msprop:Generator_UserColumnName="TOTAL_AMOUNT" type="xs:decimal" minOccurs="0" />
               <xs:element name="withholdingTax" msprop:Generator_ColumnVarNameInTable="columnwithholdingTax" msprop:Generator_ColumnPropNameInRow="withholdingTax" msprop:Generator_ColumnPropNameInTable="withholdingTaxColumn" msprop:Generator_UserColumnName="withholdingTax" type="xs:decimal" minOccurs="0" />
               <xs:element name="sc_pwd_discount" msprop:Generator_ColumnVarNameInTable="columnsc_pwd_discount" msprop:Generator_ColumnPropNameInRow="sc_pwd_discount" msprop:Generator_ColumnPropNameInTable="sc_pwd_discountColumn" msprop:Generator_UserColumnName="sc_pwd_discount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="vat" msprop:Generator_ColumnVarNameInTable="columnvat" msprop:Generator_ColumnPropNameInRow="vat" msprop:Generator_ColumnPropNameInTable="vatColumn" msprop:Generator_UserColumnName="vat" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

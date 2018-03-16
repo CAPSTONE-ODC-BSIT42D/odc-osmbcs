@@ -42,6 +42,6 @@
                 </Canvas>
             </Viewbox>
         </Button>
-        <syncfusion:ReportViewer x:Name="ucReportViewer"  ReportPath="C:\Users\Alexis\Source\Repos\odc-osmbcs\rdlcfiles\PurchaseOrder.rdlc" ProcessingMode="Local" Visibility="Visible" ExcelVersion="Excel2007" ShowPageLayoutControl="True" ViewMode="Print" WordFormatType="Docx" ShowRefreshButton="True" ShowExcelExportButton="False" ShowHtmlExportButton="False" ShowPPTExportButton="False" ShowPrintButton="True" ShowWordExportButton="False" ShowXpsExportButton="False"/>
+        <syncfusion:ReportViewer x:Name="ucReportViewer"  Margin="0" ProcessingMode="Local" Visibility="Visible" ExcelVersion="Excel2007" ShowPageLayoutControl="True" ViewMode="Print" WordFormatType="Docx" ShowRefreshButton="True" ShowExcelExportButton="False" ShowHtmlExportButton="False" ShowPPTExportButton="False" ShowPrintButton="True" ShowWordExportButton="False" ShowXpsExportButton="False"/>
     </Grid>
 </UserControl>
