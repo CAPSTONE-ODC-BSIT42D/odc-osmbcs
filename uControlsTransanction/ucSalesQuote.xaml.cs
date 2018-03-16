@@ -107,6 +107,7 @@ namespace prototype2
                 {
                     if (MainVM.SelectedSalesQuote != null)
                     {
+                        
                         downloadBtn.IsEnabled = true;
                         foreach (UIElement obj in transQuoatationGridForm.Children)
                         {
@@ -120,8 +121,10 @@ namespace prototype2
                         loadSalesQuoteToUi();
                         computePrice();
                     }
-                    else
+                    else if(MainVM.isNewTrans)
                     {
+                        editSalesQuoteBtn.Visibility = Visibility.Collapsed;
+                        convertToInvoiceBtn.Visibility = Visibility.Collapsed;
                         downloadBtn.IsEnabled = false;
                         foreach (UIElement obj in transQuoatationGridForm.Children)
                         {
@@ -136,7 +139,6 @@ namespace prototype2
                         }
 
                     }
-                    closeModals();
 
                 }
             }
@@ -311,8 +313,6 @@ namespace prototype2
         {
             if (MainVM.SelectedCustomerSupplier != null)
             {
-                //if(!MainVM.isEdit)
-                //    MainVM.SelectedSalesQuote = new SalesQuote() { };
                 OnSelectItemClicked(e);
             }
                 
@@ -711,8 +711,8 @@ namespace prototype2
                 if (transQuoatationGridForm.Children.IndexOf(obj) <= 1)
                     obj.IsEnabled = true;
             }
-            viewSalesQuoteBtns.Visibility = Visibility.Collapsed;
-            newSalesQuoteBtns.Visibility = Visibility.Visible;
+            convertToInvoiceBtn.Visibility = Visibility.Collapsed;
+            editSalesQuoteBtn.Visibility = Visibility.Collapsed;
 
         }
 

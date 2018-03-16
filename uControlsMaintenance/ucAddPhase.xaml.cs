@@ -116,7 +116,7 @@ namespace prototype2.uControlsMaintenance
                     }
                     else
                     {
-                        MainVM.SelectedService.PhaseGroups.Add(new PhaseGroup() { PhaseGroupName = phaseNameTb.Text, PhaseGroupDesc = phaseDescTb.Text, PhaseItems = MainVM.SelectedPhaseGroup.PhaseItems });
+                        //MainVM.SelectedService.PhaseGroups.Add(new PhaseGroup() { PhaseGroupName = phaseNameTb.Text, PhaseGroupDesc = phaseDescTb.Text, PhaseItems = MainVM.SelectedPhaseGroup.PhaseItems });
                     }
                 }
                 else

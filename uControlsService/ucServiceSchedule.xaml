@@ -12,7 +12,7 @@
     <UserControl.Resources>
         <local:ServiceNameConverter x:Key="ServiceNameConverter" />
         <local:PhaseItemConverter x:Key="PhaseItemConverter" />
-        <local:PhaseGroupConverter x:Key="PhaseGroupConverter" />
+        <!--<local:PhaseGroupConverter x:Key="PhaseGroupConverter" />-->
         <local:EmployeeNameConcatenator x:Key="EmployeeNameConcatenator"/>
     </UserControl.Resources>
 
@@ -59,7 +59,6 @@
                 <DataGrid x:Name="phaseDg" SelectedItem="{Binding SelectedPhasesPerService}" ItemsSource="{Binding SelectedServiceSchedule_.PhasesPerService}" Height="271" Margin="55,550,0,0" VerticalAlignment="Top" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Width="740">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding PhaseID, Converter={StaticResource PhaseItemConverter}, NotifyOnTargetUpdated=True}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Phase Name"  />
-                        <DataGridTextColumn Binding="{Binding PhaseID, Converter={StaticResource PhaseGroupConverter}, NotifyOnTargetUpdated=True}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Phase Group"  />
                         <DataGridTextColumn Binding="{Binding Status}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Status"  />
                         <DataGridTemplateColumn  Width="115" CanUserResize="False" Header="Actions"  >
                             <DataGridTemplateColumn.CellTemplate  >

@@ -59,33 +59,33 @@ namespace prototype2
             MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
             var dbCon = DBConnection.Instance();
 
-            if (dbCon.IsConnect())
-            {
-                MainVM.PhasesGroup.Clear();
-                string query = "SELECT * FROM phases_group_t";
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    MainVM.PhasesGroup.Add(new PhaseGroup()
-                    {
-                        PhaseGroupID = int.Parse(dr[0].ToString()),
-                        PhaseGroupName = dr[1].ToString(),
-                        SequenceNo = int.Parse(dr[2].ToString()),
-                        ServiceID = int.Parse(dr[3].ToString())
+            //if (dbCon.IsConnect())
+            //{
+            //    MainVM.PhasesGroup.Clear();
+            //    string query = "SELECT * FROM phases_group_t";
+            //    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+            //    DataSet fromDb = new DataSet();
+            //    DataTable fromDbTable = new DataTable();
+            //    dataAdapter.Fill(fromDb, "t");
+            //    fromDbTable = fromDb.Tables["t"];
+            //    foreach (DataRow dr in fromDbTable.Rows)
+            //    {
+            //        MainVM.PhasesGroup.Add(new PhaseGroup()
+            //        {
+            //            PhaseGroupID = int.Parse(dr[0].ToString()),
+            //            PhaseGroupName = dr[1].ToString(),
+            //            SequenceNo = int.Parse(dr[2].ToString()),
+            //            ServiceID = int.Parse(dr[3].ToString())
 
-                    });
-                }
-                dbCon.Close();
-            }
+            //        });
+            //    }
+            //    dbCon.Close();
+            //}
 
             if (dbCon.IsConnect())
             {
                 MainVM.Phases.Clear();
-                string query = "SELECT * FROM phase_t";
+                string query = "SELECT * FROM phase_t where isDeleted = 0";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
@@ -99,7 +99,7 @@ namespace prototype2
                         PhaseName = dr[1].ToString(),
                         PhaseDesc = dr[2].ToString(),
                         SequenceNo = int.Parse(dr[3].ToString()),
-                        PhaseGroupID = int.Parse(dr[4].ToString())
+                        ServiceID = int.Parse(dr[4].ToString())
 
                     });
                 }

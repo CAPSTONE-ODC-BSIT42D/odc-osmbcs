@@ -41,12 +41,12 @@ namespace prototype2.uControlsMaintenance
         {
             if (MainVM.SelectedPhase == null)
             {
-                if (MainVM.SelectedPhaseGroup.PhaseItems.Count == 0)
-                    MainVM.SelectedPhaseGroup.PhaseItems.Add(new Phase() { PhaseName = phaseItemNameTb.Text, PhaseDesc = phaseDescTb.Text, SequenceNo = MainVM.SelectedPhaseGroup.PhaseItems.Count, LastItem = true, FirstItem = true });
-                else if (MainVM.SelectedPhaseGroup.PhaseItems.Count > 0)
+                if (MainVM.SelectedService.Phases.Count == 0)
+                    MainVM.SelectedService.Phases.Add(new Phase() { PhaseName = phaseItemNameTb.Text, PhaseDesc = phaseDescTb.Text, SequenceNo = MainVM.SelectedService.Phases.Count, LastItem = true, FirstItem = true });
+                else if (MainVM.SelectedService.Phases.Count > 0)
                 {
-                    MainVM.SelectedPhaseGroup.PhaseItems[MainVM.SelectedPhaseGroup.PhaseItems.Count - 1].LastItem = false;
-                    MainVM.SelectedPhaseGroup.PhaseItems.Add(new Phase() { PhaseName = phaseItemNameTb.Text, PhaseDesc = phaseDescTb.Text, SequenceNo = MainVM.SelectedPhaseGroup.PhaseItems.Count+1,LastItem = true, FirstItem = false });
+                    MainVM.SelectedService.Phases[MainVM.SelectedService.Phases.Count - 1].LastItem = false;
+                    MainVM.SelectedService.Phases.Add(new Phase() { PhaseName = phaseItemNameTb.Text, PhaseDesc = phaseDescTb.Text, SequenceNo = MainVM.SelectedService.Phases.Count+1,LastItem = true, FirstItem = false });
                 }  
                 
             }

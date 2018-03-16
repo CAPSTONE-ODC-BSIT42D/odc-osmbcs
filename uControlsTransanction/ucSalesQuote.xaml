@@ -279,16 +279,11 @@
             <local:DocumentViewer x:Name="saleQuoteViewer" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,45" d:IsHidden="True"/>
 
         </Grid>
-        <StackPanel Margin="0" Height="45" FlowDirection="RightToLeft" VerticalAlignment="Bottom">
-            <Grid x:Name="newSalesQuoteBtns" HorizontalAlignment="Left" Margin="10" Visibility="Collapsed">
-                <Button x:Name="transRequestNext" Content="Next" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" Height="26" Click="transRequestNext_Click" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="0,0,104,0"/>
-                <Button x:Name="transRequestBack" Content="Back" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="84" Height="26" Click="transRequestBack_Click" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
-            </Grid>
-            <Grid x:Name="viewSalesQuoteBtns" Margin="10" HorizontalAlignment="Left">
-                <Button x:Name="transRequestBack1" Content="Back" VerticalAlignment="Bottom" Height="26" Click="transRequestBack_Click" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="233,0,0,0" HorizontalAlignment="Left" Width="84"/>
-                <Button x:Name="convertToInvoiceBtn" Content="Continue as Order" VerticalAlignment="Bottom" Height="26" Click="convertToInvoiceBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="0" HorizontalAlignment="Left" Width="139"/>
-                <Button x:Name="editSalesQuoteBtn" Content="Edit" VerticalAlignment="Bottom" Height="26" Click="editSalesQuoteBtn_Click" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="144,0,0,0" HorizontalAlignment="Left" Width="84"/>
-            </Grid>
+        <StackPanel Margin="0" Height="45" FlowDirection="RightToLeft" VerticalAlignment="Bottom" Orientation="Horizontal">
+            <Button x:Name="transRequestNext" Content="Next" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" Height="26" Click="transRequestNext_Click" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="10,10"/>
+            <Button x:Name="transRequestBack" Content="Back" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="84" Height="26" Click="transRequestBack_Click" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="10,10"/>
+            <Button x:Name="convertToInvoiceBtn" Content="Continue as Order" VerticalAlignment="Bottom" Height="26" Click="convertToInvoiceBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" HorizontalAlignment="Right" Width="139" Margin="10,10"/>
+            <Button x:Name="editSalesQuoteBtn" Content="Edit" VerticalAlignment="Bottom" Height="26" Click="editSalesQuoteBtn_Click" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="10,10" HorizontalAlignment="Right" Width="84"/>
         </StackPanel>
         <Grid x:Name="formGridBg" Margin="0" Background="#80000000" d:IsHidden="True">
             <Grid x:Name="additionalFeesFormGrid" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="380" d:IsHidden="True">

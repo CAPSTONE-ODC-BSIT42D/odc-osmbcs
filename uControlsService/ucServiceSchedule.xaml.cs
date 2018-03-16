@@ -83,12 +83,11 @@ namespace prototype2
             {
                 MainVM.SelectedServiceSchedule_ = new ServiceSchedule();
                 var obj = from ph in MainVM.Phases
-                          join pg in MainVM.PhasesGroup on ph.PhaseGroupID equals pg.PhaseGroupID
-                          where pg.ServiceID == MainVM.SelectedAvailedServices.ServiceID
+                          where ph.ServiceID == MainVM.SelectedAvailedServices.ServiceID
                           select ph;
                 foreach(Phase ph in obj)
                 {
-                    MainVM.SelectedServiceSchedule_.PhasesPerService.Add(new PhasesPerService() { PhaseID = ph.PhaseID, Status = "PENDING" });
+                    MainVM.SelectedServiceSchedule_.PhasesPerService.Add(new PhasesPerService() { PhaseID = ph.PhaseID, Status = "" });
                 }
             }
             

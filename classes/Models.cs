@@ -266,12 +266,12 @@ namespace prototype2
             set { SetProperty(ref sequenceNo, value); }
         }
 
-        protected int phaseGroupID;
-        public int PhaseGroupID
+        protected int serviceId;
+        public int ServiceID
         {
 
-            get { return phaseGroupID; }
-            set { SetProperty(ref phaseGroupID, value); }
+            get { return serviceId; }
+            set { SetProperty(ref serviceId, value); }
         }
 
         protected bool firstItem;
@@ -786,11 +786,11 @@ namespace prototype2
             set { SetProperty(ref servicePrice, value); }
         }
 
-        protected ObservableCollection<PhaseGroup> phaseGroups = new ObservableCollection<PhaseGroup>();
-        public ObservableCollection<PhaseGroup> PhaseGroups
+        protected ObservableCollection<Phase> phases = new ObservableCollection<Phase>();
+        public ObservableCollection<Phase> Phases
         {
-            get { return phaseGroups; }
-            set { SetProperty(ref phaseGroups, value); }
+            get { return phases; }
+            set { SetProperty(ref phases, value); }
         }
     }
 
