@@ -823,7 +823,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!companyAddress.Value &amp; "  "&amp; Fields!companyCity.Value</Value>
+                              <Value>=Fields!companyAddress.Value &amp; ",  "&amp; Fields!companyCity.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -841,6 +841,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -1486,13 +1487,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.26038in</Width>
+              <Width>0.29167in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.94118in</Width>
+              <Width>0.91661in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.27381in</Width>
+              <Width>1.26709in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.3693in</Width>
@@ -1940,7 +1941,7 @@
         <DataSetName>DataSetSalesQuote</DataSetName>
         <Top>1.72098in</Top>
         <Left>0.64708in</Left>
-        <Height>0.61458in</Height>
+        <Height>0.61457in</Height>
         <Width>5.83384in</Width>
         <ZIndex>28</ZIndex>
         <Style>
@@ -2088,13 +2089,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>3.50811in</Width>
+              <Width>2.84467in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.73147in</Width>
+              <Width>1.34151in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.59426in</Width>
+              <Width>1.64766in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
