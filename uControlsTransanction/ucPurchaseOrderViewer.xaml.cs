@@ -39,8 +39,8 @@ namespace prototype2
 
         private void DisplayReport()
         {
-          
-            ucReportViewer.Reset();
+
+            ucReportViewer.DataSources.Clear();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseOrder.rdlc");
             ucReportViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("PurchaseOrderTableTable", GetPurchase()));
             ucReportViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetPO", GetPurchaseItem()));

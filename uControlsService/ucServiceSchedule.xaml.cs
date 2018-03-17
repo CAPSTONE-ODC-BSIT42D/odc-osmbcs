@@ -71,9 +71,16 @@ namespace prototype2
                 DataTable fromDbTable = new DataTable();
                 dataAdapter.Fill(fromDb, "t");
                 fromDbTable = fromDb.Tables["t"];
+                
+
                 foreach (DataRow dr in fromDbTable.Rows)
                 {
-                    MainVM.SelectedServiceSchedule_.PhasesPerService.Add(new PhasesPerService() { ID = int.Parse(dr[0].ToString()), ServiceSchedID = int.Parse(dr[2].ToString()), PhaseID = int.Parse(dr[1].ToString()), Status = dr[3].ToString()});
+                    DateTime dateStarted = new DateTime() ;
+                    DateTime.TryParse(dr[3].ToString(),out dateStarted);
+                    DateTime dateEnded = new DateTime();
+                    DateTime.TryParse(dr[4].ToString(), out dateEnded);
+
+                    MainVM.SelectedServiceSchedule_.PhasesPerService.Add(new PhasesPerService() { ID = int.Parse(dr[0].ToString()), ServiceSchedID = int.Parse(dr[2].ToString()), PhaseID = int.Parse(dr[1].ToString()),DateStarted = dateStarted, DateEnded = dateEnded, Status = dr[3].ToString()});
                 }
                 startDate.SelectedDate = MainVM.SelectedServiceSchedule_.dateStarted_;
                 endDate.SelectedDate = MainVM.SelectedServiceSchedule_.dateEnded_;
@@ -89,6 +96,7 @@ namespace prototype2
                 {
                     MainVM.SelectedServiceSchedule_.PhasesPerService.Add(new PhasesPerService() { PhaseID = ph.PhaseID, Status = "" });
                 }
+                
             }
             
 
@@ -308,6 +316,11 @@ namespace prototype2
 
                 
             }
+        }
+
+        private void deletePhaseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.SelectedServiceSchedule_.PhasesPerService.Remove(MainVM.SelectedPhasesPerService);
         }
     }
 }

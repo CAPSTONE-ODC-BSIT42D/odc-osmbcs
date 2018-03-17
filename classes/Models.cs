@@ -1768,7 +1768,27 @@ namespace prototype2
             get { return status; }
             set { SetProperty(ref status, value); }
         }
-        
+
+        protected DateTime dateStarted;
+        public DateTime DateStarted
+        {
+            get { return dateStarted; }
+            set { SetProperty(ref dateStarted, value); }
+        }
+
+        protected DateTime dateEnded;
+        public DateTime DateEnded
+        {
+            get { return dateEnded; }
+            set { SetProperty(ref dateEnded, value); }
+        }
+
+        protected bool isNew;
+        public bool IsNew
+        {
+            get { return isNew; }
+            set { SetProperty(ref isNew, value); }
+        }
     }
     #endregion
 }
