@@ -316,7 +316,7 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columnserviceName;
             
-            private global::System.Data.DataColumn columnTOTAL_SERVICE;
+            private global::System.Data.DataColumn columnExpr1;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -361,9 +361,9 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn TOTAL_SERVICEColumn {
+            public global::System.Data.DataColumn Expr1Column {
                 get {
-                    return this.columnTOTAL_SERVICE;
+                    return this.columnExpr1;
                 }
             }
             
@@ -404,11 +404,11 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public services_tRow Addservices_tRow(string serviceName, decimal TOTAL_SERVICE) {
+            public services_tRow Addservices_tRow(string serviceName, decimal Expr1) {
                 services_tRow rowservices_tRow = ((services_tRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         serviceName,
-                        TOTAL_SERVICE};
+                        Expr1};
                 rowservices_tRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowservices_tRow);
                 return rowservices_tRow;
@@ -432,7 +432,7 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             internal void InitVars() {
                 this.columnserviceName = base.Columns["serviceName"];
-                this.columnTOTAL_SERVICE = base.Columns["TOTAL_SERVICE"];
+                this.columnExpr1 = base.Columns["Expr1"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -440,8 +440,8 @@ namespace prototype2 {
             private void InitClass() {
                 this.columnserviceName = new global::System.Data.DataColumn("serviceName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnserviceName);
-                this.columnTOTAL_SERVICE = new global::System.Data.DataColumn("TOTAL_SERVICE", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTOTAL_SERVICE);
+                this.columnExpr1 = new global::System.Data.DataColumn("Expr1", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnExpr1);
                 this.columnserviceName.AllowDBNull = false;
                 this.columnserviceName.MaxLength = 50;
             }
@@ -579,7 +579,7 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columnitemName;
             
-            private global::System.Data.DataColumn columnTOTAL_ITEM;
+            private global::System.Data.DataColumn columnExpr1;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -624,9 +624,9 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn TOTAL_ITEMColumn {
+            public global::System.Data.DataColumn Expr1Column {
                 get {
-                    return this.columnTOTAL_ITEM;
+                    return this.columnExpr1;
                 }
             }
             
@@ -667,11 +667,11 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public SalesItemRow AddSalesItemRow(string itemName, decimal TOTAL_ITEM) {
+            public SalesItemRow AddSalesItemRow(string itemName, decimal Expr1) {
                 SalesItemRow rowSalesItemRow = ((SalesItemRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         itemName,
-                        TOTAL_ITEM};
+                        Expr1};
                 rowSalesItemRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSalesItemRow);
                 return rowSalesItemRow;
@@ -695,7 +695,7 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             internal void InitVars() {
                 this.columnitemName = base.Columns["itemName"];
-                this.columnTOTAL_ITEM = base.Columns["TOTAL_ITEM"];
+                this.columnExpr1 = base.Columns["Expr1"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -703,8 +703,8 @@ namespace prototype2 {
             private void InitClass() {
                 this.columnitemName = new global::System.Data.DataColumn("itemName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnitemName);
-                this.columnTOTAL_ITEM = new global::System.Data.DataColumn("TOTAL_ITEM", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTOTAL_ITEM);
+                this.columnExpr1 = new global::System.Data.DataColumn("Expr1", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnExpr1);
                 this.columnitemName.AllowDBNull = false;
                 this.columnitemName.MaxLength = 255;
             }
@@ -860,30 +860,30 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public decimal TOTAL_SERVICE {
+            public decimal Expr1 {
                 get {
                     try {
-                        return ((decimal)(this[this.tableservices_t.TOTAL_SERVICEColumn]));
+                        return ((decimal)(this[this.tableservices_t.Expr1Column]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'TOTAL_SERVICE\' in table \'services_t\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Expr1\' in table \'services_t\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableservices_t.TOTAL_SERVICEColumn] = value;
+                    this[this.tableservices_t.Expr1Column] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsTOTAL_SERVICENull() {
-                return this.IsNull(this.tableservices_t.TOTAL_SERVICEColumn);
+            public bool IsExpr1Null() {
+                return this.IsNull(this.tableservices_t.Expr1Column);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetTOTAL_SERVICENull() {
-                this[this.tableservices_t.TOTAL_SERVICEColumn] = global::System.Convert.DBNull;
+            public void SetExpr1Null() {
+                this[this.tableservices_t.Expr1Column] = global::System.Convert.DBNull;
             }
         }
         
@@ -914,30 +914,30 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public decimal TOTAL_ITEM {
+            public decimal Expr1 {
                 get {
                     try {
-                        return ((decimal)(this[this.tableSalesItem.TOTAL_ITEMColumn]));
+                        return ((decimal)(this[this.tableSalesItem.Expr1Column]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'TOTAL_ITEM\' in table \'SalesItem\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Expr1\' in table \'SalesItem\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableSalesItem.TOTAL_ITEMColumn] = value;
+                    this[this.tableSalesItem.Expr1Column] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsTOTAL_ITEMNull() {
-                return this.IsNull(this.tableSalesItem.TOTAL_ITEMColumn);
+            public bool IsExpr1Null() {
+                return this.IsNull(this.tableSalesItem.Expr1Column);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetTOTAL_ITEMNull() {
-                this[this.tableSalesItem.TOTAL_ITEMColumn] = global::System.Convert.DBNull;
+            public void SetExpr1Null() {
+                this[this.tableSalesItem.Expr1Column] = global::System.Convert.DBNull;
             }
         }
         
@@ -1135,7 +1135,7 @@ namespace prototype2.DatasetReportSalesTableAdapters {
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "services_t";
             tableMapping.ColumnMappings.Add("serviceName", "serviceName");
-            tableMapping.ColumnMappings.Add("TOTAL_SERVICE", "TOTAL_SERVICE");
+            tableMapping.ColumnMappings.Add("Expr1", "Expr1");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -1152,35 +1152,20 @@ namespace prototype2.DatasetReportSalesTableAdapters {
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[6];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        s.serviceName, SUM(sa.totalCost + IFNULL(ft.feeValue, 0)) AS TOTAL_SERVICE
-FROM            services_t s INNER JOIN
-                         services_availed_t sa ON s.serviceID = sa.serviceID LEFT OUTER JOIN
-                         fees_per_transaction_t ft ON ft.servicesAvailedID = sa.id INNER JOIN
-                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
-                         sales_invoice_t si ON si.sqNoChar = sq.sqNoChar
-GROUP BY s.serviceName";
+            this._commandCollection[0].CommandText = "SELECT        serviceName, SUM(total_discounted_service) AS Expr1\r\nFROM          " +
+                "  sales_report_service_view\r\nGROUP BY serviceName";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = @"SELECT        s.serviceName, SUM(sa.totalCost + IFNULL(ft.feeValue, 0)) AS TOTAL_SERVICE
-FROM            services_t s INNER JOIN
-                         services_availed_t sa ON s.serviceID = sa.serviceID LEFT OUTER JOIN
-                         fees_per_transaction_t ft ON ft.servicesAvailedID = sa.id INNER JOIN
-                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
-                         sales_invoice_t si ON si.sqNoChar = sq.sqNoChar
-WHERE        (DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE())
-GROUP BY s.serviceName";
+            this._commandCollection[1].CommandText = "SELECT        serviceName, SUM(total_discounted_service) AS Expr1\r\nFROM          " +
+                "  sales_report_service_view\r\nWHERE        (DATE_FORMAT(_date, \'%Y-%m-%d\') = CURD" +
+                "ATE())\r\nGROUP BY serviceName";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = @"SELECT        s.serviceName, SUM(sa.totalCost + IFNULL(ft.feeValue, 0)) AS TOTAL_SERVICE
-FROM            services_t s INNER JOIN
-                         services_availed_t sa ON s.serviceID = sa.serviceID LEFT OUTER JOIN
-                         fees_per_transaction_t ft ON ft.servicesAvailedID = sa.id INNER JOIN
-                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
-                         sales_invoice_t si ON si.sqNoChar = sq.sqNoChar
-WHERE        (MONTHNAME(si.dateOfIssue) = @A)
-GROUP BY s.serviceName";
+            this._commandCollection[2].CommandText = "SELECT        serviceName, SUM(total_discounted_service) AS Expr1\r\nFROM          " +
+                "  sales_report_service_view\r\nWHERE        (MONTHNAME(_date) = @A)\r\nGROUP BY serv" +
+                "iceName";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@A";
@@ -1190,39 +1175,29 @@ GROUP BY s.serviceName";
             this._commandCollection[2].Parameters.Add(param);
             this._commandCollection[3] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = @"SELECT        s.serviceName, SUM(sa.totalCost + IFNULL(ft.feeValue, 0)) AS TOTAL_SERVICE
-FROM            services_t s INNER JOIN
-                         services_availed_t sa ON s.serviceID = sa.serviceID LEFT OUTER JOIN
-                         fees_per_transaction_t ft ON ft.servicesAvailedID = sa.id INNER JOIN
-                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
-                         sales_invoice_t si ON si.sqNoChar = sq.sqNoChar
-WHERE        (si.dateOfIssue BETWEEN @R AND @T)
-GROUP BY s.serviceName";
+            this._commandCollection[3].CommandText = "SELECT        serviceName, SUM(total_discounted_service) AS Expr1\r\nFROM          " +
+                "  sales_report_service_view\r\nWHERE        (_date BETWEEN @R AND @T)\r\nGROUP BY se" +
+                "rviceName";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@R";
             param.DbType = global::System.Data.DbType.DateTime;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Timestamp;
             param.IsNullable = true;
-            param.SourceColumn = "dateOfIssue";
+            param.SourceColumn = "_date";
             this._commandCollection[3].Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@T";
             param.DbType = global::System.Data.DbType.DateTime;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Timestamp;
             param.IsNullable = true;
-            param.SourceColumn = "dateOfIssue";
+            param.SourceColumn = "_date";
             this._commandCollection[3].Parameters.Add(param);
             this._commandCollection[4] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[4].Connection = this.Connection;
-            this._commandCollection[4].CommandText = @"SELECT        s.serviceName, SUM(sa.totalCost + IFNULL(ft.feeValue, 0)) AS TOTAL_SERVICE
-FROM            services_t s INNER JOIN
-                         services_availed_t sa ON s.serviceID = sa.serviceID LEFT OUTER JOIN
-                         fees_per_transaction_t ft ON ft.servicesAvailedID = sa.id INNER JOIN
-                         sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN
-                         sales_invoice_t si ON si.sqNoChar = sq.sqNoChar
-WHERE        (WEEK(si.dateOfIssue) = @N)
-GROUP BY s.serviceName";
+            this._commandCollection[4].CommandText = "SELECT        serviceName, SUM(total_discounted_service) AS Expr1\r\nFROM          " +
+                "  sales_report_service_view\r\nWHERE        (WEEK(_date) = @N)\r\nGROUP BY serviceNa" +
+                "me";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@N";
@@ -1529,7 +1504,7 @@ GROUP BY s.serviceName";
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "SalesItem";
             tableMapping.ColumnMappings.Add("itemName", "itemName");
-            tableMapping.ColumnMappings.Add("TOTAL_ITEM", "TOTAL_ITEM");
+            tableMapping.ColumnMappings.Add("Expr1", "Expr1");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -1546,24 +1521,13 @@ GROUP BY s.serviceName";
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[6];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        i.itemName, TRUNCATE(SUM(ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))), 2) AS TOTAL_ITEM
-FROM            sales_quote_t sq INNER JOIN
-                         items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN
-                         item_t i ON ia.itemID = i.ID INNER JOIN
-                         markup_hist_t mh ON i.ID = mh.itemID INNER JOIN
-                         sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
-GROUP BY i.itemName";
+            this._commandCollection[0].CommandText = "SELECT        itemName, SUM(TOTAL_DISCOUNTED_ITEM) AS Expr1\r\nFROM            sale" +
+                "s_report_item_view\r\nGROUP BY itemName";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = @"SELECT        i.itemName, TRUNCATE(SUM(ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))), 2) AS TOTAL_ITEM
-FROM            sales_quote_t sq INNER JOIN
-                         items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN
-                         item_t i ON ia.itemID = i.ID INNER JOIN
-                         markup_hist_t mh ON i.ID = mh.itemID INNER JOIN
-                         sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
-WHERE        (MONTHNAME(si.dateOfIssue) = @A)
-GROUP BY i.itemName";
+            this._commandCollection[1].CommandText = "SELECT        itemName, SUM(TOTAL_DISCOUNTED_ITEM) AS Expr1\r\nFROM            sale" +
+                "s_report_item_view\r\nWHERE        (MONTHNAME(_date) = @A)\r\nGROUP BY itemName";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@A";
@@ -1573,28 +1537,22 @@ GROUP BY i.itemName";
             this._commandCollection[1].Parameters.Add(param);
             this._commandCollection[2] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = @"SELECT        i.itemName, TRUNCATE(SUM(ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))), 2) AS TOTAL_ITEM
-FROM            sales_quote_t sq INNER JOIN
-                         items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN
-                         item_t i ON ia.itemID = i.ID INNER JOIN
-                         markup_hist_t mh ON i.ID = mh.itemID INNER JOIN
-                         sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
-WHERE        (si.dateOfIssue BETWEEN @R AND @T)
-GROUP BY i.itemName";
+            this._commandCollection[2].CommandText = "SELECT        itemName, SUM(TOTAL_DISCOUNTED_ITEM) AS Expr1\r\nFROM            sale" +
+                "s_report_item_view\r\nWHERE        (_date BETWEEN @R AND @T)\r\nGROUP BY itemName";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@R";
             param.DbType = global::System.Data.DbType.DateTime;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Timestamp;
             param.IsNullable = true;
-            param.SourceColumn = "dateOfIssue";
+            param.SourceColumn = "_date";
             this._commandCollection[2].Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@T";
             param.DbType = global::System.Data.DbType.DateTime;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Timestamp;
             param.IsNullable = true;
-            param.SourceColumn = "dateOfIssue";
+            param.SourceColumn = "_date";
             this._commandCollection[2].Parameters.Add(param);
             this._commandCollection[3] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[3].Connection = this.Connection;
@@ -1609,14 +1567,8 @@ GROUP BY i.itemName";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[4] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[4].Connection = this.Connection;
-            this._commandCollection[4].CommandText = @"SELECT       i.itemName ,TRUNCATE(SUM(ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))),2) AS TOTAL_ITEM
-			FROM sales_quote_t sq 
-			INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar 
-			INNER JOIN  item_t i ON ia.itemID = i.ID INNER JOIN  markup_hist_t mh ON i.ID = mh.itemID 
-			INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
-  
-WHERE        (WEEK(si.dateOfIssue) = @e)
-GROUP BY i.itemName";
+            this._commandCollection[4].CommandText = "SELECT        itemName, SUM(TOTAL_DISCOUNTED_ITEM) AS Expr1\r\nFROM            sale" +
+                "s_report_item_view\r\nWHERE        (WEEK(_date) = @e)\r\nGROUP BY itemName";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@e";
@@ -1626,14 +1578,8 @@ GROUP BY i.itemName";
             this._commandCollection[4].Parameters.Add(param);
             this._commandCollection[5] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[5].Connection = this.Connection;
-            this._commandCollection[5].CommandText = @"SELECT       i.itemName ,TRUNCATE(SUM(ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))),2) AS TOTAL_ITEM
-			FROM sales_quote_t sq 
-			INNER JOIN items_availed_t ia ON sq.sqNoChar = ia.sqNoChar 
-			INNER JOIN  item_t i ON ia.itemID = i.ID INNER JOIN  markup_hist_t mh ON i.ID = mh.itemID 
-			INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
-     
-WHERE        (YEAR(si.dateOfIssue) = @B)
-GROUP BY i.itemName";
+            this._commandCollection[5].CommandText = "SELECT        itemName, SUM(TOTAL_DISCOUNTED_ITEM) AS Expr1\r\nFROM            sale" +
+                "s_report_item_view\r\nWHERE        (YEAR(_date) = @B)\r\nGROUP BY itemName";
             this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@B";

@@ -1942,7 +1942,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!UNIT_PRICE.Value</Value>
-                              <Style />
+                              <Style>
+                                <Format>'₱' #,0.00;('₱' #,0.00)</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -1961,6 +1963,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -1976,7 +1979,7 @@
                             <TextRun>
                               <Value>=Fields!total_item.Value</Value>
                               <Style>
-                                <Format>'₱'#,0.00;('₱'#,0.00)</Format>
+                                <Format>'₱' #,0.00;('₱' #,0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1999,6 +2002,7 @@
                         <rd:FormatSymbolCulture>fil-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>

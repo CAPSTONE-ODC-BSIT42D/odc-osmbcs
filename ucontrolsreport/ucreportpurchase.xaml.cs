@@ -54,7 +54,7 @@ namespace prototype2
             cmd.CommandType = CommandType.Text;
           
           
-            cmd.CommandText = "    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS  Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar   ";
+            cmd.CommandText = " SELECT        itemName, SUM(Total) AS Expr1 FROM po_report_view GROUP BY itemName   ";
 
             DataSetReportPurchase.PurchaseTableDataTable dSPurchase = new DataSetReportPurchase.PurchaseTableDataTable();
 
@@ -65,66 +65,8 @@ namespace prototype2
 
 
         }
-        private void DisplayReportSalesDay()
-        {
 
-            
-            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
-            ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("PurchaseTable", GetPurchaseDay()));
-            ReportPurchase.LoadReport(rNames);
-            ReportPurchase.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
-            ReportPurchase.RefreshReport();
-        }
-
-        private DataTable GetPurchaseDay()
-        {
-            var dbCon = DBConnection.Instance();
-            dbCon.IsConnect();
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = dbCon.Connection;
-            cmd.CommandType = CommandType.Text;
-
-            cmd.CommandText = "    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS  Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar WHERE        (CURDATE() = po.orderDate)   ";
-
-            DataSetReportPurchase.PurchaseTableDataTable dSPurchase = new DataSetReportPurchase.PurchaseTableDataTable();
-
-            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
-            mySqlDa.Fill(dSPurchase);
-
-            return dSPurchase;
-
-
-
-        }
-        private void DisplayReportPurchaseWeek()
-        {
-            
-            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
-            ReportPurchase.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("PurchaseTable", GetPurchaseWeek()));
-            ReportPurchase.LoadReport(rNames);
-            ReportPurchase.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
-            ReportPurchase.RefreshReport();
-        }
-
-        private DataTable GetPurchaseWeek()
-        {
-            var dbCon = DBConnection.Instance();
-            dbCon.IsConnect();
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = dbCon.Connection;
-            cmd.CommandType = CommandType.Text;
-        
-            cmd.CommandText = "    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS  Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar WHERE(WEEK(po.orderDate) = '" + SalesWeek.SelectedDate.Value.ToString("yyyy-MM-dd") + "')   ";
-
-            DataSetReportPurchase.PurchaseTableDataTable dSPurchase = new DataSetReportPurchase.PurchaseTableDataTable();
-
-            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
-            mySqlDa.Fill(dSPurchase);
-
-            return dSPurchase;
-
-
-        }
+      
         private void DisplayReportPurchaseYear()
         {
    
@@ -144,7 +86,7 @@ namespace prototype2
             cmd.CommandType = CommandType.Text;
             string year = ((ComboBoxItem)ComboBoxYearSales.SelectedItem).Content.ToString();//same problem
         
-            cmd.CommandText = "    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS  Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar  WHERE(YEAR(po.orderDate) = '" + year + "')    ";
+            cmd.CommandText = "   SELECT        itemName, SUM(Total) AS Expr1 FROM po_report_view  WHERE(YEAR(_date) = '" + year + "')  GROUP BY itemName  ";
 
             DataSetReportPurchase.PurchaseTableDataTable dSPurchase = new DataSetReportPurchase.PurchaseTableDataTable();
 
@@ -180,7 +122,7 @@ namespace prototype2
             cmd.CommandType = CommandType.Text;
        
       
-            cmd.CommandText = "    SELECT po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5 FROM item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar WHERE (MONTHNAME(po.orderDate) = '"+month +"') AND (YEAR(po.orderDate) = YEAR(CURDATE()))";
+            cmd.CommandText = "     SELECT        itemName, SUM(Total) AS Expr1 FROM po_report_view WHERE (MONTHNAME(_date) = '" + month + "') AND (YEAR(_date) = YEAR(CURDATE())) GROUP BY itemName ";
 
             DataSetReportPurchase.PurchaseTableDataTable dSPurchase = new DataSetReportPurchase.PurchaseTableDataTable();
 
@@ -209,7 +151,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS  Expr4, YEAR(po.orderDate) AS Expr5 FROM            item_t i INNER JOIN po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN purchase_order_t po ON po.PONumChar = pi.poNumChar WHERE(po.orderDate BETWEEN '" + SalesDateStart.SelectedDate.Value.ToString("yyyy-MM-dd") + "' AND '"+ SalesDateEnd.SelectedDate.Value.ToString("yyyy-MM-dd") + "')    ";
+            cmd.CommandText = "  SELECT        itemName, SUM(Total) AS Expr1 FROM po_report_view WHERE(_date BETWEEN '" + SalesDateStart.SelectedDate.Value.ToString("yyyy-MM-dd") + "' AND '"+ SalesDateEnd.SelectedDate.Value.ToString("yyyy-MM-dd") + "')  GROUP BY itemName  ";
 
             DataSetReportPurchase.PurchaseTableDataTable dSPurchase = new DataSetReportPurchase.PurchaseTableDataTable();
 
@@ -241,28 +183,6 @@ namespace prototype2
             if (SELECTEDINDEX.Equals(0))
             {
                 ReportPurchase.Reset();
-
-
-            }
-            if (SELECTEDINDEX.Equals(1))
-
-            {
-               ;
-                ComboBoxYearSales.Visibility = Visibility.Hidden;
-                ComboBoxMonthSales.Visibility = Visibility.Hidden;
-                MonthSales.Visibility = Visibility.Hidden;
-                YearSales.Visibility = Visibility.Hidden;
-                SalesDateStart.Visibility = Visibility.Hidden;
-                SalesDateEnd.Visibility = Visibility.Hidden;
-                labelstart.Visibility = Visibility.Hidden;
-                labelend.Visibility = Visibility.Hidden;
-                SalesWeek.Visibility = Visibility.Visible;
-                labelweek.Visibility = Visibility.Visible;
-
-            }
-            if (SELECTEDINDEX.Equals(2))
-            {
-                ReportPurchase.Reset();
                 ComboBoxYearSales.Visibility = Visibility.Hidden;
                 ComboBoxMonthSales.Visibility = Visibility.Visible;
                 MonthSales.Visibility = Visibility.Visible;
@@ -271,11 +191,15 @@ namespace prototype2
                 SalesDateEnd.Visibility = Visibility.Hidden;
                 labelstart.Visibility = Visibility.Hidden;
                 labelend.Visibility = Visibility.Hidden;
-                SalesWeek.Visibility = Visibility.Hidden;
+
                 labelweek.Visibility = Visibility.Hidden;
+
+
             }
-            if (SELECTEDINDEX.Equals(3))
+            if (SELECTEDINDEX.Equals(1))
+
             {
+
                 ReportPurchase.Reset();
                 ComboBoxYearSales.Visibility = Visibility.Visible;
                 ComboBoxMonthSales.Visibility = Visibility.Hidden;
@@ -285,24 +209,32 @@ namespace prototype2
                 SalesDateEnd.Visibility = Visibility.Hidden;
                 labelstart.Visibility = Visibility.Hidden;
                 labelend.Visibility = Visibility.Hidden;
-                SalesWeek.Visibility = Visibility.Hidden;
-                labelweek.Visibility = Visibility.Hidden;
 
+                labelweek.Visibility = Visibility.Hidden;
             }
-            if (SELECTEDINDEX.Equals(4))
+            if (SELECTEDINDEX.Equals(2))
             {
                 ReportPurchase.Reset();
                 ComboBoxYearSales.Visibility = Visibility.Hidden;
                 ComboBoxMonthSales.Visibility = Visibility.Hidden;
                 MonthSales.Visibility = Visibility.Hidden;
                 YearSales.Visibility = Visibility.Hidden;
-              
+
                 SalesDateStart.Visibility = Visibility.Visible;
                 SalesDateEnd.Visibility = Visibility.Visible;
                 labelstart.Visibility = Visibility.Visible;
                 labelend.Visibility = Visibility.Visible;
-                SalesWeek.Visibility = Visibility.Hidden;
+
                 labelweek.Visibility = Visibility.Hidden;
+            }
+            if (SELECTEDINDEX.Equals(3))
+            {
+            
+
+            }
+            if (SELECTEDINDEX.Equals(4))
+            {
+             
 
             }
         }
@@ -327,7 +259,7 @@ namespace prototype2
 
         private void DatePickerWeekSales_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            DisplayReportPurchaseWeek();
+          
         }
 
         private void ComboBoxMonthSales_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
@@ -340,39 +272,8 @@ namespace prototype2
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Object SELECTEDINDEX = ComboBoxSalesFilter.SelectedIndex;
+       
             if (SELECTEDINDEX.Equals(0))
-            {
-                DisplayReportSalesDay();
-                ComboBoxYearSales.Visibility = Visibility.Hidden;
-                ComboBoxMonthSales.Visibility = Visibility.Hidden;
-                MonthSales.Visibility = Visibility.Hidden;
-                YearSales.Visibility = Visibility.Hidden;
-                SalesDateStart.Visibility = Visibility.Hidden;
-                SalesDateEnd.Visibility = Visibility.Hidden;
-                labelstart.Visibility = Visibility.Hidden;
-                labelend.Visibility = Visibility.Hidden;
-                SalesWeek.Visibility = Visibility.Hidden;
-                GoButtonPurchase.Visibility = Visibility.Hidden;
-                labelweek.Visibility = Visibility.Hidden;
-
-            }
-            if (SELECTEDINDEX.Equals(1))
-
-            {
-                ReportPurchase.Reset();
-                ComboBoxYearSales.Visibility = Visibility.Hidden;
-                ComboBoxMonthSales.Visibility = Visibility.Hidden;
-                MonthSales.Visibility = Visibility.Hidden;
-                YearSales.Visibility = Visibility.Hidden;
-                SalesDateStart.Visibility = Visibility.Hidden;
-                SalesDateEnd.Visibility = Visibility.Hidden;
-                labelstart.Visibility = Visibility.Hidden;
-                labelend.Visibility = Visibility.Hidden;
-                SalesWeek.Visibility = Visibility.Visible;
-                labelweek.Visibility = Visibility.Visible;
-
-            }
-            if (SELECTEDINDEX.Equals(2))
             {
                 ReportPurchase.Reset();
                 ComboBoxYearSales.Visibility = Visibility.Hidden;
@@ -383,12 +284,15 @@ namespace prototype2
                 SalesDateEnd.Visibility = Visibility.Hidden;
                 labelstart.Visibility = Visibility.Hidden;
                 labelend.Visibility = Visibility.Hidden;
-                SalesWeek.Visibility = Visibility.Hidden;
+
                 labelweek.Visibility = Visibility.Hidden;
-                GoButtonPurchase.Visibility = Visibility.Hidden;
+
+
             }
-            if (SELECTEDINDEX.Equals(3))
+            if (SELECTEDINDEX.Equals(1))
+
             {
+
                 ReportPurchase.Reset();
                 ComboBoxYearSales.Visibility = Visibility.Visible;
                 ComboBoxMonthSales.Visibility = Visibility.Hidden;
@@ -398,11 +302,10 @@ namespace prototype2
                 SalesDateEnd.Visibility = Visibility.Hidden;
                 labelstart.Visibility = Visibility.Hidden;
                 labelend.Visibility = Visibility.Hidden;
-                SalesWeek.Visibility = Visibility.Hidden;
+
                 labelweek.Visibility = Visibility.Hidden;
-                GoButtonPurchase.Visibility = Visibility.Hidden;
             }
-            if (SELECTEDINDEX.Equals(4))
+            if (SELECTEDINDEX.Equals(2))
             {
                 ReportPurchase.Reset();
                 ComboBoxYearSales.Visibility = Visibility.Hidden;
@@ -414,9 +317,17 @@ namespace prototype2
                 SalesDateEnd.Visibility = Visibility.Visible;
                 labelstart.Visibility = Visibility.Visible;
                 labelend.Visibility = Visibility.Visible;
-                SalesWeek.Visibility = Visibility.Hidden;
+
                 labelweek.Visibility = Visibility.Hidden;
-                GoButtonPurchase.Visibility = Visibility.Visible;
+            }
+            if (SELECTEDINDEX.Equals(3))
+            {
+                
+               
+            }
+            if (SELECTEDINDEX.Equals(4))
+            {
+            
 
             }
         }

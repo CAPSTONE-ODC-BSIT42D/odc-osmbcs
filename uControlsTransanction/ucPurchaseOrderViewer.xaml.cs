@@ -43,7 +43,7 @@ namespace prototype2
             ucReportViewer.DataSources.Clear();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseOrder.rdlc");
             ucReportViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("PurchaseOrderTableTable", GetPurchase()));
-            ucReportViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetPO", GetPurchaseItem()));
+            ucReportViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetPo", GetPurchaseItem()));
 
             ucReportViewer.LoadReport(rNames);
             ucReportViewer.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
