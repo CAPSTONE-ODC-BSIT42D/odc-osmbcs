@@ -274,6 +274,10 @@ namespace prototype2
             {
                 if (MainVM.RequestedItems.Count != 0)
                 {
+                    if((from ri in MainVM.RequestedItems where ri.itemType == 1 select ri).Count() > 0)
+                        surveyReportGrid.Visibility = Visibility.Visible;
+                    else
+                        surveyReportGrid.Visibility = Visibility.Collapsed;
                     foreach (UIElement obj in transQuoatationGridForm.Children)
                     {
                         if (transQuoatationGridForm.Children.IndexOf(obj) == 1)
@@ -575,44 +579,47 @@ namespace prototype2
             if (IsLoaded && IsVisible)
                 computePrice();
         }
+
         string filename;
-        byte[] data = null;
+        long FileSize;
+        byte[] rawData;
+        FileStream fs;
         private void uploadBtn_Click(object sender, RoutedEventArgs e)
         {
 
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             // Set filter for file extension and default file extension 
             dlg.DefaultExt = ".docx";
-            dlg.Filter = "Word Files (*.doc)|*.docx";
-
-
-            // Display OpenFileDialog by calling ShowDialog method 
-            Nullable<bool> result = dlg.ShowDialog();
-
+            dlg.Filter = "Word Files(*.docx)| *.docx|Word Files 2 (*.doc)|*.doc";
 
             // Get the selected file name and display in a TextBox 
-            if (result == true)
+            bool isLarge = true;
+            while(isLarge)
             {
-                // Open document 
+                dlg.ShowDialog();
                 filename = dlg.FileName;
+                fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+                FileSize = fs.Length;
+
+                if (((int)fs.Length) >= fs.Length)
+                {
+                    isLarge = false;
+                }
             }
 
             
 
             //Use FileInfo object to get file size.
             FileInfo fInfo = new FileInfo(filename);
-            long numBytes = fInfo.Length;
 
             //Open FileStream to read file
-            FileStream fStream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            
+            rawData = new byte[FileSize];
 
-            //Use BinaryReader to read file stream into byte array.
-            BinaryReader br = new BinaryReader(fStream);
+            fs.Read(rawData, 0, (int)FileSize);
 
-            //When you use BinaryReader, you need to supply number of bytes to read from file.
-            //In this case we want to read entire file. So supplying total number of bytes.
-            data = br.ReadBytes((int)numBytes);
-
+            fs.Close();
+                
 
         }
 
@@ -735,6 +742,7 @@ namespace prototype2
                 }
                 else if (item.itemType == 1 && MainVM.AvailedServicesList.Count != 0)
                 {
+                    
                     MainVM.SelectedAvailedServices = MainVM.AvailedServicesList.Where(x => x.AvailedServiceID.Equals(item.availedServiceID)).FirstOrDefault();
                     decimal totalFee = 0;
                     if (MainVM.SelectedAvailedServices != null)
@@ -886,7 +894,27 @@ namespace prototype2
             {
                 if (MainVM.isNewTrans)
                 {
-                    string query = "INSERT INTO `odc_db`.`sales_quote_t` " + "(`sqNoChar`,`custID`,`quoteSubject`,`priceNote`,`deliveryDate`,`estDelivery`,`validityDays`,`validityDate`,`otherTerms`,`VAT`,`vatIsExcluded`,`paymentIsLanded`,`paymentCurrency`,`status`,`termsDays`,`termsDP`,`discountPercent`,surveyReportDoc, additionalNote)" +
+                    using (MySqlConnection conn = dbCon.Connection)
+                    {
+                        conn.Open();
+                        MySqlCommand cmd = new MySqlCommand();
+                        cmd.Connection = conn;
+                        cmd.CommandType = CommandType.Text;
+
+                        cmd.CommandText = "INSERT INTO files_t VALUES(NULL, @FileName, @FileSize, @File)";
+                        cmd.Parameters.AddWithValue("@FileName", MainVM.SelectedSalesQuote.sqNoChar_ + "-SURVEYREPORT");
+
+                        cmd.Parameters.AddWithValue("@FileSize", FileSize);
+
+                        cmd.Parameters.AddWithValue("@File", rawData);
+
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+                    }
+                    string query = "SELECT LAST_INSERT_ID();";
+                    string fileId = dbCon.selectScalar(query, dbCon.Connection).ToString();
+
+                    query = "INSERT INTO `odc_db`.`sales_quote_t` " + "(`sqNoChar`,`custID`,`quoteSubject`,`priceNote`,`deliveryDate`,`estDelivery`,`validityDays`,`validityDate`,`otherTerms`,`VAT`,`vatIsExcluded`,`paymentIsLanded`,`paymentCurrency`,`status`,`termsDays`,`termsDP`,`discountPercent`,`fileID`, additionalNote)" +
                     " VALUES " +
                     "('" + MainVM.SelectedSalesQuote.sqNoChar_ + "','" +
                     MainVM.SelectedSalesQuote.custID_ + "','" +
@@ -905,7 +933,7 @@ namespace prototype2
                     MainVM.SelectedSalesQuote.termsDays_ + "','" +
                     MainVM.SelectedSalesQuote.termsDP_ + "','" +
                     MainVM.SelectedSalesQuote.discountPercent_ + "','" +
-                    data + "','" +
+                    fileId + "','" +
                     MainVM.SelectedSalesQuote.additionalTerms_ + "'" +
                     "); ";
                     if (dbCon.insertQuery(query, dbCon.Connection))
