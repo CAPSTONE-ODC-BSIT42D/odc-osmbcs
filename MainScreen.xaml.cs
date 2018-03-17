@@ -1842,6 +1842,7 @@ namespace prototype2
 
             //}
         }
+        #region Queries
 
         private void QueiresConBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -1858,7 +1859,7 @@ namespace prototype2
             }
             foreach (UIElement obj in queriesGrid.Children)
             {
-                if (queriesGrid.Children.IndexOf(obj) ==0)
+                if (queriesGrid.Children.IndexOf(obj) == 0)
                 {
                     headerLbl.Content = "Queires - Frequent Contractor";
                     obj.Visibility = Visibility.Visible;
@@ -1988,7 +1989,7 @@ namespace prototype2
             }
             foreach (UIElement obj in queriesGrid.Children)
             {
-                if (queriesGrid.Children.IndexOf(obj) ==3)
+                if (queriesGrid.Children.IndexOf(obj) == 3)
                 {
                     headerLbl.Content = "Queires - Top Supplier";
                     obj.Visibility = Visibility.Visible;
@@ -1997,6 +1998,7 @@ namespace prototype2
                     obj.Visibility = Visibility.Collapsed;
             }
             closeAllOtherGridForm();
-        }
+        } 
+        #endregion
     }
 }

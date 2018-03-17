@@ -107,7 +107,6 @@ namespace prototype2
                 {
                     if (MainVM.SelectedSalesQuote != null)
                     {
-                        
                         downloadBtn.IsEnabled = true;
                         foreach (UIElement obj in transQuoatationGridForm.Children)
                         {
