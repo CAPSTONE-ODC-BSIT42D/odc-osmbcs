@@ -29,8 +29,8 @@ namespace prototype2.uControlsMaintenance
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            this.ucAddPhase.SaveCloseButtonClicked += addPhaseSaveCloseBtn_SaveCloseButtonClicked;
-            this.ucAddPhase.AddPhaseItem += addPhaseItem_Clicked;
+            //this.ucAddPhase.SaveCloseButtonClicked += addPhaseSaveCloseBtn_SaveCloseButtonClicked;
+            //this.ucAddPhase.AddPhaseItem += addPhaseItem_Clicked;
             this.ucAddPhaseItem.SaveCloseButtonClicked += addPhaseItemSaveCloseBtn_SaveCloseButtonClicked;
         }
 
@@ -52,12 +52,12 @@ namespace prototype2.uControlsMaintenance
         private void addPhaseSaveCloseBtn_SaveCloseButtonClicked(object sender, EventArgs e)
         {
             //Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
-            modalsGrid.Visibility = Visibility.Collapsed;
+           
             foreach (var obj in modalsGrid.Children)
             {
                 if (obj is UserControl)
                 {
-                    if (((UserControl)obj).Equals(ucAddPhase))
+                    if (((UserControl)obj).Equals(ucAddPhaseItem))
                     {
                         ((UserControl)obj).Visibility = Visibility.Collapsed;
                     }
@@ -68,6 +68,7 @@ namespace prototype2.uControlsMaintenance
 
         private void addPhaseItemSaveCloseBtn_SaveCloseButtonClicked(object sender, EventArgs e)
         {
+            modalsGrid.Visibility = Visibility.Collapsed;
             foreach (var obj in modalsGrid.Children)
             {
                 if (obj is UserControl)
@@ -111,13 +112,12 @@ namespace prototype2.uControlsMaintenance
 
         private void addPhaseButton_Click(object sender, RoutedEventArgs e)
         {
-            MainVM.SelectedPhaseGroup = new PhaseGroup();
             modalsGrid.Visibility = Visibility.Visible;
             foreach (var obj in modalsGrid.Children)
             {
                 if (obj is UserControl)
                 {
-                    if (((UserControl)obj).Equals(ucAddPhase))
+                    if (((UserControl)obj).Equals(ucAddPhaseItem))
                     {
                         ((UserControl)obj).Visibility = Visibility.Visible;
                     }
@@ -134,7 +134,7 @@ namespace prototype2.uControlsMaintenance
             {
                 if (obj is UserControl)
                 {
-                    if (((UserControl)obj).Equals(ucAddPhase))
+                    if (((UserControl)obj).Equals(ucAddPhaseItem))
                     {
                         ((UserControl)obj).Visibility = Visibility.Visible;
                     }
@@ -154,16 +154,16 @@ namespace prototype2.uControlsMaintenance
                 {
                     if (dbCon.IsConnect())
                     {
-                        string query = "UPDATE `phase_group_t` SET `isDeleted`= 1 WHERE phaseGroupID = '" + MainVM.SelectedPhaseGroup.PhaseGroupID;
+                        string query = "UPDATE `phase_t` SET `isDeleted`= 1 WHERE phaseID = '" + MainVM.SelectedPhase.PhaseID;
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             MessageBox.Show("Record successfully deleted!");
-                            MainVM.SelectedService.PhaseGroups.Remove(MainVM.SelectedPhaseGroup);
+                            MainVM.SelectedService.Phases.Remove(MainVM.SelectedPhase);
                         }
                     }
                 }
                 else
-                    MainVM.SelectedService.PhaseGroups.Remove(MainVM.SelectedPhaseGroup);
+                    MainVM.SelectedService.Phases.Remove(MainVM.SelectedPhase);
 
             }
             else if (result == MessageBoxResult.Cancel)
@@ -212,22 +212,13 @@ namespace prototype2.uControlsMaintenance
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
                             query = "SELECT LAST_INSERT_ID();";
-                            string serviceID = dbCon.selectScalar(query, dbCon.Connection).ToString();
-                            foreach (PhaseGroup pg in MainVM.SelectedService.PhaseGroups)
+                            string serviceId = dbCon.selectScalar(query, dbCon.Connection).ToString();
+                            foreach (Phase pi in MainVM.SelectedService.Phases)
                             {
-                                query = "INSERT INTO phases_group_t (phaseGroupName,phaseGroupSequence,serviceID) VALUES ('" + pg.PhaseGroupName + "'," + pg.SequenceNo + ", " + serviceID + ")";
-                                if(dbCon.insertQuery(query, dbCon.Connection))
+                                query = "INSERT INTO phase_t (phaseName, phaseDesc, sequenceNo, serviceID) VALUE ('" + pi.PhaseName + "', '" + pi.PhaseDesc + "','" + pi.SequenceNo + "','" + serviceId + "')";
+                                if (dbCon.insertQuery(query, dbCon.Connection))
                                 {
-                                    query = "SELECT LAST_INSERT_ID();";
-                                    string phaseGroupID = dbCon.selectScalar(query, dbCon.Connection).ToString();
-                                    foreach (Phase pi in pg.PhaseItems)
-                                    {
-                                        query = "INSERT INTO phase_t (phaseName, phaseDesc, sequenceNo, phaseGroupID) VALUE ('" + pi.PhaseName + "', '" + pi.PhaseDesc + "','" + pi.SequenceNo + "','" + phaseGroupID + "')";
-                                        if (dbCon.insertQuery(query, dbCon.Connection))
-                                        {
-                                            MessageBox.Show("Service type successfully added!");
-                                        }
-                                    }
+                                    
                                 }
                             }
                             //clearing textboxes
@@ -236,43 +227,30 @@ namespace prototype2.uControlsMaintenance
                             servicePrice.Value = 0;
                             MainVM.Ldt.worker.RunWorkerAsync();
                         }
-                        MainVM.isEdit = false;
+                        MessageBox.Show("Service type successfully added!");
                     }
                     else
                     {
                         string query = "UPDATE `services_T` SET serviceName = '" + serviceName.Text + "',serviceDesc = '" + serviceDesc.Text + "', servicePrice = '" + servicePrice.Value + "' WHERE serviceID = '" + MainVM.SelectedService.ServiceID + "'";
                         if (dbCon.insertQuery(query, dbCon.Connection))
                         {
-                            var pgs = from pg in MainVM.SelectedService.PhaseGroups
-                                      where pg.IsModified = true
-                                      select pg;
+                            var pgs = from pi in MainVM.SelectedService.Phases
+                                      where pi.IsModified = true
+                                      select pi;
                             if(pgs != null)
                             {
-                                foreach (PhaseGroup pg in pgs)
+                                foreach (Phase pi in pgs)
                                 {
-                                    query = "UPDATE `phases_group_t` SET phaseGroupName = '" + pg.PhaseGroupName + "',phaseGroupSequence = '" + pg.SequenceNo + "', serviceID = '" + pg.ServiceID + "' WHERE phaseGroupID = '" + pg.PhaseGroupID + "'";
+                                    query = "UPDATE `phase_t` SET phaseName = '" + pi.PhaseName + "', phaseDesc = '" + pi.PhaseDesc + "', sequenceNo = '" + pi.SequenceNo + "' WHERE phaseID = '" + pi.PhaseID + "'";
                                     dbCon.insertQuery(query, dbCon.Connection);
-                                    var pis = from pi in pg.PhaseItems
-                                              where pi.IsModified = true
-                                              select pi;
-                                    if (pis != null)
-                                    {
-                                        foreach(Phase pi in pis)
-                                        {
-                                            query = "UPDATE `phase_t` SET phaseName = '" + pi.PhaseName + "', phaseDesc = '" + pi.PhaseDesc + "', sequenceNo = '" + pi.SequenceNo + "' WHERE phaseID = '" + pi.PhaseID + "'";
-                                            dbCon.insertQuery(query, dbCon.Connection);
-                                        }
-                                    }
-                                    
                                 }
 
                             }
 
                         }
                         MessageBox.Show("Sevice type sucessfully updated");
-                        OnSaveCloseButtonClicked(e);
-                        MainVM.isEdit = false;
                     }
+                    OnSaveCloseButtonClicked(e);
                 }
                 else
                     MessageBox.Show("Resolve the error first");
@@ -292,7 +270,7 @@ namespace prototype2.uControlsMaintenance
             serviceName.Text = MainVM.SelectedService.ServiceName;
             serviceDesc.Text = MainVM.SelectedService.ServiceDesc;
             servicePrice.Value = MainVM.SelectedService.ServicePrice;
-            MainVM.SelectedService.PhaseGroups = new ObservableCollection<PhaseGroup>(from pg in MainVM.PhasesGroup
+            MainVM.SelectedService.Phases = new ObservableCollection<Phase>(from pg in MainVM.Phases
                                                                                       where pg.ServiceID == MainVM.SelectedService.ServiceID
                                                                                       select pg);
         }
@@ -322,5 +300,53 @@ namespace prototype2.uControlsMaintenance
             saveCloseButtonGrid.Visibility = Visibility.Visible;
             editCloseButtonGrid.Visibility = Visibility.Collapsed;
         }
+
+        private void moveUpSeqNoBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (MainVM.SelectedService.Phases.IndexOf(MainVM.SelectedPhase) == 1)
+            {
+                MainVM.SelectedPhase.FirstItem = true;
+                MainVM.SelectedPhase.LastItem = false;
+                MainVM.SelectedService.Phases[0].FirstItem = false;
+                if (MainVM.SelectedService.Phases.Count == 2)
+                    MainVM.SelectedService.Phases[0].LastItem = true;
+                MainVM.SelectedPhase.SequenceNo =MainVM.SelectedService.Phases.IndexOf(MainVM.SelectedPhase) - 1;
+                MainVM.SelectedService.Phases.Move(MainVM.SelectedService.Phases.IndexOf(MainVM.SelectedPhase), MainVM.SelectedService.Phases.IndexOf(MainVM.SelectedPhase) - 1);
+
+            }
+            else
+            {
+                MainVM.SelectedPhase.LastItem = false;
+                if (MainVM.SelectedService.Phases.Count - 1 == MainVM.SelectedService.Phases.IndexOf(MainVM.SelectedPhase))
+                    MainVM.SelectedService.Phases[MainVM.SelectedService.Phases.IndexOf(MainVM.SelectedPhase) - 1].LastItem = true;
+                MainVM.SelectedPhase.SequenceNo = MainVM.SelectedService.Phases.IndexOf(MainVM.SelectedPhase) - 1;
+                MainVM.SelectedService.Phases.Move(MainVM.SelectedService.Phases.IndexOf(MainVM.SelectedPhase), MainVM.SelectedService.Phases.IndexOf(MainVM.SelectedPhase) - 1);
+            }
+        }
+
+        private void moveDownSeqNoBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MainVM.SelectedService.Phases.IndexOf(MainVM.SelectedPhase) == MainVM.SelectedService.Phases.Count - 2)
+            {
+                MainVM.SelectedPhase.FirstItem = false;
+                MainVM.SelectedPhase.LastItem = true;
+                if (MainVM.SelectedService.Phases.Count == 2)
+                    MainVM.SelectedService.Phases[MainVM.SelectedService.Phases.Count - 1].LastItem = false;
+                MainVM.SelectedService.Phases[MainVM.SelectedService.Phases.Count - 1].LastItem = false;
+                MainVM.SelectedPhase.SequenceNo = MainVM.SelectedService.Phases.IndexOf(MainVM.SelectedPhase) - 1;
+                MainVM.SelectedService.Phases.Move(MainVM.SelectedService.Phases.IndexOf(MainVM.SelectedPhase), MainVM.SelectedService.Phases.Count + 1);
+
+            }
+            else
+            {
+                MainVM.SelectedPhase.FirstItem = false;
+                if (MainVM.SelectedService.Phases.Count - 1 == MainVM.SelectedService.Phases.IndexOf(MainVM.SelectedPhase))
+                    MainVM.SelectedService.Phases[MainVM.SelectedService.Phases.IndexOf(MainVM.SelectedPhase) - 1].LastItem = false;
+                MainVM.SelectedPhase.SequenceNo = MainVM.SelectedService.Phases.IndexOf(MainVM.SelectedPhase) - 1;
+                MainVM.SelectedService.Phases.Move(MainVM.SelectedService.Phases.IndexOf(MainVM.SelectedPhase), MainVM.SelectedService.Phases.IndexOf(MainVM.SelectedPhase) + 1);
+            }
+        }
+
     }
 }

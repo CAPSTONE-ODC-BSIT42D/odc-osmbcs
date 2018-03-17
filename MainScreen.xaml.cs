@@ -1518,8 +1518,6 @@ namespace prototype2
                         ((UserControl)element).Visibility = Visibility.Visible;
                 }
             }
-            ucSalesQuote.viewSalesQuoteBtns.Visibility = Visibility.Collapsed;
-            ucSalesQuote.newSalesQuoteBtns.Visibility = Visibility.Visible;
             
         }
 
@@ -1536,8 +1534,6 @@ namespace prototype2
                 else
                     element.Visibility = Visibility.Collapsed;
             }
-            ucSalesQuote.viewSalesQuoteBtns.Visibility = Visibility.Visible;
-            ucSalesQuote.newSalesQuoteBtns.Visibility = Visibility.Collapsed;
         }
 
         private void editQuoteRecordBtn_Click(object sender, RoutedEventArgs e)
@@ -1550,8 +1546,6 @@ namespace prototype2
                 else
                     element.Visibility = Visibility.Collapsed;
             }
-            ucSalesQuote.viewSalesQuoteBtns.Visibility = Visibility.Collapsed;
-            ucSalesQuote.newSalesQuoteBtns.Visibility = Visibility.Visible;
 
         }
 
