@@ -9,96 +9,80 @@
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="PurchaseTableTableAdapter" GeneratorDataComponentClassName="PurchaseTableTableAdapter" Name="PurchaseTable" UserDataComponentName="PurchaseTableTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillPurchaseAll" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataPurchaseAll" GeneratorSourceName="FillPurchaseAll" GetMethodModifier="Public" GetMethodName="GetDataPurchaseAll" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataPurchaseAll" UserSourceName="FillPurchaseAll">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.po_report_view" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillPurchaseAll" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataPurchaseAll" GeneratorSourceName="FillPurchaseAll" GetMethodModifier="Public" GetMethodName="GetDataPurchaseAll" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataPurchaseAll" UserSourceName="FillPurchaseAll">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
- FROM            item_t i INNER JOIN
-                         po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
-                         purchase_order_t po ON po.PONumChar = pi.poNumChar</CommandText>
+                    <CommandText>SELECT        itemName, SUM(Total) AS Expr1
+FROM            po_report_view
+GROUP BY itemName</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
             </MainSource>
             <Mappings>
-              <Mapping SourceColumn="orderDate" DataSetColumn="orderDate" />
               <Mapping SourceColumn="itemName" DataSetColumn="itemName" />
-              <Mapping SourceColumn="Expr4" DataSetColumn="Expr4" />
-              <Mapping SourceColumn="Expr5" DataSetColumn="Expr5" />
-              <Mapping SourceColumn="Total" DataSetColumn="Total" />
+              <Mapping SourceColumn="Expr1" DataSetColumn="Expr1" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByPurchaseDay" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByPurchaseDay" GeneratorSourceName="FillByPurchaseDay" GetMethodModifier="Public" GetMethodName="GetDataByPurchaseDay" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByPurchaseDay" UserSourceName="FillByPurchaseDay">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.po_report_view" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByPurchaseDay" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByPurchaseDay" GeneratorSourceName="FillByPurchaseDay" GetMethodModifier="Public" GetMethodName="GetDataByPurchaseDay" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByPurchaseDay" UserSourceName="FillByPurchaseDay">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
- 
-FROM            item_t i INNER JOIN
-                         po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
-                         purchase_order_t po ON po.PONumChar = pi.poNumChar
-WHERE        (DATE_FORMAT(po.orderDate, '%Y-%m-%d') = CURDATE()) </CommandText>
+                    <CommandText>SELECT        itemName, SUM(Total) AS Expr1
+FROM            po_report_view
+WHERE        (DATE_FORMAT(_date, '%Y-%m-%d') = CURDATE())
+GROUP BY itemName</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByPurchaseMonth" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByPurchaseMonth" GeneratorSourceName="FillByPurchaseMonth" GetMethodModifier="Public" GetMethodName="GetDataByPurchaseMonth" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByPurchaseMonth" UserSourceName="FillByPurchaseMonth">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.po_report_view" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByPurchaseMonth" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByPurchaseMonth" GeneratorSourceName="FillByPurchaseMonth" GetMethodModifier="Public" GetMethodName="GetDataByPurchaseMonth" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByPurchaseMonth" UserSourceName="FillByPurchaseMonth">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
- 
-FROM            item_t i INNER JOIN
-                         po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
-                         purchase_order_t po ON po.PONumChar = pi.poNumChar
-WHERE        (MONTHNAME(po.orderDate) = @A) AND (YEAR(po.orderDate) = YEAR(CURDATE()))</CommandText>
+                    <CommandText>SELECT        itemName, SUM(Total) AS Expr1
+FROM            po_report_view
+WHERE        (MONTHNAME(_date) = @A) AND (YEAR(_date) = YEAR(CURDATE()))
+GROUP BY itemName</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="A" ColumnName="" DataSourceName="" DataTypeServer="unknown" DbType="AnsiString" Direction="Input" ParameterName="@A" Precision="0" Scale="0" Size="1024" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByPurchaseRange" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByPurchaseRange" GeneratorSourceName="FillByPurchaseRange" GetMethodModifier="Public" GetMethodName="GetDataByPurchaseRange" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByPurchaseRange" UserSourceName="FillByPurchaseRange">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.po_report_view" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByPurchaseRange" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByPurchaseRange" GeneratorSourceName="FillByPurchaseRange" GetMethodModifier="Public" GetMethodName="GetDataByPurchaseRange" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByPurchaseRange" UserSourceName="FillByPurchaseRange">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
- 
-FROM            item_t i INNER JOIN
-                         po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
-                         purchase_order_t po ON po.PONumChar = pi.poNumChar
-WHERE        (po.orderDate BETWEEN @R AND @T)
-</CommandText>
+                    <CommandText>SELECT        itemName, SUM(Total) AS Expr1
+FROM            po_report_view
+WHERE        (_date BETWEEN @R AND @T)
+GROUP BY itemName</CommandText>
                     <Parameters>
-                      <Parameter AllowDbNull="true" AutogeneratedName="R" ColumnName="orderDate" DataSourceName="odc_db.purchase_order_t" DataTypeServer="timestamp" DbType="DateTime" Direction="Input" ParameterName="@R" Precision="0" ProviderType="Timestamp" Scale="0" Size="0" SourceColumn="orderDate" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="T" ColumnName="orderDate" DataSourceName="odc_db.purchase_order_t" DataTypeServer="timestamp" DbType="DateTime" Direction="Input" ParameterName="@T" Precision="0" ProviderType="Timestamp" Scale="0" Size="0" SourceColumn="orderDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="R" ColumnName="_date" DataSourceName="odc_db.po_report_view" DataTypeServer="timestamp" DbType="DateTime" Direction="Input" ParameterName="@R" Precision="0" ProviderType="Timestamp" Scale="0" Size="0" SourceColumn="_date" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="T" ColumnName="_date" DataSourceName="odc_db.po_report_view" DataTypeServer="timestamp" DbType="DateTime" Direction="Input" ParameterName="@T" Precision="0" ProviderType="Timestamp" Scale="0" Size="0" SourceColumn="_date" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByPurchaseWeek" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByPurchaseWeek" GeneratorSourceName="FillByPurchaseWeek" GetMethodModifier="Public" GetMethodName="GetDataByPurchaseWeek" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByPurchaseWeek" UserSourceName="FillByPurchaseWeek">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.po_report_view" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByPurchaseWeek" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByPurchaseWeek" GeneratorSourceName="FillByPurchaseWeek" GetMethodModifier="Public" GetMethodName="GetDataByPurchaseWeek" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByPurchaseWeek" UserSourceName="FillByPurchaseWeek">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
- 
-FROM            item_t i INNER JOIN
-                         po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
-                         purchase_order_t po ON po.PONumChar = pi.poNumChar
-WHERE        (WEEK(po.orderDate) = @C) 
-</CommandText>
+                    <CommandText>SELECT        itemName, SUM(Total) AS Expr1
+FROM            po_report_view
+WHERE        (WEEK(_date) = @C)
+GROUP BY itemName</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="C" ColumnName="" DataSourceName="" DataTypeServer="unknown" DbType="Decimal" Direction="Input" ParameterName="@C" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByPurchaseYear" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByPurchaseYear" GeneratorSourceName="FillByPurchaseYear" GetMethodModifier="Public" GetMethodName="GetDataByPurchaseYear" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByPurchaseYear" UserSourceName="FillByPurchaseYear">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.po_report_view" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByPurchaseYear" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByPurchaseYear" GeneratorSourceName="FillByPurchaseYear" GetMethodModifier="Public" GetMethodName="GetDataByPurchaseYear" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByPurchaseYear" UserSourceName="FillByPurchaseYear">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>    SELECT        po.orderDate, i.itemName, pi.unitPrice*pi.itemqnty as Total, MONTHNAME(po.orderDate) AS Expr4, YEAR(po.orderDate) AS Expr5
- 
-FROM            item_t i INNER JOIN
-                         po_items_availed_t pi ON i.ID = pi.itemID INNER JOIN
-                         purchase_order_t po ON po.PONumChar = pi.poNumChar
-WHERE        (YEAR(po.orderDate) = @B) </CommandText>
+                    <CommandText>SELECT        itemName, SUM(Total) AS Expr1
+FROM            po_report_view
+WHERE        (YEAR(_date) = @B)
+GROUP BY itemName</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="B" ColumnName="" DataSourceName="" DataTypeServer="unknown" DbType="Decimal" Direction="Input" ParameterName="@B" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
@@ -115,10 +99,9 @@ WHERE        (YEAR(po.orderDate) = @B) </CommandText>
   <xs:element name="DataSetReportPurchase" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DataSetReportPurchase" msprop:Generator_UserDSName="DataSetReportPurchase">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="PurchaseTable" msprop:Generator_TableClassName="PurchaseTableDataTable" msprop:Generator_TableVarName="tablePurchaseTable" msprop:Generator_TablePropName="PurchaseTable" msprop:Generator_RowDeletingName="PurchaseTableRowDeleting" msprop:Generator_RowChangingName="PurchaseTableRowChanging" msprop:Generator_RowEvHandlerName="PurchaseTableRowChangeEventHandler" msprop:Generator_RowDeletedName="PurchaseTableRowDeleted" msprop:Generator_UserTableName="PurchaseTable" msprop:Generator_RowChangedName="PurchaseTableRowChanged" msprop:Generator_RowEvArgName="PurchaseTableRowChangeEvent" msprop:Generator_RowClassName="PurchaseTableRow">
+        <xs:element name="PurchaseTable" msprop:Generator_TableClassName="PurchaseTableDataTable" msprop:Generator_TableVarName="tablePurchaseTable" msprop:Generator_RowChangedName="PurchaseTableRowChanged" msprop:Generator_TablePropName="PurchaseTable" msprop:Generator_RowDeletingName="PurchaseTableRowDeleting" msprop:Generator_RowChangingName="PurchaseTableRowChanging" msprop:Generator_RowEvHandlerName="PurchaseTableRowChangeEventHandler" msprop:Generator_RowDeletedName="PurchaseTableRowDeleted" msprop:Generator_RowClassName="PurchaseTableRow" msprop:Generator_UserTableName="PurchaseTable" msprop:Generator_RowEvArgName="PurchaseTableRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="orderDate" msprop:Generator_ColumnVarNameInTable="columnorderDate" msprop:Generator_ColumnPropNameInRow="orderDate" msprop:Generator_ColumnPropNameInTable="orderDateColumn" msprop:Generator_UserColumnName="orderDate" type="xs:dateTime" minOccurs="0" />
               <xs:element name="itemName" msprop:Generator_ColumnVarNameInTable="columnitemName" msprop:Generator_ColumnPropNameInRow="itemName" msprop:Generator_ColumnPropNameInTable="itemNameColumn" msprop:Generator_UserColumnName="itemName">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -126,15 +109,7 @@ WHERE        (YEAR(po.orderDate) = @B) </CommandText>
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Expr4" msprop:Generator_ColumnVarNameInTable="columnExpr4" msprop:Generator_ColumnPropNameInRow="Expr4" msprop:Generator_ColumnPropNameInTable="Expr4Column" msprop:Generator_UserColumnName="Expr4" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="9" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Expr5" msprop:Generator_ColumnVarNameInTable="columnExpr5" msprop:Generator_ColumnPropNameInRow="Expr5" msprop:Generator_ColumnPropNameInTable="Expr5Column" msprop:Generator_UserColumnName="Expr5" type="xs:long" minOccurs="0" />
-              <xs:element name="Total" msprop:Generator_ColumnVarNameInTable="columnTotal" msprop:Generator_ColumnPropNameInRow="Total" msprop:Generator_ColumnPropNameInTable="TotalColumn" msprop:Generator_UserColumnName="Total" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Expr1" msprop:Generator_ColumnVarNameInTable="columnExpr1" msprop:Generator_ColumnPropNameInRow="Expr1" msprop:Generator_ColumnPropNameInTable="Expr1Column" msprop:Generator_UserColumnName="Expr1" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

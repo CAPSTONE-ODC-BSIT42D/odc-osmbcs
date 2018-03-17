@@ -65,7 +65,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT           i.itemName, TRUNCATE(SUM(ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))), 2) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN  items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN   item_t i ON ia.itemID = i.ID INNER JOIN     markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar GROUP BY i.itemName";
+            cmd.CommandText = "SELECT        itemName, SUM(TOTAL_DISCOUNTED_ITEM) AS Expr1 FROM sales_report_item_view GROUP BY itemName";
            
             DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
 
@@ -84,7 +84,7 @@ namespace prototype2
             cmd.CommandType = CommandType.Text;
 
   
-            cmd.CommandText = " SELECT        s.serviceName, SUM(sa.totalCost + IFNULL(ft.feeValue, 0)) AS TOTAL_SERVICE FROM services_t s JOIN services_availed_t sa on s.serviceID = sa.serviceID LEFT JOIN fees_per_transaction_t ft on ft.servicesAvailedID = sa.ID JOIN sales_quote_t sq on sq.sqNoChar = sa.sqNoChar JOIN sales_invoice_t si on si.sqNoChar = sq.sqNoChar GROUP BY s.serviceName ";
+            cmd.CommandText = "SELECT        serviceName, SUM(total_discounted_service) AS Expr1 FROM sales_report_service_view GROUP BY serviceName ";
 
             DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
 
@@ -94,106 +94,13 @@ namespace prototype2
             return dSItem;
 
         }
-    
-        private void DisplayReportSalesDay()
-        {
-            ReportSales.DataSources.Clear();
 
-            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
 
-            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItemDay()));
-            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesServiceTable", GetSerDay()));
-            ReportSales.LoadReport(rNames);
-            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
-            ReportSales.RefreshReport();
-        }
 
-        private DataTable GetItemDay()
-        {
-            var dbCon = DBConnection.Instance();
-            dbCon.IsConnect();
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = dbCon.Connection;
-            cmd.CommandType = CommandType.Text;
+     
 
-            cmd.CommandText = "SELECT           i.itemName, TRUNCATE(SUM(ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))), 2) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN  items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN   item_t i ON ia.itemID = i.ID INNER JOIN     markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE()) GROUP BY i.itemName  ";
-
-            DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
-
-            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
-            mySqlDa.Fill(dSItem);
-
-            return dSItem;
-
-        }
-        private DataTable GetSerDay()
-        {
-            var dbCon = DBConnection.Instance();
-            dbCon.IsConnect();
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = dbCon.Connection;
-            cmd.CommandType = CommandType.Text;
-
-            cmd.CommandText = "  SELECT        s.serviceName, SUM(sa.totalCost + IFNULL(ft.feeValue, 0)) AS TOTAL_SERVICE FROM services_t s JOIN services_availed_t sa on s.serviceID = sa.serviceID LEFT JOIN fees_per_transaction_t ft on ft.servicesAvailedID = sa.ID JOIN sales_quote_t sq on sq.sqNoChar = sa.sqNoChar JOIN sales_invoice_t si on si.sqNoChar = sq.sqNoChar  WHERE(DATE_FORMAT(si.dateOfIssue, '%Y-%m-%d') = CURDATE())  GROUP BY s.serviceName";
-
-            DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
-
-            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
-            mySqlDa.Fill(dSItem);
-
-            return dSItem;
-
-        }
-        private void DisplayReportSalesWeek()
-        {
-
-            ReportSales.DataSources.Clear();
-            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesReport.rdlc");
-
-            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesItemTable", GetItemWeek()));
-            ReportSales.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("SalesServiceTable", GetSerWeek()));
-            ReportSales.LoadReport(rNames);
-            ReportSales.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
-            ReportSales.RefreshReport();
-        }
-
-        private DataTable GetItemWeek()
-        {
-            var dbCon = DBConnection.Instance();
-            dbCon.IsConnect();
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = dbCon.Connection;
-            cmd.CommandType = CommandType.Text;
-
-            cmd.CommandText = "SELECT           i.itemName, TRUNCATE(SUM(ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))), 2) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN  items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN   item_t i ON ia.itemID = i.ID INNER JOIN     markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(WEEK(si.dateOfIssue) = '" + DatePickerItemWeek.SelectedDate.Value.ToString("yyyy-MM-dd") + "')  GROUP BY i.itemName  ";
-
-            DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
-
-            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
-            mySqlDa.Fill(dSItem);
-
-            return dSItem;
-
-        }
-
-        private DataTable GetSerWeek()
-        {
-            var dbCon = DBConnection.Instance();
-            dbCon.IsConnect();
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = dbCon.Connection;
-            cmd.CommandType = CommandType.Text;
-
-            cmd.CommandText = "  SELECT        s.serviceName, SUM(sa.totalCost + IFNULL(ft.feeValue, 0)) AS TOTAL_SERVICE FROM services_t s JOIN services_availed_t sa on s.serviceID = sa.serviceID LEFT JOIN fees_per_transaction_t ft on ft.servicesAvailedID = sa.ID JOIN sales_quote_t sq on sq.sqNoChar = sa.sqNoChar JOIN sales_invoice_t si on si.sqNoChar = sq.sqNoChar WHERE(WEEK(si.dateOfIssue) = '" + DatePickerItemWeek.SelectedDate.Value.ToString("yyyy-MM-dd") + "') group by s.servicename";
-
-            DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
-
-            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
-            mySqlDa.Fill(dSItem);
-
-            return dSItem;
-
-        }
+     
+ 
 
         private void DisplayReportSalesMonth()
         {
@@ -216,7 +123,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT           i.itemName, TRUNCATE(SUM(ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))), 2) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN  items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN   item_t i ON ia.itemID = i.ID INNER JOIN     markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(MONTHNAME(si.dateOfIssue) = '" + ((ComboBoxItem)ComboBoxItemMonth.SelectedItem).Content.ToString() + "') GROUP BY i.itemName  ";
+            cmd.CommandText = "SELECT        itemName, SUM(TOTAL_DISCOUNTED_ITEM) AS Expr1 FROM sales_report_item_view WHERE(MONTHNAME(_date) = '" + ((ComboBoxItem)ComboBoxItemMonth.SelectedItem).Content.ToString() + "') GROUP BY itemName  ";
             DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
@@ -234,7 +141,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "  SELECT        s.serviceName, SUM(sa.totalCost + IFNULL(ft.feeValue, 0)) AS TOTAL_SERVICE FROM services_t s JOIN services_availed_t sa on s.serviceID = sa.serviceID LEFT JOIN fees_per_transaction_t ft on ft.servicesAvailedID = sa.ID JOIN sales_quote_t sq on sq.sqNoChar = sa.sqNoChar JOIN sales_invoice_t si on si.sqNoChar = sq.sqNoChar WHERE(MONTHNAME(si.dateOfIssue) = '" + ((ComboBoxItem)ComboBoxItemMonth.SelectedItem).Content.ToString() + "') group by s.servicename ";
+            cmd.CommandText = " SELECT        serviceName, SUM(total_discounted_service) AS Expr1 FROM sales_report_service_view WHERE(MONTHNAME(_date) = '" + ((ComboBoxItem)ComboBoxItemMonth.SelectedItem).Content.ToString() + "') group by servicename ";
             DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
@@ -264,7 +171,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT           i.itemName, TRUNCATE(SUM(ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))), 2) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN  items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN   item_t i ON ia.itemID = i.ID INNER JOIN     markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(YEAR(si.dateOfIssue) = '" + ((ComboBoxItem)ComboBoxItemYear.SelectedItem).Content.ToString() + "')  GROUP BY i.itemName  ";
+            cmd.CommandText = "SELECT        itemName, SUM(TOTAL_DISCOUNTED_ITEM) AS Expr1 FROM sales_report_item_view WHERE(YEAR(_date) = '" + ((ComboBoxItem)ComboBoxItemYear.SelectedItem).Content.ToString() + "')  GROUP BY itemName  ";
 
             DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
 
@@ -283,7 +190,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "  SELECT        s.serviceName, SUM(sa.totalCost + IFNULL(ft.feeValue, 0)) AS TOTAL_SERVICE FROM services_t s JOIN services_availed_t sa on s.serviceID = sa.serviceID LEFT JOIN fees_per_transaction_t ft on ft.servicesAvailedID = sa.ID JOIN sales_quote_t sq on sq.sqNoChar = sa.sqNoChar JOIN sales_invoice_t si on si.sqNoChar = sq.sqNoChar WHERE(YEAR(si.dateOfIssue) = '" + ((ComboBoxItem)ComboBoxItemYear.SelectedItem).Content.ToString() + "') group by s.servicename ";
+            cmd.CommandText = " SELECT        serviceName, SUM(total_discounted_service) AS Expr1 FROM sales_report_service_view WHERE(YEAR(_date) = '" + ((ComboBoxItem)ComboBoxItemYear.SelectedItem).Content.ToString() + "') group by servicename ";
 
             DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
 
@@ -313,7 +220,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT           i.itemName, TRUNCATE(SUM(ia.itemQnty * (ia.unitPrice + ia.unitPrice * (mh.markupPerc / 100))), 2) AS TOTAL_ITEM FROM sales_quote_t sq INNER JOIN  items_availed_t ia ON sq.sqNoChar = ia.sqNoChar INNER JOIN   item_t i ON ia.itemID = i.ID INNER JOIN     markup_hist_t mh ON i.ID = mh.itemID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(si.dateOfIssue BETWEEN '" + DatePickerItemStart.SelectedDate.Value.ToString("yyyy-MM-dd") + "' AND '" + DatePickerItemEnd.SelectedDate.Value.ToString("yyyy-MM-dd") + "') GROUP BY i.itemName  ";
+            cmd.CommandText = "SELECT        itemName, SUM(TOTAL_DISCOUNTED_ITEM) AS Expr1 FROM sales_report_item_view WHERE(_date BETWEEN '" + DatePickerItemStart.SelectedDate.Value.ToString("yyyy-MM-dd") + "' AND '" + DatePickerItemEnd.SelectedDate.Value.ToString("yyyy-MM-dd") + "') GROUP BY itemName  ";
 
             DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
 
@@ -332,7 +239,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "  SELECT        s.serviceName, SUM(sa.totalCost + IFNULL(ft.feeValue, 0)) AS TOTAL_SERVICE FROM services_t s JOIN services_availed_t sa on s.serviceID = sa.serviceID LEFT JOIN fees_per_transaction_t ft on ft.servicesAvailedID = sa.ID JOIN sales_quote_t sq on sq.sqNoChar = sa.sqNoChar JOIN sales_invoice_t si on si.sqNoChar = sq.sqNoChar WHERE(si.dateOfIssue BETWEEN  '" + DatePickerItemStart.SelectedDate.Value.ToString("yyyy-MM-dd") + "' AND '" + DatePickerItemEnd.SelectedDate.Value.ToString("yyyy-MM-dd") + "') group by s.servicename ";
+            cmd.CommandText = " SELECT        serviceName, SUM(total_discounted_service) AS Expr1 FROM sales_report_service_view WHERE(_date BETWEEN  '" + DatePickerItemStart.SelectedDate.Value.ToString("yyyy-MM-dd") + "' AND '" + DatePickerItemEnd.SelectedDate.Value.ToString("yyyy-MM-dd") + "') group by servicename ";
 
             DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
 
@@ -346,42 +253,9 @@ namespace prototype2
         {
             if (ComboBoxItemFilter.SelectedIndex == 0)
             {
-                DisplayReportSalesDay();
-                ItemWeek.Visibility = Visibility.Hidden;
-                ComboBoxItemYear.Visibility = Visibility.Hidden;
-                ComboBoxItemMonth.Visibility = Visibility.Hidden;
-                MonthItem.Visibility = Visibility.Hidden;
-                YearItem.Visibility = Visibility.Hidden;
-                DatePickerItemStart.Visibility = Visibility.Hidden;
-                DatePickerItemEnd.Visibility = Visibility.Hidden;
-                ItemStart.Visibility = Visibility.Hidden;
-                ItemEnd.Visibility = Visibility.Hidden;
-                DatePickerItemWeek.Visibility = Visibility.Hidden;
-                Go_ButtonSales.Visibility = Visibility.Hidden;
-
-
-            }
-            if (ComboBoxItemFilter.SelectedIndex == 1)
-            {
-                ReportSales.Reset();
-                ComboBoxItemYear.Visibility = Visibility.Hidden;
-                ComboBoxItemMonth.Visibility = Visibility.Hidden;
-                MonthItem.Visibility = Visibility.Hidden;
-                YearItem.Visibility = Visibility.Hidden;
-                DatePickerItemStart.Visibility = Visibility.Hidden;
-                DatePickerItemEnd.Visibility = Visibility.Hidden;
-                ItemStart.Visibility = Visibility.Hidden;
-                ItemEnd.Visibility = Visibility.Hidden;
-                DatePickerItemWeek.Visibility = Visibility.Visible;
-                ItemWeek.Visibility = Visibility.Visible;
-                Go_ButtonSales.Visibility = Visibility.Hidden;
-
-            }
-            if (ComboBoxItemFilter.SelectedIndex == 2)
-            {
                 ReportSales.Reset();
                 ItemWeek.Visibility = Visibility.Hidden;
-                DatePickerItemWeek.Visibility = Visibility.Hidden;
+              
                 ComboBoxItemYear.Visibility = Visibility.Hidden;
                 ComboBoxItemMonth.Visibility = Visibility.Visible;
                 MonthItem.Visibility = Visibility.Visible;
@@ -391,12 +265,13 @@ namespace prototype2
                 ItemStart.Visibility = Visibility.Hidden;
                 ItemEnd.Visibility = Visibility.Hidden;
 
+
             }
-            if (ComboBoxItemFilter.SelectedIndex == 3)
+            if (ComboBoxItemFilter.SelectedIndex == 1)
             {
                 ReportSales.Reset();
                 ItemWeek.Visibility = Visibility.Hidden;
-                DatePickerItemWeek.Visibility = Visibility.Hidden;
+              
                 ComboBoxItemYear.Visibility = Visibility.Visible;
                 ComboBoxItemMonth.Visibility = Visibility.Hidden;
                 MonthItem.Visibility = Visibility.Hidden;
@@ -409,10 +284,10 @@ namespace prototype2
 
 
             }
-            if (ComboBoxItemFilter.SelectedIndex == 4)
+            if (ComboBoxItemFilter.SelectedIndex == 2)
             {
                 ItemWeek.Visibility = Visibility.Hidden;
-                DatePickerItemWeek.Visibility = Visibility.Hidden;
+          
                 ComboBoxItemYear.Visibility = Visibility.Hidden;
                 ComboBoxItemMonth.Visibility = Visibility.Hidden;
                 MonthItem.Visibility = Visibility.Hidden;
@@ -422,6 +297,16 @@ namespace prototype2
                 ItemStart.Visibility = Visibility.Visible;
                 ItemEnd.Visibility = Visibility.Visible;
                 Go_ButtonSales.Visibility = Visibility.Visible;
+
+            }
+            if (ComboBoxItemFilter.SelectedIndex == 3)
+            {
+            
+
+            }
+            if (ComboBoxItemFilter.SelectedIndex == 4)
+            {
+             
             }
         }
 
@@ -449,7 +334,7 @@ namespace prototype2
 
         private void DatePickerItemWeek_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            DisplayReportSalesWeek();
+          
            
         }
 

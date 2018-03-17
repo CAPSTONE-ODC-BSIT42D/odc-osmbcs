@@ -971,7 +971,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.76041in</Width>
+              <Width>1.44791in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -987,7 +987,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=MonthName(Month(Fields!dateOfIssue.Value),false)&amp;" "&amp;Day(Fields!dateOfIssue.Value)</Value>
+                              <Value>=FormatDateTime(Fields!dateOfIssue.Value,DateFormat.LongDate)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1028,7 +1028,7 @@
         <Top>1.54167in</Top>
         <Left>6.80778in</Left>
         <Height>0.25in</Height>
-        <Width>0.76041in</Width>
+        <Width>1.44791in</Width>
         <ZIndex>26</ZIndex>
         <Style>
           <Border>
@@ -1105,75 +1105,6 @@
           </Border>
         </Style>
       </Tablix>
-      <Tablix Name="Tablix8">
-        <TablixBody>
-          <TablixColumns>
-            <TablixColumn>
-              <Width>0.8125in</Width>
-            </TablixColumn>
-          </TablixColumns>
-          <TablixRows>
-            <TablixRow>
-              <Height>0.25in</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="dateOfIssue1">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Year(Fields!dateOfIssue.Value)</Value>
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>dateOfIssue1</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
-          </TablixRows>
-        </TablixBody>
-        <TablixColumnHierarchy>
-          <TablixMembers>
-            <TablixMember />
-          </TablixMembers>
-        </TablixColumnHierarchy>
-        <TablixRowHierarchy>
-          <TablixMembers>
-            <TablixMember>
-              <Group Name="Details10" />
-            </TablixMember>
-          </TablixMembers>
-        </TablixRowHierarchy>
-        <DataSetName>DataSetSalesInvoice</DataSetName>
-        <Top>1.52777in</Top>
-        <Left>7.60986in</Left>
-        <Height>0.25in</Height>
-        <Width>0.8125in</Width>
-        <ZIndex>28</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Tablix>
       <Tablix Name="Tablix10">
         <TablixBody>
           <TablixColumns>
@@ -1194,12 +1125,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>₱</Value>
-                              <Style />
-                            </TextRun>
-                            <TextRun>
                               <Value>=Fields!TOTAL_WITH_VAT.Value</Value>
-                              <Style />
+                              <Style>
+                                <Format>'₱' #,0.00;('₱' #,0.00)</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -1215,6 +1144,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -1240,7 +1170,7 @@
         <Left>6.6782in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
-        <ZIndex>29</ZIndex>
+        <ZIndex>28</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1267,12 +1197,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>₱</Value>
-                              <Style />
-                            </TextRun>
-                            <TextRun>
                               <Value>=Fields!VAT.Value</Value>
-                              <Style />
+                              <Style>
+                                <Format>'₱' #,0.00;('₱' #,0.00)</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -1288,6 +1216,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -1313,7 +1242,7 @@
         <Left>6.65042in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
-        <ZIndex>30</ZIndex>
+        <ZIndex>29</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1340,12 +1269,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>₱</Value>
-                              <Style />
-                            </TextRun>
-                            <TextRun>
                               <Value>=Fields!TOTAL.Value</Value>
-                              <Style />
+                              <Style>
+                                <Format>'₱' #,0.00;('₱' #,0.00)</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -1361,6 +1288,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -1386,7 +1314,7 @@
         <Left>6.6782in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
-        <ZIndex>31</ZIndex>
+        <ZIndex>30</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1414,11 +1342,15 @@
                           <TextRuns>
                             <TextRun>
                               <Value>₱</Value>
-                              <Style />
+                              <Style>
+                                <Format>'₱' #,0.00;('₱' #,0.00)</Format>
+                              </Style>
                             </TextRun>
                             <TextRun>
                               <Value>=Fields!TOTAL.Value</Value>
-                              <Style />
+                              <Style>
+                                <Format>'₱' #,0.00;('₱' #,0.00)</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -1434,8 +1366,10 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -1459,7 +1393,7 @@
         <Left>1.81305in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
-        <ZIndex>32</ZIndex>
+        <ZIndex>31</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1470,7 +1404,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.5132in</Width>
+              <Width>1.71639in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1486,12 +1420,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>₱</Value>
-                              <Style />
-                            </TextRun>
-                            <TextRun>
                               <Value>=Fields!VAT.Value</Value>
-                              <Style />
+                              <Style>
+                                <Format>'₱' #,0.00;('₱' #,0.00)</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -1507,6 +1439,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -1528,11 +1461,11 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSetSIAmount</DataSetName>
-        <Top>5.26958in</Top>
-        <Left>1.81305in</Left>
+        <Top>5.28347in</Top>
+        <Left>1.94319in</Left>
         <Height>0.25in</Height>
-        <Width>1.5132in</Width>
-        <ZIndex>33</ZIndex>
+        <Width>1.71639in</Width>
+        <ZIndex>32</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1558,7 +1491,7 @@
         <Left>4.46291in</Left>
         <Height>0.25in</Height>
         <Width>2.14584in</Width>
-        <ZIndex>34</ZIndex>
+        <ZIndex>33</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1588,7 +1521,7 @@
         <Left>4.46292in</Left>
         <Height>0.25in</Height>
         <Width>2.14584in</Width>
-        <ZIndex>35</ZIndex>
+        <ZIndex>34</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1619,12 +1552,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>₱</Value>
-                              <Style />
-                            </TextRun>
-                            <TextRun>
                               <Value>=Fields!discountPercent.Value/"100"* Fields!TOTAL.Value</Value>
-                              <Style />
+                              <Style>
+                                <Format>'₱' #,0.00;('₱' #,0.00)</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -1640,6 +1571,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -1665,7 +1597,7 @@
         <Left>6.6782in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
-        <ZIndex>36</ZIndex>
+        <ZIndex>35</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1692,12 +1624,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>₱</Value>
-                              <Style />
-                            </TextRun>
-                            <TextRun>
                               <Value>=Fields!TOTAL.Value</Value>
-                              <Style />
+                              <Style>
+                                <Format>'₱' #,0.00;('₱' #,0.00)</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -1713,6 +1643,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -1738,7 +1669,7 @@
         <Left>6.6782in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
-        <ZIndex>37</ZIndex>
+        <ZIndex>36</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1765,12 +1696,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>₱</Value>
-                              <Style />
-                            </TextRun>
-                            <TextRun>
                               <Value>=Fields!VAT.Value</Value>
-                              <Style />
+                              <Style>
+                                <Format>'₱' #,0.00;('₱' #,0.00)</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -1786,6 +1715,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -1811,7 +1741,7 @@
         <Left>6.6782in</Left>
         <Height>0.25in</Height>
         <Width>1.38306in</Width>
-        <ZIndex>38</ZIndex>
+        <ZIndex>37</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1838,12 +1768,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>₱</Value>
-                              <Style />
-                            </TextRun>
-                            <TextRun>
                               <Value>=Fields!TOTAL_WITH_VAT.Value</Value>
-                              <Style />
+                              <Style>
+                                <Format>'₱' #,0.00;('₱' #,0.00)</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -1859,6 +1787,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -1884,7 +1813,7 @@
         <Left>6.6782in</Left>
         <Height>0.26389in</Height>
         <Width>1.38306in</Width>
-        <ZIndex>39</ZIndex>
+        <ZIndex>38</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1911,12 +1840,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>₱</Value>
-                              <Style />
-                            </TextRun>
-                            <TextRun>
                               <Value>=Fields!TOTAL_WITH_VAT.Value</Value>
-                              <Style />
+                              <Style>
+                                <Format>'₱' #,0.00;('₱' #,0.00)</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -1932,6 +1859,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -1957,7 +1885,7 @@
         <Left>1.94319in</Left>
         <Height>0.25in</Height>
         <Width>1.71639in</Width>
-        <ZIndex>40</ZIndex>
+        <ZIndex>39</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2026,7 +1954,7 @@
         <Left>1.16889in</Left>
         <Height>0.25in</Height>
         <Width>1.74653in</Width>
-        <ZIndex>41</ZIndex>
+        <ZIndex>40</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2379,12 +2307,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>₱</Value>
-                              <Style />
-                            </TextRun>
-                            <TextRun>
                               <Value>=Fields!UNIT_PRICE.Value</Value>
-                              <Style />
+                              <Style>
+                                <Format>'₱' #,0.00;('₱' #,0.00)</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -2400,6 +2326,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -2413,12 +2340,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>₱</Value>
-                              <Style />
-                            </TextRun>
-                            <TextRun>
                               <Value>=Fields!total_item.Value</Value>
-                              <Style />
+                              <Style>
+                                <Format>'₱' #,0.00;('₱' #,0.00)</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -2434,6 +2359,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -2467,7 +2393,7 @@
         <Left>0.3043in</Left>
         <Height>0.60417in</Height>
         <Width>7.65973in</Width>
-        <ZIndex>42</ZIndex>
+        <ZIndex>41</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>

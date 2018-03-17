@@ -78,60 +78,8 @@ namespace prototype2
 
     
 
-        private DataTable GetServiceDay()
-        {
-            var dbCon = DBConnection.Instance();
-            dbCon.IsConnect();
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = dbCon.Connection;
-            cmd.CommandType = CommandType.Text;
+     
 
-            cmd.CommandText = "SELECT     sq.sqNoChar,   si.invoiceNo, s.serviceName,  s.servicedesc ,ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN   services_t s ON s.serviceID = sa.serviceID INNER JOIN  sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar INNER JOIN cust_supp_t cs ON cs.CompanyID = sq.custId WHERE(DATE_FORMAT(sq.dateOfIssue, '%Y-%m-%d') = CURDATE())";
-
-            DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
-
-            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
-            mySqlDa.Fill(dSServices);
-
-            return dSServices;
-
-        } 
-        private void DisplayReportDayService()
-        {
-            ReportService.DataSources.Clear();
-            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
-            ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("ServiceTable", GetServiceDay()));
-            ReportService.LoadReport(rNames);
-            ReportService.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
-            ReportService.RefreshReport();
-        }
-        private DataTable GetServiceWeek()
-        {
-            var dbCon = DBConnection.Instance();
-            dbCon.IsConnect();
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = dbCon.Connection;
-            cmd.CommandType = CommandType.Text;
-
-            cmd.CommandText = "SELECT     sq.sqNoChar,   si.invoiceNo, s.serviceName,  s.servicedesc ,ss.dateStarted, ss.dateEnded, ss.serviceStatus FROM service_sched_t ss INNER JOIN services_availed_t sa ON ss.serviceAvailedID = sa.id INNER JOIN   services_t s ON s.serviceID = sa.serviceID INNER JOIN  sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar INNER JOIN sales_invoice_t si ON sq.sqNoChar = si.sqNoChar INNER JOIN cust_supp_t cs ON cs.CompanyID = sq.custId WHERE(WEEK(ss.dateStarted) = '" + DatePickerWeekSer.SelectedDate.Value.ToString("yyyy-MM-dd") + "') ";
-
-            DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
-
-            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
-            mySqlDa.Fill(dSServices);
-
-            return dSServices;
-
-        }
-        private void DisplayReportWeekService()
-        {
-            ReportService.DataSources.Clear();
-            var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.ServiceReport.rdlc");
-            ReportService.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("ServiceTable", GetServiceWeek()));
-            ReportService.LoadReport(rNames);
-            ReportService.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
-            ReportService.RefreshReport();
-        }
         private DataTable GetServiceMonth()
         {
             var dbCon = DBConnection.Instance();
@@ -221,44 +169,10 @@ namespace prototype2
             if (SELECTEDINDEX.Equals(0))
             {
 
-                DisplayReportDayService();
-                WeekDate.Visibility = Visibility.Hidden;
-                ComboBoxYear.Visibility = Visibility.Hidden;
-                ComboBoxSerMonth.Visibility = Visibility.Hidden;
-                monthSer.Visibility = Visibility.Hidden;
-                YearSer.Visibility = Visibility.Hidden;
-                DatePickerStartSer.Visibility = Visibility.Hidden;
-                DatePickerEndSer.Visibility = Visibility.Hidden;
-                StartDateSer.Visibility = Visibility.Hidden;
-                EndDateSer.Visibility = Visibility.Hidden;
-                DatePickerWeekSer.Visibility = Visibility.Hidden;
-                GoButtonService.Visibility = Visibility.Hidden;
-
-
-
-            }
-            if (SELECTEDINDEX.Equals(1))
-            {
 
                 ReportService.Reset();
-                ComboBoxYear.Visibility = Visibility.Hidden;
-                ComboBoxSerMonth.Visibility = Visibility.Hidden;
-                monthSer.Visibility = Visibility.Hidden;
-                YearSer.Visibility = Visibility.Hidden;
-                DatePickerStartSer.Visibility = Visibility.Hidden;
-                DatePickerEndSer.Visibility = Visibility.Hidden;
-                StartDateSer.Visibility = Visibility.Hidden;
-                EndDateSer.Visibility = Visibility.Hidden;
-                DatePickerWeekSer.Visibility = Visibility.Visible;
-                GoButtonService.Visibility = Visibility.Hidden;
-
-
-            }
-            if (SELECTEDINDEX.Equals(2))
-            {
-                ReportService.Reset();
                 WeekDate.Visibility = Visibility.Hidden;
-                DatePickerWeekSer.Visibility = Visibility.Hidden;
+          
                 ComboBoxYear.Visibility = Visibility.Hidden;
                 ComboBoxSerMonth.Visibility = Visibility.Visible;
                 monthSer.Visibility = Visibility.Visible;
@@ -269,12 +183,13 @@ namespace prototype2
                 EndDateSer.Visibility = Visibility.Hidden;
                 GoButtonService.Visibility = Visibility.Hidden;
 
+
             }
-            if (SELECTEDINDEX.Equals(3))
+            if (SELECTEDINDEX.Equals(1))
             {
                 ReportService.Reset();
                 WeekDate.Visibility = Visibility.Hidden;
-                DatePickerWeekSer.Visibility = Visibility.Hidden;
+               
                 ComboBoxYear.Visibility = Visibility.Visible;
                 ComboBoxSerMonth.Visibility = Visibility.Hidden;
                 monthSer.Visibility = Visibility.Hidden;
@@ -286,12 +201,13 @@ namespace prototype2
                 GoButtonService.Visibility = Visibility.Hidden;
 
 
+
             }
-            if (SELECTEDINDEX.Equals(4))
+            if (SELECTEDINDEX.Equals(2))
             {
                 ReportService.Reset();
                 WeekDate.Visibility = Visibility.Hidden;
-                DatePickerWeekSer.Visibility = Visibility.Hidden;
+        
                 ComboBoxYear.Visibility = Visibility.Hidden;
                 ComboBoxSerMonth.Visibility = Visibility.Hidden;
                 monthSer.Visibility = Visibility.Hidden;
@@ -301,6 +217,17 @@ namespace prototype2
                 StartDateSer.Visibility = Visibility.Visible;
                 EndDateSer.Visibility = Visibility.Visible;
                 GoButtonService.Visibility = Visibility.Visible;
+
+            }
+            if (SELECTEDINDEX.Equals(3))
+            {
+            
+
+
+            }
+            if (SELECTEDINDEX.Equals(4))
+            {
+              
             }
         }
 
@@ -331,7 +258,7 @@ namespace prototype2
 
         private void DatePickerWeekSer_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            DisplayReportWeekService(); 
+        
         }
 
         private void GoButtonService_Click(object sender, RoutedEventArgs e)
