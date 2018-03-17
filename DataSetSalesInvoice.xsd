@@ -17,7 +17,7 @@
                          cust_supp_t.companyEmail, cust_supp_t.companyTelephone, cust_supp_t.companyMobile, cust_supp_t.repTitle, cust_supp_t.repLName, cust_supp_t.repFName, cust_supp_t.repMInitial, cust_supp_t.repEmail, 
                          cust_supp_t.repTelephone, cust_supp_t.repMobile, cust_supp_t.companyType, cust_supp_t.isDeleted, sq.sqNoChar AS Expr1, sq.dateOfIssue AS Expr2, sq.custID AS Expr3, sq.quoteSubject, sq.priceNote, 
                          sq.deliveryDate, sq.estDelivery, sq.validityDays, sq.validityDate, sq.otherTerms, sq.VAT AS Expr4, sq.vatIsExcluded, sq.paymentIsLanded, sq.paymentCurrency, sq.status, sq.termsDays AS Expr5, sq.termsDP, 
-                         sq.discountPercent, sq.surveyReportDoc, sq.additionalNote, sq.isDeleted AS Expr6
+                         sq.discountPercent, sq.additionalNote, sq.isDeleted AS Expr6
 FROM            sales_quote_t sq INNER JOIN
                          cust_supp_t ON sq.custID = cust_supp_t.companyID INNER JOIN
                          sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
@@ -80,7 +80,6 @@ WHERE        (si.invoiceNo = @a)</CommandText>
               <Mapping SourceColumn="Expr5" DataSetColumn="Expr5" />
               <Mapping SourceColumn="termsDP" DataSetColumn="termsDP" />
               <Mapping SourceColumn="discountPercent" DataSetColumn="discountPercent" />
-              <Mapping SourceColumn="surveyReportDoc" DataSetColumn="surveyReportDoc" />
               <Mapping SourceColumn="additionalNote" DataSetColumn="additionalNote" />
               <Mapping SourceColumn="Expr6" DataSetColumn="Expr6" />
             </Mappings>
@@ -91,7 +90,7 @@ WHERE        (si.invoiceNo = @a)</CommandText>
               <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.si_view_indiv" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillSiAmount" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataSiAmount" GeneratorSourceName="FillSiAmount" GetMethodModifier="Public" GetMethodName="GetDataSiAmount" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataSiAmount" UserSourceName="FillSiAmount">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        invoiceNo, sqNoChar, discountPercent, SUM(total_item) AS TOTAL, SUM(total_item) * IFNULL(vat, 0) / 100 AS VAT, SUM(total_item) + SUM(total_item) * IFNULL(vat, 0) / 100 AS TOTAL_WITH_VAT
+                    <CommandText>SELECT        invoiceNo, sqNoChar, discountPercent, SUM(total_item) AS TOTAL, SUM(total_item) * IFNULL(SQ_VAT, 0) / 100 AS VAT, SUM(total_item) + SUM(total_item) * IFNULL(SQ_VAT, 0) / 100 AS TOTAL_WITH_VAT
 FROM            si_view_indiv
 WHERE        (invoiceNo = @A)
 GROUP BY invoiceNo</CommandText>
@@ -114,10 +113,10 @@ GROUP BY invoiceNo</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="si_view_indivTableAdapter" GeneratorDataComponentClassName="si_view_indivTableAdapter" Name="si_view_indiv" UserDataComponentName="si_view_indivTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.si_view_indiv" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByItemService" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataByItemService" GeneratorSourceName="FillByItemService" GetMethodModifier="Public" GetMethodName="GetDataByItemService" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByItemService" UserSourceName="FillByItemService">
+              <DbSource ConnectionRef="odc_dbConnectionString (Settings)" DbObjectName="odc_db.si_view_indiv" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByItemService" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataByItemService" GeneratorSourceName="FillByItemService" GetMethodModifier="Public" GetMethodName="GetDataByItemService" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataByItemService" UserSourceName="FillByItemService">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        invoiceNo, dateOfIssue, dueDate, notes, sqNoChar, quoteSubject, priceNote, deliveryDate, estDelivery, validityDays, validityDate, otherTerms, vat, paymentCurrency, termsDays, termsDP, discountPercent, 
+                    <CommandText>SELECT        invoiceNo, dateOfIssue, dueDate, notes, sqNoChar, quoteSubject, priceNote, deliveryDate, estDelivery, validityDays, validityDate, otherTerms, Sq_VAT, paymentCurrency, termsDays, termsDP, discountPercent, 
                          additionalNote, busStyle, taxNumber, CompanyAddInfo, companyAddress, companyCity, companyPostalCode, companyEmail, companyTelephone, companyMobile, repTitle, repLname, repFName, repMInitial, 
                          repEmail, repMobile, companyName, ID, DESCRIPTION, itemName, itemDescr, UNIT_PRICE, itemQnty, total_item
 FROM            si_view_indiv
@@ -142,7 +141,6 @@ WHERE        (invoiceNo = @a)</CommandText>
               <Mapping SourceColumn="validityDays" DataSetColumn="validityDays" />
               <Mapping SourceColumn="validityDate" DataSetColumn="validityDate" />
               <Mapping SourceColumn="otherTerms" DataSetColumn="otherTerms" />
-              <Mapping SourceColumn="vat" DataSetColumn="vat" />
               <Mapping SourceColumn="paymentCurrency" DataSetColumn="paymentCurrency" />
               <Mapping SourceColumn="termsDays" DataSetColumn="termsDays" />
               <Mapping SourceColumn="termsDP" DataSetColumn="termsDP" />
@@ -171,6 +169,7 @@ WHERE        (invoiceNo = @a)</CommandText>
               <Mapping SourceColumn="UNIT_PRICE" DataSetColumn="UNIT_PRICE" />
               <Mapping SourceColumn="itemQnty" DataSetColumn="itemQnty" />
               <Mapping SourceColumn="total_item" DataSetColumn="total_item" />
+              <Mapping SourceColumn="Sq_VAT" DataSetColumn="Sq_VAT" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -182,7 +181,7 @@ WHERE        (invoiceNo = @a)</CommandText>
   <xs:element name="DataSetSalesInvoice" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DataSetSalesInvoice" msprop:Generator_UserDSName="DataSetSalesInvoice">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="SalesInvoice" msprop:Generator_TableClassName="SalesInvoiceDataTable" msprop:Generator_TableVarName="tableSalesInvoice" msprop:Generator_TablePropName="SalesInvoice" msprop:Generator_RowDeletingName="SalesInvoiceRowDeleting" msprop:Generator_RowChangingName="SalesInvoiceRowChanging" msprop:Generator_RowEvHandlerName="SalesInvoiceRowChangeEventHandler" msprop:Generator_RowDeletedName="SalesInvoiceRowDeleted" msprop:Generator_UserTableName="SalesInvoice" msprop:Generator_RowChangedName="SalesInvoiceRowChanged" msprop:Generator_RowEvArgName="SalesInvoiceRowChangeEvent" msprop:Generator_RowClassName="SalesInvoiceRow">
+        <xs:element name="SalesInvoice" msprop:Generator_TableClassName="SalesInvoiceDataTable" msprop:Generator_TableVarName="tableSalesInvoice" msprop:Generator_RowChangedName="SalesInvoiceRowChanged" msprop:Generator_TablePropName="SalesInvoice" msprop:Generator_RowDeletingName="SalesInvoiceRowDeleting" msprop:Generator_RowChangingName="SalesInvoiceRowChanging" msprop:Generator_RowEvHandlerName="SalesInvoiceRowChangeEventHandler" msprop:Generator_RowDeletedName="SalesInvoiceRowDeleted" msprop:Generator_RowClassName="SalesInvoiceRow" msprop:Generator_UserTableName="SalesInvoice" msprop:Generator_RowEvArgName="SalesInvoiceRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="companyName" msprop:Generator_ColumnVarNameInTable="columncompanyName" msprop:Generator_ColumnPropNameInRow="companyName" msprop:Generator_ColumnPropNameInTable="companyNameColumn" msprop:Generator_UserColumnName="companyName">
@@ -391,7 +390,6 @@ WHERE        (invoiceNo = @a)</CommandText>
               <xs:element name="Expr5" msprop:Generator_ColumnVarNameInTable="columnExpr5" msprop:Generator_ColumnPropNameInRow="Expr5" msprop:Generator_ColumnPropNameInTable="Expr5Column" msprop:Generator_UserColumnName="Expr5" type="xs:int" minOccurs="0" />
               <xs:element name="termsDP" msprop:Generator_ColumnVarNameInTable="columntermsDP" msprop:Generator_ColumnPropNameInRow="termsDP" msprop:Generator_ColumnPropNameInTable="termsDPColumn" msprop:Generator_UserColumnName="termsDP" type="xs:int" minOccurs="0" />
               <xs:element name="discountPercent" msprop:Generator_ColumnVarNameInTable="columndiscountPercent" msprop:Generator_ColumnPropNameInRow="discountPercent" msprop:Generator_ColumnPropNameInTable="discountPercentColumn" msprop:Generator_UserColumnName="discountPercent" type="xs:decimal" minOccurs="0" />
-              <xs:element name="surveyReportDoc" msprop:Generator_ColumnVarNameInTable="columnsurveyReportDoc" msprop:Generator_ColumnPropNameInRow="surveyReportDoc" msprop:Generator_ColumnPropNameInTable="surveyReportDocColumn" msprop:Generator_UserColumnName="surveyReportDoc" type="xs:base64Binary" minOccurs="0" />
               <xs:element name="additionalNote" msprop:Generator_ColumnVarNameInTable="columnadditionalNote" msprop:Generator_ColumnPropNameInRow="additionalNote" msprop:Generator_ColumnPropNameInTable="additionalNoteColumn" msprop:Generator_UserColumnName="additionalNote" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -403,7 +401,7 @@ WHERE        (invoiceNo = @a)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="sales_Invoice_t" msprop:Generator_TableClassName="sales_Invoice_tDataTable" msprop:Generator_TableVarName="tablesales_Invoice_t" msprop:Generator_RowChangedName="sales_Invoice_tRowChanged" msprop:Generator_TablePropName="sales_Invoice_t" msprop:Generator_RowDeletingName="sales_Invoice_tRowDeleting" msprop:Generator_RowChangingName="sales_Invoice_tRowChanging" msprop:Generator_RowEvHandlerName="sales_Invoice_tRowChangeEventHandler" msprop:Generator_RowDeletedName="sales_Invoice_tRowDeleted" msprop:Generator_RowClassName="sales_Invoice_tRow" msprop:Generator_UserTableName="sales_Invoice_t" msprop:Generator_RowEvArgName="sales_Invoice_tRowChangeEvent">
+        <xs:element name="sales_Invoice_t" msprop:Generator_TableClassName="sales_Invoice_tDataTable" msprop:Generator_TableVarName="tablesales_Invoice_t" msprop:Generator_TablePropName="sales_Invoice_t" msprop:Generator_RowDeletingName="sales_Invoice_tRowDeleting" msprop:Generator_RowChangingName="sales_Invoice_tRowChanging" msprop:Generator_RowEvHandlerName="sales_Invoice_tRowChangeEventHandler" msprop:Generator_RowDeletedName="sales_Invoice_tRowDeleted" msprop:Generator_UserTableName="sales_Invoice_t" msprop:Generator_RowChangedName="sales_Invoice_tRowChanged" msprop:Generator_RowEvArgName="sales_Invoice_tRowChangeEvent" msprop:Generator_RowClassName="sales_Invoice_tRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="invoiceNo" msprop:Generator_ColumnVarNameInTable="columninvoiceNo" msprop:Generator_ColumnPropNameInRow="invoiceNo" msprop:Generator_ColumnPropNameInTable="invoiceNoColumn" msprop:Generator_UserColumnName="invoiceNo" type="xs:int" />
@@ -421,7 +419,7 @@ WHERE        (invoiceNo = @a)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="si_view_indiv" msprop:Generator_TableClassName="si_view_indivDataTable" msprop:Generator_TableVarName="tablesi_view_indiv" msprop:Generator_TablePropName="si_view_indiv" msprop:Generator_RowDeletingName="si_view_indivRowDeleting" msprop:Generator_RowChangingName="si_view_indivRowChanging" msprop:Generator_RowEvHandlerName="si_view_indivRowChangeEventHandler" msprop:Generator_RowDeletedName="si_view_indivRowDeleted" msprop:Generator_UserTableName="si_view_indiv" msprop:Generator_RowChangedName="si_view_indivRowChanged" msprop:Generator_RowEvArgName="si_view_indivRowChangeEvent" msprop:Generator_RowClassName="si_view_indivRow">
+        <xs:element name="si_view_indiv" msprop:Generator_TableClassName="si_view_indivDataTable" msprop:Generator_TableVarName="tablesi_view_indiv" msprop:Generator_RowChangedName="si_view_indivRowChanged" msprop:Generator_TablePropName="si_view_indiv" msprop:Generator_RowDeletingName="si_view_indivRowDeleting" msprop:Generator_RowChangingName="si_view_indivRowChanging" msprop:Generator_RowEvHandlerName="si_view_indivRowChangeEventHandler" msprop:Generator_RowDeletedName="si_view_indivRowDeleted" msprop:Generator_RowClassName="si_view_indivRow" msprop:Generator_UserTableName="si_view_indiv" msprop:Generator_RowEvArgName="si_view_indivRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="invoiceNo" msprop:Generator_ColumnVarNameInTable="columninvoiceNo" msprop:Generator_ColumnPropNameInRow="invoiceNo" msprop:Generator_ColumnPropNameInTable="invoiceNoColumn" msprop:Generator_UserColumnName="invoiceNo" type="xs:int" />
@@ -466,7 +464,6 @@ WHERE        (invoiceNo = @a)</CommandText>
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="vat" msprop:Generator_ColumnVarNameInTable="columnvat" msprop:Generator_ColumnPropNameInRow="vat" msprop:Generator_ColumnPropNameInTable="vatColumn" msprop:Generator_UserColumnName="vat" type="xs:decimal" minOccurs="0" />
               <xs:element name="paymentCurrency" msprop:Generator_ColumnVarNameInTable="columnpaymentCurrency" msprop:Generator_ColumnPropNameInRow="paymentCurrency" msprop:Generator_ColumnPropNameInTable="paymentCurrencyColumn" msprop:Generator_UserColumnName="paymentCurrency" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -621,6 +618,7 @@ WHERE        (invoiceNo = @a)</CommandText>
               <xs:element name="UNIT_PRICE" msprop:Generator_ColumnVarNameInTable="columnUNIT_PRICE" msprop:Generator_ColumnPropNameInRow="UNIT_PRICE" msprop:Generator_ColumnPropNameInTable="UNIT_PRICEColumn" msprop:Generator_UserColumnName="UNIT_PRICE" type="xs:decimal" minOccurs="0" />
               <xs:element name="itemQnty" msprop:Generator_ColumnVarNameInTable="columnitemQnty" msprop:Generator_ColumnPropNameInRow="itemQnty" msprop:Generator_ColumnPropNameInTable="itemQntyColumn" msprop:Generator_UserColumnName="itemQnty" type="xs:long" minOccurs="0" />
               <xs:element name="total_item" msprop:Generator_ColumnVarNameInTable="columntotal_item" msprop:Generator_ColumnPropNameInRow="total_item" msprop:Generator_ColumnPropNameInTable="total_itemColumn" msprop:Generator_UserColumnName="total_item" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Sq_VAT" msprop:Generator_ColumnVarNameInTable="columnSq_VAT" msprop:Generator_ColumnPropNameInRow="Sq_VAT" msprop:Generator_ColumnPropNameInTable="Sq_VATColumn" msprop:Generator_UserColumnName="Sq_VAT" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

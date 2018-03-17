@@ -449,8 +449,6 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columndiscountPercent;
             
-            private global::System.Data.DataColumn columnsurveyReportDoc;
-            
             private global::System.Data.DataColumn columnadditionalNote;
             
             private global::System.Data.DataColumn columnExpr6;
@@ -890,14 +888,6 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn surveyReportDocColumn {
-                get {
-                    return this.columnsurveyReportDoc;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn additionalNoteColumn {
                 get {
                     return this.columnadditionalNote;
@@ -998,7 +988,6 @@ namespace prototype2 {
                         int Expr5, 
                         int termsDP, 
                         decimal discountPercent, 
-                        byte[] surveyReportDoc, 
                         string additionalNote, 
                         bool Expr6) {
                 SalesInvoiceRow rowSalesInvoiceRow = ((SalesInvoiceRow)(this.NewRow()));
@@ -1053,7 +1042,6 @@ namespace prototype2 {
                         Expr5,
                         termsDP,
                         discountPercent,
-                        surveyReportDoc,
                         additionalNote,
                         Expr6};
                 rowSalesInvoiceRow.ItemArray = columnValuesArray;
@@ -1135,7 +1123,6 @@ namespace prototype2 {
                 this.columnExpr5 = base.Columns["Expr5"];
                 this.columntermsDP = base.Columns["termsDP"];
                 this.columndiscountPercent = base.Columns["discountPercent"];
-                this.columnsurveyReportDoc = base.Columns["surveyReportDoc"];
                 this.columnadditionalNote = base.Columns["additionalNote"];
                 this.columnExpr6 = base.Columns["Expr6"];
             }
@@ -1243,8 +1230,6 @@ namespace prototype2 {
                 base.Columns.Add(this.columntermsDP);
                 this.columndiscountPercent = new global::System.Data.DataColumn("discountPercent", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndiscountPercent);
-                this.columnsurveyReportDoc = new global::System.Data.DataColumn("surveyReportDoc", typeof(byte[]), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnsurveyReportDoc);
                 this.columnadditionalNote = new global::System.Data.DataColumn("additionalNote", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnadditionalNote);
                 this.columnExpr6 = new global::System.Data.DataColumn("Expr6", typeof(bool), null, global::System.Data.MappingType.Element);
@@ -1777,8 +1762,6 @@ namespace prototype2 {
             
             private global::System.Data.DataColumn columnotherTerms;
             
-            private global::System.Data.DataColumn columnvat;
-            
             private global::System.Data.DataColumn columnpaymentCurrency;
             
             private global::System.Data.DataColumn columntermsDays;
@@ -1834,6 +1817,8 @@ namespace prototype2 {
             private global::System.Data.DataColumn columnitemQnty;
             
             private global::System.Data.DataColumn columntotal_item;
+            
+            private global::System.Data.DataColumn columnSq_VAT;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -1961,14 +1946,6 @@ namespace prototype2 {
             public global::System.Data.DataColumn otherTermsColumn {
                 get {
                     return this.columnotherTerms;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn vatColumn {
-                get {
-                    return this.columnvat;
                 }
             }
             
@@ -2198,6 +2175,14 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Sq_VATColumn {
+                get {
+                    return this.columnSq_VAT;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2246,7 +2231,6 @@ namespace prototype2 {
                         int validityDays, 
                         System.DateTime validityDate, 
                         string otherTerms, 
-                        decimal vat, 
                         string paymentCurrency, 
                         int termsDays, 
                         int termsDP, 
@@ -2274,7 +2258,8 @@ namespace prototype2 {
                         string itemDescr, 
                         decimal UNIT_PRICE, 
                         long itemQnty, 
-                        decimal total_item) {
+                        decimal total_item, 
+                        decimal Sq_VAT) {
                 si_view_indivRow rowsi_view_indivRow = ((si_view_indivRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         invoiceNo,
@@ -2289,7 +2274,6 @@ namespace prototype2 {
                         validityDays,
                         validityDate,
                         otherTerms,
-                        vat,
                         paymentCurrency,
                         termsDays,
                         termsDP,
@@ -2317,7 +2301,8 @@ namespace prototype2 {
                         itemDescr,
                         UNIT_PRICE,
                         itemQnty,
-                        total_item};
+                        total_item,
+                        Sq_VAT};
                 rowsi_view_indivRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowsi_view_indivRow);
                 return rowsi_view_indivRow;
@@ -2352,7 +2337,6 @@ namespace prototype2 {
                 this.columnvalidityDays = base.Columns["validityDays"];
                 this.columnvalidityDate = base.Columns["validityDate"];
                 this.columnotherTerms = base.Columns["otherTerms"];
-                this.columnvat = base.Columns["vat"];
                 this.columnpaymentCurrency = base.Columns["paymentCurrency"];
                 this.columntermsDays = base.Columns["termsDays"];
                 this.columntermsDP = base.Columns["termsDP"];
@@ -2381,6 +2365,7 @@ namespace prototype2 {
                 this.columnUNIT_PRICE = base.Columns["UNIT_PRICE"];
                 this.columnitemQnty = base.Columns["itemQnty"];
                 this.columntotal_item = base.Columns["total_item"];
+                this.columnSq_VAT = base.Columns["Sq_VAT"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2410,8 +2395,6 @@ namespace prototype2 {
                 base.Columns.Add(this.columnvalidityDate);
                 this.columnotherTerms = new global::System.Data.DataColumn("otherTerms", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnotherTerms);
-                this.columnvat = new global::System.Data.DataColumn("vat", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnvat);
                 this.columnpaymentCurrency = new global::System.Data.DataColumn("paymentCurrency", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnpaymentCurrency);
                 this.columntermsDays = new global::System.Data.DataColumn("termsDays", typeof(int), null, global::System.Data.MappingType.Element);
@@ -2468,6 +2451,8 @@ namespace prototype2 {
                 base.Columns.Add(this.columnitemQnty);
                 this.columntotal_item = new global::System.Data.DataColumn("total_item", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntotal_item);
+                this.columnSq_VAT = new global::System.Data.DataColumn("Sq_VAT", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSq_VAT);
                 this.columninvoiceNo.AllowDBNull = false;
                 this.columndateOfIssue.AllowDBNull = false;
                 this.columnnotes.MaxLength = 65535;
@@ -3369,22 +3354,6 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public byte[] surveyReportDoc {
-                get {
-                    try {
-                        return ((byte[])(this[this.tableSalesInvoice.surveyReportDocColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'surveyReportDoc\' in table \'SalesInvoice\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableSalesInvoice.surveyReportDocColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string additionalNote {
                 get {
                     try {
@@ -3837,18 +3806,6 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IssurveyReportDocNull() {
-                return this.IsNull(this.tableSalesInvoice.surveyReportDocColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetsurveyReportDocNull() {
-                this[this.tableSalesInvoice.surveyReportDocColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsadditionalNoteNull() {
                 return this.IsNull(this.tableSalesInvoice.additionalNoteColumn);
             }
@@ -4209,22 +4166,6 @@ namespace prototype2 {
                 }
                 set {
                     this[this.tablesi_view_indiv.otherTermsColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public decimal vat {
-                get {
-                    try {
-                        return ((decimal)(this[this.tablesi_view_indiv.vatColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'vat\' in table \'si_view_indiv\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablesi_view_indiv.vatColumn] = value;
                 }
             }
             
@@ -4653,6 +4594,22 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Sq_VAT {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablesi_view_indiv.Sq_VATColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Sq_VAT\' in table \'si_view_indiv\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablesi_view_indiv.Sq_VATColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsdueDateNull() {
                 return this.IsNull(this.tablesi_view_indiv.dueDateColumn);
             }
@@ -4757,18 +4714,6 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetotherTermsNull() {
                 this[this.tablesi_view_indiv.otherTermsColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsvatNull() {
-                return this.IsNull(this.tablesi_view_indiv.vatColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetvatNull() {
-                this[this.tablesi_view_indiv.vatColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5045,6 +4990,18 @@ namespace prototype2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void Settotal_itemNull() {
                 this[this.tablesi_view_indiv.total_itemColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsSq_VATNull() {
+                return this.IsNull(this.tablesi_view_indiv.Sq_VATColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetSq_VATNull() {
+                this[this.tablesi_view_indiv.Sq_VATColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -5325,7 +5282,6 @@ namespace prototype2.DataSetSalesInvoiceTableAdapters {
             tableMapping.ColumnMappings.Add("Expr5", "Expr5");
             tableMapping.ColumnMappings.Add("termsDP", "termsDP");
             tableMapping.ColumnMappings.Add("discountPercent", "discountPercent");
-            tableMapping.ColumnMappings.Add("surveyReportDoc", "surveyReportDoc");
             tableMapping.ColumnMappings.Add("additionalNote", "additionalNote");
             tableMapping.ColumnMappings.Add("Expr6", "Expr6");
             this._adapter.TableMappings.Add(tableMapping);
@@ -5349,7 +5305,7 @@ namespace prototype2.DataSetSalesInvoiceTableAdapters {
                          cust_supp_t.companyEmail, cust_supp_t.companyTelephone, cust_supp_t.companyMobile, cust_supp_t.repTitle, cust_supp_t.repLName, cust_supp_t.repFName, cust_supp_t.repMInitial, cust_supp_t.repEmail, 
                          cust_supp_t.repTelephone, cust_supp_t.repMobile, cust_supp_t.companyType, cust_supp_t.isDeleted, sq.sqNoChar AS Expr1, sq.dateOfIssue AS Expr2, sq.custID AS Expr3, sq.quoteSubject, sq.priceNote, 
                          sq.deliveryDate, sq.estDelivery, sq.validityDays, sq.validityDate, sq.otherTerms, sq.VAT AS Expr4, sq.vatIsExcluded, sq.paymentIsLanded, sq.paymentCurrency, sq.status, sq.termsDays AS Expr5, sq.termsDP, 
-                         sq.discountPercent, sq.surveyReportDoc, sq.additionalNote, sq.isDeleted AS Expr6
+                         sq.discountPercent, sq.additionalNote, sq.isDeleted AS Expr6
 FROM            sales_quote_t sq INNER JOIN
                          cust_supp_t ON sq.custID = cust_supp_t.companyID INNER JOIN
                          sales_invoice_t si ON sq.sqNoChar = si.sqNoChar
@@ -5534,7 +5490,7 @@ WHERE        (si.invoiceNo = @a)";
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[1];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        invoiceNo, sqNoChar, discountPercent, SUM(total_item) AS TOTAL, SUM(total_item) * IFNULL(vat, 0) / 100 AS VAT, SUM(total_item) + SUM(total_item) * IFNULL(vat, 0) / 100 AS TOTAL_WITH_VAT
+            this._commandCollection[0].CommandText = @"SELECT        invoiceNo, sqNoChar, discountPercent, SUM(total_item) AS TOTAL, SUM(total_item) * IFNULL(SQ_VAT, 0) / 100 AS VAT, SUM(total_item) + SUM(total_item) * IFNULL(SQ_VAT, 0) / 100 AS TOTAL_WITH_VAT
 FROM            si_view_indiv
 WHERE        (invoiceNo = @A)
 GROUP BY invoiceNo";
@@ -5708,7 +5664,6 @@ GROUP BY invoiceNo";
             tableMapping.ColumnMappings.Add("validityDays", "validityDays");
             tableMapping.ColumnMappings.Add("validityDate", "validityDate");
             tableMapping.ColumnMappings.Add("otherTerms", "otherTerms");
-            tableMapping.ColumnMappings.Add("vat", "vat");
             tableMapping.ColumnMappings.Add("paymentCurrency", "paymentCurrency");
             tableMapping.ColumnMappings.Add("termsDays", "termsDays");
             tableMapping.ColumnMappings.Add("termsDP", "termsDP");
@@ -5737,6 +5692,7 @@ GROUP BY invoiceNo";
             tableMapping.ColumnMappings.Add("UNIT_PRICE", "UNIT_PRICE");
             tableMapping.ColumnMappings.Add("itemQnty", "itemQnty");
             tableMapping.ColumnMappings.Add("total_item", "total_item");
+            tableMapping.ColumnMappings.Add("Sq_VAT", "Sq_VAT");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -5753,7 +5709,7 @@ GROUP BY invoiceNo";
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[1];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        invoiceNo, dateOfIssue, dueDate, notes, sqNoChar, quoteSubject, priceNote, deliveryDate, estDelivery, validityDays, validityDate, otherTerms, vat, paymentCurrency, termsDays, termsDP, discountPercent, 
+            this._commandCollection[0].CommandText = @"SELECT        invoiceNo, dateOfIssue, dueDate, notes, sqNoChar, quoteSubject, priceNote, deliveryDate, estDelivery, validityDays, validityDate, otherTerms, Sq_VAT, paymentCurrency, termsDays, termsDP, discountPercent, 
                          additionalNote, busStyle, taxNumber, CompanyAddInfo, companyAddress, companyCity, companyPostalCode, companyEmail, companyTelephone, companyMobile, repTitle, repLname, repFName, repMInitial, 
                          repEmail, repMobile, companyName, ID, DESCRIPTION, itemName, itemDescr, UNIT_PRICE, itemQnty, total_item
 FROM            si_view_indiv

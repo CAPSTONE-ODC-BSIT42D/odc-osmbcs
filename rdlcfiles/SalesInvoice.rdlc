@@ -1198,7 +1198,7 @@
                               <Style />
                             </TextRun>
                             <TextRun>
-                              <Value>="12"/"100"*Fields!TOTAL.Value+Fields!TOTAL.Value</Value>
+                              <Value>=Fields!TOTAL_WITH_VAT.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1271,7 +1271,7 @@
                               <Style />
                             </TextRun>
                             <TextRun>
-                              <Value>="12"/"100"*Fields!TOTAL.Value</Value>
+                              <Value>=Fields!VAT.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1490,7 +1490,7 @@
                               <Style />
                             </TextRun>
                             <TextRun>
-                              <Value>="12"/"100"*Fields!TOTAL.Value</Value>
+                              <Value>=Fields!VAT.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1696,7 +1696,7 @@
                               <Style />
                             </TextRun>
                             <TextRun>
-                              <Value>="12"/"100"*Fields!TOTAL.Value+Fields!TOTAL.Value - "12"/"100"*Fields!TOTAL.Value</Value>
+                              <Value>=Fields!TOTAL.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1769,7 +1769,7 @@
                               <Style />
                             </TextRun>
                             <TextRun>
-                              <Value>="12"/"100"*Fields!TOTAL.Value</Value>
+                              <Value>=Fields!VAT.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1842,7 +1842,7 @@
                               <Style />
                             </TextRun>
                             <TextRun>
-                              <Value>="12"/"100"*Fields!TOTAL.Value+Fields!TOTAL.Value</Value>
+                              <Value>=Fields!TOTAL_WITH_VAT.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1895,7 +1895,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.38306in</Width>
+              <Width>1.71639in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1915,7 +1915,7 @@
                               <Style />
                             </TextRun>
                             <TextRun>
-                              <Value>="12"/"100"*Fields!TOTAL.Value+Fields!TOTAL.Value</Value>
+                              <Value>=Fields!TOTAL_WITH_VAT.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1956,7 +1956,7 @@
         <Top>5.56125in</Top>
         <Left>1.94319in</Left>
         <Height>0.25in</Height>
-        <Width>1.38306in</Width>
+        <Width>1.71639in</Width>
         <ZIndex>40</ZIndex>
         <Style>
           <Border>
@@ -2703,10 +2703,6 @@
           <DataField>discountPercent</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
-        <Field Name="surveyReportDoc">
-          <DataField>surveyReportDoc</DataField>
-          <rd:TypeName>System.Byte[]</rd:TypeName>
-        </Field>
         <Field Name="additionalNote">
           <DataField>additionalNote</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -2819,10 +2815,6 @@
           <DataField>otherTerms</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="vat">
-          <DataField>vat</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
         <Field Name="paymentCurrency">
           <DataField>paymentCurrency</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -2933,6 +2925,10 @@
         </Field>
         <Field Name="total_item">
           <DataField>total_item</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Sq_VAT">
+          <DataField>Sq_VAT</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>
