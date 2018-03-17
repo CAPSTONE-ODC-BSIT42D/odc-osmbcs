@@ -459,6 +459,10 @@ namespace prototype2
                     int termsDP;
                     int.TryParse(dr["termsDP"].ToString(), out termsDP);
 
+                    int fileID;
+                    int.TryParse(dr["fileID"].ToString(), out fileID);
+
+
                     decimal discountPerc;
                     decimal.TryParse(dr["discountPercent"].ToString(), out discountPerc);
 
@@ -483,6 +487,7 @@ namespace prototype2
                         termsDays_ = termsDays,
                         termsDP_ = termsDP,
                         discountPercent_ = discountPerc,
+                        fileID_ = fileID,
                          additionalTerms_ = dr["additionalNote"].ToString()
                     });
                 }
