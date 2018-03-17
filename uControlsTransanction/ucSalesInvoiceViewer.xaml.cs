@@ -45,10 +45,37 @@ namespace prototype2
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesInvoice.rdlc");
             SalesInvoiceViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetSalesInvoice", GetSales()));
             SalesInvoiceViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetSIAmount", GetSalesAmount()));
+            SalesInvoiceViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetItemService", GetSalesItemService()));
             SalesInvoiceViewer.LoadReport(rNames);
             SalesInvoiceViewer.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             SalesInvoiceViewer.RefreshReport();
            
+        }
+        private DataTable GetSalesItemService()
+        {
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            string query = "SELECT LAST_INSERT_ID();";
+            string result = dbCon.selectScalar(query, dbCon.Connection).ToString();
+
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+            if (MainVM.SelectedSalesInvoice == null)
+                cmd.CommandText = "SELECT        invoiceNo, dateOfIssue, dueDate, notes, sqNoChar, quoteSubject, priceNote, deliveryDate, estDelivery, validityDays, validityDate, otherTerms, vat, paymentCurrency, termsDays, termsDP, discountPercent,   additionalNote, busStyle, taxNumber, CompanyAddInfo, companyAddress, companyCity, companyPostalCode, companyEmail, companyTelephone, companyMobile, repTitle, repLname, repFName, repMInitial,   repEmail, repMobile, companyName, ID, DESCRIPTION, itemName, itemDescr, UNIT_PRICE, itemQnty, total_item FROM            si_view_indiv WHERE(invoiceNo = '" + result + "') ";
+
+            else
+                cmd.CommandText = "SELECT        invoiceNo, dateOfIssue, dueDate, notes, sqNoChar, quoteSubject, priceNote, deliveryDate, estDelivery, validityDays, validityDate, otherTerms, vat, paymentCurrency, termsDays, termsDP, discountPercent,   additionalNote, busStyle, taxNumber, CompanyAddInfo, companyAddress, companyCity, companyPostalCode, companyEmail, companyTelephone, companyMobile, repTitle, repLname, repFName, repMInitial,   repEmail, repMobile, companyName, ID, DESCRIPTION, itemName, itemDescr, UNIT_PRICE, itemQnty, total_item FROM            si_view_indiv WHERE(invoiceNo ='" + MainVM.SelectedSalesInvoice.invoiceNo_ + "') ";
+
+
+            DataSetSalesInvoice.si_view_indivDataTable dSItem = new DataSetSalesInvoice.si_view_indivDataTable();
+
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSItem);
+
+            return dSItem;
+
         }
         private DataTable GetSalesAmount()
         {
@@ -62,10 +89,10 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
             if (MainVM.SelectedSalesInvoice == null)
-                cmd.CommandText = "SELECT        si.vat,  si.withholdingTax, TRUNCATE(IFNULL(sq.discountPercent, 0), 2) AS LESS_DISCOUNT, TRUNCATE(TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) / 100)) * IFNULL(ia.itemQnty, 0)     + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) *TRUNCATE(IFNULL(sq.VAT, 0) / 100, 2), 2) AS ADD_VAT_IF_INCLUSIVE, TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc,   0) / 100)) * IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) -TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) / 100)) * IFNULL(ia.itemQnty, 0)   + IFNULL(sa.totalCost, 0), 2) * TRUNCATE(IFNULL(sq.discountPercent, 0) / 100, 2) + TRUNCATE(TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) / 100)) * IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) * TRUNCATE(IFNULL(sq.VAT, 0) / 100, 2), 2) AS TOTAL_AMOUNT FROM sales_quote_t sq LEFT OUTER JOIN    items_availed_t ia ON sq.sqNoChar = ia.sqNoChar LEFT OUTER JOIN  item_t i ON i.ID = ia.itemID LEFT OUTER JOIN    markup_hist_t mh ON mh.itemID = ia.itemID INNER JOIN  cust_supp_t cs ON cs.companyID = sq.custID INNER JOIN  provinces_t p ON p.id = cs.companyProvinceID LEFT OUTER JOIN  services_availed_t sa ON sa.sqNoChar = sq.sqNoChar LEFT OUTER JOIN   services_t s ON s.serviceID = sa.serviceID LEFT OUTER JOIN  fees_per_transaction_t ft ON ft.servicesAvailedID = sa.id INNER JOIN   sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(si.invoiceNo =  '" + result + "') ";
+                cmd.CommandText = "SELECT        invoiceNo, sqNoChar, discountPercent, SUM(total_item) AS TOTAL, SUM(total_item) * IFNULL(vat, 0) / 100 AS VAT, SUM(total_item) + SUM(total_item) * IFNULL(vat, 0) / 100 AS TOTAL_WITH_VAT FROM si_view_indiv WHERE(invoiceNo = '" + result + "') GROUP BY invoiceNo ";
 
             else
-                cmd.CommandText = "SELECT       si.vat,  si.withholdingTax,  TRUNCATE(IFNULL(sq.discountPercent, 0), 2) AS LESS_DISCOUNT, TRUNCATE(TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) / 100)) * IFNULL(ia.itemQnty, 0)     + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) *TRUNCATE(IFNULL(sq.VAT, 0) / 100, 2), 2) AS ADD_VAT_IF_INCLUSIVE, TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc,   0) / 100)) * IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) -TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) / 100)) * IFNULL(ia.itemQnty, 0)   + IFNULL(sa.totalCost, 0), 2) * TRUNCATE(IFNULL(sq.discountPercent, 0) / 100, 2) + TRUNCATE(TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) / 100)) * IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) * TRUNCATE(IFNULL(sq.VAT, 0) / 100, 2), 2) AS TOTAL_AMOUNT FROM sales_quote_t sq LEFT OUTER JOIN    items_availed_t ia ON sq.sqNoChar = ia.sqNoChar LEFT OUTER JOIN  item_t i ON i.ID = ia.itemID LEFT OUTER JOIN    markup_hist_t mh ON mh.itemID = ia.itemID INNER JOIN  cust_supp_t cs ON cs.companyID = sq.custID INNER JOIN  provinces_t p ON p.id = cs.companyProvinceID LEFT OUTER JOIN  services_availed_t sa ON sa.sqNoChar = sq.sqNoChar LEFT OUTER JOIN   services_t s ON s.serviceID = sa.serviceID LEFT OUTER JOIN  fees_per_transaction_t ft ON ft.servicesAvailedID = sa.id INNER JOIN   sales_invoice_t si ON si.sqNoChar = sq.sqNoChar WHERE(si.invoiceNo = '" + MainVM.SelectedSalesInvoice.invoiceNo_ + "')";
+                cmd.CommandText = "SELECT        invoiceNo, sqNoChar, discountPercent, SUM(total_item) AS TOTAL, SUM(total_item) * IFNULL(vat, 0) / 100 AS VAT, SUM(total_item) + SUM(total_item) * IFNULL(vat, 0) / 100 AS TOTAL_WITH_VAT FROM si_view_indiv WHERE(invoiceNo ='" + MainVM.SelectedSalesInvoice.invoiceNo_ + "') GROUP BY invoiceNo ";
            
 
             DataSetSalesInvoice.sales_Invoice_tDataTable dSItem = new DataSetSalesInvoice.sales_Invoice_tDataTable();
@@ -89,9 +116,9 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
             if (MainVM.SelectedSalesInvoice == null)
-                cmd.CommandText = "SELECT      cs.taxNumber AS Expr2, si.invoiceNo, si.custID, si.sqNoChar, si.dateOfIssue, si.termsDays, si.dueDate, si.paymentStatus, si.vat, si.sc_pwd_discount, si.withholdingTax, si.notes, sq.sqNoChar AS Expr1, cs.companyID, sq.termsDP,    s.servicePrice, s.serviceDesc, i.itemDescr, cs.companyName, cs.busStyle, cs.taxNumber, cs.companyAddInfo, cs.companyAddress, cs.companyCity, cs.companyProvinceID, cs.companyPostalCode,   cs.companyEmail, cs.companyTelephone, cs.companyMobile, cs.repTitle, cs.repLName, cs.repFName, cs.repMInitial, cs.repEmail, cs.repTelephone, cs.repMobile, cs.companyType, cs.isDeleted, i.itemName,   s.serviceName, TRUNCATE(IFNULL(sq.discountPercent, 0) / 100, 2) AS LESS_DISCOUNT, TRUNCATE(IFNULL(sq.VAT, 0), 2) AS IF_VAT_INCLUSIVE, TRUNCATE(IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0)     * (IFNULL(mh.markupPerc, 0) / 100), 2) AS UNIT_PRICE, ia.itemQnty, TRUNCATE(IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) / 100), 2) * IFNULL(ia.itemQnty, 0) AS total_item,    TRUNCATE(IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) AS total_service FROM sales_quote_t sq LEFT OUTER JOIN  items_availed_t ia ON sq.sqNoChar = ia.sqNoChar LEFT OUTER JOIN   item_t i ON i.ID = ia.itemID LEFT OUTER JOIN  markup_hist_t mh ON mh.itemID = ia.itemID INNER JOIN    cust_supp_t cs ON cs.companyID = sq.custID INNER JOIN   provinces_t p ON p.id = cs.companyProvinceID LEFT OUTER JOIN  services_availed_t sa ON sa.sqNoChar = sq.sqNoChar LEFT OUTER JOIN services_t s ON s.serviceID = sa.serviceID LEFT OUTER JOIN  fees_per_transaction_t ft ON ft.servicesAvailedID = sa.id INNER JOIN    sales_invoice_t si ON si.sqNoChar = sq.sqNoChar  where si.invoiceno='" + result + "'";
+                cmd.CommandText = "SELECT        si.invoiceNo, si.custID, si.sqNoChar, si.dateOfIssue, si.termsDays, si.dueDate, si.paymentStatus, si.vat, si.sc_pwd_discount, si.withholdingTax, si.notes, cust_supp_t.companyID, cust_supp_t.companyName,    cust_supp_t.busStyle, cust_supp_t.taxNumber, cust_supp_t.companyAddInfo, cust_supp_t.companyAddress, cust_supp_t.companyCity, cust_supp_t.companyProvinceID, cust_supp_t.companyPostalCode,   cust_supp_t.companyEmail, cust_supp_t.companyTelephone, cust_supp_t.companyMobile, cust_supp_t.repTitle, cust_supp_t.repLName, cust_supp_t.repFName, cust_supp_t.repMInitial, cust_supp_t.repEmail,    cust_supp_t.repTelephone, cust_supp_t.repMobile, cust_supp_t.companyType, cust_supp_t.isDeleted, sq.sqNoChar AS Expr1, sq.dateOfIssue AS Expr2, sq.custID AS Expr3, sq.quoteSubject, sq.priceNote,   sq.deliveryDate, sq.estDelivery, sq.validityDays, sq.validityDate, sq.otherTerms, sq.VAT AS Expr4, sq.vatIsExcluded, sq.paymentIsLanded, sq.paymentCurrency, sq.status, sq.termsDays AS Expr5, sq.termsDP,   sq.discountPercent, sq.surveyReportDoc, sq.additionalNote, sq.isDeleted AS Expr6 FROM            sales_quote_t sq INNER JOIN  cust_supp_t ON sq.custID = cust_supp_t.companyID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(si.invoiceNo = '" + result + "')";
             else
-                cmd.CommandText = "SELECT         cs.taxNumber AS Expr2, si.invoiceNo, si.custID, si.sqNoChar, si.dateOfIssue, si.termsDays, si.dueDate, si.paymentStatus, si.vat, si.sc_pwd_discount, si.withholdingTax, si.notes, sq.sqNoChar AS Expr1, cs.companyID, sq.termsDP,    s.servicePrice, s.serviceDesc, i.itemDescr, cs.companyName, cs.busStyle, cs.taxNumber, cs.companyAddInfo, cs.companyAddress, cs.companyCity, cs.companyProvinceID, cs.companyPostalCode,   cs.companyEmail, cs.companyTelephone, cs.companyMobile, cs.repTitle, cs.repLName, cs.repFName, cs.repMInitial, cs.repEmail, cs.repTelephone, cs.repMobile, cs.companyType, cs.isDeleted, i.itemName,   s.serviceName, TRUNCATE(IFNULL(sq.discountPercent, 0) / 100, 2) AS LESS_DISCOUNT, TRUNCATE(IFNULL(sq.VAT, 0), 2) AS IF_VAT_INCLUSIVE, TRUNCATE(IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0)     * (IFNULL(mh.markupPerc, 0) / 100), 2) AS UNIT_PRICE, ia.itemQnty, TRUNCATE(IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) / 100), 2) * IFNULL(ia.itemQnty, 0) AS total_item,    TRUNCATE(IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) AS total_service FROM sales_quote_t sq LEFT OUTER JOIN  items_availed_t ia ON sq.sqNoChar = ia.sqNoChar LEFT OUTER JOIN   item_t i ON i.ID = ia.itemID LEFT OUTER JOIN  markup_hist_t mh ON mh.itemID = ia.itemID INNER JOIN    cust_supp_t cs ON cs.companyID = sq.custID INNER JOIN   provinces_t p ON p.id = cs.companyProvinceID LEFT OUTER JOIN  services_availed_t sa ON sa.sqNoChar = sq.sqNoChar LEFT OUTER JOIN services_t s ON s.serviceID = sa.serviceID LEFT OUTER JOIN  fees_per_transaction_t ft ON ft.servicesAvailedID = sa.id INNER JOIN    sales_invoice_t si ON si.sqNoChar = sq.sqNoChar  where si.invoiceno='" + MainVM.SelectedSalesInvoice.invoiceNo_ + "'";
+                cmd.CommandText = "SELECT        si.invoiceNo, si.custID, si.sqNoChar, si.dateOfIssue, si.termsDays, si.dueDate, si.paymentStatus, si.vat, si.sc_pwd_discount, si.withholdingTax, si.notes, cust_supp_t.companyID, cust_supp_t.companyName,    cust_supp_t.busStyle, cust_supp_t.taxNumber, cust_supp_t.companyAddInfo, cust_supp_t.companyAddress, cust_supp_t.companyCity, cust_supp_t.companyProvinceID, cust_supp_t.companyPostalCode,   cust_supp_t.companyEmail, cust_supp_t.companyTelephone, cust_supp_t.companyMobile, cust_supp_t.repTitle, cust_supp_t.repLName, cust_supp_t.repFName, cust_supp_t.repMInitial, cust_supp_t.repEmail,    cust_supp_t.repTelephone, cust_supp_t.repMobile, cust_supp_t.companyType, cust_supp_t.isDeleted, sq.sqNoChar AS Expr1, sq.dateOfIssue AS Expr2, sq.custID AS Expr3, sq.quoteSubject, sq.priceNote,   sq.deliveryDate, sq.estDelivery, sq.validityDays, sq.validityDate, sq.otherTerms, sq.VAT AS Expr4, sq.vatIsExcluded, sq.paymentIsLanded, sq.paymentCurrency, sq.status, sq.termsDays AS Expr5, sq.termsDP,   sq.discountPercent, sq.surveyReportDoc, sq.additionalNote, sq.isDeleted AS Expr6 FROM            sales_quote_t sq INNER JOIN  cust_supp_t ON sq.custID = cust_supp_t.companyID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(si.invoiceNo = '" + MainVM.SelectedSalesInvoice.invoiceNo_ + "')";
 
 
             DataSetSalesInvoice.SalesInvoiceDataTable dSItem = new DataSetSalesInvoice.SalesInvoiceDataTable();
@@ -100,6 +127,7 @@ namespace prototype2
             mySqlDa.Fill(dSItem);
 
             return dSItem;
+
         }
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)

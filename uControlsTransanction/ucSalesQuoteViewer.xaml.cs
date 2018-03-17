@@ -45,11 +45,38 @@ namespace prototype2
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesQuote.rdlc");
             ucReportViewerSalesQuote.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetSalesQuote", GetSalesQuote()));
             ucReportViewerSalesQuote.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetSQAmount", GetSalesQuoteAmount()));
+            ucReportViewerSalesQuote.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetItemService", GetSalesItemService()));
             ucReportViewerSalesQuote.LoadReport(rNames);
             ucReportViewerSalesQuote.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ucReportViewerSalesQuote.RefreshReport();
         }
+ 
 
+
+
+             private DataTable GetSalesItemService()
+        {
+
+
+            var dbCon = DBConnection.Instance();
+            dbCon.IsConnect();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = dbCon.Connection;
+            cmd.CommandType = CommandType.Text;
+            if (MainVM.SelectedSalesQuote != null)
+            {
+                cmd.CommandText = "       SELECT        sqNoChar, dateOfIssue, quoteSubject, priceNote, deliveryDate, estDelivery, validityDays, validityDate, otherTerms, vat, paymentCurrency, termsDays, termsDP, discountPercent, additionalNote, busStyle,   taxNumber, CompanyAddInfo, companyAddress, companyCity, companyPostalCode, companyEmail, companyTelephone, companyMobile, repTitle, repLname, repFName, repMInitial, repEmail, repMobile,    companyName, ID, DESCRIPTION, itemName, UNIT_PRICE, itemQnty, total_item FROM            sq_view_indiv WHERE(sqNoChar = '" + MainVM.SelectedSalesQuote.sqNoChar_ + "')   ";
+                DatasetSales_Quote.si_view_indivDataTable dSItem = new DatasetSales_Quote.si_view_indivDataTable();
+
+                MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+                mySqlDa.Fill(dSItem);
+
+                return dSItem;
+            }
+
+
+            return null;
+        }
         private DataTable GetSalesQuoteAmount()
         {
 
@@ -61,7 +88,7 @@ namespace prototype2
             cmd.CommandType = CommandType.Text;
             if (MainVM.SelectedSalesQuote != null)
             {
-                cmd.CommandText = "SELECT        sq.discountpercent,sq.sqNoChar, TRUNCATE(IFNULL(sq.discountPercent, 0), 2) AS LESS_DISCOUNT, TRUNCATE(TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) / 100)) * IFNULL(ia.itemQnty,    0) +IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) *TRUNCATE(IFNULL(sq.VAT, 0) / 100, 2), 2) AS ADD_VAT_IF_INCLUSIVE, TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0)  * (IFNULL(mh.markupPerc, 0) / 100)) * IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) -TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0) * (IFNULL(mh.markupPerc, 0) / 100))  * IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) * TRUNCATE(IFNULL(sq.discountPercent, 0) / 100, 2) + TRUNCATE(TRUNCATE((IFNULL(ia.unitPrice, 0) + IFNULL(ia.unitPrice, 0)   * (IFNULL(mh.markupPerc, 0) / 100)) * IFNULL(ia.itemQnty, 0) + IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) * TRUNCATE(IFNULL(sq.VAT, 0) / 100, 2), 2) AS TOTAL_AMOUNT FROM sales_quote_t sq LEFT OUTER JOIN   items_availed_t ia ON sq.sqNoChar = ia.sqNoChar LEFT OUTER JOIN    item_t i ON i.ID = ia.itemID LEFT OUTER JOIN   markup_hist_t mh ON mh.itemID = ia.itemID INNER JOIN   cust_supp_t cs ON cs.companyID = sq.custID INNER JOIN  provinces_t p ON p.id = cs.companyProvinceID LEFT OUTER JOIN  services_availed_t sa ON sa.sqNoChar = sq.sqNoChar LEFT OUTER JOIN  services_t s ON s.serviceID = sa.serviceID LEFT OUTER JOIN   fees_per_transaction_t ft ON ft.servicesAvailedID = sa.id WHERE(sq.sqNoChar = '" + MainVM.SelectedSalesQuote.sqNoChar_ + "') ";
+                cmd.CommandText = "SELECT        sqNoChar, discountPercent, SUM(total_item) AS TOTAL, SUM(total_item) * IFNULL(vat, 0) / 100 AS VAT, SUM(total_item) + SUM(total_item) * IFNULL(vat, 0) / 100 AS TOTAL_WITH_VAT FROM sq_view_indiv WHERE(sqNoChar = '" + MainVM.SelectedSalesQuote.sqNoChar_ + "') GROUP BY sqNoChar  ";
                 DatasetSales_Quote.sales_quote_tDataTable dSItem = new DatasetSales_Quote.sales_quote_tDataTable();
 
                 MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
@@ -86,7 +113,7 @@ namespace prototype2
             cmd.CommandType = CommandType.Text;
             if(MainVM.SelectedSalesQuote != null)
             {
-                cmd.CommandText = "SELECT sq.*, cs.*, i.id, i.itemName, s.serviceName,s.servicePrice, s.serviceDesc,i.id,s.serviceid,i.itemdescr, TRUNCATE(IFNULL(sq.discountPercent,0)/100,2) AS LESS_DISCOUNT,     TRUNCATE(IFNULL(sq.vat, 0), 2) AS IF_VAT_INCLUSIVE,   TRUNCATE(IFNULL(ia.unitPrice, 0) + (IFNULL(ia.unitPrice, 0)) *   (IFNULL((mh.markupperc), 0) / 100), 2) AS UNIT_PRICE, ia.itemQnty, 	TRUNCATE(IFNULL(ia.unitPrice, 0) + (IFNULL(ia.unitPrice, 0)) *  (IFNULL((mh.markupperc), 0) / 100), 2) *  IFNULL(ia.itemQnty, 0) as total_item,   TRUNCATE(IFNULL(sa.totalCost, 0) + IFNULL(ft.feeValue, 0), 2) as total_service from sales_quote_t sq left join items_availed_t ia  on sq.sqnochar = ia.sqnochar left join item_t i on i.id = ia.itemId left Join markup_hist_t mh on mh.itemID = ia.itemID JOIN cust_supp_t cs on cs.companyID = sq.custID  join provinces_t p on p.id = cs.companyProvinceID left JOIN services_availed_t sa on sa.sqnochar = sq.sqnochar left JOIN services_t s on s.serviceID = sa.serviceID left join fees_per_transaction_t ft on ft.servicesAvailedID = sa.id  where sq.sqnochar = '" + MainVM.SelectedSalesQuote.sqNoChar_ + "' ";
+                cmd.CommandText = "select * from sales_quote_t, cust_supp_t where custid=companyid and sqnochar = '" + MainVM.SelectedSalesQuote.sqNoChar_ + "' ";
                 DatasetSales_Quote.Sales_QuoteDataTable dSItem = new DatasetSales_Quote.Sales_QuoteDataTable();
 
                 MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
