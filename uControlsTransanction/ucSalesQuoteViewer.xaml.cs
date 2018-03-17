@@ -38,9 +38,6 @@ namespace prototype2
 
     private void DisplayReport()
         {
-
-
-            //ucReportViewerSalesQuote.Reset();
             ucReportViewerSalesQuote.DataSources.Clear();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesQuote.rdlc");
             ucReportViewerSalesQuote.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetSalesQuote", GetSalesQuote()));
@@ -50,10 +47,6 @@ namespace prototype2
             ucReportViewerSalesQuote.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ucReportViewerSalesQuote.RefreshReport();
         }
- 
-
-
-
              private DataTable GetSalesItemService()
         {
 

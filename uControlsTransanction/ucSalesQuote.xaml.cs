@@ -581,7 +581,7 @@ namespace prototype2
         }
 
         string filename;
-        long FileSize;
+        UInt32 FileSize;
         byte[] rawData;
         FileStream fs;
         private void uploadBtn_Click(object sender, RoutedEventArgs e)
@@ -599,7 +599,7 @@ namespace prototype2
                 dlg.ShowDialog();
                 filename = dlg.FileName;
                 fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
-                FileSize = fs.Length;
+                FileSize = (UInt32)fs.Length;
 
                 if (((int)fs.Length) >= fs.Length)
                 {
@@ -648,10 +648,23 @@ namespace prototype2
                     cmd.Connection = conn;
                     cmd.CommandType = CommandType.Text;
 
-                    cmd.CommandText = "SELECT surveyReportDoc from sales_quote_t where sqNoChar = @sqNoChar";
-                    cmd.Parameters.AddWithValue("@sqNoChar", MainVM.SelectedSalesQuote.sqNoChar_);
+                    cmd.CommandText = "SELECT fileName, fileSize, file from files_t where fileID = @fileID";
+                    cmd.Parameters.AddWithValue("@fileID", MainVM.SelectedSalesQuote.fileID_);
                     using (MySqlDataReader dr = cmd.ExecuteReader())
                     {
+                        if (dr.HasRows)
+                        {
+                            dr.Read();
+                            FileSize = dr.GetUInt32(dr.GetOrdinal("fileSize"));
+                            rawData = new byte[FileSize];
+                            dr.GetBytes(dr.GetOrdinal("file"), 0, rawData, 0,(int)FileSize);
+                            fs = new FileStream(saveFileDialog1.FileName, FileMode.OpenOrCreate, FileAccess.Write);
+                            fs.Write(rawData, 0, (int)FileSize);
+                            fs.Close();
+                            MessageBox.Show("File successfully written to disk!","Success!",MessageBoxButton.OK,MessageBoxImage.Asterisk );
+                        }
+                           
+
                         while (dr.Read())
                         {
                             int size = 1024 * 1024;
@@ -894,25 +907,32 @@ namespace prototype2
             {
                 if (MainVM.isNewTrans)
                 {
-                    using (MySqlConnection conn = dbCon.Connection)
+                    string query = "";
+                    string fileId = "";
+                    if (rawData != null)
                     {
-                        conn.Open();
-                        MySqlCommand cmd = new MySqlCommand();
-                        cmd.Connection = conn;
-                        cmd.CommandType = CommandType.Text;
 
-                        cmd.CommandText = "INSERT INTO files_t VALUES(NULL, @FileName, @FileSize, @File)";
-                        cmd.Parameters.AddWithValue("@FileName", MainVM.SelectedSalesQuote.sqNoChar_ + "-SURVEYREPORT");
+                        using (MySqlConnection conn = dbCon.Connection)
+                        {
+                            conn.Open();
+                            MySqlCommand cmd = new MySqlCommand();
+                            cmd.Connection = conn;
+                            cmd.CommandType = CommandType.Text;
 
-                        cmd.Parameters.AddWithValue("@FileSize", FileSize);
+                            cmd.CommandText = "INSERT INTO files_t VALUES(NULL, @FileName, @FileSize, @File)";
+                            cmd.Parameters.AddWithValue("@FileName", MainVM.SelectedSalesQuote.sqNoChar_ + "-SURVEYREPORT");
 
-                        cmd.Parameters.AddWithValue("@File", rawData);
+                            cmd.Parameters.AddWithValue("@FileSize", FileSize);
 
-                        cmd.ExecuteNonQuery();
-                        conn.Close();
+                            cmd.Parameters.AddWithValue("@File", rawData);
+
+                            cmd.ExecuteNonQuery();
+                            conn.Close();
+                        }
+
+                        query = "SELECT LAST_INSERT_ID();";
+                        fileId = dbCon.selectScalar(query, dbCon.Connection).ToString();
                     }
-                    string query = "SELECT LAST_INSERT_ID();";
-                    string fileId = dbCon.selectScalar(query, dbCon.Connection).ToString();
 
                     query = "INSERT INTO `odc_db`.`sales_quote_t` " + "(`sqNoChar`,`custID`,`quoteSubject`,`priceNote`,`deliveryDate`,`estDelivery`,`validityDays`,`validityDate`,`otherTerms`,`VAT`,`vatIsExcluded`,`paymentIsLanded`,`paymentCurrency`,`status`,`termsDays`,`termsDP`,`discountPercent`,`fileID`, additionalNote)" +
                     " VALUES " +

@@ -1295,11 +1295,11 @@ namespace prototype2
             set { SetProperty(ref discountPercent, value); }
         }
 
-        protected byte[] surveyReport;
-        public byte[] surveyReport_
+        protected int fileID;
+        public int fileID_
         {
-            get { return surveyReport; }
-            set { SetProperty(ref surveyReport, value); }
+            get { return fileID; }
+            set { SetProperty(ref fileID, value); }
         }
 
 

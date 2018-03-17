@@ -1715,12 +1715,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>₱</Value>
-                              <Style />
-                            </TextRun>
-                            <TextRun>
                               <Value>=Fields!TOTAL.Value</Value>
-                              <Style />
+                              <Style>
+                                <Format>'₱' #,0.00;('₱' #,0.00)</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -1739,8 +1737,10 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>fil-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -1973,12 +1973,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>₱</Value>
-                              <Style />
-                            </TextRun>
-                            <TextRun>
                               <Value>=Fields!total_item.Value</Value>
-                              <Style />
+                              <Style>
+                                <Format>'₱'#,0.00;('₱'#,0.00)</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -1997,6 +1995,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>fil-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
