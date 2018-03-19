@@ -423,4 +423,31 @@ namespace prototype2
             return "no";
         }
     }
+
+    public class DisableActionButtonPurchaseOrder : IValueConverter
+    {
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
+        public object Convert(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            if (!MainVM.isNewPurchaseOrder)
+            {
+                if (MainVM.isEditPurchaseOrder && !MainVM.isViewPurchaseOrder)
+                    return true;
+                else if (!MainVM.isEditPurchaseOrder && MainVM.isViewPurchaseOrder)
+                    return false;
+                else
+                    return null;
+            }
+            else
+                return true;
+             
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            return "no";
+        }
+    }
 }

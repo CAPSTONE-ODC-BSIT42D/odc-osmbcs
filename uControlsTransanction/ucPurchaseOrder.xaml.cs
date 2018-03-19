@@ -63,17 +63,6 @@ namespace prototype2
                 handler(this, e);
         }
 
-        private void resetElements()
-        {
-            MainVM.RequestedItems.Clear();
-            MainVM.AvailedServicesList.Clear();
-            MainVM.SelectedSalesQuote = null;
-            MainVM.isEdit = false;
-            MainVM.isView = false;
-            MainVM.isNewPurchaseOrder = false;
-            MainVM.TotalSales = 0;
-        }
-
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (this.IsLoaded && this.IsVisible)
@@ -92,16 +81,18 @@ namespace prototype2
                 {
                     nextBtn.Visibility = Visibility.Visible;
                     editSalesQuoteBtn.Visibility = Visibility.Collapsed;
+                    statusColumn.Visibility = Visibility.Collapsed;
                 }
-                else if (MainVM.isEdit && MainVM.SelectedPurchaseOrder != null)
+                else if (MainVM.isEditPurchaseOrder && MainVM.SelectedPurchaseOrder != null)
                 {
                     refreshDataGrid();
                     loadPurchaseOrdertoUI();
                     nextBtn.Visibility = Visibility.Visible;
                     editSalesQuoteBtn.Visibility = Visibility.Collapsed;
+                    statusColumn.Visibility = Visibility.Collapsed;
                 }
                     
-                else if (MainVM.isView && MainVM.SelectedPurchaseOrder != null)
+                else if (MainVM.isViewPurchaseOrder && MainVM.SelectedPurchaseOrder != null)
                 {
                     refreshDataGrid();
                     loadPurchaseOrdertoUI();
@@ -113,6 +104,7 @@ namespace prototype2
                     }
                     nextBtn.Visibility = Visibility.Collapsed;
                     editSalesQuoteBtn.Visibility = Visibility.Visible;
+                    statusColumn.Visibility = Visibility.Visible;
                 }
                     
             }
@@ -128,9 +120,9 @@ namespace prototype2
             foreach (POAvailedItem ai in MainVM.SelectedPurchaseOrder.AvailedItems)
             {
                 if (MainVM.isView)
-                    MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, totalAmount = ai.ItemQty * ai.UnitPrice, unitPrice = ai.UnitPrice, qtyEditable = true });
+                    MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, totalAmount = ai.ItemQty * ai.UnitPrice, unitPrice = ai.UnitPrice, qtyEditable = true, status = ai.ItemStatus });
                 else
-                    MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, totalAmount = ai.ItemQty * ai.UnitPrice, unitPrice = ai.UnitPrice, qtyEditable = false });
+                    MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, totalAmount = ai.ItemQty * ai.UnitPrice, unitPrice = ai.UnitPrice, qtyEditable = false, status = ai.ItemStatus });
             }
 
             shipViaCb.SelectedValue = MainVM.SelectedPurchaseOrder.shipVia;
@@ -169,7 +161,8 @@ namespace prototype2
                         AvailedItemID = int.Parse(dr[0].ToString()),
                         ItemID = int.Parse(dr[2].ToString()),
                         ItemQty = int.Parse(dr[3].ToString()),
-                        UnitPrice = decimal.Parse(dr[4].ToString())
+                        UnitPrice = decimal.Parse(dr[4].ToString()),
+                        ItemStatus = dr[5].ToString()
                     });
                 }
                 dbCon.Close();
@@ -251,8 +244,8 @@ namespace prototype2
                     if (!validationError)
                     {
                         saveDataToDb();
-                        resetElements();
                         OnSaveCloseButtonClicked(e);
+                        
                         OnPrintPurchaseOrderClicked(e);
                     }
                     else
@@ -471,6 +464,63 @@ namespace prototype2
                 }
                 
             }
+        }
+
+        private void receiveItemBtn_Click(object sender, RoutedEventArgs e)
+        {
+            
+            var dbCon = DBConnection.Instance();
+            using (MySqlConnection conn = dbCon.Connection)
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandType = CommandType.Text;
+
+                cmd.CommandText = "UPDATE po_items_availed_t SET itemStatus = @itemStatus WHERE id = @id";
+                cmd.Parameters.AddWithValue("@itemStatus","RECEIVED");
+
+                cmd.Parameters.AddWithValue("@id", MainVM.SelectedRequestedItem.availedItemID);
+
+                cmd.ExecuteNonQuery();
+                conn.Close();
+                refreshDataGrid();
+
+                var allReceived = MainVM.SelectedPurchaseOrder.AvailedItems.Where(x => x.ItemStatus.Equals("ORDERED"));
+                if (allReceived.Count() == 0)
+                {
+                    conn.Open();
+                    cmd = new MySqlCommand();
+                    cmd.Connection = conn;
+                    cmd.CommandType = CommandType.Text;
+
+                    cmd.CommandText = "UPDATE purchase_order_t SET POStatus = @status WHERE PONumChar = @id";
+                    cmd.Parameters.AddWithValue("@status", "RECEIVED");
+
+                    cmd.Parameters.AddWithValue("@id", MainVM.SelectedPurchaseOrder.PONumChar);
+
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+                else
+                {
+                    conn.Open();
+                    cmd = new MySqlCommand();
+                    cmd.Connection = conn;
+                    cmd.CommandType = CommandType.Text;
+
+                    cmd.CommandText = "UPDATE purchase_order_t SET POStatus = @status WHERE PONumChar = @id";
+                    cmd.Parameters.AddWithValue("@status", "PARTIALLY RECEIVED");
+
+                    cmd.Parameters.AddWithValue("@id", MainVM.SelectedPurchaseOrder.PONumChar);
+
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+
+                MessageBox.Show("Successfully updated!");
+            }
+            refreshDataGrid();
         }
     }
 }
