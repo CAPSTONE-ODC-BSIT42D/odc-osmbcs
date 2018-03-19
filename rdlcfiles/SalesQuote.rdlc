@@ -1082,22 +1082,22 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.29167in</Width>
+              <Width>0.2675in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.91661in</Width>
+              <Width>0.89244in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.26709in</Width>
+              <Width>1.24292in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.3693in</Width>
+              <Width>0.34513in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.34151in</Width>
+              <Width>1.31734in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.64766in</Width>
+              <Width>1.62349in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1334,11 +1334,13 @@
             <TablixMember />
           </TablixMembers>
         </TablixRowHierarchy>
+        <RepeatColumnHeaders>true</RepeatColumnHeaders>
+        <KeepTogether>true</KeepTogether>
         <DataSetName>DataSetSalesQuote</DataSetName>
         <Top>1.38417in</Top>
-        <Left>1.03125in</Left>
+        <Left>1.07161in</Left>
         <Height>0.35417in</Height>
-        <Width>5.83384in</Width>
+        <Width>5.68881in</Width>
         <ZIndex>25</ZIndex>
         <Style>
           <Border>
@@ -1621,13 +1623,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.84467in</Width>
+              <Width>2.79633in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.34151in</Width>
+              <Width>1.29317in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.64766in</Width>
+              <Width>1.59932in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1762,9 +1764,9 @@
         </TablixRowHierarchy>
         <DataSetName>DataSetSQAmount</DataSetName>
         <Top>2.17931in</Top>
-        <Left>1.03125in</Left>
+        <Left>1.07161in</Left>
         <Height>0.22917in</Height>
-        <Width>5.83384in</Width>
+        <Width>5.68881in</Width>
         <ZIndex>30</ZIndex>
         <Style>
           <Border>
@@ -1776,22 +1778,22 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.29547in</Width>
+              <Width>0.27218in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.9223in</Width>
+              <Width>0.89901in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.2614in</Width>
+              <Width>1.23811in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.3693in</Width>
+              <Width>0.34601in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.34151in</Width>
+              <Width>1.31822in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.64766in</Width>
+              <Width>1.62437in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -2028,10 +2030,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSetItemService</DataSetName>
-        <Top>1.75223in</Top>
-        <Left>1.02176in</Left>
+        <Top>1.78in</Top>
+        <Left>1.0625in</Left>
         <Height>0.38542in</Height>
-        <Width>5.83764in</Width>
+        <Width>5.69792in</Width>
         <ZIndex>31</ZIndex>
         <Style>
           <Border>

@@ -84,8 +84,6 @@ namespace prototype2
 
         private void closeModals()
         {
-            Storyboard sb = Resources["sbHideRightMenu"] as Storyboard;
-            sb.Begin(formGridBg);
             formGridBg.Visibility = Visibility.Collapsed;
             foreach (var obj in formGridBg.Children)
             {
@@ -103,6 +101,7 @@ namespace prototype2
         {
             if (IsLoaded)
             {
+                closeModals();
                 if (this.IsVisible)
                 {
                     if (MainVM.SelectedSalesQuote != null)
@@ -189,7 +188,7 @@ namespace prototype2
             discountPriceTb.Value = MainVM.SelectedSalesQuote.discountPercent_;
             landedCheckBox.IsChecked = MainVM.SelectedSalesQuote.paymentIsLanded_;
             vatCheckBox.IsChecked = MainVM.SelectedSalesQuote.vatexcluded_;
-            vatInclusiveTb.Value = MainVM.SelectedSalesQuote.vat_;
+            vatInclusiveTb.Text = MainVM.SelectedSalesQuote.vat_.ToString();
             if (MainVM.SelectedSalesQuote.termsDP_ == 50)
             {
                 paymentDefaultRd.IsChecked = true;
@@ -480,8 +479,56 @@ namespace prototype2
 
         private void deleteRequestedItemBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainVM.AvailedServices.Remove(MainVM.AvailedServices.Where(x => x.AvailedServiceID.Equals(MainVM.SelectedRequestedItem.lineNo)).FirstOrDefault());
-            MainVM.RequestedItems.Remove(MainVM.SelectedRequestedItem);
+            
+            var dbCon = DBConnection.Instance();
+
+            string query = "";
+            if (!MainVM.isNewTrans)
+            {
+                if (dbCon.IsConnect())
+                {
+                    if(MainVM.SelectedRequestedItem.itemType == 0)
+                    {
+                        MainVM.SelectedAvailedItem = (MainVM.AvailedItems.Where(x => x.AvailedItemID.Equals(MainVM.SelectedRequestedItem.availedItemID))).FirstOrDefault();
+                        query = "DELETE FROM `ITEMS_AVAILED_T` WHERE id = '" + MainVM.SelectedAvailedItem.AvailedItemID + "'";
+                        dbCon.insertQuery(query, dbCon.Connection);
+                        MainVM.RequestedItems.Remove(MainVM.SelectedRequestedItem);
+                    }
+                    else
+                    {
+                        MainVM.SelectedAvailedServices = (MainVM.AvailedServicesList.Where(x => x.AvailedServiceID.Equals(MainVM.SelectedRequestedItem.availedServiceID)).FirstOrDefault());
+                        
+                        if (MainVM.SelectedAvailedServices.AdditionalFees.Count > 0)
+                        {
+                            query = "DELETE FROM `FEES_PER_TRANSACTION_T` WHERE servicesAvailedID = " + MainVM.SelectedAvailedServices.AvailedServiceID;
+                            dbCon.insertQuery(query, dbCon.Connection);
+                        }
+                        else
+                        {
+                            query = "DELETE FROM `services_availed_t` WHERE id = " + MainVM.SelectedAvailedServices.AvailedServiceID;
+                            dbCon.insertQuery(query, dbCon.Connection);
+                        }
+                        MainVM.RequestedItems.Remove(MainVM.SelectedRequestedItem);
+                        MainVM.AvailedServicesList.Remove(MainVM.SelectedAvailedServices);
+                    }
+                    
+                    
+                }
+            }
+            else
+            {
+                if(MainVM.SelectedRequestedItem.itemType == 0)
+                {
+                    MainVM.RequestedItems.Remove(MainVM.SelectedRequestedItem);
+                }
+                else
+                {
+                    MainVM.SelectedAvailedItem = (MainVM.AvailedItems.Where(x => x.AvailedItemID.Equals(MainVM.SelectedRequestedItem.availedItemID))).FirstOrDefault();
+                    MainVM.RequestedItems.Remove(MainVM.SelectedRequestedItem);
+                    MainVM.AvailedServicesList.Remove(MainVM.SelectedAvailedServices);
+                }
+            }
+            computePrice();
         }
 
         private void paymentCustomRb_Checked(object sender, RoutedEventArgs e)
@@ -787,7 +834,7 @@ namespace prototype2
             }
             if (!(bool)vatCheckBox.IsChecked)
             {
-                vat = (decimal)vatInclusiveTb.Value;
+                vat = decimal.Parse(vatInclusiveTb.Value.ToString()) * 100;
             }
             else
                 vat = 12;
@@ -890,23 +937,28 @@ namespace prototype2
         void saveSalesQuoteToDb()
         {
             var dbCon = DBConnection.Instance();
-            bool noError = true;
-            string FileName = filename;
 
-            byte[] DocData;
-            FileStream fs;
-            BinaryReader br;
-            fs = new FileStream(FileName, FileMode.Open, FileAccess.Read);
-            br = new BinaryReader(fs);
-            DocData = br.ReadBytes((int)fs.Length);
-            br.Close();
-            fs.Close();
+            string query = "";
+            bool noError = true;
+            //string FileName = filename;
+
+            //byte[] DocData;
+            //FileStream fs;
+            //BinaryReader br;
+            //if (String.IsNullOrEmpty(FileName))
+            //{
+            //    fs = new FileStream(FileName, FileMode.Open, FileAccess.Read);
+            //    br = new BinaryReader(fs);
+            //    DocData = br.ReadBytes((int)fs.Length);
+            //    br.Close();
+            //    fs.Close();
+            //}
+            
 
             if (dbCon.IsConnect())
             {
                 if (MainVM.isNewTrans)
                 {
-                    string query = "";
                     string fileId = "";
                     if (rawData != null)
                     {
@@ -1013,7 +1065,31 @@ namespace prototype2
                 }
                 else
                 {
-                    string query = "UPDATE `odc_db`.`sales_quote_t` SET " +
+                    if (rawData != null)
+                    {
+
+                        using (MySqlConnection conn = dbCon.Connection)
+                        {
+                            conn.Open();
+                            MySqlCommand cmd = new MySqlCommand();
+                            cmd.Connection = conn;
+                            cmd.CommandType = CommandType.Text;
+
+                            cmd.CommandText = "UPDATE files_t VALUES SET `fileName` = @FileName, fileSize = @FileSize, file = @File WHERE fileID = @fileID";
+                            cmd.Parameters.AddWithValue("@FileName", MainVM.SelectedSalesQuote.sqNoChar_ + "-SURVEYREPORT");
+
+                            cmd.Parameters.AddWithValue("@FileSize", FileSize);
+
+                            cmd.Parameters.AddWithValue("@File", rawData);
+
+                            cmd.Parameters.AddWithValue("@FileID", MainVM.SelectedSalesQuote.fileID_);
+
+                            cmd.ExecuteNonQuery();
+                            conn.Close();
+                        }
+                        
+                    }
+                    query = "UPDATE `odc_db`.`sales_quote_t` SET " +
                         "`custID` = '" + MainVM.SelectedSalesQuote.custID_ + "'," +
                         "`quoteSubject` = '" + MainVM.SelectedSalesQuote.quoteSubject_ + "'," +
                         "`priceNote` = '" + MainVM.SelectedSalesQuote.priceNote_ + "'," +
@@ -1030,9 +1106,9 @@ namespace prototype2
                         "`termsDays` = '" + MainVM.SelectedSalesQuote.termsDays_ + "'," +
                         "`termsDP` = '" + MainVM.SelectedSalesQuote.termsDP_ + "'," +
                         "`discountPercent` = '" + MainVM.SelectedSalesQuote.discountPercent_ + "'," +
-                        "`surveyReportDoc` = '" + DocData + "'," +
                         "`additionalNote` = '" + MainVM.SelectedSalesQuote.additionalTerms_ + "'" +
                         " WHERE `sqNoCHar` = '" + MainVM.SelectedSalesQuote.sqNoChar_ +"'";
+
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
                         if (!MainVM.isNewTrans)
@@ -1056,9 +1132,16 @@ namespace prototype2
                         }
                         foreach (AvailedService aserv in MainVM.AvailedServicesList)
                         {
-                            query = "DELETE FROM `FEES_PER_TRANSACTION_T` WHERE servicesAvailedID = " + aserv.AvailedServiceID;
-                            dbCon.insertQuery(query, dbCon.Connection);
-
+                            if(aserv.AdditionalFees.Count > 0)
+                            {
+                                query = "DELETE FROM `FEES_PER_TRANSACTION_T` WHERE servicesAvailedID = " + aserv.AvailedServiceID;
+                                dbCon.insertQuery(query, dbCon.Connection);
+                            }
+                            else
+                            {
+                                query = "DELETE FROM `services_availed_t` WHERE id = " + aserv.AvailedServiceID;
+                                dbCon.insertQuery(query, dbCon.Connection);
+                            }
                             query = "INSERT INTO `odc_db`.`services_availed_t`(`serviceID`,`provinceID`,`sqNoChar`,`city`,`address`,`totalCost`)" +
                                 " VALUES " +
                                 "('" + aserv.ServiceID + "', '" +

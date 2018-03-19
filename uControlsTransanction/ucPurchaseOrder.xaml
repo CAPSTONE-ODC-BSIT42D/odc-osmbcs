@@ -191,14 +191,14 @@
                                                 </Button>
                                                 <Button x:Name="receiveItemBtn" Width="Auto" Content="Receive Item">
                                                     <Button.Style>
-                                                    <Style TargetType="{x:Type Button}">
-                                                        <Style.Triggers>
+                                                        <Style TargetType="{x:Type Button}">
+                                                            <Style.Triggers>
                                                                 <DataTrigger Binding="{Binding qtyEditable}" Value="true">
-                                                                <Setter Property="Visibility" Value="Collapsed"/>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </Button.Style>
+                                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Button.Style>
                                                 </Button>
                                             </StackPanel>
                                         </DataTemplate>
@@ -255,14 +255,10 @@
             </Grid>
         </ScrollViewer>
 
-        <StackPanel Margin="0" VerticalAlignment="Bottom" FlowDirection="RightToLeft" Height="40">
-            <StackPanel x:Name="newPurchaseOrderGrid" HorizontalAlignment="Left" Margin="10,0" Orientation="Horizontal">
-                <Button x:Name="nextBtn" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" Height="26" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="5,0" Click="nextBtn_Click"/>
-            </StackPanel>
-            <StackPanel x:Name="viewPuchaseOrderGrid" Margin="10,10,10,0" Orientation="Horizontal">
-                <Button x:Name="editSalesQuoteBtn" Content="Edit" VerticalAlignment="Bottom" Height="26" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="5,0" HorizontalAlignment="Left" Width="84" Click="editSalesQuoteBtn_Click"/>
-                <Button x:Name="closeBtn" Content="Close" VerticalAlignment="Bottom" Height="26" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="5,0" HorizontalAlignment="Left" Width="84" Click="closeBtn_Click"/>
-            </StackPanel>
+        <StackPanel Margin="0" VerticalAlignment="Bottom" FlowDirection="RightToLeft" Orientation="Horizontal">
+            <Button x:Name="editSalesQuoteBtn" Content="Edit" VerticalAlignment="Bottom" Height="26" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="5" HorizontalAlignment="Right" Width="84" Click="editSalesQuoteBtn_Click"/>
+            <Button x:Name="nextBtn" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" Height="26" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="5" Click="nextBtn_Click"/>
+            <Button x:Name="closeBtn" Content="Close" VerticalAlignment="Bottom" Height="26" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="5" HorizontalAlignment="Right" Width="84" Click="closeBtn_Click"/>
         </StackPanel>
 
     </Grid>

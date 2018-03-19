@@ -428,18 +428,10 @@ namespace prototype2
                     DateTime.TryParse(dr["dateOfIssue"].ToString(), out expiration);
 
                     bool vatIsExcluded = false;
-
-                    if (dr["vatIsExcluded"].ToString().Equals("1"))
-                    {
-                        vatIsExcluded = true;
-                    }
+                    bool.TryParse(dr["vatIsExcluded"].ToString(),out vatIsExcluded);
 
                     bool paymentIsLanded = false;
-
-                    if (dr["paymentIsLanded"].ToString().Equals("1"))
-                    {
-                        paymentIsLanded = true;
-                    }
+                    bool.TryParse(dr["paymentIsLanded"].ToString(), out paymentIsLanded);
 
                     int custId;
                     int.TryParse(dr["custID"].ToString(), out custId);

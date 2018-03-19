@@ -251,7 +251,7 @@
                     </ComboBox>
                     <CheckBox x:Name="landedCheckBox" Content="Landed Price" HorizontalAlignment="Left" Margin="140,197,0,0" VerticalAlignment="Top" IsChecked="true" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
                     <CheckBox x:Name="vatCheckBox" Content="VAT Exclusive" HorizontalAlignment="Left" Margin="299,197,0,0" VerticalAlignment="Top" IsChecked="True" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI" Unchecked="vatCheckBox_Unchecked" Checked="vatCheckBox_Checked"/>
-                    <xctk:DecimalUpDown x:Name="vatInclusiveTb" HorizontalAlignment="Left" Margin="412,197,0,0" VerticalAlignment="Top" Width="77" Height="18" Maximum="100" Minimum="0" DefaultValue="0" FormatString="P" Text="12" UpdateValueOnEnterKey="True" IsEnabled="False"/>
+                    <xctk:DecimalUpDown x:Name="vatInclusiveTb" HorizontalAlignment="Left" Margin="412,197,0,0" VerticalAlignment="Top" Width="77" Height="18" Maximum="1" Minimum="0" TextAlignment="Center" ClipValueToMinMax="True" FormatString="P" Text="12" UpdateValueOnEnterKey="True" Value="0.12"/>
                     <Label x:Name="label16_Copy4" Content="Payment :" HorizontalAlignment="Left" Margin="36,266,0,0" VerticalAlignment="Top" FontWeight="Normal" FontSize="14" FontFamily="Segoe UI Semibold"/>
                     <RadioButton x:Name="paymentDefaultRd" Content="50% Downpayment (Upon Release of Order), 50% Balance Upon Delivery" HorizontalAlignment="Left" Margin="140,273,0,0" VerticalAlignment="Top" IsChecked="True" GroupName="Payment" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
                     <RadioButton x:Name="paymentCustomRb" Content="Custom" HorizontalAlignment="Left" Margin="140,306,0,0" VerticalAlignment="Top" GroupName="Payment" Checked="paymentCustomRb_Checked" Unchecked="paymentCustomRb_Unchecked" FontWeight="Normal" FontStyle="Normal" FontSize="14" FontFamily="Segoe UI"/>
@@ -297,7 +297,7 @@
                 </Button.Style>
             </Button>
         </StackPanel>
-        <Grid x:Name="formGridBg" Margin="0" Background="#80000000" d:IsHidden="True">
+        <Grid x:Name="formGridBg" Margin="0" Background="#80000000" d:IsHidden="True" Visibility="Collapsed">
             <Grid x:Name="additionalFeesFormGrid" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="380" d:IsHidden="True">
                 <ScrollViewer x:Name="additionalFeesFormGridSv" MinWidth="600" Margin="0,0,0,40" VerticalScrollBarVisibility="Auto">
                     <Grid x:Name="additionalFeesFormGrid1" Background="White">

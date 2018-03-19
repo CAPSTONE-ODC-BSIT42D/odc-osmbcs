@@ -88,15 +88,20 @@ namespace prototype2
                     else
                         obj.Visibility = Visibility.Visible;
                 }
-                if (MainVM.isEdit && MainVM.SelectedPurchaseOrder != null)
+                if (MainVM.isNewPurchaseOrder)
+                {
+                    nextBtn.Visibility = Visibility.Visible;
+                    editSalesQuoteBtn.Visibility = Visibility.Collapsed;
+                }
+                else if (MainVM.isEdit && MainVM.SelectedPurchaseOrder != null)
                 {
                     refreshDataGrid();
                     loadPurchaseOrdertoUI();
-                    newPurchaseOrderGrid.Visibility = Visibility.Visible;
-                    viewPuchaseOrderGrid.Visibility = Visibility.Collapsed;
+                    nextBtn.Visibility = Visibility.Visible;
+                    editSalesQuoteBtn.Visibility = Visibility.Collapsed;
                 }
                     
-                if (MainVM.isView && MainVM.SelectedPurchaseOrder != null)
+                else if (MainVM.isView && MainVM.SelectedPurchaseOrder != null)
                 {
                     refreshDataGrid();
                     loadPurchaseOrdertoUI();
@@ -106,8 +111,8 @@ namespace prototype2
                         if(purchaseOrderForm.Children.IndexOf(obj) != 1)
                             obj.IsEnabled = false;
                     }
-                    newPurchaseOrderGrid.Visibility = Visibility.Collapsed;
-                    viewPuchaseOrderGrid.Visibility = Visibility.Visible;
+                    nextBtn.Visibility = Visibility.Collapsed;
+                    editSalesQuoteBtn.Visibility = Visibility.Visible;
                 }
                     
             }
