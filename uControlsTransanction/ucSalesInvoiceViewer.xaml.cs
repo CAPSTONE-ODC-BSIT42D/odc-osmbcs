@@ -103,13 +103,13 @@ namespace prototype2
             return dSItem;
          
         }
-        string result = "";
+    
         private DataTable GetSales()
         {
             var dbCon = DBConnection.Instance();
             dbCon.IsConnect();
             string query = "SELECT LAST_INSERT_ID();";
-            result = dbCon.selectScalar(query, dbCon.Connection).ToString();
+            string result = dbCon.selectScalar(query, dbCon.Connection).ToString();
 
             dbCon.IsConnect();
             MySqlCommand cmd = new MySqlCommand();
@@ -138,7 +138,7 @@ namespace prototype2
             }
             else
             {
-
+                SalesInvoiceViewer.Reset();
             }
         }
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)
