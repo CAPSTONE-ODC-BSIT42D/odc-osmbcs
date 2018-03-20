@@ -959,7 +959,7 @@ namespace prototype2
             {
                 if (MainVM.isNewTrans)
                 {
-                    string fileId = "";
+                    string fileId = "null";
                     if (rawData != null)
                     {
 
@@ -1003,8 +1003,8 @@ namespace prototype2
                     MainVM.SelectedSalesQuote.status_ + "','" +
                     MainVM.SelectedSalesQuote.termsDays_ + "','" +
                     MainVM.SelectedSalesQuote.termsDP_ + "','" +
-                    MainVM.SelectedSalesQuote.discountPercent_ + "','" +
-                    fileId + "','" +
+                    MainVM.SelectedSalesQuote.discountPercent_ + "'," +
+                    fileId + ",'" +
                     MainVM.SelectedSalesQuote.additionalTerms_ + "'" +
                     "); ";
                     if (dbCon.insertQuery(query, dbCon.Connection))
