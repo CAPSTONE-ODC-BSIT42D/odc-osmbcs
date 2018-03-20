@@ -84,8 +84,10 @@ namespace prototype2
 
             this.ucInvoiceForm.SaveCloseButtonClicked += saveCloseInvoiceForm;
             this.ucInvoiceForm.PrintSalesInvoice += printSalesInvoice_BtnCliked;
+
             this.ucInvoicePaymentHist.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
             this.ucInvoicePaymentHist.ReceivePaymentButtonClicked += receive_BtnClicked;
+            this.ucInvoicePaymentHist.PrintReceipt += printReceipt_BtnCliked;
 
             this.ucInvoicePaymentForm.SaveClosePaymentForm += saveClosePaymentForm_BtnClicked;
             this.ucInvoicePaymentForm.PrintReceipt += printReceipt_BtnCliked;

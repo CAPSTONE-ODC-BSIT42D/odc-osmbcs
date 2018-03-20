@@ -47,6 +47,14 @@ namespace prototype2.uControlsTransanction
                 handler(this, e);
         }
 
+        public event EventHandler PrintReceipt;
+        protected virtual void OnPrintReceipt(RoutedEventArgs e)
+        {
+            var handler = PrintReceipt;
+            if (handler != null)
+                handler(this, e);
+        }
+
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (this.IsVisible && MainVM.SelectedSalesInvoice!=null)
@@ -159,7 +167,7 @@ namespace prototype2.uControlsTransanction
 
         private void printReceiptBtn_Click(object sender, RoutedEventArgs e)
         {
-            OnReceivePaymentButtonCliked(e);
+            OnPrintReceipt(e);
         }
 
         private void clearCheckBtn_Click(object sender, RoutedEventArgs e)
