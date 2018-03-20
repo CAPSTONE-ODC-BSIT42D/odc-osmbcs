@@ -491,7 +491,7 @@ namespace prototype2
             var dbCon = DBConnection.Instance();
 
             string query = "";
-            if (!MainVM.isNewTrans)
+            if (!MainVM.isNewSalesQuote)
             {
                 if (dbCon.IsConnect())
                 {
@@ -891,7 +891,7 @@ namespace prototype2
 
             string stringChars = "";
 
-            if (MainVM.isNewTrans)
+            if (MainVM.isNewSalesQuote)
             {
                 for (int i = 0; i < 4; i++)
                 {
@@ -961,7 +961,7 @@ namespace prototype2
 
             if (dbCon.IsConnect())
             {
-                if (MainVM.isNewTrans)
+                if (MainVM.isNewSalesQuote)
                 {
                     string fileId = "";
                     if (rawData != null)
@@ -1138,7 +1138,7 @@ namespace prototype2
 
                     if (dbCon.insertQuery(query, dbCon.Connection))
                     {
-                        if (!MainVM.isNewTrans)
+                        if (!MainVM.isNewSalesQuote)
                         {
                             query = "DELETE FROM `ITEMS_AVAILED_T` WHERE sqNoChar = '" + MainVM.SelectedSalesQuote.sqNoChar_ + "'";
                             dbCon.insertQuery(query, dbCon.Connection);
