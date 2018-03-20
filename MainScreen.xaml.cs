@@ -363,7 +363,6 @@ namespace prototype2
 
         private void saveClosePurchaseOrderForm(object sender, EventArgs e)
         {
-            MainVM.isNewTrans = true;
             foreach (UIElement obj in transOrderGrid.Children)
             {
                 if (obj is Grid)
@@ -379,6 +378,8 @@ namespace prototype2
 
             }
             refreshData();
+            MainVM.resetValueofVariables();
+            
         }
 
         private void selectCustomer_BtnClicked(object sender, EventArgs e)
@@ -1711,7 +1712,7 @@ namespace prototype2
         private void viewPurchaseOrderBtn_Click(object sender, RoutedEventArgs e)
         {
 
-            MainVM.isView = true;
+            MainVM.isViewPurchaseOrder = true;
             foreach (var element in transOrderGrid.Children)
             {
                 if (element is UserControl)
@@ -1729,7 +1730,7 @@ namespace prototype2
         private void editPurchaseOrderBtn_Click(object sender, RoutedEventArgs e)
         {
 
-            MainVM.isEdit = true;
+            MainVM.isEditPurchaseOrder = true;
             foreach (var element in transOrderGrid.Children)
             {
                 if (element is UserControl)

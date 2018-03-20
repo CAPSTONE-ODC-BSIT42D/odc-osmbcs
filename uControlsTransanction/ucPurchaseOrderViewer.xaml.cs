@@ -78,18 +78,14 @@ namespace prototype2
         {
             var dbCon = DBConnection.Instance();
             dbCon.IsConnect();
-            string query = "SELECT LAST_INSERT_ID();";
-            string result = dbCon.selectScalar(query, dbCon.Connection).ToString();
-            
-            dbCon.IsConnect();
+            if (MainVM.SelectedPurchaseOrder == null)
+                MainVM.SelectedPurchaseOrder = (from po in MainVM.PurchaseOrder
+                                            orderby po.PONumChar descending
+                                            select po).FirstOrDefault();
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
-            if (MainVM.SelectedPurchaseOrder == null)
-                cmd.CommandText = "SELECT        po.PONumChar, po.suppID, po.shipTo, po.orderDate, po.POdueDate, po.asapDueDate, po.shipVia, po.requisitioner, po.incoterms, po.POstatus, po.currency, po.importantNotes, po.preparedBy, po.approvedBy,    po.refNo, po.termsDays, po.termsDP, po.isDeleted, cs.companyID, cs.companyName, cs.busStyle, cs.taxNumber, cs.companyAddInfo, cs.companyAddress, cs.companyCity, cs.companyProvinceID,     cs.companyPostalCode, cs.companyEmail, cs.companyTelephone, cs.companyMobile, cs.repTitle, cs.repLName, cs.repFName, cs.repMInitial, cs.repEmail, cs.repTelephone, cs.repMobile, cs.companyType,      cs.isDeleted AS Expr1 FROM            purchase_order_t po INNER JOIN    cust_supp_t cs ON po.suppID = cs.companyID WHERE(po.PONumChar = '" + result + "')";
-            else
-                cmd.CommandText = "SELECT        po.PONumChar, po.suppID, po.shipTo, po.orderDate, po.POdueDate, po.asapDueDate, po.shipVia, po.requisitioner, po.incoterms, po.POstatus, po.currency, po.importantNotes, po.preparedBy, po.approvedBy,    po.refNo, po.termsDays, po.termsDP, po.isDeleted, cs.companyID, cs.companyName, cs.busStyle, cs.taxNumber, cs.companyAddInfo, cs.companyAddress, cs.companyCity, cs.companyProvinceID,     cs.companyPostalCode, cs.companyEmail, cs.companyTelephone, cs.companyMobile, cs.repTitle, cs.repLName, cs.repFName, cs.repMInitial, cs.repEmail, cs.repTelephone, cs.repMobile, cs.companyType,      cs.isDeleted AS Expr1 FROM            purchase_order_t po INNER JOIN    cust_supp_t cs ON po.suppID = cs.companyID WHERE(po.PONumChar = '" + MainVM.SelectedPurchaseOrder.PONumChar + "')";
-            
+            cmd.CommandText = "SELECT        po.PONumChar, po.suppID, po.shipTo, po.orderDate, po.POdueDate, po.asapDueDate, po.shipVia, po.requisitioner, po.incoterms, po.POstatus, po.currency, po.importantNotes, po.preparedBy, po.approvedBy,    po.refNo, po.termsDays, po.termsDP, po.isDeleted, cs.companyID, cs.companyName, cs.busStyle, cs.taxNumber, cs.companyAddInfo, cs.companyAddress, cs.companyCity, cs.companyProvinceID,     cs.companyPostalCode, cs.companyEmail, cs.companyTelephone, cs.companyMobile, cs.repTitle, cs.repLName, cs.repFName, cs.repMInitial, cs.repEmail, cs.repTelephone, cs.repMobile, cs.companyType,      cs.isDeleted AS Expr1 FROM            purchase_order_t po INNER JOIN    cust_supp_t cs ON po.suppID = cs.companyID WHERE(po.PONumChar = '" + MainVM.SelectedPurchaseOrder.PONumChar + "')";
 
             DataSet1.PODataTableDataTable dSItem = new DataSet1.PODataTableDataTable();
 
