@@ -122,13 +122,15 @@
                     <Value>Product</Value>
                     <Style>
                       <FontFamily>Calibri Light</FontFamily>
-                      <FontSize>18pt</FontSize>
+                      <FontSize>20pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <Color>DarkBlue</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox4</rd:DefaultName>
@@ -157,13 +159,15 @@
                     <Value>Service</Value>
                     <Style>
                       <FontFamily>Calibri Light</FontFamily>
-                      <FontSize>18pt</FontSize>
+                      <FontSize>20pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <Color>Navy</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox4</rd:DefaultName>
@@ -454,7 +458,7 @@
             <DataSetName>SalesItemTable</DataSetName>
             <Top>2.47792in</Top>
             <Left>0.41542in</Left>
-            <Height>1.34375in</Height>
+            <Height>1.34376in</Height>
             <Width>8.0868in</Width>
             <ZIndex>4</ZIndex>
             <Style>
@@ -735,7 +739,7 @@
             <DataSetName>SalesServiceTable</DataSetName>
             <Top>4.54736in</Top>
             <Left>0.41542in</Left>
-            <Height>1.48958in</Height>
+            <Height>1.48959in</Height>
             <Width>8.0868in</Width>
             <ZIndex>5</ZIndex>
             <Style>
@@ -754,10 +758,6 @@
       </Body>
       <Width>10.91544in</Width>
       <Page>
-        <LeftMargin>1in</LeftMargin>
-        <RightMargin>1in</RightMargin>
-        <TopMargin>1in</TopMargin>
-        <BottomMargin>1in</BottomMargin>
         <Style />
       </Page>
     </ReportSection>

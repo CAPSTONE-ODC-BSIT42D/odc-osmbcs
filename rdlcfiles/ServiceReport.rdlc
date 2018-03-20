@@ -529,7 +529,7 @@ STATUS</Value>
             <DataSetName>ServiceTable</DataSetName>
             <Top>1.83208in</Top>
             <Left>0.16605in</Left>
-            <Height>0.85417in</Height>
+            <Height>0.85416in</Height>
             <Width>9.02535in</Width>
             <ZIndex>2</ZIndex>
             <Style>
@@ -544,10 +544,6 @@ STATUS</Value>
       </Body>
       <Width>11in</Width>
       <Page>
-        <LeftMargin>1in</LeftMargin>
-        <RightMargin>1in</RightMargin>
-        <TopMargin>1in</TopMargin>
-        <BottomMargin>1in</BottomMargin>
         <Style />
       </Page>
     </ReportSection>
