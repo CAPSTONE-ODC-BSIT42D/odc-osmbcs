@@ -52,7 +52,11 @@ namespace prototype2
 
             isContractor = false;
             isEdit = false;
+
             isNewPurchaseOrder = false;
+            isEditPurchaseOrder = false;
+            isViewPurchaseOrder = false;
+
             isNewRecord = false;
             isNewSupplier = false;
             isNewTrans = false;
@@ -239,6 +243,8 @@ namespace prototype2
         public bool isNewTrans{ get; set; }
 
         public bool isNewPurchaseOrder { get; set; }
+        public bool isViewPurchaseOrder { get; set; }
+        public bool isEditPurchaseOrder { get; set; }
 
         public bool isNewSupplier { get; set; }
 

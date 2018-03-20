@@ -177,10 +177,7 @@ namespace prototype2.uControlsMaintenance
         private void selectProductBtn_Click(object sender, RoutedEventArgs e)
         {
             object linqResults = null;
-            foreach (Item prd in MainVM.ProductList)
-            {
-                linqResults = MainVM.RequestedItems.Where(x => x.itemID.Equals(prd.ID) && x.itemType == 0).FirstOrDefault();
-            }
+            linqResults = MainVM.RequestedItems.Where(x => x.itemID.Equals(MainVM.SelectedProduct.ID) && x.itemType == 0).FirstOrDefault();
             if (linqResults == null)
             {
                 MainVM.RequestedItems.Add(new RequestedItem() { lineNo = MainVM.RequestedItems.Count + 1, itemID = MainVM.SelectedProduct.ID, itemType = 0, qty = 1,unitPrice = 0, qtyEditable = true });

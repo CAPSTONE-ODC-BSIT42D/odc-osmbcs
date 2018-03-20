@@ -247,7 +247,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.44412in</Width>
+              <Width>1.13542in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -302,7 +302,7 @@
         <DataSetName>DataSetSalesQuote</DataSetName>
         <Left>1.0625in</Left>
         <Height>0.25in</Height>
-        <Width>2.44412in</Width>
+        <Width>1.13542in</Width>
         <ZIndex>7</ZIndex>
         <Style>
           <Border>
@@ -1121,8 +1121,7 @@
                             <TextRun>
                               <Value>O.</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
+                                <TextAlign>Center</TextAlign>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1550,6 +1549,73 @@
           </Border>
         </Style>
       </Tablix>
+      <Tablix Name="Tablix3">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>0.85417in</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.25in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="dateOfIssue1">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Year(Fields!dateOfIssue.Value)</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>dateOfIssue1</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Details8" />
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>DataSetSalesQuote</DataSetName>
+        <Left>2.19792in</Left>
+        <Height>0.25in</Height>
+        <Width>0.85417in</Width>
+        <ZIndex>29</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Tablix>
       <Tablix Name="Tablix4">
         <TablixBody>
           <TablixColumns>
@@ -1698,7 +1764,7 @@
         <Left>1.03125in</Left>
         <Height>0.22917in</Height>
         <Width>5.83384in</Width>
-        <ZIndex>29</ZIndex>
+        <ZIndex>30</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1933,6 +1999,7 @@
                         <rd:FormatSymbolCulture>fil-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -1964,7 +2031,7 @@
         <Left>1.02176in</Left>
         <Height>0.38542in</Height>
         <Width>5.83764in</Width>
-        <ZIndex>30</ZIndex>
+        <ZIndex>31</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>

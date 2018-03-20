@@ -920,6 +920,7 @@ namespace prototype2
         protected int itemID;
         protected int itemQty;
         protected decimal unitPrice;
+        protected string itemStatus;
 
         public int AvailedItemID
         {
@@ -949,6 +950,12 @@ namespace prototype2
         {
             get { return unitPrice; }
             set { SetProperty(ref unitPrice, value); }
+        }
+
+        public string ItemStatus
+        {
+            get { return itemStatus; }
+            set { SetProperty(ref itemStatus, value); }
         }
     }
 
@@ -1026,6 +1033,13 @@ namespace prototype2
         {
             get { return _qtyEditable; }
             set { SetProperty(ref _qtyEditable, value); }
+        }
+
+        private string _status;
+        public string status
+        {
+            get { return _status; }
+            set { SetProperty(ref _status, value); }
         }
 
         protected ObservableCollection<AdditionalFee> _additionalFees = new ObservableCollection<AdditionalFee>();
@@ -1461,6 +1475,7 @@ namespace prototype2
             set { SetProperty(ref suppID_, value); }
         }
 
+
         protected string shipTo_;
         public string shipTo
         {
@@ -1768,7 +1783,27 @@ namespace prototype2
             get { return status; }
             set { SetProperty(ref status, value); }
         }
-        
+
+        protected DateTime dateStarted;
+        public DateTime DateStarted
+        {
+            get { return dateStarted; }
+            set { SetProperty(ref dateStarted, value); }
+        }
+
+        protected DateTime dateEnded;
+        public DateTime DateEnded
+        {
+            get { return dateEnded; }
+            set { SetProperty(ref dateEnded, value); }
+        }
+
+        protected bool isNew;
+        public bool IsNew
+        {
+            get { return isNew; }
+            set { SetProperty(ref isNew, value); }
+        }
     }
     #endregion
 }

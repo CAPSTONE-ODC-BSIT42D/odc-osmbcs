@@ -10,6 +10,7 @@
     <UserControl.Resources>
         <local:ProductNameConverter x:Key="ProductNameConverter"/>
         <local:ServiceNameConverter x:Key="ServiceNameConverter"/>
+        <local:DisableActionButtonPurchaseOrder x:Key="DisableActionButtonPurchaseOrder"/>
     </UserControl.Resources>
     <UserControl.DataContext>
         <StaticResource ResourceKey="MainVM"/>
@@ -35,8 +36,8 @@
                         <Button x:Name="selectItemsBtn" Content="Choose Items" HorizontalAlignment="Right" Margin="0,9,10,0" Width="105" Height="24" VerticalAlignment="Top" Click="selectItemsBtn_Click"/>
                         <Label Content="Ordered Items" HorizontalAlignment="Left" Margin="5,8,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Normal" FontFamily="Segoe UI" Height="31" Width="138"/>
                         <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="0,37,0,0" VerticalAlignment="Top"/>
-                        <DataGrid x:Name="itemDg" Margin="10,56,17,10" ItemsSource="{Binding RequestedItems}" CanUserAddRows="False" ColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="False" IsReadOnly="True" VerticalAlignment="Top" Height="312" SelectedItem="{Binding SelectedRequestedItem}"  >
-                            <DataGrid.Columns >
+                        <DataGrid x:Name="itemDg" Margin="10,56,17,10" ItemsSource="{Binding RequestedItems}" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="False" VerticalAlignment="Top" Height="312" SelectedItem="{Binding SelectedRequestedItem}" AutoGenerateColumns="False" MinColumnWidth="0" IsSynchronizedWithCurrentItem="False" EnableColumnVirtualization="True" IsReadOnly="True">
+                            <DataGrid.Columns>
                                 <DataGridTemplateColumn Width="150" CanUserResize="False" Header="Item Name" >
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -47,9 +48,6 @@
                                                         <Style.Triggers>
                                                             <DataTrigger Binding="{Binding itemType}" Value="0">
                                                                 <Setter Property="Content" Value="{Binding itemID, Converter={StaticResource ProductNameConverter}, NotifyOnTargetUpdated=True}" />
-                                                            </DataTrigger>
-                                                            <DataTrigger Binding="{Binding itemType}" Value="1">
-                                                                <Setter Property="Content" Value = "{Binding itemID, Converter={StaticResource ServiceNameConverter}, NotifyOnTargetUpdated=True}" />
                                                             </DataTrigger>
                                                         </Style.Triggers>
                                                     </Style>
@@ -66,36 +64,6 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <!--<DataGridTemplateColumn Header="Item Type" Width="100">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <Label>
-                                                    <Label.Style>
-                                                        <Style TargetType="{x:Type Label}">
-                                                            <Setter Property="Content" Value="{Binding itemType}" />
-                                                            <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding itemType}" Value="0">
-                                                                    <Setter Property="Content" Value="Product" />
-                                                                </DataTrigger>
-                                                                <DataTrigger Binding="{Binding itemType}" Value="1">
-                                                                    <Setter Property="Content" Value = "Serivce" />
-                                                                </DataTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </Label.Style>
-                                                </Label>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                        <DataGridTemplateColumn.CellStyle>
-                                            <Style TargetType="{x:Type DataGridCell}">
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding qtyEditable}" Value="false">
-                                                        <Setter Property="IsEnabled" Value="false"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </DataGridTemplateColumn.CellStyle>
-                                    </DataGridTemplateColumn>-->
                                 <DataGridTemplateColumn Header="Qty" Width="60">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -126,16 +94,33 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn  Width="50" CanUserResize="False" Header="Action"  >
+                                <DataGridTextColumn Width="100" CanUserResize="False" Header="Status" Binding="{Binding status}" x:Name="statusColumn">
+                                    <!--<DataGridTextColumn.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Converter={StaticResource DisableActionButtonPurchaseOrder}, NotifyOnTargetUpdated=True}" Value="false">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Converter={StaticResource DisableActionButtonPurchaseOrder}, NotifyOnTargetUpdated=True}" Value="true">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>-->
+                                </DataGridTextColumn>
+                                <DataGridTemplateColumn  Width="Auto" CanUserResize="False" Header="Action"  >
                                     <DataGridTemplateColumn.CellTemplate  >
                                         <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <Button x:Name="deleteRequestedItemBtn"  Width="Auto" Height="25" BorderBrush="Black" Background="{x:Null}" Margin="10,10,0,10" ToolTip="Delete Record">
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
+                                                <Button x:Name="deleteRequestedItemBtn"  Width="Auto" Height="25" BorderBrush="Black" Background="{x:Null}" Margin="5,0" ToolTip="Delete Record" HorizontalAlignment="Center" VerticalAlignment="Center">
                                                     <Button.Style>
                                                         <Style TargetType="{x:Type Button}">
                                                             <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding qtyEditable}" Value="false">
+                                                                <DataTrigger Binding="{Binding Converter={StaticResource DisableActionButtonPurchaseOrder}, NotifyOnTargetUpdated=True}" Value="true">
                                                                     <Setter Property="Visibility" Value="Visible"/>
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding Converter={StaticResource DisableActionButtonPurchaseOrder}, NotifyOnTargetUpdated=True}" Value="false">
+                                                                    <Setter Property="Visibility" Value="Collapsed"/>
                                                                 </DataTrigger>
                                                             </Style.Triggers>
                                                         </Style>
@@ -189,16 +174,22 @@
                                                         </Canvas>
                                                     </Viewbox>
                                                 </Button>
-                                                <Button x:Name="receiveItemBtn" Width="Auto" Content="Receive Item">
+                                                <Button x:Name="receiveItemBtn" Width="Auto" Content="Receive" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0" Click="receiveItemBtn_Click">
                                                     <Button.Style>
-                                                    <Style TargetType="{x:Type Button}">
-                                                        <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding qtyEditable}" Value="true">
-                                                                <Setter Property="Visibility" Value="Collapsed"/>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </Button.Style>
+                                                        <Style TargetType="{x:Type Button}">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Converter={StaticResource DisableActionButtonPurchaseOrder}, NotifyOnTargetUpdated=True}" Value="false">
+                                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding Converter={StaticResource DisableActionButtonPurchaseOrder}, NotifyOnTargetUpdated=True}" Value="true">
+                                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding status}" Value="RECEIVED">
+                                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Button.Style>
                                                 </Button>
                                             </StackPanel>
                                         </DataTemplate>
@@ -255,14 +246,10 @@
             </Grid>
         </ScrollViewer>
 
-        <StackPanel Margin="0" VerticalAlignment="Bottom" FlowDirection="RightToLeft" Height="40">
-            <StackPanel x:Name="newPurchaseOrderGrid" HorizontalAlignment="Left" Margin="10,0" Orientation="Horizontal">
-                <Button x:Name="nextBtn" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" Height="26" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="5,0" Click="nextBtn_Click"/>
-            </StackPanel>
-            <StackPanel x:Name="viewPuchaseOrderGrid" Margin="10,10,10,0" Orientation="Horizontal">
-                <Button x:Name="editSalesQuoteBtn" Content="Edit" VerticalAlignment="Bottom" Height="26" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="5,0" HorizontalAlignment="Left" Width="84" Click="editSalesQuoteBtn_Click"/>
-                <Button x:Name="closeBtn" Content="Close" VerticalAlignment="Bottom" Height="26" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="5,0" HorizontalAlignment="Left" Width="84" Click="closeBtn_Click"/>
-            </StackPanel>
+        <StackPanel Margin="0" VerticalAlignment="Bottom" FlowDirection="RightToLeft" Orientation="Horizontal">
+            <Button x:Name="editSalesQuoteBtn" Content="Edit" VerticalAlignment="Bottom" Height="26" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="5" HorizontalAlignment="Right" Width="84" Click="editSalesQuoteBtn_Click"/>
+            <Button x:Name="nextBtn" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" Height="26" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="5" Click="nextBtn_Click"/>
+            <Button x:Name="closeBtn" Content="Close" VerticalAlignment="Bottom" Height="26" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="5" HorizontalAlignment="Right" Width="84" Click="closeBtn_Click"/>
         </StackPanel>
 
     </Grid>
