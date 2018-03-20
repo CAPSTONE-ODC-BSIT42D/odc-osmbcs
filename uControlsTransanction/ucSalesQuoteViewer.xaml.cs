@@ -133,5 +133,10 @@ namespace prototype2
             else
                 ucReportViewerSalesQuote.Reset();
         }
+
+        private void ucReportViewerSalesQuote_ReportExport(object sender, Syncfusion.Windows.Reports.ReportExportEventArgs e)
+        {
+            e.FileName = MainVM.SelectedSalesQuote.sqNoChar_;
+        }
     }
 }

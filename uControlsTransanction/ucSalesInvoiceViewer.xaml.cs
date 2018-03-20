@@ -103,13 +103,13 @@ namespace prototype2
             return dSItem;
          
         }
-      
+        string result = "";
         private DataTable GetSales()
         {
             var dbCon = DBConnection.Instance();
             dbCon.IsConnect();
             string query = "SELECT LAST_INSERT_ID();";
-            string result = dbCon.selectScalar(query, dbCon.Connection).ToString();
+            result = dbCon.selectScalar(query, dbCon.Connection).ToString();
 
             dbCon.IsConnect();
             MySqlCommand cmd = new MySqlCommand();
@@ -144,6 +144,11 @@ namespace prototype2
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)
         {
             OnSaveCloseButtonClicked(e);
+        }
+
+        private void SalesInvoiceViewer_ReportExport(object sender, Syncfusion.Windows.Reports.ReportExportEventArgs e)
+        {
+            e.FileName = MainVM.SelectedSalesInvoice.sqNoChar_ + "-INVOICE";
         }
     }
 }

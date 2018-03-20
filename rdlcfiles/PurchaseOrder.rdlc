@@ -3329,7 +3329,9 @@
           </Tablix>
         </ReportItems>
         <Height>8.93625in</Height>
-        <Style />
+        <Style>
+          <BackgroundColor>White</BackgroundColor>
+        </Style>
       </Body>
       <Width>7.05672in</Width>
       <Page>
@@ -3362,7 +3364,9 @@
         <RightMargin>1in</RightMargin>
         <TopMargin>1in</TopMargin>
         <BottomMargin>1in</BottomMargin>
-        <Style />
+        <Style>
+          <BackgroundColor>White</BackgroundColor>
+        </Style>
       </Page>
     </ReportSection>
   </ReportSections>

@@ -34,7 +34,6 @@
         <Storyboard x:Key="sbHideTopMenu">
             <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,0" To="0,-100,0,0" AccelerationRatio="1" Duration="0:0:0.5" />
         </Storyboard>
-
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="Validation.ErrorTemplate">
                 <Setter.Value>
