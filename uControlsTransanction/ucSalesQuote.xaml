@@ -284,7 +284,17 @@
         <StackPanel Margin="0" Height="45" FlowDirection="RightToLeft" VerticalAlignment="Bottom" Orientation="Horizontal">
             <Button x:Name="transRequestNext" Content="Next" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="85" Height="26" Click="transRequestNext_Click" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" Margin="10,10"/>
             <Button x:Name="transRequestBack" Content="Back" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="84" Height="26" Click="transRequestBack_Click" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="10,10"/>
-            <Button x:Name="convertToInvoiceBtn" Content="Continue as Order" VerticalAlignment="Bottom" Height="26" Click="convertToInvoiceBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" HorizontalAlignment="Right" Width="139" Margin="10,10"/>
+            <Button x:Name="convertToInvoiceBtn" Content="Continue as Order" VerticalAlignment="Bottom" Height="26" Click="convertToInvoiceBtn_Click" FontSize="13" FontFamily="Segoe UI Semibold" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" HorizontalAlignment="Right" Width="139" Margin="10,10">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedSalesQuote.status_}" Value="ACCEPTED">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button x:Name="editSalesQuoteBtn" Content="Edit" VerticalAlignment="Bottom" Height="26" Click="editSalesQuoteBtn_Click" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="13" Background="#FF194E84" BorderBrush="#FF0B3D70" Margin="10,10" HorizontalAlignment="Right" Width="84">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">

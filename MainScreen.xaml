@@ -1168,7 +1168,7 @@
                         </ComboBox>
                     </Grid>
 
-                    <local:ucPurchaseOrder x:Name="ucPurchaseOrder" Margin="0" d:IsHidden="True"/>
+                    <local:ucPurchaseOrder x:Name="ucPurchaseOrder" Margin="0" d:IsHidden="True" Visibility="Collapsed"/>
 
                 </Grid>
             </Grid>

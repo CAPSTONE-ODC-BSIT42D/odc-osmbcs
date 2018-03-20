@@ -117,14 +117,15 @@ namespace prototype2
             {
                 newInvoiceForm.Visibility = Visibility.Collapsed;
                 documentViewer.Visibility = Visibility.Collapsed;
+
                 OnSaveCloseButtonClicked(e);
             }
-            else if (documentViewer.IsVisible)
-            {
-                newInvoiceForm.Visibility = Visibility.Visible;
-                documentViewer.Visibility = Visibility.Collapsed;
+            //else if (documentViewer.IsVisible)
+            //{
+            //    newInvoiceForm.Visibility = Visibility.Visible;
+            //    documentViewer.Visibility = Visibility.Collapsed;
                
-            }
+            //}
         }
 
         void computeInvoice()

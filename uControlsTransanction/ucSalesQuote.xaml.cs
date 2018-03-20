@@ -104,7 +104,7 @@ namespace prototype2
                 closeModals();
                 if (this.IsVisible)
                 {
-                    if (MainVM.SelectedSalesQuote != null)
+                    if (MainVM.isEditSalesQuote && MainVM.SelectedSalesQuote != null)
                     {
                         downloadBtn.IsEnabled = true;
                         foreach (UIElement obj in transQuoatationGridForm.Children)
@@ -119,7 +119,7 @@ namespace prototype2
                         loadSalesQuoteToUi();
                         computePrice();
                     }
-                    else if(MainVM.isNewTrans)
+                    else if(MainVM.isNewSalesQuote)
                     {
                         editSalesQuoteBtn.Visibility = Visibility.Collapsed;
                         convertToInvoiceBtn.Visibility = Visibility.Collapsed;
@@ -146,8 +146,8 @@ namespace prototype2
 
         void loadSalesQuoteToUi()
         {
-            MainVM.SelectedCustomerSupplier = (from cust in MainVM.Customers
-                                               where cust.CompanyID == MainVM.SelectedSalesQuote.custID_
+            MainVM.SelectedCustomerSupplier = (from cust in MainVM.Suppliers
+                                               where cust.CompanyID == MainVM.SelectedPurchaseOrder.suppID
                                                select cust).FirstOrDefault();
             MainVM.RequestedItems.Clear();
             MainVM.AvailedServicesList.Clear();
@@ -176,12 +176,20 @@ namespace prototype2
                 MainVM.RequestedItems.Add(new RequestedItem() { availedServiceID = aserv.AvailedServiceID, itemID = aserv.ServiceID, itemType = 1, qty = 0, totalAmount = aserv.TotalCost, unitPrice = aserv.TotalCost });
             }
 
-            if (MainVM.isView)
+            if (MainVM.isViewSalesQuote)
             {
                 foreach (UIElement obj in transQuoatationGridForm.Children)
                 {
                     if (transQuoatationGridForm.Children.IndexOf(obj) <= 1)
                         obj.IsEnabled = false;
+                }
+            }
+            else
+            {
+                foreach (UIElement obj in transQuoatationGridForm.Children)
+                {
+                    if (transQuoatationGridForm.Children.IndexOf(obj) <= 1)
+                        obj.IsEnabled = true;
                 }
             }
 
@@ -678,11 +686,7 @@ namespace prototype2
             saveFileDialog1.FilterIndex = 1;
             
             Nullable<bool> result = saveFileDialog1.ShowDialog();
-
             
-
-
-            // Get the selected file name and display in a TextBox 
             if (result == true)
             {
                 var dbCon = DBConnection.Instance();
@@ -959,7 +963,7 @@ namespace prototype2
             {
                 if (MainVM.isNewTrans)
                 {
-                    string fileId = "null";
+                    string fileId = "";
                     if (rawData != null)
                     {
 
@@ -976,6 +980,29 @@ namespace prototype2
                             cmd.Parameters.AddWithValue("@FileSize", FileSize);
 
                             cmd.Parameters.AddWithValue("@File", rawData);
+
+                            cmd.ExecuteNonQuery();
+                            conn.Close();
+                        }
+
+                        query = "SELECT LAST_INSERT_ID();";
+                        fileId = dbCon.selectScalar(query, dbCon.Connection).ToString();
+                    }
+                    else
+                    {
+                        using (MySqlConnection conn = dbCon.Connection)
+                        {
+                            conn.Open();
+                            MySqlCommand cmd = new MySqlCommand();
+                            cmd.Connection = conn;
+                            cmd.CommandType = CommandType.Text;
+
+                            cmd.CommandText = "INSERT INTO files_t VALUES(NULL, @FileName, @FileSize, @File)";
+                            cmd.Parameters.AddWithValue("@FileName", MainVM.SelectedSalesQuote.sqNoChar_ + "-SURVEYREPORT");
+
+                            cmd.Parameters.AddWithValue("@FileSize", DBNull.Value);
+
+                            cmd.Parameters.AddWithValue("@File", DBNull.Value);
 
                             cmd.ExecuteNonQuery();
                             conn.Close();

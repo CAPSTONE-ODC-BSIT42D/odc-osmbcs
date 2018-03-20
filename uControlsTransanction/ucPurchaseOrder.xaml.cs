@@ -82,6 +82,8 @@ namespace prototype2
                     nextBtn.Visibility = Visibility.Visible;
                     editSalesQuoteBtn.Visibility = Visibility.Collapsed;
                     statusColumn.Visibility = Visibility.Collapsed;
+                    selectSupplierBtn.Visibility = Visibility.Visible;
+                    selectItemsBtn.Visibility = Visibility.Visible;
                 }
                 else if (MainVM.isEditPurchaseOrder && MainVM.SelectedPurchaseOrder != null)
                 {
@@ -90,6 +92,8 @@ namespace prototype2
                     nextBtn.Visibility = Visibility.Visible;
                     editSalesQuoteBtn.Visibility = Visibility.Collapsed;
                     statusColumn.Visibility = Visibility.Collapsed;
+                    selectSupplierBtn.Visibility = Visibility.Visible;
+                    selectItemsBtn.Visibility = Visibility.Visible;
                 }
                     
                 else if (MainVM.isViewPurchaseOrder && MainVM.SelectedPurchaseOrder != null)
@@ -105,6 +109,8 @@ namespace prototype2
                     nextBtn.Visibility = Visibility.Collapsed;
                     editSalesQuoteBtn.Visibility = Visibility.Visible;
                     statusColumn.Visibility = Visibility.Visible;
+                    selectSupplierBtn.Visibility = Visibility.Collapsed;
+                    selectItemsBtn.Visibility = Visibility.Collapsed;
                 }
                     
             }
@@ -139,7 +145,7 @@ namespace prototype2
                 paymentDefaultRd.IsChecked = true;
             else
                 paymentCustomRb.IsChecked = true;
-
+            
         }
 
         void refreshDataGrid()
@@ -244,9 +250,8 @@ namespace prototype2
                     if (!validationError)
                     {
                         saveDataToDb();
-                        OnSaveCloseButtonClicked(e);
-                        
                         OnPrintPurchaseOrderClicked(e);
+                        OnSaveCloseButtonClicked(e);
                     }
                     else
                     {
@@ -267,6 +272,7 @@ namespace prototype2
             var dbCon = DBConnection.Instance();
             bool noError = true;
             string poNumChar = "TRANS-" + DateTime.Now.ToString("yyyy-MM-dd") + "-" + (MainVM.PurchaseOrder.Count+1);
+            MainVM.poNumChar = poNumChar;
             int termsDay = 30;
             decimal termsDp = 50;
             if ((bool)paymentDefaultRd.IsChecked)
@@ -278,7 +284,7 @@ namespace prototype2
             {
                 //termsDp = downpaymentPercentTb.Value;
             }
-            if (MainVM.isEdit)
+            if (MainVM.isEditPurchaseOrder)
             {
                 if (dbCon.IsConnect())
                 {

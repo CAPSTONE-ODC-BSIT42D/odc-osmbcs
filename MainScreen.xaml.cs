@@ -377,8 +377,9 @@ namespace prototype2
                     ((UserControl)obj).Visibility = Visibility.Collapsed;
 
             }
-            refreshData();
             MainVM.resetValueofVariables();
+            refreshData();
+
             
         }
 
@@ -1506,7 +1507,7 @@ namespace prototype2
         private void transQuotationAddBtn_Click(object sender, RoutedEventArgs e)
         {
             
-            MainVM.isNewTrans = true;
+            MainVM.isNewSalesQuote = true;
             foreach (var element in transQuotationGrid.Children)
             {
                 if (element is UserControl)
@@ -1527,7 +1528,7 @@ namespace prototype2
         private void viewQuoteRecordBtn_Click(object sender, RoutedEventArgs e)
         {
             
-            MainVM.isView = true;
+            MainVM.isViewSalesQuote = true;
             foreach (UIElement element in transQuotationGrid.Children)
             {
                 if (transQuotationGrid.Children.IndexOf(element) == 1)
@@ -1539,7 +1540,7 @@ namespace prototype2
 
         private void editQuoteRecordBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainVM.isEdit = true;
+            MainVM.isEditSalesQuote = true;
             foreach (UIElement element in transQuotationGrid.Children)
             {
                 if (transQuotationGrid.Children.IndexOf(element) == 1)

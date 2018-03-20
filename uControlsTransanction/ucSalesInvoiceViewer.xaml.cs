@@ -37,11 +37,18 @@ namespace prototype2
                 handler(this, e);
         }
 
-
+        string result = "";
         private void DisplayReport()
         {
 
             SalesInvoiceViewer.DataSources.Clear();
+            if(MainVM.SelectedSalesInvoice == null)
+            {
+                var dbCon = DBConnection.Instance();
+                dbCon.IsConnect();
+                string query = "SELECT LAST_INSERT_ID();";
+                result = dbCon.selectScalar(query, dbCon.Connection).ToString();
+            }
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesInvoice.rdlc");
             SalesInvoiceViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetSalesInvoice", GetSales()));
             SalesInvoiceViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetSIAmount", GetSalesAmount()));
@@ -51,12 +58,10 @@ namespace prototype2
             SalesInvoiceViewer.RefreshReport();
            
         }
+        
         private DataTable GetSalesItemService()
         {
             var dbCon = DBConnection.Instance();
-            dbCon.IsConnect();
-            string query = "SELECT LAST_INSERT_ID();";
-            string result = dbCon.selectScalar(query, dbCon.Connection).ToString();
 
             dbCon.IsConnect();
             MySqlCommand cmd = new MySqlCommand();
@@ -80,9 +85,6 @@ namespace prototype2
         private DataTable GetSalesAmount()
         {
             var dbCon = DBConnection.Instance();
-            dbCon.IsConnect();
-            string query = "SELECT LAST_INSERT_ID();";
-            string result = dbCon.selectScalar(query, dbCon.Connection).ToString();
            
             dbCon.IsConnect();
             MySqlCommand cmd = new MySqlCommand();
@@ -103,13 +105,9 @@ namespace prototype2
             return dSItem;
          
         }
-        string result = "";
         private DataTable GetSales()
         {
             var dbCon = DBConnection.Instance();
-            dbCon.IsConnect();
-            string query = "SELECT LAST_INSERT_ID();";
-            result = dbCon.selectScalar(query, dbCon.Connection).ToString();
 
             dbCon.IsConnect();
             MySqlCommand cmd = new MySqlCommand();
