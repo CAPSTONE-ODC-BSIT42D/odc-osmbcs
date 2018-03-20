@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using Microsoft.Reporting.WinForms;
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.IO;
+using Syncfusion.ReportWriter;
 
 namespace prototype2
 {
@@ -44,7 +46,6 @@ namespace prototype2
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseOrder.rdlc");
             ucReportViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("PurchaseOrderTableTable", GetPurchase()));
             ucReportViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetPo", GetPurchaseItem()));
-
             ucReportViewer.LoadReport(rNames);
             ucReportViewer.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ucReportViewer.RefreshReport();
@@ -101,14 +102,19 @@ namespace prototype2
             {
                 DisplayReport();
             }
-            else
-            {
-                ucReportViewer.Reset();
-            }
         }
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)
         {
             OnSaveCloseButtonClicked(e);
+        }
+        private void ucReportViewer_ReportExport(object sender, Syncfusion.Windows.Reports.ReportExportEventArgs e)
+        {
+            e.FileName = MainVM.SelectedPurchaseOrder.PONumChar;
+        }
+
+        private void ucReportViewer_ReportRefresh(object sender, EventArgs e)
+        {
+            
         }
     }
 }

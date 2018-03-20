@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
            d:DesignHeight="429.684" d:DesignWidth="684.579" IsVisibleChanged="UserControl_IsVisibleChanged">
     <Grid Background="#FFEAE8E8">
-        <syncfusion:ReportViewer x:Name="ucReportViewerSalesQuote" Margin="0" ProcessingMode="Local" Visibility="Visible" ExcelVersion="Excel2007" ShowPageLayoutControl="True" ViewMode="Print" WordFormatType="Docx" ShowRefreshButton="True" ShowExcelExportButton="False" ShowHtmlExportButton="False" ShowPPTExportButton="False" ShowPrintButton="True" ShowWordExportButton="False" ShowXpsExportButton="False" />
+        <syncfusion:ReportViewer x:Name="ucReportViewerSalesQuote" Margin="0" ProcessingMode="Local" Visibility="Visible" ExcelVersion="Excel2007" ShowPageLayoutControl="True" ViewMode="Print" WordFormatType="Docx" ShowRefreshButton="True" ShowExcelExportButton="False" ShowHtmlExportButton="False" ShowPPTExportButton="False" ShowPrintButton="True" ShowWordExportButton="False" ShowXpsExportButton="False" ReportExport="ucReportViewerSalesQuote_ReportExport" />
         <!--<local:DocumentViewer VerticalAlignment="Top" x:Name="saleQuoteViewer"/>-->
         <Button x:Name="closeModalBtn_Copy" HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Margin="0,10,10,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="closeModalBtn_Click">
             <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform" Height="23" Width="27" HorizontalAlignment="Center" VerticalAlignment="Center">
