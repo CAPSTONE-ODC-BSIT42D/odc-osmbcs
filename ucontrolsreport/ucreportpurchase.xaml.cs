@@ -284,7 +284,7 @@ namespace prototype2
                 SalesDateEnd.Visibility = Visibility.Hidden;
                 labelstart.Visibility = Visibility.Hidden;
                 labelend.Visibility = Visibility.Hidden;
-
+                GoButtonPurchase.Visibility = Visibility.Hidden;
                 labelweek.Visibility = Visibility.Hidden;
 
 
@@ -302,7 +302,7 @@ namespace prototype2
                 SalesDateEnd.Visibility = Visibility.Hidden;
                 labelstart.Visibility = Visibility.Hidden;
                 labelend.Visibility = Visibility.Hidden;
-
+                GoButtonPurchase.Visibility = Visibility.Hidden;
                 labelweek.Visibility = Visibility.Hidden;
             }
             if (SELECTEDINDEX.Equals(2))
@@ -317,7 +317,7 @@ namespace prototype2
                 SalesDateEnd.Visibility = Visibility.Visible;
                 labelstart.Visibility = Visibility.Visible;
                 labelend.Visibility = Visibility.Visible;
-
+                GoButtonPurchase.Visibility = Visibility.Visible;
                 labelweek.Visibility = Visibility.Hidden;
             }
             if (SELECTEDINDEX.Equals(3))
