@@ -18,7 +18,7 @@
 
         <Grid x:Name="newInvoiceFormGrid1" Margin="0,0,0,40">
             <local:DocumentViewer x:Name="documentViewer" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed"/>
-            <ScrollViewer x:Name="newInvoiceForm" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top">
+            <ScrollViewer x:Name="newInvoiceForm" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" d:IsHidden="True">
                 <Grid x:Name="newInvoiceFormGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>

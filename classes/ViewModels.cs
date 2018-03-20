@@ -57,6 +57,10 @@ namespace prototype2
             isEditPurchaseOrder = false;
             isViewPurchaseOrder = false;
 
+            isNewSalesQuote = false;
+            isEditSalesQuote = false;
+            isViewSalesQuote = false;
+
             isNewRecord = false;
             isNewSupplier = false;
             isNewTrans = false;
@@ -242,6 +246,10 @@ namespace prototype2
         
         public bool isNewTrans{ get; set; }
 
+        public bool isNewSalesQuote { get; set; }
+        public bool isViewSalesQuote { get; set; }
+        public bool isEditSalesQuote { get; set; }
+
         public bool isNewPurchaseOrder { get; set; }
         public bool isViewPurchaseOrder { get; set; }
         public bool isEditPurchaseOrder { get; set; }
@@ -259,6 +267,10 @@ namespace prototype2
         public bool isNewSched { get; set; }
 
         public int lastNumber { get; set; }
+
+        public string poNumChar { get; set; }
+
+        public string invoiceId { get; set; }
 
         public string Ddl;
         public string Ddl_
