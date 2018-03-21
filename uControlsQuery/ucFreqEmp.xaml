@@ -12,19 +12,11 @@
         <CollectionViewSource x:Key="employeeViewSource" Source="{Binding Employee, Source={StaticResource queriesDataSet}}"/>
     </UserControl.Resources>
     <Grid Background="#FFF7F6F6" DataContext="{StaticResource job_title_tViewSource}">
-        <Label Content="Frequently Assigned Employees" HorizontalAlignment="Left" Margin="0,0,0,369" FontWeight="Bold" FontSize="16" Width="251"/>
-        <Label Content="Sort by:" HorizontalAlignment="Left" Margin="407,34,0,0" VerticalAlignment="Top" FontSize="11"/>
-        <ComboBox x:Name="comboBoxFreqEmp" HorizontalAlignment="Left" Margin="458,35,0,0" VerticalAlignment="Top" Width="120" FontSize="11">
-            <ComboBoxItem Content="Daily"/>
-            <ComboBoxItem Content="Weekly"/>
-            <ComboBoxItem Content="Monthly"/>
-            <ComboBoxItem Content="Yearly"/>
-        </ComboBox>
-        <DataGrid x:Name="employeeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource employeeViewSource}}" Margin="10,81,10,6" RowDetailsVisibilityMode="VisibleWhenSelected">
+        <DataGrid x:Name="employeeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding }" Margin="10,10,10,6" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn  Binding="{Binding NAME}" Header="NAME" Width="200"/>
-                <DataGridTextColumn  Binding="{Binding positionName}" Header="position Name" Width="200"/>
-                <DataGridTextColumn  Binding="{Binding NoOfTimes}" Header="No Of Times assigned" Width="200"/>
+                <DataGridTextColumn  Binding="{Binding _fullName}" Header="Name" Width="200"/>
+                <DataGridTextColumn  Binding="{Binding positionName}" Header="Position" Width="200"/>
+                <DataGridTextColumn  Binding="{Binding _count}" Header="No Of Times Assigned" Width="200"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
