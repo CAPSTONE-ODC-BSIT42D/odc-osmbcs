@@ -451,4 +451,30 @@ namespace prototype2
         }
     }
 
+    public class DisableActionButtonServiceSchedule : IValueConverter
+    {
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
+        public object Convert(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            if (!MainVM.isNewSchedule)
+            {
+                if (MainVM.isEditSchedule && !MainVM.isViewSchedule)
+                    return true;
+                else if (!MainVM.isEditSchedule && MainVM.isViewSchedule)
+                    return false;
+                else
+                    return null;
+            }
+            else
+                return true;
+
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            return "no";
+        }
+    }
 }

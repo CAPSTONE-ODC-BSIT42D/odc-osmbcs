@@ -12,7 +12,7 @@
     <UserControl.Resources>
         <local:ServiceNameConverter x:Key="ServiceNameConverter" />
         <local:PhaseItemConverter x:Key="PhaseItemConverter" />
-        <!--<local:PhaseGroupConverter x:Key="PhaseGroupConverter" />-->
+        <local:DisableActionButtonServiceSchedule x:Key="DisableActionButtonServiceSchedule" />
         <local:EmployeeNameConcatenator x:Key="EmployeeNameConcatenator"/>
         <local:EmployeeTypeOfConverter x:Key="EmployeeTypeOfConverter" />
     </UserControl.Resources>
@@ -44,14 +44,54 @@
                 <TextBox x:Name="notesTb" HorizontalAlignment="Left" Height="65" Margin="55,219,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="610"/>
                 <DataGrid x:Name="assignedEmployees" HorizontalAlignment="Left" Height="199" Margin="383,320,0,0" VerticalAlignment="Top" Width="282" ItemsSource="{Binding SelectedServiceSchedule_.assignedEmployees_}" SelectedItem="{Binding SelectedEmployeeContractor}" IsReadOnly="True" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding EmpID, Converter={StaticResource EmployeeNameConcatenator}, NotifyOnTargetUpdated=True}" />
-                        <DataGridTextColumn Binding="{Binding EmpType, Converter={StaticResource EmployeeTypeOfConverter}, NotifyOnTargetUpdated=True}" />
+                        <DataGridTextColumn Binding="{Binding EmpID, Converter={StaticResource EmployeeNameConcatenator}, NotifyOnTargetUpdated=True}" Header="Name" Width="200"/>
+                        <DataGridTemplateColumn Width="100" CanUserResize="False" Header="Type" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label>
+                                        <Label.Style>
+                                            <Style TargetType="{x:Type Label}">
+                                                <Setter Property="Content" Value="{Binding EmpType}" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding EmpType}" Value="0">
+                                                        <Setter Property="Content" Value="Employee" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding EmpType}" Value="1">
+                                                        <Setter Property="Content" Value = "Contractor" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
                 <DataGrid x:Name="availableEmployees" ItemsSource="{Binding AvailableEmployees_}" SelectedItem="{Binding SelectedEmployeeContractor}" Margin="55,320,0,0" Height="199" VerticalAlignment="Top" HorizontalAlignment="Left" Width="282" IsReadOnly="True" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding EmpID, Converter={StaticResource EmployeeNameConcatenator}, NotifyOnTargetUpdated=True}" />
-                        <DataGridTextColumn Binding="{Binding EmpType, Converter={StaticResource EmployeeTypeOfConverter}, NotifyOnTargetUpdated=True}" />
+                        <DataGridTextColumn Binding="{Binding EmpID, Converter={StaticResource EmployeeNameConcatenator}, NotifyOnTargetUpdated=True}" Header="Name" Width="200"/>
+                        <DataGridTemplateColumn Width="100" CanUserResize="False" Header="Type" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label>
+                                        <Label.Style>
+                                            <Style TargetType="{x:Type Label}">
+                                                <Setter Property="Content" Value="{Binding EmpType}" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding EmpType}" Value="0">
+                                                        <Setter Property="Content" Value="Employee" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding EmpType}" Value="1">
+                                                        <Setter Property="Content" Value = "Contractor" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
 
@@ -70,7 +110,22 @@
                             <DataGridTemplateColumn.CellTemplate  >
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button x:Name="markAsDoneBtn" Foreground="White" Width="Auto" Height="25" Click="markAsDoneBtn_Click" Margin="10,10,0,10" Background="{x:Null}" BorderBrush="Black" ToolTip="Mark as Done" IsEnabled="{Binding Path=IsNew}">
+                                        <Button x:Name="markAsDoneBtn" Foreground="White" Width="Auto" Height="25" Click="markAsDoneBtn_Click" Margin="10,10,0,10" Background="{x:Null}" BorderBrush="Black" ToolTip="Mark as Done">
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Converter={StaticResource DisableActionButtonServiceSchedule}, NotifyOnTargetUpdated=True}" Value="false">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Converter={StaticResource DisableActionButtonServiceSchedule}, NotifyOnTargetUpdated=True}" Value="true">
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Status}" Value="Done">
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
                                             <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
                                                 <Canvas Name="Capa_1" Width="474.8" Height="474.801" Canvas.Left="0" Canvas.Top="0">
                                                     <Canvas.RenderTransform>
@@ -112,6 +167,19 @@
                                             </Viewbox>
                                         </Button>
                                         <Button x:Name="deletePhaseBtn"  Width="Auto" Height="25" BorderBrush="Black" Background="{x:Null}" Margin="10,10,0,10" ToolTip="Delete Record" Click="deletePhaseBtn_Click">
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Converter={StaticResource DisableActionButtonServiceSchedule}, NotifyOnTargetUpdated=True}" Value="true">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Converter={StaticResource DisableActionButtonServiceSchedule}, NotifyOnTargetUpdated=True}" Value="false">
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                        </DataTrigger>
+
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
                                             <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
                                                 <Canvas x:Name="Capa_1c" Width="438.529" Height="438.529" Canvas.Left="0" Canvas.Top="0">
                                                     <Canvas.RenderTransform>

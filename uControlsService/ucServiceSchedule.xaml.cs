@@ -55,33 +55,25 @@ namespace prototype2
             if (this.IsVisible)
             {
                 loadDataToUi();
+                if (MainVM.isViewSchedule)
+                {
+                    saveSchedBtn.Visibility = Visibility.Collapsed;
+                    cancelschedBtn.Content = "Close";
+                }
+                else
+                {
+                    saveSchedBtn.Visibility = Visibility.Visible;
+                    cancelschedBtn.Content = "Cancel";
+                }
 
             }
         }
 
         void loadDataToUi()
         {
-            if (!MainVM.isNewSched)
+            if (!MainVM.isNewSchedule)
             {
-                MainVM.SelectedAvailedServices = MainVM.AvailedServices.Where(x => x.AvailedServiceID == MainVM.SelectedServiceSchedule_.ServiceAvailedID).FirstOrDefault();
-                var dbCon = DBConnection.Instance();
-                string query = "SELECT * FROM phases_per_services_t where serviceSchedID = " + MainVM.SelectedServiceSchedule_.ServiceSchedID;
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-                
-
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    DateTime dateStarted = new DateTime() ;
-                    DateTime.TryParse(dr[3].ToString(),out dateStarted);
-                    DateTime dateEnded = new DateTime();
-                    DateTime.TryParse(dr[4].ToString(), out dateEnded);
-
-                    MainVM.SelectedServiceSchedule_.PhasesPerService.Add(new PhasesPerService() { ID = int.Parse(dr[0].ToString()), ServiceSchedID = int.Parse(dr[2].ToString()), PhaseID = int.Parse(dr[1].ToString()),DateStarted = dateStarted, DateEnded = dateEnded, Status = dr[3].ToString()});
-                }
+                loadPhases();
                 startDate.SelectedDate = MainVM.SelectedServiceSchedule_.dateStarted_;
                 endDate.SelectedDate = MainVM.SelectedServiceSchedule_.dateEnded_;
                 notesTb.Text = MainVM.SelectedServiceSchedule_.schedNotes_;
@@ -98,9 +90,30 @@ namespace prototype2
                 }
                 
             }
+        }
+
+        void loadPhases()
+        {
             
+            MainVM.SelectedAvailedServices = MainVM.AvailedServices.Where(x => x.AvailedServiceID == MainVM.SelectedServiceSchedule_.ServiceAvailedID).FirstOrDefault();
+            var dbCon = DBConnection.Instance();
+            string query = "SELECT * FROM phases_per_services_t where serviceSchedID = " + MainVM.SelectedServiceSchedule_.ServiceSchedID;
+            MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+            DataSet fromDb = new DataSet();
+            DataTable fromDbTable = new DataTable();
+            dataAdapter.Fill(fromDb, "t");
+            fromDbTable = fromDb.Tables["t"];
 
+            MainVM.SelectedServiceSchedule_.PhasesPerService.Clear();
+            foreach (DataRow dr in fromDbTable.Rows)
+            {
+                DateTime dateStarted = new DateTime();
+                DateTime.TryParse(dr[3].ToString(), out dateStarted);
+                DateTime dateEnded = new DateTime();
+                DateTime.TryParse(dr[4].ToString(), out dateEnded);
 
+                MainVM.SelectedServiceSchedule_.PhasesPerService.Add(new PhasesPerService() { ID = int.Parse(dr[0].ToString()), ServiceSchedID = int.Parse(dr[2].ToString()), PhaseID = int.Parse(dr[1].ToString()), DateStarted = dateStarted, DateEnded = dateEnded, Status = dr[5].ToString() });
+            }
         }
 
         void searchForAvailableEmployees()
@@ -218,11 +231,24 @@ namespace prototype2
 
                         foreach(PhasesPerService pps in MainVM.SelectedServiceSchedule_.PhasesPerService)
                         {
-                            query = "INSERT INTO `odc_db`.`phases_per_services_t`(`phaseID`,`serviceSchedID`, `status`)" +
-                         " VALUES" +
-                         "('"+ pps.PhaseID + "','" +
-                            schedID + "','PENDING');";
-                            dbCon.insertQuery(query, dbCon.Connection);
+                            if(MainVM.SelectedServiceSchedule_.PhasesPerService.IndexOf(pps) == 0)
+                            {
+                                query = "INSERT INTO `odc_db`.`phases_per_services_t`(`phaseID`,`serviceSchedID`,`dateStarted`)" +
+                                        " VALUES" +
+                                        "('" + pps.PhaseID + "','" +
+                                            startDate.SelectedDate.Value.ToString("yyyy-MM-dd") + "','" +
+                                            schedID + "');";
+                                dbCon.insertQuery(query, dbCon.Connection);
+                            }
+                            else
+                            {
+                                query = "INSERT INTO `odc_db`.`phases_per_services_t`(`phaseID`,`serviceSchedID`)" +
+                                        " VALUES" +
+                                        "('" + pps.PhaseID + "','" +
+                                            schedID + "');";
+                                dbCon.insertQuery(query, dbCon.Connection);
+                            }
+
                         }
 
                         MessageBox.Show("Succesfully added a schedule");
@@ -296,7 +322,12 @@ namespace prototype2
             var dbCon = DBConnection.Instance();
             using (MySqlConnection conn = dbCon.Connection)
             {
-                string query = "UPDATE `odc_db`.`phases_per_services_t` SET `status` = 'DONE' WHERE id = '" + MainVM.SelectedPhasesPerService.ID + "'";
+                string query = "UPDATE `odc_db`.`phases_per_services_t` SET `status` = 'DONE', dateEnded = '"+DateTime.Now.ToString("yyyy-MM-dd") +"'WHERE id = '" + MainVM.SelectedPhasesPerService.ID + "'";
+                dbCon.insertQuery(query, dbCon.Connection);
+
+                if(MainVM.SelectedServiceSchedule_.PhasesPerService.IndexOf(MainVM.SelectedPhasesPerService) != MainVM.SelectedServiceSchedule_.PhasesPerService.Count - 1)
+                    MainVM.SelectedPhasesPerService = MainVM.SelectedServiceSchedule_.PhasesPerService[MainVM.SelectedServiceSchedule_.PhasesPerService.IndexOf(MainVM.SelectedPhasesPerService) + 1];
+                query = "UPDATE `odc_db`.`phases_per_services_t` SET `dateStarted` = '" + DateTime.Now.ToString("yyyy-MM-dd") + "'WHERE id = '" + MainVM.SelectedPhasesPerService.ID + "'";
                 dbCon.insertQuery(query, dbCon.Connection);
 
                 query = "SELECT * FROM PHASES_PER_SERVICES_T WHERE serviceSchedID = '"+ MainVM.SelectedServiceSchedule_.ServiceSchedID+ "' AND status = 'ON QUEUE'";
@@ -313,9 +344,12 @@ namespace prototype2
                         MessageBox.Show("Succesfully updated the schedule");
                     }
                 }
-
                 
+                else
+                    MessageBox.Show("Succesfully updated the schedule");
+
             }
+            loadPhases();
         }
 
         private void deletePhaseBtn_Click(object sender, RoutedEventArgs e)

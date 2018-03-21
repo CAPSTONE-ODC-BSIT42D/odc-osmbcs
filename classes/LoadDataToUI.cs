@@ -642,9 +642,9 @@ namespace prototype2
                     {
                         foreach (DataRow dr2 in fromDbTable2.Rows)
                         {
-                            MainVM.SelectedEmployeeContractor = MainVM.Employees.Where(x => x.EmpID == int.Parse(dr2[2].ToString())).First();
+                            MainVM.SelectedEmployeeContractor = MainVM.Employees.Where(x => x.EmpID == int.Parse(dr2[2].ToString())).FirstOrDefault();
                             if (MainVM.SelectedEmployeeContractor == null)
-                                MainVM.SelectedEmployeeContractor = MainVM.Contractor.Where(x => x.EmpID == int.Parse(dr2[2].ToString())).First();
+                                MainVM.SelectedEmployeeContractor = MainVM.Contractor.Where(x => x.EmpID == int.Parse(dr2[2].ToString())).FirstOrDefault();
 
                             MainVM.SelectedServiceSchedule_.assignedEmployees_.Add(MainVM.SelectedEmployeeContractor);
                         }

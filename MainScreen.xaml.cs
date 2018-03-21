@@ -365,6 +365,7 @@ namespace prototype2
 
         private void saveClosePurchaseOrderForm(object sender, EventArgs e)
         {
+            MainVM.resetValueofVariables();
             foreach (UIElement obj in transOrderGrid.Children)
             {
                 if (obj is Grid)
@@ -379,7 +380,7 @@ namespace prototype2
                     ((UserControl)obj).Visibility = Visibility.Collapsed;
 
             }
-            MainVM.resetValueofVariables();
+
             refreshData();
 
             
@@ -1787,7 +1788,7 @@ namespace prototype2
         #region Service Management
         private void newServiceSchedBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainVM.isNewSched = true;
+            MainVM.isNewSchedule = true;
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
             otherGridBg.Visibility = Visibility.Visible;
             Grid.SetZIndex((otherGridBg), 1);
@@ -1806,6 +1807,7 @@ namespace prototype2
 
         private void viewSchedBtn_Click(object sender, RoutedEventArgs e)
         {
+            MainVM.isViewSchedule = true;
             foreach (var element in serviceGrid.Children)
             {
                 if (element is UserControl)
