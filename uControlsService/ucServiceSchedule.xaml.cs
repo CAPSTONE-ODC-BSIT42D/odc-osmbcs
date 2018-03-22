@@ -118,9 +118,11 @@ namespace prototype2
 
         void searchForAvailableEmployees()
         {
+            notAvail.Clear();
             MainVM.AvailableEmployees_.Clear();
             IEnumerable<Employee> availEmp;
             IEnumerable<Employee> availCont;
+            
             
             foreach (ServiceSchedule ss in MainVM.ServiceSchedules_)
             {
@@ -205,7 +207,7 @@ namespace prototype2
             var dbCon = DBConnection.Instance();
             using (MySqlConnection conn = dbCon.Connection)
             {
-                if (!MainVM.isEdit)
+                if (!MainVM.isEditSchedule)
                 {
                     string query = "INSERT INTO `odc_db`.`service_sched_t`(`serviceAvailedID`,`serviceStatus`,`dateStarted`,`dateEnded`,`schedNotes`)" +
                         " VALUES" +
@@ -236,8 +238,8 @@ namespace prototype2
                                 query = "INSERT INTO `odc_db`.`phases_per_services_t`(`phaseID`,`serviceSchedID`,`dateStarted`)" +
                                         " VALUES" +
                                         "('" + pps.PhaseID + "','" +
-                                            startDate.SelectedDate.Value.ToString("yyyy-MM-dd") + "','" +
-                                            schedID + "');";
+                                            schedID + "','" +
+                                            startDate.SelectedDate.Value.ToString("yyyy-MM-dd") + "');";
                                 dbCon.insertQuery(query, dbCon.Connection);
                             }
                             else
@@ -281,7 +283,6 @@ namespace prototype2
                         MessageBox.Show("Succesfully updated the schedule");
                     }
                 }
-                MainVM.isEdit = false;
             }
         }
 

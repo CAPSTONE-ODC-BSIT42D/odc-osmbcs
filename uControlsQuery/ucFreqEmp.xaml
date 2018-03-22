@@ -14,7 +14,7 @@
     <Grid Background="#FFF7F6F6" DataContext="{StaticResource job_title_tViewSource}">
         <DataGrid x:Name="employeeDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding }" Margin="10,10,10,6" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn  Binding="{Binding _fullName}" Header="Name" Width="200"/>
+                <DataGridTextColumn  Binding="{Binding _name}" Header="Name" Width="200"/>
                 <DataGridTextColumn  Binding="{Binding positionName}" Header="Position" Width="200"/>
                 <DataGridTextColumn  Binding="{Binding _count}" Header="No Of Times Assigned" Width="200"/>
             </DataGrid.Columns>

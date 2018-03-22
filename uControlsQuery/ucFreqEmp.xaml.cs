@@ -61,7 +61,7 @@ MySqlConnection(ConfigurationManager.ConnectionStrings["prototype2.Properties.Se
                 if (dbCon.IsConnect())
                 {
                     MainVM.Phases.Clear();
-                    string query = "SELECT CONCAT(e.empFName,' ',e.empLName) AS _name, p.positionName, COUNT(ae.assignEmployeeID) AS _count FROM assigned_employees_t ae JOIN emp_cont_t e ON e.empID = e.empID JOIN position_t p ON p.positionID = e.positionID JOIN service_sched_t ss ON ss.serviceSchedID = ae.serviceSchedID GROUP BY ae.empID, ae.serviceSchedID ORDER BY _count DESC LIMIT 0, 10";
+                    string query = "SELECT CONCAT(e.empFName,' ',e.empLName) AS _name, p.positionName, COUNT(ae.assignEmployeeID) AS _count FROM assigned_employees_t ae JOIN emp_cont_t e ON ae.empID = e.empID JOIN position_t p ON p.positionID = e.positionID JOIN service_sched_t ss ON ss.serviceSchedID = ae.serviceSchedID GROUP BY ae.empID, ae.serviceSchedID ORDER BY _count DESC LIMIT 0, 10";
                     MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                     DataSet fromDb = new DataSet();
                     DataTable fromDbTable = new DataTable();

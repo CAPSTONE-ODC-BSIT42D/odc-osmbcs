@@ -81,7 +81,7 @@ namespace prototype2.uControlsTransanction
                 {
                     DateTime paymentDate = new DateTime();
                     DateTime.TryParse(dr["SIpaymentDate"].ToString(), out paymentDate);
-                    MainVM.SelectedSalesInvoice.PaymentHist_.Add(new PaymentT() { SIpaymentID_ = int.Parse(dr["SIpaymentID"].ToString()), SIpaymentDate_ = paymentDate, SIpaymentAmount_ = decimal.Parse(dr["SIpaymentAmount"].ToString()), invoiceNo_ = int.Parse(dr["invoiceNo"].ToString()), SIpaymentMethod_ = dr["SIpaymentMethod"].ToString(), SIcheckNo_ = dr["SIcheckNo"].ToString() });
+                    MainVM.SelectedSalesInvoice.PaymentHist_.Add(new PaymentT() { SIpaymentID_ = int.Parse(dr["SIpaymentID"].ToString()), SIpaymentDate_ = paymentDate, SIpaymentAmount_ = decimal.Parse(dr["SIpaymentAmount"].ToString()), invoiceNo_ = int.Parse(dr["invoiceNo"].ToString()), SIpaymentMethod_ = dr["SIpaymentMethod"].ToString(),SIpaymentStatus_ = dr["SIpaymentStatus"].ToString(), SIcheckNo_ = dr["SIcheckNo"].ToString() });
                 }
                 dbCon.Close();
             }
@@ -172,7 +172,14 @@ namespace prototype2.uControlsTransanction
 
         private void clearCheckBtn_Click(object sender, RoutedEventArgs e)
         {
+            var dbCon = DBConnection.Instance();
+            using (MySqlConnection conn = dbCon.Connection)
+            {
+                string query = "UPDATE `odc_db`.`si_payment_t` SET `SIpaymentStatus` = 'CLEARED' WHERE SIpaymentID = '" + MainVM.SelectedPaymentH_.SIpaymentID_ + "'";
+                dbCon.insertQuery(query, dbCon.Connection);
+                MessageBox.Show("Succesfully cleared the checked");
 
+            }
         }
     }
 }

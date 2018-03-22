@@ -154,7 +154,7 @@ namespace prototype2
             {
                 if (containerGrid.Children.IndexOf(obj) == 2)
                 {
-                    headerLbl.Content = "Billing";
+                    headerLbl.Content = "Billing and Collection";
                     obj.Visibility = Visibility.Visible;
                 }
                 else
@@ -1808,6 +1808,23 @@ namespace prototype2
         private void viewSchedBtn_Click(object sender, RoutedEventArgs e)
         {
             MainVM.isViewSchedule = true;
+            foreach (var element in serviceGrid.Children)
+            {
+                if (element is UserControl)
+                {
+                    if (!(((UserControl)element).Equals(ucService)))
+                    {
+                        ((UserControl)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((UserControl)element).Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+        private void editSchedBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.isEditSchedule = true;
             foreach (var element in serviceGrid.Children)
             {
                 if (element is UserControl)

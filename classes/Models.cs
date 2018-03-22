@@ -1631,6 +1631,13 @@ namespace prototype2
             set { SetProperty(ref SIcheckNo, value); }
         }
 
+        protected string SIpaymentStatus;
+        public string SIpaymentStatus_
+        {
+            get { return SIpaymentStatus; }
+            set { SetProperty(ref SIpaymentStatus, value); }
+        }
+
         protected int invoiceNo;
         public int invoiceNo_
         {
