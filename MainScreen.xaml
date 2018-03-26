@@ -2321,7 +2321,7 @@
             <uControlsMaintenance:ucLocation x:Name="ucLocation" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="458" d:IsHidden="True"/>
 
         </Grid>
-        <Grid x:Name="otherGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3" d:IsHidden="True" Grid.RowSpan="2">
+        <Grid x:Name="otherGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2">
             <uControlsMaintenance:ucSelectCustomer x:Name="ucSelectCustomer" Margin="0" Visibility="Collapsed" d:IsHidden="True"/>
             <uControlsMaintenance:ucAddItem x:Name="ucAddItem" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Visibility="Collapsed" d:IsHidden="True"/>
 
@@ -2334,6 +2334,7 @@
             <local:ucNoticeOfEmployment x:Name="ucNoticeOfEmployment" Height="Auto" Margin="0" Width="Auto" d:IsHidden="True" Visibility="Collapsed"/>
             <local:ucSalesInvoiceViewer x:Name="ucSaleInvoiceViewer" Margin="0" d:IsHidden="True" Visibility="Collapsed"/>
             <local:ucSalesQuoteViewer x:Name="ucSalesQuoteViewer" Margin="0" d:IsHidden="True" Visibility="Collapsed"/>
+            <uControlsService:ucAssignEmployees x:Name="ucAssignEmp" HorizontalAlignment="Center" Height="392" Margin="0" VerticalAlignment="Center" Width="624"/>
         </Grid>
 
     </Grid>

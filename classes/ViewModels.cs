@@ -382,6 +382,13 @@ namespace prototype2
 
         public String SearchQuery { get; set; }
 
+        protected ObservableCollection<Employee> notAvail = new ObservableCollection<Employee>();
+        public ObservableCollection<Employee> NotAvail
+        {
+            get { return notAvail; }
+            set { notAvail = value; }
+        }
+
         #region Customer/Supplier
         protected ObservableCollection<Customer> allCustomerSupplier =
             new ObservableCollection<Customer>();

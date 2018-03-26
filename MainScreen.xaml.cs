@@ -105,6 +105,9 @@ namespace prototype2
 
             
             this.ucSaleInvoiceViewer.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
+
+            this.ucService.AssignEmployeeButtonClicked += assignEmp_BtnClicked;
+            this.ucAssignEmp.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
             foreach (var obj in containerGrid.Children)
             {
                 ((Grid)obj).Visibility = Visibility.Collapsed;
@@ -126,10 +129,25 @@ namespace prototype2
 
         #region Custom Events
 
+        private void assignEmp_BtnClicked(object sender, EventArgs e)
+        {
+            otherGridBg.Visibility = Visibility.Visible;
+            Grid.SetZIndex((otherGridBg), 1);
+            foreach (UIElement obj in otherGridBg.Children)
+            {
+                if (obj.Equals(ucAssignEmp))
+                {
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    obj.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+
         private void selectService_BtnClicked(object sender, EventArgs e)
         {
-            MainVM.isEdit = false;
-            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
             otherGridBg.Visibility = Visibility.Visible;
             Grid.SetZIndex((otherGridBg), 1);
             ucService.Visibility = Visibility.Collapsed;

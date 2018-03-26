@@ -32,7 +32,8 @@ namespace prototype2
         }
 
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
-        ObservableCollection<Employee> notAvail = new ObservableCollection<Employee>();
+
+
         public event EventHandler SaveCloseButtonClicked;
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
@@ -46,6 +47,14 @@ namespace prototype2
         protected virtual void OnSelectServiceButtonClicked(RoutedEventArgs e)
         {
             var handler = SelectServiceButtonClicked;
+            if (handler != null)
+                handler(this, e);
+        }
+
+        public event EventHandler AssignEmployeeButtonClicked;
+        protected virtual void OnAssignEmployeeButtonClicked(RoutedEventArgs e)
+        {
+            var handler = AssignEmployeeButtonClicked;
             if (handler != null)
                 handler(this, e);
         }
@@ -118,7 +127,7 @@ namespace prototype2
 
         void searchForAvailableEmployees()
         {
-            notAvail.Clear();
+            MainVM.NotAvail.Clear();
             MainVM.AvailableEmployees_.Clear();
             IEnumerable<Employee> availEmp;
             IEnumerable<Employee> availCont;
@@ -136,11 +145,11 @@ namespace prototype2
                                 select cont;
                     foreach(Employee emp in empx)
                     {
-                        notAvail.Add(emp);
+                        MainVM.NotAvail.Add(emp);
                     }
                     foreach (Employee cont in contx)
                     {
-                        notAvail.Add(cont);
+                        MainVM.NotAvail.Add(cont);
                     }
                 }
                     
@@ -148,31 +157,14 @@ namespace prototype2
 
             foreach (Employee ee in MainVM.Employees)
             {
-                if (!notAvail.Contains(ee))
+                if (!MainVM.NotAvail.Contains(ee))
                     MainVM.AvailableEmployees_.Add(ee);
             }
             foreach (Employee ee in MainVM.Contractor)
             {
-                if (!notAvail.Contains(ee))
+                if (!MainVM.NotAvail.Contains(ee))
                     MainVM.AvailableEmployees_.Add(ee);
             }
-
-            //if (MainVM.ServiceSchedules_.Count ==0)
-            //{
-
-            //    foreach (Employee ee in MainVM.Employees)
-            //    {
-            //        if(!MainVM.SelectedServiceSchedule_.assignedEmployees_.Contains(ee))
-            //            MainVM.AvailableEmployees_.Add(ee);
-            //    }
-            //    foreach (Employee ee in MainVM.Contractor)
-            //    {
-            //        if (!MainVM.SelectedServiceSchedule_.assignedEmployees_.Contains(ee))
-            //            MainVM.AvailableEmployees_.Add(ee);
-            //    }
-            //}
-
-            
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -286,31 +278,11 @@ namespace prototype2
             }
         }
 
-        
-
-        
-
-        private void transferToLeftBtn_Click(object sender, RoutedEventArgs e)
-        {
-            MainVM.AvailableEmployees_.Add(MainVM.SelectedEmployeeContractor);
-            MainVM.SelectedServiceSchedule_.assignedEmployees_.Remove(MainVM.SelectedEmployeeContractor);
-            
-        }
-
-        private void transferToRightBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if(notAvail.Contains(MainVM.SelectedEmployeeContractor) && MainVM.Employees.Contains(MainVM.SelectedEmployeeContractor))
-            {
-                MessageBoxResult result = MessageBox.Show("This employee already assigned to other service, do you want to assign this ", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Information);
-            }
-            MainVM.SelectedServiceSchedule_.assignedEmployees_.Add(MainVM.SelectedEmployeeContractor);
-            MainVM.AvailableEmployees_.Remove(MainVM.SelectedEmployeeContractor);
-        }
-
         private void startDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             endDate.DisplayDateStart = startDate.SelectedDate;
             searchForAvailableEmployees();
+            assignEmployeeBtn.IsEnabled = true;
         }
 
         private void endDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -356,6 +328,17 @@ namespace prototype2
         private void deletePhaseBtn_Click(object sender, RoutedEventArgs e)
         {
             MainVM.SelectedServiceSchedule_.PhasesPerService.Remove(MainVM.SelectedPhasesPerService);
+        }
+
+        private void deleteAssignedEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.AvailableEmployees_.Add(MainVM.SelectedEmployeeContractor);
+            MainVM.SelectedServiceSchedule_.assignedEmployees_.Remove(MainVM.SelectedEmployeeContractor);
+        }
+
+        private void assignEmployeeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OnAssignEmployeeButtonClicked(e);
         }
     }
 }
