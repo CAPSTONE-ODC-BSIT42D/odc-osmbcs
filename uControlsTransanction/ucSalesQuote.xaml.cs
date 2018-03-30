@@ -104,8 +104,10 @@ namespace prototype2
                 closeModals();
                 if (this.IsVisible)
                 {
-                    if (MainVM.isEditSalesQuote && MainVM.SelectedSalesQuote != null)
+                    if ((MainVM.isEditSalesQuote || MainVM.isViewSalesQuote) && MainVM.SelectedSalesQuote != null)
                     {
+                        editSalesQuoteBtn.Visibility = Visibility.Visible;
+                        convertToInvoiceBtn.Visibility = Visibility.Visible;
                         downloadBtn.IsEnabled = true;
                         foreach (UIElement obj in transQuoatationGridForm.Children)
                         {
@@ -146,8 +148,8 @@ namespace prototype2
 
         void loadSalesQuoteToUi()
         {
-            MainVM.SelectedCustomerSupplier = (from cust in MainVM.Suppliers
-                                               where cust.CompanyID == MainVM.SelectedPurchaseOrder.suppID
+            MainVM.SelectedCustomerSupplier = (from cust in MainVM.Customers
+                                               where cust.CompanyID == MainVM.SelectedSalesQuote.custID_
                                                select cust).FirstOrDefault();
             MainVM.RequestedItems.Clear();
             MainVM.AvailedServicesList.Clear();
@@ -249,6 +251,10 @@ namespace prototype2
             }
             else if (termsAndConditionGrid.IsVisible)
             {
+                if (MainVM.isViewSalesQuote)
+                {
+                    transRequestNext.Visibility = Visibility.Visible;
+                }
                 foreach (UIElement obj in transQuoatationGridForm.Children)
                 {
                     if (transQuoatationGridForm.Children.IndexOf(obj) == 0)
@@ -259,25 +265,29 @@ namespace prototype2
                         obj.Visibility = Visibility.Collapsed;
                 }
             }
-            else if (saleQuoteViewer.IsVisible)
-            {
-                MainVM.SalesQuotes.Remove(MainVM.SelectedSalesQuote);
-                foreach (UIElement obj in transQuoatationGridForm.Children)
-                {
-                    if (transQuoatationGridForm.Children.IndexOf(obj) == 1)
-                    {
-                        obj.Visibility = Visibility.Visible;
-                    }
-                    else
-                        obj.Visibility = Visibility.Collapsed;
-                }
-            }
+            //else if (saleQuoteViewer.IsVisible)
+            //{
+            //    MainVM.SalesQuotes.Remove(MainVM.SelectedSalesQuote);
+            //    foreach (UIElement obj in transQuoatationGridForm.Children)
+            //    {
+            //        if (transQuoatationGridForm.Children.IndexOf(obj) == 1)
+            //        {
+            //            obj.Visibility = Visibility.Visible;
+            //        }
+            //        else
+            //            obj.Visibility = Visibility.Collapsed;
+            //    }
+            //}
         }
         Document document;
         private void transRequestNext_Click(object sender, RoutedEventArgs e)
         {
             if (newRequisitionGrid.IsVisible)
             {
+                if (MainVM.isViewSalesQuote)
+                {
+                    transRequestNext.Visibility = Visibility.Collapsed;
+                }
                 if (MainVM.RequestedItems.Count != 0)
                 {
                     if((from ri in MainVM.RequestedItems where ri.itemType == 1 select ri).Count() > 0)
@@ -301,6 +311,8 @@ namespace prototype2
 
             else if (termsAndConditionGrid.IsVisible)
             {
+                transRequestNext.Content = "Next";
+
                 salesQuoteToMemory();
 
                 saveSalesQuoteToDb();
@@ -740,26 +752,26 @@ namespace prototype2
 
         private void generatePDFBtn_Click(object sender, RoutedEventArgs e)
         {
-            foreach (UIElement obj in transQuoatationGridForm.Children)
-            {
-                if (transQuoatationGridForm.Children.IndexOf(obj) == 2)
-                {
-                    obj.Visibility = Visibility.Visible;
-                }
-                else
-                    obj.Visibility = Visibility.Collapsed;
-            }
-            if (MainVM.RequestedItems.Count != 0)
-            {
-                transRequestNext.Content = "Save";
-                salesQuoteToMemory();
-                SalesQuoteDocument df = new SalesQuoteDocument();
-                document = df.CreateDocument("SalesQuote", "asdsadsa");
-                string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
-                saleQuoteViewer.pagePreview.Ddl = ddl;
-            }
-            else
-                MessageBox.Show("No items on the list.");
+            //foreach (UIElement obj in transQuoatationGridForm.Children)
+            //{
+            //    if (transQuoatationGridForm.Children.IndexOf(obj) == 2)
+            //    {
+            //        obj.Visibility = Visibility.Visible;
+            //    }
+            //    else
+            //        obj.Visibility = Visibility.Collapsed;
+            //}
+            //if (MainVM.RequestedItems.Count != 0)
+            //{
+            //    transRequestNext.Content = "Save";
+            //    //salesQuoteToMemory();
+            //    //SalesQuoteDocument df = new SalesQuoteDocument();
+            //    //document = df.CreateDocument("SalesQuote", "asdsadsa");
+            //    //string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);
+            //    //saleQuoteViewer.pagePreview.Ddl = ddl;
+            //}
+            //else
+            //    MessageBox.Show("No items on the list.");
         }
 
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)

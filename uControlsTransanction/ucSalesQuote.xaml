@@ -235,7 +235,7 @@
                     <TextBlock x:Name="totalPriceLbl" Margin="130,492,0,0" VerticalAlignment="Top" FontFamily="Segoe UI" FontWeight="Normal" Grid.Column="1" FontSize="20" Height="25" HorizontalAlignment="Left"  Text="{Binding TotalSales, ConverterCulture=fil-PH, StringFormat=\{0:C\}}"/>
                 </Grid>
             </ScrollViewer>
-            <ScrollViewer x:Name="termsAndConditionGrid" Margin="0,0,0,45" Padding="10" VerticalScrollBarVisibility="Auto">
+            <ScrollViewer x:Name="termsAndConditionGrid" Margin="0,0,0,45" Padding="10" VerticalScrollBarVisibility="Auto" d:IsHidden="True">
                 <Grid x:Name="termsAndConditionGridForm">
                     <Grid x:Name="surveyReportGrid" Margin="20,0,20,863">
                         <Label Content="Survey Report" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" FontFamily="Segoe UI"/>
@@ -278,7 +278,7 @@
                     <TextBox x:Name="additionalTermsTb" HorizontalAlignment="Left" Height="86" Margin="38,799,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="451" FontWeight="Normal" FontSize="14"/>
                 </Grid>
             </ScrollViewer>
-            <local:DocumentViewer x:Name="saleQuoteViewer" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,45" d:IsHidden="True"/>
+            <!--<local:DocumentViewer x:Name="saleQuoteViewer" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,45" d:IsHidden="True"/>-->
 
         </Grid>
         <StackPanel Margin="0" Height="45" FlowDirection="RightToLeft" VerticalAlignment="Bottom" Orientation="Horizontal">

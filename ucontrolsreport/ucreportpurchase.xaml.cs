@@ -33,7 +33,7 @@ namespace prototype2
         }
         private void DisplayReport()
         {
-            ReportPurchase.Reset();
+            ReportPurchase.DataSources.Clear();
 
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.PurchaseReport.rdlc");
  

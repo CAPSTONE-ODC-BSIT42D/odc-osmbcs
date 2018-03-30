@@ -1,0 +1,126 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:prototype2.uControlsService"
+             xmlns:prototype2="clr-namespace:prototype2" x:Class="prototype2.uControlsService.ucAssignEmployees"
+             mc:Ignorable="d" 
+             d:DesignHeight="357" d:DesignWidth="630" IsVisibleChanged="UserControl_IsVisibleChanged">
+    <UserControl.Resources>
+        <prototype2:EmployeeNameConcatenator x:Key="EmployeeNameConcatenator"/>
+    </UserControl.Resources>
+    <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+        <Button x:Name="closeModalBtn_Copy" HorizontalAlignment="Right" VerticalAlignment="Top" Width="25" Margin="0,10,10,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="closeModalBtn_Click">
+            <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform" Height="23" Width="27" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Canvas x:Name="Capa_1d3" Width="438.533" Height="438.533" Canvas.Left="0" Canvas.Top="0">
+                    <!--Unknown tag: metadata-->
+                    <Canvas.RenderTransform>
+                        <TranslateTransform X="0" Y="0"/>
+                    </Canvas.RenderTransform>
+                    <!--Unknown tag: sodipodi:namedview-->
+                    <Canvas x:Name="g4d2">
+                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2d2" Fill="#000000" Canvas.Left="-2.272">
+                            <Path.Data>
+                                <PathGeometry Figures="M409.133 109.203c-19.608-33.592-46.205-60.189-79.798-79.796C295.736 9.801 259.058 0 219.273 0   c-39.781 0-76.47 9.801-110.063 29.407c-33.595 19.604-60.192 46.201-79.8 79.796C9.801 142.8 0 179.489 0 219.267   c0 39.78 9.804 76.463 29.407 110.062c19.607 33.592 46.204 60.189 79.799 79.798c33.597 19.605 70.283 29.407 110.063 29.407   s76.47-9.802 110.065-29.407c33.593-19.602 60.189-46.206 79.795-79.798c19.603-33.596 29.403-70.284 29.403-110.062   C438.533 179.485 428.732 142.795 409.133 109.203z M322.621 270.939c3.617 3.613 5.428 7.905 5.428 12.854   c0 5.133-1.811 9.514-5.428 13.127l-25.693 25.701c-3.614 3.613-7.994 5.42-13.135 5.42c-4.948 0-9.236-1.807-12.847-5.42   l-51.676-51.682l-51.678 51.682c-3.616 3.613-7.898 5.42-12.847 5.42c-5.14 0-9.517-1.807-13.134-5.42l-25.697-25.701   c-3.616-3.613-5.424-7.994-5.424-13.127c0-4.948 1.809-9.24 5.424-12.854l51.678-51.673l-51.678-51.678   c-3.616-3.612-5.424-7.898-5.424-12.847c0-5.14 1.809-9.517 5.424-13.134l25.697-25.693c3.617-3.616 7.994-5.424 13.134-5.424   c4.949 0 9.231 1.809 12.847 5.424l51.678 51.674l51.676-51.674c3.61-3.616 7.898-5.424 12.847-5.424   c5.141 0 9.521 1.809 13.135 5.424l25.693 25.693c3.617 3.617 5.428 7.994 5.428 13.134c0 4.948-1.811 9.235-5.428 12.847   l-51.675 51.678L322.621 270.939z" FillRule="NonZero"/>
+                            </Path.Data>
+                        </Path>
+                    </Canvas>
+                    <Canvas x:Name="g6d2"/>
+                    <Canvas x:Name="g8d2"/>
+                    <Canvas x:Name="g10d2"/>
+                    <Canvas x:Name="g12d2"/>
+                    <Canvas x:Name="g14d3"/>
+                    <Canvas x:Name="g16d3"/>
+                    <Canvas x:Name="g18d3"/>
+                    <Canvas x:Name="g20d3"/>
+                    <Canvas x:Name="g22d3"/>
+                    <Canvas x:Name="g24d3"/>
+                    <Canvas x:Name="g26d3"/>
+                    <Canvas x:Name="g28d3"/>
+                    <Canvas x:Name="g30d3"/>
+                    <Canvas x:Name="g32d3"/>
+                    <Canvas x:Name="g34d3"/>
+                </Canvas>
+                </Viewbox>
+        </Button>
+
+        <Label x:Name="headerLbl" Content="Select a Customer" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Margin="26,38,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" Height="2" Margin="15,74,15,0" VerticalAlignment="Top"/>
+
+        <DataGrid x:Name="availableEmployees" ItemsSource="{Binding AvailableEmployees_}" SelectedItem="{Binding SelectedEmployeeContractor}" Margin="15,81,0,0" Height="266" VerticalAlignment="Top" HorizontalAlignment="Left" Width="600" IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding EmpID, Converter={StaticResource EmployeeNameConcatenator}, NotifyOnTargetUpdated=True}" Header="Name" Width="200"/>
+                <DataGridTemplateColumn Width="100" CanUserResize="False" Header="Type" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label>
+                                <Label.Style>
+                                    <Style TargetType="{x:Type Label}">
+                                        <Setter Property="Content" Value="{Binding EmpType}" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding EmpType}" Value="0">
+                                                <Setter Property="Content" Value="Employee" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding EmpType}" Value="1">
+                                                <Setter Property="Content" Value = "Contractor" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Label.Style>
+                            </Label>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn  Width="115" CanUserResize="False" Header="Actions"  >
+                    <DataGridTemplateColumn.CellTemplate  >
+                        <DataTemplate>
+                            <Border Height="34" Margin="5" Width="101" BorderBrush="Black" BorderThickness="1" CornerRadius="5" >
+                                <Button x:Name="assignEmployee" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" ToolTip="View Record" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="assignEmployee_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform" Height="19" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Canvas x:Name="Capa_1" Width="438.536" Height="438.536" Canvas.Left="0" Canvas.Top="0">
+                                                <!--Unknown tag: metadata-->
+                                                <Canvas.RenderTransform>
+                                                    <TranslateTransform X="0" Y="0"/>
+                                                </Canvas.RenderTransform>
+                                                <!--Unknown tag: sodipodi:namedview-->
+                                                <Canvas x:Name="g4">
+                                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2" Fill="#000000">
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="M414.41 24.123C398.333 8.042 378.963 0 356.315 0H82.228C59.58 0 40.21 8.042 24.126 24.123   C8.045 40.207 0.003 59.576 0.003 82.225v274.084c0 22.647 8.042 42.018 24.123 58.102c16.084 16.084 35.454 24.126 58.102 24.126   h274.084c22.648 0 42.018-8.042 58.095-24.126c16.084-16.084 24.126-35.454 24.126-58.102V82.225   C438.532 59.576 430.49 40.204 414.41 24.123z M370.88 159.024l-175.307 175.3c-3.615 3.614-7.898 5.428-12.85 5.428   c-4.95 0-9.233-1.807-12.85-5.421L67.663 232.118c-3.616-3.62-5.424-7.898-5.424-12.848c0-4.949 1.809-9.233 5.424-12.847   l29.124-29.124c3.617-3.616 7.895-5.424 12.847-5.424c4.952 0 9.235 1.809 12.851 5.424l60.242 60.24l133.334-133.333   c3.606-3.617 7.898-5.424 12.847-5.424c4.945 0 9.227 1.807 12.847 5.424l29.126 29.125c3.61 3.615 5.421 7.898 5.421 12.847   S374.49 155.411 370.88 159.024z" FillRule="NonZero"/>
+                                                        </Path.Data>
+                                                    </Path>
+                                                </Canvas>
+                                                <Canvas x:Name="g6"/>
+                                                <Canvas x:Name="g8"/>
+                                                <Canvas x:Name="g10"/>
+                                                <Canvas x:Name="g12"/>
+                                                <Canvas x:Name="g14"/>
+                                                <Canvas x:Name="g16"/>
+                                                <Canvas x:Name="g18"/>
+                                                <Canvas x:Name="g20"/>
+                                                <Canvas x:Name="g22"/>
+                                                <Canvas x:Name="g24"/>
+                                                <Canvas x:Name="g26"/>
+                                                <Canvas x:Name="g28"/>
+                                                <Canvas x:Name="g30"/>
+                                                <Canvas x:Name="g32"/>
+                                                <Canvas x:Name="g34"/>
+                                            </Canvas>
+                                        </Viewbox>
+                                        <Label Content="Assign"/>
+                                    </StackPanel>
+
+                                </Button>
+
+                            </Border>
+
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</UserControl>

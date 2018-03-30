@@ -39,38 +39,25 @@ MySqlConnection(ConfigurationManager.ConnectionStrings["prototype2.Properties.Se
             InitializeComponent();
            // binddatagrid();
         }
-        private void binddatagrid()
-        {
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT        cs.companyName, COUNT(si.invoiceNo) AS NoOfTransaction FROM            cust_supp_t cs INNER JOIN sales_invoice_t si ON cs.companyID = si.custID GROUP BY si.custID ORDER BY NoOfTransaction DESC", conn);
-                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-                QueriesDataSet ds = new QueriesDataSet();
-                adp.Fill(ds);
-                cust_supp_tDataGrid.DataContext = ds;
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            finally
-            {
-                conn.Close();
-            }
-
-        }
-
         private void ucLoyalCust_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
+            MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
+            var dbCon = DBConnection.Instance();
+
             if (this.IsVisible)
             {
-                binddatagrid();
-
-            }
-            else
-            {
-
+                if (dbCon.IsConnect())
+                {
+                    MainVM.Phases.Clear();
+                    string query = "	SELECT cs.companyName, COUNT(si.invoiceNo) as _count FROM cust_supp_t cs JOIN sales_invoice_t si ON cs.companyID = si.custID WHERE companyType = 0 GROUP BY si.custID ORDER BY _count DESC LIMIT 0,10";
+                    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                    DataSet fromDb = new DataSet();
+                    DataTable fromDbTable = new DataTable();
+                    dataAdapter.Fill(fromDb, "t");
+                    fromDbTable = fromDb.Tables["t"];
+                    cust_supp_tDataGrid.ItemsSource = fromDbTable.DefaultView;
+                    dbCon.Close();
+                }
             }
         }
     }

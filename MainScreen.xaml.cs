@@ -105,6 +105,9 @@ namespace prototype2
 
             
             this.ucSaleInvoiceViewer.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
+
+            this.ucService.AssignEmployeeButtonClicked += assignEmp_BtnClicked;
+            this.ucAssignEmp.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
             foreach (var obj in containerGrid.Children)
             {
                 ((Grid)obj).Visibility = Visibility.Collapsed;
@@ -126,10 +129,25 @@ namespace prototype2
 
         #region Custom Events
 
+        private void assignEmp_BtnClicked(object sender, EventArgs e)
+        {
+            otherGridBg.Visibility = Visibility.Visible;
+            Grid.SetZIndex((otherGridBg), 1);
+            foreach (UIElement obj in otherGridBg.Children)
+            {
+                if (obj.Equals(ucAssignEmp))
+                {
+                    obj.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    obj.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+
         private void selectService_BtnClicked(object sender, EventArgs e)
         {
-            MainVM.isEdit = false;
-            Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
             otherGridBg.Visibility = Visibility.Visible;
             Grid.SetZIndex((otherGridBg), 1);
             ucService.Visibility = Visibility.Collapsed;
@@ -154,7 +172,7 @@ namespace prototype2
             {
                 if (containerGrid.Children.IndexOf(obj) == 2)
                 {
-                    headerLbl.Content = "Billing";
+                    headerLbl.Content = "Billing and Collection";
                     obj.Visibility = Visibility.Visible;
                 }
                 else
@@ -365,6 +383,7 @@ namespace prototype2
 
         private void saveClosePurchaseOrderForm(object sender, EventArgs e)
         {
+            MainVM.resetValueofVariables();
             foreach (UIElement obj in transOrderGrid.Children)
             {
                 if (obj is Grid)
@@ -379,7 +398,7 @@ namespace prototype2
                     ((UserControl)obj).Visibility = Visibility.Collapsed;
 
             }
-            MainVM.resetValueofVariables();
+
             refreshData();
 
             
@@ -1787,7 +1806,7 @@ namespace prototype2
         #region Service Management
         private void newServiceSchedBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainVM.isNewSched = true;
+            MainVM.isNewSchedule = true;
             Storyboard sb = Resources["sbShowRightMenu"] as Storyboard;
             otherGridBg.Visibility = Visibility.Visible;
             Grid.SetZIndex((otherGridBg), 1);
@@ -1806,6 +1825,24 @@ namespace prototype2
 
         private void viewSchedBtn_Click(object sender, RoutedEventArgs e)
         {
+            MainVM.isViewSchedule = true;
+            foreach (var element in serviceGrid.Children)
+            {
+                if (element is UserControl)
+                {
+                    if (!(((UserControl)element).Equals(ucService)))
+                    {
+                        ((UserControl)element).Visibility = Visibility.Collapsed;
+                    }
+                    else
+                        ((UserControl)element).Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+        private void editSchedBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.isEditSchedule = true;
             foreach (var element in serviceGrid.Children)
             {
                 if (element is UserControl)

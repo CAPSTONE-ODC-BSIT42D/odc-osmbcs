@@ -125,7 +125,7 @@ namespace prototype2
             MainVM.RequestedItems.Clear();
             foreach (POAvailedItem ai in MainVM.SelectedPurchaseOrder.AvailedItems)
             {
-                if (MainVM.isView)
+                if (MainVM.isViewPurchaseOrder)
                     MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, totalAmount = ai.ItemQty * ai.UnitPrice, unitPrice = ai.UnitPrice, qtyEditable = true, status = ai.ItemStatus });
                 else
                     MainVM.RequestedItems.Add(new RequestedItem() { availedItemID = ai.AvailedItemID, itemID = ai.ItemID, itemType = 0, qty = ai.ItemQty, totalAmount = ai.ItemQty * ai.UnitPrice, unitPrice = ai.UnitPrice, qtyEditable = false, status = ai.ItemStatus });

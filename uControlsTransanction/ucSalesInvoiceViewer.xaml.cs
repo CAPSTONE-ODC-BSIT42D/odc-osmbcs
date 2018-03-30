@@ -40,15 +40,9 @@ namespace prototype2
         string result = "";
         private void DisplayReport()
         {
-
+            if (MainVM.SelectedSalesInvoice != null)
+                MainVM.invoiceId = MainVM.SelectedSalesInvoice.invoiceNo_.ToString();
             SalesInvoiceViewer.DataSources.Clear();
-            if(MainVM.SelectedSalesInvoice == null)
-            {
-                var dbCon = DBConnection.Instance();
-                dbCon.IsConnect();
-                string query = "SELECT LAST_INSERT_ID();";
-                result = dbCon.selectScalar(query, dbCon.Connection).ToString();
-            }
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.SalesInvoice.rdlc");
             SalesInvoiceViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetSalesInvoice", GetSales()));
             SalesInvoiceViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("DataSetSIAmount", GetSalesAmount()));
@@ -67,11 +61,8 @@ namespace prototype2
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
-            if (MainVM.SelectedSalesInvoice == null)
-                cmd.CommandText = "SELECT        invoiceNo, dateOfIssue, dueDate, notes, sqNoChar, quoteSubject, priceNote, deliveryDate, estDelivery, validityDays, validityDate, otherTerms, Sq_vat, paymentCurrency, termsDays, termsDP, discountPercent,   additionalNote, busStyle, taxNumber, CompanyAddInfo, companyAddress, companyCity, companyPostalCode, companyEmail, companyTelephone, companyMobile, repTitle, repLname, repFName, repMInitial,   repEmail, repMobile, companyName, ID, DESCRIPTION, itemName, itemDescr, UNIT_PRICE, itemQnty, total_item FROM            si_view_indiv WHERE(invoiceNo = '" + result + "') ";
+            cmd.CommandText = "SELECT        invoiceNo, dateOfIssue, dueDate, notes, sqNoChar, quoteSubject, priceNote, deliveryDate, estDelivery, validityDays, validityDate, otherTerms, Sq_vat, paymentCurrency, termsDays, termsDP, discountPercent,   additionalNote, busStyle, taxNumber, CompanyAddInfo, companyAddress, companyCity, companyPostalCode, companyEmail, companyTelephone, companyMobile, repTitle, repLname, repFName, repMInitial,   repEmail, repMobile, companyName, ID, DESCRIPTION, itemName, itemDescr, UNIT_PRICE, itemQnty, total_item FROM            si_view_indiv WHERE(invoiceNo = '" + MainVM.invoiceId + "') ";
 
-            else
-                cmd.CommandText = "SELECT        invoiceNo, dateOfIssue, dueDate, notes, sqNoChar, quoteSubject, priceNote, deliveryDate, estDelivery, validityDays, validityDate, otherTerms, sq_vat, paymentCurrency, termsDays, termsDP, discountPercent,   additionalNote, busStyle, taxNumber, CompanyAddInfo, companyAddress, companyCity, companyPostalCode, companyEmail, companyTelephone, companyMobile, repTitle, repLname, repFName, repMInitial,   repEmail, repMobile, companyName, ID, DESCRIPTION, itemName, itemDescr, UNIT_PRICE, itemQnty, total_item FROM            si_view_indiv WHERE(invoiceNo ='" + MainVM.SelectedSalesInvoice.invoiceNo_ + "') ";
 
 
             DataSetSalesInvoice.si_view_indivDataTable dSItem = new DataSetSalesInvoice.si_view_indivDataTable();
@@ -90,11 +81,8 @@ namespace prototype2
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
-            if (MainVM.SelectedSalesInvoice == null)
-                cmd.CommandText = "SELECT        invoiceNo, sqNoChar, discountPercent, SUM(total_item) AS TOTAL, SUM(total_item) * IFNULL(sq_vat, 0) / 100 AS VAT, SUM(total_item) + SUM(total_item) * IFNULL(sq_vat, 0) / 100 AS TOTAL_WITH_VAT FROM si_view_indiv WHERE(invoiceNo = '" + result + "') GROUP BY invoiceNo ";
-
-            else
-                cmd.CommandText = "SELECT        invoiceNo, sqNoChar, discountPercent, SUM(total_item) AS TOTAL, SUM(total_item) * IFNULL(sq_vat, 0) / 100 AS VAT, SUM(total_item) + SUM(total_item) * IFNULL(sq_vat, 0) / 100 AS TOTAL_WITH_VAT FROM si_view_indiv WHERE(invoiceNo ='" + MainVM.SelectedSalesInvoice.invoiceNo_ + "') GROUP BY invoiceNo ";
+            cmd.CommandText = "SELECT        invoiceNo, sqNoChar, discountPercent, SUM(total_item) AS TOTAL, SUM(total_item) * IFNULL(sq_vat, 0) / 100 AS VAT, SUM(total_item) + SUM(total_item) * IFNULL(sq_vat, 0) / 100 AS TOTAL_WITH_VAT FROM si_view_indiv WHERE(invoiceNo = '" + MainVM.invoiceId + "') GROUP BY invoiceNo ";
+            
            
 
             DataSetSalesInvoice.sales_Invoice_tDataTable dSItem = new DataSetSalesInvoice.sales_Invoice_tDataTable();
@@ -113,10 +101,7 @@ namespace prototype2
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
-            if (MainVM.SelectedSalesInvoice == null)
-                cmd.CommandText = "SELECT        si.invoiceNo, si.custID, si.sqNoChar, si.dateOfIssue, si.termsDays, si.dueDate, si.paymentStatus, si.vat, si.sc_pwd_discount, si.withholdingTax, si.notes, cust_supp_t.companyID, cust_supp_t.companyName,    cust_supp_t.busStyle, cust_supp_t.taxNumber, cust_supp_t.companyAddInfo, cust_supp_t.companyAddress, cust_supp_t.companyCity, cust_supp_t.companyProvinceID, cust_supp_t.companyPostalCode,   cust_supp_t.companyEmail, cust_supp_t.companyTelephone, cust_supp_t.companyMobile, cust_supp_t.repTitle, cust_supp_t.repLName, cust_supp_t.repFName, cust_supp_t.repMInitial, cust_supp_t.repEmail,    cust_supp_t.repTelephone, cust_supp_t.repMobile, cust_supp_t.companyType, cust_supp_t.isDeleted, sq.sqNoChar AS Expr1, sq.dateOfIssue AS Expr2, sq.custID AS Expr3, sq.quoteSubject, sq.priceNote,   sq.deliveryDate, sq.estDelivery, sq.validityDays, sq.validityDate, sq.otherTerms, sq.VAT AS Expr4, sq.vatIsExcluded, sq.paymentIsLanded, sq.paymentCurrency, sq.status, sq.termsDays AS Expr5, sq.termsDP,   sq.discountPercent, sq.additionalNote, sq.isDeleted AS Expr6 FROM            sales_quote_t sq INNER JOIN  cust_supp_t ON sq.custID = cust_supp_t.companyID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(si.invoiceNo = '" + result + "')";
-            else
-                cmd.CommandText = "SELECT        si.invoiceNo, si.custID, si.sqNoChar, si.dateOfIssue, si.termsDays, si.dueDate, si.paymentStatus, si.vat, si.sc_pwd_discount, si.withholdingTax, si.notes, cust_supp_t.companyID, cust_supp_t.companyName,    cust_supp_t.busStyle, cust_supp_t.taxNumber, cust_supp_t.companyAddInfo, cust_supp_t.companyAddress, cust_supp_t.companyCity, cust_supp_t.companyProvinceID, cust_supp_t.companyPostalCode,   cust_supp_t.companyEmail, cust_supp_t.companyTelephone, cust_supp_t.companyMobile, cust_supp_t.repTitle, cust_supp_t.repLName, cust_supp_t.repFName, cust_supp_t.repMInitial, cust_supp_t.repEmail,    cust_supp_t.repTelephone, cust_supp_t.repMobile, cust_supp_t.companyType, cust_supp_t.isDeleted, sq.sqNoChar AS Expr1, sq.dateOfIssue AS Expr2, sq.custID AS Expr3, sq.quoteSubject, sq.priceNote,   sq.deliveryDate, sq.estDelivery, sq.validityDays, sq.validityDate, sq.otherTerms, sq.VAT AS Expr4, sq.vatIsExcluded, sq.paymentIsLanded, sq.paymentCurrency, sq.status, sq.termsDays AS Expr5, sq.termsDP,   sq.discountPercent, sq.additionalNote, sq.isDeleted AS Expr6 FROM            sales_quote_t sq INNER JOIN  cust_supp_t ON sq.custID = cust_supp_t.companyID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(si.invoiceNo = '" + MainVM.SelectedSalesInvoice.invoiceNo_ + "')";
+            cmd.CommandText = "SELECT        si.invoiceNo, si.custID, si.sqNoChar, si.dateOfIssue, si.termsDays, si.dueDate, si.paymentStatus, si.vat, si.sc_pwd_discount, si.withholdingTax, si.notes, cust_supp_t.companyID, cust_supp_t.companyName,    cust_supp_t.busStyle, cust_supp_t.taxNumber, cust_supp_t.companyAddInfo, cust_supp_t.companyAddress, cust_supp_t.companyCity, cust_supp_t.companyProvinceID, cust_supp_t.companyPostalCode,   cust_supp_t.companyEmail, cust_supp_t.companyTelephone, cust_supp_t.companyMobile, cust_supp_t.repTitle, cust_supp_t.repLName, cust_supp_t.repFName, cust_supp_t.repMInitial, cust_supp_t.repEmail,    cust_supp_t.repTelephone, cust_supp_t.repMobile, cust_supp_t.companyType, cust_supp_t.isDeleted, sq.sqNoChar AS Expr1, sq.dateOfIssue AS Expr2, sq.custID AS Expr3, sq.quoteSubject, sq.priceNote,   sq.deliveryDate, sq.estDelivery, sq.validityDays, sq.validityDate, sq.otherTerms, sq.VAT AS Expr4, sq.vatIsExcluded, sq.paymentIsLanded, sq.paymentCurrency, sq.status, sq.termsDays AS Expr5, sq.termsDP,   sq.discountPercent, sq.additionalNote, sq.isDeleted AS Expr6 FROM            sales_quote_t sq INNER JOIN  cust_supp_t ON sq.custID = cust_supp_t.companyID INNER JOIN  sales_invoice_t si ON sq.sqNoChar = si.sqNoChar WHERE(si.invoiceNo = '" + MainVM.invoiceId + "')";
 
 
             DataSetSalesInvoice.SalesInvoiceDataTable dSItem = new DataSetSalesInvoice.SalesInvoiceDataTable();
@@ -133,10 +118,6 @@ namespace prototype2
             if (this.IsVisible)
             {
                 DisplayReport();
-            }
-            else
-            {
-
             }
         }
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)

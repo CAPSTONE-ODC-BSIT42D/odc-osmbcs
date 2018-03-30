@@ -40,7 +40,7 @@ namespace prototype2
         }
         private void DisplayReport()
         {
-            ucReportViewer.Reset();
+            ucReportViewer.DataSources.Clear();
             var rNames = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("prototype2.rdlcfiles.NoticeOfEmployment.rdlc");
             ucReportViewer.DataSources.Add(new Syncfusion.Windows.Reports.ReportDataSource("noticeOfemploymentDataTable", GetContract()));
             ucReportViewer.LoadReport(rNames);
@@ -74,7 +74,6 @@ namespace prototype2
             {
                 DisplayReport();
             }
-            ucReportViewer.RefreshReport();
         }
 
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)

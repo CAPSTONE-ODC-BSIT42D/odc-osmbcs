@@ -61,6 +61,10 @@ namespace prototype2
             isEditSalesQuote = false;
             isViewSalesQuote = false;
 
+            isNewSchedule = false;
+            isEditSchedule = false;
+            isViewSchedule = false;
+
             isNewRecord = false;
             isNewSupplier = false;
             isNewTrans = false;
@@ -254,6 +258,10 @@ namespace prototype2
         public bool isViewPurchaseOrder { get; set; }
         public bool isEditPurchaseOrder { get; set; }
 
+        public bool isNewSchedule { get; set; }
+        public bool isEditSchedule { get; set; }
+        public bool isViewSchedule { get; set; }
+
         public bool isNewSupplier { get; set; }
 
         public bool isPaymentInvoice { get; set; }
@@ -373,6 +381,13 @@ namespace prototype2
         }
 
         public String SearchQuery { get; set; }
+
+        protected ObservableCollection<Employee> notAvail = new ObservableCollection<Employee>();
+        public ObservableCollection<Employee> NotAvail
+        {
+            get { return notAvail; }
+            set { notAvail = value; }
+        }
 
         #region Customer/Supplier
         protected ObservableCollection<Customer> allCustomerSupplier =

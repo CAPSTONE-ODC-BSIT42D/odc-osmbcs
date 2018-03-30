@@ -32,7 +32,8 @@ namespace prototype2
         }
 
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
-        ObservableCollection<Employee> notAvail = new ObservableCollection<Employee>();
+
+
         public event EventHandler SaveCloseButtonClicked;
         protected virtual void OnSaveCloseButtonClicked(RoutedEventArgs e)
         {
@@ -50,38 +51,38 @@ namespace prototype2
                 handler(this, e);
         }
 
+        public event EventHandler AssignEmployeeButtonClicked;
+        protected virtual void OnAssignEmployeeButtonClicked(RoutedEventArgs e)
+        {
+            var handler = AssignEmployeeButtonClicked;
+            if (handler != null)
+                handler(this, e);
+        }
+
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (this.IsVisible)
             {
                 loadDataToUi();
+                if (MainVM.isViewSchedule)
+                {
+                    saveSchedBtn.Visibility = Visibility.Collapsed;
+                    cancelschedBtn.Content = "Close";
+                }
+                else
+                {
+                    saveSchedBtn.Visibility = Visibility.Visible;
+                    cancelschedBtn.Content = "Cancel";
+                }
 
             }
         }
 
         void loadDataToUi()
         {
-            if (!MainVM.isNewSched)
+            if (!MainVM.isNewSchedule)
             {
-                MainVM.SelectedAvailedServices = MainVM.AvailedServices.Where(x => x.AvailedServiceID == MainVM.SelectedServiceSchedule_.ServiceAvailedID).FirstOrDefault();
-                var dbCon = DBConnection.Instance();
-                string query = "SELECT * FROM phases_per_services_t where serviceSchedID = " + MainVM.SelectedServiceSchedule_.ServiceSchedID;
-                MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
-                DataSet fromDb = new DataSet();
-                DataTable fromDbTable = new DataTable();
-                dataAdapter.Fill(fromDb, "t");
-                fromDbTable = fromDb.Tables["t"];
-                
-
-                foreach (DataRow dr in fromDbTable.Rows)
-                {
-                    DateTime dateStarted = new DateTime() ;
-                    DateTime.TryParse(dr[3].ToString(),out dateStarted);
-                    DateTime dateEnded = new DateTime();
-                    DateTime.TryParse(dr[4].ToString(), out dateEnded);
-
-                    MainVM.SelectedServiceSchedule_.PhasesPerService.Add(new PhasesPerService() { ID = int.Parse(dr[0].ToString()), ServiceSchedID = int.Parse(dr[2].ToString()), PhaseID = int.Parse(dr[1].ToString()),DateStarted = dateStarted, DateEnded = dateEnded, Status = dr[3].ToString()});
-                }
+                loadPhases();
                 startDate.SelectedDate = MainVM.SelectedServiceSchedule_.dateStarted_;
                 endDate.SelectedDate = MainVM.SelectedServiceSchedule_.dateEnded_;
                 notesTb.Text = MainVM.SelectedServiceSchedule_.schedNotes_;
@@ -98,16 +99,39 @@ namespace prototype2
                 }
                 
             }
+        }
+
+        void loadPhases()
+        {
             
+            MainVM.SelectedAvailedServices = MainVM.AvailedServices.Where(x => x.AvailedServiceID == MainVM.SelectedServiceSchedule_.ServiceAvailedID).FirstOrDefault();
+            var dbCon = DBConnection.Instance();
+            string query = "SELECT * FROM phases_per_services_t where serviceSchedID = " + MainVM.SelectedServiceSchedule_.ServiceSchedID;
+            MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+            DataSet fromDb = new DataSet();
+            DataTable fromDbTable = new DataTable();
+            dataAdapter.Fill(fromDb, "t");
+            fromDbTable = fromDb.Tables["t"];
 
+            MainVM.SelectedServiceSchedule_.PhasesPerService.Clear();
+            foreach (DataRow dr in fromDbTable.Rows)
+            {
+                DateTime dateStarted = new DateTime();
+                DateTime.TryParse(dr[3].ToString(), out dateStarted);
+                DateTime dateEnded = new DateTime();
+                DateTime.TryParse(dr[4].ToString(), out dateEnded);
 
+                MainVM.SelectedServiceSchedule_.PhasesPerService.Add(new PhasesPerService() { ID = int.Parse(dr[0].ToString()), ServiceSchedID = int.Parse(dr[2].ToString()), PhaseID = int.Parse(dr[1].ToString()), DateStarted = dateStarted, DateEnded = dateEnded, Status = dr[5].ToString() });
+            }
         }
 
         void searchForAvailableEmployees()
         {
+            MainVM.NotAvail.Clear();
             MainVM.AvailableEmployees_.Clear();
             IEnumerable<Employee> availEmp;
             IEnumerable<Employee> availCont;
+            
             
             foreach (ServiceSchedule ss in MainVM.ServiceSchedules_)
             {
@@ -121,11 +145,11 @@ namespace prototype2
                                 select cont;
                     foreach(Employee emp in empx)
                     {
-                        notAvail.Add(emp);
+                        MainVM.NotAvail.Add(emp);
                     }
                     foreach (Employee cont in contx)
                     {
-                        notAvail.Add(cont);
+                        MainVM.NotAvail.Add(cont);
                     }
                 }
                     
@@ -133,31 +157,14 @@ namespace prototype2
 
             foreach (Employee ee in MainVM.Employees)
             {
-                if (!notAvail.Contains(ee))
+                if (!MainVM.NotAvail.Contains(ee))
                     MainVM.AvailableEmployees_.Add(ee);
             }
             foreach (Employee ee in MainVM.Contractor)
             {
-                if (!notAvail.Contains(ee))
+                if (!MainVM.NotAvail.Contains(ee))
                     MainVM.AvailableEmployees_.Add(ee);
             }
-
-            //if (MainVM.ServiceSchedules_.Count ==0)
-            //{
-
-            //    foreach (Employee ee in MainVM.Employees)
-            //    {
-            //        if(!MainVM.SelectedServiceSchedule_.assignedEmployees_.Contains(ee))
-            //            MainVM.AvailableEmployees_.Add(ee);
-            //    }
-            //    foreach (Employee ee in MainVM.Contractor)
-            //    {
-            //        if (!MainVM.SelectedServiceSchedule_.assignedEmployees_.Contains(ee))
-            //            MainVM.AvailableEmployees_.Add(ee);
-            //    }
-            //}
-
-            
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -192,7 +199,7 @@ namespace prototype2
             var dbCon = DBConnection.Instance();
             using (MySqlConnection conn = dbCon.Connection)
             {
-                if (!MainVM.isEdit)
+                if (!MainVM.isEditSchedule)
                 {
                     string query = "INSERT INTO `odc_db`.`service_sched_t`(`serviceAvailedID`,`serviceStatus`,`dateStarted`,`dateEnded`,`schedNotes`)" +
                         " VALUES" +
@@ -218,11 +225,24 @@ namespace prototype2
 
                         foreach(PhasesPerService pps in MainVM.SelectedServiceSchedule_.PhasesPerService)
                         {
-                            query = "INSERT INTO `odc_db`.`phases_per_services_t`(`phaseID`,`serviceSchedID`, `status`)" +
-                         " VALUES" +
-                         "('"+ pps.PhaseID + "','" +
-                            schedID + "','PENDING');";
-                            dbCon.insertQuery(query, dbCon.Connection);
+                            if(MainVM.SelectedServiceSchedule_.PhasesPerService.IndexOf(pps) == 0)
+                            {
+                                query = "INSERT INTO `odc_db`.`phases_per_services_t`(`phaseID`,`serviceSchedID`,`dateStarted`)" +
+                                        " VALUES" +
+                                        "('" + pps.PhaseID + "','" +
+                                            schedID + "','" +
+                                            startDate.SelectedDate.Value.ToString("yyyy-MM-dd") + "');";
+                                dbCon.insertQuery(query, dbCon.Connection);
+                            }
+                            else
+                            {
+                                query = "INSERT INTO `odc_db`.`phases_per_services_t`(`phaseID`,`serviceSchedID`)" +
+                                        " VALUES" +
+                                        "('" + pps.PhaseID + "','" +
+                                            schedID + "');";
+                                dbCon.insertQuery(query, dbCon.Connection);
+                            }
+
                         }
 
                         MessageBox.Show("Succesfully added a schedule");
@@ -255,35 +275,14 @@ namespace prototype2
                         MessageBox.Show("Succesfully updated the schedule");
                     }
                 }
-                MainVM.isEdit = false;
             }
-        }
-
-        
-
-        
-
-        private void transferToLeftBtn_Click(object sender, RoutedEventArgs e)
-        {
-            MainVM.AvailableEmployees_.Add(MainVM.SelectedEmployeeContractor);
-            MainVM.SelectedServiceSchedule_.assignedEmployees_.Remove(MainVM.SelectedEmployeeContractor);
-            
-        }
-
-        private void transferToRightBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if(notAvail.Contains(MainVM.SelectedEmployeeContractor) && MainVM.Employees.Contains(MainVM.SelectedEmployeeContractor))
-            {
-                MessageBoxResult result = MessageBox.Show("This employee already assigned to other service, do you want to assign this ", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Information);
-            }
-            MainVM.SelectedServiceSchedule_.assignedEmployees_.Add(MainVM.SelectedEmployeeContractor);
-            MainVM.AvailableEmployees_.Remove(MainVM.SelectedEmployeeContractor);
         }
 
         private void startDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             endDate.DisplayDateStart = startDate.SelectedDate;
             searchForAvailableEmployees();
+            assignEmployeeBtn.IsEnabled = true;
         }
 
         private void endDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -296,7 +295,12 @@ namespace prototype2
             var dbCon = DBConnection.Instance();
             using (MySqlConnection conn = dbCon.Connection)
             {
-                string query = "UPDATE `odc_db`.`phases_per_services_t` SET `status` = 'DONE' WHERE id = '" + MainVM.SelectedPhasesPerService.ID + "'";
+                string query = "UPDATE `odc_db`.`phases_per_services_t` SET `status` = 'DONE', dateEnded = '"+DateTime.Now.ToString("yyyy-MM-dd") +"'WHERE id = '" + MainVM.SelectedPhasesPerService.ID + "'";
+                dbCon.insertQuery(query, dbCon.Connection);
+
+                if(MainVM.SelectedServiceSchedule_.PhasesPerService.IndexOf(MainVM.SelectedPhasesPerService) != MainVM.SelectedServiceSchedule_.PhasesPerService.Count - 1)
+                    MainVM.SelectedPhasesPerService = MainVM.SelectedServiceSchedule_.PhasesPerService[MainVM.SelectedServiceSchedule_.PhasesPerService.IndexOf(MainVM.SelectedPhasesPerService) + 1];
+                query = "UPDATE `odc_db`.`phases_per_services_t` SET `dateStarted` = '" + DateTime.Now.ToString("yyyy-MM-dd") + "'WHERE id = '" + MainVM.SelectedPhasesPerService.ID + "'";
                 dbCon.insertQuery(query, dbCon.Connection);
 
                 query = "SELECT * FROM PHASES_PER_SERVICES_T WHERE serviceSchedID = '"+ MainVM.SelectedServiceSchedule_.ServiceSchedID+ "' AND status = 'ON QUEUE'";
@@ -313,14 +317,28 @@ namespace prototype2
                         MessageBox.Show("Succesfully updated the schedule");
                     }
                 }
-
                 
+                else
+                    MessageBox.Show("Succesfully updated the schedule");
+
             }
+            loadPhases();
         }
 
         private void deletePhaseBtn_Click(object sender, RoutedEventArgs e)
         {
             MainVM.SelectedServiceSchedule_.PhasesPerService.Remove(MainVM.SelectedPhasesPerService);
+        }
+
+        private void deleteAssignedEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.AvailableEmployees_.Add(MainVM.SelectedEmployeeContractor);
+            MainVM.SelectedServiceSchedule_.assignedEmployees_.Remove(MainVM.SelectedEmployeeContractor);
+        }
+
+        private void assignEmployeeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OnAssignEmployeeButtonClicked(e);
         }
     }
 }

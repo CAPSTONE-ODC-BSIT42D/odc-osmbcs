@@ -5,24 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:prototype2"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Width="596" Height="400" Loaded="UserControl_Loaded" IsVisibleChanged="UserControl_IsVisibleChanged">
+             d:DesignHeight="300" d:DesignWidth="300" Width="596" Height="400" IsVisibleChanged="UserControl_IsVisibleChanged">
     <UserControl.Resources>
         <local:QueriesDataSet x:Key="queriesDataSet"/>
         <CollectionViewSource x:Key="job_title_tViewSource" Source="{Binding job_title_t, Source={StaticResource queriesDataSet}}"/>
     </UserControl.Resources>
-    <Grid Background="#FFF3F3F3" DataContext="{StaticResource job_title_tViewSource}">
-        <Label Content="Sort by:" HorizontalAlignment="Left" Margin="407,34,0,0" VerticalAlignment="Top" FontSize="11"/>
-        <ComboBox x:Name="comboBoxFreqContractor" HorizontalAlignment="Left" Margin="458,35,0,0" VerticalAlignment="Top" Width="120" FontSize="11">
-            <ComboBoxItem Content="Daily"/>
-            <ComboBoxItem Content="Weekly"/>
-            <ComboBoxItem Content="Monthly"/>
-            <ComboBoxItem Content="Yearly"/>
-        </ComboBox>
-        <DataGrid x:Name="job_title_tDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,64,10,10" RowDetailsVisibilityMode="VisibleWhenSelected">
+    <Grid Background="#FFF3F3F3">
+        <DataGrid x:Name="freqCont" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10" IsReadOnly="True" EnableColumnVirtualization="True" >
             <DataGrid.Columns>
-                <DataGridTextColumn  Binding="{Binding NAME}" Header="NAME" Width="200"/>
-                <DataGridTextColumn  Binding="{Binding Position}" Header="Position" Width="200"/>
-                <DataGridTextColumn  Binding="{Binding NoOfTimes}" Header="No Of Times Assigned" Width="200"/>
+                <DataGridTextColumn  Binding="{Binding _fullName}" Header="Name" Width="200"/>
+                <DataGridTextColumn  Binding="{Binding jobName}" Header="Position" Width="200"/>
+                <DataGridTextColumn  Binding="{Binding _count}" Header="No Of Times Assigned" Width="200"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

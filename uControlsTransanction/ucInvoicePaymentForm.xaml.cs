@@ -100,14 +100,32 @@ namespace prototype2.uControlsMaintenance
                 dbCon.insertQuery(query, dbCon.Connection);
             }
 
-            query = "INSERT INTO `odc_db`.`si_payment_t` " +
-                "(`SIpaymentAmount`,`SIpaymentMethod`,`SIcheckNo`,`invoiceNo`) " +
-                "VALUES " +
-                "('" + amountTb.Value + "','" +
-                paymentMethodCb.SelectedValue + "','" +
-                checkNoTb.Text + "','" +
-                MainVM.SelectedSalesInvoice.invoiceNo_ + "')";
-            dbCon.insertQuery(query, dbCon.Connection);
+
+            if(paymentMethodCb.SelectedIndex == 0)
+            {
+                query = "INSERT INTO `odc_db`.`si_payment_t` " +
+    "(`SIpaymentAmount`,`SIpaymentMethod`,`SIcheckNo`,`SIpaymentStatus`,`invoiceNo`) " +
+    "VALUES " +
+    "('" + amountTb.Value + "','" +
+    paymentMethodCb.SelectedValue + "','" +
+    checkNoTb.Text + "','" +
+        "PAID" + "','" +
+    MainVM.SelectedSalesInvoice.invoiceNo_ + "')";
+                dbCon.insertQuery(query, dbCon.Connection);
+            }
+            else
+            {
+                query = "INSERT INTO `odc_db`.`si_payment_t` " +
+    "(`SIpaymentAmount`,`SIpaymentMethod`,`SIcheckNo`,`SIpaymentStatus`,`invoiceNo`) " +
+    "VALUES " +
+    "('" + amountTb.Value + "','" +
+    paymentMethodCb.SelectedValue + "','" +
+    checkNoTb.Text + "','" +
+    "PENDING" + "','" +
+    MainVM.SelectedSalesInvoice.invoiceNo_ + "')";
+                dbCon.insertQuery(query, dbCon.Connection);
+            }
+
             refreshDataGrid();
             
         }
@@ -128,7 +146,7 @@ namespace prototype2.uControlsMaintenance
                 {
                     DateTime paymentDate = new DateTime();
                     DateTime.TryParse(dr["SIpaymentDate"].ToString(), out paymentDate);
-                    MainVM.SelectedSalesInvoice.PaymentHist_.Add(new PaymentT() { SIpaymentID_ = int.Parse(dr["SIpaymentID"].ToString()), SIpaymentDate_ = paymentDate, SIpaymentAmount_ = decimal.Parse(dr["SIpaymentAmount"].ToString()), invoiceNo_ = int.Parse(dr["invoiceNo"].ToString()), SIpaymentMethod_ = dr["SIpaymentMethod"].ToString(),SIcheckNo_ = dr["SIcheckNo"].ToString() });
+                    MainVM.SelectedSalesInvoice.PaymentHist_.Add(new PaymentT() { SIpaymentID_ = int.Parse(dr["SIpaymentID"].ToString()), SIpaymentDate_ = paymentDate, SIpaymentAmount_ = decimal.Parse(dr["SIpaymentAmount"].ToString()), invoiceNo_ = int.Parse(dr["invoiceNo"].ToString()), SIpaymentMethod_ = dr["SIpaymentMethod"].ToString(), SIpaymentStatus_ = dr["SIpaymentStatus"].ToString(), SIcheckNo_ = dr["SIcheckNo"].ToString() });
                 }
                 dbCon.Close();
             }

@@ -1827,12 +1827,6 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>₱</Value>
-                                  <Style>
-                                    <Format>'₱' #,0.00;('₱' #,0.00)</Format>
-                                  </Style>
-                                </TextRun>
-                                <TextRun>
                                   <Value>=Fields!TOTAL.Value</Value>
                                   <Style>
                                     <Format>'₱' #,0.00;('₱' #,0.00)</Format>

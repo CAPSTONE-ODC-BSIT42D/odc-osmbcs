@@ -38,27 +38,7 @@ MySqlConnection(ConfigurationManager.ConnectionStrings["prototype2.Properties.Se
         {
             InitializeComponent();
         }
-        private void binddatagrid()
-
-        {
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT        s.serviceName, COUNT(sa.id) AS NoOfTimes FROM            services_t s INNER JOIN  services_availed_t sa ON s.serviceID = sa.serviceID INNER JOIN sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar WHERE(sq.status = 'ACCEPTED') GROUP BY sa.serviceID ORDER BY NoOfTimes DESC", conn);
-                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-                QueriesDataSet ds = new QueriesDataSet();
-                adp.Fill(ds);
-                services_tDataGrid.DataContext = ds;
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            finally
-            {
-                conn.Close();
-            }
-        }
+       
     
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -75,14 +55,23 @@ MySqlConnection(ConfigurationManager.ConnectionStrings["prototype2.Properties.Se
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
+            MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
+            var dbCon = DBConnection.Instance();
+
             if (this.IsVisible)
             {
-                binddatagrid();
-
-            }
-            else
-            {
-
+                if (dbCon.IsConnect())
+                {
+                    MainVM.Phases.Clear();
+                    string query = "	SELECT s.serviceName, COUNT(sa.id) _count FROM services_t s JOIN services_availed_t sa ON s.serviceID = sa.serviceID JOIN sales_quote_t sq ON sq.sqNoChar = sa.sqNoChar JOIN sales_invoice_t si ON si.sqNoChar = sq.sqNoChar GROUP BY sa.serviceID ORDER BY _count DESC LIMIT 0, 20";
+                    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                    DataSet fromDb = new DataSet();
+                    DataTable fromDbTable = new DataTable();
+                    dataAdapter.Fill(fromDb, "t");
+                    fromDbTable = fromDb.Tables["t"];
+                    services_tDataGrid.ItemsSource = fromDbTable.DefaultView;
+                    dbCon.Close();
+                }
             }
         }
     }
