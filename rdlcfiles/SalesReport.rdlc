@@ -107,13 +107,15 @@
                     <Value>Product</Value>
                     <Style>
                       <FontFamily>Calibri Light</FontFamily>
-                      <FontSize>18pt</FontSize>
+                      <FontSize>20pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <Color>DarkBlue</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox4</rd:DefaultName>
@@ -142,13 +144,15 @@
                     <Value>Service</Value>
                     <Style>
                       <FontFamily>Calibri Light</FontFamily>
-                      <FontSize>18pt</FontSize>
+                      <FontSize>20pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <Color>Navy</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox4</rd:DefaultName>
