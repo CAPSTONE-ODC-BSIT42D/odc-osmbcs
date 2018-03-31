@@ -424,6 +424,33 @@ namespace prototype2
         }
     }
 
+    public class CountServicesAssigned : IValueConverter
+    {
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
+        public object Convert(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            int count = 0;
+            MainVM.SelectedEmployeeContractor = MainVM.Employees.Where(x => x.EmpID.Equals(value)).FirstOrDefault();
+            MainVM.SelectedEmployeeContractor = MainVM.Contractor.Where(x => x.EmpID.Equals(value)).FirstOrDefault();
+            foreach (ServiceSchedule ss in MainVM.ServiceSchedules_)
+            {
+                if (ss.assignedEmployees_.Contains(MainVM.SelectedEmployeeContractor))
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter,
+                System.Globalization.CultureInfo culture)
+        {
+            return "no";
+        }
+    }
+
+
     public class DisableActionButtonPurchaseOrder : IValueConverter
     {
         MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;

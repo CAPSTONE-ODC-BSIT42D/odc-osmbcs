@@ -457,7 +457,7 @@
                         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="15,0,0,0" Padding="0" VerticalAlignment="Center" Height="18" Text="Order Management"/>
                     </StackPanel>
                 </Button>
-                <StackPanel x:Name="salesBtnSubMenuGrid" Orientation="Vertical" Width="240">
+                <StackPanel x:Name="salesBtnSubMenuGrid" Orientation="Vertical" Width="240" Visibility="Collapsed">
                     <Button x:Name="quotesSalesMenuBtn" Content="Create Sales Order" Margin="0,0,1,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1" Width="239.2" Click="quotesSalesMenuBtn_Click"/>
                     <Button x:Name="ordersSalesMenuBtn" Content="Create Purchase Order" Margin="0,0,1,0" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10,1,1,1" Click="ordersSalesMenuBtn_Click"/>
                 </StackPanel>
@@ -566,7 +566,7 @@
                         <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Reports" Margin="15,0,0,0" Padding="0" VerticalAlignment="Center" Width="50"/>
                     </StackPanel>
                 </Button>
-                <StackPanel x:Name="reportsSubMenuGrid" Margin="0" Orientation="Vertical">
+                <StackPanel x:Name="reportsSubMenuGrid" Margin="0" Orientation="Vertical" Visibility="Collapsed">
                     <Button x:Name="salesReportBtn" Content="Sales Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0,0,0,5" Click="salesReportBtn_Click"/>
                     <Button x:Name="purchaseReportBtn" Content="Purchase Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="purchaseReportBtn_Click"/>
                     <Button x:Name="serviceReportBtn" Content="Service Report" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="serviceReportBtn_Click"/>
@@ -608,14 +608,14 @@
                         <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Queries" Margin="15,0,0,0" Padding="0" VerticalAlignment="Center" Width="50"/>
                     </StackPanel>
                 </Button>
-                <StackPanel x:Name="queriesSubMenuBtn" Margin="0" Orientation="Vertical">
-                    <Button x:Name="contractorBtn" Content="FREQUENTLY ASSIGNED CONTRACTORS " VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="242" Margin="0,0,0,5" Click= "QueiresConBtn_Click"/>
-                    <Button x:Name="employeeBtn" Content="FREQUENT ASSIGNED EMPLOYEES" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="QueiresEmpBtn_Click"/>
-                    <Button x:Name="itemsBtn" Content="MOST AVAILED ITEMS" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="QueiresItems_Click"/>
+                <StackPanel x:Name="queriesSubMenuGrid" Margin="0" Orientation="Vertical" Visibility="Collapsed">
+                    <Button x:Name="contractorBtn" Content="Frequently Assigned Contractors" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="242" Margin="0,0,0,5" Click= "QueiresConBtn_Click"/>
+                    <Button x:Name="employeeBtn" Content="Frequent Assigned Employees" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="QueiresEmpBtn_Click"/>
+                    <Button x:Name="itemsBtn" Content="Most Availed Items" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="QueiresItems_Click"/>
 
-                    <Button x:Name="ServiceBtn" Content="MOST AVAILED SERVICE" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="QueiresService_Click"/>
-                    <Button x:Name="customerBtn" Content="MOST LOYAL CUSTOMERS" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="QueiresCustomer_Click"/>
-                    <Button x:Name="SupplierBtn" Content="TOP SUPPLIERS" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="QueiresSupplier_Click"/>
+                    <Button x:Name="ServiceBtn" Content="Most Availed Service" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="QueiresService_Click"/>
+                    <Button x:Name="customerBtn" Content="Most Loyal Customers" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="QueiresCustomer_Click"/>
+                    <Button x:Name="SupplierBtn" Content="Top Suppliers" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Margin="0.5,0,0.5,5" Click="QueiresSupplier_Click"/>
                 </StackPanel>
                 <Button x:Name="manageBtn" Margin="0,5,0,0" Style="{StaticResource mainButton}" MinWidth="125" Foreground="White" Height="45" VerticalAlignment="Top" Click="manageBtn_Click" HorizontalContentAlignment="Center">
                     <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
@@ -692,7 +692,7 @@
                         <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Manage" Margin="15,8,0,0" Padding="0" VerticalAlignment="Center" Width="50"/>
                     </StackPanel>
                 </Button>
-                <StackPanel x:Name="manageSubMenugrid" Orientation="Vertical" Margin="0">
+                <StackPanel x:Name="manageSubMenugrid" Orientation="Vertical" Margin="0" Visibility="Collapsed">
                     <Button x:Name="empManageBtn" Content="Employee" Margin="0,0,1,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Click="empManageBtn_Click"/>
                     <Button x:Name="contManageBtn" Content="Contractor" Margin="0,0,1,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" HorizontalContentAlignment="Left" Padding="10,1,1,1" VerticalContentAlignment="Center" Width="238" Click="contManageBtn_Click"/>
                     <Button x:Name="custSuppManageBtn" Content="Suppliers" Margin="0,0,1,5" VerticalAlignment="Top" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Foreground="White" Click="custSuppManageBtn_Click" HorizontalContentAlignment="Left" Padding="10,1,1,1" Width="238"/>

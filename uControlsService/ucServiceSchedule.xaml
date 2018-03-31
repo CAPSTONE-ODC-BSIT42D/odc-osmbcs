@@ -36,8 +36,24 @@
                 <Label x:Name="label21_Copy2" Content="Start Date:" HorizontalAlignment="Left" Margin="38,130,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <Label x:Name="label21_Copy3" Content="End Date:" HorizontalAlignment="Left" Margin="38,161,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <Label x:Name="label21_Copy4" Content="Assigned Employees/Contractor:" HorizontalAlignment="Left" Margin="38,293,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <DatePicker x:Name="startDate" HorizontalAlignment="Left" Margin="137,131,0,0" VerticalAlignment="Top" Height="26" Width="124" SelectedDateChanged="startDate_SelectedDateChanged"/>
-                <DatePicker x:Name="endDate" HorizontalAlignment="Left" Margin="137,162,0,0" VerticalAlignment="Top" Height="26" Width="124" SelectedDateChanged="endDate_SelectedDateChanged"/>
+                <DatePicker x:Name="startDate" HorizontalAlignment="Left" Margin="137,131,0,0" VerticalAlignment="Top" Height="26" Width="124" SelectedDateChanged="startDate_SelectedDateChanged">
+                    <DatePicker.SelectedDate>
+                        <Binding Path="DatePickerBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <local:TextBoxValidation TextBoxType="Date"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DatePicker.SelectedDate>
+                </DatePicker>
+                <DatePicker x:Name="endDate" HorizontalAlignment="Left" Margin="137,162,0,0" VerticalAlignment="Top" Height="26" Width="124" SelectedDateChanged="endDate_SelectedDateChanged">
+                    <DatePicker.SelectedDate>
+                        <Binding Path="SelectedDate" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <local:TextBoxValidation TextBoxType="Date"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DatePicker.SelectedDate>
+                </DatePicker>
                 <Label x:Name="label21_Copy5" Content="Additional Notes:" HorizontalAlignment="Left" Margin="38,193,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                 <TextBox x:Name="notesTb" HorizontalAlignment="Left" Height="65" Margin="55,219,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="610"/>
                 <DataGrid x:Name="assignedEmployees" HorizontalAlignment="Left" Height="199" Margin="55,325,0,0" VerticalAlignment="Top" Width="610" ItemsSource="{Binding SelectedServiceSchedule_.assignedEmployees_}" SelectedItem="{Binding SelectedEmployeeContractor}" IsReadOnly="True" AutoGenerateColumns="False">
@@ -127,7 +143,7 @@
                 </DataGrid>
                 <Button x:Name="selectServiceBtn" Content="Select Service" HorizontalAlignment="Right" Margin="0,70,40,0" Width="105" Height="24" VerticalAlignment="Top" Click="selectServiceBtn_Click" Visibility="Hidden" />
                 <Label x:Name="label21_Copy7" Content="Phases" HorizontalAlignment="Left" Margin="38,524,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <DataGrid x:Name="phaseDg" SelectedItem="{Binding SelectedPhasesPerService}" ItemsSource="{Binding SelectedServiceSchedule_.PhasesPerService}" Height="271" Margin="55,550,0,0" VerticalAlignment="Top" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Width="740">
+                <DataGrid x:Name="phaseDg" SelectedItem="{Binding SelectedPhasesPerService}" ItemsSource="{Binding SelectedServiceSchedule_.PhasesPerService}" Height="271" Margin="55,550,0,0" VerticalAlignment="Top" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Width="610">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding PhaseID, Converter={StaticResource PhaseItemConverter}, NotifyOnTargetUpdated=True}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Phase Name"  />
                         <DataGridTextColumn Binding="{Binding DateStarted, StringFormat=D}" ClipboardContentBinding="{x:Null}" Width="150" CanUserResize="False" Visibility="Visible" Header="Date Started">

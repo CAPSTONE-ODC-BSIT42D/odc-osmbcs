@@ -329,7 +329,7 @@ namespace prototype2.uControlsMaintenance
             MainVM.SelectedRegion.Provinces = new ObservableCollection<Province> (from prov in MainVM.Provinces
                                               where prov.RegionID == MainVM.SelectedRegion.RegionID
                                               select prov);
-            Grid.SetZIndex(disableGrid, 1);
+            
         }
 
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)

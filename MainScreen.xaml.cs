@@ -694,7 +694,10 @@ namespace prototype2
 
         private void queriesBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            if (queriesSubMenuGrid.IsVisible)
+                queriesSubMenuGrid.Visibility = Visibility.Collapsed;
+            else
+                queriesSubMenuGrid.Visibility = Visibility.Visible;
         }
 
         private void salesReportBtn_Click(object sender, RoutedEventArgs e)
@@ -1939,7 +1942,7 @@ namespace prototype2
 
         private void QueiresItems_Click(object sender, RoutedEventArgs e)
         {
-            MainVM.resetValueofVariables();
+           MainVM.resetValueofVariables();
             foreach (UIElement obj in containerGrid.Children)
             {
                 if (containerGrid.Children.IndexOf(obj) == 5)

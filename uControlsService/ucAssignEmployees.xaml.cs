@@ -36,7 +36,6 @@ namespace prototype2.uControlsService
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-
         }
 
         private void closeModalBtn_Click(object sender, RoutedEventArgs e)
@@ -46,10 +45,10 @@ namespace prototype2.uControlsService
 
         private void assignEmployee_Click(object sender, RoutedEventArgs e)
         {
-            if (MainVM.NotAvail.Contains(MainVM.SelectedEmployeeContractor) && MainVM.Employees.Contains(MainVM.SelectedEmployeeContractor))
-            {
-                MessageBoxResult result = MessageBox.Show("This employee already assigned to other service, do you want to assign this ", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Information);
-            }
+            //if (MainVM.NotAvail.Contains(MainVM.SelectedEmployeeContractor) && MainVM.Employees.Contains(MainVM.SelectedEmployeeContractor))
+            //{
+            //    MessageBoxResult result = MessageBox.Show("This employee already assigned to other service, do you want to assign this ", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+            //}
             MainVM.SelectedServiceSchedule_.assignedEmployees_.Add(MainVM.SelectedEmployeeContractor);
             MainVM.AvailableEmployees_.Remove(MainVM.SelectedEmployeeContractor);
         }

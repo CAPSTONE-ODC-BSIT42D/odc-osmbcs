@@ -64,20 +64,6 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <Image Name="Image1">
-            <Source>Embedded</Source>
-            <Value>oliveLogo</Value>
-            <Sizing>FitProportional</Sizing>
-            <Top>0.28in</Top>
-            <Left>0.41542in</Left>
-            <Height>0.58333in</Height>
-            <Width>2.20833in</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Image>
           <Textbox Name="Textbox21">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -101,7 +87,6 @@
             <Left>0.41542in</Left>
             <Height>0.5in</Height>
             <Width>2.20833in</Width>
-            <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -136,7 +121,7 @@
             <Left>0.41542in</Left>
             <Height>0.42708in</Height>
             <Width>8.0868in</Width>
-            <ZIndex>2</ZIndex>
+            <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -171,7 +156,7 @@
             <Left>0.41542in</Left>
             <Height>0.42708in</Height>
             <Width>8.10069in</Width>
-            <ZIndex>3</ZIndex>
+            <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -454,9 +439,9 @@
             <DataSetName>SalesItemTable</DataSetName>
             <Top>2.47792in</Top>
             <Left>0.41542in</Left>
-            <Height>1.34375in</Height>
+            <Height>1.34376in</Height>
             <Width>8.0868in</Width>
-            <ZIndex>4</ZIndex>
+            <ZIndex>3</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -735,9 +720,9 @@
             <DataSetName>SalesServiceTable</DataSetName>
             <Top>4.54736in</Top>
             <Left>0.41542in</Left>
-            <Height>1.48958in</Height>
+            <Height>1.48959in</Height>
             <Width>8.0868in</Width>
-            <ZIndex>5</ZIndex>
+            <ZIndex>4</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -754,10 +739,6 @@
       </Body>
       <Width>10.91544in</Width>
       <Page>
-        <LeftMargin>1in</LeftMargin>
-        <RightMargin>1in</RightMargin>
-        <TopMargin>1in</TopMargin>
-        <BottomMargin>1in</BottomMargin>
         <Style />
       </Page>
     </ReportSection>

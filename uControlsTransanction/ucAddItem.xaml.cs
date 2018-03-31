@@ -185,7 +185,9 @@ namespace prototype2.uControlsMaintenance
                 MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
                 var dbCon = DBConnection.Instance();
                 string query = "SELECT unitPrice FROM po_items_availed_t WHERE itemID = '" + MainVM.SelectedProduct.ID + "' ORDER BY id DESC LIMIT 1";
-                decimal unitPriceLast = decimal.Parse(dbCon.selectScalar(query, dbCon.Connection).ToString());
+                decimal unitPriceLast = 0;
+                if(dbCon.selectScalar(query, dbCon.Connection) != null)
+                    decimal.TryParse(dbCon.selectScalar(query, dbCon.Connection).ToString(), out unitPriceLast);
                 MainVM.RequestedItems.Add(new RequestedItem() { lineNo = MainVM.RequestedItems.Count + 1, itemID = MainVM.SelectedProduct.ID, itemType = 0, qty = 1,unitPrice = unitPriceLast, qtyEditable = true });
                 OnSaveCloseButtonClicked(e);
             }
