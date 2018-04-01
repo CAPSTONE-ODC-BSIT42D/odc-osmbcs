@@ -63,7 +63,7 @@ namespace prototype2
         {
             if (this.IsVisible)
             {
-                searchForAvailableEmployees();
+
                 loadDataToUi();
                 if (MainVM.isViewSchedule)
                 {
@@ -100,6 +100,7 @@ namespace prototype2
                 }
                 
             }
+            searchForAvailableEmployees();
         }
 
         void loadPhases()
@@ -359,9 +360,8 @@ namespace prototype2
         {
             if (this.IsVisible)
             {
-
                 endDate.DisplayDateStart = startDate.SelectedDate;
-                if(MainVM.SelectedServiceSchedule_ != null)
+                if(MainVM.SelectedServiceSchedule_ != null && MainVM.isEditSchedule)
                 {
                     if (MainVM.SelectedServiceSchedule_.serviceStatus_.Equals("ON GOING") && MainVM.SelectedServiceSchedule_.dateStarted_ < startDate.SelectedDate)
                     {
@@ -377,6 +377,7 @@ namespace prototype2
                             startDate.SelectedDate = MainVM.SelectedServiceSchedule_.dateStarted_;
                         }
                     }
+
                 }
 
             }

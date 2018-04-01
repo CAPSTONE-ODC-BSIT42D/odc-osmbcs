@@ -146,9 +146,42 @@
                 <DataGrid x:Name="phaseDg" SelectedItem="{Binding SelectedPhasesPerService}" ItemsSource="{Binding SelectedServiceSchedule_.PhasesPerService}" Height="271" Margin="55,550,0,0" VerticalAlignment="Top" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Width="610">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding PhaseID, Converter={StaticResource PhaseItemConverter}, NotifyOnTargetUpdated=True}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Phase Name"  />
-                        <DataGridTextColumn Binding="{Binding DateStarted, StringFormat=D}" ClipboardContentBinding="{x:Null}" Width="150" CanUserResize="False" Visibility="Visible" Header="Date Started">
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding DateEnded}" ClipboardContentBinding="{x:Null}" Width="150" CanUserResize="False" Visibility="Visible" Header="Date Ended"  />
+                        <DataGridTemplateColumn Width="100" CanUserResize="False" Header="Date Started" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}">
+                                                <Setter Property="Text" Value="{Binding DateStarted, StringFormat=D}" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding DateStarted}" Value="01/01/0001 12:00AM">
+                                                        <Setter Property="Text" Value=" " />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="100" CanUserResize="False" Header="Date Ended" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}">
+                                                <Setter Property="Text" Value="{Binding DateEnded, StringFormat=D}" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding DateEnded}" Value="01/01/0001 12:00AM">
+                                                        <Setter Property="Text" Value=" " />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTextColumn Binding="{Binding Status}" ClipboardContentBinding="{x:Null}" Width="100" CanUserResize="False" Visibility="Visible" Header="Status"  />
                         <DataGridTemplateColumn  Width="115" CanUserResize="False" Header="Actions">
                             <DataGridTemplateColumn.CellTemplate  >

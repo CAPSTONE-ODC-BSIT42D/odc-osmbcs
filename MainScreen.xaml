@@ -259,7 +259,7 @@
                     </Canvas>
                 </Viewbox>
             </Button>
-            <Button x:Name="notifBtn" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Width="55" Background="{x:Null}" BorderBrush="White" Foreground="{x:Null}" Height="28">
+            <Button x:Name="notifBtn" HorizontalAlignment="Left" Margin="21,62,0,0" VerticalAlignment="Top" Width="26" Background="{x:Null}" BorderBrush="White" Foreground="{x:Null}" Height="28">
                 <StackPanel Orientation="Horizontal">
                     <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform" Height="24" Width="16">
                         <Canvas x:Name="Capa_1a" Width="477" Height="601" Canvas.Left="0" Canvas.Top="0">
@@ -292,7 +292,6 @@
                             <Canvas x:Name="g34a"/>
                         </Canvas>
                     </Viewbox>
-                    <Label x:Name="notifLbl" Foreground="White" Content="99+" Height="24" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11" FontWeight="Bold"/>
                 </StackPanel>
             </Button>
         </Grid>
@@ -711,72 +710,10 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Grid x:Name="dashboardGrid" d:IsHidden="True">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="204*"/>
-                    <RowDefinition Height="205*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto" MinWidth="37"/>
-                </Grid.ColumnDefinitions>
-                <Grid Margin="10" RenderTransformOrigin="0.5,0.5" Background="#FFA4A4A4">
-                    <Border BorderBrush="Black" BorderThickness="1" Height="1" Margin="10,48,5,0" VerticalAlignment="Top"/>
-                    <Label x:Name="label1" Content="Today's Appointment" Height="33" Margin="19,10,242,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Foreground="Black"/>
-                    <Label x:Name="label2" Content="No appointment/s to show." Height="37" Margin="19,59,22,0" VerticalAlignment="Top" Foreground="Black" FontSize="14"/>
-                    <Label x:Name="label1_Copy" Content="February 18, 2016" Height="26" Margin="302,10,5,0" VerticalAlignment="Top" FlowDirection="RightToLeft" FontWeight="Bold" Foreground="Black" FontSize="13"/>
-                    <Label x:Name="label1_Copy1" Content="Upcoming appointment" Height="52" Margin="272,95,12,0" VerticalAlignment="Top" FlowDirection="RightToLeft" FontWeight="Bold" Foreground="Black" FontSize="14"/>
-                    <ListBox x:Name="listBox" Margin="13,131,11,10"/>
-                </Grid>
-                <Grid Grid.Column="1" Margin="10,10,512,10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="321.5*"/>
-                        <ColumnDefinition Width="321.5*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Button x:Name="btReceivables" Margin="10" Foreground="White" Background="#FF1A3A5D" BorderBrush="#FF0F2D4B" HorizontalContentAlignment="Stretch">
-                        <Grid Height="128" Width="216" Margin="38,0,39,0">
-                            <Label x:Name="LblReceivables" Content="25, 000" HorizontalAlignment="Left" VerticalAlignment="Top" Height="63" Width="210" FontSize="36" FontWeight="Bold" Foreground="White"/>
-                            <Label Content="RECEIVABLES" HorizontalAlignment="Left" Margin="8,122,0,-17" VerticalAlignment="Top" Width="183" Height="53" FontSize="25" FontWeight="Bold" Foreground="#FFFBFBFB" RenderTransformOrigin="0.5,0.5">
-                                <Label.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform Angle="-0.704"/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </Label.RenderTransform>
-                            </Label>
-                            <Label Content="WEEKLY" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" Width="102" Foreground="White"/>
-                        </Grid>
-                    </Button>
-                    <Button x:Name="btPayables" Margin="10" Background="#FF08AE4D" BorderBrush="#FF027431" Grid.Column="1" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
-                        <Grid Width="215" Margin="39,0,39,-4">
-                            <Label Content="10, 000" HorizontalAlignment="Left" Margin="-4,8,0,0" VerticalAlignment="Top" Height="63" Width="210" FontSize="36" FontWeight="Bold" Foreground="White"/>
-                            <Label Content="WEEKLY" HorizontalAlignment="Left" Margin="4,98,0,0" VerticalAlignment="Top" Width="93" Height="34" FontSize="18" FontWeight="Bold" Foreground="White"/>
-                            <Label Content="PAYABLES" HorizontalAlignment="Left" Margin="4,123,0,-1" VerticalAlignment="Top" Width="183" Height="53" FontWeight="Bold" FontSize="25" Foreground="White"/>
-                        </Grid>
-                    </Button>
-                    <Button x:Name="btPendingSQ" Margin="10,10,14,10" Background="#FF2A80B9" BorderBrush="#FF0C65A0" Grid.Row="1" Width="305" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-                        <Grid Width="205" Margin="48,0,48,-4">
-                            <Label Content="25" Margin="-5,0,0,75" Foreground="White" FontWeight="Bold" FontSize="36" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
-                            <Label Content="PENDING" HorizontalAlignment="Left" Margin="2,85,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" Width="113"/>
-                            <Label Content="SALES QUOTE" HorizontalAlignment="Left" Margin="2,116,0,0" VerticalAlignment="Top" Foreground="White" FontSize="25" Width="185" FontWeight="Bold"/>
-                        </Grid>
-                    </Button>
-                    <Button x:Name="btPendingService" Margin="10,10,2,11" Background="#FFBF3A2B" BorderBrush="#FFA21717" Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
-                        <Grid Width="210" Margin="46,0,45,-4">
-                            <Label Content="52" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Height="63" FontWeight="Bold" FontSize="36" Foreground="#FFFBFBFB" Margin="0,4,0,0"/>
-                            <Label Content="SERVICES" HorizontalAlignment="Left" Margin="-2,111,0,-6" VerticalAlignment="Top" FontWeight="Bold" FontSize="25" Width="138" Height="46" Foreground="#FFFBFBFB"/>
-                            <Label Content="PENDING" HorizontalAlignment="Left" Margin="0,81,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Foreground="#FFFBF6F6"/>
-                        </Grid>
-                    </Button>
-                </Grid>
+            <Grid x:Name="dashboardGrid">
+                <local:ucDashboard Margin="0"/>
             </Grid>
-            <Grid x:Name="trasanctionGrid">
+            <Grid x:Name="trasanctionGrid" d:IsHidden="True">
                 <Grid x:Name="transQuotationGrid" Margin="0,0,1,0" >
                     <Grid x:Name="quotationsGridHome" Margin="10" >
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
@@ -2321,7 +2258,7 @@
             <uControlsMaintenance:ucLocation x:Name="ucLocation" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="458" d:IsHidden="True"/>
 
         </Grid>
-        <Grid x:Name="otherGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2">
+        <Grid x:Name="otherGridBg" Margin="0" Background="#80000000" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" d:IsHidden="True">
             <uControlsMaintenance:ucSelectCustomer x:Name="ucSelectCustomer" Margin="0" Visibility="Collapsed" d:IsHidden="True"/>
             <uControlsMaintenance:ucAddItem x:Name="ucAddItem" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Visibility="Collapsed" d:IsHidden="True"/>
 
