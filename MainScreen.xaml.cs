@@ -640,7 +640,7 @@ namespace prototype2
             {
                 if (containerGrid.Children.IndexOf(obj) == 2)
                 {
-                    headerLbl.Content = "Billing";
+                    headerLbl.Content = "Billing and Collection";
                     obj.Visibility = Visibility.Visible;
                 }
                 else
