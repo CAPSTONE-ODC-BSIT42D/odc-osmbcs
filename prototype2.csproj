@@ -422,7 +422,7 @@
     <Compile Include="uControlsTransanction\ucOfficialReceipt.xaml.cs">
       <DependentUpon>ucOfficialReceipt.xaml</DependentUpon>
     </Compile>
-    <Compile Include="uControlsTransanction\ucPurchaseOrderViewer.xaml.cs">
+    <Compile Include="ucPurchaseOrderViewer.xaml.cs">
       <DependentUpon>ucPurchaseOrderViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="classes\ValueConverter.cs" />
@@ -575,7 +575,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="uControlsTransanction\ucPurchaseOrderViewer.xaml">
+    <Page Include="ucPurchaseOrderViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
