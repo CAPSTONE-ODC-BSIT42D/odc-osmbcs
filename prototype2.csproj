@@ -258,6 +258,7 @@
     </ApplicationDefinition>
     <Compile Include="classes\InvoiceDocument.cs" />
     <Compile Include="classes\LoadDataToUI.cs" />
+    <Compile Include="classes\MonitorRecords.cs" />
     <Compile Include="classes\SalesQuoteDocument.cs" />
     <Compile Include="DataSet1.cs">
       <DependentUpon>DataSet1.xsd</DependentUpon>

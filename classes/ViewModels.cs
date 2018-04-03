@@ -24,6 +24,12 @@ namespace prototype2
             get { return ldt; }
         }
 
+        private MonitorRecords mr = new MonitorRecords();
+        public MonitorRecords Mr
+        {
+            get { return mr; }
+        }
+
         public void resetValueofVariables()
         {
             SelectedAdditionalFee = null;

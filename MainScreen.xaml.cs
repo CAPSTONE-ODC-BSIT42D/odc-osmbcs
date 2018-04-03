@@ -50,6 +50,8 @@ namespace prototype2
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+           
+            MainVM.Mr.worker.RunWorkerAsync();
             MainVM.Ldt.worker.RunWorkerAsync();
             this.ucEmployee.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
 
