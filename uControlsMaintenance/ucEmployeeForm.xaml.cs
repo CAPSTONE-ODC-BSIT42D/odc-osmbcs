@@ -69,39 +69,39 @@ namespace prototype2.uControlsMaintenance
                             }
                         }
                     }
-                    else if (element is ComboBox)
-                    {
-                        BindingExpression expression = ((ComboBox)element).GetBindingExpression(ComboBox.SelectedItemProperty);
-                        expression.UpdateSource();
-                        if (Validation.GetHasError((ComboBox)element))
-                            validationError = true;
-                    }
+                    //else if (element is ComboBox)
+                    //{
+                    //    BindingExpression expression = ((ComboBox)element).GetBindingExpression(ComboBox.SelectedItemProperty);
+                    //    expression.UpdateSource();
+                    //    if (Validation.GetHasError((ComboBox)element))
+                    //        validationError = true;
+                    //}
                     else if(element is StackPanel)
                     {
                         foreach(var element1 in perTypeField.Children)
                         {
-                            if (((Grid)element1).Equals(employeeOnlyGrid))
+                            if (((Grid)element1).Equals(employeeOnlyGrid) && employeeOnlyGrid.IsVisible)
                             {
                                 foreach(var element1a in employeeOnlyGrid.Children)
                                 {
-                                    if (element is TextBox)
+                                    if (element1a is TextBox)
                                     {
-                                        BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
+                                        BindingExpression expression = ((TextBox)element1a).GetBindingExpression(TextBox.TextProperty);
                                         if (expression != null)
                                         {
-                                            if (((TextBox)element).IsEnabled)
+                                            if (((TextBox)element1a).IsEnabled)
                                             {
                                                 expression.UpdateSource();
-                                                if (Validation.GetHasError((TextBox)element))
+                                                if (Validation.GetHasError((TextBox)element1a))
                                                     validationError = true;
                                             }
                                         }
                                     }
-                                    else if (element is ComboBox)
+                                    else if (element1a is ComboBox)
                                     {
-                                        BindingExpression expression = ((ComboBox)element).GetBindingExpression(ComboBox.SelectedItemProperty);
+                                        BindingExpression expression = ((ComboBox)element1a).GetBindingExpression(ComboBox.SelectedItemProperty);
                                         expression.UpdateSource();
-                                        if (Validation.GetHasError((ComboBox)element))
+                                        if (Validation.GetHasError((ComboBox)element1a))
                                             validationError = true;
                                     }
                                 }
@@ -110,31 +110,31 @@ namespace prototype2.uControlsMaintenance
                             {
                                 foreach (var element1a in contractorOnlyGrid.Children)
                                 {
-                                    if (element is TextBox)
+                                    if (element1a is TextBox)
                                     {
-                                        BindingExpression expression = ((TextBox)element).GetBindingExpression(TextBox.TextProperty);
+                                        BindingExpression expression = ((TextBox)element1a).GetBindingExpression(TextBox.TextProperty);
                                         if (expression != null)
                                         {
-                                            if (((TextBox)element).IsEnabled)
+                                            if (((TextBox)element1a).IsEnabled)
                                             {
                                                 expression.UpdateSource();
-                                                if (Validation.GetHasError((TextBox)element))
+                                                if (Validation.GetHasError((TextBox)element1a))
                                                     validationError = true;
                                             }
                                         }
                                     }
-                                    else if (element is ComboBox)
+                                    else if (element1a is ComboBox)
                                     {
-                                        BindingExpression expression = ((ComboBox)element).GetBindingExpression(ComboBox.SelectedItemProperty);
+                                        BindingExpression expression = ((ComboBox)element1a).GetBindingExpression(ComboBox.SelectedItemProperty);
                                         expression.UpdateSource();
-                                        if (Validation.GetHasError((ComboBox)element))
+                                        if (Validation.GetHasError((ComboBox)element1a))
                                             validationError = true;
                                     }
-                                    else if(element is DatePicker)
+                                    else if(element1a is DatePicker)
                                     {
-                                        BindingExpression expression = ((DatePicker)element).GetBindingExpression(DatePicker.SelectedDateProperty);
+                                        BindingExpression expression = ((DatePicker)element1a).GetBindingExpression(DatePicker.SelectedDateProperty);
                                         expression.UpdateSource();
-                                        if (Validation.GetHasError((DatePicker)element))
+                                        if (Validation.GetHasError((DatePicker)element1a))
                                             validationError = true;
                                     }
                                 }

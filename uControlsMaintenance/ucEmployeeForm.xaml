@@ -40,7 +40,7 @@
                     <Label Content="* Position" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="0"/>
                     <ComboBox x:Name="empPostionCb" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="174" ItemsSource = "{Binding EmpPosition}" Height="26" DisplayMemberPath="PositionName" SelectedValuePath="PositionID" FontWeight="Normal" >
                         <ComboBox.SelectedItem>
-                            <Binding Path="cbItem" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding Path="SelectedEmpPosition" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                 <Binding.ValidationRules>
                                     <prototype2:TextBoxValidation TextBoxType="ComboBox"/>
                                 </Binding.ValidationRules>
@@ -48,7 +48,7 @@
                         </ComboBox.SelectedItem>
                     </ComboBox>
                     <TextBox x:Name="newPosTb" TextWrapping="Wrap" Margin="10,36,353,165" Visibility="Collapsed"/>
-                    <Button x:Name="addPosBtn" Content="+" HorizontalAlignment="Left" Margin="189,36,0,0" VerticalAlignment="Top" Width="41" Height="26" Click="addPosBtn_Click"/>
+                    <Button x:Name="addPosBtn" Content="+" HorizontalAlignment="Left" Margin="225,36,0,0" VerticalAlignment="Top" Width="41" Height="26" Click="addPosBtn_Click"/>
                     <Grid x:Name="accountCredentialsForm" Margin="10,105,256,10">
                         <Label x:Name="label_Copy5" Content="Account Credentials" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" IsEnabled="False"/>
                         <Label x:Name="label_Copy1" Content="Username" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" FontWeight="Normal" Width="99" IsEnabled="False"/>
@@ -74,7 +74,7 @@
                     <Label Content="* Job Title" HorizontalAlignment="Left" Margin="4,57,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="29"/>
                     <ComboBox x:Name="empJobCb" HorizontalAlignment="Left" Margin="14,86,0,0" VerticalAlignment="Top" Width="172" Height="26"  ItemsSource="{Binding ContJobTitle}" DisplayMemberPath="JobName" SelectedValuePath="JobID" FontWeight="Normal">
                         <ComboBox.SelectedItem>
-                            <Binding Path="cbItem" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding Path="SelectedJobTitle" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                 <Binding.ValidationRules>
                                     <prototype2:TextBoxValidation TextBoxType="ComboBox"/>
                                 </Binding.ValidationRules>

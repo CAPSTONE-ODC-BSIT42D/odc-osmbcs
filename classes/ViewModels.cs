@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace prototype2
 {
@@ -108,6 +109,8 @@ namespace prototype2
         public int IntegerTextBox { get; set; }
         public string StringTextBox_;
         public string StringTextBox { get; set; }
+        public ComboBoxItem ComboBItem { get; set; }
+
         public DateTime DatePickerBox_ = DateTime.Now;
         public DateTime DatePickerBox
         {

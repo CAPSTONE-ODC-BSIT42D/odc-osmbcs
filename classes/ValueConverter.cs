@@ -90,8 +90,8 @@ namespace prototype2
         {
             if (!value.Equals(0) && MainVM.EmpPosition.Count != 0)
             {
-                MainVM.SelectedEmpPosition = MainVM.EmpPosition.Where(x => x.PositionID.Equals(value)).First();
-                return MainVM.SelectedEmpPosition.PositionName;
+                var empPos = MainVM.EmpPosition.Where(x => x.PositionID.Equals(value)).First();
+                return empPos.PositionName;
             }
             return "";
         }
@@ -111,8 +111,8 @@ namespace prototype2
         {
             if (!value.Equals(0) && MainVM.ContJobTitle.Count!=0)
             {
-                MainVM.SelectedJobTitle = MainVM.ContJobTitle.Where(x => x.JobID.Equals(value)).First();
-                return MainVM.SelectedJobTitle.JobName;
+                var jobTitle = MainVM.ContJobTitle.Where(x => x.JobID.Equals(value)).First();
+                return jobTitle.JobName;
             }
             return "";
         }
