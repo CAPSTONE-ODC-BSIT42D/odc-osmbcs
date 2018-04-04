@@ -2898,14 +2898,6 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public PODataTableRow FindByPONumCharcompanyID(string PONumChar, int companyID) {
-                return ((PODataTableRow)(this.Rows.Find(new object[] {
-                            PONumChar,
-                            companyID})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public override global::System.Data.DataTable Clone() {
                 PODataTableDataTable cln = ((PODataTableDataTable)(base.Clone()));
                 cln.InitVars();
@@ -3048,7 +3040,7 @@ namespace prototype2 {
                 base.Columns.Add(this.columnrefNo);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnPONumChar,
-                                this.columncompanyID}, true));
+                                this.columncompanyID}, false));
                 this.columncompanyName.AllowDBNull = false;
                 this.columncompanyName.MaxLength = 50;
                 this.columncompanyType.AllowDBNull = false;

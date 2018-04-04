@@ -65,17 +65,9 @@
           <DataField>termsDP</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="ID">
-          <DataField>ID</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
         <Field Name="shipVia">
           <DataField>shipVia</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="itemQnty">
-          <DataField>itemQnty</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="isDeleted">
           <DataField>isDeleted</DataField>
@@ -124,18 +116,6 @@
         <Field Name="Expr1">
           <DataField>Expr1</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
-        </Field>
-        <Field Name="itemName">
-          <DataField>itemName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="UNIT_PRICE">
-          <DataField>UNIT_PRICE</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="total_item">
-          <DataField>total_item</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="PONumChar">
           <DataField>PONumChar</DataField>
@@ -195,18 +175,6 @@
         </Field>
         <Field Name="refNo">
           <DataField>refNo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="unitName">
-          <DataField>unitName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="itemDescr">
-          <DataField>itemDescr</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="unitShorthand">
-          <DataField>unitShorthand</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -1681,7 +1649,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>CMO-Director</Value>
+                    <Value>Director</Value>
                     <Style>
                       <FontFamily>Calibri Light</FontFamily>
                       <FontWeight>Bold</FontWeight>
@@ -2208,7 +2176,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Olive Data Centre Phils., Inc.</Value>
+                    <Value />
                     <Style>
                       <FontFamily>Calibri Light</FontFamily>
                       <FontSize>11pt</FontSize>
@@ -2241,7 +2209,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Unit 3A  Amparo Garden Corperate Bldg., No. 2116     Amparo  cor Felix St. Sta Ana, Manila</Value>
+                    <Value />
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Calibri</FontFamily>
@@ -2278,7 +2246,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>ENGR. DANNY ORCENA</Value>
+                    <Value />
                     <Style>
                       <FontFamily>Calibri Light</FontFamily>
                       <FontSize>11pt</FontSize>
@@ -2290,7 +2258,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox83</rd:DefaultName>
             <Top>1.5821in</Top>
-            <Left>4.55647in</Left>
+            <Left>4.54456in</Left>
             <Height>0.25in</Height>
             <Width>1.71429in</Width>
             <ZIndex>29</ZIndex>
@@ -2348,7 +2316,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>o.danny@odcphils.com</Value>
+                    <Value />
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Calibri Light</FontFamily>
@@ -3212,6 +3180,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -3339,21 +3308,6 @@
           <Height>0.47917in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
-          <ReportItems>
-            <Image Name="Image1">
-              <Source>Embedded</Source>
-              <Value>oliveLogo1</Value>
-              <Sizing>FitProportional</Sizing>
-              <Left>2.3222in</Left>
-              <Height>0.47917in</Height>
-              <Width>1.88542in</Width>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-              </Style>
-            </Image>
-          </ReportItems>
           <Style>
             <Border>
               <Style>None</Style>

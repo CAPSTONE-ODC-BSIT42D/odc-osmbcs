@@ -426,7 +426,7 @@
     <Compile Include="uControlsTransanction\ucOfficialReceipt.xaml.cs">
       <DependentUpon>ucOfficialReceipt.xaml</DependentUpon>
     </Compile>
-    <Compile Include="uControlsTransanction\ucPurchaseOrderViewer.xaml.cs">
+    <Compile Include="ucPurchaseOrderViewer.xaml.cs">
       <DependentUpon>ucPurchaseOrderViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="classes\ValueConverter.cs" />
@@ -583,7 +583,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="uControlsTransanction\ucPurchaseOrderViewer.xaml">
+    <Page Include="ucPurchaseOrderViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -678,6 +678,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="DataSetSalesInvoice.xsc">
       <DependentUpon>DataSetSalesInvoice.xsd</DependentUpon>
@@ -759,7 +760,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="rdlcfiles\PurchaseOrder.rdlc" />
-    <EmbeddedResource Include="Resources\odclogo.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\DataSources\" />
