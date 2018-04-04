@@ -208,18 +208,13 @@
 
     <Grid Background="#FFEFECCA">
         <Grid.RowDefinitions>
-            <RowDefinition Height="715*"/>
-            <RowDefinition Height="48*"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="12.5"/>
-            <ColumnDefinition Width="35.5"/>
-            <ColumnDefinition Width="190"/>
-            <ColumnDefinition Width="347*"/>
-            <ColumnDefinition Width="436*"/>
-            <ColumnDefinition Width="220*"/>
+            <ColumnDefinition Width="238"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid Background="#FF002F2F" VerticalAlignment="Top" Height="100" Grid.ColumnSpan="3">
+        <Grid Background="#FF002F2F" VerticalAlignment="Top" Height="100">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="97*"/>
                 <ColumnDefinition Width="143*"/>
@@ -298,7 +293,7 @@
                 </StackPanel>
             </Button>
         </Grid>
-        <ScrollViewer Margin="0,100,0,0" VerticalScrollBarVisibility="Hidden" Grid.RowSpan="2" Grid.ColumnSpan="3" >
+        <ScrollViewer Margin="0,100,0,0" VerticalScrollBarVisibility="Hidden" >
             <StackPanel Background="#FF395066" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" CanHorizontallyScroll="True">
                 <Button x:Name="dashBoardBtn" Style="{StaticResource mainButton}" Foreground="White" Height="45" Margin="0,5,0,0" Grid.Row="0" HorizontalContentAlignment="Stretch" Click="dashBoardBtn_Click" Padding="1" VerticalContentAlignment="Stretch">
                     <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
@@ -705,10 +700,10 @@
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
-        <Grid x:Name="headerGrid" Grid.Column="3" Height="100" VerticalAlignment="Top" Background="#FF046380" Grid.ColumnSpan="3">
+        <Grid x:Name="headerGrid" Grid.Column="1" Height="100" VerticalAlignment="Top" Background="#FF046380">
             <Label x:Name="headerLbl" Content="Dashboard" Margin="10,0,80,0" FontSize="20" FontWeight="Bold" Background="{x:Null}" Foreground="White" Padding="10,10,10,5" Height="50" VerticalAlignment="Top"/>
         </Grid>
-        <Grid x:Name="containerGrid" Grid.Column="3" Margin="35,50,26,0" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Grid.ColumnSpan="3" Grid.RowSpan="2">
+        <Grid x:Name="containerGrid" Grid.Column="1" Margin="35,50,26,0" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Grid.ColumnSpan="1" Grid.RowSpan="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
@@ -2251,7 +2246,7 @@
 
         </Grid>
 
-        <Grid x:Name="formGridBg" Margin="0" Background="#80000000" Grid.Column="3" Grid.ColumnSpan="3" Visibility="Visible" Panel.ZIndex="1" d:IsHidden="True" Grid.RowSpan="2">
+        <Grid x:Name="formGridBg" Margin="0" Background="#80000000" Grid.Column="1" Visibility="Visible" Panel.ZIndex="1" d:IsHidden="True">
 
             <local:ucCustSuppCRUD x:Name="ucCustSupp" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="Auto"/>
             <local:ucProductsCRUD x:Name="ucProduct" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True"/>
@@ -2260,7 +2255,7 @@
             <uControlsMaintenance:ucLocation x:Name="ucLocation" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="458" d:IsHidden="True"/>
 
         </Grid>
-        <Grid x:Name="otherGridBg" Margin="0" Background="#80000000" Grid.Column="3" Grid.ColumnSpan="3" Grid.RowSpan="2" d:IsHidden="True">
+        <Grid x:Name="otherGridBg" Margin="0" Background="#80000000" Grid.Column="1" d:IsHidden="True">
             <uControlsMaintenance:ucSelectCustomer x:Name="ucSelectCustomer" Margin="0" Visibility="Collapsed" d:IsHidden="True"/>
             <uControlsMaintenance:ucAddItem x:Name="ucAddItem" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Visibility="Collapsed" d:IsHidden="True"/>
 

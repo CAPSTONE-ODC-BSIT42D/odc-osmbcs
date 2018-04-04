@@ -55,9 +55,9 @@
             <RowDefinition Height="267*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="317*"/>
-            <ColumnDefinition Width="135*"/>
-            <ColumnDefinition Width="124*"/>
+            <ColumnDefinition Width="449*"/>
+            <ColumnDefinition Width="350*"/>
+            <ColumnDefinition Width="350*"/>
         </Grid.ColumnDefinitions>
         <Button x:Name="btnSQ" Margin="5" Background="#FF3698DA" BorderBrush="#FF1B93E4" Grid.Column="1">
             <Grid HorizontalAlignment="Left" Height="68" VerticalAlignment="Top" Width="180">
