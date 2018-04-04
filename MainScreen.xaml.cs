@@ -2049,6 +2049,17 @@ namespace prototype2
         #endregion
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
+            searchuery();
+
+        }
+
+        private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            searchuery();
+        }
+
+        void searchuery()
+        {
             if (transQuotationGrid.IsVisible)
             {
                 if (!(String.IsNullOrWhiteSpace(MainVM.SearchQuery)))
@@ -2083,7 +2094,7 @@ namespace prototype2
                                 join ass in MainVM.AvailedServices on ss.ServiceAvailedID equals ass.AvailedServiceID
                                 where ass.SqNoChar.IndexOf(MainVM.SearchQuery, StringComparison.CurrentCultureIgnoreCase) != -1
                                 select ss;
-                                
+
 
                     scheduledServiceDg.ItemsSource = items;
                 }
@@ -2094,42 +2105,95 @@ namespace prototype2
             }
             else if (manageLocationsGrid.IsVisible)
             {
+                if (!(String.IsNullOrWhiteSpace(MainVM.SearchQuery)))
+                {
+                    var items = MainVM.Regions.Where(x => x.RegionName.IndexOf(MainVM.SearchQuery, StringComparison.CurrentCultureIgnoreCase) != -1);
 
+                    regionListDg.ItemsSource = items;
+                }
+                else
+                {
+                    regionListDg.ItemsSource = MainVM.Regions;
+                }
             }
             else if (manageUnitsGrid.IsVisible)
             {
+                if (!(String.IsNullOrWhiteSpace(MainVM.SearchQuery)))
+                {
+                    var items = MainVM.Units.Where(x => x.UnitName.IndexOf(MainVM.SearchQuery, StringComparison.CurrentCultureIgnoreCase) != -1);
 
+                    unitListDg.ItemsSource = items;
+                }
+                else
+                {
+                    unitListDg.ItemsSource = MainVM.Units;
+                }
             }
             else if (manageServicesGrid.IsVisible)
             {
+                if (!(String.IsNullOrWhiteSpace(MainVM.SearchQuery)))
+                {
+                    var items = MainVM.ServicesList.Where(x => x.ServiceName.IndexOf(MainVM.SearchQuery, StringComparison.CurrentCultureIgnoreCase) != -1);
 
+                    serviceTypeDg.ItemsSource = items;
+                }
+                else
+                {
+                    serviceTypeDg.ItemsSource = MainVM.ServicesList;
+                }
             }
             else if (manageProductListGrid.IsVisible)
             {
+                if (!(String.IsNullOrWhiteSpace(MainVM.SearchQuery)))
+                {
+                    var items = MainVM.ProductList.Where(x => x.ItemName.IndexOf(MainVM.SearchQuery, StringComparison.CurrentCultureIgnoreCase) != -1);
 
+                    productListDg.ItemsSource = items;
+                }
+                else
+                {
+                    productListDg.ItemsSource = MainVM.ProductList;
+                }
             }
             else if (manageEmployeeGrid.IsVisible)
             {
-
+                if (!(String.IsNullOrWhiteSpace(MainVM.SearchQuery)))
+                {
+                    if (MainVM.isContractor)
+                    {
+                        var items = MainVM.Contractor.Where(x => (x.EmpFname + " " + x.EmpMiddleInitial + " " + x.EmpLName).IndexOf(MainVM.SearchQuery, StringComparison.CurrentCultureIgnoreCase) != -1);
+                        manageEmployeeDataGrid.ItemsSource = items;
+                    }
+                    else
+                    {
+                        var items = MainVM.Employees.Where(x => (x.EmpFname + " " + x.EmpMiddleInitial + " " + x.EmpLName).IndexOf(MainVM.SearchQuery, StringComparison.CurrentCultureIgnoreCase) != -1);
+                        manageEmployeeDataGrid.ItemsSource = items;
+                    }
+                }
+                else
+                {
+                    if (MainVM.isContractor)
+                    {
+                        manageEmployeeDataGrid.ItemsSource = MainVM.Contractor;
+                    }
+                    else
+                    {
+                        manageEmployeeDataGrid.ItemsSource = MainVM.Employees;
+                    }
+                }
             }
             else if (manageCustomerGrid.IsVisible)
             {
+                if (!(String.IsNullOrWhiteSpace(MainVM.SearchQuery)))
+                {
+                    var items = MainVM.Suppliers.Where(x => x.CompanyName.IndexOf(MainVM.SearchQuery, StringComparison.CurrentCultureIgnoreCase) != -1);
 
-            }
-
-        }
-
-        private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!(String.IsNullOrWhiteSpace(MainVM.SearchQuery)))
-            {
-                var items = MainVM.SalesQuotes.Where(x => x.sqNoChar_.IndexOf(MainVM.SearchQuery, StringComparison.CurrentCultureIgnoreCase) != -1);
-
-                quotationsDataGrid.ItemsSource = items;
-            }
-            else
-            {
-                quotationsDataGrid.ItemsSource = MainVM.SalesQuotes;
+                    manageCustomerDataGrid.ItemsSource = items;
+                }
+                else
+                {
+                    manageCustomerDataGrid.ItemsSource = MainVM.Suppliers;
+                }
             }
         }
     }
