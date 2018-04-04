@@ -63,16 +63,6 @@ namespace prototype2.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap odclogo {
-            get {
-                object obj = ResourceManager.GetObject("odclogo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap photo_camera {
             get {
                 object obj = ResourceManager.GetObject("photo_camera", resourceCulture);
