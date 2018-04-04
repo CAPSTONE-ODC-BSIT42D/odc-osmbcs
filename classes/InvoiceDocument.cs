@@ -5,7 +5,7 @@ using MigraDoc;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using prototype2.Properties;
+using OSMBCS.Properties;
 using MigraDoc.DocumentObjectModel.Shapes;
 using MigraDoc.DocumentObjectModel.Tables;
 using System.Reflection;

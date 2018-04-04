@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace OSMBCS {
+namespace prototype2 {
     
     
     /// <summary>
@@ -651,7 +651,7 @@ namespace OSMBCS {
         }
     }
 }
-namespace OSMBCS.DataSetItemQueryTableAdapters {
+namespace prototype2.DataSetItemQueryTableAdapters {
     
     
     /// <summary>
@@ -785,7 +785,7 @@ namespace OSMBCS.DataSetItemQueryTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::MySql.Data.MySqlClient.MySqlConnection();
-            this._connection.ConnectionString = global::OSMBCS.Properties.Settings.Default.odc_dbConnectionString;
+            this._connection.ConnectionString = global::prototype2.Properties.Settings.Default.odc_dbConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

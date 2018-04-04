@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace OSMBCS {
+namespace prototype2 {
     
     
     /// <summary>
@@ -7395,7 +7395,7 @@ namespace OSMBCS {
         }
     }
 }
-namespace OSMBCS.DataSet1TableAdapters {
+namespace prototype2.DataSet1TableAdapters {
     
     
     /// <summary>
@@ -7532,7 +7532,7 @@ namespace OSMBCS.DataSet1TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::MySql.Data.MySqlClient.MySqlConnection();
-            this._connection.ConnectionString = global::OSMBCS.Properties.Settings.Default.odc_dbConnectionString;
+            this._connection.ConnectionString = global::prototype2.Properties.Settings.Default.odc_dbConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7894,7 +7894,7 @@ ORDER BY ss.serviceStatus";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::MySql.Data.MySqlClient.MySqlConnection();
-            this._connection.ConnectionString = global::OSMBCS.Properties.Settings.Default.odc_dbConnectionString;
+            this._connection.ConnectionString = global::prototype2.Properties.Settings.Default.odc_dbConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8368,7 +8368,7 @@ WHERE        (i.isDeleted = 0) AND (po.orderDate BETWEEN @D AND @E)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::MySql.Data.MySqlClient.MySqlConnection();
-            this._connection.ConnectionString = global::OSMBCS.Properties.Settings.Default.odc_dbConnectionString;
+            this._connection.ConnectionString = global::prototype2.Properties.Settings.Default.odc_dbConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8798,7 +8798,7 @@ WHERE        (i.isDeleted = 0) AND (s.isDeleted = 0) AND (YEAR(ss.dateStarted) =
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::MySql.Data.MySqlClient.MySqlConnection();
-            this._connection.ConnectionString = global::OSMBCS.Properties.Settings.Default.odc_dbConnectionString;
+            this._connection.ConnectionString = global::prototype2.Properties.Settings.Default.odc_dbConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8985,7 +8985,7 @@ WHERE        (e.isDeleted = 0) AND (e.empType = 1) AND (e.empID = @a)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::MySql.Data.MySqlClient.MySqlConnection();
-            this._connection.ConnectionString = global::OSMBCS.Properties.Settings.Default.odc_dbConnectionString;
+            this._connection.ConnectionString = global::prototype2.Properties.Settings.Default.odc_dbConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9194,7 +9194,7 @@ FROM            cust_supp_t c INNER JOIN
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::MySql.Data.MySqlClient.MySqlConnection();
-            this._connection.ConnectionString = global::OSMBCS.Properties.Settings.Default.odc_dbConnectionString1;
+            this._connection.ConnectionString = global::prototype2.Properties.Settings.Default.odc_dbConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9389,7 +9389,7 @@ WHERE        (po.PONumChar = @a)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::MySql.Data.MySqlClient.MySqlConnection();
-            this._connection.ConnectionString = global::OSMBCS.Properties.Settings.Default.odc_dbConnectionString1;
+            this._connection.ConnectionString = global::prototype2.Properties.Settings.Default.odc_dbConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9612,7 +9612,7 @@ WHERE        (po.PONumChar = @a)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::MySql.Data.MySqlClient.MySqlConnection();
-            this._connection.ConnectionString = global::OSMBCS.Properties.Settings.Default.odc_dbConnectionString1;
+            this._connection.ConnectionString = global::prototype2.Properties.Settings.Default.odc_dbConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

@@ -4,7 +4,7 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="odc_dbConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="odc_dbConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.OSMBCS.Properties.Settings.GlobalReference.Default.odc_dbConnectionString" Provider="MySql.Data.MySqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="odc_dbConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="odc_dbConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.prototype2.Properties.Settings.GlobalReference.Default.odc_dbConnectionString" Provider="MySql.Data.MySqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="PurchaseTableTableAdapter" GeneratorDataComponentClassName="PurchaseTableTableAdapter" Name="PurchaseTable" UserDataComponentName="PurchaseTableTableAdapter">
@@ -99,7 +99,7 @@ GROUP BY itemName</CommandText>
   <xs:element name="DataSetReportPurchase" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DataSetReportPurchase" msprop:Generator_UserDSName="DataSetReportPurchase">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="PurchaseTable" msprop:Generator_TableClassName="PurchaseTableDataTable" msprop:Generator_TableVarName="tablePurchaseTable" msprop:Generator_TablePropName="PurchaseTable" msprop:Generator_RowDeletingName="PurchaseTableRowDeleting" msprop:Generator_RowChangingName="PurchaseTableRowChanging" msprop:Generator_RowEvHandlerName="PurchaseTableRowChangeEventHandler" msprop:Generator_RowDeletedName="PurchaseTableRowDeleted" msprop:Generator_UserTableName="PurchaseTable" msprop:Generator_RowChangedName="PurchaseTableRowChanged" msprop:Generator_RowEvArgName="PurchaseTableRowChangeEvent" msprop:Generator_RowClassName="PurchaseTableRow">
+        <xs:element name="PurchaseTable" msprop:Generator_TableClassName="PurchaseTableDataTable" msprop:Generator_TableVarName="tablePurchaseTable" msprop:Generator_RowChangedName="PurchaseTableRowChanged" msprop:Generator_TablePropName="PurchaseTable" msprop:Generator_RowDeletingName="PurchaseTableRowDeleting" msprop:Generator_RowChangingName="PurchaseTableRowChanging" msprop:Generator_RowEvHandlerName="PurchaseTableRowChangeEventHandler" msprop:Generator_RowDeletedName="PurchaseTableRowDeleted" msprop:Generator_RowClassName="PurchaseTableRow" msprop:Generator_UserTableName="PurchaseTable" msprop:Generator_RowEvArgName="PurchaseTableRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="itemName" msprop:Generator_ColumnVarNameInTable="columnitemName" msprop:Generator_ColumnPropNameInRow="itemName" msprop:Generator_ColumnPropNameInTable="itemNameColumn" msprop:Generator_UserColumnName="itemName">

@@ -1,4 +1,4 @@
-﻿namespace OSMBCS
+﻿namespace prototype2
 {
 
 
@@ -8,7 +8,7 @@
 }
 
 
-namespace OSMBCS.DatasetSales_QuoteTableAdapters
+namespace prototype2.DatasetSales_QuoteTableAdapters
 {
 
 

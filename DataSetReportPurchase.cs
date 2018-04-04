@@ -1,4 +1,4 @@
-﻿namespace OSMBCS
+﻿namespace prototype2
 {
 
 
@@ -11,7 +11,7 @@
 
 
 
-namespace OSMBCS.DataSetReportPurchaseTableAdapters
+namespace prototype2.DataSetReportPurchaseTableAdapters
 {
 
 

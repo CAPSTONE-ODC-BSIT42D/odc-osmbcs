@@ -1,4 +1,4 @@
-﻿namespace OSMBCS
+﻿namespace prototype2
 {
 
 

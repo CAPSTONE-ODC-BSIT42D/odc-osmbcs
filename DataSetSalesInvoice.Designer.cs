@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace OSMBCS {
+namespace prototype2 {
     
     
     /// <summary>
@@ -5108,7 +5108,7 @@ namespace OSMBCS {
         }
     }
 }
-namespace OSMBCS.DataSetSalesInvoiceTableAdapters {
+namespace prototype2.DataSetSalesInvoiceTableAdapters {
     
     
     /// <summary>
@@ -5291,7 +5291,7 @@ namespace OSMBCS.DataSetSalesInvoiceTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::MySql.Data.MySqlClient.MySqlConnection();
-            this._connection.ConnectionString = global::OSMBCS.Properties.Settings.Default.odc_dbConnectionString;
+            this._connection.ConnectionString = global::prototype2.Properties.Settings.Default.odc_dbConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5481,7 +5481,7 @@ WHERE        (si.invoiceNo = @a)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::MySql.Data.MySqlClient.MySqlConnection();
-            this._connection.ConnectionString = global::OSMBCS.Properties.Settings.Default.odc_dbConnectionString;
+            this._connection.ConnectionString = global::prototype2.Properties.Settings.Default.odc_dbConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5700,7 +5700,7 @@ GROUP BY invoiceNo";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::MySql.Data.MySqlClient.MySqlConnection();
-            this._connection.ConnectionString = global::OSMBCS.Properties.Settings.Default.odc_dbConnectionString;
+            this._connection.ConnectionString = global::prototype2.Properties.Settings.Default.odc_dbConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

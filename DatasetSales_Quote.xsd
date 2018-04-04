@@ -4,7 +4,7 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="odc_dbConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="odc_dbConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.OSMBCS.Properties.Settings.GlobalReference.Default.odc_dbConnectionString" Provider="MySql.Data.MySqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="odc_dbConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="odc_dbConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.prototype2.Properties.Settings.GlobalReference.Default.odc_dbConnectionString" Provider="MySql.Data.MySqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Sales_QuoteTableAdapter" GeneratorDataComponentClassName="Sales_QuoteTableAdapter" Name="Sales_Quote" UserDataComponentName="Sales_QuoteTableAdapter">
@@ -167,7 +167,7 @@ WHERE        (sqNoChar = @A)
   <xs:element name="DatasetSales_Quote" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DatasetSales_Quote" msprop:Generator_UserDSName="DatasetSales_Quote">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Sales_Quote" msprop:Generator_TableClassName="Sales_QuoteDataTable" msprop:Generator_TableVarName="tableSales_Quote" msprop:Generator_RowChangedName="Sales_QuoteRowChanged" msprop:Generator_TablePropName="Sales_Quote" msprop:Generator_RowDeletingName="Sales_QuoteRowDeleting" msprop:Generator_RowChangingName="Sales_QuoteRowChanging" msprop:Generator_RowEvHandlerName="Sales_QuoteRowChangeEventHandler" msprop:Generator_RowDeletedName="Sales_QuoteRowDeleted" msprop:Generator_RowClassName="Sales_QuoteRow" msprop:Generator_UserTableName="Sales_Quote" msprop:Generator_RowEvArgName="Sales_QuoteRowChangeEvent">
+        <xs:element name="Sales_Quote" msprop:Generator_TableClassName="Sales_QuoteDataTable" msprop:Generator_TableVarName="tableSales_Quote" msprop:Generator_TablePropName="Sales_Quote" msprop:Generator_RowDeletingName="Sales_QuoteRowDeleting" msprop:Generator_RowChangingName="Sales_QuoteRowChanging" msprop:Generator_RowEvHandlerName="Sales_QuoteRowChangeEventHandler" msprop:Generator_RowDeletedName="Sales_QuoteRowDeleted" msprop:Generator_UserTableName="Sales_Quote" msprop:Generator_RowChangedName="Sales_QuoteRowChanged" msprop:Generator_RowEvArgName="Sales_QuoteRowChangeEvent" msprop:Generator_RowClassName="Sales_QuoteRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="dateOfIssue" msprop:Generator_ColumnVarNameInTable="columndateOfIssue" msprop:Generator_ColumnPropNameInRow="dateOfIssue" msprop:Generator_ColumnPropNameInTable="dateOfIssueColumn" msprop:Generator_UserColumnName="dateOfIssue" type="xs:dateTime" />
@@ -359,7 +359,7 @@ WHERE        (sqNoChar = @A)
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="sales_quote_t" msprop:Generator_TableClassName="sales_quote_tDataTable" msprop:Generator_TableVarName="tablesales_quote_t" msprop:Generator_TablePropName="sales_quote_t" msprop:Generator_RowDeletingName="sales_quote_tRowDeleting" msprop:Generator_RowChangingName="sales_quote_tRowChanging" msprop:Generator_RowEvHandlerName="sales_quote_tRowChangeEventHandler" msprop:Generator_RowDeletedName="sales_quote_tRowDeleted" msprop:Generator_UserTableName="sales_quote_t" msprop:Generator_RowChangedName="sales_quote_tRowChanged" msprop:Generator_RowEvArgName="sales_quote_tRowChangeEvent" msprop:Generator_RowClassName="sales_quote_tRow">
+        <xs:element name="sales_quote_t" msprop:Generator_TableClassName="sales_quote_tDataTable" msprop:Generator_TableVarName="tablesales_quote_t" msprop:Generator_RowChangedName="sales_quote_tRowChanged" msprop:Generator_TablePropName="sales_quote_t" msprop:Generator_RowDeletingName="sales_quote_tRowDeleting" msprop:Generator_RowChangingName="sales_quote_tRowChanging" msprop:Generator_RowEvHandlerName="sales_quote_tRowChangeEventHandler" msprop:Generator_RowDeletedName="sales_quote_tRowDeleted" msprop:Generator_RowClassName="sales_quote_tRow" msprop:Generator_UserTableName="sales_quote_t" msprop:Generator_RowEvArgName="sales_quote_tRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="sqNoChar" msprop:Generator_ColumnVarNameInTable="columnsqNoChar" msprop:Generator_ColumnPropNameInRow="sqNoChar" msprop:Generator_ColumnPropNameInTable="sqNoCharColumn" msprop:Generator_UserColumnName="sqNoChar">
@@ -376,7 +376,7 @@ WHERE        (sqNoChar = @A)
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="si_view_indiv" msprop:Generator_TableClassName="si_view_indivDataTable" msprop:Generator_TableVarName="tablesi_view_indiv" msprop:Generator_RowChangedName="si_view_indivRowChanged" msprop:Generator_TablePropName="si_view_indiv" msprop:Generator_RowDeletingName="si_view_indivRowDeleting" msprop:Generator_RowChangingName="si_view_indivRowChanging" msprop:Generator_RowEvHandlerName="si_view_indivRowChangeEventHandler" msprop:Generator_RowDeletedName="si_view_indivRowDeleted" msprop:Generator_RowClassName="si_view_indivRow" msprop:Generator_UserTableName="si_view_indiv" msprop:Generator_RowEvArgName="si_view_indivRowChangeEvent">
+        <xs:element name="si_view_indiv" msprop:Generator_TableClassName="si_view_indivDataTable" msprop:Generator_TableVarName="tablesi_view_indiv" msprop:Generator_TablePropName="si_view_indiv" msprop:Generator_RowDeletingName="si_view_indivRowDeleting" msprop:Generator_RowChangingName="si_view_indivRowChanging" msprop:Generator_RowEvHandlerName="si_view_indivRowChangeEventHandler" msprop:Generator_RowDeletedName="si_view_indivRowDeleted" msprop:Generator_UserTableName="si_view_indiv" msprop:Generator_RowChangedName="si_view_indivRowChanged" msprop:Generator_RowEvArgName="si_view_indivRowChangeEvent" msprop:Generator_RowClassName="si_view_indivRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="sqNoChar" msprop:Generator_ColumnVarNameInTable="columnsqNoChar" msprop:Generator_ColumnPropNameInRow="sqNoChar" msprop:Generator_ColumnPropNameInTable="sqNoCharColumn" msprop:Generator_UserColumnName="sqNoChar">
