@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:prototype2"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="prototype2.ucDashboard"
              mc:Ignorable="d" 
-             d:DesignHeight="502.5" d:DesignWidth="925.5" Width="Auto" Height="Auto">
+             d:DesignHeight="538.5" d:DesignWidth="576" Width="Auto" Height="Auto">
     <UserControl.Resources>
 
         <DataTemplate x:Key="legend">
@@ -48,148 +48,48 @@
         </DataTemplate>
 
     </UserControl.Resources>
-    <ScrollViewer Margin="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid Background="#FFF9F5F5">
-            <Button x:Name="btnSQ" Margin="10,10,0,0" Height="89" VerticalAlignment="Top" HorizontalAlignment="Left" Width="204" Background="#FF3698DA" BorderBrush="#FF1B93E4">
-                <Grid HorizontalAlignment="Left" Height="68" VerticalAlignment="Top" Width="180">
-                    <Label Content="PENDING" HorizontalAlignment="Right" Margin="0,6,-2,0" VerticalAlignment="Top" Foreground="#FFF9F0F0" FontWeight="Bold"/>
-                    <Label Content="SALES QUOTE" Margin="0,0,-9,8" Foreground="#FFFDECEC" FontWeight="Bold" HorizontalAlignment="Right" Width="96" Height="26" VerticalAlignment="Bottom"/>
-                    <Label Content="12" Margin="7,3,0,0" VerticalAlignment="Top" Foreground="#FFF9F5F5" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" Width="51"/>
-                </Grid>
-            </Button>
-            <Button x:Name="btnInvoice" HorizontalAlignment="Left" Margin="242,10,0,0" Width="204" Height="89" VerticalAlignment="Top" Background="#FFE03B2B" Foreground="#FFE63524">
-                <Grid Height="69" Width="178">
-                    <Label Content="PENDING" HorizontalAlignment="Left" Margin="111,7,0,0" VerticalAlignment="Top" Foreground="#FFF9EEEE" FontWeight="Bold"/>
-                    <Label Content="INVOICE" HorizontalAlignment="Left" Margin="117,33,0,0" Height="26" VerticalAlignment="Top" Foreground="#FFF9EAEA" FontWeight="Bold"/>
-                    <Label Content="12" Margin="7,7,0,0" VerticalAlignment="Top" Foreground="#FFFBF2F2" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" Width="51"/>
-                </Grid>
-            </Button>
-            <Button x:Name="btnPOcust" HorizontalAlignment="Left" Margin="472,10,0,0" VerticalAlignment="Top" Width="204" Height="89" Background="#FF079C3D">
-                <Grid Height="79" Width="194">
-                    <Label Content="PENDING" HorizontalAlignment="Left" Margin="124,7,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="#FFF5EEEE"/>
-                    <Label Content="PURCHSE ORDER" HorizontalAlignment="Left" Margin="84,29,0,0" Height="26" VerticalAlignment="Top" FontWeight="Bold" Foreground="#FFFBEEEE"/>
-                    <Label Content="12" Margin="7,7,0,0" VerticalAlignment="Top" Foreground="#FFFBF2F2" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" Width="51"/>
-                    <Label Content="(FROM CUSTOMER)" HorizontalAlignment="Left" Margin="82,0,0,0" VerticalAlignment="Bottom" FontSize="10" FontWeight="Bold" Foreground="#FFFBF2F2"/>
-                </Grid>
-            </Button>
-            <Button x:Name="btnPOsupp" HorizontalAlignment="Left" Margin="703,10,0,0" VerticalAlignment="Top" Width="204" Height="89" Background="#FF9A59B5">
-                <Grid Height="79" Width="194">
-                    <Label Content="PURCHASE ORDER" HorizontalAlignment="Left" Margin="81,28,0,0" VerticalAlignment="Top" Foreground="#FFFBF0F0"/>
-                    <Label Content="(FOR SUPPLIER)" HorizontalAlignment="Left" Margin="112,51,0,0" VerticalAlignment="Top" FontSize="10" Foreground="#FFF9EEEE"/>
-                    <Label Content="PENDING" HorizontalAlignment="Left" Margin="129,6,0,0" VerticalAlignment="Top" Foreground="#FFF7EEEE"/>
-                    <Label Content="12" Margin="7,7,0,0" VerticalAlignment="Top" Foreground="#FFFBF2F2" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" Width="51"/>
-                </Grid>
-            </Button>
-            <Grid HorizontalAlignment="Left" Height="313" Margin="36,147,0,0" VerticalAlignment="Top" Width="262" Background="#FFE2E2E2">
-                <Label Content="Today's Appointment" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+    <Grid Background="#FFF9F5F5">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="btnSQ" Margin="10,10,10,0" Background="#FF3698DA" BorderBrush="#FF1B93E4" Grid.Column="1" Height="120" VerticalAlignment="Top">
+            <Grid HorizontalAlignment="Left" Height="68" VerticalAlignment="Top" Width="180">
+                <Label Content="PENDING" HorizontalAlignment="Right" Margin="0,6,-2,0" VerticalAlignment="Top" Foreground="#FFF9F0F0" FontWeight="Bold"/>
+                <Label Content="SALES QUOTE" Margin="0,0,-9,8" Foreground="#FFFDECEC" FontWeight="Bold" HorizontalAlignment="Right" Width="96" Height="26" VerticalAlignment="Bottom"/>
+                <Label Content="12" Margin="7,3,0,0" VerticalAlignment="Top" Foreground="#FFF9F5F5" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" Width="51"/>
             </Grid>
-            <syncfusion:SfChart x:Name="lineChart" AreaBorderBrush="#8e8e8e" 
-                AreaBorderThickness="0,1,1,0" 
-                Background="White" Margin="196,72,183,76">
-
-                <syncfusion:SfChart.Header>
-                    <TextBlock Foreground="Black" FontSize="20" 
-                        FontFamily="Segoe UI" Margin="0,0,0,20" 
-                        Text="SALES FOR 2017"
-                        HorizontalAlignment="Center" 
-                        VerticalAlignment="Center" />
-                </syncfusion:SfChart.Header>
-
-
-
-                <syncfusion:SfChart.PrimaryAxis>
-                    <syncfusion:CategoryAxis PlotOffset="15" ShowTrackBallInfo="True" 
-                        LabelFormat="yyyy" 
-                        Foreground="Black"
-                        AxisLineStyle="{StaticResource AxisStyle}"
-                        LabelTemplate="{StaticResource xLabelTemplate}" 
-                        HeaderTemplate="{StaticResource xheadertemplate}" 
-                        MajorTickLineStyle="{StaticResource AxisStyle}"/>
-                </syncfusion:SfChart.PrimaryAxis>
-
-                <syncfusion:SfChart.SecondaryAxis>
-                    <syncfusion:NumericalAxis Foreground="Black" Interval="5" 
-                        Minimum="25" Maximum="50" 
-                        HorizontalAlignment="Center" 
-                        AxisLineStyle="{StaticResource AxisStyle}"
-                        LabelTemplate="{StaticResource ylabelTemplate}" 
-                        HeaderTemplate="{StaticResource yheadertemplate}"
-                        PlotOffset="15"
-                        MajorTickLineStyle="{StaticResource AxisStyle}"/>
-                </syncfusion:SfChart.SecondaryAxis>
-
-                <syncfusion:LineSeries EnableAnimation="True" 
-                    XBindingPath="Year" 
-                    YBindingPath="India"
-                    ItemsSource="{Binding DataPoints}" 
-                    Label="India" ShowTooltip="True" >
-                    <syncfusion:LineSeries.AdornmentsInfo>
-                        <syncfusion:ChartAdornmentInfo Symbol="Custom" ShowMarker="True" >
-                            <syncfusion:ChartAdornmentInfo.SymbolTemplate>
-                                <DataTemplate>
-                                    <Grid IsHitTestVisible="False" >
-                                        <Ellipse Fill="#FF1BA1E2" Height="18" Width="18"
-                                            StrokeThickness="3" Stroke="White"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </syncfusion:ChartAdornmentInfo.SymbolTemplate>
-                        </syncfusion:ChartAdornmentInfo>
-                    </syncfusion:LineSeries.AdornmentsInfo>
-                </syncfusion:LineSeries>
-                <syncfusion:LineSeries EnableAnimation="True" 
-                    Label="Bahay" 
-                    ItemsSource="{Binding DataPoints}" 
-                    XBindingPath="Year"
-                    YBindingPath="Germany" ShowTooltip="True" >
-                    <syncfusion:LineSeries.AdornmentsInfo>
-                        <syncfusion:ChartAdornmentInfo Symbol="Custom" ShowLabel="True" 
-                            ShowMarker="True" >
-                            <syncfusion:ChartAdornmentInfo.LabelTemplate>
-                                <DataTemplate>
-                                    <Grid IsHitTestVisible="False">
-                                        <Ellipse Fill="Brown" Height="18" Width="18"
-                                            StrokeThickness="3" Stroke="White"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </syncfusion:ChartAdornmentInfo.LabelTemplate>
-                        </syncfusion:ChartAdornmentInfo>
-                    </syncfusion:LineSeries.AdornmentsInfo>
-                </syncfusion:LineSeries>
-                <syncfusion:LineSeries EnableAnimation="True" Label="England"
-                    ItemsSource="{Binding DataPoints}" XBindingPath="Year" 
-                    YBindingPath="England" ShowTooltip="True" >
-                    <syncfusion:LineSeries.AdornmentsInfo>
-                        <syncfusion:ChartAdornmentInfo Symbol="Custom" 
-                            ShowLabel="True" ShowMarker="True" >
-                            <syncfusion:ChartAdornmentInfo.LabelTemplate>
-                                <DataTemplate>
-                                    <Grid IsHitTestVisible="False">
-                                        <Ellipse Fill="#FF339933" Height="18" Width="18"
-                                            StrokeThickness="3" Stroke="White"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </syncfusion:ChartAdornmentInfo.LabelTemplate>
-                        </syncfusion:ChartAdornmentInfo>
-                    </syncfusion:LineSeries.AdornmentsInfo>
-                </syncfusion:LineSeries>
-                <syncfusion:LineSeries EnableAnimation="True"  Label="France"
-                    ItemsSource="{Binding DataPoints}" XBindingPath="Year" 
-                    YBindingPath="Bahay" ShowTooltip="True" >
-                    <syncfusion:LineSeries.AdornmentsInfo>
-                        <syncfusion:ChartAdornmentInfo Symbol="Custom" ShowLabel="True" ShowMarker="True">
-                            <syncfusion:ChartAdornmentInfo.LabelTemplate>
-                                <DataTemplate>
-                                    <Grid IsHitTestVisible="False">
-                                        <Ellipse Fill="#FFA2C139" Height="18" Width="18" 
-                                            Stroke="White" StrokeThickness="3"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </syncfusion:ChartAdornmentInfo.LabelTemplate>
-                        </syncfusion:ChartAdornmentInfo>
-                    </syncfusion:LineSeries.AdornmentsInfo>
-                </syncfusion:LineSeries>
-
-            </syncfusion:SfChart>
+        </Button>
+        <Button x:Name="btnInvoice" Margin="10,0,10,10" Background="#FFE03B2B" Foreground="#FFE63524" Grid.Column="1" Height="118" VerticalAlignment="Bottom">
+            <Grid Height="69" Width="178">
+                <Label Content="PENDING" HorizontalAlignment="Left" Margin="111,7,0,0" VerticalAlignment="Top" Foreground="#FFF9EEEE" FontWeight="Bold"/>
+                <Label Content="INVOICE" HorizontalAlignment="Left" Margin="117,33,0,0" Height="26" VerticalAlignment="Top" Foreground="#FFF9EAEA" FontWeight="Bold"/>
+                <Label Content="12" Margin="7,7,0,0" VerticalAlignment="Top" Foreground="#FFFBF2F2" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" Width="51"/>
+            </Grid>
+        </Button>
+        <Button x:Name="btnPOcust" HorizontalAlignment="Left" Margin="14.5,10,0,0" VerticalAlignment="Top" Width="204" Height="89" Background="#FF079C3D" Grid.Column="2">
+            <Grid Height="79" Width="194">
+                <Label Content="PENDING" HorizontalAlignment="Left" Margin="124,7,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="#FFF5EEEE"/>
+                <Label Content="PURCHSE ORDER" HorizontalAlignment="Left" Margin="84,29,0,0" Height="26" VerticalAlignment="Top" FontWeight="Bold" Foreground="#FFFBEEEE"/>
+                <Label Content="12" Margin="7,7,0,0" VerticalAlignment="Top" Foreground="#FFFBF2F2" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" Width="51"/>
+                <Label Content="(FROM CUSTOMER)" HorizontalAlignment="Left" Margin="82,0,0,0" VerticalAlignment="Bottom" FontSize="10" FontWeight="Bold" Foreground="#FFFBF2F2"/>
+            </Grid>
+        </Button>
+        <Button x:Name="btnPOsupp" Margin="10,10,9,11" Background="#FF9A59B5" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
+            <Grid Height="79" Width="194">
+                <Label Content="PURCHASE ORDER" HorizontalAlignment="Left" Margin="81,28,0,0" VerticalAlignment="Top" Foreground="#FFFBF0F0"/>
+                <Label Content="(FOR SUPPLIER)" HorizontalAlignment="Left" Margin="112,51,0,0" VerticalAlignment="Top" FontSize="10" Foreground="#FFF9EEEE"/>
+                <Label Content="PENDING" HorizontalAlignment="Left" Margin="129,6,0,0" VerticalAlignment="Top" Foreground="#FFF7EEEE"/>
+                <Label Content="12" Margin="7,7,0,0" VerticalAlignment="Top" Foreground="#FFFBF2F2" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" Width="51"/>
+            </Grid>
+        </Button>
+        <Grid Margin="10,10,10,11" Background="#FFE2E2E2" Grid.RowSpan="2">
+            <Label Content="Service on Schedule" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
         </Grid>
-    </ScrollViewer>
+    </Grid>
 </UserControl>

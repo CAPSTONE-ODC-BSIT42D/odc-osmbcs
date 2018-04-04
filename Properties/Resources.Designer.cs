@@ -89,5 +89,15 @@ namespace prototype2.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] USER_MANUAL {
+            get {
+                object obj = ResourceManager.GetObject("USER_MANUAL", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

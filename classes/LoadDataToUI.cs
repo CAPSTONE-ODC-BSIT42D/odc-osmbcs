@@ -30,6 +30,7 @@ namespace prototype2
 {
     public class LoadDataToUI
     {
+        public string empId { get; set; }
         public LoadDataToUI()
         {
             worker.DoWork += worker_DoWork;
@@ -654,6 +655,8 @@ namespace prototype2
                 
                 dbCon.Close();
             }
+            if(!String.IsNullOrWhiteSpace(empId))
+                MainVM.LoginEmployee_ = MainVM.Employees.Where(x => x.EmpID == int.Parse(empId)).FirstOrDefault();
         }
     }
 }

@@ -719,6 +719,9 @@
     <None Include="QueriesDataSet.xss">
       <DependentUpon>QueriesDataSet.xsd</DependentUpon>
     </None>
+    <Resource Include="Resources\USER-MANUAL.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

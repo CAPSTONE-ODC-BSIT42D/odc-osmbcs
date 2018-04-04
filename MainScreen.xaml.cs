@@ -51,9 +51,11 @@ namespace prototype2
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-           
+            MainVM.Ldt.empId = empID;
+
             MainVM.Mr.worker.RunWorkerAsync();
             MainVM.Ldt.worker.RunWorkerAsync();
+            
             this.ucEmployee.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
 
             this.ucCustSupp.SaveCloseButtonClicked += saveCloseBtn_SaveCloseButtonClicked;
@@ -84,6 +86,8 @@ namespace prototype2
 
             this.ucSelectCustomer.AddNewCustomer += addNewCustomer_BtnClicked;
             this.ucSelectCustomer.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
+
+            
 
             this.ucInvoiceForm.SaveCloseButtonClicked += saveCloseInvoiceForm;
             this.ucInvoiceForm.PrintSalesInvoice += printSalesInvoice_BtnCliked;
@@ -125,9 +129,6 @@ namespace prototype2
             dashboardGrid.Visibility = Visibility.Visible;
             formGridBg.Visibility = Visibility.Collapsed;
             otherGridBg.Visibility = Visibility.Collapsed;
-            MainVM.LoginEmployee_ = MainVM.Employees.Where(x => x.EmpID.Equals(empID)).FirstOrDefault();
-            
-            int cout = MainVM.SalesQuotes.Count;
         }
 
         #region Custom Events
@@ -2195,6 +2196,12 @@ namespace prototype2
                     manageCustomerDataGrid.ItemsSource = MainVM.Suppliers;
                 }
             }
+        }
+
+        private void userManualBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string locationToSavePdf = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "USER-MANUAL.pdf");  
+            Process.Start(locationToSavePdf);
         }
     }
 }
