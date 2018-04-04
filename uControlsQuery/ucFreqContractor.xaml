@@ -5,12 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:prototype2"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Width="596" Height="400" IsVisibleChanged="UserControl_IsVisibleChanged">
+             d:DesignHeight="300" d:DesignWidth="300" Width="Auto" Height="Auto" IsVisibleChanged="UserControl_IsVisibleChanged">
     <UserControl.Resources>
         <local:QueriesDataSet x:Key="queriesDataSet"/>
         <CollectionViewSource x:Key="job_title_tViewSource" Source="{Binding job_title_t, Source={StaticResource queriesDataSet}}"/>
     </UserControl.Resources>
-    <Grid Background="#FFF3F3F3">
+    <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
         <DataGrid x:Name="freqCont" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10" IsReadOnly="True" EnableColumnVirtualization="True" >
             <DataGrid.Columns>
                 <DataGridTextColumn  Binding="{Binding _fullName}" Header="Name" Width="200"/>
