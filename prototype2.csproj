@@ -258,6 +258,7 @@
     </ApplicationDefinition>
     <Compile Include="classes\InvoiceDocument.cs" />
     <Compile Include="classes\LoadDataToUI.cs" />
+    <Compile Include="classes\MonitorRecords.cs" />
     <Compile Include="classes\SalesQuoteDocument.cs" />
     <Compile Include="DataSet1.cs">
       <DependentUpon>DataSet1.xsd</DependentUpon>
@@ -758,7 +759,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="rdlcfiles\PurchaseOrder.rdlc" />
-    <EmbeddedResource Include="Resources\odclogo.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\DataSources\" />

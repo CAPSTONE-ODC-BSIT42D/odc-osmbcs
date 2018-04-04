@@ -1681,7 +1681,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>CMO-Director</Value>
+                    <Value>Director</Value>
                     <Style>
                       <FontFamily>Calibri Light</FontFamily>
                       <FontWeight>Bold</FontWeight>
@@ -2208,7 +2208,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Olive Data Centre Phils., Inc.</Value>
+                    <Value />
                     <Style>
                       <FontFamily>Calibri Light</FontFamily>
                       <FontSize>11pt</FontSize>
@@ -2241,7 +2241,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Unit 3A  Amparo Garden Corperate Bldg., No. 2116     Amparo  cor Felix St. Sta Ana, Manila</Value>
+                    <Value />
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Calibri</FontFamily>
@@ -2278,7 +2278,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>ENGR. DANNY ORCENA</Value>
+                    <Value />
                     <Style>
                       <FontFamily>Calibri Light</FontFamily>
                       <FontSize>11pt</FontSize>
@@ -2290,7 +2290,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox83</rd:DefaultName>
             <Top>1.5821in</Top>
-            <Left>4.55647in</Left>
+            <Left>4.54456in</Left>
             <Height>0.25in</Height>
             <Width>1.71429in</Width>
             <ZIndex>29</ZIndex>
@@ -2348,7 +2348,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>o.danny@odcphils.com</Value>
+                    <Value />
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Calibri Light</FontFamily>
@@ -3339,21 +3339,6 @@
           <Height>0.47917in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
-          <ReportItems>
-            <Image Name="Image1">
-              <Source>Embedded</Source>
-              <Value>oliveLogo1</Value>
-              <Sizing>FitProportional</Sizing>
-              <Left>2.3222in</Left>
-              <Height>0.47917in</Height>
-              <Width>1.88542in</Width>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-              </Style>
-            </Image>
-          </ReportItems>
           <Style>
             <Border>
               <Style>None</Style>

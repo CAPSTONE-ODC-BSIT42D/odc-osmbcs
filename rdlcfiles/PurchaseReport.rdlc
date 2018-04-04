@@ -40,20 +40,6 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <Image Name="Image1">
-            <Source>Embedded</Source>
-            <Value>oliveLogo</Value>
-            <Sizing>FitProportional</Sizing>
-            <Top>0.18229in</Top>
-            <Left>0.24479in</Left>
-            <Height>0.58333in</Height>
-            <Width>2.42708in</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Image>
           <Textbox Name="Textbox21">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -77,7 +63,6 @@
             <Left>0.24479in</Left>
             <Height>0.42708in</Height>
             <Width>2.42708in</Width>
-            <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -359,7 +344,7 @@
             <Left>0.26127in</Left>
             <Height>1.13542in</Height>
             <Width>8.1007in</Width>
-            <ZIndex>2</ZIndex>
+            <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -392,7 +377,7 @@
             <Left>3.24479in</Left>
             <Height>0.42708in</Height>
             <Width>2.42708in</Width>
-            <ZIndex>3</ZIndex>
+            <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>

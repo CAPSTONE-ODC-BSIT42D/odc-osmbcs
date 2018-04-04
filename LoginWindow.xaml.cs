@@ -75,6 +75,7 @@ namespace prototype2
 
 
                         cmd.ExecuteNonQuery();
+                        conn.Close();
                         //Gets the output key from the stored procedure/database;
                         empId = cmd.Parameters["@insertedid"].Value.ToString();
 
@@ -93,7 +94,6 @@ namespace prototype2
                     }
                 }
             }
-            toLogin();
         }
 
         public void toLogin()
