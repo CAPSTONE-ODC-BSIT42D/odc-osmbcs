@@ -37,32 +37,8 @@ MySqlConnection(ConfigurationManager.ConnectionStrings["prototype2.Properties.Se
         public ucFreqEmp()
         {
             InitializeComponent();
-            // binddatagrid();
         }
-
-        private void binddatagrid()
-        {
-
-
-
-            try
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT        e.empFName + e.empLName AS NAME, p.positionName, COUNT(ae.assignEmployeeID) AS NoOfTimes FROM            assigned_employees_t ae INNER JOIN  emp_cont_t e ON e.empID = ae.empID INNER JOIN  position_t p ON p.positionid = e.positionID INNER JOIN  service_sched_t ss ON ss.serviceSchedID = ae.serviceSchedID GROUP BY ae.empID, ae.serviceSchedID ORDER BY NoOfTimes DESC", conn);
-                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-                QueriesDataSet ds = new QueriesDataSet();
-                adp.Fill(ds);
-                employeeDataGrid.DataContext = ds;
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            finally
-            {
-                conn.Close();
-            }
-        }
+        
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -77,14 +53,23 @@ MySqlConnection(ConfigurationManager.ConnectionStrings["prototype2.Properties.Se
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
+            MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
+            var dbCon = DBConnection.Instance();
+
             if (this.IsVisible)
             {
-                binddatagrid();
-
-            }
-            else
-            {
-
+                if (dbCon.IsConnect())
+                {
+                    MainVM.Phases.Clear();
+                    string query = "SELECT CONCAT(e.empFName,' ',e.empLName) AS _name, p.positionName, COUNT(ae.assignEmployeeID) AS _count FROM assigned_employees_t ae JOIN emp_cont_t e ON ae.empID = e.empID JOIN position_t p ON p.positionID = e.positionID JOIN service_sched_t ss ON ss.serviceSchedID = ae.serviceSchedID GROUP BY ae.empID, ae.serviceSchedID ORDER BY _count DESC LIMIT 0, 10";
+                    MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
+                    DataSet fromDb = new DataSet();
+                    DataTable fromDbTable = new DataTable();
+                    dataAdapter.Fill(fromDb, "t");
+                    fromDbTable = fromDb.Tables["t"];
+                    employeeDataGrid.ItemsSource = fromDbTable.DefaultView;
+                    dbCon.Close();
+                }
             }
         }
     }
