@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:prototype2"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="prototype2.ucDashboard"
              mc:Ignorable="d" 
-             d:DesignHeight="538.5" d:DesignWidth="576" Width="Auto" Height="Auto">
+             d:DesignHeight="528.166" d:DesignWidth="1158.131" Width="Auto" Height="Auto">
     <UserControl.Resources>
 
         <DataTemplate x:Key="legend">
@@ -50,29 +50,30 @@
     </UserControl.Resources>
     <Grid Background="#FFF9F5F5">
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="134*"/>
+            <RowDefinition Height="132*"/>
+            <RowDefinition Height="267*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="317*"/>
+            <ColumnDefinition Width="135*"/>
+            <ColumnDefinition Width="124*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btnSQ" Margin="10,10,10,0" Background="#FF3698DA" BorderBrush="#FF1B93E4" Grid.Column="1" Height="120" VerticalAlignment="Top">
+        <Button x:Name="btnSQ" Margin="5" Background="#FF3698DA" BorderBrush="#FF1B93E4" Grid.Column="1">
             <Grid HorizontalAlignment="Left" Height="68" VerticalAlignment="Top" Width="180">
                 <Label Content="PENDING" HorizontalAlignment="Right" Margin="0,6,-2,0" VerticalAlignment="Top" Foreground="#FFF9F0F0" FontWeight="Bold"/>
                 <Label Content="SALES QUOTE" Margin="0,0,-9,8" Foreground="#FFFDECEC" FontWeight="Bold" HorizontalAlignment="Right" Width="96" Height="26" VerticalAlignment="Bottom"/>
                 <Label Content="12" Margin="7,3,0,0" VerticalAlignment="Top" Foreground="#FFF9F5F5" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" Width="51"/>
             </Grid>
         </Button>
-        <Button x:Name="btnInvoice" Margin="10,0,10,10" Background="#FFE03B2B" Foreground="#FFE63524" Grid.Column="1" Height="118" VerticalAlignment="Bottom">
+        <Button x:Name="btnInvoice" Margin="5" Background="#FFE03B2B" Foreground="#FFE63524" Grid.Column="1" Grid.Row="1">
             <Grid Height="69" Width="178">
                 <Label Content="PENDING" HorizontalAlignment="Left" Margin="111,7,0,0" VerticalAlignment="Top" Foreground="#FFF9EEEE" FontWeight="Bold"/>
                 <Label Content="INVOICE" HorizontalAlignment="Left" Margin="117,33,0,0" Height="26" VerticalAlignment="Top" Foreground="#FFF9EAEA" FontWeight="Bold"/>
                 <Label Content="12" Margin="7,7,0,0" VerticalAlignment="Top" Foreground="#FFFBF2F2" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" Width="51"/>
             </Grid>
         </Button>
-        <Button x:Name="btnPOcust" HorizontalAlignment="Left" Margin="14.5,10,0,0" VerticalAlignment="Top" Width="204" Height="89" Background="#FF079C3D" Grid.Column="2">
+        <Button x:Name="btnPOcust" Margin="5" Background="#FF079C3D" Grid.Column="2">
             <Grid Height="79" Width="194">
                 <Label Content="PENDING" HorizontalAlignment="Left" Margin="124,7,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="#FFF5EEEE"/>
                 <Label Content="PURCHSE ORDER" HorizontalAlignment="Left" Margin="84,29,0,0" Height="26" VerticalAlignment="Top" FontWeight="Bold" Foreground="#FFFBEEEE"/>
@@ -80,7 +81,7 @@
                 <Label Content="(FROM CUSTOMER)" HorizontalAlignment="Left" Margin="82,0,0,0" VerticalAlignment="Bottom" FontSize="10" FontWeight="Bold" Foreground="#FFFBF2F2"/>
             </Grid>
         </Button>
-        <Button x:Name="btnPOsupp" Margin="10,10,9,11" Background="#FF9A59B5" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
+        <Button x:Name="btnPOsupp" Margin="5" Background="#FF9A59B5" Grid.Column="2" Grid.Row="1">
             <Grid Height="79" Width="194">
                 <Label Content="PURCHASE ORDER" HorizontalAlignment="Left" Margin="81,28,0,0" VerticalAlignment="Top" Foreground="#FFFBF0F0"/>
                 <Label Content="(FOR SUPPLIER)" HorizontalAlignment="Left" Margin="112,51,0,0" VerticalAlignment="Top" FontSize="10" Foreground="#FFF9EEEE"/>
@@ -88,7 +89,7 @@
                 <Label Content="12" Margin="7,7,0,0" VerticalAlignment="Top" Foreground="#FFFBF2F2" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" Width="51"/>
             </Grid>
         </Button>
-        <Grid Margin="10,10,10,11" Background="#FFE2E2E2" Grid.RowSpan="2">
+        <Grid Margin="10,10,10,11" Background="#FFE2E2E2" Grid.RowSpan="3">
             <Label Content="Service on Schedule" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
         </Grid>
     </Grid>
