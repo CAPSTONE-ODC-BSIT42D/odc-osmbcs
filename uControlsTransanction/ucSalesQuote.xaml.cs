@@ -1064,6 +1064,7 @@ namespace prototype2
                             }
                             foreach (AvailedService aserv in MainVM.AvailedServicesList)
                             {
+                                var rqI = MainVM.RequestedItems.Where(x => x.availedServiceID == aserv.AvailedServiceID).FirstOrDefault();
                                 query = "INSERT INTO `odc_db`.`services_availed_t`(`serviceID`,`provinceID`,`sqNoChar`,`desc`,`city`,`address`,`totalCost`)" +
                                     " VALUES " +
                                     "('" + aserv.ServiceID + "', '" +
@@ -1072,7 +1073,7 @@ namespace prototype2
                                     aserv.Desc + "', '" +
                                     aserv.City + "', '" +
                                     aserv.Address + "', '" +
-                                    aserv.TotalCost + "');";
+                                    rqI.unitPrice+ "');";
                                 if (dbCon.insertQuery(query, dbCon.Connection))
                                 {
                                     query = "SELECT LAST_INSERT_ID();";

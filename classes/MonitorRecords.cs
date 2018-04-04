@@ -60,7 +60,7 @@ namespace prototype2
             var dbCon = DBConnection.Instance();
             if (dbCon.IsConnect())
             {
-                string query = "UPDATE `odc_db`.`service_sched_t` SET serviceStatus = 'ON GOING' WHERE `dateStarted` = " + DateTime.Now.ToString("yyyy-MM-dd") + ";";
+                string query = "UPDATE `odc_db`.`service_sched_t` SET serviceStatus = 'ON GOING' WHERE `dateStarted` = '" + DateTime.Now.ToString("yyyy-MM-dd") + "';";
                 dbCon.insertQuery(query, dbCon.Connection);
             }
                 

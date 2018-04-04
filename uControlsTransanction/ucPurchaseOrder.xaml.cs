@@ -100,7 +100,6 @@ namespace prototype2
                 {
                     refreshDataGrid();
                     loadPurchaseOrdertoUI();
-                    itemDg.IsReadOnly = true;
                     foreach (UIElement obj in purchaseOrderForm.Children)
                     {
                         if(purchaseOrderForm.Children.IndexOf(obj) != 1)
@@ -250,8 +249,8 @@ namespace prototype2
                     if (!validationError)
                     {
                         saveDataToDb();
-                        OnPrintPurchaseOrderClicked(e);
                         OnSaveCloseButtonClicked(e);
+                        OnPrintPurchaseOrderClicked(e);
                     }
                     else
                     {
