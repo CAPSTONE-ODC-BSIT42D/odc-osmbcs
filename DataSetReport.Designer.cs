@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace prototype2 {
+namespace OSMBCS {
     
     
     /// <summary>

@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace prototype2 {
+namespace OSMBCS {
     
     
     /// <summary>
@@ -2542,7 +2542,7 @@ namespace prototype2 {
         }
     }
 }
-namespace prototype2.QueriesDataSetTableAdapters {
+namespace OSMBCS.QueriesDataSetTableAdapters {
     
     
     /// <summary>
@@ -2676,7 +2676,7 @@ namespace prototype2.QueriesDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::MySql.Data.MySqlClient.MySqlConnection();
-            this._connection.ConnectionString = global::prototype2.Properties.Settings.Default.odc_dbConnectionString;
+            this._connection.ConnectionString = global::OSMBCS.Properties.Settings.Default.odc_dbConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2851,7 +2851,7 @@ ORDER BY NoOfTimes DESC";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::MySql.Data.MySqlClient.MySqlConnection();
-            this._connection.ConnectionString = global::prototype2.Properties.Settings.Default.odc_dbConnectionString;
+            this._connection.ConnectionString = global::OSMBCS.Properties.Settings.Default.odc_dbConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3025,7 +3025,7 @@ ORDER BY NoOfTimes DESC";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::MySql.Data.MySqlClient.MySqlConnection();
-            this._connection.ConnectionString = global::prototype2.Properties.Settings.Default.odc_dbConnectionString;
+            this._connection.ConnectionString = global::OSMBCS.Properties.Settings.Default.odc_dbConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3199,7 +3199,7 @@ ORDER BY NoOfTimes DESC";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::MySql.Data.MySqlClient.MySqlConnection();
-            this._connection.ConnectionString = global::prototype2.Properties.Settings.Default.odc_dbConnectionString;
+            this._connection.ConnectionString = global::OSMBCS.Properties.Settings.Default.odc_dbConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3373,7 +3373,7 @@ ORDER BY NoOfTimes DESC";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::MySql.Data.MySqlClient.MySqlConnection();
-            this._connection.ConnectionString = global::prototype2.Properties.Settings.Default.odc_dbConnectionString;
+            this._connection.ConnectionString = global::OSMBCS.Properties.Settings.Default.odc_dbConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3543,7 +3543,7 @@ ORDER BY NoOfTimes DESC";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::MySql.Data.MySqlClient.MySqlConnection();
-            this._connection.ConnectionString = global::prototype2.Properties.Settings.Default.odc_dbConnectionString;
+            this._connection.ConnectionString = global::OSMBCS.Properties.Settings.Default.odc_dbConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

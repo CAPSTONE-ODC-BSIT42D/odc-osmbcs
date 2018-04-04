@@ -2200,7 +2200,7 @@ namespace prototype2
 
         private void userManualBtn_Click(object sender, RoutedEventArgs e)
         {
-            string locationToSavePdf = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "USER-MANUAL.pdf");  
+            string locationToSavePdf = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Resources\\USER-MANUAL.pdf");  
             Process.Start(locationToSavePdf);
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace prototype2
+﻿namespace OSMBCS
 {
 
 
@@ -8,9 +8,11 @@
 }
 
 
-namespace prototype2.DatasetSales_QuoteTableAdapters {
-    
-    
-    public partial class SQServiceTableAdapter {
+namespace OSMBCS.DatasetSales_QuoteTableAdapters
+{
+
+
+    public partial class SQServiceTableAdapter
+    {
     }
 }

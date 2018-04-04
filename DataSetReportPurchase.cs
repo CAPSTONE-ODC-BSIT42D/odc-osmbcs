@@ -1,4 +1,4 @@
-﻿namespace prototype2
+﻿namespace OSMBCS
 {
 
 
@@ -11,9 +11,11 @@
 
 
 
-namespace prototype2.DataSetReportPurchaseTableAdapters {
-    
-    
-    public partial class PurchaseTableTableAdapter {
+namespace OSMBCS.DataSetReportPurchaseTableAdapters
+{
+
+
+    public partial class PurchaseTableTableAdapter
+    {
     }
 }
