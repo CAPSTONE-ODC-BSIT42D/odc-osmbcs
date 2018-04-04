@@ -55,6 +55,7 @@
                 <DataGrid.Columns >
                     <DataGridTextColumn Binding="{Binding SIpaymentAmount_, ConverterCulture=fil-PH, StringFormat=\{0:C\}}" ClipboardContentBinding="{x:Null}" Header="Amount" CanUserResize="False" />
                     <DataGridTextColumn Binding="{Binding SIpaymentMethod_}" ClipboardContentBinding="{x:Null}" Header="Payment Method"  CanUserResize="False" />
+                    <DataGridTextColumn Binding="{Binding SIpaymentStatus_}" ClipboardContentBinding="{x:Null}" Header="Payment Method"  CanUserResize="False" />
                     <DataGridTemplateColumn CanUserResize="False" Header="Actions"  >
                         <DataGridTemplateColumn.CellTemplate  >
                             <DataTemplate>

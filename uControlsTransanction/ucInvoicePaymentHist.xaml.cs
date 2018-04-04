@@ -180,6 +180,7 @@ namespace prototype2.uControlsTransanction
                 MessageBox.Show("Succesfully cleared the checked");
 
             }
+            refreshDataGrid();
         }
     }
 }
