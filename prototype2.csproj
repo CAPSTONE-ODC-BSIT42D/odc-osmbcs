@@ -759,7 +759,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="rdlcfiles\PurchaseOrder.rdlc" />
-    <EmbeddedResource Include="Resources\odclogo.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\DataSources\" />
