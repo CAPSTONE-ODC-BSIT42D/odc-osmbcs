@@ -65,17 +65,9 @@
           <DataField>termsDP</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="ID">
-          <DataField>ID</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
         <Field Name="shipVia">
           <DataField>shipVia</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="itemQnty">
-          <DataField>itemQnty</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="isDeleted">
           <DataField>isDeleted</DataField>
@@ -124,18 +116,6 @@
         <Field Name="Expr1">
           <DataField>Expr1</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
-        </Field>
-        <Field Name="itemName">
-          <DataField>itemName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="UNIT_PRICE">
-          <DataField>UNIT_PRICE</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="total_item">
-          <DataField>total_item</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="PONumChar">
           <DataField>PONumChar</DataField>
@@ -195,18 +175,6 @@
         </Field>
         <Field Name="refNo">
           <DataField>refNo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="unitName">
-          <DataField>unitName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="itemDescr">
-          <DataField>itemDescr</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="unitShorthand">
-          <DataField>unitShorthand</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -3212,6 +3180,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>

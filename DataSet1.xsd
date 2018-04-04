@@ -541,7 +541,7 @@ GROUP BY ponumchar</CommandText>
   <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet1" msprop:Generator_UserDSName="DataSet1">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="service_t" msprop:Generator_TableClassName="service_tDataTable" msprop:Generator_TableVarName="tableservice_t" msprop:Generator_TablePropName="service_t" msprop:Generator_RowDeletingName="service_tRowDeleting" msprop:Generator_RowChangingName="service_tRowChanging" msprop:Generator_RowEvHandlerName="service_tRowChangeEventHandler" msprop:Generator_RowDeletedName="service_tRowDeleted" msprop:Generator_UserTableName="service_t" msprop:Generator_RowChangedName="service_tRowChanged" msprop:Generator_RowEvArgName="service_tRowChangeEvent" msprop:Generator_RowClassName="service_tRow">
+        <xs:element name="service_t" msprop:Generator_TableClassName="service_tDataTable" msprop:Generator_TableVarName="tableservice_t" msprop:Generator_RowChangedName="service_tRowChanged" msprop:Generator_TablePropName="service_t" msprop:Generator_RowDeletingName="service_tRowDeleting" msprop:Generator_RowChangingName="service_tRowChanging" msprop:Generator_RowEvHandlerName="service_tRowChangeEventHandler" msprop:Generator_RowDeletedName="service_tRowDeleted" msprop:Generator_RowClassName="service_tRow" msprop:Generator_UserTableName="service_t" msprop:Generator_RowEvArgName="service_tRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="serviceID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnserviceID" msprop:Generator_ColumnPropNameInRow="serviceID" msprop:Generator_ColumnPropNameInTable="serviceIDColumn" msprop:Generator_UserColumnName="serviceID" type="xs:int" />
@@ -571,7 +571,7 @@ GROUP BY ponumchar</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="item_t" msprop:Generator_TableClassName="item_tDataTable" msprop:Generator_TableVarName="tableitem_t" msprop:Generator_TablePropName="item_t" msprop:Generator_RowDeletingName="item_tRowDeleting" msprop:Generator_RowChangingName="item_tRowChanging" msprop:Generator_RowEvHandlerName="item_tRowChangeEventHandler" msprop:Generator_RowDeletedName="item_tRowDeleted" msprop:Generator_UserTableName="item_t" msprop:Generator_RowChangedName="item_tRowChanged" msprop:Generator_RowEvArgName="item_tRowChangeEvent" msprop:Generator_RowClassName="item_tRow">
+        <xs:element name="item_t" msprop:Generator_TableClassName="item_tDataTable" msprop:Generator_TableVarName="tableitem_t" msprop:Generator_RowChangedName="item_tRowChanged" msprop:Generator_TablePropName="item_t" msprop:Generator_RowDeletingName="item_tRowDeleting" msprop:Generator_RowChangingName="item_tRowChanging" msprop:Generator_RowEvHandlerName="item_tRowChangeEventHandler" msprop:Generator_RowDeletedName="item_tRowDeleted" msprop:Generator_RowClassName="item_tRow" msprop:Generator_UserTableName="item_t" msprop:Generator_RowEvArgName="item_tRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="itemCode" msprop:Generator_ColumnVarNameInTable="columnitemCode" msprop:Generator_ColumnPropNameInRow="itemCode" msprop:Generator_ColumnPropNameInTable="itemCodeColumn" msprop:Generator_UserColumnName="itemCode">
@@ -600,7 +600,7 @@ GROUP BY ponumchar</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="salesReport" msprop:Generator_TableClassName="salesReportDataTable" msprop:Generator_TableVarName="tablesalesReport" msprop:Generator_RowChangedName="salesReportRowChanged" msprop:Generator_TablePropName="salesReport" msprop:Generator_RowDeletingName="salesReportRowDeleting" msprop:Generator_RowChangingName="salesReportRowChanging" msprop:Generator_RowEvHandlerName="salesReportRowChangeEventHandler" msprop:Generator_RowDeletedName="salesReportRowDeleted" msprop:Generator_RowClassName="salesReportRow" msprop:Generator_UserTableName="salesReport" msprop:Generator_RowEvArgName="salesReportRowChangeEvent">
+        <xs:element name="salesReport" msprop:Generator_TableClassName="salesReportDataTable" msprop:Generator_TableVarName="tablesalesReport" msprop:Generator_TablePropName="salesReport" msprop:Generator_RowDeletingName="salesReportRowDeleting" msprop:Generator_RowChangingName="salesReportRowChanging" msprop:Generator_RowEvHandlerName="salesReportRowChangeEventHandler" msprop:Generator_RowDeletedName="salesReportRowDeleted" msprop:Generator_UserTableName="salesReport" msprop:Generator_RowChangedName="salesReportRowChanged" msprop:Generator_RowEvArgName="salesReportRowChangeEvent" msprop:Generator_RowClassName="salesReportRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="itemCode" msprop:Generator_ColumnVarNameInTable="columnitemCode" msprop:Generator_ColumnPropNameInRow="itemCode" msprop:Generator_ColumnPropNameInTable="itemCodeColumn" msprop:Generator_UserColumnName="itemCode">
@@ -654,7 +654,7 @@ GROUP BY ponumchar</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="noticeOfemploymentDataTable" msprop:Generator_TableClassName="noticeOfemploymentDataTableDataTable" msprop:Generator_TableVarName="tablenoticeOfemploymentDataTable" msprop:Generator_RowChangedName="noticeOfemploymentDataTableRowChanged" msprop:Generator_TablePropName="noticeOfemploymentDataTable" msprop:Generator_RowDeletingName="noticeOfemploymentDataTableRowDeleting" msprop:Generator_RowChangingName="noticeOfemploymentDataTableRowChanging" msprop:Generator_RowEvHandlerName="noticeOfemploymentDataTableRowChangeEventHandler" msprop:Generator_RowDeletedName="noticeOfemploymentDataTableRowDeleted" msprop:Generator_RowClassName="noticeOfemploymentDataTableRow" msprop:Generator_UserTableName="noticeOfemploymentDataTable" msprop:Generator_RowEvArgName="noticeOfemploymentDataTableRowChangeEvent">
+        <xs:element name="noticeOfemploymentDataTable" msprop:Generator_TableClassName="noticeOfemploymentDataTableDataTable" msprop:Generator_TableVarName="tablenoticeOfemploymentDataTable" msprop:Generator_TablePropName="noticeOfemploymentDataTable" msprop:Generator_RowDeletingName="noticeOfemploymentDataTableRowDeleting" msprop:Generator_RowChangingName="noticeOfemploymentDataTableRowChanging" msprop:Generator_RowEvHandlerName="noticeOfemploymentDataTableRowChangeEventHandler" msprop:Generator_RowDeletedName="noticeOfemploymentDataTableRowDeleted" msprop:Generator_UserTableName="noticeOfemploymentDataTable" msprop:Generator_RowChangedName="noticeOfemploymentDataTableRowChanged" msprop:Generator_RowEvArgName="noticeOfemploymentDataTableRowChangeEvent" msprop:Generator_RowClassName="noticeOfemploymentDataTableRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="jobName" msprop:Generator_ColumnVarNameInTable="columnjobName" msprop:Generator_ColumnPropNameInRow="jobName" msprop:Generator_ColumnPropNameInTable="jobNameColumn" msprop:Generator_UserColumnName="jobName" minOccurs="0">
@@ -698,7 +698,7 @@ GROUP BY ponumchar</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="officialReceipt" msprop:Generator_TableClassName="officialReceiptDataTable" msprop:Generator_TableVarName="tableofficialReceipt" msprop:Generator_TablePropName="officialReceipt" msprop:Generator_RowDeletingName="officialReceiptRowDeleting" msprop:Generator_RowChangingName="officialReceiptRowChanging" msprop:Generator_RowEvHandlerName="officialReceiptRowChangeEventHandler" msprop:Generator_RowDeletedName="officialReceiptRowDeleted" msprop:Generator_UserTableName="officialReceipt" msprop:Generator_RowChangedName="officialReceiptRowChanged" msprop:Generator_RowEvArgName="officialReceiptRowChangeEvent" msprop:Generator_RowClassName="officialReceiptRow">
+        <xs:element name="officialReceipt" msprop:Generator_TableClassName="officialReceiptDataTable" msprop:Generator_TableVarName="tableofficialReceipt" msprop:Generator_RowChangedName="officialReceiptRowChanged" msprop:Generator_TablePropName="officialReceipt" msprop:Generator_RowDeletingName="officialReceiptRowDeleting" msprop:Generator_RowChangingName="officialReceiptRowChanging" msprop:Generator_RowEvHandlerName="officialReceiptRowChangeEventHandler" msprop:Generator_RowDeletedName="officialReceiptRowDeleted" msprop:Generator_RowClassName="officialReceiptRow" msprop:Generator_UserTableName="officialReceipt" msprop:Generator_RowEvArgName="officialReceiptRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="companyName" msprop:Generator_ColumnVarNameInTable="columncompanyName" msprop:Generator_ColumnPropNameInRow="companyName" msprop:Generator_ColumnPropNameInTable="companyNameColumn" msprop:Generator_UserColumnName="companyName">
@@ -755,7 +755,7 @@ GROUP BY ponumchar</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="PODataTable" msprop:Generator_TableClassName="PODataTableDataTable" msprop:Generator_TableVarName="tablePODataTable" msprop:Generator_RowChangedName="PODataTableRowChanged" msprop:Generator_TablePropName="PODataTable" msprop:Generator_RowDeletingName="PODataTableRowDeleting" msprop:Generator_RowChangingName="PODataTableRowChanging" msprop:Generator_RowEvHandlerName="PODataTableRowChangeEventHandler" msprop:Generator_RowDeletedName="PODataTableRowDeleted" msprop:Generator_RowClassName="PODataTableRow" msprop:Generator_UserTableName="PODataTable" msprop:Generator_RowEvArgName="PODataTableRowChangeEvent">
+        <xs:element name="PODataTable" msprop:Generator_TableClassName="PODataTableDataTable" msprop:Generator_TableVarName="tablePODataTable" msprop:Generator_TablePropName="PODataTable" msprop:Generator_RowDeletingName="PODataTableRowDeleting" msprop:Generator_RowChangingName="PODataTableRowChanging" msprop:Generator_RowEvHandlerName="PODataTableRowChangeEventHandler" msprop:Generator_RowDeletedName="PODataTableRowDeleted" msprop:Generator_UserTableName="PODataTable" msprop:Generator_RowChangedName="PODataTableRowChanged" msprop:Generator_RowEvArgName="PODataTableRowChangeEvent" msprop:Generator_RowClassName="PODataTableRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="companyName" msprop:Generator_ColumnVarNameInTable="columncompanyName" msprop:Generator_ColumnPropNameInRow="companyName" msprop:Generator_ColumnPropNameInTable="companyNameColumn" msprop:Generator_UserColumnName="companyName">
@@ -969,7 +969,7 @@ GROUP BY ponumchar</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="PoItem" msprop:Generator_TableClassName="PoItemDataTable" msprop:Generator_TableVarName="tablePoItem" msprop:Generator_RowChangedName="PoItemRowChanged" msprop:Generator_TablePropName="PoItem" msprop:Generator_RowDeletingName="PoItemRowDeleting" msprop:Generator_RowChangingName="PoItemRowChanging" msprop:Generator_RowEvHandlerName="PoItemRowChangeEventHandler" msprop:Generator_RowDeletedName="PoItemRowDeleted" msprop:Generator_RowClassName="PoItemRow" msprop:Generator_UserTableName="PoItem" msprop:Generator_RowEvArgName="PoItemRowChangeEvent">
+        <xs:element name="PoItem" msprop:Generator_TableClassName="PoItemDataTable" msprop:Generator_TableVarName="tablePoItem" msprop:Generator_TablePropName="PoItem" msprop:Generator_RowDeletingName="PoItemRowDeleting" msprop:Generator_RowChangingName="PoItemRowChanging" msprop:Generator_RowEvHandlerName="PoItemRowChangeEventHandler" msprop:Generator_RowDeletedName="PoItemRowDeleted" msprop:Generator_UserTableName="PoItem" msprop:Generator_RowChangedName="PoItemRowChanged" msprop:Generator_RowEvArgName="PoItemRowChangeEvent" msprop:Generator_RowClassName="PoItemRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ponumchar" msprop:Generator_ColumnVarNameInTable="columnponumchar" msprop:Generator_ColumnPropNameInRow="ponumchar" msprop:Generator_ColumnPropNameInTable="ponumcharColumn" msprop:Generator_UserColumnName="ponumchar">
@@ -990,7 +990,7 @@ GROUP BY ponumchar</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="po_view" msprop:Generator_TableClassName="po_viewDataTable" msprop:Generator_TableVarName="tablepo_view" msprop:Generator_RowChangedName="po_viewRowChanged" msprop:Generator_TablePropName="po_view" msprop:Generator_RowDeletingName="po_viewRowDeleting" msprop:Generator_RowChangingName="po_viewRowChanging" msprop:Generator_RowEvHandlerName="po_viewRowChangeEventHandler" msprop:Generator_RowDeletedName="po_viewRowDeleted" msprop:Generator_RowClassName="po_viewRow" msprop:Generator_UserTableName="po_view" msprop:Generator_RowEvArgName="po_viewRowChangeEvent">
+        <xs:element name="po_view" msprop:Generator_TableClassName="po_viewDataTable" msprop:Generator_TableVarName="tablepo_view" msprop:Generator_TablePropName="po_view" msprop:Generator_RowDeletingName="po_viewRowDeleting" msprop:Generator_RowChangingName="po_viewRowChanging" msprop:Generator_RowEvHandlerName="po_viewRowChangeEventHandler" msprop:Generator_RowDeletedName="po_viewRowDeleted" msprop:Generator_UserTableName="po_view" msprop:Generator_RowChangedName="po_viewRowChanged" msprop:Generator_RowEvArgName="po_viewRowChangeEvent" msprop:Generator_RowClassName="po_viewRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ponumchar" msprop:Generator_ColumnVarNameInTable="columnponumchar" msprop:Generator_ColumnPropNameInRow="ponumchar" msprop:Generator_ColumnPropNameInTable="ponumcharColumn" msprop:Generator_UserColumnName="ponumchar">
@@ -1213,7 +1213,7 @@ GROUP BY ponumchar</CommandText>
       <xs:selector xpath=".//mstns:officialReceipt" />
       <xs:field xpath="mstns:invoiceNo" />
     </xs:unique>
-    <xs:unique name="PODataTable_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+    <xs:unique name="PODataTable_Constraint1" msdata:ConstraintName="Constraint1">
       <xs:selector xpath=".//mstns:PODataTable" />
       <xs:field xpath="mstns:PONumChar" />
       <xs:field xpath="mstns:companyID" />
