@@ -50,21 +50,14 @@ namespace prototype2
 
             DataSetReportService.ServiceTableDataTable dSServices = new DataSetReportService.ServiceTableDataTable();
 
-            try
-            {
-                MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
-                mySqlDa.Fill(dSServices);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-       
+            MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
+            mySqlDa.Fill(dSServices);
+
             return dSServices;
 
         }
   
-             private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (this.IsVisible)
             {

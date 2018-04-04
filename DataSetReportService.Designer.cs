@@ -447,13 +447,6 @@ namespace prototype2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public ServiceTableRow FindBysqNoChar(string sqNoChar) {
-                return ((ServiceTableRow)(this.Rows.Find(new object[] {
-                            sqNoChar})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public override global::System.Data.DataTable Clone() {
                 ServiceTableDataTable cln = ((ServiceTableDataTable)(base.Clone()));
                 cln.InitVars();
@@ -498,13 +491,10 @@ namespace prototype2 {
                 base.Columns.Add(this.columnsqNoChar);
                 this.columnserviceDesc = new global::System.Data.DataColumn("serviceDesc", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnserviceDesc);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnsqNoChar}, true));
                 this.columnserviceName.AllowDBNull = false;
                 this.columnserviceName.MaxLength = 50;
                 this.columnserviceStatus.MaxLength = 255;
                 this.columnsqNoChar.AllowDBNull = false;
-                this.columnsqNoChar.Unique = true;
                 this.columnsqNoChar.MaxLength = 255;
                 this.columnserviceDesc.MaxLength = 21845;
             }

@@ -707,7 +707,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Grid x:Name="dashboardGrid">
+            <Grid x:Name="dashboardGrid" d:IsHidden="True">
                 <local:ucDashboard Margin="0"/>
             </Grid>
             <Grid x:Name="trasanctionGrid" d:IsHidden="True">
@@ -1413,13 +1413,13 @@
                 <local:ucReportService x:Name="ucReportService" HorizontalAlignment="Left" Height="703" VerticalAlignment="Top" Width="888" d:IsHidden="True" Visibility="Collapsed"/>
 
             </Grid>
-            <Grid x:Name="queriesGrid" d:IsHidden="True">
-                <local:ucFreqContractor HorizontalAlignment="Left" Height="703" VerticalAlignment="Top" Width="898" Visibility="Collapsed"/>
-                <local:ucFreqEmp HorizontalAlignment="Left" Height="703" VerticalAlignment="Top" Width="888" Visibility="Collapsed"/>
-                <local:ucFreqItem HorizontalAlignment="Left" Height="703" VerticalAlignment="Top" Width="888" Visibility="Collapsed"/>
-                <local:ucMostSupplier HorizontalAlignment="Left" Height="703" VerticalAlignment="Top" Width="888" Visibility="Collapsed"/>
-                <local:ucLoyalcust HorizontalAlignment="Left" Height="693" Margin="10,10,0,0" VerticalAlignment="Top" Width="878" Visibility="Collapsed"/>
-                <local:ucFreqServices HorizontalAlignment="Left" Height="693" Margin="0,10,0,0" VerticalAlignment="Top" Width="898" Visibility="Collapsed"/>
+            <Grid x:Name="queriesGrid">
+                <local:ucFreqContractor Visibility="Collapsed"/>
+                <local:ucFreqEmp HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Visibility="Collapsed"/>
+                <local:ucFreqItem HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Visibility="Collapsed"/>
+                <local:ucMostSupplier HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Visibility="Collapsed"/>
+                <local:ucLoyalcust HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Stretch" Width="Auto" Visibility="Collapsed"/>
+                <local:ucFreqServices HorizontalAlignment="Stretch" Height="Auto" Margin="0,10,0,0" VerticalAlignment="Stretch" Width="Auto" Visibility="Collapsed"/>
             </Grid>
 
             <Grid x:Name="maintenanceGrid" d:IsHidden="True">

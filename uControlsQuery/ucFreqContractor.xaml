@@ -7,8 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Width="Auto" Height="Auto" IsVisibleChanged="UserControl_IsVisibleChanged">
     <UserControl.Resources>
-        <local:QueriesDataSet x:Key="queriesDataSet"/>
-        <CollectionViewSource x:Key="job_title_tViewSource" Source="{Binding job_title_t, Source={StaticResource queriesDataSet}}"/>
     </UserControl.Resources>
     <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
         <DataGrid x:Name="freqCont" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10" IsReadOnly="True" EnableColumnVirtualization="True" >

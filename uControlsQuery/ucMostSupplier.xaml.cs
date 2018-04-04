@@ -62,7 +62,7 @@ MySqlConnection(ConfigurationManager.ConnectionStrings["prototype2.Properties.Se
                 if (dbCon.IsConnect())
                 {
                     MainVM.Phases.Clear();
-                    string query = "	SELECT cs.companyName, COUNT(po.poNumChar) as _count FROM cust_supp_t cs JOIN purchase_order_t po ON po.suppID = cs.companyID WHERE companyType = 1 GROUP BY po.suppID   ORDER BY _count DESC LIMIT 0, 20; ";
+                    string query = "	SELECT cs.companyName, COUNT(po.poNumChar) as _count FROM cust_supp_t cs JOIN purchase_order_t po ON po.suppID = cs.companyID GROUP BY po.suppID   ORDER BY _count DESC LIMIT 0, 20; ";
                     MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                     DataSet fromDb = new DataSet();
                     DataTable fromDbTable = new DataTable();

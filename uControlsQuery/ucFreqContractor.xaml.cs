@@ -29,7 +29,7 @@ namespace prototype2
                 if (dbCon.IsConnect())
                 {
                     MainVM.Phases.Clear();
-                    string query = "SELECT CONCAT(e.empFName,' ',e.empLName) as _fullName, j.jobName, COUNT(ae.assignEmployeeID) AS _count FROM assigned_employees_t ae JOIN emp_cont_t e ON e.empID = ae.empID JOIN job_title_t j ON j.jobID = e.jobID JOIN service_sched_t ss ON ss.serviceSchedID = ae.serviceSchedID GROUP BY ae.empID, ae.serviceSchedID ORDER BY _count DESC LIMIT 0, 10";
+                    string query = "SELECT CONCAT(e.empFName,' ',e.empLName) as _fullName, j.jobName, COUNT(ae.assignEmployeeID) AS _count FROM assigned_employees_t ae JOIN emp_cont_t e ON e.empID = ae.empID JOIN job_title_t j ON j.jobID = e.jobID JOIN service_sched_t ss ON ss.serviceSchedID = ae.serviceSchedID GROUP BY ae.empID ORDER BY _count DESC LIMIT 0, 10";
                     MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                     DataSet fromDb = new DataSet();
                     DataTable fromDbTable = new DataTable();
