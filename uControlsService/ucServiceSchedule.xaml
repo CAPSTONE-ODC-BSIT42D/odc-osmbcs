@@ -80,11 +80,23 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn  Width="Auto" CanUserResize="False" Header="Actions"  >
+                        <DataGridTemplateColumn  Width="Auto" CanUserResize="False" Header="Actions" x:Name="actionColumn" >
                             <DataGridTemplateColumn.CellTemplate  >
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <Button x:Name="deleteAssignedEmployee"  Width="Auto" Height="25" BorderBrush="Black" Background="{x:Null}" Margin="10,10,0,10" ToolTip="Delete Record" Click="deleteAssignedEmployee_Click">
+                                            <Button.Style>
+                                                
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Converter={StaticResource DisableActionButtonServiceSchedule}, NotifyOnTargetUpdated=True}" Value="false">
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                        </DataTrigger>
+
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
                                             <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
                                                 <Canvas x:Name="Capa_1c" Width="438.529" Height="438.529" Canvas.Left="0" Canvas.Top="0">
                                                     <Canvas.RenderTransform>
@@ -138,6 +150,21 @@
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
+                            <DataGridTemplateColumn.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Converter={StaticResource DisableActionButtonServiceSchedule}, NotifyOnTargetUpdated=True}" Value="false">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Converter={StaticResource DisableActionButtonServiceSchedule}, NotifyOnTargetUpdated=True}" Value="true">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Status}" Value="Done">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridTemplateColumn.CellStyle>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
@@ -309,21 +336,23 @@
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
+                            
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
 
                 </DataGrid>
                 <Button x:Name="assignEmployeeBtn" Content="Assign" HorizontalAlignment="Left" Margin="590,299,0,0" VerticalAlignment="Top" Width="75" Click="assignEmployeeBtn_Click">
-                    <!--<Button.Style>
-                        <Style TargetType="{x:Type Button}">
+                    <Button.Style>
+                        <Style>
+                            <Setter Property="Button.Visibility" Value="Visible" />
                             <Style.Triggers>
-                                
-                                <DataTrigger Binding="{Binding }" Value="ON GOING">
-                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self},Converter={StaticResource DisableActionButtonServiceSchedule}, NotifyOnTargetUpdated=True}" Value="false">
+                                    <Setter Property="Button.Visibility" Value="Collapsed"/>
                                 </DataTrigger>
+
                             </Style.Triggers>
                         </Style>
-                    </Button.Style>-->
+                    </Button.Style>
                 </Button>
             </Grid>
 

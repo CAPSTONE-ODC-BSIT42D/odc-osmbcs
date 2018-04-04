@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -2044,7 +2045,92 @@ namespace prototype2
                     obj.Visibility = Visibility.Collapsed;
             }
             closeAllOtherGridForm();
-        } 
+        }
         #endregion
+        private void searchBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (transQuotationGrid.IsVisible)
+            {
+                if (!(String.IsNullOrWhiteSpace(MainVM.SearchQuery)))
+                {
+                    var items = MainVM.SalesQuotes.Where(x => x.sqNoChar_.IndexOf(MainVM.SearchQuery, StringComparison.CurrentCultureIgnoreCase) != -1);
+
+                    quotationsDataGrid.ItemsSource = items;
+                }
+                else
+                {
+                    quotationsDataGrid.ItemsSource = MainVM.SalesQuotes;
+                }
+            }
+            else if (transOrderGrid.IsVisible)
+            {
+                if (!(String.IsNullOrWhiteSpace(MainVM.SearchQuery)))
+                {
+                    var items = MainVM.PurchaseOrder.Where(x => x.PONumChar.IndexOf(MainVM.SearchQuery, StringComparison.CurrentCultureIgnoreCase) != -1);
+
+                    purchaseOrderDg.ItemsSource = items;
+                }
+                else
+                {
+                    purchaseOrderDg.ItemsSource = MainVM.PurchaseOrder;
+                }
+            }
+            else if (serviceGrid.IsVisible)
+            {
+                if (!(String.IsNullOrWhiteSpace(MainVM.SearchQuery)))
+                {
+                    var items = from ss in MainVM.ServiceSchedules_
+                                join ass in MainVM.AvailedServices on ss.ServiceAvailedID equals ass.AvailedServiceID
+                                where ass.SqNoChar.IndexOf(MainVM.SearchQuery, StringComparison.CurrentCultureIgnoreCase) != -1
+                                select ss;
+                                
+
+                    scheduledServiceDg.ItemsSource = items;
+                }
+                else
+                {
+                    scheduledServiceDg.ItemsSource = MainVM.ServiceSchedules_;
+                }
+            }
+            else if (manageLocationsGrid.IsVisible)
+            {
+
+            }
+            else if (manageUnitsGrid.IsVisible)
+            {
+
+            }
+            else if (manageServicesGrid.IsVisible)
+            {
+
+            }
+            else if (manageProductListGrid.IsVisible)
+            {
+
+            }
+            else if (manageEmployeeGrid.IsVisible)
+            {
+
+            }
+            else if (manageCustomerGrid.IsVisible)
+            {
+
+            }
+
+        }
+
+        private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!(String.IsNullOrWhiteSpace(MainVM.SearchQuery)))
+            {
+                var items = MainVM.SalesQuotes.Where(x => x.sqNoChar_.IndexOf(MainVM.SearchQuery, StringComparison.CurrentCultureIgnoreCase) != -1);
+
+                quotationsDataGrid.ItemsSource = items;
+            }
+            else
+            {
+                quotationsDataGrid.ItemsSource = MainVM.SalesQuotes;
+            }
+        }
     }
 }

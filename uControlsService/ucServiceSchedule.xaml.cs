@@ -67,11 +67,16 @@ namespace prototype2
                 loadDataToUi();
                 if (MainVM.isViewSchedule)
                 {
+                    actionColumn.Visibility = Visibility.Collapsed;
+                    assignEmployeeBtn.Visibility = Visibility.Collapsed;
                     saveSchedBtn.Visibility = Visibility.Collapsed;
                     cancelschedBtn.Content = "Close";
                 }
                 else
                 {
+
+                    actionColumn.Visibility = Visibility.Visible;
+                    assignEmployeeBtn.Visibility = Visibility.Visible;
                     saveSchedBtn.Visibility = Visibility.Visible;
                     cancelschedBtn.Content = "Cancel";
                 }

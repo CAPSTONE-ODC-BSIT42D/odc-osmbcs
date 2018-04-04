@@ -269,7 +269,13 @@ namespace prototype2
 
         public bool isNewSchedule { get; set; }
         public bool isEditSchedule { get; set; }
-        public bool isViewSchedule { get; set; }
+
+        private bool isViewSchedule_;
+        public bool isViewSchedule
+        {
+            get { return isViewSchedule_; }
+            set { SetProperty(ref isViewSchedule_, value); }
+        }
 
         public bool isNewSupplier { get; set; }
 
@@ -389,7 +395,12 @@ namespace prototype2
             set { SetProperty(ref downpayment_, value); }
         }
 
-        public String SearchQuery { get; set; }
+        public string searchQuery;
+        public string SearchQuery
+        {
+            get { return searchQuery; }
+            set { SetProperty(ref searchQuery, value); }
+        }
 
         protected ObservableCollection<Employee> notAvail = new ObservableCollection<Employee>();
         public ObservableCollection<Employee> NotAvail

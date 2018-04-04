@@ -50,14 +50,11 @@
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}">
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding isViewPurchaseOrder, NotifyOnTargetUpdated=true}" Value="true">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        <DataTrigger Binding="{Binding Converter={StaticResource DisableActionButtonPurchaseOrder}, NotifyOnTargetUpdated=True}" Value="true">
+                                            <Setter Property="IsEnabled" Value="True"/>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding isEditPurchaseOrder, NotifyOnTargetUpdated=true}" Value="true">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding isNewPurchaseOrder, NotifyOnTargetUpdated=true}" Value="true">
-                                            <Setter Property="Visibility" Value="Visible"/>
+                                        <DataTrigger Binding="{Binding Converter={StaticResource DisableActionButtonPurchaseOrder}, NotifyOnTargetUpdated=True}" Value="false">
+                                            <Setter Property="IsEnabled" Value="False"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -124,7 +121,7 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                                 <DataGridTextColumn Width="100" CanUserResize="False" Header="Status" Binding="{Binding status}" x:Name="statusColumn">
-                                    <!--<DataGridTextColumn.CellStyle>
+                                    <DataGridTextColumn.CellStyle>
                                         <Style TargetType="{x:Type DataGridCell}">
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding Converter={StaticResource DisableActionButtonPurchaseOrder}, NotifyOnTargetUpdated=True}" Value="false">
@@ -135,7 +132,7 @@
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
-                                    </DataGridTextColumn.CellStyle>-->
+                                    </DataGridTextColumn.CellStyle>
                                 </DataGridTextColumn>
                                 <DataGridTemplateColumn  Width="Auto" CanUserResize="False" Header="Action"  >
                                     <DataGridTemplateColumn.CellTemplate  >
@@ -146,10 +143,10 @@
                                                         <Style TargetType="{x:Type Button}">
                                                             <Style.Triggers>
                                                                 <DataTrigger Binding="{Binding Converter={StaticResource DisableActionButtonPurchaseOrder}, NotifyOnTargetUpdated=True}" Value="true">
-                                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                                    <Setter Property="IsEnabled" Value="True"/>
                                                                 </DataTrigger>
                                                                 <DataTrigger Binding="{Binding Converter={StaticResource DisableActionButtonPurchaseOrder}, NotifyOnTargetUpdated=True}" Value="false">
-                                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                                    <Setter Property="IsEnabled" Value="False"/>
                                                                 </DataTrigger>
                                                             </Style.Triggers>
                                                         </Style>

@@ -711,18 +711,18 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Grid x:Name="dashboardGrid">
+            <Grid x:Name="dashboardGrid" d:IsHidden="True">
                 <local:ucDashboard Margin="0"/>
             </Grid>
             <Grid x:Name="trasanctionGrid" d:IsHidden="True">
                 <Grid x:Name="transQuotationGrid" Margin="0,0,1,0" >
                     <Grid x:Name="quotationsGridHome" Margin="10" >
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
-                            <Label x:Name="label18" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-                            <TextBox x:Name="searchBox" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317" Text="{Binding SearchQuery}"/>
-                            <Button x:Name="button" Content="Search" HorizontalAlignment="Left" Margin="402,3,-11,0" VerticalAlignment="Top" Width="85" Height="29" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
+                            <Label Content="Search ID:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+                            <TextBox x:Name="searchBox" HorizontalAlignment="Left" Height="25" Margin="72,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317" Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" TextChanged="searchBox_TextChanged"/>
+                            <Button x:Name="searchBtn" Content="Search" HorizontalAlignment="Left" Margin="394,0,-3,0" VerticalAlignment="Top" Width="85" Height="29" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70" Click="searchBtn_Click"/>
                         </Grid>
-                        <Label x:Name="label8_Copy" Content="Sort:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="525,9,0,0"/>
+                        <Label Content="Sort:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="525,9,0,0"/>
                         <Button x:Name="transQuoteAddBtn" Content="Add" HorizontalAlignment="Right" Height="29" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Click="transQuotationAddBtn_Click" Background="#FF03BD03" BorderBrush="#FF03A403" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold"/>
                         <DataGrid x:Name="quotationsDataGrid" Margin="0,44,0,-3" ItemsSource="{Binding SalesQuotes}" SelectedItem="{Binding SelectedSalesQuote}" CanUserAddRows="False" AutoGenerateColumns="False" EnableColumnVirtualization="True" IsReadOnly="True">
                             <DataGrid.Columns >
@@ -919,7 +919,7 @@
                     <Grid Margin="10" >
                         <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                             <Label x:Name="label4" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-                            <TextBox x:Name="searchBox5" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317" Text="{Binding SearchQuery}"/>
+                            <TextBox x:Name="searchBox5" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317"  Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" TextChanged="searchBox_TextChanged"/>
                             <Button x:Name="button4" Content="Search" HorizontalAlignment="Left" Margin="402,3,-11,0" VerticalAlignment="Top" Width="85" Height="29" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
                         </Grid>
                         <Label x:Name="label8_Copy2" Content="Sort:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="525,9,0,0"/>
@@ -1114,7 +1114,7 @@
                 <Grid x:Name="invoiceGridHome" >
                     <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                         <Label x:Name="label22" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-                        <TextBox x:Name="searchBox8" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317" Text="{Binding SearchQuery}"/>
+                        <TextBox x:Name="searchBox8" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317"  Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" TextChanged="searchBox_TextChanged"/>
                         <Button x:Name="button8" Content="Search" HorizontalAlignment="Left" Margin="402,3,-11,0" VerticalAlignment="Top" Width="85" Height="29" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
                     </Grid>
                     <Label x:Name="label8_Copy1" Content="Sort:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="525,9,0,0"/>
@@ -1260,7 +1260,7 @@
                 <Grid x:Name="serviceGridHome" Margin="0,0,20,20" >
                     <Grid Margin="10,7,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="476" >
                         <Label x:Name="label9" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-                        <TextBox x:Name="searchBox9" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317" Text="{Binding SearchQuery}"/>
+                        <TextBox x:Name="searchBox9" HorizontalAlignment="Left" Height="25" Margin="56,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="317"  Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" TextChanged="searchBox_TextChanged"/>
                         <Button x:Name="button9" Content="Search" HorizontalAlignment="Left" Margin="402,3,-11,0" VerticalAlignment="Top" Width="85" Height="29" Foreground="White" Background="#FF194E84" BorderBrush="#FF0B3D70"/>
                     </Grid>
                     <Label x:Name="label8_Copy3" Content="Sort:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="525,9,0,0"/>
@@ -1270,7 +1270,7 @@
                         <ComboBoxItem Content="PENDING"/>
                         <ComboBoxItem Content="APPROVED"/>
                     </ComboBox>
-                    <DataGrid x:Name="scheduledServiceDg" ItemsSource="{Binding ServiceSchedules_}" SelectedItem="{Binding SelectedServiceSchedule_}" CanUserAddRows="False" AutoGenerateColumns="false" EnableColumnVirtualization="True" IsReadOnly="True" Margin="10,62,-10,10" FrozenColumnCount="1">
+                    <DataGrid x:Name="scheduledServiceDg" ItemsSource="{Binding ServiceSchedules_}" SelectedItem="{Binding SelectedServiceSchedule_}" CanUserAddRows="False" AutoGenerateColumns="false" EnableColumnVirtualization="True" IsReadOnly="True" Margin="10,62,-10,10" >
                         <DataGrid.Columns >
                             <DataGridTextColumn Binding="{Binding ServiceAvailedID, Converter={StaticResource ServiceSalesOrderIDConverter}, NotifyOnTargetUpdated=True}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Sales Order ID"/>
                             <DataGridTextColumn Binding="{Binding ServiceAvailedID, Converter={StaticResource ServiceNameConverter2}, NotifyOnTargetUpdated=True}" ClipboardContentBinding="{x:Null}" Width="200" CanUserResize="False" Visibility="Visible" Header="Service Name"/>
@@ -1426,11 +1426,11 @@
                 <local:ucFreqServices HorizontalAlignment="Left" Height="693" Margin="0,10,0,0" VerticalAlignment="Top" Width="898" Visibility="Collapsed"/>
             </Grid>
 
-            <Grid x:Name="maintenanceGrid" d:IsHidden="True">
+            <Grid x:Name="maintenanceGrid">
                 <Grid x:Name="manageCustomerGrid" Margin="0,0,1,0" >
                     <Grid x:Name="manageCustomerHomeGrid" Margin="0">
                         <Label x:Name="label13" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
-                        <TextBox x:Name="searchBox4" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>
+                        <TextBox x:Name="searchBox4" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" TextChanged="searchBox_TextChanged"/>
                         <Button x:Name="button5" Content="Search" HorizontalAlignment="Left" Margin="398,20,0,0" VerticalAlignment="Top" Width="84" Height="26" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="13"/>
                         <Label x:Name="label3" Content="Type:" HorizontalAlignment="Left" Margin="557,20,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                         <ComboBox x:Name="compType" HorizontalAlignment="Left" Margin="613,22,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="dataGridType_SelectionChanged" Visibility="Hidden">
@@ -1616,7 +1616,7 @@
                 <Grid x:Name="manageEmployeeGrid" Margin="0,0,1,0">
                     <Grid x:Name="manageEmployeeGridHome" Margin="0">
                         <Label x:Name="label8" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
-                        <TextBox x:Name="searchBox1" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>
+                        <TextBox x:Name="searchBox1" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"   Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" TextChanged="searchBox_TextChanged"/>
                         <Button x:Name="button1" Content="Search" HorizontalAlignment="Left" Margin="398,20,0,0" VerticalAlignment="Top" Width="84" Height="26" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="13"/>
                         <Button x:Name="manageEmployeeAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,20,20,0" VerticalAlignment="Top" Width="85" Background="#FF0D9E0D" BorderBrush="#FF107C10" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13" Click="manageEmployeeAddBtn_Click" d:IsHidden="True"/>
                         <DataGrid x:Name="manageEmployeeDataGrid" Margin="20,60,20,20" CanUserAddRows="False" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="True" IsReadOnly="True" SelectionMode="Single" MinRowHeight="20"  MinColumnWidth="0" ItemsSource="{Binding AllEmployeesContractor}" SelectedItem ="{Binding SelectedEmployeeContractor}">
@@ -1800,7 +1800,7 @@
                 <Grid x:Name="manageProductListGrid" Margin="0,0,1,0">
                     <Grid Margin="0">
                         <Label x:Name="label11" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
-                        <TextBox x:Name="searchBox2" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>
+                        <TextBox x:Name="searchBox2" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"   Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" TextChanged="searchBox_TextChanged"/>
                         <Button x:Name="button2" Content="Search" HorizontalAlignment="Left" Margin="422,21,0,0" VerticalAlignment="Top" Width="84" Height="26" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="13"/>
                         <Label x:Name="label12" Content="Type:" HorizontalAlignment="Left" Margin="557,20,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                         <ComboBox x:Name="empType1" HorizontalAlignment="Left" Margin="613,20,0,0" VerticalAlignment="Top" Width="120"/>
@@ -1951,7 +1951,7 @@
                 <Grid x:Name="manageServicesGrid" Margin="0,0,1,0" d:IsHidden="True">
                     <Grid Margin="0">
                         <Label x:Name="label5" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
-                        <TextBox x:Name="searchBox3" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>
+                        <TextBox x:Name="searchBox3" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" TextChanged="searchBox_TextChanged"/>
                         <Button x:Name="button3" Content="Search" HorizontalAlignment="Left" Margin="398,20,0,0" VerticalAlignment="Top" Width="84" Height="26" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="13"/>
                         <Button x:Name="manageServiceAddBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,20,20,0" VerticalAlignment="Top" Width="85" Background="#FF0D9E0D" BorderBrush="#FF107C10" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13" Click="manageServiceAddBtn_Click"/>
                         <DataGrid x:Name="serviceTypeDg" Margin="20,60,20,20" ItemsSource="{Binding ServicesList}" CanUserAddRows="False" MinColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="False" SelectedItem="{Binding SelectedService}">
@@ -2087,7 +2087,7 @@
                 <Grid x:Name="manageUnitsGrid" Margin="0,0,1,0" d:IsHidden="True">
                     <Grid Margin="0">
                         <Label x:Name="label6" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
-                        <TextBox x:Name="searchBox6" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>
+                        <TextBox x:Name="searchBox6" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" TextChanged="searchBox_TextChanged"/>
                         <Button x:Name="button6" Content="Search" HorizontalAlignment="Left" Margin="398,20,0,0" VerticalAlignment="Top" Width="84" Height="26" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="13"/>
                         <Button x:Name="manageAddUnitBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,20,20,0" VerticalAlignment="Top" Width="85" Background="#FF0D9E0D" BorderBrush="#FF107C10" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13" Click="manageAddUnitBtn_Click"/>
                         <DataGrid x:Name="unitListDg" Margin="20,60,20,20" ItemsSource="{Binding Units}" CanUserAddRows="False" MinColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="False" SelectedItem="{Binding SelectedUnit}">
@@ -2112,10 +2112,10 @@
                         </DataGrid>
                     </Grid>
                 </Grid>
-                <Grid x:Name="manageLocationsGrid" Margin="0,0,1,0" d:IsHidden="True">
+                <Grid x:Name="manageLocationsGrid" Margin="0,0,1,0">
                     <Grid Margin="0">
                         <Label x:Name="label7" Content="Search:" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="20,20,0,0"/>
-                        <TextBox x:Name="searchBox7" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"  Text="{Binding SearchQuery}"/>
+                        <TextBox x:Name="searchBox7" HorizontalAlignment="Left" Height="25" Margin="76,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"   Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" TextChanged="searchBox_TextChanged"/>
                         <Button x:Name="button7" Content="Search" HorizontalAlignment="Left" Margin="398,20,0,0" VerticalAlignment="Top" Width="84" Height="26" Foreground="White" BorderBrush="#FF0B3D70" Background="#FF194E84" FontFamily="Segoe UI Semibold" FontSize="13"/>
                         <Button x:Name="manageAddRegionBtn" Content="Add" HorizontalAlignment="Right" Height="26" Margin="0,20,20,0" VerticalAlignment="Top" Width="85" Background="#FF0D9E0D" BorderBrush="#FF107C10" Foreground="#FFFFF9F9" FontFamily="Segoe UI Semibold" FontSize="13" Click="managemanageAddRegionBtn_Click"/>
                         <DataGrid x:Name="regionListDg" Margin="20,60,20,20" ItemsSource="{Binding Regions}" CanUserAddRows="False" MinColumnWidth="0" AutoGenerateColumns="False" FontSize="14" FontWeight="Normal" CanUserReorderColumns="False" CanUserResizeColumns="False" SelectedItem="{Binding SelectedRegion}" IsSynchronizedWithCurrentItem="True">
