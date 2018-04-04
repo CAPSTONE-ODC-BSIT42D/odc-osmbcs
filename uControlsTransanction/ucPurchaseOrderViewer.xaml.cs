@@ -53,20 +53,16 @@ namespace prototype2
             ucReportViewer.ProcessingMode = Syncfusion.Windows.Reports.Viewer.ProcessingMode.Local;
             ucReportViewer.RefreshReport();
         }
-           private DataTable GetPurchaseItem()
+        private DataTable GetPurchaseItem()
         {
             var dbCon = DBConnection.Instance();
-            dbCon.IsConnect();
-            string query = "SELECT LAST_INSERT_ID();";
-            string result = dbCon.selectScalar(query, dbCon.Connection).ToString();
-
             dbCon.IsConnect();
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT        ponumchar, shipTo, orderDate, poduedate, asapDueDate, requisitioner, incoterms, currency, importantNotes, preparedBy, approvedBy, refNo, termsDays, termsDP, busStyle, taxNumber, CompanyAddInfo,    companyAddress, companyCity, companyPostalCode, companyEmail, companyTelephone, companyMobile, repTitle, repLname, repFName, repMInitial, repEmail, repMobile, companyName, id, itemName, UNIT,    UNIT_PRICE, itemQnty, total_item FROM            po_view WHERE(ponumchar = '" + MainVM.SelectedPurchaseOrder.PONumChar + "') GROUP BY ponumchar";
+            cmd.CommandText = "SELECT        ponumchar, shipTo, orderDate, poduedate, asapDueDate, requisitioner, incoterms, currency, importantNotes, preparedBy, approvedBy, refNo, termsDays, termsDP, busStyle, taxNumber, CompanyAddInfo,    companyAddress, companyCity, companyPostalCode, companyEmail, companyTelephone, companyMobile, repTitle, repLname, repFName, repMInitial, repEmail, repMobile, companyName, id, itemName, UNIT,    UNIT_PRICE, itemQnty, total_item FROM            po_view WHERE(ponumchar = '" + MainVM.SelectedPurchaseOrder.PONumChar + "') ";
 
-            DataSet1.PoItemDataTable dSItem = new DataSet1.PoItemDataTable();
+            DataSet1.po_viewDataTable dSItem = new DataSet1.po_viewDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
@@ -78,7 +74,7 @@ namespace prototype2
         {
             var dbCon = DBConnection.Instance();
             dbCon.IsConnect();
-           
+
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
@@ -89,7 +85,7 @@ namespace prototype2
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
             mySqlDa.Fill(dSItem);
 
-            return dSItem; 
+            return dSItem;
         }
 
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -110,7 +106,7 @@ namespace prototype2
 
         private void ucReportViewer_ReportRefresh(object sender, EventArgs e)
         {
-            
+
         }
     }
 }
