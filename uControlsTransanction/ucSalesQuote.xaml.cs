@@ -905,13 +905,13 @@ namespace prototype2
 
             if (MainVM.isNewSalesQuote)
             {
-                for (int i = 0; i < 4; i++)
-                {
-                    if (!(i > 3))
-                    {
-                        stringChars += chars[random.Next(chars.Length)];
-                    }
-                }
+                //for (int i = 0; i < 4; i++)
+                //{
+                //    if (!(i > 3))
+                //    {
+                //        stringChars += chars[random.Next(chars.Length)];
+                //    }
+                //}
                 stringChars += "SQ";
                 stringChars += MainVM.SalesQuotes.Count + 1;
                 stringChars += "-";

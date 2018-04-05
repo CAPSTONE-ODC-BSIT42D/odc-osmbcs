@@ -35,6 +35,7 @@ namespace prototype2
             if (this.IsVisible)
             {
                 DisplayReport();
+                ComboBoxFilter.SelectedIndex = 0;
          
             }
         }
@@ -123,7 +124,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        itemName, SUM(TOTAL_DISCOUNTED_ITEM) AS Expr1 FROM sales_report_item_view WHERE(MONTHNAME(_date) = '" + ((ComboBoxItem)ComboBoxItemMonth.SelectedItem).Content.ToString() + "') GROUP BY itemName  ";
+            cmd.CommandText = "SELECT        itemName, SUM(TOTAL_DISCOUNTED_ITEM) AS Expr1 FROM sales_report_item_view WHERE(MONTHNAME(_date) = '" + ((ComboBoxItem)ComboBoxMonth.SelectedItem).Content.ToString() + "') GROUP BY itemName  ";
             DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
@@ -141,7 +142,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = " SELECT        serviceName, SUM(total_discounted_service) AS Expr1 FROM sales_report_service_view WHERE(MONTHNAME(_date) = '" + ((ComboBoxItem)ComboBoxItemMonth.SelectedItem).Content.ToString() + "') group by servicename ";
+            cmd.CommandText = " SELECT        serviceName, SUM(total_discounted_service) AS Expr1 FROM sales_report_service_view WHERE(MONTHNAME(_date) = '" + ((ComboBoxItem)ComboBoxMonth.SelectedItem).Content.ToString() + "') group by servicename ";
             DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
 
             MySqlDataAdapter mySqlDa = new MySqlDataAdapter(cmd);
@@ -171,7 +172,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        itemName, SUM(TOTAL_DISCOUNTED_ITEM) AS Expr1 FROM sales_report_item_view WHERE(YEAR(_date) = '" + ((ComboBoxItem)ComboBoxItemYear.SelectedItem).Content.ToString() + "')  GROUP BY itemName  ";
+            cmd.CommandText = "SELECT        itemName, SUM(TOTAL_DISCOUNTED_ITEM) AS Expr1 FROM sales_report_item_view WHERE(YEAR(_date) = '" + ComboBoxYear.SelectedValue.ToString() + "')  GROUP BY itemName  ";
 
             DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
 
@@ -190,7 +191,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = " SELECT        serviceName, SUM(total_discounted_service) AS Expr1 FROM sales_report_service_view WHERE(YEAR(_date) = '" + ((ComboBoxItem)ComboBoxItemYear.SelectedItem).Content.ToString() + "') group by servicename ";
+            cmd.CommandText = " SELECT        serviceName, SUM(total_discounted_service) AS Expr1 FROM sales_report_service_view WHERE(YEAR(_date) = '" + ComboBoxYear.SelectedValue.ToString() + "') group by servicename ";
 
             DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
 
@@ -220,7 +221,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = "SELECT        itemName, SUM(TOTAL_DISCOUNTED_ITEM) AS Expr1 FROM sales_report_item_view WHERE(_date BETWEEN '" + DatePickerItemStart.SelectedDate.Value.ToString("yyyy-MM-dd") + "' AND '" + DatePickerItemEnd.SelectedDate.Value.ToString("yyyy-MM-dd") + "') GROUP BY itemName  ";
+            cmd.CommandText = "SELECT        itemName, SUM(TOTAL_DISCOUNTED_ITEM) AS Expr1 FROM sales_report_item_view WHERE(_date BETWEEN '" + DateStart.SelectedDate.Value.ToString("yyyy-MM-dd") + "' AND '" + DateEnd.SelectedDate.Value.ToString("yyyy-MM-dd") + "') GROUP BY itemName  ";
 
             DatasetReportSales.SalesItemDataTable dSItem = new DatasetReportSales.SalesItemDataTable();
 
@@ -239,7 +240,7 @@ namespace prototype2
             cmd.Connection = dbCon.Connection;
             cmd.CommandType = CommandType.Text;
 
-            cmd.CommandText = " SELECT        serviceName, SUM(total_discounted_service) AS Expr1 FROM sales_report_service_view WHERE(_date BETWEEN  '" + DatePickerItemStart.SelectedDate.Value.ToString("yyyy-MM-dd") + "' AND '" + DatePickerItemEnd.SelectedDate.Value.ToString("yyyy-MM-dd") + "') group by servicename ";
+            cmd.CommandText = " SELECT        serviceName, SUM(total_discounted_service) AS Expr1 FROM sales_report_service_view WHERE(_date BETWEEN  '" + DateStart.SelectedDate.Value.ToString("yyyy-MM-dd") + "' AND '" + DateEnd.SelectedDate.Value.ToString("yyyy-MM-dd") + "') group by servicename ";
 
             DatasetReportSales.services_tDataTable dSItem = new DatasetReportSales.services_tDataTable();
 
@@ -249,74 +250,53 @@ namespace prototype2
             return dSItem;
 
         }
-        private void ComboBoxItemFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (ComboBoxItemFilter.SelectedIndex == 0)
+            if (IsLoaded)
             {
-                ReportSales.Reset();
-                ItemWeek.Visibility = Visibility.Hidden;
-              
-                ComboBoxItemYear.Visibility = Visibility.Hidden;
-                ComboBoxItemMonth.Visibility = Visibility.Visible;
-                MonthItem.Visibility = Visibility.Visible;
-                YearItem.Visibility = Visibility.Hidden;
-                DatePickerItemStart.Visibility = Visibility.Hidden;
-                DatePickerItemEnd.Visibility = Visibility.Hidden;
-                ItemStart.Visibility = Visibility.Hidden;
-                ItemEnd.Visibility = Visibility.Hidden;
+                if (ComboBoxFilter.SelectedIndex == 0)
+                {
+                    Monthly.Visibility = Visibility.Visible;
+                    Yearly.Visibility = Visibility.Collapsed;
+                    Range.Visibility = Visibility.Collapsed;
 
 
+                }
+                if (ComboBoxFilter.SelectedIndex == 1)
+                {
+                    Monthly.Visibility = Visibility.Collapsed;
+                    Yearly.Visibility = Visibility.Visible;
+                    Range.Visibility = Visibility.Collapsed;
+
+
+                }
+                if (ComboBoxFilter.SelectedIndex == 2)
+                {
+                    Monthly.Visibility = Visibility.Collapsed;
+                    Yearly.Visibility = Visibility.Collapsed;
+                    Range.Visibility = Visibility.Visible;
+
+                }
+                if (ComboBoxFilter.SelectedIndex == 3)
+                {
+
+
+                }
+                if (ComboBoxFilter.SelectedIndex == 4)
+                {
+
+                }
             }
-            if (ComboBoxItemFilter.SelectedIndex == 1)
-            {
-                ReportSales.Reset();
-                ItemWeek.Visibility = Visibility.Hidden;
-              
-                ComboBoxItemYear.Visibility = Visibility.Visible;
-                ComboBoxItemMonth.Visibility = Visibility.Hidden;
-                MonthItem.Visibility = Visibility.Hidden;
-                YearItem.Visibility = Visibility.Visible;
-                DatePickerItemStart.Visibility = Visibility.Hidden;
-                DatePickerItemEnd.Visibility = Visibility.Hidden;
-                ItemStart.Visibility = Visibility.Hidden;
-                ItemEnd.Visibility = Visibility.Hidden;
-                Go_ButtonSales.Visibility = Visibility.Hidden;
-
-
-            }
-            if (ComboBoxItemFilter.SelectedIndex == 2)
-            {
-                ItemWeek.Visibility = Visibility.Hidden;
-          
-                ComboBoxItemYear.Visibility = Visibility.Hidden;
-                ComboBoxItemMonth.Visibility = Visibility.Hidden;
-                MonthItem.Visibility = Visibility.Hidden;
-                YearItem.Visibility = Visibility.Hidden;
-                DatePickerItemStart.Visibility = Visibility.Visible;
-                DatePickerItemEnd.Visibility = Visibility.Visible;
-                ItemStart.Visibility = Visibility.Visible;
-                ItemEnd.Visibility = Visibility.Visible;
-                Go_ButtonSales.Visibility = Visibility.Visible;
-
-            }
-            if (ComboBoxItemFilter.SelectedIndex == 3)
-            {
             
-
-            }
-            if (ComboBoxItemFilter.SelectedIndex == 4)
-            {
-             
-            }
         }
 
-        private void ComboBoxItemMonth_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ComboBoxMonthSales_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DisplayReportSalesMonth();
           
         }
 
-        private void ComboBoxItemYear_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ComboBoxYearSales_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DisplayReportSalesYear();
           
@@ -324,6 +304,7 @@ namespace prototype2
 
         private void DatePickerItemStart_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
+
         }
 
         private void DatePickerItemEnd_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -338,9 +319,31 @@ namespace prototype2
            
         }
 
-        private void Go_ButtonSales_Click(object sender, RoutedEventArgs e)
+        private void GoButton_Click(object sender, RoutedEventArgs e)
         {
-            DisplayReportSalesRange();
+            bool validationError = false;
+            if (DateStart.SelectedDate.HasValue && DateEnd.SelectedDate.HasValue)
+            {
+                foreach (var element in Range.Children)
+                {
+                    if (element is DatePicker)
+                    {
+                        BindingExpression expression = ((DatePicker)element).GetBindingExpression(DatePicker.SelectedDateProperty);
+                        if (expression != null)
+                        {
+                            if (Validation.GetHasError((DatePicker)element))
+                                validationError = true;
+                        }
+                    }
+                }
+                if(!validationError)
+                    DisplayReportSalesRange();
+                
+            }
+
+
+            else
+                MessageBox.Show("Select the data range");
         }
     }
 }

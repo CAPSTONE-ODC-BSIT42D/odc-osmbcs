@@ -6,47 +6,69 @@
 
               xmlns:RV="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"  
              xmlns:local="clr-namespace:prototype2"
-             xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="prototype2.ucReportSales"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="prototype2.ucReportSales"
              mc:Ignorable="d" Width="815.435" Height="405.519" IsVisibleChanged="UserControl_IsVisibleChanged" Background="#FFEAEA50">
     <Grid Margin="0,0,-27,-48" Background="#FFE6E1E1">
+        <Grid Margin="10,0" VerticalAlignment="Top">
 
-        <ComboBox x:Name="ComboBoxItemFilter" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" Width="131" Height="31" SelectionChanged="ComboBoxItemFilter_SelectionChanged">
-         
-            <ComboBoxItem Content="Month"/>
-            <ComboBoxItem Content="Year"/>
-            <ComboBoxItem Content="Range"/>
-        </ComboBox>
-        <Label Content="Filter: use reset when choosing a filter again" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="MonthItem" Content="Month:" HorizontalAlignment="Left" Margin="272,4,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
-        <ComboBox x:Name="ComboBoxItemMonth" HorizontalAlignment="Left" Margin="272,30,0,0" VerticalAlignment="Top" Width="131" Height="31" Visibility="Hidden" SelectionChanged="ComboBoxItemMonth_SelectionChanged" SelectedValuePath="Content">
-            <ComboBoxItem Content="January"/>
-            <ComboBoxItem Content="February"/>
-            <ComboBoxItem Content="March"/>
-            <ComboBoxItem Content="April"/>
-            <ComboBoxItem Content="May"/>
-            <ComboBoxItem Content="June"/>
-            <ComboBoxItem Content="July"/>
-            <ComboBoxItem Content="August"/>
-            <ComboBoxItem Content="September"/>
-            <ComboBoxItem Content="October"/>
-            <ComboBoxItem Content="November"/>
-            <ComboBoxItem Content="December"/>
-        </ComboBox>
-        <ComboBox x:Name="ComboBoxItemYear" HorizontalAlignment="Left" Margin="272,31,0,0" VerticalAlignment="Top" Width="131" Height="31" IsEditable="False" Visibility="Hidden" SelectionChanged="ComboBoxItemYear_SelectionChanged">
-            <ComboBoxItem Content="2017"/>
-            <ComboBoxItem Content="2018"/>
-        </ComboBox>
-        <Label x:Name="YearItem" Content="Year:" HorizontalAlignment="Left" Margin="272,4,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
-        <DatePicker x:Name="DatePickerItemStart" HorizontalAlignment="Left" Margin="402,30,0,0" VerticalAlignment="Top" Width="131" Height="31" Visibility="Hidden" SelectedDateChanged="DatePickerItemStart_SelectedDateChanged" />
-      
-        <DatePicker x:Name="DatePickerItemEnd" HorizontalAlignment="Left" Margin="610,30,0,0" VerticalAlignment="Top" Width="131" Height="31" Visibility="Hidden" SelectedDateChanged="DatePickerItemEnd_SelectedDateChanged"/>
-        <Label x:Name="ItemStart" Content="Start Date:" HorizontalAlignment="Left" Margin="402,4,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
-        <Label x:Name="ItemWeek" Content="Week:" HorizontalAlignment="Left" Margin="402,4,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+            <Label Content="Filter:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="42" FontWeight="Bold" Margin="0,10,0,0"/>
 
-        <Label x:Name="ItemEnd" Content="End Date:" HorizontalAlignment="Left" Margin="610,4,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+            <ComboBox x:Name="ComboBoxFilter" HorizontalAlignment="Left" Margin="47,8,0,0" Width="131" SelectionChanged="ComboBox_SelectionChanged" Height="31" VerticalAlignment="Top">
 
-        <syncfusion:ReportViewer x:Name="ReportSales" ReportPath="C:\Users\Alexis\Source\Repos\odc-osmbcs\rdlcfiles\SalesReport.rdlc" Margin="0,67,0,0"/>
-        <Button x:Name="Go_ButtonSales" Content="Go" HorizontalAlignment="Left" Margin="757,31,0,0" VerticalAlignment="Top" Visibility="Hidden" Width="48" Height="30" Click="Go_ButtonSales_Click"/>
+                <ComboBoxItem Content="Month"/>
+                <ComboBoxItem Content="Year"/>
+                <ComboBoxItem Content="Range"/>
+            </ComboBox>
+            <Grid x:Name="Monthly" Margin="183,8,455,8" d:IsHidden="True" Visibility="Collapsed">
+                <ComboBox x:Name="ComboBoxMonth" HorizontalAlignment="Left" Margin="53,0,0,0" VerticalAlignment="Top" Width="131" Height="31" SelectionChanged="ComboBoxMonthSales_SelectionChanged" >
+                    <ComboBoxItem Content="January"/>
+                    <ComboBoxItem Content="February"/>
+                    <ComboBoxItem Content="March"/>
+                    <ComboBoxItem Content="April"/>
+                    <ComboBoxItem Content="May"/>
+                    <ComboBoxItem Content="June"/>
+                    <ComboBoxItem Content="July"/>
+                    <ComboBoxItem Content="August"/>
+                    <ComboBoxItem Content="September"/>
+                    <ComboBoxItem Content="October"/>
+                    <ComboBoxItem Content="November"/>
+                    <ComboBoxItem Content="December"/>
+                </ComboBox>
+                <Label x:Name="Month" Content="Month:" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" Height="26" Width="48" FontWeight="Bold" FontStyle="Italic"/>
+            </Grid>
+            <Grid x:Name="Yearly" Margin="189,8,455,8" Visibility="Collapsed">
+                <ComboBox x:Name="ComboBoxYear" HorizontalAlignment="Left" Margin="47,0,0,0" VerticalAlignment="Top" Width="131" Height="31" IsEditable="False" SelectionChanged="ComboBoxYearSales_SelectionChanged" ItemsSource="{Binding Years}" DisplayMemberPath="Year" SelectedValuePath="Year"/>
+                <Label x:Name="YearSales" Content="Year:" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" Height="26" Width="42" FontWeight="Bold" FontStyle="Italic"/>
+            </Grid>
+            <Grid x:Name="Range" Margin="189,0,232,1">
+                <Label x:Name="labelweek" Content="Week Date:"  HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic"/>
 
+
+                <DatePicker x:Name="DateStart" HorizontalAlignment="Left" Margin="80,18,0,0" VerticalAlignment="Top" Height="28" Width="110" DisplayDate="{Binding DatePickerBox}" >
+                    <DatePicker.SelectedDate>
+                        <Binding Path="StartDatePickerBox" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <local:TextBoxValidation TextBoxType="StartDate"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DatePicker.SelectedDate>
+                </DatePicker>
+                <DatePicker x:Name="DateEnd" HorizontalAlignment="Left" Margin="216,18,0,0" VerticalAlignment="Top" Height="28" Width="114" >
+                    <DatePicker.SelectedDate>
+                        <Binding Path="DatePickerBox" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <local:TextBoxValidation TextBoxType="EndDate"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DatePicker.SelectedDate>
+                </DatePicker>
+
+                <Label x:Name="labelstart" Content="Start Date:"  HorizontalAlignment="Left" Margin="75,0,0,0" VerticalAlignment="Top" FontSize="9" Width="51" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label x:Name="labelend" Content="End Date:"  HorizontalAlignment="Left" Margin="209,0,0,0" VerticalAlignment="Top" FontSize="9"/>
+                <Button x:Name="GoButtonPurchase" Content="Go" HorizontalAlignment="Left" Margin="335,18,0,9" Width="61" Click="GoButton_Click"/>
+            </Grid>
+           
+        </Grid>
+        <syncfusion:ReportViewer x:Name="ReportSales" ReportPath="C:\Users\Alexis\Source\Repos\odc-osmbcs\rdlcfiles\SalesReport.rdlc" Margin="0,52,0,0"/>
     </Grid>
 </UserControl>

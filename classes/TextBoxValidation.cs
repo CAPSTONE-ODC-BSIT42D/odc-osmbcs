@@ -2,12 +2,15 @@
 using System.Windows.Controls;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using System.Windows;
+
 namespace prototype2
 {
     public class TextBoxValidation : ValidationRule
     {
         public string TextBoxType { get; set; }
         RegexUtilities regex = new RegexUtilities();
+        MainViewModel MainVM = Application.Current.Resources["MainVM"] as MainViewModel;
         public override ValidationResult Validate (object value, System.Globalization.CultureInfo cultureInfo)
         {
 
@@ -89,6 +92,29 @@ namespace prototype2
             {
                 if (value is null)
                     return new ValidationResult(false, "Selection is invalid.");
+                return ValidationResult.ValidResult;
+            }
+
+            else if (TextBoxType.Equals("StartDate"))
+            {
+                if (value is null)
+                    return new ValidationResult(false, "Selection is invalid.");
+                return ValidationResult.ValidResult;
+            }
+
+            else if (TextBoxType.Equals("EndDate"))
+            {
+                if (value is null)
+                    return new ValidationResult(false, "Selection is invalid.");
+                else
+                {
+                    DateTime dt;
+                    DateTime.TryParse(value.ToString(), out dt);
+                    if(dt < MainVM.StartDatePickerBox)
+                    {
+                        return new ValidationResult(false, "Selection is invalid");
+                    }
+                }
                 return ValidationResult.ValidResult;
             }
 

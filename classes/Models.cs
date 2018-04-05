@@ -1813,4 +1813,20 @@ namespace prototype2
         }
     }
     #endregion
+
+    public class Yearly : ViewModelEntity
+    {
+        public Yearly()
+        {
+
+        }
+
+        protected string year;
+        public string Year
+        {
+            get { return year; }
+            set { SetProperty(ref year, value); }
+        }
+        
+    }
 }

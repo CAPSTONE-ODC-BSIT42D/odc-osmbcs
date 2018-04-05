@@ -657,6 +657,14 @@ namespace prototype2
             }
             if(!String.IsNullOrWhiteSpace(empId))
                 MainVM.LoginEmployee_ = MainVM.Employees.Where(x => x.EmpID == int.Parse(empId)).FirstOrDefault();
+
+            var earliestYear = (from sq in MainVM.SalesQuotes
+                                orderby sq.dateOfIssue_ descending
+                                select sq.dateOfIssue_).LastOrDefault();
+
+            for (int i = earliestYear.Year; i <= DateTime.Now.Year; i++)
+                MainVM.Years.Add(new Yearly() { Year = i.ToString() });
+
         }
     }
 }

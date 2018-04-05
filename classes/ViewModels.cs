@@ -31,6 +31,13 @@ namespace prototype2
             get { return mr; }
         }
 
+        protected ObservableCollection<Yearly> years = new ObservableCollection<Yearly>();
+        public ObservableCollection<Yearly> Years
+        {
+            get { return years; }
+            set { years = value; }
+        }
+
         public void resetValueofVariables()
         {
             SelectedAdditionalFee = null;
@@ -116,6 +123,13 @@ namespace prototype2
         {
             get { return DatePickerBox_; }
             set { SetProperty(ref DatePickerBox_, value); }
+        }
+
+        public DateTime StartDatePickerBox_ = DateTime.Now;
+        public DateTime StartDatePickerBox
+        {
+            get { return StartDatePickerBox_; }
+            set { SetProperty(ref StartDatePickerBox_, value); }
         }
         #region Customer/Supplier
         public object CompanyType;
