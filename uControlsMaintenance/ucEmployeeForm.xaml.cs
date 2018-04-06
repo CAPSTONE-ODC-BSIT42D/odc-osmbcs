@@ -106,7 +106,7 @@ namespace prototype2.uControlsMaintenance
                                     }
                                 }
                             }
-                            else
+                            else if(contractorOnlyGrid.IsVisible)
                             {
                                 foreach (var element1a in contractorOnlyGrid.Children)
                                 {

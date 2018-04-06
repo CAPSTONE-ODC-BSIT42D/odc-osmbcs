@@ -87,7 +87,7 @@ namespace prototype2
             this.ucSelectCustomer.AddNewCustomer += addNewCustomer_BtnClicked;
             this.ucSelectCustomer.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
 
-            
+            this.ucNoticeOfEmployment.SaveCloseOtherButtonClicked += saveCloseOther_BtnClicked;
 
             this.ucInvoiceForm.SaveCloseButtonClicked += saveCloseInvoiceForm;
             this.ucInvoiceForm.PrintSalesInvoice += printSalesInvoice_BtnCliked;
