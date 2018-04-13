@@ -44,13 +44,14 @@ namespace prototype2
             //If the fields are not empty
             else
             {
-                //Checks if the fields are equal to admin, admin
-                if (usernameTb.Text.Equals("admin") && passwordBox.Password.Equals("admin"))
-                {
-                    toLogin();
-                }
-                //If not then, checks the database for registered employee
-                else if (dbCon.IsConnect())
+                ////Checks if the fields are equal to admin, admin
+                //if (usernameTb.Text.Equals("admin") && passwordBox.Password.Equals("admin"))
+                //{
+                //    toLogin();
+                //}
+                ////If not then, checks the database for registered employee
+                //else
+                if (dbCon.IsConnect())
                 {
                     using (MySqlConnection conn = dbCon.Connection)
                     {

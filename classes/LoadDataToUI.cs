@@ -145,7 +145,7 @@ namespace prototype2
             if (dbCon.IsConnect())
             {
                 MainVM.EmpPosition.Clear();
-                string query = "SELECT * FROM POSITION_T;";
+                string query = "SELECT * FROM POSITION_T where positionName != 'ADMINISTRATOR';";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
@@ -319,7 +319,7 @@ namespace prototype2
             if (dbCon.IsConnect())
             {
                 MainVM.Employees.Clear();
-                string query = "SELECT * FROM emp_cont_t a JOIN position_t c ON a.positionID = c.positionid  WHERE isDeleted = 0 AND empType = 0;";
+                string query = "SELECT * FROM emp_cont_t a JOIN position_t c ON a.positionID = c.positionid  WHERE isDeleted = 0 AND a.positionID != 1 AND empType = 0;";
                 MySqlDataAdapter dataAdapter = dbCon.selectQuery(query, dbCon.Connection);
                 DataSet fromDb = new DataSet();
                 DataTable fromDbTable = new DataTable();
@@ -655,8 +655,19 @@ namespace prototype2
                 
                 dbCon.Close();
             }
-            if(!String.IsNullOrWhiteSpace(empId))
+            if (!String.IsNullOrWhiteSpace(empId))
+            {
                 MainVM.LoginEmployee_ = MainVM.Employees.Where(x => x.EmpID == int.Parse(empId)).FirstOrDefault();
+                if (MainVM.LoginEmployee_ == null)
+                {
+                    MainVM.LoginEmployee_ = new Employee()
+                    {
+                        EmpFname = "Administrator Account"
+                    };
+                }
+            }
+                
+
 
             var earliestYear = (from sq in MainVM.SalesQuotes
                                 orderby sq.dateOfIssue_ descending

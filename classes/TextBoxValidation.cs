@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Linq;
 
 namespace prototype2
 {
@@ -39,6 +40,24 @@ namespace prototype2
                 }
                 return ValidationResult.ValidResult;
             }
+
+            else if (TextBoxType.Equals("Username"))
+            {
+                if (String.IsNullOrWhiteSpace(tbValue))
+                {
+                    return new ValidationResult(false, "*This field must be filled.");
+                }
+                else
+                {
+                    var results = from emp in MainVM.Employees
+                                  where emp.EmpUserName == tbValue.ToString()
+                                  select emp;
+                    if(results.Count() > 0 )
+                        return new ValidationResult(false, "*The username is already taken.");
+                }
+                return ValidationResult.ValidResult;
+            }
+
             else if (TextBoxType.Equals("Mobile"))
             {
                 if (String.IsNullOrWhiteSpace(tbValue))
