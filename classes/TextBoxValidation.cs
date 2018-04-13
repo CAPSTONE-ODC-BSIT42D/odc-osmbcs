@@ -52,7 +52,8 @@ namespace prototype2
                     var results = from emp in MainVM.Employees
                                   where emp.EmpUserName == tbValue.ToString()
                                   select emp;
-                    if(results.Count() > 0 )
+                    //tbValue.IndexOf("admin", StringComparison.CurrentCultureIgnoreCase) != -1;
+                    if (results.Count() > 0 || string.Equals(tbValue, "admin", StringComparison.CurrentCultureIgnoreCase))
                         return new ValidationResult(false, "*The username is already taken.");
                 }
                 return ValidationResult.ValidResult;

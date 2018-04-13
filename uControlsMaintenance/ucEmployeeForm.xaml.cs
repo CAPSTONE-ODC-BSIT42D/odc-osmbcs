@@ -104,6 +104,28 @@ namespace prototype2.uControlsMaintenance
                                         if (Validation.GetHasError((ComboBox)element1a))
                                             validationError = true;
                                     }
+                                    else if (element1a is Grid)
+                                    {
+                                        if (((Grid)element1a).Equals(accountCredentialsForm))
+                                        {
+                                            foreach (var element1ab in accountCredentialsForm.Children)
+                                            {
+                                                if (element1ab is TextBox)
+                                                {
+                                                    BindingExpression expression = ((TextBox)element1ab).GetBindingExpression(TextBox.TextProperty);
+                                                    if (expression != null)
+                                                    {
+                                                        if (((TextBox)element1ab).IsEnabled)
+                                                        {
+                                                            expression.UpdateSource();
+                                                            if (Validation.GetHasError((TextBox)element1ab))
+                                                                validationError = true;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                             else if(contractorOnlyGrid.IsVisible)

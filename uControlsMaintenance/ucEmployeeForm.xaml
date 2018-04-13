@@ -55,7 +55,7 @@
                         <TextBox x:Name="empUserNameTb" HorizontalAlignment="Left" Height="25" Margin="30,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontWeight="Normal" VerticalContentAlignment="Center" IsEnabled="False">
                             <Binding Path="StringTextBox" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                                 <Binding.ValidationRules>
-                                    <prototype2:TextBoxValidation TextBoxType="IsEmpty"/>
+                                    <prototype2:TextBoxValidation TextBoxType="Username"/>
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox>
